@@ -1,0 +1,541 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 51;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		6AA769E526636AE700B7E1F5 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AA769E426636AE700B7E1F5 /* AppDelegate.swift */; };
+		6AA769E726636AE700B7E1F5 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AA769E626636AE700B7E1F5 /* SceneDelegate.swift */; };
+		6AA769EF26636AE700B7E1F5 /* EZY.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 6AA769ED26636AE700B7E1F5 /* EZY.xcdatamodeld */; };
+		6AA769F126636AE800B7E1F5 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6AA769F026636AE800B7E1F5 /* Assets.xcassets */; };
+		6AA769F426636AE800B7E1F5 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6AA769F226636AE800B7E1F5 /* LaunchScreen.storyboard */; };
+		6AA76A0226636D2800B7E1F5 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AA76A0126636D2800B7E1F5 /* LoginViewController.swift */; };
+		6AA76A1526638C5600B7E1F5 /* Poppins-MediumItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 6AA76A122663844A00B7E1F5 /* Poppins-MediumItalic.ttf */; };
+		6AA76A1626638C5600B7E1F5 /* Poppins-ThinItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 6AA76A102663844A00B7E1F5 /* Poppins-ThinItalic.ttf */; };
+		6AA76A1726638C5600B7E1F5 /* Poppins-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 6AA76A0C2663844A00B7E1F5 /* Poppins-Regular.ttf */; };
+		6AA76A1826638C5600B7E1F5 /* Poppins-BoldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 6AA76A112663844A00B7E1F5 /* Poppins-BoldItalic.ttf */; };
+		6AA76A1926638C5600B7E1F5 /* Poppins-Italic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 6AA76A0F2663844A00B7E1F5 /* Poppins-Italic.ttf */; };
+		6AA76A1A26638C5600B7E1F5 /* Poppins-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 6AA76A0A2663844A00B7E1F5 /* Poppins-Medium.ttf */; };
+		6AA76A1B26638C5600B7E1F5 /* Poppins-Thin.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 6AA76A0D2663844A00B7E1F5 /* Poppins-Thin.ttf */; };
+		6AA76A1C26638C5600B7E1F5 /* Poppins-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 6AA76A092663844A00B7E1F5 /* Poppins-Light.ttf */; };
+		6AA76A1D26638C5600B7E1F5 /* Poppins-LightItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 6AA76A072663844A00B7E1F5 /* Poppins-LightItalic.ttf */; };
+		6AA76A1E26638C5600B7E1F5 /* Poppins-ExtraLightItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 6AA76A082663844A00B7E1F5 /* Poppins-ExtraLightItalic.ttf */; };
+		6AA76A1F26638C5600B7E1F5 /* Poppins-ExtraBoldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 6AA76A062663844A00B7E1F5 /* Poppins-ExtraBoldItalic.ttf */; };
+		6AA76A2026638C5600B7E1F5 /* Poppins-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 6AA76A142663844A00B7E1F5 /* Poppins-SemiBold.ttf */; };
+		6AA76A2126638C5600B7E1F5 /* Poppins-Black.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 6AA76A032663844A00B7E1F5 /* Poppins-Black.ttf */; };
+		6AA76A2226638C5600B7E1F5 /* Poppins-BlackItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 6AA76A042663844A00B7E1F5 /* Poppins-BlackItalic.ttf */; };
+		6AA76A2326638C5600B7E1F5 /* Poppins-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 6AA76A0B2663844A00B7E1F5 /* Poppins-Bold.ttf */; };
+		6AA76A2426638C5600B7E1F5 /* Poppins-ExtraBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 6AA76A052663844A00B7E1F5 /* Poppins-ExtraBold.ttf */; };
+		6AA76A2526638C5600B7E1F5 /* Poppins-SemiBoldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 6AA76A132663844A00B7E1F5 /* Poppins-SemiBoldItalic.ttf */; };
+		6AA76A2626638C5600B7E1F5 /* Poppins-ExtraLight.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 6AA76A0E2663844A00B7E1F5 /* Poppins-ExtraLight.ttf */; };
+		E5052C73E73080AD40F6F655 /* Pods_EZY.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A75C11C1873FE4E191601230 /* Pods_EZY.framework */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		14AF3F335899880714FDA1B3 /* Pods-EZY.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EZY.release.xcconfig"; path = "Target Support Files/Pods-EZY/Pods-EZY.release.xcconfig"; sourceTree = "<group>"; };
+		6AA769E126636AE700B7E1F5 /* EZY.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = EZY.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		6AA769E426636AE700B7E1F5 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		6AA769E626636AE700B7E1F5 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
+		6AA769EE26636AE700B7E1F5 /* EZY.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = EZY.xcdatamodel; sourceTree = "<group>"; };
+		6AA769F026636AE800B7E1F5 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		6AA769F326636AE800B7E1F5 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		6AA769F526636AE800B7E1F5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		6AA76A0126636D2800B7E1F5 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
+		6AA76A032663844A00B7E1F5 /* Poppins-Black.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Poppins-Black.ttf"; path = "../../../../../Downloads/Poppins/Poppins-Black.ttf"; sourceTree = "<group>"; };
+		6AA76A042663844A00B7E1F5 /* Poppins-BlackItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Poppins-BlackItalic.ttf"; path = "../../../../../Downloads/Poppins/Poppins-BlackItalic.ttf"; sourceTree = "<group>"; };
+		6AA76A052663844A00B7E1F5 /* Poppins-ExtraBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Poppins-ExtraBold.ttf"; path = "../../../../../Downloads/Poppins/Poppins-ExtraBold.ttf"; sourceTree = "<group>"; };
+		6AA76A062663844A00B7E1F5 /* Poppins-ExtraBoldItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Poppins-ExtraBoldItalic.ttf"; path = "../../../../../Downloads/Poppins/Poppins-ExtraBoldItalic.ttf"; sourceTree = "<group>"; };
+		6AA76A072663844A00B7E1F5 /* Poppins-LightItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Poppins-LightItalic.ttf"; path = "../../../../../Downloads/Poppins/Poppins-LightItalic.ttf"; sourceTree = "<group>"; };
+		6AA76A082663844A00B7E1F5 /* Poppins-ExtraLightItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Poppins-ExtraLightItalic.ttf"; path = "../../../../../Downloads/Poppins/Poppins-ExtraLightItalic.ttf"; sourceTree = "<group>"; };
+		6AA76A092663844A00B7E1F5 /* Poppins-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Poppins-Light.ttf"; path = "../../../../../Downloads/Poppins/Poppins-Light.ttf"; sourceTree = "<group>"; };
+		6AA76A0A2663844A00B7E1F5 /* Poppins-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Poppins-Medium.ttf"; path = "../../../../../Downloads/Poppins/Poppins-Medium.ttf"; sourceTree = "<group>"; };
+		6AA76A0B2663844A00B7E1F5 /* Poppins-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Poppins-Bold.ttf"; path = "../../../../../Downloads/Poppins/Poppins-Bold.ttf"; sourceTree = "<group>"; };
+		6AA76A0C2663844A00B7E1F5 /* Poppins-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Poppins-Regular.ttf"; path = "../../../../../Downloads/Poppins/Poppins-Regular.ttf"; sourceTree = "<group>"; };
+		6AA76A0D2663844A00B7E1F5 /* Poppins-Thin.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Poppins-Thin.ttf"; path = "../../../../../Downloads/Poppins/Poppins-Thin.ttf"; sourceTree = "<group>"; };
+		6AA76A0E2663844A00B7E1F5 /* Poppins-ExtraLight.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Poppins-ExtraLight.ttf"; path = "../../../../../Downloads/Poppins/Poppins-ExtraLight.ttf"; sourceTree = "<group>"; };
+		6AA76A0F2663844A00B7E1F5 /* Poppins-Italic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Poppins-Italic.ttf"; path = "../../../../../Downloads/Poppins/Poppins-Italic.ttf"; sourceTree = "<group>"; };
+		6AA76A102663844A00B7E1F5 /* Poppins-ThinItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Poppins-ThinItalic.ttf"; path = "../../../../../Downloads/Poppins/Poppins-ThinItalic.ttf"; sourceTree = "<group>"; };
+		6AA76A112663844A00B7E1F5 /* Poppins-BoldItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Poppins-BoldItalic.ttf"; path = "../../../../../Downloads/Poppins/Poppins-BoldItalic.ttf"; sourceTree = "<group>"; };
+		6AA76A122663844A00B7E1F5 /* Poppins-MediumItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Poppins-MediumItalic.ttf"; path = "../../../../../Downloads/Poppins/Poppins-MediumItalic.ttf"; sourceTree = "<group>"; };
+		6AA76A132663844A00B7E1F5 /* Poppins-SemiBoldItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Poppins-SemiBoldItalic.ttf"; path = "../../../../../Downloads/Poppins/Poppins-SemiBoldItalic.ttf"; sourceTree = "<group>"; };
+		6AA76A142663844A00B7E1F5 /* Poppins-SemiBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Poppins-SemiBold.ttf"; path = "../../../../../Downloads/Poppins/Poppins-SemiBold.ttf"; sourceTree = "<group>"; };
+		8B5046DC93C289B5AC6C406E /* Pods-EZY.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EZY.debug.xcconfig"; path = "Target Support Files/Pods-EZY/Pods-EZY.debug.xcconfig"; sourceTree = "<group>"; };
+		A75C11C1873FE4E191601230 /* Pods_EZY.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_EZY.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		6AA769DE26636AE700B7E1F5 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				E5052C73E73080AD40F6F655 /* Pods_EZY.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		2B62A8E180A8585A5EDF7361 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				A75C11C1873FE4E191601230 /* Pods_EZY.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		6AA769D826636AE700B7E1F5 = {
+			isa = PBXGroup;
+			children = (
+				6AA769E326636AE700B7E1F5 /* EZY */,
+				6AA769E226636AE700B7E1F5 /* Products */,
+				D97C84BDB41C12F061081FBC /* Pods */,
+				2B62A8E180A8585A5EDF7361 /* Frameworks */,
+			);
+			sourceTree = "<group>";
+		};
+		6AA769E226636AE700B7E1F5 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				6AA769E126636AE700B7E1F5 /* EZY.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		6AA769E326636AE700B7E1F5 /* EZY */ = {
+			isa = PBXGroup;
+			children = (
+				6AA76A0026636C7B00B7E1F5 /* Font */,
+				6AA769FF26636C7600B7E1F5 /* Controllers */,
+				6AA769FE26636C7000B7E1F5 /* Models */,
+				6AA769FD26636C6B00B7E1F5 /* Views */,
+				6AA769FC26636C6500B7E1F5 /* ViewModels */,
+				6AA769FB26636C5700B7E1F5 /* Services */,
+				6AA769E426636AE700B7E1F5 /* AppDelegate.swift */,
+				6AA769E626636AE700B7E1F5 /* SceneDelegate.swift */,
+				6AA769F026636AE800B7E1F5 /* Assets.xcassets */,
+				6AA769F226636AE800B7E1F5 /* LaunchScreen.storyboard */,
+				6AA769F526636AE800B7E1F5 /* Info.plist */,
+				6AA769ED26636AE700B7E1F5 /* EZY.xcdatamodeld */,
+			);
+			path = EZY;
+			sourceTree = "<group>";
+		};
+		6AA769FB26636C5700B7E1F5 /* Services */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
+		6AA769FC26636C6500B7E1F5 /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = ViewModels;
+			sourceTree = "<group>";
+		};
+		6AA769FD26636C6B00B7E1F5 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		6AA769FE26636C7000B7E1F5 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		6AA769FF26636C7600B7E1F5 /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				6AA76A0126636D2800B7E1F5 /* LoginViewController.swift */,
+			);
+			path = Controllers;
+			sourceTree = "<group>";
+		};
+		6AA76A0026636C7B00B7E1F5 /* Font */ = {
+			isa = PBXGroup;
+			children = (
+				6AA76A032663844A00B7E1F5 /* Poppins-Black.ttf */,
+				6AA76A042663844A00B7E1F5 /* Poppins-BlackItalic.ttf */,
+				6AA76A0B2663844A00B7E1F5 /* Poppins-Bold.ttf */,
+				6AA76A112663844A00B7E1F5 /* Poppins-BoldItalic.ttf */,
+				6AA76A052663844A00B7E1F5 /* Poppins-ExtraBold.ttf */,
+				6AA76A062663844A00B7E1F5 /* Poppins-ExtraBoldItalic.ttf */,
+				6AA76A0E2663844A00B7E1F5 /* Poppins-ExtraLight.ttf */,
+				6AA76A082663844A00B7E1F5 /* Poppins-ExtraLightItalic.ttf */,
+				6AA76A0F2663844A00B7E1F5 /* Poppins-Italic.ttf */,
+				6AA76A092663844A00B7E1F5 /* Poppins-Light.ttf */,
+				6AA76A072663844A00B7E1F5 /* Poppins-LightItalic.ttf */,
+				6AA76A0A2663844A00B7E1F5 /* Poppins-Medium.ttf */,
+				6AA76A122663844A00B7E1F5 /* Poppins-MediumItalic.ttf */,
+				6AA76A0C2663844A00B7E1F5 /* Poppins-Regular.ttf */,
+				6AA76A142663844A00B7E1F5 /* Poppins-SemiBold.ttf */,
+				6AA76A132663844A00B7E1F5 /* Poppins-SemiBoldItalic.ttf */,
+				6AA76A0D2663844A00B7E1F5 /* Poppins-Thin.ttf */,
+				6AA76A102663844A00B7E1F5 /* Poppins-ThinItalic.ttf */,
+			);
+			path = Font;
+			sourceTree = "<group>";
+		};
+		D97C84BDB41C12F061081FBC /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				8B5046DC93C289B5AC6C406E /* Pods-EZY.debug.xcconfig */,
+				14AF3F335899880714FDA1B3 /* Pods-EZY.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		6AA769E026636AE700B7E1F5 /* EZY */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 6AA769F826636AE800B7E1F5 /* Build configuration list for PBXNativeTarget "EZY" */;
+			buildPhases = (
+				403E3B89B0999B5A60799CB9 /* [CP] Check Pods Manifest.lock */,
+				6AA769DD26636AE700B7E1F5 /* Sources */,
+				6AA769DE26636AE700B7E1F5 /* Frameworks */,
+				6AA769DF26636AE700B7E1F5 /* Resources */,
+				8F426DE6A00A79981FB7B8D3 /* [CP] Embed Pods Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = EZY;
+			productName = EZY;
+			productReference = 6AA769E126636AE700B7E1F5 /* EZY.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		6AA769D926636AE700B7E1F5 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 1250;
+				LastUpgradeCheck = 1250;
+				TargetAttributes = {
+					6AA769E026636AE700B7E1F5 = {
+						CreatedOnToolsVersion = 12.5;
+					};
+				};
+			};
+			buildConfigurationList = 6AA769DC26636AE700B7E1F5 /* Build configuration list for PBXProject "EZY" */;
+			compatibilityVersion = "Xcode 9.3";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 6AA769D826636AE700B7E1F5;
+			productRefGroup = 6AA769E226636AE700B7E1F5 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				6AA769E026636AE700B7E1F5 /* EZY */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		6AA769DF26636AE700B7E1F5 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6AA76A2626638C5600B7E1F5 /* Poppins-ExtraLight.ttf in Resources */,
+				6AA76A1E26638C5600B7E1F5 /* Poppins-ExtraLightItalic.ttf in Resources */,
+				6AA76A2526638C5600B7E1F5 /* Poppins-SemiBoldItalic.ttf in Resources */,
+				6AA76A2026638C5600B7E1F5 /* Poppins-SemiBold.ttf in Resources */,
+				6AA769F426636AE800B7E1F5 /* LaunchScreen.storyboard in Resources */,
+				6AA76A1C26638C5600B7E1F5 /* Poppins-Light.ttf in Resources */,
+				6AA76A1626638C5600B7E1F5 /* Poppins-ThinItalic.ttf in Resources */,
+				6AA76A1926638C5600B7E1F5 /* Poppins-Italic.ttf in Resources */,
+				6AA76A1F26638C5600B7E1F5 /* Poppins-ExtraBoldItalic.ttf in Resources */,
+				6AA76A1B26638C5600B7E1F5 /* Poppins-Thin.ttf in Resources */,
+				6AA76A1526638C5600B7E1F5 /* Poppins-MediumItalic.ttf in Resources */,
+				6AA76A2126638C5600B7E1F5 /* Poppins-Black.ttf in Resources */,
+				6AA76A2426638C5600B7E1F5 /* Poppins-ExtraBold.ttf in Resources */,
+				6AA76A1826638C5600B7E1F5 /* Poppins-BoldItalic.ttf in Resources */,
+				6AA76A1A26638C5600B7E1F5 /* Poppins-Medium.ttf in Resources */,
+				6AA76A2326638C5600B7E1F5 /* Poppins-Bold.ttf in Resources */,
+				6AA76A2226638C5600B7E1F5 /* Poppins-BlackItalic.ttf in Resources */,
+				6AA769F126636AE800B7E1F5 /* Assets.xcassets in Resources */,
+				6AA76A1726638C5600B7E1F5 /* Poppins-Regular.ttf in Resources */,
+				6AA76A1D26638C5600B7E1F5 /* Poppins-LightItalic.ttf in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		403E3B89B0999B5A60799CB9 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-EZY-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		8F426DE6A00A79981FB7B8D3 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-EZY/Pods-EZY-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-EZY/Pods-EZY-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-EZY/Pods-EZY-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		6AA769DD26636AE700B7E1F5 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6AA76A0226636D2800B7E1F5 /* LoginViewController.swift in Sources */,
+				6AA769EF26636AE700B7E1F5 /* EZY.xcdatamodeld in Sources */,
+				6AA769E526636AE700B7E1F5 /* AppDelegate.swift in Sources */,
+				6AA769E726636AE700B7E1F5 /* SceneDelegate.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		6AA769F226636AE800B7E1F5 /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				6AA769F326636AE800B7E1F5 /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		6AA769F626636AE800B7E1F5 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.5;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		6AA769F726636AE800B7E1F5 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.5;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		6AA769F926636AE800B7E1F5 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 8B5046DC93C289B5AC6C406E /* Pods-EZY.debug.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = Q25U65UWAP;
+				INFOPLIST_FILE = EZY/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.yujin.EZY;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		6AA769FA26636AE800B7E1F5 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 14AF3F335899880714FDA1B3 /* Pods-EZY.release.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = Q25U65UWAP;
+				INFOPLIST_FILE = EZY/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.yujin.EZY;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		6AA769DC26636AE700B7E1F5 /* Build configuration list for PBXProject "EZY" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				6AA769F626636AE800B7E1F5 /* Debug */,
+				6AA769F726636AE800B7E1F5 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		6AA769F826636AE800B7E1F5 /* Build configuration list for PBXNativeTarget "EZY" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				6AA769F926636AE800B7E1F5 /* Debug */,
+				6AA769FA26636AE800B7E1F5 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		6AA769ED26636AE700B7E1F5 /* EZY.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				6AA769EE26636AE700B7E1F5 /* EZY.xcdatamodel */,
+			);
+			currentVersion = 6AA769EE26636AE700B7E1F5 /* EZY.xcdatamodel */;
+			path = EZY.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
+	};
+	rootObject = 6AA769D926636AE700B7E1F5 /* Project object */;
+}
