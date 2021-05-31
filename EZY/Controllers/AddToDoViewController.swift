@@ -13,13 +13,21 @@ import Alamofire
 class AddToDoViewController:UIViewController{
     
     //MARK: - Properties
-    private let backbutton : UIButton = {
-        let button = UIButton(type: .system)
-        button.tintColor = .EZY_BAC8FF
-        button.setImage(UIImage(systemName: "arrow.left"), for: .normal)
-        return button
-    }()
+    private let backbutton = UIButton().then{
+        $0.tintColor = .EZY_BAC8FF
+        $0.setImage(UIImage(systemName: "arrow.left"), for: .normal)
+        $0.addTarget(self, action: #selector(todobackbtn), for: .touchUpInside)
+        $0.sizeThatFits(CGSize(width: 24, height: 24))
+    }
+    private let TitleLabel = UILabel().then{
+        $0.textColor = .EZY_BAC8FF
+        $0.text = "나의 할 일 추가"
+        $0.dynamicFont(fontSize: 22, weight: .semibold)
+    }
     
+//    private let TextTitleView = UITextView().then{
+//
+//    }
     //MARK: - Lifecycle
     
     override func viewDidLoad() {
@@ -29,11 +37,26 @@ class AddToDoViewController:UIViewController{
     
     //MARK: - Selectors
     
-    
+    @objc func todobackbtn(){
+        
+    }
     
     //MARK: - Helpers
     func configureUI(){
+        view.backgroundColor = .white
         view.addSubview(backbutton)
+        
+        backbutton.snp.makeConstraints { (make) in
+            make.width.height.equalTo(24)
+            make.top.equalTo(61)
+            make.left.equalTo(28)
+        }
+        view.addSubview(TitleLabel)
+        TitleLabel.snp.makeConstraints { (make) in
+            make.top.equalTo(backbutton.snp_bottomMargin).offset(51)
+            
+            make.left.equalTo(backbutton.snp_leftMargin)
+        }
     }
 }
 

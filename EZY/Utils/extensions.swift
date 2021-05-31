@@ -22,7 +22,7 @@ extension UIColor{
     static let EZY_BADEFF = UIColor.rgb(red: 186, green: 222, blue: 255)
     static let EZY_CFE3CE = UIColor.rgb(red: 207, green: 227, blue: 255)
     static let EZY_E4C9FF = UIColor.rgb(red: 228, green: 201, blue: 255)
-    static let EZY_6B40FF = UIColor.rgb(red: 107, green: 64, blue: 255)
+    static let EZY_6B40FF = UIColor.rgb(red: 107, green: 64,  blue: 255)
     static let EZY_FFA680 = UIColor.rgb(red: 255, green: 166, blue: 128)
     static let EZY_FFD18D = UIColor.rgb(red: 255, green: 209, blue: 141)
     static let EZY_B880FF = UIColor.rgb(red: 184, green: 128, blue: 255)
@@ -34,8 +34,51 @@ extension UIColor{
     static let EZY_EED9B9 = UIColor.rgb(red: 238, green: 217, blue: 185)
     static let EZY_FFCEB9 = UIColor.rgb(red: 255, green: 206, blue: 185)
     static let EZY_DEC4FF = UIColor.rgb(red: 222, green: 196, blue: 255)
+    static let EZY_656565 = UIColor.rgb(red: 101, green: 101, blue: 101)
+    static let EZY_929292 = UIColor.rgb(red: 146, green: 146, blue: 146)
 
     
-    // static let EZY_ = UIColor.rgb(red: , green: , blue: )
+}
+extension UILabel {
+  func dynamicFont(fontSize size: CGFloat, weight: UIFont.Weight) {
+    let currentFontName = self.font.fontName
+    var calculatedFont: UIFont?
+    let bounds = UIScreen.main.bounds
+    let height = bounds.size.height
     
+    switch height {
+    case 480.0: //Iphone 3,4S => 3.5 inch
+      calculatedFont = UIFont(name: currentFontName, size: size * 0.7)
+      resizeFont(calculatedFont: calculatedFont, weight: weight)
+      break
+    case 568.0: //iphone 5, SE => 4 inch
+      calculatedFont = UIFont(name: currentFontName, size: size * 0.8)
+      resizeFont(calculatedFont: calculatedFont, weight: weight)
+      break
+    case 667.0: //iphone 6, 6s, 7, 8 => 4.7 inch
+      calculatedFont = UIFont(name: currentFontName, size: size * 0.92)
+      resizeFont(calculatedFont: calculatedFont, weight: weight)
+      break
+    case 736.0: //iphone 6s+ 6+, 7+, 8+ => 5.5 inch
+      calculatedFont = UIFont(name: currentFontName, size: size * 0.95)
+     resizeFont(calculatedFont: calculatedFont, weight: weight)
+      break
+    case 812.0: //iphone X, XS => 5.8 inch
+      calculatedFont = UIFont(name: currentFontName, size: size)
+      resizeFont(calculatedFont: calculatedFont, weight: weight)
+      break
+    case 896.0: //iphone XR => 6.1 inch  // iphone XS MAX => 6.5 inch
+      calculatedFont = UIFont(name: currentFontName, size: size * 1.15)
+      resizeFont(calculatedFont: calculatedFont, weight: weight)
+      break
+    default:
+      print("not an iPhone")
+      break
+    }
+  }
+  
+  private func resizeFont(calculatedFont: UIFont?, weight: UIFont.Weight) {
+    self.font = calculatedFont
+    self.font = UIFont.systemFont(ofSize: calculatedFont!.pointSize, weight: weight)
+  }
 }
