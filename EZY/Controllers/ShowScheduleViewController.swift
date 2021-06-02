@@ -12,6 +12,18 @@ import Then
 class ShowScheduleViewController: UIViewController{
     
     //MARK: Properties
+    var schedulebyTypeCollectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout()).then {
+        let layout = UICollectionViewFlowLayout()
+        layout.scrollDirection = .horizontal
+        $0.backgroundColor = .white
+        $0.contentInset = UIEdgeInsets.init(top: 0, left: 17, bottom: 0, right: 0)
+        $0.showsHorizontalScrollIndicator = false
+        $0.collectionViewLayout = layout
+    }
+    
+    let scheduleTypesArray = ["나의 할 일","우리의 할 일","심부름","문의하기"]
+    let icon = [UIImage(named: "EZY_MyJob"), UIImage(named: "EZY_OurJob"), UIImage(named: "EZY_Errand"), UIImage(named: "EZY_Errand")]
+    
     lazy var userName = "Y00ujin"
     
     lazy var badgeView = UIView().then {
@@ -48,6 +60,10 @@ class ShowScheduleViewController: UIViewController{
     //MARK: Lifecycles
     override func viewDidLoad() {
         super.viewDidLoad()
+        schedulebyTypeCollectionView.register(ScheduleTypeCollectionViewCell.self, forCellWithReuseIdentifier: ScheduleTypeCollectionViewCell.Identifier)
+
+        schedulebyTypeCollectionView.delegate = self
+        schedulebyTypeCollectionView.dataSource = self
         
         configureUI()
     }
@@ -60,11 +76,19 @@ class ShowScheduleViewController: UIViewController{
     func configureUI(){
         self.view.backgroundColor = .white
     
+        self.view.addSubview(schedulebyTypeCollectionView)
         self.view.addSubview(questionTopLabel)
         self.view.addSubview(questionMiddleLabel)
         self.view.addSubview(questionBottomLabel)
         self.view.addSubview(notificationButton)
         notificationButton.addSubview(badgeView)
+        
+        schedulebyTypeCollectionView.snp.makeConstraints { make in
+            make.height.equalToSuperview().dividedBy(5)
+            make.width.equalToSuperview()
+            make.top.equalTo(questionBottomLabel.snp.bottom).offset(17)
+            make.centerX.equalToSuperview()
+        }
         
         badgeView.snp.makeConstraints { make in
             make.top.equalToSuperview().inset(5)
@@ -99,9 +123,42 @@ class ShowScheduleViewController: UIViewController{
     }
 }
 
+extension ShowScheduleViewController: UICollectionViewDelegate, UICollectionViewDelegateFlowLayout{
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        return CGSize.init(width: self.view.frame.width / 3.45, height: (self.view.frame.width / 3)/0.95)
+    }
+    
+    //MARK: collectionView - left Padding
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
+       return UIEdgeInsets(top: 0, left: 10, bottom: 0, right: 0)
+    }
+    
+    //MARK: collectionView - cell 간격
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
+        return 22
+    }
+}
+
+extension ShowScheduleViewController: UICollectionViewDataSource{
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return scheduleTypesArray.count
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier:
+                                                                ScheduleTypeCollectionViewCell.Identifier, for: indexPath) as? ScheduleTypeCollectionViewCell else {
+            return UICollectionViewCell()
+        }
+        
+        cell.label.text = scheduleTypesArray[indexPath.row]
+        cell.icon.image = icon[indexPath.row]
+        cell.backgroundColor = .clear
+        return cell
+    }
+}
+
 extension UILabel {
     func dynamicFont(fontSize size: CGFloat, currentFontName: String) {
-    var calculatedFont: UIFont?
     let bounds = UIScreen.main.bounds
     let height = bounds.size.height
     
