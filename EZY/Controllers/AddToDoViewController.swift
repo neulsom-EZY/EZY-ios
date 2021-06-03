@@ -38,13 +38,8 @@ class AddToDoViewController:UIViewController{
         return tf
     }()
     
-    private let calenderButton = UIButton().then {
-        $0.setImage(UIImage(systemName: "calendar"), for: .normal)
-        $0.layer.cornerRadius = 10
-        $0.layer.shadowColor = UIColor.gray.cgColor
-        $0.layer.shadowOpacity = 1.0
-    }
 
+    
 
     //MARK: - Lifecycle
     
@@ -69,15 +64,19 @@ class AddToDoViewController:UIViewController{
             make.height.equalTo(self.view.frame.height/33.8)
             make.left.equalTo(self.view.frame.width/13.3)
             make.top.equalTo(self.view.frame.height/13.3)
-        
         }
+        
         view.addSubview(TitleLabel)
+        
         TitleLabel.snp.makeConstraints { (make) in
             make.top.equalTo(backbutton.snp.bottom).offset(self.view.frame.height/30.0)
             make.left.equalTo(backbutton.snp.left)
         }
+        
         view.addSubview(titleContainerView)
+        
         titleContainerView.snp.makeConstraints { (make) in
+            make.height.equalTo(self.view.frame.height/14.7)
             make.top.equalTo(TitleLabel.snp.bottom).offset(self.view.frame.height/19.8)
             make.left.equalTo(backbutton.snp.left)
             make.right.equalTo(self.view.frame.width/13.8 * -1)

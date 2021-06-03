@@ -7,15 +7,13 @@
 
 import UIKit
 import SnapKit
+
 class Utilities{
     
     func inputContainerView(withMessage Message:String,textField:UITextField,Color MessageColor: UIColor) -> UIView{
         let view = UIView()
         let Label_Message = UILabel()
         
-        view.snp.makeConstraints { (make) in
-            make.height.equalTo(55)
-        }
         view.backgroundColor = MessageColor
         view.layer.cornerRadius = 20
         
@@ -24,7 +22,7 @@ class Utilities{
         Label_Message.dynamicFont(fontSize: 14, weight: .bold)
         Label_Message.textColor = .EZY_8099FF
         Label_Message.snp.makeConstraints { (make) in
-            make.left.equalTo(view.snp.left).offset(21)
+            make.left.equalTo(view.snp.left).offset(20)
             make.centerY.equalToSuperview()
         }
         view.addSubview(textField)
