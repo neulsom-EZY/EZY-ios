@@ -225,7 +225,7 @@ extension ShowScheduleViewController: UITableViewDataSource{
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 90
+        return self.view.frame.height/8.8
     }
 
 }
