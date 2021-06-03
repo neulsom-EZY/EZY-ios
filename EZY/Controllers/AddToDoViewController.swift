@@ -25,10 +25,26 @@ class AddToDoViewController:UIViewController{
         $0.dynamicFont(fontSize: 22, weight: .semibold)
     }
     
-//    private let TextTitleView = UITextView().then{
-//
+    private lazy var titleContainerView : UIView = {
+        let title = "제목"
+        let view = Utilities().inputContainerView(withMessage: title, textField: titleTextField, Color: .EZY_F4F6FF)
+        
+        return view
+    }()
+    
+    private let titleTextField : UITextField = {
+        let tf = Utilities().textField(TextColor: .EZY_656565, TextSize: 14)
+        
+        return tf
+    }()
+    
+//    private let calenderButton = UIButton().then {
+//        $0.setImage(UIImage(systemName: ""), for: .normal)
 //    }
+//
+//
     //MARK: - Lifecycle
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -56,6 +72,14 @@ class AddToDoViewController:UIViewController{
             make.top.equalTo(backbutton.snp_bottomMargin).offset(51)
             
             make.left.equalTo(backbutton.snp_leftMargin)
+        }
+        view.addSubview(titleContainerView)
+        titleContainerView.snp.makeConstraints { (make) in
+            make.top.equalTo(TitleLabel.snp.bottom).offset(57)
+            make.centerX.equalToSuperview()
+
+            make.left.equalTo(view.snp.left).offset(28)
+            make.right.equalTo(view.snp.right).offset(-28)
         }
     }
 }
