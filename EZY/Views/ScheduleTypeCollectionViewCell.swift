@@ -8,7 +8,8 @@
 import UIKit
 
 class ScheduleTypeCollectionViewCell: UICollectionViewCell {
-    static let Identifier = "\(ScheduleTypeCollectionViewCell.self)"
+    static let ScheduleTypeCollectionViewIdentifier = "\(ScheduleTypeCollectionViewCell.self)"
+    
     
     let label = UILabel().then{
         $0.text = "나의 할 일"
