@@ -28,7 +28,7 @@ class AddToDoViewController:UIViewController{
     private lazy var titleContainerView : UIView = {
         let title = "제목"
         let view = Utilities().inputContainerView(withMessage: title, textField: titleTextField, Color: .EZY_F4F6FF)
-        
+
         return view
     }()
     
@@ -38,8 +38,7 @@ class AddToDoViewController:UIViewController{
         return tf
     }()
     
-
-    
+ 
 
     //MARK: - Lifecycle
     
@@ -59,6 +58,7 @@ class AddToDoViewController:UIViewController{
     func configureUI(){
         view.backgroundColor = .white
         view.addSubview(backbutton)
+        titleContainerView.layer.cornerRadius = view.frame.height/40.6
         
         backbutton.snp.makeConstraints { (make) in
             make.height.equalTo(self.view.frame.height/33.8)
@@ -81,6 +81,7 @@ class AddToDoViewController:UIViewController{
             make.left.equalTo(backbutton.snp.left)
             make.right.equalTo(self.view.frame.width/13.8 * -1)
         }
+        
     }
 }
 
