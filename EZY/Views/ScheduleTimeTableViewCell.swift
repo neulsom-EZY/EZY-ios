@@ -85,7 +85,7 @@ class ScheduleTimeTableViewCell: UITableViewCell {
         EZYLISTCellRightDecorationView.snp.makeConstraints { make in
             make.top.equalToSuperview().offset(7)
             make.width.equalToSuperview().dividedBy(1.15)
-            make.height.equalTo(77)
+            make.height.equalToSuperview().dividedBy(1.2)
             make.centerX.equalToSuperview()
         }
         
