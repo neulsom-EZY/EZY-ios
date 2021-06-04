@@ -12,7 +12,6 @@ class ScheduleTimeTableView: UIView {
     private lazy var ViewController = ShowScheduleViewController()
 
     let tableView = UITableView().then {
-        $0.backgroundColor = .white
         $0.separatorStyle = .none
         $0.showsVerticalScrollIndicator = false
     }
@@ -30,13 +29,6 @@ class ScheduleTimeTableView: UIView {
     func setup() {
         backgroundColor = .white
         addSubview(tableView)
-        
-        tableView.snp.makeConstraints { make in
-            make.top.equalToSuperview().offset(20)
-            make.centerX.equalToSuperview()
-            make.width.equalToSuperview()
-            make.bottom.equalToSuperview()
-        }
     }
 
 }

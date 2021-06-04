@@ -12,13 +12,13 @@ class ScheduleTimeTableViewCell: UITableViewCell {
     static let ScheduleTimeTableViewIdentifier = "\(ScheduleTimeTableViewCell.self)"
 
     var groupNameLabel = UILabel().then {
-        $0.font = UIFont(name: "Poppins-SemiBold", size: 8)
+        $0.dynamicFont(fontSize: 8, currentFontName: "Poppins-SemiBold")
     }
     var titleLabel = UILabel().then {
-        $0.font = UIFont(name: "Poppins-SemiBold", size: 14)
+        $0.dynamicFont(fontSize: 14, currentFontName: "Poppins-SemiBold")
     }
     var planTimeLabel = UILabel().then {
-        $0.font = UIFont(name: "Poppins-Light", size: 8)
+        $0.dynamicFont(fontSize: 8, currentFontName: "Poppins-Light")
     }
     var EZYLISTCellLeftDecorationView = UIView().then {
         $0.backgroundColor = UIColor(red: 150/255, green: 141/255, blue: 255/255, alpha: 1)
@@ -84,8 +84,8 @@ class ScheduleTimeTableViewCell: UITableViewCell {
         
         EZYLISTCellRightDecorationView.snp.makeConstraints { make in
             make.top.equalToSuperview().offset(7)
-            make.bottom.equalToSuperview().inset(10)
             make.width.equalToSuperview().dividedBy(1.15)
+            make.height.equalTo(77)
             make.centerX.equalToSuperview()
         }
         

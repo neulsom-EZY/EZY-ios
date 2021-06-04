@@ -21,28 +21,16 @@ class ScheduleTypeCollectionView: UIView {
     override init(frame: CGRect) {
         super.init(frame: frame)
         setup()
-        
-        CollectionViewSnapKit()
     }
     
     required init?(coder: NSCoder) {
         super.init(coder: coder)
         setup()
-        
-        CollectionViewSnapKit()
     }
     
     func setup() {
         backgroundColor = .white
         addSubview(collectionView)
-    }
-    
-    func CollectionViewSnapKit(){
-        collectionView.snp.makeConstraints { make in
-            make.top.equalToSuperview().offset(173)
-            make.width.equalToSuperview()
-            make.height.equalToSuperview().dividedBy(4.5)
-        }
     }
 
 }

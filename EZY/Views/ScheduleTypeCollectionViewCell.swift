@@ -14,7 +14,8 @@ class ScheduleTypeCollectionViewCell: UICollectionViewCell {
     let label = UILabel().then{
         $0.text = "나의 할 일"
         $0.textColor = UIColor(red: 107/255, green: 64/255, blue: 255/255, alpha: 1)
-        $0.font = UIFont(name: "AppleSDGothicNeo-SemiBold", size: 12)
+        $0.dynamicFont(fontSize: 12, currentFontName: "AppleSDGothicNeo-SemiBold")
+
     }
     
     let icon: UIImageView = UIImageView(image: UIImage(named: "EZY_MyJob"))
@@ -30,9 +31,9 @@ class ScheduleTypeCollectionViewCell: UICollectionViewCell {
     
     let mainView = UIView().then {
         $0.layer.cornerRadius = 20
-        $0.layer.shadowOpacity = 0.1
+        $0.layer.shadowOpacity = 0.11
         $0.layer.shadowOffset = CGSize(width: 0, height: 3)
-        $0.layer.shadowRadius = 10
+        $0.layer.shadowRadius = 7
         $0.layer.masksToBounds = false
         $0.backgroundColor = .white
     }

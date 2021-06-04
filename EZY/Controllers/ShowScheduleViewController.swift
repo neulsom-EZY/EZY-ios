@@ -16,7 +16,7 @@ class ShowScheduleViewController: UIViewController{
     
     private lazy var ScheduleTimeTableMainView = ScheduleTimeTableView.init(frame: self.view.frame)
     
-    let groupNameArray: [String] = ["NEULSOM", "공부", "산책", "심부름", "NEULSOM", "공부", "산책", "심부름"]
+    var groupNameArray: [String] = ["NEULSOM", "공부", "산책", "심부름", "NEULSOM", "공부", "산책", "심부름"]
     let titleArray: [String] = ["EZY 회의", "디자인 이론 공부", "강아지 산책시키기", "카페에서 마카롱 사오기", "EZY 회의", "디자인 이론 공부", "강아지 산책시키기", "카페에서 마카롱 사오기"]
     let planTimeArray: [String] = ["12:00 - 13:00", "12:00 - 13:00", "12:00 - 13:00", "12:00 - 13:00", "12:00 - 13:00", "12:00 - 13:00", "12:00 - 13:00", "12:00 - 13:00"]
     
@@ -90,8 +90,6 @@ class ShowScheduleViewController: UIViewController{
     override func viewDidAppear(_ animated: Bool) {
         badgeView.layer.cornerRadius = badgeView.bounds.width/2
         badgeView.isHidden = true
-        
-        
     }
     
     func configureUI(){
@@ -132,9 +130,8 @@ class ShowScheduleViewController: UIViewController{
         
         questionTopLabel.snp.makeConstraints { make in
             make.centerX.equalToSuperview()
-            make.left.equalToSuperview().offset(29)
+            make.left.equalToSuperview().offset(self.view.frame.width/12.9)
             make.top.equalToSuperview().offset(self.view.frame.height/12)
-            print(self.view.frame.height/12)
             make.width.equalToSuperview().dividedBy(2)
         }
         
@@ -157,6 +154,22 @@ class ShowScheduleViewController: UIViewController{
             make.right.equalToSuperview().inset(29)
             make.top.equalTo(ScheduleTypeCollectionMainView.collectionView.snp.bottom).offset(9)
         }
+        
+        ScheduleTypeCollectionMainView.collectionView.snp.makeConstraints { make in
+            make.top.equalTo(questionBottomLabel.snp.bottom)
+            make.width.equalToSuperview()
+            make.centerX.equalToSuperview()
+            make.height.equalToSuperview().dividedBy(4)
+        }
+        
+        ScheduleTimeTableMainView.tableView.snp.makeConstraints { make in
+            make.top.equalTo(ScheduleTimeTableMainView).offset(self.view.frame.height/36)
+            make.width.equalToSuperview()
+            make.bottom.equalToSuperview()
+            make.centerX.equalToSuperview()
+        }
+        
+        
         
         let attributedString = NSMutableAttributedString(string: EZYLISTTitleLabel.text!)
         attributedString.addAttribute(NSAttributedString.Key.kern, value: CGFloat(3.0), range: NSRange(location: 0, length: attributedString.length))
@@ -190,6 +203,7 @@ extension ShowScheduleViewController: UICollectionViewDataSource{
                                                                 ScheduleTypeCollectionViewCell.ScheduleTypeCollectionViewIdentifier, for: indexPath) as? ScheduleTypeCollectionViewCell else {
             return UICollectionViewCell()
         }
+        
         
         cell.label.text = scheduleTypesArray[indexPath.row]
         cell.icon.image = icon[indexPath.row]
@@ -225,7 +239,12 @@ extension ShowScheduleViewController: UITableViewDataSource{
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return self.view.frame.height/8.8
+        return 92
+        
+    }
+    
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+           return 0
     }
 
 }
