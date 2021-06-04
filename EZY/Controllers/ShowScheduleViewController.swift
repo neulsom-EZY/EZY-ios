@@ -77,6 +77,8 @@ class ShowScheduleViewController: UIViewController{
         super.viewDidLoad()
         ScheduleTypeCollectionMainView.collectionView.register(ScheduleTypeCollectionViewCell.self, forCellWithReuseIdentifier: ScheduleTypeCollectionViewCell.ScheduleTypeCollectionViewIdentifier)
         ScheduleTimeTableMainView.tableView.register(ScheduleTimeTableViewCell.self, forCellReuseIdentifier: ScheduleTimeTableViewCell.ScheduleTimeTableViewIdentifier)
+        
+        notificationButton.addTarget(self, action: #selector(didBnotificationButtonClick), for: .touchUpInside)
 
         ScheduleTypeCollectionMainView.collectionView.delegate = self
         ScheduleTypeCollectionMainView.collectionView.dataSource = self
@@ -91,6 +93,13 @@ class ShowScheduleViewController: UIViewController{
         badgeView.layer.cornerRadius = badgeView.bounds.width/2
         badgeView.isHidden = true
     }
+    
+    @objc func didBnotificationButtonClick(_ sender: UIButton) {
+        let pushVC = NotificationViewController()
+        
+//        pushVC.titleLabel.text = titleArray[indexPath.row]
+        
+        self.navigationController?.pushViewController(pushVC, animated: true)    }
     
     func configureUI(){
         self.view.backgroundColor = .white
