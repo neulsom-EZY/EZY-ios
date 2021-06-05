@@ -37,8 +37,23 @@ class AddToDoViewController:UIViewController{
         
         return tf
     }()
+    private let calendarButton : UIButton = {
+        let button = Utilities().AlertButton(image: UIImage(named: "calendar")!)
+        button.addTarget(self, action: #selector(calendarAlert), for: .touchUpInside)
+       return button
+    }()
     
- 
+    
+    
+    
+    private let addButton = UIButton().then{
+        let Label = UILabel()
+        Label.dynamicFont(fontSize: 14, weight: .semibold)
+        $0.setTitle("추가", for: .normal)
+        $0.backgroundColor = .EZY_BAC8FF
+        $0.addTarget(self, action: #selector(Addmytodobtn), for: .touchUpInside)
+        $0.isEnabled = true
+    }
 
     //MARK: - Lifecycle
     
@@ -51,7 +66,18 @@ class AddToDoViewController:UIViewController{
     //MARK: - Selectors
     
     @objc func todobackbtn(){
+        //전페이지로 되돌아가는 버튼
         
+    }
+    
+    
+    @objc func calendarAlert(){
+        // 날짜 Alert를 실행시킬 부분
+    }
+    
+    @objc func Addmytodobtn(){
+        print("DEBUG:AddButton")
+        //추가페이지 작성후 실행시키는 코드
     }
     
     //MARK: - Helpers
@@ -59,6 +85,9 @@ class AddToDoViewController:UIViewController{
         view.backgroundColor = .white
         view.addSubview(backbutton)
         titleContainerView.layer.cornerRadius = view.frame.height/40.6
+        addButton.layer.cornerRadius = view.frame.height/81.2
+        calendarButton.layer.cornerRadius = view.frame.height/81.2
+        
         
         backbutton.snp.makeConstraints { (make) in
             make.height.equalTo(self.view.frame.height/33.8)
@@ -82,13 +111,30 @@ class AddToDoViewController:UIViewController{
             make.right.equalTo(self.view.frame.width/13.8 * -1)
         }
         
+        view.addSubview(calendarButton)
+        calendarButton.snp.makeConstraints { (make) in
+            make.height.width.equalTo(self.view.frame.height/18.0)
+            make.left.equalTo(backbutton.snp.left)
+            make.top.equalTo(titleContainerView.snp.bottom).offset(view.frame.height/30.0)
+        }
+        
+        view.addSubview(addButton)
+        
+        addButton.snp.makeConstraints { (make) in
+            make.bottom.equalToSuperview().offset(view.frame.height/10.9 * -1)
+            make.height.equalTo(self.view.frame.height/18.0)
+            make.left.equalTo(backbutton.snp.left)
+            make.right.equalTo(titleContainerView.snp.right)
+            
+        }
+  
     }
 }
 
 #if DEBUG
 import SwiftUI
 struct ViewControllerRepresentable: UIViewControllerRepresentable {
-    
+
 func updateUIViewController(_ uiView: UIViewController,context: Context) {
         // leave this empty
 }
@@ -106,6 +152,6 @@ struct ViewControllerRepresentable_PreviewProvider: PreviewProvider {
                 .previewDisplayName(/*@START_MENU_TOKEN@*/"Preview"/*@END_MENU_TOKEN@*/)
                 .previewDevice(PreviewDevice(rawValue: "iPhone 11"))
         }
-        
+
     }
 } #endif

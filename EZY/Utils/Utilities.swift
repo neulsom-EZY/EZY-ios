@@ -28,7 +28,7 @@ class Utilities{
         view.addSubview(textField)
         textField.snp.makeConstraints { (make) in
             make.left.equalTo(Label_Message.snp.right)
-            make.right.equalTo(view.snp.right)
+            make.right.equalToSuperview()
             make.centerY.equalToSuperview()
         }
     
@@ -40,6 +40,7 @@ class Utilities{
         let tf = UITextField()
         tf.textColor = TC
         tf.font = UIFont.systemFont(ofSize: CGFloat(TS), weight: .medium)
+        tf.attributedPlaceholder = NSAttributedString(string: "입력", attributes: [NSAttributedString.Key.foregroundColor: UIColor.white])
         return tf
     }
     func textView(TextColor TC: UIColor,TextSize TS : Int) -> UITextView{
@@ -48,5 +49,24 @@ class Utilities{
         tv.font = UIFont.systemFont(ofSize: CGFloat(TS), weight: .medium)
         return tv
     }
+    
+    
+    
+    func AlertButton(image img: UIImage) -> UIButton{
+        let button = UIButton()
+        
+        button.backgroundColor = .white
+        
+        button.setImage(img, for: .normal)
+        
 
+        button.layer.shadowColor = UIColor.black.cgColor
+        button.layer.shadowOffset = CGSize(width: 0, height: 4)
+        button.layer.shadowOpacity = 0.1
+        
+        return button
+    }
+    
+    
+    
 }
