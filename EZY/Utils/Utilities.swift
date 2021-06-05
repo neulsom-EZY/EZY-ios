@@ -22,7 +22,7 @@ class Utilities{
         Label_Message.dynamicFont(fontSize: 14, weight: .bold)
         Label_Message.textColor = .EZY_8099FF
         Label_Message.snp.makeConstraints { (make) in
-            make.left.equalToSuperview().offset(ViewSize)
+            make.left.equalToSuperview().offset(ViewSize / 17.8)
             make.centerY.equalToSuperview()
         }
         view.addSubview(textField)
@@ -35,6 +35,7 @@ class Utilities{
 
         return view
     }
+    
     
     func textField(TextColor TC: UIColor,TextSize TS : Int) -> UITextField{
         let tf = UITextField()
@@ -50,22 +51,43 @@ class Utilities{
         return tv
     }
     
+    //MARK: - Alert
+    
+    func AlertbtnView(withMessage Message: String, ViewSize : Double, Button: UIButton) -> UIView{
+        let view = UIView()
+        let Label = UILabel()
+        Label.text = Message
+        Label.dynamicFont(fontSize: 16, weight: .regular)
+        Label.textColor = .EZY_656565
+        
+        view.addSubview(Button)
+        Button.snp.makeConstraints { (make) in
+            make.left.equalTo(view.snp.left)
+            make.height.width.equalToSuperview()
+        }
+        view.addSubview(Label)
+        Label.snp.makeConstraints { (make) in
+            make.left.equalTo(Button.snp.right).offset(ViewSize/31.2)
+            make.centerY.equalToSuperview()
+        }
+        
+        
+        return view
+    }
     
     
     func AlertButton(image img: UIImage) -> UIButton{
         let button = UIButton()
         
         button.backgroundColor = .white
-        
-        button.setImage(img, for: .normal)
-        
-
         button.layer.shadowColor = UIColor.black.cgColor
         button.layer.shadowOffset = CGSize(width: 0, height: 4)
         button.layer.shadowOpacity = 0.1
         
         return button
     }
+
+    //MARK: - Add Button Custom
     
     
     

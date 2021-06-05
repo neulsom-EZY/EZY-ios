@@ -27,7 +27,7 @@ class AddToDoViewController:UIViewController{
     
     private lazy var titleContainerView : UIView = {
         let title = "제목"
-        let view = Utilities().inputContainerView(withMessage: title, textField: titleTextField, Color: .EZY_F4F6FF,ViewSize: Double(view.frame.width) / 17.8)
+        let view = Utilities().inputContainerView(withMessage: title, textField: titleTextField, Color: .EZY_F4F6FF,ViewSize: Double(view.frame.width) )
 
         return view
     }()
@@ -37,31 +37,31 @@ class AddToDoViewController:UIViewController{
         
         return tf
     }()
+    
+    
+    private lazy var calendarButtonView : UIView = {
+        let message = "2020 - 10 - 28"
+        let view = Utilities().AlertbtnView(withMessage: message, ViewSize: Double(view.frame.width), Button: calendarButton)
+        return view
+    }()
+    
     private let calendarButton : UIButton = {
         let button = Utilities().AlertButton(image: UIImage(named: "calendar")!)
         button.addTarget(self, action: #selector(calendarAlert), for: .touchUpInside)
-       return button
-    }()
-    private let DateButton : UIButton = {
-        let button = Utilities().AlertButton(image: UIImage(named: "calendar")!)
-        button.addTarget(self, action: #selector(calendarAlert), for: .touchUpInside)
-       return button
-    }()
-    private let LocationButton : UIButton = {
-        let button = Utilities().AlertButton(image: UIImage(named: "calendar")!)
-        button.addTarget(self, action: #selector(calendarAlert), for: .touchUpInside)
+        button.setImage(UIImage(named: "calendar"), for: .normal)
+        button.imageEdgeInsets = UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10)
        return button
     }()
     
     
-    private let addButton = UIButton().then{
-        let Label = UILabel()
-        Label.dynamicFont(fontSize: 14, weight: .semibold)
-        $0.setTitle("추가", for: .normal)
-        $0.backgroundColor = .EZY_BAC8FF
-        $0.addTarget(self, action: #selector(Addmytodobtn), for: .touchUpInside)
-        $0.isEnabled = true
-    }
+    private let addButton : UIButton = {
+        let button = UIButton(type: .system)
+        button.setTitle("추가", for: .normal)
+        
+        button.backgroundColor = .EZY_BAC8FF
+        button.addTarget(self, action: #selector(Addmytodobtn), for: .touchUpInside)
+        return button
+    }()
 
     //MARK: - Lifecycle
     
@@ -96,7 +96,6 @@ class AddToDoViewController:UIViewController{
         addButton.layer.cornerRadius = view.frame.height/81.2
         calendarButton.layer.cornerRadius = view.frame.height/81.2
         
-        
         backbutton.snp.makeConstraints { (make) in
             make.height.equalTo(self.view.frame.height/33.8)
             make.left.equalTo(self.view.frame.width/13.3)
@@ -119,8 +118,8 @@ class AddToDoViewController:UIViewController{
             make.right.equalTo(self.view.frame.width/13.8 * -1)
         }
         
-        view.addSubview(calendarButton)
-        calendarButton.snp.makeConstraints { (make) in
+        view.addSubview(calendarButtonView)
+        calendarButtonView.snp.makeConstraints { (make) in
             make.height.width.equalTo(self.view.frame.height/18.0)
             make.left.equalTo(backbutton.snp.left)
             make.top.equalTo(titleContainerView.snp.bottom).offset(view.frame.height/30.0)
