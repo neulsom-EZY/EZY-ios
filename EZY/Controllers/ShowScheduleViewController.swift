@@ -77,6 +77,8 @@ class ShowScheduleViewController: UIViewController{
         super.viewDidLoad()
         ScheduleTypeCollectionMainView.collectionView.register(ScheduleTypeCollectionViewCell.self, forCellWithReuseIdentifier: ScheduleTypeCollectionViewCell.ScheduleTypeCollectionViewIdentifier)
         ScheduleTimeTableMainView.tableView.register(ScheduleTimeTableViewCell.self, forCellReuseIdentifier: ScheduleTimeTableViewCell.ScheduleTimeTableViewIdentifier)
+        
+        notificationButton.addTarget(self, action: #selector(didBnotificationButtonClick), for: .touchUpInside)
 
         ScheduleTypeCollectionMainView.collectionView.delegate = self
         ScheduleTypeCollectionMainView.collectionView.dataSource = self
@@ -90,7 +92,16 @@ class ShowScheduleViewController: UIViewController{
     override func viewDidAppear(_ animated: Bool) {
         badgeView.layer.cornerRadius = badgeView.bounds.width/2
         badgeView.isHidden = true
+        
+        
     }
+    
+    @objc func didBnotificationButtonClick(sender: UIButton!) {
+        let pushVC = NotificationViewController()
+        
+//        pushVC.titleLabel.text = titleArray[indexPath.row]
+        
+        self.navigationController?.pushViewController(pushVC, animated: true)    }
     
     func configureUI(){
         self.view.backgroundColor = .white
@@ -220,6 +231,7 @@ extension ShowScheduleViewController: UITableViewDataSource{
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: ScheduleTimeTableViewCell.ScheduleTimeTableViewIdentifier, for: indexPath) as! ScheduleTimeTableViewCell
+        
         cell.groupNameLabel.text = groupNameArray[indexPath.row]
         cell.titleLabel.text = titleArray[indexPath.row]
         cell.planTimeLabel.text = planTimeArray[indexPath.row]
@@ -291,6 +303,8 @@ extension UILabel {
     case 896.0: //iphone XR => 6.1 inch  // iphone XS MAX => 6.5 inch
         self.font = UIFont(name: currentFontName, size: size * 1.15)
       break
+    case 926.0: //iphone 12 Pro Max
+        self.font = UIFont(name:currentFontName, size: size * 1.18)
     default:
       print("not an iPhone")
       break

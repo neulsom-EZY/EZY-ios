@@ -1,13 +1,13 @@
 //
-//  ScheduleTimeTableView.swift
+//  NotificationTableView.swift
 //  EZY
 //
-//  Created by 김유진 on 2021/06/03.
+//  Created by 김유진 on 2021/06/04.
 //
 
 import UIKit
 
-class ScheduleTimeTableView: UIView {
+class NotificationTableView: UIView {
 
     let tableView = UITableView().then {
         $0.separatorStyle = .none
