@@ -25,7 +25,7 @@ class NotificationViewController: UIViewController {
     let circleView = [UIImage(named: "EZY_PersonalBackgroundView"), UIImage(named: "EZY_TeamBackgroundView"), UIImage(named: "EZY_ErrendBackgroundView"), UIImage(named: "EZY_PersonalBackgroundView"), UIImage(named: "EZY_TeamBackgroundView"), UIImage(named: "EZY_ErrendBackgroundView"),UIImage(named: "EZY_PersonalBackgroundView"), UIImage(named: "EZY_TeamBackgroundView"), UIImage(named: "EZY_ErrendBackgroundView")]
     
     lazy var backButton = UIButton().then {
-        $0.setImage(UIImage(named: "EZY_BackButton_Purple"), for: .normal)
+        $0.setImage(UIImage(named: "EZY_NotificationBackButton"), for: .normal)
         $0.addTarget(self, action: #selector(didbackButtonClick(_:)), for: .touchUpInside)
     }
     
