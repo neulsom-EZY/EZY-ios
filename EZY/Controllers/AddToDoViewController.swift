@@ -42,8 +42,16 @@ class AddToDoViewController:UIViewController{
         button.addTarget(self, action: #selector(calendarAlert), for: .touchUpInside)
        return button
     }()
-    
-    
+    private let DateButton : UIButton = {
+        let button = Utilities().AlertButton(image: UIImage(named: "calendar")!)
+        button.addTarget(self, action: #selector(calendarAlert), for: .touchUpInside)
+       return button
+    }()
+    private let LocationButton : UIButton = {
+        let button = Utilities().AlertButton(image: UIImage(named: "calendar")!)
+        button.addTarget(self, action: #selector(calendarAlert), for: .touchUpInside)
+       return button
+    }()
     
     
     private let addButton = UIButton().then{
