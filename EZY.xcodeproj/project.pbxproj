@@ -7,17 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		6A44474D26677647004C4BC3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6A44474C26677647004C4BC3 /* Assets.xcassets */; };
-		6A4EDA002668653200B809EC /* ScheduleTimeTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A4ED9FF2668653200B809EC /* ScheduleTimeTableViewCell.swift */; };
-		6A4EDA02266866E600B809EC /* ScheduleTimeTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A4EDA01266866E600B809EC /* ScheduleTimeTableView.swift */; };
-		6A4EDA04266866FC00B809EC /* ScheduleTypeCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A4EDA03266866FC00B809EC /* ScheduleTypeCollectionView.swift */; };
-		6A4EDA2C266A045B00B809EC /* NotificationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A4EDA2B266A045B00B809EC /* NotificationViewController.swift */; };
-		6A4EDA2E266A332100B809EC /* NotificationTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A4EDA2D266A332100B809EC /* NotificationTableViewCell.swift */; };
-		6A4EDA30266A336000B809EC /* NotificationTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A4EDA2F266A336000B809EC /* NotificationTableView.swift */; };
-		6A98A9CC2666F94E00BFAE30 /* ScheduleTypeCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A98A9CB2666F94E00BFAE30 /* ScheduleTypeCollectionViewCell.swift */; };
 		6AA769E526636AE700B7E1F5 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AA769E426636AE700B7E1F5 /* AppDelegate.swift */; };
 		6AA769E726636AE700B7E1F5 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AA769E626636AE700B7E1F5 /* SceneDelegate.swift */; };
 		6AA769EF26636AE700B7E1F5 /* EZY.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 6AA769ED26636AE700B7E1F5 /* EZY.xcdatamodeld */; };
+		6AA769F126636AE800B7E1F5 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6AA769F026636AE800B7E1F5 /* Assets.xcassets */; };
 		6AA769F426636AE800B7E1F5 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6AA769F226636AE800B7E1F5 /* LaunchScreen.storyboard */; };
 		6AA76A0226636D2800B7E1F5 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AA76A0126636D2800B7E1F5 /* LoginViewController.swift */; };
 		6AA76A1526638C5600B7E1F5 /* Poppins-MediumItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 6AA76A122663844A00B7E1F5 /* Poppins-MediumItalic.ttf */; };
@@ -38,24 +31,16 @@
 		6AA76A2426638C5600B7E1F5 /* Poppins-ExtraBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 6AA76A052663844A00B7E1F5 /* Poppins-ExtraBold.ttf */; };
 		6AA76A2526638C5600B7E1F5 /* Poppins-SemiBoldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 6AA76A132663844A00B7E1F5 /* Poppins-SemiBoldItalic.ttf */; };
 		6AA76A2626638C5600B7E1F5 /* Poppins-ExtraLight.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 6AA76A0E2663844A00B7E1F5 /* Poppins-ExtraLight.ttf */; };
-		6AA76A282663958B00B7E1F5 /* ShowScheduleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AA76A272663958B00B7E1F5 /* ShowScheduleViewController.swift */; };
 		E5052C73E73080AD40F6F655 /* Pods_EZY.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A75C11C1873FE4E191601230 /* Pods_EZY.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		14AF3F335899880714FDA1B3 /* Pods-EZY.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EZY.release.xcconfig"; path = "Target Support Files/Pods-EZY/Pods-EZY.release.xcconfig"; sourceTree = "<group>"; };
-		6A44474C26677647004C4BC3 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		6A4ED9FF2668653200B809EC /* ScheduleTimeTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleTimeTableViewCell.swift; sourceTree = "<group>"; };
-		6A4EDA01266866E600B809EC /* ScheduleTimeTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleTimeTableView.swift; sourceTree = "<group>"; };
-		6A4EDA03266866FC00B809EC /* ScheduleTypeCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleTypeCollectionView.swift; sourceTree = "<group>"; };
-		6A4EDA2B266A045B00B809EC /* NotificationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationViewController.swift; sourceTree = "<group>"; };
-		6A4EDA2D266A332100B809EC /* NotificationTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationTableViewCell.swift; sourceTree = "<group>"; };
-		6A4EDA2F266A336000B809EC /* NotificationTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationTableView.swift; sourceTree = "<group>"; };
-		6A98A9CB2666F94E00BFAE30 /* ScheduleTypeCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleTypeCollectionViewCell.swift; sourceTree = "<group>"; };
 		6AA769E126636AE700B7E1F5 /* EZY.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = EZY.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6AA769E426636AE700B7E1F5 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		6AA769E626636AE700B7E1F5 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		6AA769EE26636AE700B7E1F5 /* EZY.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = EZY.xcdatamodel; sourceTree = "<group>"; };
+		6AA769F026636AE800B7E1F5 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		6AA769F326636AE800B7E1F5 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		6AA769F526636AE800B7E1F5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		6AA76A0126636D2800B7E1F5 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
@@ -77,7 +62,6 @@
 		6AA76A122663844A00B7E1F5 /* Poppins-MediumItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Poppins-MediumItalic.ttf"; path = "../../../../../Downloads/Poppins/Poppins-MediumItalic.ttf"; sourceTree = "<group>"; };
 		6AA76A132663844A00B7E1F5 /* Poppins-SemiBoldItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Poppins-SemiBoldItalic.ttf"; path = "../../../../../Downloads/Poppins/Poppins-SemiBoldItalic.ttf"; sourceTree = "<group>"; };
 		6AA76A142663844A00B7E1F5 /* Poppins-SemiBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Poppins-SemiBold.ttf"; path = "../../../../../Downloads/Poppins/Poppins-SemiBold.ttf"; sourceTree = "<group>"; };
-		6AA76A272663958B00B7E1F5 /* ShowScheduleViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowScheduleViewController.swift; sourceTree = "<group>"; };
 		8B5046DC93C289B5AC6C406E /* Pods-EZY.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EZY.debug.xcconfig"; path = "Target Support Files/Pods-EZY/Pods-EZY.debug.xcconfig"; sourceTree = "<group>"; };
 		A75C11C1873FE4E191601230 /* Pods_EZY.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_EZY.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -131,8 +115,8 @@
 				6AA769FB26636C5700B7E1F5 /* Services */,
 				6AA769E426636AE700B7E1F5 /* AppDelegate.swift */,
 				6AA769E626636AE700B7E1F5 /* SceneDelegate.swift */,
+				6AA769F026636AE800B7E1F5 /* Assets.xcassets */,
 				6AA769F226636AE800B7E1F5 /* LaunchScreen.storyboard */,
-				6A44474C26677647004C4BC3 /* Assets.xcassets */,
 				6AA769F526636AE800B7E1F5 /* Info.plist */,
 				6AA769ED26636AE700B7E1F5 /* EZY.xcdatamodeld */,
 			);
@@ -156,12 +140,6 @@
 		6AA769FD26636C6B00B7E1F5 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				6A98A9CB2666F94E00BFAE30 /* ScheduleTypeCollectionViewCell.swift */,
-				6A4EDA03266866FC00B809EC /* ScheduleTypeCollectionView.swift */,
-				6A4ED9FF2668653200B809EC /* ScheduleTimeTableViewCell.swift */,
-				6A4EDA01266866E600B809EC /* ScheduleTimeTableView.swift */,
-				6A4EDA2D266A332100B809EC /* NotificationTableViewCell.swift */,
-				6A4EDA2F266A336000B809EC /* NotificationTableView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -177,8 +155,6 @@
 			isa = PBXGroup;
 			children = (
 				6AA76A0126636D2800B7E1F5 /* LoginViewController.swift */,
-				6AA76A272663958B00B7E1F5 /* ShowScheduleViewController.swift */,
-				6A4EDA2B266A045B00B809EC /* NotificationViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -290,10 +266,10 @@
 				6AA76A2126638C5600B7E1F5 /* Poppins-Black.ttf in Resources */,
 				6AA76A2426638C5600B7E1F5 /* Poppins-ExtraBold.ttf in Resources */,
 				6AA76A1826638C5600B7E1F5 /* Poppins-BoldItalic.ttf in Resources */,
-				6A44474D26677647004C4BC3 /* Assets.xcassets in Resources */,
 				6AA76A1A26638C5600B7E1F5 /* Poppins-Medium.ttf in Resources */,
 				6AA76A2326638C5600B7E1F5 /* Poppins-Bold.ttf in Resources */,
 				6AA76A2226638C5600B7E1F5 /* Poppins-BlackItalic.ttf in Resources */,
+				6AA769F126636AE800B7E1F5 /* Assets.xcassets in Resources */,
 				6AA76A1726638C5600B7E1F5 /* Poppins-Regular.ttf in Resources */,
 				6AA76A1D26638C5600B7E1F5 /* Poppins-LightItalic.ttf in Resources */,
 			);
@@ -348,18 +324,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				6A4EDA2C266A045B00B809EC /* NotificationViewController.swift in Sources */,
 				6AA76A0226636D2800B7E1F5 /* LoginViewController.swift in Sources */,
-				6AA76A282663958B00B7E1F5 /* ShowScheduleViewController.swift in Sources */,
-				6A4EDA04266866FC00B809EC /* ScheduleTypeCollectionView.swift in Sources */,
-				6A4EDA30266A336000B809EC /* NotificationTableView.swift in Sources */,
 				6AA769EF26636AE700B7E1F5 /* EZY.xcdatamodeld in Sources */,
-				6A98A9CC2666F94E00BFAE30 /* ScheduleTypeCollectionViewCell.swift in Sources */,
 				6AA769E526636AE700B7E1F5 /* AppDelegate.swift in Sources */,
-				6A4EDA02266866E600B809EC /* ScheduleTimeTableView.swift in Sources */,
 				6AA769E726636AE700B7E1F5 /* SceneDelegate.swift in Sources */,
-				6A4EDA002668653200B809EC /* ScheduleTimeTableViewCell.swift in Sources */,
-				6A4EDA2E266A332100B809EC /* NotificationTableViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

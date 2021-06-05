@@ -15,17 +15,11 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
         guard let windowScene = (scene as? UIWindowScene) else { return }
         window = UIWindow(windowScene: windowScene)
-        let mainViewController = NotificationViewController()
+        let mainViewController = LoginViewController()
         let navigationController = UINavigationController(rootViewController: mainViewController)
         navigationController.navigationBar.isHidden = true
         window?.rootViewController = navigationController
         window?.makeKeyAndVisible()
-        
-        for fontFamily in UIFont.familyNames {
-            for fontName in UIFont.fontNames(forFamilyName: fontFamily) {
-                print(fontName)
-            }
-        }
     }
 
     func sceneDidDisconnect(_ scene: UIScene) {
