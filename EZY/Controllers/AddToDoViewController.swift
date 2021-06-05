@@ -27,7 +27,7 @@ class AddToDoViewController:UIViewController{
     
     private lazy var titleContainerView : UIView = {
         let title = "제목"
-        let view = Utilities().inputContainerView(withMessage: title, textField: titleTextField, Color: .EZY_F4F6FF)
+        let view = Utilities().inputContainerView(withMessage: title, textField: titleTextField, Color: .EZY_F4F6FF,ViewSize: Double(view.frame.width) / 17.8)
 
         return view
     }()

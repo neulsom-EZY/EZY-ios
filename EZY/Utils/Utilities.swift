@@ -10,7 +10,7 @@ import SnapKit
 
 class Utilities{
     
-    func inputContainerView(withMessage Message:String,textField:UITextField,Color MessageColor: UIColor) -> UIView{
+    func inputContainerView(withMessage Message:String,textField:UITextField,Color MessageColor: UIColor, ViewSize : Double) -> UIView{
         let view = UIView()
         let Label_Message = UILabel()
         
@@ -22,7 +22,7 @@ class Utilities{
         Label_Message.dynamicFont(fontSize: 14, weight: .bold)
         Label_Message.textColor = .EZY_8099FF
         Label_Message.snp.makeConstraints { (make) in
-            make.left.equalToSuperview().offset(21)
+            make.left.equalToSuperview().offset(ViewSize)
             make.centerY.equalToSuperview()
         }
         view.addSubview(textField)

@@ -12,18 +12,22 @@ class CustomBtnView : UIView{
     override init(frame: CGRect) {
         super.init(frame: frame)
         
-//        private let Label = UILabel().then{
-//            $0.dynamicFont(fontSize: 16, weight: .regular)
-//            $0.textColor = .EZY_656565
-//        }
-//        Label.snp.makeConstraints { (make) in
-//            make.
-//        }
-//        
+        let view = UIView()
+        
+        
+        
+        
     }
     
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+    func LabelCustom(message text: String,textSize : Int,textColor color : UIColor) -> UILabel{
+        let Label = UILabel()
+        Label.text = text
+        Label.dynamicFont(fontSize: CGFloat(textSize), weight: .regular)
+        
+        return Label
     }
 }
