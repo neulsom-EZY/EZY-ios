@@ -17,22 +17,23 @@ class TopView: UIView {
 
     func topViewDataSetting(backButtonImage: UIImage, titleLabelText: String, textColor: UIColor){
         backButton.setImage(backButtonImage, for: .normal)
-
+        
         titleLabel.text = titleLabelText
         titleLabel.textColor = textColor
     }
     
     func topViewLayoutSetting(screenHeight: Double, screenWeight: Double){
-        titleLabel.snp.makeConstraints { make in
-            make.top.equalTo(backButton.snp.bottom).offset(screenHeight/30)
-            make.left.equalTo(backButton)
-        }
-
         backButton.snp.makeConstraints { make in
-            make.top.equalToSuperview().offset(screenHeight/13.3)
+            make.top.equalToSuperview().offset(screenHeight/47.7)
             make.left.equalToSuperview().offset(20)
             make.width.equalToSuperview().dividedBy(33.8/2)
             make.height.equalTo(backButton.snp.width)
+            
+        }
+        
+        titleLabel.snp.makeConstraints { make in
+            make.left.equalTo(backButton)
+            make.top.equalTo(backButton.snp.bottom).offset(screenHeight/30)
         }
     }
 }
