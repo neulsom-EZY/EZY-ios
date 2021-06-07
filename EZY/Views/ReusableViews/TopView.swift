@@ -28,7 +28,6 @@ class TopView: UIView {
             make.left.equalToSuperview().offset(20)
             make.width.equalToSuperview().dividedBy(33.8/2)
             make.height.equalTo(backButton.snp.width)
-            
         }
         
         titleLabel.snp.makeConstraints { make in

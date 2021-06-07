@@ -30,7 +30,6 @@ class NotificationTableViewCell: UITableViewCell {
         $0.text = "개인일정"
         $0.textColor = UIColor(red: 186/255, green: 200/255, blue: 255/255, alpha: 1)
         $0.dynamicFont(fontSize: 8, currentFontName: "Poppins-SemiBold")
-        
     }
 
     lazy var notificationContentLabel = UILabel().then {
@@ -46,8 +45,6 @@ class NotificationTableViewCell: UITableViewCell {
         $0.textColor = UIColor(red: 144/255, green: 144/255, blue: 144/255, alpha: 1)
     }
     
-
-    
     lazy var scheduleImageByTypeImageView = UIImageView().then {
         $0.self.image? = UIImage(named: "EZY_MyJob")!
     }
@@ -57,8 +54,6 @@ class NotificationTableViewCell: UITableViewCell {
         // Initialization code
         
         configureUI()
-        
-        
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
@@ -88,7 +83,6 @@ class NotificationTableViewCell: UITableViewCell {
             make.height.equalTo(logoCircleImageView.snp.width)
             make.centerY.equalToSuperview()
             make.left.equalToSuperview().offset(contentView.frame.width/20)
-            
         }
         
         scheduleImageByTypeImageView.snp.makeConstraints { make in

@@ -48,7 +48,9 @@ class NotificationViewController: UIViewController {
         
         notificationTableMainView.tableView.delegate = self
         notificationTableMainView.tableView.dataSource = self
+        
         print("height\(self.view.bounds.size.height)")
+        
         configureUI()
     }
     
@@ -87,7 +89,6 @@ class NotificationViewController: UIViewController {
     @objc func didbackButtonClick(_ button: UIButton){
         navigationController?.popViewController(animated: true)
     }
-
 }
 
 extension NotificationViewController: UITableViewDelegate{
