@@ -25,7 +25,7 @@ class NotificationViewController: UIViewController {
     let circleView = [UIImage(named: "EZY_PersonalBackgroundView"), UIImage(named: "EZY_TeamBackgroundView"), UIImage(named: "EZY_ErrendBackgroundView"), UIImage(named: "EZY_PersonalBackgroundView"), UIImage(named: "EZY_TeamBackgroundView"), UIImage(named: "EZY_ErrendBackgroundView"),UIImage(named: "EZY_PersonalBackgroundView"), UIImage(named: "EZY_TeamBackgroundView"), UIImage(named: "EZY_ErrendBackgroundView")]
     
     lazy var backButton = UIButton().then {
-        $0.setImage(UIImage(named: "EZY_BackButton_Purple"), for: .normal)
+        $0.setImage(UIImage(named: "EZY_NotificationBackButton"), for: .normal)
         $0.addTarget(self, action: #selector(didbackButtonClick(_:)), for: .touchUpInside)
     }
     
@@ -48,7 +48,9 @@ class NotificationViewController: UIViewController {
         
         notificationTableMainView.tableView.delegate = self
         notificationTableMainView.tableView.dataSource = self
+        
         print("height\(self.view.bounds.size.height)")
+        
         configureUI()
     }
     
@@ -87,7 +89,6 @@ class NotificationViewController: UIViewController {
     @objc func didbackButtonClick(_ button: UIButton){
         navigationController?.popViewController(animated: true)
     }
-
 }
 
 extension NotificationViewController: UITableViewDelegate{
