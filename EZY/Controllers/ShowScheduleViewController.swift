@@ -101,7 +101,9 @@ class ShowScheduleViewController: UIViewController{
         
 //        pushVC.titleLabel.text = titleArray[indexPath.row]
         
-        self.navigationController?.pushViewController(pushVC, animated: true)    }
+        self.navigationController?.pushViewController(pushVC, animated: true)
+        
+    }
     
     func configureUI(){
         self.view.backgroundColor = .white

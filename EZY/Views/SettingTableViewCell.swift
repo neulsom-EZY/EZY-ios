@@ -23,7 +23,7 @@ class SettingTableViewCell: UITableViewCell {
     }
     
     lazy var labelGroup = UIView().then {
-        $0.backgroundColor = .blue
+        $0.backgroundColor = .white
     }
     
     lazy var listTitleLabel = UILabel().then {

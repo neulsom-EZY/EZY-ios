@@ -10,12 +10,10 @@ import UIKit
 class ScheduleTypeCollectionViewCell: UICollectionViewCell {
     static let ScheduleTypeCollectionViewIdentifier = "\(ScheduleTypeCollectionViewCell.self)"
     
-    
     let label = UILabel().then{
         $0.text = "나의 할 일"
         $0.textColor = UIColor(red: 107/255, green: 64/255, blue: 255/255, alpha: 1)
         $0.dynamicFont(fontSize: 12, currentFontName: "AppleSDGothicNeo-SemiBold")
-
     }
     
     let icon: UIImageView = UIImageView(image: UIImage(named: "EZY_MyJob"))
