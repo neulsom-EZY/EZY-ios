@@ -93,7 +93,7 @@ class Utilities{
         button.snp.makeConstraints { (make) in
             make.left.equalTo(view.snp.left)
             make.height.width.equalTo(viewSize/18.0)
-            
+            make.centerY.equalToSuperview()
         }
         view.addSubview(label)
         label.snp.makeConstraints { (make) in

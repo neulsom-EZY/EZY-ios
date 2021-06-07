@@ -165,42 +165,44 @@ class AddToDoViewController:UIViewController{
             make.right.equalTo(self.view.frame.width/13.8 * -1)
         }
         
-//        let stack = UIStackView(arrangedSubviews: [calendarButtonView, clockButtonView, locationButtonView])
-//
-//        stack.axis = .vertical
-//        stack.spacing = view.frame.height/47.7
-//
-//        stack.snp.makeConstraints { (make) in
-//            make.top.equalTo(titleContainerView.snp.bottom).offset(view.frame.height/30.0)
-//            make.left.equalTo(backbutton.snp.left)
-//            make.left.equalTo(titleContainerView.snp.right)
-//        }
-        view.addSubview(calendarButtonView)
-        calendarButtonView.snp.makeConstraints { (make) in
-            make.height.width.equalTo(self.view.frame.height/18.0)
-            make.left.equalTo(backbutton.snp.left)
+        let stack = UIStackView(arrangedSubviews: [calendarButtonView, clockButtonView, locationButtonView])
+
+        stack.axis = .vertical
+        stack.spacing = view.frame.height/12
+        view.addSubview(stack)
+        stack.snp.makeConstraints { (make) in
             make.top.equalTo(titleContainerView.snp.bottom).offset(view.frame.height/30.0)
+            make.left.equalTo(backbutton.snp.left)
+            make.right.equalTo(titleContainerView.snp.right)
+            
         }
-
-        view.addSubview(clockButtonView)
-        clockButtonView.snp.makeConstraints { (make) in
-            make.height.width.equalTo(self.view.frame.height/18.0)
-            make.left.equalTo(calendarButtonView.snp.left)
-            make.top.equalTo(calendarButtonView.snp.bottom).offset(view.frame.height/47.7)
-        }
-        view.addSubview(locationButtonView)
-
-        locationButtonView.snp.makeConstraints { (make) in
-            make.height.width.equalTo(self.view.frame.height/18.0)
-            make.left.equalTo(calendarButtonView.snp.left)
-            make.top.equalTo(clockButtonView.snp.bottom).offset(view.frame.height/47.7)
-        }
+        
+//        view.addSubview(calendarButtonView)
+//        calendarButtonView.snp.makeConstraints { (make) in
+//            make.height.width.equalTo(self.view.frame.height/18.0)
+//            make.left.equalTo(backbutton.snp.left)
+//            make.top.equalTo(titleContainerView.snp.bottom).offset(view.frame.height/30.0)
+//        }
+//
+//        view.addSubview(clockButtonView)
+//        clockButtonView.snp.makeConstraints { (make) in
+//            make.height.width.equalTo(self.view.frame.height/18.0)
+//            make.left.equalTo(calendarButtonView.snp.left)
+//            make.top.equalTo(calendarButtonView.snp.bottom).offset(view.frame.height/47.7)
+//        }
+//        view.addSubview(locationButtonView)
+//
+//        locationButtonView.snp.makeConstraints { (make) in
+//            make.height.width.equalTo(self.view.frame.height/18.0)
+//            make.left.equalTo(calendarButtonView.snp.left)
+//            make.top.equalTo(clockButtonView.snp.bottom).offset(view.frame.height/47.7)
+//        }
         
         view.addSubview(explanationContainerView)
         
         explanationContainerView.snp.makeConstraints { (make) in
             make.height.equalTo(self.view.frame.height/10.8)
-            make.top.equalTo(locationButton.snp.bottom).offset(self.view.frame.height/19.8)
+            make.top.equalTo(stack.snp.bottom).offset(self.view.frame.height/19.8)
             make.left.equalTo(backbutton.snp.left)
             make.right.equalTo(self.view.frame.width/13.8 * -1)
         }
