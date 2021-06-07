@@ -10,27 +10,27 @@ import SnapKit
 
 class Utilities{
     
-    func inputContainerView(withMessage Message:String,textField:UITextField,Color MessageColor: UIColor, ViewSize : Double) -> UIView{
+    func inputContainerView(withMessage message:String,textField:UITextField,color messageColor: UIColor, viewSize : Double) -> UIView{
         let view = UIView()
-        let Label_Message = UILabel()
+        let label_Message = UILabel()
         
-        view.backgroundColor = MessageColor
+        view.backgroundColor = messageColor
         
         
-        view.addSubview(Label_Message)
-        Label_Message.text = Message
-        Label_Message.dynamicFont(fontSize: 14, weight: .bold)
-        Label_Message.textColor = .EZY_8099FF
-        Label_Message.snp.makeConstraints { (make) in
-            make.left.equalToSuperview().offset(ViewSize / 17.8)
+        view.addSubview(label_Message)
+        label_Message.text = message
+        label_Message.dynamicFont(fontSize: 14, weight: .bold)
+        label_Message.textColor = .EZY_8099FF
+        label_Message.snp.makeConstraints { (make) in
+            make.left.equalToSuperview().offset(viewSize / 38.6)
             make.centerY.equalToSuperview()
         }
         view.addSubview(textField)
         textField.snp.makeConstraints { (make) in
-            make.right.equalTo(view.snp.right).offset(ViewSize/31.2 * -1)
+            make.right.equalTo(view.snp.right).offset(viewSize/31.2 * -1)
             make.centerY.equalToSuperview()
-            make.height.equalTo(ViewSize)
-            make.left.equalTo(Label_Message.snp.right).offset(ViewSize/31.2)
+            make.height.equalTo(viewSize)
+            make.left.equalTo(label_Message.snp.right).offset(viewSize/31.2)
 
         }
     
@@ -39,66 +39,67 @@ class Utilities{
     }
     
     
-    func textField(TextColor TC: UIColor,TextSize TS : Int) -> UITextField{
+    func textField(textColor tc: UIColor,textSize ts : Int) -> UITextField{
         let tf = UITextField()
-        tf.textColor = TC
-        tf.font = UIFont.systemFont(ofSize: CGFloat(TS), weight: .medium)
+        tf.textColor = tc
+        tf.font = UIFont.systemFont(ofSize: CGFloat(ts), weight: .medium)
         return tf
     }
     
-    func inputContainerTextView(withMessage Message:String,textView:UITextView,Color MessageColor: UIColor, ViewSize : Double) -> UIView{
+    func inputContainerTextView(withMessage message:String,textView:UITextView,Color messageColor: UIColor, viewSize : Double) -> UIView{
         let view = UIView()
-        let Label_Message = UILabel()
+        let label_Message = UILabel()
         
-        view.backgroundColor = MessageColor
+        view.backgroundColor = messageColor
         
         
-        view.addSubview(Label_Message)
-        Label_Message.text = Message
-        Label_Message.dynamicFont(fontSize: 14, weight: .bold)
-        Label_Message.textColor = .EZY_968DFF
-        Label_Message.snp.makeConstraints { (make) in
-            make.left.equalToSuperview().offset(ViewSize / 38.6)
-            make.top.equalToSuperview().offset(ViewSize/40.6)
+        view.addSubview(label_Message)
+        label_Message.text = message
+        label_Message.dynamicFont(fontSize: 14, weight: .bold)
+        label_Message.textColor = .EZY_968DFF
+        label_Message.snp.makeConstraints { (make) in
+            make.left.equalToSuperview().offset(viewSize / 38.6)
+            make.top.equalToSuperview().offset(viewSize/40.6)
         }
         view.addSubview(textView)
         textView.snp.makeConstraints { (make) in
-            make.left.equalTo(Label_Message.snp.right).offset(ViewSize/42.7)
+            make.left.equalTo(label_Message.snp.right).offset(viewSize/42.7)
             make.right.equalToSuperview()
-            make.top.equalToSuperview().offset(ViewSize/60)
-            make.bottom.equalToSuperview().offset(ViewSize/60 * -1)
+            make.top.equalToSuperview().offset(viewSize/60)
+            make.bottom.equalToSuperview().offset(viewSize/60 * -1)
         }
     
 
         return view
     }
-    func textView(TextColor TC: UIColor,TextSize TS : Int) -> UITextView{
+    func textView(TextColor tc: UIColor,TextSize ts : Int) -> UITextView{
         let tv = UITextView()
-        tv.textColor = TC
-        tv.font = UIFont.systemFont(ofSize: CGFloat(TS), weight: .medium)
+        tv.textColor = tc
+        tv.font = UIFont.systemFont(ofSize: CGFloat(ts), weight: .medium)
         tv.backgroundColor = .EZY_F6F3FF
         return tv
     }
     
     //MARK: - Alert
     
-    func AlertbtnView(withMessage Message: String, ViewSize : Double, Button: UIButton) -> UIView{
+    func AlertbtnView(withMessage message: String, viewSize : Double, button: UIButton) -> UIView{
         let view = UIView()
-        let Label = UILabel()
-        Label.text = Message
-        Label.dynamicFont(fontSize: 16, weight: .regular)
-        Label.textColor = .EZY_656565
+        let label = UILabel()
+        label.text = message
+        label.dynamicFont(fontSize: 16, weight: .regular)
+        label.textColor = .EZY_656565
         
-        view.addSubview(Button)
-        Button.snp.makeConstraints { (make) in
+        view.addSubview(button)
+        button.snp.makeConstraints { (make) in
             make.left.equalTo(view.snp.left)
-            make.height.width.equalToSuperview()
+            make.height.width.equalTo(viewSize/18.0)
             
         }
-        view.addSubview(Label)
-        Label.snp.makeConstraints { (make) in
-            make.left.equalTo(Button.snp.right).offset(ViewSize/13.8)
+        view.addSubview(label)
+        label.snp.makeConstraints { (make) in
+            make.left.equalTo(button.snp.right).offset(viewSize/30.0)
             make.centerY.equalToSuperview()
+            
         }
         
         
@@ -116,6 +117,7 @@ class Utilities{
         button.setImage(img, for: .normal)
         button.imageEdgeInsets = UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10)
 
+        
         return button
     }
 

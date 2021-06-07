@@ -17,7 +17,7 @@ class AddToDoViewController:UIViewController{
         $0.tintColor = .EZY_BAC8FF
         $0.setImage(UIImage(systemName: "arrow.left"), for: .normal)
         $0.addTarget(self, action: #selector(todobackbtn), for: .touchUpInside)
-        $0.sizeThatFits(CGSize(width: 24, height: 24))
+
     }
     private let TitleLabel = UILabel().then{
         $0.textColor = .EZY_BAC8FF
@@ -27,13 +27,13 @@ class AddToDoViewController:UIViewController{
     
     private lazy var titleContainerView : UIView = {
         let title = "제목"
-        let view = Utilities().inputContainerView(withMessage: title, textField: titleTextField, Color: .EZY_F4F6FF,ViewSize: Double(view.frame.width) )
+        let view = Utilities().inputContainerView(withMessage: title, textField: titleTextField, color: .EZY_F4F6FF,viewSize: Double(view.frame.height) )
 
         return view
     }()
     
     private let titleTextField : UITextField = {
-        let tf = Utilities().textField(TextColor: .EZY_656565, TextSize: 14)
+        let tf = Utilities().textField(textColor: .EZY_656565, textSize: 14)
         
         return tf
     }()
@@ -41,7 +41,7 @@ class AddToDoViewController:UIViewController{
     
     private lazy var calendarButtonView : UIView = {
         let message = "2021. 6. 6 일요일 "
-        let view = Utilities().AlertbtnView(withMessage: message, ViewSize: Double(view.frame.width), Button: calendarButton)
+        let view = Utilities().AlertbtnView(withMessage: message, viewSize: Double(view.frame.height), button: calendarButton)
         return view
     }()
     
@@ -55,21 +55,22 @@ class AddToDoViewController:UIViewController{
     
     private lazy var clockButtonView : UIView = {
         let message = "11:00AM - 1:00PM"
-        let view = Utilities().AlertbtnView(withMessage: message, ViewSize: Double(view.frame.width), Button: clockButton)
+        let view = Utilities().AlertbtnView(withMessage: message, viewSize: Double(view.frame.height), button: clockButton)
         return view
     }()
+    
     private let clockButton : UIButton = {
         let button = Utilities().AlertButton(image: UIImage(named: "clock")!)
         button.addTarget(self, action: #selector(calendarAlert), for: .touchUpInside)
        return button
     }()
     
-    private lazy var LocationButtonView : UIView = {
+    private lazy var locationButtonView : UIView = {
         let message = "광주소프트웨어마이스터고등학교"
-        let view = Utilities().AlertbtnView(withMessage: message, ViewSize: Double(view.frame.width), Button: LocationButton)
+        let view = Utilities().AlertbtnView(withMessage: message, viewSize: Double(view.frame.height), button: locationButton)
         return view
     }()
-    private let LocationButton : UIButton = {
+    private let locationButton : UIButton = {
         let button = Utilities().AlertButton(image: UIImage(named: "location")!)
         button.addTarget(self, action: #selector(calendarAlert), for: .touchUpInside)
        return button
@@ -77,7 +78,7 @@ class AddToDoViewController:UIViewController{
     
     private lazy var explanationContainerView : UIView = {
         let title = "설명"
-        let view = Utilities().inputContainerTextView(withMessage: title, textView: explanationTextView, Color: .EZY_F6F3FF, ViewSize: Double(view.frame.height))
+        let view = Utilities().inputContainerTextView(withMessage: title, textView: explanationTextView, Color: .EZY_F6F3FF, viewSize: Double(view.frame.height))
 
         return view
     }()
@@ -88,6 +89,15 @@ class AddToDoViewController:UIViewController{
         return tf
     }()
     
+    
+    
+    private let kindOfCollectionView = UILabel().then{
+        $0.text = "태그"
+        $0.textColor = .EZY_B6B6B6
+        $0.dynamicFont(fontSize: 12, weight: .bold)
+    }
+
+
     
     
     private let addButton : AdditionalButton = {
@@ -130,12 +140,12 @@ class AddToDoViewController:UIViewController{
         addButton.layer.cornerRadius = view.frame.height/81.2
         calendarButton.layer.cornerRadius = view.frame.height/81.2
         clockButton.layer.cornerRadius = view.frame.height/81.2
-        LocationButton.layer.cornerRadius = view.frame.height/81.2
+        locationButton.layer.cornerRadius = view.frame.height/81.2
         explanationContainerView.layer.cornerRadius = view.frame.height/40.6
         
         backbutton.snp.makeConstraints { (make) in
-            make.height.equalTo(self.view.frame.height/33.8)
-            make.left.equalTo(self.view.frame.width/13.3)
+            make.height.width.equalTo(self.view.frame.height/33.8)
+            make.left.equalTo(self.view.frame.height/29)
             make.top.equalTo(self.view.frame.height/13.3)
         }
         
@@ -155,29 +165,32 @@ class AddToDoViewController:UIViewController{
             make.right.equalTo(self.view.frame.width/13.8 * -1)
         }
         
-        
-        
-        
-//        let stack = UIStackView(arrangedSubviews: [calendarButtonView,clockButtonView,LocationButtonView])
+//        let stack = UIStackView(arrangedSubviews: [calendarButtonView, clockButtonView, locationButtonView])
+//
 //        stack.axis = .vertical
-//        stack.spacing = view.frame.height
-
+//        stack.spacing = view.frame.height/47.7
+//
+//        stack.snp.makeConstraints { (make) in
+//            make.top.equalTo(titleContainerView.snp.bottom).offset(view.frame.height/30.0)
+//            make.left.equalTo(backbutton.snp.left)
+//            make.left.equalTo(titleContainerView.snp.right)
+//        }
         view.addSubview(calendarButtonView)
         calendarButtonView.snp.makeConstraints { (make) in
             make.height.width.equalTo(self.view.frame.height/18.0)
             make.left.equalTo(backbutton.snp.left)
             make.top.equalTo(titleContainerView.snp.bottom).offset(view.frame.height/30.0)
         }
-        
+
         view.addSubview(clockButtonView)
         clockButtonView.snp.makeConstraints { (make) in
             make.height.width.equalTo(self.view.frame.height/18.0)
             make.left.equalTo(calendarButtonView.snp.left)
             make.top.equalTo(calendarButtonView.snp.bottom).offset(view.frame.height/47.7)
         }
-        view.addSubview(LocationButtonView)
-        
-        LocationButtonView.snp.makeConstraints { (make) in
+        view.addSubview(locationButtonView)
+
+        locationButtonView.snp.makeConstraints { (make) in
             make.height.width.equalTo(self.view.frame.height/18.0)
             make.left.equalTo(calendarButtonView.snp.left)
             make.top.equalTo(clockButtonView.snp.bottom).offset(view.frame.height/47.7)
@@ -187,10 +200,19 @@ class AddToDoViewController:UIViewController{
         
         explanationContainerView.snp.makeConstraints { (make) in
             make.height.equalTo(self.view.frame.height/10.8)
-            make.top.equalTo(LocationButtonView.snp.bottom).offset(self.view.frame.height/19.8)
+            make.top.equalTo(locationButton.snp.bottom).offset(self.view.frame.height/19.8)
             make.left.equalTo(backbutton.snp.left)
             make.right.equalTo(self.view.frame.width/13.8 * -1)
         }
+        
+        view.addSubview(kindOfCollectionView)
+        
+        kindOfCollectionView.snp.makeConstraints { (make) in
+            make.left.equalTo(backbutton.snp.left)
+            make.top.equalTo(explanationContainerView.snp.bottom).offset(view.frame.height/38.6)
+        }
+        
+        
         
         
         view.addSubview(addButton)
