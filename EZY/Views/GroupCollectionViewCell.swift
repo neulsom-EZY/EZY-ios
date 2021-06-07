@@ -24,18 +24,21 @@ class GroupCollectionViewCell: UICollectionViewCell {
     
     lazy var titleBackgroundView = UIView().then {
         $0.backgroundColor = UIColor(red: 255/255, green: 205/255, blue: 184/255, alpha: 1)
-        $0.layer.cornerRadius = $0.frame.size.width/2
+        $0.layer.cornerRadius = 17
         $0.clipsToBounds = true
+        
     }
     
     lazy var titleLabel = UILabel().then {
-        $0.text = "영어 스터디 모임"
+        $0.text = "영어 스터디"
         $0.textColor = .white
-        $0.dynamicFont(fontSize: 12, currentFontName: "AppleSDGothicNeo-Bold")
+        $0.textAlignment = .center
+        $0.dynamicFont(fontSize: 14, currentFontName: "AppleSDGothicNeo-Bold")
     }
     
     lazy var userNameGroup = UILabel().then {
         $0.numberOfLines = 0
+        $0.textAlignment = .center
         $0.text = "youjin\nyoujin\nyoujin\nyoujin\nyoujin\nyoujin\nvyoujin\n"
     }
     
@@ -64,6 +67,7 @@ class GroupCollectionViewCell: UICollectionViewCell {
     }
     
     func configureUI(){
+        
         contentView.addSubview(cellBackgroundView)
         contentView.addSubview(titleBackgroundView)
         titleBackgroundView.addSubview(titleLabel)
@@ -71,18 +75,26 @@ class GroupCollectionViewCell: UICollectionViewCell {
         cellBackgroundView.addSubview(userNameGroup)
         
         titleBackgroundView.snp.makeConstraints { make in
+            make.bottom.equalTo(cellBackgroundView.snp.top).offset(14)
+            make.centerX.equalToSuperview()
+            make.width.equalTo(cellBackgroundView).dividedBy(1.5)
+            make.height.equalTo(cellBackgroundView).dividedBy(4)
         }
         
         cellBackgroundView.snp.makeConstraints { make in
-            make.top.bottom.left.right.equalToSuperview()
+            make.bottom.left.right.equalToSuperview()
+            make.top.equalToSuperview().offset(contentView.frame.height/7)
         }
         
         titleLabel.snp.makeConstraints{ make in
+            make.centerX.centerY.equalToSuperview()
+            make.width.equalToSuperview()
             
         }
         
         userNameGroup.snp.makeConstraints { make in
-            
+            make.centerX.centerY.equalToSuperview()
+            make.width.equalToSuperview()
         }
         
         star.snp.makeConstraints { make in

@@ -16,14 +16,23 @@ class GroupManagementViewController: UIViewController {
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .vertical
         $0.backgroundColor = .white
-        $0.contentInset = UIEdgeInsets.init(top: 0, left: 0, bottom: 0, right: 0)
+        $0.contentInset = UIEdgeInsets.init(top: 10, left: 0, bottom: 0, right: 0)
         $0.showsHorizontalScrollIndicator = false
         $0.collectionViewLayout = layout
     }
     
-    let titleLabel = ["영어 스터디 그룹", "EZY", "NELSOM", "영어 스터디 그룹", "EZY", "NELSOM", "영어 스터디 그룹", "EZY", "NELSOM", "영어 스터디 그룹", "EZY", "NELSOM"]
+    var greenColor: UIColor! = UIColor(red: 207/255, green: 227/255, blue: 206/255, alpha: 1)
+    var orangeColor: UIColor! = UIColor(red: 255/255, green: 205/255, blue: 184/255, alpha: 1)
+    var pinkColor: UIColor! = UIColor(red: 255/255, green: 191/255, blue: 191/255, alpha: 1)
+    var blueColor: UIColor! = UIColor(red: 197/255, green: 208/255, blue: 255/255, alpha: 1)
+    var purpleColor: UIColor! = UIColor(red: 196/255, green: 191/255, blue: 251/255, alpha: 1)
+    var yellowColor: UIColor! = UIColor(red: 197/255, green: 226/255, blue: 181/255, alpha: 1)
     
-    let userNameGroup = ["youjin\nyoujin\nyoujin\nyoujin\nyoujin\nyoujin\n","youjin\nyoujin\nyoujin\nyoujin\nyoujin\nyoujin\n","youjin\nyoujin\nyoujin\nyoujin\nyoujin\nyoujin\n","youjin\nyoujin\nyoujin\nyoujin\nyoujin\nyoujin\n","youjin\nyoujin\nyoujin\nyoujin\nyoujin\nyoujin\n","youjin\nyoujin\nyoujin\nyoujin\nyoujin\nyoujin\n","youjin\nyoujin\nyoujin\nyoujin\nyoujin\nyoujin\n","youjin\nyoujin\nyoujin\nyoujin\nyoujin\nyoujin\n","youjin\nyoujin\nyoujin\nyoujin\nyoujin\nyoujin\n","youjin\nyoujin\nyoujin\nyoujin\nyoujin\nyoujin\n","youjin\nyoujin\nyoujin\nyoujin\nyoujin\nyoujin\n","youjin\nyoujin\nyoujin\nyoujin\nyoujin\nyoujin\n",]
+    lazy var EZYPlanBackgroundColor: [UIColor] = [greenColor, orangeColor, pinkColor, blueColor, purpleColor, yellowColor,greenColor, orangeColor, pinkColor, blueColor, purpleColor, yellowColor]
+    
+    let titleLabel = ["영어 스터디", "EZY", "NELSOM", "영어 스터디", "EZY", "NELSOM", "영어 스터디", "EZY", "NELSOM", "영어 스터디", "EZY", "NELSOM"]
+    
+    let userNameGroup = ["youjin\nyoujin\nyoujin\nyouji","youjin\nyoujin\nyoujin\nyoujin\nyoujin\\n","youjin\\nyoujin\nyoujin\nyoujin\nyoujin\n","youjin\nyoujin\nyoujin\\nyoujin\nyoujin\n","youjin\nyoujin\nyoujin\\\nyoujin\n","\nyoujin\nyoujin\\nyoujin\nyoujin\n","youjin\nyoujin\nyoujin\nyoujin\\\n","youjin\nyoujin\\nyoujin\\nyoujin\n","youjin\\\nyoujin\\nyoujin\n","youjin\nyoujin\nyoujin\\\nyoujin\n","youjin\nyoujin\\\nyoujin\nyoujin\n","youjin\nyoujinnyoujin\nyoujin\nyoujin\\n"]
 
     //MARK: LifeCycles
     override func viewDidLoad() {
@@ -42,6 +51,7 @@ class GroupManagementViewController: UIViewController {
         GroupCollectionView.dataSource = self
         
         GroupCollectionView.register(GroupCollectionViewCell.self, forCellWithReuseIdentifier: GroupCollectionViewCell.GroupCollectionViewCellIdentifier)
+        GroupCollectionView.register(GroupAddCollectionViewCell.self, forCellWithReuseIdentifier: GroupAddCollectionViewCell.GroupAddCollectionViewCellIdentifier)
         
         GroupCollectionView.snp.makeConstraints { make in
             make.top.equalTo(topView.snp.bottom)
@@ -89,13 +99,19 @@ extension GroupManagementViewController: UICollectionViewDataSource{
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: GroupCollectionViewCell.GroupCollectionViewCellIdentifier, for: indexPath) as! GroupCollectionViewCell
         
-        cell.titleLabel.text = titleLabel[indexPath.row]
-        cell.userNameGroup.text = userNameGroup[indexPath.row]
-        
-        return cell
+        if indexPath.row == 0{
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: GroupAddCollectionViewCell.GroupAddCollectionViewCellIdentifier, for: indexPath) as! GroupAddCollectionViewCell
+            
+            return cell
+        }else{
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: GroupCollectionViewCell.GroupCollectionViewCellIdentifier, for: indexPath) as! GroupCollectionViewCell
+            
+            cell.titleLabel.text = titleLabel[indexPath.row]
+            cell.userNameGroup.text = userNameGroup[indexPath.row]
+            cell.titleBackgroundView.backgroundColor = EZYPlanBackgroundColor[indexPath.row]
+            
+            return cell
+        }
     }
-    
-    
 }
