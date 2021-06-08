@@ -1,63 +1,53 @@
 //
-//  GroupAddCollectionViewCell.swift
+//  MultilineLabelCell.swift
 //  EZY
 //
-//  Created by 김유진 on 2021/06/07.
+//  Created by 김유진 on 2021/06/08.
 //
 
 import UIKit
+import SnapKit
 
 class GroupAddCollectionViewCell: UICollectionViewCell {
-    static var GroupAddCollectionViewCellIdentifier = "\(GroupAddCollectionViewCell.self)"
-
-    lazy var cellBackgroundView = UIView().then {
-        $0.backgroundColor = .white
-        $0.layer.cornerRadius = 10
-        $0.layer.masksToBounds = false
-        $0.layer.shadowOpacity = 0.9
-        $0.layer.shadowRadius = 7
-        $0.layer.shadowOffset = CGSize(width: 0, height: 4)
-        $0.layer.shadowColor = UIColor(red: 222/255, green: 222/255, blue: 222/255, alpha: 1).cgColor
-    }
     
-    lazy var groupAddButton = UIButton().then {
+    static let reuseId = "\(GroupAddCollectionViewCell.self)"
+    
+    var cellBackgroundView: UIView = {
+        var view = UIView()
+        view.backgroundColor = .white
+        view.layer.cornerRadius = 10
+        view.layer.masksToBounds = false
+        view.layer.shadowOpacity = 0.9
+        view.layer.shadowRadius = 7
+        view.layer.shadowOffset = CGSize(width: 0, height: 4)
+        view.layer.shadowColor = UIColor(red: 222/255, green: 222/255, blue: 222/255, alpha: 1).cgColor
+        return view
+    }()
+    
+    var addbutton = UIButton().then {
         $0.setImage(UIImage(named: "EZY_GroupAddButton"), for: .normal)
     }
     
-    //MARK: LifeCycles
     override init(frame: CGRect) {
         super.init(frame: frame)
         
-        configureUI()
-    }
-    
-    required init?(coder: NSCoder) {
-        super.init(coder: coder)
-       
-        configureUI()
-    }
-    
-    override func awakeFromNib() {
-        super.awakeFromNib()
-        // Initialization code
-        
-        configureUI()
-    }
-    
-    func configureUI(){
         contentView.addSubview(cellBackgroundView)
-        cellBackgroundView.addSubview(groupAddButton)
+        cellBackgroundView.addSubview(addbutton)
+        
+        addbutton.snp.makeConstraints { make in
+            make.centerX.centerY.equalToSuperview()
+            make.height.width.equalToSuperview().dividedBy(4)
+        }
         
         cellBackgroundView.snp.makeConstraints { make in
+            make.top.equalToSuperview().offset(26)
+            make.centerX.equalToSuperview()
             make.width.equalToSuperview().dividedBy(1.1)
             make.bottom.equalToSuperview()
-            make.centerX.equalToSuperview()
-            make.top.equalToSuperview().offset(contentView.frame.height/7)
         }
-        
-        groupAddButton.snp.makeConstraints { make in
-            make.centerX.centerY.equalToSuperview()
-            make.width.height.equalToSuperview().dividedBy(4)
-        }
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("Storyboards are quicker, easier, more seductive. Not stronger then Code.")
     }
 }

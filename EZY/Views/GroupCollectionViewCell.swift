@@ -10,8 +10,8 @@ import UIKit
 class GroupCollectionViewCell: UICollectionViewCell {
     
     //MARK: Properties
-    static var GroupCollectionViewCellIdentifier = "\(GroupCollectionViewCell.self)"
-    
+    static let reuseId = "\(GroupCollectionViewCell.self)"
+
     lazy var cellBackgroundView = UIView().then {
         $0.backgroundColor = .white
         $0.layer.cornerRadius = 10
@@ -40,6 +40,7 @@ class GroupCollectionViewCell: UICollectionViewCell {
         $0.textAlignment = .center
         $0.numberOfLines = 0
         $0.lineBreakMode = .byWordWrapping
+        $0.textColor = UIColor(red: 120/255, green: 120/255, blue: 120/255, alpha: 1)
         $0.dynamicFont(fontSize: 15, currentFontName: "AppleSDGothicNeo-UltraLight")
         $0.text = "youjin\nyoujin\nyoujin\nyoujin\nyoujin\nyoujin\nvyoujin\n"
     }
@@ -84,7 +85,7 @@ class GroupCollectionViewCell: UICollectionViewCell {
             make.bottom.equalTo(cellBackgroundView.snp.top).offset(14)
             make.centerX.equalToSuperview()
             make.width.equalTo(cellBackgroundView).dividedBy(1.5)
-            make.height.equalTo(cellBackgroundView).dividedBy(4)
+            make.height.equalTo(32)
         }
         
         cellBackgroundView.snp.makeConstraints { make in
@@ -98,7 +99,6 @@ class GroupCollectionViewCell: UICollectionViewCell {
             make.top.equalToSuperview()
             make.left.equalToSuperview()
             make.bottom.right.equalToSuperview()
-            
         }
         
         userNameGroup.snp.makeConstraints { make in
