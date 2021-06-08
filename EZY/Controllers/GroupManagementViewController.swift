@@ -1,25 +1,45 @@
 //
-//  GroupManagementViewController.swift
+//  ViewController.swift
 //  EZY
 //
-//  Created by 김유진 on 2021/06/07.
+//  Created by 김유진 on 2021/06/08.
 //
 
 import UIKit
 
-class GroupManagementViewController: UIViewController {
+
+
+extension GroupManagementViewController: PinterestLayoutDelegate {
+    func collectionView(_ collectionView: UICollectionView, heightForPhotoAtIndexPath indexPath: IndexPath) -> CGFloat {
+        let cellWidth: CGFloat = (view.bounds.width - 4) / 2 // 셀 가로 크기
+
+       print(heightForView(text: userNameGroup[indexPath.row], font: UIFont.systemFont(ofSize: 15), width:  200))
+        return CGFloat(heightForView(text: userNameGroup[indexPath.row], font: UIFont.systemFont(ofSize: 15), width:  200)/76) * cellWidth
+    }
+}
+
+class GroupManagementViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     
     //MARK: Properties
-    let topView = TopView()
+    private(set) var collectionView: UICollectionView
+    private var labelHeightConstraint: NSLayoutConstraint!
     
-    let GroupCollectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout()).then {
-        let layout = UICollectionViewFlowLayout()
-        layout.scrollDirection = .vertical
-        $0.backgroundColor = .white
-        $0.contentInset = UIEdgeInsets.init(top: 10, left: 0, bottom: 0, right: 0)
-        $0.showsHorizontalScrollIndicator = false
-        $0.collectionViewLayout = layout
-    }
+    let userNameGroup = [
+        "1youjin\nyoujin\nyoujin\nyoujin\nyoyoujin\nyoujin\nyoujin\nyoujin\nyoujinujin\nyoujin\nyoujin\nyoujin\nyoujin\nyoujin\nyoujin\nyoujin\n",
+        "2youjin\nyoujin\nyoujin\n",
+        "3\nyoujin\nyoujin\nyoujin\nyoujin\nyoujin\nyoujin\n",
+        "4youjin\nyoujin\nyoujin\nyoujin\n",
+        "5youjyoujin\nyoujin\nyoujin\nyoujin\nyoujinin\n","6youjin\nyoujin\nyoujin\nyoujin\nyoujin\nyoujin\nyoujin\nyoujin\nyoujinyoujin\nyoujin\nyoujin\nyoujin\nyoujin\nyoujin\nyoujin\nyoujin\n",
+        "y7oujin\nyoujin\nyoujin\n",
+        "youjin\nyoujin\nyoujin\nyoujin\nyoujin\nyoujin\nyoujin\nyoujin\nyoujin\nyoujin\nyoujin\n",
+        "youjin\nyoujin\nyoujin\nyoujin\n",
+        "youjyoujin\nyoujin\nyoujin\nyoujin\nyoujinyoujin\nyoujin\nyoujin\nyoujin\nyoujinin\n",
+        "youjin\nyoujin\nyoujin\nyoujin\nyoujin\nyoujin\nyoujin\nyoujin\nyoujin\nyoujin\nyoujin\nyoujin\n",
+        "youjin\nyoujin\nyoujin\n",
+        "youjin\nyoujin\nyoujinin\nyoujin\nyoujinnyoujin\nyoujin\nyoujin\nn\nyoujin\nyoujin\nyoujin\n",
+        "youjin\nyoujin\nyoujin\nyoujin\n",
+        "youjiyoujin\nyoujin\nyoujin\nyoujin\nyoujinyoujin\nyoujin\nyoujin\nyoujin\nyoujinyoujin\nyoujin\nyoujin\nyoujin\nyoujinn\n"
+    ]
     
     var greenColor: UIColor! = UIColor(red: 207/255, green: 227/255, blue: 206/255, alpha: 1)
     var orangeColor: UIColor! = UIColor(red: 255/255, green: 205/255, blue: 184/255, alpha: 1)
@@ -32,86 +52,83 @@ class GroupManagementViewController: UIViewController {
     
     let titleLabel = ["영어 스터디", "EZY", "NELSOM", "영어 스터디", "EZY", "NELSOM", "영어 스터디", "EZY", "NELSOM", "영어 스터디", "EZY", "NELSOM"]
     
-    let userNameGroup = ["youjin\nyoujin\nyoujin\nyouji","youjin\nyoujin\nyoujin\nyoujin\nyoujin\\n","youjin\\nyoujin\nyoujin\nyoujin\nyoujin\n","youjin\nyoujin\nyoujin\\nyoujin\nyoujin\n","youjin\nyoujin\nyoujin\\\nyoujin\n","\nyoujin\nyoujin\\nyoujin\nyoujin\n","youjin\nyoujin\nyoujin\nyoujin\\\n","youjin\nyoujin\\nyoujin\\nyoujin\n","youjin\\\nyoujin\\nyoujin\n","youjin\nyoujin\nyoujin\\\nyoujin\n","youjin\nyoujin\\\nyoujin\nyoujin\n","youjin\nyoujinnyoujin\nyoujin\nyoujin\\n"]
-
+    //MARK: Initializers
+    init() {
+        // Create new `UICollectionView` and set `UICollectionViewFlowLayout` as its layout
+        collectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout())
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        // Create new `UICollectionView` and set `UICollectionViewFlowLayout` as its layout
+        collectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout())
+        super.init(coder: aDecoder)
+    }
+    
     //MARK: LifeCycles
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        self.view.backgroundColor = .white
-        
-        topViewSetting()
+
         setupCollectionView()
     }
     
+    //MARK: setupCollectionView
     func setupCollectionView(){
-        self.view.addSubview(GroupCollectionView)
+        let pinterestLayout = PinterestLayout()
+        pinterestLayout.delegate = self
+        collectionView.collectionViewLayout = pinterestLayout
         
-        GroupCollectionView.delegate = self
-        GroupCollectionView.dataSource = self
+        collectionView.register(MultilineLabelCell.self, forCellWithReuseIdentifier: MultilineLabelCell.reuseId)
         
-        GroupCollectionView.register(GroupCollectionViewCell.self, forCellWithReuseIdentifier: GroupCollectionViewCell.GroupCollectionViewCellIdentifier)
-        GroupCollectionView.register(GroupAddCollectionViewCell.self, forCellWithReuseIdentifier: GroupAddCollectionViewCell.GroupAddCollectionViewCellIdentifier)
+        view.addSubview(collectionView)
+        collectionView.backgroundColor = .white
+        collectionView.contentInsetAdjustmentBehavior = .always
+        collectionView.contentInset = UIEdgeInsets(top: 0, left: 10, bottom: 0, right: 10)
         
-        GroupCollectionView.snp.makeConstraints { make in
-            make.top.equalTo(topView.snp.bottom)
-            make.width.bottom.centerX.equalToSuperview()
+        collectionView.snp.makeConstraints { make in
+            make.top.bottom.left.right.equalToSuperview()
         }
-    }
-    
-    func topViewSetting(){
-        self.view.addSubview(topView)
-        topView.addSubview(topView.backButton)
-        topView.addSubview(topView.titleLabel)
         
-        topView.topViewDataSetting(backButtonImage: UIImage(named: "EZY_SettingBackButton")!, titleLabelText: "그룹 관리",
-                                   textColor: UIColor(red: 175/255, green: 173/255, blue: 255/255, alpha: 1))
-
-        topView.topViewLayoutSetting(screenHeight: Double(self.view.bounds.height), screenWeight: Double(self.view.bounds.width))
+        collectionView.dataSource = self
+        collectionView.delegate = self
         
-        topView.snp.makeConstraints { make in
-            make.left.right.equalToSuperview()
-            make.top.equalTo(self.view.safeAreaLayoutGuide)
-            make.height.equalToSuperview().dividedBy(8)
-        }
-    }
-}
-
-extension GroupManagementViewController: UICollectionViewDelegate, UICollectionViewDelegateFlowLayout{
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize.init(width: self.view.frame.width / 2.4, height: self.view.frame.width / 2.4)
+        (collectionView.collectionViewLayout as! UICollectionViewFlowLayout).estimatedItemSize = UICollectionViewFlowLayout.automaticSize
+        (collectionView.collectionViewLayout as! UICollectionViewFlowLayout).sectionInsetReference = .fromLayoutMargins
     }
     
-    //MARK: collectionView - left Padding
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
-        return UIEdgeInsets(top: 0, left: self.view.frame.width/20, bottom: 0, right: self.view.frame.width/20)
+    //MARK: Getting label height
+    func heightForView(text:String, font:UIFont, width:CGFloat) -> CGFloat{
+           let label:UILabel = UILabel(frame: CGRect(x: 0, y: 0, width: width, height: CGFloat.greatestFiniteMagnitude))
+           label.numberOfLines = 0
+           label.lineBreakMode = NSLineBreakMode.byWordWrapping
+           label.font = font
+           label.text = text
+           label.sizeToFit()
+           
+           return label.frame.height
     }
     
-    //MARK: collectionView - cell 간격
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
-        return self.view.frame.height/45
-    }
-}
-
-extension GroupManagementViewController: UICollectionViewDataSource{
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return titleLabel.count
-    }
-    
+    //MARK: UICollectionViewDataSource
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        
-        if indexPath.row == 0{
-            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: GroupAddCollectionViewCell.GroupAddCollectionViewCellIdentifier, for: indexPath) as! GroupAddCollectionViewCell
-            
-            return cell
-        }else{
-            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: GroupCollectionViewCell.GroupCollectionViewCellIdentifier, for: indexPath) as! GroupCollectionViewCell
-            
-            cell.titleLabel.text = titleLabel[indexPath.row]
-            cell.userNameGroup.text = userNameGroup[indexPath.row]
-            cell.titleBackgroundView.backgroundColor = EZYPlanBackgroundColor[indexPath.row]
-            
-            return cell
-        }
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: MultilineLabelCell.reuseId, for: indexPath) as! MultilineLabelCell
+        cell.configure(text: userNameGroup[indexPath.row])
+        return cell
+    }
+    
+    //MARK: CollectionViewCell count
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return userNameGroup.count
+    }
+    
+    //MARK: UICollectionViewDelegateFlowLayout
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        let sectionInset = (collectionViewLayout as! UICollectionViewFlowLayout).sectionInset
+        let referenceHeight: CGFloat = 100 // Approximate height of your cell
+        let referenceWidth = collectionView.safeAreaLayoutGuide.layoutFrame.width
+            - sectionInset.left
+            - sectionInset.right
+            - collectionView.contentInset.left
+            - collectionView.contentInset.right
+        return CGSize(width: referenceWidth/2.2, height: referenceHeight)
     }
 }

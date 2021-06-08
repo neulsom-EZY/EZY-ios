@@ -36,9 +36,11 @@ class GroupCollectionViewCell: UICollectionViewCell {
         $0.dynamicFont(fontSize: 14, currentFontName: "AppleSDGothicNeo-Bold")
     }
     
-    lazy var userNameGroup = UILabel().then {
-        $0.numberOfLines = 0
+    lazy var userNameGroup = UILabel(frame: .zero).then {
         $0.textAlignment = .center
+        $0.numberOfLines = 0
+        $0.lineBreakMode = .byWordWrapping
+        $0.dynamicFont(fontSize: 15, currentFontName: "AppleSDGothicNeo-UltraLight")
         $0.text = "youjin\nyoujin\nyoujin\nyoujin\nyoujin\nyoujin\nvyoujin\n"
     }
     
@@ -66,6 +68,10 @@ class GroupCollectionViewCell: UICollectionViewCell {
         configureUI()
     }
     
+    func configure(text: String?) {
+        userNameGroup.text = text
+    }
+    
     func configureUI(){
         
         contentView.addSubview(cellBackgroundView)
@@ -82,13 +88,16 @@ class GroupCollectionViewCell: UICollectionViewCell {
         }
         
         cellBackgroundView.snp.makeConstraints { make in
-            make.bottom.left.right.equalToSuperview()
+            make.centerX.equalToSuperview()
+            make.width.equalToSuperview().dividedBy(1.1)
+            make.bottom.equalToSuperview()
             make.top.equalToSuperview().offset(contentView.frame.height/7)
         }
         
         titleLabel.snp.makeConstraints{ make in
-            make.centerX.centerY.equalToSuperview()
-            make.width.equalToSuperview()
+            make.top.equalToSuperview()
+            make.left.equalToSuperview()
+            make.bottom.right.equalToSuperview()
             
         }
         
@@ -102,6 +111,10 @@ class GroupCollectionViewCell: UICollectionViewCell {
         }
     }
     
-
+    override func preferredLayoutAttributesFitting(_ layoutAttributes: UICollectionViewLayoutAttributes) -> UICollectionViewLayoutAttributes {
+        userNameGroup.preferredMaxLayoutWidth = layoutAttributes.size.width - contentView.layoutMargins.left - contentView.layoutMargins.left
+        layoutAttributes.bounds.size.height = systemLayoutSizeFitting(UIView.layoutFittingCompressedSize).height
+        return layoutAttributes
+    }
 
 }

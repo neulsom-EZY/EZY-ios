@@ -49,7 +49,10 @@ class GroupAddCollectionViewCell: UICollectionViewCell {
         cellBackgroundView.addSubview(groupAddButton)
         
         cellBackgroundView.snp.makeConstraints { make in
-            make.top.bottom.left.right.equalToSuperview()
+            make.width.equalToSuperview().dividedBy(1.1)
+            make.bottom.equalToSuperview()
+            make.centerX.equalToSuperview()
+            make.top.equalToSuperview().offset(contentView.frame.height/7)
         }
         
         groupAddButton.snp.makeConstraints { make in
