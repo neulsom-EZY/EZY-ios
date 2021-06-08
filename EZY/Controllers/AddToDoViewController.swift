@@ -97,10 +97,9 @@ class AddToDoViewController:UIViewController{
         $0.dynamicFont(fontSize: 12, weight: .bold)
     }
     
-    private var CollectionView : UICollectionView = {
-        
-    }()
-    
+    private var collectionView: UICollectionView?
+
+
     
     private let addButton : AdditionalButton = {
         let button = AdditionalButton(type: .system)
@@ -167,7 +166,7 @@ class AddToDoViewController:UIViewController{
             make.right.equalTo(self.view.frame.width/13.8 * -1)
         }
         
-        let stack = UIStackView(arrangedSubviews: [calendarButtonView, clockButtonView, locationButtonView])
+//        let stack = UIStackView(arrangedSubviews: [calendarButtonView, clockButtonView, locationButtonView])
 
 //        stack.axis = .vertical
 //        stack.spacing = view.frame.height/12
@@ -214,6 +213,9 @@ class AddToDoViewController:UIViewController{
             make.left.equalTo(backbutton.snp.left)
             make.top.equalTo(explanationContainerView.snp.bottom).offset(view.frame.height/38.6)
         }
+        
+        
+        
         view.addSubview(addButton)
         
         addButton.snp.makeConstraints { (make) in
@@ -227,27 +229,5 @@ class AddToDoViewController:UIViewController{
     }
 }
 
-#if DEBUG
-import SwiftUI
-struct ViewControllerRepresentable: UIViewControllerRepresentable {
 
-func updateUIViewController(_ uiView: UIViewController,context: Context) {
-        // leave this empty
-}
-@available(iOS 13.0.0, *)
-func makeUIViewController(context: Context) -> UIViewController{
-    AddToDoViewController()
-    }
-}
-@available(iOS 13.0, *)
-struct ViewControllerRepresentable_PreviewProvider: PreviewProvider {
-    static var previews: some View {
-        Group {
-            ViewControllerRepresentable()
-                .ignoresSafeArea()
-                .previewDisplayName(/*@START_MENU_TOKEN@*/"Preview"/*@END_MENU_TOKEN@*/)
-                .previewDevice(PreviewDevice(rawValue: "iPhone 11"))
-        }
 
-    }
-} #endif
