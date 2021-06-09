@@ -130,8 +130,11 @@ class GroupManagementViewController: UIViewController {
         groupModalView.modalView.addSubview(groupModalView.modalTitleLabel)
         groupModalView.modalView.addSubview(groupModalView.modalButton)
         groupModalView.modalView.addSubview(groupModalView.groupMemberTitleLabel)
-        groupModalView.modalView.addSubview(groupModalView.textFieldBackgroundView)
-        groupModalView.textFieldBackgroundView.addSubview(groupModalView.groupNameTextField)
+        groupModalView.modalView.addSubview(groupModalView.nicknameTextFieldBackgroundView)
+        groupModalView.nicknameTextFieldBackgroundView.addSubview(groupModalView.nickNameTextField)
+        groupModalView.modalView.addSubview(groupModalView.groupNameTitleLabel)
+        groupModalView.modalView.addSubview(groupModalView.groupNameTextFieldBackgroundView)
+        groupModalView.groupNameTextFieldBackgroundView.addSubview(groupModalView.groupNameTextField)
         
         groupModalView.GroupModalDataSetting(modalTitleText: "그룹 추가", modalColor: UIColor(red: 255/255, green: 191/255, blue: 191/255, alpha: 1))
 
@@ -151,7 +154,7 @@ class GroupManagementViewController: UIViewController {
         groupCollectionView.backgroundColor = .white
         
         groupCollectionView.contentInsetAdjustmentBehavior = .always
-        groupCollectionView.contentInset = UIEdgeInsets(top: 0, left: 10, bottom: 0, right: 10)
+        groupCollectionView.contentInset = UIEdgeInsets(top: 0, left: 20, bottom: 0, right: 20)
         
         groupCollectionView.snp.makeConstraints { make in
             groupCollectionView.backgroundColor = .white
@@ -172,10 +175,10 @@ class GroupManagementViewController: UIViewController {
         recommendUserCollectionView.register(groupAddUserCollectionViewCell.self, forCellWithReuseIdentifier: groupAddUserCollectionViewCell.reuseId)
         
         recommendUserCollectionView.snp.makeConstraints { make in
-            make.top.equalTo(groupModalView.textFieldBackgroundView.snp.bottom).offset(10)
+            make.top.equalTo(groupModalView.nicknameTextFieldBackgroundView.snp.bottom).offset(10)
             make.centerX.equalToSuperview()
             make.width.equalToSuperview()
-            make.height.equalTo(self.view.frame.height/10)
+            make.height.equalTo(self.view.frame.height/13)
         }
     }
     
@@ -245,6 +248,8 @@ extension GroupManagementViewController: UICollectionViewDataSource{
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
         if collectionView == groupCollectionView{
             return UIEdgeInsets(top: 0, left: 0, bottom: 10, right: 0)
+        }else{
+            return UIEdgeInsets(top: 0, left: 10, bottom: 0, right: 0)
         }
         
         return UIEdgeInsets()

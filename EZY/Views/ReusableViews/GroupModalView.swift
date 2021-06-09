@@ -15,12 +15,22 @@ class GroupModalView: UIView {
         $0.backgroundColor = UIColor.black.withAlphaComponent(0.2)
     }
     
-    lazy var groupNameTextField = UITextField().then {
+    lazy var nickNameTextField = UITextField().then {
         $0.placeholder = "닉네임을 검색하세요."
         $0.font = UIFont(name: "AppleSDGothicNeo-Bold", size: 10)
     }
     
-    lazy var textFieldBackgroundView = UIView().then {
+    lazy var groupNameTextField = UITextField().then {
+        $0.placeholder = "그룹명을 입력하세요."
+        $0.font = UIFont(name: "AppleSDGothicNeo-Bold", size: 10)
+    }
+    
+    lazy var nicknameTextFieldBackgroundView = UIView().then {
+        $0.backgroundColor = UIColor(red: 245/255, green: 245/255, blue: 245/255, alpha: 1)
+        $0.layer.cornerRadius = 10
+    }
+    
+    lazy var groupNameTextFieldBackgroundView = UIView().then {
         $0.backgroundColor = UIColor(red: 245/255, green: 245/255, blue: 245/255, alpha: 1)
         $0.layer.cornerRadius = 10
     }
@@ -45,6 +55,13 @@ class GroupModalView: UIView {
     
     lazy var groupMemberTitleLabel = UILabel().then {
         $0.text = "그룹원"
+        $0.dynamicFont(fontSize: 10, currentFontName: "AppleSDGothicNeo-Thin")
+        $0.textColor = UIColor(red: 129/255, green: 129/255, blue: 129/255, alpha: 1)
+    }
+    
+    
+    lazy var groupNameTitleLabel = UILabel().then {
+        $0.text = "그룹명"
         $0.dynamicFont(fontSize: 10, currentFontName: "AppleSDGothicNeo-Thin")
         $0.textColor = UIColor(red: 129/255, green: 129/255, blue: 129/255, alpha: 1)
     }
@@ -82,11 +99,29 @@ class GroupModalView: UIView {
             make.top.equalTo(modalTitleLabel.snp.bottom).offset(screenHeight/45)
         }
         
-        textFieldBackgroundView.snp.makeConstraints { make in
+        nicknameTextFieldBackgroundView.snp.makeConstraints { make in
             make.centerX.equalToSuperview()
             make.left.equalTo(groupMemberTitleLabel)
             make.height.equalTo(38)
             make.top.equalTo(groupMemberTitleLabel.snp.bottom).offset(screenHeight/135.3)
+        }
+        
+        nickNameTextField.snp.makeConstraints { make in
+            make.left.equalToSuperview().offset(16)
+            make.centerX.equalToSuperview()
+            make.height.equalToSuperview()
+        }
+        
+        groupNameTextFieldBackgroundView.snp.makeConstraints { make in
+            make.bottom.equalTo(modalButton.snp.top).offset(-30)
+            make.centerX.equalToSuperview()
+            make.left.equalTo(groupMemberTitleLabel)
+            make.height.equalTo(38)
+        }
+        
+        groupNameTitleLabel.snp.makeConstraints { make in
+            make.left.equalTo(groupMemberTitleLabel)
+            make.bottom.equalTo(groupNameTextFieldBackgroundView.snp.top).offset(-screenHeight/135.3)
         }
         
         groupNameTextField.snp.makeConstraints { make in

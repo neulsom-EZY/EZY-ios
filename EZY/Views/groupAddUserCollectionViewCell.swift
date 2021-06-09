@@ -19,6 +19,10 @@ class groupAddUserCollectionViewCell: UICollectionViewCell {
         return v
     }()
     
+    lazy var groupMemberDeleteButton = UIButton().then{
+        $0.setImage(UIImage(named: "EZY_GroupMemberDeleteButton"), for: .normal)
+    }
+    
     lazy var titleLabel: UILabel = {
         
         let label = UILabel()
@@ -33,8 +37,10 @@ class groupAddUserCollectionViewCell: UICollectionViewCell {
         super.init(frame: frame)
         contentView.addSubview(background)
         background.addSubview(titleLabel)
+        background.addSubview(groupMemberDeleteButton)
 
         contentView.backgroundColor = .clear
+
         
         background.snp.makeConstraints { make in
             make.width.height.equalToSuperview()
@@ -42,7 +48,13 @@ class groupAddUserCollectionViewCell: UICollectionViewCell {
         }
         
         titleLabel.snp.makeConstraints { make in
-            make.centerX.centerY.equalToSuperview()
+            make.centerY.equalToSuperview()
+            make.left.equalToSuperview().offset(20)
+        }
+        
+        groupMemberDeleteButton.snp.makeConstraints { make in
+            make.centerY.equalToSuperview()
+            make.right.equalToSuperview().offset(-10)
         }
     }
     
