@@ -6,27 +6,33 @@
 //
 
 import UIKit
-import SnapKit
-class CustomTextField: UITextField{
-
+class CustomTextField : UITextField {
+    
     init(placeholder : String) {
         super.init(frame: .zero)
         
         let spacer = UIView()
-
+//        spacer.setDimensions(height: 50, width: 12)
+        spacer.snp.makeConstraints { (make) in
+            make.height.equalToSuperview()
+            make.width.equalToSuperview()
+        }
         leftView = spacer
         leftViewMode = .always
         
         borderStyle = .none
-        textColor = .EZY_6A6A6A
+        textColor = .white
         keyboardAppearance = .dark
-        backgroundColor = .EZY_F5F5F5
-        attributedPlaceholder = NSAttributedString(string: placeholder, attributes: [.foregroundColor: UIColor.EZY_CACACA])
-        
+        backgroundColor = UIColor(white: 1, alpha: 0.1)
+//        setHeight(height: 50)
+        snp.makeConstraints { (make) in
+            make.height.equalToSuperview()
+        }
+        attributedPlaceholder = NSAttributedString(string: placeholder, attributes: [.foregroundColor : UIColor(white:1.0 ,alpha: 0.7)])
+
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
 }

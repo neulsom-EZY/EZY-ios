@@ -114,7 +114,19 @@ class Utilities{
     }
     
     //MARK: - CustomTextField
-    
-    
-    
+//    func customTextView(withMessage message:String,textView:UITextView,Color messageColor: UIColor, viewSize : Double) -> UIView{
+//        let view = UIView()
+//
+//        view.backgroundColor = messageColor
+//
+//        view.addSubview(textView)
+//        textView.snp.makeConstraints { (make) in
+//            make.left.equalTo(view.snp.right).offset(viewSize/42.7)
+//            make.right.equalToSuperview()
+//            make.top.equalToSuperview().offset(viewSize/60)
+//            make.bottom.equalToSuperview().offset(viewSize/60 * -1)
+//        }
+//
+//        return view
+//    }
 }

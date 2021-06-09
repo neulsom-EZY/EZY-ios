@@ -23,7 +23,7 @@ class MorePeopleToDo: UIViewController{
     }
     private let SubLabel = UILabel().then{
         $0.text = "한명도 좋고 여러명도 좋아요!"
-        $0.updateGradientTextColor(gradientColors: [UIColor.EZY_968DFF,UIColor.white])
+        $0.textColor = .EZY_968DFF
         $0.dynamicFont(fontSize: 20, weight: .semibold)
     }
     private let GroupLabel = UILabel().then{
@@ -31,8 +31,7 @@ class MorePeopleToDo: UIViewController{
         $0.dynamicFont(fontSize: 10, weight: .thin)
         $0.textColor = .EZY_818181
     }
-    
-//    private let nickNameTextField = CustomTextField(placeholder: "닉네임을 입력해주세요")
+    private let CustomField = CustomTextField(placeholder: "닉네임을 입력해주세요")
     
     //MARK: - Lifecycle
     override func viewDidLoad() {
