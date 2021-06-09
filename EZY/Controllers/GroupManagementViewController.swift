@@ -234,7 +234,8 @@ extension GroupManagementViewController: UICollectionViewDelegate, UICollectionV
                     make.top.bottom.right.left.equalToSuperview()
                 }
                 groupModalView.GroupModalLayoutSetting(screenHeight: Double(self.view.bounds.height), screenWeight: Double(self.view.bounds.width))
-                
+//                textField.becomeFirstResponder()
+                groupModalView.nickNameTextField.becomeFirstResponder()
             }
         }else{ //MARK: GroupAddCollectionView
             

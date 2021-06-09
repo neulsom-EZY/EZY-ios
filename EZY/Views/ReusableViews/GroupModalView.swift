@@ -79,7 +79,7 @@ class GroupModalView: UIView {
         
         modalView.snp.makeConstraints { make in
             make.width.equalToSuperview().dividedBy(1.3)
-            make.height.equalToSuperview().dividedBy(2.3)
+            make.height.equalToSuperview().dividedBy(2.4)
             make.top.equalToSuperview().offset(screenHeight/10)
             make.centerX.equalToSuperview()
         }
