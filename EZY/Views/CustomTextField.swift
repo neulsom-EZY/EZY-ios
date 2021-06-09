@@ -20,6 +20,8 @@ class CustomTextField: UITextField{
         leftView = spacer
         leftViewMode = .always
         
+        borderStyle = .none
+        
         
     }
     
