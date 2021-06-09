@@ -37,7 +37,7 @@ extension UIColor{
     static let EZY_656565 = UIColor.rgb(red: 101, green: 101, blue: 101)
     static let EZY_929292 = UIColor.rgb(red: 146, green: 146, blue: 146)
     static let EZY_B6B6B6 = UIColor.rgb(red: 182, green: 182, blue: 182)
-    
+    static let EZY_818181 = UIColor.rgb(red: 129, green: 129, blue: 129)
 }
 extension UILabel {
   func dynamicFont(fontSize size: CGFloat, weight: UIFont.Weight) {

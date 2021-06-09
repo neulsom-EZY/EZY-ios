@@ -25,6 +25,13 @@ class MorePeopleToDo: UIViewController{
         $0.text = "한명도 좋고 여러명도 좋아요!"
         $0.dynamicFont(fontSize: 20, weight: .semibold)
     }
+    private let GroupLabel = UILabel().then{
+        $0.text = "그룹원"
+        $0.dynamicFont(fontSize: 10, weight: .thin)
+        $0.textColor = .EZY_818181
+    }
+    
+    
     
     //MARK: - Lifecycle
     override func viewDidLoad() {
@@ -49,8 +56,21 @@ class MorePeopleToDo: UIViewController{
         view.addSubview(TitleLabel)
         TitleLabel.snp.makeConstraints { (make) in
             make.left.equalTo(backbutton.snp.left)
-            make.top.equalTo(backbutton.snp.top).offset(view.frame.height/27.0)
+            make.top.equalTo(backbutton.snp.top).offset(view.frame.height/15.6)
         }
+        view.addSubview(SubLabel)
+        SubLabel.snp.makeConstraints { (make) in
+            make.top.equalTo(TitleLabel.snp.bottom)
+            make.left.equalTo(TitleLabel.snp.left)
+            
+        }
+        
+        view.addSubview(GroupLabel)
+        GroupLabel.snp.makeConstraints { (make) in
+            make.left.equalTo(view.frame.height/20.8)
+            make.top.equalTo(SubLabel.snp.bottom).offset(view.frame.height/17.6)
+        }
+        
         
     }
     

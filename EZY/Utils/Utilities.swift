@@ -99,25 +99,17 @@ class Utilities{
         label.snp.makeConstraints { (make) in
             make.left.equalTo(button.snp.right).offset(viewSize/30.0)
             make.centerY.equalToSuperview()
-            
         }
-        
-        
         return view
     }
-    
-    
     func AlertButton(image img: UIImage) -> UIButton{
         let button = UIButton()
-        
         button.backgroundColor = .white
         button.layer.shadowColor = UIColor.black.cgColor
         button.layer.shadowOffset = CGSize(width: 0, height: 4)
         button.layer.shadowOpacity = 0.1
         button.setImage(img, for: .normal)
         button.imageEdgeInsets = UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10)
-
-        
         return button
     }
 
