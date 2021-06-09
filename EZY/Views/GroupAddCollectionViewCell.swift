@@ -6,7 +6,6 @@
 //
 
 import UIKit
-import SnapKit
 
 class GroupAddCollectionViewCell: UICollectionViewCell {
     
@@ -26,6 +25,7 @@ class GroupAddCollectionViewCell: UICollectionViewCell {
     
     var addbutton = UIButton().then {
         $0.setImage(UIImage(named: "EZY_GroupAddButton"), for: .normal)
+        $0.isEnabled = false
     }
     
     override init(frame: CGRect) {

@@ -33,7 +33,7 @@ class GroupCollectionViewCell: UICollectionViewCell {
         $0.text = "영어 스터디"
         $0.textColor = .white
         $0.textAlignment = .center
-        $0.dynamicFont(fontSize: 14, currentFontName: "AppleSDGothicNeo-Bold")
+        $0.dynamicFont(fontSize: 12, currentFontName: "AppleSDGothicNeo-Bold")
     }
     
     lazy var userNameGroup = UILabel(frame: .zero).then {
