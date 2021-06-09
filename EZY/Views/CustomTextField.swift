@@ -13,15 +13,15 @@ class CustomTextField: UITextField{
         super.init(frame: .zero)
         
         let spacer = UIView()
-        spacer.snp.makeConstraints { (make) in
-            make.height.equalToSuperview()
-            make.width.equalToSuperview()
-        }
+
         leftView = spacer
         leftViewMode = .always
         
         borderStyle = .none
-        
+        textColor = .EZY_6A6A6A
+        keyboardAppearance = .dark
+        backgroundColor = .EZY_F5F5F5
+        attributedPlaceholder = NSAttributedString(string: placeholder, attributes: [.foregroundColor: UIColor.EZY_CACACA])
         
     }
     

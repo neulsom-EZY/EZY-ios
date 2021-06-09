@@ -12,7 +12,7 @@ import Then
 class MorePeopleToDo: UIViewController{
     //MARK: - Properties
     private let backbutton = UIButton().then{
-        $0.tintColor = .EZY_BAC8FF
+        $0.tintColor = .EZY_968DFF
         $0.setImage(UIImage(systemName: "arrow.left"), for: .normal)
         $0.addTarget(self, action: #selector(backButton), for: .touchUpInside)
     }
@@ -23,6 +23,7 @@ class MorePeopleToDo: UIViewController{
     }
     private let SubLabel = UILabel().then{
         $0.text = "한명도 좋고 여러명도 좋아요!"
+        $0.updateGradientTextColor(gradientColors: [UIColor.EZY_968DFF,UIColor.white])
         $0.dynamicFont(fontSize: 20, weight: .semibold)
     }
     private let GroupLabel = UILabel().then{
@@ -31,7 +32,7 @@ class MorePeopleToDo: UIViewController{
         $0.textColor = .EZY_818181
     }
     
-    
+//    private let nickNameTextField = CustomTextField(placeholder: "닉네임을 입력해주세요")
     
     //MARK: - Lifecycle
     override func viewDidLoad() {
@@ -70,8 +71,7 @@ class MorePeopleToDo: UIViewController{
             make.left.equalTo(view.frame.height/20.8)
             make.top.equalTo(SubLabel.snp.bottom).offset(view.frame.height/17.6)
         }
-        
-        
+
     }
     
 }
