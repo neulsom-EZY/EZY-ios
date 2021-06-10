@@ -23,12 +23,9 @@ class CustomTextField : UITextField {
         borderStyle = .none
         textColor = .white
         keyboardAppearance = .dark
-        backgroundColor = UIColor(white: 1, alpha: 0.1)
+        backgroundColor = UIColor.EZY_F5F5F5
 //        setHeight(height: 50)
-        snp.makeConstraints { (make) in
-            make.height.equalToSuperview()
-        }
-        attributedPlaceholder = NSAttributedString(string: placeholder, attributes: [.foregroundColor : UIColor(white:1.0 ,alpha: 0.7)])
+        attributedPlaceholder = NSAttributedString(string: placeholder, attributes: [.foregroundColor : UIColor.EZY_6A6A6A])
 
     }
     

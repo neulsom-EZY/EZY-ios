@@ -4,12 +4,13 @@
 //
 //  Created by Ji-hoon Ahn on 2021/06/08.
 //
-
+    
 import UIKit
 import SnapKit
 import Then
-
+    
 class MorePeopleToDo: UIViewController{
+    
     //MARK: - Properties
     private let backbutton = UIButton().then{
         $0.tintColor = .EZY_968DFF
@@ -31,7 +32,6 @@ class MorePeopleToDo: UIViewController{
         $0.dynamicFont(fontSize: 10, weight: .thin)
         $0.textColor = .EZY_818181
     }
-    private let CustomField = CustomTextField(placeholder: "닉네임을 입력해주세요")
     
     //MARK: - Lifecycle
     override func viewDidLoad() {
@@ -70,7 +70,7 @@ class MorePeopleToDo: UIViewController{
             make.left.equalTo(view.frame.height/20.8)
             make.top.equalTo(SubLabel.snp.bottom).offset(view.frame.height/17.6)
         }
-
+      
     }
     
 }
