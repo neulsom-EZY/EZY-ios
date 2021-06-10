@@ -24,8 +24,8 @@ class MorePeopleToDo: UIViewController{
     }
     private let SubLabel = UILabel().then{
         $0.text = "한명도 좋고 여러명도 좋아요!"
-        $0.textColor = .EZY_968DFF
         $0.dynamicFont(fontSize: 20, weight: .semibold)
+        $0.updateGradientTextColor_vertical(gradientColors: [.EZY_968DFF,.white])
     }
     private let GroupLabel = UILabel().then{
         $0.text = "그룹원"

@@ -88,7 +88,7 @@ extension UILabel {
         self.font = calculatedFont
         self.font = UIFont.systemFont(ofSize: calculatedFont!.pointSize, weight: weight)
   }
-    public func updateGradientTextColor_vertical(gradientColors: [UIColor] = [UIColor(white: 0, alpha: 0.95), UIColor(white: 0, alpha: 0.6)]){
+    public func updateGradientTextColor_vertical(gradientColors: [UIColor] = [UIColor(white: 0, alpha: 0.95), UIColor(white: 0, alpha: 0.0)]){
           let size = CGSize(width: intrinsicContentSize.width, height: intrinsicContentSize.height)
           
           UIGraphicsBeginImageContextWithOptions(size, false, 0)
