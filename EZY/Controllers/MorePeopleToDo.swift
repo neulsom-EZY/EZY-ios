@@ -25,13 +25,23 @@ class MorePeopleToDo: UIViewController{
     private let SubLabel = UILabel().then{
         $0.text = "한명도 좋고 여러명도 좋아요!"
         $0.dynamicFont(fontSize: 20, weight: .semibold)
-        $0.updateGradientTextColor_vertical(gradientColors: [.EZY_968DFF,.white])
+        $0.updateGradientTextColor_vertical(gradientColors: [.EZY_968DFF,.EZY_968DFF,.EZY_968DFF,.white])
     }
     private let GroupLabel = UILabel().then{
         $0.text = "그룹원"
         $0.dynamicFont(fontSize: 10, weight: .thin)
         $0.textColor = .EZY_818181
     }
+    private let NickNameTextField : UITextField = {
+        let tf = Utilities().textField(textColor: .EZY_6A6A6A, textSize: 10)
+        return tf
+    }()
+    
+    private let NickNameView : UIView = {
+        let view = Utilities().customTextField(withMessage: <#T##String#>, textField: <#T##UITextField#>, Color: <#T##UIColor#>, viewSize: <#T##Double#>)
+        return view
+    }()
+    
     
     //MARK: - Lifecycle
     override func viewDidLoad() {

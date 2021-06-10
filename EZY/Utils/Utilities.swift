@@ -109,24 +109,26 @@ class Utilities{
         button.layer.shadowOffset = CGSize(width: 0, height: 4)
         button.layer.shadowOpacity = 0.1
         button.setImage(img, for: .normal)
-        button.imageEdgeInsets = UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10)
+        button.imageEdgeInsets = UIEdgeInsets(top: 11.25, left: 11.25, bottom: 11.25, right: 11.25)
         return button
     }
     
     //MARK: - CustomTextField
-//    func customTextView(withMessage message:String,textView:UITextView,Color messageColor: UIColor, viewSize : Double) -> UIView{
-//        let view = UIView()
-//
-//        view.backgroundColor = messageColor
-//
-//        view.addSubview(textView)
-//        textView.snp.makeConstraints { (make) in
-//            make.left.equalTo(view.snp.right).offset(viewSize/42.7)
-//            make.right.equalToSuperview()
-//            make.top.equalToSuperview().offset(viewSize/60)
-//            make.bottom.equalToSuperview().offset(viewSize/60 * -1)
-//        }
-//
-//        return view
-//    }
+    func customTextField(withMessage message:String,textField:UITextField ,Color messageColor: UIColor, viewSize : Double) -> UIView{
+        let view = UIView()
+
+        view.backgroundColor = messageColor
+        
+        view.addSubview(textField)
+        textField.attributedPlaceholder = NSAttributedString(string: message, attributes: [NSAttributedString.Key.foregroundColor: UIColor.EZY_CACACA])
+        
+        textField.snp.makeConstraints { (make) in
+            make.left.equalTo(view.snp.right).offset(viewSize/42.7)
+            make.right.equalToSuperview()
+            make.top.equalToSuperview().offset(viewSize/60)
+            make.bottom.equalToSuperview().offset(viewSize/60 * -1)
+        }
+
+        return view
+    }
 }
