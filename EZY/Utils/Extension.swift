@@ -5,7 +5,6 @@
 //  Created by 노연주 on 2021/06/02.
 //
 
-import Foundation
 import UIKit
 
 extension UIColor{
@@ -23,7 +22,7 @@ extension UIColor{
     static let EZY_BADEFF = UIColor.rgb(red: 186, green: 222, blue: 255)
     static let EZY_CFE3CE = UIColor.rgb(red: 207, green: 227, blue: 255)
     static let EZY_E4C9FF = UIColor.rgb(red: 228, green: 201, blue: 255)
-    static let EZY_6B40FF = UIColor.rgb(red: 107, green: 64, blue: 255)
+    static let EZY_6B40FF = UIColor.rgb(red: 107, green: 64,  blue: 255)
     static let EZY_FFA680 = UIColor.rgb(red: 255, green: 166, blue: 128)
     static let EZY_FFD18D = UIColor.rgb(red: 255, green: 209, blue: 141)
     static let EZY_B880FF = UIColor.rgb(red: 184, green: 128, blue: 255)
@@ -35,6 +34,9 @@ extension UIColor{
     static let EZY_EED9B9 = UIColor.rgb(red: 238, green: 217, blue: 185)
     static let EZY_FFCEB9 = UIColor.rgb(red: 255, green: 206, blue: 185)
     static let EZY_DEC4FF = UIColor.rgb(red: 222, green: 196, blue: 255)
+    static let EZY_656565 = UIColor.rgb(red: 101, green: 101, blue: 101)
+    static let EZY_929292 = UIColor.rgb(red: 146, green: 146, blue: 146)
+    static let EZY_B6B6B6 = UIColor.rgb(red: 182, green: 182, blue: 182)
 }
 
 extension UILabel {
@@ -66,4 +68,59 @@ extension UILabel {
       break
     }
   }
+}
+
+extension UILabel{
+    public func updateGradientTextColor_horizontal(gradientColors: [UIColor] = [UIColor(white: 0, alpha: 0.95), UIColor(white: 0, alpha: 0.6)]){
+        let size = CGSize(width: intrinsicContentSize.width, height: 1)
+        
+        UIGraphicsBeginImageContextWithOptions(size, false, 0)
+        
+        defer { UIGraphicsEndImageContext()}
+        guard let context = UIGraphicsGetCurrentContext() else {return}
+        var colors: [CGColor] = []
+        for color in gradientColors{
+            colors.append(color.cgColor)
+        }
+        guard let gradient = CGGradient(colorsSpace: CGColorSpaceCreateDeviceRGB(),
+                                        colors: colors as CFArray,
+                                        locations: nil) else {return }
+        
+        context.drawLinearGradient(
+            gradient,
+            start: CGPoint.zero,
+            end: CGPoint(x: size.width, y:0),
+            options: []
+        )
+        if let image = UIGraphicsGetImageFromCurrentImageContext(){
+            self.textColor = UIColor(patternImage: image)
+        }
+    }
+    
+    public func updateGradientTextColor_vertical(gradientColors: [UIColor] = [UIColor(white: 0, alpha: 0.95), UIColor(white: 0, alpha: 0.6)]){
+        let size = CGSize(width: intrinsicContentSize.width, height: intrinsicContentSize.height)
+        
+        UIGraphicsBeginImageContextWithOptions(size, false, 0)
+        
+        defer { UIGraphicsEndImageContext()}
+        guard let context = UIGraphicsGetCurrentContext() else {return}
+        var colors: [CGColor] = []
+        for color in gradientColors{
+            colors.append(color.cgColor)
+        }
+        guard let gradient = CGGradient(colorsSpace: CGColorSpaceCreateDeviceRGB(),
+                                        colors: colors as CFArray,
+                                        locations: nil) else {return }
+        
+        context.drawLinearGradient(
+            gradient,
+            start: CGPoint.zero,
+            end: CGPoint(x: 0, y: size.height),
+            options: []
+        )
+        if let image = UIGraphicsGetImageFromCurrentImageContext(){
+            self.textColor = UIColor(patternImage: image)
+        }
+    }
+   
 }
