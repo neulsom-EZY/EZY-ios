@@ -82,7 +82,7 @@ class AddToDoViewController:UIViewController{
     }()
     
     private let explanationTextView : UITextView = {
-        let tf = Utilities().textView(TextColor: .EZY_929292, TextSize: 14)
+        let tf = Utilities().textView(TextColor: .EZY_929292, TextSize: 14,font: .medium)
         
         return tf
     }()
@@ -164,18 +164,6 @@ class AddToDoViewController:UIViewController{
             make.left.equalTo(backbutton.snp.left)
             make.right.equalTo(self.view.frame.width/13.8 * -1)
         }
-        
-//        let stack = UIStackView(arrangedSubviews: [calendarButtonView, clockButtonView, locationButtonView])
-
-//        stack.axis = .vertical
-//        stack.spacing = view.frame.height/12
-//        view.addSubview(stack)
-//        stack.snp.makeConstraints { (make) in
-//            make.top.equalTo(titleContainerView.snp.bottom).offset(view.frame.height/20.0)
-//            make.left.equalTo(backbutton.snp.left)
-//            make.right.equalTo(titleContainerView.snp.right)
-//
-//        }
 
         view.addSubview(calendarButtonView)
         calendarButtonView.snp.makeConstraints { (make) in

@@ -72,10 +72,10 @@ class Utilities{
 
         return view
     }
-    func textView(TextColor tc: UIColor,TextSize ts : Int) -> UITextView{
+    func textView(TextColor tc: UIColor,TextSize ts : Int,font : UIFont.Weight) -> UITextView{
         let tv = UITextView()
         tv.textColor = tc
-        tv.font = UIFont.systemFont(ofSize: CGFloat(ts), weight: .medium)
+        tv.dynamicFont(fontSize: CGFloat(ts), weight: font)
         tv.backgroundColor = .EZY_F6F3FF
         return tv
     }
