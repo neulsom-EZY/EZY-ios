@@ -76,6 +76,7 @@ class Utilities{
         let tv = UITextView()
         tv.textColor = tc
         tv.font = UIFont.systemFont(ofSize: CGFloat(ts), weight: .medium)
+        
         tv.backgroundColor = .EZY_F6F3FF
         return tv
     }
@@ -109,7 +110,7 @@ class Utilities{
         button.layer.shadowOffset = CGSize(width: 0, height: 4)
         button.layer.shadowOpacity = 0.1
         button.setImage(img, for: .normal)
-        button.imageEdgeInsets = UIEdgeInsets(top: 11.25, left: 11.25, bottom: 11.25, right: 11.25)
+        button.imageEdgeInsets = UIEdgeInsets(top: button.frame.height/4, left: button.frame.height/4, bottom: button.frame.height/4, right: button.frame.height/4)
         return button
     }
     
@@ -125,8 +126,7 @@ class Utilities{
         textField.snp.makeConstraints { (make) in
             make.left.equalTo(view.snp.right).offset(viewSize/42.7)
             make.right.equalToSuperview()
-            make.top.equalToSuperview().offset(viewSize/60)
-            make.bottom.equalToSuperview().offset(viewSize/60 * -1)
+            make.centerY.equalToSuperview()
         }
 
         return view

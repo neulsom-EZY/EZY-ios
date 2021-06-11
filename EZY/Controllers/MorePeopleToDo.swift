@@ -81,6 +81,10 @@ class MorePeopleToDo: UIViewController{
             make.left.equalTo(view.frame.height/20.8)
             make.top.equalTo(SubLabel.snp.bottom).offset(view.frame.height/17.6)
         }
+        view.addSubview(nickNameTextFieldContainerView)
+        nickNameTextFieldContainerView.snp.makeConstraints { (make) in
+            make.top.equalTo(GroupLabel.snp.bottom)
+        }
       
     }
     
