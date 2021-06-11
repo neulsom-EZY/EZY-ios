@@ -32,7 +32,7 @@ class AddToDoViewController:UIViewController{
     }()
     
     private let titleTextField : UITextField = {
-        let tf = Utilities().textField(textColor: .EZY_656565, textSize: 14)
+        let tf = Utilities().textField(textColor: .EZY_656565, textSize: 14,font: .medium)
         return tf
     }()
     

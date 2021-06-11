@@ -39,10 +39,10 @@ class Utilities{
     }
     
     
-    func textField(textColor tc: UIColor,textSize ts : Int) -> UITextField{
+    func textField(textColor tc: UIColor,textSize ts : Int, font : UIFont.Weight) -> UITextField{
         let tf = UITextField()
         tf.textColor = tc
-        tf.font = UIFont.systemFont(ofSize: CGFloat(ts), weight: .medium)
+        tf.dynamicFont(fontSize: CGFloat(ts), weight: font)
         return tf
     }
     
@@ -76,7 +76,6 @@ class Utilities{
         let tv = UITextView()
         tv.textColor = tc
         tv.font = UIFont.systemFont(ofSize: CGFloat(ts), weight: .medium)
-        
         tv.backgroundColor = .EZY_F6F3FF
         return tv
     }

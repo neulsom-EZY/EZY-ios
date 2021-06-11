@@ -34,7 +34,7 @@ class MorePeopleToDo: UIViewController{
     }
 
     private let nickNameTextField : UITextField = {
-        let tf = Utilities().textField(textColor: .EZY_6A6A6A, textSize: 10)
+        let tf = Utilities().textField(textColor: .EZY_6A6A6A, textSize: 10,font: .bold)
         return tf
     }()
     private lazy var nickNameTextFieldContainerView: UIView = {
