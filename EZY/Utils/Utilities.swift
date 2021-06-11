@@ -116,7 +116,7 @@ class Utilities{
     //MARK: - CustomTextField
     func customTextField(withMessage message : String,textField : UITextField ,Color messageColor : UIColor, viewSize : Double) -> UIView{
         let view = UIView()
-
+        view.layer.cornerRadius = 10
         view.backgroundColor = messageColor
         
         view.addSubview(textField)

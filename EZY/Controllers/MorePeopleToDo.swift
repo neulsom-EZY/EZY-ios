@@ -33,11 +33,15 @@ class MorePeopleToDo: UIViewController{
         $0.textColor = .EZY_818181
     }
 
-    private let nickNameText : UITextField = {
+    private let nickNameTextField : UITextField = {
         let tf = Utilities().textField(textColor: .EZY_6A6A6A, textSize: 10)
         return tf
     }()
-
+    private lazy var nickNameTextFieldContainerView: UIView = {
+        let view = Utilities().customTextField(withMessage: "닉네임을 입력해주세요", textField: nickNameTextField, Color: .EZY_F5F5F5, viewSize: Double(view.frame.height))
+        return view
+        
+    }()
     
     
     //MARK: - Lifecycle
