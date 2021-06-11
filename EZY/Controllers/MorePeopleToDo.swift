@@ -32,15 +32,12 @@ class MorePeopleToDo: UIViewController{
         $0.dynamicFont(fontSize: 10, weight: .thin)
         $0.textColor = .EZY_818181
     }
-    private let NickNameTextField : UITextField = {
+
+    private let nickNameText : UITextField = {
         let tf = Utilities().textField(textColor: .EZY_6A6A6A, textSize: 10)
         return tf
     }()
-    
-    private let NickNameView : UIView = {
-        let view = Utilities().customTextField(withMessage: <#T##String#>, textField: <#T##UITextField#>, Color: <#T##UIColor#>, viewSize: <#T##Double#>)
-        return view
-    }()
+
     
     
     //MARK: - Lifecycle
