@@ -62,7 +62,7 @@ class LoginViewController: UIViewController{
     lazy var passwordField:UITextField = {
         let tf = Utilities().textField(withPlaceholder: "비밀번호를 입력해주세요.")
         tf.isSecureTextEntry = true
-        
+
         return tf
     }()
     
@@ -88,43 +88,45 @@ class LoginViewController: UIViewController{
         view.addSubview(titleLabel)
         view.addSubview(subLabel)
         view.addSubview(textLabel)
+        view.addSubview(nicknameContainerView)
+        view.addSubview(passwordContainerView)
+        view.addSubview(showPasswordButton)
+        
         titleLabel.snp.makeConstraints { make in
             make.top.equalToSuperview().offset(self.view.frame.height/6.6)
-            make.left.equalToSuperview().offset(47)
+            make.left.equalToSuperview().offset(self.view.frame.width/7.98)
         }
         
         subLabel.snp.makeConstraints { make in
             make.top.equalToSuperview().offset(self.view.frame.height/6.05)
-            make.right.equalTo(titleLabel).offset(22)
+            make.right.equalTo(titleLabel).offset(self.view.frame.width/17.05)
         }
 
         textLabel.snp.makeConstraints { make in
             make.top.equalTo(subLabel).offset(self.view.frame.height/27.06)
-            make.left.equalToSuperview().offset(47)
+            make.left.equalToSuperview().offset(self.view.frame.width/7.98)
         }
         
-        view.addSubview(nicknameContainerView)
         nicknameContainerView.snp.makeConstraints { make in
             make.bottom.equalTo(textLabel).offset(self.view.frame.height/7.44)
-            make.left.equalToSuperview().offset(47)
+            make.centerX.equalToSuperview()
             make.height.equalTo(self.view.frame.height/16.57)
             make.width.equalTo(self.view.frame.width/1.33)
         }
-        
-        view.addSubview(passwordContainerView)
+
         passwordContainerView.snp.makeConstraints { make in
             make.bottom.equalTo(nicknameContainerView).offset(self.view.frame.height/10.68)
-            make.left.equalToSuperview().offset(47)
+            make.centerX.equalToSuperview()
             make.height.equalTo(self.view.frame.height/16.57)
             make.width.equalTo(self.view.frame.width/1.33)
         }
         
-        view.addSubview(showPasswordButton)
         showPasswordButton.snp.makeConstraints { make in
-            make.top.equalTo(passwordField).offset(self.view.frame.height/95.53)
-            make.right.equalToSuperview().offset(self.view.frame.width/7.5 * -1)
+            make.centerY.equalTo(passwordField)
+            make.right.equalTo(passwordContainerView)
+            make.height.equalTo(self.view.frame.height/90.22)
+            make.width.equalTo(self.view.frame.width/25)
         }
-        
         
        
     }
