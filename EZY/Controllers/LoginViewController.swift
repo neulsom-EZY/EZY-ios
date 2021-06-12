@@ -31,18 +31,6 @@ class LoginViewController: UIViewController{
         $0.textColor = UIColor.rgb(red: 0, green: 0, blue: 0)
     }
     
-    lazy var nicknameLabel = UILabel().then{
-        $0.text = "닉네임"
-        $0.dynamicFont(fontSize: 10, currentFontName: "AppleSDGothicNeo-SemiBold")
-        $0.textColor = UIColor.EZY_968DFF
-    }
-    
-    lazy var passwordLabel = UILabel().then {
-        $0.text = "비밀번호"
-        $0.dynamicFont(fontSize: 10, currentFontName: "AppleSDGothicNeo-SemiBold")
-        $0.textColor = UIColor.EZY_968DFF
-    }
-    
     lazy var nicknameContainerView: UIView = {
         let view = Utilities().inputContainerView(textField: nicknameField, text: "닉네임", fonts: 10)
         return view
@@ -70,10 +58,17 @@ class LoginViewController: UIViewController{
         $0.setImage(UIImage(named: "EZY_eye"), for: .normal)
     }
     
+    lazy var forgotPasswordButton = UIButton().then{
+        $0.setTitle("비밀번호를 잊으셨나요?", for: .normal)
+        $0.setTitleColor(UIColor.EZY_B2B2B2, for: .normal)
+        $0.titleLabel?.dynamicFont(fontSize: 10, currentFontName: "AppleSDGothicNeo-Bold")
+    }
     
-    
-    
-    
+    lazy var doNotHaveAccountButton = UIButton().then{
+        $0.setTitle("아직 회원이 아니신가요?", for: .normal)
+        $0.setTitleColor(UIColor.EZY_B2B2B2, for: .normal)
+        $0.titleLabel?.dynamicFont(fontSize: 10, currentFontName: "AppleSDGothicNeo-Bold")
+    }
     //MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -91,6 +86,8 @@ class LoginViewController: UIViewController{
         view.addSubview(nicknameContainerView)
         view.addSubview(passwordContainerView)
         view.addSubview(showPasswordButton)
+        view.addSubview(forgotPasswordButton)
+        view.addSubview(doNotHaveAccountButton)
         
         titleLabel.snp.makeConstraints { make in
             make.top.equalToSuperview().offset(self.view.frame.height/6.6)
@@ -128,7 +125,15 @@ class LoginViewController: UIViewController{
             make.width.equalTo(self.view.frame.width/25)
         }
         
+        forgotPasswordButton.snp.makeConstraints { make in
+            make.bottom.equalTo(passwordContainerView).offset(self.view.frame.height/30.07)
+            make.left.equalToSuperview().offset(self.view.frame.width/7.98)
+        }
        
+        doNotHaveAccountButton.snp.makeConstraints { make in
+            make.bottom.equalToSuperview().offset(self.view.frame.height/12.3 * -1)
+            make.centerX.equalToSuperview()
+        }
     }
 
 }
