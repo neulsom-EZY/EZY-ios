@@ -132,7 +132,7 @@ extension UITextField {
         calculatedFont = UIFont(name: currentFontName!, size: size * 0.8)
         resizeFont(calculatedFont: calculatedFont, weight: weight)
         break
-      case 667.0: //iphone 6, 6s, 7, 8 => 4.7 inch
+      case 667.0: //iphone 6, 6s, 7, 8 => 4.7 inch // iphone SE2 -> 4.7 inch
         calculatedFont = UIFont(name: currentFontName!, size: size * 0.92)
         resizeFont(calculatedFont: calculatedFont, weight: weight)
         break
@@ -140,14 +140,26 @@ extension UITextField {
         calculatedFont = UIFont(name: currentFontName!, size: size * 0.95)
        resizeFont(calculatedFont: calculatedFont, weight: weight)
         break
-      case 812.0: //iphone X, XS => 5.8 inch
+//      case 780.0 : //iphone 12 mini
+//        calculatedFont = UIFont(name: currentFontName!, size: size)
+//        resizeFont(calculatedFont: calculatedFont, weight: weight)
+//        break
+      case 812.0: //iphone X, XS => 5.8 inch // iphone 11 pro => 5.8 inch
         calculatedFont = UIFont(name: currentFontName!, size: size)
         resizeFont(calculatedFont: calculatedFont, weight: weight)
         break
-      case 896.0: //iphone XR => 6.1 inch  // iphone XS MAX => 6.5 inch
+//      case 844.0 : // iphone 12 & iphone 12 pro => 6.1 inch
+//        calculatedFont = UIFont(name: currentFontName!, size: size)
+//        resizeFont(calculatedFont: calculatedFont, weight: weight)
+//        break
+      case 896.0: //iphone XR => 6.1 inch  // iphone XS MAX => 6.5 inch // iphone 11 => 6.1 inch // iphone 11 pro max => 6.5 inch
         calculatedFont = UIFont(name: currentFontName!, size: size * 1.15)
         resizeFont(calculatedFont: calculatedFont, weight: weight)
         break
+//      case 926.0 : //iphone 12 pro max => 6.7 inch
+//        calculatedFont = UIFont(name: currentFontName!, size: size * 1.15)
+//        resizeFont(calculatedFont: calculatedFont, weight: weight)
+//        break
       default:
         print("not an iPhone")
         break

@@ -109,7 +109,7 @@ class Utilities{
         button.layer.shadowOffset = CGSize(width: 0, height: 4)
         button.layer.shadowOpacity = 0.1
         button.setImage(img, for: .normal)
-        button.imageEdgeInsets = UIEdgeInsets(top: button.frame.height/4, left: button.frame.height/4, bottom: button.frame.height/4, right: button.frame.height/4)
+        button.imageEdgeInsets = UIEdgeInsets(top: 11.25, left: 11.25, bottom: 11.25, right: 11.25)
         return button
     }
     
