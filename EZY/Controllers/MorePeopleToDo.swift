@@ -83,7 +83,10 @@ class MorePeopleToDo: UIViewController{
         }
         view.addSubview(nickNameTextFieldContainerView)
         nickNameTextFieldContainerView.snp.makeConstraints { (make) in
-            make.top.equalTo(GroupLabel.snp.bottom)
+            make.top.equalTo(GroupLabel.snp.bottom).offset(view.frame.height/135.3)
+            make.height.equalTo(self.view.frame.height/21.3)
+            make.left.equalTo(view.snp.left).offset(self.view.frame.height/23.2)
+            make.right.equalTo(view.snp.right).offset(self.view.frame.height/23.8 * -1)
         }
       
     }

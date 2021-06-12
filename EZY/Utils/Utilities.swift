@@ -75,7 +75,7 @@ class Utilities{
     func textView(TextColor tc: UIColor,TextSize ts : Int,font : UIFont.Weight) -> UITextView{
         let tv = UITextView()
         tv.textColor = tc
-        tv.dynamicFont(fontSize: CGFloat(ts), weight: font)
+        tv.font = UIFont.systemFont(ofSize: CGFloat(ts), weight: .medium)
         tv.backgroundColor = .EZY_F6F3FF
         return tv
     }
@@ -123,9 +123,10 @@ class Utilities{
         textField.attributedPlaceholder = NSAttributedString(string: message, attributes: [NSAttributedString.Key.foregroundColor: UIColor.EZY_CACACA])
         
         textField.snp.makeConstraints { (make) in
-            make.left.equalTo(view.snp.right).offset(viewSize/42.7)
-            make.right.equalToSuperview()
-            make.centerY.equalToSuperview()
+            make.left.equalTo(view.snp.left).offset(viewSize/42.7)
+            make.right.equalTo(view.snp.right)
+            make.top.equalTo(view.snp.top)
+            make.bottom.equalTo(view.snp.bottom)
         }
 
         return view
