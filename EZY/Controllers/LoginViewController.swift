@@ -73,7 +73,7 @@ class LoginViewController: UIViewController{
     lazy var loginButton = UIButton().then {
         $0.setTitle("로그인", for: .normal)
         $0.titleLabel?.dynamicFont(fontSize: 14, currentFontName: "AppleSDGothicNeo-Bold")
-        $0.setTitleColor(UIColor.EZY_FFFFFF, for: UIControl.State.normal)
+        $0.setTitleColor(UIColor.EZY_FFFFFF, for: .normal)
         $0.backgroundColor = UIColor.EZY_968DFF
     }
     
@@ -98,7 +98,7 @@ class LoginViewController: UIViewController{
         view.addSubview(doNotHaveAccountButton)
         view.addSubview(loginButton)
         
-        loginButton.layer.cornerRadius = self.view.frame.width/31.5
+        loginButton.layer.cornerRadius = self.view.frame.width/37.5
         
         titleLabel.snp.makeConstraints { make in
             make.top.equalToSuperview().offset(self.view.frame.height/6.6)

@@ -46,7 +46,7 @@ class SignUpNicknameViewController: UIViewController{
     lazy var continueButton = UIButton().then {
         $0.setTitle("계속하기", for: .normal)
         $0.titleLabel?.dynamicFont(fontSize: 14, currentFontName: "AppleSDGothicNeo-Bold")
-        $0.setTitleColor(UIColor.EZY_FFFFFF, for: UIControl.State.normal)
+        $0.setTitleColor(UIColor.EZY_FFFFFF, for: .normal)
         $0.backgroundColor = UIColor.EZY_968DFF
     }
     
@@ -68,7 +68,7 @@ class SignUpNicknameViewController: UIViewController{
         view.addSubview(alreadyExistLabel)
         view.addSubview(continueButton)
         
-        continueButton.layer.cornerRadius = self.view.frame.width/31.5
+        continueButton.layer.cornerRadius = self.view.frame.width/37.5
         
         goBackButton.snp.makeConstraints { make in
             make.top.equalToSuperview().offset(self.view.frame.height/9.12)
