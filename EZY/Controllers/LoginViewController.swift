@@ -58,17 +58,25 @@ class LoginViewController: UIViewController{
         $0.setImage(UIImage(named: "EZY_eye"), for: .normal)
     }
     
-    lazy var forgotPasswordButton = UIButton().then{
+    lazy var forgotPasswordButton = UIButton().then {
         $0.setTitle("비밀번호를 잊으셨나요?", for: .normal)
         $0.setTitleColor(UIColor.EZY_B2B2B2, for: .normal)
         $0.titleLabel?.dynamicFont(fontSize: 10, currentFontName: "AppleSDGothicNeo-Bold")
     }
     
-    lazy var doNotHaveAccountButton = UIButton().then{
+    lazy var doNotHaveAccountButton = UIButton().then {
         $0.setTitle("아직 회원이 아니신가요?", for: .normal)
         $0.setTitleColor(UIColor.EZY_B2B2B2, for: .normal)
         $0.titleLabel?.dynamicFont(fontSize: 10, currentFontName: "AppleSDGothicNeo-Bold")
     }
+    
+    lazy var loginButton = UIButton().then {
+        $0.setTitle("로그인", for: .normal)
+        $0.titleLabel?.dynamicFont(fontSize: 14, currentFontName: "AppleSDGothicNeo-Bold")
+        $0.setTitleColor(UIColor.EZY_FFFFFF, for: UIControl.State.normal)
+        $0.backgroundColor = UIColor.EZY_968DFF
+    }
+    
     //MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -88,6 +96,9 @@ class LoginViewController: UIViewController{
         view.addSubview(showPasswordButton)
         view.addSubview(forgotPasswordButton)
         view.addSubview(doNotHaveAccountButton)
+        view.addSubview(loginButton)
+        
+        loginButton.layer.cornerRadius = self.view.frame.width/31.5
         
         titleLabel.snp.makeConstraints { make in
             make.top.equalToSuperview().offset(self.view.frame.height/6.6)
@@ -133,6 +144,13 @@ class LoginViewController: UIViewController{
         doNotHaveAccountButton.snp.makeConstraints { make in
             make.bottom.equalToSuperview().offset(self.view.frame.height/12.3 * -1)
             make.centerX.equalToSuperview()
+        }
+        
+        loginButton.snp.makeConstraints { make in
+            make.bottom.equalTo(forgotPasswordButton).offset(self.view.frame.height/11.6)
+            make.centerX.equalToSuperview()
+            make.width.equalTo(self.view.frame.width/1.34)
+            make.height.equalTo(self.view.frame.height/16.24)
         }
     }
 
