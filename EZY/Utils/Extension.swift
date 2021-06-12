@@ -45,6 +45,7 @@ extension UIColor{
     static let EZY_BFCCFF = UIColor.rgb(red: 191, green: 204, blue: 255)
     static let EZY_000000 = UIColor.rgb(red: 0, green: 0, blue: 0)
     static let EZY_FCA1A1 = UIColor.rgb(red: 252, green: 161, blue: 161)
+    static let EZY_747474 = UIColor.rgb(red: 116, green: 116, blue: 116)
 }
 
 extension UILabel {
