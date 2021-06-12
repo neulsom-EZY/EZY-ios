@@ -38,11 +38,14 @@ class MorePeopleToDo: UIViewController{
         return tf
     }()
     private lazy var nickNameTextFieldContainerView: UIView = {
-        let view = Utilities().customTextField(withMessage: "닉네임을 입력해주세요", textField: nickNameTextField, Color: .EZY_F5F5F5, viewSize: Double(view.frame.height))
+        let view = Utilities().customTextField(withMessage: "닉네임을 검색하세요.", textField: nickNameTextField, Color: .EZY_F5F5F5, viewSize: Double(view.frame.height))
         return view
         
     }()
-    
+    private let recommendPeopleLabel = UILabel().then{
+        $0.text = "이런 사람들은 어때요"
+        $0.dynamicFont(fontSize: 14, weight: .thin)
+    }
     
     //MARK: - Lifecycle
     override func viewDidLoad() {
@@ -88,7 +91,12 @@ class MorePeopleToDo: UIViewController{
             make.left.equalTo(view.snp.left).offset(self.view.frame.height/23.2)
             make.right.equalTo(view.snp.right).offset(self.view.frame.height/23.8 * -1)
         }
-      
+        view.addSubview(recommendPeopleLabel)
+        recommendPeopleLabel.snp.makeConstraints { (make) in
+            make.top.equalTo(nickNameTextFieldContainerView.snp.bottom).offset(view.frame.height/21.9)
+            make.left.equalTo(view.frame.height/22.5)
+        }
+        
     }
     
 }
