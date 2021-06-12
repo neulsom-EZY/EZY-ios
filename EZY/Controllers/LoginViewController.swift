@@ -31,6 +31,46 @@ class LoginViewController: UIViewController{
         $0.textColor = UIColor.rgb(red: 0, green: 0, blue: 0)
     }
     
+    lazy var nicknameLabel = UILabel().then{
+        $0.text = "닉네임"
+        $0.dynamicFont(fontSize: 10, currentFontName: "AppleSDGothicNeo-SemiBold")
+        $0.textColor = UIColor.EZY_968DFF
+    }
+    
+    lazy var passwordLabel = UILabel().then {
+        $0.text = "비밀번호"
+        $0.dynamicFont(fontSize: 10, currentFontName: "AppleSDGothicNeo-SemiBold")
+        $0.textColor = UIColor.EZY_968DFF
+    }
+    
+    lazy var nicknameContainerView: UIView = {
+        let view = Utilities().inputContainerView(textField: nicknameField, text: "닉네임", fonts: 10)
+        return view
+    }()
+    
+    lazy var passwordContainerView: UIView = {
+        let view = Utilities().inputContainerView(textField: passwordField, text: "비밀번호", fonts: 10)
+        
+        return view
+    }()
+    
+    lazy var nicknameField:UITextField = {
+        let tf = Utilities().textField(withPlaceholder: "닉네임을 입력해주세요.")
+        return tf
+    }()
+
+    lazy var passwordField:UITextField = {
+        let tf = Utilities().textField(withPlaceholder: "비밀번호를 입력해주세요.")
+        tf.isSecureTextEntry = true
+        
+        return tf
+    }()
+    
+    lazy var showPasswordButton = UIButton().then {
+        $0.setImage(UIImage(named: "EZY_eye"), for: .normal)
+    }
+    
+    
     
     
     
@@ -44,6 +84,7 @@ class LoginViewController: UIViewController{
 
     //MARK: - Helpers
     func configureUI(){
+        view.backgroundColor = .white
         view.addSubview(titleLabel)
         view.addSubview(subLabel)
         view.addSubview(textLabel)
@@ -61,6 +102,31 @@ class LoginViewController: UIViewController{
             make.top.equalTo(subLabel).offset(self.view.frame.height/27.06)
             make.left.equalToSuperview().offset(47)
         }
+        
+        view.addSubview(nicknameContainerView)
+        nicknameContainerView.snp.makeConstraints { make in
+            make.bottom.equalTo(textLabel).offset(self.view.frame.height/7.44)
+            make.left.equalToSuperview().offset(47)
+            make.height.equalTo(self.view.frame.height/16.57)
+            make.width.equalTo(self.view.frame.width/1.33)
+        }
+        
+        view.addSubview(passwordContainerView)
+        passwordContainerView.snp.makeConstraints { make in
+            make.bottom.equalTo(nicknameContainerView).offset(self.view.frame.height/10.68)
+            make.left.equalToSuperview().offset(47)
+            make.height.equalTo(self.view.frame.height/16.57)
+            make.width.equalTo(self.view.frame.width/1.33)
+        }
+        
+        view.addSubview(showPasswordButton)
+        showPasswordButton.snp.makeConstraints { make in
+            make.top.equalTo(passwordField).offset(self.view.frame.height/95.53)
+            make.right.equalToSuperview().offset(self.view.frame.width/7.5 * -1)
+        }
+        
+        
+       
     }
 
 }
