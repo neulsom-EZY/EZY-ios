@@ -21,14 +21,14 @@ class LoginViewController: UIViewController{
     lazy var subLabel = UILabel().then {
         $0.text = "는"
         $0.dynamicFont(fontSize: 25, currentFontName: "AppleSDGothicNeo-Thin")
-        $0.textColor = UIColor.rgb(red: 0, green: 0, blue: 0)
+        $0.textColor = UIColor.EZY_000000
     }
     
     lazy var textLabel = UILabel().then {
         $0.text = "자신만의 라이프스타일\n역사를 쓰고 있습니다."
         $0.numberOfLines = 2
         $0.dynamicFont(fontSize: 25, currentFontName: "AppleSDGothicNeo-Thin")
-        $0.textColor = UIColor.rgb(red: 0, green: 0, blue: 0)
+        $0.textColor = UIColor.EZY_000000
     }
     
     lazy var nicknameContainerView: UIView = {
@@ -159,7 +159,7 @@ class LoginViewController: UIViewController{
 //MARK: - Preview
 #if DEBUG
 import SwiftUI
-struct ViewControllerRepresentable: UIViewControllerRepresentable {
+struct LoginViewControllerRepresentable: UIViewControllerRepresentable {
     
 func updateUIViewController(_ uiView: UIViewController,context: Context) {
         // leave this empty
@@ -170,10 +170,10 @@ func updateUIViewController(_ uiView: UIViewController,context: Context) {
     }
 }
 @available(iOS 13.0, *)
-struct ViewControllerRepresentable_PreviewProvider: PreviewProvider {
+struct LoginViewControllerRepresentable_PreviewProvider: PreviewProvider {
     static var previews: some View {
         Group {
-            ViewControllerRepresentable()
+            LoginViewControllerRepresentable()
                 .ignoresSafeArea()
                 .previewDisplayName(/*@START_MENU_TOKEN@*/"Preview"/*@END_MENU_TOKEN@*/)
                 .previewDevice(PreviewDevice(rawValue: "iPhone 11"))
