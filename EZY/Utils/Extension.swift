@@ -37,6 +37,12 @@ extension UIColor{
     static let EZY_656565 = UIColor.rgb(red: 101, green: 101, blue: 101)
     static let EZY_929292 = UIColor.rgb(red: 146, green: 146, blue: 146)
     static let EZY_B6B6B6 = UIColor.rgb(red: 182, green: 182, blue: 182)
+    static let EZY_C9BCFF = UIColor.rgb(red: 201, green: 188, blue: 255)
+    static let EZY_B2B2B2 = UIColor.rgb(red: 178, green: 178, blue: 178)
+    static let EZY_FFFFFF = UIColor.rgb(red: 255, green: 255, blue: 255)
+    static let EZY_B5A0FF = UIColor.rgb(red: 181, green: 160, blue: 255)
+    static let EZY_8F8DFF = UIColor.rgb(red: 143, green: 141, blue: 255)
+    static let EZY_BFCCFF = UIColor.rgb(red: 191, green: 204, blue: 255)
 }
 
 extension UILabel {
@@ -63,6 +69,39 @@ extension UILabel {
     case 896.0: //iphone XR => 6.1 inch  // iphone XS MAX => 6.5 inch
         self.font = UIFont(name: currentFontName, size: size * 1.15)
       break
+    default:
+      print("not an iPhone")
+      break
+    }
+  }
+}
+
+extension UITextField {
+    func dynamicFont(fontSize size: CGFloat, currentFontName: String) {
+    let bounds = UIScreen.main.bounds
+    let height = bounds.size.height
+
+    switch height {
+    case 480.0: //Iphone 3,4S => 3.5 inch
+        self.font = UIFont(name: currentFontName, size: size * 0.7)
+      break
+    case 568.0: //iphone 5, SE => 4 inch
+        self.font = UIFont(name: currentFontName, size: size * 0.8)
+      break
+    case 667.0: //iphone 6, 6s, 7, 8 => 4.7 inch
+        self.font = UIFont(name: currentFontName, size: size * 0.92)
+      break
+    case 736.0: //iphone 6s+ 6+, 7+, 8+ => 5.5 inch
+        self.font = UIFont(name: currentFontName, size: size * 0.95)
+      break
+    case 812.0: //iphone X, XS => 5.8 inch
+        self.font = UIFont(name: currentFontName, size: size)
+      break
+    case 896.0: //iphone XR => 6.1 inch  // iphone XS MAX => 6.5 inch
+        self.font = UIFont(name: currentFontName, size: size * 1.15)
+      break
+    case 926.0: //iphone 12 Pro Max
+        self.font = UIFont(name:currentFontName, size: size * 1.18)
     default:
       print("not an iPhone")
       break
@@ -124,3 +163,34 @@ extension UILabel{
     }
    
 }
+
+extension UIView {
+    @discardableResult
+    func applyGradient(colours: [UIColor]) -> CAGradientLayer {
+        return self.applyGradient(colours: colours, locations: nil)
+    }
+
+    @discardableResult
+    func applyGradient(colours: [UIColor], locations: [NSNumber]?) -> CAGradientLayer {
+        let gradient: CAGradientLayer = CAGradientLayer()
+        gradient.frame = self.bounds
+        gradient.colors = colours.map { $0.cgColor }
+        gradient.locations = locations
+        self.layer.insertSublayer(gradient, at: 0)
+        return gradient
+    }
+}
+
+//class ViewController: UIViewController {
+//
+//    @IBOutlet weak var btn: UIButton!
+//
+//    override func viewDidLoad() {
+//        super.viewDidLoad()
+//
+//        self.btn.applyGradient(colours: [.yellow, .blue])
+//        self.view.applyGradient(colours: [.yellow, .blue, .red], locations: [0.0, 0.5, 1.0])
+//    }
+//
+//
+//}
