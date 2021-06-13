@@ -39,7 +39,6 @@ class NewPasswordPhoneNumViewController: UIViewController{
     
     lazy var phoneNumField:UITextField = {
         let tf = Utilities().textField(withPlaceholder: "")
-        tf.isSecureTextEntry = true
         return tf
     }()
     
@@ -94,13 +93,13 @@ class NewPasswordPhoneNumViewController: UIViewController{
         }
         
         toNewPassWordLabel.snp.makeConstraints { make in
-            make.left.equalTo(putPhoneNumLabel)
+            make.left.equalTo(phoneNumContainerView)
             make.top.equalTo(EZY_Logo).offset(self.view.frame.height/9.67)
         }
         
         putPhoneNumLabel.snp.makeConstraints { make in
             make.top.equalTo(toNewPassWordLabel).offset(self.view.frame.height/27.07)
-            make.left.equalToSuperview().offset(self.view.frame.width/7.5)
+            make.left.equalTo(phoneNumContainerView)
         }
         
         phoneNumContainerView.snp.makeConstraints { make in

@@ -88,7 +88,7 @@ class SignUpPhoneNumViewController: UIViewController{
         
         putPhoneNumLabel.snp.makeConstraints { make in
             make.top.equalTo(EZY_Logo).offset(self.view.frame.height/9.67)
-            make.left.equalToSuperview().offset(self.view.frame.width/7.5)
+            make.left.equalTo(phoneNumContainerView)
         }
         
         phoneNumContainerView.snp.makeConstraints { make in

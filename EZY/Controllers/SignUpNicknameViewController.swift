@@ -86,7 +86,7 @@ class SignUpNicknameViewController: UIViewController{
         
         putNicknameLabel.snp.makeConstraints { make in
             make.top.equalTo(EZY_Logo).offset(self.view.frame.height/9.67)
-            make.left.equalToSuperview().offset(self.view.frame.width/7.5)
+            make.left.equalTo(nicknameContainerView)
         }
         
         nicknameContainerView.snp.makeConstraints { make in
@@ -98,7 +98,7 @@ class SignUpNicknameViewController: UIViewController{
         
         alreadyExistLabel.snp.makeConstraints { make in
             make.top.equalTo(nicknameContainerView).offset(self.view.frame.height/13.76)
-            make.left.equalToSuperview().offset(self.view.frame.width/7.5)
+            make.left.equalTo(nicknameContainerView)
         }
         
         continueButton.snp.makeConstraints { make in

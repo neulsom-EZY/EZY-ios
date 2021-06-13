@@ -87,7 +87,7 @@ class SignUpPasswordViewController: UIViewController{
         
         putPasswordLabel.snp.makeConstraints { make in
             make.top.equalTo(EZY_Logo).offset(self.view.frame.height/9.67)
-            make.left.equalToSuperview().offset(self.view.frame.width/7.5)
+            make.left.equalTo(passwordContainerView)
         }
         
         passwordContainerView.snp.makeConstraints { make in
@@ -99,7 +99,7 @@ class SignUpPasswordViewController: UIViewController{
         
         passwordConstraintsLabel.snp.makeConstraints { make in
             make.top.equalTo(passwordContainerView).offset(self.view.frame.height/13.76)
-            make.left.equalToSuperview().offset(self.view.frame.width/7.5)
+            make.left.equalTo(passwordContainerView)
         }
         
         continueButton.snp.makeConstraints { make in
