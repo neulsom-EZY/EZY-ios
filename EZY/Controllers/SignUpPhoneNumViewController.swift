@@ -34,7 +34,6 @@ class SignUpPhoneNumViewController: UIViewController{
     
     lazy var phoneNumField:UITextField = {
         let tf = Utilities().textField(withPlaceholder: "")
-        tf.isSecureTextEntry = true
         return tf
     }()
     
