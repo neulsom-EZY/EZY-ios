@@ -49,6 +49,7 @@ class GroupAddModalView: UIView {
     lazy var modalButton = UIButton().then {
         $0.setTitle("생 성", for: .normal)
         $0.layer.cornerRadius = 10
+        $0.backgroundColor = UIColor(red: 255/255, green: 191/255, blue: 191/255, alpha: 1)
         $0.titleLabel?.dynamicFont(fontSize: 12, currentFontName: "AppleSDGothicNeo-Bold")
     }
     

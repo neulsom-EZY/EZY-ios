@@ -150,7 +150,12 @@ class GroupManagementViewController: UIViewController, UITextFieldDelegate {
             make.height.equalToSuperview()
         }
         
-        
+        groupAddModalView.modalButton.snp.makeConstraints { make in
+            make.top.equalTo(groupAddModalView.groupNameTextFieldBackgroundView.snp.bottom).offset(self.view.frame.height/42.7)
+            make.width.equalToSuperview().dividedBy(4.7)
+            make.height.equalToSuperview().dividedBy(10.3)
+            make.right.equalToSuperview().offset(-(self.view.frame.width/15))
+        }
     }
     
     //MARK: topView Setting
