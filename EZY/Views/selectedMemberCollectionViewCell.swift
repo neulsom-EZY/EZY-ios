@@ -7,9 +7,9 @@
 
 import UIKit
 
-class groupAddUserCollectionViewCell: UICollectionViewCell {
+class selectedMemberCollectionViewCell: UICollectionViewCell {
     
-    static var reuseId = "\(groupAddUserCollectionViewCell.self)"
+    static var reuseId = "\(selectedMemberCollectionViewCell.self)"
     lazy var background: UIView = {
         let v = UIView()
         v.backgroundColor = .white
@@ -43,8 +43,7 @@ class groupAddUserCollectionViewCell: UICollectionViewCell {
 
         
         background.snp.makeConstraints { make in
-            make.width.height.equalToSuperview()
-            make.centerX.centerY.equalToSuperview()
+            make.top.left.bottom.right.equalToSuperview()
         }
         
         titleLabel.snp.makeConstraints { make in
@@ -55,6 +54,7 @@ class groupAddUserCollectionViewCell: UICollectionViewCell {
         groupMemberDeleteButton.snp.makeConstraints { make in
             make.centerY.equalToSuperview()
             make.right.equalToSuperview().offset(-10)
+            make.height.width.equalTo(7)
         }
     }
     

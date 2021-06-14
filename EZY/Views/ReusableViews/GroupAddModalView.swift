@@ -7,8 +7,8 @@
 
 import UIKit
 
-class GroupModalView: UIView {
-
+class GroupAddModalView: UIView {
+    
     //MARK: Properties
     lazy var backgroundView = UIView().then {
         //투명도가 있는 뷰 하위에 추가 되는 뷰에서 투명도 영향 받지 않게하기위해 alpha 대신 사용한다.
@@ -17,12 +17,12 @@ class GroupModalView: UIView {
     
     lazy var nickNameTextField = UITextField().then {
         $0.placeholder = "닉네임을 검색하세요."
-        $0.font = UIFont(name: "AppleSDGothicNeo-Bold", size: 10)
+        $0.dynamicFont(fontSize: 10, currentFontName: "AppleSDGothicNeo-Bold")
     }
     
     lazy var groupNameTextField = UITextField().then {
         $0.placeholder = "그룹명을 입력하세요."
-        $0.font = UIFont(name: "AppleSDGothicNeo-Bold", size: 10)
+        $0.dynamicFont(fontSize: 10, currentFontName: "AppleSDGothicNeo-Bold")
     }
     
     lazy var nicknameTextFieldBackgroundView = UIView().then {
@@ -50,7 +50,6 @@ class GroupModalView: UIView {
         $0.setTitle("생 성", for: .normal)
         $0.layer.cornerRadius = 10
         $0.titleLabel?.dynamicFont(fontSize: 12, currentFontName: "AppleSDGothicNeo-Bold")
-
     }
     
     lazy var groupMemberTitleLabel = UILabel().then {
@@ -65,6 +64,22 @@ class GroupModalView: UIView {
         $0.dynamicFont(fontSize: 10, currentFontName: "AppleSDGothicNeo-Thin")
         $0.textColor = UIColor(red: 129/255, green: 129/255, blue: 129/255, alpha: 1)
     }
+    
+    lazy var popButton = UIImageView().then {
+        $0.image? = UIImage(named: "EZY_GroupMemberDeleteButton")!
+    }
+    
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        
+        self.frame = UIScreen.main.bounds
+        
+        GroupModalLayoutSetting()
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
 
     func GroupModalDataSetting(modalTitleText: String, modalColor: UIColor){
         modalTitleLabel.text = modalTitleText
@@ -72,63 +87,28 @@ class GroupModalView: UIView {
         modalButton.backgroundColor = modalColor
     }
     
-    func GroupModalLayoutSetting(screenHeight: Double, screenWeight: Double){
+    func GroupModalLayoutSetting(){
+        self.addSubview(backgroundView)
+        backgroundView.addSubview(modalView)
+        modalView.addSubview(modalTitleLabel)
+        modalView.addSubview(modalButton)
+        modalView.addSubview(groupMemberTitleLabel)
+        modalView.addSubview(groupNameTitleLabel)
+        modalView.addSubview(nicknameTextFieldBackgroundView)
+        modalView.addSubview(groupNameTextFieldBackgroundView)
+        modalView.addSubview(popButton)
+        groupNameTextFieldBackgroundView.addSubview(groupNameTextField)
+        nicknameTextFieldBackgroundView.addSubview(nickNameTextField)
+
         backgroundView.snp.makeConstraints { make in
-            make.top.right.left.bottom.equalToSuperview()
+            make.top.left.bottom.right.equalToSuperview()
         }
         
         modalView.snp.makeConstraints { make in
-            make.width.equalToSuperview().dividedBy(1.3)
-            make.height.equalToSuperview().dividedBy(2.4)
-            make.top.equalToSuperview().offset(screenHeight/10)
-            make.centerX.equalToSuperview()
-        }
-        
-        modalTitleLabel.snp.makeConstraints { make in
-            make.left.top.equalToSuperview().offset(screenHeight/33.8)
-        }
-        
-        modalButton.snp.makeConstraints { make in
-            make.right.bottom.equalToSuperview().offset(-screenHeight/33.8)
-            make.height.equalTo(33)
-            make.width.equalTo(70)
-        }
-        
-        groupMemberTitleLabel.snp.makeConstraints { make in
-            make.left.equalTo(modalTitleLabel)
-            make.top.equalTo(modalTitleLabel.snp.bottom).offset(screenHeight/45)
-        }
-        
-        nicknameTextFieldBackgroundView.snp.makeConstraints { make in
-            make.centerX.equalToSuperview()
-            make.left.equalTo(groupMemberTitleLabel)
-            make.height.equalTo(38)
-            make.top.equalTo(groupMemberTitleLabel.snp.bottom).offset(screenHeight/135.3)
-        }
-        
-        nickNameTextField.snp.makeConstraints { make in
-            make.left.equalToSuperview().offset(16)
-            make.centerX.equalToSuperview()
-            make.height.equalToSuperview()
-        }
-        
-        groupNameTextFieldBackgroundView.snp.makeConstraints { make in
-            make.bottom.equalTo(modalButton.snp.top).offset(-30)
-            make.centerX.equalToSuperview()
-            make.left.equalTo(groupMemberTitleLabel)
-            make.height.equalTo(38)
-        }
-        
-        groupNameTitleLabel.snp.makeConstraints { make in
-            make.left.equalTo(groupMemberTitleLabel)
-            make.bottom.equalTo(groupNameTextFieldBackgroundView.snp.top).offset(-screenHeight/135.3)
-        }
-        
-        groupNameTextField.snp.makeConstraints { make in
-            make.left.equalToSuperview().offset(16)
-            make.centerX.equalToSuperview()
-            make.height.equalToSuperview()
+            make.centerX.centerY.equalToSuperview()
+            make.height.equalToSuperview().dividedBy(2.3)
+            make.width.equalToSuperview().dividedBy(1.2)
         }
     }
-
 }
+

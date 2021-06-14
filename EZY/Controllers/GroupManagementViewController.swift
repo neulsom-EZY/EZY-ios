@@ -7,40 +7,28 @@
 
 import UIKit
 
-
-
 extension GroupManagementViewController: PinterestLayoutDelegate {
     func collectionView(_ collectionView: UICollectionView, heightForPhotoAtIndexPath indexPath: IndexPath) -> CGFloat {
             let cellWidth: CGFloat = (view.bounds.width - 4) / 2 // 셀 가로 크기
             
             if indexPath.row == 0{
                 return 140
-            }else{
-                
-                return CGFloat(heightForView(text: userNameGroup[indexPath.row], font: UIFont.systemFont(ofSize: 15), width:  200)/76) * cellWidth
-            
-        }
+            }else{ return CGFloat(heightForView(text: userNameGroup[indexPath.row], font: UIFont.systemFont(ofSize: 15), width:  200)/76) * cellWidth }
     }
 }
 
-class GroupManagementViewController: UIViewController {
+class GroupManagementViewController: UIViewController, UITextFieldDelegate {
     
     //MARK: Properties
     let topView = TopView()
     
-    let groupModalView = GroupModalView()
+    let groupAddModalView = GroupAddModalView()
+    
+    let searchResultsView = SearchResultsView()
 
     private(set) var groupCollectionView: UICollectionView
     
-    let recommendUserCollectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout()).then {
-        let layout = UICollectionViewFlowLayout()
-        layout.scrollDirection = .horizontal
-            
-        $0.backgroundColor = .white
-        $0.contentInset = UIEdgeInsets.init(top: 0, left: 20, bottom: 0, right: 0)
-        $0.showsHorizontalScrollIndicator = false
-        $0.collectionViewLayout = layout
-    }
+    private(set) var selectedMemberCollectionView: UICollectionView
     
     let titleLabelText = ["minjiii","minjiii","minjiii","minjiii","minjiii","minjiii","minjiii","minjiii","minjiii","minjiii","minjiii","minjiii","minjiii","minjiii","minjiii","minjiii"]
     
@@ -81,14 +69,15 @@ class GroupManagementViewController: UIViewController {
     
     //MARK: Initializers
     init() {
-        // Create new `UICollectionView` and set `UICollectionViewFlowLayout` as its layout
         groupCollectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout())
+        selectedMemberCollectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout())
         super.init(nibName: nil, bundle: nil)
     }
     
     required init?(coder aDecoder: NSCoder) {
         // Create new `UICollectionView` and set `UICollectionViewFlowLayout` as its layout
         groupCollectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout())
+        selectedMemberCollectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout())
         super.init(coder: aDecoder)
     }
     
@@ -97,23 +86,66 @@ class GroupManagementViewController: UIViewController {
         super.viewDidLoad()
         
         self.view.backgroundColor = .white
-
+        
         topViewSetting()
         
-        GroupModalViewSetting()
-        
         setupCollectionView()
+        
+        // selectedMemberCollectionView 설정
+        groupModalViewSetting()
+        
+        // selectedMemberCollectionView 설정
+        selectedMemberCollectionViewSetting()
     }
     
-    //MARK: setuptopView
+    //MARK: SettingGroupModalView
+    func groupModalViewSetting(){
+        self.view.addSubview(groupAddModalView)
+        
+        groupAddModalView.nickNameTextField.delegate = self
+        
+        groupAddModalView.snp.makeConstraints { make in
+            make.top.right.bottom.left.equalToSuperview()
+        }
+        
+        groupAddModalView.modalTitleLabel.snp.makeConstraints { make in
+            make.left.equalToSuperview().offset(self.view.frame.height/33.8)
+            make.top.equalToSuperview().offset(self.view.frame.height/33.8)
+        }
+        
+        groupAddModalView.groupMemberTitleLabel.snp.makeConstraints { make in
+            make.left.equalTo(groupAddModalView.modalTitleLabel)
+            make.top.equalTo(groupAddModalView.modalTitleLabel.snp.bottom).offset(self.view.frame.height/45.1)
+        }
+        
+        groupAddModalView.nicknameTextFieldBackgroundView.snp.makeConstraints { make in
+            make.left.equalTo(groupAddModalView.groupMemberTitleLabel)
+            make.centerX.equalToSuperview()
+            make.height.equalTo(groupAddModalView).dividedBy(21.3)
+            make.top.equalTo(groupAddModalView.groupMemberTitleLabel.snp.bottom).offset(self.view.frame.height/135.3)
+        }
+        
+        groupAddModalView.nickNameTextField.snp.makeConstraints { make in
+            make.centerX.centerY.equalToSuperview()
+            make.left.equalToSuperview().offset(16)
+            make.height.equalToSuperview()
+        }
+        // superView 오류
+//        groupAddModalView.groupNameTitleLabel.snp.makeConstraints { make in
+//            make.top.equalTo(selectedMemberCollectionView.snp.bottom).offset(self.view.frame.height/45.1)
+//            make.left.equalTo(selectedMemberCollectionView)
+//        }
+    }
+    
+    //MARK: topView Setting
     func topViewSetting(){
         self.view.addSubview(topView)
         topView.addSubview(topView.backButton)
         topView.addSubview(topView.titleLabel)
-    
+        
         topView.topViewDataSetting(backButtonImage: UIImage(named: "EZY_SettingBackButton")!, titleLabelText: "그룹 관리",
                                    textColor: UIColor(red: 175/255, green: 173/255, blue: 255/255, alpha: 1))
-
+        
         topView.topViewLayoutSetting(screenHeight: Double(self.view.bounds.height), screenWeight: Double(self.view.bounds.width))
         
         topView.snp.makeConstraints { make in
@@ -123,33 +155,42 @@ class GroupManagementViewController: UIViewController {
         }
     }
     
-    //MARK: modal창 설정
-    func GroupModalViewSetting(){
-        groupModalView.addSubview(groupModalView.backgroundView)
-        groupModalView.backgroundView.addSubview(groupModalView.modalView)
-        groupModalView.modalView.addSubview(groupModalView.modalTitleLabel)
-        groupModalView.modalView.addSubview(groupModalView.modalButton)
-        groupModalView.modalView.addSubview(groupModalView.groupMemberTitleLabel)
-        groupModalView.modalView.addSubview(groupModalView.nicknameTextFieldBackgroundView)
-        groupModalView.nicknameTextFieldBackgroundView.addSubview(groupModalView.nickNameTextField)
-        groupModalView.modalView.addSubview(groupModalView.groupNameTitleLabel)
-        groupModalView.modalView.addSubview(groupModalView.groupNameTextFieldBackgroundView)
-        groupModalView.groupNameTextFieldBackgroundView.addSubview(groupModalView.groupNameTextField)
+    //MARK: selectedMemberCollectionView Setting
+    func selectedMemberCollectionViewSetting(){
+        selectedMemberCollectionView.delegate = self
+        selectedMemberCollectionView.dataSource = self
         
-        groupModalView.GroupModalDataSetting(modalTitleText: "그룹 추가", modalColor: UIColor(red: 255/255, green: 191/255, blue: 191/255, alpha: 1))
-
+        selectedMemberCollectionView.register(selectedMemberCollectionViewCell.self, forCellWithReuseIdentifier: selectedMemberCollectionViewCell.reuseId)
+        
+        groupAddModalView.modalView.addSubview(selectedMemberCollectionView)
+        
+        let layout = UICollectionViewFlowLayout()
+        layout.scrollDirection = .horizontal
+        selectedMemberCollectionView.collectionViewLayout = layout
+        selectedMemberCollectionView.showsHorizontalScrollIndicator = false
+        selectedMemberCollectionView.backgroundColor = .white
+        
+        selectedMemberCollectionView.snp.makeConstraints { make in
+            make.left.equalTo(groupAddModalView.nicknameTextFieldBackgroundView)
+            make.right.equalTo(groupAddModalView.modalView)
+            make.height.equalToSuperview().dividedBy(5)
+            make.top.equalTo(groupAddModalView.nicknameTextFieldBackgroundView.snp.bottom).offset(self.view.frame.height/81.2)
+        }
     }
     
-    //MARK: collectionView 설정
+    //MARK: groupCollectionView Setting
     func setupCollectionView(){
         let pinterestLayout = PinterestLayout()
         pinterestLayout.delegate = self
         groupCollectionView.collectionViewLayout = pinterestLayout
         
+        groupCollectionView.dataSource = self
+        groupCollectionView.delegate = self
+        
         groupCollectionView.register(GroupAddCollectionViewCell.self, forCellWithReuseIdentifier: GroupAddCollectionViewCell.reuseId)
         groupCollectionView.register(GroupCollectionViewCell.self, forCellWithReuseIdentifier: GroupCollectionViewCell.reuseId)
 
-        view.addSubview(groupCollectionView)
+        self.view.addSubview(groupCollectionView)
         
         groupCollectionView.backgroundColor = .white
         
@@ -162,24 +203,33 @@ class GroupManagementViewController: UIViewController {
             make.top.equalTo(topView.snp.bottom)
         }
         
-        groupCollectionView.dataSource = self
-        groupCollectionView.delegate = self
-        
         (groupCollectionView.collectionViewLayout as! UICollectionViewFlowLayout).estimatedItemSize = UICollectionViewFlowLayout.automaticSize
         (groupCollectionView.collectionViewLayout as! UICollectionViewFlowLayout).sectionInsetReference = .fromLayoutMargins
+
+    }
+    
+    //MARK: 화면터치하여 내리기
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?){
+
+         self.view.endEditing(true)
+
+   }
+    
+    //MARK: textfield의 값이 변경될 때 호출되는 함수
+    func textFieldDidBeginEditing(_ textField: UITextField){
+        groupAddModalView.modalView.addSubview(searchResultsView.searchResultsBackgroundView)
+        searchResultsView.searchResultLayoutSetting(screenHeight: Double(self.view.frame.height), screenWeight: Double(self.view.frame.width), textfieldBackground: groupAddModalView.nicknameTextFieldBackgroundView)
+    }
+    
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        if textField.text?.isEmpty ?? true {
+                print("textField is empty")
+                searchResultsView.searchResultsBackgroundView.removeFromSuperview()
+            } else {
+                print("textField has some text")
+            }
         
-        //MARK: recommendUserCollectionView 설정
-        groupModalView.modalView.addSubview(recommendUserCollectionView)
-        recommendUserCollectionView.delegate = self
-        recommendUserCollectionView.dataSource = self
-        recommendUserCollectionView.register(groupAddUserCollectionViewCell.self, forCellWithReuseIdentifier: groupAddUserCollectionViewCell.reuseId)
-        
-        recommendUserCollectionView.snp.makeConstraints { make in
-            make.top.equalTo(groupModalView.nicknameTextFieldBackgroundView.snp.bottom).offset(10)
-            make.centerX.equalToSuperview()
-            make.width.equalToSuperview()
-            make.height.equalTo(self.view.frame.height/13)
-        }
+        return true
     }
     
     //MARK: label의 높이를 반환하는 함수
@@ -214,10 +264,10 @@ extension GroupManagementViewController: UICollectionViewDelegate, UICollectionV
                 return cell
             }
         }else{ //MARK: cell 내용 설정 - groupAddUserCollectionViewCell
-            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: groupAddUserCollectionViewCell.reuseId, for: indexPath) as! groupAddUserCollectionViewCell
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: selectedMemberCollectionViewCell.reuseId, for: indexPath) as! selectedMemberCollectionViewCell
             
             cell.titleLabel.text = titleLabelText[indexPath.row]
-            
+
             return cell
         }
         
@@ -228,14 +278,7 @@ extension GroupManagementViewController: UICollectionViewDelegate, UICollectionV
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         if collectionView == groupCollectionView{
             if indexPath.row == 0{
-                print("addButtonClicked")
-                self.view.addSubview(groupModalView)
-                groupModalView.snp.makeConstraints { make in
-                    make.top.bottom.right.left.equalToSuperview()
-                }
-                groupModalView.GroupModalLayoutSetting(screenHeight: Double(self.view.bounds.height), screenWeight: Double(self.view.bounds.width))
-//                textField.becomeFirstResponder()
-                groupModalView.nickNameTextField.becomeFirstResponder()
+
             }
         }else{ //MARK: GroupAddCollectionView
             
@@ -246,11 +289,13 @@ extension GroupManagementViewController: UICollectionViewDelegate, UICollectionV
 }
 
 extension GroupManagementViewController: UICollectionViewDataSource{
+    
+    //MARK: collectionView UIEdgeInsets
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
         if collectionView == groupCollectionView{
             return UIEdgeInsets(top: 0, left: 0, bottom: 10, right: 0)
-        }else{
-            return UIEdgeInsets(top: 0, left: 10, bottom: 0, right: 0)
+        }else if collectionView == selectedMemberCollectionView{
+            return UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
         }
         
         return UIEdgeInsets()
@@ -258,14 +303,16 @@ extension GroupManagementViewController: UICollectionViewDataSource{
     
     //MARK: cell 갯수
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        if collectionView == recommendUserCollectionView{
-            return titleLabelText.count
-        }else{
+        if collectionView == groupCollectionView{
             return userNameGroup.count
+        }else if collectionView == selectedMemberCollectionView{
+            return titleLabelText.count
         }
+        
+        return Int()
     }
     
-    //MARK: UICollectionViewDelegateFlowLayout
+    //MARK: CGSize
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         
         if collectionView == groupCollectionView{
@@ -277,8 +324,12 @@ extension GroupManagementViewController: UICollectionViewDataSource{
                 - collectionView.contentInset.left
                 - collectionView.contentInset.right
             return CGSize(width: referenceWidth/2.2, height: referenceHeight)
-        }else{
-            return CGSize(width: self.view.frame.width/5, height: 30)
+            
+        }else if collectionView == selectedMemberCollectionView{
+            return CGSize(width: self.view.frame.width/5.3, height: self.view.frame.height/27)
         }
+        
+        return CGSize()
     }
 }
+
