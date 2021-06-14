@@ -92,10 +92,11 @@ class GroupManagementViewController: UIViewController, UITextFieldDelegate {
         setupCollectionView()
         
         // selectedMemberCollectionView 설정
-        groupModalViewSetting()
+        selectedMemberCollectionViewSetting()
         
         // selectedMemberCollectionView 설정
-        selectedMemberCollectionViewSetting()
+        groupModalViewSetting()
+        
     }
     
     //MARK: SettingGroupModalView
@@ -130,11 +131,26 @@ class GroupManagementViewController: UIViewController, UITextFieldDelegate {
             make.left.equalToSuperview().offset(16)
             make.height.equalToSuperview()
         }
-        // superView 오류
-//        groupAddModalView.groupNameTitleLabel.snp.makeConstraints { make in
-//            make.top.equalTo(selectedMemberCollectionView.snp.bottom).offset(self.view.frame.height/45.1)
-//            make.left.equalTo(selectedMemberCollectionView)
-//        }
+
+        groupAddModalView.groupNameTitleLabel.snp.makeConstraints { make in
+            make.top.equalTo(selectedMemberCollectionView.snp.bottom).offset(self.view.frame.height/45.1)
+            make.left.equalTo(selectedMemberCollectionView)
+        }
+        
+        groupAddModalView.groupNameTextFieldBackgroundView.snp.makeConstraints { make in
+            make.left.equalTo(groupAddModalView.groupNameTitleLabel)
+            make.centerX.equalToSuperview()
+            make.height.equalTo(groupAddModalView.nicknameTextFieldBackgroundView)
+            make.top.equalTo(groupAddModalView.groupNameTitleLabel.snp.bottom).offset(self.view.frame.height/135.3)
+        }
+        
+        groupAddModalView.groupNameTextField.snp.makeConstraints { make in
+            make.centerX.centerY.equalToSuperview()
+            make.left.equalToSuperview().offset(16)
+            make.height.equalToSuperview()
+        }
+        
+        
     }
     
     //MARK: topView Setting
