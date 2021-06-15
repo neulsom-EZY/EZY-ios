@@ -20,7 +20,7 @@ class selectedMemberCollectionViewCell: UICollectionViewCell {
     }()
     
     lazy var groupMemberDeleteButton = UIButton().then{
-        $0.setImage(UIImage(named: "EZY_GroupMemberDeleteButton"), for: .normal)
+        $0.setImage(UIImage(named: "EZY_GroupModalViewHideButton"), for: .normal)
     }
     
     lazy var titleLabel: UILabel = {

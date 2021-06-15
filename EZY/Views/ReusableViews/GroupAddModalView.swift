@@ -66,8 +66,8 @@ class GroupAddModalView: UIView {
         $0.textColor = UIColor(red: 129/255, green: 129/255, blue: 129/255, alpha: 1)
     }
     
-    lazy var popButton = UIButton().then {
-        $0.setImage(UIImage(named: "EZY_GroupMemberDeleteButton"), for: .normal)
+    lazy var groupModalViewHideButton = UIButton().then {
+        $0.setImage(UIImage(named: "EZY_GroupModalViewHideButton"), for: .normal)
     }
     
     override init(frame: CGRect) {
@@ -99,16 +99,10 @@ class GroupAddModalView: UIView {
         modalView.addSubview(groupNameTextFieldBackgroundView)
         groupNameTextFieldBackgroundView.addSubview(groupNameTextField)
         nicknameTextFieldBackgroundView.addSubview(nickNameTextField)
-        modalView.addSubview(popButton)
+        modalView.addSubview(groupModalViewHideButton)
 
         backgroundView.snp.makeConstraints { make in
             make.top.left.bottom.right.equalToSuperview()
-        }
-        
-        modalView.snp.makeConstraints { make in
-            make.centerX.centerY.equalToSuperview()
-            make.height.equalToSuperview().dividedBy(2.3)
-            make.width.equalToSuperview().dividedBy(1.2)
         }
     }
 }

@@ -99,14 +99,34 @@ class GroupManagementViewController: UIViewController, UITextFieldDelegate {
         
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(_:)), name:UIResponder.keyboardWillShowNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide(_:)), name: UIResponder.keyboardWillHideNotification, object: nil)
+        
     }
     
-    func startAnimation(){
-        groupModalViewLayoutUpdate()
+    @objc func groupAddModalViewHide(sender: UIButton){
+        groupAddModalView.isHidden = true
+        self.view.endEditing(true)
+    }
+    
+    func groupModalViewStartAnimation(){
+        groupModalViewLayoutUpdateByKeyBoard()
         UIView.animate(withDuration: 3, delay: 1, options:.curveEaseOut, animations: {
             self.view.layoutIfNeeded()
         }, completion: nil)
     }
+    
+//    func modalViewStartAnimation(){
+//        UIView.animate(withDuration: 0.3){
+//            self.modalViewLayoutUpdateByCreate()
+//            self.view.layoutIfNeeded()
+//        }
+//    }
+//
+//    func modalViewHideAnimation(){
+//        UIView.animate(withDuration: 0.3){
+//            self.modalViewLayoutUpdateByHide()
+//            self.view.layoutIfNeeded()
+//        }
+//    }
     
     @objc //MARK: 모달 창 올리기
     func keyboardWillShow(_ sender: Notification) {
@@ -118,7 +138,7 @@ class GroupManagementViewController: UIViewController, UITextFieldDelegate {
         groupAddModalView.modalView.frame.origin.y = (self.view.frame.height/2) - (groupAddModalView.modalView.frame.height/2)
     }
     
-    func groupModalViewLayoutUpdate(){
+    func groupModalViewLayoutUpdateByKeyBoard(){
         groupAddModalView.modalView.snp.makeConstraints { make in
             make.centerX.centerY.equalToSuperview()
             make.height.equalToSuperview().dividedBy(2.3)
@@ -126,12 +146,49 @@ class GroupManagementViewController: UIViewController, UITextFieldDelegate {
         }
     }
     
-    //MARK: SettingGroupModalView
+//    func modalViewLayoutUpdateByCreate(){
+//        groupAddModalView.modalView.snp.remakeConstraints { make in
+//            make.centerX.centerY.equalToSuperview()
+//            make.height.equalToSuperview().dividedBy(2.3)
+//            make.width.equalToSuperview().dividedBy(1.2)
+//        }
+//    }
+//
+//    func modalViewLayoutUpdateByHide(){
+//        groupAddModalView.modalView.snp.remakeConstraints { make in
+//            make.bottom.equalTo(self.view.snp.top)
+//            make.centerX.equalToSuperview()
+//            make.height.equalToSuperview().dividedBy(2.3)
+//            make.width.equalToSuperview().dividedBy(1.2)
+//        }
+//    }
+    
+    //MARK: 화면터치하여 내리기
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?){
+         self.view.endEditing(true)
+    }
+    
+    //MARK: GroupModalView Setting
     func groupModalViewSetting(){
         self.view.addSubview(groupAddModalView)
         
         groupAddModalView.nickNameTextField.delegate = self
         groupAddModalView.groupNameTextField.delegate = self
+        
+        groupAddModalView.groupModalViewHideButton.addTarget(self, action: #selector(self.groupAddModalViewHide), for: .touchUpInside)
+        
+//        groupAddModalView.modalView.snp.makeConstraints { make in
+//            make.bottom.equalTo(self.view.snp.top)
+//            make.centerX.equalToSuperview()
+//            make.height.equalToSuperview().dividedBy(2.3)
+//            make.width.equalToSuperview().dividedBy(1.2)
+//        }
+        
+        groupAddModalView.modalView.snp.makeConstraints { make in
+            make.centerX.centerY.equalToSuperview()
+            make.height.equalToSuperview().dividedBy(2.3)
+            make.width.equalToSuperview().dividedBy(1.2)
+        }
         
         groupAddModalView.snp.makeConstraints { make in
             make.top.right.bottom.left.equalToSuperview()
@@ -185,11 +242,13 @@ class GroupManagementViewController: UIViewController, UITextFieldDelegate {
             make.right.equalTo(groupAddModalView.groupNameTextFieldBackgroundView)
         }
         
-        groupAddModalView.popButton.snp.makeConstraints { make in
+        groupAddModalView.groupModalViewHideButton.snp.makeConstraints { make in
             make.right.equalTo(groupAddModalView.modalButton)
             make.top.equalTo(groupAddModalView.modalTitleLabel)
             make.height.width.equalTo(groupAddModalView.modalTitleLabel.snp.height)
         }
+        
+        groupAddModalView.isHidden = true
     }
     
     //MARK: topView Setting
@@ -263,13 +322,6 @@ class GroupManagementViewController: UIViewController, UITextFieldDelegate {
 
     }
     
-    //MARK: 화면터치하여 내리기
-    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?){
-
-         self.view.endEditing(true)
-
-   }
-    
     //MARK: textfield의 값이 변경될 때 호출되는 함수
     func textFieldDidBeginEditing(_ textField: UITextField){
         groupAddModalView.modalView.addSubview(searchResultsView.searchResultsBackgroundView)
@@ -333,10 +385,12 @@ extension GroupManagementViewController: UICollectionViewDelegate, UICollectionV
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         if collectionView == groupCollectionView{
             if indexPath.row == 0{
-
+                groupAddModalView.isHidden = false
+                groupAddModalView.GroupModalDataSetting(modalTitleText: "그룹 추가", modalColor: UIColor(red: 255/255, green: 191/255, blue: 191/255, alpha: 1))
+            }else{
+                groupAddModalView.isHidden = false
+                groupAddModalView.GroupModalDataSetting(modalTitleText: "그룹 수정", modalColor: UIColor(red: 176/255, green: 209/255, blue: 174/255, alpha: 1))
             }
-        }else{ //MARK: GroupAddCollectionView
-            
         }
         
     }
