@@ -14,6 +14,7 @@ class NewPasswordPutViewController: UIViewController{
     
     lazy var goBackButton = UIButton().then {
         $0.setImage(UIImage(named: "EZY_GoBackBtn"), for: .normal)
+        $0.addTarget(self, action: #selector(goBack), for: .touchUpInside)
     }
     
     lazy var EZY_Logo = UIImageView().then {
@@ -50,10 +51,11 @@ class NewPasswordPutViewController: UIViewController{
     }
     
     lazy var continueButton = UIButton().then {
-        $0.setTitle("비밀번호 바꾸러 가기", for: .normal)
+        $0.setTitle("비밀번호 바꾸기", for: .normal)
         $0.titleLabel?.dynamicFont(fontSize: 14, currentFontName: "AppleSDGothicNeo-Bold")
         $0.setTitleColor(UIColor.EZY_FFFFFF, for: .normal)
         $0.backgroundColor = UIColor.EZY_968DFF
+        $0.addTarget(self, action: #selector(onTapContinueNewPasswordPut), for: .touchUpInside)
     }
     
     //MARK: - Lifecycle
@@ -63,6 +65,16 @@ class NewPasswordPutViewController: UIViewController{
     }
     
     //MARK: - Selectors
+    
+    @objc
+    func goBack(){
+        navigationController?.popViewController(animated: true )
+    }
+    
+    @objc
+    func onTapContinueNewPasswordPut(){
+        print("DEBUG : Click bottom password change button Button")
+    }
 
     //MARK: - Helpers
     func configureUI(){

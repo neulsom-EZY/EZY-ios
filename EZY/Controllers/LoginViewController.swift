@@ -63,19 +63,21 @@ class LoginViewController: UIViewController{
         $0.setTitle("비밀번호를 잊으셨나요?", for: .normal)
         $0.setTitleColor(UIColor.EZY_B2B2B2, for: .normal)
         $0.titleLabel?.dynamicFont(fontSize: 10, currentFontName: "AppleSDGothicNeo-Bold")
+        $0.addTarget(self, action: #selector(onTapForgotPassword), for: .touchUpInside)
     }
     
     lazy var doNotHaveAccountButton = UIButton().then {
         $0.setTitle("아직 회원이 아니신가요?", for: .normal)
         $0.setTitleColor(UIColor.EZY_B2B2B2, for: .normal)
         $0.titleLabel?.dynamicFont(fontSize: 10, currentFontName: "AppleSDGothicNeo-Bold")
+        $0.addTarget(self, action: #selector(onTapSignUp), for: .touchUpInside)
+
     }
     
     lazy var loginButton = CustomGradientButton().then {
         $0.setTitle("로그인", for: .normal)
         $0.titleLabel?.dynamicFont(fontSize: 14, currentFontName: "AppleSDGothicNeo-Bold")
-//        $0.setTitleColor(UIColor.EZY_FFFFFF, for: .normal)
-//        $0.backgroundColor = UIColor.EZY_968DFF
+        $0.addTarget(self, action: #selector(onTapLogin), for: .touchUpInside)
     }
     
     
@@ -96,6 +98,23 @@ class LoginViewController: UIViewController{
         }
     }
     
+    @objc
+    func onTapForgotPassword(){
+        let controller = NewPasswordPhoneNumViewController()
+        navigationController?.pushViewController(controller, animated: true)
+    }
+    
+    @objc
+    func onTapSignUp(){
+        let controller = SignUpNicknameViewController()
+        navigationController?.pushViewController(controller, animated: true)
+    }
+    
+    @objc
+    func onTapLogin(){
+        print("DEBUG : Click bottom login button Button")
+    }
+
     //MARK: - Helpers
     func configureUI(){
         view.backgroundColor = .white

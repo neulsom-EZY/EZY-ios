@@ -14,6 +14,7 @@ class SignUpPasswordViewController: UIViewController{
     
     lazy var goBackButton = UIButton().then {
         $0.setImage(UIImage(named: "EZY_GoBackBtn"), for: .normal)
+        $0.addTarget(self, action: #selector(goBack), for: .touchUpInside)
     }
     
     lazy var EZY_Logo = UIImageView().then {
@@ -49,6 +50,7 @@ class SignUpPasswordViewController: UIViewController{
         $0.titleLabel?.dynamicFont(fontSize: 14, currentFontName: "AppleSDGothicNeo-Bold")
         $0.setTitleColor(UIColor.EZY_FFFFFF, for: .normal)
         $0.backgroundColor = UIColor.EZY_968DFF
+        $0.addTarget(self, action: #selector(onTapContinuePhoneNum), for: .touchUpInside)
     }
     
     //MARK: - Lifecycle
@@ -59,6 +61,17 @@ class SignUpPasswordViewController: UIViewController{
     
     //MARK: - Selectors
 
+    @objc
+    func goBack(){
+        navigationController?.popViewController(animated: true )
+    }
+    
+    @objc
+    func onTapContinuePhoneNum(){
+        let controller = SignUpPhoneNumViewController()
+        navigationController?.pushViewController(controller, animated: true)
+    }
+    
     //MARK: - Helpers
     func configureUI(){
         view.backgroundColor = .white
