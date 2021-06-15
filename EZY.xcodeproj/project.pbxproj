@@ -7,6 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		6A138F81266F862200DBCE49 /* GroupAddCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A138F80266F862200DBCE49 /* GroupAddCollectionViewCell.swift */; };
+		6A138F83266F864300DBCE49 /* PinterestLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A138F82266F864300DBCE49 /* PinterestLayout.swift */; };
+		6A138F85266F866D00DBCE49 /* GroupManagementViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A138F84266F866D00DBCE49 /* GroupManagementViewController.swift */; };
+		6A138F89266FACFE00DBCE49 /* GroupAddModalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A138F88266FACFE00DBCE49 /* GroupAddModalView.swift */; };
+		6A138F8D26703C1900DBCE49 /* selectedMemberCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A138F8C26703C1900DBCE49 /* selectedMemberCollectionViewCell.swift */; };
 		6A44474D26677647004C4BC3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6A44474C26677647004C4BC3 /* Assets.xcassets */; };
 		6A4EDA002668653200B809EC /* ScheduleTimeTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A4ED9FF2668653200B809EC /* ScheduleTimeTableViewCell.swift */; };
 		6A4EDA02266866E600B809EC /* ScheduleTimeTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A4EDA01266866E600B809EC /* ScheduleTimeTableView.swift */; };
@@ -14,6 +19,11 @@
 		6A4EDA2C266A045B00B809EC /* NotificationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A4EDA2B266A045B00B809EC /* NotificationViewController.swift */; };
 		6A4EDA2E266A332100B809EC /* NotificationTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A4EDA2D266A332100B809EC /* NotificationTableViewCell.swift */; };
 		6A4EDA30266A336000B809EC /* NotificationTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A4EDA2F266A336000B809EC /* NotificationTableView.swift */; };
+		6A4EDA32266BD11600B809EC /* SettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A4EDA31266BD11600B809EC /* SettingViewController.swift */; };
+		6A4EDA35266BD27800B809EC /* TopView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A4EDA34266BD27800B809EC /* TopView.swift */; };
+		6A4EDA37266DA52A00B809EC /* SettingTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A4EDA36266DA52A00B809EC /* SettingTableViewCell.swift */; };
+		6A4EDA41266E38E000B809EC /* GroupCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A4EDA40266E38E000B809EC /* GroupCollectionViewCell.swift */; };
+		6A94934E2670DBC700CC5B37 /* SearchResultsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A94934D2670DBC700CC5B37 /* SearchResultsView.swift */; };
 		6A98A9CC2666F94E00BFAE30 /* ScheduleTypeCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A98A9CB2666F94E00BFAE30 /* ScheduleTypeCollectionViewCell.swift */; };
 		6AA769E526636AE700B7E1F5 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AA769E426636AE700B7E1F5 /* AppDelegate.swift */; };
 		6AA769E726636AE700B7E1F5 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AA769E626636AE700B7E1F5 /* SceneDelegate.swift */; };
@@ -44,6 +54,11 @@
 
 /* Begin PBXFileReference section */
 		14AF3F335899880714FDA1B3 /* Pods-EZY.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EZY.release.xcconfig"; path = "Target Support Files/Pods-EZY/Pods-EZY.release.xcconfig"; sourceTree = "<group>"; };
+		6A138F80266F862200DBCE49 /* GroupAddCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupAddCollectionViewCell.swift; sourceTree = "<group>"; };
+		6A138F82266F864300DBCE49 /* PinterestLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PinterestLayout.swift; sourceTree = "<group>"; };
+		6A138F84266F866D00DBCE49 /* GroupManagementViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupManagementViewController.swift; sourceTree = "<group>"; };
+		6A138F88266FACFE00DBCE49 /* GroupAddModalView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupAddModalView.swift; sourceTree = "<group>"; };
+		6A138F8C26703C1900DBCE49 /* selectedMemberCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = selectedMemberCollectionViewCell.swift; sourceTree = "<group>"; };
 		6A44474C26677647004C4BC3 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		6A4ED9FF2668653200B809EC /* ScheduleTimeTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleTimeTableViewCell.swift; sourceTree = "<group>"; };
 		6A4EDA01266866E600B809EC /* ScheduleTimeTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleTimeTableView.swift; sourceTree = "<group>"; };
@@ -51,6 +66,11 @@
 		6A4EDA2B266A045B00B809EC /* NotificationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationViewController.swift; sourceTree = "<group>"; };
 		6A4EDA2D266A332100B809EC /* NotificationTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationTableViewCell.swift; sourceTree = "<group>"; };
 		6A4EDA2F266A336000B809EC /* NotificationTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationTableView.swift; sourceTree = "<group>"; };
+		6A4EDA31266BD11600B809EC /* SettingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingViewController.swift; sourceTree = "<group>"; };
+		6A4EDA34266BD27800B809EC /* TopView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopView.swift; sourceTree = "<group>"; };
+		6A4EDA36266DA52A00B809EC /* SettingTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingTableViewCell.swift; sourceTree = "<group>"; };
+		6A4EDA40266E38E000B809EC /* GroupCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupCollectionViewCell.swift; sourceTree = "<group>"; };
+		6A94934D2670DBC700CC5B37 /* SearchResultsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResultsView.swift; sourceTree = "<group>"; };
 		6A98A9CB2666F94E00BFAE30 /* ScheduleTypeCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleTypeCollectionViewCell.swift; sourceTree = "<group>"; };
 		6AA769E126636AE700B7E1F5 /* EZY.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = EZY.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6AA769E426636AE700B7E1F5 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -100,6 +120,16 @@
 				A75C11C1873FE4E191601230 /* Pods_EZY.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		6A4EDA33266BD17B00B809EC /* ReusableViews */ = {
+			isa = PBXGroup;
+			children = (
+				6A4EDA34266BD27800B809EC /* TopView.swift */,
+				6A138F88266FACFE00DBCE49 /* GroupAddModalView.swift */,
+				6A94934D2670DBC700CC5B37 /* SearchResultsView.swift */,
+			);
+			path = ReusableViews;
 			sourceTree = "<group>";
 		};
 		6AA769D826636AE700B7E1F5 = {
@@ -156,12 +186,18 @@
 		6AA769FD26636C6B00B7E1F5 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				6A4EDA33266BD17B00B809EC /* ReusableViews */,
+				6A4EDA36266DA52A00B809EC /* SettingTableViewCell.swift */,
 				6A98A9CB2666F94E00BFAE30 /* ScheduleTypeCollectionViewCell.swift */,
 				6A4EDA03266866FC00B809EC /* ScheduleTypeCollectionView.swift */,
 				6A4ED9FF2668653200B809EC /* ScheduleTimeTableViewCell.swift */,
 				6A4EDA01266866E600B809EC /* ScheduleTimeTableView.swift */,
 				6A4EDA2D266A332100B809EC /* NotificationTableViewCell.swift */,
 				6A4EDA2F266A336000B809EC /* NotificationTableView.swift */,
+				6A4EDA40266E38E000B809EC /* GroupCollectionViewCell.swift */,
+				6A138F80266F862200DBCE49 /* GroupAddCollectionViewCell.swift */,
+				6A138F82266F864300DBCE49 /* PinterestLayout.swift */,
+				6A138F8C26703C1900DBCE49 /* selectedMemberCollectionViewCell.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -179,6 +215,8 @@
 				6AA76A0126636D2800B7E1F5 /* LoginViewController.swift */,
 				6AA76A272663958B00B7E1F5 /* ShowScheduleViewController.swift */,
 				6A4EDA2B266A045B00B809EC /* NotificationViewController.swift */,
+				6A4EDA31266BD11600B809EC /* SettingViewController.swift */,
+				6A138F84266F866D00DBCE49 /* GroupManagementViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -348,18 +386,28 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6A138F83266F864300DBCE49 /* PinterestLayout.swift in Sources */,
+				6A4EDA35266BD27800B809EC /* TopView.swift in Sources */,
 				6A4EDA2C266A045B00B809EC /* NotificationViewController.swift in Sources */,
 				6AA76A0226636D2800B7E1F5 /* LoginViewController.swift in Sources */,
 				6AA76A282663958B00B7E1F5 /* ShowScheduleViewController.swift in Sources */,
+				6A4EDA32266BD11600B809EC /* SettingViewController.swift in Sources */,
 				6A4EDA04266866FC00B809EC /* ScheduleTypeCollectionView.swift in Sources */,
+				6A4EDA37266DA52A00B809EC /* SettingTableViewCell.swift in Sources */,
 				6A4EDA30266A336000B809EC /* NotificationTableView.swift in Sources */,
+				6A94934E2670DBC700CC5B37 /* SearchResultsView.swift in Sources */,
+				6A4EDA41266E38E000B809EC /* GroupCollectionViewCell.swift in Sources */,
 				6AA769EF26636AE700B7E1F5 /* EZY.xcdatamodeld in Sources */,
 				6A98A9CC2666F94E00BFAE30 /* ScheduleTypeCollectionViewCell.swift in Sources */,
+				6A138F89266FACFE00DBCE49 /* GroupAddModalView.swift in Sources */,
 				6AA769E526636AE700B7E1F5 /* AppDelegate.swift in Sources */,
 				6A4EDA02266866E600B809EC /* ScheduleTimeTableView.swift in Sources */,
+				6A138F81266F862200DBCE49 /* GroupAddCollectionViewCell.swift in Sources */,
 				6AA769E726636AE700B7E1F5 /* SceneDelegate.swift in Sources */,
 				6A4EDA002668653200B809EC /* ScheduleTimeTableViewCell.swift in Sources */,
+				6A138F85266F866D00DBCE49 /* GroupManagementViewController.swift in Sources */,
 				6A4EDA2E266A332100B809EC /* NotificationTableViewCell.swift in Sources */,
+				6A138F8D26703C1900DBCE49 /* selectedMemberCollectionViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
