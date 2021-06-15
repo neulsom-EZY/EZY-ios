@@ -184,6 +184,12 @@ class GroupManagementViewController: UIViewController, UITextFieldDelegate {
             make.height.equalToSuperview().dividedBy(10.3)
             make.right.equalTo(groupAddModalView.groupNameTextFieldBackgroundView)
         }
+        
+        groupAddModalView.popButton.snp.makeConstraints { make in
+            make.right.equalTo(groupAddModalView.modalButton)
+            make.top.equalTo(groupAddModalView.modalTitleLabel)
+            make.height.width.equalTo(groupAddModalView.modalTitleLabel.snp.height)
+        }
     }
     
     //MARK: topView Setting
