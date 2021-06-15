@@ -56,6 +56,7 @@ class LoginViewController: UIViewController{
     
     lazy var showPasswordButton = UIButton().then {
         $0.setImage(UIImage(named: "EZY_eye"), for: .normal)
+        $0.addTarget(self, action: #selector(onTapEyeButton), for: .touchUpInside)
     }
     
     lazy var forgotPasswordButton = UIButton().then {
@@ -70,12 +71,13 @@ class LoginViewController: UIViewController{
         $0.titleLabel?.dynamicFont(fontSize: 10, currentFontName: "AppleSDGothicNeo-Bold")
     }
     
-    lazy var loginButton = UIButton().then {
+    lazy var loginButton = CustomGradientButton().then {
         $0.setTitle("로그인", for: .normal)
         $0.titleLabel?.dynamicFont(fontSize: 14, currentFontName: "AppleSDGothicNeo-Bold")
-        $0.setTitleColor(UIColor.EZY_FFFFFF, for: .normal)
-        $0.backgroundColor = UIColor.EZY_968DFF
+//        $0.setTitleColor(UIColor.EZY_FFFFFF, for: .normal)
+//        $0.backgroundColor = UIColor.EZY_968DFF
     }
+    
     
     //MARK: - Lifecycle
     override func viewDidLoad() {
@@ -85,6 +87,15 @@ class LoginViewController: UIViewController{
     
     //MARK: - Selectors
 
+    @objc
+    func onTapEyeButton(){
+        if passwordField.isSecureTextEntry == true {
+            passwordField.isSecureTextEntry = false
+        } else {
+            passwordField.isSecureTextEntry = true
+        }
+    }
+    
     //MARK: - Helpers
     func configureUI(){
         view.backgroundColor = .white
