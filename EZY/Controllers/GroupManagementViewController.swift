@@ -154,7 +154,7 @@ class GroupManagementViewController: UIViewController, UITextFieldDelegate {
             make.top.equalTo(groupAddModalView.groupNameTextFieldBackgroundView.snp.bottom).offset(self.view.frame.height/42.7)
             make.width.equalToSuperview().dividedBy(4.7)
             make.height.equalToSuperview().dividedBy(10.3)
-            make.right.equalToSuperview().offset(-(self.view.frame.width/15))
+            make.right.equalTo(groupAddModalView.groupNameTextFieldBackgroundView)
         }
     }
     
@@ -194,7 +194,7 @@ class GroupManagementViewController: UIViewController, UITextFieldDelegate {
         selectedMemberCollectionView.snp.makeConstraints { make in
             make.left.equalTo(groupAddModalView.nicknameTextFieldBackgroundView)
             make.right.equalTo(groupAddModalView.modalView)
-            make.height.equalToSuperview().dividedBy(5)
+            make.height.equalToSuperview().dividedBy(4.5)
             make.top.equalTo(groupAddModalView.nicknameTextFieldBackgroundView.snp.bottom).offset(self.view.frame.height/81.2)
         }
     }
