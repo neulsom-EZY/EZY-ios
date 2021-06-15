@@ -46,6 +46,7 @@ class MorePeopleToDo: UIViewController{
         $0.text = "이런 사람들은 어때요"
         $0.dynamicFont(fontSize: 14, weight: .thin)
     }
+
     
     //MARK: - Lifecycle
     override func viewDidLoad() {

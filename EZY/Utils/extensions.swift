@@ -77,6 +77,9 @@ extension UILabel {
     case 896.0: //iphone XR => 6.1 inch  // iphone XS MAX => 6.5 inch
       calculatedFont = UIFont(name: currentFontName, size: size * 1.15)
       resizeFont(calculatedFont: calculatedFont, weight: weight)
+    case 926.0 : //iphone 12 pro max => 6.7 inch
+      calculatedFont = UIFont(name: currentFontName, size: size * 1.18)
+      resizeFont(calculatedFont: calculatedFont, weight: weight)
       break
     default:
       print("not an iPhone")
@@ -156,10 +159,10 @@ extension UITextField {
         calculatedFont = UIFont(name: currentFontName!, size: size * 1.15)
         resizeFont(calculatedFont: calculatedFont, weight: weight)
         break
-//      case 926.0 : //iphone 12 pro max => 6.7 inch
-//        calculatedFont = UIFont(name: currentFontName!, size: size * 1.15)
-//        resizeFont(calculatedFont: calculatedFont, weight: weight)
-//        break
+      case 926.0 : //iphone 12 pro max => 6.7 inch
+        calculatedFont = UIFont(name: currentFontName!, size: size * 1.18)
+        resizeFont(calculatedFont: calculatedFont, weight: weight)
+        break
       default:
         print("not an iPhone")
         break
@@ -237,28 +240,4 @@ extension AddToDoViewController: UICollectionViewDelegate,UICollectionViewDataSo
 }
 
 //MARK: - MorePeopleToDo
-extension MorePeopleToDo: UICollectionViewDelegate,UICollectionViewDataSource, UICollectionViewDelegateFlowLayout{
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 5
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath)
-        cell.backgroundColor = .white
-        cell.layer.cornerRadius = view.frame.height / 40.6
-        cell.layer.shadowColor = UIColor.gray.cgColor
-        cell.layer.shadowRadius = view.frame.height/40.6
-        return cell
-    }
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: view.frame.size.height/9.6,
-                      height: view.frame.size.height/25.3)
-    }
-    
-    
-}
-class CustomCell : UICollectionViewCell{
 
-    
-    
-}
