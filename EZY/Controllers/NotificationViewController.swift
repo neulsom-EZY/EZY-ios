@@ -54,11 +54,6 @@ class NotificationViewController: UIViewController {
         configureUI()
     }
     
-    override func viewDidAppear(_ animated: Bool) {
-
-    }
-
-    
     func configureUI(){
         
         self.view.addSubview(backButton)

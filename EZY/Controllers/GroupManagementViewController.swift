@@ -25,6 +25,10 @@ class GroupManagementViewController: UIViewController, UITextFieldDelegate {
     let groupAddModalView = GroupAddModalView()
     
     let searchResultsView = SearchResultsView()
+    
+    let groupModifyDeleteModalView = GroupModifyDeleteModalView()
+    
+    let deleteModalView = DeleteModalView()
 
     private(set) var groupCollectionView: UICollectionView
     
@@ -97,75 +101,176 @@ class GroupManagementViewController: UIViewController, UITextFieldDelegate {
         // selectedMemberCollectionView 설정
         groupModalViewSetting()
         
+        groupModifyDeleteModalViewSetting()
+        
+        deleteModalViewSetting()
+        
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(_:)), name:UIResponder.keyboardWillShowNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide(_:)), name: UIResponder.keyboardWillHideNotification, object: nil)
-        
-    }
-    
-    @objc func groupAddModalViewHide(sender: UIButton){
-        groupAddModalView.isHidden = true
-        self.view.endEditing(true)
-    }
-    
-    func groupModalViewStartAnimation(){
-        groupModalViewLayoutUpdateByKeyBoard()
-        UIView.animate(withDuration: 3, delay: 1, options:.curveEaseOut, animations: {
-            self.view.layoutIfNeeded()
-        }, completion: nil)
-    }
-    
-//    func modalViewStartAnimation(){
-//        UIView.animate(withDuration: 0.3){
-//            self.modalViewLayoutUpdateByCreate()
-//            self.view.layoutIfNeeded()
-//        }
-//    }
-//
-//    func modalViewHideAnimation(){
-//        UIView.animate(withDuration: 0.3){
-//            self.modalViewLayoutUpdateByHide()
-//            self.view.layoutIfNeeded()
-//        }
-//    }
-    
-    @objc //MARK: 모달 창 올리기
-    func keyboardWillShow(_ sender: Notification) {
-        groupAddModalView.modalView.frame.origin.y = self.view.frame.height/10
     }
 
-    @objc //MARK: 모달 창 원래대로
-    func keyboardWillHide(_ sender: Notification) {
-        groupAddModalView.modalView.frame.origin.y = (self.view.frame.height/2) - (groupAddModalView.modalView.frame.height/2)
-    }
     
-    func groupModalViewLayoutUpdateByKeyBoard(){
-        groupAddModalView.modalView.snp.makeConstraints { make in
+    //MARK: deleteModalView Setting
+    func deleteModalViewSetting(){
+        self.view.addSubview(deleteModalView)
+        deleteModalView.addSubview(deleteModalView.backgroundView)
+        deleteModalView.backgroundView.addSubview(deleteModalView.modalBackgroundView)
+        deleteModalView.modalBackgroundView.addSubview(deleteModalView.modalTitleLabel)
+        deleteModalView.modalBackgroundView.addSubview(deleteModalView.circleView)
+        deleteModalView.modalBackgroundView.addSubview(deleteModalView.labelContentView)
+        deleteModalView.modalBackgroundView.addSubview(deleteModalView.userName)
+        deleteModalView.modalBackgroundView.addSubview(deleteModalView.labeltobottomView)
+        deleteModalView.labeltobottomView.addSubview(deleteModalView.cancelButton)
+        deleteModalView.labeltobottomView.addSubview(deleteModalView.deleteButton)
+        deleteModalView.labelContentView.addSubview(deleteModalView.planNameLabel)
+        deleteModalView.labelContentView.addSubview(deleteModalView.deleteLabel)
+        deleteModalView.circleView.addSubview(deleteModalView.iconImageView)
+        
+        deleteModalView.cancelButton.addTarget(self, action: #selector(groupCancelButtonClicked(_:)), for: .touchUpInside)
+        deleteModalView.deleteButton.addTarget(self, action: #selector(groupDeleteButtonClicked(_:)), for: .touchUpInside)
+
+        deleteModalView.snp.makeConstraints { make in
+            make.top.left.right.bottom.equalToSuperview()
+        }
+        
+        deleteModalView.backgroundView.snp.makeConstraints { make in
+            make.top.left.right.bottom.equalToSuperview()
+        }
+        
+        deleteModalView.modalBackgroundView.snp.makeConstraints { make in
             make.centerX.centerY.equalToSuperview()
-            make.height.equalToSuperview().dividedBy(2.3)
+            make.height.equalToSuperview().dividedBy(3.5)
             make.width.equalToSuperview().dividedBy(1.2)
         }
+
+        deleteModalView.modalTitleLabel.snp.makeConstraints { make in
+            make.left.equalToSuperview().offset(self.view.frame.height/33.8)
+            make.top.equalToSuperview().offset(self.view.frame.height/33.8)
+        }
+        
+        deleteModalView.circleView.snp.makeConstraints { make in
+            make.width.height.equalTo(self.view.snp.height).dividedBy(15.3)
+            make.top.equalTo(deleteModalView.modalTitleLabel.snp.bottom).offset(self.view.frame.height/58)
+            make.centerX.equalToSuperview()
+            
+            deleteModalView.circleView.layer.cornerRadius = (self.view.frame.height/15.3)/2
+        }
+        
+        deleteModalView.iconImageView.snp.makeConstraints { make in
+            make.height.width.equalTo(deleteModalView.modalBackgroundView.snp.height).dividedBy(9)
+            make.centerX.centerY.equalToSuperview()
+        }
+        
+        deleteModalView.userName.snp.makeConstraints { make in
+            make.bottom.equalTo(deleteModalView.labelContentView.snp.top).offset(-self.view.frame.height/270)
+            make.left.equalTo(deleteModalView.labelContentView)
+        }
+        
+        deleteModalView.labelContentView.snp.makeConstraints { make in
+            make.top.equalTo(deleteModalView.iconImageView.snp.bottom).offset(self.view.frame.height/30)
+            make.height.equalToSuperview().dividedBy(10)
+            make.centerX.equalToSuperview()
+            make.width.equalToSuperview().dividedBy(1.25)
+        }
+        
+        deleteModalView.planNameLabel.snp.makeConstraints { make in
+            make.left.equalToSuperview()
+            make.centerY.equalToSuperview()
+        }
+        
+        deleteModalView.deleteLabel.snp.makeConstraints { make in
+            make.centerY.equalToSuperview()
+            make.right.equalToSuperview()
+        }
+        
+        deleteModalView.labeltobottomView.snp.makeConstraints { make in
+            make.top.equalTo(deleteModalView.labelContentView.snp.bottom)
+            make.bottom.equalToSuperview()
+            make.left.right.equalToSuperview()
+        }
+        
+        deleteModalView.cancelButton.snp.makeConstraints { make in
+            make.height.equalTo(deleteModalView.modalBackgroundView).dividedBy(6.8)
+            make.width.equalTo(deleteModalView.modalBackgroundView).dividedBy(4.7)
+            make.centerY.equalToSuperview()
+            make.right.equalTo(deleteModalView.deleteButton.snp.left).offset(-self.view.frame.width/20)
+        }
+        
+        deleteModalView.deleteButton.snp.makeConstraints { make in
+            make.height.equalTo(deleteModalView.modalBackgroundView).dividedBy(6.8)
+            make.width.equalTo(deleteModalView.modalBackgroundView).dividedBy(4.7)
+            make.centerY.equalToSuperview()
+            make.right.equalToSuperview().offset(-self.view.frame.width/15)
+        }
+        
+        deleteModalView.isHidden = true
     }
-    
-//    func modalViewLayoutUpdateByCreate(){
-//        groupAddModalView.modalView.snp.remakeConstraints { make in
-//            make.centerX.centerY.equalToSuperview()
-//            make.height.equalToSuperview().dividedBy(2.3)
-//            make.width.equalToSuperview().dividedBy(1.2)
-//        }
-//    }
-//
-//    func modalViewLayoutUpdateByHide(){
-//        groupAddModalView.modalView.snp.remakeConstraints { make in
-//            make.bottom.equalTo(self.view.snp.top)
-//            make.centerX.equalToSuperview()
-//            make.height.equalToSuperview().dividedBy(2.3)
-//            make.width.equalToSuperview().dividedBy(1.2)
-//        }
-//    }
-    
-    //MARK: 화면터치하여 내리기
-    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?){
-         self.view.endEditing(true)
+
+    //MARK: groupModifyDeleteModalView Setting
+    func groupModifyDeleteModalViewSetting(){
+        
+        self.view.addSubview(groupModifyDeleteModalView)
+        groupModifyDeleteModalView.addSubview(groupModifyDeleteModalView.backgroundView)
+        groupModifyDeleteModalView.backgroundView.addSubview(groupModifyDeleteModalView.modalBackgroundView)
+        groupModifyDeleteModalView.modalBackgroundView.addSubview(groupModifyDeleteModalView.lineView)
+        groupModifyDeleteModalView.modalBackgroundView.addSubview(groupModifyDeleteModalView.groupModifyLabelBackgroundView)
+        groupModifyDeleteModalView.modalBackgroundView.addSubview(groupModifyDeleteModalView.groupDeleteLabelBackgroundView)
+        groupModifyDeleteModalView.modalBackgroundView.addSubview(groupModifyDeleteModalView.groupModifyButton)
+        groupModifyDeleteModalView.modalBackgroundView.addSubview(groupModifyDeleteModalView.groupDeleteButton)
+
+        groupModifyDeleteModalView.groupModifyButton.addTarget(self, action: #selector(groupModifyLabelButtonClicked(_:)), for: .touchUpInside)
+        groupModifyDeleteModalView.groupDeleteButton.addTarget(self, action: #selector(groupDeleteLabelButtonClicked(_:)), for: .touchUpInside)
+        
+        groupModifyDeleteModalView.snp.makeConstraints { make in
+            make.top.left.right.bottom.equalToSuperview()
+        }
+        
+        groupModifyDeleteModalView.backgroundView.snp.makeConstraints { make in
+            make.top.left.right.bottom.equalToSuperview()
+        }
+        
+        groupModifyDeleteModalView.modalBackgroundView.snp.makeConstraints { make in
+            make.bottom.equalTo(self.view)
+            make.width.equalTo(self.view)
+            make.height.equalTo(self.view).dividedBy(5)
+            make.centerX.equalToSuperview()
+        }
+        
+        groupModifyDeleteModalView.lineView.snp.makeConstraints { make in
+            make.height.equalTo(0.7)
+            make.width.equalToSuperview().dividedBy(1.3)
+            make.centerX.centerY.equalToSuperview()
+        }
+        
+        groupModifyDeleteModalView.groupModifyButton.snp.makeConstraints { make in
+            make.centerY.equalToSuperview().offset(-36)
+            make.centerX.equalToSuperview()
+            make.height.equalToSuperview().dividedBy(9)
+            make.width.equalToSuperview().dividedBy(6.6)
+        }
+        
+        groupModifyDeleteModalView.groupDeleteButton.snp.makeConstraints { make in
+            make.centerY.equalToSuperview().offset(36)
+            make.centerX.equalToSuperview()
+            make.height.equalToSuperview().dividedBy(9)
+            make.width.equalToSuperview().dividedBy(6.6)
+        }
+        
+        groupModifyDeleteModalView.groupModifyLabelBackgroundView.snp.makeConstraints { make in
+            make.centerY.equalToSuperview().offset(-30)
+            make.centerX.equalToSuperview()
+            make.width.equalTo(groupModifyDeleteModalView.groupModifyButton)
+            make.height.equalTo(groupModifyDeleteModalView.groupModifyButton).dividedBy(2)
+        }
+        
+        groupModifyDeleteModalView.groupDeleteLabelBackgroundView.snp.makeConstraints { make in
+            make.centerY.equalToSuperview().offset(42)
+            make.centerX.equalToSuperview()
+            make.width.equalTo(groupModifyDeleteModalView.groupDeleteButton)
+            make.height.equalTo(groupModifyDeleteModalView.groupDeleteButton).dividedBy(2)
+        }
+        
+        groupModifyDeleteModalView.isHidden = true
     }
     
     //MARK: GroupModalView Setting
@@ -176,13 +281,6 @@ class GroupManagementViewController: UIViewController, UITextFieldDelegate {
         groupAddModalView.groupNameTextField.delegate = self
         
         groupAddModalView.groupModalViewHideButton.addTarget(self, action: #selector(self.groupAddModalViewHide), for: .touchUpInside)
-        
-//        groupAddModalView.modalView.snp.makeConstraints { make in
-//            make.bottom.equalTo(self.view.snp.top)
-//            make.centerX.equalToSuperview()
-//            make.height.equalToSuperview().dividedBy(2.3)
-//            make.width.equalToSuperview().dividedBy(1.2)
-//        }
         
         groupAddModalView.modalView.snp.makeConstraints { make in
             make.centerX.centerY.equalToSuperview()
@@ -322,6 +420,66 @@ class GroupManagementViewController: UIViewController, UITextFieldDelegate {
 
     }
     
+    @objc func groupDeleteLabelButtonClicked(_ button: UIButton){
+        print("groupDeleteButtonClicked")
+        groupModifyDeleteModalView.isHidden = true
+        deleteModalView.isHidden = false
+    }
+    
+    @objc func groupModifyLabelButtonClicked(_ button: UIButton){
+        print("groupModifyButtonClicked")
+        groupModifyDeleteModalView.isHidden = true
+        groupAddModalView.isHidden = false
+        groupAddModalView.GroupModalDataSetting(modalTitleText: "그룹 수정", modalColor: UIColor(red: 176/255, green: 209/255, blue: 174/255, alpha: 1))
+    }
+    
+    @objc func groupCancelButtonClicked(_ button: UIButton){
+        print("groupCancelButtonClicked")
+        deleteModalView.isHidden = true
+    }
+    
+    @objc func groupDeleteButtonClicked(_ button: UIButton){
+        print("groupDeleteButtonClicked")
+        deleteModalView.isHidden = true
+    }
+    
+    @objc func groupAddModalViewHide(sender: UIButton){
+        groupAddModalView.isHidden = true
+        self.view.endEditing(true)
+    }
+    
+    func groupModalViewStartAnimation(){
+        groupModalViewLayoutUpdateByKeyBoard()
+        UIView.animate(withDuration: 3, delay: 1, options:.curveEaseOut, animations: {
+            self.view.layoutIfNeeded()
+        }, completion: nil)
+    }
+    
+    @objc //MARK: 모달 창 올리기
+    func keyboardWillShow(_ sender: Notification) {
+        groupAddModalView.modalView.frame.origin.y = self.view.frame.height/10
+    }
+
+    @objc //MARK: 모달 창 원래대로
+    func keyboardWillHide(_ sender: Notification) {
+        groupAddModalView.modalView.frame.origin.y = (self.view.frame.height/2) - (groupAddModalView.modalView.frame.height/2)
+    }
+    
+    func groupModalViewLayoutUpdateByKeyBoard(){
+        groupAddModalView.modalView.snp.makeConstraints { make in
+            make.centerX.centerY.equalToSuperview()
+            make.height.equalToSuperview().dividedBy(2.3)
+            make.width.equalToSuperview().dividedBy(1.2)
+        }
+    }
+
+    //MARK: 화면터치하여 내리기
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?){
+         self.view.endEditing(true)
+        groupModifyDeleteModalView.isHidden = true
+    }
+    
+    
     //MARK: textfield의 값이 변경될 때 호출되는 함수
     func textFieldDidBeginEditing(_ textField: UITextField){
         groupAddModalView.modalView.addSubview(searchResultsView.searchResultsBackgroundView)
@@ -388,8 +546,8 @@ extension GroupManagementViewController: UICollectionViewDelegate, UICollectionV
                 groupAddModalView.isHidden = false
                 groupAddModalView.GroupModalDataSetting(modalTitleText: "그룹 추가", modalColor: UIColor(red: 255/255, green: 191/255, blue: 191/255, alpha: 1))
             }else{
-                groupAddModalView.isHidden = false
-                groupAddModalView.GroupModalDataSetting(modalTitleText: "그룹 수정", modalColor: UIColor(red: 176/255, green: 209/255, blue: 174/255, alpha: 1))
+                groupModifyDeleteModalView.isHidden = false
+
             }
         }
         
