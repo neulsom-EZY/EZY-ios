@@ -50,6 +50,9 @@ extension UIColor{
     static let EZY_FCA1A1 = UIColor.rgb(red: 252, green: 161, blue: 161)
     static let EZY_747474 = UIColor.rgb(red: 116, green: 116, blue: 116)
     static let EZY_E3E3E3 = UIColor.rgb(red: 227, green: 227, blue: 227)
+    static let EZY_FAFAFA = UIColor.rgb(red: 250, green: 250, blue: 250)
+    static let EZY_AFAFAF = UIColor.rgb(red: 175, green: 175, blue: 175)
+    static let EZY_E1E1E1 = UIColor.rgb(red: 225, green: 225, blue: 225)
 }
 
 extension UILabel {
@@ -173,31 +176,18 @@ extension UILabel{
 
 extension UIView {
     @discardableResult
-    func applyGradient(colours: [UIColor]) -> CAGradientLayer {
-        return self.applyGradient(colours: colours, locations: nil)
+    func applyGradient(colors: [UIColor]) -> CAGradientLayer {
+        return self.applyGradient(colors: colors, locations: nil)
     }
 
     @discardableResult
-    func applyGradient(colours: [UIColor], locations: [NSNumber]?) -> CAGradientLayer {
+    func applyGradient(colors: [UIColor], locations: [NSNumber]?) -> CAGradientLayer {
         let gradient: CAGradientLayer = CAGradientLayer()
         gradient.frame = self.bounds
-        gradient.colors = colours.map { $0.cgColor }
+        gradient.colors = colors.map { $0.cgColor }
         gradient.locations = locations
         self.layer.insertSublayer(gradient, at: 0)
         return gradient
     }
 }
 
-//class ViewController: UIViewController {
-//
-//    @IBOutlet weak var btn: UIButton!
-//
-//    override func viewDidLoad() {
-//        super.viewDidLoad()
-//
-//        self.btn.applyGradient(colours: [.yellow, .blue])
-//        self.view.applyGradient(colours: [.yellow, .blue, .red], locations: [0.0, 0.5, 1.0])
-//    }
-//
-//
-//}
