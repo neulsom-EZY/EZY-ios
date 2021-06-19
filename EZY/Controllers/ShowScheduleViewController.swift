@@ -333,7 +333,7 @@ extension UIButton {
             self.titleLabel!.font = UIFont(name: currentFontName, size: size * 0.95)
           break
         case 812.0: //iphone X, XS => 5.8 inch
-            self.titleLabel!.font = UIFont(name: currentFontName, size: size * size)
+            self.titleLabel!.font = UIFont(name: currentFontName, size: size)
           break
         case 896.0: //iphone XR => 6.1 inch  // iphone XS MAX => 6.5 inch
             self.titleLabel!.font = UIFont(name: currentFontName, size: size * 1.15)

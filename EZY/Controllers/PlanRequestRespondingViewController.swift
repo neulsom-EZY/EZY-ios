@@ -94,14 +94,21 @@ class PlanRequestRespondingViewController: UIViewController {
         $0.dynamicFont(fontSize: 12, currentFontName: "AppleSDGothicNeo-Regular")
     }
     
-    // 버튼 글씨가 안나옴 ㅅㅂ
     lazy var rejectionButton = UIButton().then{
-        $0.setTitle("Test Button", for: .normal)
+        $0.setTitle("거 절", for: .normal)
         $0.backgroundColor = .white
-//        $0.titleLabel?.textColor = UIColor(red: 207/255, green: 203/255, blue: 255/255, alpha: 1)
+
+        $0.setTitleColor(UIColor(red: 207/255, green: 203/255, blue: 255/255, alpha: 1), for: .normal)
         $0.layer.borderWidth = 1.5
         $0.layer.borderColor = UIColor(red: 207/255, green: 203/255, blue: 255/255, alpha: 1).cgColor
-//        $0.dynamicFont(fontSize: 14, currentFontName: "AppleSDGothicNeo-Bold")
+        $0.dynamicFont(fontSize: 14, currentFontName: "AppleSDGothicNeo-Bold")
+    }
+    
+    lazy var acceptButton = UIButton().then {
+        $0.setTitle("수 락", for: .normal)
+        $0.backgroundColor = UIColor(red: 207/255, green: 203/255, blue: 255/255, alpha: 1)
+        $0.setTitleColor(UIColor.white, for: .normal)
+        $0.dynamicFont(fontSize: 14, currentFontName: "AppleSDGothicNeo-Bold")
     }
        
 
@@ -119,6 +126,7 @@ class PlanRequestRespondingViewController: UIViewController {
         self.view.addSubview(contentLabel)
         self.view.addSubview(planShowView)
         self.view.addSubview(rejectionButton)
+        self.view.addSubview(acceptButton)
         planShowView.addSubview(planTitleLabel)
         planShowView.addSubview(planTimeImageView)
         planShowView.addSubview(planLocationImageView)
@@ -211,6 +219,15 @@ class PlanRequestRespondingViewController: UIViewController {
             make.top.equalTo(planShowView.snp.bottom).offset(self.view.frame.height/29)
             
             rejectionButton.layer.cornerRadius = (self.view.frame.height/20.3)/2
+        }
+        
+        acceptButton.snp.makeConstraints { make in
+            make.right.equalToSuperview().offset(-self.view.frame.width/5.2)
+            make.width.equalToSuperview().dividedBy(3.75)
+            make.height.equalToSuperview().dividedBy(20.3)
+            make.top.equalTo(planShowView.snp.bottom).offset(self.view.frame.height/29)
+            
+            acceptButton.layer.cornerRadius = (self.view.frame.height/20.3)/2
         }
     }
 }
