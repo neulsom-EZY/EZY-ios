@@ -5,7 +5,7 @@
 //  Created by Ji-hoon Ahn on 2021/06/16.
 //
 
-import Foundation
+import UIKit
 
 enum CellModel {
     case collectionView(models: [CollectionTableCellModel], rows: Int)
@@ -13,6 +13,7 @@ enum CellModel {
 }
 struct CollectionTableCellModel{
     let title : String
+    let color : UIColor
 }
 
 

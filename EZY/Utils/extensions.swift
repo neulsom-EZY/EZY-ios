@@ -239,5 +239,10 @@ extension AddToDoViewController: UICollectionViewDelegate,UICollectionViewDataSo
     }
 }
 
-//MARK: - MorePeopleToDo
+//MARK: - CollectioNViewCellDelegate
 
+extension MorePeopleToDo: CollectionTableViewCellDelegate{
+    func didSelectItem(with model: CollectionTableCellModel) {
+        print("Selected \(model.title)")
+    }
+}
