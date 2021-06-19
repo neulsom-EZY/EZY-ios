@@ -25,7 +25,7 @@ class TopView: UIView {
     func topViewLayoutSetting(screenHeight: Double, screenWeight: Double){
         backButton.snp.makeConstraints { make in
             make.top.equalToSuperview().offset(screenHeight/47.7)
-            make.left.equalToSuperview().offset(20)
+            make.left.equalToSuperview().offset(screenWeight/12)
             make.width.equalToSuperview().dividedBy(33.8/2)
             make.height.equalTo(backButton.snp.width)
         }
