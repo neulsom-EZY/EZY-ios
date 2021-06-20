@@ -74,8 +74,47 @@ class RescheduleViewController: UIViewController {
     
     lazy var tagLabel = UILabel().then {
         $0.text = "태그"
-        $0.dynamicFont(fontSize: 12, currentFontName:" AppleSDGothicNeo-Bold")
         $0.textColor = UIColor(red: 182/255, green: 182/255, blue: 182/255, alpha: 1)
+        $0.dynamicFont(fontSize: 14, currentFontName: "AppleSDGothicNeo-Bold")
+    }
+    
+    lazy var tagStudyButton = UIButton().then {
+        $0.setTitle("공부", for: .normal)
+        $0.setTitleColor(UIColor.white, for: .normal)
+        $0.dynamicFont(fontSize: 12, currentFontName: "AppleSDGothicNeo-Bold")
+        $0.backgroundColor = UIColor(red: 150/255, green: 141/255, blue: 255/255, alpha: 1)
+    }
+    
+    lazy var tagWalkButton = UIButton().then {
+        $0.setTitle("산책", for: .normal)
+        $0.setTitleColor(UIColor(red: 186/255, green: 222/255, blue: 255/255, alpha: 1), for: .normal)
+        $0.layer.borderWidth = 1
+        $0.layer.borderColor = UIColor(red: 186/255, green: 222/255, blue: 255/255, alpha: 1).cgColor
+        $0.dynamicFont(fontSize: 12, currentFontName: "AppleSDGothicNeo-Bold")
+    }
+    
+    lazy var tagMajorBandButton = UIButton().then {
+        $0.setTitle("전공동아리", for: .normal)
+        $0.setTitleColor(UIColor(red: 207/255, green: 227/255, blue: 206/255, alpha: 1), for: .normal)
+        $0.layer.borderWidth = 1
+        $0.layer.borderColor = UIColor(red: 207/255, green: 227/255, blue: 206/255, alpha: 1).cgColor
+        $0.dynamicFont(fontSize: 12, currentFontName: "AppleSDGothicNeo-Bold")
+    }
+    
+    lazy var tagFreedomBandButton = UIButton().then {
+        $0.setTitle("자율동아리", for: .normal)
+        $0.setTitleColor(UIColor(red: 228/255, green: 201/255, blue: 255/255, alpha: 1), for: .normal)
+        $0.layer.borderWidth = 1
+        $0.layer.borderColor = UIColor(red: 228/255, green: 201/255, blue: 255/255, alpha: 1).cgColor
+        $0.dynamicFont(fontSize: 12, currentFontName: "AppleSDGothicNeo-Bold")
+    }
+    
+    lazy var tagAddButton = UIButton().then {
+        $0.setTitle("+ 추가", for: .normal)
+        $0.setTitleColor(UIColor(red: 186/255, green: 200/255, blue: 255/255, alpha: 1), for: .normal)
+        $0.layer.borderWidth = 1
+        $0.layer.borderColor = UIColor(red: 186/255, green: 200/255, blue: 255/255, alpha: 1).cgColor
+        $0.dynamicFont(fontSize: 12, currentFontName: "AppleSDGothicNeo-Bold")
     }
 
     override func viewDidLoad() {
@@ -103,6 +142,12 @@ class RescheduleViewController: UIViewController {
         self.view.addSubview(calendarLabel)
         self.view.addSubview(timeLabel)
         self.view.addSubview(locationLabel)
+        self.view.addSubview(tagLabel)
+        self.view.addSubview(tagStudyButton)
+        self.view.addSubview(tagWalkButton)
+        self.view.addSubview(tagMajorBandButton)
+        self.view.addSubview(tagFreedomBandButton)
+        self.view.addSubview(tagAddButton)
         
         self.view.addSubview(explanationBackgroundView)
         explanationBackgroundView.addSubview(explanationTitleLabel)
@@ -220,7 +265,54 @@ class RescheduleViewController: UIViewController {
             make.height.equalToSuperview().dividedBy(12)
             make.top.equalTo(locationView.snp.bottom).offset(self.view.frame.height/30)
         }
+        
+        tagLabel.snp.makeConstraints { make in
+            make.left.equalTo(titleBackgroundView)
+            make.top.equalTo(explanationBackgroundView.snp.bottom).offset(self.view.frame.height/38.6)
+        }
+        
+        tagStudyButton.snp.makeConstraints{ make in
+            make.top.equalTo(tagLabel.snp.bottom).offset(self.view.frame.height/47.7)
+            make.left.equalTo(tagLabel)
+            make.height.equalToSuperview().dividedBy(25.3)
+            make.width.equalToSuperview().dividedBy(4.4)
+            
+            tagStudyButton.layer.cornerRadius = (self.view.frame.height/25.3)/2
+        }
+        
+        tagWalkButton.snp.makeConstraints { make in
+            make.top.equalTo(tagStudyButton)
+            make.left.equalTo(tagStudyButton.snp.right).offset(self.view.frame.width/25)
+            make.height.width.equalTo(tagStudyButton)
+            
+            tagWalkButton.layer.cornerRadius = (self.view.frame.height/25.3)/2
+        }
+        
+        tagMajorBandButton.snp.makeConstraints { make in
+            make.top.equalTo(tagWalkButton)
+            make.left.equalTo(tagWalkButton.snp.right).offset(self.view.frame.width/25)
+            make.height.width.equalTo(tagStudyButton)
+            
+            tagMajorBandButton.layer.cornerRadius = (self.view.frame.height/25.3)/2
+        }
+        
+        tagFreedomBandButton.snp.makeConstraints { make in
+            make.top.equalTo(tagStudyButton.snp.bottom).offset(self.view.frame.height/60)
+            make.left.equalTo(tagStudyButton.snp.left)
+            make.height.width.equalTo(tagStudyButton)
+            
+            tagFreedomBandButton.layer.cornerRadius = (self.view.frame.height/25.3)/2
+        }
+        
+        tagAddButton.snp.makeConstraints { make in
+            make.top.equalTo(tagFreedomBandButton)
+            make.left.equalTo(tagFreedomBandButton.snp.right).offset(self.view.frame.width/25)
+            make.height.width.equalTo(tagStudyButton)
+            
+            tagAddButton.layer.cornerRadius = (self.view.frame.height/25.3)/2
+        }
     }
+    
     
     func topViewSetting() {
         self.view.addSubview(topView)
