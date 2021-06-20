@@ -13,6 +13,7 @@ struct MyCustomButtonViewModel{
     let image: UIImage
     let color : UIColor
 }
+
 class MoreCalendarModalsButton : UIButton{
     
     private let toDoLabel : UILabel = {
@@ -37,10 +38,13 @@ class MoreCalendarModalsButton : UIButton{
     init(with viewModel : MyCustomButtonViewModel) {
         self.viewModel = viewModel
         super.init(frame: .zero)
-        addSubViews()
         
+        isEnabled = true
+        addSubViews()
+        configure(with: viewModel)
+
     }
-    func addSubViews(){
+    private func addSubViews(){
         addSubview(toDoLabel)
         addSubview(iconView)
     }
@@ -53,7 +57,7 @@ class MoreCalendarModalsButton : UIButton{
         layer.borderColor = viewModel.color.cgColor
         layer.borderWidth = 2
         iconView.tintColor = viewModel.color
-        
+        toDoLabel.textColor = viewModel.color
         toDoLabel.text = viewModel.title
         iconView.image = viewModel.image
         
