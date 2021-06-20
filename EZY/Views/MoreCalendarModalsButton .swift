@@ -9,9 +9,9 @@ import UIKit
 import SnapKit
 
 struct MyCustomButtonViewModel{
-    let title : String
-    let image: UIImage
-    let color : UIColor
+    let title : String?
+    let image: UIImage?
+    let color : UIColor?
 }
 
 class MoreCalendarModalsButton : UIButton{
@@ -54,7 +54,7 @@ class MoreCalendarModalsButton : UIButton{
     public func configure(with viewModel : MyCustomButtonViewModel){
         layer.masksToBounds = true
         layer.cornerRadius = 20
-        layer.borderColor = viewModel.color.cgColor
+        layer.borderColor = viewModel.color?.cgColor
         layer.borderWidth = 2
         iconView.tintColor = viewModel.color
         toDoLabel.textColor = viewModel.color

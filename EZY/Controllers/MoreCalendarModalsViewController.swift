@@ -14,6 +14,8 @@ protocol BulletinDelegate: class {
 }
 class MoreCalendarModalsViewController : UIViewController{
     
+    
+    //MARK: - Properties
     weak var delegate: BulletinDelegate?
     
     let bgView = UIView().then {
@@ -41,26 +43,43 @@ class MoreCalendarModalsViewController : UIViewController{
         return button
     }()
     
+    private let ourToDo : MoreCalendarModalsButton = {
+        let viewModel = MyCustomButtonViewModel(title: "우리의 할 일", image: UIImage(systemName: "person.3")!, color: .EZY_CFCBFF)
+        let button = MoreCalendarModalsButton(with: viewModel)
+
+        return button
+    }()
+    
     static func instance() -> MoreCalendarModalsViewController {
         return MoreCalendarModalsViewController(nibName: nil, bundle: nil).then {
             $0.modalPresentationStyle = .overFullScreen
         }
     }
-    
+    //MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
-      
-        // Setup view
+        configureUI()
+
+        
+    }
+    
+    //MARK: - Selectors
+    @objc func onTapClose() {
+        delegate?.onTapClose()
+        dismiss(animated: true, completion: nil)
+    }
+    
+    //MARK: - HELPERS
+    func configureUI(){
         view.backgroundColor = .clear
         view.addSubview(bgView)
         view.addSubview(closeBtn)
         view.addSubview(TitleLabel)
         view.addSubview(myToDo)
-        // Add Event
         closeBtn.addTarget(self, action: #selector(onTapClose), for: .touchUpInside)
         
         
-        // Setup AutoLayout
+        
         bgView.snp.makeConstraints { (make) in
             make.left.equalToSuperview()
             make.right.equalToSuperview()
@@ -76,20 +95,22 @@ class MoreCalendarModalsViewController : UIViewController{
         
         myToDo.snp.makeConstraints { (make) in
             make.centerX.equalTo(bgView.snp.centerX)
-            make.bottom.equalTo(closeBtn.snp.top)
+            make.top.equalTo(TitleLabel.snp.bottom).offset(view.frame.height/11.6)
             make.width.equalTo(view.frame.height/4.8)
             make.height.equalTo(view.frame.height/15.3)
         }
         
+        ourToDo.snp.makeConstraints { (make) in
+            make.centerX.equalTo(bgView.snp.centerX)
+            make.top.equalTo(myToDo.snp.bottom).offset(10)
+            make.width.equalTo(view.frame.height/4.8)
+            make.height.equalTo(view.frame.height/15.3)
+        }
+        
+        
         closeBtn.snp.makeConstraints { (make) in
             make.center.equalTo(bgView)
         }
-        
-    }
-    @objc
-    func onTapClose() {
-        delegate?.onTapClose()
-        dismiss(animated: true, completion: nil)
     }
     
     
