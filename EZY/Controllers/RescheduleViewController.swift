@@ -34,6 +34,24 @@ class RescheduleViewController: UIViewController {
         $0.textColor = UIColor(red: 101/255, green: 101/255, blue: 101/255, alpha: 1)
         $0.dynamicFont(fontSize: 14, currentFontName: "AppleSDGothicNeo-Medium")
     }
+    
+    lazy var calendarLabel = UILabel().then {
+        $0.text = "2021. 05. 09 화요일"
+        $0.textColor = UIColor(red: 101/255, green: 101/255, blue: 101/255, alpha: 1)
+        $0.dynamicFont(fontSize: 16, currentFontName: "Poppins-Regular")
+    }
+    
+    lazy var timeLabel = UILabel().then {
+        $0.text = "11:00AM - 1:00PM"
+        $0.textColor = UIColor(red: 101/255, green: 101/255, blue: 101/255, alpha: 1)
+        $0.dynamicFont(fontSize: 16, currentFontName: "Poppins-Regular")
+    }
+    
+    lazy var locationLabel = UILabel().then {
+        $0.text = "송정역 이디야 카페"
+        $0.textColor = UIColor(red: 101/255, green: 101/255, blue: 101/255, alpha: 1)
+        $0.dynamicFont(fontSize: 16, currentFontName: "Poppins-Regular")
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -49,12 +67,36 @@ class RescheduleViewController: UIViewController {
         timeViewSetting()
         
         locationViewSetting()
+
+        labelSetting()
+    }
+    
+    func labelSetting(){
+        calendarLabel.snp.makeConstraints { make in
+            make.centerY.equalTo(calendarView)
+            make.left.equalTo(calendarView.snp.right).offset(self.view.frame.width/13.8)
+        }
+        
+        timeLabel.snp.makeConstraints { make in
+            make.centerY.equalTo(timeView)
+            make.left.equalTo(timeView.snp.right).offset(self.view.frame.width/13.8)
+
+        }
+        
+        locationLabel.snp.makeConstraints { make in
+            make.centerY.equalTo(locationView)
+            make.left.equalTo(locationView.snp.right).offset(self.view.frame.width/13.8)
+
+        }
     }
     
     func layoutSetting(){
         self.view.addSubview(titleBackgroundView)
         titleBackgroundView.addSubview(titleLabel)
         titleBackgroundView.addSubview(titleTextField)
+        self.view.addSubview(calendarLabel)
+        self.view.addSubview(timeLabel)
+        self.view.addSubview(locationLabel)
         
         titleBackgroundView.snp.makeConstraints { make in
             make.centerX.equalToSuperview()
@@ -74,6 +116,7 @@ class RescheduleViewController: UIViewController {
             make.width.equalToSuperview().dividedBy(1.45)
             make.height.equalToSuperview()
         }
+
     }
 
     
