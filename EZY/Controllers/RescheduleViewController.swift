@@ -52,6 +52,31 @@ class RescheduleViewController: UIViewController {
         $0.textColor = UIColor(red: 101/255, green: 101/255, blue: 101/255, alpha: 1)
         $0.dynamicFont(fontSize: 16, currentFontName: "Poppins-Regular")
     }
+    
+    lazy var explanationBackgroundView = UIView().then {
+        $0.backgroundColor = UIColor(red: 246/255, green: 243/255, blue: 255/255, alpha: 1)
+        $0.layer.cornerRadius = 20
+    }
+    
+    lazy var explanationTitleLabel = UILabel().then {
+        $0.text = "설명"
+        $0.textColor = UIColor(red: 150/255, green: 141/255, blue: 255/255, alpha: 1)
+        $0.dynamicFont(fontSize: 14, currentFontName: "AppleSDGothicNeo-Bold")
+    }
+    
+    lazy var explanationTextView = UITextView().then {
+        $0.text = "카페에서 디자인 이론 공부 하기, 카페에서 디자인 이론 공부 하기"
+        $0.textAlignment = .left
+        $0.backgroundColor = .clear
+        $0.textColor = UIColor(red: 101/255, green: 101/255, blue: 101/255, alpha: 1)
+        $0.dynamicFont(fontSize: 14, currentFontName: "AppleSDGothicNeo-Medium")
+    }
+    
+    lazy var tagLabel = UILabel().then {
+        $0.text = "태그"
+        $0.dynamicFont(fontSize: 12, currentFontName:" AppleSDGothicNeo-Bold")
+        $0.textColor = UIColor(red: 182/255, green: 182/255, blue: 182/255, alpha: 1)
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -71,25 +96,6 @@ class RescheduleViewController: UIViewController {
         labelSetting()
     }
     
-    func labelSetting(){
-        calendarLabel.snp.makeConstraints { make in
-            make.centerY.equalTo(calendarView)
-            make.left.equalTo(calendarView.snp.right).offset(self.view.frame.width/13.8)
-        }
-        
-        timeLabel.snp.makeConstraints { make in
-            make.centerY.equalTo(timeView)
-            make.left.equalTo(timeView.snp.right).offset(self.view.frame.width/13.8)
-
-        }
-        
-        locationLabel.snp.makeConstraints { make in
-            make.centerY.equalTo(locationView)
-            make.left.equalTo(locationView.snp.right).offset(self.view.frame.width/13.8)
-
-        }
-    }
-    
     func layoutSetting(){
         self.view.addSubview(titleBackgroundView)
         titleBackgroundView.addSubview(titleLabel)
@@ -97,6 +103,10 @@ class RescheduleViewController: UIViewController {
         self.view.addSubview(calendarLabel)
         self.view.addSubview(timeLabel)
         self.view.addSubview(locationLabel)
+        
+        self.view.addSubview(explanationBackgroundView)
+        explanationBackgroundView.addSubview(explanationTitleLabel)
+        explanationBackgroundView.addSubview(explanationTextView)
         
         titleBackgroundView.snp.makeConstraints { make in
             make.centerX.equalToSuperview()
@@ -115,6 +125,18 @@ class RescheduleViewController: UIViewController {
             make.left.equalTo(titleLabel.snp.right).offset(self.view.frame.width/17.8)
             make.width.equalToSuperview().dividedBy(1.45)
             make.height.equalToSuperview()
+        }
+        
+        explanationTitleLabel.snp.makeConstraints { make in
+            make.centerY.equalToSuperview()
+            make.left.equalToSuperview().offset(self.view.frame.width/17.8)
+        }
+        
+        explanationTextView.snp.makeConstraints { make in
+            make.centerY.equalToSuperview()
+            make.left.equalTo(explanationTitleLabel.snp.right).offset(self.view.frame.width/17.8)
+            make.width.equalToSuperview().dividedBy(1.45)
+            make.height.equalToSuperview().dividedBy(1.3)
         }
 
     }
@@ -191,6 +213,13 @@ class RescheduleViewController: UIViewController {
             make.centerX.centerY.equalToSuperview()
             make.height.width.equalToSuperview().dividedBy(2)
         }
+        
+        explanationBackgroundView.snp.makeConstraints { make in
+            make.centerX.equalToSuperview()
+            make.left.equalTo(titleBackgroundView)
+            make.height.equalToSuperview().dividedBy(12)
+            make.top.equalTo(locationView.snp.bottom).offset(self.view.frame.height/30)
+        }
     }
     
     func topViewSetting() {
@@ -207,6 +236,25 @@ class RescheduleViewController: UIViewController {
             make.left.right.equalToSuperview()
             make.top.equalTo(self.view.safeAreaLayoutGuide)
             make.height.equalToSuperview().dividedBy(8)
+        }
+    }
+    
+    func labelSetting(){
+        calendarLabel.snp.makeConstraints { make in
+            make.centerY.equalTo(calendarView)
+            make.left.equalTo(calendarView.snp.right).offset(self.view.frame.width/13.8)
+        }
+        
+        timeLabel.snp.makeConstraints { make in
+            make.centerY.equalTo(timeView)
+            make.left.equalTo(timeView.snp.right).offset(self.view.frame.width/13.8)
+
+        }
+        
+        locationLabel.snp.makeConstraints { make in
+            make.centerY.equalTo(locationView)
+            make.left.equalTo(locationView.snp.right).offset(self.view.frame.width/13.8)
+
         }
     }
 }
