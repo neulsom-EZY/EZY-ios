@@ -50,6 +50,12 @@ class MoreCalendarModalsViewController : UIViewController{
         return button
     }()
     
+    private let errand : MoreCalendarModalsButton = {
+        let viewModel = MyCustomButtonViewModel(title: "심부름", image: UIImage(systemName: "person.3")!, color: .EZY_AFADFF)
+        let button = MoreCalendarModalsButton(with: viewModel)
+
+        return button
+    }()
     static func instance() -> MoreCalendarModalsViewController {
         return MoreCalendarModalsViewController(nibName: nil, bundle: nil).then {
             $0.modalPresentationStyle = .overFullScreen
@@ -76,6 +82,8 @@ class MoreCalendarModalsViewController : UIViewController{
         view.addSubview(closeBtn)
         view.addSubview(TitleLabel)
         view.addSubview(myToDo)
+        view.addSubview(ourToDo)
+        view.addSubview(errand)
         closeBtn.addTarget(self, action: #selector(onTapClose), for: .touchUpInside)
         
         
@@ -100,7 +108,18 @@ class MoreCalendarModalsViewController : UIViewController{
             make.height.equalTo(view.frame.height/15.3)
         }
         
-   
+        ourToDo.snp.makeConstraints { (make) in
+            make.centerX.equalTo(bgView.snp.centerX)
+            make.top.equalTo(myToDo.snp.bottom).offset(view.frame.height/32.4)
+            make.width.equalTo(view.frame.height/4.8)
+            make.height.equalTo(view.frame.height/15.3)
+        }
+        errand.snp.makeConstraints { (make) in
+            make.centerX.equalTo(bgView.snp.centerX)
+            make.top.equalTo(ourToDo.snp.bottom).offset(view.frame.height/32.4)
+            make.width.equalTo(view.frame.height/4.8)
+            make.height.equalTo(view.frame.height/15.3)
+        }
         
         
         closeBtn.snp.makeConstraints { (make) in
