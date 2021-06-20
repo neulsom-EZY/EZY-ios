@@ -17,6 +17,10 @@ class RescheduleViewController: UIViewController {
     
     lazy var locationView = WhiteBackgroundView()
     
+    var isChecked: [Bool] = [true, false, false, false]
+    
+    lazy var tagButton: [UIButton] = [tagStudyButton, tagWalkButton, tagMajorBandButton, tagFreedomBandButton]
+    
     lazy var titleBackgroundView = UIView().then {
         $0.backgroundColor = UIColor(red: 244/255, green: 246/255, blue: 255/255, alpha: 1)
         $0.layer.cornerRadius = 20
@@ -78,14 +82,16 @@ class RescheduleViewController: UIViewController {
         $0.dynamicFont(fontSize: 14, currentFontName: "AppleSDGothicNeo-Bold")
     }
     
-    lazy var tagStudyButton = UIButton().then {
+    var tagStudyButton = UIButton().then {
         $0.setTitle("공부", for: .normal)
         $0.setTitleColor(UIColor.white, for: .normal)
+        $0.layer.borderWidth = 1
+        $0.layer.borderColor = UIColor(red: 150/255, green: 141/255, blue: 255/255, alpha: 1).cgColor
         $0.dynamicFont(fontSize: 12, currentFontName: "AppleSDGothicNeo-Bold")
         $0.backgroundColor = UIColor(red: 150/255, green: 141/255, blue: 255/255, alpha: 1)
     }
     
-    lazy var tagWalkButton = UIButton().then {
+    var tagWalkButton = UIButton().then {
         $0.setTitle("산책", for: .normal)
         $0.setTitleColor(UIColor(red: 186/255, green: 222/255, blue: 255/255, alpha: 1), for: .normal)
         $0.layer.borderWidth = 1
@@ -93,7 +99,7 @@ class RescheduleViewController: UIViewController {
         $0.dynamicFont(fontSize: 12, currentFontName: "AppleSDGothicNeo-Bold")
     }
     
-    lazy var tagMajorBandButton = UIButton().then {
+    var tagMajorBandButton = UIButton().then {
         $0.setTitle("전공동아리", for: .normal)
         $0.setTitleColor(UIColor(red: 207/255, green: 227/255, blue: 206/255, alpha: 1), for: .normal)
         $0.layer.borderWidth = 1
@@ -101,7 +107,7 @@ class RescheduleViewController: UIViewController {
         $0.dynamicFont(fontSize: 12, currentFontName: "AppleSDGothicNeo-Bold")
     }
     
-    lazy var tagFreedomBandButton = UIButton().then {
+    var tagFreedomBandButton = UIButton().then {
         $0.setTitle("자율동아리", for: .normal)
         $0.setTitleColor(UIColor(red: 228/255, green: 201/255, blue: 255/255, alpha: 1), for: .normal)
         $0.layer.borderWidth = 1
@@ -109,7 +115,7 @@ class RescheduleViewController: UIViewController {
         $0.dynamicFont(fontSize: 12, currentFontName: "AppleSDGothicNeo-Bold")
     }
     
-    lazy var tagAddButton = UIButton().then {
+    var tagAddButton = UIButton().then {
         $0.setTitle("+ 추가", for: .normal)
         $0.setTitleColor(UIColor(red: 186/255, green: 200/255, blue: 255/255, alpha: 1), for: .normal)
         $0.layer.borderWidth = 1
@@ -135,6 +141,56 @@ class RescheduleViewController: UIViewController {
         labelSetting()
     }
     
+    @objc func tagStudybuttonClicked(sender:UIButton)
+    {
+        var backgroundColor: UIColor
+        var borderColor: CGColor
+        
+        if isChecked[sender.tag] == true{
+            // 1개만 체크되어있을때 눌러서 체크해제하려고할때 다른 버튼이 체크되어있는지 확인하고 체크되어있으면 바꾸고 되어있지않으면 그냥 나가게
+            for index in 0...isChecked.count-1{
+                if isChecked[index] == true{
+                    if isChecked[index] != isChecked[sender.tag]{
+                        backgroundColor = sender.backgroundColor!
+                        
+                        sender.backgroundColor = .white
+                        sender.setTitleColor(backgroundColor, for: .normal)
+                        sender.layer.borderWidth = 1
+                        sender.layer.borderColor = backgroundColor.cgColor
+                        
+                        isChecked[sender.tag] = false
+                    }
+                }
+            }
+        }else{
+            // 다른 버튼중에 선택된게 있다면 지우기
+            for index in 0...isChecked.count-1{
+                if isChecked[index] == true{
+                    backgroundColor = tagButton[index].backgroundColor!
+                    
+                    tagButton[index].backgroundColor = .white
+                    tagButton[index].setTitleColor(backgroundColor, for: .normal)
+                    tagButton[index].layer.borderWidth = 1
+                    tagButton[index].layer.borderColor = backgroundColor.cgColor
+                    
+                    isChecked[index] = false
+                }
+            }
+            
+            borderColor = sender.layer.borderColor!
+            
+            sender.backgroundColor = UIColor(cgColor: borderColor)
+            sender.setTitleColor(UIColor.white, for: .normal)
+            sender.layer.borderWidth = 0
+            
+            isChecked[sender.tag] = true
+        }
+    }
+    
+    func buttonUnClicked(){
+        
+    }
+    
     func layoutSetting(){
         self.view.addSubview(titleBackgroundView)
         titleBackgroundView.addSubview(titleLabel)
@@ -148,6 +204,20 @@ class RescheduleViewController: UIViewController {
         self.view.addSubview(tagMajorBandButton)
         self.view.addSubview(tagFreedomBandButton)
         self.view.addSubview(tagAddButton)
+        
+        tagStudyButton.tag = 0
+        tagWalkButton.tag = 1
+        tagMajorBandButton.tag = 2
+        tagFreedomBandButton.tag = 3
+        
+        tagStudyButton.addTarget(self,action:#selector(tagStudybuttonClicked),
+                                 for:.touchUpInside)
+        tagWalkButton.addTarget(self,action:#selector(tagStudybuttonClicked),
+                                 for:.touchUpInside)
+        tagMajorBandButton.addTarget(self,action:#selector(tagStudybuttonClicked),
+                                 for:.touchUpInside)
+        tagFreedomBandButton.addTarget(self,action:#selector(tagStudybuttonClicked),
+                                 for:.touchUpInside)
         
         self.view.addSubview(explanationBackgroundView)
         explanationBackgroundView.addSubview(explanationTitleLabel)
