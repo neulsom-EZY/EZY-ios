@@ -100,12 +100,7 @@ class MoreCalendarModalsViewController : UIViewController{
             make.height.equalTo(view.frame.height/15.3)
         }
         
-        ourToDo.snp.makeConstraints { (make) in
-            make.centerX.equalTo(bgView.snp.centerX)
-            make.top.equalTo(myToDo.snp.bottom).offset(10)
-            make.width.equalTo(view.frame.height/4.8)
-            make.height.equalTo(view.frame.height/15.3)
-        }
+   
         
         
         closeBtn.snp.makeConstraints { (make) in
