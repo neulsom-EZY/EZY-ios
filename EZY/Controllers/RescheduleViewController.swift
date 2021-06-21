@@ -152,6 +152,9 @@ class RescheduleViewController: UIViewController, UICollectionViewDataSource, UI
         
         tagColorCollectionView?.dataSource = self
         tagColorCollectionView?.delegate = self
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(_:)), name:UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide(_:)), name: UIResponder.keyboardWillHideNotification, object: nil)
     }
 
     
@@ -214,6 +217,11 @@ class RescheduleViewController: UIViewController, UICollectionViewDataSource, UI
             make.height.equalToSuperview().dividedBy(7.2)
             make.width.equalToSuperview().dividedBy(4.7)
         }
+        
+        tagAddModalView.tagAddButton.addTarget(self,action:#selector(tagAddCompletionbuttonClicked(sender:)),
+                                 for:.touchUpInside)
+        
+        tagAddModalView.isHidden = true
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -240,6 +248,22 @@ class RescheduleViewController: UIViewController, UICollectionViewDataSource, UI
         }
     }
     
+    @objc //MARK: 모달 창 올리기
+    func keyboardWillShow(_ sender: Notification) {
+        tagAddModalView.modalBackgroundView.frame.origin.y = self.view.frame.height/5
+    }
+
+    @objc //MARK: 모달 창 원래대로
+    func keyboardWillHide(_ sender: Notification) {
+        tagAddModalView.modalBackgroundView.frame.origin.y = (self.view.frame.height/2) - (tagAddModalView.modalBackgroundView.frame.height/2)
+    }
+    
+    //MARK: 화면터치하여 모달 추가 창 나가기
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?){
+         self.view.endEditing(true)
+        tagAddModalView.isHidden = true
+    }
+    
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return 10
     }
@@ -256,6 +280,14 @@ class RescheduleViewController: UIViewController, UICollectionViewDataSource, UI
         print("User tapped on item \(indexPath.row)")
     }
     
+    @objc func tagAddCompletionbuttonClicked(sender:UIButton)
+    {
+        tagAddModalView.isHidden = true
+    }
+    
+    @objc func tagAddButtonClicked(sender:UIButton){
+        tagAddModalView.isHidden = false
+    }
     
     @objc func tagbuttonClicked(sender:UIButton)
     {
@@ -329,6 +361,9 @@ class RescheduleViewController: UIViewController, UICollectionViewDataSource, UI
         tagMajorBandButton.addTarget(self,action:#selector(tagbuttonClicked),
                                  for:.touchUpInside)
         tagFreedomBandButton.addTarget(self,action:#selector(tagbuttonClicked),
+                                 for:.touchUpInside)
+        
+        tagAddButton.addTarget(self,action:#selector(tagAddButtonClicked(sender:)),
                                  for:.touchUpInside)
         
         self.view.addSubview(explanationBackgroundView)
