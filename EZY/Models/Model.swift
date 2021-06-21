@@ -23,5 +23,3 @@ struct MyCustomButtonViewModel{
     let image: UIImage?
     let color : UIColor?
 }
-
-

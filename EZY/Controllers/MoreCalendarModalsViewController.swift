@@ -81,13 +81,14 @@ class MoreCalendarModalsViewController : UIViewController{
     
     @objc func MyTodo(){
         
-        let vc = AddToDoViewController()
+        let vc = AddMyToDoViewController()
         vc.modalPresentationStyle = .fullScreen
         present(vc, animated: true, completion: nil)
     }
     @objc func OurTodo(){
-        print("DEBUG : Click OurToDo")
-
+        let vc = AddOurToDoViewController()
+        vc.modalPresentationStyle = .fullScreen
+        present(vc, animated: true, completion: nil)
     }
     @objc func Errand(){
     }
