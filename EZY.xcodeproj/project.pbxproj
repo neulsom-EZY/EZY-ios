@@ -53,7 +53,10 @@
 		6AA76A2626638C5600B7E1F5 /* Poppins-ExtraLight.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 6AA76A0E2663844A00B7E1F5 /* Poppins-ExtraLight.ttf */; };
 		6AA76A282663958B00B7E1F5 /* ShowScheduleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AA76A272663958B00B7E1F5 /* ShowScheduleViewController.swift */; };
 		6AC3BF18267B475200DDCBB2 /* PlanRequestRespondingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AC3BF17267B475200DDCBB2 /* PlanRequestRespondingViewController.swift */; };
+		6AD9A2BA268089DB00703E51 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AD9A2B9268089DB00703E51 /* ViewController.swift */; };
 		6AFB77F9267ECD6700B59482 /* WhiteBackgroundView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AFB77F8267ECD6700B59482 /* WhiteBackgroundView.swift */; };
+		6AFB77FE267F343500B59482 /* TagAddModalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AFB77FD267F343500B59482 /* TagAddModalView.swift */; };
+		6AFB7800267F812B00B59482 /* TagColorCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AFB77FF267F812B00B59482 /* TagColorCollectionViewCell.swift */; };
 		E5052C73E73080AD40F6F655 /* Pods_EZY.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A75C11C1873FE4E191601230 /* Pods_EZY.framework */; };
 /* End PBXBuildFile section */
 
@@ -107,7 +110,10 @@
 		6AA76A142663844A00B7E1F5 /* Poppins-SemiBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Poppins-SemiBold.ttf"; path = "../../../../../Downloads/Poppins/Poppins-SemiBold.ttf"; sourceTree = "<group>"; };
 		6AA76A272663958B00B7E1F5 /* ShowScheduleViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowScheduleViewController.swift; sourceTree = "<group>"; };
 		6AC3BF17267B475200DDCBB2 /* PlanRequestRespondingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlanRequestRespondingViewController.swift; sourceTree = "<group>"; };
+		6AD9A2B9268089DB00703E51 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		6AFB77F8267ECD6700B59482 /* WhiteBackgroundView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WhiteBackgroundView.swift; sourceTree = "<group>"; };
+		6AFB77FD267F343500B59482 /* TagAddModalView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagAddModalView.swift; sourceTree = "<group>"; };
+		6AFB77FF267F812B00B59482 /* TagColorCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagColorCollectionViewCell.swift; sourceTree = "<group>"; };
 		8B5046DC93C289B5AC6C406E /* Pods-EZY.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EZY.debug.xcconfig"; path = "Target Support Files/Pods-EZY/Pods-EZY.debug.xcconfig"; sourceTree = "<group>"; };
 		A75C11C1873FE4E191601230 /* Pods_EZY.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_EZY.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -211,6 +217,8 @@
 				6A138F80266F862200DBCE49 /* GroupAddCollectionViewCell.swift */,
 				6A138F82266F864300DBCE49 /* PinterestLayout.swift */,
 				6A138F8C26703C1900DBCE49 /* selectedMemberCollectionViewCell.swift */,
+				6AFB77FD267F343500B59482 /* TagAddModalView.swift */,
+				6AFB77FF267F812B00B59482 /* TagColorCollectionViewCell.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -232,6 +240,7 @@
 				6A138F84266F866D00DBCE49 /* GroupManagementViewController.swift */,
 				6AC3BF17267B475200DDCBB2 /* PlanRequestRespondingViewController.swift */,
 				6A705BB5267E3ABF001954CE /* RescheduleViewController.swift */,
+				6AD9A2B9268089DB00703E51 /* ViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -401,6 +410,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6AD9A2BA268089DB00703E51 /* ViewController.swift in Sources */,
 				6A138F83266F864300DBCE49 /* PinterestLayout.swift in Sources */,
 				6A4EDA35266BD27800B809EC /* TopView.swift in Sources */,
 				6A4EDA2C266A045B00B809EC /* NotificationViewController.swift in Sources */,
@@ -418,6 +428,7 @@
 				6AA769EF26636AE700B7E1F5 /* EZY.xcdatamodeld in Sources */,
 				6A98A9CC2666F94E00BFAE30 /* ScheduleTypeCollectionViewCell.swift in Sources */,
 				6AC3BF18267B475200DDCBB2 /* PlanRequestRespondingViewController.swift in Sources */,
+				6AFB77FE267F343500B59482 /* TagAddModalView.swift in Sources */,
 				6AFB77F9267ECD6700B59482 /* WhiteBackgroundView.swift in Sources */,
 				6A138F89266FACFE00DBCE49 /* GroupAddModalView.swift in Sources */,
 				6AA769E526636AE700B7E1F5 /* AppDelegate.swift in Sources */,
@@ -426,6 +437,7 @@
 				6AA769E726636AE700B7E1F5 /* SceneDelegate.swift in Sources */,
 				6A4EDA002668653200B809EC /* ScheduleTimeTableViewCell.swift in Sources */,
 				6A138F85266F866D00DBCE49 /* GroupManagementViewController.swift in Sources */,
+				6AFB7800267F812B00B59482 /* TagColorCollectionViewCell.swift in Sources */,
 				6A4EDA2E266A332100B809EC /* NotificationTableViewCell.swift in Sources */,
 				6A138F8D26703C1900DBCE49 /* selectedMemberCollectionViewCell.swift in Sources */,
 			);

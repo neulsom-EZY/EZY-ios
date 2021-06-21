@@ -7,7 +7,7 @@
 
 import UIKit
 
-class RescheduleViewController: UIViewController {
+class RescheduleViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate {
     
     lazy var topView = TopView()
     
@@ -16,6 +16,11 @@ class RescheduleViewController: UIViewController {
     lazy var timeView = WhiteBackgroundView()
     
     lazy var locationView = WhiteBackgroundView()
+    
+    lazy var tagAddModalView = TagAddModalView()
+    
+    var myCollectionView:UICollectionView?
+
     
     var isChecked: [Bool] = [true, false, false, false]
     
@@ -122,6 +127,9 @@ class RescheduleViewController: UIViewController {
         $0.layer.borderColor = UIColor(red: 186/255, green: 200/255, blue: 255/255, alpha: 1).cgColor
         $0.dynamicFont(fontSize: 12, currentFontName: "AppleSDGothicNeo-Bold")
     }
+    
+    
+    var tagColorArray: [UIColor] = [UIColor(red: 186/255, green: 200/255, blue: 255/255, alpha: 1),UIColor(red: 196/255, green: 200/255, blue: 255/255, alpha: 1),UIColor(red: 206/255, green: 200/255, blue: 255/255, alpha: 1),UIColor(red: 216/255, green: 200/255, blue: 255/255, alpha: 1),UIColor(red: 226/255, green: 200/255, blue: 255/255, alpha: 1),UIColor(red: 236/255, green: 200/255, blue: 255/255, alpha: 1),UIColor(red: 246/255, green: 200/255, blue: 255/255, alpha: 1),UIColor(red: 255/255, green: 200/255, blue: 255/255, alpha: 1),UIColor(red: 186/255, green: 200/255, blue: 255/255, alpha: 1),UIColor(red: 196/255, green: 200/255, blue: 255/255, alpha: 1),UIColor(red: 206/255, green: 200/255, blue: 255/255, alpha: 1),UIColor(red: 216/255, green: 200/255, blue: 255/255, alpha: 1),UIColor(red: 226/255, green: 200/255, blue: 255/255, alpha: 1),UIColor(red: 236/255, green: 200/255, blue: 255/255, alpha: 1),UIColor(red: 246/255, green: 200/255, blue: 255/255, alpha: 1),UIColor(red: 255/255, green: 200/255, blue: 255/255, alpha: 1)]
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -139,9 +147,118 @@ class RescheduleViewController: UIViewController {
         locationViewSetting()
 
         labelSetting()
+        
+        tagAddModalViewSetting()
+        
+        myCollectionView?.dataSource = self
+        myCollectionView?.delegate = self
+        
+    }
+
+    
+    func tagAddModalViewSetting(){
+        self.view.addSubview(tagAddModalView)
+        tagAddModalView.addSubview(tagAddModalView.shadowBackgroundView)
+        tagAddModalView.shadowBackgroundView.addSubview(tagAddModalView.modalBackgroundView)
+        tagAddModalView.modalBackgroundView.addSubview(tagAddModalView.titleLabel)
+        tagAddModalView.modalBackgroundView.addSubview(tagAddModalView.tagNameLabel)
+        tagAddModalView.modalBackgroundView.addSubview(tagAddModalView.tagNameBackgroundView)
+        tagAddModalView.tagNameBackgroundView.addSubview(tagAddModalView.tagNameTextField)
+        tagAddModalView.modalBackgroundView.addSubview(tagAddModalView.tagColorLabel)
+        tagAddModalView.modalBackgroundView.addSubview(tagAddModalView.colorView1)
+        tagAddModalView.modalBackgroundView.addSubview(tagAddModalView.colorView2)
+        tagAddModalView.modalBackgroundView.addSubview(tagAddModalView.colorView3)
+        tagAddModalView.modalBackgroundView.addSubview(tagAddModalView.colorView4)
+        tagAddModalView.modalBackgroundView.addSubview(tagAddModalView.colorView5)
+        tagAddModalView.modalBackgroundView.addSubview(tagAddModalView.colorView6)
+        tagAddModalView.modalBackgroundView.addSubview(tagAddModalView.colorView7)
+        tagAddModalView.modalBackgroundView.addSubview(tagAddModalView.colorView8)
+        
+        tagAddModalView.snp.makeConstraints { make in
+            make.top.right.bottom.left.equalToSuperview()
+        }
+        
+        tagAddModalView.shadowBackgroundView.snp.makeConstraints { make in
+            make.top.right.bottom.left.equalToSuperview()
+        }
+        
+        tagAddModalView.modalBackgroundView.snp.makeConstraints { make in
+            make.centerX.centerY.equalToSuperview()
+            make.width.equalToSuperview().dividedBy(1.2)
+            make.height.equalToSuperview().dividedBy(3.3)
+        }
+        
+        tagAddModalView.titleLabel.snp.makeConstraints { make in
+            make.top.equalToSuperview().offset(self.view.frame.height/33.8)
+            make.left.equalToSuperview().offset(self.view.frame.height/33.8)
+        }
+        
+        tagAddModalView.tagNameLabel.snp.makeConstraints { make in
+            make.top.equalTo(tagAddModalView.titleLabel.snp.bottom).offset(self.view.frame.height/62.4)
+            make.left.equalTo(tagAddModalView.titleLabel)
+        }
+        
+        tagAddModalView.tagNameBackgroundView.snp.makeConstraints { make in
+            make.left.equalTo(tagAddModalView.tagNameLabel)
+            make.centerX.equalToSuperview()
+            make.height.equalToSuperview().dividedBy(6.3)
+            make.top.equalTo(tagAddModalView.tagNameLabel.snp.bottom).offset(self.view.frame.height/135.3)
+        }
+        
+        tagAddModalView.tagNameTextField.snp.makeConstraints { make in
+            make.left.equalToSuperview().offset(self.view.frame.width/28.8)
+            make.centerX.equalToSuperview()
+            make.height.equalToSuperview()
+        }
+        
+        tagAddModalView.tagColorLabel.snp.makeConstraints { make in
+            make.top.equalTo(tagAddModalView.tagNameBackgroundView.snp.bottom).offset(self.view.frame.height/50.7)
+            make.left.equalTo(tagAddModalView.tagNameBackgroundView)
+        }
     }
     
-    @objc func tagStudybuttonClicked(sender:UIButton)
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        let layout: UICollectionViewFlowLayout = UICollectionViewFlowLayout()
+        layout.itemSize = CGSize(width: 30, height: 30)
+        layout.scrollDirection = .horizontal
+        
+        let myCollectionView: UICollectionView = UICollectionView(frame: self.view.frame, collectionViewLayout: layout)
+        
+        myCollectionView.showsHorizontalScrollIndicator = false
+        myCollectionView.dataSource = self
+        myCollectionView.delegate = self
+        myCollectionView.register(TagColorCollectionViewCell.self, forCellWithReuseIdentifier: TagColorCollectionViewCell.reuseId)
+        myCollectionView.backgroundColor = UIColor.white
+        tagAddModalView.modalBackgroundView.addSubview(myCollectionView)
+        
+        myCollectionView.snp.makeConstraints { make in
+            make.top.equalTo(tagAddModalView.tagColorLabel.snp.bottom)
+            make.left.equalTo(tagAddModalView.tagColorLabel)
+            make.height.equalTo(tagAddModalView.modalBackgroundView).dividedBy(5)
+            make.right.equalTo(tagAddModalView.modalBackgroundView)
+        }
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return 10
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let myCell = collectionView.dequeueReusableCell(withReuseIdentifier: TagColorCollectionViewCell.reuseId, for: indexPath) as! TagColorCollectionViewCell
+        
+
+        return myCell
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath)
+    {
+        print("User tapped on item \(indexPath.row)")
+    }
+    
+    
+    @objc func tagbuttonClicked(sender:UIButton)
     {
         var backgroundColor: UIColor
         var borderColor: CGColor
@@ -187,10 +304,6 @@ class RescheduleViewController: UIViewController {
         }
     }
     
-    func buttonUnClicked(){
-        
-    }
-    
     func layoutSetting(){
         self.view.addSubview(titleBackgroundView)
         titleBackgroundView.addSubview(titleLabel)
@@ -210,13 +323,13 @@ class RescheduleViewController: UIViewController {
         tagMajorBandButton.tag = 2
         tagFreedomBandButton.tag = 3
         
-        tagStudyButton.addTarget(self,action:#selector(tagStudybuttonClicked),
+        tagStudyButton.addTarget(self,action:#selector(tagbuttonClicked),
                                  for:.touchUpInside)
-        tagWalkButton.addTarget(self,action:#selector(tagStudybuttonClicked),
+        tagWalkButton.addTarget(self,action:#selector(tagbuttonClicked),
                                  for:.touchUpInside)
-        tagMajorBandButton.addTarget(self,action:#selector(tagStudybuttonClicked),
+        tagMajorBandButton.addTarget(self,action:#selector(tagbuttonClicked),
                                  for:.touchUpInside)
-        tagFreedomBandButton.addTarget(self,action:#selector(tagStudybuttonClicked),
+        tagFreedomBandButton.addTarget(self,action:#selector(tagbuttonClicked),
                                  for:.touchUpInside)
         
         self.view.addSubview(explanationBackgroundView)
@@ -410,13 +523,12 @@ class RescheduleViewController: UIViewController {
         timeLabel.snp.makeConstraints { make in
             make.centerY.equalTo(timeView)
             make.left.equalTo(timeView.snp.right).offset(self.view.frame.width/13.8)
-
         }
         
         locationLabel.snp.makeConstraints { make in
             make.centerY.equalTo(locationView)
             make.left.equalTo(locationView.snp.right).offset(self.view.frame.width/13.8)
-
         }
     }
+    
 }
