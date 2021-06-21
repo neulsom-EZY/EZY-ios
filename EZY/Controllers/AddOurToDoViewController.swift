@@ -21,6 +21,7 @@ class AddOurToDoViewController: UIViewController {
    
     let scrollView = UIScrollView().then  {
         $0.backgroundColor = .white
+        
     }
 
     
@@ -231,12 +232,14 @@ class AddOurToDoViewController: UIViewController {
         scrollView.addSubview(addButton)
         
         addButton.snp.makeConstraints { (make) in
-            make.bottom.equalToSuperview().offset(view.frame.height/10.9 * -1)
+            make.bottom.equalTo(tagLabel.snp.bottom).offset(view.frame.height/6.1)
             make.height.equalTo(self.view.frame.height/18.0)
             make.left.equalTo(backbutton.snp.left)
             make.right.equalTo(titleContainerView.snp.right)
-            
         }
+        
+//        scrollView.contentSize = CGSize(width: view.frame.size.width, height: )
+        
    
   
     }
