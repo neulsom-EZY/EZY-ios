@@ -46,35 +46,11 @@ class TagAddModalView: UIView {
         $0.textColor = UIColor(red: 129/255, green: 129/255, blue: 129/255, alpha: 1)
     }
     
-    lazy var colorView1 = UIView().then {
-        $0.backgroundColor = UIColor(red: 186/255, green: 200/255, blue: 255/255, alpha: 1)
-    }
-    
-    lazy var colorView2 = UIView().then {
-        $0.backgroundColor = UIColor(red: 196/255, green: 200/255, blue: 255/255, alpha: 1)
-    }
-    
-    lazy var colorView3 = UIView().then {
-        $0.backgroundColor = UIColor(red: 206/255, green: 200/255, blue: 255/255, alpha: 1)
-    }
-    
-    lazy var colorView4 = UIView().then {
-        $0.backgroundColor = UIColor(red: 216/255, green: 200/255, blue: 255/255, alpha: 1)
-    }
-    
-    lazy var colorView5 = UIView().then {
-        $0.backgroundColor = UIColor(red: 226/255, green: 200/255, blue: 255/255, alpha: 1)
-    }
-    
-    lazy var colorView6 = UIView().then {
-        $0.backgroundColor = UIColor(red: 236/255, green: 200/255, blue: 255/255, alpha: 1)
-    }
-    
-    lazy var colorView7 = UIView().then {
-        $0.backgroundColor = UIColor(red: 246/255, green: 200/255, blue: 255/255, alpha: 1)
-    }
-    
-    lazy var colorView8 = UIView().then {
-        $0.backgroundColor = UIColor(red: 255/255, green: 200/255, blue: 255/255, alpha: 1)
+    lazy var tagAddButton = UIButton().then {
+        $0.setTitle("완 료", for: .normal)
+        $0.backgroundColor = UIColor(red: 154/255, green: 174/255, blue: 253/255, alpha: 1)
+        $0.layer.cornerRadius = 10
+        $0.dynamicFont(fontSize: 12, currentFontName: "AppleSDGothicNeo-Bold")
+        $0.setTitleColor(UIColor.white, for: .normal)
     }
 }

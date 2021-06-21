@@ -19,7 +19,7 @@ class RescheduleViewController: UIViewController, UICollectionViewDataSource, UI
     
     lazy var tagAddModalView = TagAddModalView()
     
-    var myCollectionView:UICollectionView?
+    var tagColorCollectionView:UICollectionView?
 
     
     var isChecked: [Bool] = [true, false, false, false]
@@ -150,9 +150,8 @@ class RescheduleViewController: UIViewController, UICollectionViewDataSource, UI
         
         tagAddModalViewSetting()
         
-        myCollectionView?.dataSource = self
-        myCollectionView?.delegate = self
-        
+        tagColorCollectionView?.dataSource = self
+        tagColorCollectionView?.delegate = self
     }
 
     
@@ -165,14 +164,7 @@ class RescheduleViewController: UIViewController, UICollectionViewDataSource, UI
         tagAddModalView.modalBackgroundView.addSubview(tagAddModalView.tagNameBackgroundView)
         tagAddModalView.tagNameBackgroundView.addSubview(tagAddModalView.tagNameTextField)
         tagAddModalView.modalBackgroundView.addSubview(tagAddModalView.tagColorLabel)
-        tagAddModalView.modalBackgroundView.addSubview(tagAddModalView.colorView1)
-        tagAddModalView.modalBackgroundView.addSubview(tagAddModalView.colorView2)
-        tagAddModalView.modalBackgroundView.addSubview(tagAddModalView.colorView3)
-        tagAddModalView.modalBackgroundView.addSubview(tagAddModalView.colorView4)
-        tagAddModalView.modalBackgroundView.addSubview(tagAddModalView.colorView5)
-        tagAddModalView.modalBackgroundView.addSubview(tagAddModalView.colorView6)
-        tagAddModalView.modalBackgroundView.addSubview(tagAddModalView.colorView7)
-        tagAddModalView.modalBackgroundView.addSubview(tagAddModalView.colorView8)
+        tagAddModalView.modalBackgroundView.addSubview(tagAddModalView.tagAddButton)
         
         tagAddModalView.snp.makeConstraints { make in
             make.top.right.bottom.left.equalToSuperview()
@@ -215,6 +207,13 @@ class RescheduleViewController: UIViewController, UICollectionViewDataSource, UI
             make.top.equalTo(tagAddModalView.tagNameBackgroundView.snp.bottom).offset(self.view.frame.height/50.7)
             make.left.equalTo(tagAddModalView.tagNameBackgroundView)
         }
+        
+        tagAddModalView.tagAddButton.snp.makeConstraints { make in
+            make.bottom.equalToSuperview().offset(-self.view.frame.height/40.6)
+            make.right.equalToSuperview().offset(-self.view.frame.width/15)
+            make.height.equalToSuperview().dividedBy(7.2)
+            make.width.equalToSuperview().dividedBy(4.7)
+        }
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -248,7 +247,7 @@ class RescheduleViewController: UIViewController, UICollectionViewDataSource, UI
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let myCell = collectionView.dequeueReusableCell(withReuseIdentifier: TagColorCollectionViewCell.reuseId, for: indexPath) as! TagColorCollectionViewCell
         
-
+        myCell.colorBackgroundView.backgroundColor = tagColorArray[indexPath.row]
         return myCell
     }
     
