@@ -231,12 +231,14 @@ extension AddToDoViewController: UICollectionViewDelegate,UICollectionViewDataSo
         let cell  = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath)
         cell.backgroundColor = .white
         cell.layer.cornerRadius = view.frame.height/40.6
+        
         return cell
     }
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         return CGSize(width: view.frame.size.height/9.6,
                       height: view.frame.size.height/25.3)
     }
+    
 }
 
 //MARK: - CollectioNViewCellDelegate

@@ -63,8 +63,8 @@ class Utilities{
         }
         view.addSubview(textView)
         textView.snp.makeConstraints { (make) in
-            make.left.equalTo(label_Message.snp.right).offset(viewSize/42.7)
-            make.right.equalToSuperview()
+            make.left.equalTo(label_Message.snp.right).offset(viewSize/31.2)
+            make.right.equalToSuperview().offset(viewSize/40.6 * -1)
             make.top.equalToSuperview().offset(viewSize/60)
             make.bottom.equalToSuperview().offset(viewSize/60 * -1)
         }
@@ -132,7 +132,7 @@ class Utilities{
         return view
     }
     
-    //MARK: - addTodo Button
+   
     
 
     

@@ -8,11 +8,7 @@
 import UIKit
 import SnapKit
 
-struct MyCustomButtonViewModel{
-    let title : String?
-    let image: UIImage?
-    let color : UIColor?
-}
+
 
 class MoreCalendarModalsButton : UIButton{
     
