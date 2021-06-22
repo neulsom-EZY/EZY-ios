@@ -38,8 +38,9 @@ class MoreCalendarModalsViewController : UIViewController{
     
     private let myToDo : MoreCalendarModalsButton = {
         let viewModel = MyCustomButtonViewModel(title: "나의 할 일", image: UIImage(named: "user")!, color: .EZY_BAC8FF)
-        
+
         let button = MoreCalendarModalsButton(with: viewModel)
+        
         button.addTarget(self, action: #selector(MyTodo), for: .touchUpInside)
         return button
     }()
@@ -106,7 +107,7 @@ class MoreCalendarModalsViewController : UIViewController{
         view.addSubview(errand)
 //        closeBtn.addTarget(self, action: #selector(onTapClose), for: .touchUpInside)
         
-        
+        cornerRadius()
         
         bgView.snp.makeConstraints { (make) in
             make.left.equalToSuperview()
@@ -140,9 +141,11 @@ class MoreCalendarModalsViewController : UIViewController{
             make.width.equalTo(view.frame.height/4.8)
             make.height.equalTo(view.frame.height/15.3)
         }
-        
-        
-        
+    }
+    func cornerRadius(){
+        myToDo.layer.cornerRadius = view.frame.height/40.6
+        ourToDo.layer.cornerRadius = view.frame.height/40.6
+        errand.layer.cornerRadius = view.frame.height/40.6
     }
     
     
