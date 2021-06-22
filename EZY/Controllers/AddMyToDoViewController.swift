@@ -157,7 +157,7 @@ class AddMyToDoViewController:UIViewController{
         view.addSubview(TitleLabel)
         
         TitleLabel.snp.makeConstraints { (make) in
-            make.top.equalTo(backbutton.snp.bottom).offset(self.view.frame.height/30.0)
+            make.top.equalTo(backbutton.snp.bottom).offset(self.view.frame.height/36.9)
             make.left.equalTo(backbutton.snp.left)
         }
         
@@ -181,7 +181,7 @@ class AddMyToDoViewController:UIViewController{
         clockButtonView.snp.makeConstraints { (make) in
             make.height.width.equalTo(self.view.frame.height/18.0)
             make.left.equalTo(calendarButtonView.snp.left)
-            make.top.equalTo(calendarButtonView.snp.bottom).offset(view.frame.height/47.7)
+            make.top.equalTo(calendarButtonView.snp.bottom).offset(view.frame.height/47.8)
         }
         view.addSubview(locationButtonView)
 

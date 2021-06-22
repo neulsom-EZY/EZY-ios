@@ -167,13 +167,14 @@ class AddOurToDoViewController: UIViewController {
         backbutton.snp.makeConstraints { (make) in
             make.height.width.equalTo(self.view.frame.height/33.8)
             make.left.equalTo(self.view.frame.height/29)
-            make.top.equalTo(self.view.frame.height/13.3)
+            make.top.equalTo(view.frame.height/39.4)
+
         }
         
         scrollView.addSubview(TitleLabel)
         
         TitleLabel.snp.makeConstraints { (make) in
-            make.top.equalTo(backbutton.snp.bottom).offset(self.view.frame.height/30.0)
+            make.top.equalTo(backbutton.snp.bottom).offset(self.view.frame.height/36.9)
             make.left.equalTo(backbutton.snp.left)
         }
         
@@ -197,7 +198,7 @@ class AddOurToDoViewController: UIViewController {
         clockButtonView.snp.makeConstraints { (make) in
             make.height.width.equalTo(self.view.frame.height/18.0)
             make.left.equalTo(calendarButtonView.snp.left)
-            make.top.equalTo(calendarButtonView.snp.bottom).offset(view.frame.height/47.7)
+            make.top.equalTo(calendarButtonView.snp.bottom).offset(view.frame.height/47.8)
         }
         scrollView.addSubview(locationButtonView)
 
@@ -238,7 +239,7 @@ class AddOurToDoViewController: UIViewController {
             make.right.equalTo(titleContainerView.snp.right)
         }
         
-//        scrollView.contentSize = CGSize(width: view.frame.size.width, height: )
+        scrollView.contentSize = CGSize(width: view.frame.size.width, height: view.frame.height/0.94)
         
    
   
