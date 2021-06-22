@@ -102,7 +102,7 @@ class Utilities{
         }
         return view
     }
-    func AlertButton(image img: UIImage) -> UIButton{
+    func AlertButton(image img: UIImage,tintColor : UIColor) -> UIButton{
         let button = UIButton()
         button.backgroundColor = .white
         button.layer.shadowColor = UIColor.black.cgColor
