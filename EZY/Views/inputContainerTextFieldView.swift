@@ -11,7 +11,8 @@ import Then
 
 class inputContainerTextFieldView : UIView{
     private let label = UILabel()
-        
+    
+    private let view = UIView()
     
     private let textField = UITextField()
     
@@ -27,15 +28,22 @@ class inputContainerTextFieldView : UIView{
         super.init(frame: frame)
         
     }
-    
+    private func addSubViews(){
+        addSubview(label)
+        addSubview(textField)
+        addSubview(view)
+    }
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     public func configure(with textFieldModel : TextFieldModel){
+        view.layer.backgroundColor = textFieldModel.color?.cgColor
+        label.textColor = textFieldModel.tfcolor
         
     }
     
     override func layoutSubviews() {
         super.layoutSubviews()
+        
     }
 }

@@ -70,7 +70,6 @@ class MoreCalendarModalsViewController : UIViewController{
     override func viewDidLoad() {
         super.viewDidLoad()
         configureUI()
-
         
     }
     
@@ -99,16 +98,27 @@ class MoreCalendarModalsViewController : UIViewController{
     
     func configureUI(){
         view.backgroundColor = .clear
+        
+        addView()
+        cornerRadius()
+        location()
+        
+    }
+    func addView(){
         view.addSubview(bgView)
-//        view.addSubview(closeBtn)
         view.addSubview(TitleLabel)
         view.addSubview(myToDo)
         view.addSubview(ourToDo)
         view.addSubview(errand)
-//        closeBtn.addTarget(self, action: #selector(onTapClose), for: .touchUpInside)
-        
-        cornerRadius()
-        
+    }
+    
+    func cornerRadius(){
+        myToDo.layer.cornerRadius = view.frame.height/40.6
+        ourToDo.layer.cornerRadius = view.frame.height/40.6
+        errand.layer.cornerRadius = view.frame.height/40.6
+    }
+    
+    func location(){
         bgView.snp.makeConstraints { (make) in
             make.left.equalToSuperview()
             make.right.equalToSuperview()
@@ -142,12 +152,6 @@ class MoreCalendarModalsViewController : UIViewController{
             make.height.equalTo(view.frame.height/15.3)
         }
     }
-    func cornerRadius(){
-        myToDo.layer.cornerRadius = view.frame.height/40.6
-        ourToDo.layer.cornerRadius = view.frame.height/40.6
-        errand.layer.cornerRadius = view.frame.height/40.6
-    }
-    
     
 }
 

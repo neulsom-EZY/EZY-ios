@@ -140,84 +140,77 @@ class AddMyToDoViewController:UIViewController{
     //MARK: - Helpers
     func configureUI(){
         view.backgroundColor = .white
+        addView()
+        cornerRadius()
+        location()
+    }
+    
+    
+    func addView(){
         view.addSubview(backbutton)
+        view.addSubview(TitleLabel)
+        view.addSubview(titleContainerView)
+        view.addSubview(calendarButtonView)
+        view.addSubview(locationButtonView)
+        view.addSubview(clockButtonView)
+        view.addSubview(explanationContainerView)
+        view.addSubview(kindOfCollectionView)
+        view.addSubview(addButton)
+    }
+    func cornerRadius(){
         titleContainerView.layer.cornerRadius = view.frame.height/40.6
         addButton.layer.cornerRadius = view.frame.height/81.2
         calendarButton.layer.cornerRadius = view.frame.height/81.2
         clockButton.layer.cornerRadius = view.frame.height/81.2
         locationButton.layer.cornerRadius = view.frame.height/81.2
         explanationContainerView.layer.cornerRadius = view.frame.height/40.6
-        
+    }
+    func location(){
         backbutton.snp.makeConstraints { (make) in
             make.height.width.equalTo(self.view.frame.height/33.8)
             make.left.equalTo(self.view.frame.height/29)
             make.top.equalTo(self.view.frame.height/13.3)
         }
-        
-        view.addSubview(TitleLabel)
-        
         TitleLabel.snp.makeConstraints { (make) in
             make.top.equalTo(backbutton.snp.bottom).offset(self.view.frame.height/36.9)
             make.left.equalTo(backbutton.snp.left)
         }
-        
-        view.addSubview(titleContainerView)
-        
         titleContainerView.snp.makeConstraints { (make) in
             make.height.equalTo(self.view.frame.height/14.7)
             make.top.equalTo(TitleLabel.snp.bottom).offset(self.view.frame.height/19.8)
             make.left.equalTo(backbutton.snp.left)
             make.right.equalTo(self.view.frame.width/13.8 * -1)
         }
-
-        view.addSubview(calendarButtonView)
         calendarButtonView.snp.makeConstraints { (make) in
             make.height.width.equalTo(self.view.frame.height/18.0)
             make.left.equalTo(backbutton.snp.left)
             make.top.equalTo(titleContainerView.snp.bottom).offset(view.frame.height/30.0)
         }
-
-        view.addSubview(clockButtonView)
         clockButtonView.snp.makeConstraints { (make) in
             make.height.width.equalTo(self.view.frame.height/18.0)
             make.left.equalTo(calendarButtonView.snp.left)
             make.top.equalTo(calendarButtonView.snp.bottom).offset(view.frame.height/47.8)
         }
-        view.addSubview(locationButtonView)
-
         locationButtonView.snp.makeConstraints { (make) in
             make.height.width.equalTo(self.view.frame.height/18.0)
             make.left.equalTo(calendarButtonView.snp.left)
             make.top.equalTo(clockButtonView.snp.bottom).offset(view.frame.height/47.7)
         }
-
-        view.addSubview(explanationContainerView)
-        
         explanationContainerView.snp.makeConstraints { (make) in
             make.height.equalTo(self.view.frame.height/10.8)
             make.top.equalTo(locationButtonView.snp.bottom).offset(self.view.frame.height/19.8)
             make.left.equalTo(backbutton.snp.left)
             make.right.equalTo(self.view.frame.width/13.8 * -1)
         }
-        
-        view.addSubview(kindOfCollectionView)
         kindOfCollectionView.snp.makeConstraints { (make) in
             make.left.equalTo(backbutton.snp.left)
             make.top.equalTo(explanationContainerView.snp.bottom).offset(view.frame.height/38.6)
         }
-        
-        
-        
-        view.addSubview(addButton)
-        
         addButton.snp.makeConstraints { (make) in
             make.bottom.equalToSuperview().offset(view.frame.height/10.9 * -1)
             make.height.equalTo(self.view.frame.height/18.0)
             make.left.equalTo(backbutton.snp.left)
             make.right.equalTo(titleContainerView.snp.right)
-            
         }
-   
-  
     }
 }

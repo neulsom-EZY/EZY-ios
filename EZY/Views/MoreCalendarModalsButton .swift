@@ -51,7 +51,6 @@ class MoreCalendarModalsButton : UIButton{
         toDoLabel.textColor = viewModel.color
         toDoLabel.text = viewModel.title
         iconView.image = viewModel.image
-        
     }
     override func layoutSubviews() {
         super.layoutSubviews()
@@ -59,10 +58,12 @@ class MoreCalendarModalsButton : UIButton{
             make.centerY.equalToSuperview()
             make.left.equalTo(frame.height/1.5)
             make.height.width.equalTo(frame.height/2.9)
+            
         }
         toDoLabel.snp.makeConstraints { (make) in
             make.centerY.equalToSuperview()
             make.left.equalTo(iconView.snp.right).offset(frame.height/8.8)
+            
         }
         
     }

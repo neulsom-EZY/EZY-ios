@@ -62,42 +62,48 @@ class MorePeopleToDo: UIViewController{
     //MARK: - Helpers
     func configureUI(){
         view.backgroundColor = .white
+        addView()
+        location()
+    }
+    
+    func addView(){
         view.addSubview(backbutton)
+        view.addSubview(TitleLabel)
+        view.addSubview(SubLabel)
+        view.addSubview(GroupLabel)
+        view.addSubview(nickNameTextFieldContainerView)
+        view.addSubview(recommendPeopleLabel)
+    }
+    
+    
+    func location(){
         backbutton.snp.makeConstraints { (make) in
             make.height.width.equalTo(self.view.frame.height/33.8)
             make.left.equalTo(self.view.frame.height/29)
             make.top.equalTo(self.view.frame.height/13.3)
         }
-        view.addSubview(TitleLabel)
         TitleLabel.snp.makeConstraints { (make) in
             make.left.equalTo(backbutton.snp.left)
             make.top.equalTo(backbutton.snp.top).offset(view.frame.height/15.6)
         }
-        view.addSubview(SubLabel)
         SubLabel.snp.makeConstraints { (make) in
             make.top.equalTo(TitleLabel.snp.bottom)
             make.left.equalTo(TitleLabel.snp.left)
-            
         }
-        
-        view.addSubview(GroupLabel)
         GroupLabel.snp.makeConstraints { (make) in
             make.left.equalTo(view.frame.height/20.8)
             make.top.equalTo(SubLabel.snp.bottom).offset(view.frame.height/17.6)
         }
-        view.addSubview(nickNameTextFieldContainerView)
         nickNameTextFieldContainerView.snp.makeConstraints { (make) in
             make.top.equalTo(GroupLabel.snp.bottom).offset(view.frame.height/135.3)
             make.height.equalTo(self.view.frame.height/21.3)
             make.left.equalTo(view.snp.left).offset(self.view.frame.height/23.2)
             make.right.equalTo(view.snp.right).offset(self.view.frame.height/23.8 * -1)
         }
-        view.addSubview(recommendPeopleLabel)
         recommendPeopleLabel.snp.makeConstraints { (make) in
             make.top.equalTo(nickNameTextFieldContainerView.snp.bottom).offset(view.frame.height/21.9)
             make.left.equalTo(view.frame.height/22.5)
         }
-        
     }
     
 }

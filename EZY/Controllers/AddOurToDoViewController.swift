@@ -18,12 +18,12 @@ class AddOurToDoViewController: UIViewController {
         $0.setImage(UIImage(systemName: "arrow.left"), for: .normal)
         $0.addTarget(self, action: #selector(todobackbtn), for: .touchUpInside)
     }
-   
+    
     let scrollView = UIScrollView().then  {
         $0.backgroundColor = .white
         
     }
-
+    
     
     
     private let TitleLabel = UILabel().then{
@@ -53,7 +53,7 @@ class AddOurToDoViewController: UIViewController {
     private let calendarButton : UIButton = {
         let button = Utilities().AlertButton(image: UIImage(named: "calendar")!, tintColor: .EZY_FFB5B5)
         button.addTarget(self, action: #selector(calendarAlert), for: .touchUpInside)
-       return button
+        return button
     }()
     
     
@@ -67,7 +67,7 @@ class AddOurToDoViewController: UIViewController {
     private let clockButton : UIButton = {
         let button = Utilities().AlertButton(image: UIImage(named: "clock")!, tintColor: .EZY_FFCBB5)
         button.addTarget(self, action: #selector(calendarAlert), for: .touchUpInside)
-       return button
+        return button
     }()
     
     private lazy var locationButtonView : UIView = {
@@ -78,13 +78,13 @@ class AddOurToDoViewController: UIViewController {
     private let locationButton : UIButton = {
         let button = Utilities().AlertButton(image: UIImage(named: "location")!, tintColor: .EZY_C7E0D4)
         button.addTarget(self, action: #selector(calendarAlert), for: .touchUpInside)
-       return button
+        return button
     }()
     
     private lazy var explanationContainerView : UIView = {
         let title = "설명"
         let view = Utilities().inputContainerTextView(withMessage: title, textView: explanationTextView, Color: .EZY_F6F3FF, viewSize: Double(view.frame.height))
-
+        
         return view
     }()
     
@@ -103,7 +103,7 @@ class AddOurToDoViewController: UIViewController {
     }
     
     private var collectionView: UICollectionView?
-
+    
     private let tagLabel = UILabel().then{
         $0.text = "태그"
         $0.textColor = .EZY_B6B6B6
@@ -117,7 +117,7 @@ class AddOurToDoViewController: UIViewController {
         button.addTarget(self, action: #selector(Addmytodobtn), for: .touchUpInside)
         return button
     }()
-
+    
     
     
     //MARK: - Lifecycle
@@ -150,13 +150,13 @@ class AddOurToDoViewController: UIViewController {
     
     //MARK: - Helpers
     func configureUI(){
-        view.addSubview(scrollView)
-        scrollView.snp.makeConstraints { (make) in
-            make.top.bottom.right.left.equalToSuperview()
-        }
+        addView()
+        cornerRadius()
+        location()
+        scrollView.contentSize = CGSize(width: view.frame.size.width, height: view.frame.height/0.94)
         
-        
-        scrollView.addSubview(backbutton)
+    }
+    func cornerRadius(){
         titleContainerView.layer.cornerRadius = view.frame.height/40.6
         addButton.layer.cornerRadius = view.frame.height/81.2
         calendarButton.layer.cornerRadius = view.frame.height/81.2
@@ -164,84 +164,74 @@ class AddOurToDoViewController: UIViewController {
         locationButton.layer.cornerRadius = view.frame.height/81.2
         explanationContainerView.layer.cornerRadius = view.frame.height/40.6
         
+    }
+    func addView(){
+        view.addSubview(scrollView)
+        scrollView.addSubview(backbutton)
+        scrollView.addSubview(TitleLabel)
+        scrollView.addSubview(titleContainerView)
+        scrollView.addSubview(calendarButtonView)
+        scrollView.addSubview(clockButtonView)
+        scrollView.addSubview(locationButtonView)
+        scrollView.addSubview(explanationContainerView)
+        scrollView.addSubview(selectPeople)
+        scrollView.addSubview(tagLabel)
+        scrollView.addSubview(addButton)
+    }
+    
+    func location(){
+        scrollView.snp.makeConstraints { (make) in
+            make.top.bottom.right.left.equalToSuperview()
+        }
         backbutton.snp.makeConstraints { (make) in
             make.height.width.equalTo(self.view.frame.height/33.8)
             make.left.equalTo(self.view.frame.height/29)
             make.top.equalTo(view.frame.height/39.4)
-
         }
-        
-        scrollView.addSubview(TitleLabel)
-        
         TitleLabel.snp.makeConstraints { (make) in
             make.top.equalTo(backbutton.snp.bottom).offset(self.view.frame.height/36.9)
             make.left.equalTo(backbutton.snp.left)
         }
-        
-        scrollView.addSubview(titleContainerView)
-        
         titleContainerView.snp.makeConstraints { (make) in
             make.height.equalTo(self.view.frame.height/14.7)
             make.top.equalTo(TitleLabel.snp.bottom).offset(self.view.frame.height/19.8)
             make.left.equalTo(backbutton.snp.left)
             make.right.equalTo(view.snp.right).offset(self.view.frame.height/19.8 * -1)
         }
-
-        scrollView.addSubview(calendarButtonView)
         calendarButtonView.snp.makeConstraints { (make) in
             make.height.width.equalTo(self.view.frame.height/18.0)
             make.left.equalTo(backbutton.snp.left)
             make.top.equalTo(titleContainerView.snp.bottom).offset(view.frame.height/30.0)
         }
-
-        scrollView.addSubview(clockButtonView)
         clockButtonView.snp.makeConstraints { (make) in
             make.height.width.equalTo(self.view.frame.height/18.0)
             make.left.equalTo(calendarButtonView.snp.left)
             make.top.equalTo(calendarButtonView.snp.bottom).offset(view.frame.height/47.8)
         }
-        scrollView.addSubview(locationButtonView)
-
         locationButtonView.snp.makeConstraints { (make) in
             make.height.width.equalTo(self.view.frame.height/18.0)
             make.left.equalTo(calendarButtonView.snp.left)
             make.top.equalTo(clockButtonView.snp.bottom).offset(view.frame.height/47.7)
         }
-
-        scrollView.addSubview(explanationContainerView)
-        
         explanationContainerView.snp.makeConstraints { (make) in
             make.height.equalTo(self.view.frame.height/10.8)
             make.top.equalTo(locationButtonView.snp.bottom).offset(self.view.frame.height/19.8)
             make.left.equalTo(backbutton.snp.left)
             make.right.equalTo(titleContainerView.snp.right)
         }
- 
-        scrollView.addSubview(selectPeople)
         selectPeople.snp.makeConstraints { (make) in
             make.left.equalTo(backbutton.snp.left)
             make.top.equalTo(explanationContainerView.snp.bottom).offset(view.frame.height/38.6)
         }
-       
-        
-        scrollView.addSubview(tagLabel)
         tagLabel.snp.makeConstraints { (make) in
             make.left.equalTo(selectPeople.snp.left)
             make.top.equalTo(selectPeople.snp.bottom).offset(view.frame.height/7)
         }
-        
-        scrollView.addSubview(addButton)
-        
         addButton.snp.makeConstraints { (make) in
             make.bottom.equalTo(tagLabel.snp.bottom).offset(view.frame.height/6.1)
             make.height.equalTo(self.view.frame.height/18.0)
             make.left.equalTo(backbutton.snp.left)
             make.right.equalTo(titleContainerView.snp.right)
         }
-        
-        scrollView.contentSize = CGSize(width: view.frame.size.width, height: view.frame.height/0.94)
-        
-   
-  
     }
 }

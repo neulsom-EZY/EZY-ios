@@ -28,6 +28,7 @@ struct MyCustomButtonViewModel{
 struct TextFieldModel {
     let title : String?
     let color : UIColor?
+    let tfcolor : UIColor?
     let tfSize : Int?
     let tfFont : UIFont.Weight?
 }
