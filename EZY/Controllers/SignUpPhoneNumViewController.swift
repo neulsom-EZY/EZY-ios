@@ -81,16 +81,26 @@ class SignUpPhoneNumViewController: UIViewController{
     //MARK: - Helpers
     func configureUI(){
         view.backgroundColor = .white
+        addView()
+        cornerRadius()
+        location()
+    }
+    
+    func addView(){
         view.addSubview(goBackButton)
         view.addSubview(EZY_Logo)
         view.addSubview(putPhoneNumLabel)
         view.addSubview(phoneNumContainerView)
         view.addSubview(continueButton)
         view.addSubview(certifiedButton)
-        
-        continueButton.layer.cornerRadius = self.view.frame.width/37.5
-        certifiedButton.layer.cornerRadius = self.view.frame.width/30
-        
+    }
+    
+    func cornerRadius(){
+        continueButton.layer.cornerRadius = self.view.frame.height/81.2
+        certifiedButton.layer.cornerRadius = self.view.frame.height/75
+    }
+    
+    func location(){
         goBackButton.snp.makeConstraints { make in
             make.top.equalToSuperview().offset(self.view.frame.height/9.12)
             make.left.equalToSuperview().offset(self.view.frame.width/9.14)

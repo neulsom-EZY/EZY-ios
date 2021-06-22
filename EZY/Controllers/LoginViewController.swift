@@ -80,6 +80,12 @@ class LoginViewController: UIViewController{
         $0.addTarget(self, action: #selector(onTapLogin), for: .touchUpInside)
     }
     
+    lazy var notCorrectLabel = UILabel().then {
+        $0.text = "닉네임과 비밀번호가 올바르지 않습니다!"
+        $0.dynamicFont(fontSize: 10, currentFontName: "AppleSDGothicNeo-SemiBold")
+        $0.textColor = UIColor.EZY_FCA1A1
+    }
+    
     
     //MARK: - Lifecycle
     override func viewDidLoad() {
@@ -118,6 +124,12 @@ class LoginViewController: UIViewController{
     //MARK: - Helpers
     func configureUI(){
         view.backgroundColor = .white
+        addView()
+        cornerRadius()
+        location()
+    }
+    
+    func addView(){
         view.addSubview(titleLabel)
         view.addSubview(subLabel)
         view.addSubview(textLabel)
@@ -127,9 +139,13 @@ class LoginViewController: UIViewController{
         view.addSubview(forgotPasswordButton)
         view.addSubview(doNotHaveAccountButton)
         view.addSubview(loginButton)
-        
-        loginButton.layer.cornerRadius = self.view.frame.width/37.5
-        
+    }
+    
+    func cornerRadius(){
+        loginButton.layer.cornerRadius = self.view.frame.height/81.2
+    }
+    
+    func location(){
         titleLabel.snp.makeConstraints { make in
             make.top.equalToSuperview().offset(self.view.frame.height/6.6)
             make.left.equalToSuperview().offset(self.view.frame.width/7.98)
@@ -182,7 +198,9 @@ class LoginViewController: UIViewController{
             make.width.equalTo(self.view.frame.width/1.34)
             make.height.equalTo(self.view.frame.height/16.24)
         }
+
     }
+
 
 }
 

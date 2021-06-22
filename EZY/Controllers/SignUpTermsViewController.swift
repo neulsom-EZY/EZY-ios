@@ -263,6 +263,11 @@ class SignUpTermsViewController: UIViewController{
     //MARK: - Helpers
     func configureUI(){
         view.backgroundColor = .white
+        addView()
+        cornerRadius()
+        location()
+    }
+    func addView(){
         view.addSubview(goBackButton)
         view.addSubview(EZY_Logo)
         view.addSubview(agreeTermsLabel)
@@ -292,12 +297,16 @@ class SignUpTermsViewController: UIViewController{
         view.addSubview(locationSubTermLabel)
         view.addSubview(locationSubTermButton)
         view.addSubview(continueButton)
-        
-        allAgreeContainer.layer.cornerRadius = 5
-        termsContainer.layer.cornerRadius = 5
-        locationTermContainer.layer.cornerRadius = 5
-        continueButton.layer.cornerRadius = 10
-
+    }
+    
+    func cornerRadius(){
+        allAgreeContainer.layer.cornerRadius = self.view.frame.height/162.4
+        termsContainer.layer.cornerRadius = self.view.frame.height/162.4
+        locationTermContainer.layer.cornerRadius = self.view.frame.height/162.4
+        continueButton.layer.cornerRadius = self.view.frame.height/81.2
+    }
+    
+    func location(){
         goBackButton.snp.makeConstraints { make in
             make.top.equalToSuperview().offset(self.view.frame.height/9.12)
             make.left.equalToSuperview().offset(self.view.frame.width/9.14)
