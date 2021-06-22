@@ -91,6 +91,9 @@ class MoreCalendarModalsViewController : UIViewController{
         present(vc, animated: true, completion: nil)
     }
     @objc func Errand(){
+        let vc = AddErrandViewController()
+        vc.modalPresentationStyle = .fullScreen
+        present(vc, animated: true, completion: nil)
     }
     
     //MARK: - HELPERS

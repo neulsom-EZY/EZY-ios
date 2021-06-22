@@ -22,28 +22,49 @@ class inputContainerTextFieldView : UIView{
         self.textFieldModel = textFieldModel
         super.init(frame: .zero)
         
+        addSubViews()
+        configure(with: textFieldModel)
+        
     }
     override init(frame: CGRect) {
         self.textFieldModel = nil
-        super.init(frame: frame)
+        super.init(frame: .zero)
         
     }
     private func addSubViews(){
-        addSubview(label)
-        addSubview(textField)
         addSubview(view)
+        view.addSubview(label)
+        view.addSubview(textField)
     }
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+    
     public func configure(with textFieldModel : TextFieldModel){
-        view.layer.backgroundColor = textFieldModel.color?.cgColor
-        label.textColor = textFieldModel.tfcolor
+        layer.backgroundColor = textFieldModel.color?.cgColor
         
+        label.text = textFieldModel.title
+        label.textColor = textFieldModel.labelColor
+        label.dynamicFont(fontSize: textFieldModel.labelSize!, weight: textFieldModel.labelFont!)
+        
+        textField.textColor = textFieldModel.tfcolor
+        textField.dynamicFont(fontSize: textFieldModel.tfSize!, weight: textFieldModel.tfFont!)
     }
     
     override func layoutSubviews() {
         super.layoutSubviews()
+        
+        label.snp.makeConstraints { (make) in
+            make.left.equalToSuperview().offset(frame.height / 38.6)
+            make.centerY.equalTo(view.snp.centerY)
+        }
+        
+        textField.snp.makeConstraints { (make) in
+            make.right.equalTo(view.snp.right).offset(frame.height/31.2 * -1)
+            make.height.equalTo(frame.height/14.7)
+            make.centerY.equalTo(view.snp.centerY)
+            make.left.equalTo(label.snp.right).offset(frame.height/31.2)
+        }
         
     }
 }
