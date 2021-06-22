@@ -23,3 +23,9 @@ struct MyCustomButtonViewModel{
     let image: UIImage?
     let color : UIColor?
 }
+
+struct TextFieldModel {
+    let title : String?
+    let color : UIColor?
+    
+}

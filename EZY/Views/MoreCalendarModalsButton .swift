@@ -12,18 +12,14 @@ import Then
 
 class MoreCalendarModalsButton : UIButton{
     
-    private let toDoLabel : UILabel = {
-        let label = UILabel()
-        label.numberOfLines = 1
-        label.dynamicFont(fontSize: 18, weight: .semibold)
-        label.textAlignment = .center
-        return label
-    }()
-    private let iconView : UIImageView = {
-        let imageView = UIImageView()
-        imageView.contentMode = .scaleAspectFit
-        return imageView
-    }()
+    private let toDoLabel = UILabel().then{
+        $0.numberOfLines = 1
+        $0.dynamicFont(fontSize: 18, weight: .semibold)
+        $0.textAlignment = .center
+    }
+    private let iconView = UIImageView().then {
+        $0.contentMode = .scaleAspectFit
+    }
     
     private var viewModel : MyCustomButtonViewModel?
     
