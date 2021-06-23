@@ -74,6 +74,7 @@ class AddErrandViewController : UIViewController{
     private let locationBtn : AlertButton = {
         let viewModel = AlertBtn(icon: UIImage(named: "location"), iconTintColor: .EZY_C7E0D4, message: "광주소프트웨어마이스터고등학교")
         let button = AlertButton(with: viewModel)
+        
         button.addTarget(self, action: #selector(Addmytodobtn), for: .touchUpInside)
         return button
     }()
@@ -116,7 +117,7 @@ class AddErrandViewController : UIViewController{
 
 
     
-    private let addButton : AdditionalButton = {
+    private lazy var addButton : AdditionalButton = {
         let button = AdditionalButton(type: .system)
         button.title = "추가"
         button.addTarget(self, action: #selector(Addmytodobtn), for: .touchUpInside)
