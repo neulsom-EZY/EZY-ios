@@ -12,14 +12,7 @@ import Then
 class SignUpPasswordViewController: UIViewController{
     //MARK: - Properties
     
-    lazy var goBackButton = UIButton().then {
-        $0.setImage(UIImage(named: "EZY_GoBackBtn"), for: .normal)
-        $0.addTarget(self, action: #selector(goBack), for: .touchUpInside)
-    }
-    
-    lazy var EZY_Logo = UIImageView().then {
-        $0.image = UIImage(named: "EZY_LOGOTYPE_2")
-    }
+    let topBarView = TopBarView()
     
     lazy var putPasswordLabel = UILabel().then {
         $0.text = "비밀번호를\n입력해주세요."
@@ -76,13 +69,13 @@ class SignUpPasswordViewController: UIViewController{
     func configureUI(){
         view.backgroundColor = .white
         addView()
+        topBarViewSetting()
         cornerRadius()
         location()
     }
     
     func addView(){
-        view.addSubview(goBackButton)
-        view.addSubview(EZY_Logo)
+        view.addSubview(topBarView)
         view.addSubview(putPasswordLabel)
         view.addSubview(passwordContainerView)
         view.addSubview(passwordConstraintsLabel)
@@ -94,22 +87,13 @@ class SignUpPasswordViewController: UIViewController{
     }
     
     func location(){
-        goBackButton.snp.makeConstraints { make in
-            make.top.equalToSuperview().offset(self.view.frame.height/9.12)
-            make.left.equalToSuperview().offset(self.view.frame.width/9.14)
-            make.height.equalTo(self.view.frame.height/50.75)
-            make.width.equalTo(self.view.frame.width/41.67)
-        }
-        
-        EZY_Logo.snp.makeConstraints { make in
-            make.top.equalToSuperview().offset(self.view.frame.height/10.55)
-            make.centerX.equalToSuperview()
-            make.height.equalTo(self.view.frame.height/20.3)
-            make.width.equalTo(self.view.frame.width/4.46)
+        topBarView.snp.makeConstraints { make in
+            make.left.right.equalToSuperview()
+            make.top.equalToSuperview()
         }
         
         putPasswordLabel.snp.makeConstraints { make in
-            make.top.equalTo(EZY_Logo).offset(self.view.frame.height/9.67)
+            make.top.equalToSuperview().offset(self.view.frame.height/5.04)
             make.left.equalTo(passwordContainerView)
         }
         
@@ -131,6 +115,13 @@ class SignUpPasswordViewController: UIViewController{
             make.width.equalTo(self.view.frame.width/1.13)
             make.height.equalTo(self.view.frame.height/16.24)
         }
+    }
+    
+    func topBarViewSetting(){
+        topBarView.addSubview(topBarView.goBackButton)
+        topBarView.addSubview(topBarView.EZY_Logo)
+        
+        topBarView.topBarViewLayoutSetting(screenHeight: self.view.frame.height, screenWidth: self.view.frame.width)
     }
 }
 
