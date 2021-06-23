@@ -24,14 +24,8 @@ struct MyCustomButtonViewModel{
     let color : UIColor?
 }
 
-
-struct TextFieldModel {
-    let title : String?
+struct AlertBtn{
+    let icon : UIImage?
     let color : UIColor?
-    let labelColor : UIColor?
-    let labelSize : CGFloat?
-    let labelFont : UIFont.Weight?
-    let tfcolor : UIColor?
-    let tfSize : CGFloat?
-    let tfFont : UIFont.Weight?
+    let message : UILabel?
 }
