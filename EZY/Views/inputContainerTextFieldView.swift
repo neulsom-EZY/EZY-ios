@@ -10,11 +10,11 @@ import SnapKit
 import Then
 
 class inputContainerTextFieldView : UIView{
-    private let label = UILabel()
+    private let  label = UILabel()
     
     private let view = UIView()
     
-    private let textField = UITextField()
+    private let  textField = UITextField()
     
     private var textFieldModel : TextFieldModel?
     
@@ -23,8 +23,7 @@ class inputContainerTextFieldView : UIView{
         super.init(frame: .zero)
         
         addSubViews()
-        configure(with: textFieldModel)
-        
+        configures(with: textFieldModel)
     }
     override init(frame: CGRect) {
         self.textFieldModel = nil
@@ -40,7 +39,7 @@ class inputContainerTextFieldView : UIView{
         fatalError("init(coder:) has not been implemented")
     }
     
-    public func configure(with textFieldModel : TextFieldModel){
+    public func configures(with textFieldModel : TextFieldModel){
         layer.backgroundColor = textFieldModel.color?.cgColor
         
         label.text = textFieldModel.title
@@ -55,14 +54,14 @@ class inputContainerTextFieldView : UIView{
         super.layoutSubviews()
         
         label.snp.makeConstraints { (make) in
-            make.left.equalToSuperview().offset(frame.height / 38.6)
+            make.left.equalTo(view.snp.left).offset(frame.height / 38.6)
             make.centerY.equalTo(view.snp.centerY)
         }
         
         textField.snp.makeConstraints { (make) in
             make.right.equalTo(view.snp.right).offset(frame.height/31.2 * -1)
             make.height.equalTo(frame.height/14.7)
-            make.centerY.equalTo(view.snp.centerY)
+            make.centerY.equalToSuperview()
             make.left.equalTo(label.snp.right).offset(frame.height/31.2)
         }
         

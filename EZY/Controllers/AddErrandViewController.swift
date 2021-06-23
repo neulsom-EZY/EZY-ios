@@ -34,7 +34,7 @@ class AddErrandViewController : UIViewController{
 //        return tf
 //    }()
  
-    private let TitleTextField : inputContainerTextFieldView = {
+    private lazy var  TitleTextField : inputContainerTextFieldView = {
         let viewModel = TextFieldModel(title: "제목", color: .EZY_F4F6FF, labelColor: .EZY_8099FF, labelSize: 14, labelFont: .bold, tfcolor: .EZY_656565, tfSize: 14, tfFont: .medium)
         let view = inputContainerTextFieldView(textFieldModel: viewModel)
         

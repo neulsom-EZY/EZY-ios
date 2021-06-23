@@ -21,7 +21,6 @@
 		EE37790E267A3A4C00334D4A /* CollectionTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE37790D267A3A4C00334D4A /* CollectionTableViewCell.swift */; };
 		EE782853268150A900AECC65 /* AddOurToDoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE782852268150A900AECC65 /* AddOurToDoViewController.swift */; };
 		EE7828552681859200AECC65 /* AddErrandViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE7828542681859200AECC65 /* AddErrandViewController.swift */; };
-		EE7828572681D35A00AECC65 /* inputContainerTextFieldView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE7828562681D35A00AECC65 /* inputContainerTextFieldView.swift */; };
 		EED007D526674AC2009A5A87 /* Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = EED007D426674AC2009A5A87 /* Utilities.swift */; };
 		EED20D63266C0F90000E0856 /* AdditionalButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = EED20D62266C0F90000E0856 /* AdditionalButton.swift */; };
 		EEEDB2BF2664B44200E5C53A /* AddMyToDoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEEDB2BE2664B44200E5C53A /* AddMyToDoViewController.swift */; };
@@ -48,7 +47,6 @@
 		EE37790D267A3A4C00334D4A /* CollectionTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionTableViewCell.swift; sourceTree = "<group>"; };
 		EE782852268150A900AECC65 /* AddOurToDoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddOurToDoViewController.swift; sourceTree = "<group>"; };
 		EE7828542681859200AECC65 /* AddErrandViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddErrandViewController.swift; sourceTree = "<group>"; };
-		EE7828562681D35A00AECC65 /* inputContainerTextFieldView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = inputContainerTextFieldView.swift; sourceTree = "<group>"; };
 		EED007D426674AC2009A5A87 /* Utilities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utilities.swift; sourceTree = "<group>"; };
 		EED20D62266C0F90000E0856 /* AdditionalButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdditionalButton.swift; sourceTree = "<group>"; };
 		EEEDB2AC2664ADCB00E5C53A /* Poppins-SemiBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Poppins-SemiBold.ttf"; sourceTree = "<group>"; };
@@ -151,7 +149,6 @@
 			children = (
 				EED20D62266C0F90000E0856 /* AdditionalButton.swift */,
 				EE3621C1267E51B80099AF3A /* MoreCalendarModalsButton .swift */,
-				EE7828562681D35A00AECC65 /* inputContainerTextFieldView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -358,7 +355,6 @@
 				EE7828552681859200AECC65 /* AddErrandViewController.swift in Sources */,
 				EED20D63266C0F90000E0856 /* AdditionalButton.swift in Sources */,
 				EE37790C267A130F00334D4A /* TableCollectionViewCell.swift in Sources */,
-				EE7828572681D35A00AECC65 /* inputContainerTextFieldView.swift in Sources */,
 				EEEDB2C22664D30D00E5C53A /* extensions.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
