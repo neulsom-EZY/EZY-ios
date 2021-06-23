@@ -16,6 +16,10 @@ class TagColorCollectionViewCell: UICollectionViewCell {
         $0.backgroundColor = UIColor(red: 186/255, green: 200/255, blue: 255/255, alpha: 1)
     }
     
+    lazy var checkImage = UIImageView().then {
+        $0.image = UIImage(named: "EZY_TagColorCheckImage")
+    }
+    
     //MARK: LifeCycles
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -37,11 +41,19 @@ class TagColorCollectionViewCell: UICollectionViewCell {
     
     func layoutSetting(){
         contentView.addSubview(colorBackgroundView)
+        colorBackgroundView.addSubview(checkImage)
         
         colorBackgroundView.snp.makeConstraints { make in
             make.top.right.bottom.left.equalToSuperview()
-            
             colorBackgroundView.layer.cornerRadius = self.contentView.frame.height/2
         }
+        
+        checkImage.snp.makeConstraints { make in
+            make.centerX.centerY.equalToSuperview()
+            make.width.equalToSuperview().dividedBy(2.6/1.2)
+            make.height.equalToSuperview().dividedBy(3.7/1.2)
+        }
+        
+        checkImage.isHidden = true
     }
 }

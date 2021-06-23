@@ -7,7 +7,7 @@
 
 import UIKit
 
-class RescheduleViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate {
+class RescheduleViewController: UIViewController {
     
     lazy var topView = TopView()
     
@@ -44,21 +44,21 @@ class RescheduleViewController: UIViewController, UICollectionViewDataSource, UI
         $0.dynamicFont(fontSize: 14, currentFontName: "AppleSDGothicNeo-Medium")
     }
     
-    lazy var calendarLabel = UILabel().then {
-        $0.text = "2021. 05. 09 화요일"
-        $0.textColor = UIColor(red: 101/255, green: 101/255, blue: 101/255, alpha: 1)
+    lazy var calendarLabelButton = UIButton().then {
+        $0.setTitle("2021. 05. 09 화요일", for: .normal)
+        $0.setTitleColor(UIColor(red: 101/255, green: 101/255, blue: 101/255, alpha: 1), for: .normal)
         $0.dynamicFont(fontSize: 16, currentFontName: "Poppins-Regular")
     }
     
-    lazy var timeLabel = UILabel().then {
-        $0.text = "11:00AM - 1:00PM"
-        $0.textColor = UIColor(red: 101/255, green: 101/255, blue: 101/255, alpha: 1)
+    lazy var timeLabelButton = UIButton().then {
+        $0.setTitle("11:00AM - 1:00PM", for: .normal)
+        $0.setTitleColor(UIColor(red: 101/255, green: 101/255, blue: 101/255, alpha: 1), for: .normal)
         $0.dynamicFont(fontSize: 16, currentFontName: "Poppins-Regular")
     }
     
-    lazy var locationLabel = UILabel().then {
-        $0.text = "송정역 이디야 카페"
-        $0.textColor = UIColor(red: 101/255, green: 101/255, blue: 101/255, alpha: 1)
+    lazy var locationLabelButton = UIButton().then {
+        $0.setTitle("송정역 이디야 카페", for: .normal)
+        $0.setTitleColor(UIColor(red: 101/255, green: 101/255, blue: 101/255, alpha: 1), for: .normal)
         $0.dynamicFont(fontSize: 16, currentFontName: "Poppins-Regular")
     }
     
@@ -130,7 +130,7 @@ class RescheduleViewController: UIViewController, UICollectionViewDataSource, UI
     
     
     var tagColorArray: [UIColor] = [UIColor(red: 186/255, green: 200/255, blue: 255/255, alpha: 1),UIColor(red: 196/255, green: 200/255, blue: 255/255, alpha: 1),UIColor(red: 206/255, green: 200/255, blue: 255/255, alpha: 1),UIColor(red: 216/255, green: 200/255, blue: 255/255, alpha: 1),UIColor(red: 226/255, green: 200/255, blue: 255/255, alpha: 1),UIColor(red: 236/255, green: 200/255, blue: 255/255, alpha: 1),UIColor(red: 246/255, green: 200/255, blue: 255/255, alpha: 1),UIColor(red: 255/255, green: 200/255, blue: 255/255, alpha: 1),UIColor(red: 186/255, green: 200/255, blue: 255/255, alpha: 1),UIColor(red: 196/255, green: 200/255, blue: 255/255, alpha: 1),UIColor(red: 206/255, green: 200/255, blue: 255/255, alpha: 1),UIColor(red: 216/255, green: 200/255, blue: 255/255, alpha: 1),UIColor(red: 226/255, green: 200/255, blue: 255/255, alpha: 1),UIColor(red: 236/255, green: 200/255, blue: 255/255, alpha: 1),UIColor(red: 246/255, green: 200/255, blue: 255/255, alpha: 1),UIColor(red: 255/255, green: 200/255, blue: 255/255, alpha: 1)]
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -264,22 +264,6 @@ class RescheduleViewController: UIViewController, UICollectionViewDataSource, UI
         tagAddModalView.isHidden = true
     }
     
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 10
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let myCell = collectionView.dequeueReusableCell(withReuseIdentifier: TagColorCollectionViewCell.reuseId, for: indexPath) as! TagColorCollectionViewCell
-        
-        myCell.colorBackgroundView.backgroundColor = tagColorArray[indexPath.row]
-        return myCell
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath)
-    {
-        print("User tapped on item \(indexPath.row)")
-    }
-    
     @objc func tagAddCompletionbuttonClicked(sender:UIButton)
     {
         tagAddModalView.isHidden = true
@@ -335,13 +319,22 @@ class RescheduleViewController: UIViewController, UICollectionViewDataSource, UI
         }
     }
     
+    @objc func calendarLabelButtonClicked(sender:UIButton){
+    }
+    
+    @objc func timeLabelButtonClicked(sender:UIButton){
+    }
+    
+    @objc func locationLabelButtonClicked(sender:UIButton){
+    }
+    
     func layoutSetting(){
         self.view.addSubview(titleBackgroundView)
         titleBackgroundView.addSubview(titleLabel)
         titleBackgroundView.addSubview(titleTextField)
-        self.view.addSubview(calendarLabel)
-        self.view.addSubview(timeLabel)
-        self.view.addSubview(locationLabel)
+        self.view.addSubview(calendarLabelButton)
+        self.view.addSubview(timeLabelButton)
+        self.view.addSubview(locationLabelButton)
         self.view.addSubview(tagLabel)
         self.view.addSubview(tagStudyButton)
         self.view.addSubview(tagWalkButton)
@@ -353,6 +346,13 @@ class RescheduleViewController: UIViewController, UICollectionViewDataSource, UI
         tagWalkButton.tag = 1
         tagMajorBandButton.tag = 2
         tagFreedomBandButton.tag = 3
+        
+        calendarLabelButton.addTarget(self,action:#selector(calendarLabelButtonClicked(sender:)),
+                                 for:.touchUpInside)
+        timeLabelButton.addTarget(self,action:#selector(timeLabelButtonClicked(sender:)),
+                                 for:.touchUpInside)
+        locationLabelButton.addTarget(self,action:#selector(locationLabelButtonClicked(sender:)),
+                                 for:.touchUpInside)
         
         tagStudyButton.addTarget(self,action:#selector(tagbuttonClicked),
                                  for:.touchUpInside)
@@ -549,20 +549,67 @@ class RescheduleViewController: UIViewController, UICollectionViewDataSource, UI
     }
     
     func labelSetting(){
-        calendarLabel.snp.makeConstraints { make in
+        calendarLabelButton.snp.makeConstraints { make in
             make.centerY.equalTo(calendarView)
             make.left.equalTo(calendarView.snp.right).offset(self.view.frame.width/13.8)
         }
         
-        timeLabel.snp.makeConstraints { make in
+        timeLabelButton.snp.makeConstraints { make in
             make.centerY.equalTo(timeView)
             make.left.equalTo(timeView.snp.right).offset(self.view.frame.width/13.8)
         }
         
-        locationLabel.snp.makeConstraints { make in
+        locationLabelButton.snp.makeConstraints { make in
             make.centerY.equalTo(locationView)
             make.left.equalTo(locationView.snp.right).offset(self.view.frame.width/13.8)
         }
     }
     
+}
+
+extension RescheduleViewController: UICollectionViewDelegate, UICollectionViewDataSource{
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return tagColorArray.count
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let myCell = collectionView.dequeueReusableCell(withReuseIdentifier: TagColorCollectionViewCell.reuseId, for: indexPath) as! TagColorCollectionViewCell
+        
+        
+        
+        print(indexPath)
+        myCell.colorBackgroundView.backgroundColor = tagColorArray[indexPath.row]
+        return myCell
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath)
+    {
+        
+        let myCell = collectionView.cellForItem(at: indexPath) as! TagColorCollectionViewCell
+        
+        if myCell.checkImage.isHidden == false{ // 체크 표시가 있을 때 클릭했을 때
+            myCell.checkImage.isHidden = true
+            
+            myCell.colorBackgroundView.layer.masksToBounds = true
+            myCell.colorBackgroundView.layer.shadowOpacity = 0
+            myCell.colorBackgroundView.layer.shadowRadius = 0
+            myCell.colorBackgroundView.layer.shadowOffset = CGSize(width: 0, height: 0)
+            myCell.colorBackgroundView.layer.shadowColor = .none
+        }else{ // 체크 표시가 없을 때 클릭했을 때
+            
+            for index in 0...4{
+                let removeCell = collectionView.cellForItem(at: [0, index]) as! TagColorCollectionViewCell
+                
+                removeCell.checkImage.isHidden = true
+            }
+            
+            myCell.checkImage.isHidden = false
+            
+            myCell.colorBackgroundView.layer.masksToBounds = false
+            myCell.colorBackgroundView.layer.shadowOpacity = 0.8
+            myCell.colorBackgroundView.layer.shadowRadius = 3
+            myCell.colorBackgroundView.layer.shadowOffset = CGSize(width: 0, height: 0)
+            myCell.colorBackgroundView.layer.shadowColor = UIColor(red: 222/255, green: 222/255, blue: 222/255, alpha: 1).cgColor
+        }
+    }
 }
