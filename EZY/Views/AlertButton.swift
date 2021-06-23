@@ -35,6 +35,12 @@ class AlertButton : UIButton {
         addSubview(icon)
     }
     public func configure(){
+        view.backgroundColor = .white
+        view.layer.cornerRadius  = frame.height/40.6
+        view.layer.shadowColor = UIColor.black.cgColor
+        view.layer.shadowOpacity = 0.1
+        view.layer.shadowOffset = CGSize(width: 0, height: 4)
+        view.backgroundColor = .white
         
     }
     
