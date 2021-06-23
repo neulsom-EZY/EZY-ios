@@ -75,8 +75,6 @@ class SignUpNicknameViewController: UIViewController{
     }
     
     func addView(){
-//        view.addSubview(goBackButton)
-//        view.addSubview(EZY_Logo)
         view.addSubview(topBarView)
         view.addSubview(putNicknameLabel)
         view.addSubview(nicknameContainerView)
