@@ -24,18 +24,14 @@ class MoreCalendarModalsViewController : UIViewController{
         $0.layer.cornerRadius = 40
     }
     let transparentView = UIView()
+    
     let TitleLabel = UILabel().then{
         $0.text = "추가 할 항목을 선택해주세요"
         $0.dynamicFont(fontSize: 22, weight: .thin)
     }
     
     
-    
-    let closeBtn = UIButton().then {
-        $0.setTitle("닫기", for: .normal)
-        $0.setTitleColor(.black, for: .normal)
-    }
-    
+        
     private let myToDo : MoreCalendarModalsButton = {
         let viewModel = MyCustomButtonViewModel(title: "나의 할 일", image: UIImage(named: "user")!, color: .EZY_BAC8FF)
 
@@ -97,17 +93,23 @@ class MoreCalendarModalsViewController : UIViewController{
     }
     
     //MARK: - HELPERS
-
+    
+    func addTransparentsview(frame : CGRect){
+        let window = UIApplication.shared.keyWindow
+        transparentView.frame = window?.frame ?? self.view.frame
+        let tapgesture = UITapGestureRecognizer(target: self, action: #selector(onTapClose))
+        transparentView.addGestureRecognizer(tapgesture)
+    }
     
     func configureUI(){
-        view.backgroundColor = .clear
         
         addView()
         cornerRadius()
         location()
-        
+        addTransparentsview(frame: transparentView.frame)
     }
     func addView(){
+        view.addSubview(transparentView)
         view.addSubview(bgView)
         view.addSubview(TitleLabel)
         view.addSubview(myToDo)
