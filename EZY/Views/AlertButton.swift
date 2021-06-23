@@ -59,12 +59,13 @@ class AlertButton : UIButton {
         
         view.snp.makeConstraints { (make) in
             make.left.equalTo(snp.left)
-            make.height.equalTo(50)
-            make.width.equalTo(50)
+            make.height.equalToSuperview()
+            make.width.equalTo(view.snp.height)
         }
         icon.snp.makeConstraints { (make) in
-            make.height.width.equalTo(22.5)
+            make.height.width.equalTo(view.snp.height)
             make.center.equalTo(view.snp.center)
+            
         }
         label.snp.makeConstraints { (make) in
             make.left.equalTo(view.snp.right).offset(30)

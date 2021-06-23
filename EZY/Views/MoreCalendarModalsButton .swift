@@ -15,7 +15,6 @@ class MoreCalendarModalsButton : UIButton{
     private let toDoLabel = UILabel().then{
         $0.numberOfLines = 1
         $0.dynamicFont(fontSize: 18, weight: .semibold)
-        $0.textAlignment = .center
     }
     private let iconView = UIImageView().then {
         $0.contentMode = .scaleAspectFit
@@ -63,7 +62,6 @@ class MoreCalendarModalsButton : UIButton{
         toDoLabel.snp.makeConstraints { (make) in
             make.centerY.equalToSuperview()
             make.left.equalTo(iconView.snp.right).offset(frame.height/8.8)
-            
         }
         
     }

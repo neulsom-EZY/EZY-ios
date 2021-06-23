@@ -75,7 +75,7 @@ class AddErrandViewController : UIViewController{
         let viewModel = AlertBtn(icon: UIImage(named: "location"), iconTintColor: .EZY_C7E0D4, message: "광주소프트웨어마이스터고등학교")
         let button = AlertButton(with: viewModel)
         
-        button.addTarget(self, action: #selector(Addmytodobtn), for: .touchUpInside)
+        button.addTarget(self, action: #selector(Addlocationbtn), for: .touchUpInside)
         return button
     }()
     
@@ -153,6 +153,10 @@ class AddErrandViewController : UIViewController{
         //추가페이지 작성후 실행시키는 코드
         
     }
+    @objc func Addlocationbtn(){
+        let vc = AddMyToDoViewController()
+        vc.modalPresentationStyle = .fullScreen
+        present(vc, animated: true, completion: nil)    }
     
     //MARK: - Helpers
     func configureUI(){

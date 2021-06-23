@@ -186,10 +186,10 @@ class AddOurToDoViewController: UIViewController {
         backbutton.snp.makeConstraints { (make) in
             make.height.width.equalTo(self.view.frame.height/33.8)
             make.left.equalTo(self.view.frame.height/29)
-            make.top.equalTo(view.frame.height/39.4)
+            make.top.equalTo(view.frame.height/19.7)
         }
         TitleLabel.snp.makeConstraints { (make) in
-            make.top.equalTo(backbutton.snp.bottom).offset(self.view.frame.height/36.9)
+            make.top.equalTo(backbutton.snp.bottom).offset(self.view.frame.height/39.5)
             make.left.equalTo(backbutton.snp.left)
         }
         titleContainerView.snp.makeConstraints { (make) in
