@@ -20,7 +20,6 @@ class RescheduleViewController: UIViewController {
     lazy var tagAddModalView = TagAddModalView()
     
     var tagColorCollectionView:UICollectionView?
-
     
     var isChecked: [Bool] = [true, false, false, false]
     
@@ -229,6 +228,7 @@ class RescheduleViewController: UIViewController {
         
         let layout: UICollectionViewFlowLayout = UICollectionViewFlowLayout()
         layout.itemSize = CGSize(width: 30, height: 30)
+        layout.sectionInset = UIEdgeInsets(top: 0, left: self.view.frame.height/33.8, bottom: 0, right: self.view.frame.height/33.8)
         layout.scrollDirection = .horizontal
         
         let myCollectionView: UICollectionView = UICollectionView(frame: self.view.frame, collectionViewLayout: layout)
@@ -242,10 +242,15 @@ class RescheduleViewController: UIViewController {
         
         myCollectionView.snp.makeConstraints { make in
             make.top.equalTo(tagAddModalView.tagColorLabel.snp.bottom)
-            make.left.equalTo(tagAddModalView.tagColorLabel)
+            make.left.equalToSuperview()
             make.height.equalTo(tagAddModalView.modalBackgroundView).dividedBy(5)
             make.right.equalTo(tagAddModalView.modalBackgroundView)
         }
+        
+        let firstCell = tagColorCollectionView?.cellForItem(at: [0, 0]) as? TagColorCollectionViewCell
+        
+        firstCell?.checkImage.isHidden = false
+
     }
     
     @objc //MARK: 모달 창 올리기
@@ -588,28 +593,42 @@ extension RescheduleViewController: UICollectionViewDelegate, UICollectionViewDa
         let myCell = collectionView.cellForItem(at: indexPath) as! TagColorCollectionViewCell
         
         if myCell.checkImage.isHidden == false{ // 체크 표시가 있을 때 클릭했을 때
-            myCell.checkImage.isHidden = true
+            for index in 0...tagColorArray.count-1{
+                let removeCell = collectionView.cellForItem(at: [0, index]) as? TagColorCollectionViewCell
+                
+                if removeCell?.checkImage.isHidden == false && [0, index] != indexPath{ // 체크이미지를 지울 때 다른 색에 체크가 없으면 체크가 헤제안대게
+                    
+                    myCell.checkImage.isHidden = true
+                    
+                    myCell.colorBackgroundView.layer.masksToBounds = true
+                    myCell.colorBackgroundView.layer.shadowOpacity = 0
+                    myCell.colorBackgroundView.layer.shadowRadius = 0
+                    myCell.colorBackgroundView.layer.shadowOffset = CGSize(width: 0, height: 0)
+                    myCell.colorBackgroundView.layer.shadowColor = .none
+                }
+            }
             
-            myCell.colorBackgroundView.layer.masksToBounds = true
-            myCell.colorBackgroundView.layer.shadowOpacity = 0
-            myCell.colorBackgroundView.layer.shadowRadius = 0
-            myCell.colorBackgroundView.layer.shadowOffset = CGSize(width: 0, height: 0)
-            myCell.colorBackgroundView.layer.shadowColor = .none
+
         }else{ // 체크 표시가 없을 때 클릭했을 때
             
-            for index in 0...4{
-                let removeCell = collectionView.cellForItem(at: [0, index]) as! TagColorCollectionViewCell
+            for index in 0...tagColorArray.count-1{
+                let removeCell = collectionView.cellForItem(at: [0, index]) as? TagColorCollectionViewCell
                 
-                removeCell.checkImage.isHidden = true
+                removeCell?.checkImage.isHidden = true
+                
+                removeCell?.colorBackgroundView.layer.shadowOpacity = 0
+                removeCell?.colorBackgroundView.layer.shadowRadius = 0
+                removeCell?.colorBackgroundView.layer.shadowOffset = CGSize(width: 0, height: 0)
+                removeCell?.colorBackgroundView.layer.shadowColor = .none
             }
             
             myCell.checkImage.isHidden = false
             
             myCell.colorBackgroundView.layer.masksToBounds = false
-            myCell.colorBackgroundView.layer.shadowOpacity = 0.8
+            myCell.colorBackgroundView.layer.shadowOpacity = 2
             myCell.colorBackgroundView.layer.shadowRadius = 3
             myCell.colorBackgroundView.layer.shadowOffset = CGSize(width: 0, height: 0)
-            myCell.colorBackgroundView.layer.shadowColor = UIColor(red: 222/255, green: 222/255, blue: 222/255, alpha: 1).cgColor
+            myCell.colorBackgroundView.layer.shadowColor = UIColor(red: 212/255, green: 212/255, blue: 212/255, alpha: 1).cgColor
         }
     }
 }
