@@ -23,24 +23,18 @@ class AddErrandViewController : UIViewController{
         $0.dynamicFont(fontSize: 22, weight: .semibold)
     }
     
-//    private lazy var titleContainerView : UIView = {
-//        let title = "제목"
-//        let view = Utilities().inputContainerView(withMessage: title, textField: titleTextField, color: .EZY_F4F6FF,viewSize: Double(view.frame.height))
-//        return view
-//    }()
-//
-//    private let titleTextField : UITextField = {
-//        let tf = Utilities().textField(textColor: .EZY_656565, textSize: 14,font: .medium)
-//        return tf
-//    }()
- 
-    private lazy var  TitleTextField : inputContainerTextFieldView = {
-        let viewModel = TextFieldModel(title: "제목", color: .EZY_F4F6FF, labelColor: .EZY_8099FF, labelSize: 14, labelFont: .bold, tfcolor: .EZY_656565, tfSize: 14, tfFont: .medium)
-        let view = inputContainerTextFieldView(textFieldModel: viewModel)
-        
+    private lazy var titleContainerView : UIView = {
+        let title = "제목"
+        let view = Utilities().inputContainerView(withMessage: title, textField: titleTextField, color: .EZY_F4F6FF,viewSize: Double(view.frame.height))
         return view
     }()
-    
+
+    private let titleTextField : UITextField = {
+        let tf = Utilities().textField(textColor: .EZY_656565, textSize: 14,font: .medium)
+        return tf
+    }()
+ 
+
     private lazy var calendarButtonView : UIView = {
         let message = "2021. 6. 6 일요일 "
         let view = Utilities().AlertbtnView(withMessage: message, viewSize: Double(view.frame.height), button: calendarButton)
@@ -156,7 +150,7 @@ class AddErrandViewController : UIViewController{
     func configureUI(){
         view.backgroundColor = .white
         view.addSubview(backbutton)
-        TitleTextField.layer.cornerRadius = view.frame.height/40.6
+        titleContainerView.layer.cornerRadius = view.frame.height/40.6
      
         addButton.layer.cornerRadius = view.frame.height/81.2
         calendarButton.layer.cornerRadius = view.frame.height/81.2
@@ -177,9 +171,9 @@ class AddErrandViewController : UIViewController{
             make.left.equalTo(backbutton.snp.left)
         }
         
-        view.addSubview(TitleTextField)
+        view.addSubview(titleContainerView)
         
-        TitleTextField.snp.makeConstraints { (make) in
+        titleContainerView.snp.makeConstraints { (make) in
             make.height.equalTo(self.view.frame.height/14.7)
             make.top.equalTo(TitleLabel.snp.bottom).offset(self.view.frame.height/19.8)
             make.left.equalTo(backbutton.snp.left)
@@ -190,7 +184,7 @@ class AddErrandViewController : UIViewController{
         calendarButtonView.snp.makeConstraints { (make) in
             make.height.width.equalTo(self.view.frame.height/18.0)
             make.left.equalTo(backbutton.snp.left)
-            make.top.equalTo(TitleTextField.snp.bottom).offset(view.frame.height/30.0)
+            make.top.equalTo(titleContainerView.snp.bottom).offset(view.frame.height/30.0)
         }
 
         view.addSubview(clockButtonView)
@@ -230,7 +224,7 @@ class AddErrandViewController : UIViewController{
             make.bottom.equalToSuperview().offset(view.frame.height/10.9 * -1)
             make.height.equalTo(self.view.frame.height/18.0)
             make.left.equalTo(backbutton.snp.left)
-            make.right.equalTo(TitleTextField.snp.right)
+            make.right.equalTo(titleContainerView.snp.right)
             
         }
    
