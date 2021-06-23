@@ -61,16 +61,23 @@ class AddErrandViewController : UIViewController{
        return button
     }()
     
-    private lazy var locationButtonView : UIView = {
-        let message = "광주소프트웨어마이스터고등학교"
-        let view = Utilities().AlertbtnView(withMessage: message, viewSize: Double(view.frame.height), button: locationButton)
-        return view
+//    private lazy var locationButtonView : UIView = {
+//        let message = "광주소프트웨어마이스터고등학교"
+//        let view = Utilities().AlertbtnView(withMessage: message, viewSize: Double(view.frame.height), button: locationButton)
+//        return view
+//    }()
+//    private let locationButton : UIButton = {
+//        let button = Utilities().AlertButton(image: UIImage(named: "location")!, tintColor: .EZY_C7E0D4)
+//        button.addTarget(self, action: #selector(calendarAlert), for: .touchUpInside)
+//       return button
+//    }()
+    private let locationBtn : AlertButton = {
+        let viewModel = AlertBtn(icon: UIImage(named: "location"), iconTintColor: .EZY_C7E0D4, message: "광주소프트웨어마이스터고등학교")
+        let button = AlertButton(with: viewModel)
+        button.addTarget(self, action: #selector(Addmytodobtn), for: .touchUpInside)
+        return button
     }()
-    private let locationButton : UIButton = {
-        let button = Utilities().AlertButton(image: UIImage(named: "location")!, tintColor: .EZY_C7E0D4)
-        button.addTarget(self, action: #selector(calendarAlert), for: .touchUpInside)
-       return button
-    }()
+    
     
 //    private lazy var errandButtonView : UIView = {
 //        let message = "11:00AM - 1:00PM"
@@ -155,7 +162,7 @@ class AddErrandViewController : UIViewController{
         addButton.layer.cornerRadius = view.frame.height/81.2
         calendarButton.layer.cornerRadius = view.frame.height/81.2
         clockButton.layer.cornerRadius = view.frame.height/81.2
-        locationButton.layer.cornerRadius = view.frame.height/81.2
+        locationBtn.layer.cornerRadius = view.frame.height/81.2
         explanationContainerView.layer.cornerRadius = view.frame.height/40.6
         
         backbutton.snp.makeConstraints { (make) in
@@ -193,9 +200,9 @@ class AddErrandViewController : UIViewController{
             make.left.equalTo(calendarButtonView.snp.left)
             make.top.equalTo(calendarButtonView.snp.bottom).offset(view.frame.height/47.8)
         }
-        view.addSubview(locationButtonView)
+        view.addSubview(locationBtn)
 
-        locationButtonView.snp.makeConstraints { (make) in
+        locationBtn.snp.makeConstraints { (make) in
             make.height.width.equalTo(self.view.frame.height/18.0)
             make.left.equalTo(calendarButtonView.snp.left)
             make.top.equalTo(clockButtonView.snp.bottom).offset(view.frame.height/47.7)
@@ -205,7 +212,7 @@ class AddErrandViewController : UIViewController{
         
         explanationContainerView.snp.makeConstraints { (make) in
             make.height.equalTo(self.view.frame.height/10.8)
-            make.top.equalTo(locationButtonView.snp.bottom).offset(self.view.frame.height/19.8)
+            make.top.equalTo(locationBtn.snp.bottom).offset(self.view.frame.height/19.8)
             make.left.equalTo(backbutton.snp.left)
             make.right.equalTo(self.view.frame.width/13.8 * -1)
         }

@@ -26,6 +26,6 @@ struct MyCustomButtonViewModel{
 
 struct AlertBtn{
     let icon : UIImage?
-    let color : UIColor?
-    let message : UILabel?
+    let iconTintColor : UIColor?
+    let message : String?
 }
