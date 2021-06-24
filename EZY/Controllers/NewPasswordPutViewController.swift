@@ -12,7 +12,9 @@ import Then
 class NewPasswordPutViewController: UIViewController{
     //MARK: - Properties
     
-    let topBarView = TopBarView()
+    let topBarView = TopBarView().then {
+        $0.goBackButton.addTarget(self, action: #selector(goBack), for: .touchUpInside)
+    }
     
     lazy var toNewPassWordLabel = UILabel().then {
         $0.text = "새로운 비밀번호를"
@@ -95,6 +97,7 @@ class NewPasswordPutViewController: UIViewController{
         topBarView.snp.makeConstraints { make in
             make.left.right.equalToSuperview()
             make.top.equalToSuperview()
+            make.height.equalTo(self.view.frame.height/7.19)
         }
         
         toNewPassWordLabel.snp.makeConstraints { make in
