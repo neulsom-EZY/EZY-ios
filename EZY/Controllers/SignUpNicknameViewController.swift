@@ -39,11 +39,8 @@ class SignUpNicknameViewController: UIViewController{
         $0.dynamicFont(fontSize: 10, currentFontName: "AppleSDGothicNeo-SemiBold")
     }
     
-    lazy var continueButton = UIButton().then {
-        $0.setTitle("계속하기", for: .normal)
+    lazy var continueButton = CustomGradientContinueBtnView().then {
         $0.titleLabel?.dynamicFont(fontSize: 14, currentFontName: "AppleSDGothicNeo-Bold")
-        $0.setTitleColor(UIColor.EZY_FFFFFF, for: .normal)
-        $0.backgroundColor = UIColor.EZY_968DFF
         $0.addTarget(self, action: #selector(onTapContinuePassword), for: .touchUpInside)
     }
     
