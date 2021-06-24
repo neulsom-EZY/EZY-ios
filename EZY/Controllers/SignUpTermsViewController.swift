@@ -12,7 +12,9 @@ import Then
 class SignUpTermsViewController: UIViewController{
     //MARK: - Properties
     
-    let topBarView = TopBarView()
+    let topBarView = TopBarView().then {
+        $0.goBackButton.addTarget(self, action: #selector(goBack), for: .touchUpInside)
+    }
     
     lazy var agreeTermsLabel = UILabel().then {
         $0.text = "이용 약관에\n동의를 해주세요."
@@ -304,6 +306,7 @@ class SignUpTermsViewController: UIViewController{
         topBarView.snp.makeConstraints { make in
             make.left.right.equalToSuperview()
             make.top.equalToSuperview()
+            make.height.equalTo(self.view.frame.height/7.19)
         }
         
         agreeTermsLabel.snp.makeConstraints { make in
