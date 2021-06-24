@@ -74,8 +74,7 @@ class LoginViewController: UIViewController{
 
     }
     
-    lazy var loginButton = CustomGradientButton().then {
-        $0.setTitle("로그인", for: .normal)
+    lazy var loginButton = CustomGradientLoginBtnView().then {
         $0.titleLabel?.dynamicFont(fontSize: 14, currentFontName: "AppleSDGothicNeo-Bold")
         $0.addTarget(self, action: #selector(onTapLogin), for: .touchUpInside)
     }
