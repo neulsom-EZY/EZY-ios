@@ -19,11 +19,31 @@ class RescheduleViewController: UIViewController {
     
     lazy var tagAddModalView = TagAddModalView()
     
-    var tagColorCollectionView:UICollectionView?
+    lazy var calendarModalView = CalendarModalView()
+    
+    var tagColorCollectionView: UICollectionView?
+    
+    var calendarCollectionView: UICollectionView?
     
     var isChecked: [Bool] = [true, false, false, false]
     
+    var models: [TagColorCollectionViewModel] = [TagColorCollectionViewModel(backgroundColor: UIColor(red: 186/255, green: 200/255, blue: 255/255, alpha: 1), isSelected: false),
+                                                 TagColorCollectionViewModel(backgroundColor: UIColor(red: 196/255, green: 200/255, blue: 255/255, alpha: 1), isSelected: true),
+                                                 TagColorCollectionViewModel(backgroundColor: UIColor(red: 206/255, green: 200/255, blue: 255/255, alpha: 1), isSelected: true),
+                                                 TagColorCollectionViewModel(backgroundColor: UIColor(red: 216/255, green: 200/255, blue: 255/255, alpha: 1), isSelected: true),
+                                                 TagColorCollectionViewModel(backgroundColor: UIColor(red: 226/255, green: 200/255, blue: 255/255, alpha: 1), isSelected: true),
+                                                 TagColorCollectionViewModel(backgroundColor: UIColor(red: 236/255, green: 200/255, blue: 255/255, alpha: 1), isSelected: true),
+                                                 TagColorCollectionViewModel(backgroundColor: UIColor(red: 246/255, green: 200/255, blue: 255/255, alpha: 1), isSelected: true),
+                                                 TagColorCollectionViewModel(backgroundColor: UIColor(red: 255/255, green: 200/255, blue: 255/255, alpha: 1), isSelected: true),
+                                                 TagColorCollectionViewModel(backgroundColor: UIColor(red: 255/255, green: 190/255, blue: 255/255, alpha: 1), isSelected: true),
+                                                 TagColorCollectionViewModel(backgroundColor: UIColor(red: 255/255, green: 180/255, blue: 255/255, alpha: 1), isSelected: true),
+                                                 TagColorCollectionViewModel(backgroundColor: UIColor(red: 255/255, green: 170/255, blue: 255/255, alpha: 1), isSelected: true),
+                                                 TagColorCollectionViewModel(backgroundColor: UIColor(red: 255/255, green: 160/255, blue: 255/255, alpha: 1), isSelected: true),
+                                                 TagColorCollectionViewModel(backgroundColor: UIColor(red: 255/255, green: 150/255, blue: 255/255, alpha: 1), isSelected: true)]
+    
     lazy var tagButton: [UIButton] = [tagStudyButton, tagWalkButton, tagMajorBandButton, tagFreedomBandButton]
+    
+    var preciousSelectedIndex = 0
     
     lazy var titleBackgroundView = UIView().then {
         $0.backgroundColor = UIColor(red: 244/255, green: 246/255, blue: 255/255, alpha: 1)
@@ -128,7 +148,7 @@ class RescheduleViewController: UIViewController {
     }
     
     
-    var tagColorArray: [UIColor] = [UIColor(red: 186/255, green: 200/255, blue: 255/255, alpha: 1),UIColor(red: 196/255, green: 200/255, blue: 255/255, alpha: 1),UIColor(red: 206/255, green: 200/255, blue: 255/255, alpha: 1),UIColor(red: 216/255, green: 200/255, blue: 255/255, alpha: 1),UIColor(red: 226/255, green: 200/255, blue: 255/255, alpha: 1),UIColor(red: 236/255, green: 200/255, blue: 255/255, alpha: 1),UIColor(red: 246/255, green: 200/255, blue: 255/255, alpha: 1),UIColor(red: 255/255, green: 200/255, blue: 255/255, alpha: 1),UIColor(red: 186/255, green: 200/255, blue: 255/255, alpha: 1),UIColor(red: 196/255, green: 200/255, blue: 255/255, alpha: 1),UIColor(red: 206/255, green: 200/255, blue: 255/255, alpha: 1),UIColor(red: 216/255, green: 200/255, blue: 255/255, alpha: 1),UIColor(red: 226/255, green: 200/255, blue: 255/255, alpha: 1),UIColor(red: 236/255, green: 200/255, blue: 255/255, alpha: 1),UIColor(red: 246/255, green: 200/255, blue: 255/255, alpha: 1),UIColor(red: 255/255, green: 200/255, blue: 255/255, alpha: 1)]
+
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -149,11 +169,52 @@ class RescheduleViewController: UIViewController {
         
         tagAddModalViewSetting()
         
-        tagColorCollectionView?.dataSource = self
-        tagColorCollectionView?.delegate = self
+        calendarModalViewSetting()
         
-        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(_:)), name:UIResponder.keyboardWillShowNotification, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide(_:)), name: UIResponder.keyboardWillHideNotification, object: nil)
+        tagColorCollectionViewSetting()
+        
+        calendarCollectionViewSetting()
+
+    }
+    
+    func calendarModalViewSetting(){
+        self.view.addSubview(calendarModalView)
+        calendarModalView.addSubview(calendarModalView.shadowBackgroundView)
+        calendarModalView.addSubview(calendarModalView.modalBackgroundView)
+        calendarModalView.modalBackgroundView.addSubview(calendarModalView.titleLabel)
+        calendarModalView.modalBackgroundView.addSubview(calendarModalView.monthLabel)
+        calendarModalView.modalBackgroundView.addSubview(calendarModalView.monthYearLabel)
+        
+        calendarModalView.snp.makeConstraints { make in
+            make.bottom.top.right.left.equalToSuperview()
+        }
+        
+        calendarModalView.shadowBackgroundView.snp.makeConstraints { make in
+            make.top.bottom.right.left.equalToSuperview()
+        }
+        
+        calendarModalView.modalBackgroundView.snp.makeConstraints { make in
+            make.centerX.centerY.equalToSuperview()
+            make.width.equalToSuperview().dividedBy(1.2)
+            make.height.equalToSuperview().dividedBy(3.3)
+        }
+        
+        calendarModalView.titleLabel.snp.makeConstraints { make in
+            make.top.equalToSuperview().offset(self.view.frame.height/33.8)
+            make.left.equalToSuperview().offset(self.view.frame.height/33.8)
+        }
+        
+        calendarModalView.monthLabel.snp.makeConstraints { make in
+            make.left.equalTo(calendarModalView.titleLabel).offset(self.view.frame.height/61.2)
+            make.top.equalTo(calendarModalView.titleLabel.snp.bottom).offset(self.view.frame.height/51.2)
+        }
+        
+        calendarModalView.monthYearLabel.snp.makeConstraints { make in
+            make.bottom.equalTo(calendarModalView.monthLabel).offset(-self.view.frame.height/131.2)
+            make.left.equalTo(calendarModalView.monthLabel.snp.right).offset(self.view.frame.height/161.2)
+        }
+        
+        calendarModalView.isHidden = true
     }
 
     
@@ -223,8 +284,36 @@ class RescheduleViewController: UIViewController {
         tagAddModalView.isHidden = true
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
+    
+    func calendarCollectionViewSetting(){
+        calendarCollectionView?.delegate = self
+        calendarCollectionView?.dataSource = self
+        
+        let layout: UICollectionViewFlowLayout = UICollectionViewFlowLayout()
+        layout.itemSize = CGSize(width: 30, height: 30)
+        layout.scrollDirection = .horizontal
+        
+        calendarCollectionView = UICollectionView(frame: self.view.frame, collectionViewLayout: layout)
+        
+        calendarCollectionView?.showsHorizontalScrollIndicator = false
+        calendarCollectionView?.register(CalendarCollectionViewCell.self, forCellWithReuseIdentifier: CalendarCollectionViewCell.reuseId)
+        
+        calendarCollectionView?.backgroundColor = .yellow
+        calendarModalView.modalBackgroundView.addSubview(calendarCollectionView!)
+        
+        calendarCollectionView!.snp.makeConstraints { make in
+            make.top.equalTo(calendarModalView.monthLabel.snp.bottom)
+            make.left.equalTo(calendarModalView.titleLabel)
+        }
+    }
+    
+    func tagColorCollectionViewSetting(){
+        
+        tagColorCollectionView?.dataSource = self
+        tagColorCollectionView?.delegate = self
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(_:)), name:UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide(_:)), name: UIResponder.keyboardWillHideNotification, object: nil)
         
         let layout: UICollectionViewFlowLayout = UICollectionViewFlowLayout()
         layout.itemSize = CGSize(width: 30, height: 30)
@@ -250,7 +339,6 @@ class RescheduleViewController: UIViewController {
         let firstCell = tagColorCollectionView?.cellForItem(at: [0, 0]) as? TagColorCollectionViewCell
         
         firstCell?.checkImage.isHidden = false
-
     }
     
     @objc //MARK: 모달 창 올리기
@@ -574,61 +662,31 @@ class RescheduleViewController: UIViewController {
 
 extension RescheduleViewController: UICollectionViewDelegate, UICollectionViewDataSource{
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return tagColorArray.count
+        return models.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let myCell = collectionView.dequeueReusableCell(withReuseIdentifier: TagColorCollectionViewCell.reuseId, for: indexPath) as! TagColorCollectionViewCell
         
-        
-        
-        print(indexPath)
-        myCell.colorBackgroundView.backgroundColor = tagColorArray[indexPath.row]
+        myCell.setModel(models[indexPath.row])
+    
         return myCell
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath)
     {
         
-        let myCell = collectionView.cellForItem(at: indexPath) as! TagColorCollectionViewCell
-        
-        if myCell.checkImage.isHidden == false{ // 체크 표시가 있을 때 클릭했을 때
-            for index in 0...tagColorArray.count-1{
-                let removeCell = collectionView.cellForItem(at: [0, index]) as? TagColorCollectionViewCell
+        if models[indexPath.row].isSelected {
+            
+            models[preciousSelectedIndex].isSelected.toggle()
+            
+            if models.filter({ $0.isSelected }).count >= 1 {
+                models[indexPath.row].isSelected.toggle()
                 
-                if removeCell?.checkImage.isHidden == false && [0, index] != indexPath{ // 체크이미지를 지울 때 다른 색에 체크가 없으면 체크가 헤제안대게
-                    
-                    myCell.checkImage.isHidden = true
-                    
-                    myCell.colorBackgroundView.layer.masksToBounds = true
-                    myCell.colorBackgroundView.layer.shadowOpacity = 0
-                    myCell.colorBackgroundView.layer.shadowRadius = 0
-                    myCell.colorBackgroundView.layer.shadowOffset = CGSize(width: 0, height: 0)
-                    myCell.colorBackgroundView.layer.shadowColor = .none
-                }
+                preciousSelectedIndex = indexPath.row
             }
-            
-
-        }else{ // 체크 표시가 없을 때 클릭했을 때
-            
-            for index in 0...tagColorArray.count-1{
-                let removeCell = collectionView.cellForItem(at: [0, index]) as? TagColorCollectionViewCell
-                
-                removeCell?.checkImage.isHidden = true
-                
-                removeCell?.colorBackgroundView.layer.shadowOpacity = 0
-                removeCell?.colorBackgroundView.layer.shadowRadius = 0
-                removeCell?.colorBackgroundView.layer.shadowOffset = CGSize(width: 0, height: 0)
-                removeCell?.colorBackgroundView.layer.shadowColor = .none
-            }
-            
-            myCell.checkImage.isHidden = false
-            
-            myCell.colorBackgroundView.layer.masksToBounds = false
-            myCell.colorBackgroundView.layer.shadowOpacity = 2
-            myCell.colorBackgroundView.layer.shadowRadius = 3
-            myCell.colorBackgroundView.layer.shadowOffset = CGSize(width: 0, height: 0)
-            myCell.colorBackgroundView.layer.shadowColor = UIColor(red: 212/255, green: 212/255, blue: 212/255, alpha: 1).cgColor
         }
+
+        collectionView.reloadData()
     }
 }
