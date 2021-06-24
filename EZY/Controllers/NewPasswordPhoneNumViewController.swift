@@ -12,7 +12,9 @@ import Then
 class NewPasswordPhoneNumViewController: UIViewController{
     //MARK: - Properties
    
-    let topBarView = TopBarView()
+    let topBarView = TopBarView().then {
+        $0.goBackButton.addTarget(self, action: #selector(goBack), for: .touchUpInside)
+    }
     
     lazy var toNewPassWordLabel = UILabel().then {
         $0.text = "새 비밀번호를 위해"
@@ -59,7 +61,6 @@ class NewPasswordPhoneNumViewController: UIViewController{
     }
     
     //MARK: - Selectors
-
     @objc
     func goBack(){
         navigationController?.popViewController(animated: true )
@@ -103,6 +104,7 @@ class NewPasswordPhoneNumViewController: UIViewController{
         topBarView.snp.makeConstraints { make in
             make.left.right.equalToSuperview()
             make.top.equalToSuperview()
+            make.height.equalTo(self.view.frame.height/7.19)
         }
         
         toNewPassWordLabel.snp.makeConstraints { make in
@@ -140,7 +142,7 @@ class NewPasswordPhoneNumViewController: UIViewController{
     func topBarViewSetting(){
         topBarView.addSubview(topBarView.goBackButton)
         topBarView.addSubview(topBarView.EZY_Logo)
-               
+                       
         topBarView.topBarViewLayoutSetting(screenHeight: self.view.frame.height, screenWidth: self.view.frame.width)
     }
 }
