@@ -155,11 +155,9 @@ class SignUpTermsViewController: UIViewController{
         $0.setImage(UIImage(named: "EZY_TermButton"), for: .normal)
     }
     
-    lazy var continueButton = UIButton().then {
-        $0.setTitle("가입하기", for: .normal)
+    lazy var continueButton = CustomGradientTermsBtnView().then {
         $0.titleLabel?.dynamicFont(fontSize: 14, currentFontName: "AppleSDGothicNeo-Bold")
-        $0.setTitleColor(UIColor.EZY_FFFFFF, for: .normal)
-        $0.backgroundColor = UIColor.EZY_968DFF
+        $0.addTarget(self, action: #selector(onTapSignIn), for: .touchUpInside)
     }
 
     
@@ -253,6 +251,11 @@ class SignUpTermsViewController: UIViewController{
             flag3 = false
             AllFlag = false
         }
+    }
+    
+    @objc
+    func onTapSignIn(){
+        print("DEBUG : Click bottom SignIn button Button")
     }
 
     //MARK: - Helpers
