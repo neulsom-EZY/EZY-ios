@@ -208,7 +208,8 @@ class AddErrandViewController : UIViewController{
         view.addSubview(locationBtn)
 
         locationBtn.snp.makeConstraints { (make) in
-            make.height.width.equalTo(self.view.frame.height/18.0)
+            make.height.equalTo(self.view.frame.height/18.0)
+            make.width.equalTo(view.frame.height/3.14)
             make.left.equalTo(calendarButtonView.snp.left)
             make.top.equalTo(clockButtonView.snp.bottom).offset(view.frame.height/47.7)
         }

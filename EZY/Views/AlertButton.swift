@@ -18,6 +18,7 @@ class AlertButton : UIButton {
     
     private var viewModel : AlertBtn?
     
+    
     override init(frame: CGRect) {
         self.viewModel = nil
         super.init(frame: frame)
@@ -26,7 +27,6 @@ class AlertButton : UIButton {
     init(with viewModel : AlertBtn){
         self.viewModel = viewModel
         super.init(frame: .zero)
-        
         isEnabled = true
         
         addSubViews()
@@ -38,9 +38,8 @@ class AlertButton : UIButton {
         view.addSubview(icon)
     }
     public func configure( with viewModel : AlertBtn){
-        
         view.backgroundColor = .white
-        view.layer.cornerRadius  = 10
+        view.layer.cornerRadius = frame.height/10
         view.layer.shadowColor = UIColor.black.cgColor
         view.layer.shadowOpacity = 0.1
         view.layer.shadowOffset = CGSize(width: 0, height: 4)
@@ -59,6 +58,7 @@ class AlertButton : UIButton {
         view.snp.makeConstraints { (make) in
             make.left.equalTo(snp.left)
             make.height.equalToSuperview()
+            make.centerY.equalToSuperview()
             make.width.equalTo(view.snp.height)
         }
         icon.snp.makeConstraints { (make) in
@@ -69,6 +69,7 @@ class AlertButton : UIButton {
         label.snp.makeConstraints { (make) in
             make.left.equalTo(view.snp.right).offset(30)
             make.centerY.equalToSuperview()
+            make.right.equalTo(frame.height/20)
         }
     }
     
