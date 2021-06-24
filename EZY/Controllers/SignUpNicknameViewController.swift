@@ -12,7 +12,9 @@ import Then
 class SignUpNicknameViewController: UIViewController{
     //MARK: - Properties
     
-    let topBarView = TopBarView()
+    let topBarView = TopBarView().then {
+        $0.goBackButton.addTarget(self, action: #selector(goBack), for: .touchUpInside)
+    }
     
     lazy var putNicknameLabel = UILabel().then {
         $0.text = "닉네임을\n입력해주세요."
@@ -91,6 +93,7 @@ class SignUpNicknameViewController: UIViewController{
         topBarView.snp.makeConstraints { make in
             make.left.right.equalToSuperview()
             make.top.equalToSuperview()
+            make.height.equalTo(self.view.frame.height/7.19)
         }
         
         putNicknameLabel.snp.makeConstraints { make in
