@@ -45,7 +45,7 @@ class AddMyToDoViewController:UIViewController{
     }()
     
     private let calendarButton : UIButton = {
-        let button = Utilities().AlertButton(image: UIImage(named: "calendar")!, tintColor: .EZY_FFB5B5)
+        let button = Utilities().AlertButton(image: UIImage(named: "EZY_calendar")!, tintColor: .EZY_FFB5B5)
         button.addTarget(self, action: #selector(calendarAlert), for: .touchUpInside)
        return button
     }()
@@ -59,7 +59,7 @@ class AddMyToDoViewController:UIViewController{
     }()
     
     private let clockButton : UIButton = {
-        let button = Utilities().AlertButton(image: UIImage(named: "clock")!, tintColor: .EZY_FFCBB5)
+        let button = Utilities().AlertButton(image: UIImage(named: "EZY_clock")!, tintColor: .EZY_FFCBB5)
         button.addTarget(self, action: #selector(calendarAlert), for: .touchUpInside)
        return button
     }()
@@ -70,7 +70,7 @@ class AddMyToDoViewController:UIViewController{
         return view
     }()
     private let locationButton : UIButton = {
-        let button = Utilities().AlertButton(image: UIImage(named: "location")!, tintColor: .EZY_C7E0D4)
+        let button = Utilities().AlertButton(image: UIImage(named: "EZY_location")!, tintColor: .EZY_C7E0D4)
         button.addTarget(self, action: #selector(calendarAlert), for: .touchUpInside)
        return button
     }()

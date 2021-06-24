@@ -62,7 +62,7 @@ class AlertButton : UIButton {
             make.width.equalTo(view.snp.height)
         }
         icon.snp.makeConstraints { (make) in
-            make.height.width.equalTo(view.snp.height)
+            make.height.width.equalTo(20)
             make.center.equalTo(view.snp.center)
             
         }

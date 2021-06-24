@@ -33,7 +33,7 @@ class MoreCalendarModalsViewController : UIViewController{
     
         
     private let myToDo : MoreCalendarModalsButton = {
-        let viewModel = MyCustomButtonViewModel(title: "나의 할 일", image: UIImage(named: "user")!, color: .EZY_BAC8FF)
+        let viewModel = MyCustomButtonViewModel(title: "나의 할 일", image: UIImage(named: "EZY_user")!, color: .EZY_BAC8FF)
 
         let button = MoreCalendarModalsButton(with: viewModel)
         
@@ -42,7 +42,7 @@ class MoreCalendarModalsViewController : UIViewController{
     }()
     
     private let ourToDo : MoreCalendarModalsButton = {
-        let viewModel = MyCustomButtonViewModel(title: "우리의 할 일", image: UIImage(named: "user-3")!, color: .EZY_CFCBFF)
+        let viewModel = MyCustomButtonViewModel(title: "우리의 할 일", image: UIImage(named: "EZY_user-3")!, color: .EZY_CFCBFF)
         let button = MoreCalendarModalsButton(with: viewModel)
         button.addTarget(self, action: #selector(OurTodo), for: .touchUpInside)
         
@@ -50,7 +50,7 @@ class MoreCalendarModalsViewController : UIViewController{
     }()
     
     private let errand : MoreCalendarModalsButton = {
-        let viewModel = MyCustomButtonViewModel(title: "심부름", image: UIImage(named: "work")!, color: .EZY_AFADFF)
+        let viewModel = MyCustomButtonViewModel(title: "심부름", image: UIImage(named: "EZY_work")!, color: .EZY_AFADFF)
         let button = MoreCalendarModalsButton(with: viewModel)
         button.addTarget(self, action: #selector(Errand), for: .touchUpInside)
         return button

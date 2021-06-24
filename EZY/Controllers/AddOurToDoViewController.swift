@@ -51,7 +51,7 @@ class AddOurToDoViewController: UIViewController {
     }()
     
     private let calendarButton : UIButton = {
-        let button = Utilities().AlertButton(image: UIImage(named: "calendar")!, tintColor: .EZY_FFB5B5)
+        let button = Utilities().AlertButton(image: UIImage(named: "EZY_calendar")!, tintColor: .EZY_FFB5B5)
         button.addTarget(self, action: #selector(calendarAlert), for: .touchUpInside)
         return button
     }()
@@ -65,7 +65,7 @@ class AddOurToDoViewController: UIViewController {
     }()
     
     private let clockButton : UIButton = {
-        let button = Utilities().AlertButton(image: UIImage(named: "clock")!, tintColor: .EZY_FFCBB5)
+        let button = Utilities().AlertButton(image: UIImage(named: "EZY_clock")!, tintColor: .EZY_FFCBB5)
         button.addTarget(self, action: #selector(calendarAlert), for: .touchUpInside)
         return button
     }()
@@ -76,7 +76,7 @@ class AddOurToDoViewController: UIViewController {
         return view
     }()
     private let locationButton : UIButton = {
-        let button = Utilities().AlertButton(image: UIImage(named: "location")!, tintColor: .EZY_C7E0D4)
+        let button = Utilities().AlertButton(image: UIImage(named: "EZY_location")!, tintColor: .EZY_C7E0D4)
         button.addTarget(self, action: #selector(calendarAlert), for: .touchUpInside)
         return button
     }()
@@ -186,10 +186,10 @@ class AddOurToDoViewController: UIViewController {
         backbutton.snp.makeConstraints { (make) in
             make.height.width.equalTo(self.view.frame.height/33.8)
             make.left.equalTo(self.view.frame.height/29)
-            make.top.equalTo(view.frame.height/19.7)
+            make.top.equalTo(self.scrollView.snp.top ).offset(self.view.frame.height/36.9)
         }
         TitleLabel.snp.makeConstraints { (make) in
-            make.top.equalTo(backbutton.snp.bottom).offset(self.view.frame.height/39.5)
+            make.top.equalTo(backbutton.snp.bottom).offset(self.view.frame.height/35.9)
             make.left.equalTo(backbutton.snp.left)
         }
         titleContainerView.snp.makeConstraints { (make) in

@@ -8,14 +8,16 @@
 import UIKit
 import SnapKit
 import Then
-
-
+import Alamofire
+    
+    
 class MoreCalendarModalsButton : UIButton{
     
     private let toDoLabel = UILabel().then{
         $0.numberOfLines = 1
         $0.dynamicFont(fontSize: 18, weight: .semibold)
     }
+    
     private let iconView = UIImageView().then {
         $0.contentMode = .scaleAspectFit
     }
@@ -26,6 +28,7 @@ class MoreCalendarModalsButton : UIButton{
         self.viewModel = nil
         super.init(frame: frame)
     }
+    
     init(with viewModel : MyCustomButtonViewModel) {
         self.viewModel = viewModel
         super.init(frame: .zero)
@@ -33,24 +36,28 @@ class MoreCalendarModalsButton : UIButton{
         isEnabled = true
         addSubViews()
         configure(with: viewModel)
-
     }
+    
     private func addSubViews(){
         addSubview(toDoLabel)
         addSubview(iconView)
     }
+    
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+    
     public func configure(with viewModel : MyCustomButtonViewModel){
         layer.masksToBounds = true
         layer.borderColor = viewModel.color?.cgColor
         layer.borderWidth = 2
+        
         iconView.tintColor = viewModel.color
         toDoLabel.textColor = viewModel.color
         toDoLabel.text = viewModel.title
         iconView.image = viewModel.image
     }
+    
     override func layoutSubviews() {
         super.layoutSubviews()
         iconView.snp.makeConstraints { (make) in
@@ -64,13 +71,16 @@ class MoreCalendarModalsButton : UIButton{
             make.left.equalTo(iconView.snp.right).offset(frame.height/8.8)
         }
     }
-    func viewDidLoad(icon : UIImageView, label : UILabel) -> UIView{
+    
+    func ViewBtn(icon : UIImageView, label : UILabel) -> UIView{
         let view = UIView()
         view.addSubview(icon)
         view.addSubview(label)
         icon.snp.makeConstraints { (make) in
             make.left.equalTo(view.snp.left)
             make.top.equalTo(view.snp.top)
+            make.height.equalToSuperview()
+            make.width.equalTo(view.snp.width)
         }
         return view
     }

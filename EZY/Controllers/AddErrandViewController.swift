@@ -42,7 +42,7 @@ class AddErrandViewController : UIViewController{
     }()
     
     private let calendarButton : UIButton = {
-        let button = Utilities().AlertButton(image: UIImage(named: "calendar")!, tintColor: .EZY_FFB5B5)
+        let button = Utilities().AlertButton(image: UIImage(named: "EZY_calendar")!, tintColor: .EZY_FFB5B5)
         button.addTarget(self, action:#selector(calendarAlert), for: .touchUpInside)
        return button
     }()
@@ -56,7 +56,7 @@ class AddErrandViewController : UIViewController{
     }()
     
     private let clockButton : UIButton = {
-        let button = Utilities().AlertButton(image: UIImage(named: "clock")!, tintColor: .EZY_FFCBB5)
+        let button = Utilities().AlertButton(image: UIImage(named: "EZY_clock")!, tintColor: .EZY_FFCBB5)
         button.addTarget(self, action: #selector(calendarAlert), for: .touchUpInside)
        return button
     }()
@@ -72,7 +72,7 @@ class AddErrandViewController : UIViewController{
 //       return button
 //    }()
     private let locationBtn : AlertButton = {
-        let viewModel = AlertBtn(icon: UIImage(named: "location"), iconTintColor: .EZY_C7E0D4, message: "광주소프트웨어마이스터고등학교")
+        let viewModel = AlertBtn(icon: UIImage(named: "EZY_location"), iconTintColor: .EZY_C7E0D4, message: "광주소프트웨어마이스터고등학교")
         let button = AlertButton(with: viewModel)
         
         button.addTarget(self, action: #selector(Addlocationbtn), for: .touchUpInside)
