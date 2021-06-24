@@ -12,7 +12,9 @@ import Then
 class SignUpPhoneNumViewController: UIViewController{
     //MARK: - Properties
     
-    let topBarView = TopBarView()
+    let topBarView = TopBarView().then {
+        $0.goBackButton.addTarget(self, action: #selector(goBack), for: .touchUpInside)
+    }
     
     lazy var putPhoneNumLabel = UILabel().then {
         $0.text = "전화번호\n인증을 해주세요."
@@ -97,6 +99,7 @@ class SignUpPhoneNumViewController: UIViewController{
         topBarView.snp.makeConstraints { make in
             make.left.right.equalToSuperview()
             make.top.equalToSuperview()
+            make.height.equalTo(self.view.frame.height/7.19)
         }
         
         putPhoneNumLabel.snp.makeConstraints { make in
