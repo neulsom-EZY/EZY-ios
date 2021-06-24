@@ -63,6 +63,15 @@ class MoreCalendarModalsButton : UIButton{
             make.centerY.equalToSuperview()
             make.left.equalTo(iconView.snp.right).offset(frame.height/8.8)
         }
-        
+    }
+    func viewDidLoad(icon : UIImageView, label : UILabel) -> UIView{
+        let view = UIView()
+        view.addSubview(icon)
+        view.addSubview(label)
+        icon.snp.makeConstraints { (make) in
+            make.left.equalTo(view.snp.left)
+            make.top.equalTo(view.snp.top)
+        }
+        return view
     }
 }

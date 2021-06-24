@@ -52,7 +52,6 @@ class AlertButton : UIButton {
         icon.image = viewModel.icon
         icon.tintColor = viewModel.iconTintColor
         label.text = viewModel.message
-        
     }
     override func layoutSubviews() {
         super.layoutSubviews()
@@ -76,6 +75,6 @@ class AlertButton : UIButton {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
+
     
 }
