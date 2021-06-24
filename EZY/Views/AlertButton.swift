@@ -35,11 +35,10 @@ class AlertButton : UIButton {
     private func addSubViews(){
         addSubview(view)
         addSubview(label)
-        view.addSubview(icon)
+        addSubview(icon)
     }
     public func configure( with viewModel : AlertBtn){
         view.backgroundColor = .white
-        view.layer.cornerRadius = frame.height/10
         view.layer.shadowColor = UIColor.black.cgColor
         view.layer.shadowOpacity = 0.1
         view.layer.shadowOffset = CGSize(width: 0, height: 4)
@@ -54,15 +53,16 @@ class AlertButton : UIButton {
     }
     override func layoutSubviews() {
         super.layoutSubviews()
+        view.layer.cornerRadius = frame.height/4.5
         
         view.snp.makeConstraints { (make) in
             make.left.equalTo(snp.left)
-            make.height.equalToSuperview()
+            make.height.equalTo(frame.height)
             make.centerY.equalToSuperview()
             make.width.equalTo(view.snp.height)
         }
         icon.snp.makeConstraints { (make) in
-            make.height.width.equalTo(20)
+            make.height.equalTo(frame.height/2)
             make.center.equalTo(view.snp.center)
             
         }
