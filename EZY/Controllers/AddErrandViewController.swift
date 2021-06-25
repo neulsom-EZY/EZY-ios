@@ -163,7 +163,7 @@ class AddErrandViewController : UIViewController{
         view.backgroundColor = .white
         view.addSubview(backbutton)
         titleContainerView.layer.cornerRadius = view.frame.height/40.6
-     
+        locationBtn.backgroundColor = .red
         addButton.layer.cornerRadius = view.frame.height/81.2
         calendarButton.layer.cornerRadius = view.frame.height/81.2
         clockButton.layer.cornerRadius = view.frame.height/81.2
