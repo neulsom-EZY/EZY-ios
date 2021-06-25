@@ -35,42 +35,25 @@ class AddErrandViewController : UIViewController{
     }()
  
 
-    private lazy var calendarButtonView : UIView = {
-        let message = "2021. 6. 6 일요일 "
-        let view = Utilities().AlertbtnView(withMessage: message, viewSize: Double(view.frame.height), button: calendarButton)
-        return view
+
+    
+    
+
+    private let calendarBtn : AlertButton = {
+        let viewModel = AlertBtn(icon: UIImage(named: "EZY_calendar"), iconTintColor: .EZY_C7E0D4, message: "2021.6.6 일요일")
+        let button = AlertButton(with: viewModel)
+        
+        button.addTarget(self, action: #selector(Addlocationbtn), for: .touchUpInside)
+        return button
+    }()
+    private let clockBtn : AlertButton = {
+        let viewModel = AlertBtn(icon: UIImage(named: "EZY_clock"), iconTintColor: .EZY_C7E0D4, message: "11:00AM - 1:00PM")
+        let button = AlertButton(with: viewModel)
+        
+        button.addTarget(self, action: #selector(Addlocationbtn), for: .touchUpInside)
+        return button
     }()
     
-    private let calendarButton : UIButton = {
-        let button = Utilities().AlertButton(image: UIImage(named: "EZY_calendar")!, tintColor: .EZY_FFB5B5)
-        button.addTarget(self, action:#selector(calendarAlert), for: .touchUpInside)
-       return button
-    }()
-    
-    
-    
-    private lazy var clockButtonView : UIView = {
-        let message = "11:00AM - 1:00PM"
-        let view = Utilities().AlertbtnView(withMessage: message, viewSize: Double(view.frame.height), button: clockButton)
-        return view
-    }()
-    
-    private let clockButton : UIButton = {
-        let button = Utilities().AlertButton(image: UIImage(named: "EZY_clock")!, tintColor: .EZY_FFCBB5)
-        button.addTarget(self, action: #selector(calendarAlert), for: .touchUpInside)
-       return button
-    }()
-    
-//    private lazy var locationButtonView : UIView = {
-//        let message = "광주소프트웨어마이스터고등학교"
-//        let view = Utilities().AlertbtnView(withMessage: message, viewSize: Double(view.frame.height), button: locationButton)
-//        return view
-//    }()
-//    private let locationButton : UIButton = {
-//        let button = Utilities().AlertButton(image: UIImage(named: "location")!, tintColor: .EZY_C7E0D4)
-//        button.addTarget(self, action: #selector(calendarAlert), for: .touchUpInside)
-//       return button
-//    }()
     private let locationBtn : AlertButton = {
         let viewModel = AlertBtn(icon: UIImage(named: "EZY_location"), iconTintColor: .EZY_C7E0D4, message: "광주소프트웨어마이스터고등학교")
         let button = AlertButton(with: viewModel)
@@ -80,17 +63,6 @@ class AddErrandViewController : UIViewController{
     }()
     
     
-//    private lazy var errandButtonView : UIView = {
-//        let message = "11:00AM - 1:00PM"
-//        let view = Utilities().AlertbtnView(withMessage: message, viewSize: Double(view.frame.height), button: errandButton)
-//        return view
-//    }()
-//
-//    private let errandButton : UIButton = {
-//        let button = Utilities().AlertButton(image: UIImage(named: "person.3")!, tintColor: .EZY_ADCAE5)
-//        button.addTarget(self, action: #selector(calendarAlert), for: .touchUpInside)
-//       return button
-//    }()
     
     private lazy var explanationContainerView : UIView = {
         let title = "설명"
@@ -161,78 +133,73 @@ class AddErrandViewController : UIViewController{
     //MARK: - Helpers
     func configureUI(){
         view.backgroundColor = .white
-        view.addSubview(backbutton)
+        cornerRadius()
+        addView()
+        location()
+    }
+    func cornerRadius(){
         titleContainerView.layer.cornerRadius = view.frame.height/40.6
-        locationBtn.backgroundColor = .red
         addButton.layer.cornerRadius = view.frame.height/81.2
-        calendarButton.layer.cornerRadius = view.frame.height/81.2
-        clockButton.layer.cornerRadius = view.frame.height/81.2
-        locationBtn.layer.cornerRadius = view.frame.height/81.2
         explanationContainerView.layer.cornerRadius = view.frame.height/40.6
-        
+    }
+    func addView(){
+        view.addSubview(backbutton)
+        view.addSubview(TitleLabel)
+        view.addSubview(titleContainerView)
+        view.addSubview(calendarBtn)
+        view.addSubview(clockBtn)
+        view.addSubview(locationBtn)
+        view.addSubview(explanationContainerView)
+        view.addSubview(kindOfCollectionView)
+        view.addSubview(addButton)
+    }
+    func location(){
         backbutton.snp.makeConstraints { (make) in
             make.height.width.equalTo(self.view.frame.height/33.8)
             make.left.equalTo(self.view.frame.height/29)
             make.top.equalTo(self.view.frame.height/13.3)
         }
-        
-        view.addSubview(TitleLabel)
-        
         TitleLabel.snp.makeConstraints { (make) in
             make.top.equalTo(backbutton.snp.bottom).offset(self.view.frame.height/36.9)
             make.left.equalTo(backbutton.snp.left)
         }
-        
-        view.addSubview(titleContainerView)
-        
         titleContainerView.snp.makeConstraints { (make) in
             make.height.equalTo(self.view.frame.height/14.7)
             make.top.equalTo(TitleLabel.snp.bottom).offset(self.view.frame.height/19.8)
             make.left.equalTo(backbutton.snp.left)
             make.right.equalTo(self.view.frame.width/13.8 * -1)
         }
-
-        view.addSubview(calendarButtonView)
-        calendarButtonView.snp.makeConstraints { (make) in
-            make.height.width.equalTo(self.view.frame.height/18.0)
-            make.left.equalTo(backbutton.snp.left)
-            make.top.equalTo(titleContainerView.snp.bottom).offset(view.frame.height/30.0)
-        }
-
-        view.addSubview(clockButtonView)
-        clockButtonView.snp.makeConstraints { (make) in
-            make.height.width.equalTo(self.view.frame.height/18.0)
-            make.left.equalTo(calendarButtonView.snp.left)
-            make.top.equalTo(calendarButtonView.snp.bottom).offset(view.frame.height/47.8)
-        }
-        view.addSubview(locationBtn)
-
-        locationBtn.snp.makeConstraints { (make) in
+        calendarBtn.snp.makeConstraints { (make) in
             make.height.equalTo(self.view.frame.height/18.0)
             make.width.equalTo(view.frame.height/3.14)
-            make.left.equalTo(calendarButtonView.snp.left)
-            make.top.equalTo(clockButtonView.snp.bottom).offset(view.frame.height/47.7)
+            make.right.equalTo(view.snp.right).offset(view.frame.height/9.23 * -1)
+            make.left.equalTo(backbutton.snp.left)
+            make.top.equalTo(titleContainerView.snp.bottom).offset(view.frame.height/30.1)
         }
-
-        view.addSubview(explanationContainerView)
-        
+        clockBtn.snp.makeConstraints { (make) in
+            make.height.equalTo(self.view.frame.height/18.0)
+            make.right.equalTo(view.snp.right).offset(view.frame.height/9.23 * -1)
+            make.width.equalTo(view.frame.height/3.14)
+            make.left.equalTo(calendarBtn.snp.left)
+            make.top.equalTo(calendarBtn.snp.bottom).offset(view.frame.height/47.7)
+        }
+        locationBtn.snp.makeConstraints { (make) in
+            make.height.equalTo(self.view.frame.height/18.0)
+            make.right.equalTo(view.snp.right).offset(view.frame.height/9.23 * -1)
+            make.width.equalTo(view.frame.height/3.14)
+            make.left.equalTo(calendarBtn.snp.left)
+            make.top.equalTo(clockBtn.snp.bottom).offset(view.frame.height/47.7)
+        }
         explanationContainerView.snp.makeConstraints { (make) in
             make.height.equalTo(self.view.frame.height/10.8)
             make.top.equalTo(locationBtn.snp.bottom).offset(self.view.frame.height/19.8)
             make.left.equalTo(backbutton.snp.left)
             make.right.equalTo(self.view.frame.width/13.8 * -1)
         }
-        
-        view.addSubview(kindOfCollectionView)
         kindOfCollectionView.snp.makeConstraints { (make) in
             make.left.equalTo(backbutton.snp.left)
             make.top.equalTo(explanationContainerView.snp.bottom).offset(view.frame.height/38.6)
         }
-        
-        
-        
-        view.addSubview(addButton)
-        
         addButton.snp.makeConstraints { (make) in
             make.bottom.equalToSuperview().offset(view.frame.height/10.9 * -1)
             make.height.equalTo(self.view.frame.height/18.0)
@@ -240,8 +207,6 @@ class AddErrandViewController : UIViewController{
             make.right.equalTo(titleContainerView.snp.right)
             
         }
-   
-  
     }
 }
 #if DEBUG
