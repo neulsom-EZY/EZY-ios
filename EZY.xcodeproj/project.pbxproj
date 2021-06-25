@@ -27,6 +27,7 @@
 		EEEDB2BF2664B44200E5C53A /* AddMyToDoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEEDB2BE2664B44200E5C53A /* AddMyToDoViewController.swift */; };
 		EEEDB2C22664D30D00E5C53A /* extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEEDB2C12664D30D00E5C53A /* extensions.swift */; };
 		EEF7DF34266F83AA00832E95 /* MorePeopleToDo.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEF7DF33266F83AA00832E95 /* MorePeopleToDo.swift */; };
+		EEF7FF5C268653EB00FD7800 /* inputContainerTextFieldView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEF7FF5B268653EB00FD7800 /* inputContainerTextFieldView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -72,6 +73,7 @@
 		EEEDB2BE2664B44200E5C53A /* AddMyToDoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddMyToDoViewController.swift; sourceTree = "<group>"; };
 		EEEDB2C12664D30D00E5C53A /* extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = extensions.swift; sourceTree = "<group>"; };
 		EEF7DF33266F83AA00832E95 /* MorePeopleToDo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MorePeopleToDo.swift; sourceTree = "<group>"; };
+		EEF7FF5B268653EB00FD7800 /* inputContainerTextFieldView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = inputContainerTextFieldView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -150,8 +152,9 @@
 			isa = PBXGroup;
 			children = (
 				EED20D62266C0F90000E0856 /* AdditionalButton.swift */,
-				EE3621C1267E51B80099AF3A /* MoreCalendarModalsButton .swift */,
 				EEA457F32682FFA100C08D17 /* AlertButton.swift */,
+				EE3621C1267E51B80099AF3A /* MoreCalendarModalsButton .swift */,
+				EEF7FF5B268653EB00FD7800 /* inputContainerTextFieldView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -354,6 +357,7 @@
 				6AA769E726636AE700B7E1F5 /* SceneDelegate.swift in Sources */,
 				EE3621C2267E51B80099AF3A /* MoreCalendarModalsButton .swift in Sources */,
 				EE782853268150A900AECC65 /* AddOurToDoViewController.swift in Sources */,
+				EEF7FF5C268653EB00FD7800 /* inputContainerTextFieldView.swift in Sources */,
 				EED007D526674AC2009A5A87 /* Utilities.swift in Sources */,
 				EE7828552681859200AECC65 /* AddErrandViewController.swift in Sources */,
 				EEA457F42682FFA100C08D17 /* AlertButton.swift in Sources */,
