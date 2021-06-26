@@ -45,6 +45,7 @@ extension UIColor{
     static let EZY_A7A7A7 = UIColor.rgb(red: 167, green: 167, blue: 167)
     static let EZY_B2B2B2 = UIColor.rgb(red: 178, green: 178, blue: 178)
     static let EZY_CDCDCD = UIColor.rgb(red: 205, green: 205, blue: 205)
+    static let EZY_DEDEDE = UIColor.rgb(red: 222, green: 222, blue: 222)
 }
 
 // MARK: - UILabel 재정의

@@ -12,6 +12,8 @@ import Alamofire
 
 class PersonalCalendarViewController : UIViewController{
     //MARK: - Properties
+    var data : []
+    
     private let backbutton = UIButton().then{
         $0.tintColor = .EZY_6B40FF
         $0.setImage(UIImage(systemName: "arrow.left"), for: .normal)
@@ -22,6 +24,7 @@ class PersonalCalendarViewController : UIViewController{
         $0.text = "개인 일정 알림 관리"
         $0.dynamicFont(fontSize: 22, weight: .semibold)
     }
+    private let tableView = UITableView()
     
     //MARK: - Lifecycle
     override func viewDidLoad() {
