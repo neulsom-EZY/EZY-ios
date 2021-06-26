@@ -42,8 +42,3 @@ struct Managementbtn {
     let subTitle : String?
 }
 
-struct Manage {
-    let title : String?
-    let explanation : String?
-    
-}
