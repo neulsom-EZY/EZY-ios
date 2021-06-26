@@ -37,7 +37,7 @@ class OneAlertButton : UIButton {
         view.layer.shadowColor = UIColor.black.cgColor
         view.layer.shadowOpacity = 0.1
         view.layer.shadowOffset = CGSize(width: 0, height: 4)
-        
+        view.layer.shadowRadius = 15
         icon.image = viewModel.icon
         icon.tintColor = viewModel.iconTintColor
     }

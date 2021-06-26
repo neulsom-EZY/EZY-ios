@@ -23,6 +23,11 @@ class PushNotificationManagementViewController : UIViewController{
         $0.text = "푸쉬 알림 관리"
         $0.dynamicFont(fontSize: 22, weight: .semibold)
     }
+    private let personalCalendar : AlarmManagementButton = {
+        let viewModel = Managementbtn(icon: UIImage(named: "EZY_user")?.withRenderingMode(.alwaysTemplate), iconTintColor : .EZY_BAC8FF, title: "개인 일정 알림 관리", subTitle: "개인, 팀, 심부름관련 알림을 관리합니다.")
+        let button = AlarmManagementButton(with: viewModel)
+        return button
+    }()
     
     //MARK: - LifeCycle
     override func viewDidLoad() {
@@ -50,6 +55,13 @@ class PushNotificationManagementViewController : UIViewController{
             make.top.equalTo(backbutton.snp.bottom).offset(self.view.frame.height/30.1)
             make.left.equalTo(backbutton.snp.left)
 
+        }
+        view.addSubview(personalCalendar)
+        personalCalendar.snp.makeConstraints { (make) in
+            make.top.equalTo(TitleLabel.snp.bottom).offset(view.frame.height/31.2)
+            make.centerX.equalToSuperview()
+            make.height.equalTo(view.frame.height/12.9)
+            make.width.equalTo(view.frame.height/2.6)
         }
         
     }

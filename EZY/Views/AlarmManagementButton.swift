@@ -9,9 +9,6 @@ import UIKit
 
 class AlarmManagementButton : UIButton {
     
-    private let backgroundview = UIView().then{
-        $0.backgroundColor = .white
-    }
     
     private let icon = UIImageView()
     
@@ -25,7 +22,7 @@ class AlarmManagementButton : UIButton {
         $0.dynamicFont(fontSize: 8, weight: .thin)
     }
     private let image = UIImageView().then{
-        $0.image = UIImage(systemName: "chevron.forward")
+        $0.image = UIImage(named: "EZY_chevron.right")
         $0.tintColor = .EZY_B2B2B2
     }
     private var viewModel : Managementbtn?
@@ -42,18 +39,18 @@ class AlarmManagementButton : UIButton {
     }
     
     func addView(){
-        addSubview(backgroundview)
-        backgroundview.addSubview(icon)
-        backgroundview.addSubview(title)
-        backgroundview.addSubview(subtitle)
-        backgroundview.addSubview(image)
+        addSubview(icon)
+        addSubview(title)
+        addSubview(subtitle)
+        addSubview(image)
     }
     
     func configure(with viewModel : Managementbtn){
-        backgroundview.isUserInteractionEnabled = false
-        backgroundview.layer.shadowColor = UIColor.black.cgColor
-        backgroundview.layer.shadowOpacity = 0.1
-        backgroundview.layer.shadowOffset = CGSize(width: 0, height: 4)
+        backgroundColor = .white
+        layer.shadowColor = UIColor.black.cgColor
+        layer.shadowOpacity = 0.1
+        layer.shadowOffset = CGSize(width: 0, height: 4)
+        layer.shadowRadius = 20
         
         icon.image = viewModel.icon
         icon.tintColor = viewModel.iconTintColor
@@ -64,12 +61,27 @@ class AlarmManagementButton : UIButton {
 
     override func layoutSubviews() {
         super.layoutSubviews()
-        backgroundview.layer.cornerRadius = frame.height/81.2
-        
+        layer.cornerRadius = frame.height/6.3
         icon.snp.makeConstraints { (make) in
-            make.centerY.equalTo(backgroundview.snp.centerY)
-            make.left.equalTo()
+            make.centerY.equalTo(snp.centerY)
+            make.left.equalTo(snp.left).offset(frame.height/3.9)
+            make.height.width.equalTo(frame.height/2)
         }
+        title.snp.makeConstraints { (make) in
+            make.top.equalTo(snp.top).offset(frame.height/4.2)
+            make.left.equalTo(icon.snp.right).offset(frame.height/4.2)
+        }
+        subtitle.snp.makeConstraints { (make) in
+            make.top.equalTo(title.snp.bottom).offset(frame.height/15.8)
+            make.left.equalTo(title.snp.left)
+        }
+        image.snp.makeConstraints { (make) in
+            make.centerY.equalTo(snp.centerY)
+            make.right.equalTo(snp.right).offset(frame.height/2.7 * -1)
+            make.height.equalTo(frame.height/3.9)
+            make.width.equalTo(frame.height/7)
+        }
+        
     }
     
     
