@@ -47,14 +47,14 @@ class AddErrandViewController : UIViewController{
     
 
     private let calendarBtn : AlertButton = {
-        let viewModel = AlertBtn(icon: UIImage(named: "EZY_calendar"), iconTintColor: .EZY_C7E0D4, message: "2021.6.6 일요일")
+        let viewModel = AlertBtn(icon: UIImage(named: "EZY_calendar")?.withRenderingMode(.alwaysTemplate), iconTintColor: .EZY_FFB5B5, message: "2021.6.6 일요일")
         let button = AlertButton(with: viewModel)
         
         button.addTarget(self, action: #selector(Addlocationbtn), for: .touchUpInside)
         return button
     }()
     private let clockBtn : AlertButton = {
-        let viewModel = AlertBtn(icon: UIImage(named: "EZY_clock"), iconTintColor: .EZY_C7E0D4, message: "11:00AM - 1:00PM")
+        let viewModel = AlertBtn(icon: UIImage(named: "EZY_clock")?.withRenderingMode(.alwaysTemplate), iconTintColor: .EZY_FFCBB5, message: "11:00AM - 1:00PM")
         let button = AlertButton(with: viewModel)
         
         button.addTarget(self, action: #selector(Addlocationbtn), for: .touchUpInside)
@@ -62,16 +62,17 @@ class AddErrandViewController : UIViewController{
     }()
     
     private let locationBtn : AlertButton = {
-        let viewModel = AlertBtn(icon: UIImage(named: "EZY_location"), iconTintColor: .EZY_C7E0D4, message: "광주소프트웨어마이스터고등학교")
+        let viewModel = AlertBtn(icon: UIImage(named: "EZY_location")?.withRenderingMode(.alwaysTemplate), iconTintColor: .EZY_C7E0D4, message: "광주소프트웨어마이스터고등학교")
         let button = AlertButton(with: viewModel)
         
         button.addTarget(self, action: #selector(Addlocationbtn), for: .touchUpInside)
         return button
     }()
     
-    private let plusPeople : UIButton = {
-        let image  = UIImage(named: "EZY_user-3")
-        let button  = Utilities().AlertButton(image: image!, tintColor: .EZY_ADCAE5)
+    private let plusPeople : OneAlertButton = {
+        let viewModel = OneAlertBtn(icon: UIImage(named: "EZY_user-3")?.withRenderingMode(.alwaysTemplate), iconTintColor: .EZY_ADCAE5)
+        let button = OneAlertButton(with: viewModel)
+        
         return button
     }()
     
@@ -101,7 +102,7 @@ class AddErrandViewController : UIViewController{
     
     private lazy var addButton : AdditionalButton = {
         let button = AdditionalButton(type: .system)
-        button.title = "추가"
+        button.title = "부탁하기"
         button.addTarget(self, action: #selector(Addmytodobtn), for: .touchUpInside)
         return button
     }()
@@ -202,9 +203,16 @@ class AddErrandViewController : UIViewController{
             make.left.equalTo(calendarBtn.snp.left)
             make.top.equalTo(clockBtn.snp.bottom).offset(view.frame.height/47.7)
         }
+        plusPeople.snp.makeConstraints { (make) in
+            make.top.equalTo(locationBtn.snp.bottom).offset(view.frame.height/47.7)
+            make.height.width.equalTo(self.view.frame.height/18.0)
+            make.left.equalTo(calendarBtn.snp.left)
+            
+            
+        }
         explanationContainerView.snp.makeConstraints { (make) in
             make.height.equalTo(self.view.frame.height/10.8)
-            make.top.equalTo(locationBtn.snp.bottom).offset(self.view.frame.height/19.8)
+            make.top.equalTo(plusPeople.snp.bottom).offset(self.view.frame.height/30.0)
             make.left.equalTo(backbutton.snp.left)
             make.right.equalTo(self.view.frame.width/13.8 * -1)
         }

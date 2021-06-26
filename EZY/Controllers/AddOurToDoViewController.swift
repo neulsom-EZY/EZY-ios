@@ -45,20 +45,20 @@ class AddOurToDoViewController: UIViewController {
     
     
     private let calendarBtn : AlertButton = {
-        let viewModel = AlertBtn(icon: UIImage(named: "EZY_calendar"), iconTintColor: .EZY_C7E0D4, message: "2021.6.6 일요일")
+        let viewModel = AlertBtn(icon: UIImage(named: "EZY_calendar")?.withRenderingMode(.alwaysTemplate), iconTintColor: .EZY_FFB5B5, message: "2021.6.6 일요일")
         let button = AlertButton(with: viewModel)
         button.addTarget(self, action: #selector(calendarAlert), for: .touchUpInside)
         return button
     }()
     private let clockBtn : AlertButton = {
-        let viewModel = AlertBtn(icon: UIImage(named: "EZY_clock"), iconTintColor: .EZY_C7E0D4, message: "11:00AM - 1:00PM")
+        let viewModel = AlertBtn(icon: UIImage(named: "EZY_clock")?.withRenderingMode(.alwaysTemplate), iconTintColor: .EZY_FFCBB5, message: "11:00AM - 1:00PM")
         let button = AlertButton(with: viewModel)
         button.addTarget(self, action: #selector(clockAlert), for: .touchUpInside)
         return button
     }()
     
     private let locationBtn : AlertButton = {
-        let viewModel = AlertBtn(icon: UIImage(named: "EZY_location"), iconTintColor: .EZY_C7E0D4, message: "광주소프트웨어마이스터고등학교")
+        let viewModel = AlertBtn(icon: UIImage(named: "EZY_location")?.withRenderingMode(.alwaysTemplate), iconTintColor: .EZY_C7E0D4, message: "광주소프트웨어마이스터고등학교")
         let button = AlertButton(with: viewModel)
         button.addTarget(self, action: #selector(locationAlert), for: .touchUpInside)
         return button

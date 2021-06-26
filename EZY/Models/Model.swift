@@ -29,3 +29,8 @@ struct AlertBtn{
     let iconTintColor : UIColor?
     let message : String?
 }
+
+struct OneAlertBtn{
+    let icon : UIImage?
+    let iconTintColor : UIColor?
+}
