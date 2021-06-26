@@ -67,7 +67,6 @@ class AddMyToDoViewController:UIViewController{
     
     private let explanationTextView : UITextView = {
         let tf = Utilities().textView(TextColor: .EZY_929292, TextSize: 14,font: .medium)
-        
         return tf
     }()
     

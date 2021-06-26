@@ -33,9 +33,16 @@ class AddErrandViewController : UIViewController{
         let tf = Utilities().textField(textColor: .EZY_656565, textSize: 14,font: .medium)
         return tf
     }()
- 
-
-
+    
+    private lazy var  RequestList : UIView = {
+        let title = "어떤 심부름을 부탁할까요?"
+        let view = Utilities().inputContainerCustomTextView(withMessage: title, textView: RequestTextView, Color: .EZY_F4F6FF, viewSize: Double(view.frame.height))
+        return view
+    }()
+    private let RequestTextView : UITextView = {
+        let tv = Utilities().textView(TextColor: .EZY_A7A7A7, TextSize: 12, font: .medium)
+        return tv
+    }()
     
     
 
@@ -62,7 +69,11 @@ class AddErrandViewController : UIViewController{
         return button
     }()
     
-    
+    private let plusPeople : UIButton = {
+        let image  = UIImage(named: "EZY_user-3")
+        let button  = Utilities().AlertButton(image: image!, tintColor: .EZY_ADCAE5)
+        return button
+    }()
     
     private lazy var explanationContainerView : UIView = {
         let title = "설명"
@@ -73,7 +84,6 @@ class AddErrandViewController : UIViewController{
     
     private let explanationTextView : UITextView = {
         let tf = Utilities().textView(TextColor: .EZY_929292, TextSize: 14,font: .medium)
-        
         return tf
     }()
     
@@ -138,16 +148,17 @@ class AddErrandViewController : UIViewController{
         location()
     }
     func cornerRadius(){
-        titleContainerView.layer.cornerRadius = view.frame.height/40.6
+        RequestList.layer.cornerRadius = view.frame.height/40.6
         addButton.layer.cornerRadius = view.frame.height/81.2
         explanationContainerView.layer.cornerRadius = view.frame.height/40.6
     }
     func addView(){
         view.addSubview(backbutton)
         view.addSubview(TitleLabel)
-        view.addSubview(titleContainerView)
+        view.addSubview(RequestList)
         view.addSubview(calendarBtn)
         view.addSubview(clockBtn)
+        view.addSubview(plusPeople)
         view.addSubview(locationBtn)
         view.addSubview(explanationContainerView)
         view.addSubview(kindOfCollectionView)
@@ -163,18 +174,19 @@ class AddErrandViewController : UIViewController{
             make.top.equalTo(backbutton.snp.bottom).offset(self.view.frame.height/36.9)
             make.left.equalTo(backbutton.snp.left)
         }
-        titleContainerView.snp.makeConstraints { (make) in
-            make.height.equalTo(self.view.frame.height/14.7)
+        RequestList.snp.makeConstraints { (make) in
+            make.height.equalTo(self.view.frame.height/7.38)
             make.top.equalTo(TitleLabel.snp.bottom).offset(self.view.frame.height/19.8)
             make.left.equalTo(backbutton.snp.left)
             make.right.equalTo(self.view.frame.width/13.8 * -1)
+            
         }
         calendarBtn.snp.makeConstraints { (make) in
             make.height.equalTo(self.view.frame.height/18.0)
             make.width.equalTo(view.frame.height/3.14)
             make.right.equalTo(view.snp.right).offset(view.frame.height/9.23 * -1)
             make.left.equalTo(backbutton.snp.left)
-            make.top.equalTo(titleContainerView.snp.bottom).offset(view.frame.height/30.1)
+            make.top.equalTo(RequestList.snp.bottom).offset(view.frame.height/30.1)
         }
         clockBtn.snp.makeConstraints { (make) in
             make.height.equalTo(self.view.frame.height/18.0)
@@ -196,15 +208,12 @@ class AddErrandViewController : UIViewController{
             make.left.equalTo(backbutton.snp.left)
             make.right.equalTo(self.view.frame.width/13.8 * -1)
         }
-        kindOfCollectionView.snp.makeConstraints { (make) in
-            make.left.equalTo(backbutton.snp.left)
-            make.top.equalTo(explanationContainerView.snp.bottom).offset(view.frame.height/38.6)
-        }
+
         addButton.snp.makeConstraints { (make) in
             make.bottom.equalToSuperview().offset(view.frame.height/10.9 * -1)
             make.height.equalTo(self.view.frame.height/18.0)
             make.left.equalTo(backbutton.snp.left)
-            make.right.equalTo(titleContainerView.snp.right)
+            make.right.equalTo(RequestList.snp.right)
             
         }
     }

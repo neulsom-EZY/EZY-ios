@@ -73,40 +73,37 @@ class Utilities{
         let tv = UITextView()
         tv.textColor = tc
         tv.font = UIFont.systemFont(ofSize: CGFloat(ts), weight: .medium)
-        tv.backgroundColor = .EZY_F6F3FF
+        tv.backgroundColor = .clear
         return tv
     }
     
     
-    //
-    func inputContainerCustomTextView(withMessage message:String,textView:UITextView,Color messageColor: UIColor, viewSize : Double) -> UIView{
+    //MARK: - inputcontainerCustomTextView
+    func inputContainerCustomTextView(withMessage message:String,textView : UITextView,Color messageColor: UIColor, viewSize : Double) -> UIView{
         let view = UIView()
         let label_Message = UILabel()
-        
         view.backgroundColor = messageColor
         
-        
         view.addSubview(label_Message)
+        
         label_Message.text = message
+        
         label_Message.dynamicFont(fontSize: 14, weight: .bold)
-        label_Message.textColor = .EZY_968DFF
+        
+        label_Message.textColor = .EZY_8099FF
         label_Message.snp.makeConstraints { (make) in
-            make.left.equalToSuperview().offset(viewSize / 38.6)
-            make.top.equalToSuperview().offset(viewSize/40.6)
+            make.left.equalToSuperview().offset(viewSize / 47.8)
+            make.top.equalToSuperview().offset(viewSize/45.1)
         }
         view.addSubview(textView)
         textView.snp.makeConstraints { (make) in
-            make.left.equalTo(label_Message.snp.right).offset(viewSize/31.2)
+            make.left.equalTo(label_Message.snp.left)
             make.right.equalToSuperview().offset(viewSize/40.6 * -1)
-            make.top.equalToSuperview().offset(viewSize/60)
-            make.bottom.equalToSuperview().offset(viewSize/60 * -1)
+            make.top.equalTo(label_Message.snp.bottom).offset(viewSize/90.2)
+            make.bottom.equalToSuperview().offset(viewSize/33.8 * -1)
         }
-    
-
         return view
     }
-    
-    
     
     //MARK: - Alert
     
