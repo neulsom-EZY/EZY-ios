@@ -23,6 +23,7 @@
 		EE7828552681859200AECC65 /* AddErrandViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE7828542681859200AECC65 /* AddErrandViewController.swift */; };
 		EE93B4D72687639F0055D7A6 /* OneAlertButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE93B4D62687639F0055D7A6 /* OneAlertButton.swift */; };
 		EE93B4D926876C6F0055D7A6 /* PushNotificationManagementViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE93B4D826876C6F0055D7A6 /* PushNotificationManagementViewController.swift */; };
+		EE93B4DB26876F430055D7A6 /* AlarmManagementButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE93B4DA26876F430055D7A6 /* AlarmManagementButton.swift */; };
 		EEA457F42682FFA100C08D17 /* AlertButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEA457F32682FFA100C08D17 /* AlertButton.swift */; };
 		EED007D526674AC2009A5A87 /* Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = EED007D426674AC2009A5A87 /* Utilities.swift */; };
 		EED20D63266C0F90000E0856 /* AdditionalButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = EED20D62266C0F90000E0856 /* AdditionalButton.swift */; };
@@ -53,6 +54,7 @@
 		EE7828542681859200AECC65 /* AddErrandViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddErrandViewController.swift; sourceTree = "<group>"; };
 		EE93B4D62687639F0055D7A6 /* OneAlertButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OneAlertButton.swift; sourceTree = "<group>"; };
 		EE93B4D826876C6F0055D7A6 /* PushNotificationManagementViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PushNotificationManagementViewController.swift; sourceTree = "<group>"; };
+		EE93B4DA26876F430055D7A6 /* AlarmManagementButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlarmManagementButton.swift; sourceTree = "<group>"; };
 		EEA457F32682FFA100C08D17 /* AlertButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertButton.swift; sourceTree = "<group>"; };
 		EED007D426674AC2009A5A87 /* Utilities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utilities.swift; sourceTree = "<group>"; };
 		EED20D62266C0F90000E0856 /* AdditionalButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdditionalButton.swift; sourceTree = "<group>"; };
@@ -158,6 +160,7 @@
 				EED20D62266C0F90000E0856 /* AdditionalButton.swift */,
 				EEA457F32682FFA100C08D17 /* AlertButton.swift */,
 				EE93B4D62687639F0055D7A6 /* OneAlertButton.swift */,
+				EE93B4DA26876F430055D7A6 /* AlarmManagementButton.swift */,
 				EE3621C1267E51B80099AF3A /* MoreCalendarModalsButton .swift */,
 				EEF7FF5B268653EB00FD7800 /* inputContainerTextFieldView.swift */,
 			);
@@ -359,6 +362,7 @@
 				EE93B4D926876C6F0055D7A6 /* PushNotificationManagementViewController.swift in Sources */,
 				EEEDB2BF2664B44200E5C53A /* AddMyToDoViewController.swift in Sources */,
 				6AA769E526636AE700B7E1F5 /* AppDelegate.swift in Sources */,
+				EE93B4DB26876F430055D7A6 /* AlarmManagementButton.swift in Sources */,
 				EEF7DF34266F83AA00832E95 /* MorePeopleToDo.swift in Sources */,
 				EE3779092679FAC100334D4A /* Model.swift in Sources */,
 				6AA769E726636AE700B7E1F5 /* SceneDelegate.swift in Sources */,
