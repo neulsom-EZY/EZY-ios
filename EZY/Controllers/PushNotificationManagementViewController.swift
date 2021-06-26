@@ -28,6 +28,16 @@ class PushNotificationManagementViewController : UIViewController{
         let button = AlarmManagementButton(with: viewModel)
         return button
     }()
+    private let teamCalendar : AlarmManagementButton = {
+        let viewModel = Managementbtn(icon: UIImage(named: "EZY_user-3")?.withRenderingMode(.alwaysTemplate), iconTintColor : .EZY_CFCBFF, title: "팀 일정 알림 관리", subTitle: "현재 버전을 표시합니다.")
+        let button = AlarmManagementButton(with: viewModel)
+        return button
+    }()
+    private let errandCalendar : AlarmManagementButton = {
+        let viewModel = Managementbtn(icon: UIImage(named: "EZY_work")?.withRenderingMode(.alwaysTemplate), iconTintColor : .EZY_AFADFF, title: "심부름 알림 관리", subTitle: "팀 일정의 그룹을 관리합니다.")
+        let button = AlarmManagementButton(with: viewModel)
+        return button
+    }()
     
     //MARK: - LifeCycle
     override func viewDidLoad() {
@@ -63,6 +73,44 @@ class PushNotificationManagementViewController : UIViewController{
             make.height.equalTo(view.frame.height/12.9)
             make.width.equalTo(view.frame.height/2.6)
         }
-        
+        view.addSubview(teamCalendar)
+        teamCalendar.snp.makeConstraints { (make) in
+            make.top.equalTo(personalCalendar.snp.bottom).offset(view.frame.height/47.8)
+            make.centerX.equalToSuperview()
+            make.height.equalTo(view.frame.height/12.9)
+            make.width.equalTo(view.frame.height/2.6)
+        }
+        view.addSubview(errandCalendar)
+        errandCalendar.snp.makeConstraints { (make) in
+            make.top.equalTo(teamCalendar.snp.bottom).offset(view.frame.height/47.8)
+            make.centerX.equalToSuperview()
+            make.height.equalTo(view.frame.height/12.9)
+            make.width.equalTo(view.frame.height/2.6)
+        }
     }
 }
+#if DEBUG
+import SwiftUI
+struct ViewControllerRepresentable: UIViewControllerRepresentable {
+    
+func updateUIViewController(_ uiView: UIViewController,context: Context) {
+        // leave this empty
+}
+@available(iOS 13.0.0, *)
+func makeUIViewController(context: Context) -> UIViewController{
+    PushNotificationManagementViewController() // 이름 바꾸기
+    }
+}
+@available(iOS 13.0, *)
+struct ViewControllerRepresentable_PreviewProvider: PreviewProvider {
+    static var previews: some View {
+        Group {
+            ViewControllerRepresentable()
+                .ignoresSafeArea()
+                .previewDisplayName(/*@START_MENU_TOKEN@*/"Preview"/*@END_MENU_TOKEN@*/)
+                .previewDevice(PreviewDevice(rawValue: "iPhone 11"))
+        }
+        
+    }
+} #endif
+

@@ -65,7 +65,7 @@ class AlarmManagementButton : UIButton {
         icon.snp.makeConstraints { (make) in
             make.centerY.equalTo(snp.centerY)
             make.left.equalTo(snp.left).offset(frame.height/3.9)
-            make.height.width.equalTo(frame.height/2)
+            make.height.width.equalTo(frame.height/2.6)
         }
         title.snp.makeConstraints { (make) in
             make.top.equalTo(snp.top).offset(frame.height/4.2)
