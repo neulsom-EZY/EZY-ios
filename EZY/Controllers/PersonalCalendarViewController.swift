@@ -14,7 +14,6 @@ class PersonalCalendarViewController : UIViewController{
 
     
     //MARK: - Properties
-    var notificationManage: [NotificationManageViewModel] = []
     private let titleNotification = ["종료 일정 미리 알림", "종료 일정 미리 알림"]
     private let explanation = ["일정이 종료되기 30분 전 알림을 보내드립니다","일정이 종료되기 30분 전 알림을 보내드립니다"]
     
@@ -60,30 +59,8 @@ class PersonalCalendarViewController : UIViewController{
     }
     private func makeData() {
         for i in 0...1 {
-            notificationManage.append(NotificationModel.init(title: (titleNotification[i]),
-                                                             explanation: (explanation[i])))}
-    }
-    private func TableConfigure(){
-        tableView.dataSource = self
-        
-    }
-}
 
-extension PersonalCalendarViewController : FormViewModel{
-    func updateForm() {
-        
     }
-}
-extension PersonalCalendarViewController : UITableViewDataSource{
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return notificationManage.count
+
     }
-    
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: CustomManagePushNotificationCell.identifier, for: indexPath) as! CustomManagePushNotificationCell
-        cell.title.text = String(titleNotification[indexPath.row].title)
-        return cell
-    }
-    
-    
 }
