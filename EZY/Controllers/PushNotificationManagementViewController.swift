@@ -55,7 +55,9 @@ class PushNotificationManagementViewController : UIViewController{
     }
     
     @objc func personalCalendarMove(){
-        
+        let controller = PersonalCalendarViewController()
+        navigationController?.pushViewController(controller, animated: true)
+ 
     }
     @objc func teamCalendarMove(){
         
@@ -67,33 +69,39 @@ class PushNotificationManagementViewController : UIViewController{
     //MARK: - Helpers
     func configureUI(){
         view.backgroundColor = .white
+        AddView()
+        Location()
+    }
+    func AddView(){
         view.addSubview(backbutton)
+        view.addSubview(TitleLabel)
+        view.addSubview(personalCalendar)
+        view.addSubview(teamCalendar)
+        view.addSubview(errandCalendar)
+    }
+    func Location(){
         backbutton.snp.makeConstraints { (make) in
             make.height.width.equalTo(self.view.frame.height/33.8)
             make.left.equalTo(self.view.frame.height/29)
             make.top.equalTo(self.view.frame.height/13.3)
         }
-        view.addSubview(TitleLabel)
         TitleLabel.snp.makeConstraints { (make) in
             make.top.equalTo(backbutton.snp.bottom).offset(self.view.frame.height/30.1)
             make.left.equalTo(backbutton.snp.left)
 
         }
-        view.addSubview(personalCalendar)
         personalCalendar.snp.makeConstraints { (make) in
             make.top.equalTo(TitleLabel.snp.bottom).offset(view.frame.height/31.2)
             make.centerX.equalToSuperview()
             make.height.equalTo(view.frame.height/12.9)
             make.width.equalTo(view.frame.height/2.6)
         }
-        view.addSubview(teamCalendar)
         teamCalendar.snp.makeConstraints { (make) in
             make.top.equalTo(personalCalendar.snp.bottom).offset(view.frame.height/47.8)
             make.centerX.equalToSuperview()
             make.height.equalTo(view.frame.height/12.9)
             make.width.equalTo(view.frame.height/2.6)
         }
-        view.addSubview(errandCalendar)
         errandCalendar.snp.makeConstraints { (make) in
             make.top.equalTo(teamCalendar.snp.bottom).offset(view.frame.height/47.8)
             make.centerX.equalToSuperview()
