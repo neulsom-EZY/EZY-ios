@@ -16,7 +16,6 @@ class Utilities{
         
         view.backgroundColor = messageColor
         
-        
         view.addSubview(label_Message)
         label_Message.text = message
         label_Message.dynamicFont(fontSize: 14, weight: .bold)
@@ -33,8 +32,6 @@ class Utilities{
             make.left.equalTo(label_Message.snp.right).offset(viewSize/31.2)
 
         }
-    
-
         return view
     }
     
@@ -80,9 +77,59 @@ class Utilities{
         return tv
     }
     
-    //MARK: - Alert
+    
+    //
+    func inputContainerCustomTextView(withMessage message:String,textView:UITextView,Color messageColor: UIColor, viewSize : Double) -> UIView{
+        let view = UIView()
+        let label_Message = UILabel()
+        
+        view.backgroundColor = messageColor
+        
+        
+        view.addSubview(label_Message)
+        label_Message.text = message
+        label_Message.dynamicFont(fontSize: 14, weight: .bold)
+        label_Message.textColor = .EZY_968DFF
+        label_Message.snp.makeConstraints { (make) in
+            make.left.equalToSuperview().offset(viewSize / 38.6)
+            make.top.equalToSuperview().offset(viewSize/40.6)
+        }
+        view.addSubview(textView)
+        textView.snp.makeConstraints { (make) in
+            make.left.equalTo(label_Message.snp.right).offset(viewSize/31.2)
+            make.right.equalToSuperview().offset(viewSize/40.6 * -1)
+            make.top.equalToSuperview().offset(viewSize/60)
+            make.bottom.equalToSuperview().offset(viewSize/60 * -1)
+        }
     
 
+        return view
+    }
+    
+    
+    
+    //MARK: - Alert
+    
+    func AlertbtnView(withMessage message: String, viewSize : Double, button: UIButton) -> UIView{
+        let view = UIView()
+        let label = UILabel()
+        label.text = message
+        label.dynamicFont(fontSize: 16, weight: .regular)
+        label.textColor = .EZY_656565
+        
+        view.addSubview(button)
+        button.snp.makeConstraints { (make) in
+            make.left.equalTo(view.snp.left)
+            make.height.width.equalTo(viewSize/18.0)
+            make.centerY.equalToSuperview()
+        }
+        view.addSubview(label)
+        label.snp.makeConstraints { (make) in
+            make.left.equalTo(button.snp.right).offset(viewSize/30.0)
+            make.centerY.equalToSuperview()
+        }
+        return view
+    }
     func AlertButton(image img: UIImage,tintColor : UIColor) -> UIButton{
         let button = UIButton()
         button.backgroundColor = .white
@@ -91,7 +138,6 @@ class Utilities{
         button.layer.shadowOpacity = 0.1
         button.setImage(img, for: .normal)
         button.imageEdgeInsets = UIEdgeInsets(top: 11.25, left: 11.25, bottom: 11.25, right: 11.25)
-        
         return button
     }
     
