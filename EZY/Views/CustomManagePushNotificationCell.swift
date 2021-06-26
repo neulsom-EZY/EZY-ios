@@ -15,12 +15,12 @@ class CustomManagePushNotificationCell: UITableViewCell {
     
     var switchClick = false
 
-    private let title = UILabel().then{
+     let title = UILabel().then{
         $0.translatesAutoresizingMaskIntoConstraints = false
         $0.dynamicFont(fontSize: 14, weight: .regular)
         $0.textColor = .EZY_656565
     }
-    private let explanation = UILabel().then{
+     let explanation = UILabel().then{
         $0.translatesAutoresizingMaskIntoConstraints = false
         $0.dynamicFont(fontSize: 8, weight: .regular)
         $0.textColor = .EZY_CDCDCD
@@ -45,16 +45,17 @@ class CustomManagePushNotificationCell: UITableViewCell {
     }
     private func location(){
         title.snp.makeConstraints { (make) in
-            make.top.equalTo(snp.top)
+            make.top.equalTo(snp.top).offset(frame.height/4.8)
             make.left.equalTo(snp.left)
         }
         explanation.snp.makeConstraints { (make) in
-            make.top.equalTo(title.snp.top).offset(frame.height/5.7)
+            make.top.equalTo(title.snp.bottom).offset(frame.height/5.7)
             make.left.equalTo(title.snp.left)
         }
         switchPushManage.snp.makeConstraints { (make) in
             make.centerY.equalTo(snp.centerY)
-            make.right.equalTo(snp.right)
+            make.right.equalTo(snp.right).offset(frame.height/20 * -1)
+            
         }
         divider.snp.makeConstraints { (make) in
             make.bottom.equalTo(snp.bottom)

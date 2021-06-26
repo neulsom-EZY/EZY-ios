@@ -14,6 +14,7 @@ class PersonalCalendarViewController : UIViewController{
 
     
     //MARK: - Properties
+    var manageData : [ManageData] = []
     private let titleNotification = ["종료 일정 미리 알림", "종료 일정 미리 알림"]
     private let explanation = ["일정이 종료되기 30분 전 알림을 보내드립니다","일정이 종료되기 30분 전 알림을 보내드립니다"]
     
@@ -37,6 +38,8 @@ class PersonalCalendarViewController : UIViewController{
     override func viewDidLoad() {
         super.viewDidLoad()
         configureUI()
+        makeData()
+        configure()
     }
     //MARK: - Selectors
     @objc func backbtn(){
@@ -56,11 +59,65 @@ class PersonalCalendarViewController : UIViewController{
             make.top.equalTo(backbutton.snp.bottom).offset(self.view.frame.height/30.1)
             make.left.equalTo(backbutton.snp.left)
         }
+        view.addSubview(tableView)
+        tableView.snp.makeConstraints { (make) in
+            make.top.equalTo(TitleLabel.snp.bottom).offset(view.frame.height/16.9)
+            make.bottom.equalToSuperview()
+            make.left.equalToSuperview().offset(view.frame.height/22.6)
+            make.right.equalToSuperview().offset(view.frame.height/22.6 * -1)
+        }
     }
+    
+    
     private func makeData() {
         for i in 0...1 {
-
+            manageData.append(ManageData.init(title: titleNotification[i], explanation: explanation[i]))
+        }
     }
+    private func configure() {
+        tableView.dataSource = self
+        tableView.rowHeight = view.frame.height/14.2
+        self.tableView.separatorStyle = .none
+        self.tableView.bounces = false;
 
     }
 }
+extension PersonalCalendarViewController : UITableViewDataSource{
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return manageData.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: CustomManagePushNotificationCell.identifier, for: indexPath) as! CustomManagePushNotificationCell
+        cell.title.text = titleNotification[indexPath.row]
+        cell.explanation.text = explanation[indexPath.row]
+        return cell
+    }
+    
+    
+}
+
+#if DEBUG
+import SwiftUI
+struct ViewControllerRepresentable: UIViewControllerRepresentable {
+    
+func updateUIViewController(_ uiView: UIViewController,context: Context) {
+        // leave this empty
+}
+@available(iOS 13.0.0, *)
+func makeUIViewController(context: Context) -> UIViewController{
+    PersonalCalendarViewController() // 이름 바꾸기
+    }
+}
+@available(iOS 13.0, *)
+struct ViewControllerRepresentable_PreviewProvider: PreviewProvider {
+    static var previews: some View {
+        Group {
+            ViewControllerRepresentable()
+                .ignoresSafeArea()
+                .previewDisplayName(/*@START_MENU_TOKEN@*/"Preview"/*@END_MENU_TOKEN@*/)
+                .previewDevice(PreviewDevice(rawValue: "iPhone 11"))
+        }
+        
+    }
+} #endif
