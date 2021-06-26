@@ -15,8 +15,8 @@ class PersonalCalendarViewController : UIViewController{
     
     //MARK: - Properties
     var manageData : [ManageData] = []
-    private let titleNotification = ["종료 일정 미리 알림", "종료 일정 미리 알림"]
-    private let explanation = ["일정이 종료되기 30분 전 알림을 보내드립니다","일정이 종료되기 30분 전 알림을 보내드립니다"]
+    let titleNotification = ["종료 일정 미리 알림", "종료 일정 미리 알림"]
+    let explanation = ["일정이 종료되기 30분 전 알림을 보내드립니다","일정이 종료되기 30분 전 알림을 보내드립니다"]
     
     
     private let backbutton = UIButton().then{
@@ -38,8 +38,7 @@ class PersonalCalendarViewController : UIViewController{
     override func viewDidLoad() {
         super.viewDidLoad()
         configureUI()
-        makeData()
-        configure()
+        
     }
     //MARK: - Selectors
     @objc func backbtn(){
@@ -48,18 +47,26 @@ class PersonalCalendarViewController : UIViewController{
     //MARK: - Helpers
     func configureUI(){
         view.backgroundColor = .white
+        addView()
+        location()
+        makeData()
+        configure()
+    }
+    func addView(){
         view.addSubview(backbutton)
+        view.addSubview(TitleLabel)
+        view.addSubview(tableView)
+    }
+    func location(){
         backbutton.snp.makeConstraints { (make) in
             make.height.width.equalTo(self.view.frame.height/33.8)
             make.left.equalTo(self.view.frame.height/29)
             make.top.equalTo(self.view.frame.height/13.3)
         }
-        view.addSubview(TitleLabel)
         TitleLabel.snp.makeConstraints { (make) in
             make.top.equalTo(backbutton.snp.bottom).offset(self.view.frame.height/30.1)
             make.left.equalTo(backbutton.snp.left)
         }
-        view.addSubview(tableView)
         tableView.snp.makeConstraints { (make) in
             make.top.equalTo(TitleLabel.snp.bottom).offset(view.frame.height/16.9)
             make.bottom.equalToSuperview()
@@ -67,15 +74,13 @@ class PersonalCalendarViewController : UIViewController{
             make.right.equalToSuperview().offset(view.frame.height/22.6 * -1)
         }
     }
-    func addView(){
-        
-    }
     
     private func makeData() {
         for i in 0...1 {
             manageData.append(ManageData.init(title: titleNotification[i], explanation: explanation[i]))
         }
     }
+    
     private func configure() {
         tableView.allowsSelection = false
         tableView.dataSource = self
@@ -85,18 +90,4 @@ class PersonalCalendarViewController : UIViewController{
     }
 }
 
-extension PersonalCalendarViewController : UITableViewDataSource{
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return manageData.count
-    }
-    
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: CustomManagePushNotificationCell.identifier, for: indexPath) as! CustomManagePushNotificationCell
-        
-        cell.title.text = titleNotification[indexPath.row]
-        cell.explanation.text = explanation[indexPath.row]
-        return cell
-    }
-    
-    
-}
+

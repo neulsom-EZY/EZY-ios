@@ -251,3 +251,21 @@ extension MorePeopleToDo: CollectionTableViewCellDelegate{
         print("Selected \(model.title)")
     }
 }
+
+//MARK: - PersonalCalendarViewController TableView
+
+extension PersonalCalendarViewController : UITableViewDataSource{
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return manageData.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: CustomManagePushNotificationCell.identifier, for: indexPath) as! CustomManagePushNotificationCell
+        
+        cell.title.text = titleNotification[indexPath.row]
+        cell.explanation.text = explanation[indexPath.row]
+        return cell
+    }
+    
+    
+}

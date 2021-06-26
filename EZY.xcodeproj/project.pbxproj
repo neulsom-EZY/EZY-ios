@@ -27,6 +27,7 @@
 		EE93B4DD26878A5D0055D7A6 /* PersonalCalendarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE93B4DC26878A5D0055D7A6 /* PersonalCalendarViewController.swift */; };
 		EE93B4DF268797230055D7A6 /* CustomManagePushNotificationCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE93B4DE268797230055D7A6 /* CustomManagePushNotificationCell.swift */; };
 		EE93B4E42687BD8A0055D7A6 /* ManageData.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE93B4E32687BD8A0055D7A6 /* ManageData.swift */; };
+		EE93B4E62687E1C30055D7A6 /* TeamCalendarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE93B4E52687E1C30055D7A6 /* TeamCalendarViewController.swift */; };
 		EEA457F42682FFA100C08D17 /* AlertButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEA457F32682FFA100C08D17 /* AlertButton.swift */; };
 		EED007D526674AC2009A5A87 /* Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = EED007D426674AC2009A5A87 /* Utilities.swift */; };
 		EED20D63266C0F90000E0856 /* AdditionalButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = EED20D62266C0F90000E0856 /* AdditionalButton.swift */; };
@@ -61,6 +62,7 @@
 		EE93B4DC26878A5D0055D7A6 /* PersonalCalendarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonalCalendarViewController.swift; sourceTree = "<group>"; };
 		EE93B4DE268797230055D7A6 /* CustomManagePushNotificationCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomManagePushNotificationCell.swift; sourceTree = "<group>"; };
 		EE93B4E32687BD8A0055D7A6 /* ManageData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManageData.swift; sourceTree = "<group>"; };
+		EE93B4E52687E1C30055D7A6 /* TeamCalendarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeamCalendarViewController.swift; sourceTree = "<group>"; };
 		EEA457F32682FFA100C08D17 /* AlertButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertButton.swift; sourceTree = "<group>"; };
 		EED007D426674AC2009A5A87 /* Utilities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utilities.swift; sourceTree = "<group>"; };
 		EED20D62266C0F90000E0856 /* AdditionalButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdditionalButton.swift; sourceTree = "<group>"; };
@@ -193,6 +195,7 @@
 				EE7828542681859200AECC65 /* AddErrandViewController.swift */,
 				EE93B4D826876C6F0055D7A6 /* PushNotificationManagementViewController.swift */,
 				EE93B4DC26878A5D0055D7A6 /* PersonalCalendarViewController.swift */,
+				EE93B4E52687E1C30055D7A6 /* TeamCalendarViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -376,6 +379,7 @@
 				6AA769EF26636AE700B7E1F5 /* EZY.xcdatamodeld in Sources */,
 				EE36219E267E18080099AF3A /* MoreCalendarModalsViewController.swift in Sources */,
 				EE37790E267A3A4C00334D4A /* CollectionTableViewCell.swift in Sources */,
+				EE93B4E62687E1C30055D7A6 /* TeamCalendarViewController.swift in Sources */,
 				EE93B4DD26878A5D0055D7A6 /* PersonalCalendarViewController.swift in Sources */,
 				EE93B4D926876C6F0055D7A6 /* PushNotificationManagementViewController.swift in Sources */,
 				EE93B4E42687BD8A0055D7A6 /* ManageData.swift in Sources */,
