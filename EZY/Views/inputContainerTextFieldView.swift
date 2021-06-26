@@ -6,3 +6,9 @@
 //
 
 import UIKit
+
+class inputContainerTextFieldView : UIView{
+    
+    
+    
+}
