@@ -67,7 +67,9 @@ class PersonalCalendarViewController : UIViewController{
             make.right.equalToSuperview().offset(view.frame.height/22.6 * -1)
         }
     }
-    
+    func addView(){
+        
+    }
     
     private func makeData() {
         for i in 0...1 {
@@ -75,13 +77,14 @@ class PersonalCalendarViewController : UIViewController{
         }
     }
     private func configure() {
+        tableView.allowsSelection = false
         tableView.dataSource = self
         tableView.rowHeight = view.frame.height/14.2
         self.tableView.separatorStyle = .none
         self.tableView.bounces = false;
-
     }
 }
+
 extension PersonalCalendarViewController : UITableViewDataSource{
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return manageData.count
@@ -89,6 +92,7 @@ extension PersonalCalendarViewController : UITableViewDataSource{
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: CustomManagePushNotificationCell.identifier, for: indexPath) as! CustomManagePushNotificationCell
+        
         cell.title.text = titleNotification[indexPath.row]
         cell.explanation.text = explanation[indexPath.row]
         return cell
@@ -96,28 +100,3 @@ extension PersonalCalendarViewController : UITableViewDataSource{
     
     
 }
-
-#if DEBUG
-import SwiftUI
-struct ViewControllerRepresentable: UIViewControllerRepresentable {
-    
-func updateUIViewController(_ uiView: UIViewController,context: Context) {
-        // leave this empty
-}
-@available(iOS 13.0.0, *)
-func makeUIViewController(context: Context) -> UIViewController{
-    PersonalCalendarViewController() // 이름 바꾸기
-    }
-}
-@available(iOS 13.0, *)
-struct ViewControllerRepresentable_PreviewProvider: PreviewProvider {
-    static var previews: some View {
-        Group {
-            ViewControllerRepresentable()
-                .ignoresSafeArea()
-                .previewDisplayName(/*@START_MENU_TOKEN@*/"Preview"/*@END_MENU_TOKEN@*/)
-                .previewDevice(PreviewDevice(rawValue: "iPhone 11"))
-        }
-        
-    }
-} #endif

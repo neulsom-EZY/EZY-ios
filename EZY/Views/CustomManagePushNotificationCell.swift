@@ -13,7 +13,7 @@ class CustomManagePushNotificationCell: UITableViewCell {
     
     static let identifier = "ManagePushNotificationCell"
     
-    var switchClick = false
+    var switchClick = true
 
      let title = UILabel().then{
         $0.translatesAutoresizingMaskIntoConstraints = false
@@ -29,7 +29,9 @@ class CustomManagePushNotificationCell: UITableViewCell {
         $0.backgroundColor = .EZY_DEDEDE
     }
     private let switchPushManage = UISwitch().then{
-        $0.tintColor = .EZY_AFADFF
+        $0.onTintColor = .EZY_AFADFF
+        $0.isUserInteractionEnabled = true
+        $0.isOn = true
     }
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
@@ -55,7 +57,6 @@ class CustomManagePushNotificationCell: UITableViewCell {
         switchPushManage.snp.makeConstraints { (make) in
             make.centerY.equalTo(snp.centerY)
             make.right.equalTo(snp.right).offset(frame.height/20 * -1)
-            
         }
         divider.snp.makeConstraints { (make) in
             make.bottom.equalTo(snp.bottom)
