@@ -26,16 +26,19 @@ class PushNotificationManagementViewController : UIViewController{
     private let personalCalendar : AlarmManagementButton = {
         let viewModel = Managementbtn(icon: UIImage(named: "EZY_user")?.withRenderingMode(.alwaysTemplate), iconTintColor : .EZY_BAC8FF, title: "개인 일정 알림 관리", subTitle: "개인, 팀, 심부름관련 알림을 관리합니다.")
         let button = AlarmManagementButton(with: viewModel)
+        button.addTarget(self, action: #selector(personalCalendarMove), for: .touchUpInside)
         return button
     }()
     private let teamCalendar : AlarmManagementButton = {
         let viewModel = Managementbtn(icon: UIImage(named: "EZY_user-3")?.withRenderingMode(.alwaysTemplate), iconTintColor : .EZY_CFCBFF, title: "팀 일정 알림 관리", subTitle: "현재 버전을 표시합니다.")
         let button = AlarmManagementButton(with: viewModel)
+        button.addTarget(self, action: #selector(teamCalendarMove), for: .touchUpInside)
         return button
     }()
     private let errandCalendar : AlarmManagementButton = {
         let viewModel = Managementbtn(icon: UIImage(named: "EZY_work")?.withRenderingMode(.alwaysTemplate), iconTintColor : .EZY_AFADFF, title: "심부름 알림 관리", subTitle: "팀 일정의 그룹을 관리합니다.")
         let button = AlarmManagementButton(with: viewModel)
+        button.addTarget(self, action: #selector(errandCalendarMove), for: .touchUpInside)
         return button
     }()
     
@@ -48,6 +51,16 @@ class PushNotificationManagementViewController : UIViewController{
     
     //MARK: - Selectors
     @objc func backbtn(){
+        dismiss(animated: true, completion: nil)
+    }
+    
+    @objc func personalCalendarMove(){
+        
+    }
+    @objc func teamCalendarMove(){
+        
+    }
+    @objc func errandCalendarMove(){
         
     }
     
