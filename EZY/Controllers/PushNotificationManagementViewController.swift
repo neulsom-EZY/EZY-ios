@@ -60,7 +60,8 @@ class PushNotificationManagementViewController : UIViewController{
  
     }
     @objc func teamCalendarMove(){
-        
+        let controller = TeamCalendarViewController()
+        navigationController?.pushViewController(controller, animated: true)
     }
     @objc func errandCalendarMove(){
         
