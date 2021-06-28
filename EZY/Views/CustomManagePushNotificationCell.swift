@@ -15,6 +15,10 @@ class CustomManagePushNotificationCell: UITableViewCell {
     
     var switchClick = true
 
+    let view  = UIView().then{
+        $0.backgroundColor = .clear
+    }
+    
      let title = UILabel().then{
         $0.translatesAutoresizingMaskIntoConstraints = false
         $0.dynamicFont(fontSize: 14, weight: .regular)
@@ -41,28 +45,36 @@ class CustomManagePushNotificationCell: UITableViewCell {
         location()
     }
     func addContentView(){
-        contentView.addSubview(title)
-        contentView.addSubview(explanation)
+        contentView.addSubview(view)
+        view.addSubview(title)
+        view.addSubview(explanation)
         contentView.addSubview(divider)
         contentView.addSubview(switchPushManage)
     }
     private func location(){
+
+        view.snp.makeConstraints { (make) in
+            make.height.equalTo(frame.height/1.706)
+            make.centerY.equalTo(snp.centerY)
+            
+        }
         title.snp.makeConstraints { (make) in
-            make.top.equalTo(snp.top).offset(frame.height/4.8)
-            make.left.equalTo(snp.left)
+            make.top.equalTo(view.snp.top)
+            make.left.equalTo(view.snp.left)
         }
         explanation.snp.makeConstraints { (make) in
-            make.top.equalTo(title.snp.bottom).offset(frame.height/5.7)
-            make.left.equalTo(title.snp.left)
+            make.top.equalTo(title.snp.bottom).offset(frame.height/11.6)
+            make.left.equalTo(view.snp.left).offset(contentView.frame.height/58)
         }
+        
         switchPushManage.snp.makeConstraints { (make) in
             make.centerY.equalTo(snp.centerY)
             make.right.equalTo(contentView.snp.right)
         }
         divider.snp.makeConstraints { (make) in
-            make.bottom.equalTo(snp.bottom)
+            make.top.equalTo(snp.bottom)
             make.width.equalToSuperview()
-            make.height.equalTo(frame.height/114)
+            make.height.equalTo(contentView.frame.height/114)
         }
         switchPushManage.set(width: 34 , height: 17)
     }

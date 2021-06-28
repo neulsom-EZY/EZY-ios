@@ -84,7 +84,7 @@ class PersonalCalendarViewController : UIViewController{
     private func configure() {
         tableView.allowsSelection = false
         tableView.dataSource = self
-        tableView.rowHeight = view.frame.height/14.2
+        tableView.rowHeight = view.frame.height/13.69
         self.tableView.separatorStyle = .none
         self.tableView.bounces = false;
     }
