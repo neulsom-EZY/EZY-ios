@@ -43,8 +43,7 @@ class AlertButton : UIButton {
         view.backgroundColor = .white
         view.layer.shadowColor = UIColor.black.cgColor
         view.layer.shadowOpacity = 0.1
-        view.layer.shadowRadius = 15
-        view.layer.shadowOffset = CGSize(width: 0, height: 4)
+
         
         label.dynamicFont(fontSize: 16, weight: .regular)
         label.textColor = .EZY_656565
@@ -55,7 +54,8 @@ class AlertButton : UIButton {
     }
     override func layoutSubviews() {
         super.layoutSubviews()
-        
+        view.layer.shadowRadius = frame.height/11.25
+        view.layer.shadowOffset = CGSize(width: 0, height: frame.height/11.25)
         view.layer.cornerRadius = frame.height/4.5
         
         view.snp.makeConstraints { (make) in

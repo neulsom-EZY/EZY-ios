@@ -36,14 +36,15 @@ class OneAlertButton : UIButton {
         view.backgroundColor = .white
         view.layer.shadowColor = UIColor.black.cgColor
         view.layer.shadowOpacity = 0.1
-        view.layer.shadowOffset = CGSize(width: 0, height: 4)
-        view.layer.shadowRadius = 15
         icon.image = viewModel.icon
         icon.tintColor = viewModel.iconTintColor
     }
     override func layoutSubviews() {
         super.layoutSubviews()
         view.layer.cornerRadius = frame.height/4.5
+        view.layer.shadowRadius = frame.height/11.25
+        view.layer.shadowOffset = CGSize(width: 0, height: frame.height/11.25)
+
         view.snp.makeConstraints { (make) in
             make.top.bottom.left.right.equalToSuperview()
             make.height.width.equalTo(frame.height)
