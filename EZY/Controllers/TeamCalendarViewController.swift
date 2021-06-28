@@ -61,7 +61,7 @@ class TeamCalendarViewController : UIViewController {
             make.left.equalTo(backbutton.snp.left)
         }
         tableView.snp.makeConstraints { (make) in
-            make.top.equalTo(TitleLabel.snp.bottom).offset(view.frame.height/16.9)
+            make.top.equalTo(TitleLabel.snp.bottom).offset(view.frame.height/21.95)
             make.bottom.equalToSuperview()
             make.left.equalToSuperview().offset(view.frame.height/22.6)
             make.right.equalToSuperview().offset(view.frame.height/22.6 * -1)
