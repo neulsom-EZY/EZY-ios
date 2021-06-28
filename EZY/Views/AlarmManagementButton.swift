@@ -47,10 +47,7 @@ class AlarmManagementButton : UIButton {
     
     func configure(with viewModel : Managementbtn){
         backgroundColor = .white
-        layer.shadowColor = UIColor.black.cgColor
-        layer.shadowOpacity = 0.1
-        layer.shadowOffset = CGSize(width: 0, height: 4)
-        layer.shadowRadius = 20
+
         
         icon.image = viewModel.icon
         icon.tintColor = viewModel.iconTintColor
@@ -62,6 +59,8 @@ class AlarmManagementButton : UIButton {
     override func layoutSubviews() {
         super.layoutSubviews()
         layer.cornerRadius = frame.height/6.3
+        layer.applySketchShadow(color: UIColor.black, alpha: 0.1, x: 0, y: frame.height/15.75, blur: 20, spread: 0)
+
         icon.snp.makeConstraints { (make) in
             make.centerY.equalTo(snp.centerY)
             make.left.equalTo(snp.left).offset(frame.height/3.9)

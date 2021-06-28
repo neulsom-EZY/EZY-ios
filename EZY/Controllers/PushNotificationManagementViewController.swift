@@ -91,7 +91,6 @@ class PushNotificationManagementViewController : UIViewController{
         TitleLabel.snp.makeConstraints { (make) in
             make.top.equalTo(backbutton.snp.bottom).offset(self.view.frame.height/30.1)
             make.left.equalTo(backbutton.snp.left)
-
         }
         personalCalendar.snp.makeConstraints { (make) in
             make.top.equalTo(TitleLabel.snp.bottom).offset(view.frame.height/31.2)
