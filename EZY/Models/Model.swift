@@ -13,4 +13,3 @@ struct Managementbtn {
     let title : String?
     let subTitle : String?
 }
-
