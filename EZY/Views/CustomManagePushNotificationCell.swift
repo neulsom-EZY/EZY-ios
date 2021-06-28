@@ -57,7 +57,7 @@ class CustomManagePushNotificationCell: UITableViewCell {
         }
         switchPushManage.snp.makeConstraints { (make) in
             make.centerY.equalTo(snp.centerY)
-            make.right.equalTo(snp.right)
+            make.right.equalTo(contentView.snp.right)
         }
         divider.snp.makeConstraints { (make) in
             make.bottom.equalTo(snp.bottom)
