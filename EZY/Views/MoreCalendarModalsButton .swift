@@ -13,6 +13,10 @@ import Alamofire
     
 class MoreCalendarModalsButton : UIButton{
     
+    private let view = UIView().then{
+        $0.backgroundColor = .clear
+        
+    }
     private let toDoLabel = UILabel().then{
         $0.numberOfLines = 1
         $0.dynamicFont(fontSize: 18, weight: .semibold)
@@ -39,8 +43,9 @@ class MoreCalendarModalsButton : UIButton{
     }
     
     private func addSubViews(){
-        addSubview(toDoLabel)
-        addSubview(iconView)
+        addSubview(view)
+        view.addSubview(toDoLabel)
+        view.addSubview(iconView)
     }
     
     required init?(coder: NSCoder) {
@@ -60,28 +65,30 @@ class MoreCalendarModalsButton : UIButton{
     
     override func layoutSubviews() {
         super.layoutSubviews()
+        view.snp.makeConstraints { (make) in
+            make.height.equalTo(frame.height/2.9)
+            make.centerY.equalTo(snp.centerY)
+            make.centerX.equalToSuperview()
+        }
         iconView.snp.makeConstraints { (make) in
-            make.centerY.equalToSuperview()
-            make.left.equalTo(frame.height/1.5)
-            make.height.width.equalTo(frame.height/2.9)
-            
-        }
-        toDoLabel.snp.makeConstraints { (make) in
-            make.centerY.equalToSuperview()
-            make.left.equalTo(iconView.snp.right).offset(frame.height/8.8)
-        }
-    }
-    
-    func ViewBtn(icon : UIImageView, label : UILabel) -> UIView{
-        let view = UIView()
-        view.addSubview(icon)
-        view.addSubview(label)
-        icon.snp.makeConstraints { (make) in
             make.left.equalTo(view.snp.left)
             make.top.equalTo(view.snp.top)
-            make.height.equalToSuperview()
-            make.width.equalTo(view.snp.width)
+            make.height.width.equalTo(view.snp.height)
         }
-        return view
+        toDoLabel.snp.makeConstraints { (make) in
+            make.top.equalTo(view.snp.top)
+            make.left.equalTo(iconView.snp.right).offset(frame.height/8.8)
+        }
+        
+//        iconView.snp.makeConstraints { (make) in
+//            make.centerY.equalToSuperview()
+//            make.left.equalTo(frame.height/1.5)
+//            make.height.width.equalTo(frame.height/2.9)
+//
+//        }
+//        toDoLabel.snp.makeConstraints { (make) in
+//            make.centerY.equalToSuperview()
+//            make.left.equalTo(iconView.snp.right).offset(frame.height/8.8)
+//        }
     }
 }
