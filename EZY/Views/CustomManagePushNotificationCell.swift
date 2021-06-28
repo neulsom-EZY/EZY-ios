@@ -31,6 +31,7 @@ class CustomManagePushNotificationCell: UITableViewCell {
     private let switchPushManage = UISwitch().then{
         $0.onTintColor = .EZY_AFADFF
         $0.isUserInteractionEnabled = true
+        
         $0.isOn = true
     }
     
@@ -56,15 +57,16 @@ class CustomManagePushNotificationCell: UITableViewCell {
         }
         switchPushManage.snp.makeConstraints { (make) in
             make.centerY.equalTo(snp.centerY)
-            make.right.equalTo(snp.right).offset(frame.height/20 * -1)
+            make.right.equalTo(snp.right)
         }
         divider.snp.makeConstraints { (make) in
             make.bottom.equalTo(snp.bottom)
             make.width.equalToSuperview()
             make.height.equalTo(frame.height/114)
         }
+        switchPushManage.set(width: 34 , height: 17)
     }
-    
+
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }

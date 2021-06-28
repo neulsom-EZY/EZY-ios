@@ -18,7 +18,7 @@ class PushNotificationManagementViewController : UIViewController{
         $0.setImage(UIImage(systemName: "arrow.left"), for: .normal)
         $0.addTarget(self, action: #selector(backbtn), for: .touchUpInside)
     }
-    private let TitleLabel = UILabel().then{
+    private let TitleLabel = UILabel().then{ 
         $0.textColor = .EZY_AFADFF
         $0.text = "푸쉬 알림 관리"
         $0.dynamicFont(fontSize: 22, weight: .semibold)
@@ -94,21 +94,21 @@ class PushNotificationManagementViewController : UIViewController{
         }
         personalCalendar.snp.makeConstraints { (make) in
             make.top.equalTo(TitleLabel.snp.bottom).offset(view.frame.height/31.2)
-            make.centerX.equalToSuperview()
             make.height.equalTo(view.frame.height/12.9)
-            make.width.equalTo(view.frame.height/2.6)
+            make.left.equalToSuperview().offset(view.frame.height/28)
+            make.right.equalToSuperview().offset(view.frame.height/29 * -1)
         }
         teamCalendar.snp.makeConstraints { (make) in
             make.top.equalTo(personalCalendar.snp.bottom).offset(view.frame.height/47.8)
-            make.centerX.equalToSuperview()
             make.height.equalTo(view.frame.height/12.9)
-            make.width.equalTo(view.frame.height/2.6)
+            make.left.equalToSuperview().offset(view.frame.height/28)
+            make.right.equalToSuperview().offset(view.frame.height/29 * -1)
         }
         errandCalendar.snp.makeConstraints { (make) in
             make.top.equalTo(teamCalendar.snp.bottom).offset(view.frame.height/47.8)
-            make.centerX.equalToSuperview()
             make.height.equalTo(view.frame.height/12.9)
-            make.width.equalTo(view.frame.height/2.6)
+            make.left.equalToSuperview().offset(view.frame.height/28)
+            make.right.equalToSuperview().offset(view.frame.height/29 * -1)
         }
     }
 }

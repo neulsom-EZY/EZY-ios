@@ -12,8 +12,6 @@ class TeamCalendarViewController : UIViewController {
     var manageData : [ManageData] = []
     let titleNotification = ["팀 일정 삭제 알림", "팀 일정 받기 알림","팀 일정 변경 확인 알림","팀 일정 변경 요청 알림","팀 일정 변경 요청 확인 알림","팀 일정 변경 요청 알림"]
     let explanation = ["팀 리더가 일정을 삭제했을 시 알림을 보내드립니다","팀 일정을 받았을 시 알림을 보내드립니다","팀 리더가 일정을 변경했을 시 알림을 보내드립니다 ","팀 리더일 시 일정 변경 요청을 받았을 시 알림을 보내드립니다","팀 리더가 일정을 변경했을 시 알림을 보내드립니다 ","팀 리더일 시 일정 변경 요청을 받았을 시 알림을 보내드립니다"]
-    
-    
     private let backbutton = UIButton().then{
         $0.tintColor = .EZY_6B40FF
         $0.setImage(UIImage(systemName: "arrow.left"), for: .normal)
@@ -71,7 +69,7 @@ class TeamCalendarViewController : UIViewController {
     }
     
     private func makeData() {
-        for i in 0...5 {
+        for i in 0...5  {
             manageData.append(ManageData.init(title: titleNotification[i], explanation: explanation[i]))
         }
     }

@@ -239,6 +239,17 @@ extension UITextView {
           self.font = UIFont.systemFont(ofSize: calculatedFont!.pointSize, weight: weight)
     }
 }
+extension UISwitch {
+    func set(width : CGFloat, height : CGFloat){
+        let standardHeight: CGFloat = 31
+        let standardWidth: CGFloat = 51
+
+        let heightRatio = height/standardHeight
+        let widthRatio = width / standardWidth
+        
+        transform = CGAffineTransform(scaleX: widthRatio, y: heightRatio)
+    }
+}
 
 
 //MARK: - PersonalCalendarViewController TableView
@@ -247,46 +258,34 @@ extension PersonalCalendarViewController : UITableViewDataSource{
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return manageData.count
     }
-    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: CustomManagePushNotificationCell.identifier, for: indexPath) as! CustomManagePushNotificationCell
-        
         cell.title.text = titleNotification[indexPath.row]
         cell.explanation.text = explanation[indexPath.row]
         return cell
     }
-    
-    
 }
 
 extension TeamCalendarViewController : UITableViewDataSource{
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return manageData.count
     }
-    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: CustomManagePushNotificationCell.identifier, for: indexPath) as! CustomManagePushNotificationCell
-        
         cell.title.text = titleNotification[indexPath.row]
         cell.explanation.text = explanation[indexPath.row]
         return cell
     }
-    
-    
 }
 
 extension ErrandCalendarViewController : UITableViewDataSource{
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return manageData.count
     }
-    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: CustomManagePushNotificationCell.identifier, for: indexPath) as! CustomManagePushNotificationCell
-        
         cell.title.text = titleNotification[indexPath.row]
         cell.explanation.text = explanation[indexPath.row]
         return cell
     }
-    
-    
 }
