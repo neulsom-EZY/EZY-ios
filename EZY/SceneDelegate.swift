@@ -16,7 +16,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         guard let windowScene = (scene as? UIWindowScene) else { return }
         window = UIWindow(windowScene: windowScene)
         let mainViewController = LoginViewController()
-        let navigationController = UINavigationController(rootViewController: PushNotificationManagementViewController())
+        let navigationController = UINavigationController(rootViewController: LoginViewController())
         navigationController.navigationBar.isHidden = true
         window?.rootViewController = navigationController
         window?.makeKeyAndVisible()

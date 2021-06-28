@@ -35,10 +35,4 @@ struct OneAlertBtn{
     let iconTintColor : UIColor?
 }
 
-struct Managementbtn {
-    let icon : UIImage?
-    let iconTintColor : UIColor?
-    let title : String?
-    let subTitle : String?
-}
 
