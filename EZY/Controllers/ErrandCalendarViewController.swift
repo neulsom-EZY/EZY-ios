@@ -15,7 +15,6 @@ class ErrandCalendarViewController : UIViewController{
     let titleNotification = ["심부름 완료 알림","심부름 수락 알림","심부름 거절 알림","심부름 받기 알림"]
     let explanation = ["상대방이 심부름을 완료했을 시 알림을 보내드립니다","상대방이 심부름 일정을 수락했을 시 알림을 보내드립니다","보낸 심부름이 거절당했을 시 알림을 보내드립니다","심부름이 왔을 때 알림을 보내드립니다"]
     
-    
     private let backbutton = UIButton().then{
         $0.tintColor = .EZY_6B40FF
         $0.setImage(UIImage(systemName: "arrow.left"), for: .normal)
