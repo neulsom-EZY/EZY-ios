@@ -33,7 +33,6 @@
 		EEA457F42682FFA100C08D17 /* AlertButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEA457F32682FFA100C08D17 /* AlertButton.swift */; };
 		EEA64E4E26895830000325AD /* Swift.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEA64E4D26895830000325AD /* Swift.swift */; };
 		EED007D526674AC2009A5A87 /* Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = EED007D426674AC2009A5A87 /* Utilities.swift */; };
-		EED20D63266C0F90000E0856 /* AdditionalButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = EED20D62266C0F90000E0856 /* AdditionalButton.swift */; };
 		EEEDB2BF2664B44200E5C53A /* AddMyToDoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEEDB2BE2664B44200E5C53A /* AddMyToDoViewController.swift */; };
 		EEEDB2C22664D30D00E5C53A /* extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEEDB2C12664D30D00E5C53A /* extensions.swift */; };
 		EEF7DF34266F83AA00832E95 /* MorePeopleToDo.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEF7DF33266F83AA00832E95 /* MorePeopleToDo.swift */; };
@@ -71,7 +70,6 @@
 		EEA457F32682FFA100C08D17 /* AlertButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertButton.swift; sourceTree = "<group>"; };
 		EEA64E4D26895830000325AD /* Swift.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Swift.swift; sourceTree = "<group>"; };
 		EED007D426674AC2009A5A87 /* Utilities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utilities.swift; sourceTree = "<group>"; };
-		EED20D62266C0F90000E0856 /* AdditionalButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdditionalButton.swift; sourceTree = "<group>"; };
 		EEEDB2AC2664ADCB00E5C53A /* Poppins-SemiBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Poppins-SemiBold.ttf"; sourceTree = "<group>"; };
 		EEEDB2AD2664ADCB00E5C53A /* Poppins-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Poppins-Light.ttf"; sourceTree = "<group>"; };
 		EEEDB2AE2664ADCB00E5C53A /* Poppins-BoldItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Poppins-BoldItalic.ttf"; sourceTree = "<group>"; };
@@ -171,7 +169,6 @@
 		6AA769FD26636C6B00B7E1F5 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				EED20D62266C0F90000E0856 /* AdditionalButton.swift */,
 				EEA457F32682FFA100C08D17 /* AlertButton.swift */,
 				EE93B4DA26876F430055D7A6 /* AlarmManagementButton.swift */,
 				EE93B4D62687639F0055D7A6 /* OneAlertButton.swift */,
@@ -407,7 +404,6 @@
 				EE7828552681859200AECC65 /* AddErrandViewController.swift in Sources */,
 				EE93B4E82687FB660055D7A6 /* ErrandCalendarViewController.swift in Sources */,
 				EEA457F42682FFA100C08D17 /* AlertButton.swift in Sources */,
-				EED20D63266C0F90000E0856 /* AdditionalButton.swift in Sources */,
 				EE37790C267A130F00334D4A /* TableCollectionViewCell.swift in Sources */,
 				EE93B4EA268802580055D7A6 /* ConfirmCompletionAlertViewController .swift in Sources */,
 				EE93B4D72687639F0055D7A6 /* OneAlertButton.swift in Sources */,
