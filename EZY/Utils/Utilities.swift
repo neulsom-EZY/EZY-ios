@@ -107,36 +107,7 @@ class Utilities{
     
     //MARK: - Alert
     
-    func AlertbtnView(withMessage message: String, viewSize : Double, button: UIButton) -> UIView{
-        let view = UIView()
-        let label = UILabel()
-        label.text = message
-        label.dynamicFont(fontSize: 16, weight: .regular)
-        label.textColor = .EZY_656565
-        
-        view.addSubview(button)
-        button.snp.makeConstraints { (make) in
-            make.left.equalTo(view.snp.left)
-            make.height.width.equalTo(viewSize/18.0)
-            make.centerY.equalToSuperview()
-        }
-        view.addSubview(label)
-        label.snp.makeConstraints { (make) in
-            make.left.equalTo(button.snp.right).offset(viewSize/30.0)
-            make.centerY.equalToSuperview()
-        }
-        return view
-    }
-    func AlertButton(image img: UIImage,tintColor : UIColor) -> UIButton{
-        let button = UIButton()
-        button.backgroundColor = .white
-        button.layer.shadowColor = UIColor.black.cgColor
-        button.layer.shadowOffset = CGSize(width: 0, height: 4)
-        button.layer.shadowOpacity = 0.1
-        button.setImage(img, for: .normal)
-        button.imageEdgeInsets = UIEdgeInsets(top: 11.25, left: 11.25, bottom: 11.25, right: 11.25)
-        return button
-    }
+  
     
     //MARK: - CustomTextField
     func customTextField(withMessage message : String,textField : UITextField ,Color messageColor : UIColor, viewSize : Double) -> UIView{

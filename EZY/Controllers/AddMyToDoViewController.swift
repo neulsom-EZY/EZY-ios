@@ -12,7 +12,7 @@ import Alamofire
 
 
 class AddMyToDoViewController:UIViewController{
-    
+    var list : [String?] = []
     //MARK: - Properties
     private let backbutton = UIButton().then{
         $0.tintColor = .EZY_BAC8FF
@@ -88,7 +88,7 @@ class AddMyToDoViewController:UIViewController{
         button.addTarget(self, action: #selector(Addmytodobtn), for: .touchUpInside)
         return button
     }()
-
+    
     
     
     //MARK: - Lifecycle

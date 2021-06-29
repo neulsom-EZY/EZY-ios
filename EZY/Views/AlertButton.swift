@@ -41,9 +41,7 @@ class AlertButton : UIButton {
     public func configure( with viewModel : AlertBtn){
         view.isUserInteractionEnabled = false
         view.backgroundColor = .white
-        view.layer.shadowColor = UIColor.black.cgColor
-        view.layer.shadowOpacity = 0.1
-
+        view.layer.applySketchShadow(color: UIColor.black, alpha: 0.1, x: 0, y: 4, blur: 15, spread: 0)
         
         label.dynamicFont(fontSize: 16, weight: .regular)
         label.textColor = .EZY_656565

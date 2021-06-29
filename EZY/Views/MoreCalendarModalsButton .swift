@@ -56,7 +56,7 @@ class MoreCalendarModalsButton : UIButton{
         layer.masksToBounds = true
         layer.borderColor = viewModel.color?.cgColor
         layer.borderWidth = 2
-        
+        viewbackground.isUserInteractionEnabled = false
         iconView.tintColor = viewModel.color
         toDoLabel.textColor = viewModel.color
         toDoLabel.text = viewModel.title
