@@ -276,6 +276,7 @@ extension TeamCalendarViewController : UITableViewDataSource{
         cell.explanation.text = explanation[indexPath.row]
         return cell
     }
+
 }
 
 extension ErrandCalendarViewController : UITableViewDataSource{

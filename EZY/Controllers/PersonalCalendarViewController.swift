@@ -78,9 +78,10 @@ class PersonalCalendarViewController : UIViewController{
     private func makeData() {
         for i in 0...1 {
             manageData.append(ManageData.init(title: titleNotification[i], explanation: explanation[i]))
+            
         }
     }
-    
+
     private func configure() {
         tableView.allowsSelection = false
         tableView.dataSource = self

@@ -12,9 +12,7 @@ import Then
 class CustomManagePushNotificationCell: UITableViewCell {
     
     static let identifier = "ManagePushNotificationCell"
-    
-    var switchClick = true
-
+        
     let view  = UIView().then{
         $0.backgroundColor = .clear
     }
@@ -32,18 +30,20 @@ class CustomManagePushNotificationCell: UITableViewCell {
     private let divider = UIView().then{
         $0.backgroundColor = .EZY_DEDEDE
     }
-    private let switchPushManage = UISwitch().then{
+    let switchPushManage = UISwitch().then{
         $0.onTintColor = .EZY_AFADFF
-        $0.isUserInteractionEnabled = true
-        
         $0.isOn = true
     }
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
+        
         addContentView()
         location()
     }
+    
+
+    
     func addContentView(){
         contentView.addSubview(view)
         view.addSubview(title)
