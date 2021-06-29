@@ -11,6 +11,7 @@ import Then
 
 class CustomManagePushNotificationCell: UITableViewCell {
     
+    //MARK: - Properties
     static let identifier = "ManagePushNotificationCell"
         
     let view  = UIView().then{
@@ -34,7 +35,15 @@ class CustomManagePushNotificationCell: UITableViewCell {
         $0.onTintColor = .EZY_AFADFF
         $0.isOn = true
     }
-    
+    let backbutton = UIButton().then{
+        $0.backgroundColor = .EZY_AFADFF
+        $0.addTarget(self, action: #selector(SwitchMoveButton), for: .touchUpInside)
+    }
+    let touchbutton = UIButton().then{
+        $0.backgroundColor = .white
+        $0.addTarget(self, action: #selector(SwitchMoveButton), for: .touchUpInside)
+    }
+    //MARK: - Lifecycle
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
@@ -42,15 +51,22 @@ class CustomManagePushNotificationCell: UITableViewCell {
         location()
     }
     
-
+    //MARK: - Selctors
+    @objc func SwitchMoveButton(){
+        
+    }
     
+    //MARK: - HELPERs
     func addContentView(){
         contentView.addSubview(view)
         view.addSubview(title)
         view.addSubview(explanation)
         contentView.addSubview(divider)
         contentView.addSubview(switchPushManage)
+        contentView.addSubview(backbutton)
+        backbutton.addSubview(touchbutton)
     }
+    
     private func location(){
 
         view.snp.makeConstraints { (make) in
@@ -78,7 +94,16 @@ class CustomManagePushNotificationCell: UITableViewCell {
         }
         switchPushManage.set(width: 34 , height: 17)
     }
+    func animateswitchOn(){
+        UIView.animate(withDuration: 0.5, animations: {
+            touchbutton.snp.makeConstraints { (make) in
+                make.left.equalTo()
+            }
+        },completion: { _ in
 
+            
+        })
+    }
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
