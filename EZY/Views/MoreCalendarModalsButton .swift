@@ -13,7 +13,7 @@ import Alamofire
     
 class MoreCalendarModalsButton : UIButton{
     
-    private let view = UIView().then{
+    private let viewbackground = UIView().then{
         $0.backgroundColor = .clear
         
     }
@@ -43,9 +43,9 @@ class MoreCalendarModalsButton : UIButton{
     }
     
     private func addSubViews(){
-        addSubview(view)
-        view.addSubview(toDoLabel)
-        view.addSubview(iconView)
+        addSubview(viewbackground)
+        addSubview(toDoLabel)
+        addSubview(iconView)
     }
     
     required init?(coder: NSCoder) {
@@ -65,30 +65,21 @@ class MoreCalendarModalsButton : UIButton{
     
     override func layoutSubviews() {
         super.layoutSubviews()
-        view.snp.makeConstraints { (make) in
+
+        viewbackground.snp.makeConstraints { (make) in
             make.height.equalTo(frame.height/2.9)
-            make.centerY.equalTo(snp.centerY)
-            make.centerX.equalToSuperview()
+            make.center.equalTo(snp.center)
         }
         iconView.snp.makeConstraints { (make) in
-            make.left.equalTo(view.snp.left)
-            make.top.equalTo(view.snp.top)
-            make.height.width.equalTo(view.snp.height)
+            make.left.equalTo(viewbackground.snp.left)
+            make.centerY.equalTo(snp.centerY)
+            make.height.width.equalTo(viewbackground.snp.height)
         }
         toDoLabel.snp.makeConstraints { (make) in
-            make.top.equalTo(view.snp.top)
+            make.centerY.equalTo(viewbackground.snp.centerY)
             make.left.equalTo(iconView.snp.right).offset(frame.height/8.8)
+            make.right.equalTo(viewbackground.snp.right)
         }
         
-//        iconView.snp.makeConstraints { (make) in
-//            make.centerY.equalToSuperview()
-//            make.left.equalTo(frame.height/1.5)
-//            make.height.width.equalTo(frame.height/2.9)
-//
-//        }
-//        toDoLabel.snp.makeConstraints { (make) in
-//            make.centerY.equalToSuperview()
-//            make.left.equalTo(iconView.snp.right).offset(frame.height/8.8)
-//        }
     }
 }
