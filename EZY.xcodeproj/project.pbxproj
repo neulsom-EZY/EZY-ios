@@ -21,6 +21,7 @@
 		EE93B4E42687BD8A0055D7A6 /* ManageData.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE93B4E32687BD8A0055D7A6 /* ManageData.swift */; };
 		EE93B4E62687E1C30055D7A6 /* TeamCalendarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE93B4E52687E1C30055D7A6 /* TeamCalendarViewController.swift */; };
 		EE93B4E82687FB660055D7A6 /* ErrandCalendarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE93B4E72687FB660055D7A6 /* ErrandCalendarViewController.swift */; };
+		EEDCAF98268D85F1001E2B4F /* SwitchBtn.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEDCAF97268D85F1001E2B4F /* SwitchBtn.swift */; };
 		EEEDB2C22664D30D00E5C53A /* extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEEDB2C12664D30D00E5C53A /* extensions.swift */; };
 /* End PBXBuildFile section */
 
@@ -43,6 +44,7 @@
 		EE93B4E32687BD8A0055D7A6 /* ManageData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManageData.swift; sourceTree = "<group>"; };
 		EE93B4E52687E1C30055D7A6 /* TeamCalendarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeamCalendarViewController.swift; sourceTree = "<group>"; };
 		EE93B4E72687FB660055D7A6 /* ErrandCalendarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrandCalendarViewController.swift; sourceTree = "<group>"; };
+		EEDCAF97268D85F1001E2B4F /* SwitchBtn.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwitchBtn.swift; sourceTree = "<group>"; };
 		EEEDB2AC2664ADCB00E5C53A /* Poppins-SemiBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Poppins-SemiBold.ttf"; sourceTree = "<group>"; };
 		EEEDB2AD2664ADCB00E5C53A /* Poppins-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Poppins-Light.ttf"; sourceTree = "<group>"; };
 		EEEDB2AE2664ADCB00E5C53A /* Poppins-BoldItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Poppins-BoldItalic.ttf"; sourceTree = "<group>"; };
@@ -141,6 +143,7 @@
 			children = (
 				EE93B4DA26876F430055D7A6 /* AlarmManagementButton.swift */,
 				EE93B4DE268797230055D7A6 /* CustomManagePushNotificationCell.swift */,
+				EEDCAF97268D85F1001E2B4F /* SwitchBtn.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -336,6 +339,7 @@
 				6AA769E526636AE700B7E1F5 /* AppDelegate.swift in Sources */,
 				EE93B4DB26876F430055D7A6 /* AlarmManagementButton.swift in Sources */,
 				EE3779092679FAC100334D4A /* Model.swift in Sources */,
+				EEDCAF98268D85F1001E2B4F /* SwitchBtn.swift in Sources */,
 				6AA769E726636AE700B7E1F5 /* SceneDelegate.swift in Sources */,
 				EE93B4DF268797230055D7A6 /* CustomManagePushNotificationCell.swift in Sources */,
 				EE93B4E82687FB660055D7A6 /* ErrandCalendarViewController.swift in Sources */,

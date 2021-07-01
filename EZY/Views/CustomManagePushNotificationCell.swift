@@ -96,11 +96,13 @@ class CustomManagePushNotificationCell: UITableViewCell {
     }
     func animateswitchOn(){
         UIView.animate(withDuration: 0.5, animations: {
-            touchbutton.snp.makeConstraints { (make) in
-                make.left.equalTo()
+            self.touchbutton.snp.makeConstraints { (make) in
+                make.left.equalTo(self.backbutton.snp.left)
+                make.centerY.equalTo(self.backbutton.snp.centerY)
+                
             }
         },completion: { _ in
-
+            
             
         })
     }
