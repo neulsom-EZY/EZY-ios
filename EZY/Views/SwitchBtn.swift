@@ -5,4 +5,12 @@
 //  Created by Ji-hoon Ahn on 2021/07/01.
 //
 
-import Foundation
+import UIKit
+import SnapKit
+import Then
+
+class SwitchBtn : UIButton{
+    
+    
+    
+}
