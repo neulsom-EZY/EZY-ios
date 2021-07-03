@@ -14,7 +14,7 @@ class CustomManagePushNotificationCell: UITableViewCell {
     //MARK: - Properties
     static let identifier = "ManagePushNotificationCell"
     
-    static var switchState :Bool? = false
+    var switchState :Bool = true
     
     let view  = UIView().then{
         $0.backgroundColor = .clear
@@ -48,13 +48,6 @@ class CustomManagePushNotificationCell: UITableViewCell {
 
     //MARK: - Selctors
     @objc func SwitchMoveButton(){
-        if CustomManagePushNotificationCell.switchState!{
-            SwitchBtn().switchState = true
-        }
-        else{
-            SwitchBtn().switchState = false
-        }
-        SwitchBtn().switchState != SwitchBtn().switchState
 
     }
     //MARK: - HELPERs
