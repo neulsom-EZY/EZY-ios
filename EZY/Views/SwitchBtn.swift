@@ -17,9 +17,8 @@ class SwitchBtn : UIButton{
     private let titleBtnView  = UIView().then{
         $0.backgroundColor = .white
     }
-    var switchState : Bool = false
-    private var viewModel = Switch()
-
+    var switchState : Bool = CustomManagePushNotificationCell.switchState!
+    
     
     override init(frame: CGRect) {
         super.init(frame: frame)
