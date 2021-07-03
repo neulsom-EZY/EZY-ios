@@ -18,8 +18,9 @@ class SwitchBtn : UIButton{
         $0.backgroundColor = .white
     }
     var switchState : Bool = false
-    
+    private var viewModel = Switch()
 
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         configureUI()
@@ -30,7 +31,6 @@ class SwitchBtn : UIButton{
         addSubview(titleBtnView)
         backview.isUserInteractionEnabled = false
         titleBtnView.isUserInteractionEnabled = false
-        
     }
     
     override func layoutSubviews() {
@@ -44,7 +44,6 @@ class SwitchBtn : UIButton{
             make.height.equalToSuperview()
             make.width.equalToSuperview()
         }
-
     }
 
     func animationstate(){
