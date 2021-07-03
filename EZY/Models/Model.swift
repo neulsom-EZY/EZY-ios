@@ -13,3 +13,7 @@ struct Managementbtn {
     let title : String?
     let subTitle : String?
 }
+
+struct Switchbtn{
+    let switchState : Bool?
+}

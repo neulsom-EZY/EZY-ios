@@ -17,46 +17,69 @@ class SwitchBtn : UIButton{
     private let titleBtnView  = UIView().then{
         $0.backgroundColor = .white
     }
-    var switchState : Bool = true
+    var switchState : Bool = false
+    
+
     override init(frame: CGRect) {
         super.init(frame: frame)
         configureUI()
     }
-    
 
     func configureUI(){
         addSubview(backview)
         addSubview(titleBtnView)
-
+        backview.isUserInteractionEnabled = false
+        titleBtnView.isUserInteractionEnabled = false
+        
     }
     
     override func layoutSubviews() {
         super.layoutSubviews()
         backview.isUserInteractionEnabled = false
-
+        titleBtnView.isUserInteractionEnabled = false
+        animationstate()
         backview.layer.cornerRadius = frame.height/2
         titleBtnView.layer.cornerRadius = titleBtnView.frame.height/2
         backview.snp.makeConstraints { (make) in
             make.height.equalToSuperview()
             make.width.equalToSuperview()
         }
-        titleBtnView.snp.makeConstraints { (make) in
-            make.right.equalTo(backview.snp.right).offset(frame.height/12.98 * -1 )
-            make.height.equalTo(frame.height/1.18)
-            make.centerY.equalTo(backview.snp.centerY)
-            make.width.equalTo(titleBtnView.snp.height)
-        }
+//        titleBtnView.snp.makeConstraints { (make) in
+//            make.right.equalTo(backview.snp.right).offset(frame.height/12.98 * -1 )
+//            make.height.equalTo(frame.height/1.18)
+//            make.centerY.equalTo(backview.snp.centerY)
+//            make.width.equalTo(titleBtnView.snp.height)
+//        }
     }
 
+    func animationstate(){
+        if switchState {
+            animateOn()
+        }else{
+            animateOff()
+            backview.backgroundColor = .EZY_CACACA
+        }
+    }
     
     func animateOn(){
         UIView.animate(withDuration: 1, animations: {
-            self.titleBtnView.frame = CGRect(x: self.backview.frame.height/10, y: 0, width: 0, height: 0)
+            self.titleBtnView.snp.makeConstraints { (make) in
+                make.right.equalTo(self.backview.snp.right).offset(self.frame.height/12.98 * -1 )
+                make.height.equalTo(self.frame.height/1.18)
+                make.centerY.equalTo(self.backview.snp.centerY)
+                make.width.equalTo(self.titleBtnView.snp.height)
+            }
         })
     }
     func animateOff(){
         UIView.animate(withDuration: 1, animations: {
-            self.titleBtnView.frame = CGRect(x: self.backview.frame.height/10 * -1, y: 0, width: 0, height: 0)
+            self.titleBtnView.snp.makeConstraints { (make) in
+                make.left.equalTo(self.backview.snp.left).offset(self.frame.height/12.98)
+                make.height.equalTo(self.frame.height/1.18)
+                make.centerY.equalTo(self.backview.snp.centerY)
+                make.width.equalTo(self.titleBtnView.snp.height)
+            }
+            
         })
     }
     

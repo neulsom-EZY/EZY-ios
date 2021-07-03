@@ -13,7 +13,9 @@ class CustomManagePushNotificationCell: UITableViewCell {
     
     //MARK: - Properties
     static let identifier = "ManagePushNotificationCell"
-        
+    static var switchState : Bool = true
+   
+    
     let view  = UIView().then{
         $0.backgroundColor = .clear
     }
@@ -28,17 +30,18 @@ class CustomManagePushNotificationCell: UITableViewCell {
         $0.dynamicFont(fontSize: 8, weight: .regular)
         $0.textColor = .EZY_CDCDCD
     }
+
     private let divider = UIView().then{
         $0.backgroundColor = .EZY_DEDEDE
     }
-    let switchPushManage = SwitchBtn().then{
-        $0.addTarget(self, action: #selector(SwitchMoveButton), for: .touchUpInside)
-    }
-    
+    let switchPushManage : SwitchBtn = {
+        let button = SwitchBtn()
+        button.addTarget(self, action: #selector(SwitchMoveButton), for: .touchUpInside)
+        return button
+    }()
     //MARK: - Lifecycle
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
-        
         addContentView()
         location()
     }
@@ -47,7 +50,6 @@ class CustomManagePushNotificationCell: UITableViewCell {
     @objc func SwitchMoveButton(){
         
     }
-   
     //MARK: - HELPERs
     func addContentView(){
         contentView.addSubview(view)
