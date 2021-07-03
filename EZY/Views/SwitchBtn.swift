@@ -44,12 +44,7 @@ class SwitchBtn : UIButton{
             make.height.equalToSuperview()
             make.width.equalToSuperview()
         }
-//        titleBtnView.snp.makeConstraints { (make) in
-//            make.right.equalTo(backview.snp.right).offset(frame.height/12.98 * -1 )
-//            make.height.equalTo(frame.height/1.18)
-//            make.centerY.equalTo(backview.snp.centerY)
-//            make.width.equalTo(titleBtnView.snp.height)
-//        }
+
     }
 
     func animationstate(){
