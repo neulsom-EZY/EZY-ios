@@ -31,11 +31,10 @@ class CustomManagePushNotificationCell: UITableViewCell {
     private let divider = UIView().then{
         $0.backgroundColor = .EZY_DEDEDE
     }
-//    let switchPushManage = UISwitch().then{
-//        $0.onTintColor = .EZY_AFADFF
-//        $0.isOn = true
-//    }
-    let switchPushManage = SwitchBtn()
+    let switchPushManage = SwitchBtn().then{
+        $0.addTarget(self, action: #selector(SwitchMoveButton), for: .touchUpInside)
+    }
+    
     //MARK: - Lifecycle
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -48,7 +47,7 @@ class CustomManagePushNotificationCell: UITableViewCell {
     @objc func SwitchMoveButton(){
         
     }
-    
+   
     //MARK: - HELPERs
     func addContentView(){
         contentView.addSubview(view)
@@ -79,8 +78,8 @@ class CustomManagePushNotificationCell: UITableViewCell {
         switchPushManage.snp.makeConstraints { (make) in
             make.centerY.equalTo(snp.centerY)
             make.right.equalTo(contentView.snp.right)
-            make.height.equalTo(frame.height/3.35)
-            make.width.equalTo(frame.height/1.68)
+            make.height.equalTo(frame.height/2.71)
+            make.width.equalTo(frame.height/1.35)
         }
         divider.snp.makeConstraints { (make) in
             make.top.equalTo(snp.bottom)
