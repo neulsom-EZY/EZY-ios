@@ -13,7 +13,11 @@ class CalendarModalView: UIView {
     var whiteColor: UIColor! = UIColor.white
     
     lazy var labelColor: [UIColor] = [pinkColor, whiteColor]
-
+    
+    lazy var calendarTriangleImageView = UIImageView().then{
+        $0.image = UIImage(named:"EZY_CalendarTriangleViewImage.svg")
+    }
+    
     lazy var shadowBackgroundView = UIView().then {
         $0.backgroundColor = UIColor.black.withAlphaComponent(0.2)
     }

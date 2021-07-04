@@ -23,8 +23,6 @@ class RescheduleViewController: UIViewController {
     
     var tagColorCollectionView: UICollectionView?
     
-    var calendarCollectionView: UICollectionView?
-    
     var isChecked: [Bool] = [true, false, false, false]
     
     var models: [TagColorCollectionViewModel] = [TagColorCollectionViewModel(backgroundColor: UIColor(red: 186/255, green: 200/255, blue: 255/255, alpha: 1), isSelected: false),
@@ -44,6 +42,21 @@ class RescheduleViewController: UIViewController {
     lazy var tagButton: [UIButton] = [tagStudyButton, tagWalkButton, tagMajorBandButton, tagFreedomBandButton]
     
     var preciousSelectedIndex = 0
+    
+    var dayArray = ["24","25","26","27","28","29","30","1","2","3"]
+    
+    var dayOfTheWeekArray = ["S","M","T","W","T","F","S","S","M","T"]
+    
+
+    
+    let calendarCollectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout()).then {
+        let layout = UICollectionViewFlowLayout()
+        layout.scrollDirection = .horizontal
+        layout.sectionInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
+        $0.backgroundColor = .white
+        $0.showsHorizontalScrollIndicator = false
+        $0.collectionViewLayout = layout
+    }
     
     lazy var titleBackgroundView = UIView().then {
         $0.backgroundColor = UIColor(red: 244/255, green: 246/255, blue: 255/255, alpha: 1)
@@ -147,9 +160,6 @@ class RescheduleViewController: UIViewController {
         $0.dynamicFont(fontSize: 12, currentFontName: "AppleSDGothicNeo-Bold")
     }
     
-    
-
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -174,16 +184,28 @@ class RescheduleViewController: UIViewController {
         tagColorCollectionViewSetting()
         
         calendarCollectionViewSetting()
+    }
 
+    
+    func calendarCollectionViewSetting(){
+        calendarCollectionView.delegate = self
+        calendarCollectionView.dataSource = self
+        calendarCollectionView.bounces = false
+        calendarCollectionView.register(CalendarCollectionViewCell.self, forCellWithReuseIdentifier: CalendarCollectionViewCell.reuseId)
+        
+        calendarCollectionView.decelerationRate = UIScrollView.DecelerationRate.normal
+        
     }
     
     func calendarModalViewSetting(){
         self.view.addSubview(calendarModalView)
         calendarModalView.addSubview(calendarModalView.shadowBackgroundView)
         calendarModalView.addSubview(calendarModalView.modalBackgroundView)
+        calendarModalView.modalBackgroundView.addSubview(calendarCollectionView)
         calendarModalView.modalBackgroundView.addSubview(calendarModalView.titleLabel)
         calendarModalView.modalBackgroundView.addSubview(calendarModalView.monthLabel)
         calendarModalView.modalBackgroundView.addSubview(calendarModalView.monthYearLabel)
+        calendarModalView.modalBackgroundView.addSubview(calendarModalView.calendarTriangleImageView)
         
         calendarModalView.snp.makeConstraints { make in
             make.bottom.top.right.left.equalToSuperview()
@@ -214,7 +236,20 @@ class RescheduleViewController: UIViewController {
             make.left.equalTo(calendarModalView.monthLabel.snp.right).offset(self.view.frame.height/161.2)
         }
         
-        calendarModalView.isHidden = true
+        calendarCollectionView.snp.makeConstraints { (make) in
+            make.left.equalTo(calendarModalView.modalBackgroundView).offset(self.view.frame.width/10.4)
+            make.centerX.equalToSuperview()
+            make.top.equalTo(calendarModalView.monthLabel.snp.bottom).offset(self.view.frame.height/31.2)
+            make.height.equalToSuperview().dividedBy(4.7)
+        }
+        
+        calendarModalView.calendarTriangleImageView.snp.makeConstraints { make in
+            make.bottom.equalTo(calendarCollectionView.snp.top).offset(-self.view.frame.height/61.2)
+            make.height.width.equalTo(10)
+            make.centerX.equalToSuperview()
+        }
+        
+        calendarModalView.isHidden = false
     }
 
     
@@ -284,29 +319,6 @@ class RescheduleViewController: UIViewController {
         tagAddModalView.isHidden = true
     }
     
-    
-    func calendarCollectionViewSetting(){
-        calendarCollectionView?.delegate = self
-        calendarCollectionView?.dataSource = self
-        
-        let layout: UICollectionViewFlowLayout = UICollectionViewFlowLayout()
-        layout.itemSize = CGSize(width: 30, height: 30)
-        layout.scrollDirection = .horizontal
-        
-        calendarCollectionView = UICollectionView(frame: self.view.frame, collectionViewLayout: layout)
-        
-        calendarCollectionView?.showsHorizontalScrollIndicator = false
-        calendarCollectionView?.register(CalendarCollectionViewCell.self, forCellWithReuseIdentifier: CalendarCollectionViewCell.reuseId)
-        
-        calendarCollectionView?.backgroundColor = .yellow
-        calendarModalView.modalBackgroundView.addSubview(calendarCollectionView!)
-        
-        calendarCollectionView!.snp.makeConstraints { make in
-            make.top.equalTo(calendarModalView.monthLabel.snp.bottom)
-            make.left.equalTo(calendarModalView.titleLabel)
-        }
-    }
-    
     func tagColorCollectionViewSetting(){
         
         tagColorCollectionView?.dataSource = self
@@ -364,6 +376,7 @@ class RescheduleViewController: UIViewController {
     
     @objc func tagAddButtonClicked(sender:UIButton){
         tagAddModalView.isHidden = false
+        tagColorCollectionView?.isHidden = false
     }
     
     @objc func tagbuttonClicked(sender:UIButton)
@@ -413,12 +426,15 @@ class RescheduleViewController: UIViewController {
     }
     
     @objc func calendarLabelButtonClicked(sender:UIButton){
+        
     }
     
     @objc func timeLabelButtonClicked(sender:UIButton){
+        
     }
     
     @objc func locationLabelButtonClicked(sender:UIButton){
+        
     }
     
     func layoutSetting(){
@@ -621,6 +637,7 @@ class RescheduleViewController: UIViewController {
             
             tagAddButton.layer.cornerRadius = (self.view.frame.height/25.3)/2
         }
+        
     }
     
     
@@ -660,22 +677,40 @@ class RescheduleViewController: UIViewController {
     
 }
 
-extension RescheduleViewController: UICollectionViewDelegate, UICollectionViewDataSource{
+extension RescheduleViewController: UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout{
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return models.count
+        if collectionView == tagColorCollectionView{
+            return models.count
+        }else if collectionView == calendarCollectionView{
+            return dayArray.count
+        }
+
+        return Int()
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let myCell = collectionView.dequeueReusableCell(withReuseIdentifier: TagColorCollectionViewCell.reuseId, for: indexPath) as! TagColorCollectionViewCell
+        if collectionView == tagColorCollectionView{
+            let myCell = collectionView.dequeueReusableCell(withReuseIdentifier: TagColorCollectionViewCell.reuseId, for: indexPath) as! TagColorCollectionViewCell
+            
+            myCell.setModel(models[indexPath.row])
         
-        myCell.setModel(models[indexPath.row])
-    
-        return myCell
+            return myCell
+        }else if collectionView == calendarCollectionView{
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CalendarCollectionViewCell.reuseId, for: indexPath) as! CalendarCollectionViewCell
+            
+            cell.backgroundColor = .white
+            cell.dateLabel.text = dayArray[indexPath.row]
+            cell.dayOfTheWeekLabel.text = dayOfTheWeekArray[indexPath.row]
+            print("calendarCollectionView.contentOffset : \(calendarCollectionView.contentOffset.x)")
+            return cell
+        }
+        
+        return UICollectionViewCell()
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath)
     {
-        
+
         if models[indexPath.row].isSelected {
             
             models[preciousSelectedIndex].isSelected.toggle()
@@ -686,7 +721,30 @@ extension RescheduleViewController: UICollectionViewDelegate, UICollectionViewDa
                 preciousSelectedIndex = indexPath.row
             }
         }
-
         collectionView.reloadData()
+        
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        if collectionView == calendarCollectionView{
+            return CGSize(width: collectionView.frame.width/10, height: self.view.frame.height/14)
+        }
+
+        return CGSize()
     }
 }
+
+extension RescheduleViewController: HSCycleGalleryViewDelegate {
+    
+    func numberOfItemInCycleGalleryView(_ cycleGalleryView: CalendarView) -> Int {
+        return 20
+    }
+    
+    func cycleGalleryView(_ cycleGalleryView: CalendarView, cellForItemAtIndex index: Int) -> UICollectionViewCell {
+        let cell = cycleGalleryView.dequeueReusableCell(withIdentifier: CalendarCollectionViewCell.reuseId, for: IndexPath(item: index, section: 0)) as! CalendarCollectionViewCell
+        return cell
+    }
+    
+}
+
+
