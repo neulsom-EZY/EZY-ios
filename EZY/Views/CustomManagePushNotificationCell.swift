@@ -10,11 +10,15 @@ import SnapKit
 import Then
 
 class CustomManagePushNotificationCell: UITableViewCell {
+
     
+        
     //MARK: - Properties
     static let identifier = "ManagePushNotificationCell"
     
-    var switchState = true
+
+    
+    var switchState : Bool = false
     
     let view  = UIView().then{
         $0.backgroundColor = .clear
@@ -54,9 +58,11 @@ class CustomManagePushNotificationCell: UITableViewCell {
             switchState = false
         }else{
             backgroundColor = .cyan
-            
             switchState = true
         }
+        
+
+
     }
     
     //MARK: - HELPERs
@@ -96,6 +102,7 @@ class CustomManagePushNotificationCell: UITableViewCell {
             make.height.equalTo(contentView.frame.height/114)
         }
     }
+    
 
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")

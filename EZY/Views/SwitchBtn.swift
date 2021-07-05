@@ -10,6 +10,8 @@ import SnapKit
 import Then
 
 class SwitchBtn : UIButton{
+
+    
     
     let backview = UIView().then{
         $0.backgroundColor = .EZY_AFADFF
@@ -17,7 +19,7 @@ class SwitchBtn : UIButton{
     let titleBtnView  = UIView().then{
         $0.backgroundColor = .white
     }
-    var switchState : Bool? = true
+    var switchState : Bool = true
     
     
     override init(frame: CGRect) {
@@ -47,11 +49,9 @@ class SwitchBtn : UIButton{
     }
 
     func animationstate(){
-        if switchState!
+        if (switchState != nil)
         {
             animateOn()
-
-
         }else{
             animateOff()
         }
@@ -82,7 +82,6 @@ class SwitchBtn : UIButton{
             self.titleBtnView.layoutIfNeeded()
         })
     }
-
 
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
