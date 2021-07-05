@@ -8,23 +8,24 @@
 import UIKit
 import SnapKit
 import Then
-
-class CustomManagePushNotificationCell: UITableViewCell {
-
+protocol sendSwitch {
     
-        
+}
+class CustomManagePushNotificationCell: UITableViewCell {
+    
     //MARK: - Properties
     static let identifier = "ManagePushNotificationCell"
     
 
-    
-    var switchState : Bool = false
+    var switchStateProtocol : sendSwitch?
+    var switchState : Bool = true
     
     let view  = UIView().then{
         $0.backgroundColor = .clear
     }
     
-     let title = UILabel().then{
+
+    let title = UILabel().then{
         $0.translatesAutoresizingMaskIntoConstraints = false
         $0.dynamicFont(fontSize: 14, weight: .regular)
         $0.textColor = .EZY_656565
@@ -38,7 +39,7 @@ class CustomManagePushNotificationCell: UITableViewCell {
     private let divider = UIView().then{
         $0.backgroundColor = .EZY_DEDEDE
     }
-     lazy var switchPushManage : SwitchBtn = {
+    private lazy var switchPushManage : SwitchBtn = {
         let button = SwitchBtn()
         button.addTarget(self, action: #selector(SwitchMoveButton), for: .touchUpInside)
         return button
@@ -55,15 +56,14 @@ class CustomManagePushNotificationCell: UITableViewCell {
     @objc func SwitchMoveButton(){
         if (switchState) {
             backgroundColor = .red
+            
             switchState = false
         }else{
             backgroundColor = .cyan
             switchState = true
         }
-        
-
-
     }
+    
     
     //MARK: - HELPERs
     func addContentView(){
