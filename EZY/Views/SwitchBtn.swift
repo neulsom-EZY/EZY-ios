@@ -11,13 +11,13 @@ import Then
 
 class SwitchBtn : UIButton{
     
-    private let backview = UIView().then{
+     let backview = UIView().then{
         $0.backgroundColor = .EZY_AFADFF
     }
-    private let titleBtnView  = UIView().then{
+    let titleBtnView  = UIView().then{
         $0.backgroundColor = .white
     }
-    var switchState : Bool = true
+    var switchState : Bool?
     
     
     override init(frame: CGRect) {
@@ -36,24 +36,28 @@ class SwitchBtn : UIButton{
         super.layoutSubviews()
         backview.isUserInteractionEnabled = false
         titleBtnView.isUserInteractionEnabled = false
-        animationstate()
         backview.layer.cornerRadius = frame.height/2
         titleBtnView.layer.cornerRadius = titleBtnView.frame.height/2
+        animationstate()
         backview.snp.makeConstraints { (make) in
             make.height.equalToSuperview()
             make.width.equalToSuperview()
         }
+ 
     }
 
     func animationstate(){
-        if switchState {
-            animateOn()
-        }else{
+        if let _ = switchState
+        {
             animateOff()
             backview.backgroundColor = .EZY_CACACA
+
+        }else{
+            animateOn()
         }
+        
     }
-    
+
     func animateOn(){
         UIView.animate(withDuration: 1, animations: {
             self.titleBtnView.snp.makeConstraints { (make) in
@@ -72,10 +76,10 @@ class SwitchBtn : UIButton{
                 make.centerY.equalTo(self.backview.snp.centerY)
                 make.width.equalTo(self.titleBtnView.snp.height)
             }
-            
+
         })
     }
-    
+
 
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
