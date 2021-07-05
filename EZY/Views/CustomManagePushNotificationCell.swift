@@ -17,7 +17,7 @@ class CustomManagePushNotificationCell: UITableViewCell {
     static let identifier = "ManagePushNotificationCell"
     
 
-    var switchStateProtocol : sendSwitch?
+    var delegate : sendSwitch?
     var switchState : Bool = true
     
     let view  = UIView().then{
@@ -56,11 +56,11 @@ class CustomManagePushNotificationCell: UITableViewCell {
     @objc func SwitchMoveButton(){
         if (switchState) {
             backgroundColor = .red
-            self.switchStateProtocol?.State(data: switchState)
+            self.delegate?.State(data: switchState)
             switchState = false
         }else{
             backgroundColor = .cyan
-            self.switchStateProtocol?.State(data: switchState)
+            self.delegate?.State(data: switchState)
             switchState = true
         }
     }
