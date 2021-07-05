@@ -8,7 +8,7 @@
 import UIKit
 import SnapKit
 import Then
-protocol sendSwitch {
+protocol sendSwitch: AnyObject{
     func State(data: Bool)
 }
 class CustomManagePushNotificationCell: UITableViewCell {
@@ -18,7 +18,7 @@ class CustomManagePushNotificationCell: UITableViewCell {
     
 
     var delegate : sendSwitch?
-    var switchState : Bool = true
+    var switchState : Bool? = true
     
     let view  = UIView().then{
         $0.backgroundColor = .clear
@@ -54,15 +54,17 @@ class CustomManagePushNotificationCell: UITableViewCell {
 
     //MARK: - Selctors
     @objc func SwitchMoveButton(){
-        if (switchState) {
+        if (switchState!) {
             backgroundColor = .red
-            self.delegate?.State(data: switchState)
+            self.delegate?.State(data: switchState!)
+
             switchState = false
         }else{
             backgroundColor = .cyan
-            self.delegate?.State(data: switchState)
+            self.delegate?.State(data: switchState!)
             switchState = true
         }
+  
     }
     
     
