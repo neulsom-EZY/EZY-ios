@@ -10,6 +10,10 @@ import SnapKit
 import Then
 
 class SwitchBtn : UIButton,sendSwitch{
+    func State(data: Bool) {
+        self.switchState = data
+    }
+    
 
     lazy var backview = UIView().then{
         $0.backgroundColor = .EZY_AFADFF

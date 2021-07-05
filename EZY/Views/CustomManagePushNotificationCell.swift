@@ -9,7 +9,7 @@ import UIKit
 import SnapKit
 import Then
 protocol sendSwitch {
-    
+    func State(data: Bool)
 }
 class CustomManagePushNotificationCell: UITableViewCell {
     
@@ -56,10 +56,11 @@ class CustomManagePushNotificationCell: UITableViewCell {
     @objc func SwitchMoveButton(){
         if (switchState) {
             backgroundColor = .red
-            
+            self.switchStateProtocol?.State(data: switchState)
             switchState = false
         }else{
             backgroundColor = .cyan
+            self.switchStateProtocol?.State(data: switchState)
             switchState = true
         }
     }
