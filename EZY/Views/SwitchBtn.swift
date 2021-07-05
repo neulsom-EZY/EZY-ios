@@ -11,13 +11,13 @@ import Then
 
 class SwitchBtn : UIButton{
     
-     let backview = UIView().then{
+    let backview = UIView().then{
         $0.backgroundColor = .EZY_AFADFF
     }
     let titleBtnView  = UIView().then{
         $0.backgroundColor = .white
     }
-    var switchState : Bool?
+    var switchState : Bool? = true
     
     
     override init(frame: CGRect) {
@@ -27,7 +27,7 @@ class SwitchBtn : UIButton{
 
     func configureUI(){
         addSubview(backview)
-        addSubview(titleBtnView)
+        backview.addSubview(titleBtnView)
         backview.isUserInteractionEnabled = false
         titleBtnView.isUserInteractionEnabled = false
     }
@@ -47,36 +47,39 @@ class SwitchBtn : UIButton{
     }
 
     func animationstate(){
-        if let _ = switchState
+        if switchState!
         {
-            animateOff()
-            backview.backgroundColor = .EZY_CACACA
+            animateOn()
+
 
         }else{
-            animateOn()
+            animateOff()
         }
+        
         
     }
 
     func animateOn(){
+        self.titleBtnView.snp.makeConstraints { (make) in
+            make.right.equalTo(self.backview.snp.right).offset(self.frame.height/12.98 * -1 )
+            make.height.equalTo(self.frame.height/1.18)
+            make.centerY.equalTo(self.backview.snp.centerY)
+            make.width.equalTo(self.titleBtnView.snp.height)
+        }
         UIView.animate(withDuration: 1, animations: {
-            self.titleBtnView.snp.makeConstraints { (make) in
-                make.right.equalTo(self.backview.snp.right).offset(self.frame.height/12.98 * -1 )
-                make.height.equalTo(self.frame.height/1.18)
-                make.centerY.equalTo(self.backview.snp.centerY)
-                make.width.equalTo(self.titleBtnView.snp.height)
-            }
+            self.titleBtnView.layoutIfNeeded()
         })
     }
     func animateOff(){
+        backview.backgroundColor = .EZY_CACACA
+        self.titleBtnView.snp.makeConstraints { (make) in
+            make.left.equalTo(self.backview.snp.left).offset(self.frame.height/12.98)
+            make.height.equalTo(self.frame.height/1.18)
+            make.centerY.equalTo(self.backview.snp.centerY)
+            make.width.equalTo(self.titleBtnView.snp.height)
+        }
         UIView.animate(withDuration: 1, animations: {
-            self.titleBtnView.snp.makeConstraints { (make) in
-                make.left.equalTo(self.backview.snp.left).offset(self.frame.height/12.98)
-                make.height.equalTo(self.frame.height/1.18)
-                make.centerY.equalTo(self.backview.snp.centerY)
-                make.width.equalTo(self.titleBtnView.snp.height)
-            }
-
+            self.titleBtnView.layoutIfNeeded()
         })
     }
 

@@ -14,7 +14,7 @@ class CustomManagePushNotificationCell: UITableViewCell {
     //MARK: - Properties
     static let identifier = "ManagePushNotificationCell"
     
-    var switchState :Bool = true
+    var switchState = true
     
     let view  = UIView().then{
         $0.backgroundColor = .clear
@@ -34,21 +34,9 @@ class CustomManagePushNotificationCell: UITableViewCell {
     private let divider = UIView().then{
         $0.backgroundColor = .EZY_DEDEDE
     }
-//     lazy var switchPushManage : SwitchBtn = {
-//        let button = SwitchBtn()
-//        button.addTarget(self, action: #selector(SwitchMoveButton), for: .touchUpInside)
-//        return button
-//    }()
-    private let backSwitch : UIButton = {
-        let button = UIButton(type: .system)
-        button.backgroundColor = .EZY_AFADFF
+     lazy var switchPushManage : SwitchBtn = {
+        let button = SwitchBtn()
         button.addTarget(self, action: #selector(SwitchMoveButton), for: .touchUpInside)
-        return button
-    }()
-    let titleSwitch : UIButton = {
-        let button = UIButton(type: .system)
-        button.backgroundColor = .white
-        button.frame.height/2
         return button
     }()
     
@@ -61,14 +49,14 @@ class CustomManagePushNotificationCell: UITableViewCell {
 
     //MARK: - Selctors
     @objc func SwitchMoveButton(){
-
-        if self.switchState {
-            SwitchBtn().animateOn()
+        if (switchState) {
+            backgroundColor = .red
+            switchState = false
         }else{
-            backgroundColor = .blue
-            SwitchBtn().animateOff()
+            backgroundColor = .cyan
+            
+            switchState = true
         }
-        self.switchState != switchState
     }
     
     //MARK: - HELPERs
@@ -77,14 +65,11 @@ class CustomManagePushNotificationCell: UITableViewCell {
         view.addSubview(title)
         view.addSubview(explanation)
         contentView.addSubview(divider)
-        contentView.addSubview(backSwitch)
-        backSwitch.addSubview(titleSwitch)
-        
+        contentView.addSubview(switchPushManage)
     }
 
     private func location(){
-        backSwitch.layer.cornerRadius = frame.height/10
-        titleSwitch.layer.cornerRadius = titleSwitch.frame.height/2
+
         view.snp.makeConstraints { (make) in
             make.height.equalTo(frame.height/1.706)
             make.centerY.equalTo(snp.centerY)
@@ -99,18 +84,11 @@ class CustomManagePushNotificationCell: UITableViewCell {
             make.left.equalTo(view.snp.left).offset(contentView.frame.height/58)
         }
         
-
-        backSwitch.snp.makeConstraints { (make) in
+        switchPushManage.snp.makeConstraints { (make) in
             make.centerY.equalTo(snp.centerY)
             make.right.equalTo(contentView.snp.right)
             make.height.equalTo(frame.height/2.71)
             make.width.equalTo(frame.height/1.35)
-        }
-        titleSwitch.snp.makeConstraints { (make) in
-            make.left.equalTo(backSwitch.snp.left).offset(frame.height/43.5)
-            make.height.equalTo(backSwitch.snp.height).offset(frame.height/43.5 * -1)
-            make.centerY.equalTo(self.backSwitch.snp.centerY)
-            make.width.equalTo(titleSwitch.snp.height)
         }
         divider.snp.makeConstraints { (make) in
             make.top.equalTo(snp.bottom)
@@ -118,11 +96,7 @@ class CustomManagePushNotificationCell: UITableViewCell {
             make.height.equalTo(contentView.frame.height/114)
         }
     }
-    override func layoutSubviews() {
-        super.layoutSubviews()
-        backSwitch.layer.cornerRadius = backSwitch.frame.height/2
-        titleSwitch.layer.cornerRadius = titleSwitch.frame.height/2
-    }
+
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
