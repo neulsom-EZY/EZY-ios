@@ -7,7 +7,7 @@
 
 import UIKit
 
-class WhiteBackgroundView: UIView {
+class WhiteBackgroundView: UIButton {
 
     lazy var backgroundView = UIView().then{
         $0.backgroundColor = .white
@@ -19,12 +19,13 @@ class WhiteBackgroundView: UIView {
         $0.layer.shadowColor = UIColor.black.cgColor
     }
     
-    lazy var iconImageView = UIImageView().then {
-        $0.image = UIImage(named: "EZY_Calendar.svg")
+    lazy var iconImageButton = UIButton().then {
+        $0.setImage(UIImage(named: "EZY_Calendar.svg"), for: .normal)
     }
     
     func dataSetting(iconImage: UIImage){
-        iconImageView.image = iconImage
+        iconImageButton.setImage(iconImage, for: .normal)
+
     }
     
 }

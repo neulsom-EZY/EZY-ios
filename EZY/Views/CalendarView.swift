@@ -22,7 +22,7 @@ public class CalendarView: UIView {
     
     public var autoScrollInterval: Double = 3
     
-    public var contentBackgroundColor = UIColor.yellow {
+    public var contentBackgroundColor = UIColor.white {
         didSet {
             collectionView.backgroundColor = contentBackgroundColor
         }

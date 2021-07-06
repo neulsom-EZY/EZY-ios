@@ -11,17 +11,17 @@ class RescheduleViewController: UIViewController {
     
     lazy var topView = TopView()
     
-    lazy var calendarView = WhiteBackgroundView()
+    lazy var calendarViewButton = WhiteBackgroundView()
     
-    lazy var timeView = WhiteBackgroundView()
+    lazy var timeViewButton = WhiteBackgroundView()
     
-    lazy var locationView = WhiteBackgroundView()
+    lazy var locationViewButton = WhiteBackgroundView()
     
     lazy var tagAddModalView = TagAddModalView()
     
     lazy var calendarModalView = CalendarModalView()
     
-    var tagColorCollectionView: UICollectionView?
+    lazy var selectTimeModalView = SelectTimeModalView()
     
     var isChecked: [Bool] = [true, false, false, false]
     
@@ -43,13 +43,11 @@ class RescheduleViewController: UIViewController {
     
     var preciousSelectedIndex = 0
     
-    var dayArray = ["24","25","26","27","28","29","30","1","2","3"]
+    var dayArray = ["24","25","26","27","28","29","30","1","2","3","24","25","26","27","28","29","30","1","2","3"]
     
-    var dayOfTheWeekArray = ["S","M","T","W","T","F","S","S","M","T"]
+    var dayOfTheWeekArray = ["S","M","T","W","T","F","S","S","M","T","S","M","T","W","T","F","S","S","M","T"]
     
-
-    
-    let calendarCollectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout()).then {
+    let calendarCollectionView = UICollectionView(frame: .zero, collectionViewLayout: CalendarViewLayout()).then {
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .horizontal
         layout.sectionInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
@@ -160,6 +158,21 @@ class RescheduleViewController: UIViewController {
         $0.dynamicFont(fontSize: 12, currentFontName: "AppleSDGothicNeo-Bold")
     }
     
+    var calendarAddButton = UIButton().then{
+        $0.backgroundColor = UIColor(red: 255/255, green: 181/255, blue: 181/255, alpha: 1)
+        $0.setTitle("완료", for: .normal)
+        $0.dynamicFont(fontSize: 12, currentFontName: "AppleSDGothicNeo-Bold")
+        $0.layer.cornerRadius = 10
+    }
+    
+    let tagColorCollectionView = UICollectionView(frame: .zero, collectionViewLayout: CalendarViewLayout()).then {
+        let layout: UICollectionViewFlowLayout = UICollectionViewFlowLayout()
+        layout.itemSize = CGSize(width: 30, height: 30)
+        layout.scrollDirection = .horizontal
+        $0.collectionViewLayout = layout
+        $0.backgroundColor = .white
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -179,22 +192,116 @@ class RescheduleViewController: UIViewController {
         
         tagAddModalViewSetting()
         
-        calendarModalViewSetting()
-        
         tagColorCollectionViewSetting()
         
+        calendarModalViewSetting()
+        
         calendarCollectionViewSetting()
+        
+        selectTimeModalViewSetting()
+        
+
     }
 
+    func selectTimeModalViewSetting(){
+        self.view.addSubview(selectTimeModalView)
+        
+        selectTimeModalView.snp.makeConstraints { make in
+            make.bottom.top.right.left.equalToSuperview()
+        }
+        
+        selectTimeModalView.backgroundView.snp.makeConstraints { make in
+            make.top.bottom.right.left.equalToSuperview()
+        }
+        
+        selectTimeModalView.modalBackgroundView.snp.makeConstraints { make in
+            make.centerX.centerY.equalToSuperview()
+            make.width.equalToSuperview().dividedBy(1.2)
+            make.height.equalToSuperview().dividedBy(3.2)
+        }
+        
+        selectTimeModalView.modalTitleLabel.snp.makeConstraints { make in
+            make.top.equalToSuperview().offset(self.view.frame.height/33.8)
+            make.left.equalToSuperview().offset(self.view.frame.height/33.8)
+        }
+        
+        selectTimeModalView.startMorningLabel.snp.makeConstraints { make in
+            make.left.equalToSuperview().offset(self.view.frame.width/7.9)
+            make.top.equalTo(selectTimeModalView.modalTitleLabel.snp.bottom).offset(self.view.frame.height/28)
+            make.height.equalToSuperview().dividedBy(19)
+        }
+        
+        selectTimeModalView.startAfternoon.snp.makeConstraints { make in
+            make.left.equalTo(selectTimeModalView.startSelectBackButton.snp.right).offset(self.view.frame.width/41.6)
+            make.top.bottom.equalTo(selectTimeModalView.startMorningLabel)
+        }
+
+        selectTimeModalView.startSelectCircleButton.snp.makeConstraints { make in
+            make.centerX.equalToSuperview()
+            make.left.equalToSuperview().offset(self.view.frame.width/100)
+            make.height.width.equalTo(selectTimeModalView.startSelectBackButton.snp.height).dividedBy(1.2)
+
+            selectTimeModalView.startSelectCircleButton.layer.cornerRadius = 10
+        }
+        
+        selectTimeModalView.startSelectBar.snp.makeConstraints { make in
+            make.bottom.equalTo(selectTimeModalView.startMorningLabel)
+            make.left.equalTo(selectTimeModalView.startMorningLabel).offset(-self.view.frame.width/100)
+            make.right.equalTo(selectTimeModalView.startMorningLabel).offset(self.view.frame.width/100)
+            make.height.equalTo(selectTimeModalView.startMorningLabel).dividedBy(2)
+        }
+        
+        selectTimeModalView.startSelectBackButton.snp.makeConstraints { make in
+            make.left.equalTo(selectTimeModalView.startMorningLabel.snp.right).offset(self.view.frame.width/41.6)
+            make.width.equalToSuperview().dividedBy(12.6)
+            make.top.bottom.equalTo(selectTimeModalView.startMorningLabel)
+
+            selectTimeModalView.startSelectBackButton.layer.cornerRadius = ((self.view.frame.height/3.2)/19)/2
+        }
+
+        selectTimeModalView.endMorningLabel.snp.makeConstraints { make in
+            make.right.equalTo(selectTimeModalView.endSelectBackButton.snp.left).offset(-self.view.frame.width/41.6)
+            make.top.bottom.equalTo(selectTimeModalView.endAfternoon)
+        }
+
+        selectTimeModalView.endAfternoon.snp.makeConstraints { make in
+            make.right.equalToSuperview().offset(-self.view.frame.width/7.9)
+            make.top.equalTo(selectTimeModalView.modalTitleLabel.snp.bottom).offset(self.view.frame.height/28)
+            make.height.equalToSuperview().dividedBy(19)
+        }
+
+        selectTimeModalView.endSelectBar.snp.makeConstraints { make in
+            make.bottom.equalTo(selectTimeModalView.endMorningLabel)
+            make.left.equalTo(selectTimeModalView.endMorningLabel).offset(-self.view.frame.width/100)
+            make.right.equalTo(selectTimeModalView.endMorningLabel).offset(self.view.frame.width/100)
+            make.height.equalTo(selectTimeModalView.endMorningLabel).dividedBy(2)
+        }
+
+        selectTimeModalView.endSelectCircleButton.snp.makeConstraints { make in
+            make.centerX.equalToSuperview()
+            make.left.equalToSuperview().offset(self.view.frame.width/100)
+            make.height.width.equalTo(selectTimeModalView.endSelectBackButton.snp.height).dividedBy(1.2)
+
+            selectTimeModalView.endSelectCircleButton.layer.cornerRadius = 10
+        }
+
+        selectTimeModalView.endSelectBackButton.snp.makeConstraints { make in
+            make.right.equalTo(selectTimeModalView.endAfternoon.snp.left).offset(-self.view.frame.width/41.6)
+            make.width.equalToSuperview().dividedBy(12.6)
+            make.top.bottom.equalTo(selectTimeModalView.endAfternoon)
+
+            selectTimeModalView.endSelectBackButton.layer.cornerRadius = ((self.view.frame.height/3.2)/19)/2
+        }
+        
+        selectTimeModalView.isHidden = false
+    }
     
     func calendarCollectionViewSetting(){
         calendarCollectionView.delegate = self
         calendarCollectionView.dataSource = self
         calendarCollectionView.bounces = false
+        
         calendarCollectionView.register(CalendarCollectionViewCell.self, forCellWithReuseIdentifier: CalendarCollectionViewCell.reuseId)
-        
-        calendarCollectionView.decelerationRate = UIScrollView.DecelerationRate.normal
-        
     }
     
     func calendarModalViewSetting(){
@@ -206,6 +313,10 @@ class RescheduleViewController: UIViewController {
         calendarModalView.modalBackgroundView.addSubview(calendarModalView.monthLabel)
         calendarModalView.modalBackgroundView.addSubview(calendarModalView.monthYearLabel)
         calendarModalView.modalBackgroundView.addSubview(calendarModalView.calendarTriangleImageView)
+        calendarModalView.modalBackgroundView.addSubview(calendarAddButton)
+        
+        calendarAddButton.addTarget(self,action:#selector(calendarAddButtonClicked(sender:)),
+                                 for:.touchUpInside)
         
         calendarModalView.snp.makeConstraints { make in
             make.bottom.top.right.left.equalToSuperview()
@@ -218,7 +329,7 @@ class RescheduleViewController: UIViewController {
         calendarModalView.modalBackgroundView.snp.makeConstraints { make in
             make.centerX.centerY.equalToSuperview()
             make.width.equalToSuperview().dividedBy(1.2)
-            make.height.equalToSuperview().dividedBy(3.3)
+            make.height.equalToSuperview().dividedBy(3.2)
         }
         
         calendarModalView.titleLabel.snp.makeConstraints { make in
@@ -236,20 +347,27 @@ class RescheduleViewController: UIViewController {
             make.left.equalTo(calendarModalView.monthLabel.snp.right).offset(self.view.frame.height/161.2)
         }
         
-        calendarCollectionView.snp.makeConstraints { (make) in
-            make.left.equalTo(calendarModalView.modalBackgroundView).offset(self.view.frame.width/10.4)
-            make.centerX.equalToSuperview()
-            make.top.equalTo(calendarModalView.monthLabel.snp.bottom).offset(self.view.frame.height/31.2)
-            make.height.equalToSuperview().dividedBy(4.7)
-        }
-        
         calendarModalView.calendarTriangleImageView.snp.makeConstraints { make in
-            make.bottom.equalTo(calendarCollectionView.snp.top).offset(-self.view.frame.height/61.2)
+            make.top.equalTo(calendarModalView.monthLabel.snp.bottom).offset(self.view.frame.height/51)
             make.height.width.equalTo(10)
             make.centerX.equalToSuperview()
         }
         
-        calendarModalView.isHidden = false
+        calendarCollectionView.snp.makeConstraints { (make) in
+            make.left.equalTo(calendarModalView.modalBackgroundView).offset(self.view.frame.width/10.4)
+            make.centerX.equalToSuperview()
+            make.top.equalTo(calendarModalView.calendarTriangleImageView.snp.bottom).offset(self.view.frame.height/61.2)
+            make.height.equalToSuperview().dividedBy(4.7)
+        }
+        
+        calendarAddButton.snp.makeConstraints { make in
+            make.top.equalTo(calendarCollectionView.snp.bottom).offset(self.view.frame.height/57.7)
+            make.width.equalToSuperview().dividedBy(4.7)
+            make.height.equalToSuperview().dividedBy(8.3)
+            make.right.equalTo(calendarCollectionView)
+        }
+        
+        calendarModalView.isHidden = true
     }
 
     
@@ -321,34 +439,28 @@ class RescheduleViewController: UIViewController {
     
     func tagColorCollectionViewSetting(){
         
-        tagColorCollectionView?.dataSource = self
-        tagColorCollectionView?.delegate = self
-        
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(_:)), name:UIResponder.keyboardWillShowNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide(_:)), name: UIResponder.keyboardWillHideNotification, object: nil)
         
-        let layout: UICollectionViewFlowLayout = UICollectionViewFlowLayout()
-        layout.itemSize = CGSize(width: 30, height: 30)
-        layout.sectionInset = UIEdgeInsets(top: 0, left: self.view.frame.height/33.8, bottom: 0, right: self.view.frame.height/33.8)
-        layout.scrollDirection = .horizontal
+
+
+        tagColorCollectionView.showsHorizontalScrollIndicator = false
+        tagColorCollectionView.dataSource = self
+        tagColorCollectionView.delegate = self
         
-        let myCollectionView: UICollectionView = UICollectionView(frame: self.view.frame, collectionViewLayout: layout)
+        tagColorCollectionView.register(TagColorCollectionViewCell.self, forCellWithReuseIdentifier: TagColorCollectionViewCell.reuseId)
         
-        myCollectionView.showsHorizontalScrollIndicator = false
-        myCollectionView.dataSource = self
-        myCollectionView.delegate = self
-        myCollectionView.register(TagColorCollectionViewCell.self, forCellWithReuseIdentifier: TagColorCollectionViewCell.reuseId)
-        myCollectionView.backgroundColor = UIColor.white
-        tagAddModalView.modalBackgroundView.addSubview(myCollectionView)
+        tagColorCollectionView.backgroundColor = UIColor.white
+        tagAddModalView.modalBackgroundView.addSubview(tagColorCollectionView)
         
-        myCollectionView.snp.makeConstraints { make in
+            tagColorCollectionView.snp.makeConstraints { make in
             make.top.equalTo(tagAddModalView.tagColorLabel.snp.bottom)
             make.left.equalToSuperview()
             make.height.equalTo(tagAddModalView.modalBackgroundView).dividedBy(5)
             make.right.equalTo(tagAddModalView.modalBackgroundView)
         }
         
-        let firstCell = tagColorCollectionView?.cellForItem(at: [0, 0]) as? TagColorCollectionViewCell
+        let firstCell = tagColorCollectionView.cellForItem(at: [0, 0]) as? TagColorCollectionViewCell
         
         firstCell?.checkImage.isHidden = false
     }
@@ -376,7 +488,11 @@ class RescheduleViewController: UIViewController {
     
     @objc func tagAddButtonClicked(sender:UIButton){
         tagAddModalView.isHidden = false
-        tagColorCollectionView?.isHidden = false
+        tagColorCollectionView.isHidden = false
+    }
+    
+    @objc func calendarAddButtonClicked(sender:UIButton){
+        calendarModalView.isHidden = true
     }
     
     @objc func tagbuttonClicked(sender:UIButton)
@@ -425,15 +541,15 @@ class RescheduleViewController: UIViewController {
         }
     }
     
-    @objc func calendarLabelButtonClicked(sender:UIButton){
+    @objc func calendarViewButtonClicked(sender:UIButton){
+        calendarModalView.isHidden = false
+    }
+    
+    @objc func timeViewButtonClicked(sender:UIButton){
         
     }
     
-    @objc func timeLabelButtonClicked(sender:UIButton){
-        
-    }
-    
-    @objc func locationLabelButtonClicked(sender:UIButton){
+    @objc func locationViewButtonClicked(sender:UIButton){
         
     }
     
@@ -456,11 +572,12 @@ class RescheduleViewController: UIViewController {
         tagMajorBandButton.tag = 2
         tagFreedomBandButton.tag = 3
         
-        calendarLabelButton.addTarget(self,action:#selector(calendarLabelButtonClicked(sender:)),
+        
+        calendarLabelButton.addTarget(self,action:#selector(calendarViewButtonClicked(sender:)),
                                  for:.touchUpInside)
-        timeLabelButton.addTarget(self,action:#selector(timeLabelButtonClicked(sender:)),
+        timeLabelButton.addTarget(self,action:#selector(timeViewButtonClicked(sender:)),
                                  for:.touchUpInside)
-        locationLabelButton.addTarget(self,action:#selector(locationLabelButtonClicked(sender:)),
+        locationLabelButton.addTarget(self,action:#selector(locationViewButtonClicked(sender:)),
                                  for:.touchUpInside)
         
         tagStudyButton.addTarget(self,action:#selector(tagbuttonClicked),
@@ -514,73 +631,79 @@ class RescheduleViewController: UIViewController {
 
     
     func calendarViewSetting(){
-        self.view.addSubview(calendarView)
-        calendarView.addSubview(calendarView.backgroundView)
-        calendarView.backgroundView.addSubview(calendarView.iconImageView)
+        self.view.addSubview(calendarViewButton)
+        calendarViewButton.addSubview(calendarViewButton.backgroundView)
+        calendarViewButton.backgroundView.addSubview(calendarViewButton.iconImageButton)
         
-        calendarView.dataSetting(iconImage: UIImage(named: "EZY_Calendar.svg")!)
+        calendarViewButton.dataSetting(iconImage: UIImage(named: "EZY_Calendar.svg")!)
         
-        calendarView.snp.makeConstraints { make in
+        calendarViewButton.addTarget(self, action: #selector(calendarViewButtonClicked(sender:)), for: .touchUpInside)
+        calendarViewButton.iconImageButton.addTarget(self, action: #selector(calendarViewButtonClicked(sender:)), for: .touchUpInside)
+        
+        calendarViewButton.snp.makeConstraints { make in
             make.top.equalTo(titleBackgroundView.snp.bottom).offset(self.view.frame.height/30)
             make.height.equalToSuperview().dividedBy(16)
-            make.width.equalTo(calendarView.snp.height)
+            make.width.equalTo(calendarViewButton.snp.height)
             make.left.equalTo(titleBackgroundView)
         }
         
-        calendarView.backgroundView.snp.makeConstraints { make in
+        calendarViewButton.backgroundView.snp.makeConstraints { make in
             make.top.left.bottom.right.equalToSuperview()
         }
         
-        calendarView.iconImageView.snp.makeConstraints { make in
+        calendarViewButton.iconImageButton.snp.makeConstraints { make in
             make.centerX.centerY.equalToSuperview()
             make.height.width.equalToSuperview().dividedBy(2.4)
         }
     }
     
-    
     func timeViewSetting(){
-        self.view.addSubview(timeView)
-        timeView.addSubview(timeView.backgroundView)
-        timeView.backgroundView.addSubview(timeView.iconImageView)
+        self.view.addSubview(timeViewButton)
+        timeViewButton.addSubview(timeViewButton.backgroundView)
+        timeViewButton.backgroundView.addSubview(timeViewButton.iconImageButton)
         
-        timeView.dataSetting(iconImage: UIImage(named: "EZY_TimeSquare.svg")!)
+        timeViewButton.addTarget(self, action: #selector(timeViewButtonClicked(sender:)), for: .touchUpInside)
         
-        timeView.snp.makeConstraints { make in
-            make.top.equalTo(calendarView.snp.bottom).offset(self.view.frame.height/47.7)
+        timeViewButton.dataSetting(iconImage: UIImage(named: "EZY_TimeSquare.svg")!)
+        
+        timeViewButton.snp.makeConstraints { make in
+            make.top.equalTo(calendarViewButton.snp.bottom).offset(self.view.frame.height/47.7)
             make.height.equalToSuperview().dividedBy(16)
-            make.width.equalTo(timeView.snp.height)
-            make.left.equalTo(calendarView)
+            make.width.equalTo(timeViewButton.snp.height)
+            make.left.equalTo(calendarViewButton)
         }
         
-        timeView.backgroundView.snp.makeConstraints { make in
+        timeViewButton.backgroundView.snp.makeConstraints { make in
             make.top.left.bottom.right.equalToSuperview()
         }
         
-        timeView.iconImageView.snp.makeConstraints { make in
+        timeViewButton.iconImageButton.snp.makeConstraints { make in
             make.centerX.centerY.equalToSuperview()
             make.height.width.equalToSuperview().dividedBy(2.4)
         }
     }
     
     func locationViewSetting(){
-        self.view.addSubview(locationView)
-        locationView.addSubview(locationView.backgroundView)
-        locationView.backgroundView.addSubview(locationView.iconImageView)
+        self.view.addSubview(locationViewButton)
+        locationViewButton.addSubview(locationViewButton.backgroundView)
+        locationViewButton.backgroundView.addSubview(locationViewButton.iconImageButton)
         
-        locationView.dataSetting(iconImage: UIImage(named: "EZY_Location.svg")!)
+        locationViewButton.addTarget(self, action: #selector(locationViewButtonClicked(sender:)), for: .touchUpInside)
         
-        locationView.snp.makeConstraints { make in
-            make.top.equalTo(timeView.snp.bottom).offset(self.view.frame.height/47.7)
+        locationViewButton.dataSetting(iconImage: UIImage(named: "EZY_Location.svg")!)
+        
+        locationViewButton.snp.makeConstraints { make in
+            make.top.equalTo(timeViewButton.snp.bottom).offset(self.view.frame.height/47.7)
             make.height.equalToSuperview().dividedBy(16)
-            make.width.equalTo(timeView.snp.height)
-            make.left.equalTo(timeView)
+            make.width.equalTo(timeViewButton.snp.height)
+            make.left.equalTo(timeViewButton)
         }
         
-        locationView.backgroundView.snp.makeConstraints { make in
+        locationViewButton.backgroundView.snp.makeConstraints { make in
             make.top.left.bottom.right.equalToSuperview()
         }
         
-        locationView.iconImageView.snp.makeConstraints { make in
+        locationViewButton.iconImageButton.snp.makeConstraints { make in
             make.centerX.centerY.equalToSuperview()
             make.height.width.equalToSuperview().dividedBy(2)
         }
@@ -589,7 +712,7 @@ class RescheduleViewController: UIViewController {
             make.centerX.equalToSuperview()
             make.left.equalTo(titleBackgroundView)
             make.height.equalToSuperview().dividedBy(12)
-            make.top.equalTo(locationView.snp.bottom).offset(self.view.frame.height/30)
+            make.top.equalTo(locationViewButton.snp.bottom).offset(self.view.frame.height/30)
         }
         
         tagLabel.snp.makeConstraints { make in
@@ -660,18 +783,18 @@ class RescheduleViewController: UIViewController {
     
     func labelSetting(){
         calendarLabelButton.snp.makeConstraints { make in
-            make.centerY.equalTo(calendarView)
-            make.left.equalTo(calendarView.snp.right).offset(self.view.frame.width/13.8)
+            make.centerY.equalTo(calendarViewButton)
+            make.left.equalTo(calendarViewButton.snp.right).offset(self.view.frame.width/13.8)
         }
         
         timeLabelButton.snp.makeConstraints { make in
-            make.centerY.equalTo(timeView)
-            make.left.equalTo(timeView.snp.right).offset(self.view.frame.width/13.8)
+            make.centerY.equalTo(timeViewButton)
+            make.left.equalTo(timeViewButton.snp.right).offset(self.view.frame.width/13.8)
         }
         
         locationLabelButton.snp.makeConstraints { make in
-            make.centerY.equalTo(locationView)
-            make.left.equalTo(locationView.snp.right).offset(self.view.frame.width/13.8)
+            make.centerY.equalTo(locationViewButton)
+            make.left.equalTo(locationViewButton.snp.right).offset(self.view.frame.width/13.8)
         }
     }
     
@@ -692,6 +815,8 @@ extension RescheduleViewController: UICollectionViewDataSource, UICollectionView
         if collectionView == tagColorCollectionView{
             let myCell = collectionView.dequeueReusableCell(withReuseIdentifier: TagColorCollectionViewCell.reuseId, for: indexPath) as! TagColorCollectionViewCell
             
+            myCell.backgroundColor = .white
+            
             myCell.setModel(models[indexPath.row])
         
             return myCell
@@ -710,27 +835,38 @@ extension RescheduleViewController: UICollectionViewDataSource, UICollectionView
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath)
     {
-
-        if models[indexPath.row].isSelected {
-            
-            models[preciousSelectedIndex].isSelected.toggle()
-            
-            if models.filter({ $0.isSelected }).count >= 1 {
-                models[indexPath.row].isSelected.toggle()
+        if collectionView == tagColorCollectionView{
+            if models[indexPath.row].isSelected {
                 
-                preciousSelectedIndex = indexPath.row
+                models[preciousSelectedIndex].isSelected.toggle()
+                
+                if models.filter({ $0.isSelected }).count >= 1 {
+                    models[indexPath.row].isSelected.toggle()
+                    
+                    preciousSelectedIndex = indexPath.row
+                }
             }
+            collectionView.reloadData()
         }
-        collectionView.reloadData()
         
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         if collectionView == calendarCollectionView{
             return CGSize(width: collectionView.frame.width/10, height: self.view.frame.height/14)
+        }else if collectionView == tagColorCollectionView{
+            return CGSize(width: 30, height: 30)
         }
 
         return CGSize()
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
+        if collectionView == tagColorCollectionView{
+            return UIEdgeInsets(top: 0, left: self.view.frame.height/33.8, bottom: 0, right: self.view.frame.height/33.8)
+        }
+        
+        return UIEdgeInsets()
     }
 }
 

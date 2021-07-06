@@ -44,7 +44,6 @@ class TagColorCollectionViewCell: UICollectionViewCell {
     func layoutSetting(){
         contentView.addSubview(colorBackgroundView)
         colorBackgroundView.addSubview(checkImage)
-        
         colorBackgroundView.snp.makeConstraints { make in
             make.top.right.bottom.left.equalToSuperview()
             
