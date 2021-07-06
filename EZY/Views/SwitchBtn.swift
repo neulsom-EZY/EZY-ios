@@ -10,10 +10,15 @@ import SnapKit
 import Then
 
 class SwitchBtn : UIButton,sendSwitch{
-   
-    func State(data: Bool) {
+    func State(data: Bool?) {
         self.switchState = data
+
     }
+    
+  
+    
+   
+
     
     lazy var backview = UIView().then{
         $0.backgroundColor = .EZY_AFADFF
@@ -21,12 +26,13 @@ class SwitchBtn : UIButton,sendSwitch{
     lazy var titleBtnView  = UIView().then{
         $0.backgroundColor = .white
     }
-    var switchState : Bool! = false
+    var switchState : Bool? = false
+    var switchStates : sendSwitch? 
     
     override init(frame: CGRect) {
         super.init(frame: frame)
         configureUI()
-        
+
     }
   
     func configureUI(){
@@ -51,7 +57,7 @@ class SwitchBtn : UIButton,sendSwitch{
    
     func animationstate(){
         
-        if (switchState)
+        if (switchState!)
         {
             animateOn()
         }else{
@@ -90,9 +96,7 @@ class SwitchBtn : UIButton,sendSwitch{
             self.titleBtnView.layoutIfNeeded()
         })
     }
-    func dataSwitch(switchState: Bool) {
-        self.switchState = switchState
-    }
+
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }

@@ -7,7 +7,8 @@
 
 import Foundation
 
-protocol HeaderViewProtocol {
-    associatedtype Content
-    func setHeader(data: Content)
+protocol sendSwitch{
+    func State(data: Bool?)
+
 }
+

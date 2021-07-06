@@ -8,35 +8,40 @@
 import UIKit
 import SnapKit
 import Then
-protocol sendSwitch: AnyObject{
-    func State(data: Bool)
-}
+
 class CustomManagePushNotificationCell: UITableViewCell {
     
     //MARK: - Properties
     static let identifier = "ManagePushNotificationCell"
+    
+
     var delegate : sendSwitch?
     var switchState : Bool? = true
+    
     let view  = UIView().then{
         $0.backgroundColor = .clear
     }
+    
+
     let title = UILabel().then{
         $0.translatesAutoresizingMaskIntoConstraints = false
         $0.dynamicFont(fontSize: 14, weight: .regular)
         $0.textColor = .EZY_656565
     }
-    let explanation = UILabel().then{
+     let explanation = UILabel().then{
         $0.translatesAutoresizingMaskIntoConstraints = false
         $0.dynamicFont(fontSize: 8, weight: .regular)
         $0.textColor = .EZY_CDCDCD
     }
+    
     private let divider = UIView().then{
         $0.backgroundColor = .EZY_DEDEDE
     }
-    private lazy var switchPushManage = SwitchBtn().then {
-        $0.addTarget(self, action: #selector(SwitchMoveButton), for: .touchUpInside)
-        
-    }
+    private lazy var switchPushManage : SwitchBtn = {
+        let button = SwitchBtn()
+        button.addTarget(self, action: #selector(SwitchMoveButton), for: .touchUpInside)
+        return button
+    }()
     
     //MARK: - Lifecycle
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
@@ -44,21 +49,24 @@ class CustomManagePushNotificationCell: UITableViewCell {
         addContentView()
         location()
     }
-    
+
     //MARK: - Selctors
     @objc func SwitchMoveButton(){
         if (switchState!) {
             backgroundColor = .red
             self.delegate?.State(data: switchState!)
+            
             switchState = false
         }else{
             backgroundColor = .cyan
             self.delegate?.State(data: switchState!)
             switchState = true
         }
+  
     }
     
-    //MARK: - Helpers
+    
+    //MARK: - HELPERs
     func addContentView(){
         contentView.addSubview(view)
         view.addSubview(title)
@@ -68,9 +76,11 @@ class CustomManagePushNotificationCell: UITableViewCell {
     }
 
     private func location(){
+
         view.snp.makeConstraints { (make) in
             make.height.equalTo(frame.height/1.706)
             make.centerY.equalTo(snp.centerY)
+            
         }
         title.snp.makeConstraints { (make) in
             make.top.equalTo(view.snp.top)
@@ -80,6 +90,7 @@ class CustomManagePushNotificationCell: UITableViewCell {
             make.top.equalTo(title.snp.bottom).offset(frame.height/11.6)
             make.left.equalTo(view.snp.left).offset(contentView.frame.height/58)
         }
+        
         switchPushManage.snp.makeConstraints { (make) in
             make.centerY.equalTo(snp.centerY)
             make.right.equalTo(contentView.snp.right)
@@ -93,6 +104,7 @@ class CustomManagePushNotificationCell: UITableViewCell {
         }
     }
     
+
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
