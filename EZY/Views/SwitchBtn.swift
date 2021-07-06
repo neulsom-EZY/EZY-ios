@@ -12,14 +12,9 @@ import Then
 class SwitchBtn : UIButton,sendSwitch{
     func State(data: Bool?) {
         self.switchState = data
-
+        
     }
-    
-  
-    
-   
 
-    
     lazy var backview = UIView().then{
         $0.backgroundColor = .EZY_AFADFF
     }
@@ -27,7 +22,7 @@ class SwitchBtn : UIButton,sendSwitch{
         $0.backgroundColor = .white
     }
     var switchState : Bool? = false
-    var switchStates : sendSwitch? 
+    var switchStates : sendSwitch?
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -96,6 +91,8 @@ class SwitchBtn : UIButton,sendSwitch{
             self.titleBtnView.layoutIfNeeded()
         })
     }
+
+
 
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")

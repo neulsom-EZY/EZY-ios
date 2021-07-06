@@ -7,8 +7,8 @@
 
 import Foundation
 
-protocol sendSwitch{
+protocol sendSwitch: class{
     func State(data: Bool?)
-
+    
 }
 
