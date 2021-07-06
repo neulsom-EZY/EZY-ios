@@ -11,7 +11,6 @@ import Then
 
 class SwitchBtn : UIButton,sendSwitch{
     
-    
     lazy var backview = UIView().then{
         $0.backgroundColor = .EZY_AFADFF
     }
@@ -19,7 +18,6 @@ class SwitchBtn : UIButton,sendSwitch{
         $0.backgroundColor = .white
     }
     var switchState : Bool? 
-    var switchStates : sendSwitch?
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -60,9 +58,7 @@ class SwitchBtn : UIButton,sendSwitch{
         }else{
             animateOff()
         }
-
     }
-
     
     func animateOn(){
         self.titleBtnView.snp.makeConstraints { (make) in
@@ -87,6 +83,7 @@ class SwitchBtn : UIButton,sendSwitch{
             self.titleBtnView.layoutIfNeeded()
         })
     }
+    
     func State(data: Bool?) {
         self.switchState = data
     }
