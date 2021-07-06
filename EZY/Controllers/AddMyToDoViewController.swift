@@ -12,7 +12,7 @@ import Alamofire
 
 
 class AddMyToDoViewController:UIViewController{
-    var list : [String?] = []
+    var list = ["1", "3", "4" ,"5", "6", "7", "8", "9", "10"]
     //MARK: - Properties
     private let backbutton = UIButton().then{
         $0.tintColor = .EZY_BAC8FF
@@ -97,6 +97,8 @@ class AddMyToDoViewController:UIViewController{
     override func viewDidLoad() {
         super.viewDidLoad()
         configureUI()
+        self.collectionView?.delegate = self
+        self.collectionView?.dataSource = self
     }
     
     //MARK: - Selectors
