@@ -26,7 +26,7 @@ class SwitchBtn : UIButton,sendSwitch{
     override init(frame: CGRect) {
         super.init(frame: frame)
         configureUI()
-
+        
     }
   
     func configureUI(){
