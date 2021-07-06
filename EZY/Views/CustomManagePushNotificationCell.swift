@@ -20,7 +20,7 @@ class CustomManagePushNotificationCell: UITableViewCell {
     let view  = UIView().then{
         $0.backgroundColor = .clear
     }
-    
+    var switchbtn = SwitchBtn()
 
     let title = UILabel().then{
         $0.translatesAutoresizingMaskIntoConstraints = false

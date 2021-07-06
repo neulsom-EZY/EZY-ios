@@ -10,18 +10,15 @@ import SnapKit
 import Then
 
 class SwitchBtn : UIButton,sendSwitch{
-    func State(data: Bool?) {
-        self.switchState = data
-        
-    }
-
+    
+    
     lazy var backview = UIView().then{
         $0.backgroundColor = .EZY_AFADFF
     }
     lazy var titleBtnView  = UIView().then{
         $0.backgroundColor = .white
     }
-    var switchState : Bool? = false
+    var switchState : Bool? 
     var switchStates : sendSwitch?
     
     override init(frame: CGRect) {
@@ -33,7 +30,6 @@ class SwitchBtn : UIButton,sendSwitch{
     func configureUI(){
         addSubview(backview)
         backview.addSubview(titleBtnView)
-        
     }
     
     override func layoutSubviews() {
@@ -51,20 +47,20 @@ class SwitchBtn : UIButton,sendSwitch{
 
    
     func animationstate(){
+//        if (switchState!)
+//        {
+//            animateOn()
+//
+//        }else{
+//            animateOff()
+//        }
         
-        if (switchState!)
-        {
+        if let _ = switchState{
             animateOn()
         }else{
             animateOff()
         }
-        
-//        if let _ = switchState{
-//            animateOn()
-//        }else{
-//            animateOff()
-//        }
-//
+
     }
 
     
@@ -91,7 +87,9 @@ class SwitchBtn : UIButton,sendSwitch{
             self.titleBtnView.layoutIfNeeded()
         })
     }
-
+    func State(data: Bool?) {
+        self.switchState = data
+    }
 
 
     required init?(coder: NSCoder) {

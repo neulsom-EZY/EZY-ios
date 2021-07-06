@@ -262,8 +262,6 @@ extension PersonalCalendarViewController : UITableViewDataSource{
         let cell = tableView.dequeueReusableCell(withIdentifier: CustomManagePushNotificationCell.identifier, for: indexPath) as! CustomManagePushNotificationCell
         cell.title.text = titleNotification[indexPath.row]
         cell.explanation.text = explanation[indexPath.row]
-        cell.delegate?.State(data: cell.switchState)
-        
         return cell
     }
 }
@@ -276,11 +274,8 @@ extension TeamCalendarViewController : UITableViewDataSource{
         let cell = tableView.dequeueReusableCell(withIdentifier: CustomManagePushNotificationCell.identifier, for: indexPath) as! CustomManagePushNotificationCell
         cell.title.text = titleNotification[indexPath.row]
         cell.explanation.text = explanation[indexPath.row]
-        cell.delegate?.State(data: cell.switchState)
-        
         return cell
     }
-
 }
 
 extension ErrandCalendarViewController : UITableViewDataSource{
@@ -291,8 +286,6 @@ extension ErrandCalendarViewController : UITableViewDataSource{
         let cell = tableView.dequeueReusableCell(withIdentifier: CustomManagePushNotificationCell.identifier, for: indexPath) as! CustomManagePushNotificationCell
         cell.title.text = titleNotification[indexPath.row]
         cell.explanation.text = explanation[indexPath.row]
-        cell.delegate?.State(data: cell.switchState)
-        
         return cell
     }
 }
