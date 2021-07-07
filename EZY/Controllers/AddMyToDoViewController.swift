@@ -100,8 +100,7 @@ class AddMyToDoViewController:UIViewController{
     override func viewDidLoad() {
         super.viewDidLoad()
         configureUI()
-        collectionView.delegate = self
-         collectionView.dataSource = self
+        collectionViewSetting()
     }
 
     
@@ -138,7 +137,28 @@ class AddMyToDoViewController:UIViewController{
         cornerRadius()
         location()
     }
-    
+    func collectionViewSetting(){
+        let layout = UICollectionViewFlowLayout()
+        layout.scrollDirection = .vertical
+        collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
+        guard let collectionView = collectionView else{
+            return
+        }
+        collectionView.register(UICollectionViewCell.self, forCellWithReuseIdentifier: AddMyToDoCollectionViewCell.identifier)
+        collectionView.dataSource = self
+        collectionView.delegate=self
+        collectionView.backgroundColor = .white
+        collectionView.frame = view.bounds
+        
+        view.addSubview(collectionView)
+        collectionView.snp.makeConstraints { (make) in
+            make.height.width.equalTo(view.frame.height/2)
+            make.right.equalTo(view.snp.right).offset(view.frame.height/13.096 * -1)
+            make.left.equalTo(view.snp.left).offset(view.frame.height/27.06 )
+            make.height.equalTo(view.frame.height/10.545)
+            make.top.equalTo(kindOfCollectionView.snp.bottom).offset(view.frame.height/73.8)
+        }
+    }
     
     func addView(){
         view.addSubview(backbutton)
@@ -151,11 +171,13 @@ class AddMyToDoViewController:UIViewController{
         view.addSubview(kindOfCollectionView)
         view.addSubview(addButton)
     }
+    
     func cornerRadius(){
         titleContainerView.layer.cornerRadius = view.frame.height/40.6
         addButton.layer.cornerRadius = view.frame.height/81.2
         explanationContainerView.layer.cornerRadius = view.frame.height/40.6
     }
+    
     func location(){
         backbutton.snp.makeConstraints { (make) in
             make.height.width.equalTo(self.view.frame.height/33.8)
@@ -212,18 +234,9 @@ class AddMyToDoViewController:UIViewController{
         }
     }
 }
-extension AddMyToDoViewController : UICollectionViewDelegate,UICollectionViewDataSource{
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 2
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: AddMyToDoCollectionViewCell.identifier, for: indexPath)
-        return cell
-    }
-    
 
-}
+
+
 
 #if DEBUG
 import SwiftUI

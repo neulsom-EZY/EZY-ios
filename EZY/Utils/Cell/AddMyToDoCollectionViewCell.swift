@@ -14,7 +14,7 @@ class AddMyToDoCollectionViewCell: UICollectionViewCell {
   
     static let identifier = "AddMyToDoCollectionViewCell"
     private let button =  UIButton().then  {
-        $0.backgroundColor = .red
+        $0.backgroundColor = .white
     }
     
     override init(frame: CGRect) {
