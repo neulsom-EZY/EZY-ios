@@ -16,6 +16,7 @@ class AddMyToDoViewController:UIViewController{
     private let cellReuseIdentifier = "collectionCell"
 
     var list = ["1", "3", "4" ,"5", "6", "7", "8", "9", "10"]
+    var btnColor : [UIColor] = [.EZY_FFCDB8,.EZY_BADEFF,.EZY_CFE3CE,.EZY_E4C9FF]
     //MARK: - Properties
     private let backbutton = UIButton().then{
         $0.tintColor = .EZY_BAC8FF
@@ -137,6 +138,7 @@ class AddMyToDoViewController:UIViewController{
         cornerRadius()
         location()
     }
+    
     func collectionViewSetting(){
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .vertical
@@ -151,6 +153,7 @@ class AddMyToDoViewController:UIViewController{
         collectionView.frame = view.bounds
         
         view.addSubview(collectionView)
+        
         collectionView.snp.makeConstraints { (make) in
             make.height.width.equalTo(view.frame.height/2)
             make.right.equalTo(view.snp.right).offset(view.frame.height/13.096 * -1)

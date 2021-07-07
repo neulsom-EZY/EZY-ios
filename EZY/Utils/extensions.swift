@@ -240,15 +240,23 @@ func applySketchShadow(color: UIColor = .black,alpha: Float = 0.5,x:CGFloat,y:CG
 }
 extension AddMyToDoViewController : UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout{
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 11
+        return 3
         
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: AddMyToDoCollectionViewCell.identifier, for: indexPath)
-        cell.contentView.backgroundColor = .red
+        cell.contentView.backgroundColor = .white
+        cell.contentView.layer.borderWidth = 1.0
+        cell.contentView.layer.borderColor = btnColor[indexPath.row].cgColor
+        cell.contentView.layer.cornerRadius = cell.contentView.frame.height/2
+        
         return cell
+        
+        
     }
+
+    
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
         return view.frame.height/62.46
     }
@@ -260,6 +268,67 @@ extension AddMyToDoViewController : UICollectionViewDelegate,UICollectionViewDat
         let height = view.frame.height/25.375
         return CGSize(width: width, height: height)
     }
-
+//    func collectionView(_ collectionView: UICollectionView, shouldSelectItemAt indexPath: IndexPath) -> Bool {
+//        guard let cell = collectionView.cellForItem(at: indexPath) as? AddMyToDoCollectionViewCell else {
+//                  return true
+//              }
+//              if cell.isSelected {
+//                  collectionView.deselectItem(at: indexPath, animated: true)
+//                  return false
+//              } else {
+//                  return true
+//              }
+//    }
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        print("GotClicked!")
+    }
 }
+
+
+extension AddOurToDoViewController : UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout{
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return 3
+        
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: AddMyToDoCollectionViewCell.identifier, for: indexPath)
+        cell.contentView.backgroundColor = .white
+        cell.contentView.layer.borderWidth = 1.0
+        cell.contentView.layer.borderColor = UIColor.black.cgColor
+        cell.contentView.layer.cornerRadius = cell.contentView.frame.height/2
+        
+        return cell
+        
+        
+    }
+
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
+        return view.frame.height/62.46
+    }
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
+        return view.frame.height/100
+    }
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        let width = view.frame.height/9.658
+        let height = view.frame.height/25.375
+        return CGSize(width: width, height: height)
+    }
+//    func collectionView(_ collectionView: UICollectionView, shouldSelectItemAt indexPath: IndexPath) -> Bool {
+//        guard let cell = collectionView.cellForItem(at: indexPath) as? AddMyToDoCollectionViewCell else {
+//                  return true
+//              }
+//              if cell.isSelected {
+//                  collectionView.deselectItem(at: indexPath, animated: true)
+//                  return false
+//              } else {
+//                  return true
+//              }
+//    }
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        print("GotClicked!")
+    }
+}
+
 
