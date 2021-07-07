@@ -12,6 +12,9 @@ import Alamofire
 
 
 class AddMyToDoViewController:UIViewController{
+    
+    private let cellReuseIdentifier = "collectionCell"
+
     var list = ["1", "3", "4" ,"5", "6", "7", "8", "9", "10"]
     //MARK: - Properties
     private let backbutton = UIButton().then{
@@ -78,7 +81,7 @@ class AddMyToDoViewController:UIViewController{
         $0.dynamicFont(fontSize: 12, weight: .bold)
     }
     
-    private var collectionView: UICollectionView?
+    private var collectionView : UICollectionView?
 
 
     
@@ -97,9 +100,10 @@ class AddMyToDoViewController:UIViewController{
     override func viewDidLoad() {
         super.viewDidLoad()
         configureUI()
-        self.collectionView?.delegate = self
-        self.collectionView?.dataSource = self
+        collectionView.delegate = self
+         collectionView.dataSource = self
     }
+
     
     //MARK: - Selectors
     
@@ -199,6 +203,7 @@ class AddMyToDoViewController:UIViewController{
             make.left.equalTo(backbutton.snp.left)
             make.top.equalTo(explanationContainerView.snp.bottom).offset(view.frame.height/38.6)
         }
+
         addButton.snp.makeConstraints { (make) in
             make.bottom.equalToSuperview().offset(view.frame.height/10.9 * -1)
             make.height.equalTo(self.view.frame.height/18.0)
@@ -207,6 +212,19 @@ class AddMyToDoViewController:UIViewController{
         }
     }
 }
+extension AddMyToDoViewController : UICollectionViewDelegate,UICollectionViewDataSource{
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return 2
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: AddMyToDoCollectionViewCell.identifier, for: indexPath)
+        return cell
+    }
+    
+
+}
+
 #if DEBUG
 import SwiftUI
 struct LoginViewControllerRepresentable: UIViewControllerRepresentable {
