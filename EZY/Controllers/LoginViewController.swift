@@ -9,6 +9,8 @@ import UIKit
 import SnapKit
 import Then
 
+// merge test
+
 class LoginViewController: UIViewController{
     //MARK: - Properties
     
