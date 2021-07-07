@@ -34,6 +34,9 @@ class SettingViewController: UIViewController {
     }
     
     func settingtableViewSetting(){
+        settingTableView.delegate = self
+        settingTableView.dataSource = self
+        
         settingTableView.register(SettingTableViewCell.self, forCellReuseIdentifier: SettingTableViewCell.settingTableViewCellIdentifier)
         self.view.addSubview(settingTableView)
         
@@ -49,8 +52,7 @@ class SettingViewController: UIViewController {
         topView.addSubview(topView.backButton)
         topView.addSubview(topView.titleLabel)
 
-        settingTableView.delegate = self
-        settingTableView.dataSource = self
+
         
         topView.topViewDataSetting(backButtonImage: UIImage(named: "EZY_SettingBackButton")!, titleLabelText: "설정",
                                    textColor: UIColor(red: 175/255, green: 173/255, blue: 255/255, alpha: 1))
