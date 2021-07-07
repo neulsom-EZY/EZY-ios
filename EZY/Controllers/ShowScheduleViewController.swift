@@ -295,6 +295,9 @@ extension UILabel {
     case 667.0: //iphone 6, 6s, 7, 8 => 4.7 inch
         self.font = UIFont(name: currentFontName, size: size * 0.92)
       break
+    case 780.0:
+        self.font = UIFont(name:currentFontName, size: size * 0.99)
+        break
     case 736.0: //iphone 6s+ 6+, 7+, 8+ => 5.5 inch
         self.font = UIFont(name: currentFontName, size: size * 0.95)
       break
@@ -306,6 +309,10 @@ extension UILabel {
       break
     case 926.0: //iphone 12 Pro Max
         self.font = UIFont(name:currentFontName, size: size * 1.18)
+        break
+    case 844.0: //iphone 12, 12 Pro
+        self.font = UIFont(name: currentFontName, size: size * 1.1)
+        break
     default:
       print("not an iPhone")
       break
@@ -334,6 +341,12 @@ extension UIButton {
         case 812.0: //iphone X, XS => 5.8 inch
             self.titleLabel!.font = UIFont(name: currentFontName, size: size)
           break
+        case 780.0:
+            self.titleLabel!.font = UIFont(name:currentFontName, size: size * 0.99)
+            break
+        case 844.0: //iphone 12, 12 Pro
+            self.titleLabel!.font = UIFont(name: currentFontName, size: size * 1.1)
+            break
         case 896.0: //iphone XR => 6.1 inch  // iphone XS MAX => 6.5 inch
             self.titleLabel!.font = UIFont(name: currentFontName, size: size * 1.15)
           break

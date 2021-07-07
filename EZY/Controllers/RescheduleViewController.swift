@@ -226,7 +226,7 @@ class RescheduleViewController: UIViewController {
         }
         
         selectTimeModalView.startMorningLabel.snp.makeConstraints { make in
-            make.left.equalToSuperview().offset(self.view.frame.width/7.9)
+            make.left.equalToSuperview().offset(self.view.frame.width/10)
             make.top.equalTo(selectTimeModalView.modalTitleLabel.snp.bottom).offset(self.view.frame.height/28)
             make.height.equalToSuperview().dividedBy(19)
         }
@@ -237,14 +237,14 @@ class RescheduleViewController: UIViewController {
         }
 
         selectTimeModalView.startSelectCircleButton.snp.makeConstraints { make in
-            make.centerX.equalToSuperview()
-            make.left.equalToSuperview().offset(self.view.frame.width/100)
+            make.top.equalTo(selectTimeModalView.startSelectBackButton).offset(selectTimeModalView.startSelectBackButton.frame.height/2)
+            make.left.equalTo(selectTimeModalView.startSelectBackButton).offset(self.view.frame.width/200)
             make.height.width.equalTo(selectTimeModalView.startSelectBackButton.snp.height).dividedBy(1.2)
-
-            selectTimeModalView.startSelectCircleButton.layer.cornerRadius = 10
+            
+            selectTimeModalView.startSelectCircleButton.layer.cornerRadius = ((((self.view.frame.height)/3.2)/19)/1.2)/2
         }
         
-        selectTimeModalView.startSelectBar.snp.makeConstraints { make in
+        selectTimeModalView.startSelectBarView.snp.makeConstraints { make in
             make.bottom.equalTo(selectTimeModalView.startMorningLabel)
             make.left.equalTo(selectTimeModalView.startMorningLabel).offset(-self.view.frame.width/100)
             make.right.equalTo(selectTimeModalView.startMorningLabel).offset(self.view.frame.width/100)
@@ -265,12 +265,12 @@ class RescheduleViewController: UIViewController {
         }
 
         selectTimeModalView.endAfternoon.snp.makeConstraints { make in
-            make.right.equalToSuperview().offset(-self.view.frame.width/7.9)
+            make.right.equalToSuperview().offset(-self.view.frame.width/10)
             make.top.equalTo(selectTimeModalView.modalTitleLabel.snp.bottom).offset(self.view.frame.height/28)
             make.height.equalToSuperview().dividedBy(19)
         }
 
-        selectTimeModalView.endSelectBar.snp.makeConstraints { make in
+        selectTimeModalView.endSelectBarView.snp.makeConstraints { make in
             make.bottom.equalTo(selectTimeModalView.endMorningLabel)
             make.left.equalTo(selectTimeModalView.endMorningLabel).offset(-self.view.frame.width/100)
             make.right.equalTo(selectTimeModalView.endMorningLabel).offset(self.view.frame.width/100)
@@ -278,11 +278,11 @@ class RescheduleViewController: UIViewController {
         }
 
         selectTimeModalView.endSelectCircleButton.snp.makeConstraints { make in
-            make.centerX.equalToSuperview()
-            make.left.equalToSuperview().offset(self.view.frame.width/100)
+            make.top.equalTo(selectTimeModalView.endSelectBackButton).offset(selectTimeModalView.startSelectBackButton.frame.height/2)
+            make.left.equalTo(selectTimeModalView.endSelectBackButton).offset(self.view.frame.width/200)
             make.height.width.equalTo(selectTimeModalView.endSelectBackButton.snp.height).dividedBy(1.2)
 
-            selectTimeModalView.endSelectCircleButton.layer.cornerRadius = 10
+            selectTimeModalView.endSelectCircleButton.layer.cornerRadius = ((((self.view.frame.height)/3.2)/19)/1.2)/2
         }
 
         selectTimeModalView.endSelectBackButton.snp.makeConstraints { make in

@@ -56,11 +56,11 @@ class SelectTimeModalView: UIView {
         $0.dynamicFont(fontSize: 12, currentFontName: "AppleSDGothicNeo-Bold")
     }
     
-    lazy var startSelectBar = UIView().then {
+    lazy var startSelectBarView = UIView().then {
         $0.backgroundColor = UIColor(red: 168/255, green: 224/255, blue: 197/255, alpha: 1).withAlphaComponent(0.6)
     }
     
-    lazy var endSelectBar = UIView().then {
+    lazy var endSelectBarView = UIView().then {
         $0.backgroundColor = UIColor(red: 168/255, green: 224/255, blue: 197/255, alpha: 1).withAlphaComponent(0.6)
     }
     
@@ -96,17 +96,17 @@ class SelectTimeModalView: UIView {
         modalBackgroundView.addSubview(modalTitleLabel)
         modalBackgroundView.addSubview(deleteButton)
         
-        modalBackgroundView.addSubview(endSelectBar)
+        modalBackgroundView.addSubview(endSelectBarView)
         modalBackgroundView.addSubview(endMorningLabel)
         modalBackgroundView.addSubview(endAfternoon)
         modalBackgroundView.addSubview(endSelectBackButton)
-        endSelectBackButton.addSubview(endSelectCircleButton)
+        modalBackgroundView.addSubview(endSelectCircleButton)
         
-        modalBackgroundView.addSubview(startSelectBar)
+        modalBackgroundView.addSubview(startSelectBarView)
         modalBackgroundView.addSubview(startMorningLabel)
         modalBackgroundView.addSubview(startAfternoon)
         modalBackgroundView.addSubview(startSelectBackButton)
-        startSelectBackButton.addSubview(startSelectCircleButton)
+        modalBackgroundView.addSubview(startSelectCircleButton)
 
     }
 
