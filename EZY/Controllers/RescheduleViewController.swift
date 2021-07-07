@@ -248,6 +248,13 @@ class RescheduleViewController: UIViewController {
             make.left.right.equalToSuperview()
             make.height.equalToSuperview().dividedBy(7)
         }
+        
+        selectCalendarModalView.calendarAddButton.snp.makeConstraints { make in
+            make.top.equalTo(repeatCollectionView.snp.bottom).offset(self.view.frame.width/43.8)
+            make.right.equalTo(repeatCollectionView).offset(-self.view.frame.width/20.8)
+            make.width.equalToSuperview().dividedBy(4.7)
+            make.height.equalToSuperview().dividedBy(10.4)
+        }
     }
     
     func TimeTableViewSetting(){
@@ -453,10 +460,6 @@ class RescheduleViewController: UIViewController {
             make.height.equalToSuperview().dividedBy(4.7)
         }
         
-        selectCalendarModalView.calendarAddButton.snp.makeConstraints { make in
-
-        }
-        
         selectCalendarModalView.divideLineView.snp.makeConstraints { make in
             make.top.equalTo(calendarCollectionView.snp.bottom)
             make.right.equalToSuperview().offset(-self.view.frame.width/18)
@@ -468,6 +471,8 @@ class RescheduleViewController: UIViewController {
             make.top.equalTo(selectCalendarModalView.divideLineView.snp.bottom).offset(self.view.frame.height/33.8)
             make.left.equalTo(selectCalendarModalView.divideLineView)
         }
+        
+
         
         selectCalendarModalView.isHidden = false
     }
