@@ -7,7 +7,7 @@
 
 import UIKit
 
-class CalendarModalView: UIView {
+class SelectCalendarModalView: UIView {
     
     var pinkColor: UIColor! = UIColor(red: 255/255, green: 148/255, blue: 148/255, alpha: 1)
     var whiteColor: UIColor! = UIColor.white
@@ -44,4 +44,22 @@ class CalendarModalView: UIView {
         $0.dynamicFont(fontSize: 10, currentFontName: "AppleSDGothicNeo-Thin")
         $0.textColor = UIColor.black
     }
+    
+    lazy var divideLineView = UIView().then {
+        $0.backgroundColor = UIColor(red: 233/255, green: 233/255, blue: 233/255, alpha: 1)
+    }
+    
+    lazy var calendarAddButton = UIButton().then{
+        $0.backgroundColor = UIColor(red: 255/255, green: 181/255, blue: 181/255, alpha: 1)
+        $0.setTitle("완료", for: .normal)
+        $0.dynamicFont(fontSize: 12, currentFontName: "AppleSDGothicNeo-Bold")
+        $0.layer.cornerRadius = 10
+    }
+    
+    lazy var repeatLabel = UILabel().then {
+        $0.text = "반복 설정"
+        $0.textColor = UIColor(red: 129/255, green: 129/255, blue: 129/255, alpha: 1)
+        $0.dynamicFont(fontSize: 10, currentFontName: "AppleSDGothicNeo-Thin")
+    }
+    
 }

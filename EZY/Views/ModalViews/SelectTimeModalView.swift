@@ -31,7 +31,7 @@ class SelectTimeModalView: UIView {
         $0.dynamicFont(fontSize: 12, currentFontName: "AppleSDGothicNeo-Thin")
     }
     
-    lazy var startAfternoon = UILabel().then {
+    lazy var startAfternoonLabel = UILabel().then {
         $0.text = "오후"
         $0.textColor = UIColor.black
         $0.dynamicFont(fontSize: 12, currentFontName: "AppleSDGothicNeo-Thin")
@@ -43,7 +43,7 @@ class SelectTimeModalView: UIView {
         $0.dynamicFont(fontSize: 12, currentFontName: "AppleSDGothicNeo-Thin")
     }
     
-    lazy var endAfternoon = UILabel().then {
+    lazy var endAfternoonLabel = UILabel().then {
         $0.text = "오후"
         $0.textColor = UIColor.black
         $0.dynamicFont(fontSize: 12, currentFontName: "AppleSDGothicNeo-Thin")
@@ -80,6 +80,20 @@ class SelectTimeModalView: UIView {
         $0.backgroundColor = UIColor.white
     }
     
+    lazy var waveLabel = UILabel().then {
+        $0.text = "~"
+        $0.dynamicFont(fontSize: 20, currentFontName: "AppleSDGothicNeo-SemiBold")
+        $0.textColor = UIColor(red: 220/255, green: 220/255, blue: 220/255, alpha: 1)
+    }
+    
+    lazy var completeButton = UIButton().then{
+        $0.setTitle("완료", for: .normal)
+        $0.setTitleColor(UIColor.white, for: .normal)
+        $0.backgroundColor = UIColor(red: 168/255, green: 224/255, blue: 197/255, alpha: 1)
+        $0.layer.cornerRadius = 10
+        $0.dynamicFont(fontSize: 12, currentFontName: "AppleSDGothicNeo-Bold")
+    }
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         
@@ -95,16 +109,18 @@ class SelectTimeModalView: UIView {
         backgroundView.addSubview(modalBackgroundView)
         modalBackgroundView.addSubview(modalTitleLabel)
         modalBackgroundView.addSubview(deleteButton)
+        modalBackgroundView.addSubview(waveLabel)
+        modalBackgroundView.addSubview(completeButton)
         
         modalBackgroundView.addSubview(endSelectBarView)
         modalBackgroundView.addSubview(endMorningLabel)
-        modalBackgroundView.addSubview(endAfternoon)
+        modalBackgroundView.addSubview(endAfternoonLabel)
         modalBackgroundView.addSubview(endSelectBackButton)
         modalBackgroundView.addSubview(endSelectCircleButton)
         
         modalBackgroundView.addSubview(startSelectBarView)
         modalBackgroundView.addSubview(startMorningLabel)
-        modalBackgroundView.addSubview(startAfternoon)
+        modalBackgroundView.addSubview(startAfternoonLabel)
         modalBackgroundView.addSubview(startSelectBackButton)
         modalBackgroundView.addSubview(startSelectCircleButton)
 
