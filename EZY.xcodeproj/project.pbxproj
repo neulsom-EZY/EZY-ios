@@ -71,6 +71,7 @@
 		6AE5BB1626969AFD00A9731B /* SelectLocationModalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AE5BB1526969AFD00A9731B /* SelectLocationModalView.swift */; };
 		6AE5BB182696A6C600A9731B /* Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AE5BB172696A6C500A9731B /* Utilities.swift */; };
 		6AE5BB1A2696A6CE00A9731B /* Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AE5BB192696A6CE00A9731B /* Extension.swift */; };
+		6AE5BB1C2696B9C900A9731B /* PlanCompleteModalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AE5BB1B2696B9C900A9731B /* PlanCompleteModalView.swift */; };
 		6AFB77F9267ECD6700B59482 /* WhiteBackgroundView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AFB77F8267ECD6700B59482 /* WhiteBackgroundView.swift */; };
 		6AFB77FE267F343500B59482 /* TagAddModalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AFB77FD267F343500B59482 /* TagAddModalView.swift */; };
 		6AFB7800267F812B00B59482 /* TagColorCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AFB77FF267F812B00B59482 /* TagColorCollectionViewCell.swift */; };
@@ -146,6 +147,7 @@
 		6AE5BB1526969AFD00A9731B /* SelectLocationModalView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectLocationModalView.swift; sourceTree = "<group>"; };
 		6AE5BB172696A6C500A9731B /* Utilities.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Utilities.swift; path = "../../../../../Downloads/Utils 2/Utilities.swift"; sourceTree = "<group>"; };
 		6AE5BB192696A6CE00A9731B /* Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Extension.swift; path = "../../../../../Downloads/Utils 2/Extension.swift"; sourceTree = "<group>"; };
+		6AE5BB1B2696B9C900A9731B /* PlanCompleteModalView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlanCompleteModalView.swift; sourceTree = "<group>"; };
 		6AFB77F8267ECD6700B59482 /* WhiteBackgroundView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WhiteBackgroundView.swift; sourceTree = "<group>"; };
 		6AFB77FD267F343500B59482 /* TagAddModalView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagAddModalView.swift; sourceTree = "<group>"; };
 		6AFB77FF267F812B00B59482 /* TagColorCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagColorCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -324,6 +326,7 @@
 				6AB486FC26832B8500E95D43 /* SelectCalendarModalView.swift */,
 				6AFB77FD267F343500B59482 /* TagAddModalView.swift */,
 				6AE5BB1526969AFD00A9731B /* SelectLocationModalView.swift */,
+				6AE5BB1B2696B9C900A9731B /* PlanCompleteModalView.swift */,
 			);
 			path = ModalViews;
 			sourceTree = "<group>";
@@ -521,6 +524,7 @@
 				6A4EDA37266DA52A00B809EC /* SettingTableViewCell.swift in Sources */,
 				6A4EDA30266A336000B809EC /* NotificationTableView.swift in Sources */,
 				6A94934E2670DBC700CC5B37 /* SearchResultsView.swift in Sources */,
+				6AE5BB1C2696B9C900A9731B /* PlanCompleteModalView.swift in Sources */,
 				6AC1F4062684093700DDD08C /* TagColorCollectionViewModel.swift in Sources */,
 				6AE5BB0D269670CB00A9731B /* CustomGradientContinueBtnView.swift in Sources */,
 				6A4EDA41266E38E000B809EC /* GroupCollectionViewCell.swift in Sources */,
