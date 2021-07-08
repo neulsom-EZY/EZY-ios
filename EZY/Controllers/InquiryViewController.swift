@@ -1,0 +1,101 @@
+//
+//  InquiryViewController.swift
+//  EZY
+//
+//  Created by 김유진 on 2021/07/08.
+//
+
+import UIKit
+
+class InquiryViewController: UIViewController {
+    
+    let titleBottomLabelColor = [UIColor(red: 151/255, green: 142/255, blue: 255/255, alpha: 1), UIColor(red: 194/255, green: 189/255, blue: 255/255, alpha: 1)]
+    
+    lazy var backButton = UIButton().then{
+        $0.setImage(UIImage(named: "EZY_DetailBackButton"), for: .normal)
+    }
+    
+    lazy var titleTopLabel = UILabel().then {
+        $0.text = "문제가 생기셨나요?"
+        $0.textColor = UIColor(red: 150/255, green: 141/255, blue: 255/255, alpha: 1)
+        $0.dynamicFont(fontSize: 25, currentFontName: "Poppins-SemiBold")
+    }
+    
+    lazy var titleBottomLabel = UILabel().then {
+        $0.text = "최선을 다해 해결해드릴게요!"
+        $0.updateGradientTextColor_vertical(gradientColors: titleBottomLabelColor)
+        $0.dynamicFont(fontSize: 20, currentFontName: "Poppins-SemiBold")
+    }
+    
+    lazy var inquiryBackgroundButton = UIButton().then{
+        $0.backgroundColor = .white
+        $0.layer.cornerRadius = 10
+        $0.layer.masksToBounds = false
+        $0.layer.shadowOpacity = 0.1
+        $0.layer.shadowRadius = 6
+        $0.layer.shadowOffset = CGSize(width: 0, height: 3)
+        $0.layer.shadowColor = UIColor.black.cgColor
+    }
+    
+    lazy var inquiryImageView = UIImageView().then {
+        $0.image = UIImage(named: "EZY_InquireImage")
+    }
+    
+    lazy var inquiryLabel = UILabel().then {
+        $0.text = "문의하기"
+        $0.dynamicFont(fontSize: 12, currentFontName: "AppleSDGothicNeo-Thin")
+    }
+
+    override func viewDidLoad() {
+        super.viewDidLoad()
+
+        layoutSetting()
+    }
+    
+    func layoutSetting(){
+        self.view.backgroundColor = .white
+        
+        self.view.addSubview(backButton)
+        self.view.addSubview(titleTopLabel)
+        self.view.addSubview(titleBottomLabel)
+        self.view.addSubview(inquiryBackgroundButton)
+        inquiryBackgroundButton.addSubview(inquiryImageView)
+        inquiryBackgroundButton.addSubview(inquiryLabel)
+        
+        backButton.snp.makeConstraints { make in
+            make.top.equalTo(self.view.safeAreaLayoutGuide).offset(self.view.frame.height/47.7)
+            make.left.equalToSuperview().offset(self.view.frame.width/12)
+            make.width.equalToSuperview().dividedBy(33.8/2)
+            make.height.equalTo(backButton.snp.width)
+        }
+        
+        titleTopLabel.snp.makeConstraints { make in
+            make.left.equalTo(backButton)
+            make.top.equalTo(backButton.snp.bottom).offset(self.view.frame.height/30)
+        }
+        
+        titleBottomLabel.snp.makeConstraints { make in
+            make.left.equalTo(titleTopLabel)
+            make.top.equalTo(titleTopLabel.snp.bottom)
+        }
+        
+        inquiryBackgroundButton.snp.makeConstraints { make in
+            make.top.equalTo(titleBottomLabel.snp.bottom).offset(self.view.frame.height/27)
+            make.left.equalToSuperview().offset(self.view.frame.width/12)
+            make.centerX.equalToSuperview()
+            make.height.equalToSuperview().dividedBy(5.9)
+        }
+        
+        inquiryImageView.snp.makeConstraints { make in
+            make.top.equalToSuperview().offset(self.view.frame.height/58)
+            make.height.equalToSuperview().dividedBy(1.6)
+            make.width.equalToSuperview().dividedBy(2.51)
+            make.centerX.equalToSuperview()
+        }
+        
+        inquiryLabel.snp.makeConstraints { make in
+            make.bottom.equalToSuperview().offset(-self.view.frame.height/58)
+            make.centerX.equalToSuperview()
+        }
+    }
+}
