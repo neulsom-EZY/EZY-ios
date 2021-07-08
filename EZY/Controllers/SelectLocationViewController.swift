@@ -55,9 +55,15 @@ class SelectLocationViewController: UIViewController {
         selectLocationModalViewSetting()
     }
     
+    @objc func okButtonClicked(sender:UIButton){
+        selectLocationModalView.isHidden = true
+    }
+    
     func selectLocationModalViewSetting(){
         
         self.view.addSubview(selectLocationModalView)
+        
+        selectLocationModalView.okButton.addTarget(self, action: #selector(okButtonClicked(sender:)), for: .touchUpInside)
         
         selectLocationModalView.snp.makeConstraints { make in
             make.top.right.bottom.left.equalToSuperview()
@@ -114,6 +120,8 @@ class SelectLocationViewController: UIViewController {
             make.height.equalToSuperview().dividedBy(7.2)
             make.width.equalToSuperview().dividedBy(4.7)
         }
+        
+        selectLocationModalView.isHidden = true
     }
     
     func locationTableViewSetting(){
@@ -194,6 +202,6 @@ extension SelectLocationViewController: UITableViewDataSource{
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
+        selectLocationModalView.isHidden = false
     }
 }
