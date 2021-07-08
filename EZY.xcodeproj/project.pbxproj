@@ -63,6 +63,14 @@
 		6AE5BAFC26953E0F00A9731B /* EndTimeTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AE5BAFB26953E0F00A9731B /* EndTimeTableViewCell.swift */; };
 		6AE5BB012695746F00A9731B /* RepeatCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AE5BB002695746F00A9731B /* RepeatCollectionViewCell.swift */; };
 		6AE5BB0326957B0600A9731B /* RepeatCollectionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AE5BB0226957B0600A9731B /* RepeatCollectionViewModel.swift */; };
+		6AE5BB0726966E9E00A9731B /* Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AE5BB0526966E9E00A9731B /* Extension.swift */; };
+		6AE5BB0826966E9E00A9731B /* Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AE5BB0626966E9E00A9731B /* Utilities.swift */; };
+		6AE5BB0C269670CB00A9731B /* CustomGradientLoginBtnView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AE5BB09269670CB00A9731B /* CustomGradientLoginBtnView.swift */; };
+		6AE5BB0D269670CB00A9731B /* CustomGradientContinueBtnView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AE5BB0A269670CB00A9731B /* CustomGradientContinueBtnView.swift */; };
+		6AE5BB0E269670CB00A9731B /* CustomGradientTermsBtnView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AE5BB0B269670CB00A9731B /* CustomGradientTermsBtnView.swift */; };
+		6AE5BB102696733F00A9731B /* SelectLocationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AE5BB0F2696733F00A9731B /* SelectLocationViewController.swift */; };
+		6AE5BB14269690B200A9731B /* LocationTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AE5BB13269690B200A9731B /* LocationTableViewCell.swift */; };
+		6AE5BB1626969AFD00A9731B /* SelectLocationModalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AE5BB1526969AFD00A9731B /* SelectLocationModalView.swift */; };
 		6AFB77F9267ECD6700B59482 /* WhiteBackgroundView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AFB77F8267ECD6700B59482 /* WhiteBackgroundView.swift */; };
 		6AFB77FE267F343500B59482 /* TagAddModalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AFB77FD267F343500B59482 /* TagAddModalView.swift */; };
 		6AFB7800267F812B00B59482 /* TagColorCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AFB77FF267F812B00B59482 /* TagColorCollectionViewCell.swift */; };
@@ -130,6 +138,14 @@
 		6AE5BAFB26953E0F00A9731B /* EndTimeTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EndTimeTableViewCell.swift; sourceTree = "<group>"; };
 		6AE5BB002695746F00A9731B /* RepeatCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepeatCollectionViewCell.swift; sourceTree = "<group>"; };
 		6AE5BB0226957B0600A9731B /* RepeatCollectionViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepeatCollectionViewModel.swift; sourceTree = "<group>"; };
+		6AE5BB0526966E9E00A9731B /* Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Extension.swift; path = ../../../../../Downloads/Utils/Extension.swift; sourceTree = "<group>"; };
+		6AE5BB0626966E9E00A9731B /* Utilities.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Utilities.swift; path = ../../../../../Downloads/Utils/Utilities.swift; sourceTree = "<group>"; };
+		6AE5BB09269670CB00A9731B /* CustomGradientLoginBtnView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomGradientLoginBtnView.swift; sourceTree = "<group>"; };
+		6AE5BB0A269670CB00A9731B /* CustomGradientContinueBtnView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomGradientContinueBtnView.swift; sourceTree = "<group>"; };
+		6AE5BB0B269670CB00A9731B /* CustomGradientTermsBtnView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomGradientTermsBtnView.swift; sourceTree = "<group>"; };
+		6AE5BB0F2696733F00A9731B /* SelectLocationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectLocationViewController.swift; sourceTree = "<group>"; };
+		6AE5BB13269690B200A9731B /* LocationTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationTableViewCell.swift; sourceTree = "<group>"; };
+		6AE5BB1526969AFD00A9731B /* SelectLocationModalView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectLocationModalView.swift; sourceTree = "<group>"; };
 		6AFB77F8267ECD6700B59482 /* WhiteBackgroundView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WhiteBackgroundView.swift; sourceTree = "<group>"; };
 		6AFB77FD267F343500B59482 /* TagAddModalView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagAddModalView.swift; sourceTree = "<group>"; };
 		6AFB77FF267F812B00B59482 /* TagColorCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagColorCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -199,6 +215,7 @@
 		6AA769E326636AE700B7E1F5 /* EZY */ = {
 			isa = PBXGroup;
 			children = (
+				6AE5BB0426966DCA00A9731B /* Utils */,
 				6A097D00268ED792001E011D /* Header */,
 				6AA76A0026636C7B00B7E1F5 /* Font */,
 				6AA769FF26636C7600B7E1F5 /* Controllers */,
@@ -238,6 +255,9 @@
 				6AE5BAFD26954B4800A9731B /* ModalViews */,
 				6A4EDA33266BD17B00B809EC /* ReusableViews */,
 				6A4EDA03266866FC00B809EC /* ScheduleTypeCollectionView.swift */,
+				6AE5BB0A269670CB00A9731B /* CustomGradientContinueBtnView.swift */,
+				6AE5BB09269670CB00A9731B /* CustomGradientLoginBtnView.swift */,
+				6AE5BB0B269670CB00A9731B /* CustomGradientTermsBtnView.swift */,
 				6A4EDA01266866E600B809EC /* ScheduleTimeTableView.swift */,
 				6A4EDA2F266A336000B809EC /* NotificationTableView.swift */,
 				6A138F80266F862200DBCE49 /* GroupAddCollectionViewCell.swift */,
@@ -267,6 +287,7 @@
 				6A138F84266F866D00DBCE49 /* GroupManagementViewController.swift */,
 				6AC3BF17267B475200DDCBB2 /* PlanRequestRespondingViewController.swift */,
 				6A705BB5267E3ABF001954CE /* RescheduleViewController.swift */,
+				6AE5BB0F2696733F00A9731B /* SelectLocationViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -302,6 +323,7 @@
 				6AE5BAD42693D46A00A9731B /* SelectTimeModalView.swift */,
 				6AB486FC26832B8500E95D43 /* SelectCalendarModalView.swift */,
 				6AFB77FD267F343500B59482 /* TagAddModalView.swift */,
+				6AE5BB1526969AFD00A9731B /* SelectLocationModalView.swift */,
 			);
 			path = ModalViews;
 			sourceTree = "<group>";
@@ -314,6 +336,7 @@
 				6A4EDA2D266A332100B809EC /* NotificationTableViewCell.swift */,
 				6AE5BAF9269534D300A9731B /* StartTimeTableViewCell.swift */,
 				6AE5BAFB26953E0F00A9731B /* EndTimeTableViewCell.swift */,
+				6AE5BB13269690B200A9731B /* LocationTableViewCell.swift */,
 			);
 			path = TableViewCells;
 			sourceTree = "<group>";
@@ -329,6 +352,15 @@
 				6AE5BB002695746F00A9731B /* RepeatCollectionViewCell.swift */,
 			);
 			path = CollectionViewCells;
+			sourceTree = "<group>";
+		};
+		6AE5BB0426966DCA00A9731B /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				6AE5BB0526966E9E00A9731B /* Extension.swift */,
+				6AE5BB0626966E9E00A9731B /* Utilities.swift */,
+			);
+			path = Utils;
 			sourceTree = "<group>";
 		};
 		D97C84BDB41C12F061081FBC /* Pods */ = {
@@ -479,6 +511,8 @@
 				6AE5BB012695746F00A9731B /* RepeatCollectionViewCell.swift in Sources */,
 				6A1E3E9026797CB600E7B198 /* DeleteModalView.swift in Sources */,
 				6AA76A0226636D2800B7E1F5 /* LoginViewController.swift in Sources */,
+				6AE5BB0E269670CB00A9731B /* CustomGradientTermsBtnView.swift in Sources */,
+				6AE5BB0826966E9E00A9731B /* Utilities.swift in Sources */,
 				6A705BB6267E3ABF001954CE /* RescheduleViewController.swift in Sources */,
 				6AA76A282663958B00B7E1F5 /* ShowScheduleViewController.swift in Sources */,
 				6A4EDA32266BD11600B809EC /* SettingViewController.swift in Sources */,
@@ -486,16 +520,21 @@
 				6A4EDA37266DA52A00B809EC /* SettingTableViewCell.swift in Sources */,
 				6A4EDA30266A336000B809EC /* NotificationTableView.swift in Sources */,
 				6A94934E2670DBC700CC5B37 /* SearchResultsView.swift in Sources */,
+				6AE5BB0726966E9E00A9731B /* Extension.swift in Sources */,
 				6AC1F4062684093700DDD08C /* TagColorCollectionViewModel.swift in Sources */,
+				6AE5BB0D269670CB00A9731B /* CustomGradientContinueBtnView.swift in Sources */,
 				6A4EDA41266E38E000B809EC /* GroupCollectionViewCell.swift in Sources */,
 				6AA769EF26636AE700B7E1F5 /* EZY.xcdatamodeld in Sources */,
+				6AE5BB14269690B200A9731B /* LocationTableViewCell.swift in Sources */,
 				6A98A9CC2666F94E00BFAE30 /* ScheduleTypeCollectionViewCell.swift in Sources */,
+				6AE5BB102696733F00A9731B /* SelectLocationViewController.swift in Sources */,
 				6A097CFD268ED628001E011D /* CalendarView.swift in Sources */,
 				6AC3BF18267B475200DDCBB2 /* PlanRequestRespondingViewController.swift in Sources */,
 				6AFB77FE267F343500B59482 /* TagAddModalView.swift in Sources */,
 				6AE5BB0326957B0600A9731B /* RepeatCollectionViewModel.swift in Sources */,
 				6AFB77F9267ECD6700B59482 /* WhiteBackgroundView.swift in Sources */,
 				6AB486FF26834D8C00E95D43 /* CalendarCollectionViewCell.swift in Sources */,
+				6AE5BB1626969AFD00A9731B /* SelectLocationModalView.swift in Sources */,
 				6AE5BAFA269534D300A9731B /* StartTimeTableViewCell.swift in Sources */,
 				6A138F89266FACFE00DBCE49 /* GroupAddModalView.swift in Sources */,
 				6AB486FD26832B8500E95D43 /* SelectCalendarModalView.swift in Sources */,
@@ -503,6 +542,7 @@
 				6AA769E526636AE700B7E1F5 /* AppDelegate.swift in Sources */,
 				6A4EDA02266866E600B809EC /* ScheduleTimeTableView.swift in Sources */,
 				6A138F81266F862200DBCE49 /* GroupAddCollectionViewCell.swift in Sources */,
+				6AE5BB0C269670CB00A9731B /* CustomGradientLoginBtnView.swift in Sources */,
 				6AA769E726636AE700B7E1F5 /* SceneDelegate.swift in Sources */,
 				6A4EDA002668653200B809EC /* ScheduleTimeTableViewCell.swift in Sources */,
 				6A138F85266F866D00DBCE49 /* GroupManagementViewController.swift in Sources */,

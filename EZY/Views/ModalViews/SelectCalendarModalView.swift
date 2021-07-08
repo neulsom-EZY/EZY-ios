@@ -10,6 +10,7 @@ import UIKit
 class SelectCalendarModalView: UIView {
     
     var pinkColor: UIColor! = UIColor(red: 255/255, green: 148/255, blue: 148/255, alpha: 1)
+    
     var whiteColor: UIColor! = UIColor.white
     
     lazy var labelColor: [UIColor] = [pinkColor, whiteColor]
