@@ -240,8 +240,7 @@ func applySketchShadow(color: UIColor = .black,alpha: Float = 0.5,x:CGFloat,y:CG
 }
 extension AddMyToDoViewController : UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout{
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 5
-        
+        return AddMyToDoViewController.list.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -256,8 +255,8 @@ extension AddMyToDoViewController : UICollectionViewDelegate,UICollectionViewDat
             cell.isSelected = true
             collectionView.selectItem(at: indexPath, animated: true, scrollPosition: .init())
         }
-
         
+
         return cell
     }
 

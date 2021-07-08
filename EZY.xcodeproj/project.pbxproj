@@ -29,6 +29,7 @@
 		EEEDB2C22664D30D00E5C53A /* extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEEDB2C12664D30D00E5C53A /* extensions.swift */; };
 		EEF7DF34266F83AA00832E95 /* MorePeopleToDo.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEF7DF33266F83AA00832E95 /* MorePeopleToDo.swift */; };
 		EEF7FF5C268653EB00FD7800 /* inputContainerTextFieldView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEF7FF5B268653EB00FD7800 /* inputContainerTextFieldView.swift */; };
+		EEFC3F9F26971BA000CEB09F /* ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEFC3F9E26971BA000CEB09F /* ViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -76,6 +77,7 @@
 		EEEDB2C12664D30D00E5C53A /* extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = extensions.swift; sourceTree = "<group>"; };
 		EEF7DF33266F83AA00832E95 /* MorePeopleToDo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MorePeopleToDo.swift; sourceTree = "<group>"; };
 		EEF7FF5B268653EB00FD7800 /* inputContainerTextFieldView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = inputContainerTextFieldView.swift; sourceTree = "<group>"; };
+		EEFC3F9E26971BA000CEB09F /* ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -146,6 +148,7 @@
 		6AA769FC26636C6500B7E1F5 /* ViewModels */ = {
 			isa = PBXGroup;
 			children = (
+				EEFC3F9E26971BA000CEB09F /* ViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -359,6 +362,7 @@
 				6AA769E726636AE700B7E1F5 /* SceneDelegate.swift in Sources */,
 				EE3621C2267E51B80099AF3A /* MoreCalendarModalsButton .swift in Sources */,
 				EE782853268150A900AECC65 /* AddOurToDoViewController.swift in Sources */,
+				EEFC3F9F26971BA000CEB09F /* ViewModel.swift in Sources */,
 				EEF7FF5C268653EB00FD7800 /* inputContainerTextFieldView.swift in Sources */,
 				EED007D526674AC2009A5A87 /* Utilities.swift in Sources */,
 				EE13F0B2269518FF0062D305 /* AddMyToDoCollectionViewCell.swift in Sources */,

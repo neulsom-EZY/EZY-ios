@@ -26,14 +26,15 @@ class AddMyToDoCollectionViewCell: UICollectionViewCell {
     override var isSelected: Bool{
         didSet{
             if isSelected{
-                backgroundColor = AddMyToDoViewController.cellColor[IndexPath().count]
                 cellClickButton.textColor = .white
+                backgroundColor = AddMyToDoViewController.cellColor.randomElement()
             }else{
                 backgroundColor = .clear
-                cellClickButton.textColor = AddMyToDoViewController.cellColor.first
+                cellClickButton.textColor = AddMyToDoViewController.cellColor[3]
             }
         }
     }
+
     
     func setLocation(){
         addSubview(cellClickButton)
