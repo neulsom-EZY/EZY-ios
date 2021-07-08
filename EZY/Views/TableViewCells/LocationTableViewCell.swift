@@ -10,7 +10,7 @@ import UIKit
 class LocationTableViewCell: UITableViewCell {
     
     static let reuseId = "\(LocationTableViewCell.self)"
-    
+        
     let alphabetLabelColorArray = [UIColor(red: 232/255, green: 229/255, blue: 255/255, alpha: 1), UIColor(red: 196/255, green: 191/255, blue: 255/255, alpha: 1)]
     
     lazy var alphabetLabel = UILabel().then {
@@ -54,6 +54,7 @@ class LocationTableViewCell: UITableViewCell {
         super.setSelected(selected, animated: animated)
 
         layoutSetting()
+        
     }
     
     func layoutSetting(){
