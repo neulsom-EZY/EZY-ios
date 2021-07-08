@@ -10,13 +10,14 @@ import SnapKit
 import Then
 import Alamofire
 
+let cellId = "AddMyToDo"
 
 class AddMyToDoViewController:UIViewController{
     
     private let cellReuseIdentifier = "collectionCell"
 
-    var list = ["1", "3", "4" ,"5", "6", "7", "8", "9", "10"]
-    var btnColor : [UIColor] = [.EZY_FFCDB8,.EZY_BADEFF,.EZY_CFE3CE,.EZY_E4C9FF]
+    var list = ["1", "3", "4" ,"5","6"]
+    var btnColor : [UIColor] = [.EZY_FFCDB8,.EZY_BADEFF,.EZY_CFE3CE,.EZY_E4C9FF,.EZY_BAC8FF]
     //MARK: - Properties
     private let backbutton = UIButton().then{
         $0.tintColor = .EZY_BAC8FF
@@ -82,7 +83,12 @@ class AddMyToDoViewController:UIViewController{
         $0.dynamicFont(fontSize: 12, weight: .bold)
     }
     
-    private var collectionView : UICollectionView?
+    private var collectionView :  UICollectionView = {
+        let flowlayout = UICollectionViewFlowLayout()
+        let cv = UICollectionView(frame: .zero, collectionViewLayout: flowlayout)
+        flowlayout.scrollDirection = .vertical
+        return cv
+    }()
 
 
     
@@ -140,27 +146,11 @@ class AddMyToDoViewController:UIViewController{
     }
     
     func collectionViewSetting(){
-        let layout = UICollectionViewFlowLayout()
-        layout.scrollDirection = .vertical
-        collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
-        guard let collectionView = collectionView else{
-            return
-        }
-        collectionView.register(UICollectionViewCell.self, forCellWithReuseIdentifier: AddMyToDoCollectionViewCell.identifier)
+        collectionView.register(AddMyToDoCollectionViewCell.self, forCellWithReuseIdentifier: cellId)
         collectionView.dataSource = self
         collectionView.delegate=self
-        collectionView.backgroundColor = .white
         collectionView.frame = view.bounds
-        
-        view.addSubview(collectionView)
-        
-        collectionView.snp.makeConstraints { (make) in
-            make.height.width.equalTo(view.frame.height/2)
-            make.right.equalTo(view.snp.right).offset(view.frame.height/13.096 * -1)
-            make.left.equalTo(view.snp.left).offset(view.frame.height/27.06 )
-            make.height.equalTo(view.frame.height/10.545)
-            make.top.equalTo(kindOfCollectionView.snp.bottom).offset(view.frame.height/73.8)
-        }
+        collectionView.backgroundColor = .clear
     }
     
     func addView(){
@@ -172,6 +162,7 @@ class AddMyToDoViewController:UIViewController{
         view.addSubview(locationBtn)
         view.addSubview(explanationContainerView)
         view.addSubview(kindOfCollectionView)
+        view.addSubview(collectionView)
         view.addSubview(addButton)
     }
     
@@ -228,7 +219,13 @@ class AddMyToDoViewController:UIViewController{
             make.left.equalTo(backbutton.snp.left)
             make.top.equalTo(explanationContainerView.snp.bottom).offset(view.frame.height/38.6)
         }
-
+        collectionView.snp.makeConstraints { (make) in
+            make.height.width.equalTo(view.frame.height/2)
+            make.right.equalTo(view.snp.right).offset(view.frame.height/13.096 * -1)
+            make.left.equalTo(view.snp.left).offset(view.frame.height/27.06 )
+            make.height.equalTo(view.frame.height/10.545)
+            make.top.equalTo(kindOfCollectionView.snp.bottom).offset(view.frame.height/73.8)
+        }
         addButton.snp.makeConstraints { (make) in
             make.bottom.equalToSuperview().offset(view.frame.height/10.9 * -1)
             make.height.equalTo(self.view.frame.height/18.0)

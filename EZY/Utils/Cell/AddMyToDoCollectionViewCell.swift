@@ -14,14 +14,17 @@ class AddMyToDoCollectionViewCell: UICollectionViewCell {
     static let identifier = "AddMyToDoCollectionViewCell"
     
     let cellClickButton = UIButton().then{
-        $0.backgroundColor = .red
+        $0.backgroundColor = .white
+        
     }
     override init(frame: CGRect) {
         super.init(frame: frame)
         setLocation()
+        
     }
     
     func setLocation(){
+        addSubview(cellClickButton)
         cellClickButton.snp.makeConstraints { (make) in
             make.top.right.left.bottom.equalToSuperview()
         }

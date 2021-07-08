@@ -21,7 +21,7 @@ extension UIColor{
     static let EZY_939393 = UIColor.rgb(red: 147, green: 147, blue: 147)
     static let EZY_FFCDB8 = UIColor.rgb(red: 255, green: 205, blue: 184)
     static let EZY_BADEFF = UIColor.rgb(red: 186, green: 222, blue: 255)
-    static let EZY_CFE3CE = UIColor.rgb(red: 207, green: 227, blue: 255)
+    static let EZY_CFE3CE = UIColor.rgb(red: 207, green: 227, blue: 206)
     static let EZY_E4C9FF = UIColor.rgb(red: 228, green: 201, blue: 255)
     static let EZY_6B40FF = UIColor.rgb(red: 107, green: 64,  blue: 255)
     static let EZY_FFA680 = UIColor.rgb(red: 255, green: 166, blue: 128)
@@ -240,16 +240,19 @@ func applySketchShadow(color: UIColor = .black,alpha: Float = 0.5,x:CGFloat,y:CG
 }
 extension AddMyToDoViewController : UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout{
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 3
+        return 5
         
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: AddMyToDoCollectionViewCell.identifier, for: indexPath)
-        cell.contentView.backgroundColor = .white
-        cell.contentView.layer.borderWidth = 1.0
-        cell.contentView.layer.borderColor = btnColor[indexPath.row].cgColor
-        cell.contentView.layer.cornerRadius = cell.contentView.frame.height/2
+    let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellId, for: indexPath) as! AddMyToDoCollectionViewCell
+        cell.backgroundColor = .white
+        cell.layer.borderWidth = 3.0
+        cell.layer.borderColor = btnColor[indexPath.row].cgColor
+        cell.layer.cornerRadius = cell.contentView.frame.height/2
+    
+        cell.backgroundColor = .blue
+        
         
         return cell
         
