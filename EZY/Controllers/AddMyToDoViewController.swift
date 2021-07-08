@@ -16,8 +16,8 @@ class AddMyToDoViewController:UIViewController{
     
     private let cellReuseIdentifier = "collectionCell"
 
-    var list = ["1", "3", "4" ,"5","6"]
-    var btnColor : [UIColor] = [.EZY_FFCDB8,.EZY_BADEFF,.EZY_CFE3CE,.EZY_E4C9FF,.EZY_BAC8FF]
+    static var list = ["공부", "산책", "전공동아리" ,"자율동아리","+ 추가"]
+    static var cellColor : [UIColor] = [.EZY_FFCDB8,.EZY_BADEFF,.EZY_CFE3CE,.EZY_E4C9FF,.EZY_BAC8FF]
     //MARK: - Properties
     private let backbutton = UIButton().then{
         $0.tintColor = .EZY_BAC8FF
@@ -221,8 +221,9 @@ class AddMyToDoViewController:UIViewController{
         }
         collectionView.snp.makeConstraints { (make) in
             make.height.width.equalTo(view.frame.height/2)
-            make.right.equalTo(view.snp.right).offset(view.frame.height/13.096 * -1)
-            make.left.equalTo(view.snp.left).offset(view.frame.height/27.06 )
+//            make.right.equalTo(view.snp.right).offset(view.frame.height/13.096 * -1)
+//            make.left.equalTo(view.snp.left).offset(view.frame.height/27.06 )
+            make.left.right.equalToSuperview()
             make.height.equalTo(view.frame.height/10.545)
             make.top.equalTo(kindOfCollectionView.snp.bottom).offset(view.frame.height/73.8)
         }
