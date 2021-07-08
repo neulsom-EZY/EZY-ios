@@ -472,9 +472,7 @@ class RescheduleViewController: UIViewController {
             make.left.equalTo(selectCalendarModalView.divideLineView)
         }
         
-
-        
-        selectCalendarModalView.isHidden = false
+        selectCalendarModalView.isHidden = true
     }
 
     
