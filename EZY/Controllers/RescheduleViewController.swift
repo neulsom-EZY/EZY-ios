@@ -198,10 +198,6 @@ class RescheduleViewController: UIViewController {
         $0.dynamicFont(fontSize: 12, currentFontName: "AppleSDGothicNeo-Bold")
     }
     
-    
-    
-    
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         
