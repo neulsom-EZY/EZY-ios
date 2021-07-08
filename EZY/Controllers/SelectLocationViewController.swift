@@ -8,6 +8,8 @@
 import UIKit
 
 class SelectLocationViewController: UIViewController {
+    
+    var alphabetTextArray = ["A","B","C","D","E","F","G","H","I","J","K"]
         
     lazy var backButton = UIButton().then {
         $0.setImage(UIImage(named: "EZY_LocationBackButton"), for: .normal)
@@ -34,7 +36,9 @@ class SelectLocationViewController: UIViewController {
     }
     
     lazy var locationTableView = UITableView().then {
-        $0.backgroundColor = .yellow
+        $0.backgroundColor = .clear
+        $0.separatorStyle = .none
+        $0.showsVerticalScrollIndicator = false
     }
 
     override func viewDidLoad() {
@@ -43,6 +47,27 @@ class SelectLocationViewController: UIViewController {
         self.view.backgroundColor = .white
         
         layoutSetting()
+        
+        locationTableViewSetting()
+    }
+    
+    func locationTableViewSetting(){
+        locationTableView.delegate = self
+        locationTableView.dataSource = self
+        
+        locationHalfModalView.addSubview(locationTableView)
+        
+        locationTableView.register(LocationTableViewCell.self, forCellReuseIdentifier: LocationTableViewCell.reuseId)
+        
+        locationTableView.showsHorizontalScrollIndicator = false
+        
+        locationTableView.snp.makeConstraints { make in
+            make.top.bottom.equalToSuperview().offset(self.view.frame.height/80)
+            make.centerX.equalToSuperview()
+            make.right.equalToSuperview().offset(-self.view.frame.width/10)
+            make.left.equalToSuperview().offset(self.view.frame.width/15)
+        }
+
     }
     
     func layoutSetting(){
@@ -77,4 +102,29 @@ class SelectLocationViewController: UIViewController {
         }
     }
 
+}
+
+extension SelectLocationViewController: UITableViewDelegate{
+    
+}
+
+extension SelectLocationViewController: UITableViewDataSource{
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return 10
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: LocationTableViewCell.reuseId, for: indexPath) as! LocationTableViewCell
+        
+        cell.backgroundColor = .clear
+        cell.selectionStyle = .none
+        
+        cell.alphabetLabel.text = alphabetTextArray[indexPath.row]
+        
+        return cell
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return CGFloat(locationTableView.frame.height/3.5)
+    }
 }
