@@ -40,11 +40,11 @@ class ScheduleDetailViewController: UIViewController {
     }
     
     lazy var locationIconImageView = UIImageView().then {
-        $0.image = UIImage(named: "EZY_Calendar.svg")
+        $0.image = UIImage(named: "EZY_Location")
     }
     
     lazy var timeIconImageView = UIImageView().then {
-        $0.image = UIImage(named: "EZY_Calendar.svg")
+        $0.image = UIImage(named: "EZY_TimeSquare")
     }
 
     lazy var calendarIconImageView = UIImageView().then {
@@ -96,6 +96,21 @@ class ScheduleDetailViewController: UIViewController {
         $0.dynamicFont(fontSize: 14, currentFontName: "AppleSDGothicNeo-Bold")
     }
     
+    lazy var tagLabel = UILabel().then {
+        $0.text = "태그"
+        $0.textColor = UIColor(red: 182/255, green: 182/255, blue: 182/255, alpha: 1)
+        $0.dynamicFont(fontSize: 14, currentFontName: "AppleSDGothicNeo-Bold")
+    }
+    
+    lazy var tagStudyButton = UIButton().then {
+        $0.setTitle("공부", for: .normal)
+        $0.setTitleColor(UIColor.white, for: .normal)
+        $0.layer.borderWidth = 1
+        $0.layer.borderColor = UIColor(red: 150/255, green: 141/255, blue: 255/255, alpha: 1).cgColor
+        $0.dynamicFont(fontSize: 12, currentFontName: "AppleSDGothicNeo-Bold")
+        $0.backgroundColor = UIColor(red: 150/255, green: 141/255, blue: 255/255, alpha: 1)
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -116,10 +131,12 @@ class ScheduleDetailViewController: UIViewController {
         self.view.addSubview(locationLabel)
         self.view.addSubview(timeLabel)
         self.view.addSubview(calendarLabel)
+        self.view.addSubview(explanationBackgroundView)
+        self.view.addSubview(tagLabel)
+        self.view.addSubview(tagStudyButton)
         self.timeBackgroundView.addSubview(timeIconImageView)
         self.calendarBackgroundView.addSubview(calendarIconImageView)
         self.locationBackgroundView.addSubview(locationIconImageView)
-        self.view.addSubview(explanationBackgroundView)
         explanationBackgroundView.addSubview(explanationTitleLabel)
         
         backButton.snp.makeConstraints { make in
@@ -175,12 +192,12 @@ class ScheduleDetailViewController: UIViewController {
         
         locationIconImageView.snp.makeConstraints { make in
             make.centerX.centerY.equalToSuperview()
-            make.height.width.equalToSuperview().dividedBy(2.5)
+            make.height.width.equalToSuperview().dividedBy(2.2)
         }
         
         timeIconImageView.snp.makeConstraints { make in
             make.centerX.centerY.equalToSuperview()
-            make.height.width.equalToSuperview().dividedBy(2.5)
+            make.height.width.equalToSuperview().dividedBy(2.3)
         }
         
         calendarIconImageView.snp.makeConstraints { make in
@@ -197,6 +214,20 @@ class ScheduleDetailViewController: UIViewController {
         explanationTitleLabel.snp.makeConstraints { make in
             make.top.equalToSuperview().offset(self.view.frame.width/20)
             make.left.equalToSuperview().offset(self.view.frame.width/17.8)
+        }
+        
+        tagLabel.snp.makeConstraints { make in
+            make.left.equalTo(explanationBackgroundView)
+            make.top.equalTo(explanationBackgroundView.snp.bottom).offset(self.view.frame.height/38.6)
+        }
+        
+        tagStudyButton.snp.makeConstraints{ make in
+            make.top.equalTo(tagLabel.snp.bottom).offset(self.view.frame.height/47.7)
+            make.left.equalTo(tagLabel)
+            make.height.equalToSuperview().dividedBy(25.3)
+            make.width.equalToSuperview().dividedBy(4.4)
+            
+            tagStudyButton.layer.cornerRadius = (self.view.frame.height/25.3)/2
         }
         
     }
