@@ -11,6 +11,8 @@ class InquiryViewController: UIViewController {
     
     let titleBottomLabelColor = [UIColor(red: 151/255, green: 142/255, blue: 255/255, alpha: 1), UIColor(red: 194/255, green: 189/255, blue: 255/255, alpha: 1)]
     
+    let bottomTitleBottomLabelColor = [UIColor(red: 135/255, green: 125/255, blue: 255/255, alpha: 1), UIColor(red: 196/255, green: 191/255, blue: 255/255, alpha: 1)]
+    
     lazy var backButton = UIButton().then{
         $0.setImage(UIImage(named: "EZY_DetailBackButton"), for: .normal)
     }
@@ -23,8 +25,8 @@ class InquiryViewController: UIViewController {
     
     lazy var titleBottomLabel = UILabel().then {
         $0.text = "최선을 다해 해결해드릴게요!"
-        $0.updateGradientTextColor_vertical(gradientColors: titleBottomLabelColor)
         $0.dynamicFont(fontSize: 20, currentFontName: "Poppins-SemiBold")
+        $0.updateGradientTextColor_vertical(gradientColors: titleBottomLabelColor)
     }
     
     lazy var inquiryBackgroundButton = UIButton().then{
@@ -45,6 +47,22 @@ class InquiryViewController: UIViewController {
         $0.text = "문의하기"
         $0.dynamicFont(fontSize: 12, currentFontName: "AppleSDGothicNeo-Thin")
     }
+    
+    lazy var divideLine = UILabel().then {
+        $0.backgroundColor = UIColor(red: 200/255, green: 200/255, blue: 200/255, alpha: 1)
+    }
+    
+    lazy var bottomTitleTopLabel = UILabel().then {
+        $0.text = "문의하기 전에 확인해보세요!"
+        $0.textColor = UIColor(red: 110/255, green: 98/255, blue: 255/255, alpha: 1)
+        $0.dynamicFont(fontSize: 20, currentFontName: "Poppins-SemiBold")
+    }
+    
+    lazy var bottomTitleBottomLabel = UILabel().then {
+        $0.text = "혹시 이게 궁금하셨나요?"
+        $0.dynamicFont(fontSize: 18, currentFontName: "Poppins-SemiBold")
+        $0.updateGradientTextColor_vertical(gradientColors: bottomTitleBottomLabelColor)
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -59,6 +77,9 @@ class InquiryViewController: UIViewController {
         self.view.addSubview(titleTopLabel)
         self.view.addSubview(titleBottomLabel)
         self.view.addSubview(inquiryBackgroundButton)
+        self.view.addSubview(divideLine)
+        self.view.addSubview(bottomTitleTopLabel)
+        self.view.addSubview(bottomTitleBottomLabel)
         inquiryBackgroundButton.addSubview(inquiryImageView)
         inquiryBackgroundButton.addSubview(inquiryLabel)
         
@@ -96,6 +117,23 @@ class InquiryViewController: UIViewController {
         inquiryLabel.snp.makeConstraints { make in
             make.bottom.equalToSuperview().offset(-self.view.frame.height/58)
             make.centerX.equalToSuperview()
+        }
+        
+        divideLine.snp.makeConstraints { make in
+            make.centerX.equalToSuperview()
+            make.top.equalTo(inquiryBackgroundButton.snp.bottom).offset(self.view.frame.height/29)
+            make.left.equalToSuperview().offset(self.view.frame.width/11.7)
+            make.height.equalTo(0.5)
+        }
+        
+        bottomTitleTopLabel.snp.makeConstraints { make in
+            make.left.equalTo(divideLine)
+            make.top.equalTo(divideLine).offset(self.view.frame.height/18.8)
+        }
+        
+        bottomTitleBottomLabel.snp.makeConstraints { make in
+            make.top.equalTo(bottomTitleTopLabel.snp.bottom)
+            make.left.equalTo(bottomTitleTopLabel)
         }
     }
 }
