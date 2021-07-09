@@ -68,7 +68,7 @@ class ScheduleDetailViewController: UIViewController {
     }
     
     lazy var calendarLabel = UILabel().then {
-        $0.text = "2021. 05. 09 화요일"
+        $0.text = "2021. 07. 09 금요일"
         $0.textColor = UIColor(red: 101/255, green: 101/255, blue: 101/255, alpha: 1)
         $0.dynamicFont(fontSize: 16, currentFontName: "Poppins-Regular")
     }
@@ -96,6 +96,13 @@ class ScheduleDetailViewController: UIViewController {
         $0.dynamicFont(fontSize: 14, currentFontName: "AppleSDGothicNeo-Bold")
     }
     
+    lazy var explanationContentTextView = UITextView().then {
+        $0.text = "송정역 이디야 카페송정역 이디야 카페송정역 이디야 카페송정역 이디야 카페송정역 이디야 카페송정역 이디야 카페송정역 이디야 카페송정역 이디야 카페송정역 이디야 카페송정역 이디야 카페송정역 이디야 카페"
+        $0.dynamicFont(fontSize: 14, currentFontName: "AppleSDGothicNeo-Medium")
+        $0.textColor = UIColor(red: 146/255, green: 146/255, blue: 146/255, alpha: 1)
+        $0.backgroundColor = .clear
+    }
+    
     lazy var tagLabel = UILabel().then {
         $0.text = "태그"
         $0.textColor = UIColor(red: 182/255, green: 182/255, blue: 182/255, alpha: 1)
@@ -109,6 +116,14 @@ class ScheduleDetailViewController: UIViewController {
         $0.layer.borderColor = UIColor(red: 150/255, green: 141/255, blue: 255/255, alpha: 1).cgColor
         $0.dynamicFont(fontSize: 12, currentFontName: "AppleSDGothicNeo-Bold")
         $0.backgroundColor = UIColor(red: 150/255, green: 141/255, blue: 255/255, alpha: 1)
+    }
+    
+    lazy var planDeleteButton = UIButton().then {
+        $0.setImage(UIImage(named: "EZY_DeleteButton"), for: .normal)
+    }
+    
+    lazy var planModifyButton = UIButton().then {
+        $0.setImage(UIImage(named: "EZY_PlanModify"), for: .normal)
     }
     
     override func viewDidLoad() {
@@ -134,16 +149,31 @@ class ScheduleDetailViewController: UIViewController {
         self.view.addSubview(explanationBackgroundView)
         self.view.addSubview(tagLabel)
         self.view.addSubview(tagStudyButton)
+        self.view.addSubview(planDeleteButton)
+        self.view.addSubview(planModifyButton)
         self.timeBackgroundView.addSubview(timeIconImageView)
         self.calendarBackgroundView.addSubview(calendarIconImageView)
         self.locationBackgroundView.addSubview(locationIconImageView)
         explanationBackgroundView.addSubview(explanationTitleLabel)
+        explanationBackgroundView.addSubview(explanationContentTextView)
         
         backButton.snp.makeConstraints { make in
             make.top.equalTo(self.view.safeAreaLayoutGuide).offset(self.view.frame.height/47.7)
             make.left.equalToSuperview().offset(self.view.frame.width/12)
             make.width.equalToSuperview().dividedBy(33.8/2)
             make.height.equalTo(backButton.snp.width)
+        }
+        
+        planModifyButton.snp.makeConstraints { make in
+            make.centerY.equalTo(backButton)
+            make.right.equalTo(planDeleteButton.snp.left).offset(-self.view.frame.width/34)
+            make.width.height.equalTo(planDeleteButton)
+        }
+        
+        planDeleteButton.snp.makeConstraints { make in
+            make.centerY.equalTo(planModifyButton)
+            make.right.equalToSuperview().offset(-self.view.frame.width/13.3)
+            make.width.equalToSuperview().dividedBy(18.75)
         }
         
         planNameLabel.snp.makeConstraints { make in
@@ -214,6 +244,13 @@ class ScheduleDetailViewController: UIViewController {
         explanationTitleLabel.snp.makeConstraints { make in
             make.top.equalToSuperview().offset(self.view.frame.width/20)
             make.left.equalToSuperview().offset(self.view.frame.width/17.8)
+        }
+        
+        explanationContentTextView.snp.makeConstraints { make in
+            make.left.equalTo(explanationTitleLabel.snp.right).offset(self.view.frame.width/40)
+            make.top.equalToSuperview().offset(self.view.frame.width/40)
+            make.right.equalToSuperview().offset(-self.view.frame.width/17.8)
+            make.bottom.equalToSuperview().offset(-self.view.frame.width/20)
         }
         
         tagLabel.snp.makeConstraints { make in
