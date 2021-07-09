@@ -1,7 +1,6 @@
 {
   "images" : [
     {
-      "filename" : "수정 버튼.svg",
       "idiom" : "universal",
       "scale" : "1x"
     },
@@ -10,6 +9,7 @@
       "scale" : "2x"
     },
     {
+      "filename" : "수정 버튼-1.svg",
       "idiom" : "universal",
       "scale" : "3x"
     }

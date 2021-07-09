@@ -29,6 +29,8 @@
 		6A4EDA41266E38E000B809EC /* GroupCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A4EDA40266E38E000B809EC /* GroupCollectionViewCell.swift */; };
 		6A705BB6267E3ABF001954CE /* RescheduleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A705BB5267E3ABF001954CE /* RescheduleViewController.swift */; };
 		6A8283502698132000AC381B /* PlanDeleteModalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A82834F2698132000AC381B /* PlanDeleteModalView.swift */; };
+		6A82835426982A6C00AC381B /* InquiryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A82835326982A6C00AC381B /* InquiryViewController.swift */; };
+		6A82835626982A8B00AC381B /* questionTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A82835526982A8B00AC381B /* questionTableViewCell.swift */; };
 		6A94934E2670DBC700CC5B37 /* SearchResultsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A94934D2670DBC700CC5B37 /* SearchResultsView.swift */; };
 		6A98A9CC2666F94E00BFAE30 /* ScheduleTypeCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A98A9CB2666F94E00BFAE30 /* ScheduleTypeCollectionViewCell.swift */; };
 		6AA769E526636AE700B7E1F5 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AA769E426636AE700B7E1F5 /* AppDelegate.swift */; };
@@ -105,6 +107,8 @@
 		6A4EDA40266E38E000B809EC /* GroupCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupCollectionViewCell.swift; sourceTree = "<group>"; };
 		6A705BB5267E3ABF001954CE /* RescheduleViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RescheduleViewController.swift; sourceTree = "<group>"; };
 		6A82834F2698132000AC381B /* PlanDeleteModalView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlanDeleteModalView.swift; sourceTree = "<group>"; };
+		6A82835326982A6C00AC381B /* InquiryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InquiryViewController.swift; sourceTree = "<group>"; };
+		6A82835526982A8B00AC381B /* questionTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = questionTableViewCell.swift; sourceTree = "<group>"; };
 		6A94934D2670DBC700CC5B37 /* SearchResultsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResultsView.swift; sourceTree = "<group>"; };
 		6A98A9CB2666F94E00BFAE30 /* ScheduleTypeCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleTypeCollectionViewCell.swift; sourceTree = "<group>"; };
 		6AA769E126636AE700B7E1F5 /* EZY.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = EZY.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -295,6 +299,7 @@
 				6A705BB5267E3ABF001954CE /* RescheduleViewController.swift */,
 				6AE5BB0F2696733F00A9731B /* SelectLocationViewController.swift */,
 				6AE5BB1D2696DDA600A9731B /* ScheduleDetailViewController.swift */,
+				6A82835326982A6C00AC381B /* InquiryViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -346,6 +351,7 @@
 				6AE5BAF9269534D300A9731B /* StartTimeTableViewCell.swift */,
 				6AE5BAFB26953E0F00A9731B /* EndTimeTableViewCell.swift */,
 				6AE5BB13269690B200A9731B /* LocationTableViewCell.swift */,
+				6A82835526982A8B00AC381B /* questionTableViewCell.swift */,
 			);
 			path = TableViewCells;
 			sourceTree = "<group>";
@@ -515,6 +521,7 @@
 				6A138F83266F864300DBCE49 /* PinterestLayout.swift in Sources */,
 				6A4EDA35266BD27800B809EC /* TopView.swift in Sources */,
 				6AE5BB1A2696A6CE00A9731B /* Extension.swift in Sources */,
+				6A82835426982A6C00AC381B /* InquiryViewController.swift in Sources */,
 				6A4EDA2C266A045B00B809EC /* NotificationViewController.swift in Sources */,
 				6AE5BAD52693D46A00A9731B /* SelectTimeModalView.swift in Sources */,
 				6A4AE85D2678EBEE009E33CD /* GroupModifyDeleteModalView.swift in Sources */,
@@ -528,6 +535,7 @@
 				6AE5BB182696A6C600A9731B /* Utilities.swift in Sources */,
 				6A4EDA04266866FC00B809EC /* ScheduleTypeCollectionView.swift in Sources */,
 				6A4EDA37266DA52A00B809EC /* SettingTableViewCell.swift in Sources */,
+				6A82835626982A8B00AC381B /* questionTableViewCell.swift in Sources */,
 				6A8283502698132000AC381B /* PlanDeleteModalView.swift in Sources */,
 				6A4EDA30266A336000B809EC /* NotificationTableView.swift in Sources */,
 				6A94934E2670DBC700CC5B37 /* SearchResultsView.swift in Sources */,
