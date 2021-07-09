@@ -12,7 +12,8 @@ import Then
 
 class AddMyToDoCollectionViewCell: UICollectionViewCell {
     static let identifier = "AddMyToDoCollectionViewCell"
-    
+    static var count = 0
+    static var textCount = 0
     let cellClickButton = UILabel().then {
         $0.backgroundColor = .clear
         $0.dynamicFont(fontSize: 12, weight: .bold)
@@ -23,19 +24,23 @@ class AddMyToDoCollectionViewCell: UICollectionViewCell {
         setLocation()
         
     }
+    
     override var isSelected: Bool{
         didSet{
             if isSelected{
+                backgroundColor = AddMyToDoViewController.cellColor[AddMyToDoCollectionViewCell.count]
                 cellClickButton.textColor = .white
-                backgroundColor = AddMyToDoViewController.cellColor.randomElement()
+            
             }else{
+                cellClickButton.textColor = AddMyToDoViewController.cellColor[AddMyToDoCollectionViewCell.textCount]
+
                 backgroundColor = .clear
-                cellClickButton.textColor = AddMyToDoViewController.cellColor[3]
             }
         }
     }
+  
 
-    
+ 
     func setLocation(){
         addSubview(cellClickButton)
         cellClickButton.snp.makeConstraints { (make) in

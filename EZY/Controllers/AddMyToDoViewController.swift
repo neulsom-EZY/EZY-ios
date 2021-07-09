@@ -11,13 +11,10 @@ import Then
 import Alamofire
 
 let cellId = "AddMyToDo"
+var clickcount : Bool = true
 
 class AddMyToDoViewController:UIViewController{
     
-    private let cellReuseIdentifier = "collectionCell"
-
-    static var list = ["공부", "산책", "전공동아리" ,"자율동아리","+ 추가"]
-    static var cellColor : [UIColor] = [.EZY_FFCDB8,.EZY_BADEFF,.EZY_CFE3CE,.EZY_E4C9FF,.EZY_BAC8FF]
     //MARK: - Properties
     private let backbutton = UIButton().then{
         $0.tintColor = .EZY_BAC8FF
@@ -108,6 +105,7 @@ class AddMyToDoViewController:UIViewController{
         super.viewDidLoad()
         configureUI()
         collectionViewSetting()
+   
     }
 
     
@@ -123,6 +121,7 @@ class AddMyToDoViewController:UIViewController{
     
     @objc func calendarAlert(){
         // 날짜 Alert를 실행시킬 부분
+        
     }
     @objc func clockAlert(){
         //시간 Alert를 실행시킬 부분
@@ -162,7 +161,6 @@ class AddMyToDoViewController:UIViewController{
         view.addSubview(locationBtn)
         view.addSubview(explanationContainerView)
         view.addSubview(kindOfCollectionView)
-        view.addSubview(collectionView)
         view.addSubview(addButton)
     }
     
@@ -219,14 +217,7 @@ class AddMyToDoViewController:UIViewController{
             make.left.equalTo(backbutton.snp.left)
             make.top.equalTo(explanationContainerView.snp.bottom).offset(view.frame.height/38.6)
         }
-        collectionView.snp.makeConstraints { (make) in
-            make.height.width.equalTo(view.frame.height/2)
-//            make.right.equalTo(view.snp.right).offset(view.frame.height/13.096 * -1)
-//            make.left.equalTo(view.snp.left).offset(view.frame.height/27.06 )
-            make.left.right.equalToSuperview()
-            make.height.equalTo(view.frame.height/10.545)
-            make.top.equalTo(kindOfCollectionView.snp.bottom).offset(view.frame.height/73.8)
-        }
+     
         addButton.snp.makeConstraints { (make) in
             make.bottom.equalToSuperview().offset(view.frame.height/10.9 * -1)
             make.height.equalTo(self.view.frame.height/18.0)

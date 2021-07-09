@@ -239,6 +239,7 @@ func applySketchShadow(color: UIColor = .black,alpha: Float = 0.5,x:CGFloat,y:CG
     }
 }
 extension AddMyToDoViewController : UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout{
+
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return AddMyToDoViewController.list.count
     }
@@ -251,15 +252,28 @@ extension AddMyToDoViewController : UICollectionViewDelegate,UICollectionViewDat
         cell.layer.cornerRadius = cell.contentView.frame.height/2
         cell.cellClickButton.text = AddMyToDoViewController.list[indexPath.row]
         cell.cellClickButton.textColor = AddMyToDoViewController.cellColor[indexPath.row]
-        if indexPath.item == 0{
-            cell.isSelected = true
-            collectionView.selectItem(at: indexPath, animated: true, scrollPosition: .init())
-        }
         
 
         return cell
     }
+    
+    func collectionView(_ collectionView: UICollectionView, shouldSelectItemAt indexPath: IndexPath) -> Bool {
+        guard let cell = collectionView.cellForItem(at: indexPath) as? AddMyToDoCollectionViewCell else{
+            return true
+        }
+        if cell.isSelected {
 
+            collectionView.deselectItem(at: indexPath, animated: true)
+            AddMyToDoCollectionViewCell.count = indexPath.row
+
+            return false
+        } else {
+            AddMyToDoCollectionViewCell.count = indexPath.row
+            AddMyToDoCollectionViewCell.textCount = indexPath.startIndex
+            return true
+        }
+        
+    }
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
         return view.frame.height/100
     }

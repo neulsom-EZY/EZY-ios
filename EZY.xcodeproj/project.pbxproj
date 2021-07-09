@@ -14,7 +14,6 @@
 		6AA769F426636AE800B7E1F5 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6AA769F226636AE800B7E1F5 /* LaunchScreen.storyboard */; };
 		6AA76A0226636D2800B7E1F5 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AA76A0126636D2800B7E1F5 /* LoginViewController.swift */; };
 		E5052C73E73080AD40F6F655 /* Pods_EZY.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A75C11C1873FE4E191601230 /* Pods_EZY.framework */; };
-		EE13F0B2269518FF0062D305 /* AddMyToDoCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE13F0B1269518FF0062D305 /* AddMyToDoCollectionViewCell.swift */; };
 		EE36219E267E18080099AF3A /* MoreCalendarModalsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE36219D267E18080099AF3A /* MoreCalendarModalsViewController.swift */; };
 		EE3621C2267E51B80099AF3A /* MoreCalendarModalsButton .swift in Sources */ = {isa = PBXBuildFile; fileRef = EE3621C1267E51B80099AF3A /* MoreCalendarModalsButton .swift */; };
 		EE3779092679FAC100334D4A /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE3779082679FAC100334D4A /* Model.swift */; };
@@ -44,7 +43,6 @@
 		6AA76A0126636D2800B7E1F5 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		8B5046DC93C289B5AC6C406E /* Pods-EZY.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EZY.debug.xcconfig"; path = "Target Support Files/Pods-EZY/Pods-EZY.debug.xcconfig"; sourceTree = "<group>"; };
 		A75C11C1873FE4E191601230 /* Pods_EZY.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_EZY.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		EE13F0B1269518FF0062D305 /* AddMyToDoCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddMyToDoCollectionViewCell.swift; sourceTree = "<group>"; };
 		EE36219D267E18080099AF3A /* MoreCalendarModalsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoreCalendarModalsViewController.swift; sourceTree = "<group>"; };
 		EE3621C1267E51B80099AF3A /* MoreCalendarModalsButton .swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MoreCalendarModalsButton .swift"; sourceTree = "<group>"; };
 		EE3779082679FAC100334D4A /* Model.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Model.swift; sourceTree = "<group>"; };
@@ -224,7 +222,6 @@
 		EE37790A2679FB3800334D4A /* Cell */ = {
 			isa = PBXGroup;
 			children = (
-				EE13F0B1269518FF0062D305 /* AddMyToDoCollectionViewCell.swift */,
 			);
 			path = Cell;
 			sourceTree = "<group>";
@@ -365,7 +362,6 @@
 				EEFC3F9F26971BA000CEB09F /* ViewModel.swift in Sources */,
 				EEF7FF5C268653EB00FD7800 /* inputContainerTextFieldView.swift in Sources */,
 				EED007D526674AC2009A5A87 /* Utilities.swift in Sources */,
-				EE13F0B2269518FF0062D305 /* AddMyToDoCollectionViewCell.swift in Sources */,
 				EE7828552681859200AECC65 /* AddErrandViewController.swift in Sources */,
 				EEA457F42682FFA100C08D17 /* AlertButton.swift in Sources */,
 				EED20D63266C0F90000E0856 /* AdditionalButton.swift in Sources */,
