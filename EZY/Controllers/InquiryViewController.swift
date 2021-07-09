@@ -63,11 +63,36 @@ class InquiryViewController: UIViewController {
         $0.dynamicFont(fontSize: 18, currentFontName: "Poppins-SemiBold")
         $0.updateGradientTextColor_vertical(gradientColors: bottomTitleBottomLabelColor)
     }
+    
+    let questionTableView = UITableView().then {
+        $0.backgroundColor = .white
+        $0.showsVerticalScrollIndicator = false
+        $0.separatorStyle = .none
+        $0.separatorEffect = .none
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
         layoutSetting()
+        
+        questionTableViewSetting()
+    }
+    
+    func questionTableViewSetting() {
+        self.view.addSubview(questionTableView)
+        
+        questionTableView.delegate = self
+        questionTableView.dataSource = self
+        
+        questionTableView.register(questionTableViewCell.self, forCellReuseIdentifier: questionTableViewCell.reuseId)
+        
+        questionTableView.snp.makeConstraints { make in
+            make.left.equalToSuperview().offset(self.view.frame.width/13.8)
+            make.top.equalTo(bottomTitleBottomLabel.snp.bottom).offset(self.view.frame.height/50.75)
+            make.bottom.equalToSuperview()
+            make.centerX.equalToSuperview()
+        }
     }
     
     func layoutSetting(){
@@ -135,5 +160,25 @@ class InquiryViewController: UIViewController {
             make.top.equalTo(bottomTitleTopLabel.snp.bottom)
             make.left.equalTo(bottomTitleTopLabel)
         }
+    }
+}
+
+extension InquiryViewController: UITableViewDelegate{
+    
+}
+
+extension InquiryViewController: UITableViewDataSource{
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return 50
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: questionTableViewCell.reuseId, for: indexPath) as! questionTableViewCell
+        cell.backgroundColor = .white
+        return cell
+    }
+        
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return (self.view.frame.height/8)
     }
 }
