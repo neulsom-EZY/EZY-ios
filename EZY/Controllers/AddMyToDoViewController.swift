@@ -10,8 +10,6 @@ import SnapKit
 import Then
 import Alamofire
 
-let cellId = "AddMyToDo"
-var clickcount : Bool = true
 
 class AddMyToDoViewController:UIViewController{
     
@@ -104,7 +102,6 @@ class AddMyToDoViewController:UIViewController{
     override func viewDidLoad() {
         super.viewDidLoad()
         configureUI()
-        collectionViewSetting()
    
     }
 
@@ -144,13 +141,7 @@ class AddMyToDoViewController:UIViewController{
         location()
     }
     
-    func collectionViewSetting(){
-        collectionView.register(AddMyToDoCollectionViewCell.self, forCellWithReuseIdentifier: cellId)
-        collectionView.dataSource = self
-        collectionView.delegate=self
-        collectionView.frame = view.bounds
-        collectionView.backgroundColor = .clear
-    }
+   
     
     func addView(){
         view.addSubview(backbutton)
