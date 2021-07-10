@@ -15,13 +15,13 @@
 		6AA76A0226636D2800B7E1F5 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AA76A0126636D2800B7E1F5 /* LoginViewController.swift */; };
 		E5052C73E73080AD40F6F655 /* Pods_EZY.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A75C11C1873FE4E191601230 /* Pods_EZY.framework */; };
 		EE3462B62698A6B9007886E3 /* UserView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE3462B52698A6B9007886E3 /* UserView.swift */; };
+		EE3462B82698AB31007886E3 /* UserCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE3462B72698AB31007886E3 /* UserCell.swift */; };
 		EE36219E267E18080099AF3A /* MoreCalendarModalsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE36219D267E18080099AF3A /* MoreCalendarModalsViewController.swift */; };
 		EE3621C2267E51B80099AF3A /* MoreCalendarModalsButton .swift in Sources */ = {isa = PBXBuildFile; fileRef = EE3621C1267E51B80099AF3A /* MoreCalendarModalsButton .swift */; };
 		EE3779092679FAC100334D4A /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE3779082679FAC100334D4A /* Model.swift */; };
 		EE782853268150A900AECC65 /* AddOurToDoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE782852268150A900AECC65 /* AddOurToDoViewController.swift */; };
 		EE7828552681859200AECC65 /* AddErrandViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE7828542681859200AECC65 /* AddErrandViewController.swift */; };
 		EE93B4D72687639F0055D7A6 /* OneAlertButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE93B4D62687639F0055D7A6 /* OneAlertButton.swift */; };
-		EE93B4EA268802580055D7A6 /* ConfirmCompletionAlertViewController .swift in Sources */ = {isa = PBXBuildFile; fileRef = EE93B4E9268802580055D7A6 /* ConfirmCompletionAlertViewController .swift */; };
 		EEA457F42682FFA100C08D17 /* AlertButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEA457F32682FFA100C08D17 /* AlertButton.swift */; };
 		EED007D526674AC2009A5A87 /* Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = EED007D426674AC2009A5A87 /* Utilities.swift */; };
 		EED20D63266C0F90000E0856 /* AdditionalButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = EED20D62266C0F90000E0856 /* AdditionalButton.swift */; };
@@ -45,13 +45,13 @@
 		8B5046DC93C289B5AC6C406E /* Pods-EZY.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EZY.debug.xcconfig"; path = "Target Support Files/Pods-EZY/Pods-EZY.debug.xcconfig"; sourceTree = "<group>"; };
 		A75C11C1873FE4E191601230 /* Pods_EZY.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_EZY.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		EE3462B52698A6B9007886E3 /* UserView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserView.swift; sourceTree = "<group>"; };
+		EE3462B72698AB31007886E3 /* UserCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserCell.swift; sourceTree = "<group>"; };
 		EE36219D267E18080099AF3A /* MoreCalendarModalsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoreCalendarModalsViewController.swift; sourceTree = "<group>"; };
 		EE3621C1267E51B80099AF3A /* MoreCalendarModalsButton .swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MoreCalendarModalsButton .swift"; sourceTree = "<group>"; };
 		EE3779082679FAC100334D4A /* Model.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Model.swift; sourceTree = "<group>"; };
 		EE782852268150A900AECC65 /* AddOurToDoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddOurToDoViewController.swift; sourceTree = "<group>"; };
 		EE7828542681859200AECC65 /* AddErrandViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddErrandViewController.swift; sourceTree = "<group>"; };
 		EE93B4D62687639F0055D7A6 /* OneAlertButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OneAlertButton.swift; sourceTree = "<group>"; };
-		EE93B4E9268802580055D7A6 /* ConfirmCompletionAlertViewController .swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ConfirmCompletionAlertViewController .swift"; sourceTree = "<group>"; };
 		EEA457F32682FFA100C08D17 /* AlertButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertButton.swift; sourceTree = "<group>"; };
 		EED007D426674AC2009A5A87 /* Utilities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utilities.swift; sourceTree = "<group>"; };
 		EED20D62266C0F90000E0856 /* AdditionalButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdditionalButton.swift; sourceTree = "<group>"; };
@@ -162,6 +162,7 @@
 				EE93B4D62687639F0055D7A6 /* OneAlertButton.swift */,
 				EEF7FF5B268653EB00FD7800 /* inputContainerTextFieldView.swift */,
 				EE3462B52698A6B9007886E3 /* UserView.swift */,
+				EE3462B72698AB31007886E3 /* UserCell.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -183,7 +184,6 @@
 				EEEDB2BE2664B44200E5C53A /* AddMyToDoViewController.swift */,
 				EE782852268150A900AECC65 /* AddOurToDoViewController.swift */,
 				EE7828542681859200AECC65 /* AddErrandViewController.swift */,
-				EE93B4E9268802580055D7A6 /* ConfirmCompletionAlertViewController .swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -369,9 +369,9 @@
 				EE7828552681859200AECC65 /* AddErrandViewController.swift in Sources */,
 				EEA457F42682FFA100C08D17 /* AlertButton.swift in Sources */,
 				EED20D63266C0F90000E0856 /* AdditionalButton.swift in Sources */,
-				EE93B4EA268802580055D7A6 /* ConfirmCompletionAlertViewController .swift in Sources */,
 				EE93B4D72687639F0055D7A6 /* OneAlertButton.swift in Sources */,
 				EEEDB2C22664D30D00E5C53A /* extensions.swift in Sources */,
+				EE3462B82698AB31007886E3 /* UserCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
