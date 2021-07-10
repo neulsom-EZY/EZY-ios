@@ -47,9 +47,27 @@ class RescheduleViewController: UIViewController {
                                                  TagColorCollectionViewModel(backgroundColor: UIColor(red: 255/255, green: 160/255, blue: 255/255, alpha: 1), isSelected: true),
                                                  TagColorCollectionViewModel(backgroundColor: UIColor(red: 255/255, green: 150/255, blue: 255/255, alpha: 1), isSelected: true)]
     
+    var TagModels: [TagCollectionViewModel] = [TagCollectionViewModel(backgroundColor: UIColor(red: 186/255, green: 200/255, blue: 255/255, alpha: 1), isSelected: true),
+                                               TagCollectionViewModel(backgroundColor: UIColor(red: 196/255, green: 200/255, blue: 255/255, alpha: 1), isSelected: true),
+                                               TagCollectionViewModel(backgroundColor: UIColor(red: 206/255, green: 200/255, blue: 255/255, alpha: 1), isSelected: false),
+                                               TagCollectionViewModel(backgroundColor: UIColor(red: 216/255, green: 200/255, blue: 255/255, alpha: 1), isSelected: true),
+                                               TagCollectionViewModel(backgroundColor: UIColor(red: 226/255, green: 200/255, blue: 255/255, alpha: 1), isSelected: true),
+                                               TagCollectionViewModel(backgroundColor: UIColor(red: 236/255, green: 200/255, blue: 255/255, alpha: 1), isSelected: true),
+                                               TagCollectionViewModel(backgroundColor: UIColor(red: 246/255, green: 200/255, blue: 255/255, alpha: 1), isSelected: true),
+                                               TagCollectionViewModel(backgroundColor: UIColor(red: 255/255, green: 200/255, blue: 255/255, alpha: 1), isSelected: true),
+                                               TagCollectionViewModel(backgroundColor: UIColor(red: 255/255, green: 190/255, blue: 255/255, alpha: 1), isSelected: true),
+                                               TagCollectionViewModel(backgroundColor: UIColor(red: 255/255, green: 180/255, blue: 255/255, alpha: 1), isSelected: true),
+                                               TagCollectionViewModel(backgroundColor: UIColor(red: 255/255, green: 170/255, blue: 255/255, alpha: 1), isSelected: true),
+                                               TagCollectionViewModel(backgroundColor: UIColor(red: 255/255, green: 160/255, blue: 255/255, alpha: 1), isSelected: true),
+                                               TagCollectionViewModel(backgroundColor: UIColor(red: 255/255, green: 150/255, blue: 255/255, alpha: 1), isSelected: true)]
+    
     lazy var tagButton: [UIButton] = [tagStudyButton, tagWalkButton, tagMajorBandButton, tagFreedomBandButton]
     
-    var preciousSelectedIndex = 0
+    var tagColorPreciousSelectedIndex = 0
+    
+    var tagPreciousSelectedIndex = 2
+    
+    var tagNameTextArray = ["공부", "산책", "토익", "코딩", "요리", "운동", "정리", "청소","공부", "산책", "토익", "코딩", "요리", "운동", "정리", "청소","공부", "산책", "토익", "코딩", "요리", "운동", "정리", "청소","공부", "산책", "토익", "코딩", "요리", "운동", "정리", "청소"]
     
     var dayArray = ["24","25","26","27","28","29","30","1","2","3","24","25","26","27","28","29","30","1","2","3"]
     
@@ -78,6 +96,14 @@ class RescheduleViewController: UIViewController {
     let repeatCollectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewLayout()).then {
         let layout: UICollectionViewFlowLayout = UICollectionViewFlowLayout()
         layout.itemSize = CGSize(width: 30, height: 30)
+        layout.scrollDirection = .horizontal
+        $0.collectionViewLayout = layout
+        $0.showsHorizontalScrollIndicator = false
+        $0.backgroundColor = .white
+    }
+    
+    let tagCollectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewLayout()).then {
+        let layout: UICollectionViewFlowLayout = UICollectionViewFlowLayout()
         layout.scrollDirection = .horizontal
         $0.collectionViewLayout = layout
         $0.showsHorizontalScrollIndicator = false
@@ -228,6 +254,24 @@ class RescheduleViewController: UIViewController {
         TimeTableViewSetting()
         
         repeatCollectionViewSetting()
+        
+        tagCollectionViewSetting()
+    }
+    
+    func tagCollectionViewSetting(){
+        tagCollectionView.delegate = self
+        tagCollectionView.dataSource = self
+        
+        tagCollectionView.register(TagCollectionViewCell.self, forCellWithReuseIdentifier: TagCollectionViewCell.reuseId)
+        
+        self.view.addSubview(tagCollectionView)
+        
+        tagCollectionView.snp.makeConstraints { make in
+            make.top.equalTo(tagLabel.snp.bottom).offset(self.view.frame.height/47.7)
+            make.left.equalTo(tagLabel)
+            make.height.equalToSuperview().dividedBy(10.5)
+            make.right.equalToSuperview()
+        }
     }
     
     func repeatCollectionViewSetting(){
@@ -832,46 +876,8 @@ class RescheduleViewController: UIViewController {
             make.top.equalTo(explanationBackgroundView.snp.bottom).offset(self.view.frame.height/38.6)
         }
         
-        tagStudyButton.snp.makeConstraints{ make in
-            make.top.equalTo(tagLabel.snp.bottom).offset(self.view.frame.height/47.7)
-            make.left.equalTo(tagLabel)
-            make.height.equalToSuperview().dividedBy(25.3)
-            make.width.equalToSuperview().dividedBy(4.4)
-            
-            tagStudyButton.layer.cornerRadius = (self.view.frame.height/25.3)/2
-        }
-        
-        tagWalkButton.snp.makeConstraints { make in
-            make.top.equalTo(tagStudyButton)
-            make.left.equalTo(tagStudyButton.snp.right).offset(self.view.frame.width/25)
-            make.height.width.equalTo(tagStudyButton)
-            
-            tagWalkButton.layer.cornerRadius = (self.view.frame.height/25.3)/2
-        }
-        
-        tagMajorBandButton.snp.makeConstraints { make in
-            make.top.equalTo(tagWalkButton)
-            make.left.equalTo(tagWalkButton.snp.right).offset(self.view.frame.width/25)
-            make.height.width.equalTo(tagStudyButton)
-            
-            tagMajorBandButton.layer.cornerRadius = (self.view.frame.height/25.3)/2
-        }
-        
-        tagFreedomBandButton.snp.makeConstraints { make in
-            make.top.equalTo(tagStudyButton.snp.bottom).offset(self.view.frame.height/60)
-            make.left.equalTo(tagStudyButton.snp.left)
-            make.height.width.equalTo(tagStudyButton)
-            
-            tagFreedomBandButton.layer.cornerRadius = (self.view.frame.height/25.3)/2
-        }
-        
-        tagAddButton.snp.makeConstraints { make in
-            make.top.equalTo(tagFreedomBandButton)
-            make.left.equalTo(tagFreedomBandButton.snp.right).offset(self.view.frame.width/25)
-            make.height.width.equalTo(tagStudyButton)
-            
-            tagAddButton.layer.cornerRadius = (self.view.frame.height/25.3)/2
-        }
+
+
         
     }
     
@@ -920,6 +926,8 @@ extension RescheduleViewController: UICollectionViewDataSource, UICollectionView
             return dayArray.count
         }else if collectionView == repeatCollectionView{
             return 7
+        }else if collectionView == tagCollectionView{
+            return TagModels.count
         }
 
         return Int()
@@ -950,6 +958,26 @@ extension RescheduleViewController: UICollectionViewDataSource, UICollectionView
             
             cell.setModel(RepeatModels[indexPath.row])
             return cell
+        }else if collectionView == tagCollectionView{
+         
+            if indexPath == [0,0]{
+                let cell = collectionView.dequeueReusableCell(withReuseIdentifier: TagCollectionViewCell.reuseId, for: indexPath) as! TagCollectionViewCell
+                
+                cell.tagNameLabel.text = "+ 추가"
+                cell.tagNameLabel.textColor = UIColor(red: 186/255, green: 200/255, blue: 255/255, alpha: 1)
+                cell.tagBackgroundView.backgroundColor = .white
+                cell.tagBackgroundView.layer.borderWidth = 1.3
+                cell.tagBackgroundView.layer.borderColor = UIColor(red: 186/255, green: 200/255, blue: 255/255, alpha: 1).cgColor
+                
+                return cell
+            }else{
+                let cell = collectionView.dequeueReusableCell(withReuseIdentifier: TagCollectionViewCell.reuseId, for: indexPath) as! TagCollectionViewCell
+                
+                cell.setModel(TagModels[indexPath.row])
+                
+                cell.tagNameLabel.text = tagNameTextArray[indexPath.row]
+                return cell
+            }
         }
         
         return UICollectionViewCell()
@@ -960,22 +988,38 @@ extension RescheduleViewController: UICollectionViewDataSource, UICollectionView
         if collectionView == tagColorCollectionView{
             if TagColorModels[indexPath.row].isSelected {
                 
-                TagColorModels[preciousSelectedIndex].isSelected.toggle()
+                TagColorModels[tagColorPreciousSelectedIndex].isSelected.toggle()
                 
                 if TagColorModels.filter({ $0.isSelected }).count >= 1 {
                     TagColorModels[indexPath.row].isSelected.toggle()
                     
-                    preciousSelectedIndex = indexPath.row
+                    tagColorPreciousSelectedIndex = indexPath.row
                 }
             }
+            
             collectionView.reloadData()
         }else if collectionView == repeatCollectionView{
             RepeatModels[indexPath.row].isSelected.toggle()
-            print("\(indexPath.row)번째 cell - \(RepeatModels[indexPath.row].isSelected)")
                 
             collectionView.reloadData()
+        }else if collectionView == tagCollectionView{
+            print("click\(indexPath)")
+            print("preciousSelectedIndex\(tagPreciousSelectedIndex)")
+            if indexPath.row != 0 {
+                if TagModels[indexPath.row].isSelected {
+                    
+                    TagModels[tagPreciousSelectedIndex].isSelected.toggle()
+                    
+                    if TagModels.filter({ $0.isSelected }).count >= 1 {
+                        TagModels[indexPath.row].isSelected.toggle()
+                        
+                        tagPreciousSelectedIndex = indexPath.row
+                    }
+                    
+                }
+                collectionView.reloadData()
+            }
         }
-        
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
@@ -985,6 +1029,8 @@ extension RescheduleViewController: UICollectionViewDataSource, UICollectionView
             return CGSize(width: 30, height: 30)
         }else if collectionView == repeatCollectionView{
             return CGSize(width: 30, height: 30)
+        }else if collectionView == tagCollectionView{
+            return CGSize(width: self.view.frame.width/4.4, height: self.view.frame.height/25.3)
         }
 
         return CGSize()
@@ -995,6 +1041,8 @@ extension RescheduleViewController: UICollectionViewDataSource, UICollectionView
             return UIEdgeInsets(top: 0, left: self.view.frame.height/33.8, bottom: 0, right: self.view.frame.height/33.8)
         }else if collectionView == repeatCollectionView{
             return UIEdgeInsets(top: 0, left: self.view.frame.height/33.8, bottom: 0, right: self.view.frame.height/33.8)
+        }else if collectionView == tagCollectionView{
+            
         }
         
         return UIEdgeInsets()
