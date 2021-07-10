@@ -68,7 +68,7 @@ class AddErrandViewController : UIViewController{
     private let plusPeople : OneAlertButton = {
         let viewModel = OneAlertBtn(icon: UIImage(named: "EZY_user-3")?.withRenderingMode(.alwaysTemplate), iconTintColor: .EZY_ADCAE5)
         let button = OneAlertButton(with: viewModel)
-        
+        button.addTarget(self, action: #selector(AddRecipient), for: .touchUpInside)
         return button
     }()
     
@@ -108,6 +108,7 @@ class AddErrandViewController : UIViewController{
     }
     
     //MARK: - Selectors
+ 
     
     @objc func todobackbtn(){
         //전페이지로 되돌아가는 버튼
@@ -116,11 +117,18 @@ class AddErrandViewController : UIViewController{
         present(vc, animated: false, completion: nil)
     }
     
-    
     @objc func calendarAlert(){
         // 날짜 Alert를 실행시킬 부분
     }
-    
+    @objc func clockAlert(){
+        //시간 Alert를 실행시킬 부분
+    }
+    @objc func locationAlert(){
+        //위치 Alert 실행시킬 부분
+    }
+    @objc func AddRecipient(){
+        //받는사람 추가하는 부분
+    }
     @objc func Addmytodobtn(){
         print("DEBUG:AddButton")
         //추가페이지 작성후 실행시키는 코드
@@ -130,7 +138,7 @@ class AddErrandViewController : UIViewController{
         let vc = AddMyToDoViewController()
         vc.modalPresentationStyle = .fullScreen
         present(vc, animated: true, completion: nil)    }
-    
+
     //MARK: - Helpers
     func configureUI(){
         view.backgroundColor = .white

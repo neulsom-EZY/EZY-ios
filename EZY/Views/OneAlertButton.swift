@@ -11,16 +11,18 @@ import SnapKit
 
 class OneAlertButton : UIButton {
     
-//    private let randomColorlist = []
+    static let randomColorlist : [UIColor] = [.EZY_FFCDB8,.EZY_BADEFF,.EZY_CFE3CE,.EZY_E4C9FF,.EZY_BAC8FF]
     private let view = UIView()
     private let icon = UIImageView()
     private var viewModel : OneAlertBtn?
-    private let button = UIButton().then{
+     let button = UIButton().then{
+        $0.layer.borderColor = UIColor.EZY_BAC8FF.cgColor
         $0.backgroundColor = .clear
     }
-    private let buttonLabel = UILabel().then{
-        $0.text = "진"
-        $0.dynamicFont(fontSize: 12, weight: .regular)
+    let buttonLabel = UILabel().then{
+        $0.text = "+"
+        $0.dynamicFont(fontSize: 9, weight: .regular)
+        $0.textColor = .EZY_BAC8FF
     }
     override init(frame: CGRect) {
         self.viewModel = nil
@@ -34,6 +36,7 @@ class OneAlertButton : UIButton {
         
     }
     
+    
     func addView(){
         addSubview(view)
         addSubview(icon)
@@ -43,14 +46,14 @@ class OneAlertButton : UIButton {
     
     func configure(with viewModel : OneAlertBtn){
         view.isUserInteractionEnabled = false
+        button.isUserInteractionEnabled = false
         view.backgroundColor = .white
         view.layer.shadowColor = UIColor.black.cgColor
         view.layer.shadowOpacity = 0.1
         icon.image = viewModel.icon
         icon.tintColor = viewModel.iconTintColor
         button.layer.borderWidth = 2
-        button.layer.borderColor = UIColor.EZY_B880FF.cgColor
-        buttonLabel.textColor = .EZY_B880FF
+
     }
     
     override func layoutSubviews() {
