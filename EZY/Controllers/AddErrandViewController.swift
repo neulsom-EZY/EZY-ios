@@ -47,21 +47,21 @@ class AddErrandViewController : UIViewController{
         let viewModel = AlertBtn(icon: UIImage(named: "EZY_calendar")?.withRenderingMode(.alwaysTemplate), iconTintColor: .EZY_FFB5B5, message: "2021.6.6 일요일")
         let button = AlertButton(with: viewModel)
         
-        button.addTarget(self, action: #selector(Addlocationbtn), for: .touchUpInside)
+        button.addTarget(self, action: #selector(calendarAlert), for: .touchUpInside)
         return button
     }()
     private let clockBtn : AlertButton = {
         let viewModel = AlertBtn(icon: UIImage(named: "EZY_clock")?.withRenderingMode(.alwaysTemplate), iconTintColor: .EZY_FFCBB5, message: "11:00AM - 1:00PM")
         let button = AlertButton(with: viewModel)
         
-        button.addTarget(self, action: #selector(Addlocationbtn), for: .touchUpInside)
+        button.addTarget(self, action: #selector(clockAlert), for: .touchUpInside)
         return button
     }()
     private let locationBtn : AlertButton = {
         let viewModel = AlertBtn(icon: UIImage(named: "EZY_location")?.withRenderingMode(.alwaysTemplate), iconTintColor: .EZY_C7E0D4, message: "광주소프트웨어마이스터고등학교")
         let button = AlertButton(with: viewModel)
         
-        button.addTarget(self, action: #selector(Addlocationbtn), for: .touchUpInside)
+        button.addTarget(self, action: #selector(locationAlert), for: .touchUpInside)
         return button
     }()
     
@@ -132,6 +132,7 @@ class AddErrandViewController : UIViewController{
     @objc func Addmytodobtn(){
         print("DEBUG:AddButton")
         //추가페이지 작성후 실행시키는 코드
+        
         
     }
     @objc func Addlocationbtn(){
@@ -228,27 +229,3 @@ class AddErrandViewController : UIViewController{
 }
 
 
-#if DEBUG
-import SwiftUI
-struct LoginViewControllerRepresentable: UIViewControllerRepresentable {
-    
-func updateUIViewController(_ uiView: UIViewController,context: Context) {
-        // leave this empty
-}
-    @available(iOS 13.0.0, *)
-    func makeUIViewController(context: Context) -> UIViewController{
-        AddErrandViewController()
-    }
-}
-@available(iOS 13.0, *)
-struct LoginViewControllerRepresentable_PreviewProvider: PreviewProvider {
-    static var previews: some View {
-        Group {
-            LoginViewControllerRepresentable()
-                .ignoresSafeArea()
-                .previewDisplayName(/*@START_MENU_TOKEN@*/"Preview"/*@END_MENU_TOKEN@*/)
-                .previewDevice(PreviewDevice(rawValue: "iPhone 11"))
-        }
-        
-    }
-} #endif
