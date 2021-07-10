@@ -85,23 +85,16 @@ class AddErrandViewController : UIViewController{
     }()
     
     
-    
-    private let kindOfCollectionView = UILabel().then{
-        $0.text = "태그"
-        $0.textColor = .EZY_B6B6B6
-        $0.dynamicFont(fontSize: 12, weight: .bold)
-    }
-    
-    private var collectionView: UICollectionView?
-
-
-    
     private lazy var addButton : AdditionalButton = {
         let button = AdditionalButton(type: .system)
         button.title = "부탁하기"
         button.addTarget(self, action: #selector(Addmytodobtn), for: .touchUpInside)
         return button
     }()
+    
+    static func instance() -> AddErrandViewController {
+        return AddErrandViewController.init(nibName: nil, bundle: nil)
+    }
     
     
     
@@ -145,10 +138,8 @@ class AddErrandViewController : UIViewController{
         addView()
         location()
     }
-    func collectionViewSetting(){
-        
-    }
-
+    
+          
     
     func cornerRadius(){
         RequestList.layer.cornerRadius = view.frame.height/40.6
@@ -164,7 +155,6 @@ class AddErrandViewController : UIViewController{
         view.addSubview(plusPeople)
         view.addSubview(locationBtn)
         view.addSubview(explanationContainerView)
-        view.addSubview(kindOfCollectionView)
         view.addSubview(addButton)
     }
     func location(){
@@ -228,7 +218,6 @@ class AddErrandViewController : UIViewController{
         }
     }
 }
-
 
 
 #if DEBUG

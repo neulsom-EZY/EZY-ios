@@ -15,14 +15,7 @@ class OneAlertButton : UIButton {
     private let icon = UIImageView()
     private var viewModel : OneAlertBtn?
     
-    let collectionView = UICollectionView(frame: .zero,collectionViewLayout: UICollectionViewFlowLayout()).then{
-        let layout = UICollectionViewFlowLayout()
-        layout.scrollDirection = .horizontal
-        $0.backgroundColor = .clear
-        $0.contentInset = UIEdgeInsets.init(top: 0, left: 20, bottom: 0, right: 0)
-        $0.showsHorizontalScrollIndicator = false
-        $0.collectionViewLayout = layout
-    }
+ 
     override init(frame: CGRect) {
         self.viewModel = nil
         super.init(frame: frame)
@@ -37,7 +30,6 @@ class OneAlertButton : UIButton {
     func addView(){
         addSubview(view)
         addSubview(icon)
-        addSubview(collectionView)
         
     }
     func configure(with viewModel : OneAlertBtn){
@@ -62,11 +54,6 @@ class OneAlertButton : UIButton {
         icon.snp.makeConstraints { (make) in
             make.center.equalTo(view.snp.center)
             make.height.width.equalTo(frame.height/2)
-        }
-        collectionView.snp.makeConstraints { (make) in
-            make.left.equalTo(view.snp.right)
-            make.right.equalToSuperview()
-            make.height.equalTo(frame.height/1.25)
         }
     }
     required init?(coder: NSCoder) {
