@@ -38,8 +38,9 @@ class UserView: UIView{
       func bindConstraints() {
           collectionView.snp.makeConstraints { (make) in
               make.left.right.equalToSuperview()
-              make.centerY.equalToSuperview()
+             
               make.height.equalTo(200)
+            
           }
       }
   }

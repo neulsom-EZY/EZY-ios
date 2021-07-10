@@ -160,9 +160,9 @@
 				EE3621C1267E51B80099AF3A /* MoreCalendarModalsButton .swift */,
 				EEA457F32682FFA100C08D17 /* AlertButton.swift */,
 				EE93B4D62687639F0055D7A6 /* OneAlertButton.swift */,
+				EE3462B72698AB31007886E3 /* UserCell.swift */,
 				EEF7FF5B268653EB00FD7800 /* inputContainerTextFieldView.swift */,
 				EE3462B52698A6B9007886E3 /* UserView.swift */,
-				EE3462B72698AB31007886E3 /* UserCell.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";

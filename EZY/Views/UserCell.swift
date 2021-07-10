@@ -26,7 +26,7 @@ class UserCell : UICollectionViewCell{
      }
      
      private func setup() {
-         backgroundColor = .red
+         backgroundColor = .black
          addSubview(main)
      }
      

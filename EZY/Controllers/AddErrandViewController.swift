@@ -43,9 +43,6 @@ class AddErrandViewController : UIViewController{
         let tv = Utilities().textView(TextColor: .EZY_A7A7A7, TextSize: 12, font: .medium)
         return tv
     }()
-    
-    
-
     private let calendarBtn : AlertButton = {
         let viewModel = AlertBtn(icon: UIImage(named: "EZY_calendar")?.withRenderingMode(.alwaysTemplate), iconTintColor: .EZY_FFB5B5, message: "2021.6.6 일요일")
         let button = AlertButton(with: viewModel)
@@ -60,7 +57,6 @@ class AddErrandViewController : UIViewController{
         button.addTarget(self, action: #selector(Addlocationbtn), for: .touchUpInside)
         return button
     }()
-    
     private let locationBtn : AlertButton = {
         let viewModel = AlertBtn(icon: UIImage(named: "EZY_location")?.withRenderingMode(.alwaysTemplate), iconTintColor: .EZY_C7E0D4, message: "광주소프트웨어마이스터고등학교")
         let button = AlertButton(with: viewModel)
@@ -115,6 +111,7 @@ class AddErrandViewController : UIViewController{
     override func viewDidLoad() {
         super.viewDidLoad()
         configureUI()
+        
     }
     
     //MARK: - Selectors
@@ -148,6 +145,11 @@ class AddErrandViewController : UIViewController{
         addView()
         location()
     }
+    func collectionViewSetting(){
+        
+    }
+
+    
     func cornerRadius(){
         RequestList.layer.cornerRadius = view.frame.height/40.6
         addButton.layer.cornerRadius = view.frame.height/81.2
@@ -207,7 +209,7 @@ class AddErrandViewController : UIViewController{
             make.top.equalTo(locationBtn.snp.bottom).offset(view.frame.height/47.7)
             make.height.width.equalTo(self.view.frame.height/18.0)
             make.left.equalTo(calendarBtn.snp.left)
-            
+            make.right.equalToSuperview()
             
         }
         explanationContainerView.snp.makeConstraints { (make) in

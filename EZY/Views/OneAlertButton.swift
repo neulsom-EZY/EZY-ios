@@ -10,10 +10,19 @@ import SnapKit
 
 
 class OneAlertButton : UIButton {
+    
     private let view = UIView()
     private let icon = UIImageView()
     private var viewModel : OneAlertBtn?
     
+    let collectionView = UICollectionView(frame: .zero,collectionViewLayout: UICollectionViewFlowLayout()).then{
+        let layout = UICollectionViewFlowLayout()
+        layout.scrollDirection = .horizontal
+        $0.backgroundColor = .clear
+        $0.contentInset = UIEdgeInsets.init(top: 0, left: 20, bottom: 0, right: 0)
+        $0.showsHorizontalScrollIndicator = false
+        $0.collectionViewLayout = layout
+    }
     override init(frame: CGRect) {
         self.viewModel = nil
         super.init(frame: frame)
@@ -21,7 +30,6 @@ class OneAlertButton : UIButton {
     init(with viewModel : OneAlertBtn){
         self.viewModel = viewModel
         super.init(frame: .zero)
-        
         addView()
         configure(with: viewModel)
         
@@ -29,6 +37,7 @@ class OneAlertButton : UIButton {
     func addView(){
         addSubview(view)
         addSubview(icon)
+        addSubview(collectionView)
         
     }
     func configure(with viewModel : OneAlertBtn){
@@ -46,17 +55,23 @@ class OneAlertButton : UIButton {
         view.layer.shadowOffset = CGSize(width: 0, height: frame.height/11.25)
 
         view.snp.makeConstraints { (make) in
-            make.top.bottom.left.right.equalToSuperview()
+            make.top.left.bottom.equalToSuperview()
+            make.right.equalTo(view.snp.left)
             make.height.width.equalTo(frame.height)
         }
         icon.snp.makeConstraints { (make) in
             make.center.equalTo(view.snp.center)
             make.height.width.equalTo(frame.height/2)
         }
+        collectionView.snp.makeConstraints { (make) in
+            make.left.equalTo(view.snp.right)
+            make.right.equalToSuperview()
+            make.height.equalTo(frame.height/1.25)
+        }
     }
-    
     required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
+        super.init(coder: coder)
+  
     }
     
 }
