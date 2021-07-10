@@ -11,7 +11,6 @@ import Then
 import Alamofire
 
 class PersonalCalendarViewController : UIViewController{
-
     
     //MARK: - Properties
     var manageData : [ManageData] = []

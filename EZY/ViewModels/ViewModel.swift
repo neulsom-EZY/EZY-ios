@@ -11,3 +11,6 @@ protocol sendSwitch: Any{
     func State(data: Bool?)
 }
 
+protocol SwieeftSwitchButtonDelegate: class {
+    func isOnValueChange(isOn: Bool)
+}

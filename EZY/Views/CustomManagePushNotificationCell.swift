@@ -19,7 +19,6 @@ class CustomManagePushNotificationCell: UITableViewCell {
     let view  = UIView().then{
         $0.backgroundColor = .clear
     }
-    var switchbtn = SwitchBtn()
 
     let title = UILabel().then{
         $0.translatesAutoresizingMaskIntoConstraints = false
@@ -41,12 +40,16 @@ class CustomManagePushNotificationCell: UITableViewCell {
         return button
     }()
     
+    private lazy var switchButton = SwitchButton()
+    
     //MARK: - Lifecycle
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         addContentView()
         location()
+        switchButton.delegate = self
     }
+    
 
     //MARK: - Selctors
     @objc func SwitchMoveButton(){
@@ -55,7 +58,6 @@ class CustomManagePushNotificationCell: UITableViewCell {
         }else{
             backgroundColor = .cyan
         }
-        switchState = !switchState!
     }
     
     
@@ -65,11 +67,10 @@ class CustomManagePushNotificationCell: UITableViewCell {
         view.addSubview(title)
         view.addSubview(explanation)
         contentView.addSubview(divider)
-        contentView.addSubview(switchPushManage)
+        contentView.addSubview(switchButton)
     }
-
+    
     private func location(){
-
         view.snp.makeConstraints { (make) in
             make.height.equalTo(frame.height/1.706)
             make.centerY.equalTo(snp.centerY)
@@ -84,7 +85,7 @@ class CustomManagePushNotificationCell: UITableViewCell {
             make.left.equalTo(view.snp.left).offset(contentView.frame.height/58)
         }
         
-        switchPushManage.snp.makeConstraints { (make) in
+        switchButton.snp.makeConstraints { (make) in
             make.centerY.equalTo(snp.centerY)
             make.right.equalTo(contentView.snp.right)
             make.height.equalTo(frame.height/2.71)
@@ -100,5 +101,10 @@ class CustomManagePushNotificationCell: UITableViewCell {
 
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+}
+extension CustomManagePushNotificationCell: SwieeftSwitchButtonDelegate{
+    func isOnValueChange(isOn: Bool) {
+        self.switchState = isOn
     }
 }
