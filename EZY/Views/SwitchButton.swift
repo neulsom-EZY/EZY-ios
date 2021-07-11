@@ -9,5 +9,14 @@ import UIKit
 import SnapKit
 
 class SwitchButton : UIButton{
-   
+    typealias SwitchColor = (bar: UIColor, circle: UIColor)
+    private var barView =  UIView()
+    private var circleView = UIView()
+    
+    var isOn: Bool = false{
+        didSet{
+            
+        }
+    }
+
 }

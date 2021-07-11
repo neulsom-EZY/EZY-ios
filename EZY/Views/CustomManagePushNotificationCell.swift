@@ -47,7 +47,6 @@ class CustomManagePushNotificationCell: UITableViewCell {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         addContentView()
         location()
-        switchButton.delegate = self
     }
     
 
