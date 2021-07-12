@@ -112,6 +112,7 @@ class MoreCalendarModalsViewController : UIViewController{
         view.addSubview(myToDo)
         view.addSubview(ourToDo)
         view.addSubview(errand)
+        view.addSubview(makeButton)
     }
     
     func cornerRadius(){
@@ -154,7 +155,13 @@ class MoreCalendarModalsViewController : UIViewController{
             make.top.equalTo(TitleLabel.snp.bottom).offset(view.frame.height/21.37)
             make.right.equalTo(view.frame.height/21.945 * -1)
         }
-        
+        makeButton.snp.makeConstraints { (make) in
+            make.top.equalTo(errand.snp.bottom).offset(view.frame.height/31.23)
+            make.right.equalTo(view.snp.right).offset(view.frame.height/22.56 * -1)
+            
+            make.width.equalTo(view.frame.height/11.6 )
+            make.height.equalTo(view.frame.height/24.61 )
+        }
         
     }
     
