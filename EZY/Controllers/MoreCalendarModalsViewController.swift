@@ -65,7 +65,7 @@ class MoreCalendarModalsViewController : UIViewController{
         $0.textColor = .white
         $0.dynamicFont(fontSize: 12, weight: .bold)
     }
-
+    let buttonCell : [AddScheduleModalBtn] = [MoreCalendarModalsViewController().myToDo,MoreCalendarModalsViewController().ourToDo,MoreCalendarModalsViewController().errand]
 
     static func instance() -> MoreCalendarModalsViewController {
         return MoreCalendarModalsViewController(nibName: nil, bundle: nil).then {
@@ -87,50 +87,41 @@ class MoreCalendarModalsViewController : UIViewController{
     }
     
     @objc func MyTodo(){
-        myToDo.isSelected = !myToDo.isSelected
-
-        if myToDo.isSelected {
-            myToDo.layer.borderWidth = 1
-            myToDo.layer.borderColor = UIColor.EZY_AFADFF.cgColor
-            ourToDo.layer.borderWidth = 0
-            ourToDo.layer.borderColor = UIColor.clear.cgColor
-            errand.layer.borderWidth = 0
-            errand.layer.borderColor = UIColor.clear.cgColor
-        }
-        else {
-            myToDo.layer.borderWidth = 0
-            myToDo.layer.borderColor = UIColor.clear.cgColor
-        }
+//        myToDo.isSelected = !myToDo.isSelected
+//
+//        if myToDo.isSelected {
+//            myToDo.layer.borderWidth = 1
+//            myToDo.layer.borderColor = UIColor.EZY_AFADFF.cgColor
+//
+//        }
+//        else {
+//            myToDo.layer.borderWidth = 0
+//            myToDo.layer.borderColor = UIColor.clear.cgColor
+//        }
     }
     @objc func OurTodo(){
-        ourToDo.isSelected = !ourToDo.isSelected
-            if ourToDo.isSelected {
-                ourToDo.layer.borderWidth = 1
-                ourToDo.layer.borderColor = UIColor.EZY_AFADFF.cgColor
-                myToDo.layer.borderWidth = 0
-                myToDo.layer.borderColor = UIColor.clear.cgColor
-                errand.layer.borderWidth = 0
-                errand.layer.borderColor = UIColor.clear.cgColor
-            }
-            else {
-                ourToDo.layer.borderWidth = 0
-                ourToDo.layer.borderColor = UIColor.clear.cgColor
-            }
+//        ourToDo.isSelected = !ourToDo.isSelected
+//            if ourToDo.isSelected {
+//                ourToDo.layer.borderWidth = 1
+//                ourToDo.layer.borderColor = UIColor.EZY_AFADFF.cgColor
+//            }
+//            else {
+//                ourToDo.layer.borderWidth = 0
+//                ourToDo.layer.borderColor = UIColor.clear.cgColor
+//            }
+            
     }
     @objc func Errand(){
-        errand.isSelected = !errand.isSelected
-            if errand.isSelected {
-                myToDo.layer.borderWidth = 0
-                myToDo.layer.borderColor = UIColor.clear.cgColor
-                ourToDo.layer.borderWidth = 0
-                ourToDo.layer.borderColor = UIColor.clear.cgColor
-                errand.layer.borderWidth = 1
-                errand.layer.borderColor = UIColor.EZY_AFADFF.cgColor
-            }
-            else {
-                errand.layer.borderWidth = 0
-                errand.layer.borderColor = UIColor.clear.cgColor
-            }
+//        errand.isSelected = !errand.isSelected
+//            if errand.isSelected {
+//
+//                errand.layer.borderWidth = 1
+//                errand.layer.borderColor = UIColor.EZY_AFADFF.cgColor
+//            }
+//            else {
+//                errand.layer.borderWidth = 0
+//                errand.layer.borderColor = UIColor.clear.cgColor
+//            }
     }
     @objc func makeTodo(){
         let vc : UIViewController = AddErrandViewController()
@@ -138,6 +129,7 @@ class MoreCalendarModalsViewController : UIViewController{
             present(vc, animated: true, completion: nil)
     }
     //MARK: - HELPERS
+ 
     
     func addTransparentsview(frame : CGRect){
         let window = UIApplication.shared.keyWindow
