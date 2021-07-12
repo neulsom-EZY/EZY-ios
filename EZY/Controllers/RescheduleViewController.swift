@@ -875,10 +875,6 @@ class RescheduleViewController: UIViewController {
             make.left.equalTo(titleBackgroundView)
             make.top.equalTo(explanationBackgroundView.snp.bottom).offset(self.view.frame.height/38.6)
         }
-        
-
-
-        
     }
     
     

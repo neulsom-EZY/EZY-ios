@@ -10,6 +10,13 @@ import UIKit
 class ErrandDetailViewController: UIViewController{
     
     //MARK: - Properties
+    
+    lazy var calendarViewButton = WhiteBackgroundView()
+    
+    lazy var timeViewButton = WhiteBackgroundView()
+    
+    lazy var locationViewButton = WhiteBackgroundView()
+    
     lazy var backButton = UIButton().then {
         $0.setImage(UIImage(named: "EZY_ErrandBackButtonImage"), for: .normal)
     }
@@ -38,11 +45,29 @@ class ErrandDetailViewController: UIViewController{
     }
     
     lazy var errandTitleContentTextView = UITextView().then {
-        $0.text = "디저트 가게에서 마카롱이랑 크로플이랑 맛있는 빵 사오기"
+        $0.text = "디저트 가게에서 마카롱이랑 크로플이랑 맛있는 빵 사오기 디저트 가게에서 마카롱이랑 크로플이랑 맛있는 빵 사오기"
         $0.textAlignment = .left
         $0.backgroundColor = .clear
         $0.textColor = UIColor(red: 167/255, green: 167/255, blue: 167/255, alpha: 1)
         $0.dynamicFont(fontSize: 12, currentFontName: "AppleSDGothicNeo-Medium")
+    }
+    
+    lazy var calendarLabel = UILabel().then {
+        $0.text = "2021. 05. 09 화요일"
+        $0.textColor = UIColor(red: 101/255, green: 101/255, blue: 101/255, alpha: 1)
+        $0.dynamicFont(fontSize: 16, currentFontName: "Poppins-Regular")
+    }
+    
+    lazy var timeLabel = UILabel().then {
+        $0.text = "11:00AM - 1:00PM"
+        $0.textColor = UIColor(red: 101/255, green: 101/255, blue: 101/255, alpha: 1)
+        $0.dynamicFont(fontSize: 16, currentFontName: "Poppins-Regular")
+    }
+    
+    lazy var locationLabel = UILabel().then {
+        $0.text = "송정역 이디야 카페"
+        $0.textColor = UIColor(red: 101/255, green: 101/255, blue: 101/255, alpha: 1)
+        $0.dynamicFont(fontSize: 16, currentFontName: "Poppins-Regular")
     }
     
     //MARK: - LifeCycle
@@ -61,6 +86,30 @@ class ErrandDetailViewController: UIViewController{
         self.view.addSubview(errandTitleView)
         errandTitleView.addSubview(errandTitleQuestionLabel)
         errandTitleView.addSubview(errandTitleContentTextView)
+        
+        self.view.addSubview(calendarViewButton)
+        calendarViewButton.isEnabled = false
+        calendarViewButton.addSubview(calendarViewButton.backgroundView)
+        calendarViewButton.backgroundView.addSubview(calendarViewButton.iconImageButton)
+        
+        self.view.addSubview(timeViewButton)
+        timeViewButton.isEnabled = false
+        timeViewButton.addSubview(timeViewButton.backgroundView)
+        timeViewButton.backgroundView.addSubview(timeViewButton.iconImageButton)
+        
+        self.view.addSubview(locationViewButton)
+        locationViewButton.isEnabled = false
+        locationViewButton.addSubview(locationViewButton.backgroundView)
+        locationViewButton.backgroundView.addSubview(locationViewButton.iconImageButton)
+        
+        self.view.addSubview(calendarLabel)
+        self.view.addSubview(timeLabel)
+        self.view.addSubview(locationLabel)
+        
+        calendarViewButton.dataSetting(iconImage: UIImage(named: "EZY_Calendar.svg")!)
+        timeViewButton.dataSetting(iconImage: UIImage(named: "EZY_TimeSquare.svg")!)
+        locationViewButton.dataSetting(iconImage: UIImage(named: "EZY_Location.svg")!)
+
         
         backButton.snp.makeConstraints { make in
             make.top.equalTo(self.view.safeAreaLayoutGuide).offset(self.view.frame.height/47.7)
@@ -95,7 +144,69 @@ class ErrandDetailViewController: UIViewController{
             make.top.equalTo(errandTitleQuestionLabel.snp.bottom).offset(self.view.frame.height/90.2)
             make.centerX.equalToSuperview()
             make.bottom.equalToSuperview().offset(self.view.frame.width/22)
-            
+        }
+        
+        calendarViewButton.snp.makeConstraints { make in
+            make.top.equalTo(errandTitleView.snp.bottom).offset(self.view.frame.height/30)
+            make.height.equalToSuperview().dividedBy(16)
+            make.width.equalTo(calendarViewButton.snp.height)
+            make.left.equalTo(errandTitleView)
+        }
+        
+        calendarViewButton.backgroundView.snp.makeConstraints { make in
+            make.top.left.bottom.right.equalToSuperview()
+        }
+        
+        calendarViewButton.iconImageButton.snp.makeConstraints { make in
+            make.centerX.centerY.equalToSuperview()
+            make.height.width.equalToSuperview().dividedBy(2.4)
+        }
+        
+        timeViewButton.snp.makeConstraints { make in
+            make.top.equalTo(calendarViewButton.snp.bottom).offset(self.view.frame.height/47.7)
+            make.height.equalToSuperview().dividedBy(16)
+            make.width.equalTo(timeViewButton.snp.height)
+            make.left.equalTo(calendarViewButton)
+        }
+        
+        timeViewButton.backgroundView.snp.makeConstraints { make in
+            make.top.left.bottom.right.equalToSuperview()
+        }
+        
+        timeViewButton.iconImageButton.snp.makeConstraints { make in
+            make.centerX.centerY.equalToSuperview()
+            make.height.width.equalToSuperview().dividedBy(2.4)
+        }
+        
+        locationViewButton.snp.makeConstraints { make in
+            make.top.equalTo(timeViewButton.snp.bottom).offset(self.view.frame.height/47.7)
+            make.height.equalToSuperview().dividedBy(16)
+            make.width.equalTo(timeViewButton.snp.height)
+            make.left.equalTo(timeViewButton)
+        }
+        
+        locationViewButton.backgroundView.snp.makeConstraints { make in
+            make.top.left.bottom.right.equalToSuperview()
+        }
+        
+        locationViewButton.iconImageButton.snp.makeConstraints { make in
+            make.centerX.centerY.equalToSuperview()
+            make.height.width.equalToSuperview().dividedBy(2)
+        }
+        
+        calendarLabel.snp.makeConstraints { make in
+            make.centerY.equalTo(calendarViewButton)
+            make.left.equalTo(calendarViewButton.snp.right).offset(self.view.frame.width/13.8)
+        }
+        
+        timeLabel.snp.makeConstraints { make in
+            make.centerY.equalTo(timeViewButton)
+            make.left.equalTo(timeViewButton.snp.right).offset(self.view.frame.width/13.8)
+        }
+        
+        locationLabel.snp.makeConstraints { make in
+            make.centerY.equalTo(locationViewButton)
+            make.left.equalTo(locationViewButton.snp.right).offset(self.view.frame.width/13.8)
         }
     }
 }
