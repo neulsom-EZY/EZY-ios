@@ -12,10 +12,7 @@ import SnapKit
 protocol BulletinDelegate: class {
     func onTapClose()
 }
-
 class MoreCalendarModalsViewController : UIViewController{
-    
-    
     //MARK: - Properties
     weak var delegate: BulletinDelegate?
     
@@ -29,32 +26,6 @@ class MoreCalendarModalsViewController : UIViewController{
         $0.text = "추가 할 항목을 선택해주세요"
         $0.dynamicFont(fontSize: 22, weight: .thin)
     }
-    
-    
-        
-    private let myToDo : MoreCalendarModalsButton = {
-        let viewModel = MyCustomButtonViewModel(title: "나의 할 일", image: UIImage(named: "EZY_user")!, color: .EZY_BAC8FF)
-
-        let button = MoreCalendarModalsButton(with: viewModel)
-        
-        button.addTarget(self, action: #selector(MyTodo), for: .touchUpInside)
-        return button
-    }()
-    
-    private let ourToDo : MoreCalendarModalsButton = {
-        let viewModel = MyCustomButtonViewModel(title: "우리의 할 일", image: UIImage(named: "EZY_user-3")!, color: .EZY_CFCBFF)
-        let button = MoreCalendarModalsButton(with: viewModel)
-        button.addTarget(self, action: #selector(OurTodo), for: .touchUpInside)
-        
-        return button
-    }()
-    
-    private let errand : MoreCalendarModalsButton = {
-        let viewModel = MyCustomButtonViewModel(title: "심부름", image: UIImage(named: "EZY_work")!, color: .EZY_AFADFF)
-        let button = MoreCalendarModalsButton(with: viewModel)
-        button.addTarget(self, action: #selector(Errand), for: .touchUpInside)
-        return button
-    }()
     
     static func instance() -> MoreCalendarModalsViewController {
         return MoreCalendarModalsViewController(nibName: nil, bundle: nil).then {
@@ -116,9 +87,7 @@ class MoreCalendarModalsViewController : UIViewController{
     }
     
     func cornerRadius(){
-        myToDo.layer.cornerRadius = view.frame.height/40.6
-        ourToDo.layer.cornerRadius = view.frame.height/40.6
-        errand.layer.cornerRadius = view.frame.height/40.6
+  
     }
     
     func location(){
