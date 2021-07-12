@@ -105,14 +105,14 @@ class LoginViewController: UIViewController{
     
     @objc
     func onTapForgotPassword(){
-//        let controller = NewPasswordPhoneNumViewController()
-//        navigationController?.pushViewController(controller, animated: true)
+        let controller = NewPasswordPhoneNumViewController()
+        navigationController?.pushViewController(controller, animated: true)
     }
     
     @objc
     func onTapSignUp(){
-//        let controller = SignUpNicknameViewController()
-//        navigationController?.pushViewController(controller, animated: true)
+        let controller = SignUpNicknameViewController()
+        navigationController?.pushViewController(controller, animated: true)
     }
     
     @objc
