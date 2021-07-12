@@ -118,6 +118,8 @@ class LoginViewController: UIViewController{
     @objc
     func onTapLogin(){
         print("DEBUG : Click bottom login button Button")
+        let controller = ShowPlanViewController()
+        navigationController?.pushViewController(controller, animated: true)
     }
 
     //MARK: - Helpers
