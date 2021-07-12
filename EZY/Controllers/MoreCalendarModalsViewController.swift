@@ -12,7 +12,10 @@ import SnapKit
 protocol BulletinDelegate: class {
     func onTapClose()
 }
+
 class MoreCalendarModalsViewController : UIViewController{
+    
+    
     //MARK: - Properties
     weak var delegate: BulletinDelegate?
     
@@ -25,6 +28,35 @@ class MoreCalendarModalsViewController : UIViewController{
     let TitleLabel = UILabel().then{
         $0.text = "추가 할 항목을 선택해주세요"
         $0.dynamicFont(fontSize: 22, weight: .thin)
+    }
+    
+    
+        
+    private let myToDo : AddScheduleModalBtn = {
+        let viewModel = CustomButtonViewModel(title: "나의 할 일", image: UIImage(named: "EZY_user")?.withRenderingMode(.alwaysTemplate), color: .EZY_BAC8FF)
+
+        let button = AddScheduleModalBtn(with: viewModel)
+        
+        button.addTarget(self, action: #selector(MyTodo), for: .touchUpInside)
+        return button
+    }()
+    
+    private let ourToDo : AddScheduleModalBtn = {
+        let viewModel = CustomButtonViewModel(title: "우리의 할 일", image: UIImage(named: "EZY_user-3")?.withRenderingMode(.alwaysTemplate), color: .EZY_CFCBFF)
+        let button = AddScheduleModalBtn(with: viewModel)
+        button.addTarget(self, action: #selector(OurTodo), for: .touchUpInside)
+        
+        return button
+    }()
+    
+    private let errand : AddScheduleModalBtn = {
+        let viewModel = CustomButtonViewModel(title: "심부름", image: UIImage(named: "EZY_work")?.withRenderingMode(.alwaysTemplate), color: .EZY_AFADFF)
+        let button = AddScheduleModalBtn(with: viewModel)
+        button.addTarget(self, action: #selector(Errand), for: .touchUpInside)
+        return button
+    }()
+    private let makeButton = UIButton().then{
+        $0.backgroundColor = .EZY_AAA3FF
     }
     
     static func instance() -> MoreCalendarModalsViewController {
@@ -83,11 +115,18 @@ class MoreCalendarModalsViewController : UIViewController{
         view.addSubview(transparentView)
         view.addSubview(bgView)
         view.addSubview(TitleLabel)
-
+        view.addSubview(myToDo)
+        view.addSubview(ourToDo)
+        view.addSubview(errand)
     }
     
     func cornerRadius(){
-  
+        myToDo.layer.cornerRadius = view.frame.height/40.6
+        ourToDo.layer.cornerRadius = view.frame.height/40.6
+        errand.layer.cornerRadius = view.frame.height/40.6
+        myToDo.layer.applySketchShadow(color: .gray, alpha: 0.25, x: 0, y: 4, blur: 14, spread: 0)
+        ourToDo.layer.applySketchShadow(color: .gray, alpha: 0.25, x: 0, y: 4, blur: 14, spread: 0)
+        errand.layer.applySketchShadow(color: .gray, alpha: 0.25, x: 0, y: 4, blur: 14, spread: 0)
     }
     
     func location(){
@@ -95,14 +134,33 @@ class MoreCalendarModalsViewController : UIViewController{
             make.left.equalToSuperview()
             make.right.equalToSuperview()
             make.bottom.equalToSuperview().offset(30)
-            make.height.equalToSuperview().dividedBy(2.1)
+            make.height.equalToSuperview().dividedBy(2.2)
         }
         
         TitleLabel.snp.makeConstraints { (make) in
             make.centerX.equalTo(bgView.snp.centerX)
-            make.top.equalTo(bgView.snp.top).offset(view.frame.height/18.4545)
+            make.top.equalTo(bgView.snp.top).offset(view.frame.height/18.45)
             
         }
+        myToDo.snp.makeConstraints { (make) in
+            make.height.equalTo(view.frame.height/5.927)
+            make.width.equalTo(view.frame.height/8.95)
+            make.top.equalTo(TitleLabel.snp.bottom).offset(view.frame.height/21.37)
+            make.left.equalTo(view.frame.height/21.945)
+        }
+        ourToDo.snp.makeConstraints { (make) in
+            make.height.equalTo(view.frame.height/5.927)
+            make.width.equalTo(view.frame.height/8.95)
+            make.top.equalTo(TitleLabel.snp.bottom).offset(view.frame.height/21.37)
+            make.centerX.equalTo(bgView.snp.centerX)
+        }
+        errand.snp.makeConstraints { (make) in
+            make.height.equalTo(view.frame.height/5.927)
+            make.width.equalTo(view.frame.height/8.95)
+            make.top.equalTo(TitleLabel.snp.bottom).offset(view.frame.height/21.37)
+            make.right.equalTo(view.frame.height/21.945 * -1)
+        }
+        
         
     }
     

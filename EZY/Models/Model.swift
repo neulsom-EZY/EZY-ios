@@ -18,7 +18,7 @@ struct CollectionTableCellModel{
 
 //MARK: - MoreCalendarModal Button 
 
-struct MyCustomButtonViewModel{
+struct CustomButtonViewModel{
     let title : String?
     let image: UIImage?
     let color : UIColor?
