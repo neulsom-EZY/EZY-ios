@@ -65,12 +65,6 @@ class AddErrandViewController : UIViewController{
         return button
     }()
     
-    private let plusPeople : OneAlertButton = {
-        let viewModel = OneAlertBtn(icon: UIImage(named: "EZY_user-3")?.withRenderingMode(.alwaysTemplate), iconTintColor: .EZY_ADCAE5)
-        let button = OneAlertButton(with: viewModel)
-        button.addTarget(self, action: #selector(AddRecipient), for: .touchUpInside)
-        return button
-    }()
     
     private lazy var explanationContainerView : UIView = {
         let title = "설명"
@@ -78,12 +72,25 @@ class AddErrandViewController : UIViewController{
 
         return view
     }()
-    
+    private let kindOfCollectionView = UILabel().then{
+        $0.text = "어떤 분에게 부탁할까요?"
+        $0.textColor = .EZY_B6B6B6
+        $0.dynamicFont(fontSize: 12, weight: .bold)
+    }
     private let explanationTextView : UITextView = {
         let tf = Utilities().textView(TextColor: .EZY_929292, TextSize: 14,font: .medium)
         return tf
     }()
     
+    fileprivate let collectionView: UICollectionView = {
+        let layout = UICollectionViewFlowLayout()
+        let cv = UICollectionView(frame: .zero, collectionViewLayout: layout)
+        cv.contentInset = UIEdgeInsets(top: 0, left: 30, bottom: 0, right: 0)
+        layout.scrollDirection = .horizontal
+        cv.translatesAutoresizingMaskIntoConstraints = false
+        cv.register(UICollectionViewCell.self, forCellWithReuseIdentifier: "cell")
+        return cv
+    }()
     
     private lazy var addButton : AdditionalButton = {
         let button = AdditionalButton(type: .system)
@@ -92,9 +99,6 @@ class AddErrandViewController : UIViewController{
         return button
     }()
     
-    static func instance() -> AddErrandViewController {
-        return AddErrandViewController.init(nibName: nil, bundle: nil)
-    }
     
     
     
@@ -104,7 +108,8 @@ class AddErrandViewController : UIViewController{
     override func viewDidLoad() {
         super.viewDidLoad()
         configureUI()
-        
+        collectionView.dataSource = self
+        collectionView.delegate = self
     }
     
     //MARK: - Selectors
@@ -126,9 +131,6 @@ class AddErrandViewController : UIViewController{
     @objc func locationAlert(){
         //위치 Alert 실행시킬 부분
     }
-    @objc func AddRecipient(){
-        //받는사람 추가하는 부분
-    }
     @objc func Addmytodobtn(){
         print("DEBUG:AddButton")
         //추가페이지 작성후 실행시키는 코드
@@ -143,6 +145,7 @@ class AddErrandViewController : UIViewController{
     //MARK: - Helpers
     func configureUI(){
         view.backgroundColor = .white
+        collectionView.backgroundColor = .clear
         cornerRadius()
         addView()
         location()
@@ -161,9 +164,10 @@ class AddErrandViewController : UIViewController{
         view.addSubview(RequestList)
         view.addSubview(calendarBtn)
         view.addSubview(clockBtn)
-        view.addSubview(plusPeople)
         view.addSubview(locationBtn)
         view.addSubview(explanationContainerView)
+        view.addSubview(collectionView)
+        view.addSubview(kindOfCollectionView)
         view.addSubview(addButton)
     }
     func location(){
@@ -204,20 +208,21 @@ class AddErrandViewController : UIViewController{
             make.left.equalTo(calendarBtn.snp.left)
             make.top.equalTo(clockBtn.snp.bottom).offset(view.frame.height/47.7)
         }
-        plusPeople.snp.makeConstraints { (make) in
-            make.top.equalTo(locationBtn.snp.bottom).offset(view.frame.height/47.7)
-            make.height.width.equalTo(self.view.frame.height/18.0)
-            make.left.equalTo(calendarBtn.snp.left)
-            make.right.equalToSuperview()
-            
-        }
         explanationContainerView.snp.makeConstraints { (make) in
             make.height.equalTo(self.view.frame.height/10.8)
-            make.top.equalTo(plusPeople.snp.bottom).offset(self.view.frame.height/30.0)
+            make.top.equalTo(locationBtn.snp.bottom).offset(self.view.frame.height/30.0)
             make.left.equalTo(backbutton.snp.left)
             make.right.equalTo(self.view.frame.width/13.8 * -1)
         }
-
+        kindOfCollectionView.snp.makeConstraints { (make) in
+            make.left.equalTo(backbutton.snp.left)
+            make.top.equalTo(explanationContainerView.snp.bottom).offset(view.frame.height/38.6)
+        }
+        collectionView.snp.makeConstraints { (make) in
+            make.right.left.equalToSuperview()
+            make.height.equalTo(view.frame.height/25.375)
+            make.top.equalTo(kindOfCollectionView.snp.bottom).offset(view.frame.height/81.2)
+        }
         addButton.snp.makeConstraints { (make) in
             make.bottom.equalToSuperview().offset(view.frame.height/10.9 * -1)
             make.height.equalTo(self.view.frame.height/18.0)
@@ -227,5 +232,44 @@ class AddErrandViewController : UIViewController{
         }
     }
 }
+extension AddErrandViewController : UICollectionViewDelegateFlowLayout,UICollectionViewDataSource{
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return 100
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath)
+        cell.backgroundColor = .red
+        return cell
+    }
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        return CGSize(width: 100, height: 30)
+    }
+    
+    
+}
 
-
+#if DEBUG
+import SwiftUI
+struct LoginViewControllerRepresentable: UIViewControllerRepresentable {
+    
+func updateUIViewController(_ uiView: UIViewController,context: Context) {
+        // leave this empty
+}
+    @available(iOS 13.0.0, *)
+    func makeUIViewController(context: Context) -> UIViewController{
+        AddErrandViewController()
+    }
+}
+@available(iOS 13.0, *)
+struct LoginViewControllerRepresentable_PreviewProvider: PreviewProvider {
+    static var previews: some View {
+        Group {
+            LoginViewControllerRepresentable()
+                .ignoresSafeArea()
+                .previewDisplayName(/*@START_MENU_TOKEN@*/"Preview"/*@END_MENU_TOKEN@*/)
+                .previewDevice(PreviewDevice(rawValue: "iPhone 11"))
+        }
+        
+    }
+} #endif

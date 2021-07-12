@@ -19,6 +19,7 @@
 		EE3779092679FAC100334D4A /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE3779082679FAC100334D4A /* Model.swift */; };
 		EE782853268150A900AECC65 /* AddOurToDoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE782852268150A900AECC65 /* AddOurToDoViewController.swift */; };
 		EE7828552681859200AECC65 /* AddErrandViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE7828542681859200AECC65 /* AddErrandViewController.swift */; };
+		EE896CC3269BEA450099E8CB /* WhoShouldIAsk.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE896CC2269BEA450099E8CB /* WhoShouldIAsk.swift */; };
 		EE93B4D72687639F0055D7A6 /* OneAlertButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE93B4D62687639F0055D7A6 /* OneAlertButton.swift */; };
 		EEA457F42682FFA100C08D17 /* AlertButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEA457F32682FFA100C08D17 /* AlertButton.swift */; };
 		EED007D526674AC2009A5A87 /* Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = EED007D426674AC2009A5A87 /* Utilities.swift */; };
@@ -47,6 +48,7 @@
 		EE3779082679FAC100334D4A /* Model.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Model.swift; sourceTree = "<group>"; };
 		EE782852268150A900AECC65 /* AddOurToDoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddOurToDoViewController.swift; sourceTree = "<group>"; };
 		EE7828542681859200AECC65 /* AddErrandViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddErrandViewController.swift; sourceTree = "<group>"; };
+		EE896CC2269BEA450099E8CB /* WhoShouldIAsk.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WhoShouldIAsk.swift; sourceTree = "<group>"; };
 		EE93B4D62687639F0055D7A6 /* OneAlertButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OneAlertButton.swift; sourceTree = "<group>"; };
 		EEA457F32682FFA100C08D17 /* AlertButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertButton.swift; sourceTree = "<group>"; };
 		EED007D426674AC2009A5A87 /* Utilities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utilities.swift; sourceTree = "<group>"; };
@@ -157,6 +159,7 @@
 				EEA457F32682FFA100C08D17 /* AlertButton.swift */,
 				EE93B4D62687639F0055D7A6 /* OneAlertButton.swift */,
 				EEF7FF5B268653EB00FD7800 /* inputContainerTextFieldView.swift */,
+				EE896CC2269BEA450099E8CB /* WhoShouldIAsk.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -363,6 +366,7 @@
 				EEA457F42682FFA100C08D17 /* AlertButton.swift in Sources */,
 				EED20D63266C0F90000E0856 /* AdditionalButton.swift in Sources */,
 				EE93B4D72687639F0055D7A6 /* OneAlertButton.swift in Sources */,
+				EE896CC3269BEA450099E8CB /* WhoShouldIAsk.swift in Sources */,
 				EEEDB2C22664D30D00E5C53A /* extensions.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

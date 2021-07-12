@@ -219,7 +219,7 @@ class AddOurToDoViewController: UIViewController {
             make.top.equalTo(selectPeople.snp.bottom).offset(view.frame.height/7)
         }
         addButton.snp.makeConstraints { (make) in
-            make.bottom.equalTo(tagLabel.snp.bottom).offset(view.frame.height/6.1)
+            make.top.equalTo(tagLabel.snp.bottom).offset(view.frame.height/6.1)
             make.height.equalTo(self.view.frame.height/18.0)
             make.left.equalTo(backbutton.snp.left)
             make.right.equalTo(titleContainerView.snp.right)
