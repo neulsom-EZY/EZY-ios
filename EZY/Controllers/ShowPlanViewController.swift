@@ -9,7 +9,7 @@ import UIKit
 import SnapKit
 import Then
 
-class ShowScheduleViewController: UIViewController{
+class ShowPlanViewController: UIViewController{
     
     //MARK: Properties
     private lazy var scheduleTypeCollectionMainView = ScheduleTypeCollectionView.init(frame: self.view.frame)
@@ -22,8 +22,8 @@ class ShowScheduleViewController: UIViewController{
     let titleArray: [String] = ["EZY 회의", "디자인 이론 공부", "강아지 산책시키기", "카페에서 마카롱 사오기", "EZY 회의", "디자인 이론 공부", "강아지 산책시키기", "카페에서 마카롱 사오기"]
     let planTimeArray: [String] = ["12:00 - 13:00", "12:00 - 13:00", "12:00 - 13:00", "12:00 - 13:00", "12:00 - 13:00", "12:00 - 13:00", "12:00 - 13:00", "12:00 - 13:00"]
     
-    let scheduleTypesArray = ["나의 할 일","우리의 할 일","심부름","문의하기"]
-    let icon = [UIImage(named: "EZY_MyJob"), UIImage(named: "EZY_OurJob"), UIImage(named: "EZY_Errand"), UIImage(named: "EZY_Errand")]
+    let scheduleTypesArray = ["나의 할 일","우리의 할 일","심부름","문의하기", "설정"]
+    let icon = [UIImage(named: "EZY_MyJob"), UIImage(named: "EZY_OurJob"), UIImage(named: "EZY_Errand"), UIImage(named: "EZY_Errand"),UIImage(named: "EZY_Errand")]
     
     lazy var userName = "Y00ujin"
     
@@ -285,7 +285,7 @@ class ShowScheduleViewController: UIViewController{
     }
 }
 
-extension ShowScheduleViewController: UICollectionViewDelegate, UICollectionViewDelegateFlowLayout{
+extension ShowPlanViewController: UICollectionViewDelegate, UICollectionViewDelegateFlowLayout{
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         return CGSize.init(width: self.view.frame.width / 3.45, height: (self.view.frame.width / 3)/0.95)
     }
@@ -301,7 +301,7 @@ extension ShowScheduleViewController: UICollectionViewDelegate, UICollectionView
     }
 }
 
-extension ShowScheduleViewController: UICollectionViewDataSource{
+extension ShowPlanViewController: UICollectionViewDataSource{
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return scheduleTypesArray.count
     }
@@ -320,7 +320,7 @@ extension ShowScheduleViewController: UICollectionViewDataSource{
     }
 }
 
-extension ShowScheduleViewController: UITableViewDataSource{
+extension ShowPlanViewController: UITableViewDataSource{
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return groupNameArray.count
@@ -357,7 +357,7 @@ extension ShowScheduleViewController: UITableViewDataSource{
 
 }
 
-extension ShowScheduleViewController: UITableViewDelegate{
+extension ShowPlanViewController: UITableViewDelegate{
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         print("tableView - didSelectRowAt")
