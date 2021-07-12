@@ -7,7 +7,7 @@
 
 import UIKit
 
-class RescheduleViewController: UIViewController {
+class PersonalPlanChangeViewController: UIViewController {
     
     lazy var topView = TopView()
     
@@ -224,6 +224,17 @@ class RescheduleViewController: UIViewController {
         $0.dynamicFont(fontSize: 12, currentFontName: "AppleSDGothicNeo-Bold")
     }
     
+    lazy var changeButton = UIButton().then {
+        $0.setTitle("변 경", for: .normal)
+        $0.layer.cornerRadius = 10
+        $0.backgroundColor = UIColor(red: 186/255, green: 200/255, blue: 255/255, alpha: 1)
+        $0.dynamicFont(fontSize: 14, currentFontName: "AppleSDGothicNeo-SemiBold")
+    }
+    
+    lazy var changeButtonLayoutBox = UIView().then {
+        $0.backgroundColor = .clear
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -241,6 +252,8 @@ class RescheduleViewController: UIViewController {
 
         labelSetting()
         
+        tagCollectionViewSetting()
+        
         tagAddModalViewSetting()
         
         tagColorCollectionViewSetting()
@@ -254,8 +267,6 @@ class RescheduleViewController: UIViewController {
         TimeTableViewSetting()
         
         repeatCollectionViewSetting()
-        
-        tagCollectionViewSetting()
     }
     
     func tagCollectionViewSetting(){
@@ -267,10 +278,24 @@ class RescheduleViewController: UIViewController {
         self.view.addSubview(tagCollectionView)
         
         tagCollectionView.snp.makeConstraints { make in
-            make.top.equalTo(tagLabel.snp.bottom).offset(self.view.frame.height/47.7)
+            tagCollectionView.backgroundColor = .clear
+            
+            make.top.equalTo(tagLabel.snp.bottom).offset(self.view.frame.height/60)
             make.left.equalTo(tagLabel)
-            make.height.equalToSuperview().dividedBy(10.5)
+            make.height.equalToSuperview().dividedBy(10)
             make.right.equalToSuperview()
+        }
+        
+        changeButton.snp.makeConstraints { make in
+            make.left.equalTo(tagCollectionView)
+            make.centerX.equalToSuperview()
+            make.top.equalToSuperview().offset(self.view.frame.height/27)
+            make.height.equalToSuperview().dividedBy(2.8)
+        }
+        
+        changeButtonLayoutBox.snp.makeConstraints { make in
+            make.top.equalTo(tagCollectionView.snp.bottom)
+            make.left.right.bottom.equalToSuperview()
         }
     }
     
@@ -720,6 +745,8 @@ class RescheduleViewController: UIViewController {
         self.view.addSubview(tagMajorBandButton)
         self.view.addSubview(tagFreedomBandButton)
         self.view.addSubview(tagAddButton)
+        self.view.addSubview(changeButtonLayoutBox)
+        changeButtonLayoutBox.addSubview(changeButton)
         
         tagStudyButton.tag = 0
         tagWalkButton.tag = 1
@@ -918,7 +945,7 @@ class RescheduleViewController: UIViewController {
     
 }
 
-extension RescheduleViewController: UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout{
+extension PersonalPlanChangeViewController: UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout{
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         if collectionView == tagColorCollectionView{
             return TagColorModels.count
@@ -1018,6 +1045,8 @@ extension RescheduleViewController: UICollectionViewDataSource, UICollectionView
                     
                 }
                 collectionView.reloadData()
+            }else{
+                tagAddModalView.isHidden = false
             }
         }
     }
@@ -1030,7 +1059,7 @@ extension RescheduleViewController: UICollectionViewDataSource, UICollectionView
         }else if collectionView == repeatCollectionView{
             return CGSize(width: 30, height: 30)
         }else if collectionView == tagCollectionView{
-            return CGSize(width: self.view.frame.width/4.4, height: self.view.frame.height/25.3)
+            return CGSize(width: self.view.frame.width/4.4, height: self.view.frame.height/23)
         }
 
         return CGSize()
@@ -1049,7 +1078,7 @@ extension RescheduleViewController: UICollectionViewDataSource, UICollectionView
     }
 }
 
-extension RescheduleViewController: HSCycleGalleryViewDelegate {
+extension PersonalPlanChangeViewController: HSCycleGalleryViewDelegate {
     
     func numberOfItemInCycleGalleryView(_ cycleGalleryView: CalendarView) -> Int {
         return 20
@@ -1062,13 +1091,13 @@ extension RescheduleViewController: HSCycleGalleryViewDelegate {
     
 }
 
-extension RescheduleViewController: UITableViewDelegate{
+extension PersonalPlanChangeViewController: UITableViewDelegate{
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return CGFloat(20)
     }
 }
 
-extension RescheduleViewController: UITableViewDataSource{
+extension PersonalPlanChangeViewController: UITableViewDataSource{
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return 7
     }
