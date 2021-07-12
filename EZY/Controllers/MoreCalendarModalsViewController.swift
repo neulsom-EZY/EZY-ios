@@ -86,8 +86,17 @@ class MoreCalendarModalsViewController : UIViewController{
     }
     
     @objc func MyTodo(){
+        
     }
-    
+    @objc func OurTodo(){
+        
+    }
+    @objc func ErrandTodo(){
+        
+    }
+    @objc func MakeTodo(){
+        
+    }
     //MARK: - HELPERS
  
     
@@ -113,12 +122,14 @@ class MoreCalendarModalsViewController : UIViewController{
         view.addSubview(ourToDo)
         view.addSubview(errand)
         view.addSubview(makeButton)
+        view.addSubview(makeTitle)
     }
     
     func cornerRadius(){
         myToDo.layer.cornerRadius = view.frame.height/40.6
         ourToDo.layer.cornerRadius = view.frame.height/40.6
         errand.layer.cornerRadius = view.frame.height/40.6
+        makeButton.layer.cornerRadius = view.frame.height/81.2
         myToDo.layer.applySketchShadow(color: .gray, alpha: 0.25, x: 0, y: 4, blur: 14, spread: 0)
         ourToDo.layer.applySketchShadow(color: .gray, alpha: 0.25, x: 0, y: 4, blur: 14, spread: 0)
         errand.layer.applySketchShadow(color: .gray, alpha: 0.25, x: 0, y: 4, blur: 14, spread: 0)
@@ -158,11 +169,12 @@ class MoreCalendarModalsViewController : UIViewController{
         makeButton.snp.makeConstraints { (make) in
             make.top.equalTo(errand.snp.bottom).offset(view.frame.height/31.23)
             make.right.equalTo(view.snp.right).offset(view.frame.height/22.56 * -1)
-            
             make.width.equalTo(view.frame.height/11.6 )
             make.height.equalTo(view.frame.height/24.61 )
         }
-        
+        makeTitle.snp.makeConstraints { (make) in
+            make.center.equalTo(makeButton.snp.center)
+        }
     }
     
 }
