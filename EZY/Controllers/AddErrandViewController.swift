@@ -11,6 +11,8 @@ import Then
 
 class AddErrandViewController : UIViewController{
     //MARK: - Properties
+    static let data = ["+ 추가"]
+    static let color : [UIColor] = [.EZY_6383FF,.EZY_BAC8FF]
     private let backbutton = UIButton().then{
         $0.tintColor = .EZY_AFADFF
         $0.setImage(UIImage(systemName: "arrow.left"), for: .normal)
@@ -88,7 +90,8 @@ class AddErrandViewController : UIViewController{
         cv.contentInset = UIEdgeInsets(top: 0, left: 30, bottom: 0, right: 0)
         layout.scrollDirection = .horizontal
         cv.translatesAutoresizingMaskIntoConstraints = false
-        cv.register(UICollectionViewCell.self, forCellWithReuseIdentifier: "cell")
+        cv.register(WhoShouldIAskCell.self, forCellWithReuseIdentifier: "cell")
+        cv.showsHorizontalScrollIndicator = false
         return cv
     }()
     
@@ -110,6 +113,7 @@ class AddErrandViewController : UIViewController{
         configureUI()
         collectionView.dataSource = self
         collectionView.delegate = self
+        collectionView.allowsMultipleSelection = true
     }
     
     //MARK: - Selectors
@@ -234,18 +238,22 @@ class AddErrandViewController : UIViewController{
 }
 extension AddErrandViewController : UICollectionViewDelegateFlowLayout,UICollectionViewDataSource{
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 100
+        return AddErrandViewController.data.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath)
-        cell.backgroundColor = .red
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as! WhoShouldIAskCell
+        cell.bglabel.text = AddErrandViewController.data[indexPath.row]
+        cell.bglabel.textColor = AddErrandViewController.color[indexPath.row]
+        cell.layer.borderWidth = 1
+        cell.layer.borderColor = AddErrandViewController.color[indexPath.row].cgColor
+ 
         return cell
     }
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         return CGSize(width: 100, height: 30)
     }
-    
+
     
 }
 

@@ -112,9 +112,7 @@ class MoreCalendarModalsViewController : UIViewController{
         view.addSubview(transparentView)
         view.addSubview(bgView)
         view.addSubview(TitleLabel)
-        view.addSubview(myToDo)
-        view.addSubview(ourToDo)
-        view.addSubview(errand)
+
     }
     
     func cornerRadius(){
@@ -128,34 +126,15 @@ class MoreCalendarModalsViewController : UIViewController{
             make.left.equalToSuperview()
             make.right.equalToSuperview()
             make.bottom.equalToSuperview().offset(30)
-            make.height.equalToSuperview().dividedBy(1.6)
+            make.height.equalToSuperview().dividedBy(2.1)
         }
         
         TitleLabel.snp.makeConstraints { (make) in
             make.centerX.equalTo(bgView.snp.centerX)
-            make.top.equalTo(bgView.snp.top).offset(view.frame.height/7.4)
+            make.top.equalTo(bgView.snp.top).offset(view.frame.height/18.4545)
             
         }
         
-        myToDo.snp.makeConstraints { (make) in
-            make.centerX.equalTo(bgView.snp.centerX)
-            make.top.equalTo(TitleLabel.snp.bottom).offset(view.frame.height/11.6)
-            make.width.equalTo(view.frame.height/4.8)
-            make.height.equalTo(view.frame.height/15.3)
-        }
-        
-        ourToDo.snp.makeConstraints { (make) in
-            make.centerX.equalTo(bgView.snp.centerX)
-            make.top.equalTo(myToDo.snp.bottom).offset(view.frame.height/32.4)
-            make.width.equalTo(view.frame.height/4.8)
-            make.height.equalTo(view.frame.height/15.3)
-        }
-        errand.snp.makeConstraints { (make) in
-            make.centerX.equalTo(bgView.snp.centerX)
-            make.top.equalTo(ourToDo.snp.bottom).offset(view.frame.height/32.4)
-            make.width.equalTo(view.frame.height/4.8)
-            make.height.equalTo(view.frame.height/15.3)
-        }
     }
     
 }
