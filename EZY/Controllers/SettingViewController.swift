@@ -17,11 +17,11 @@ class SettingViewController: UIViewController {
         $0.showsVerticalScrollIndicator = false
     }
     
-    lazy var settingiconImage = [UIImage(named: "EZY_SettingBell"), UIImage(named: "EZY_SettingId"), UIImage(named: "EZY_SettingGroup"), UIImage(named: "EZY_SettingTag")]
+    lazy var settingiconImage = [UIImage(named: "EZY_SettingBell"), UIImage(named: "EZY_SettingId"), UIImage(named: "EZY_SettingGroup"), UIImage(named: "EZY_SettingTag"), UIImage(named: "EZY_SettingTag")]
     
-    lazy var settingListTitleLabel = ["푸시 알림 관리", "아이디 변경","그룹 관리", "태그 관리"]
+    lazy var settingListTitleLabel = ["푸시 알림 관리", "아이디 변경","그룹 관리", "태그 관리", "회원 탈퇴"]
     
-    lazy var settingListDescriptionLabel = ["팀 일정의 그룹을 관리합니다.", "EZY의 궁금한 점이나 불편한 점을 보내주세요.","팀 일정의 그룹을 관리합니다.","팀 일정의 그룹을 관리합니다."]
+    lazy var settingListDescriptionLabel = ["팀 일정의 그룹을 관리합니다.", "EZY의 궁금한 점이나 불편한 점을 보내주세요.","팀 일정의 그룹을 관리합니다.","팀 일정의 그룹을 관리합니다.","팀 일정의 그룹을 관리합니다."]
     
     //MARK: LifeCycles
     override func viewDidLoad() {
@@ -88,6 +88,9 @@ extension SettingViewController: UITableViewDelegate{
             self.navigationController?.pushViewController(nextViewController, animated: true)
         }else if indexPath.row == 3{
             let nextViewController = GroupManagementViewController()
+            self.navigationController?.pushViewController(nextViewController, animated: true)
+        }else if indexPath.row == 4{
+            let nextViewController = WithdrawalViewController()
             self.navigationController?.pushViewController(nextViewController, animated: true)
         }
     }
