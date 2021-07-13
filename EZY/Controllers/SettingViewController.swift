@@ -52,7 +52,7 @@ class SettingViewController: UIViewController {
         topView.addSubview(topView.backButton)
         topView.addSubview(topView.titleLabel)
 
-
+        topView.backButton.addTarget(self, action: #selector(backButtonClicked(sender:)), for: .touchUpInside)
         
         topView.topViewDataSetting(backButtonImage: UIImage(named: "EZY_SettingBackButton")!, titleLabelText: "설정",
                                    textColor: UIColor(red: 175/255, green: 173/255, blue: 255/255, alpha: 1))
@@ -64,6 +64,11 @@ class SettingViewController: UIViewController {
             make.top.equalTo(self.view.safeAreaLayoutGuide)
             make.height.equalToSuperview().dividedBy(8)
         }
+    }
+    
+    
+    @objc func backButtonClicked(sender: UIButton!) {
+        self.navigationController?.popViewController(animated: true)
     }
 
 }
