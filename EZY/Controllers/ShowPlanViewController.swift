@@ -305,10 +305,10 @@ extension ShowPlanViewController: UICollectionViewDelegate, UICollectionViewDele
             let nextViewController = InquiryViewController()
             self.navigationController?.pushViewController(nextViewController, animated: true)
         }
-        
         if indexPath.row == 4{
             let nextViewController = SettingViewController()
             self.navigationController?.pushViewController(nextViewController, animated: true)
+
         }
     }
 }
