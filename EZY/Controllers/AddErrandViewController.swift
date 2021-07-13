@@ -11,8 +11,8 @@ import Then
 
 class AddErrandViewController : UIViewController{
     //MARK: - Properties
-    static let data = ["+ 추가"]
-    static let color : [UIColor] = [.EZY_6383FF,.EZY_BAC8FF]
+    static let data = ["@JiHooooon","+ 수정"]
+    static let color : [UIColor] = [.EZY_6383FF,.EZY_BAC8FF,.EZY_BAC8FF]
     private let backbutton = UIButton().then{
         $0.tintColor = .EZY_AFADFF
         $0.setImage(UIImage(systemName: "arrow.left"), for: .normal)
@@ -155,12 +155,6 @@ class AddErrandViewController : UIViewController{
         location()
     }
     
-    func autoCellSize(){
-        if let collectionViewFlowLayout = collectionView.collectionViewLayout as? UICollectionViewFlowLayout {
-              collectionViewFlowLayout.estimatedItemSize = UICollectionViewFlowLayoutAutomaticSize
-          }
-    }
-    
     func cornerRadius(){
         RequestList.layer.cornerRadius = view.frame.height/40.6
         addButton.layer.cornerRadius = view.frame.height/81.2
@@ -228,7 +222,7 @@ class AddErrandViewController : UIViewController{
         }
         collectionView.snp.makeConstraints { (make) in
             make.right.left.equalToSuperview()
-            make.height.equalTo(view.frame.height/25.375)
+            make.height.equalTo(view.frame.height/20)
             make.top.equalTo(kindOfCollectionView.snp.bottom).offset(view.frame.height/81.2)
         }
         addButton.snp.makeConstraints { (make) in
@@ -254,7 +248,7 @@ extension AddErrandViewController : UICollectionViewDelegateFlowLayout,UICollect
         return cell
     }
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: view.frame.height/15, height: view.frame.height/25.375)
+        return WhoShouldIAskCell.fittingSize(availableHeight: view.frame.height/25.375, name: AddErrandViewController.data[indexPath.row])
     }
     
     

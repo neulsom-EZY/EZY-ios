@@ -199,19 +199,19 @@ class MoreCalendarModalsViewController : UIViewController{
         }
         myToDo.snp.makeConstraints { (make) in
             make.height.equalTo(view.frame.height/5.927)
-            make.width.equalTo(view.frame.height/8.95)
+            make.width.equalTo(view.frame.width/4.134)
             make.top.equalTo(TitleLabel.snp.bottom).offset(view.frame.height/21.37)
             make.left.equalTo(view.frame.height/21.945)
         }
         ourToDo.snp.makeConstraints { (make) in
             make.height.equalTo(view.frame.height/5.927)
-            make.width.equalTo(view.frame.height/8.95)
+            make.width.equalTo(view.frame.width/4.134)
             make.top.equalTo(TitleLabel.snp.bottom).offset(view.frame.height/21.37)
             make.centerX.equalTo(bgView.snp.centerX)
         }
         errand.snp.makeConstraints { (make) in
             make.height.equalTo(view.frame.height/5.927)
-            make.width.equalTo(view.frame.height/8.95)
+            make.width.equalTo(view.frame.width/4.134)
             make.top.equalTo(TitleLabel.snp.bottom).offset(view.frame.height/21.37)
             make.right.equalTo(view.frame.height/21.945 * -1)
         }

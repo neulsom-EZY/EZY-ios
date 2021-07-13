@@ -14,6 +14,16 @@ class WhoShouldIAskCell : UICollectionViewCell{
         label.dynamicFont(fontSize: 12, weight: .bold)
         return label
     }()
+    static func fittingSize(availableHeight: CGFloat, name: String?) -> CGSize {
+            let cell = WhoShouldIAskCell()
+            cell.configure(name: name)
+            
+        let targetSize = CGSize(width: UIView.layoutFittingCompressedSize.width , height: availableHeight)
+            return cell.contentView.systemLayoutSizeFitting(targetSize, withHorizontalFittingPriority: .fittingSizeLevel, verticalFittingPriority: .required)
+    }
+    func configure(name: String?) {
+        bglabel.text = name
+    }
     override var isHighlighted: Bool {
        didSet {
            if isSelected {
@@ -36,10 +46,10 @@ class WhoShouldIAskCell : UICollectionViewCell{
         contentView.addSubview(bglabel)
         contentView.backgroundColor = .clear
         layer.cornerRadius = frame.height/6.4
+        bglabel.textAlignment = .center
         bglabel.snp.makeConstraints { (make) in
-            make.center.equalTo(contentView.snp.center)
+            make.edges.equalToSuperview().inset(10 - frame.height)
         }
-        
     }
 
     
