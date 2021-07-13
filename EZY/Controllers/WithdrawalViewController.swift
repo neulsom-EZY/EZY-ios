@@ -83,20 +83,20 @@ class WithdrawalViewController: UIViewController {
         }
         
         pwNameLabel.snp.makeConstraints { make in
-            make.top.equalTo(topView.titleLabel.snp.bottom).offset(self.view.frame.height/16.91)
-            make.left.equalTo(topView.titleLabel)
+            make.top.equalTo(idUnderLineView.snp.bottom).offset(self.view.frame.height/16.91)
+            make.left.equalTo(idUnderLineView)
         }
         
         pwTextField.snp.makeConstraints { make in
-            make.top.equalTo(idNameLabel.snp.bottom)
-            make.left.equalTo(idNameLabel)
+            make.top.equalTo(pwNameLabel.snp.bottom)
+            make.left.equalTo(pwNameLabel)
             make.centerX.equalToSuperview()
             make.height.equalToSuperview().dividedBy(27)
         }
         
         pwUnderLineView.snp.makeConstraints { make in
-            make.top.equalTo(idTextField.snp.bottom)
-            make.left.equalTo(idTextField)
+            make.top.equalTo(pwTextField.snp.bottom)
+            make.left.equalTo(pwTextField)
             make.centerX.equalToSuperview()
             make.height.equalTo(2)
         }
