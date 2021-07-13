@@ -97,9 +97,13 @@ class MoreCalendarModalsViewController : UIViewController{
             ourToDo.isSelected = false
             errand.layer.borderColor = UIColor.clear.cgColor
             errand.isSelected = false
+            makeButton.isEnabled = true
+
         }else{
             myToDo.layer.borderWidth = 0
             myToDo.layer.borderColor = UIColor.clear.cgColor
+            makeButton.isEnabled = false
+
         }
     }
     @objc func OurTodo(){
@@ -112,10 +116,13 @@ class MoreCalendarModalsViewController : UIViewController{
             myToDo.isSelected = false
             errand.layer.borderColor = UIColor.clear.cgColor
             errand.isSelected = false
+            makeButton.isEnabled = true
 
         }else{
             ourToDo.layer.borderWidth = 0
             ourToDo.layer.borderColor = UIColor.clear.cgColor
+            makeButton.isEnabled = false
+
         }
     }
     @objc func ErrandTodo(){
@@ -128,9 +135,12 @@ class MoreCalendarModalsViewController : UIViewController{
             ourToDo.isSelected = false
             myToDo.layer.borderColor = UIColor.clear.cgColor
             myToDo.isSelected = false
+            makeButton.isEnabled = true
+
         }else{
             errand.layer.borderWidth = 0
             errand.layer.borderColor = UIColor.clear.cgColor
+            makeButton.isEnabled = false
         }
     }
     @objc func MakeTodo(){

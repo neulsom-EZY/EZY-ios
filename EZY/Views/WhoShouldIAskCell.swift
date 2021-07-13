@@ -20,11 +20,13 @@ class WhoShouldIAskCell : UICollectionViewCell{
                UIView.animate(withDuration: 0.2, delay: 0, options: .curveEaseOut, animations: {
                    // animate highlight
                 self.backgroundColor = .red
+                self.bglabel.textColor = .white
                }, completion: nil)
            } else {
                UIView.animate(withDuration: 0.2, delay: 0, options: .curveEaseOut, animations: {
                    // animate unHighligh
                 self.backgroundColor = .clear
+                self.bglabel.textColor = .red
                }, completion: nil)
            }
        }
@@ -33,9 +35,9 @@ class WhoShouldIAskCell : UICollectionViewCell{
         super.init(frame: frame)
         contentView.addSubview(bglabel)
         contentView.backgroundColor = .clear
-        contentView.layer.cornerRadius = frame.height/2
+        layer.cornerRadius = frame.height/6.4
         bglabel.snp.makeConstraints { (make) in
-            make.center.equalTo(snp.center)
+            make.center.equalTo(contentView.snp.center)
         }
         
     }

@@ -155,7 +155,11 @@ class AddErrandViewController : UIViewController{
         location()
     }
     
-          
+    func autoCellSize(){
+        if let collectionViewFlowLayout = collectionView.collectionViewLayout as? UICollectionViewFlowLayout {
+              collectionViewFlowLayout.estimatedItemSize = UICollectionViewFlowLayoutAutomaticSize
+          }
+    }
     
     func cornerRadius(){
         RequestList.layer.cornerRadius = view.frame.height/40.6
@@ -247,13 +251,12 @@ extension AddErrandViewController : UICollectionViewDelegateFlowLayout,UICollect
         cell.bglabel.textColor = AddErrandViewController.color[indexPath.row]
         cell.layer.borderWidth = 1
         cell.layer.borderColor = AddErrandViewController.color[indexPath.row].cgColor
- 
         return cell
     }
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: 100, height: 30)
+        return CGSize(width: view.frame.height/15, height: view.frame.height/25.375)
     }
-
+    
     
 }
 
