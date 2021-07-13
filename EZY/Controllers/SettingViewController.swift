@@ -17,11 +17,11 @@ class SettingViewController: UIViewController {
         $0.showsVerticalScrollIndicator = false
     }
     
-    lazy var settingiconImage = [UIImage(named: "EZY_SettingGroup"), UIImage(named: "EZY_SettingNotificationButton"), UIImage(named: "EZY_SettingInquiry")]
+    lazy var settingiconImage = [UIImage(named: "EZY_SettingBell"), UIImage(named: "EZY_SettingId"), UIImage(named: "EZY_SettingGroup"), UIImage(named: "EZY_SettingTag")]
     
-    lazy var settingListTitleLabel = ["그룹 알림", "푸시 알림 관리", "문의하기"]
+    lazy var settingListTitleLabel = ["푸시 알림 관리", "아이디 변경","그룹 관리", "태그 관리"]
     
-    lazy var settingListDescriptionLabel = ["팀 일정의 그룹을 관리합니다.", "개인, 팀, 심부름관련 알림을 관리합니다.", "EZY의 궁금한 점이나 불편한 점을 보내주세요."]
+    lazy var settingListDescriptionLabel = ["팀 일정의 그룹을 관리합니다.", "EZY의 궁금한 점이나 불편한 점을 보내주세요.","팀 일정의 그룹을 관리합니다.","팀 일정의 그룹을 관리합니다."]
     
     //MARK: LifeCycles
     override func viewDidLoad() {
@@ -36,6 +36,8 @@ class SettingViewController: UIViewController {
     func settingtableViewSetting(){
         settingTableView.delegate = self
         settingTableView.dataSource = self
+        
+        settingTableView.isScrollEnabled = false
         
         settingTableView.register(SettingTableViewCell.self, forCellReuseIdentifier: SettingTableViewCell.settingTableViewCellIdentifier)
         self.view.addSubview(settingTableView)
@@ -75,7 +77,10 @@ class SettingViewController: UIViewController {
 
 extension SettingViewController: UITableViewDelegate{
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        print("tableView - didSelectRowAt")
+        if indexPath.row == 2{
+            let nextViewController = GroupManagementViewController()
+            self.navigationController?.pushViewController(nextViewController, animated: true)
+        }
     }
 }
 
@@ -98,7 +103,7 @@ extension SettingViewController: UITableViewDataSource{
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 83
+        return self.view.frame.height/10
     }
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
