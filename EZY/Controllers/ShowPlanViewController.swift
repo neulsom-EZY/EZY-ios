@@ -299,6 +299,16 @@ extension ShowPlanViewController: UICollectionViewDelegate, UICollectionViewDele
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
         return 22
     }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        if indexPath.row == 3{
+            let nextViewController = InquiryViewController()
+            self.navigationController?.pushViewController(nextViewController, animated: true)
+        }else if indexPath.row == 4{
+                let nextViewController = SettingViewController()
+                self.navigationController?.pushViewController(nextViewController, animated: true)
+        }
+    }
 }
 
 extension ShowPlanViewController: UICollectionViewDataSource{
