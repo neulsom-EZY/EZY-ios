@@ -55,10 +55,16 @@ class IdChangeViewController: UIViewController {
         self.navigationController?.popViewController(animated: true)
     }
     
+    @objc func backButtonClicked(sender:UIButton){
+        self.navigationController?.popViewController(animated: true)
+    }
+    
     func topViewSetting(){
         self.view.addSubview(topView)
         topView.addSubview(topView.backButton)
         topView.addSubview(topView.titleLabel)
+        
+        topView.backButton.addTarget(self, action: #selector(backButtonClicked(sender:)), for: .touchUpInside)
         
         topView.titleLabel.text = "아이디 변경"
         
