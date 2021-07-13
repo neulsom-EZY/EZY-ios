@@ -250,8 +250,7 @@ extension AddErrandViewController : UICollectionViewDelegateFlowLayout,UICollect
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         return WhoShouldIAskCell.fittingSize(availableHeight: view.frame.height/25.375, name: AddErrandViewController.data[indexPath.row])
     }
-    
-    
+
 }
 
 #if DEBUG

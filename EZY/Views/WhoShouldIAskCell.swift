@@ -29,18 +29,19 @@ class WhoShouldIAskCell : UICollectionViewCell{
            if isSelected {
                UIView.animate(withDuration: 0.2, delay: 0, options: .curveEaseOut, animations: {
                    // animate highlight
-                self.backgroundColor = .red
+                self.backgroundColor = AddErrandViewController.color[0]
                 self.bglabel.textColor = .white
                }, completion: nil)
            } else {
                UIView.animate(withDuration: 0.2, delay: 0, options: .curveEaseOut, animations: {
                    // animate unHighligh
                 self.backgroundColor = .clear
-                self.bglabel.textColor = .red
+                self.bglabel.textColor = AddErrandViewController.color[1]
                }, completion: nil)
            }
        }
    }
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         contentView.addSubview(bglabel)
