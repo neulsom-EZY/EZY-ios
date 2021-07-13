@@ -29,10 +29,11 @@ class MoreCalendarModalsViewController : UIViewController{
         $0.text = "추가 할 항목을 선택해주세요"
         $0.dynamicFont(fontSize: 22, weight: .thin)
     }
-    
+    private var vc = UIViewController()
+   
     
         
-    private let myToDo : AddScheduleModalBtn = {
+    private lazy var myToDo : AddScheduleModalBtn = {
         let viewModel = CustomButtonViewModel(title: "나의 할 일", image: UIImage(named: "EZY_user")?.withRenderingMode(.alwaysTemplate), color: .EZY_BAC8FF)
 
         let button = AddScheduleModalBtn(with: viewModel)
@@ -41,22 +42,23 @@ class MoreCalendarModalsViewController : UIViewController{
         return button
     }()
     
-    private let ourToDo : AddScheduleModalBtn = {
+    private lazy var ourToDo : AddScheduleModalBtn = {
         let viewModel = CustomButtonViewModel(title: "우리의 할 일", image: UIImage(named: "EZY_user-3")?.withRenderingMode(.alwaysTemplate), color: .EZY_CFCBFF)
         let button = AddScheduleModalBtn(with: viewModel)
-        button.addTarget(self, action: #selector(MyTodo), for: .touchUpInside)
+        button.addTarget(self, action: #selector(OurTodo), for: .touchUpInside)
         
         return button
     }()
     
-    private let errand : AddScheduleModalBtn = {
+    private lazy var errand : AddScheduleModalBtn = {
         let viewModel = CustomButtonViewModel(title: "심부름", image: UIImage(named: "EZY_work")?.withRenderingMode(.alwaysTemplate), color: .EZY_AFADFF)
         let button = AddScheduleModalBtn(with: viewModel)
-        button.addTarget(self, action: #selector(MyTodo), for: .touchUpInside)
+        button.addTarget(self, action: #selector(ErrandTodo), for: .touchUpInside)
         return button
     }()
     private let makeButton = UIButton().then{
         $0.backgroundColor = .EZY_AAA3FF
+        $0.addTarget(self, action: #selector(MakeTodo), for: .touchUpInside)
     }
 
     private let makeTitle = UILabel().then{
@@ -86,16 +88,54 @@ class MoreCalendarModalsViewController : UIViewController{
     }
     
     @objc func MyTodo(){
-        
+        myToDo.isSelected = !myToDo.isSelected
+        if myToDo.isSelected{
+            myToDo.layer.borderWidth = 1
+            myToDo.layer.borderColor = UIColor.EZY_AFADFF.cgColor
+            vc = AddMyToDoViewController()
+            ourToDo.layer.borderColor = UIColor.clear.cgColor
+            ourToDo.isSelected = false
+            errand.layer.borderColor = UIColor.clear.cgColor
+            errand.isSelected = false
+        }else{
+            myToDo.layer.borderWidth = 0
+            myToDo.layer.borderColor = UIColor.clear.cgColor
+        }
     }
     @objc func OurTodo(){
-        
+        ourToDo.isSelected = !ourToDo.isSelected
+        if ourToDo.isSelected{
+            ourToDo.layer.borderWidth = 1
+            ourToDo.layer.borderColor = UIColor.EZY_AFADFF.cgColor
+            vc = AddOurToDoViewController()
+            myToDo.layer.borderColor = UIColor.clear.cgColor
+            myToDo.isSelected = false
+            errand.layer.borderColor = UIColor.clear.cgColor
+            errand.isSelected = false
+
+        }else{
+            ourToDo.layer.borderWidth = 0
+            ourToDo.layer.borderColor = UIColor.clear.cgColor
+        }
     }
     @objc func ErrandTodo(){
-        
+        errand.isSelected = !errand.isSelected
+        if errand.isSelected{
+            errand.layer.borderWidth = 1
+            errand.layer.borderColor = UIColor.EZY_AFADFF.cgColor
+            vc = AddErrandViewController()
+            ourToDo.layer.borderColor = UIColor.clear.cgColor
+            ourToDo.isSelected = false
+            myToDo.layer.borderColor = UIColor.clear.cgColor
+            myToDo.isSelected = false
+        }else{
+            errand.layer.borderWidth = 0
+            errand.layer.borderColor = UIColor.clear.cgColor
+        }
     }
     @objc func MakeTodo(){
-        
+        vc.modalPresentationStyle = .fullScreen
+        present(vc, animated: true, completion: nil)
     }
     //MARK: - HELPERS
  
@@ -108,7 +148,6 @@ class MoreCalendarModalsViewController : UIViewController{
     }
     
     func configureUI(){
-        
         addView()
         cornerRadius()
         location()
