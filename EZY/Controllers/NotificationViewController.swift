@@ -24,7 +24,6 @@ class NotificationViewController: UIViewController {
     
     lazy var backButton = UIButton().then {
         $0.setImage(UIImage(named: "EZY_NotificationBackButton"), for: .normal)
-        $0.addTarget(self, action: #selector(didbackButtonClick(_:)), for: .touchUpInside)
     }
     
     lazy var notificationTitleLabel = UILabel().then {
@@ -52,11 +51,18 @@ class NotificationViewController: UIViewController {
         configureUI()
     }
     
+    @objc func backButtonClicked(sender:UIButton){
+        self.navigationController?.popViewController(animated: true)
+        print("fdasdfasdf")
+    }
+    
     func configureUI(){
         
         self.view.addSubview(backButton)
         self.view.addSubview(notificationTitleLabel)
         self.view.addSubview(notificationTableMainView.tableView)
+        
+        backButton.addTarget(self, action: #selector(backButtonClicked(sender:)), for: .touchUpInside)
         
         notificationTableMainView.tableView.register(NotificationTableViewCell.self, forCellReuseIdentifier: NotificationTableViewCell.NotificationTableViewIdentifier)
         
@@ -78,10 +84,7 @@ class NotificationViewController: UIViewController {
             make.width.equalToSuperview()
         }
     }
-    
-    @objc func didbackButtonClick(_ button: UIButton){
-        navigationController?.popViewController(animated: true)
-    }
+
 }
 
 extension NotificationViewController: UITableViewDelegate{
