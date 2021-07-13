@@ -304,9 +304,11 @@ extension ShowPlanViewController: UICollectionViewDelegate, UICollectionViewDele
         if indexPath.row == 3{
             let nextViewController = InquiryViewController()
             self.navigationController?.pushViewController(nextViewController, animated: true)
-        }else if indexPath.row == 4{
-                let nextViewController = SettingViewController()
-                self.navigationController?.pushViewController(nextViewController, animated: true)
+        }
+        if indexPath.row == 4{
+            let nextViewController = SettingViewController()
+            self.navigationController?.pushViewController(nextViewController, animated: true)
+
         }
     }
 }
@@ -377,11 +379,6 @@ extension ShowPlanViewController: UITableViewDelegate{
         
         planCompleteModalView.isHidden = false
         
-//        let pushVC = NextViewController()
-//        pushVC.titleLabel.text = titleArray[indexPath.row]
-//        self.navigationController?.pushViewController(pushVC, animated: true)
     }
-
-    
 }
 

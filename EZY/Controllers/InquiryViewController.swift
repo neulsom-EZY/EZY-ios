@@ -95,6 +95,15 @@ class InquiryViewController: UIViewController {
         }
     }
     
+    @objc func inquiryBackgroundButtonClicked(sender:UIButton)
+    {
+    }
+    
+    @objc func backButtonClicked(sender:UIButton)
+    {
+        self.navigationController?.popViewController(animated: true)
+    }
+    
     func layoutSetting(){
         self.view.backgroundColor = .white
         
@@ -107,6 +116,9 @@ class InquiryViewController: UIViewController {
         self.view.addSubview(bottomTitleBottomLabel)
         inquiryBackgroundButton.addSubview(inquiryImageView)
         inquiryBackgroundButton.addSubview(inquiryLabel)
+        
+        inquiryBackgroundButton.addTarget(self, action: #selector(inquiryBackgroundButtonClicked(sender:)), for: .touchUpInside)
+        backButton.addTarget(self, action: #selector(backButtonClicked(sender:)), for: .touchUpInside)
         
         backButton.snp.makeConstraints { make in
             make.top.equalTo(self.view.safeAreaLayoutGuide).offset(self.view.frame.height/47.7)
