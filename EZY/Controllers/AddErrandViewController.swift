@@ -13,6 +13,7 @@ class AddErrandViewController : UIViewController{
     //MARK: - Properties
     static let data = ["@JiHooooon","+ 수정"]
     static let color : [UIColor] = [.EZY_6383FF,.EZY_BAC8FF,.EZY_BAC8FF]
+    static let cellFont : [UIFont.Weight] = [.ultraLight,.bold]
     private let backbutton = UIButton().then{
         $0.tintColor = .EZY_AFADFF
         $0.setImage(UIImage(systemName: "arrow.left"), for: .normal)
@@ -240,8 +241,9 @@ extension AddErrandViewController : UICollectionViewDelegateFlowLayout,UICollect
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as! WhoShouldIAskCell
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as? WhoShouldIAskCell else {return UICollectionViewCell()}
         cell.bglabel.text = AddErrandViewController.data[indexPath.row]
+        cell.bglabel.dynamicFont(fontSize: 12, weight:  AddErrandViewController.cellFont[indexPath.row])
         cell.bglabel.textColor = AddErrandViewController.color[indexPath.row]
         cell.layer.borderWidth = 1
         cell.layer.borderColor = AddErrandViewController.color[indexPath.row].cgColor
