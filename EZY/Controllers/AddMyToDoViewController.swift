@@ -14,6 +14,10 @@ import Alamofire
 class AddMyToDoViewController:UIViewController{
     
     //MARK: - Properties
+    let scrollView = UIScrollView().then  {
+        $0.backgroundColor = .white
+        
+    }
     private let backbutton = UIButton().then{
         $0.tintColor = .EZY_BAC8FF
         $0.setImage(UIImage(systemName: "arrow.left"), for: .normal)
@@ -72,7 +76,7 @@ class AddMyToDoViewController:UIViewController{
     
     
     
-    private let kindOfCollectionView = UILabel().then{
+    private let tagLabel = UILabel().then{
         $0.text = "태그"
         $0.textColor = .EZY_B6B6B6
         $0.dynamicFont(fontSize: 12, weight: .bold)
@@ -144,15 +148,17 @@ class AddMyToDoViewController:UIViewController{
    
     
     func addView(){
-        view.addSubview(backbutton)
-        view.addSubview(TitleLabel)
-        view.addSubview(titleContainerView)
-        view.addSubview(calendarBtn)
-        view.addSubview(clockBtn)
-        view.addSubview(locationBtn)
-        view.addSubview(explanationContainerView)
-        view.addSubview(kindOfCollectionView)
-        view.addSubview(addButton)
+        view.addSubview(scrollView)
+        scrollView.addSubview(backbutton)
+        scrollView.addSubview(TitleLabel)
+        scrollView.addSubview(titleContainerView)
+        scrollView.addSubview(calendarBtn)
+        scrollView.addSubview(clockBtn)
+        scrollView.addSubview(locationBtn)
+        scrollView.addSubview(explanationContainerView)
+        scrollView.addSubview(tagLabel)
+        scrollView.addSubview(addButton)
+        scrollView.contentSize = CGSize(width: view.frame.size.width, height: view.frame.height/0.94)
     }
     
     func cornerRadius(){
@@ -162,20 +168,23 @@ class AddMyToDoViewController:UIViewController{
     }
     
     func location(){
+        scrollView.snp.makeConstraints { (make) in
+            make.top.bottom.right.left.equalToSuperview()
+        }
         backbutton.snp.makeConstraints { (make) in
             make.height.width.equalTo(self.view.frame.height/33.8)
             make.left.equalTo(self.view.frame.height/29)
-            make.top.equalTo(self.view.frame.height/13.3)
+            make.top.equalTo(self.scrollView.snp.top ).offset(self.view.frame.height/36.9)
         }
         TitleLabel.snp.makeConstraints { (make) in
-            make.top.equalTo(backbutton.snp.bottom).offset(self.view.frame.height/36.9)
+            make.top.equalTo(backbutton.snp.bottom).offset(self.view.frame.height/39.5)
             make.left.equalTo(backbutton.snp.left)
         }
         titleContainerView.snp.makeConstraints { (make) in
             make.height.equalTo(self.view.frame.height/14.7)
             make.top.equalTo(TitleLabel.snp.bottom).offset(self.view.frame.height/19.8)
             make.left.equalTo(backbutton.snp.left)
-            make.right.equalTo(self.view.frame.width/13.8 * -1)
+            make.right.equalTo(view.snp.right).offset(self.view.frame.height/19.8 * -1)
         }
         calendarBtn.snp.makeConstraints { (make) in
             make.height.equalTo(self.view.frame.height/18.0)
@@ -202,15 +211,15 @@ class AddMyToDoViewController:UIViewController{
             make.height.equalTo(self.view.frame.height/10.8)
             make.top.equalTo(locationBtn.snp.bottom).offset(self.view.frame.height/19.8)
             make.left.equalTo(backbutton.snp.left)
-            make.right.equalTo(self.view.frame.width/13.8 * -1)
+            make.right.equalTo(titleContainerView.snp.right)
         }
-        kindOfCollectionView.snp.makeConstraints { (make) in
+        tagLabel.snp.makeConstraints { (make) in
             make.left.equalTo(backbutton.snp.left)
             make.top.equalTo(explanationContainerView.snp.bottom).offset(view.frame.height/38.6)
         }
      
         addButton.snp.makeConstraints { (make) in
-            make.bottom.equalToSuperview().offset(view.frame.height/10.9 * -1)
+            make.top.equalTo(tagLabel.snp.bottom).offset(view.frame.height/12.3)
             make.height.equalTo(self.view.frame.height/18.0)
             make.left.equalTo(backbutton.snp.left)
             make.right.equalTo(titleContainerView.snp.right)
@@ -220,3 +229,27 @@ class AddMyToDoViewController:UIViewController{
 
 
 
+#if DEBUG
+import SwiftUI
+struct LoginViewControllerRepresentable: UIViewControllerRepresentable {
+    
+func updateUIViewController(_ uiView: UIViewController,context: Context) {
+        // leave this empty
+}
+    @available(iOS 13.0.0, *)
+    func makeUIViewController(context: Context) -> UIViewController{
+        AddMyToDoViewController()
+    }
+}
+@available(iOS 13.0, *)
+struct LoginViewControllerRepresentable_PreviewProvider: PreviewProvider {
+    static var previews: some View {
+        Group {
+            LoginViewControllerRepresentable()
+                .ignoresSafeArea()
+                .previewDisplayName(/*@START_MENU_TOKEN@*/"Preview"/*@END_MENU_TOKEN@*/)
+                .previewDevice(PreviewDevice(rawValue: "iPhone 11"))
+        }
+        
+    }
+} #endif

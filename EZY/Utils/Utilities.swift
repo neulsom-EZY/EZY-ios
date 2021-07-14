@@ -30,8 +30,8 @@ class Utilities{
             make.centerY.equalToSuperview()
             make.height.equalTo(viewSize)
             make.left.equalTo(label_Message.snp.right).offset(viewSize/31.2)
-
         }
+        
         return view
     }
     

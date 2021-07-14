@@ -21,7 +21,7 @@ class AddOurToDoViewController: UIViewController {
     
     let scrollView = UIScrollView().then  {
         $0.backgroundColor = .white
-        
+        $0.showsVerticalScrollIndicator = false
     }
     
     
@@ -70,10 +70,8 @@ class AddOurToDoViewController: UIViewController {
         
         return view
     }()
-    
     private let explanationTextView : UITextView = {
         let tf = Utilities().textView(TextColor: .EZY_929292, TextSize: 14,font: .medium)
-        
         return tf
     }()
     
@@ -93,7 +91,17 @@ class AddOurToDoViewController: UIViewController {
         $0.dynamicFont(fontSize: 12, weight: .bold)
     }
     
+    private let repeatSettings = UILabel().then{
+        $0.text = "반복설정"
+        $0.textColor = .EZY_B6B6B6
+        $0.dynamicFont(fontSize: 12, weight: .bold)
+    }
     
+    private let alertSettings = UILabel().then{
+        $0.text = "알람 설정"
+        $0.textColor = .EZY_B6B6B6
+        $0.dynamicFont(fontSize: 12, weight: .bold)
+    }
     private let addButton : AdditionalButton = {
         let button = AdditionalButton(type: .system)
         button.title = "추가"
@@ -141,7 +149,7 @@ class AddOurToDoViewController: UIViewController {
         addView()
         cornerRadius()
         location()
-        scrollView.contentSize = CGSize(width: view.frame.size.width, height: view.frame.height/0.94)
+        scrollView.contentSize = CGSize(width: view.frame.size.width, height: view.frame.height/0.803)
         
     }
     func cornerRadius(){
@@ -161,6 +169,8 @@ class AddOurToDoViewController: UIViewController {
         scrollView.addSubview(explanationContainerView)
         scrollView.addSubview(selectPeople)
         scrollView.addSubview(tagLabel)
+        scrollView.addSubview(repeatSettings)
+        scrollView.addSubview(alertSettings)
         scrollView.addSubview(addButton)
     }
     
@@ -212,14 +222,22 @@ class AddOurToDoViewController: UIViewController {
         }
         selectPeople.snp.makeConstraints { (make) in
             make.left.equalTo(backbutton.snp.left)
-            make.top.equalTo(explanationContainerView.snp.bottom).offset(view.frame.height/38.6)
+            make.top.equalTo(explanationContainerView.snp.bottom).offset(view.frame.height/33.83)
         }
         tagLabel.snp.makeConstraints { (make) in
             make.left.equalTo(selectPeople.snp.left)
-            make.top.equalTo(selectPeople.snp.bottom).offset(view.frame.height/7)
+            make.top.equalTo(selectPeople.snp.bottom).offset(view.frame.height/7.52)
+        }
+        repeatSettings.snp.makeConstraints { (make) in
+            make.left.equalTo(selectPeople.snp.left)
+            make.top.equalTo(tagLabel.snp.bottom).offset(view.frame.height/6.88)
+        }
+        alertSettings.snp.makeConstraints { (make) in
+            make.top.equalTo(repeatSettings.snp.bottom).offset(view.frame.height/11.77)
+            make.left.equalTo(selectPeople.snp.left)
         }
         addButton.snp.makeConstraints { (make) in
-            make.top.equalTo(tagLabel.snp.bottom).offset(view.frame.height/6.1)
+            make.top.equalTo(alertSettings.snp.bottom).offset(view.frame.height/12.3)
             make.height.equalTo(self.view.frame.height/18.0)
             make.left.equalTo(backbutton.snp.left)
             make.right.equalTo(titleContainerView.snp.right)

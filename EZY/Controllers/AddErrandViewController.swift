@@ -184,7 +184,7 @@ class AddErrandViewController : UIViewController{
             make.left.equalTo(backbutton.snp.left)
         }
         RequestList.snp.makeConstraints { (make) in
-            make.height.equalTo(self.view.frame.height/7.38)
+            make.height.equalTo(self.view.frame.height/10.545)
             make.top.equalTo(TitleLabel.snp.bottom).offset(self.view.frame.height/19.8)
             make.left.equalTo(backbutton.snp.left)
             make.right.equalTo(self.view.frame.width/13.8 * -1)
@@ -227,7 +227,7 @@ class AddErrandViewController : UIViewController{
             make.top.equalTo(kindOfCollectionView.snp.bottom).offset(view.frame.height/81.2)
         }
         addButton.snp.makeConstraints { (make) in
-            make.bottom.equalToSuperview().offset(view.frame.height/10.9 * -1)
+            make.bottom.equalToSuperview().offset(view.frame.height/8.2 * -1)
             make.height.equalTo(self.view.frame.height/18.0)
             make.left.equalTo(backbutton.snp.left)
             make.right.equalTo(RequestList.snp.right)
@@ -247,6 +247,7 @@ extension AddErrandViewController : UICollectionViewDelegateFlowLayout,UICollect
         cell.bglabel.textColor = AddErrandViewController.color[indexPath.row]
         cell.layer.borderWidth = 1
         cell.layer.borderColor = AddErrandViewController.color[indexPath.row].cgColor
+        
         return cell
     }
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
@@ -255,27 +256,4 @@ extension AddErrandViewController : UICollectionViewDelegateFlowLayout,UICollect
 
 }
 
-#if DEBUG
-import SwiftUI
-struct LoginViewControllerRepresentable: UIViewControllerRepresentable {
-    
-func updateUIViewController(_ uiView: UIViewController,context: Context) {
-        // leave this empty
-}
-    @available(iOS 13.0.0, *)
-    func makeUIViewController(context: Context) -> UIViewController{
-        AddErrandViewController()
-    }
-}
-@available(iOS 13.0, *)
-struct LoginViewControllerRepresentable_PreviewProvider: PreviewProvider {
-    static var previews: some View {
-        Group {
-            LoginViewControllerRepresentable()
-                .ignoresSafeArea()
-                .previewDisplayName(/*@START_MENU_TOKEN@*/"Preview"/*@END_MENU_TOKEN@*/)
-                .previewDevice(PreviewDevice(rawValue: "iPhone 11"))
-        }
-        
-    }
-} #endif
+
