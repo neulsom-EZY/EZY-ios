@@ -92,11 +92,10 @@ class MoreCalendarModalsViewController : UIViewController{
         if myToDo.isSelected{
             myToDo.layer.borderWidth = 1
             myToDo.layer.borderColor = UIColor.EZY_AFADFF.cgColor
-            vc = AddMyToDoViewController()
-            ourToDo.layer.borderColor = UIColor.clear.cgColor
-            ourToDo.isSelected = false
-            errand.layer.borderColor = UIColor.clear.cgColor
-            errand.isSelected = false
+            
+            vc = AddMyToDoViewController() //ViewController 보내줌
+            ourTodoState()
+            ErrandTodoState()
             makeButton.isEnabled = true
 
         }else{
@@ -111,11 +110,9 @@ class MoreCalendarModalsViewController : UIViewController{
         if ourToDo.isSelected{
             ourToDo.layer.borderWidth = 1
             ourToDo.layer.borderColor = UIColor.EZY_AFADFF.cgColor
-            vc = AddOurToDoViewController()
-            myToDo.layer.borderColor = UIColor.clear.cgColor
-            myToDo.isSelected = false
-            errand.layer.borderColor = UIColor.clear.cgColor
-            errand.isSelected = false
+            vc = AddOurToDoViewController()//ViewController 보내줌
+            ErrandTodoState()
+            myTodoState()
             makeButton.isEnabled = true
 
         }else{
@@ -130,9 +127,9 @@ class MoreCalendarModalsViewController : UIViewController{
         if errand.isSelected{
             errand.layer.borderWidth = 1
             errand.layer.borderColor = UIColor.EZY_AFADFF.cgColor
-            vc = AddErrandViewController()
-        
-            
+            vc = AddErrandViewController()//ViewController 보내줌
+            myTodoState()
+            ourTodoState()
             makeButton.isEnabled = true
 
         }else{
@@ -147,21 +144,7 @@ class MoreCalendarModalsViewController : UIViewController{
     }
     //MARK: - HELPERS
  
-    func myTodoState(){
-        myToDo.layer.borderColor = UIColor.clear.cgColor
-        myToDo.isSelected = false
-    }
-    func ourTodoState(){
-        ourToDo.layer.borderColor = UIColor.clear.cgColor
-        ourToDo.isSelected = false
-    }
     
-    func addTransparentsview(frame : CGRect){
-        let window = UIApplication.shared.keyWindow
-        transparentView.frame = window?.frame ?? self.view.frame
-        let tapgesture = UITapGestureRecognizer(target: self, action: #selector(onTapClose))
-        transparentView.addGestureRecognizer(tapgesture)
-    }
     
     func configureUI(){
         addView()
@@ -230,6 +213,24 @@ class MoreCalendarModalsViewController : UIViewController{
         makeTitle.snp.makeConstraints { (make) in
             make.center.equalTo(makeButton.snp.center)
         }
+    }
+    func myTodoState(){
+        myToDo.layer.borderColor = UIColor.clear.cgColor
+        myToDo.isSelected = false
+    }
+    func ourTodoState(){
+        ourToDo.layer.borderColor = UIColor.clear.cgColor
+        ourToDo.isSelected = false
+    }
+    func ErrandTodoState(){
+        errand.layer.borderColor = UIColor.clear.cgColor
+        errand.isSelected = false
+    }
+    func addTransparentsview(frame : CGRect){
+        let window = UIApplication.shared.keyWindow
+        transparentView.frame = window?.frame ?? self.view.frame
+        let tapgesture = UITapGestureRecognizer(target: self, action: #selector(onTapClose))
+        transparentView.addGestureRecognizer(tapgesture)
     }
     
 }

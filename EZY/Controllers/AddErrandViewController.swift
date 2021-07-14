@@ -11,10 +11,7 @@ import Then
 
 class AddErrandViewController : UIViewController{
     //MARK: - Properties
-    static let data = ["@JiHooooon","+ 수정"]
-    static let color : [UIColor] = [.EZY_6383FF,.EZY_BAC8FF,.EZY_BAC8FF]
-    static let cellFont : [UIFont.Weight] = [.ultraLight,.bold]
-    var currentIndex = 0
+    static let data = ["@JiHoooooon","+ 수정"]
     
     private let backbutton = UIButton().then{
         $0.tintColor = .EZY_AFADFF

@@ -28,7 +28,6 @@ class WhoShouldIAskCell : UICollectionViewCell{
                UIView.animate(withDuration: 0.2, delay: 0, options: .curveEaseOut, animations: {
                    // animate unHighligh
                 self.bglabel.textColor = self.backgroundColor
-
                 self.backgroundColor = .clear
                }, completion: nil)
            }
@@ -54,10 +53,11 @@ class WhoShouldIAskCell : UICollectionViewCell{
         contentView.backgroundColor = .clear
         layer.cornerRadius = frame.height/6.4
         bglabel.textAlignment = .center
+        
         bglabel.snp.makeConstraints { (make) in
             make.edges.equalToSuperview().inset(20 - frame.height)
         }
-
+        
     }
 
     

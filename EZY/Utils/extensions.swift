@@ -12,6 +12,7 @@ extension UIColor{
     static func rgb(red: CGFloat ,green: CGFloat,blue:CGFloat) -> UIColor{
         return UIColor(red: red/255, green: green/255, blue: blue/255, alpha: 1)
     }
+    static let EZY_3D64FF = UIColor.rgb(red: 61, green: 100, blue: 255)
     static let EZY_AAA3FF = UIColor.rgb(red: 170, green: 163, blue: 255)
     static let EZY_AEA9F2 = UIColor.rgb(red: 174, green: 169, blue: 242)
     static let EZY_6383FF = UIColor.rgb(red: 99, green: 131, blue: 255)
@@ -252,17 +253,22 @@ extension AddErrandViewController : UICollectionViewDelegateFlowLayout,UICollect
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
          guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: WhoShouldIAskCell.identifier, for: indexPath) as? WhoShouldIAskCell else {return UICollectionViewCell()}
         cell.bglabel.text = AddErrandViewController.data[indexPath.row]
-        cell.bglabel.dynamicFont(fontSize: 12, weight:  AddErrandViewController.cellFont[indexPath.row])
-        cell.bglabel.textColor = AddErrandViewController.color[indexPath.item]
+        cell.bglabel.dynamicFont(fontSize: 12, weight:  .thin)
+        cell.bglabel.textColor = .EZY_3D64FF
         cell.layer.borderWidth = 1
-        cell.layer.borderColor = AddErrandViewController.color[indexPath.row].cgColor
+        cell.layer.borderColor = UIColor.EZY_6383FF.cgColor
+        if cell.bglabel.text == AddErrandViewController.data.last{
+            cell.bglabel.textColor = .EZY_BAC8FF
+            cell.layer.borderColor = UIColor.EZY_BAC8FF.cgColor
+            cell.bglabel.dynamicFont(fontSize: 12, weight: .bold)
+        }
+        
         return cell
     }
 
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         return WhoShouldIAskCell.fittingSize(availableHeight: view.frame.height/25.375, name: AddErrandViewController.data[indexPath.row])
     }
-
 
 }
 
