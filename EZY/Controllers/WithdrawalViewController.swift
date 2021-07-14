@@ -34,6 +34,11 @@ class WithdrawalViewController: UIViewController {
         $0.dynamicFont(fontSize: 10, currentFontName: "AppleSDGothicNeo-SemiBold")
     }
     
+    lazy var showPasswordButton = UIButton().then {
+        $0.setImage(UIImage(named: "EZY_eye"), for: .normal)
+        $0.addTarget(self, action: #selector(EyeButtondClicked), for: .touchUpInside)
+    }
+    
     lazy var pwTextField = UITextField().then {
         $0.textColor = UIColor(red: 101/255, green: 101/255, blue: 101/255, alpha: 1)
         $0.placeholder = "비밀번호를 입력해주세요"
@@ -61,6 +66,14 @@ class WithdrawalViewController: UIViewController {
         layoutSetting()
     }
     
+    @objc func EyeButtondClicked(sender:UIButton){
+        if pwTextField.isSecureTextEntry == true {
+            pwTextField.isSecureTextEntry = false
+        } else {
+            pwTextField.isSecureTextEntry = true
+        }
+    }
+    
     @objc func withdrawalButtonClicked(sender:UIButton){
         self.navigationController?.popViewController(animated: true)
     }
@@ -74,6 +87,7 @@ class WithdrawalViewController: UIViewController {
         self.view.addSubview(pwTextField)
         self.view.addSubview(pwUnderLineView)
         self.view.addSubview(withdrawalButton)
+        self.view.addSubview(showPasswordButton)
         
         idNameLabel.snp.makeConstraints { make in
             make.top.equalTo(topView.titleLabel.snp.bottom).offset(self.view.frame.height/16.91)
@@ -102,7 +116,7 @@ class WithdrawalViewController: UIViewController {
         pwTextField.snp.makeConstraints { make in
             make.top.equalTo(pwNameLabel.snp.bottom)
             make.left.equalTo(pwNameLabel)
-            make.centerX.equalToSuperview()
+            make.right.equalTo(pwUnderLineView).offset(-self.view.frame.width/20)
             make.height.equalToSuperview().dividedBy(27)
         }
         
@@ -118,6 +132,13 @@ class WithdrawalViewController: UIViewController {
             make.centerX.equalToSuperview()
             make.height.equalToSuperview().dividedBy(16.24)
             make.bottom.equalToSuperview().offset(-self.view.frame.height/23.8)
+        }
+        
+        showPasswordButton.snp.makeConstraints { make in
+            make.centerY.equalTo(pwTextField)
+            make.right.equalTo(pwUnderLineView)
+            make.height.equalTo(self.view.frame.height/90.22*1.2)
+            make.width.equalTo(self.view.frame.width/25*1.2)
         }
     }
     

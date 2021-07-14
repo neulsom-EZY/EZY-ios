@@ -227,6 +227,15 @@
 			path = ReusableViews;
 			sourceTree = "<group>";
 		};
+		6A9B7547269E82D800703ADF /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				6AA769E426636AE700B7E1F5 /* AppDelegate.swift */,
+				6AA769E626636AE700B7E1F5 /* SceneDelegate.swift */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
 		6AA769D826636AE700B7E1F5 = {
 			isa = PBXGroup;
 			children = (
@@ -256,8 +265,7 @@
 				6AA769FD26636C6B00B7E1F5 /* Views */,
 				6AA769FC26636C6500B7E1F5 /* ViewModels */,
 				6AA769FB26636C5700B7E1F5 /* Services */,
-				6AA769E426636AE700B7E1F5 /* AppDelegate.swift */,
-				6AA769E626636AE700B7E1F5 /* SceneDelegate.swift */,
+				6A9B7547269E82D800703ADF /* Resources */,
 				6AA769F226636AE800B7E1F5 /* LaunchScreen.storyboard */,
 				6A44474C26677647004C4BC3 /* Assets.xcassets */,
 				6AA769F526636AE800B7E1F5 /* Info.plist */,
