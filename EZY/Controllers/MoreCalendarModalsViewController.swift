@@ -34,7 +34,7 @@ class MoreCalendarModalsViewController : UIViewController{
     
         
     private lazy var myToDo : AddScheduleModalBtn = {
-        let viewModel = CustomButtonViewModel(title: "나의 할 일", image: UIImage(named: "EZY_user")?.withRenderingMode(.alwaysTemplate), color: .EZY_BAC8FF)
+        let viewModel = CustomButtonViewModel(title: "나의 할 일", image: UIImage(named: "EZY_user")?.withRenderingMode(.alwaysTemplate), color: .EZY_AFADFF)
 
         let button = AddScheduleModalBtn(with: viewModel)
         
@@ -43,7 +43,7 @@ class MoreCalendarModalsViewController : UIViewController{
     }()
     
     private lazy var ourToDo : AddScheduleModalBtn = {
-        let viewModel = CustomButtonViewModel(title: "우리의 할 일", image: UIImage(named: "EZY_user-3")?.withRenderingMode(.alwaysTemplate), color: .EZY_CFCBFF)
+        let viewModel = CustomButtonViewModel(title: "우리의 할 일", image: UIImage(named: "EZY_user-3")?.withRenderingMode(.alwaysTemplate), color: .EZY_AFADFF)
         let button = AddScheduleModalBtn(with: viewModel)
         button.addTarget(self, action: #selector(OurTodo), for: .touchUpInside)
         
@@ -133,8 +133,7 @@ class MoreCalendarModalsViewController : UIViewController{
             vc = AddErrandViewController()
             ourToDo.layer.borderColor = UIColor.clear.cgColor
             ourToDo.isSelected = false
-            myToDo.layer.borderColor = UIColor.clear.cgColor
-            myToDo.isSelected = false
+            
             makeButton.isEnabled = true
 
         }else{
@@ -149,6 +148,13 @@ class MoreCalendarModalsViewController : UIViewController{
     }
     //MARK: - HELPERS
  
+    func myTodoState(){
+        myToDo.layer.borderColor = UIColor.clear.cgColor
+        myToDo.isSelected = false
+    }
+    func ourTodoState(){
+        
+    }
     
     func addTransparentsview(frame : CGRect){
         let window = UIApplication.shared.keyWindow
