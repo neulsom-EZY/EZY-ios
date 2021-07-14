@@ -241,3 +241,29 @@ func applySketchShadow(color: UIColor = .black,alpha: Float = 0.5,x:CGFloat,y:CG
         }
     }
 }
+
+//MARK: - AddErrandViewController CollectionView
+
+extension AddErrandViewController : UICollectionViewDelegateFlowLayout,UICollectionViewDataSource{
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return AddErrandViewController.data.count
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: WhoShouldIAskCell.identifier, for: indexPath) as? WhoShouldIAskCell else {return UICollectionViewCell()}
+        cell.bglabel.text = AddErrandViewController.data[indexPath.row]
+        cell.bglabel.dynamicFont(fontSize: 12, weight:  AddErrandViewController.cellFont[indexPath.row])
+        cell.bglabel.textColor = AddErrandViewController.color[indexPath.item]
+        cell.layer.borderWidth = 1
+        cell.layer.borderColor = AddErrandViewController.color[indexPath.row].cgColor
+        return cell
+    }
+
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        return WhoShouldIAskCell.fittingSize(availableHeight: view.frame.height/25.375, name: AddErrandViewController.data[indexPath.row])
+    }
+
+
+}
+
+

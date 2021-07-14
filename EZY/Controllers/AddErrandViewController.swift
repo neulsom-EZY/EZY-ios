@@ -14,6 +14,8 @@ class AddErrandViewController : UIViewController{
     static let data = ["@JiHooooon","+ 수정"]
     static let color : [UIColor] = [.EZY_6383FF,.EZY_BAC8FF,.EZY_BAC8FF]
     static let cellFont : [UIFont.Weight] = [.ultraLight,.bold]
+    var currentIndex = 0
+    
     private let backbutton = UIButton().then{
         $0.tintColor = .EZY_AFADFF
         $0.setImage(UIImage(systemName: "arrow.left"), for: .normal)
@@ -91,7 +93,7 @@ class AddErrandViewController : UIViewController{
         cv.contentInset = UIEdgeInsets(top: 0, left: 30, bottom: 0, right: 0)
         layout.scrollDirection = .horizontal
         cv.translatesAutoresizingMaskIntoConstraints = false
-        cv.register(WhoShouldIAskCell.self, forCellWithReuseIdentifier: "cell")
+        cv.register(WhoShouldIAskCell.self, forCellWithReuseIdentifier: WhoShouldIAskCell.identifier)
         cv.showsHorizontalScrollIndicator = false
         return cv
     }()
@@ -235,25 +237,3 @@ class AddErrandViewController : UIViewController{
         }
     }
 }
-extension AddErrandViewController : UICollectionViewDelegateFlowLayout,UICollectionViewDataSource{
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return AddErrandViewController.data.count
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as? WhoShouldIAskCell else {return UICollectionViewCell()}
-        cell.bglabel.text = AddErrandViewController.data[indexPath.row]
-        cell.bglabel.dynamicFont(fontSize: 12, weight:  AddErrandViewController.cellFont[indexPath.row])
-        cell.bglabel.textColor = AddErrandViewController.color[indexPath.row]
-        cell.layer.borderWidth = 1
-        cell.layer.borderColor = AddErrandViewController.color[indexPath.row].cgColor
-        
-        return cell
-    }
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return WhoShouldIAskCell.fittingSize(availableHeight: view.frame.height/25.375, name: AddErrandViewController.data[indexPath.row])
-    }
-
-}
-
-

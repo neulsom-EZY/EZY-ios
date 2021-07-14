@@ -103,8 +103,8 @@
 			children = (
 				6AA769E326636AE700B7E1F5 /* EZY */,
 				6AA769E226636AE700B7E1F5 /* Products */,
-				D97C84BDB41C12F061081FBC /* Pods */,
 				2B62A8E180A8585A5EDF7361 /* Frameworks */,
+				D97C84BDB41C12F061081FBC /* Pods */,
 			);
 			sourceTree = "<group>";
 		};
@@ -158,8 +158,8 @@
 				EE896CC4269C35640099E8CB /* AddScheduleModalBtn .swift */,
 				EEA457F32682FFA100C08D17 /* AlertButton.swift */,
 				EE93B4D62687639F0055D7A6 /* OneAlertButton.swift */,
-				EEF7FF5B268653EB00FD7800 /* inputContainerTextFieldView.swift */,
 				EE896CC2269BEA450099E8CB /* WhoShouldIAskCell.swift */,
+				EEF7FF5B268653EB00FD7800 /* inputContainerTextFieldView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
