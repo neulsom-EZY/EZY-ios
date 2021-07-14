@@ -131,8 +131,7 @@ class MoreCalendarModalsViewController : UIViewController{
             errand.layer.borderWidth = 1
             errand.layer.borderColor = UIColor.EZY_AFADFF.cgColor
             vc = AddErrandViewController()
-            ourToDo.layer.borderColor = UIColor.clear.cgColor
-            ourToDo.isSelected = false
+        
             
             makeButton.isEnabled = true
 
@@ -153,7 +152,8 @@ class MoreCalendarModalsViewController : UIViewController{
         myToDo.isSelected = false
     }
     func ourTodoState(){
-        
+        ourToDo.layer.borderColor = UIColor.clear.cgColor
+        ourToDo.isSelected = false
     }
     
     func addTransparentsview(frame : CGRect){

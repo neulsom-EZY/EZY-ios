@@ -82,14 +82,16 @@ class AddMyToDoViewController:UIViewController{
         $0.dynamicFont(fontSize: 12, weight: .bold)
     }
     
-    private var collectionView :  UICollectionView = {
-        let flowlayout = UICollectionViewFlowLayout()
-        let cv = UICollectionView(frame: .zero, collectionViewLayout: flowlayout)
-        flowlayout.scrollDirection = .vertical
-        return cv
-    }()
-
-
+    private let repeatSettings  = UILabel().then{
+        $0.text = "반복 설정"
+        $0.textColor = .EZY_B6B6B6
+        $0.dynamicFont(fontSize: 12, weight: .bold)
+    }
+    private let alarmSettings = UILabel().then{
+        $0.text = "알림 설정"
+        $0.textColor = .EZY_B6B6B6
+        $0.dynamicFont(fontSize: 12, weight: .bold)
+    }
     
     private let addButton : AdditionalButton = {
         let button = AdditionalButton(type: .system)
@@ -158,7 +160,9 @@ class AddMyToDoViewController:UIViewController{
         scrollView.addSubview(explanationContainerView)
         scrollView.addSubview(tagLabel)
         scrollView.addSubview(addButton)
-        scrollView.contentSize = CGSize(width: view.frame.size.width, height: view.frame.height/0.94)
+        scrollView.addSubview(repeatSettings)
+        scrollView.addSubview(alarmSettings)
+        scrollView.contentSize = CGSize(width: view.frame.size.width, height: view.frame.height/0.916)
     }
     
     func cornerRadius(){
@@ -217,9 +221,16 @@ class AddMyToDoViewController:UIViewController{
             make.left.equalTo(backbutton.snp.left)
             make.top.equalTo(explanationContainerView.snp.bottom).offset(view.frame.height/38.6)
         }
-     
+        repeatSettings.snp.makeConstraints { (make) in
+            make.left.equalTo(backbutton.snp.left)
+            make.top.equalTo(tagLabel.snp.bottom).offset(view.frame.height/6.88812)
+        }
+        alarmSettings.snp.makeConstraints { (make) in
+            make.left.equalTo(backbutton.snp.left)
+            make.top.equalTo(repeatSettings.snp.bottom).offset(view.frame.height/11.76)
+        }
         addButton.snp.makeConstraints { (make) in
-            make.top.equalTo(tagLabel.snp.bottom).offset(view.frame.height/12.3)
+            make.top.equalTo(alarmSettings.snp.bottom).offset(view.frame.height/10.83)
             make.height.equalTo(self.view.frame.height/18.0)
             make.left.equalTo(backbutton.snp.left)
             make.right.equalTo(titleContainerView.snp.right)
