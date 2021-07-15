@@ -16,10 +16,11 @@ class WhatAboutPeopleLikeThisCell:UICollectionViewCell{
     }
     
     static func fittingSize(availableHeight: CGFloat, name: String?) -> CGSize {
-            let cell = WhatAboutPeopleLikeThisCell()
-            cell.configure(name: name)
-        let targetSize = CGSize(width: UIView.layoutFittingCompressedSize.width , height: availableHeight)
-            return cell.contentView.systemLayoutSizeFitting(targetSize, withHorizontalFittingPriority: .fittingSizeLevel, verticalFittingPriority: .required)
+        let cell = WhatAboutPeopleLikeThisCell()
+        cell.configure(name: name)
+        
+        let targetSize = CGSize(width: UIView.layoutFittingCompressedSize.width, height: availableHeight/2)
+        return cell.contentView.systemLayoutSizeFitting(targetSize, withHorizontalFittingPriority: .fittingSizeLevel, verticalFittingPriority: .required)
     }
     
     func configure(name: String?) {

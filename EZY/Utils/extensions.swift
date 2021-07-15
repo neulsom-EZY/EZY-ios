@@ -292,5 +292,6 @@ extension MorePeopleToDo : UICollectionViewDelegateFlowLayout,UICollectionViewDa
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         return WhatAboutPeopleLikeThisCell.fittingSize(availableHeight: collectionView.frame.height, name: MorePeopleToDo.data[indexPath.row])
     }
+
 }
 
