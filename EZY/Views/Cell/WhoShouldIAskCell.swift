@@ -16,13 +16,13 @@ class WhoShouldIAskCell : UICollectionViewCell{
         label.dynamicFont(fontSize: 12, weight: .ultraLight)
         return label
     }()
-    override var isSelected: Bool {
+    override var isHighlighted: Bool {
        didSet {
-           if isSelected {
+           if isHighlighted {
                 UIView.animate(withDuration: 0.2, delay: 0, options: .curveEaseOut, animations: {
                    // animate highlight
                     self.backgroundColor = self.bglabel.textColor
-                self.bglabel.textColor = .white
+                    self.bglabel.textColor = .white
                }, completion: nil)
            } else {
                UIView.animate(withDuration: 0.2, delay: 0, options: .curveEaseOut, animations: {

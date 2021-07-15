@@ -158,7 +158,7 @@
 				EE896CC4269C35640099E8CB /* AddScheduleModalBtn .swift */,
 				EEA457F32682FFA100C08D17 /* AlertButton.swift */,
 				EE93B4D62687639F0055D7A6 /* OneAlertButton.swift */,
-				EE896CC2269BEA450099E8CB /* WhoShouldIAskCell.swift */,
+				EE37790A2679FB3800334D4A /* Cell */,
 				EEF7FF5B268653EB00FD7800 /* inputContainerTextFieldView.swift */,
 			);
 			path = Views;
@@ -222,6 +222,7 @@
 		EE37790A2679FB3800334D4A /* Cell */ = {
 			isa = PBXGroup;
 			children = (
+				EE896CC2269BEA450099E8CB /* WhoShouldIAskCell.swift */,
 			);
 			path = Cell;
 			sourceTree = "<group>";
@@ -229,7 +230,6 @@
 		EEEDB2C02664D10100E5C53A /* Utils */ = {
 			isa = PBXGroup;
 			children = (
-				EE37790A2679FB3800334D4A /* Cell */,
 				EEEDB2C12664D30D00E5C53A /* extensions.swift */,
 				EED007D426674AC2009A5A87 /* Utilities.swift */,
 			);
