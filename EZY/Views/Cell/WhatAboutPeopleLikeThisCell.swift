@@ -18,10 +18,10 @@ class WhatAboutPeopleLikeThisCell:UICollectionViewCell{
     static func fittingSize(availableHeight: CGFloat, name: String?) -> CGSize {
             let cell = WhatAboutPeopleLikeThisCell()
             cell.configure(name: name)
-            
         let targetSize = CGSize(width: UIView.layoutFittingCompressedSize.width , height: availableHeight)
             return cell.contentView.systemLayoutSizeFitting(targetSize, withHorizontalFittingPriority: .fittingSizeLevel, verticalFittingPriority: .required)
     }
+    
     func configure(name: String?) {
         bglabel.text = name
     }
@@ -32,7 +32,7 @@ class WhatAboutPeopleLikeThisCell:UICollectionViewCell{
         contentView.backgroundColor = .clear
         layer.cornerRadius = frame.height/6.4
         bglabel.textAlignment = .center
-
+        
         bglabel.snp.makeConstraints { (make) in
             make.edges.equalToSuperview().inset(20 - frame.height)
         }

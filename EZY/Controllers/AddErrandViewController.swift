@@ -102,9 +102,6 @@ class AddErrandViewController : UIViewController{
         return button
     }()
     
-    
-    
-    
     //MARK: - Lifecycle
     
     
@@ -117,7 +114,6 @@ class AddErrandViewController : UIViewController{
     }
     
     //MARK: - Selectors
- 
     
     @objc func todobackbtn(){
         //전페이지로 되돌아가는 버튼

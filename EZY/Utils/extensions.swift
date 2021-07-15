@@ -273,20 +273,24 @@ extension AddErrandViewController : UICollectionViewDelegateFlowLayout,UICollect
 
 //MARK: - MorePeopleToDo
 
-extension MorePeopleToDo : UICollectionViewDelegateFlowLayout,UICollectionViewDataSource,UICollectionViewDelegate{
+
+extension MorePeopleToDo : UICollectionViewDelegateFlowLayout,UICollectionViewDataSource{
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return MorePeopleToDo.data.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: WhatAboutPeopleLikeThisCell.identifier, for: indexPath) as? WhatAboutPeopleLikeThisCell else { return UICollectionViewCell()}
-        cell.bglabel.text = MorePeopleToDo.data[indexPath.row]
-        
+         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: WhatAboutPeopleLikeThisCell.identifier, for: indexPath) as? WhatAboutPeopleLikeThisCell else {return UICollectionViewCell()}
+        cell.bglabel.text = "@ " + MorePeopleToDo.data[indexPath.row]
+        cell.bglabel.dynamicFont(fontSize: 12, weight:.thin)
+        cell.bglabel.textColor = .EZY_3D64FF
+        cell.layer.borderWidth = 1
+        cell.layer.borderColor = UIColor.EZY_6383FF.cgColor
         return cell
     }
+
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return WhoShouldIAskCell.fittingSize(availableHeight: view.frame.height/25.375, name: AddErrandViewController.data[indexPath.row])
+        return WhatAboutPeopleLikeThisCell.fittingSize(availableHeight: collectionView.frame.height, name: MorePeopleToDo.data[indexPath.row])
     }
 }
-
 

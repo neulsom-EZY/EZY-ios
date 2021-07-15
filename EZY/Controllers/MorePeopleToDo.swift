@@ -48,12 +48,27 @@ class MorePeopleToDo: UIViewController{
         $0.text = "이런 사람들은 어때요"
         $0.dynamicFont(fontSize: 14, weight: .thin)
     }
-
+    
+    fileprivate let WhatAboutPeopleLikeThis: UICollectionView = {
+        let layout = UICollectionViewFlowLayout()
+        let cv = UICollectionView(frame: .zero, collectionViewLayout: layout)
+        cv.contentInset = UIEdgeInsets(top: 0, left: 30, bottom: 0, right: 0)
+        layout.scrollDirection = .horizontal
+        cv.translatesAutoresizingMaskIntoConstraints = false
+        cv.register(WhatAboutPeopleLikeThisCell.self, forCellWithReuseIdentifier: WhatAboutPeopleLikeThisCell.identifier)
+        cv.showsHorizontalScrollIndicator = false
+        cv.backgroundColor = .clear
+        return cv
+    }()
+    
     
     //MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         configureUI()
+        WhatAboutPeopleLikeThis.dataSource = self
+        WhatAboutPeopleLikeThis.delegate = self
+        WhatAboutPeopleLikeThis.allowsMultipleSelection = true
     }
     
     //MARK: - Selectors
@@ -75,6 +90,7 @@ class MorePeopleToDo: UIViewController{
         view.addSubview(GroupLabel)
         view.addSubview(nickNameTextFieldContainerView)
         view.addSubview(recommendPeopleLabel)
+        view.addSubview(WhatAboutPeopleLikeThis)
     }
     
     
@@ -105,6 +121,12 @@ class MorePeopleToDo: UIViewController{
         recommendPeopleLabel.snp.makeConstraints { (make) in
             make.top.equalTo(nickNameTextFieldContainerView.snp.bottom).offset(view.frame.height/21.9)
             make.left.equalTo(view.frame.height/22.5)
+        }
+        WhatAboutPeopleLikeThis.snp.makeConstraints { (make) in
+            make.top.equalTo(recommendPeopleLabel.snp.bottom).offset(view.frame.height/81.2)
+            make.left.equalToSuperview()
+            make.height.equalTo(view.frame.height/11.28)
+            make.right.equalToSuperview()
         }
     }
     
