@@ -19,8 +19,8 @@ class WhatAboutPeopleLikeThisCell:UICollectionViewCell{
         let cell = WhatAboutPeopleLikeThisCell()
         cell.configure(name: name)
         
-        let targetSize = CGSize(width: UIView.layoutFittingCompressedSize.width, height: availableHeight/2)
-        return cell.contentView.systemLayoutSizeFitting(targetSize, withHorizontalFittingPriority: .fittingSizeLevel, verticalFittingPriority: .required)
+        let targetSize = CGSize(width: UIView.layoutFittingCompressedSize.width, height: availableHeight )
+        return cell.contentView.systemLayoutSizeFitting(targetSize, withHorizontalFittingPriority: .fittingSizeLevel , verticalFittingPriority: .required)
     }
     
     func configure(name: String?) {

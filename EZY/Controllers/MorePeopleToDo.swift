@@ -52,7 +52,6 @@ class MorePeopleToDo: UIViewController{
     fileprivate let WhatAboutPeopleLikeThis: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
         let cv = UICollectionView(frame: .zero, collectionViewLayout: layout)
-        cv.contentInset = UIEdgeInsets(top: 0, left: 40, bottom: 0, right: 40)
         layout.scrollDirection = .horizontal
         cv.translatesAutoresizingMaskIntoConstraints = false
         cv.register(WhatAboutPeopleLikeThisCell.self, forCellWithReuseIdentifier: WhatAboutPeopleLikeThisCell.identifier)
@@ -79,6 +78,7 @@ class MorePeopleToDo: UIViewController{
     //MARK: - Helpers
     func configureUI(){
         view.backgroundColor = .white
+        WhatAboutPeopleLikeThis.contentInset = UIEdgeInsets(top: 0, left: view.frame.height/21.95, bottom: 0, right: view.frame.height/21.95)
         addView()
         location()
     }
@@ -125,7 +125,7 @@ class MorePeopleToDo: UIViewController{
         WhatAboutPeopleLikeThis.snp.makeConstraints { (make) in
             make.top.equalTo(recommendPeopleLabel.snp.bottom).offset(view.frame.height/81.2)
             make.left.equalToSuperview()
-            make.height.equalTo(view.frame.height/11.27)
+            make.height.equalTo(view.frame.height/11.277)
             make.right.equalToSuperview()
         }
     }

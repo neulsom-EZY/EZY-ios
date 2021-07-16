@@ -290,8 +290,12 @@ extension MorePeopleToDo : UICollectionViewDelegateFlowLayout,UICollectionViewDa
     }
 
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return WhatAboutPeopleLikeThisCell.fittingSize(availableHeight: collectionView.frame.height, name: MorePeopleToDo.data[indexPath.row])
+        return WhatAboutPeopleLikeThisCell.fittingSize(availableHeight: view.frame.height/25.375, name: MorePeopleToDo.data[indexPath.row])
     }
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
+        return 0
+    }
+
 
 }
 

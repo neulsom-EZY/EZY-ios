@@ -100,7 +100,7 @@ class Utilities{
             make.left.equalTo(label_Message.snp.left)
             make.right.equalToSuperview().offset(viewSize/40.6 * -1)
             make.top.equalTo(label_Message.snp.bottom).offset(viewSize/90.2)
-            make.bottom.equalToSuperview().offset(viewSize/33.8 * -1)
+            make.bottom.equalToSuperview()
         }
         return view
     }
