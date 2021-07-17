@@ -10,7 +10,7 @@ import SnapKit
 import Then
     
 class MorePeopleToDo: UIViewController{
-    static let data = ["JiHoooooon","mingki","y0000000ujin","siwony","johnjihwan","noplayy","gyeongggggjuunnn"]
+    static let data = ["JiHoooooon","siwony","NoName","mingki","johnjihwan","noplayy","gyeongggggjuunnn"]
     
     
     //MARK: - Properties
@@ -53,12 +53,17 @@ class MorePeopleToDo: UIViewController{
         let layout = UICollectionViewFlowLayout()
         let cv = UICollectionView(frame: .zero, collectionViewLayout: layout)
         layout.scrollDirection = .horizontal
+        layout.minimumLineSpacing = 0
         cv.translatesAutoresizingMaskIntoConstraints = false
         cv.register(WhatAboutPeopleLikeThisCell.self, forCellWithReuseIdentifier: WhatAboutPeopleLikeThisCell.identifier)
         cv.showsHorizontalScrollIndicator = false
         cv.backgroundColor = .clear
         return cv
     }()
+    
+    private let divider = UIView().then{
+        $0.backgroundColor = .EZY_DEDEDE
+    }
     
     
     //MARK: - Lifecycle
@@ -91,6 +96,7 @@ class MorePeopleToDo: UIViewController{
         view.addSubview(nickNameTextFieldContainerView)
         view.addSubview(recommendPeopleLabel)
         view.addSubview(WhatAboutPeopleLikeThis)
+        view.addSubview(divider)
     }
     
     
@@ -128,6 +134,13 @@ class MorePeopleToDo: UIViewController{
             make.height.equalTo(view.frame.height/11.277)
             make.right.equalToSuperview()
         }
+        divider.snp.makeConstraints { (make) in
+            make.height.equalTo(view.frame.height/1624)
+            make.top.equalTo(WhatAboutPeopleLikeThis.snp.bottom).offset(view.frame.height/35.3)
+            make.centerX.equalToSuperview()
+            make.width.equalTo(view.frame.height/2.689)
+        }
+        
     }
     
 }

@@ -285,17 +285,22 @@ extension MorePeopleToDo : UICollectionViewDelegateFlowLayout,UICollectionViewDa
         cell.bglabel.dynamicFont(fontSize: 12, weight:.thin)
         cell.bglabel.textColor = .EZY_3D64FF
         cell.layer.borderWidth = 1
+        cell.bglabel.sizeToFit()
         cell.layer.borderColor = UIColor.EZY_6383FF.cgColor
         return cell
     }
 
+
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return WhatAboutPeopleLikeThisCell.fittingSize(availableHeight: view.frame.height/25.375, name: MorePeopleToDo.data[indexPath.row])
+        return WhatAboutPeopleLikeThisCell.fittingSize(availableHeight: view.frame.size.height/25.375, name: MorePeopleToDo.data[indexPath.row])
     }
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
         return 0
     }
-
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
+        return 15
+    }
+    
 
 }
 
