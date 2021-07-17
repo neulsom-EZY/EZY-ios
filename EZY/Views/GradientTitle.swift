@@ -8,18 +8,9 @@
 import UIKit
 
 class GradientTitle : UIView{
-    private let titleLbl = UILabel().then{
-        $0.dynamicFont(fontSize: 24, weight: .semibold)
-        $0.textColor = .EZY_968DFF
-
-    }
-    private lazy var subLbl = UILabel().then{
-        $0.dynamicFont(fontSize: 20, weight: .semibold)
-    }
     var title: String?{
         didSet{
             titleLbl.text = title
-            
         }
     }
     var subTitle : String?{
@@ -27,15 +18,26 @@ class GradientTitle : UIView{
             subLbl.text = subTitle
         }
     }
+    private let view = UIView()
+    private let titleLbl = UILabel().then{
+        $0.dynamicFont(fontSize: 24, weight: .semibold)
+        $0.textColor = .EZY_968DFF
+
+    }
+    private let subLbl = UILabel().then{
+        $0.dynamicFont(fontSize: 20, weight: .semibold)
+        $0.updateGradientTextColor_vertical(gradientColors: [.EZY_968DFF,.EZY_968DFF,.EZY_968DFF,.white])
+    }
+
     override init(frame: CGRect) {
         super.init(frame: frame)
-        addSubview(titleLbl)
-        addSubview(subLbl)
-        subLbl.updateGradientTextColor_vertical(gradientColors: [.EZY_968DFF,.white])
+        addSubview(view)
+        view.addSubview(titleLbl)
+        view.addSubview(subLbl)
 
         titleLbl.snp.makeConstraints { (make) in
-            make.top.equalTo(snp.top)
-            make.left.equalToSuperview()
+            make.top.equalTo(view.snp.top)
+            make.left.equalTo(view.snp.left)
         }
         subLbl.snp.makeConstraints { (make) in
             make.top.equalTo(titleLbl.snp.bottom)

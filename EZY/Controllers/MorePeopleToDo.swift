@@ -19,22 +19,23 @@ class MorePeopleToDo: UIViewController{
         $0.setImage(UIImage(systemName: "arrow.left"), for: .normal)
         $0.addTarget(self, action: #selector(backButton), for: .touchUpInside)
     }
-    private let TitleLabel = UILabel().then{
-        $0.text = "누구와 일정을 함께하시나요?"
-        $0.dynamicFont(fontSize: 24, weight: .semibold)
-        $0.textColor = .EZY_968DFF
-    }
-    private let SubLabel = UILabel().then{
-        $0.text = "한명도 좋고 여러명도 좋아요!"
-        $0.dynamicFont(fontSize: 20, weight: .semibold)
-        $0.updateGradientTextColor_vertical(gradientColors: [.EZY_968DFF,.EZY_968DFF,.EZY_968DFF,.white])
-    }
-//    private let titleLabel : GradientTitle = {
-//        let tL = GradientTitle()
-//        tL.title = "누구와 일정을 함께하시나요?"
-//        tL.subTitle = "한명도 좋고 여러명도 좋아요!"
-//        return tL
-//    }()
+//    private let TitleLabel = UILabel().then{
+//        $0.text = "누구와 일정을 함께하시나요?"
+//        $0.dynamicFont(fontSize: 24, weight: .semibold)
+//        $0.textColor = .EZY_968DFF
+//    }
+//    private let SubLabel = UILabel().then{
+//        $0.text = "한명도 좋고 여러명도 좋아요!"
+//        $0.dynamicFont(fontSize: 20, weight: .semibold)
+//        $0.updateGradientTextColor_vertical(gradientColors: [.EZY_968DFF,.EZY_968DFF,.EZY_968DFF,.white])
+//    }
+    private let titleLabel : GradientTitle = {
+        let tL = GradientTitle()
+        tL.title = "누구와 일정을 함께하시나요?"
+        tL.subTitle = "한명도 좋고 여러명도 좋아요!"
+        
+        return tL
+    }()
     
     private let GroupLabel = UILabel().then{
         $0.text = "그룹원"
@@ -97,9 +98,9 @@ class MorePeopleToDo: UIViewController{
     
     func addView(){
         view.addSubview(backbutton)
-//        view.addSubview(titleLabel)
-        view.addSubview(TitleLabel)
-        view.addSubview(SubLabel)
+        view.addSubview(titleLabel)
+//        view.addSubview(TitleLabel)
+//        view.addSubview(SubLabel)
         view.addSubview(GroupLabel)
         view.addSubview(nickNameTextFieldContainerView)
         view.addSubview(recommendPeopleLabel)
@@ -114,22 +115,22 @@ class MorePeopleToDo: UIViewController{
             make.left.equalTo(self.view.frame.height/29)
             make.top.equalTo(self.view.frame.height/13.3)
         }
-        TitleLabel.snp.makeConstraints { (make) in
-            make.left.equalTo(backbutton.snp.left)
-            make.top.equalTo(backbutton.snp.top).offset(view.frame.height/15.6)
-        }
-        SubLabel.snp.makeConstraints { (make) in
-            make.top.equalTo(TitleLabel.snp.bottom)
-            make.left.equalTo(TitleLabel.snp.left)
-        }
-//        titleLabel.snp.makeConstraints { (make) in
+//        TitleLabel.snp.makeConstraints { (make) in
 //            make.left.equalTo(backbutton.snp.left)
 //            make.top.equalTo(backbutton.snp.top).offset(view.frame.height/15.6)
-//
 //        }
+//        SubLabel.snp.makeConstraints { (make) in
+//            make.top.equalTo(TitleLabel.snp.bottom)
+//            make.left.equalTo(TitleLabel.snp.left)
+//        }
+        titleLabel.snp.makeConstraints { (make) in
+            make.left.equalTo(backbutton.snp.left)
+            make.top.equalTo(backbutton.snp.top).offset(view.frame.height/15.6)
+            make.height.equalTo(view.frame.height/15.615)
+        }
         GroupLabel.snp.makeConstraints { (make) in
             make.left.equalTo(view.frame.height/20.8)
-            make.top.equalTo(SubLabel.snp.bottom).offset(view.frame.height/17.6)
+            make.top.equalTo(titleLabel.snp.bottom).offset(view.frame.height/17.6)
         }
         nickNameTextFieldContainerView.snp.makeConstraints { (make) in
             make.top.equalTo(GroupLabel.snp.bottom).offset(view.frame.height/135.3)
