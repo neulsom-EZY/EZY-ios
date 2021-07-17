@@ -162,9 +162,9 @@
 				EE896CC4269C35640099E8CB /* AddScheduleModalBtn .swift */,
 				EEA457F32682FFA100C08D17 /* AlertButton.swift */,
 				EE93B4D62687639F0055D7A6 /* OneAlertButton.swift */,
-				EE37790A2679FB3800334D4A /* Cell */,
 				EEF7FF5B268653EB00FD7800 /* inputContainerTextFieldView.swift */,
 				EE2921FB26A2C97F0031F893 /* GradientTitle.swift */,
+				EE37790A2679FB3800334D4A /* Cell */,
 			);
 			path = Views;
 			sourceTree = "<group>";

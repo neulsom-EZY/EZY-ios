@@ -29,6 +29,13 @@ class MorePeopleToDo: UIViewController{
         $0.dynamicFont(fontSize: 20, weight: .semibold)
         $0.updateGradientTextColor_vertical(gradientColors: [.EZY_968DFF,.EZY_968DFF,.EZY_968DFF,.white])
     }
+//    private let titleLabel : GradientTitle = {
+//        let tL = GradientTitle()
+//        tL.title = "누구와 일정을 함께하시나요?"
+//        tL.subTitle = "한명도 좋고 여러명도 좋아요!"
+//        return tL
+//    }()
+    
     private let GroupLabel = UILabel().then{
         $0.text = "그룹원"
         $0.dynamicFont(fontSize: 10, weight: .thin)
@@ -90,6 +97,7 @@ class MorePeopleToDo: UIViewController{
     
     func addView(){
         view.addSubview(backbutton)
+//        view.addSubview(titleLabel)
         view.addSubview(TitleLabel)
         view.addSubview(SubLabel)
         view.addSubview(GroupLabel)
@@ -114,6 +122,11 @@ class MorePeopleToDo: UIViewController{
             make.top.equalTo(TitleLabel.snp.bottom)
             make.left.equalTo(TitleLabel.snp.left)
         }
+//        titleLabel.snp.makeConstraints { (make) in
+//            make.left.equalTo(backbutton.snp.left)
+//            make.top.equalTo(backbutton.snp.top).offset(view.frame.height/15.6)
+//
+//        }
         GroupLabel.snp.makeConstraints { (make) in
             make.left.equalTo(view.frame.height/20.8)
             make.top.equalTo(SubLabel.snp.bottom).offset(view.frame.height/17.6)
