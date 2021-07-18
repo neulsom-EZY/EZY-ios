@@ -34,13 +34,17 @@ class CustomManagePushNotificationCell: UITableViewCell {
     private let divider = UIView().then{
         $0.backgroundColor = .EZY_DEDEDE
     }
-    private lazy var switchPushManage : SwitchBtn = {
-        let button = SwitchBtn()
-        button.addTarget(self, action: #selector(SwitchMoveButton), for: .touchUpInside)
+//    private lazy var switchPushManage : SwitchBtn = {
+//        let button = SwitchBtn()
+//        button.addTarget(self, action: #selector(SwitchMoveButton), for: .touchUpInside)
+//        return button
+//    }()
+    
+    private lazy var switchButton : SwitchButton = {
+        let button = SwitchButton(type: .system)
+        button.addTarget(self, action: #selector(SwitchMoveButtonState), for: .touchUpInside)
         return button
     }()
-    
-    private lazy var switchButton = SwitchButton()
     
     //MARK: - Lifecycle
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
@@ -58,7 +62,9 @@ class CustomManagePushNotificationCell: UITableViewCell {
             backgroundColor = .cyan
         }
     }
-    
+    @objc func SwitchMoveButtonState(){
+//        switchButton.delegate = self
+    }
     
     //MARK: - HELPERs
     func addContentView(){
@@ -102,8 +108,9 @@ class CustomManagePushNotificationCell: UITableViewCell {
         fatalError("init(coder:) has not been implemented")
     }
 }
-extension CustomManagePushNotificationCell: SwieeftSwitchButtonDelegate{
+extension CustomManagePushNotificationCell: SwitchButtonDelegate{
     func isOnValueChange(isOn: Bool) {
         self.switchState = isOn
     }
 }
+
