@@ -22,11 +22,8 @@ class NotificationViewController: UIViewController {
     
     lazy var scheduleImageByTypeImage = [UIImage(named: "EZY_MyJob"), UIImage(named: "EZY_OurJob"), UIImage(named: "EZY_Errand"),UIImage(named: "EZY_MyJob"), UIImage(named: "EZY_OurJob"), UIImage(named: "EZY_Errand"),UIImage(named: "EZY_MyJob"), UIImage(named: "EZY_OurJob"), UIImage(named: "EZY_Errand")]
     
-    let circleView = [UIImage(named: "EZY_PersonalBackgroundView"), UIImage(named: "EZY_TeamBackgroundView"), UIImage(named: "EZY_ErrendBackgroundView"), UIImage(named: "EZY_PersonalBackgroundView"), UIImage(named: "EZY_TeamBackgroundView"), UIImage(named: "EZY_ErrendBackgroundView"),UIImage(named: "EZY_PersonalBackgroundView"), UIImage(named: "EZY_TeamBackgroundView"), UIImage(named: "EZY_ErrendBackgroundView")]
-    
     lazy var backButton = UIButton().then {
         $0.setImage(UIImage(named: "EZY_NotificationBackButton"), for: .normal)
-        $0.addTarget(self, action: #selector(didbackButtonClick(_:)), for: .touchUpInside)
     }
     
     lazy var notificationTitleLabel = UILabel().then {
@@ -35,9 +32,9 @@ class NotificationViewController: UIViewController {
         $0.dynamicFont(fontSize: 23, currentFontName: "AppleSDGothicNeo-SemiBold")
     }
     
-    var personalScheduleColor: UIColor! = UIColor(red: 186/255, green: 200/255, blue: 255/255, alpha: 1)
-    var teamScheduleColor: UIColor! = UIColor(red: 207/255, green: 203/255, blue: 255/255, alpha: 1)
-    var errendColor: UIColor! = UIColor(red: 175/255, green: 173/255, blue: 255/255, alpha: 1)
+    var personalScheduleColor: UIColor! = UIColor(red: 167/255, green: 161/255, blue: 255/255, alpha: 1)
+    var teamScheduleColor: UIColor! = UIColor(red: 167/255, green: 161/255, blue: 255/255, alpha: 1)
+    var errendColor: UIColor! = UIColor(red: 167/255, green: 161/255, blue: 255/255, alpha: 1)
     
     lazy var notificationColor: [UIColor] = [personalScheduleColor, teamScheduleColor, errendColor, personalScheduleColor, teamScheduleColor, errendColor, personalScheduleColor, teamScheduleColor, errendColor]
     
@@ -54,11 +51,18 @@ class NotificationViewController: UIViewController {
         configureUI()
     }
     
+    @objc func backButtonClicked(sender:UIButton){
+        self.navigationController?.popViewController(animated: true)
+        print("fdasdfasdf")
+    }
+    
     func configureUI(){
         
         self.view.addSubview(backButton)
         self.view.addSubview(notificationTitleLabel)
         self.view.addSubview(notificationTableMainView.tableView)
+        
+        backButton.addTarget(self, action: #selector(backButtonClicked(sender:)), for: .touchUpInside)
         
         notificationTableMainView.tableView.register(NotificationTableViewCell.self, forCellReuseIdentifier: NotificationTableViewCell.NotificationTableViewIdentifier)
         
@@ -80,10 +84,7 @@ class NotificationViewController: UIViewController {
             make.width.equalToSuperview()
         }
     }
-    
-    @objc func didbackButtonClick(_ button: UIButton){
-        navigationController?.popViewController(animated: true)
-    }
+
 }
 
 extension NotificationViewController: UITableViewDelegate{
@@ -104,9 +105,8 @@ extension NotificationViewController: UITableViewDataSource{
         cell.scheduleTypeLabel.textColor = notificationColor[indexPath.row]
         cell.notificationContentLabel.text = notificationContent[indexPath.row]
         cell.notificationContentLabel.textColor = notificationColor[indexPath.row]
-        cell.scheduleImageByTypeImageView.image = scheduleImageByTypeImage[indexPath.row]
+        cell.logoCircleImageView.image = scheduleImageByTypeImage[indexPath.row]
         cell.afterNotificationTimeLabel.text = afterNotificationTime[indexPath.row]
-        cell.logoCircleImageView.image = circleView[indexPath.row]
         
         cell.selectionStyle = .none
         
