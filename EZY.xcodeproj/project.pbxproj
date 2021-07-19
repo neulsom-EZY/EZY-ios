@@ -69,6 +69,7 @@
 		6AB27CB0269D8C1600B95C0F /* WithdrawalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AB27CAF269D8C1600B95C0F /* WithdrawalViewController.swift */; };
 		6AB486FD26832B8500E95D43 /* SelectCalendarModalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AB486FC26832B8500E95D43 /* SelectCalendarModalView.swift */; };
 		6AB486FF26834D8C00E95D43 /* CalendarCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AB486FE26834D8C00E95D43 /* CalendarCollectionViewCell.swift */; };
+		6ABA2C8C26A5366000CB1E16 /* WithdrawalModalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6ABA2C8B26A5366000CB1E16 /* WithdrawalModalView.swift */; };
 		6AC1F4062684093700DDD08C /* TagColorCollectionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AC1F4052684093700DDD08C /* TagColorCollectionViewModel.swift */; };
 		6AC3BF18267B475200DDCBB2 /* PlanRequestRespondingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AC3BF17267B475200DDCBB2 /* PlanRequestRespondingViewController.swift */; };
 		6ACB4ED2269C2FA8008606C5 /* TopBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6ACB4ED1269C2FA8008606C5 /* TopBarView.swift */; };
@@ -160,6 +161,7 @@
 		6AB27CAF269D8C1600B95C0F /* WithdrawalViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WithdrawalViewController.swift; sourceTree = "<group>"; };
 		6AB486FC26832B8500E95D43 /* SelectCalendarModalView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectCalendarModalView.swift; sourceTree = "<group>"; };
 		6AB486FE26834D8C00E95D43 /* CalendarCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarCollectionViewCell.swift; sourceTree = "<group>"; };
+		6ABA2C8B26A5366000CB1E16 /* WithdrawalModalView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WithdrawalModalView.swift; sourceTree = "<group>"; };
 		6AC1F4052684093700DDD08C /* TagColorCollectionViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagColorCollectionViewModel.swift; sourceTree = "<group>"; };
 		6AC3BF17267B475200DDCBB2 /* PlanRequestRespondingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlanRequestRespondingViewController.swift; sourceTree = "<group>"; };
 		6ACB4ED1269C2FA8008606C5 /* TopBarView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TopBarView.swift; sourceTree = "<group>"; };
@@ -378,6 +380,7 @@
 				6AE5BB1526969AFD00A9731B /* SelectLocationModalView.swift */,
 				6AE5BB1B2696B9C900A9731B /* PlanCompleteModalView.swift */,
 				6A82834F2698132000AC381B /* PlanDeleteModalView.swift */,
+				6ABA2C8B26A5366000CB1E16 /* WithdrawalModalView.swift */,
 			);
 			path = ModalViews;
 			sourceTree = "<group>";
@@ -578,6 +581,7 @@
 				6A4EDA04266866FC00B809EC /* ScheduleTypeCollectionView.swift in Sources */,
 				6A4EDA37266DA52A00B809EC /* SettingTableViewCell.swift in Sources */,
 				6A82835626982A8B00AC381B /* questionTableViewCell.swift in Sources */,
+				6ABA2C8C26A5366000CB1E16 /* WithdrawalModalView.swift in Sources */,
 				6AA6F799269C2E6200958D36 /* NewPasswordPutViewController.swift in Sources */,
 				6ACB4ED2269C2FA8008606C5 /* TopBarView.swift in Sources */,
 				6A8283502698132000AC381B /* PlanDeleteModalView.swift in Sources */,

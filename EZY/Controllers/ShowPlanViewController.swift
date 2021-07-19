@@ -277,8 +277,6 @@ class ShowPlanViewController: UIViewController{
             make.centerX.equalToSuperview()
         }
         
-        
-        
         let attributedString = NSMutableAttributedString(string: EZYLISTTitleLabel.text!)
         attributedString.addAttribute(NSAttributedString.Key.kern, value: CGFloat(3.0), range: NSRange(location: 0, length: attributedString.length))
         EZYLISTTitleLabel.attributedText = attributedString
