@@ -86,11 +86,6 @@ class WithdrawalViewController: UIViewController {
         withdrawalModalView.isHidden = false
     }
     
-    @objc func backButtonClicked(sender:UIButton){
-        self.navigationController?.popViewController(animated: true)
-    }
-    
-<<<<<<< HEAD
     func withdrawalModalViewSetting() {
         self.view.addSubview(withdrawalModalView)
         
@@ -141,10 +136,11 @@ class WithdrawalViewController: UIViewController {
         }
         
         withdrawalModalView.isHidden = true
-=======
+        
+    }
+    
     @objc func backButtonClicked(sender:UIButton){
         self.navigationController?.popViewController(animated: true)
->>>>>>> 8a3a9d22c0c674a20efc89b0c13bbbad9163cdff
     }
     
     func layoutSetting(){
@@ -156,14 +152,11 @@ class WithdrawalViewController: UIViewController {
         self.view.addSubview(pwTextField)
         self.view.addSubview(pwUnderLineView)
         self.view.addSubview(withdrawalButton)
-<<<<<<< HEAD
         self.view.addSubview(showPasswordButton)
         
         topView.backButton.addTarget(self, action: #selector(backButtonClicked(sender:)), for: .touchUpInside)
         
-=======
                 
->>>>>>> 8a3a9d22c0c674a20efc89b0c13bbbad9163cdff
         idNameLabel.snp.makeConstraints { make in
             make.top.equalTo(topView.titleLabel.snp.bottom).offset(self.view.frame.height/16.91)
             make.left.equalTo(topView.titleLabel)
@@ -245,4 +238,3 @@ class WithdrawalViewController: UIViewController {
         }
     }
 }
-
