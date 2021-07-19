@@ -29,7 +29,7 @@ class SelectLocationViewController: UIViewController {
     
     lazy var locationHalfModalView = UIView().then{
         $0.backgroundColor = .white
-        $0.roundCorners(cornerRadius: 50, maskedCorners: [.layerMinXMinYCorner, .layerMaxXMinYCorner]) // 그림자 코드 뒤에 넣으면 그림자가 안먹음
+//        $0.roundCorners(cornerRadius: 50, maskedCorners: [.layerMinXMinYCorner, .layerMaxXMinYCorner]) // 그림자 코드 뒤에 넣으면 그림자가 안먹음
         $0.layer.masksToBounds = false
         $0.layer.shadowOpacity = 0.3
         $0.layer.shadowRadius = 20
