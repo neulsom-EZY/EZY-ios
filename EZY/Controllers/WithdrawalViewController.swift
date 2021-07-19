@@ -12,6 +12,8 @@ class WithdrawalViewController: UIViewController {
     //MARK: - Properties
     lazy var topView = TopView()
     
+    lazy var withdrawalModalView = WithdrawalModalView()
+    
     lazy var idNameLabel = UILabel().then {
         $0.textColor = UIColor(red: 150/255, green: 141/255, blue: 255/255, alpha: 1)
         $0.text = "아이디/닉네임"
@@ -32,6 +34,11 @@ class WithdrawalViewController: UIViewController {
         $0.textColor = UIColor(red: 150/255, green: 141/255, blue: 255/255, alpha: 1)
         $0.text = "비밀번호"
         $0.dynamicFont(fontSize: 10, currentFontName: "AppleSDGothicNeo-SemiBold")
+    }
+    
+    lazy var showPasswordButton = UIButton().then {
+        $0.setImage(UIImage(named: "EZY_eye"), for: .normal)
+        $0.addTarget(self, action: #selector(EyeButtondClicked), for: .touchUpInside)
     }
     
     lazy var pwTextField = UITextField().then {
@@ -59,14 +66,85 @@ class WithdrawalViewController: UIViewController {
         topViewSetting()
         
         layoutSetting()
+        
+        withdrawalModalViewSetting()
+    }
+    
+    @objc func okButtonClicked(sender:UIButton){
+        withdrawalModalView.isHidden = true
+    }
+    
+    @objc func EyeButtondClicked(sender:UIButton){
+        if pwTextField.isSecureTextEntry == true {
+            pwTextField.isSecureTextEntry = false
+        } else {
+            pwTextField.isSecureTextEntry = true
+        }
     }
     
     @objc func withdrawalButtonClicked(sender:UIButton){
-        self.navigationController?.popViewController(animated: true)
+        withdrawalModalView.isHidden = false
     }
     
     @objc func backButtonClicked(sender:UIButton){
         self.navigationController?.popViewController(animated: true)
+    }
+    
+<<<<<<< HEAD
+    func withdrawalModalViewSetting() {
+        self.view.addSubview(withdrawalModalView)
+        
+        withdrawalModalView.okButton.addTarget(self, action: #selector(okButtonClicked(sender:)), for: .touchUpInside)
+        
+        withdrawalModalView.snp.makeConstraints { make in
+            make.top.right.bottom.left.equalToSuperview()
+        }
+        
+        withdrawalModalView.shadowBackgroundView.snp.makeConstraints { make in
+            make.top.right.bottom.left.equalToSuperview()
+        }
+        
+        withdrawalModalView.modalBackgroundView.snp.makeConstraints { make in
+            make.width.equalToSuperview().dividedBy(1.13)
+            make.height.equalToSuperview().dividedBy(3.59)
+            make.centerX.centerY.equalToSuperview()
+        }
+        
+        withdrawalModalView.titleLabel.snp.makeConstraints { make in
+            make.top.equalToSuperview().offset(self.view.frame.height/33.8)
+            make.left.equalToSuperview().offset(self.view.frame.height/33.8)
+        }
+        
+        withdrawalModalView.withdrawalCircleImageView.snp.makeConstraints { make in
+            make.centerX.equalToSuperview()
+            make.height.equalTo(self.view).dividedBy(17.27)
+            make.width.equalTo(withdrawalModalView.withdrawalCircleImageView.snp.height)
+            make.top.equalTo(withdrawalModalView.titleLabel.snp.bottom).offset(self.view.frame.height/33.8)
+        }
+        
+        withdrawalModalView.withdrawalContentLabel.snp.makeConstraints { make in
+            make.top.equalTo(withdrawalModalView.withdrawalCircleImageView.snp.bottom).offset(self.view.frame.height/40.6)
+            make.centerX.equalToSuperview()
+        }
+        
+        withdrawalModalView.okButton.snp.makeConstraints { make in
+            make.bottom.equalTo(withdrawalModalView.noButton)
+            make.right.equalTo(withdrawalModalView.noButton.snp.left).offset(-self.view.frame.width/35)
+            make.height.width.equalTo(withdrawalModalView.noButton)
+        }
+        
+        withdrawalModalView.noButton.snp.makeConstraints { make in
+            make.bottom.equalToSuperview().offset(-self.view.frame.height/30.6)
+            make.right.equalToSuperview().offset(-self.view.frame.width/15)
+            make.height.equalToSuperview().dividedBy(7.2)
+            make.width.equalToSuperview().dividedBy(4.7)
+        }
+        
+        withdrawalModalView.isHidden = true
+=======
+    @objc func backButtonClicked(sender:UIButton){
+        self.navigationController?.popViewController(animated: true)
+>>>>>>> 8a3a9d22c0c674a20efc89b0c13bbbad9163cdff
     }
     
     func layoutSetting(){
@@ -78,7 +156,14 @@ class WithdrawalViewController: UIViewController {
         self.view.addSubview(pwTextField)
         self.view.addSubview(pwUnderLineView)
         self.view.addSubview(withdrawalButton)
+<<<<<<< HEAD
+        self.view.addSubview(showPasswordButton)
+        
+        topView.backButton.addTarget(self, action: #selector(backButtonClicked(sender:)), for: .touchUpInside)
+        
+=======
                 
+>>>>>>> 8a3a9d22c0c674a20efc89b0c13bbbad9163cdff
         idNameLabel.snp.makeConstraints { make in
             make.top.equalTo(topView.titleLabel.snp.bottom).offset(self.view.frame.height/16.91)
             make.left.equalTo(topView.titleLabel)
@@ -106,7 +191,7 @@ class WithdrawalViewController: UIViewController {
         pwTextField.snp.makeConstraints { make in
             make.top.equalTo(pwNameLabel.snp.bottom)
             make.left.equalTo(pwNameLabel)
-            make.centerX.equalToSuperview()
+            make.right.equalTo(pwUnderLineView).offset(-self.view.frame.width/20)
             make.height.equalToSuperview().dividedBy(27)
         }
         
@@ -122,6 +207,13 @@ class WithdrawalViewController: UIViewController {
             make.centerX.equalToSuperview()
             make.height.equalToSuperview().dividedBy(16.24)
             make.bottom.equalToSuperview().offset(-self.view.frame.height/23.8)
+        }
+        
+        showPasswordButton.snp.makeConstraints { make in
+            make.centerY.equalTo(pwTextField)
+            make.right.equalTo(pwUnderLineView)
+            make.height.equalTo(self.view.frame.height/90.22*1.2)
+            make.width.equalTo(self.view.frame.width/25*1.2)
         }
     }
     
