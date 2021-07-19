@@ -34,17 +34,17 @@ class CustomManagePushNotificationCell: UITableViewCell {
     private let divider = UIView().then{
         $0.backgroundColor = .EZY_DEDEDE
     }
-//    private lazy var switchPushManage : SwitchBtn = {
-//        let button = SwitchBtn()
-//        button.addTarget(self, action: #selector(SwitchMoveButton), for: .touchUpInside)
-//        return button
-//    }()
-    
-    private lazy var switchButton : SwitchButton = {
-        let button = SwitchButton(type: .system)
-        button.addTarget(self, action: #selector(SwitchMoveButtonState), for: .touchUpInside)
+    private lazy var switchPushManage : SwitchBtn = {
+        let button = SwitchBtn()
+        button.addTarget(self, action: #selector(SwitchMoveButton), for: .touchUpInside)
         return button
     }()
+    
+//    private lazy var switchButton : SwitchButton = {
+//        let button = SwitchButton()
+//        button.addTarget(self, action: #selector(SwitchMoveButtonState), for: .touchUpInside)
+//        return button
+//    }()
     
     //MARK: - Lifecycle
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
@@ -61,10 +61,12 @@ class CustomManagePushNotificationCell: UITableViewCell {
         }else{
             backgroundColor = .cyan
         }
+        
     }
-    @objc func SwitchMoveButtonState(){
-//        switchButton.delegate = self
-    }
+//    @objc func SwitchMoveButtonState(){
+//        switchButton.setOn(on: !switchButton.isOn, animated: true)
+//
+//    }
     
     //MARK: - HELPERs
     func addContentView(){
@@ -72,7 +74,7 @@ class CustomManagePushNotificationCell: UITableViewCell {
         view.addSubview(title)
         view.addSubview(explanation)
         contentView.addSubview(divider)
-        contentView.addSubview(switchButton)
+        contentView.addSubview(switchPushManage)
     }
     
     private func location(){
@@ -90,7 +92,7 @@ class CustomManagePushNotificationCell: UITableViewCell {
             make.left.equalTo(view.snp.left).offset(contentView.frame.height/58)
         }
         
-        switchButton.snp.makeConstraints { (make) in
+        switchPushManage.snp.makeConstraints { (make) in
             make.centerY.equalTo(snp.centerY)
             make.right.equalTo(contentView.snp.right)
             make.height.equalTo(frame.height/2.71)

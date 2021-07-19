@@ -9,19 +9,23 @@ import UIKit
 import SnapKit
 import Then
 
-class SwitchBtn : UIButton,sendSwitch{
+protocol SwitchStateDelegate: class {
+    func isOnValueChange(isOn: Bool)
+}
+class SwitchBtn : UIButton{
     
     lazy var backview = UIView().then{
         $0.backgroundColor = .EZY_AFADFF
     }
     func State(data: Bool?) {
-        self.switchState = data
+        self.switchState = data!
     }
     lazy var titleBtnView  = UIView().then{
         $0.backgroundColor = .white
     }
-    lazy var switchState : Bool? = false
-    
+    lazy var switchState : Bool = false
+    weak var delegate: SwitchStateDelegate?
+
     override init(frame: CGRect) {
         super.init(frame: frame)
         configureUI()
@@ -37,28 +41,31 @@ class SwitchBtn : UIButton,sendSwitch{
         backview.isUserInteractionEnabled = false
         backview.layer.cornerRadius = frame.height/2
         titleBtnView.layer.cornerRadius = titleBtnView.frame.height/2
-        animationstate()
         backview.snp.makeConstraints { (make) in
             make.height.equalToSuperview()
             make.width.equalToSuperview()
         }
+
         
     }
+    override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
+        animationstate()
+    }
     func animationstate(){
-        if (switchState!)
+        if (switchState)
         {
             animateOn()
-
+            titleBtnView.backgroundColor = .EZY_AFADFF
+            
         }else{
             animateOff()
+            titleBtnView.backgroundColor = .clear
+            titleBtnView.backgroundColor = .gray
         }
-//        if let _ = switchState{
-//            animateOn()
-//        }else{
-//            animateOff()
-//        }
+        switchState = !switchState
+
     }
-    
+
     func animateOn(){
         self.titleBtnView.snp.makeConstraints { (make) in
             make.right.equalTo(self.backview.snp.right).offset(self.frame.height/12.98 * -1)
@@ -66,7 +73,7 @@ class SwitchBtn : UIButton,sendSwitch{
             make.centerY.equalTo(self.backview.snp.centerY)
             make.width.equalTo(self.titleBtnView.snp.height)
         }
-        UIView.animate(withDuration: 1, animations: {
+        UIView.animate(withDuration: 5, animations: {
             self.titleBtnView.layoutIfNeeded()
         })
     }
@@ -78,7 +85,7 @@ class SwitchBtn : UIButton,sendSwitch{
             make.centerY.equalTo(self.backview.snp.centerY)
             make.width.equalTo(self.titleBtnView.snp.height)
         }
-        UIView.animate(withDuration: 1, animations: {
+        UIView.animate(withDuration: 5, animations: {
             self.titleBtnView.layoutIfNeeded()
         })
     }
