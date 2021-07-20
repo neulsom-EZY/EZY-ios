@@ -11,7 +11,6 @@ class GroupModifyDeleteModalView: UIView {
     
     lazy var backgroundView = UIView().then {
         $0.backgroundColor = UIColor.black.withAlphaComponent(0.2)
-        
     }
     
     lazy var modalBackgroundView = UIView().then {
@@ -20,11 +19,6 @@ class GroupModifyDeleteModalView: UIView {
         $0.layer.cornerRadius = 40
         $0.layer.maskedCorners = CACornerMask(arrayLiteral: .layerMinXMinYCorner, .layerMaxXMinYCorner)
     }
-    
-    lazy var lineView = UIView().then {
-        $0.backgroundColor = UIColor(red: 222/255, green: 222/255, blue: 222/255, alpha: 1)
-    }
-    
     lazy var groupModifyLabelBackgroundView = UIView().then{
         $0.backgroundColor = UIColor(red: 255/255, green: 236/255, blue: 236/255, alpha: 1)
     }
@@ -33,16 +27,49 @@ class GroupModifyDeleteModalView: UIView {
         $0.backgroundColor = UIColor(red: 255/255, green: 236/255, blue: 236/255, alpha: 1)
     }
     
-    lazy var groupModifyButton = UIButton().then{
-        $0.setTitle("그룹 수정", for: .normal)
-        $0.setTitleColor(UIColor.black, for: .normal)
-        $0.titleLabel!.font = UIFont(name: "AppleSDGothicNeo-UltraLight", size: 15 * 0.92)
+    lazy var introTitleLabel = UILabel().then {
+        $0.text = "항목을 선택해주세요"
+        $0.dynamicFont(fontSize: 19, currentFontName: "AppleSDGothicNeo-Thin")
     }
     
-    lazy var groupDeleteButton = UIButton().then{
-        $0.setTitle("그룹 삭제", for: .normal)
-        $0.setTitleColor(UIColor.black, for: .normal)
-        $0.titleLabel!.font = UIFont(name: "AppleSDGothicNeo-UltraLight", size: 15 * 0.92)
+    lazy var modifyViewButton = UIButton().then {
+        $0.backgroundColor = .white
+        $0.layer.cornerRadius = 20
+        $0.layer.masksToBounds = false
+        $0.layer.shadowOpacity = 0.9
+        $0.layer.shadowRadius = 7
+        $0.layer.shadowOffset = CGSize(width: 0, height: 4)
+        $0.layer.shadowColor = UIColor(red: 222/255, green: 222/255, blue: 222/255, alpha: 1).cgColor
+    }
+    
+    lazy var deleteViewButton = UIButton().then {
+        $0.backgroundColor = .white
+        $0.layer.cornerRadius = 20
+        $0.layer.masksToBounds = false
+        $0.layer.shadowOpacity = 0.9
+        $0.layer.shadowRadius = 7
+        $0.layer.shadowOffset = CGSize(width: 0, height: 4)
+        $0.layer.shadowColor = UIColor(red: 222/255, green: 222/255, blue: 222/255, alpha: 1).cgColor
+    }
+    
+    lazy var modifyIconBackgroundCircleView = UIView().then {
+        $0.backgroundColor = UIColor(red: 136/255, green: 128/255, blue: 255/255, alpha: 1)
+    }
+    
+    lazy var deleteIconBackgroundCircleView = UIView().then {
+        $0.backgroundColor = UIColor(red: 174/255, green: 169/255, blue: 242/255, alpha: 1)
+    }
+    
+    lazy var modifyLabel = UILabel().then {
+        $0.text = "일정 수정"
+        $0.backgroundColor = UIColor(red: 136/255, green: 128/255, blue: 255/255, alpha: 1)
+        $0.dynamicFont(fontSize: 10, currentFontName: "AppleSDGothicNeo-SemiBold")
+    }
+    
+    lazy var deleteLabel = UILabel().then {
+        $0.text = "일정 삭제"
+        $0.backgroundColor = UIColor(red: 136/255, green: 128/255, blue: 255/255, alpha: 1)
+        $0.dynamicFont(fontSize: 10, currentFontName: "AppleSDGothicNeo-SemiBold")
     }
     
     override init(frame: CGRect) {

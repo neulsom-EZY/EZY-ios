@@ -70,7 +70,7 @@ class GroupManagementViewController: UIViewController, UITextFieldDelegate {
     lazy var EZYPlanBackgroundColor: [UIColor] = [greenColor, orangeColor, pinkColor, blueColor, purpleColor, yellowColor,greenColor, orangeColor, pinkColor, blueColor, purpleColor, yellowColor,greenColor, orangeColor, pinkColor, blueColor, purpleColor, yellowColor,greenColor, orangeColor, pinkColor, blueColor, purpleColor, yellowColor,greenColor, orangeColor, pinkColor, blueColor, purpleColor, yellowColor,greenColor, orangeColor, pinkColor, blueColor, purpleColor, yellowColor]
     
     let titleLabel = ["영어 스터디", "EZY", "NELSOM", "영어 스터디", "EZY", "NELSOM", "영어 스터디", "EZY", "NELSOM", "영어 스터디", "EZY", "NELSOM"]
-    
+ 
     //MARK: Initializers
     init() {
         groupCollectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout())
@@ -88,27 +88,29 @@ class GroupManagementViewController: UIViewController, UITextFieldDelegate {
     //MARK: LifeCycles
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        self.view.backgroundColor = .white
-        
+                
         topViewSetting()
+        
+        layoutSetting()
         
         setupCollectionView()
         
-        // selectedMemberCollectionView 설정
         selectedMemberCollectionViewSetting()
         
-        // selectedMemberCollectionView 설정
         groupModalViewSetting()
         
         groupModifyDeleteModalViewSetting()
         
         deleteModalViewSetting()
         
+    }
+
+    func layoutSetting(){
+        self.view.backgroundColor = .white
+
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(_:)), name:UIResponder.keyboardWillShowNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide(_:)), name: UIResponder.keyboardWillHideNotification, object: nil)
     }
-
     
     //MARK: deleteModalView Setting
     func deleteModalViewSetting(){
@@ -212,14 +214,14 @@ class GroupManagementViewController: UIViewController, UITextFieldDelegate {
         self.view.addSubview(groupModifyDeleteModalView)
         groupModifyDeleteModalView.addSubview(groupModifyDeleteModalView.backgroundView)
         groupModifyDeleteModalView.backgroundView.addSubview(groupModifyDeleteModalView.modalBackgroundView)
-        groupModifyDeleteModalView.modalBackgroundView.addSubview(groupModifyDeleteModalView.lineView)
         groupModifyDeleteModalView.modalBackgroundView.addSubview(groupModifyDeleteModalView.groupModifyLabelBackgroundView)
         groupModifyDeleteModalView.modalBackgroundView.addSubview(groupModifyDeleteModalView.groupDeleteLabelBackgroundView)
-        groupModifyDeleteModalView.modalBackgroundView.addSubview(groupModifyDeleteModalView.groupModifyButton)
-        groupModifyDeleteModalView.modalBackgroundView.addSubview(groupModifyDeleteModalView.groupDeleteButton)
+        groupModifyDeleteModalView.modalBackgroundView.addSubview(groupModifyDeleteModalView.introTitleLabel)
+        groupModifyDeleteModalView.modalBackgroundView.addSubview(groupModifyDeleteModalView.modifyViewButton)
+        groupModifyDeleteModalView.modalBackgroundView.addSubview(groupModifyDeleteModalView.deleteViewButton)
 
-        groupModifyDeleteModalView.groupModifyButton.addTarget(self, action: #selector(groupModifyLabelButtonClicked(_:)), for: .touchUpInside)
-        groupModifyDeleteModalView.groupDeleteButton.addTarget(self, action: #selector(groupDeleteLabelButtonClicked(_:)), for: .touchUpInside)
+        groupModifyDeleteModalView.modifyViewButton.addTarget(self, action: #selector(groupModifyViewButtonClicked(_:)), for: .touchUpInside)
+        groupModifyDeleteModalView.deleteViewButton.addTarget(self, action: #selector(groupDeleteViewButtonClicked(_:)), for: .touchUpInside)
         
         groupModifyDeleteModalView.snp.makeConstraints { make in
             make.top.left.right.bottom.equalToSuperview()
@@ -230,44 +232,29 @@ class GroupManagementViewController: UIViewController, UITextFieldDelegate {
         }
         
         groupModifyDeleteModalView.modalBackgroundView.snp.makeConstraints { make in
-            make.bottom.equalTo(self.view)
-            make.width.equalTo(self.view)
-            make.height.equalTo(self.view).dividedBy(5)
+            make.bottom.equalToSuperview()
+            make.width.equalToSuperview()
+            make.height.equalToSuperview().dividedBy(2.9)
             make.centerX.equalToSuperview()
         }
         
-        groupModifyDeleteModalView.lineView.snp.makeConstraints { make in
-            make.height.equalTo(0.7)
-            make.width.equalToSuperview().dividedBy(1.3)
-            make.centerX.centerY.equalToSuperview()
+        groupModifyDeleteModalView.introTitleLabel.snp.makeConstraints { make in
+            make.top.equalToSuperview().offset(self.view.frame.height/19.3)
+            make.centerX.equalToSuperview()
         }
         
-        groupModifyDeleteModalView.groupModifyButton.snp.makeConstraints { make in
-            make.centerY.equalToSuperview().offset(-36)
-            make.centerX.equalToSuperview()
-            make.height.equalToSuperview().dividedBy(9)
-            make.width.equalToSuperview().dividedBy(6.6)
+        groupModifyDeleteModalView.deleteViewButton.snp.makeConstraints { make in
+            make.height.equalTo(self.view).dividedBy(7.8)
+            make.width.equalTo(self.view).dividedBy(4.1)
+            make.top.equalTo(groupModifyDeleteModalView.introTitleLabel.snp.bottom).offset(self.view.frame.height/27)
+            make.left.equalToSuperview().offset(self.view.frame.width/5)
         }
         
-        groupModifyDeleteModalView.groupDeleteButton.snp.makeConstraints { make in
-            make.centerY.equalToSuperview().offset(36)
-            make.centerX.equalToSuperview()
-            make.height.equalToSuperview().dividedBy(9)
-            make.width.equalToSuperview().dividedBy(6.6)
-        }
-        
-        groupModifyDeleteModalView.groupModifyLabelBackgroundView.snp.makeConstraints { make in
-            make.centerY.equalToSuperview().offset(-30)
-            make.centerX.equalToSuperview()
-            make.width.equalTo(groupModifyDeleteModalView.groupModifyButton)
-            make.height.equalTo(groupModifyDeleteModalView.groupModifyButton).dividedBy(2)
-        }
-        
-        groupModifyDeleteModalView.groupDeleteLabelBackgroundView.snp.makeConstraints { make in
-            make.centerY.equalToSuperview().offset(42)
-            make.centerX.equalToSuperview()
-            make.width.equalTo(groupModifyDeleteModalView.groupDeleteButton)
-            make.height.equalTo(groupModifyDeleteModalView.groupDeleteButton).dividedBy(2)
+        groupModifyDeleteModalView.modifyViewButton.snp.makeConstraints { make in
+            make.height.equalTo(self.view).dividedBy(7.8)
+            make.width.equalTo(self.view).dividedBy(4.1)
+            make.top.equalTo(groupModifyDeleteModalView.introTitleLabel.snp.bottom).offset(self.view.frame.height/27)
+            make.right.equalToSuperview().offset(-self.view.frame.width/5)
         }
         
         groupModifyDeleteModalView.isHidden = true
@@ -420,13 +407,13 @@ class GroupManagementViewController: UIViewController, UITextFieldDelegate {
 
     }
     
-    @objc func groupDeleteLabelButtonClicked(_ button: UIButton){
+    @objc func groupDeleteViewButtonClicked(_ button: UIButton){
         print("groupDeleteButtonClicked")
         groupModifyDeleteModalView.isHidden = true
         deleteModalView.isHidden = false
     }
     
-    @objc func groupModifyLabelButtonClicked(_ button: UIButton){
+    @objc func groupModifyViewButtonClicked(_ button: UIButton){
         print("groupModifyButtonClicked")
         groupModifyDeleteModalView.isHidden = true
         groupAddModalView.isHidden = false
