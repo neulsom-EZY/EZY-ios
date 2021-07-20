@@ -93,7 +93,7 @@ class CustomManagePushNotificationCell: UITableViewCell {
         fatalError("init(coder:) has not been implemented")
     }
 }
-extension CustomManagePushNotificationCell: SwitchButtonDelegate{
+extension CustomManagePushNotificationCell: SwitchStateDelegate{
     func isOnValueChange(isOn: Bool) {
         self.switchState = isOn
     }
