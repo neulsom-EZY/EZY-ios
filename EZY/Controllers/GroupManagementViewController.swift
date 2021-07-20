@@ -223,10 +223,12 @@ class GroupManagementViewController: UIViewController, UITextFieldDelegate {
         groupModifyDeleteModalView.modalBackgroundView.addSubview(groupModifyDeleteModalView.introTitleLabel)
         groupModifyDeleteModalView.modalBackgroundView.addSubview(groupModifyDeleteModalView.modifyViewButton)
         groupModifyDeleteModalView.modalBackgroundView.addSubview(groupModifyDeleteModalView.deleteViewButton)
+        
         groupModifyDeleteModalView.deleteViewButton.addSubview(groupModifyDeleteModalView.deleteLabel)
         groupModifyDeleteModalView.modifyViewButton.addSubview(groupModifyDeleteModalView.modifyLabel)
-        groupModifyDeleteModalView.deleteViewButton.addSubview(groupModifyDeleteModalView.modifyIconBackgroundCircleView)
-        groupModifyDeleteModalView.modifyViewButton.addSubview(groupModifyDeleteModalView.deleteIconBackgroundCircleView)
+        
+        groupModifyDeleteModalView.modifyViewButton.addSubview(groupModifyDeleteModalView.modifyIconBackgroundCircleView)
+        groupModifyDeleteModalView.deleteViewButton.addSubview(groupModifyDeleteModalView.deleteIconBackgroundCircleView)
         groupModifyDeleteModalView.modifyIconBackgroundCircleView.addSubview(groupModifyDeleteModalView.modifyIconImageView)
         groupModifyDeleteModalView.deleteIconBackgroundCircleView.addSubview(groupModifyDeleteModalView.deleteIconImageView)
         
@@ -477,11 +479,16 @@ class GroupManagementViewController: UIViewController, UITextFieldDelegate {
     
     @objc func groupDeleteViewButtonClicked(sender: UIButton){
         if deleteViewButtonSelected == false{
+            // 삭제 버튼 테두리 주고, 강조 색 주기
             groupModifyDeleteModalView.deleteViewButton.layer.borderWidth = 1
-            groupModifyDeleteModalView.deleteViewButton.layer.borderColor = UIColor(red: 136/255, green: 128/255, blue: 255/255, alpha: 1).cgColor
+            groupModifyDeleteModalView.deleteViewButton.layer.borderColor = UIColor(red: 131/255, green: 122/255, blue: 255/255, alpha: 1).cgColor
+            groupModifyDeleteModalView.deleteLabel.textColor = UIColor(red: 131/255, green: 122/255, blue: 255/255, alpha: 1)
+            groupModifyDeleteModalView.deleteIconBackgroundCircleView.backgroundColor = UIColor(red: 131/255, green: 122/255, blue: 255/255, alpha: 1)
             
+            // 수정 버튼 테두리 없애고, 강조 색 빼기
             groupModifyDeleteModalView.modifyViewButton.layer.borderWidth = 0
-
+            groupModifyDeleteModalView.modifyLabel.textColor = UIColor(red: 188/255, green: 183/255, blue: 255/255, alpha: 1)
+            groupModifyDeleteModalView.modifyIconBackgroundCircleView.backgroundColor = UIColor(red: 188/255, green: 183/255, blue: 255/255, alpha: 1)
             
             deleteViewButtonSelected.toggle()
             modifyViewButtonSelected.toggle()
@@ -490,10 +497,16 @@ class GroupManagementViewController: UIViewController, UITextFieldDelegate {
     
     @objc func groupModifyViewButtonClicked(sender: UIButton){
         if modifyViewButtonSelected == false{
+            // 수정 버튼 테두리 주고, 강조 색 주기
             groupModifyDeleteModalView.modifyViewButton.layer.borderWidth = 1
-            groupModifyDeleteModalView.modifyViewButton.layer.borderColor = UIColor(red: 136/255, green: 128/255, blue: 255/255, alpha: 1).cgColor
+            groupModifyDeleteModalView.modifyViewButton.layer.borderColor = UIColor(red: 131/255, green: 122/255, blue: 255/255, alpha: 1).cgColor
+            groupModifyDeleteModalView.modifyLabel.textColor = UIColor(red: 131/255, green: 122/255, blue: 255/255, alpha: 1)
+            groupModifyDeleteModalView.modifyIconBackgroundCircleView.backgroundColor = UIColor(red: 131/255, green: 122/255, blue: 255/255, alpha: 1)
             
+            // 삭제 버튼 테두리 없애고, 강조 색 빼기
             groupModifyDeleteModalView.deleteViewButton.layer.borderWidth = 0
+            groupModifyDeleteModalView.deleteLabel.textColor = UIColor(red: 188/255, green: 183/255, blue: 255/255, alpha: 1)
+            groupModifyDeleteModalView.deleteIconBackgroundCircleView.backgroundColor = UIColor(red: 188/255, green: 183/255, blue: 255/255, alpha: 1)
             
             deleteViewButtonSelected.toggle()
             modifyViewButtonSelected.toggle()
@@ -619,8 +632,8 @@ extension GroupManagementViewController: UICollectionViewDelegate, UICollectionV
                 deleteViewButtonSelected = true
                 
                 groupModifyDeleteModalView.deleteViewButton.layer.borderWidth = 1
-                groupModifyDeleteModalView.deleteViewButton.layer.borderColor = UIColor(red: 136/255, green: 128/255, blue: 255/255, alpha: 1).cgColor
-                groupModifyDeleteModalView.deleteViewButton.setTitleColor(UIColor(red: 136/255, green: 128/255, blue: 255/255, alpha: 1), for: .normal)
+                groupModifyDeleteModalView.deleteViewButton.layer.borderColor = UIColor(red: 131/255, green: 122/255, blue: 255/255, alpha: 1).cgColor
+                groupModifyDeleteModalView.deleteViewButton.setTitleColor(UIColor(red: 131/255, green: 122/255, blue: 255/255, alpha: 1), for: .normal)
                 
                 groupModifyDeleteModalView.modifyViewButton.layer.borderWidth = 0
             }
