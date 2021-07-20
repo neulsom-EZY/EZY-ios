@@ -631,11 +631,17 @@ extension GroupManagementViewController: UICollectionViewDelegate, UICollectionV
                 modifyViewButtonSelected = false
                 deleteViewButtonSelected = true
                 
+                // 삭제 버튼 테두리 주고, 강조 색 주기
                 groupModifyDeleteModalView.deleteViewButton.layer.borderWidth = 1
                 groupModifyDeleteModalView.deleteViewButton.layer.borderColor = UIColor(red: 131/255, green: 122/255, blue: 255/255, alpha: 1).cgColor
-                groupModifyDeleteModalView.deleteViewButton.setTitleColor(UIColor(red: 131/255, green: 122/255, blue: 255/255, alpha: 1), for: .normal)
+                groupModifyDeleteModalView.deleteLabel.textColor = UIColor(red: 131/255, green: 122/255, blue: 255/255, alpha: 1)
+                groupModifyDeleteModalView.deleteIconBackgroundCircleView.backgroundColor = UIColor(red: 131/255, green: 122/255, blue: 255/255, alpha: 1)
                 
+                // 수정 버튼 테두리 없애고, 강조 색 빼기
                 groupModifyDeleteModalView.modifyViewButton.layer.borderWidth = 0
+                groupModifyDeleteModalView.modifyLabel.textColor = UIColor(red: 188/255, green: 183/255, blue: 255/255, alpha: 1)
+                groupModifyDeleteModalView.modifyIconBackgroundCircleView.backgroundColor = UIColor(red: 188/255, green: 183/255, blue: 255/255, alpha: 1)
+                
             }
         }
         
