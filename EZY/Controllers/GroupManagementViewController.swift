@@ -28,6 +28,10 @@ class GroupManagementViewController: UIViewController, UITextFieldDelegate {
     
     let groupModifyDeleteModalView = GroupModifyDeleteModalView()
     
+    var modifyViewButtonSelected = true
+    
+    var deleteViewButtonSelected = false
+    
     let deleteModalView = DeleteModalView()
 
     private(set) var groupCollectionView: UICollectionView
@@ -219,9 +223,16 @@ class GroupManagementViewController: UIViewController, UITextFieldDelegate {
         groupModifyDeleteModalView.modalBackgroundView.addSubview(groupModifyDeleteModalView.introTitleLabel)
         groupModifyDeleteModalView.modalBackgroundView.addSubview(groupModifyDeleteModalView.modifyViewButton)
         groupModifyDeleteModalView.modalBackgroundView.addSubview(groupModifyDeleteModalView.deleteViewButton)
-
-        groupModifyDeleteModalView.modifyViewButton.addTarget(self, action: #selector(groupModifyViewButtonClicked(_:)), for: .touchUpInside)
-        groupModifyDeleteModalView.deleteViewButton.addTarget(self, action: #selector(groupDeleteViewButtonClicked(_:)), for: .touchUpInside)
+        groupModifyDeleteModalView.deleteViewButton.addSubview(groupModifyDeleteModalView.deleteLabel)
+        groupModifyDeleteModalView.modifyViewButton.addSubview(groupModifyDeleteModalView.modifyLabel)
+        groupModifyDeleteModalView.deleteViewButton.addSubview(groupModifyDeleteModalView.modifyIconBackgroundCircleView)
+        groupModifyDeleteModalView.modifyViewButton.addSubview(groupModifyDeleteModalView.deleteIconBackgroundCircleView)
+        groupModifyDeleteModalView.modifyIconBackgroundCircleView.addSubview(groupModifyDeleteModalView.modifyIconImageView)
+        groupModifyDeleteModalView.deleteIconBackgroundCircleView.addSubview(groupModifyDeleteModalView.deleteIconImageView)
+        
+        groupModifyDeleteModalView.deleteViewButton.addTarget(self, action: #selector(groupDeleteViewButtonClicked(sender:)), for: .touchUpInside)
+        
+        groupModifyDeleteModalView.modifyViewButton.addTarget(self, action: #selector(groupModifyViewButtonClicked(sender:)), for: .touchUpInside)
         
         groupModifyDeleteModalView.snp.makeConstraints { make in
             make.top.left.right.bottom.equalToSuperview()
@@ -255,6 +266,44 @@ class GroupManagementViewController: UIViewController, UITextFieldDelegate {
             make.width.equalTo(self.view).dividedBy(4.1)
             make.top.equalTo(groupModifyDeleteModalView.introTitleLabel.snp.bottom).offset(self.view.frame.height/27)
             make.right.equalToSuperview().offset(-self.view.frame.width/5)
+        }
+        
+        groupModifyDeleteModalView.modifyLabel.snp.makeConstraints { make in
+            make.centerX.equalToSuperview()
+            make.bottom.equalToSuperview().offset(-self.view.frame.height/40.6)
+        }
+        
+        groupModifyDeleteModalView.deleteLabel.snp.makeConstraints { make in
+            make.centerX.equalToSuperview()
+            make.bottom.equalToSuperview().offset(-self.view.frame.height/40.6)
+        }
+        
+        groupModifyDeleteModalView.deleteIconBackgroundCircleView.snp.makeConstraints { make in
+            make.centerX.equalToSuperview()
+            make.top.equalToSuperview().offset(self.view.frame.height/40.6)
+            make.height.equalTo(self.view).dividedBy(27)
+            make.width.equalTo(groupModifyDeleteModalView.deleteIconBackgroundCircleView.snp.height)
+            
+            groupModifyDeleteModalView.deleteIconBackgroundCircleView.layer.cornerRadius = (self.view.frame.height/27)/2
+        }
+        
+        groupModifyDeleteModalView.modifyIconBackgroundCircleView.snp.makeConstraints { make in
+            make.centerX.equalToSuperview()
+            make.top.equalToSuperview().offset(self.view.frame.height/40.6)
+            make.height.equalTo(self.view).dividedBy(27)
+            make.width.equalTo(groupModifyDeleteModalView.deleteIconBackgroundCircleView.snp.height)
+            
+            groupModifyDeleteModalView.modifyIconBackgroundCircleView.layer.cornerRadius = (self.view.frame.height/27)/2
+        }
+        
+        groupModifyDeleteModalView.deleteIconImageView.snp.makeConstraints { make in
+            make.centerX.centerY.equalToSuperview()
+            make.height.width.equalToSuperview().dividedBy(2.3)
+        }
+        
+        groupModifyDeleteModalView.modifyIconImageView.snp.makeConstraints { make in
+            make.centerX.centerY.equalToSuperview()
+            make.height.width.equalToSuperview().dividedBy(2.3)
         }
         
         groupModifyDeleteModalView.isHidden = true
@@ -404,20 +453,27 @@ class GroupManagementViewController: UIViewController, UITextFieldDelegate {
         
         (groupCollectionView.collectionViewLayout as! UICollectionViewFlowLayout).estimatedItemSize = UICollectionViewFlowLayout.automaticSize
         (groupCollectionView.collectionViewLayout as! UICollectionViewFlowLayout).sectionInsetReference = .fromLayoutMargins
-
     }
     
-    @objc func groupDeleteViewButtonClicked(_ button: UIButton){
-        print("groupDeleteButtonClicked")
-        groupModifyDeleteModalView.isHidden = true
-        deleteModalView.isHidden = false
+    @objc func groupDeleteViewButtonClicked(sender: UIButton){
+        if deleteViewButtonSelected == false{
+            groupModifyDeleteModalView.deleteViewButton.layer.borderWidth = 1
+            groupModifyDeleteModalView.deleteViewButton.layer.borderColor = UIColor(red: 136/255, green: 128/255, blue: 255/255, alpha: 1).cgColor
+            deleteViewButtonSelected.toggle()
+            groupModifyDeleteModalView.modifyViewButton.layer.borderWidth = 0
+            modifyViewButtonSelected.toggle()
+        }
     }
     
-    @objc func groupModifyViewButtonClicked(_ button: UIButton){
-        print("groupModifyButtonClicked")
-        groupModifyDeleteModalView.isHidden = true
-        groupAddModalView.isHidden = false
-        groupAddModalView.GroupModalDataSetting(modalTitleText: "그룹 수정", modalColor: UIColor(red: 176/255, green: 209/255, blue: 174/255, alpha: 1))
+    @objc func groupModifyViewButtonClicked(sender: UIButton){
+        if modifyViewButtonSelected == false{
+            groupModifyDeleteModalView.modifyViewButton.layer.borderWidth = 1
+            groupModifyDeleteModalView.modifyViewButton.layer.borderColor = UIColor(red: 136/255, green: 128/255, blue: 255/255, alpha: 1).cgColor
+            
+            groupModifyDeleteModalView.deleteViewButton.layer.borderWidth = 0
+            deleteViewButtonSelected.toggle()
+            modifyViewButtonSelected.toggle()
+        }
     }
     
     @objc func groupCancelButtonClicked(_ button: UIButton){

@@ -33,6 +33,7 @@ class GroupModifyDeleteModalView: UIView {
     }
     
     lazy var modifyViewButton = UIButton().then {
+
         $0.backgroundColor = .white
         $0.layer.cornerRadius = 20
         $0.layer.masksToBounds = false
@@ -43,6 +44,8 @@ class GroupModifyDeleteModalView: UIView {
     }
     
     lazy var deleteViewButton = UIButton().then {
+        $0.layer.borderWidth = 1
+        $0.layer.borderColor = UIColor(red: 136/255, green: 128/255, blue: 255/255, alpha: 1).cgColor
         $0.backgroundColor = .white
         $0.layer.cornerRadius = 20
         $0.layer.masksToBounds = false
@@ -62,14 +65,22 @@ class GroupModifyDeleteModalView: UIView {
     
     lazy var modifyLabel = UILabel().then {
         $0.text = "일정 수정"
-        $0.backgroundColor = UIColor(red: 136/255, green: 128/255, blue: 255/255, alpha: 1)
+        $0.textColor = UIColor(red: 136/255, green: 128/255, blue: 255/255, alpha: 1)
         $0.dynamicFont(fontSize: 10, currentFontName: "AppleSDGothicNeo-SemiBold")
     }
     
     lazy var deleteLabel = UILabel().then {
         $0.text = "일정 삭제"
-        $0.backgroundColor = UIColor(red: 136/255, green: 128/255, blue: 255/255, alpha: 1)
+        $0.textColor = UIColor(red: 174/255, green: 169/255, blue: 242/255, alpha: 1)
         $0.dynamicFont(fontSize: 10, currentFontName: "AppleSDGothicNeo-SemiBold")
+    }
+    
+    lazy var modifyIconImageView = UIImageView().then{
+        $0.image = UIImage(named: "EZY_EditWhiteButton")
+    }
+    
+    lazy var deleteIconImageView = UIImageView().then{
+        $0.image = UIImage(named: "EZY_DeleteWhiteButton")
     }
     
     override init(frame: CGRect) {
