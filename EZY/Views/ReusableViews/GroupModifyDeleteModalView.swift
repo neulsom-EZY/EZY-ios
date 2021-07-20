@@ -65,13 +65,13 @@ class GroupModifyDeleteModalView: UIView {
     
     lazy var modifyLabel = UILabel().then {
         $0.text = "일정 수정"
-        $0.textColor = UIColor(red: 136/255, green: 128/255, blue: 255/255, alpha: 1)
+        $0.textColor = UIColor(red: 174/255, green: 169/255, blue: 242/255, alpha: 1)
         $0.dynamicFont(fontSize: 10, currentFontName: "AppleSDGothicNeo-SemiBold")
     }
     
     lazy var deleteLabel = UILabel().then {
         $0.text = "일정 삭제"
-        $0.textColor = UIColor(red: 174/255, green: 169/255, blue: 242/255, alpha: 1)
+        $0.textColor = UIColor(red: 136/255, green: 128/255, blue: 255/255, alpha: 1)
         $0.dynamicFont(fontSize: 10, currentFontName: "AppleSDGothicNeo-SemiBold")
     }
     
