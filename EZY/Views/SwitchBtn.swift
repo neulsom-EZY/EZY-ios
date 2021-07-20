@@ -23,7 +23,7 @@ class SwitchBtn : UIButton{
     lazy var titleBtnView  = UIView().then{
         $0.backgroundColor = .white
     }
-    lazy var switchState : Bool = false
+    lazy var switchState : Bool = true
     weak var delegate: SwitchStateDelegate?
 
     override init(frame: CGRect) {
@@ -45,7 +45,12 @@ class SwitchBtn : UIButton{
             make.height.equalToSuperview()
             make.width.equalToSuperview()
         }
-
+        self.titleBtnView.snp.makeConstraints { (make) in
+            make.right.equalTo(self.backview.snp.right).offset(self.frame.height/12.98 * -1)
+            make.height.equalTo(frame.height/1.18)
+            make.centerY.equalTo(self.backview.snp.centerY)
+            make.width.equalTo(self.titleBtnView.snp.height)
+        }
         
     }
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -55,38 +60,38 @@ class SwitchBtn : UIButton{
         if (switchState)
         {
             animateOn()
-            titleBtnView.backgroundColor = .EZY_AFADFF
+            titleBtnView.backgroundColor = .white
             
         }else{
             animateOff()
-            titleBtnView.backgroundColor = .clear
-            titleBtnView.backgroundColor = .gray
+            titleBtnView.backgroundColor = .white
         }
         switchState = !switchState
 
     }
 
     func animateOn(){
-        self.titleBtnView.snp.makeConstraints { (make) in
-            make.right.equalTo(self.backview.snp.right).offset(self.frame.height/12.98 * -1)
-            make.height.equalTo(self.frame.height/1.18)
-            make.centerY.equalTo(self.backview.snp.centerY)
-            make.width.equalTo(self.titleBtnView.snp.height)
-        }
-        UIView.animate(withDuration: 5, animations: {
-            self.titleBtnView.layoutIfNeeded()
+//        self.titleBtnView.snp.makeConstraints { (make) in
+//            make.right.equalTo(self.backview.snp.right).offset(self.frame.height/12.98 * -1)
+//            make.height.equalTo(frame.height/1.18)
+//            make.centerY.equalTo(self.backview.snp.centerY)
+//            make.width.equalTo(self.titleBtnView.snp.height)
+//        }
+        UIView.animate(withDuration: 0.25, animations: {
+            self.backview.backgroundColor = .EZY_DEDEDE
+            //            self.titleBtnView.layoutIfNeeded()
         })
     }
     func animateOff(){
-        backview.backgroundColor = .EZY_CACACA
-        self.titleBtnView.snp.makeConstraints { (make) in
-            make.left.equalTo(self.backview.snp.left).offset(self.frame.height/12.98)
-            make.height.equalTo(self.frame.height/1.18)
-            make.centerY.equalTo(self.backview.snp.centerY)
-            make.width.equalTo(self.titleBtnView.snp.height)
-        }
-        UIView.animate(withDuration: 5, animations: {
-            self.titleBtnView.layoutIfNeeded()
+//        self.titleBtnView.snp.makeConstraints { (make) in
+//            make.left.equalTo(self.backview.snp.left).offset(self.frame.height/12.98)
+//            make.height.equalTo(frame.height/1.18)
+//            make.centerY.equalTo(self.backview.snp.centerY)
+//            make.width.equalTo(self.titleBtnView.snp.height)
+//        }
+        UIView.animate(withDuration: 0.25, animations: {
+            self.backview.backgroundColor = .EZY_AFADFF
+
         })
     }
     
