@@ -83,6 +83,14 @@ class GroupModifyDeleteModalView: UIView {
         $0.image = UIImage(named: "EZY_DeleteWhiteButton")
     }
     
+    lazy var selectButton = UIButton().then {
+        $0.backgroundColor = UIColor(red: 136/255, green: 128/255, blue: 255/255, alpha: 1)
+        $0.setTitle("선 택", for: .normal)
+        $0.dynamicFont(fontSize: 12, currentFontName: "AppleSDGothicNeo-Bold")
+        $0.setTitleColor(UIColor.white, for: .normal)
+        $0.layer.cornerRadius = 10
+    }
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
     }
