@@ -45,11 +45,8 @@ class CustomManagePushNotificationCell: UITableViewCell {
         addContentView()
         location()
     }
-    
 
     //MARK: - Selctors
-
-
     
     //MARK: - HELPERs
     func addContentView(){

@@ -14,6 +14,4 @@ struct Managementbtn {
     let subTitle : String?
 }
 
-struct Switchbtn{
-    let switchState : Bool?
-}
+

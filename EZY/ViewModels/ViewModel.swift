@@ -7,6 +7,6 @@
 
 import Foundation
 
-
-
-
+protocol SwitchStateDelegate: class {
+    func isOnValueChange(isOn: Bool)
+}
