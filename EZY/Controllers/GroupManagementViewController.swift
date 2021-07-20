@@ -22,8 +22,6 @@ class GroupManagementViewController: UIViewController, UITextFieldDelegate {
     //MARK: Properties
     let topView = TopView()
     
-    
-    
     let groupAddModalView = GroupAddModalView()
     
     let searchResultsView = SearchResultsView()
@@ -148,7 +146,7 @@ class GroupManagementViewController: UIViewController, UITextFieldDelegate {
         deleteModalView.modalBackgroundView.snp.makeConstraints { make in
             make.centerX.centerY.equalToSuperview()
             make.height.equalToSuperview().dividedBy(3.5)
-            make.width.equalToSuperview().dividedBy(1.2)
+            make.width.equalToSuperview().dividedBy(1.1)
         }
 
         deleteModalView.modalTitleLabel.snp.makeConstraints { make in
@@ -178,7 +176,7 @@ class GroupManagementViewController: UIViewController, UITextFieldDelegate {
             make.top.equalTo(deleteModalView.iconImageView.snp.bottom).offset(self.view.frame.height/30)
             make.height.equalToSuperview().dividedBy(10)
             make.centerX.equalToSuperview()
-            make.width.equalToSuperview().dividedBy(1.25)
+            make.width.equalToSuperview().dividedBy(1.4)
         }
         
         deleteModalView.planNameLabel.snp.makeConstraints { make in
