@@ -66,7 +66,6 @@ class PushNotificationManagementViewController : UIViewController{
     @objc func errandCalendarMove(){
         let controller = ErrandCalendarViewController()
         navigationController?.pushViewController(controller, animated: true)
-    
     }
     
     //MARK: - Helpers

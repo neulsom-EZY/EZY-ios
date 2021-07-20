@@ -23,7 +23,7 @@ class SwitchBtn : UIButton{
     lazy var titleBtnView  = UIView().then{
         $0.backgroundColor = .white
     }
-    lazy var switchState : Bool = true
+    var switchState : Bool = false
     weak var delegate: SwitchStateDelegate?
 
     override init(frame: CGRect) {
@@ -60,39 +60,35 @@ class SwitchBtn : UIButton{
         if (switchState)
         {
             animateOn()
-            titleBtnView.backgroundColor = .white
-            
         }else{
             animateOff()
-            titleBtnView.backgroundColor = .white
         }
         switchState = !switchState
 
     }
 
     func animateOn(){
-//        self.titleBtnView.snp.makeConstraints { (make) in
-//            make.right.equalTo(self.backview.snp.right).offset(self.frame.height/12.98 * -1)
-//            make.height.equalTo(frame.height/1.18)
-//            make.centerY.equalTo(self.backview.snp.centerY)
-//            make.width.equalTo(self.titleBtnView.snp.height)
-//        }
-        UIView.animate(withDuration: 0.25, animations: {
-            self.backview.backgroundColor = .EZY_DEDEDE
-            //            self.titleBtnView.layoutIfNeeded()
-        })
+        UIView.animate(withDuration: 0.25, animations: {[weak self] in
+            guard let self = self else {return}
+            self.backview.backgroundColor = .EZY_AFADFF
+            self.titleBtnView.center.x = self.frame.width - (self.titleBtnView.frame.width / 2)
+        }){ [weak self] _ in
+            guard let self = self else {return}
+            
+            self.delegate?.isOnValueChange(isOn: self.switchState)
+        }
     }
     func animateOff(){
-//        self.titleBtnView.snp.makeConstraints { (make) in
-//            make.left.equalTo(self.backview.snp.left).offset(self.frame.height/12.98)
-//            make.height.equalTo(frame.height/1.18)
-//            make.centerY.equalTo(self.backview.snp.centerY)
-//            make.width.equalTo(self.titleBtnView.snp.height)
-//        }
-        UIView.animate(withDuration: 0.25, animations: {
-            self.backview.backgroundColor = .EZY_AFADFF
 
-        })
+        UIView.animate(withDuration: 0.25, animations: { [weak self] in
+            guard let self = self else {return}
+            self.backview.backgroundColor = .EZY_DEDEDE
+            self.titleBtnView.center.x = self.titleBtnView.frame.width/2
+        }){ [weak self] _ in
+            guard let self = self else {return}
+            
+            self.delegate?.isOnValueChange(isOn: self.switchState)
+        }
     }
     
     required init?(coder: NSCoder) {
