@@ -11,7 +11,9 @@ class InquiryChattingViewController: UIViewController {
 
     //MARK: - Properties
     
-    lazy var inquiryChattingBoxView = InquiryChattingBoxView()
+    lazy var inquiryReceiveChattingBoxView = InquiryReceiveChattingBoxView()
+    
+    lazy var inquirySendChattingBoxView = InquirySendChattingBoxView()
     
     lazy var backButton = UIButton().then {
         $0.setImage(UIImage(named: "EZY_InquiryChattingBackButton"), for: .normal)
@@ -50,25 +52,66 @@ class InquiryChattingViewController: UIViewController {
 
         layoutSetting()
         
-        inquiryChattingBoxViewSetting()
+        inquiryReceiveChattingBoxViewSetting()
+        
+        inquirySendChattingBoxViewSetting()
+        
+
     }
     
-    func inquiryChattingBoxViewSetting(){
-        self.view.addSubview(inquiryChattingBoxView)
-        inquiryChattingBoxView.addSubview(inquiryChattingBoxView.chattingBackgroundView)
-        inquiryChattingBoxView.chattingBackgroundView.addSubview(inquiryChattingBoxView.chattingContentLabel)
-        inquiryChattingBoxView.snp.makeConstraints { make in
-            make.left.equalTo(ezyProfileImageview.snp.right).offset(self.view.frame.width/26.7)
+    func inquirySendChattingBoxViewSetting(){
+        self.view.addSubview(inquirySendChattingBoxView)
+        inquirySendChattingBoxView.addSubview(inquirySendChattingBoxView.chattingBackgroundView)
+        inquirySendChattingBoxView.chattingBackgroundView.addSubview(inquirySendChattingBoxView.chattingContentLabel)
+        
+        let gradient: CAGradientLayer = CAGradientLayer()
+
+        gradient.colors = [UIColor(red: 164/255, green: 138/255, blue: 255/255, alpha: 1).cgColor, UIColor(red: 141/255, green: 135/255, blue: 255/255, alpha: 1).cgColor, UIColor(red: 167/255, green: 253/255, blue: 254/255, alpha: 1)]
+        
+        gradient.locations = [0.0 , 1.0]
+        gradient.startPoint = CGPoint(x: 0.0, y: 1.0)
+        gradient.endPoint = CGPoint(x: 1.0, y: 1.0)
+        gradient.frame = CGRect(x: 0.0, y: 0.0, width: self.view.frame.size.width, height: self.view.frame.size.height)
+        
+
+        self.inquirySendChattingBoxView.layer.insertSublayer(gradient, at: 0)
+        inquirySendChattingBoxView.clipsToBounds = true
+        
+        inquirySendChattingBoxView.roundCorners(cornerRadius: 10, maskedCorners: [.layerMinXMinYCorner, .layerMaxXMinYCorner, .layerMinXMaxYCorner])
+        
+        inquirySendChattingBoxView.snp.makeConstraints { make in
+            make.right.equalToSuperview().offset(-self.view.frame.width/12)
             make.height.equalToSuperview().dividedBy(20)
-            make.width.equalTo(inquiryChattingBoxView.chattingContentLabel).multipliedBy(1.2)
-            make.top.equalTo(ezyProfileImageview)
+            make.width.equalTo(inquirySendChattingBoxView.chattingContentLabel).multipliedBy(1.2)
+            make.top.equalTo(inquiryReceiveChattingBoxView.snp.bottom).offset(self.view.frame.height/54.1)
         }
         
-        inquiryChattingBoxView.chattingBackgroundView.snp.makeConstraints { make in
+        inquirySendChattingBoxView.chattingBackgroundView.snp.makeConstraints { make in
             make.top.right.bottom.left.equalToSuperview()
         }
         
-        inquiryChattingBoxView.chattingContentLabel.snp.makeConstraints { make in
+        inquirySendChattingBoxView.chattingContentLabel.snp.makeConstraints { make in
+            make.centerY.centerX.equalToSuperview()
+        }
+    }
+    
+    func inquiryReceiveChattingBoxViewSetting(){
+        self.view.addSubview(inquiryReceiveChattingBoxView)
+        inquiryReceiveChattingBoxView.addSubview(inquiryReceiveChattingBoxView.chattingBackgroundView)
+        inquiryReceiveChattingBoxView.chattingBackgroundView.addSubview(inquiryReceiveChattingBoxView.chattingContentLabel)
+        
+        inquiryReceiveChattingBoxView.snp.makeConstraints { make in
+            make.left.equalTo(ezyProfileImageview.snp.right).offset(self.view.frame.width/26.7)
+            make.height.equalToSuperview().dividedBy(20)
+            make.width.equalTo(inquiryReceiveChattingBoxView.chattingContentLabel).multipliedBy(1.2)
+            make.top.equalTo(ezyProfileImageview)
+        }
+        
+        inquiryReceiveChattingBoxView.chattingBackgroundView.snp.makeConstraints { make in
+            make.top.right.bottom.left.equalToSuperview()
+        }
+        
+        inquiryReceiveChattingBoxView.chattingContentLabel.snp.makeConstraints { make in
             make.centerY.centerX.equalToSuperview()
         }
     }
