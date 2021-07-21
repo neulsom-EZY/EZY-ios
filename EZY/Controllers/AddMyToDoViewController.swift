@@ -99,8 +99,27 @@ class AddMyToDoViewController:UIViewController{
         button.addTarget(self, action: #selector(Addmytodobtn), for: .touchUpInside)
         return button
     }()
+    fileprivate let tagcollectionView: UICollectionView = {
+        let layout = UICollectionViewFlowLayout()
+        let cv = UICollectionView(frame: .zero, collectionViewLayout: layout)
+        layout.scrollDirection = .horizontal
+        cv.translatesAutoresizingMaskIntoConstraints = false
+        cv.register(TagCollectionViewCell.self, forCellWithReuseIdentifier: TagCollectionViewCell.identifier)
+        cv.showsHorizontalScrollIndicator = false
+        cv.backgroundColor = .red
+        return cv
+    }()
     
-    
+    fileprivate let repeatSettingcollectionView: UICollectionView = {
+        let layout = UICollectionViewFlowLayout()
+        let cv = UICollectionView(frame: .zero, collectionViewLayout: layout)
+        layout.scrollDirection = .horizontal
+        cv.translatesAutoresizingMaskIntoConstraints = false
+        cv.register(TagCollectionViewCell.self, forCellWithReuseIdentifier: TagCollectionViewCell.identifier)
+        cv.showsHorizontalScrollIndicator = false
+        cv.backgroundColor = .red
+        return cv
+    }()
     
     //MARK: - Lifecycle
     
@@ -159,8 +178,10 @@ class AddMyToDoViewController:UIViewController{
         scrollView.addSubview(locationBtn)
         scrollView.addSubview(explanationContainerView)
         scrollView.addSubview(tagLabel)
+        scrollView.addSubview(tagcollectionView)
         scrollView.addSubview(addButton)
         scrollView.addSubview(repeatSettings)
+        scrollView.addSubview(repeatSettingcollectionView)
         scrollView.addSubview(alarmSettings)
         scrollView.contentSize = CGSize(width: view.frame.size.width, height: view.frame.height/0.916)
     }
@@ -221,9 +242,14 @@ class AddMyToDoViewController:UIViewController{
             make.left.equalTo(backbutton.snp.left)
             make.top.equalTo(explanationContainerView.snp.bottom).offset(view.frame.height/38.6)
         }
+        tagcollectionView.snp.makeConstraints { (make) in
+            make.top.equalTo(tagLabel.snp.bottom).offset(view.frame.height/47.76)
+            make.height.equalTo(view.frame.height/10.55)
+            make.width.equalToSuperview()
+        }
         repeatSettings.snp.makeConstraints { (make) in
             make.left.equalTo(backbutton.snp.left)
-            make.top.equalTo(tagLabel.snp.bottom).offset(view.frame.height/6.88812)
+            make.top.equalTo(tagcollectionView.snp.bottom).offset(view.frame.height/33.83)
         }
         alarmSettings.snp.makeConstraints { (make) in
             make.left.equalTo(backbutton.snp.left)
@@ -240,3 +266,27 @@ class AddMyToDoViewController:UIViewController{
 
 
 
+#if DEBUG
+import SwiftUI
+struct LoginViewControllerRepresentable: UIViewControllerRepresentable {
+    
+func updateUIViewController(_ uiView: UIViewController,context: Context) {
+        // leave this empty
+}
+    @available(iOS 13.0.0, *)
+    func makeUIViewController(context: Context) -> UIViewController{
+        AddMyToDoViewController()
+    }
+}
+@available(iOS 13.0, *)
+struct LoginViewControllerRepresentable_PreviewProvider: PreviewProvider {
+    static var previews: some View {
+        Group {
+            LoginViewControllerRepresentable()
+                .ignoresSafeArea()
+                .previewDisplayName(/*@START_MENU_TOKEN@*/"Preview"/*@END_MENU_TOKEN@*/)
+                .previewDevice(PreviewDevice(rawValue: "iPhone 11"))
+        }
+        
+    }
+} #endif

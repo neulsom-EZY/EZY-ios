@@ -16,23 +16,7 @@ class WhoShouldIAskCell : UICollectionViewCell{
         label.dynamicFont(fontSize: 12, weight: .ultraLight)
         return label
     }()
-    override var isHighlighted: Bool {
-       didSet {
-           if isHighlighted {
-                UIView.animate(withDuration: 0.2, delay: 0, options: .curveEaseOut, animations: {
-                   // animate highlight
-                    self.backgroundColor = self.bglabel.textColor
-                    self.bglabel.textColor = .white
-               }, completion: nil)
-           } else {
-               UIView.animate(withDuration: 0.2, delay: 0, options: .curveEaseOut, animations: {
-                   // animate unHighligh
-                self.bglabel.textColor = self.backgroundColor
-                self.backgroundColor = .clear
-               }, completion: nil)
-           }
-       }
-   }
+
     
     static func fittingSize(availableHeight: CGFloat, name: String?) -> CGSize {
             let cell = WhoShouldIAskCell()
