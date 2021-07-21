@@ -10,6 +10,9 @@ import UIKit
 class InquiryChattingViewController: UIViewController {
 
     //MARK: - Properties
+    
+    lazy var inquiryChattingBoxView = InquiryChattingBoxView()
+    
     lazy var backButton = UIButton().then {
         $0.setImage(UIImage(named: "EZY_InquiryChattingBackButton"), for: .normal)
     }
@@ -46,6 +49,28 @@ class InquiryChattingViewController: UIViewController {
         super.viewDidLoad()
 
         layoutSetting()
+        
+        inquiryChattingBoxViewSetting()
+    }
+    
+    func inquiryChattingBoxViewSetting(){
+        self.view.addSubview(inquiryChattingBoxView)
+        inquiryChattingBoxView.addSubview(inquiryChattingBoxView.chattingBackgroundView)
+        inquiryChattingBoxView.chattingBackgroundView.addSubview(inquiryChattingBoxView.chattingContentLabel)
+        inquiryChattingBoxView.snp.makeConstraints { make in
+            make.left.equalTo(ezyProfileImageview.snp.right).offset(self.view.frame.width/26.7)
+            make.height.equalToSuperview().dividedBy(20)
+            make.width.equalTo(inquiryChattingBoxView.chattingContentLabel).multipliedBy(1.2)
+            make.top.equalTo(ezyProfileImageview)
+        }
+        
+        inquiryChattingBoxView.chattingBackgroundView.snp.makeConstraints { make in
+            make.top.right.bottom.left.equalToSuperview()
+        }
+        
+        inquiryChattingBoxView.chattingContentLabel.snp.makeConstraints { make in
+            make.centerY.centerX.equalToSuperview()
+        }
     }
     
     func layoutSetting() {
