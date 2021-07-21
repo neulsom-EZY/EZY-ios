@@ -59,6 +59,12 @@ class InquiryChattingViewController: UIViewController {
 
     }
     
+    @objc func inquirySendButtonClicked(sender:UIButton){
+        inquirySendChattingBoxView.isHidden = false
+        inquirySendChattingBoxView.chattingContentLabel.text = chattingWriteTextField.text
+        chattingWriteTextField.text = ""
+    }
+    
     func inquirySendChattingBoxViewSetting(){
         self.view.addSubview(inquirySendChattingBoxView)
         inquirySendChattingBoxView.addSubview(inquirySendChattingBoxView.chattingBackgroundView)
@@ -93,6 +99,9 @@ class InquiryChattingViewController: UIViewController {
         inquirySendChattingBoxView.chattingContentLabel.snp.makeConstraints { make in
             make.centerY.centerX.equalToSuperview()
         }
+        
+        inquirySendChattingBoxView.isHidden = true
+
     }
     
     func inquiryReceiveChattingBoxViewSetting(){
@@ -126,6 +135,8 @@ class InquiryChattingViewController: UIViewController {
         chattingWriteBackgroundView.addSubview(chattingWriteTextFieldBackgroundView)
         chattingWriteTextFieldBackgroundView.addSubview(chattingWriteTextField)
         chattingWriteTextFieldBackgroundView.addSubview(inquirySendButton)
+        
+        inquirySendButton.addTarget(self, action: #selector(inquirySendButtonClicked(sender:)), for: .touchUpInside)
         
         backButton.snp.makeConstraints { make in
             make.top.equalTo(self.view.safeAreaLayoutGuide).offset(self.view.frame.height/47.7)
