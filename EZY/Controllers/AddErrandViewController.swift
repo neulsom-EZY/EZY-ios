@@ -150,6 +150,7 @@ class AddErrandViewController : UIViewController{
         cornerRadius()
         addView()
         location()
+        
     }
     
     func cornerRadius(){
