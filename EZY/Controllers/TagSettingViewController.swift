@@ -7,7 +7,7 @@
 
 import UIKit
 
-class TagSettingViewController: UIViewController {
+class TagSettingViewController: UIViewController, UITextFieldDelegate {
     
     lazy var backButton = UIButton().then{
         $0.setImage(UIImage(named: "EZY_TagManagementBackButtonImage"), for: .normal)
@@ -119,6 +119,8 @@ class TagSettingViewController: UIViewController {
         self.view.addSubview(tagColorTitleLabel)
         self.view.addSubview(completeButton)
         
+        tagNameTextField.delegate = self
+        
         backButton.addTarget(self, action: #selector(backButtonClicked(sender:)), for: .touchUpInside)
         
         backButton.snp.makeConstraints { make in
@@ -173,6 +175,10 @@ class TagSettingViewController: UIViewController {
     
     @objc func backButtonClicked(sender:UIButton){
         self.navigationController?.popViewController(animated: true)
+    }
+    
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        self.tagNameTextField.resignFirstResponder()
     }
 
 }
