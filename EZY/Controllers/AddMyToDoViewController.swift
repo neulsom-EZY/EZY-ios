@@ -12,8 +12,9 @@ import Alamofire
 
 
 class AddMyToDoViewController:UIViewController{
-    let explanationData : [String] = [""]
-    
+    let tagData : [String] = ["전공동아리","산책","자율동아리","공부","자율동아리","전공동아리"]
+    let repeatData : [String] = ["S","M","T","W","T","F","S"]
+    let alarmData : [String] = ["선택안함", "추가"]
     //MARK: - Properties
     let scrollView = UIScrollView().then  {
         $0.backgroundColor = .white
@@ -178,10 +179,10 @@ class AddMyToDoViewController:UIViewController{
     //MARK: - Helpers
     func configureUI(){
         view.backgroundColor = .white
+        scrollView.showsVerticalScrollIndicator = false
         addView()
         cornerRadius()
         location()
-        scrollView.showsVerticalScrollIndicator = false
 
     }
     
@@ -297,13 +298,13 @@ class AddMyToDoViewController:UIViewController{
 extension AddMyToDoViewController : UICollectionViewDelegateFlowLayout,UICollectionViewDataSource{
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         if collectionView == self.tagcollectionView{
-            return 0
+            return tagData.count
         }
         else if collectionView == self.repeatSettingcollectionView{
-            return 0
+            return repeatData.count
         }
         else if collectionView == self.alarmSettingcollectionView{
-            return 0
+            return alarmData.count
         }
         return 0
     }
@@ -311,18 +312,19 @@ extension AddMyToDoViewController : UICollectionViewDelegateFlowLayout,UICollect
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         if collectionView == self.tagcollectionView{
             guard let cellA = collectionView.dequeueReusableCell(withReuseIdentifier: TagCollectionViewCell.identifier, for: indexPath) as? TagCollectionViewCell else {return UICollectionViewCell()}
+            cellA.bglabel.text = ""
            return cellA
         }else if collectionView == self.repeatSettingcollectionView{
             guard let cellB = collectionView.dequeueReusableCell(withReuseIdentifier: RepeatSettingCell.identifier, for: indexPath) as? RepeatSettingCell else {return UICollectionViewCell()}
+            cellB.bglabel.text = ""
             return cellB
         }else{
             guard let cellC = collectionView.dequeueReusableCell(withReuseIdentifier: AlarmSettingCell.identifier, for: indexPath) as? AlarmSettingCell else {return UICollectionViewCell()}
             cellC.bglabel.text = ""
             return cellC
         }
-
-       
     }
+
     
     
 }
