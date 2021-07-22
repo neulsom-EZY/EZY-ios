@@ -97,6 +97,10 @@ class InquiryChattingViewController: UIViewController, UITextFieldDelegate {
         chattingWriteBackgroundView.frame.origin.y = self.view.frame.height/2
     }
     
+    @objc func backButtonClicked(sender: UIButton) {
+        self.navigationController?.popViewController(animated: true)
+    }
+    
     func inquirySendChattingBoxViewSetting(){
         self.view.addSubview(inquirySendChattingBoxView)
         inquirySendChattingBoxView.addSubview(inquirySendChattingBoxView.chattingBackgroundView)
@@ -178,6 +182,7 @@ class InquiryChattingViewController: UIViewController, UITextFieldDelegate {
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide(_:)), name: UIResponder.keyboardWillHideNotification, object: nil)
 
         inquirySendButton.addTarget(self, action: #selector(inquirySendButtonClicked(sender:)), for: .touchUpInside)
+        backButton.addTarget(self, action: #selector(backButtonClicked(sender:)), for: .touchUpInside)
         
         backButton.snp.makeConstraints { make in
             make.top.equalTo(self.view.safeAreaLayoutGuide).offset(self.view.frame.height/47.7)
