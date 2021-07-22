@@ -116,6 +116,10 @@ class GroupManagementViewController: UIViewController, UITextFieldDelegate {
         deleteModalViewSetting()
         
     }
+    
+    @objc func backButtonClicked(sender:UIButton){
+        self.navigationController?.popViewController(animated: true)
+    }
 
     func layoutSetting(){
         self.view.backgroundColor = .white
@@ -125,6 +129,8 @@ class GroupManagementViewController: UIViewController, UITextFieldDelegate {
         
         self.view.addSubview(backButton)
         self.view.addSubview(mainTitleLabel)
+        
+        backButton.addTarget(self, action: #selector(backButtonClicked(sender:)), for: .touchUpInside)
         
         backButton.snp.makeConstraints { make in
             make.top.equalTo(self.view.safeAreaLayoutGuide).offset(self.view.frame.height/47.7)
