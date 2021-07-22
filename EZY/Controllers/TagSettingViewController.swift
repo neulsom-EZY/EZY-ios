@@ -64,6 +64,8 @@ class TagSettingViewController: UIViewController, UITextFieldDelegate {
     
     var tagColorPreciousSelectedIndex = 0
     
+    var tagDeleteModalView = TagDeleteModalView()
+    
     var TagColorModels: [TagColorCollectionViewModel] = [TagColorCollectionViewModel(backgroundColor: UIColor(red: 186/255, green: 200/255, blue: 255/255, alpha: 1), isSelected: false),
                                                  TagColorCollectionViewModel(backgroundColor: UIColor(red: 196/255, green: 200/255, blue: 255/255, alpha: 1), isSelected: true),
                                                  TagColorCollectionViewModel(backgroundColor: UIColor(red: 206/255, green: 200/255, blue: 255/255, alpha: 1), isSelected: true),
@@ -87,6 +89,8 @@ class TagSettingViewController: UIViewController, UITextFieldDelegate {
         layoutSetting()
         
         tagColorCollectionViewSetting()
+        
+        tagDeleteModalViewSetting()
     }
     
     func tagColorCollectionViewSetting(){
@@ -122,6 +126,7 @@ class TagSettingViewController: UIViewController, UITextFieldDelegate {
         tagNameTextField.delegate = self
         
         backButton.addTarget(self, action: #selector(backButtonClicked(sender:)), for: .touchUpInside)
+        tagDeleteButton.addTarget(self, action: #selector(tagDeleteButtonClicked(sender:)), for: .touchUpInside)
         
         backButton.snp.makeConstraints { make in
             make.top.equalTo(self.view.safeAreaLayoutGuide).offset(self.view.frame.height/47.7)
@@ -173,12 +178,91 @@ class TagSettingViewController: UIViewController, UITextFieldDelegate {
         }
     }
     
+    func tagDeleteModalViewSetting(){
+        self.view.addSubview(tagDeleteModalView)
+        
+        tagDeleteModalView.deleteButton.addTarget(self, action: #selector(deleteButtonClicked(sender:)), for: .touchUpInside)
+        
+        tagDeleteModalView.snp.makeConstraints { make in
+            make.top.right.bottom.left.equalToSuperview()
+        }
+        
+        tagDeleteModalView.shadowBackgroundView.snp.makeConstraints { make in
+            make.top.right.bottom.left.equalToSuperview()
+        }
+        
+        tagDeleteModalView.modalBackgroundView.snp.makeConstraints { make in
+            make.width.equalToSuperview().dividedBy(1.13)
+            make.height.equalToSuperview().dividedBy(3.59)
+            make.centerX.centerY.equalToSuperview()
+        }
+        
+        tagDeleteModalView.titleLabel.snp.makeConstraints { make in
+            make.top.equalToSuperview().offset(self.view.frame.height/33.8)
+            make.left.equalToSuperview().offset(self.view.frame.height/33.8)
+        }
+        
+        tagDeleteModalView.iconCircleBackground.snp.makeConstraints { make in
+            make.centerX.equalToSuperview()
+            make.width.equalToSuperview().dividedBy(6.3)
+            make.height.equalTo(tagDeleteModalView.iconCircleBackground.snp.width)
+            make.top.equalTo(tagDeleteModalView.titleLabel.snp.bottom).offset(self.view.frame.height/62)
+            
+            tagDeleteModalView.iconCircleBackground.layer.cornerRadius = ((self.view.frame.width/1.13)/6.3)/2
+        }
+        
+        tagDeleteModalView.iconImageView.snp.makeConstraints { make in
+            make.centerX.centerY.equalToSuperview()
+            make.height.width.equalToSuperview().dividedBy(2)
+        }
+        
+        tagDeleteModalView.labelView.snp.makeConstraints { make in
+            make.centerX.equalToSuperview()
+            make.width.equalToSuperview().dividedBy(1.7)
+            make.height.equalToSuperview().dividedBy(5.5)
+            make.top.equalTo(tagDeleteModalView.iconCircleBackground.snp.bottom).offset(self.view.frame.height/63)
+        }
+        
+        tagDeleteModalView.tagTitleNameLabel.snp.makeConstraints { make in
+            make.centerX.top.equalToSuperview()
+        }
+        
+        tagDeleteModalView.completeQuestionsLabel.snp.makeConstraints { make in
+            make.bottom.centerX.equalToSuperview()
+        }
+        
+        tagDeleteModalView.cancleButton.snp.makeConstraints { make in
+            make.bottom.equalTo(tagDeleteModalView.deleteButton)
+            make.right.equalTo(tagDeleteModalView.deleteButton.snp.left).offset(-self.view.frame.width/35)
+            make.height.width.equalTo(tagDeleteModalView.deleteButton)
+        }
+        
+        tagDeleteModalView.deleteButton.snp.makeConstraints { make in
+            make.bottom.equalToSuperview().offset(-self.view.frame.height/30.6)
+            make.right.equalToSuperview().offset(-self.view.frame.width/15)
+            make.height.equalToSuperview().dividedBy(7.2)
+            make.width.equalToSuperview().dividedBy(4.7)
+        }
+        
+        tagDeleteModalView.isHidden = true
+    }
+    
+    @objc func deleteButtonClicked(sender:UIButton){
+        let nextViewController = TagManagementViewController()
+        self.navigationController?.pushViewController(nextViewController, animated: true)
+    }
+    
     @objc func backButtonClicked(sender:UIButton){
         self.navigationController?.popViewController(animated: true)
     }
     
+    @objc func tagDeleteButtonClicked(sender:UIButton){
+        tagDeleteModalView.isHidden = false
+    }
+    
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         self.tagNameTextField.resignFirstResponder()
+        tagDeleteModalView.isHidden = true
     }
 
 }
