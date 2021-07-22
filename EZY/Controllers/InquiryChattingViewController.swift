@@ -7,7 +7,7 @@
 
 import UIKit
 
-class InquiryChattingViewController: UIViewController {
+class InquiryChattingViewController: UIViewController, UITextFieldDelegate {
 
     //MARK: - Properties
     
@@ -20,7 +20,7 @@ class InquiryChattingViewController: UIViewController {
     }
     
     lazy var ezyProfileImageview = UIImageView().then {
-        $0.image = UIImage(named: "EZY_InquiryChattingCircleView")
+        $0.image = UIImage(named: "EZY_EZYProfileImage")
     }
     
     lazy var chattingWriteLineView = UIView().then {
@@ -49,20 +49,30 @@ class InquiryChattingViewController: UIViewController {
     //MARK: - LifeCycle
     override func viewDidLoad() {
         super.viewDidLoad()
-
         layoutSetting()
         
         inquiryReceiveChattingBoxViewSetting()
         
         inquirySendChattingBoxViewSetting()
-        
-
+        print(chattingWriteBackgroundView.frame.origin.y)
+    }
+    
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        self.chattingWriteTextField.resignFirstResponder()
     }
     
     @objc func inquirySendButtonClicked(sender:UIButton){
         inquirySendChattingBoxView.isHidden = false
         inquirySendChattingBoxView.chattingContentLabel.text = chattingWriteTextField.text
         chattingWriteTextField.text = ""
+    }
+    
+    @objc func keyboardWillHide(_ sender: Notification) {
+        chattingWriteBackgroundView.frame.origin.y = (self.view.frame.height) - (chattingWriteBackgroundView.frame.height) - ((self.view.frame.height)-(self.view.safeAreaLayoutGuide.layoutFrame.height))/2.4
+    }
+    
+    @objc func keyboardWillShow(_ sender: Notification) {
+        chattingWriteBackgroundView.frame.origin.y = self.view.frame.height/2
     }
     
     func inquirySendChattingBoxViewSetting(){
@@ -72,7 +82,7 @@ class InquiryChattingViewController: UIViewController {
         
         let gradient: CAGradientLayer = CAGradientLayer()
 
-        gradient.colors = [UIColor(red: 164/255, green: 138/255, blue: 255/255, alpha: 1).cgColor, UIColor(red: 141/255, green: 135/255, blue: 255/255, alpha: 1).cgColor, UIColor(red: 167/255, green: 253/255, blue: 254/255, alpha: 1)]
+        gradient.colors = [UIColor(red: 185/255, green: 165/255, blue: 255/255, alpha: 1).cgColor, UIColor(red: 141/255, green: 135/255, blue: 255/255, alpha: 1).cgColor, UIColor(red: 167/255, green: 253/255, blue: 254/255, alpha: 1)]
         
         gradient.locations = [0.0 , 1.0]
         gradient.startPoint = CGPoint(x: 0.0, y: 1.0)
@@ -85,10 +95,9 @@ class InquiryChattingViewController: UIViewController {
         
         inquirySendChattingBoxView.roundCorners(cornerRadius: 10, maskedCorners: [.layerMinXMinYCorner, .layerMaxXMinYCorner, .layerMinXMaxYCorner])
         
-        inquirySendChattingBoxView.snp.makeConstraints { make in
+        inquirySendChattingBoxView.snp.makeConstraints { make in make.width.equalTo(inquirySendChattingBoxView.chattingContentLabel).offset(self.view.frame.width/17)
             make.right.equalToSuperview().offset(-self.view.frame.width/12)
             make.height.equalToSuperview().dividedBy(20)
-            make.width.equalTo(inquirySendChattingBoxView.chattingContentLabel).multipliedBy(1.2)
             make.top.equalTo(inquiryReceiveChattingBoxView.snp.bottom).offset(self.view.frame.height/54.1)
         }
         
@@ -130,12 +139,18 @@ class InquiryChattingViewController: UIViewController {
         
         self.view.addSubview(backButton)
         self.view.addSubview(ezyProfileImageview)
-        self.view.addSubview(chattingWriteLineView)
         self.view.addSubview(chattingWriteBackgroundView)
+        chattingWriteBackgroundView.addSubview(chattingWriteLineView)
         chattingWriteBackgroundView.addSubview(chattingWriteTextFieldBackgroundView)
         chattingWriteTextFieldBackgroundView.addSubview(chattingWriteTextField)
         chattingWriteTextFieldBackgroundView.addSubview(inquirySendButton)
         
+        chattingWriteTextField.delegate = self
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(_:)), name: UIResponder.keyboardWillShowNotification, object: nil)
+
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide(_:)), name: UIResponder.keyboardWillHideNotification, object: nil)
+
         inquirySendButton.addTarget(self, action: #selector(inquirySendButtonClicked(sender:)), for: .touchUpInside)
         
         backButton.snp.makeConstraints { make in
@@ -161,13 +176,14 @@ class InquiryChattingViewController: UIViewController {
         chattingWriteLineView.snp.makeConstraints { make in
             make.height.equalTo(0.5)
             make.width.equalToSuperview()
-            make.bottom.equalTo(chattingWriteBackgroundView.snp.top)
+            make.top.equalTo(chattingWriteBackgroundView)
         }
         
         chattingWriteTextFieldBackgroundView.snp.makeConstraints { make in
             make.width.equalToSuperview().dividedBy(1.3)
             make.height.equalToSuperview().dividedBy(1.25)
-            make.centerY.centerX.equalToSuperview()
+            make.centerX.equalToSuperview()
+            make.centerY.equalToSuperview().offset(self.view.frame.height/70)
             
             chattingWriteTextFieldBackgroundView.layer.cornerRadius = ((self.view.frame.height/16.24)/1.25)/2
         }
