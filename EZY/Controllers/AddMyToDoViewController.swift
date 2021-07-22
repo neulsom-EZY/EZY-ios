@@ -13,6 +13,7 @@ import Alamofire
 
 class AddMyToDoViewController:UIViewController{
     
+    
     //MARK: - Properties
     let scrollView = UIScrollView().then  {
         $0.backgroundColor = .white
@@ -290,6 +291,28 @@ class AddMyToDoViewController:UIViewController{
             make.right.equalTo(titleContainerView.snp.right)
         }
     }
+}
+extension AddMyToDoViewController : UICollectionViewDelegateFlowLayout,UICollectionViewDataSource{
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return 0
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        if collectionView == self.tagcollectionView{
+            let cellA = collectionView.dequeueReusableCell(withReuseIdentifier: TagCollectionViewCell.identifier, for: indexPath)
+           return cellA
+        }else if collectionView == self.repeatSettingcollectionView{
+            let cellB = collectionView.dequeueReusableCell(withReuseIdentifier: RepeatSettingCell.identifier, for: indexPath)
+            return cellB
+        }else{
+//            let cellC = collectionView.dequeueReusableCell(withReuseIdentifier: , for: indexPath)
+//            return cellC
+        }
+
+       
+    }
+    
+    
 }
 
 
