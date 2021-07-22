@@ -117,7 +117,17 @@ class AddMyToDoViewController:UIViewController{
         cv.translatesAutoresizingMaskIntoConstraints = false
         cv.register(TagCollectionViewCell.self, forCellWithReuseIdentifier: TagCollectionViewCell.identifier)
         cv.showsHorizontalScrollIndicator = false
-        cv.backgroundColor = .red
+        cv.backgroundColor = .black
+        return cv
+    }()
+    fileprivate let alarmSettingcollectionView: UICollectionView = {
+        let layout = UICollectionViewFlowLayout()
+        let cv = UICollectionView(frame: .zero, collectionViewLayout: layout)
+        layout.scrollDirection = .horizontal
+        cv.translatesAutoresizingMaskIntoConstraints = false
+        cv.register(TagCollectionViewCell.self, forCellWithReuseIdentifier: TagCollectionViewCell.identifier)
+        cv.showsHorizontalScrollIndicator = false
+        cv.backgroundColor = .black
         return cv
     }()
     
@@ -127,7 +137,13 @@ class AddMyToDoViewController:UIViewController{
     override func viewDidLoad() {
         super.viewDidLoad()
         configureUI()
-   
+        tagcollectionView.dataSource = self
+        tagcollectionView.delegate = self
+        tagcollectionView.allowsMultipleSelection = true
+        repeatSettingcollectionView.dataSource = self
+        repeatSettingcollectionView.delegate = self
+        alarmSettingcollectionView.delegate = self
+        alarmSettingcollectionView.dataSource = self
     }
 
     
@@ -183,7 +199,8 @@ class AddMyToDoViewController:UIViewController{
         scrollView.addSubview(repeatSettings)
         scrollView.addSubview(repeatSettingcollectionView)
         scrollView.addSubview(alarmSettings)
-        scrollView.contentSize = CGSize(width: view.frame.size.width, height: view.frame.height/0.916)
+        scrollView.addSubview(alarmSettingcollectionView)
+        scrollView.contentSize = CGSize(width: view.frame.size.width, height: view.frame.height/0.9165)
     }
     
     func cornerRadius(){
@@ -251,12 +268,23 @@ class AddMyToDoViewController:UIViewController{
             make.left.equalTo(backbutton.snp.left)
             make.top.equalTo(tagcollectionView.snp.bottom).offset(view.frame.height/33.83)
         }
+        repeatSettingcollectionView.snp.makeConstraints { (make) in
+            make.top.equalTo(repeatSettings.snp.bottom).offset(view.frame.height/45.11)
+            make.height.equalTo(view.frame.height/28)
+            make.width.equalToSuperview()
+        }
         alarmSettings.snp.makeConstraints { (make) in
             make.left.equalTo(backbutton.snp.left)
-            make.top.equalTo(repeatSettings.snp.bottom).offset(view.frame.height/11.76)
+            make.top.equalTo(repeatSettingcollectionView.snp.bottom).offset(view.frame.height/36.91)
         }
+        alarmSettingcollectionView.snp.makeConstraints { (make) in
+            make.top.equalTo(alarmSettings.snp.bottom).offset(view.frame.height/58)
+            make.height.equalTo(view.frame.height/23.88)
+            make.width.equalToSuperview()
+        }
+        
         addButton.snp.makeConstraints { (make) in
-            make.top.equalTo(alarmSettings.snp.bottom).offset(view.frame.height/10.83)
+            make.top.equalTo(alarmSettingcollectionView.snp.bottom).offset(view.frame.height/30.074)
             make.height.equalTo(self.view.frame.height/18.0)
             make.left.equalTo(backbutton.snp.left)
             make.right.equalTo(titleContainerView.snp.right)

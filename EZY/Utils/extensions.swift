@@ -306,11 +306,13 @@ extension MorePeopleToDo : UICollectionViewDelegateFlowLayout,UICollectionViewDa
 
 extension AddMyToDoViewController : UICollectionViewDelegateFlowLayout,UICollectionViewDataSource{
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        <#code#>
+        return 0
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        <#code#>
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: TagCollectionViewCell.identifier, for: indexPath) as? TagCollectionViewCell else {return UICollectionViewCell()}
+
+        return cell
     }
     
     
