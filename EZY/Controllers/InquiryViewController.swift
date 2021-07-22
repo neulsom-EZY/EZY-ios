@@ -97,6 +97,8 @@ class InquiryViewController: UIViewController {
     
     @objc func inquiryBackgroundButtonClicked(sender:UIButton)
     {
+        let nextViewController = InquiryChattingViewController()
+        self.navigationController?.pushViewController(nextViewController, animated: true)
     }
     
     @objc func backButtonClicked(sender:UIButton)
