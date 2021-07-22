@@ -472,7 +472,7 @@ class GroupManagementViewController: UIViewController, UITextFieldDelegate {
         groupCollectionView.snp.makeConstraints { make in
             groupCollectionView.backgroundColor = .white
             make.bottom.left.right.equalToSuperview()
-            make.top.equalTo(mainTitleLabel.snp.bottom).offset(self.view.frame.height/21.9)
+            make.top.equalTo(mainTitleLabel.snp.bottom).offset(self.view.frame.height/40)
         }
         
         (groupCollectionView.collectionViewLayout as! UICollectionViewFlowLayout).estimatedItemSize = UICollectionViewFlowLayout.automaticSize
