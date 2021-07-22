@@ -39,6 +39,19 @@ class TagSettingViewController: UIViewController {
     lazy var tagNameTextFieldUnderLineView = UIView().then{
         $0.backgroundColor = UIColor(red: 186/255, green: 200/255, blue: 255/255, alpha: 1)
     }
+    
+    lazy var tagColorTitleLabel = UILabel().then {
+        $0.text = "태그 색"
+        $0.textColor = UIColor(red: 181/255, green: 181/255, blue: 181/255, alpha: 1)
+        $0.dynamicFont(fontSize: 10, currentFontName: "AppleSDGothicNeo-SemiBold")
+    }
+    
+    lazy var completeButton = UIButton().then{
+        $0.backgroundColor = UIColor(red: 150/255, green: 141/255, blue: 255/255, alpha: 1)
+        $0.layer.cornerRadius = 10
+        $0.setTitle("완 료", for: .normal)
+        $0.dynamicFont(fontSize: 14, currentFontName: "AppleSDGothicNeo-SemiBold")
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -56,6 +69,8 @@ class TagSettingViewController: UIViewController {
         self.view.addSubview(tagNameTitleLabel)
         self.view.addSubview(tagNameTextField)
         self.view.addSubview(tagNameTextFieldUnderLineView)
+        self.view.addSubview(tagColorTitleLabel)
+        self.view.addSubview(completeButton)
         
         backButton.addTarget(self, action: #selector(backButtonClicked(sender:)), for: .touchUpInside)
         
@@ -94,6 +109,18 @@ class TagSettingViewController: UIViewController {
             make.centerX.equalToSuperview()
             make.height.equalTo(2)
             make.top.equalTo(tagNameTextField.snp.bottom)
+        }
+        
+        tagColorTitleLabel.snp.makeConstraints { make in
+            make.top.equalTo(tagNameTextFieldUnderLineView.snp.bottom).offset(self.view.frame.height/25.3)
+            make.left.equalTo(tagNameTextFieldUnderLineView)
+        }
+        
+        completeButton.snp.makeConstraints { make in
+            make.bottom.equalToSuperview().offset(-self.view.frame.width/13.3)
+            make.left.equalToSuperview().offset(self.view.frame.width/13.3)
+            make.height.equalToSuperview().dividedBy(18)
+            make.centerX.equalToSuperview()
         }
     }
     
