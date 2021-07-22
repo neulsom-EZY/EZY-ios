@@ -20,8 +20,6 @@ extension GroupManagementViewController: PinterestLayoutDelegate {
 class GroupManagementViewController: UIViewController, UITextFieldDelegate {
     
     //MARK: Properties
-    let topView = TopView()
-    
     let groupAddModalView = GroupAddModalView()
     
     let searchResultsView = SearchResultsView()
@@ -33,6 +31,16 @@ class GroupManagementViewController: UIViewController, UITextFieldDelegate {
     var deleteViewButtonSelected = false
     
     let deleteModalView = DeleteModalView()
+    
+    lazy var backButton = UIButton().then{
+        $0.setImage(UIImage(named: "EZY_IdChangeBackButtonImage"), for: .normal)
+    }
+    
+    lazy var mainTitleLabel = UILabel().then {
+        $0.text = "그룹 관리"
+        $0.textColor = UIColor(red: 107/255, green: 64/255, blue: 255/255, alpha: 1)
+        $0.dynamicFont(fontSize: 22, currentFontName: "Poppins-SemiBold")
+    }
 
     private(set) var groupCollectionView: UICollectionView
     
@@ -75,6 +83,8 @@ class GroupManagementViewController: UIViewController, UITextFieldDelegate {
     
     let titleLabel = ["영어 스터디", "EZY", "NELSOM", "영어 스터디", "EZY", "NELSOM", "영어 스터디", "EZY", "NELSOM", "영어 스터디", "EZY", "NELSOM"]
  
+
+    
     //MARK: Initializers
     init() {
         groupCollectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout())
@@ -92,8 +102,6 @@ class GroupManagementViewController: UIViewController, UITextFieldDelegate {
     //MARK: LifeCycles
     override func viewDidLoad() {
         super.viewDidLoad()
-                
-        topViewSetting()
         
         layoutSetting()
         
@@ -108,12 +116,33 @@ class GroupManagementViewController: UIViewController, UITextFieldDelegate {
         deleteModalViewSetting()
         
     }
+    
+    @objc func backButtonClicked(sender:UIButton){
+        self.navigationController?.popViewController(animated: true)
+    }
 
     func layoutSetting(){
         self.view.backgroundColor = .white
 
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(_:)), name:UIResponder.keyboardWillShowNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide(_:)), name: UIResponder.keyboardWillHideNotification, object: nil)
+        
+        self.view.addSubview(backButton)
+        self.view.addSubview(mainTitleLabel)
+        
+        backButton.addTarget(self, action: #selector(backButtonClicked(sender:)), for: .touchUpInside)
+        
+        backButton.snp.makeConstraints { make in
+            make.top.equalTo(self.view.safeAreaLayoutGuide).offset(self.view.frame.height/47.7)
+            make.left.equalToSuperview().offset(self.view.frame.width/12)
+            make.width.equalToSuperview().dividedBy(33.8/2)
+            make.height.equalTo(backButton.snp.width)
+        }
+        
+        mainTitleLabel.snp.makeConstraints { make in
+            make.left.equalTo(backButton)
+            make.top.equalTo(backButton.snp.bottom).offset(self.view.frame.height/50)
+        }
     }
     
     //MARK: deleteModalView Setting
@@ -398,24 +427,6 @@ class GroupManagementViewController: UIViewController, UITextFieldDelegate {
         groupAddModalView.isHidden = true
     }
     
-    //MARK: topView Setting
-    func topViewSetting(){
-        self.view.addSubview(topView)
-        topView.addSubview(topView.backButton)
-        topView.addSubview(topView.titleLabel)
-        
-        topView.topViewDataSetting(backButtonImage: UIImage(named: "EZY_SettingBackButton")!, titleLabelText: "그룹 관리",
-                                   textColor: UIColor(red: 175/255, green: 173/255, blue: 255/255, alpha: 1))
-        
-        topView.topViewLayoutSetting(screenHeight: Double(self.view.bounds.height), screenWeight: Double(self.view.bounds.width))
-        
-        topView.snp.makeConstraints { make in
-            make.left.right.equalToSuperview()
-            make.top.equalTo(self.view.safeAreaLayoutGuide)
-            make.height.equalToSuperview().dividedBy(8)
-        }
-    }
-    
     //MARK: selectedMemberCollectionView Setting
     func selectedMemberCollectionViewSetting(){
         selectedMemberCollectionView.delegate = self
@@ -461,7 +472,7 @@ class GroupManagementViewController: UIViewController, UITextFieldDelegate {
         groupCollectionView.snp.makeConstraints { make in
             groupCollectionView.backgroundColor = .white
             make.bottom.left.right.equalToSuperview()
-            make.top.equalTo(topView.snp.bottom)
+            make.top.equalTo(mainTitleLabel.snp.bottom).offset(self.view.frame.height/40)
         }
         
         (groupCollectionView.collectionViewLayout as! UICollectionViewFlowLayout).estimatedItemSize = UICollectionViewFlowLayout.automaticSize
