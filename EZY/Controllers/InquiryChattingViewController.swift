@@ -15,6 +15,8 @@ class InquiryChattingViewController: UIViewController, UITextFieldDelegate {
     
     lazy var inquirySendChattingBoxView = InquirySendChattingBoxView()
     
+    var recipientNameLabelColor: [UIColor] = [UIColor(red: 110/255, green: 98/255, blue: 255/255, alpha: 1), UIColor(red: 196/255, green: 191/255, blue: 255/255, alpha: 1)]
+    
     lazy var backButton = UIButton().then {
         $0.setImage(UIImage(named: "EZY_InquiryChattingBackButton"), for: .normal)
     }
@@ -46,6 +48,24 @@ class InquiryChattingViewController: UIViewController, UITextFieldDelegate {
         $0.setImage(UIImage(named: "EZY_InquirySendButton"), for: .normal)
     }
     
+    lazy var recipientNameLabel = UILabel().then {
+        $0.text = "EZY - NEULSOM"
+        $0.textColor = UIColor(red: 110/255, green: 98/255, blue: 255/255, alpha: 1)
+        $0.dynamicFont(fontSize: 14, currentFontName: "AppleSDGothicNeo-Bold")
+    }
+    
+    lazy var responseTimeLabel = UILabel().then {
+        $0.text = "보통 1시간 내에 응답합니다."
+        $0.textColor = UIColor(red: 121/255, green: 121/255, blue: 121/255, alpha: 1)
+        $0.dynamicFont(fontSize: 10, currentFontName: "AppleSDGothicNeo-Medium")
+    }
+    
+    lazy var labelBoxView = UIView()
+    
+    lazy var onlineCircleView = UIView().then {
+        $0.backgroundColor = UIColor(red: 93/255, green: 221/255, blue: 82/255, alpha: 1)
+    }
+    
     //MARK: - LifeCycle
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -54,7 +74,6 @@ class InquiryChattingViewController: UIViewController, UITextFieldDelegate {
         inquiryReceiveChattingBoxViewSetting()
         
         inquirySendChattingBoxViewSetting()
-        print(chattingWriteBackgroundView.frame.origin.y)
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -64,6 +83,9 @@ class InquiryChattingViewController: UIViewController, UITextFieldDelegate {
     @objc func inquirySendButtonClicked(sender:UIButton){
         inquirySendChattingBoxView.isHidden = false
         inquirySendChattingBoxView.chattingContentLabel.text = chattingWriteTextField.text
+        if chattingWriteTextField.text!.count > 30 {
+            self.chattingWriteBackgroundView.frame = CGRect(x: 0, y: 0, width: 0, height: self.view.frame.height/3)
+        }
         chattingWriteTextField.text = ""
     }
     
@@ -140,6 +162,10 @@ class InquiryChattingViewController: UIViewController, UITextFieldDelegate {
         self.view.addSubview(backButton)
         self.view.addSubview(ezyProfileImageview)
         self.view.addSubview(chattingWriteBackgroundView)
+        self.view.addSubview(labelBoxView)
+        labelBoxView.addSubview(recipientNameLabel)
+        labelBoxView.addSubview(responseTimeLabel)
+        labelBoxView.addSubview(onlineCircleView)
         chattingWriteBackgroundView.addSubview(chattingWriteLineView)
         chattingWriteBackgroundView.addSubview(chattingWriteTextFieldBackgroundView)
         chattingWriteTextFieldBackgroundView.addSubview(chattingWriteTextField)
@@ -199,6 +225,30 @@ class InquiryChattingViewController: UIViewController, UITextFieldDelegate {
             make.centerY.centerX.height.equalToSuperview()
             make.left.equalToSuperview().offset(self.view.frame.width/20)
             make.right.equalToSuperview().offset(-self.view.frame.width/8)
+        }
+        
+        labelBoxView.snp.makeConstraints { make in
+            make.centerY.equalTo(backButton)
+            make.right.equalToSuperview()
+            make.left.equalTo(backButton.snp.right).offset(self.view.frame.width/30)
+            make.height.equalTo(backButton).multipliedBy(1.3)
+        }
+        
+        recipientNameLabel.snp.makeConstraints { make in
+            make.left.top.equalToSuperview()
+        }
+        
+        responseTimeLabel.snp.makeConstraints { make in
+            make.left.bottom.equalToSuperview()
+        }
+        
+        onlineCircleView.snp.makeConstraints { make in
+            make.centerY.equalTo(recipientNameLabel)
+            make.left.equalTo(recipientNameLabel.snp.right).offset(self.view.frame.width/60)
+            make.height.equalToSuperview().dividedBy(4)
+            make.width.equalTo(onlineCircleView.snp.height)
+            
+            onlineCircleView.layer.cornerRadius = 3
         }
     }
 }
