@@ -310,48 +310,23 @@ extension AddMyToDoViewController : UICollectionViewDelegateFlowLayout,UICollect
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        if collectionView == self.tagcollectionView{
-            guard let cellA = collectionView.dequeueReusableCell(withReuseIdentifier: TagCollectionViewCell.identifier, for: indexPath) as? TagCollectionViewCell else {return UICollectionViewCell()}
-            cellA.bglabel.text = ""
-           return cellA
-        }else if collectionView == self.repeatSettingcollectionView{
-            guard let cellB = collectionView.dequeueReusableCell(withReuseIdentifier: RepeatSettingCell.identifier, for: indexPath) as? RepeatSettingCell else {return UICollectionViewCell()}
-            cellB.bglabel.text = ""
-            return cellB
-        }else{
-            guard let cellC = collectionView.dequeueReusableCell(withReuseIdentifier: AlarmSettingCell.identifier, for: indexPath) as? AlarmSettingCell else {return UICollectionViewCell()}
-            cellC.bglabel.text = ""
-            return cellC
-        }
-    }
-
-    
-    
-}
-
-
-
-#if DEBUG
-import SwiftUI
-struct LoginViewControllerRepresentable: UIViewControllerRepresentable {
-    
-func updateUIViewController(_ uiView: UIViewController,context: Context) {
-        // leave this empty
-}
-    @available(iOS 13.0.0, *)
-    func makeUIViewController(context: Context) -> UIViewController{
-        AddMyToDoViewController()
+//        if collectionView == self.tagcollectionView{
+//            guard let cellA = collectionView.dequeueReusableCell(withReuseIdentifier: TagCollectionViewCell.identifier, for: indexPath) as? TagCollectionViewCell else {return UICollectionViewCell()}
+//            cellA.bglabel.text = tagData[indexPath.row]
+//           return cellA
+//        }
+//        else if collectionView == self.repeatSettingcollectionView{
+//            guard let cellB = collectionView.dequeueReusableCell(withReuseIdentifier: RepeatSettingCell.identifier, for: indexPath) as? RepeatSettingCell else {return UICollectionViewCell()}
+//            cellB.bglabel.text = repeatData[indexPath.row]
+//            return cellB
+//        }else{
+//            guard let cellC = collectionView.dequeueReusableCell(withReuseIdentifier: AlarmSettingCell.identifier, for: indexPath) as? AlarmSettingCell else {return UICollectionViewCell()}
+//            cellC.bglabel.text = alarmData[indexPath.row]
+//            return cellC
+//        }
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: TagCollectionViewCell.identifier, for: indexPath) as? TagCollectionViewCell else {return UICollectionViewCell()}
+    return cell
     }
 }
-@available(iOS 13.0, *)
-struct LoginViewControllerRepresentable_PreviewProvider: PreviewProvider {
-    static var previews: some View {
-        Group {
-            LoginViewControllerRepresentable()
-                .ignoresSafeArea()
-                .previewDisplayName(/*@START_MENU_TOKEN@*/"Preview"/*@END_MENU_TOKEN@*/)
-                .previewDevice(PreviewDevice(rawValue: "iPhone 11"))
-        }
-        
-    }
-} #endif
+
+

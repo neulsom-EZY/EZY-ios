@@ -42,14 +42,6 @@ class MoreCalendarModalsViewController : UIViewController{
         return button
     }()
     
-    private lazy var ourToDo : AddScheduleModalBtn = {
-        let viewModel = CustomButtonViewModel(title: "우리의 할 일", image: UIImage(named: "EZY_user-3")?.withRenderingMode(.alwaysTemplate), color: .EZY_AFADFF)
-        let button = AddScheduleModalBtn(with: viewModel)
-        button.addTarget(self, action: #selector(OurTodo), for: .touchUpInside)
-        
-        return button
-    }()
-    
     private lazy var errand : AddScheduleModalBtn = {
         let viewModel = CustomButtonViewModel(title: "심부름", image: UIImage(named: "EZY_work")?.withRenderingMode(.alwaysTemplate), color: .EZY_AFADFF)
         let button = AddScheduleModalBtn(with: viewModel)
@@ -94,7 +86,7 @@ class MoreCalendarModalsViewController : UIViewController{
             myToDo.layer.borderColor = UIColor.EZY_AFADFF.cgColor
             
             vc = AddMyToDoViewController() //ViewController 보내줌
-            ourTodoState()
+//            ourTodoState()
             ErrandTodoState()
             makeButton.isEnabled = true
 
@@ -105,23 +97,7 @@ class MoreCalendarModalsViewController : UIViewController{
 
         }
     }
-    @objc func OurTodo(){
-        ourToDo.isSelected = !ourToDo.isSelected
-        if ourToDo.isSelected{
-            ourToDo.layer.borderWidth = 1
-            ourToDo.layer.borderColor = UIColor.EZY_AFADFF.cgColor
-            vc = AddOurToDoViewController()//ViewController 보내줌
-            ErrandTodoState()
-            myTodoState()
-            makeButton.isEnabled = true
 
-        }else{
-            ourToDo.layer.borderWidth = 0
-            ourToDo.layer.borderColor = UIColor.clear.cgColor
-            makeButton.isEnabled = false
-
-        }
-    }
     @objc func ErrandTodo(){
         errand.isSelected = !errand.isSelected
         if errand.isSelected{
@@ -129,7 +105,6 @@ class MoreCalendarModalsViewController : UIViewController{
             errand.layer.borderColor = UIColor.EZY_AFADFF.cgColor
             vc = AddErrandViewController()//ViewController 보내줌
             myTodoState()
-            ourTodoState()
             makeButton.isEnabled = true
 
         }else{
@@ -157,7 +132,6 @@ class MoreCalendarModalsViewController : UIViewController{
         view.addSubview(bgView)
         view.addSubview(TitleLabel)
         view.addSubview(myToDo)
-        view.addSubview(ourToDo)
         view.addSubview(errand)
         view.addSubview(makeButton)
         view.addSubview(makeTitle)
@@ -165,11 +139,9 @@ class MoreCalendarModalsViewController : UIViewController{
     
     func cornerRadius(){
         myToDo.layer.cornerRadius = view.frame.height/40.6
-        ourToDo.layer.cornerRadius = view.frame.height/40.6
         errand.layer.cornerRadius = view.frame.height/40.6
         makeButton.layer.cornerRadius = view.frame.height/81.2
         myToDo.layer.applySketchShadow(color: .gray, alpha: 0.25, x: 0, y: 4, blur: 14, spread: 0)
-        ourToDo.layer.applySketchShadow(color: .gray, alpha: 0.25, x: 0, y: 4, blur: 14, spread: 0)
         errand.layer.applySketchShadow(color: .gray, alpha: 0.25, x: 0, y: 4, blur: 14, spread: 0)
     }
     
@@ -188,21 +160,16 @@ class MoreCalendarModalsViewController : UIViewController{
         }
         myToDo.snp.makeConstraints { (make) in
             make.height.equalTo(view.frame.height/5.927)
-            make.width.equalTo(view.frame.width/4.134)
+            make.width.equalTo(view.frame.width/3.32)
             make.top.equalTo(TitleLabel.snp.bottom).offset(view.frame.height/21.37)
-            make.left.equalTo(view.frame.height/21.945)
+            make.left.equalTo(view.frame.height/14)
         }
-        ourToDo.snp.makeConstraints { (make) in
-            make.height.equalTo(view.frame.height/5.927)
-            make.width.equalTo(view.frame.width/4.134)
-            make.top.equalTo(TitleLabel.snp.bottom).offset(view.frame.height/21.37)
-            make.centerX.equalTo(bgView.snp.centerX)
-        }
+
         errand.snp.makeConstraints { (make) in
             make.height.equalTo(view.frame.height/5.927)
-            make.width.equalTo(view.frame.width/4.134)
+            make.width.equalTo(view.frame.width/3.32)
             make.top.equalTo(TitleLabel.snp.bottom).offset(view.frame.height/21.37)
-            make.right.equalTo(view.frame.height/21.945 * -1)
+            make.right.equalTo(view.frame.height/14 * -1)
         }
         makeButton.snp.makeConstraints { (make) in
             make.top.equalTo(errand.snp.bottom).offset(view.frame.height/31.23)
@@ -218,10 +185,7 @@ class MoreCalendarModalsViewController : UIViewController{
         myToDo.layer.borderColor = UIColor.clear.cgColor
         myToDo.isSelected = false
     }
-    func ourTodoState(){
-        ourToDo.layer.borderColor = UIColor.clear.cgColor
-        ourToDo.isSelected = false
-    }
+
     func ErrandTodoState(){
         errand.layer.borderColor = UIColor.clear.cgColor
         errand.isSelected = false
