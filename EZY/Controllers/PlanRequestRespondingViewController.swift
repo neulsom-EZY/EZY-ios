@@ -19,7 +19,7 @@ class PlanRequestRespondingViewController: UIViewController {
     }
     
     lazy var titleLabel = UILabel().then {
-        $0.text = "지환님이\n팀 일정을 보내셨어요."
+        $0.text = "지환님이\n심부름을 부탁하셨어요."
         $0.numberOfLines = 0
         $0.textAlignment = .left
         $0.dynamicFont(fontSize: 27, currentFontName: "AppleSDGothicNeo-SemiBold")
@@ -44,7 +44,7 @@ class PlanRequestRespondingViewController: UIViewController {
     }
     
     lazy var planTitleLabel = UILabel().then {
-        $0.text = "EZY 회의"
+        $0.text = "마카롱 사오기"
         $0.dynamicFont(fontSize: 22, currentFontName: "AppleSDGothicNeo-Bold")
         $0.textColor = UIColor(red: 141/255, green: 138/255, blue: 255/255, alpha: 1)
     }
@@ -135,6 +135,11 @@ class PlanRequestRespondingViewController: UIViewController {
         planShowView.addSubview(planExplanationView)
         planShowView.addSubview(planCalenderImageView)
         planExplanationView.addSubview(planExplanationLabel)
+        
+        acceptButton.addTarget(self, action: #selector(acceptButtonClicked(sender:)), for: .touchUpInside)
+        rejectionButton.addTarget(self, action: #selector(rejectionButtonClicked(sender:)), for: .touchUpInside)
+        backButton.addTarget(self, action: #selector(backButtonClicked(sender:)), for: .touchUpInside)
+
 
         backButton.snp.makeConstraints { make in
             make.top.equalTo(self.view.safeAreaLayoutGuide).offset(self.view.frame.height/47.7)
@@ -228,5 +233,19 @@ class PlanRequestRespondingViewController: UIViewController {
             
             acceptButton.layer.cornerRadius = (self.view.frame.height/20.3)/2
         }
+    }
+    
+    @objc func acceptButtonClicked(sender:UIButton){
+        let nextViewController = ShowPlanViewController()
+        self.navigationController?.pushViewController(nextViewController, animated: true)
+    }
+    
+    @objc func rejectionButtonClicked(sender:UIButton){
+        let nextViewController = ShowPlanViewController()
+        self.navigationController?.pushViewController(nextViewController, animated: true)
+    }
+    
+    @objc func backButtonClicked(sender:UIButton){
+        self.navigationController?.popViewController(animated: true)
     }
 }
