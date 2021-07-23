@@ -45,7 +45,7 @@ class InquiryChattingViewController: UIViewController, UITextFieldDelegate {
     }
     
     lazy var inquirySendButton = UIButton().then {
-        $0.setImage(UIImage(named: "EZY_InquirySendButton"), for: .normal)
+        $0.setImage(UIImage(named: "EZY_InquirySendButtonImage"), for: .normal)
     }
     
     lazy var recipientNameLabel = UILabel().then {
