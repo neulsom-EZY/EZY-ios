@@ -12,8 +12,8 @@ import Alamofire
 
 
 class AddMyToDoViewController:UIViewController{
-    let tagData : [String] = ["전공동아리","산책","자율동아리","공부","자율동아리","전공동아리"]
-    let repeatData : [String] = ["S","M","T","W","T","F","S"]
+    let tagData : [String] = ["전공동아리","산책","자율동아리","공부","자율동아리","전공동아리","전공동아리","산책","자율동아리","공부","자율동아리","전공동아리","산책"]
+    let repeatData : [String] = ["+","S","M","T","W","T","F","S"]
     let alarmData : [String] = ["선택안함", "추가"]
     //MARK: - Properties
     let scrollView = UIScrollView().then  {
@@ -108,7 +108,7 @@ class AddMyToDoViewController:UIViewController{
         cv.translatesAutoresizingMaskIntoConstraints = false
         cv.register(TagCollectionViewCell.self, forCellWithReuseIdentifier: TagCollectionViewCell.identifier)
         cv.showsHorizontalScrollIndicator = false
-        cv.backgroundColor = .red
+        cv.backgroundColor = .clear
         return cv
     }()
     
@@ -119,7 +119,7 @@ class AddMyToDoViewController:UIViewController{
         cv.translatesAutoresizingMaskIntoConstraints = false
         cv.register(TagCollectionViewCell.self, forCellWithReuseIdentifier: TagCollectionViewCell.identifier)
         cv.showsHorizontalScrollIndicator = false
-        cv.backgroundColor = .black
+        cv.backgroundColor = .clear
         return cv
     }()
     fileprivate let alarmSettingcollectionView: UICollectionView = {
@@ -129,7 +129,7 @@ class AddMyToDoViewController:UIViewController{
         cv.translatesAutoresizingMaskIntoConstraints = false
         cv.register(TagCollectionViewCell.self, forCellWithReuseIdentifier: TagCollectionViewCell.identifier)
         cv.showsHorizontalScrollIndicator = false
-        cv.backgroundColor = .black
+        cv.backgroundColor = .clear
         return cv
     }()
     
@@ -180,6 +180,10 @@ class AddMyToDoViewController:UIViewController{
     func configureUI(){
         view.backgroundColor = .white
         scrollView.showsVerticalScrollIndicator = false
+        tagcollectionView.contentInset = UIEdgeInsets(top: 0, left: view.frame.height/29, bottom: 0, right: 0)
+        repeatSettingcollectionView.contentInset = UIEdgeInsets(top: 0, left: view.frame.height/29, bottom: 0, right: 0)
+        alarmSettingcollectionView.contentInset = UIEdgeInsets(top: 0, left: view.frame.height/29, bottom: 0, right: 0)
+
         addView()
         cornerRadius()
         location()
@@ -310,22 +314,32 @@ extension AddMyToDoViewController : UICollectionViewDelegateFlowLayout,UICollect
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-//        if collectionView == self.tagcollectionView{
-//            guard let cellA = collectionView.dequeueReusableCell(withReuseIdentifier: TagCollectionViewCell.identifier, for: indexPath) as? TagCollectionViewCell else {return UICollectionViewCell()}
-//            cellA.bglabel.text = tagData[indexPath.row]
-//           return cellA
-//        }
-//        else if collectionView == self.repeatSettingcollectionView{
-//            guard let cellB = collectionView.dequeueReusableCell(withReuseIdentifier: RepeatSettingCell.identifier, for: indexPath) as? RepeatSettingCell else {return UICollectionViewCell()}
-//            cellB.bglabel.text = repeatData[indexPath.row]
-//            return cellB
-//        }else{
-//            guard let cellC = collectionView.dequeueReusableCell(withReuseIdentifier: AlarmSettingCell.identifier, for: indexPath) as? AlarmSettingCell else {return UICollectionViewCell()}
-//            cellC.bglabel.text = alarmData[indexPath.row]
-//            return cellC
-//        }
+ 
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: TagCollectionViewCell.identifier, for: indexPath) as? TagCollectionViewCell else {return UICollectionViewCell()}
+        cell.backgroundColor = .blue
     return cell
+    }
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        if collectionView == self.tagcollectionView{
+            return CGSize(width:view.frame.height/9.66, height: view.frame.height/25.375)
+        }
+        else if collectionView == self.repeatSettingcollectionView{
+            return CGSize(width: view.frame.height/28.96, height: view.frame.height/28)
+        }
+        else{
+            return CGSize(width: view.frame.height/9.78, height: view.frame.height/23.88)
+        }
+    }
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
+        if collectionView == self.tagcollectionView{
+            return view.frame.height/50.81
+        }
+        else if collectionView == self.repeatSettingcollectionView{
+            return view.frame.height/64.60
+        }
+        else{
+            return view.frame.height/47.76
+        }
     }
 }
 
