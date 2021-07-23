@@ -10,9 +10,9 @@ import UIKit
 class PlanRequestRespondingViewController: UIViewController {
     
     var purpleColor: UIColor! = UIColor(red: 150/255, green: 141/255, blue: 255/255, alpha: 1)
-    var whiteColor: UIColor! = UIColor(red: 255/255, green: 255/255, blue: 255/255, alpha: 1)
+    var whitePurpleColor: UIColor! = UIColor(red: 227/255, green: 225/255, blue: 255/255, alpha: 1)
     
-    lazy var labelColor: [UIColor] = [purpleColor, whiteColor]
+    lazy var labelColor: [UIColor] = [purpleColor, whitePurpleColor]
     
     lazy var backButton = UIButton().then{
         $0.setImage(UIImage(named: "EZY_RequestBackButton"), for: .normal)
@@ -110,8 +110,7 @@ class PlanRequestRespondingViewController: UIViewController {
         $0.setTitleColor(UIColor.white, for: .normal)
         $0.dynamicFont(fontSize: 14, currentFontName: "AppleSDGothicNeo-Bold")
     }
-       
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -158,7 +157,7 @@ class PlanRequestRespondingViewController: UIViewController {
             make.centerX.equalToSuperview()
             make.height.equalToSuperview().dividedBy(2)
             make.width.equalToSuperview().dividedBy(1.2)
-            make.top.equalTo(contentLabel.snp.bottom).offset(self.view.frame.height/14.2)
+            make.top.equalTo(contentLabel.snp.bottom).offset(self.view.frame.height/20)
         }
         
         planTitleLabel.snp.makeConstraints { make in
