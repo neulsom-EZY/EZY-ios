@@ -215,6 +215,10 @@ class TagManagementViewController: UIViewController {
         self.navigationController?.popViewController(animated: true)
     }
     
+    @objc func tagSettingButtonClicked(sender:UIButton){
+        let nextViewController = TagSettingViewController()
+        self.navigationController?.pushViewController(nextViewController, animated: true)
+    }
 
 }
 
@@ -230,7 +234,9 @@ extension TagManagementViewController: UITableViewDataSource{
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: TagTableViewCell.reuseId, for: indexPath) as! TagTableViewCell
+        cell.tagSettingButton.addTarget(self, action: #selector(tagSettingButtonClicked(sender:)), for: .touchUpInside)
         
+        cell.selectionStyle = .none
         return cell
     }
     

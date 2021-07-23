@@ -9,6 +9,7 @@ import UIKit
 
 class TagTableViewCell: UITableViewCell {
     
+    
     static var reuseId = "\(TagTableViewCell.self)"
     
     lazy var tagLabelBackgroundView = UIView().then {
@@ -35,7 +36,6 @@ class TagTableViewCell: UITableViewCell {
 
     override func awakeFromNib() {
         super.awakeFromNib()
-        
         layoutSetting()
     }
 
