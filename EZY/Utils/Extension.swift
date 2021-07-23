@@ -53,6 +53,8 @@ extension UIColor{
     static let EZY_FAFAFA = UIColor.rgb(red: 250, green: 250, blue: 250)
     static let EZY_AFAFAF = UIColor.rgb(red: 175, green: 175, blue: 175)
     static let EZY_E1E1E1 = UIColor.rgb(red: 225, green: 225, blue: 225)
+    static let EZY_AAA8FF = UIColor.rgb(red: 170, green: 168, blue: 255)
+    static let EZY_D0D0D0 = UIColor.rgb(red: 208, green: 208, blue: 208)
 }
 
 extension UILabel {
@@ -90,7 +92,7 @@ extension UITextView {
     func dynamicFont(fontSize size: CGFloat, currentFontName: String) {
     let bounds = UIScreen.main.bounds
     let height = bounds.size.height
-    
+
     switch height {
     case 480.0: //Iphone 3,4S => 3.5 inch
         self.font = UIFont(name: currentFontName, size: size * 0.7)
@@ -110,6 +112,8 @@ extension UITextView {
     case 896.0: //iphone XR => 6.1 inch  // iphone XS MAX => 6.5 inch
         self.font = UIFont(name: currentFontName, size: size * 1.15)
       break
+    case 926.0: //iphone 12 Pro Max
+        self.font = UIFont(name:currentFontName, size: size * 1.18)
     default:
       print("not an iPhone")
       break
