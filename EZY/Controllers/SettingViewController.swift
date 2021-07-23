@@ -87,7 +87,7 @@ extension SettingViewController: UITableViewDelegate{
             let nextViewController = GroupManagementViewController()
             self.navigationController?.pushViewController(nextViewController, animated: true)
         }else if indexPath.row == 3{
-            let nextViewController = GroupManagementViewController()
+            let nextViewController = TagManagementViewController()
             self.navigationController?.pushViewController(nextViewController, animated: true)
         }else if indexPath.row == 4{
             let nextViewController = WithdrawalViewController()
