@@ -83,9 +83,7 @@ class InquiryChattingViewController: UIViewController, UITextFieldDelegate {
     @objc func inquirySendButtonClicked(sender:UIButton){
         inquirySendChattingBoxView.isHidden = false
         inquirySendChattingBoxView.chattingContentLabel.text = chattingWriteTextField.text
-        if chattingWriteTextField.text!.count > 30 {
-            self.chattingWriteBackgroundView.frame = CGRect(x: 0, y: 0, width: 0, height: self.view.frame.height/3)
-        }
+        
         chattingWriteTextField.text = ""
     }
     
