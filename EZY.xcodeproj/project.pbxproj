@@ -78,6 +78,8 @@
 		6ACB4ED2269C2FA8008606C5 /* TopBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6ACB4ED1269C2FA8008606C5 /* TopBarView.swift */; };
 		6AE41E7A26A9228A0072612C /* TagManagementViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AE41E7926A9228A0072612C /* TagManagementViewController.swift */; };
 		6AE41E7C26A9492C0072612C /* TagTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AE41E7B26A9492C0072612C /* TagTableViewCell.swift */; };
+		6AE41E7E26A9560C0072612C /* TagSettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AE41E7D26A9560C0072612C /* TagSettingViewController.swift */; };
+		6AE41E8226A97C440072612C /* TagDeleteModalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AE41E8126A97C440072612C /* TagDeleteModalView.swift */; };
 		6AE5BAD52693D46A00A9731B /* SelectTimeModalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AE5BAD42693D46A00A9731B /* SelectTimeModalView.swift */; };
 		6AE5BAFA269534D300A9731B /* StartTimeTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AE5BAF9269534D300A9731B /* StartTimeTableViewCell.swift */; };
 		6AE5BAFC26953E0F00A9731B /* EndTimeTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AE5BAFB26953E0F00A9731B /* EndTimeTableViewCell.swift */; };
@@ -175,6 +177,8 @@
 		6ACB4ED1269C2FA8008606C5 /* TopBarView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TopBarView.swift; sourceTree = "<group>"; };
 		6AE41E7926A9228A0072612C /* TagManagementViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagManagementViewController.swift; sourceTree = "<group>"; };
 		6AE41E7B26A9492C0072612C /* TagTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagTableViewCell.swift; sourceTree = "<group>"; };
+		6AE41E7D26A9560C0072612C /* TagSettingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagSettingViewController.swift; sourceTree = "<group>"; };
+		6AE41E8126A97C440072612C /* TagDeleteModalView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagDeleteModalView.swift; sourceTree = "<group>"; };
 		6AE5BAD42693D46A00A9731B /* SelectTimeModalView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectTimeModalView.swift; sourceTree = "<group>"; };
 		6AE5BAF9269534D300A9731B /* StartTimeTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartTimeTableViewCell.swift; sourceTree = "<group>"; };
 		6AE5BAFB26953E0F00A9731B /* EndTimeTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EndTimeTableViewCell.swift; sourceTree = "<group>"; };
@@ -348,6 +352,7 @@
 				6A4EDA31266BD11600B809EC /* SettingViewController.swift */,
 				6A138F84266F866D00DBCE49 /* GroupManagementViewController.swift */,
 				6AE41E7926A9228A0072612C /* TagManagementViewController.swift */,
+				6AE41E7D26A9560C0072612C /* TagSettingViewController.swift */,
 				6AC3BF17267B475200DDCBB2 /* PlanRequestRespondingViewController.swift */,
 				6A705BB5267E3ABF001954CE /* PersonalPlanChangeViewController.swift */,
 				6AE5BB0F2696733F00A9731B /* SelectLocationViewController.swift */,
@@ -395,6 +400,7 @@
 				6AE5BB1B2696B9C900A9731B /* PlanCompleteModalView.swift */,
 				6A82834F2698132000AC381B /* PlanDeleteModalView.swift */,
 				6ABA2C8B26A5366000CB1E16 /* WithdrawalModalView.swift */,
+				6AE41E8126A97C440072612C /* TagDeleteModalView.swift */,
 			);
 			path = ModalViews;
 			sourceTree = "<group>";
@@ -631,6 +637,7 @@
 				6A097CFF268ED68B001E011D /* CalendarViewLayout.swift in Sources */,
 				6A8283582699742300AC381B /* TagCollectionViewCell.swift in Sources */,
 				6AE41E7A26A9228A0072612C /* TagManagementViewController.swift in Sources */,
+				6AE41E7E26A9560C0072612C /* TagSettingViewController.swift in Sources */,
 				6AA769E526636AE700B7E1F5 /* AppDelegate.swift in Sources */,
 				6AB27CB0269D8C1600B95C0F /* WithdrawalViewController.swift in Sources */,
 				6A4EDA02266866E600B809EC /* ScheduleTimeTableView.swift in Sources */,
@@ -644,6 +651,7 @@
 				6AFB7800267F812B00B59482 /* TagColorCollectionViewCell.swift in Sources */,
 				6A4EDA2E266A332100B809EC /* NotificationTableViewCell.swift in Sources */,
 				6A138F8D26703C1900DBCE49 /* selectedMemberCollectionViewCell.swift in Sources */,
+				6AE41E8226A97C440072612C /* TagDeleteModalView.swift in Sources */,
 				6AA6F795269C2E4D00958D36 /* SignUpTermsViewController.swift in Sources */,
 				6AE5BAFC26953E0F00A9731B /* EndTimeTableViewCell.swift in Sources */,
 			);
