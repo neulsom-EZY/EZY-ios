@@ -119,4 +119,9 @@ extension NotificationViewController: UITableViewDataSource{
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
            return 0
     }
+    
+    func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
+        let nextViewController = PlanRequestRespondingViewController()
+        self.navigationController?.pushViewController(nextViewController, animated: true)
+    }
 }
