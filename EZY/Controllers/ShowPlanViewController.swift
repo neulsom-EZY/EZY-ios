@@ -22,8 +22,8 @@ class ShowPlanViewController: UIViewController{
     let titleArray: [String] = ["EZY 회의", "디자인 이론 공부", "강아지 산책시키기", "카페에서 마카롱 사오기", "EZY 회의", "디자인 이론 공부", "강아지 산책시키기", "카페에서 마카롱 사오기"]
     let planTimeArray: [String] = ["12:00 - 13:00", "12:00 - 13:00", "12:00 - 13:00", "12:00 - 13:00", "12:00 - 13:00", "12:00 - 13:00", "12:00 - 13:00", "12:00 - 13:00"]
     
-    let scheduleTypesArray = ["나의 할 일","우리의 할 일","심부름","문의하기", "설정"]
-    let icon = [UIImage(named: "EZY_MyJob"), UIImage(named: "EZY_OurJob"), UIImage(named: "EZY_Errand"), UIImage(named: "EZY_Errand"),UIImage(named: "EZY_Errand")]
+    let scheduleTypesArray = ["나의 할 일","심부름","문의하기", "설정"]
+    let icon = [UIImage(named: "EZY_MyJob"), UIImage(named: "EZY_Errand"), UIImage(named: "EZY_inquiry"), UIImage(named: "EZY_settingsIcon")]
     
     lazy var userName = "Y00ujin"
     
@@ -96,7 +96,6 @@ class ShowPlanViewController: UIViewController{
     
     override func viewDidAppear(_ animated: Bool) {
         badgeView.layer.cornerRadius = badgeView.bounds.width/2
-        badgeView.isHidden = true
     }
     
     @objc func didBnotificationButtonClick(sender: UIButton!) {
