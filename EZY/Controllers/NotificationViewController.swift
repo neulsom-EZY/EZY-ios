@@ -105,7 +105,6 @@ extension NotificationViewController: UITableViewDataSource{
         cell.scheduleTypeLabel.textColor = notificationColor[indexPath.row]
         cell.notificationContentLabel.text = notificationContent[indexPath.row]
         cell.notificationContentLabel.textColor = notificationColor[indexPath.row]
-        cell.logoCircleImageView.image = scheduleImageByTypeImage[indexPath.row]
         cell.afterNotificationTimeLabel.text = afterNotificationTime[indexPath.row]
         
         cell.selectionStyle = .none
@@ -114,8 +113,7 @@ extension NotificationViewController: UITableViewDataSource{
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-//        return self.view.frame.height/7
-        return 95
+        return self.view.frame.height/8.54
     }
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
