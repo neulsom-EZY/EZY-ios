@@ -162,9 +162,10 @@ class PersonalPlanDetailViewController: UIViewController {
 
         layoutSetting()
         
+        repeatDayCollectionViewSetting()
+        
         planDeleteModalViewSetting()
         
-        repeatDayCollectionViewSetting()
     }
     
     func repeatDayCollectionViewSetting(){
