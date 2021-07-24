@@ -60,6 +60,7 @@ extension UIColor{
     static let EZY_PLAN_YELLOW = UIColor.rgb(red: 255, green: 209, blue: 141)
     static let EZY_PLAN_ORANGE = UIColor.rgb(red: 255, green: 166, blue: 128)
     static let EZY_PLAN_PURPLE = UIColor.rgb(red: 141, green: 138, blue: 255)
+    static let EZY_PLAN_MIDDLEPURPLE = UIColor.rgb(red: 175, green: 173, blue: 255)
     static let EZY_PLAN_LIGHTPURPLE = UIColor.rgb(red: 200, green: 199, blue: 255)
     static let EZY_PLAN_FINISH_BACK = UIColor.rgb(red: 242, green: 242, blue: 242)
     static let EZY_PLAN_DO_BACK = UIColor.rgb(red: 255, green: 255, blue: 255)
