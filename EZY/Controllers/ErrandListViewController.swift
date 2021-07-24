@@ -168,7 +168,7 @@ func updateUIViewController(_ uiView: UIViewController,context: Context) {
     }
 }
 @available(iOS 13.0, *)
-struct ViewControllerRepresentable_PreviewProvider: PreviewProvider {
+struct ErrandListViewControllerRepresentable_PreviewProvider: PreviewProvider {
     static var previews: some View {
         Group {
             ErrandListViewControllerRepresentable()
