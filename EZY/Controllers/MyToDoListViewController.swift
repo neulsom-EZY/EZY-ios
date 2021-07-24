@@ -11,6 +11,19 @@ import Then
 
 class MyToDoListViewController: UIViewController {
     //MARK: - Properties
+    lazy var backButton = UIButton().then {
+        $0.setImage(UIImage(named: "EZY_ListBackBtn"), for: .normal)
+    }
+    
+    lazy var listName = UILabel().then {
+        $0.text = "나의 할 일 목록"
+        $0.textColor = UIColor.EZY_AAA8FF
+        $0.dynamicFont(fontSize: 22, currentFontName: "AppleSDGothicNeo-SemiBold")
+    }
+    
+    lazy var line = UIView().then {
+        $0.backgroundColor = .EZY_D0D0D0
+    }
     
     //MARK: - Lifecycle
     override func viewDidLoad() {
@@ -29,7 +42,9 @@ class MyToDoListViewController: UIViewController {
     }
     
     func addView(){
-        
+        view.addSubview(backButton)
+        view.addSubview(listName)
+        view.addSubview(line)
     }
     
     func cornerRadius(){
@@ -37,7 +52,21 @@ class MyToDoListViewController: UIViewController {
     }
     
     func location(){
-        
+        backButton.snp.makeConstraints { make in
+            make.top.equalToSuperview().offset(self.view.frame.height/13.31)
+            make.left.equalToSuperview().offset(self.view.frame.width/13.39)
+            make.width.height.equalTo(self.view.frame.width/15.63)
+        }
+        listName.snp.makeConstraints { make in
+            make.top.equalTo(backButton).offset(self.view.frame.height/15.32)
+            make.left.equalTo(backButton)
+        }
+        line.snp.makeConstraints { make in
+            make.width.equalTo(self.view.frame.width/1.18)
+            make.height.equalTo(self.view.frame.height/1624)
+            make.centerX.equalToSuperview()
+            make.top.equalTo(listName).offset(self.view.frame.height/16.57)
+        }
     }
 }
 
