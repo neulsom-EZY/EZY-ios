@@ -7,7 +7,7 @@
 
 import UIKit
 
-class ScheduleDetailViewController: UIViewController {
+class PersonalPlanDetailViewController: UIViewController {
     
     lazy var locationBackgroundView = UIView().then{
         $0.backgroundColor = .white
@@ -157,6 +157,8 @@ class ScheduleDetailViewController: UIViewController {
         explanationBackgroundView.addSubview(explanationTitleLabel)
         explanationBackgroundView.addSubview(explanationContentTextView)
         
+        planModifyButton.addTarget(self, action: #selector(planModifyButtonClicked(sender:)), for: .touchUpInside)
+        
         backButton.snp.makeConstraints { make in
             make.top.equalTo(self.view.safeAreaLayoutGuide).offset(self.view.frame.height/47.7)
             make.left.equalToSuperview().offset(self.view.frame.width/12)
@@ -267,6 +269,11 @@ class ScheduleDetailViewController: UIViewController {
             tagStudyButton.layer.cornerRadius = (self.view.frame.height/25.3)/2
         }
         
+    }
+    
+    @objc func planModifyButtonClicked(sender:UIButton){
+        let nextViewController = PersonalPlanChangeViewController()
+        self.navigationController?.pushViewController(nextViewController, animated: true)
     }
 
 }
