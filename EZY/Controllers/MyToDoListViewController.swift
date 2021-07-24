@@ -31,15 +31,15 @@ class MyToDoListViewController: UIViewController {
     
     private lazy var firstList = ScheduleTimeTableView.init(frame: self.view.frame)
     
-    var firstDescriptionArray: [String] = ["NEULSOM", "NEULSOM"]
+    var firstDescriptionArray: [String] = ["NEULSOM", "NEULSOM", "NEULSOM"]
     
-    let firstTitleArray: [String] = ["EZY 회의", "EZY 회의"]
+    let firstTitleArray: [String] = ["EZY 회의", "EZY 회의", "EZY 회의"]
     
-    let firstPlanTimeArray: [String] = ["12:00 - 13:00", "12:00 - 13:00"]
+    let firstPlanTimeArray: [String] = ["12:00 - 13:00", "12:00 - 13:00", "12:00 - 13:00"]
     
-    lazy var firstPlanBackgroundColor: [UIColor] = [.EZY_PLAN_MIDDLEPURPLE, .EZY_PLAN_FINISH_PURPLE]
+    lazy var firstPlanBackgroundColor: [UIColor] = [.EZY_PLAN_MIDDLEPURPLE, .EZY_PLAN_FINISH_PURPLE, .EZY_PLAN_FINISH_PURPLE]
     
-    lazy var firstPlanDoOrFinishColor: [UIColor] = [.EZY_PLAN_DO_BACK, .EZY_PLAN_FINISH_BACK]
+    lazy var firstPlanDoOrFinishColor: [UIColor] = [.EZY_PLAN_DO_BACK, .EZY_PLAN_FINISH_BACK, .EZY_PLAN_FINISH_BACK]
     
     lazy var secondListTag = ListTagView().then {
         $0.listLabel.text = "APP Programming"
@@ -85,16 +85,19 @@ class MyToDoListViewController: UIViewController {
             make.left.equalToSuperview().offset(self.view.frame.width/13.39)
             make.width.height.equalTo(self.view.frame.width/15.63)
         }
+        
         listName.snp.makeConstraints { make in
             make.top.equalTo(backButton).offset(self.view.frame.height/15.32)
             make.left.equalTo(backButton)
         }
+        
         line.snp.makeConstraints { make in
             make.width.equalTo(self.view.frame.width/1.18)
             make.height.equalTo(self.view.frame.height/1624)
             make.centerX.equalToSuperview()
             make.top.equalTo(listName).offset(self.view.frame.height/16.57)
         }
+        
         firstListTag.snp.makeConstraints { make in
             make.top.equalTo(line).offset(self.view.frame.height/62.46)
             make.left.equalTo(line)
@@ -107,7 +110,7 @@ class MyToDoListViewController: UIViewController {
             make.top.equalTo(firstListTag).offset(self.view.frame.height/67.67)
             make.centerX.equalToSuperview()
             make.width.equalToSuperview()
-            make.bottom.equalToSuperview().offset(self.view.frame.height/2.05 * -1)
+            make.bottom.equalTo(secondListTag).offset(self.view.frame.height/18.92 * -1)
         }
         
         firstList.tableView.snp.makeConstraints { make in
@@ -115,6 +118,13 @@ class MyToDoListViewController: UIViewController {
             make.width.equalToSuperview()
             make.bottom.equalToSuperview()
             make.centerX.equalToSuperview()
+        }
+        
+        secondListTag.snp.makeConstraints { make in
+            make.bottom.equalTo(firstListTag).offset(self.view.frame.height/3.58)
+            make.left.equalTo(line)
+            make.width.equalTo(secondListTag.listLabel).offset(self.view.frame.width/12.5)
+            make.height.equalTo(self.view.frame.height/31.23)
         }
     }
     
