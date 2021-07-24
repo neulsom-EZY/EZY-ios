@@ -233,6 +233,7 @@ class PersonalPlanDetailViewController: UIViewController {
         explanationBackgroundView.addSubview(explanationContentTextView)
         
         planModifyButton.addTarget(self, action: #selector(planModifyButtonClicked(sender:)), for: .touchUpInside)
+        planDeleteButton.addTarget(self, action: #selector(planDeleteButtonClicked(sender:)), for: .touchUpInside)
         
         backButton.snp.makeConstraints { make in
             make.top.equalTo(self.view.safeAreaLayoutGuide).offset(self.view.frame.height/47.7)
@@ -344,6 +345,10 @@ class PersonalPlanDetailViewController: UIViewController {
             tagStudyButton.layer.cornerRadius = (self.view.frame.height/25.3)/2
         }
         
+    }
+    
+    @objc func planDeleteButtonClicked(sender:UIButton){
+        planDeleteModalView.isHidden = false
     }
     
     @objc func planModifyButtonClicked(sender:UIButton){
