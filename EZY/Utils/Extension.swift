@@ -55,6 +55,13 @@ extension UIColor{
     static let EZY_E1E1E1 = UIColor.rgb(red: 225, green: 225, blue: 225)
     static let EZY_AAA8FF = UIColor.rgb(red: 170, green: 168, blue: 255)
     static let EZY_D0D0D0 = UIColor.rgb(red: 208, green: 208, blue: 208)
+    static let EZY_PLAN_FINISH_PURPLE = UIColor.rgb(red: 189, green: 170, blue: 255)
+    static let EZY_PLAN_YELLOW = UIColor.rgb(red: 255, green: 209, blue: 141)
+    static let EZY_PLAN_ORANGE = UIColor.rgb(red: 255, green: 166, blue: 128)
+    static let EZY_PLAN_PURPLE = UIColor.rgb(red: 141, green: 138, blue: 255)
+    static let EZY_PLAN_LIGHTPURPLE = UIColor.rgb(red: 200, green: 199, blue: 255)
+    static let EZY_PLAN_FINISH_BACK = UIColor.rgb(red: 242, green: 242, blue: 242)
+    static let EZY_PLAN_DO_BACK = UIColor.rgb(red: 255, green: 255, blue: 255)
 }
 
 extension UILabel {
