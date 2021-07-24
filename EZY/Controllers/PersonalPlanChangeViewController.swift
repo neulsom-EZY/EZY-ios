@@ -303,7 +303,7 @@ class PersonalPlanChangeViewController: UIViewController {
         repeatCollectionView.delegate = self
         repeatCollectionView.dataSource = self
         
-        repeatCollectionView.register(RepeatCollectionViewCell.self, forCellWithReuseIdentifier: RepeatCollectionViewCell.reuseId)
+        repeatCollectionView.register(PersonalPlanAddRepeatDayCollectionViewCell.self, forCellWithReuseIdentifier: PersonalPlanAddRepeatDayCollectionViewCell.reuseId)
         
         selectCalendarModalView.modalBackgroundView.addSubview(repeatCollectionView)
         
@@ -978,7 +978,7 @@ extension PersonalPlanChangeViewController: UICollectionViewDataSource, UICollec
 
             return cell
         }else if collectionView == repeatCollectionView{
-            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: RepeatCollectionViewCell.reuseId, for: indexPath) as! RepeatCollectionViewCell
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: PersonalPlanAddRepeatDayCollectionViewCell.reuseId, for: indexPath) as! PersonalPlanAddRepeatDayCollectionViewCell
             
             cell.label.text = RepeatDayOfTheWeekArray[indexPath.row]
             cell.backgroundColor = .white
