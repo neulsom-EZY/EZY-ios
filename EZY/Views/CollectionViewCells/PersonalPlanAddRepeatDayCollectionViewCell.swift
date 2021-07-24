@@ -7,9 +7,9 @@
 
 import UIKit
 
-class RepeatCollectionViewCell: UICollectionViewCell {
+class PersonalPlanAddRepeatDayCollectionViewCell: UICollectionViewCell {
     
-    static let reuseId = "\(RepeatCollectionViewCell.self)"
+    static let reuseId = "\(PersonalPlanAddRepeatDayCollectionViewCell.self)"
     
     var model: RepeatCollectionViewModel?
 

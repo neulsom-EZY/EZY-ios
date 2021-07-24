@@ -120,6 +120,12 @@ class PersonalPlanDetailViewController: UIViewController {
         $0.backgroundColor = UIColor(red: 150/255, green: 141/255, blue: 255/255, alpha: 1)
     }
     
+    lazy var repeatTitleLabel = UILabel().then {
+        $0.text = "반복 설정"
+        $0.textColor = UIColor(red: 182/255, green: 182/255, blue: 182/255, alpha: 1)
+        $0.dynamicFont(fontSize: 14, currentFontName: "AppleSDGothicNeo-Bold")
+    }
+    
     lazy var planDeleteButton = UIButton().then {
         $0.setImage(UIImage(named: "EZY_DeleteButton"), for: .normal)
     }
@@ -128,12 +134,36 @@ class PersonalPlanDetailViewController: UIViewController {
         $0.setImage(UIImage(named: "EZY_PlanModify"), for: .normal)
     }
     
+    lazy var repeatDayCollectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout())
+    
+    var dayLabelText = ["월","수","토","일"]
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
         layoutSetting()
         
         planDeleteModalViewSetting()
+        
+        repeatDayCollectionViewSetting()
+    }
+    
+    func repeatDayCollectionViewSetting(){
+        self.view.addSubview(repeatDayCollectionView)
+        
+        repeatDayCollectionView.backgroundColor = .white
+        
+        repeatDayCollectionView.delegate = self
+        repeatDayCollectionView.dataSource = self
+        
+        repeatDayCollectionView.register(PersonalPlanDetailRepeatDayCollectionViewCell.self, forCellWithReuseIdentifier: PersonalPlanDetailRepeatDayCollectionViewCell.reuseId)
+        
+        repeatDayCollectionView.snp.makeConstraints { make in
+            make.top.equalTo(repeatTitleLabel.snp.bottom).offset(self.view.frame.height/47.7)
+            make.left.equalTo(repeatTitleLabel)
+            make.centerX.equalToSuperview()
+            make.height.equalToSuperview().dividedBy(25.3)
+        }
     }
     
     func planDeleteModalViewSetting(){
@@ -226,6 +256,7 @@ class PersonalPlanDetailViewController: UIViewController {
         self.view.addSubview(tagStudyButton)
         self.view.addSubview(planDeleteButton)
         self.view.addSubview(planModifyButton)
+        self.view.addSubview(repeatTitleLabel)
         self.timeBackgroundView.addSubview(timeIconImageView)
         self.calendarBackgroundView.addSubview(calendarIconImageView)
         self.locationBackgroundView.addSubview(locationIconImageView)
@@ -345,6 +376,13 @@ class PersonalPlanDetailViewController: UIViewController {
             tagStudyButton.layer.cornerRadius = (self.view.frame.height/25.3)/2
         }
         
+        repeatTitleLabel.snp.makeConstraints { make in
+            make.left.equalTo(tagStudyButton)
+            make.top.equalTo(tagStudyButton.snp.bottom).offset(self.view.frame.height/35)
+        }
+        
+        
+        
     }
     
     @objc func planDeleteButtonClicked(sender:UIButton){
@@ -362,4 +400,24 @@ class PersonalPlanDetailViewController: UIViewController {
 //        self.navigationController?.pushViewController(nextViewController, animated: true)
     }
 
+}
+
+extension PersonalPlanDetailViewController: UICollectionViewDelegate, UICollectionViewDelegateFlowLayout{
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        return CGSize.init(width: self.view.frame.height / 25.375, height: self.view.frame.height / 25.375)
+    }
+}
+
+extension PersonalPlanDetailViewController: UICollectionViewDataSource{
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return dayLabelText.count
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: PersonalPlanDetailRepeatDayCollectionViewCell.reuseId, for: indexPath) as! PersonalPlanDetailRepeatDayCollectionViewCell
+        
+        cell.dayLabel.text = dayLabelText[indexPath.row]
+        
+        return cell
+    }
 }
