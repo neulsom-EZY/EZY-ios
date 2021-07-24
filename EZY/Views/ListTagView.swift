@@ -10,7 +10,7 @@ import UIKit
 class ListTagView: UIView {
     lazy var listLabel = UILabel().then {
         $0.text = "부탁받은 심부름"
-        $0.textColor = .blue
+        $0.textColor = .EZY_796DFF
         $0.dynamicFont(fontSize: 10, currentFontName: "AppleSDGothicNeo-Bold")
     }
     
@@ -20,6 +20,6 @@ class ListTagView: UIView {
         }
         
         self.layer.borderWidth = 0.5
-        self.layer.borderColor = UIColor.blue.cgColor
+        self.layer.borderColor = UIColor.EZY_796DFF.cgColor
     }
 }
