@@ -139,6 +139,8 @@ class PersonalPlanDetailViewController: UIViewController {
     func planDeleteModalViewSetting(){
         self.view.addSubview(planDeleteModalView)
         
+        planDeleteModalView.deleteButton.addTarget(self, action: #selector(planDeleteModalViewDeleteButtonClicked(sender:)), for: .touchUpInside)
+        
         planDeleteModalView.snp.makeConstraints { make in
             make.top.right.bottom.left.equalToSuperview()
         }
@@ -171,6 +173,39 @@ class PersonalPlanDetailViewController: UIViewController {
             make.centerX.centerY.equalToSuperview()
             make.height.width.equalToSuperview().dividedBy(2)
         }
+        
+        planDeleteModalView.labelView.snp.makeConstraints { make in
+            make.centerX.equalToSuperview()
+            make.width.equalToSuperview().dividedBy(1.4)
+            make.height.equalToSuperview().dividedBy(10)
+            make.top.equalTo(planDeleteModalView.iconCircleBackground.snp.bottom).offset(self.view.frame.height/54.1)
+        }
+        
+        planDeleteModalView.planTitleNameLabel.snp.makeConstraints { make in
+            make.left.equalToSuperview()
+            make.centerY.equalToSuperview()
+        }
+        
+        planDeleteModalView.deleteQuestionsLabel.snp.makeConstraints { make in
+            make.right.equalToSuperview()
+            make.centerY.equalToSuperview()
+        }
+        
+        planDeleteModalView.deleteButton.snp.makeConstraints { make in
+            make.bottom.equalTo(planDeleteModalView.cancelButton)
+            make.right.equalTo(planDeleteModalView.cancelButton.snp.left).offset(-self.view.frame.width/35)
+            make.height.width.equalTo(planDeleteModalView.cancelButton)
+        }
+        
+        planDeleteModalView.cancelButton.snp.makeConstraints { make in
+            make.bottom.equalToSuperview().offset(-self.view.frame.height/30.6)
+            make.right.equalToSuperview().offset(-self.view.frame.width/15)
+            make.height.equalToSuperview().dividedBy(7.2)
+            make.width.equalToSuperview().dividedBy(4.7)
+        }
+        
+        planDeleteModalView.isHidden = true
+        
     }
     
     func layoutSetting(){
@@ -314,6 +349,12 @@ class PersonalPlanDetailViewController: UIViewController {
     @objc func planModifyButtonClicked(sender:UIButton){
         let nextViewController = PersonalPlanChangeViewController()
         self.navigationController?.pushViewController(nextViewController, animated: true)
+    }
+    
+    @objc func planDeleteModalViewDeleteButtonClicked(sender:UIButton){
+        planDeleteModalView.isHidden = true
+//        let nextViewController = personallistVC()
+//        self.navigationController?.pushViewController(nextViewController, animated: true)
     }
 
 }

@@ -51,7 +51,7 @@ class PlanDeleteModalView: UIView {
     }
     
     lazy var planTitleNameLabel = UILabel().then {
-        $0.text = "산책하기"
+        $0.text = "아름이 산책시키기"
         $0.textColor = UIColor(red: 104/255, green: 134/255, blue: 254/255, alpha: 1)
         $0.dynamicFont(fontSize: 17, currentFontName: "AppleSDGothicNeo-Bold")
     }
