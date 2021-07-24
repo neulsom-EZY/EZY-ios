@@ -138,6 +138,25 @@ class PersonalPlanDetailViewController: UIViewController {
     
     var dayLabelText = ["월","수","토","일"]
     
+    lazy var notificationTitleLabel = UILabel().then {
+        $0.text = "알림 설정"
+        $0.textColor = UIColor(red: 182/255, green: 182/255, blue: 182/255, alpha: 1)
+        $0.dynamicFont(fontSize: 14, currentFontName: "AppleSDGothicNeo-Bold")
+    }
+    
+    lazy var notificationBackgroundView = UIView().then {
+        $0.backgroundColor = UIColor(red: 253/255, green: 253/255, blue: 253/255, alpha: 1)
+        $0.layer.borderWidth = 0.5
+        $0.layer.borderColor = UIColor(red: 207/255, green: 207/255, blue: 207/255, alpha: 1).cgColor
+        $0.layer.cornerRadius = 10
+    }
+    
+    lazy var notificationTimeLabel = UILabel().then {
+        $0.text = "오전 12:12"
+        $0.textColor = UIColor(red: 172/255, green: 172/255, blue: 172/255, alpha: 1)
+        $0.dynamicFont(fontSize: 12, currentFontName: "Poppins-Light")
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -163,6 +182,22 @@ class PersonalPlanDetailViewController: UIViewController {
             make.left.equalTo(repeatTitleLabel)
             make.centerX.equalToSuperview()
             make.height.equalToSuperview().dividedBy(25.3)
+        }
+        
+        notificationTitleLabel.snp.makeConstraints { make in
+            make.left.equalTo(repeatDayCollectionView)
+            make.top.equalTo(repeatDayCollectionView.snp.bottom).offset(self.view.frame.height/38.6)
+        }
+        
+        notificationBackgroundView.snp.makeConstraints { make in
+            make.left.equalTo(notificationTitleLabel)
+            make.top.equalTo(notificationTitleLabel.snp.bottom).offset(self.view.frame.height/47.7)
+            make.height.equalToSuperview().dividedBy(25.3)
+            make.width.equalToSuperview().dividedBy(4.07)
+        }
+        
+        notificationTimeLabel.snp.makeConstraints { make in
+            make.centerY.centerX.equalToSuperview()
         }
     }
     
@@ -257,6 +292,9 @@ class PersonalPlanDetailViewController: UIViewController {
         self.view.addSubview(planDeleteButton)
         self.view.addSubview(planModifyButton)
         self.view.addSubview(repeatTitleLabel)
+        self.view.addSubview(notificationTitleLabel)
+        self.view.addSubview(notificationBackgroundView)
+        notificationBackgroundView.addSubview(notificationTimeLabel)
         self.timeBackgroundView.addSubview(timeIconImageView)
         self.calendarBackgroundView.addSubview(calendarIconImageView)
         self.locationBackgroundView.addSubview(locationIconImageView)
@@ -380,8 +418,6 @@ class PersonalPlanDetailViewController: UIViewController {
             make.left.equalTo(tagStudyButton)
             make.top.equalTo(tagStudyButton.snp.bottom).offset(self.view.frame.height/35)
         }
-        
-        
         
     }
     
