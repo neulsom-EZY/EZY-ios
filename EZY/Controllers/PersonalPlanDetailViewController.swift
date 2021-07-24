@@ -178,7 +178,7 @@ class PersonalPlanDetailViewController: UIViewController {
         repeatDayCollectionView.register(PersonalPlanDetailRepeatDayCollectionViewCell.self, forCellWithReuseIdentifier: PersonalPlanDetailRepeatDayCollectionViewCell.reuseId)
         
         repeatDayCollectionView.snp.makeConstraints { make in
-            make.top.equalTo(repeatTitleLabel.snp.bottom).offset(self.view.frame.height/47.7)
+            make.top.equalTo(repeatTitleLabel.snp.bottom).offset(self.view.frame.height/80)
             make.left.equalTo(repeatTitleLabel)
             make.centerX.equalToSuperview()
             make.height.equalToSuperview().dividedBy(25.3)
@@ -191,7 +191,7 @@ class PersonalPlanDetailViewController: UIViewController {
         
         notificationBackgroundView.snp.makeConstraints { make in
             make.left.equalTo(notificationTitleLabel)
-            make.top.equalTo(notificationTitleLabel.snp.bottom).offset(self.view.frame.height/47.7)
+            make.top.equalTo(notificationTitleLabel.snp.bottom).offset(self.view.frame.height/80)
             make.height.equalToSuperview().dividedBy(25.3)
             make.width.equalToSuperview().dividedBy(4.07)
         }
@@ -406,7 +406,7 @@ class PersonalPlanDetailViewController: UIViewController {
         }
         
         tagStudyButton.snp.makeConstraints{ make in
-            make.top.equalTo(tagLabel.snp.bottom).offset(self.view.frame.height/47.7)
+            make.top.equalTo(tagLabel.snp.bottom).offset(self.view.frame.height/80)
             make.left.equalTo(tagLabel)
             make.height.equalToSuperview().dividedBy(25.3)
             make.width.equalToSuperview().dividedBy(4.4)
