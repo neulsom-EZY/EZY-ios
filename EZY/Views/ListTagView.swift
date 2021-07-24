@@ -14,7 +14,7 @@ class ListTagView: UIView {
         $0.dynamicFont(fontSize: 10, currentFontName: "AppleSDGothicNeo-Bold")
     }
     
-    func inTextViewLayoutSetting(){
+    func listTagViewLayoutSetting(){
         listLabel.snp.makeConstraints { make in
             make.center.equalToSuperview()
         }
