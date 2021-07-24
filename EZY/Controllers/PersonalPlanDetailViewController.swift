@@ -9,6 +9,8 @@ import UIKit
 
 class PersonalPlanDetailViewController: UIViewController {
     
+    var planDeleteModalView = PlanDeleteModalView()
+    
     lazy var locationBackgroundView = UIView().then{
         $0.backgroundColor = .white
         $0.layer.cornerRadius = 10
@@ -131,6 +133,44 @@ class PersonalPlanDetailViewController: UIViewController {
 
         layoutSetting()
         
+        planDeleteModalViewSetting()
+    }
+    
+    func planDeleteModalViewSetting(){
+        self.view.addSubview(planDeleteModalView)
+        
+        planDeleteModalView.snp.makeConstraints { make in
+            make.top.right.bottom.left.equalToSuperview()
+        }
+        
+        planDeleteModalView.shadowBackgroundView.snp.makeConstraints { make in
+            make.top.right.bottom.left.equalToSuperview()
+        }
+        
+        planDeleteModalView.modalBackgroundView.snp.makeConstraints { make in
+            make.width.equalToSuperview().dividedBy(1.1)
+            make.height.equalToSuperview().dividedBy(3.59)
+            make.centerY.centerX.equalToSuperview()
+        }
+        
+        planDeleteModalView.titleLabel.snp.makeConstraints { make in
+            make.top.equalToSuperview().offset(self.view.frame.height/33.8)
+            make.left.equalToSuperview().offset(self.view.frame.height/33.8)
+        }
+        
+        planDeleteModalView.iconCircleBackground.snp.makeConstraints { make in
+            make.top.equalTo(planDeleteModalView.titleLabel.snp.bottom).offset(self.view.frame.height/54.1)
+            make.centerX.equalToSuperview()
+            make.height.equalTo(self.view).dividedBy(15.6)
+            make.width.equalTo(planDeleteModalView.iconCircleBackground.snp.height)
+            
+            planDeleteModalView.iconCircleBackground.layer.cornerRadius = (self.view.frame.height/15.6)/2
+        }
+        
+        planDeleteModalView.iconImageView.snp.makeConstraints { make in
+            make.centerX.centerY.equalToSuperview()
+            make.height.width.equalToSuperview().dividedBy(2)
+        }
     }
     
     func layoutSetting(){

@@ -19,29 +19,29 @@ class PlanDeleteModalView: UIView {
     }
     
     lazy var titleLabel = UILabel().then {
-        $0.text = "일정 완료"
+        $0.text = "개인 일정 삭제"
         $0.dynamicFont(fontSize: 12, currentFontName: "AppleSDGothicNeo-Bold")
-        $0.textColor = UIColor(red: 104/255, green: 134/255, blue: 254/255, alpha: 1)
+        $0.textColor = UIColor(red: 150/255, green: 141/255, blue: 255/255, alpha: 1)
     }
     
     lazy var iconCircleBackground = UIView().then {
-        $0.backgroundColor = UIColor(red: 104/255, green: 134/255, blue: 254/255, alpha: 1)
+        $0.backgroundColor = UIColor(red: 150/255, green: 141/255, blue: 255/255, alpha: 1)
     }
     
     lazy var iconImageView = UIImageView().then {
         $0.image = UIImage(named: "EZY_OurJob")
     }
     
-    lazy var okButton = UIButton().then {
-        $0.setTitle("네!", for: .normal)
-        $0.backgroundColor = UIColor(red: 104/255, green: 134/255, blue: 254/255, alpha: 1)
+    lazy var deleteButton = UIButton().then {
+        $0.setTitle("삭 제", for: .normal)
+        $0.backgroundColor = UIColor(red: 150/255, green: 141/255, blue: 255/255, alpha: 1)
         $0.layer.cornerRadius = 10
         $0.dynamicFont(fontSize: 12, currentFontName: "AppleSDGothicNeo-Bold")
     }
     
     lazy var cancelButton = UIButton().then {
-        $0.setTitle("아니요!", for: .normal)
-        $0.backgroundColor = UIColor(red: 154/255, green: 174/255, blue: 252/255, alpha: 1)
+        $0.setTitle("취 소", for: .normal)
+        $0.backgroundColor = UIColor(red: 211/255, green: 211/255, blue: 211/255, alpha: 1)
         $0.layer.cornerRadius = 10
         $0.dynamicFont(fontSize: 12, currentFontName: "AppleSDGothicNeo-Bold")
     }
@@ -56,8 +56,8 @@ class PlanDeleteModalView: UIView {
         $0.dynamicFont(fontSize: 17, currentFontName: "AppleSDGothicNeo-Bold")
     }
     
-    lazy var completeQuestionsLabel = UILabel().then {
-        $0.text = "일정을 완료하셨나요?"
+    lazy var deleteQuestionsLabel = UILabel().then {
+        $0.text = "일정을 삭제할까요?"
         $0.dynamicFont(fontSize: 15, currentFontName: "AppleSDGothicNeo-Thin")
     }
 
@@ -77,10 +77,10 @@ class PlanDeleteModalView: UIView {
         modalBackgroundView.addSubview(titleLabel)
         modalBackgroundView.addSubview(iconCircleBackground)
         iconCircleBackground.addSubview(iconImageView)
-        modalBackgroundView.addSubview(okButton)
+        modalBackgroundView.addSubview(deleteButton)
         modalBackgroundView.addSubview(cancelButton)
         modalBackgroundView.addSubview(labelView)
         labelView.addSubview(planTitleNameLabel)
-        labelView.addSubview(completeQuestionsLabel)
+        labelView.addSubview(deleteQuestionsLabel)
     }
 }
