@@ -1014,8 +1014,17 @@ extension PersonalPlanChangeViewController: UICollectionViewDataSource, UICollec
             cell.setModel(RepeatModels[indexPath.row])
             return cell
         }else if collectionView == tagCollectionView{
-         
             if indexPath == [0,0]{
+                let cell = collectionView.dequeueReusableCell(withReuseIdentifier: TagCollectionViewCell.reuseId, for: indexPath) as! TagCollectionViewCell
+                
+                cell.tagNameLabel.text = "선택 안 함"
+                cell.tagNameLabel.textColor = UIColor(red: 187/255, green: 187/255, blue: 187/255, alpha: 1)
+                cell.tagBackgroundView.backgroundColor = .white
+                cell.tagBackgroundView.layer.borderWidth = 1.3
+                cell.tagBackgroundView.layer.borderColor = UIColor(red: 187/255, green: 187/255, blue: 187/255, alpha: 1).cgColor
+                
+                return cell
+            }else if indexPath == [0,1]{
                 let cell = collectionView.dequeueReusableCell(withReuseIdentifier: TagCollectionViewCell.reuseId, for: indexPath) as! TagCollectionViewCell
                 
                 cell.tagNameLabel.text = "+ 추가"
