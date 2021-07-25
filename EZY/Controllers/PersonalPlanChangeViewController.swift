@@ -23,13 +23,13 @@ class PersonalPlanChangeViewController: UIViewController {
     
     var isChecked: [Bool] = [true, false, false, false]
     
-    var RepeatModels: [RepeatCollectionViewModel] = [RepeatCollectionViewModel(backgroundColr: UIColor(red: 255/255, green: 188/255, blue: 188/255, alpha: 1), isSelected: false),
-                                                     RepeatCollectionViewModel(backgroundColr: UIColor(red: 255/255, green: 188/255, blue: 188/255, alpha: 1), isSelected: false),
-                                                     RepeatCollectionViewModel(backgroundColr: UIColor(red: 255/255, green: 188/255, blue: 188/255, alpha: 1), isSelected: false),
-                                                     RepeatCollectionViewModel(backgroundColr: UIColor(red: 255/255, green: 188/255, blue: 188/255, alpha: 1), isSelected: false),
-                                                     RepeatCollectionViewModel(backgroundColr: UIColor(red: 255/255, green: 188/255, blue: 188/255, alpha: 1), isSelected: false),
-                                                     RepeatCollectionViewModel(backgroundColr: UIColor(red: 255/255, green: 188/255, blue: 188/255, alpha: 1), isSelected: false),
-                                                     RepeatCollectionViewModel(backgroundColr: UIColor(red: 255/255, green: 188/255, blue: 188/255, alpha: 1), isSelected: false)]
+    var RepeatModels: [RepeatCollectionViewModel] = [RepeatCollectionViewModel(backgroundColr: UIColor(red: 255/255, green: 188/255, blue: 188/255, alpha: 1), isSelected: true),
+                                                     RepeatCollectionViewModel(backgroundColr: UIColor(red: 255/255, green: 188/255, blue: 188/255, alpha: 1), isSelected: true),
+                                                     RepeatCollectionViewModel(backgroundColr: UIColor(red: 255/255, green: 188/255, blue: 188/255, alpha: 1), isSelected: true),
+                                                     RepeatCollectionViewModel(backgroundColr: UIColor(red: 255/255, green: 188/255, blue: 188/255, alpha: 1), isSelected: true),
+                                                     RepeatCollectionViewModel(backgroundColr: UIColor(red: 255/255, green: 188/255, blue: 188/255, alpha: 1), isSelected: true),
+                                                     RepeatCollectionViewModel(backgroundColr: UIColor(red: 255/255, green: 188/255, blue: 188/255, alpha: 1), isSelected: true),
+                                                     RepeatCollectionViewModel(backgroundColr: UIColor(red: 255/255, green: 188/255, blue: 188/255, alpha: 1), isSelected: true)]
     
     var TagColorModels: [TagColorCollectionViewModel] = [TagColorCollectionViewModel(backgroundColor: UIColor(red: 186/255, green: 200/255, blue: 255/255, alpha: 1), isSelected: false),
                                                  TagColorCollectionViewModel(backgroundColor: UIColor(red: 196/255, green: 200/255, blue: 255/255, alpha: 1), isSelected: true),
@@ -637,8 +637,6 @@ class PersonalPlanChangeViewController: UIViewController {
         
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(_:)), name:UIResponder.keyboardWillShowNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide(_:)), name: UIResponder.keyboardWillHideNotification, object: nil)
-        
-
 
         tagColorCollectionView.showsHorizontalScrollIndicator = false
         tagColorCollectionView.dataSource = self
