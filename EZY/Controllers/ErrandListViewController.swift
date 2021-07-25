@@ -26,22 +26,31 @@ class ErrandListViewController: UIViewController {
         $0.backgroundColor = .EZY_D0D0D0
     }
     
-    private lazy var scheduleTableView = ScheduleTimeTableView.init(frame: self.view.frame)
+    lazy var acceptErrandTag = ListTagView().then {
+        $0.listLabel.text = "부탁받은 심부름"
+    }
     
-    var descriptionArray: [String] = ["부탁받은 심부름", "부탁받은 심부름", "부탁받은 심부름", "부탁받은 심부름", "부탁받은 심부름", "부탁받은 심부름", "부탁받은 심부름", "부탁받은 심부름"]
+    lazy var scheduleTableView = ScheduleTimeTableView.init(frame: self.view.frame)
     
-    let titleArray: [String] = ["EZY 회의", "EZY 회의", "EZY 회의", "EZY 회의", "EZY 회의", "EZY 회의", "EZY 회의", "EZY 회의"]
+    var descriptionArray: [String] = ["부탁받은 심부름", "부탁받은 심부름"]
     
-    let planTimeArray: [String] = ["7월 24일 AM 10:24까지", "12:00 - 13:00", "12:00 - 13:00", "12:00 - 13:00", "12:00 - 13:00", "12:00 - 13:00", "12:00 - 13:00", "12:00 - 13:00"]
+    let titleArray: [String] = ["EZY 회의", "EZY 회의"]
     
-    lazy var planBackgroundColor: [UIColor] = [.EZY_PLAN_FINISH_PURPLE, .EZY_PLAN_FINISH_PURPLE, .EZY_PLAN_FINISH_PURPLE, .EZY_PLAN_FINISH_PURPLE, .EZY_PLAN_FINISH_PURPLE, .EZY_PLAN_FINISH_PURPLE, .EZY_PLAN_FINISH_PURPLE, .EZY_PLAN_FINISH_PURPLE]
+    let planTimeArray: [String] = ["12:00 - 13:00", "12:00 - 13:00"]
     
-    lazy var planDoOrFinishColor: [UIColor] = [.EZY_PLAN_FINISH_BACK, .EZY_PLAN_FINISH_BACK, .EZY_PLAN_FINISH_BACK, .EZY_PLAN_FINISH_BACK, .EZY_PLAN_FINISH_BACK, .EZY_PLAN_FINISH_BACK, .EZY_PLAN_FINISH_BACK, .EZY_PLAN_FINISH_BACK]
+    lazy var planBackgroundColor: [UIColor] = [.EZY_PLAN_FINISH_PURPLE, .EZY_PLAN_FINISH_PURPLE]
+    
+    lazy var planDoOrFinishColor: [UIColor] = [.EZY_PLAN_DO_BACK, .EZY_PLAN_FINISH_BACK]
+    
+    lazy var sendErrandTag = ListTagView().then {
+        $0.listLabel.text = "부탁한 심부름"
+        $0.listLabel.textColor = .EZY_8F85FF
+        $0.layer.borderColor = UIColor.EZY_8F85FF.cgColor
+    }
     
     //MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        ScheduleTimeTableViewSetting()
         configureUI()
     }
     
@@ -50,7 +59,12 @@ class ErrandListViewController: UIViewController {
     //MARK: - Helpers
     func configureUI(){
         view.backgroundColor = .white
+        
+        listTagViewSetting()
+        ScheduleTimeTableViewSetting()
+        
         addView()
+        cornerRadius()
         location()
     }
     
@@ -58,7 +72,14 @@ class ErrandListViewController: UIViewController {
         view.addSubview(backButton)
         view.addSubview(listName)
         view.addSubview(line)
+        view.addSubview(acceptErrandTag)
         view.addSubview(scheduleTableView)
+        view.addSubview(sendErrandTag)
+    }
+    
+    func cornerRadius(){
+        acceptErrandTag.layer.cornerRadius = self.view.frame.width/75
+        sendErrandTag.layer.cornerRadius = self.view.frame.width/75
     }
     
     func location(){
@@ -78,12 +99,19 @@ class ErrandListViewController: UIViewController {
             make.top.equalTo(listName).offset(self.view.frame.height/16.57)
         }
         
+        acceptErrandTag.snp.makeConstraints { make in
+            make.top.equalTo(line).offset(self.view.frame.height/62.46)
+            make.left.equalTo(line)
+            make.width.equalTo(acceptErrandTag.listLabel).offset(self.view.frame.width/12.5)
+            make.height.equalTo(self.view.frame.height/31.23)
+        }
+        
         scheduleTableView.snp.makeConstraints { make in
             scheduleTableView.backgroundColor = .clear
-            make.top.equalTo(line)
+            make.top.equalTo(acceptErrandTag).offset(self.view.frame.height/67.67)
             make.centerX.equalToSuperview()
             make.width.equalToSuperview()
-            make.bottom.equalToSuperview()
+            make.bottom.equalTo(sendErrandTag).offset(self.view.frame.height/18.92 * -1)
         }
         
         scheduleTableView.tableView.snp.makeConstraints { make in
@@ -92,6 +120,22 @@ class ErrandListViewController: UIViewController {
             make.bottom.equalToSuperview()
             make.centerX.equalToSuperview()
         }
+        
+        sendErrandTag.snp.makeConstraints { make in
+            make.bottom.equalTo(acceptErrandTag).offset(self.view.frame.height/3.58)
+            make.left.equalTo(line)
+            make.width.equalTo(sendErrandTag.listLabel).offset(self.view.frame.width/12.5)
+            make.height.equalTo(self.view.frame.height/31.23)
+        }
+        
+    }
+    
+    func listTagViewSetting() {
+        acceptErrandTag.addSubview(acceptErrandTag.listLabel)
+        acceptErrandTag.listTagViewLayoutSetting()
+        
+        sendErrandTag.addSubview(sendErrandTag.listLabel)
+        sendErrandTag.listTagViewLayoutSetting()
     }
     
     func ScheduleTimeTableViewSetting(){
@@ -121,10 +165,6 @@ extension ErrandListViewController: UITableViewDataSource{
         cell.titleLabel.textColor = planBackgroundColor[indexPath.row]
         cell.groupNameLabel.textColor = planBackgroundColor[indexPath.row]
         
-        print("tableView - cellForRowAt")
-        print(indexPath.row)
-        print(cell.titleLabel.text ?? "")
-        
         cell.backgroundColor = .clear
         cell.selectionStyle = UITableViewCell.SelectionStyle.none
         
@@ -144,10 +184,7 @@ extension ErrandListViewController: UITableViewDataSource{
 extension ErrandListViewController: UITableViewDelegate{
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        print("tableView - didSelectRowAt")
         var cell = tableView.cellForRow(at: indexPath)
-        print(indexPath.row)
-        print(titleArray[indexPath.row])
     }
 
     
