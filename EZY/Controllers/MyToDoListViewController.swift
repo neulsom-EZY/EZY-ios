@@ -29,7 +29,7 @@ class MyToDoListViewController: UIViewController {
         $0.listLabel.text = "STUDY"
     }
     
-    private lazy var firstList = ScheduleTimeTableView.init(frame: self.view.frame)
+    lazy var firstList = ScheduleTimeTableView.init(frame: self.view.frame)
     
     var firstDescriptionArray: [String] = ["NEULSOM", "NEULSOM", "NEULSOM"]
     
@@ -44,6 +44,19 @@ class MyToDoListViewController: UIViewController {
     lazy var secondListTag = ListTagView().then {
         $0.listLabel.text = "APP Programming"
     }
+    
+    lazy var secondList = ScheduleTimeTableView.init(frame: self.view.frame)
+    
+    var secondDescriptionArray: [String] = ["공부", "공부", "NEULSOM", "NEULSOM"]
+    
+    let secondTitleArray: [String] = ["강아지 산책시키기", "카페에서 마카롱 사오기", "EZY 회의", "EZY 회의"]
+    
+    let secondPlanTimeArray: [String] = ["19:00 - 20:00", "20:30 - 21:00", "12:00 - 13:00", "12:00 - 13:00"]
+    
+    lazy var secondPlanBackgroundColor: [UIColor] = [.EZY_PLAN_PURPLE, .EZY_PLAN_LIGHTPURPLE, .EZY_PLAN_FINISH_PURPLE, .EZY_PLAN_FINISH_PURPLE]
+    
+    lazy var secondPlanDoOrFinishColor: [UIColor] = [.EZY_PLAN_DO_BACK, .EZY_PLAN_DO_BACK, .EZY_PLAN_FINISH_BACK, .EZY_PLAN_FINISH_BACK]
+    
     
     //MARK: - Lifecycle
     override func viewDidLoad() {
@@ -72,6 +85,7 @@ class MyToDoListViewController: UIViewController {
         view.addSubview(firstListTag)
         view.addSubview(firstList)
         view.addSubview(secondListTag)
+        view.addSubview(secondList)
     }
     
     func cornerRadius(){
@@ -126,6 +140,21 @@ class MyToDoListViewController: UIViewController {
             make.width.equalTo(secondListTag.listLabel).offset(self.view.frame.width/12.5)
             make.height.equalTo(self.view.frame.height/31.23)
         }
+        
+        secondList.snp.makeConstraints { make in
+            secondList.backgroundColor = .clear
+            make.top.equalTo(secondListTag).offset(self.view.frame.height/67.67)
+            make.centerX.equalToSuperview()
+            make.width.equalToSuperview()
+            make.bottom.equalToSuperview()
+        }
+        
+        secondList.tableView.snp.makeConstraints { make in
+            make.top.equalTo(secondList).offset(self.view.frame.height/36)
+            make.width.equalToSuperview()
+            make.bottom.equalToSuperview()
+            make.centerX.equalToSuperview()
+        }
     }
     
     func listTagViewSetting() {
@@ -141,6 +170,11 @@ class MyToDoListViewController: UIViewController {
         firstList.tableView.delegate = self
         
         firstList.tableView.register(ScheduleTimeTableViewCell.self, forCellReuseIdentifier: ScheduleTimeTableViewCell.ScheduleTimeTableViewIdentifier)
+        
+        secondList.tableView.dataSource = self
+        secondList.tableView.delegate = self
+        
+        secondList.tableView.register(ScheduleTimeTableViewCell.self, forCellReuseIdentifier: ScheduleTimeTableViewCell.ScheduleTimeTableViewIdentifier)
     }
 
 }
@@ -148,31 +182,47 @@ class MyToDoListViewController: UIViewController {
 extension MyToDoListViewController: UITableViewDataSource{
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return firstDescriptionArray.count
+        if tableView == firstList {
+            return firstDescriptionArray.count
+        }
+        return secondDescriptionArray.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: ScheduleTimeTableViewCell.ScheduleTimeTableViewIdentifier, for: indexPath) as! ScheduleTimeTableViewCell
         
-        cell.groupNameLabel.text = firstDescriptionArray[indexPath.row]
-        cell.titleLabel.text = firstTitleArray[indexPath.row]
-        cell.planTimeLabel.text = firstPlanTimeArray[indexPath.row]
-        cell.EZYLISTCellLeftDecorationView.backgroundColor = firstPlanBackgroundColor[indexPath.row]
-        cell.EZYLISTCellBackground.backgroundColor = firstPlanDoOrFinishColor[indexPath.row]
-        cell.EZYLISTCellRightDecorationView.backgroundColor = firstPlanDoOrFinishColor[indexPath.row]
-        cell.titleLabel.textColor = firstPlanBackgroundColor[indexPath.row]
-        cell.groupNameLabel.textColor = firstPlanBackgroundColor[indexPath.row]
-        
-        print("tableView - cellForRowAt")
-        print(indexPath.row)
-        print(cell.titleLabel.text ?? "")
-        
-        cell.backgroundColor = .clear
-        cell.selectionStyle = UITableViewCell.SelectionStyle.none
-        
-        return cell
+        if tableView == firstList {
+            let cell = tableView.dequeueReusableCell(withIdentifier: ScheduleTimeTableViewCell.ScheduleTimeTableViewIdentifier, for: indexPath) as! ScheduleTimeTableViewCell
+            
+            cell.groupNameLabel.text = firstDescriptionArray[indexPath.row]
+            cell.titleLabel.text = firstTitleArray[indexPath.row]
+            cell.planTimeLabel.text = firstPlanTimeArray[indexPath.row]
+            cell.EZYLISTCellLeftDecorationView.backgroundColor = firstPlanBackgroundColor[indexPath.row]
+            cell.EZYLISTCellBackground.backgroundColor = firstPlanDoOrFinishColor[indexPath.row]
+            cell.EZYLISTCellRightDecorationView.backgroundColor = firstPlanDoOrFinishColor[indexPath.row]
+            cell.titleLabel.textColor = firstPlanBackgroundColor[indexPath.row]
+            cell.groupNameLabel.textColor = firstPlanBackgroundColor[indexPath.row]
+            
+            cell.backgroundColor = .clear
+            cell.selectionStyle = UITableViewCell.SelectionStyle.none
+            
+            return cell
+        } else{
+            let cell = tableView.dequeueReusableCell(withIdentifier: ScheduleTimeTableViewCell.ScheduleTimeTableViewIdentifier, for: indexPath) as! ScheduleTimeTableViewCell
+            cell.groupNameLabel.text = secondDescriptionArray[indexPath.row]
+            cell.titleLabel.text = secondTitleArray[indexPath.row]
+            cell.planTimeLabel.text = secondPlanTimeArray[indexPath.row]
+            cell.EZYLISTCellLeftDecorationView.backgroundColor = secondPlanBackgroundColor[indexPath.row]
+            cell.EZYLISTCellBackground.backgroundColor = secondPlanDoOrFinishColor[indexPath.row]
+            cell.EZYLISTCellRightDecorationView.backgroundColor = secondPlanDoOrFinishColor[indexPath.row]
+            cell.titleLabel.textColor = secondPlanBackgroundColor[indexPath.row]
+            cell.groupNameLabel.textColor = secondPlanBackgroundColor[indexPath.row]
+            
+            cell.backgroundColor = .clear
+            cell.selectionStyle = UITableViewCell.SelectionStyle.none
+            
+            return cell
+        }
     }
-    
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return self.view.frame.height/8
     }
@@ -186,12 +236,8 @@ extension MyToDoListViewController: UITableViewDataSource{
 extension MyToDoListViewController: UITableViewDelegate{
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        print("tableView - didSelectRowAt")
         var cell = tableView.cellForRow(at: indexPath)
-        print(indexPath.row)
-        print(firstTitleArray[indexPath.row])
     }
-
     
 }
 
