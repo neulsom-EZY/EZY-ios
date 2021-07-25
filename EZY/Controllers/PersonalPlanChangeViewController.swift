@@ -761,6 +761,10 @@ class PersonalPlanChangeViewController: UIViewController {
         self.navigationController?.popViewController(animated: true)
     }
     
+    @objc func backButtonClicked(sender:UIButton){
+        self.navigationController?.popViewController(animated: true)
+    }
+    
     func layoutSetting(){
         self.view.addSubview(backButton)
         self.view.addSubview(mainTitleLabel)
@@ -785,6 +789,7 @@ class PersonalPlanChangeViewController: UIViewController {
         self.view.addSubview(changeButton)
         
         changeButton.addTarget(self, action: #selector(changeButtonClicked(sender:)), for: .touchUpInside)
+        backButton.addTarget(self, action: #selector(backButtonClicked(sender:)), for: .touchUpInside)
         
         tagStudyButton.tag = 0
         tagWalkButton.tag = 1
