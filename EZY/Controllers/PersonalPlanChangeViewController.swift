@@ -9,8 +9,6 @@ import UIKit
 
 class PersonalPlanChangeViewController: UIViewController {
     
-    lazy var topView = TopView()
-    
     lazy var calendarViewButton = WhiteBackgroundView()
     
     lazy var timeViewButton = WhiteBackgroundView()
@@ -231,17 +229,37 @@ class PersonalPlanChangeViewController: UIViewController {
         $0.dynamicFont(fontSize: 14, currentFontName: "AppleSDGothicNeo-SemiBold")
     }
     
-    lazy var changeButtonLayoutBox = UIView().then {
-        $0.backgroundColor = .clear
+    lazy var mainTitleLabel = UILabel().then{
+        $0.text = "나의 할 일 변경"
+        $0.textColor = UIColor(red: 154/255, green: 174/255, blue: 254/255, alpha: 1)
+        $0.dynamicFont(fontSize: 22, currentFontName: "AppleSDGothicNeo-SemiBold")
+    }
+    
+    lazy var notificationTitleLabel = UILabel().then {
+        $0.text = "알림 설정"
+        $0.textColor = UIColor(red: 182/255, green: 182/255, blue: 182/255, alpha: 1)
+        $0.dynamicFont(fontSize: 14, currentFontName: "AppleSDGothicNeo-Bold")
+    }
+    
+    lazy var notificationBackgroundView = UIButton().then {
+        $0.backgroundColor = UIColor(red: 253/255, green: 253/255, blue: 253/255, alpha: 1)
+        $0.layer.borderWidth = 0.5
+        $0.layer.borderColor = UIColor(red: 207/255, green: 207/255, blue: 207/255, alpha: 1).cgColor
+        $0.layer.cornerRadius = 10
+        $0.setTitle("오전 12:12", for: .normal)
+        $0.dynamicFont(fontSize: 12, currentFontName: "Poppins-Light")
+        $0.setTitleColor(UIColor(red: 172/255, green: 172/255, blue: 172/255, alpha: 1), for: .normal)
+    }
+    
+    lazy var backButton = UIButton().then{
+        $0.setImage(UIImage(named: "EZY_LocationBackButton"), for: .normal)
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         self.view.backgroundColor = .white
-            
-        topViewSetting()
-        
+                
         layoutSetting()
         
         calendarViewSetting()
@@ -286,16 +304,24 @@ class PersonalPlanChangeViewController: UIViewController {
             make.right.equalToSuperview()
         }
         
-        changeButton.snp.makeConstraints { make in
+        notificationTitleLabel.snp.makeConstraints { make in
             make.left.equalTo(tagCollectionView)
-            make.centerX.equalToSuperview()
-            make.top.equalToSuperview().offset(self.view.frame.height/27)
-            make.height.equalToSuperview().dividedBy(2.8)
+            make.top.equalTo(tagCollectionView.snp.bottom).offset(self.view.frame.height/38.6)
         }
         
-        changeButtonLayoutBox.snp.makeConstraints { make in
-            make.top.equalTo(tagCollectionView.snp.bottom)
-            make.left.right.bottom.equalToSuperview()
+        notificationBackgroundView.snp.makeConstraints { make in
+            make.left.equalTo(notificationTitleLabel)
+            make.top.equalTo(notificationTitleLabel.snp.bottom).offset(self.view.frame.height/80)
+            make.height.equalToSuperview().dividedBy(22)
+            make.width.equalToSuperview().dividedBy(4.07)
+        }
+        
+        
+        changeButton.snp.makeConstraints { make in
+            make.top.equalTo(notificationBackgroundView.snp.bottom).offset(self.view.frame.height/38.6)
+            make.width.equalToSuperview().dividedBy(1.17)
+            make.centerX.equalToSuperview()
+            make.height.equalToSuperview().dividedBy(18.6)
         }
     }
     
@@ -727,12 +753,19 @@ class PersonalPlanChangeViewController: UIViewController {
         
     }
     
-    
     @objc func timeIconImageButton(sender:UIButton){
         selectTimeModalView.isHidden = false
     }
     
+    @objc func changeButtonClicked(sender:UIButton){
+        self.navigationController?.popViewController(animated: true)
+    }
+    
     func layoutSetting(){
+        self.view.addSubview(backButton)
+        self.view.addSubview(mainTitleLabel)
+        self.view.addSubview(notificationTitleLabel)
+        self.view.addSubview(notificationBackgroundView)
         self.view.addSubview(titleBackgroundView)
         titleBackgroundView.addSubview(titleLabel)
         titleBackgroundView.addSubview(titleTextField)
@@ -745,14 +778,30 @@ class PersonalPlanChangeViewController: UIViewController {
         self.view.addSubview(tagMajorBandButton)
         self.view.addSubview(tagFreedomBandButton)
         self.view.addSubview(tagAddButton)
-        self.view.addSubview(changeButtonLayoutBox)
-        changeButtonLayoutBox.addSubview(changeButton)
+        self.view.addSubview(explanationBackgroundView)
+        
+        explanationBackgroundView.addSubview(explanationTitleLabel)
+        explanationBackgroundView.addSubview(explanationTextView)
+        self.view.addSubview(changeButton)
+        
+        changeButton.addTarget(self, action: #selector(changeButtonClicked(sender:)), for: .touchUpInside)
         
         tagStudyButton.tag = 0
         tagWalkButton.tag = 1
         tagMajorBandButton.tag = 2
         tagFreedomBandButton.tag = 3
         
+        backButton.snp.makeConstraints { make in
+            make.top.equalTo(self.view.safeAreaLayoutGuide).offset(self.view.frame.height/47.7)
+            make.left.equalToSuperview().offset(self.view.frame.width/12)
+            make.width.equalToSuperview().dividedBy(33.8/2)
+            make.height.equalTo(backButton.snp.width)
+        }
+        
+        mainTitleLabel.snp.makeConstraints { make in
+            make.left.equalTo(backButton)
+            make.top.equalTo(backButton.snp.bottom).offset(self.view.frame.height/50)
+        }
         
         calendarLabelButton.addTarget(self,action:#selector(calendarViewButtonClicked(sender:)),
                                  for:.touchUpInside)
@@ -773,15 +822,11 @@ class PersonalPlanChangeViewController: UIViewController {
         tagAddButton.addTarget(self,action:#selector(tagAddButtonClicked(sender:)),
                                  for:.touchUpInside)
         
-        self.view.addSubview(explanationBackgroundView)
-        explanationBackgroundView.addSubview(explanationTitleLabel)
-        explanationBackgroundView.addSubview(explanationTextView)
-        
         titleBackgroundView.snp.makeConstraints { make in
             make.centerX.equalToSuperview()
             make.left.equalToSuperview().offset(self.view.frame.width/13.3)
             make.height.equalToSuperview().dividedBy(12)
-            make.top.equalTo(topView.snp.bottom).offset(self.view.frame.height/19.8)
+            make.top.equalTo(mainTitleLabel.snp.bottom).offset(self.view.frame.height/30)
         }
         
         titleLabel.snp.makeConstraints { make in
@@ -810,7 +855,6 @@ class PersonalPlanChangeViewController: UIViewController {
 
     }
 
-    
     func calendarViewSetting(){
         self.view.addSubview(calendarViewButton)
         calendarViewButton.addSubview(calendarViewButton.backgroundView)
@@ -822,7 +866,7 @@ class PersonalPlanChangeViewController: UIViewController {
         calendarViewButton.iconImageButton.addTarget(self, action: #selector(calendarViewButtonClicked(sender:)), for: .touchUpInside)
         
         calendarViewButton.snp.makeConstraints { make in
-            make.top.equalTo(titleBackgroundView.snp.bottom).offset(self.view.frame.height/30)
+            make.top.equalTo(titleBackgroundView.snp.bottom).offset(self.view.frame.height/50)
             make.height.equalToSuperview().dividedBy(16)
             make.width.equalTo(calendarViewButton.snp.height)
             make.left.equalTo(titleBackgroundView)
@@ -895,7 +939,7 @@ class PersonalPlanChangeViewController: UIViewController {
             make.centerX.equalToSuperview()
             make.left.equalTo(titleBackgroundView)
             make.height.equalToSuperview().dividedBy(12)
-            make.top.equalTo(locationViewButton.snp.bottom).offset(self.view.frame.height/30)
+            make.top.equalTo(locationViewButton.snp.bottom).offset(self.view.frame.height/50)
         }
         
         tagLabel.snp.makeConstraints { make in
@@ -903,27 +947,6 @@ class PersonalPlanChangeViewController: UIViewController {
             make.top.equalTo(explanationBackgroundView.snp.bottom).offset(self.view.frame.height/38.6)
         }
         
-
-
-        
-    }
-    
-    
-    func topViewSetting() {
-        self.view.addSubview(topView)
-        topView.addSubview(topView.backButton)
-        topView.addSubview(topView.titleLabel)
-        
-        topView.topViewDataSetting(backButtonImage: UIImage(named: "EZY_SettingBackButton")!, titleLabelText: "나의 할 일 변경",
-                                   textColor: UIColor(red: 154/255, green: 174/255, blue: 253/255, alpha: 1))
-
-        topView.topViewLayoutSetting(screenHeight: Double(self.view.bounds.height), screenWeight: Double(self.view.bounds.width))
-        
-        topView.snp.makeConstraints { make in
-            make.left.right.equalToSuperview()
-            make.top.equalTo(self.view.safeAreaLayoutGuide)
-            make.height.equalToSuperview().dividedBy(8)
-        }
     }
     
     func labelSetting(){
