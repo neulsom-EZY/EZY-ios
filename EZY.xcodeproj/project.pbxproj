@@ -44,7 +44,6 @@
 		6AA769EE26636AE700B7E1F5 /* EZY.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = EZY.xcdatamodel; sourceTree = "<group>"; };
 		6AA769F026636AE800B7E1F5 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		6AA769F326636AE800B7E1F5 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
-		6AA769F526636AE800B7E1F5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		6AA76A0126636D2800B7E1F5 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		8B5046DC93C289B5AC6C406E /* Pods-EZY.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EZY.debug.xcconfig"; path = "Target Support Files/Pods-EZY/Pods-EZY.debug.xcconfig"; sourceTree = "<group>"; };
 		A75C11C1873FE4E191601230 /* Pods_EZY.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_EZY.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -58,6 +57,7 @@
 		EE896CC4269C35640099E8CB /* AddScheduleModalBtn .swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AddScheduleModalBtn .swift"; sourceTree = "<group>"; };
 		EE93B4D62687639F0055D7A6 /* OneAlertButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OneAlertButton.swift; sourceTree = "<group>"; };
 		EEA457F32682FFA100C08D17 /* AlertButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertButton.swift; sourceTree = "<group>"; };
+		EEB26ABE26ADAD7E00A32C76 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		EED007D426674AC2009A5A87 /* Utilities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utilities.swift; sourceTree = "<group>"; };
 		EED20D62266C0F90000E0856 /* AdditionalButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdditionalButton.swift; sourceTree = "<group>"; };
 		EEE1E95026A9CE550082B696 /* RepeatSettingsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepeatSettingsCell.swift; sourceTree = "<group>"; };
@@ -112,7 +112,6 @@
 			isa = PBXGroup;
 			children = (
 				6AA769E326636AE700B7E1F5 /* EZY */,
-				6AA769F526636AE800B7E1F5 /* Info.plist */,
 				6AA769E226636AE700B7E1F5 /* Products */,
 				2B62A8E180A8585A5EDF7361 /* Frameworks */,
 				D97C84BDB41C12F061081FBC /* Pods */,
@@ -142,6 +141,7 @@
 				6AA769F026636AE800B7E1F5 /* Assets.xcassets */,
 				6AA769F226636AE800B7E1F5 /* LaunchScreen.storyboard */,
 				6AA769ED26636AE700B7E1F5 /* EZY.xcdatamodeld */,
+				EEB26ABE26ADAD7E00A32C76 /* Info.plist */,
 			);
 			path = EZY;
 			sourceTree = "<group>";

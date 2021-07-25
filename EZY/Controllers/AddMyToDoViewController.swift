@@ -236,7 +236,7 @@ class AddMyToDoViewController:UIViewController{
         }
         explanationContainerView.snp.makeConstraints { (make) in
             make.height.equalTo(self.view.frame.height/10.8)
-            make.top.equalTo(locationBtn.snp.bottom).offset(self.view.frame.height/30.07)
+            make.top.equalTo(locationBtn.snp.bottom).offset(self.view.frame.height/45.11)
             make.left.equalTo(backbutton.snp.left)
             make.right.equalTo(titleContainerView.snp.right)
         }
@@ -283,8 +283,8 @@ extension AddMyToDoViewController : UICollectionViewDelegateFlowLayout,UICollect
  
         if collectionView == self.tagcollectionView{
             let tagCell = collectionView.dequeueReusableCell(withReuseIdentifier: TagCollectionViewCell.identifier, for: indexPath) as! TagCollectionViewCell
-            tagCell.backgroundColor = .blue
-            tagCell.bglabel.text = AddMyToDoViewController.
+            tagCell.backgroundColor = .cyan
+            
             return tagCell
         }
         else{
