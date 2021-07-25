@@ -286,7 +286,7 @@ class PersonalPlanChangeViewController: UIViewController {
         
         repeatCollectionViewSetting()
     }
-    
+
     func tagCollectionViewSetting(){
         tagCollectionView.delegate = self
         tagCollectionView.dataSource = self
@@ -294,7 +294,7 @@ class PersonalPlanChangeViewController: UIViewController {
         tagCollectionView.register(TagCollectionViewCell.self, forCellWithReuseIdentifier: TagCollectionViewCell.reuseId)
         
         self.view.addSubview(tagCollectionView)
-        
+                
         tagCollectionView.snp.makeConstraints { make in
             tagCollectionView.backgroundColor = .clear
             
@@ -663,11 +663,13 @@ class PersonalPlanChangeViewController: UIViewController {
     
     @objc //MARK: 모달 창 올리기
     func keyboardWillShow(_ sender: Notification) {
+        explanationBackgroundView.frame.origin.y = self.view.frame.height/2.2
         tagAddModalView.modalBackgroundView.frame.origin.y = self.view.frame.height/5
     }
 
     @objc //MARK: 모달 창 원래대로
     func keyboardWillHide(_ sender: Notification) {
+        explanationBackgroundView.frame.origin.y = self.view.frame.height/1.85
         tagAddModalView.modalBackgroundView.frame.origin.y = (self.view.frame.height/2) - (tagAddModalView.modalBackgroundView.frame.height/2)
     }
     
@@ -782,7 +784,9 @@ class PersonalPlanChangeViewController: UIViewController {
         self.view.addSubview(tagMajorBandButton)
         self.view.addSubview(tagFreedomBandButton)
         self.view.addSubview(tagAddButton)
-        self.view.addSubview(explanationBackgroundView)
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(_:)), name:UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide(_:)), name: UIResponder.keyboardWillHideNotification, object: nil)
         
         explanationBackgroundView.addSubview(explanationTitleLabel)
         explanationBackgroundView.addSubview(explanationTextView)
@@ -846,17 +850,7 @@ class PersonalPlanChangeViewController: UIViewController {
             make.height.equalToSuperview()
         }
         
-        explanationTitleLabel.snp.makeConstraints { make in
-            make.centerY.equalToSuperview()
-            make.left.equalToSuperview().offset(self.view.frame.width/17.8)
-        }
-        
-        explanationTextView.snp.makeConstraints { make in
-            make.centerY.equalToSuperview()
-            make.left.equalTo(explanationTitleLabel.snp.right).offset(self.view.frame.width/17.8)
-            make.width.equalToSuperview().dividedBy(1.45)
-            make.height.equalToSuperview().dividedBy(1.3)
-        }
+
 
     }
 
@@ -919,7 +913,8 @@ class PersonalPlanChangeViewController: UIViewController {
         self.view.addSubview(locationViewButton)
         locationViewButton.addSubview(locationViewButton.backgroundView)
         locationViewButton.backgroundView.addSubview(locationViewButton.iconImageButton)
-        
+        self.view.addSubview(explanationBackgroundView)
+
         locationViewButton.addTarget(self, action: #selector(locationViewButtonClicked(sender:)), for: .touchUpInside)
         
         locationViewButton.dataSetting(iconImage: UIImage(named: "EZY_Location.svg")!)
@@ -950,6 +945,18 @@ class PersonalPlanChangeViewController: UIViewController {
         tagLabel.snp.makeConstraints { make in
             make.left.equalTo(titleBackgroundView)
             make.top.equalTo(explanationBackgroundView.snp.bottom).offset(self.view.frame.height/38.6)
+        }
+        
+        explanationTitleLabel.snp.makeConstraints { make in
+            make.centerY.equalToSuperview()
+            make.left.equalToSuperview().offset(self.view.frame.width/17.8)
+        }
+        
+        explanationTextView.snp.makeConstraints { make in
+            make.centerY.equalToSuperview()
+            make.left.equalTo(explanationTitleLabel.snp.right).offset(self.view.frame.width/17.8)
+            make.width.equalToSuperview().dividedBy(1.45)
+            make.height.equalToSuperview().dividedBy(1.3)
         }
         
     }
