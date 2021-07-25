@@ -13,7 +13,7 @@ import Alamofire
 
 class AddMyToDoViewController:UIViewController{
     let tagData : [String] = ["전공동아리","산책","자율동아리","공부","자율동아리","전공동아리","전공동아리","산책","자율동아리","공부","자율동아리","전공동아리","산책"]
-    let alarmData : [String] = ["선택안함", "추가"]
+    let alarmData : [String] = ["선택안함", "+추가"]
     //MARK: - Properties
  
     private let backbutton = UIButton().then{
@@ -283,8 +283,11 @@ extension AddMyToDoViewController : UICollectionViewDelegateFlowLayout,UICollect
  
         if collectionView == self.tagcollectionView{
             let tagCell = collectionView.dequeueReusableCell(withReuseIdentifier: TagCollectionViewCell.identifier, for: indexPath) as! TagCollectionViewCell
-            tagCell.backgroundColor = .cyan
-            
+            tagCell.backgroundColor = .clear
+            tagCell.layer.borderWidth = 1
+            tagCell.layer.borderColor = UIColor.EZY_AFADFF.cgColor
+            tagCell.bglabel.text = tagData[indexPath.row]
+            tagCell.bglabel.textColor = .EZY_AFADFF
             return tagCell
         }
         else{
@@ -292,6 +295,9 @@ extension AddMyToDoViewController : UICollectionViewDelegateFlowLayout,UICollect
             alarmCell.backgroundColor = .EZY_FDFDFD
             alarmCell.layer.borderWidth = 1
             alarmCell.layer.borderColor = UIColor.EZY_CFCFCF.cgColor
+            alarmCell.layer.cornerRadius = view.frame.height/81.2
+            alarmCell.bglabel.text = alarmData[indexPath.row]
+            alarmCell.bglabel.textColor = .EZY_B7B4B4
             return alarmCell
         }
     }

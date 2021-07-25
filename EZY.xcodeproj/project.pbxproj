@@ -26,7 +26,6 @@
 		EEA457F42682FFA100C08D17 /* AlertButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEA457F32682FFA100C08D17 /* AlertButton.swift */; };
 		EED007D526674AC2009A5A87 /* Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = EED007D426674AC2009A5A87 /* Utilities.swift */; };
 		EED20D63266C0F90000E0856 /* AdditionalButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = EED20D62266C0F90000E0856 /* AdditionalButton.swift */; };
-		EEE1E95126A9CE550082B696 /* RepeatSettingsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEE1E95026A9CE550082B696 /* RepeatSettingsCell.swift */; };
 		EEE1E95326A9F38A0082B696 /* AlarmSettingCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEE1E95226A9F38A0082B696 /* AlarmSettingCell.swift */; };
 		EEE53D9626A81CCE00F58287 /* TagCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEE53D9526A81CCE00F58287 /* TagCollectionViewCell.swift */; };
 		EEEDB2BF2664B44200E5C53A /* AddMyToDoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEEDB2BE2664B44200E5C53A /* AddMyToDoViewController.swift */; };
@@ -60,7 +59,6 @@
 		EEB26ABE26ADAD7E00A32C76 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		EED007D426674AC2009A5A87 /* Utilities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utilities.swift; sourceTree = "<group>"; };
 		EED20D62266C0F90000E0856 /* AdditionalButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdditionalButton.swift; sourceTree = "<group>"; };
-		EEE1E95026A9CE550082B696 /* RepeatSettingsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepeatSettingsCell.swift; sourceTree = "<group>"; };
 		EEE1E95226A9F38A0082B696 /* AlarmSettingCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlarmSettingCell.swift; sourceTree = "<group>"; };
 		EEE53D9526A81CCE00F58287 /* TagCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagCollectionViewCell.swift; sourceTree = "<group>"; };
 		EEEDB2AC2664ADCB00E5C53A /* Poppins-SemiBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Poppins-SemiBold.ttf"; sourceTree = "<group>"; };
@@ -236,7 +234,6 @@
 				EE896CC2269BEA450099E8CB /* WhoShouldIAskCell.swift */,
 				EE24573F269FDA6100E2EE9D /* WhatAboutPeopleLikeThisCell.swift */,
 				EEE53D9526A81CCE00F58287 /* TagCollectionViewCell.swift */,
-				EEE1E95026A9CE550082B696 /* RepeatSettingsCell.swift */,
 				EEE1E95226A9F38A0082B696 /* AlarmSettingCell.swift */,
 			);
 			path = Cell;
@@ -385,7 +382,6 @@
 				EE93B4D72687639F0055D7A6 /* OneAlertButton.swift in Sources */,
 				EE896CC3269BEA450099E8CB /* WhoShouldIAskCell.swift in Sources */,
 				EEE1E95326A9F38A0082B696 /* AlarmSettingCell.swift in Sources */,
-				EEE1E95126A9CE550082B696 /* RepeatSettingsCell.swift in Sources */,
 				EEEDB2C22664D30D00E5C53A /* extensions.swift in Sources */,
 				EEE53D9626A81CCE00F58287 /* TagCollectionViewCell.swift in Sources */,
 			);
