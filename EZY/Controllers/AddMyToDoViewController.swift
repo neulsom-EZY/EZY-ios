@@ -13,7 +13,8 @@ import Alamofire
 
 class AddMyToDoViewController:UIViewController{
     let tagData : [String] = ["전공동아리","산책","자율동아리","공부","자율동아리","전공동아리","전공동아리","산책","자율동아리","공부","자율동아리","전공동아리","산책"]
-    let alarmData : [String] = ["선택안함", "+추가"]
+    let alarmData : [String] = ["선택안함", "+ 추가"]
+//    let alarmData : [UIColor] = [.]
     //MARK: - Properties
  
     private let backbutton = UIButton().then{
@@ -288,7 +289,19 @@ extension AddMyToDoViewController : UICollectionViewDelegateFlowLayout,UICollect
             tagCell.layer.borderColor = UIColor.EZY_AFADFF.cgColor
             tagCell.bglabel.text = tagData[indexPath.row]
             tagCell.bglabel.textColor = .EZY_AFADFF
+            if indexPath.item == 0 {
+                tagCell.bglabel.text = "선택해제"
+                tagCell.bglabel.textColor = .EZY_B7B4B4
+                tagCell.layer.borderColor = tagCell.bglabel.textColor.cgColor
+            }
+            if indexPath.item == 2{
+                tagCell.bglabel.text = "+ 추가"
+                tagCell.bglabel.textColor = .EZY_BAC8FF
+                tagCell.layer.borderColor = tagCell.bglabel.textColor.cgColor
+            }
+            
             return tagCell
+            
         }
         else{
             let alarmCell = collectionView.dequeueReusableCell(withReuseIdentifier: AlarmSettingCell.identifier, for: indexPath) as! AlarmSettingCell
