@@ -12,6 +12,7 @@ extension UIColor{
     static func rgb(red: CGFloat ,green: CGFloat,blue:CGFloat) -> UIColor{
         return UIColor(red: red/255, green: green/255, blue: blue/255, alpha: 1)
     }
+    static let EZY_CFCFCF = UIColor.rgb(red: 207, green: 207, blue: 207)
     static let EZY_FDFDFD = UIColor.rgb(red: 253, green: 253, blue: 253)
     static let EZY_3D64FF = UIColor.rgb(red: 61, green: 100, blue: 255)
     static let EZY_AAA3FF = UIColor.rgb(red: 170, green: 163, blue: 255)
@@ -242,66 +243,5 @@ func applySketchShadow(color: UIColor = .black,alpha: Float = 0.5,x:CGFloat,y:CG
             shadowPath = UIBezierPath(rect: rect).cgPath
         }
     }
-}
-
-//MARK: - AddErrandViewController CollectionView
-
-extension AddErrandViewController : UICollectionViewDelegateFlowLayout,UICollectionViewDataSource{
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return AddErrandViewController.data.count
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: WhoShouldIAskCell.identifier, for: indexPath) as? WhoShouldIAskCell else {return UICollectionViewCell()}
-        cell.bglabel.text = AddErrandViewController.data[indexPath.row]
-        cell.bglabel.dynamicFont(fontSize: 12, weight:  .thin)
-        cell.bglabel.textColor = .EZY_3D64FF
-        cell.layer.borderWidth = 1
-        cell.layer.borderColor = UIColor.EZY_6383FF.cgColor
-        if cell.bglabel.text == AddErrandViewController.data.last{
-            cell.bglabel.textColor = .EZY_BAC8FF
-            cell.layer.borderColor = UIColor.EZY_BAC8FF.cgColor
-            cell.bglabel.dynamicFont(fontSize: 12, weight: .bold)
-        }
-        
-        return cell
-    }
-
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return WhoShouldIAskCell.fittingSize(availableHeight: view.frame.height/25.375, name: AddErrandViewController.data[indexPath.row])
-    }
-}
-
-//MARK: - MorePeopleToDo
-
-
-extension MorePeopleToDo : UICollectionViewDelegateFlowLayout,UICollectionViewDataSource{
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return MorePeopleToDo.data.count
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: WhatAboutPeopleLikeThisCell.identifier, for: indexPath) as? WhatAboutPeopleLikeThisCell else {return UICollectionViewCell()}
-        cell.bglabel.text = "@ " + MorePeopleToDo.data[indexPath.row]
-        cell.bglabel.dynamicFont(fontSize: 12, weight:.thin)
-        cell.bglabel.textColor = .EZY_3D64FF
-        cell.layer.borderWidth = 1
-        cell.bglabel.sizeToFit()
-        cell.layer.borderColor = UIColor.EZY_6383FF.cgColor
-        return cell
-    }
-
-
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return WhatAboutPeopleLikeThisCell.fittingSize(availableHeight: view.frame.size.height/25.375, name: MorePeopleToDo.data[indexPath.row])
-    }
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
-        return 0
-    }
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
-        return view.frame.height/90.22
-    }
-    
-
 }
 

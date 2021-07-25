@@ -159,5 +159,36 @@ class MorePeopleToDo: UIViewController{
     
 }
 
+extension MorePeopleToDo : UICollectionViewDelegateFlowLayout,UICollectionViewDataSource{
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return MorePeopleToDo.data.count
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: WhatAboutPeopleLikeThisCell.identifier, for: indexPath) as? WhatAboutPeopleLikeThisCell else {return UICollectionViewCell()}
+        cell.bglabel.text = "@ " + MorePeopleToDo.data[indexPath.row]
+        cell.bglabel.dynamicFont(fontSize: 12, weight:.thin)
+        cell.bglabel.textColor = .EZY_3D64FF
+        cell.layer.borderWidth = 1
+        cell.bglabel.sizeToFit()
+        cell.layer.borderColor = UIColor.EZY_6383FF.cgColor
+        return cell
+    }
+
+
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        return WhatAboutPeopleLikeThisCell.fittingSize(availableHeight: view.frame.size.height/25.375, name: MorePeopleToDo.data[indexPath.row])
+    }
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
+        return 0
+    }
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
+        return view.frame.height/90.22
+    }
+    
+
+}
+
+
 
 

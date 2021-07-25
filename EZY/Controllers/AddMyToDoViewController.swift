@@ -13,13 +13,9 @@ import Alamofire
 
 class AddMyToDoViewController:UIViewController{
     let tagData : [String] = ["전공동아리","산책","자율동아리","공부","자율동아리","전공동아리","전공동아리","산책","자율동아리","공부","자율동아리","전공동아리","산책"]
-    let repeatData : [String] = ["+","S","M","T","W","T","F","S"]
     let alarmData : [String] = ["선택안함", "추가"]
     //MARK: - Properties
-    let scrollView = UIScrollView().then  {
-        $0.backgroundColor = .white
-        
-    }
+ 
     private let backbutton = UIButton().then{
         $0.tintColor = .EZY_BAC8FF
         $0.setImage(UIImage(systemName: "arrow.left"), for: .normal)
@@ -112,22 +108,13 @@ class AddMyToDoViewController:UIViewController{
         return cv
     }()
     
-    fileprivate let repeatSettingcollectionView: UICollectionView = {
-        let layout = UICollectionViewFlowLayout()
-        let cv = UICollectionView(frame: .zero, collectionViewLayout: layout)
-        layout.scrollDirection = .horizontal
-        cv.translatesAutoresizingMaskIntoConstraints = false
-        cv.register(TagCollectionViewCell.self, forCellWithReuseIdentifier: TagCollectionViewCell.identifier)
-        cv.showsHorizontalScrollIndicator = false
-        cv.backgroundColor = .clear
-        return cv
-    }()
+
     fileprivate let alarmSettingcollectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
         let cv = UICollectionView(frame: .zero, collectionViewLayout: layout)
         layout.scrollDirection = .horizontal
         cv.translatesAutoresizingMaskIntoConstraints = false
-        cv.register(TagCollectionViewCell.self, forCellWithReuseIdentifier: TagCollectionViewCell.identifier)
+        cv.register(AlarmSettingCell.self, forCellWithReuseIdentifier: AlarmSettingCell.identifier)
         cv.showsHorizontalScrollIndicator = false
         cv.backgroundColor = .clear
         return cv
@@ -142,8 +129,7 @@ class AddMyToDoViewController:UIViewController{
         tagcollectionView.dataSource = self
         tagcollectionView.delegate = self
         tagcollectionView.allowsMultipleSelection = true
-        repeatSettingcollectionView.dataSource = self
-        repeatSettingcollectionView.delegate = self
+
         alarmSettingcollectionView.delegate = self
         alarmSettingcollectionView.dataSource = self
     }
@@ -179,9 +165,7 @@ class AddMyToDoViewController:UIViewController{
     //MARK: - Helpers
     func configureUI(){
         view.backgroundColor = .white
-        scrollView.showsVerticalScrollIndicator = false
         tagcollectionView.contentInset = UIEdgeInsets(top: 0, left: view.frame.height/29, bottom: 0, right: 0)
-        repeatSettingcollectionView.contentInset = UIEdgeInsets(top: 0, left: view.frame.height/29, bottom: 0, right: 0)
         alarmSettingcollectionView.contentInset = UIEdgeInsets(top: 0, left: view.frame.height/29, bottom: 0, right: 0)
 
         addView()
@@ -193,22 +177,18 @@ class AddMyToDoViewController:UIViewController{
    
     
     func addView(){
-        view.addSubview(scrollView)
-        scrollView.addSubview(backbutton)
-        scrollView.addSubview(TitleLabel)
-        scrollView.addSubview(titleContainerView)
-        scrollView.addSubview(calendarBtn)
-        scrollView.addSubview(clockBtn)
-        scrollView.addSubview(locationBtn)
-        scrollView.addSubview(explanationContainerView)
-        scrollView.addSubview(tagLabel)
-        scrollView.addSubview(tagcollectionView)
-        scrollView.addSubview(addButton)
-        scrollView.addSubview(repeatSettings)
-        scrollView.addSubview(repeatSettingcollectionView)
-        scrollView.addSubview(alarmSettings)
-        scrollView.addSubview(alarmSettingcollectionView)
-        scrollView.contentSize = CGSize(width: view.frame.size.width, height: view.frame.height/0.9165)
+        view.addSubview(backbutton)
+        view.addSubview(TitleLabel)
+        view.addSubview(titleContainerView)
+        view.addSubview(calendarBtn)
+        view.addSubview(clockBtn)
+        view.addSubview(locationBtn)
+        view.addSubview(explanationContainerView)
+        view.addSubview(tagLabel)
+        view.addSubview(tagcollectionView)
+        view.addSubview(addButton)
+        view.addSubview(alarmSettings)
+        view.addSubview(alarmSettingcollectionView)
     }
     
     func cornerRadius(){
@@ -218,21 +198,18 @@ class AddMyToDoViewController:UIViewController{
     }
     
     func location(){
-        scrollView.snp.makeConstraints { (make) in
-            make.top.bottom.right.left.equalToSuperview()
-        }
         backbutton.snp.makeConstraints { (make) in
             make.height.width.equalTo(self.view.frame.height/33.8)
             make.left.equalTo(self.view.frame.height/29)
-            make.top.equalTo(self.scrollView.snp.top ).offset(self.view.frame.height/36.9)
+            make.top.equalTo(self.view.snp.top ).offset(self.view.frame.height/13.3)
         }
         TitleLabel.snp.makeConstraints { (make) in
-            make.top.equalTo(backbutton.snp.bottom).offset(self.view.frame.height/39.5)
+            make.top.equalTo(backbutton.snp.bottom).offset(self.view.frame.height/30.07)
             make.left.equalTo(backbutton.snp.left)
         }
         titleContainerView.snp.makeConstraints { (make) in
             make.height.equalTo(self.view.frame.height/14.7)
-            make.top.equalTo(TitleLabel.snp.bottom).offset(self.view.frame.height/19.8)
+            make.top.equalTo(TitleLabel.snp.bottom).offset(self.view.frame.height/30.07)
             make.left.equalTo(backbutton.snp.left)
             make.right.equalTo(view.snp.right).offset(self.view.frame.height/19.8 * -1)
         }
@@ -241,7 +218,7 @@ class AddMyToDoViewController:UIViewController{
             make.width.equalTo(view.frame.height/3.14)
             make.right.equalTo(view.snp.right).offset(view.frame.height/9.23 * -1)
             make.left.equalTo(backbutton.snp.left)
-            make.top.equalTo(titleContainerView.snp.bottom).offset(view.frame.height/30.1)
+            make.top.equalTo(titleContainerView.snp.bottom).offset(view.frame.height/42.74)
         }
         clockBtn.snp.makeConstraints { (make) in
             make.height.equalTo(self.view.frame.height/18.0)
@@ -259,31 +236,23 @@ class AddMyToDoViewController:UIViewController{
         }
         explanationContainerView.snp.makeConstraints { (make) in
             make.height.equalTo(self.view.frame.height/10.8)
-            make.top.equalTo(locationBtn.snp.bottom).offset(self.view.frame.height/19.8)
+            make.top.equalTo(locationBtn.snp.bottom).offset(self.view.frame.height/30.07)
             make.left.equalTo(backbutton.snp.left)
             make.right.equalTo(titleContainerView.snp.right)
         }
         tagLabel.snp.makeConstraints { (make) in
             make.left.equalTo(backbutton.snp.left)
-            make.top.equalTo(explanationContainerView.snp.bottom).offset(view.frame.height/38.6)
+            make.top.equalTo(explanationContainerView.snp.bottom).offset(view.frame.height/42.74)
         }
         tagcollectionView.snp.makeConstraints { (make) in
             make.top.equalTo(tagLabel.snp.bottom).offset(view.frame.height/47.76)
             make.height.equalTo(view.frame.height/10.55)
             make.width.equalToSuperview()
         }
-        repeatSettings.snp.makeConstraints { (make) in
-            make.left.equalTo(backbutton.snp.left)
-            make.top.equalTo(tagcollectionView.snp.bottom).offset(view.frame.height/33.83)
-        }
-        repeatSettingcollectionView.snp.makeConstraints { (make) in
-            make.top.equalTo(repeatSettings.snp.bottom).offset(view.frame.height/45.11)
-            make.height.equalTo(view.frame.height/28)
-            make.width.equalToSuperview()
-        }
+       
         alarmSettings.snp.makeConstraints { (make) in
             make.left.equalTo(backbutton.snp.left)
-            make.top.equalTo(repeatSettingcollectionView.snp.bottom).offset(view.frame.height/36.91)
+            make.top.equalTo(tagcollectionView.snp.bottom).offset(view.frame.height/36.91)
         }
         alarmSettingcollectionView.snp.makeConstraints { (make) in
             make.top.equalTo(alarmSettings.snp.bottom).offset(view.frame.height/58)
@@ -292,7 +261,7 @@ class AddMyToDoViewController:UIViewController{
         }
         
         addButton.snp.makeConstraints { (make) in
-            make.top.equalTo(alarmSettingcollectionView.snp.bottom).offset(view.frame.height/30.074)
+            make.top.equalTo(alarmSettingcollectionView.snp.bottom).offset(view.frame.height/38.67)
             make.height.equalTo(self.view.frame.height/18.0)
             make.left.equalTo(backbutton.snp.left)
             make.right.equalTo(titleContainerView.snp.right)
@@ -304,9 +273,6 @@ extension AddMyToDoViewController : UICollectionViewDelegateFlowLayout,UICollect
         if collectionView == self.tagcollectionView{
             return tagData.count
         }
-        else if collectionView == self.repeatSettingcollectionView{
-            return repeatData.count
-        }
         else if collectionView == self.alarmSettingcollectionView{
             return alarmData.count
         }
@@ -315,16 +281,23 @@ extension AddMyToDoViewController : UICollectionViewDelegateFlowLayout,UICollect
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
  
-        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: TagCollectionViewCell.identifier, for: indexPath) as? TagCollectionViewCell else {return UICollectionViewCell()}
-        cell.backgroundColor = .blue
-    return cell
+        if collectionView == self.tagcollectionView{
+            let tagCell = collectionView.dequeueReusableCell(withReuseIdentifier: TagCollectionViewCell.identifier, for: indexPath) as! TagCollectionViewCell
+            tagCell.backgroundColor = .blue
+            tagCell.bglabel.text = AddMyToDoViewController.
+            return tagCell
+        }
+        else{
+            let alarmCell = collectionView.dequeueReusableCell(withReuseIdentifier: AlarmSettingCell.identifier, for: indexPath) as! AlarmSettingCell
+            alarmCell.backgroundColor = .EZY_FDFDFD
+            alarmCell.layer.borderWidth = 1
+            alarmCell.layer.borderColor = UIColor.EZY_CFCFCF.cgColor
+            return alarmCell
+        }
     }
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         if collectionView == self.tagcollectionView{
             return CGSize(width:view.frame.height/9.66, height: view.frame.height/25.375)
-        }
-        else if collectionView == self.repeatSettingcollectionView{
-            return CGSize(width: view.frame.height/28.96, height: view.frame.height/28)
         }
         else{
             return CGSize(width: view.frame.height/9.78, height: view.frame.height/23.88)
@@ -333,9 +306,6 @@ extension AddMyToDoViewController : UICollectionViewDelegateFlowLayout,UICollect
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
         if collectionView == self.tagcollectionView{
             return view.frame.height/50.81
-        }
-        else if collectionView == self.repeatSettingcollectionView{
-            return view.frame.height/64.60
         }
         else{
             return view.frame.height/47.76

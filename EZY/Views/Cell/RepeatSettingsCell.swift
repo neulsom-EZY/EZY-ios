@@ -18,7 +18,7 @@ class RepeatSettingCell : UICollectionViewCell{
         super.init(frame: frame)
         contentView.addSubview(bglabel)
         contentView.backgroundColor = .clear
-        layer.cornerRadius = frame.height/6.4
+        layer.cornerRadius = frame.height/2
         bglabel.textAlignment = .center
         
         bglabel.snp.makeConstraints { (make) in

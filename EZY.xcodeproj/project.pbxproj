@@ -112,6 +112,7 @@
 			isa = PBXGroup;
 			children = (
 				6AA769E326636AE700B7E1F5 /* EZY */,
+				6AA769F526636AE800B7E1F5 /* Info.plist */,
 				6AA769E226636AE700B7E1F5 /* Products */,
 				2B62A8E180A8585A5EDF7361 /* Frameworks */,
 				D97C84BDB41C12F061081FBC /* Pods */,
@@ -140,7 +141,6 @@
 				6AA769E626636AE700B7E1F5 /* SceneDelegate.swift */,
 				6AA769F026636AE800B7E1F5 /* Assets.xcassets */,
 				6AA769F226636AE800B7E1F5 /* LaunchScreen.storyboard */,
-				6AA769F526636AE800B7E1F5 /* Info.plist */,
 				6AA769ED26636AE700B7E1F5 /* EZY.xcdatamodeld */,
 			);
 			path = EZY;

@@ -232,3 +232,32 @@ class AddErrandViewController : UIViewController{
         }
     }
 }
+//MARK: - AddErrandViewController CollectionView
+
+extension AddErrandViewController : UICollectionViewDelegateFlowLayout,UICollectionViewDataSource{
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return AddErrandViewController.data.count
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: WhoShouldIAskCell.identifier, for: indexPath) as? WhoShouldIAskCell else {return UICollectionViewCell()}
+        cell.bglabel.text = AddErrandViewController.data[indexPath.row]
+        cell.bglabel.dynamicFont(fontSize: 12, weight:  .thin)
+        cell.bglabel.textColor = .EZY_3D64FF
+        cell.layer.borderWidth = 1
+        cell.layer.borderColor = UIColor.EZY_6383FF.cgColor
+        if cell.bglabel.text == AddErrandViewController.data.last{
+            cell.bglabel.textColor = .EZY_BAC8FF
+            cell.layer.borderColor = UIColor.EZY_BAC8FF.cgColor
+            cell.bglabel.dynamicFont(fontSize: 12, weight: .bold)
+        }
+        
+        return cell
+    }
+
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        return WhoShouldIAskCell.fittingSize(availableHeight: view.frame.height/25.375, name: AddErrandViewController.data[indexPath.row])
+    }
+}
+
+
