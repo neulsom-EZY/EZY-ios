@@ -1014,7 +1014,7 @@ extension PersonalPlanChangeViewController: UICollectionViewDataSource, UICollec
             cell.setModel(RepeatModels[indexPath.row])
             return cell
         }else if collectionView == tagCollectionView{
-            if indexPath == [0,0]{
+            if indexPath == [0,2]{
                 let cell = collectionView.dequeueReusableCell(withReuseIdentifier: TagCollectionViewCell.reuseId, for: indexPath) as! TagCollectionViewCell
                 
                 cell.tagNameLabel.text = "선택 안 함"
@@ -1023,8 +1023,10 @@ extension PersonalPlanChangeViewController: UICollectionViewDataSource, UICollec
                 cell.tagBackgroundView.layer.borderWidth = 1.3
                 cell.tagBackgroundView.layer.borderColor = UIColor(red: 187/255, green: 187/255, blue: 187/255, alpha: 1).cgColor
                 
+                cell.setModel(TagModels[indexPath.row])
+                
                 return cell
-            }else if indexPath == [0,1]{
+            }else if indexPath == [0,0]{
                 let cell = collectionView.dequeueReusableCell(withReuseIdentifier: TagCollectionViewCell.reuseId, for: indexPath) as! TagCollectionViewCell
                 
                 cell.tagNameLabel.text = "+ 추가"
@@ -1069,7 +1071,9 @@ extension PersonalPlanChangeViewController: UICollectionViewDataSource, UICollec
         }else if collectionView == tagCollectionView{
             print("click\(indexPath)")
             print("preciousSelectedIndex\(tagPreciousSelectedIndex)")
-            if indexPath.row != 0 {
+            if indexPath == [0,0]{
+                tagAddModalView.isHidden = false
+            }else{
                 if TagModels[indexPath.row].isSelected {
                     
                     TagModels[tagPreciousSelectedIndex].isSelected.toggle()
@@ -1082,8 +1086,6 @@ extension PersonalPlanChangeViewController: UICollectionViewDataSource, UICollec
                     
                 }
                 collectionView.reloadData()
-            }else{
-                tagAddModalView.isHidden = false
             }
         }
     }
