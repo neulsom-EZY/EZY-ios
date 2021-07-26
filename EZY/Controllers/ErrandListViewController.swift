@@ -30,23 +30,51 @@ class ErrandListViewController: UIViewController {
         $0.listLabel.text = "부탁받은 심부름"
     }
     
-    lazy var scheduleTableView = ScheduleTimeTableView.init(frame: self.view.frame)
+    lazy var acceptTableView = ScheduleTimeTableView.init(frame: self.view.frame)
     
-    var descriptionArray: [String] = ["부탁받은 심부름", "부탁받은 심부름"]
+    var acceptDescriptionArray: [String] = ["부탁받은 심부름", "부탁받은 심부름"]
     
-    let titleArray: [String] = ["EZY 회의", "EZY 회의"]
+    let acceptTitleArray: [String] = ["EZY 회의", "EZY 회의"]
     
-    let planTimeArray: [String] = ["12:00 - 13:00", "12:00 - 13:00"]
+    let acceptPlanTimeArray: [String] = ["12:00 - 13:00", "12:00 - 13:00"]
     
-    lazy var planBackgroundColor: [UIColor] = [.EZY_PLAN_FINISH_PURPLE, .EZY_PLAN_FINISH_PURPLE]
+    lazy var acceptPlanBackgroundColor: [UIColor] = [.EZY_PLAN_FINISH_PURPLE, .EZY_PLAN_FINISH_PURPLE]
     
-    lazy var planDoOrFinishColor: [UIColor] = [.EZY_PLAN_DO_BACK, .EZY_PLAN_FINISH_BACK]
+    lazy var acceptPlanDoOrFinishColor: [UIColor] = [.EZY_PLAN_DO_BACK, .EZY_PLAN_FINISH_BACK]
     
     lazy var sendErrandTag = ListTagView().then {
         $0.listLabel.text = "부탁한 심부름"
         $0.listLabel.textColor = .EZY_8F85FF
         $0.layer.borderColor = UIColor.EZY_8F85FF.cgColor
     }
+    
+    lazy var sendTableView = ScheduleTimeTableView.init(frame: self.view.frame)
+    
+    var sendDescriptionArray: [String] = ["부탁한 심부름", "부탁한 심부름"]
+    
+    let sendTitleArray: [String] = ["EZY 회의", "EZY 회의"]
+    
+    let sendPlanTimeArray: [String] = ["12:00 - 13:00", "12:00 - 13:00"]
+    
+    lazy var sendPlanBackgroundColor: [UIColor] = [.EZY_PLAN_FINISH_PURPLE, .EZY_PLAN_FINISH_PURPLE]
+    
+    lazy var sendPlanDoOrFinishColor: [UIColor] = [.EZY_PLAN_DO_BACK, .EZY_PLAN_FINISH_BACK]
+
+    lazy var waitErrandTag = ListTagView().then {
+        $0.listLabel.text = "수락 대기 중인 심부름"
+    }
+    
+    lazy var waitTableView = ScheduleTimeTableView.init(frame: self.view.frame)
+    
+    var waitDescriptionArray: [String] = ["수락 대기 중인 심부름", "수락 대기 중인 심부름"]
+    
+    let waitTitleArray: [String] = ["EZY 회의", "EZY 회의"]
+    
+    let waitPlanTimeArray: [String] = ["12:00 - 13:00", "12:00 - 13:00"]
+    
+    lazy var waitPlanBackgroundColor: [UIColor] = [.EZY_PLAN_FINISH_PURPLE, .EZY_PLAN_FINISH_PURPLE]
+    
+    lazy var waitPlanDoOrFinishColor: [UIColor] = [.EZY_PLAN_DO_BACK, .EZY_PLAN_DO_BACK]
     
     //MARK: - Lifecycle
     override func viewDidLoad() {
@@ -72,14 +100,18 @@ class ErrandListViewController: UIViewController {
         view.addSubview(backButton)
         view.addSubview(listName)
         view.addSubview(line)
+        view.addSubview(acceptTableView)
+        view.addSubview(sendTableView)
+        view.addSubview(waitTableView)
         view.addSubview(acceptErrandTag)
-        view.addSubview(scheduleTableView)
         view.addSubview(sendErrandTag)
+        view.addSubview(waitErrandTag)
     }
     
     func cornerRadius(){
         acceptErrandTag.layer.cornerRadius = self.view.frame.width/75
         sendErrandTag.layer.cornerRadius = self.view.frame.width/75
+        waitErrandTag.layer.cornerRadius = self.view.frame.width/75
     }
     
     func location(){
@@ -106,16 +138,16 @@ class ErrandListViewController: UIViewController {
             make.height.equalTo(self.view.frame.height/31.23)
         }
         
-        scheduleTableView.snp.makeConstraints { make in
-            scheduleTableView.backgroundColor = .clear
+        acceptTableView.snp.makeConstraints { make in
+            acceptTableView.backgroundColor = .clear
             make.top.equalTo(acceptErrandTag).offset(self.view.frame.height/67.67)
             make.centerX.equalToSuperview()
             make.width.equalToSuperview()
             make.bottom.equalTo(sendErrandTag).offset(self.view.frame.height/18.92 * -1)
         }
         
-        scheduleTableView.tableView.snp.makeConstraints { make in
-            make.top.equalTo(scheduleTableView).offset(self.view.frame.height/36)
+        acceptTableView.tableView.snp.makeConstraints { make in
+            make.top.equalTo(acceptTableView).offset(self.view.frame.height/36)
             make.width.equalToSuperview()
             make.bottom.equalToSuperview()
             make.centerX.equalToSuperview()
@@ -128,6 +160,42 @@ class ErrandListViewController: UIViewController {
             make.height.equalTo(self.view.frame.height/31.23)
         }
         
+        sendTableView.snp.makeConstraints { make in
+            acceptTableView.backgroundColor = .clear
+            make.top.equalTo(sendErrandTag).offset(self.view.frame.height/67.67)
+            make.centerX.equalToSuperview()
+            make.width.equalToSuperview()
+            make.bottom.equalTo(waitErrandTag).offset(self.view.frame.height/18.92 * -1)
+        }
+        
+        sendTableView.tableView.snp.makeConstraints { make in
+            make.top.equalTo(sendTableView).offset(self.view.frame.height/36)
+            make.width.equalToSuperview()
+            make.bottom.equalToSuperview()
+            make.centerX.equalToSuperview()
+        }
+        
+        waitErrandTag.snp.makeConstraints { make in
+            make.bottom.equalTo(sendErrandTag).offset(self.view.frame.height/3.58)
+            make.left.equalTo(line)
+            make.width.equalTo(waitErrandTag.listLabel).offset(self.view.frame.width/12.5)
+            make.height.equalTo(self.view.frame.height/31.23)
+        }
+        
+        waitTableView.snp.makeConstraints { make in
+            acceptTableView.backgroundColor = .clear
+            make.top.equalTo(waitErrandTag).offset(self.view.frame.height/67.67)
+            make.centerX.equalToSuperview()
+            make.width.equalToSuperview()
+            make.bottom.equalToSuperview()
+        }
+        
+        waitTableView.tableView.snp.makeConstraints { make in
+            make.top.equalTo(waitTableView).offset(self.view.frame.height/36)
+            make.width.equalToSuperview()
+            make.bottom.equalToSuperview()
+            make.centerX.equalToSuperview()
+        }
     }
     
     func listTagViewSetting() {
@@ -136,13 +204,26 @@ class ErrandListViewController: UIViewController {
         
         sendErrandTag.addSubview(sendErrandTag.listLabel)
         sendErrandTag.listTagViewLayoutSetting()
+        
+        waitErrandTag.addSubview(waitErrandTag.listLabel)
+        waitErrandTag.listTagViewLayoutSetting()
     }
     
     func ScheduleTimeTableViewSetting(){
-        scheduleTableView.tableView.dataSource = self
-        scheduleTableView.tableView.delegate = self
+        acceptTableView.tableView.dataSource = self
+        acceptTableView.tableView.delegate = self
         
-        scheduleTableView.tableView.register(ScheduleTimeTableViewCell.self, forCellReuseIdentifier: ScheduleTimeTableViewCell.ScheduleTimeTableViewIdentifier)
+        acceptTableView.tableView.register(ScheduleTimeTableViewCell.self, forCellReuseIdentifier: ScheduleTimeTableViewCell.ScheduleTimeTableViewIdentifier)
+        
+        sendTableView.tableView.dataSource = self
+        sendTableView.tableView.delegate = self
+        
+        sendTableView.tableView.register(ScheduleTimeTableViewCell.self, forCellReuseIdentifier: ScheduleTimeTableViewCell.ScheduleTimeTableViewIdentifier)
+        
+        waitTableView.tableView.dataSource = self
+        waitTableView.tableView.delegate = self
+        
+        waitTableView.tableView.register(ScheduleTimeTableViewCell.self, forCellReuseIdentifier: ScheduleTimeTableViewCell.ScheduleTimeTableViewIdentifier)
     }
 
 }
@@ -150,25 +231,64 @@ class ErrandListViewController: UIViewController {
 extension ErrandListViewController: UITableViewDataSource{
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return descriptionArray.count
+        if tableView == acceptTableView {
+            return acceptDescriptionArray.count
+        } else if tableView == sendTableView {
+            return sendDescriptionArray.count
+        }
+        return waitDescriptionArray.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: ScheduleTimeTableViewCell.ScheduleTimeTableViewIdentifier, for: indexPath) as! ScheduleTimeTableViewCell
-        
-        cell.groupNameLabel.text = descriptionArray[indexPath.row]
-        cell.titleLabel.text = titleArray[indexPath.row]
-        cell.planTimeLabel.text = planTimeArray[indexPath.row]
-        cell.EZYLISTCellLeftDecorationView.backgroundColor = planBackgroundColor[indexPath.row]
-        cell.EZYLISTCellBackground.backgroundColor = planDoOrFinishColor[indexPath.row]
-        cell.EZYLISTCellRightDecorationView.backgroundColor = planDoOrFinishColor[indexPath.row]
-        cell.titleLabel.textColor = planBackgroundColor[indexPath.row]
-        cell.groupNameLabel.textColor = planBackgroundColor[indexPath.row]
-        
-        cell.backgroundColor = .clear
-        cell.selectionStyle = UITableViewCell.SelectionStyle.none
-        
-        return cell
+        if tableView == acceptTableView {
+            let cell = tableView.dequeueReusableCell(withIdentifier: ScheduleTimeTableViewCell.ScheduleTimeTableViewIdentifier, for: indexPath) as! ScheduleTimeTableViewCell
+            
+            cell.groupNameLabel.text = acceptDescriptionArray[indexPath.row]
+            cell.titleLabel.text = acceptTitleArray[indexPath.row]
+            cell.planTimeLabel.text = acceptPlanTimeArray[indexPath.row]
+            cell.EZYLISTCellLeftDecorationView.backgroundColor = acceptPlanBackgroundColor[indexPath.row]
+            cell.EZYLISTCellBackground.backgroundColor = acceptPlanDoOrFinishColor[indexPath.row]
+            cell.EZYLISTCellRightDecorationView.backgroundColor = acceptPlanDoOrFinishColor[indexPath.row]
+            cell.titleLabel.textColor = acceptPlanBackgroundColor[indexPath.row]
+            cell.groupNameLabel.textColor = acceptPlanBackgroundColor[indexPath.row]
+            
+            cell.backgroundColor = .clear
+            cell.selectionStyle = UITableViewCell.SelectionStyle.none
+            
+            return cell
+        } else if tableView == sendTableView{
+            let cell = tableView.dequeueReusableCell(withIdentifier: ScheduleTimeTableViewCell.ScheduleTimeTableViewIdentifier, for: indexPath) as! ScheduleTimeTableViewCell
+            
+            cell.groupNameLabel.text = sendDescriptionArray[indexPath.row]
+            cell.titleLabel.text = sendTitleArray[indexPath.row]
+            cell.planTimeLabel.text = sendPlanTimeArray[indexPath.row]
+            cell.EZYLISTCellLeftDecorationView.backgroundColor = sendPlanBackgroundColor[indexPath.row]
+            cell.EZYLISTCellBackground.backgroundColor = sendPlanDoOrFinishColor[indexPath.row]
+            cell.EZYLISTCellRightDecorationView.backgroundColor = sendPlanDoOrFinishColor[indexPath.row]
+            cell.titleLabel.textColor = sendPlanBackgroundColor[indexPath.row]
+            cell.groupNameLabel.textColor = sendPlanBackgroundColor[indexPath.row]
+            
+            cell.backgroundColor = .clear
+            cell.selectionStyle = UITableViewCell.SelectionStyle.none
+            
+            return cell
+        } else {
+            let cell = tableView.dequeueReusableCell(withIdentifier: ScheduleTimeTableViewCell.ScheduleTimeTableViewIdentifier, for: indexPath) as! ScheduleTimeTableViewCell
+            
+            cell.groupNameLabel.text = waitDescriptionArray[indexPath.row]
+            cell.titleLabel.text = waitTitleArray[indexPath.row]
+            cell.planTimeLabel.text = waitPlanTimeArray[indexPath.row]
+            cell.EZYLISTCellLeftDecorationView.backgroundColor = waitPlanBackgroundColor[indexPath.row]
+            cell.EZYLISTCellBackground.backgroundColor = waitPlanDoOrFinishColor[indexPath.row]
+            cell.EZYLISTCellRightDecorationView.backgroundColor = waitPlanDoOrFinishColor[indexPath.row]
+            cell.titleLabel.textColor = waitPlanBackgroundColor[indexPath.row]
+            cell.groupNameLabel.textColor = waitPlanBackgroundColor[indexPath.row]
+            
+            cell.backgroundColor = .clear
+            cell.selectionStyle = UITableViewCell.SelectionStyle.none
+            
+            return cell
+        }
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
