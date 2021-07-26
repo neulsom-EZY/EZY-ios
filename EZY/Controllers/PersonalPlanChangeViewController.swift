@@ -138,10 +138,20 @@ class PersonalPlanChangeViewController: UIViewController {
         $0.dynamicFont(fontSize: 14, currentFontName: "AppleSDGothicNeo-Medium")
     }
     
+    lazy var calendarLabelView = UIView().then{
+        $0.backgroundColor = UIColor.clear
+    }
+    
     lazy var calendarLabelButton = UIButton().then {
         $0.setTitle("2021. 05. 09 화요일", for: .normal)
         $0.setTitleColor(UIColor(red: 101/255, green: 101/255, blue: 101/255, alpha: 1), for: .normal)
         $0.dynamicFont(fontSize: 16, currentFontName: "Poppins-Regular")
+    }
+    
+    lazy var calendarRepeatLabel = UILabel().then{
+        $0.text = "월, 화, 수, 목, 금, 반복"
+        $0.textColor = UIColor(red: 166/255, green: 166/255, blue: 166/255, alpha: 1)
+        $0.dynamicFont(fontSize: 10, currentFontName: "AppleSDGothicNeo-Light")
     }
     
     lazy var timeLabelButton = UIButton().then {
@@ -773,7 +783,9 @@ class PersonalPlanChangeViewController: UIViewController {
         self.view.addSubview(titleBackgroundView)
         titleBackgroundView.addSubview(titleLabel)
         titleBackgroundView.addSubview(titleTextField)
-        self.view.addSubview(calendarLabelButton)
+        self.view.addSubview(calendarLabelView)
+        calendarLabelView.addSubview(calendarRepeatLabel)
+        calendarLabelView.addSubview(calendarLabelButton)
         self.view.addSubview(timeLabelButton)
         self.view.addSubview(locationLabelButton)
         self.view.addSubview(tagLabel)
@@ -782,6 +794,7 @@ class PersonalPlanChangeViewController: UIViewController {
         self.view.addSubview(tagMajorBandButton)
         self.view.addSubview(tagFreedomBandButton)
         self.view.addSubview(tagAddButton)
+        
         
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(_:)), name:UIResponder.keyboardWillShowNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide(_:)), name: UIResponder.keyboardWillHideNotification, object: nil)
@@ -848,7 +861,7 @@ class PersonalPlanChangeViewController: UIViewController {
             make.height.equalToSuperview()
         }
         
-
+        
 
     }
 
@@ -869,6 +882,7 @@ class PersonalPlanChangeViewController: UIViewController {
             make.left.equalTo(titleBackgroundView)
         }
         
+        
         calendarViewButton.backgroundView.snp.makeConstraints { make in
             make.top.left.bottom.right.equalToSuperview()
         }
@@ -876,6 +890,21 @@ class PersonalPlanChangeViewController: UIViewController {
         calendarViewButton.iconImageButton.snp.makeConstraints { make in
             make.centerX.centerY.equalToSuperview()
             make.height.width.equalToSuperview().dividedBy(2.4)
+        }
+        
+        calendarLabelView.snp.makeConstraints { make in
+            make.left.equalTo(calendarViewButton.snp.right).offset(self.view.frame.width/13.8)
+            make.height.equalTo(calendarViewButton).dividedBy(1.2)
+            make.right.equalToSuperview()
+            make.centerY.equalTo(calendarViewButton)
+        }
+                
+        calendarRepeatLabel.snp.makeConstraints { make in
+            make.bottom.left.equalToSuperview()
+        }
+        
+        calendarLabelButton.snp.makeConstraints { make in
+            make.left.top.equalToSuperview()
         }
     }
     
@@ -960,10 +989,7 @@ class PersonalPlanChangeViewController: UIViewController {
     }
     
     func labelSetting(){
-        calendarLabelButton.snp.makeConstraints { make in
-            make.centerY.equalTo(calendarViewButton)
-            make.left.equalTo(calendarViewButton.snp.right).offset(self.view.frame.width/13.8)
-        }
+
         
         timeLabelButton.snp.makeConstraints { make in
             make.centerY.equalTo(timeViewButton)
