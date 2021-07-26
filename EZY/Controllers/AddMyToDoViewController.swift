@@ -14,7 +14,7 @@ import Alamofire
 class AddMyToDoViewController:UIViewController{
     let tagData : [String] = ["전공동아리","산책","자율동아리","공부","자율동아리","전공동아리","전공동아리","산책","자율동아리","공부","자율동아리","전공동아리","산책"]
     let alarmData : [String] = ["선택안함", "+ 추가"]
-//    let alarmData : [UIColor] = [.]
+    let tagColor : [UIColor] = [.EZY_879FFF,.EZY_968DFF,.EZY_9EB1FC]
     //MARK: - Properties
  
     private let backbutton = UIButton().then{
@@ -257,7 +257,7 @@ class AddMyToDoViewController:UIViewController{
         }
         alarmSettingcollectionView.snp.makeConstraints { (make) in
             make.top.equalTo(alarmSettings.snp.bottom).offset(view.frame.height/58)
-            make.height.equalTo(view.frame.height/23.88)
+            make.height.equalTo(view.frame.height/23.7)
             make.width.equalToSuperview()
         }
         
@@ -286,20 +286,22 @@ extension AddMyToDoViewController : UICollectionViewDelegateFlowLayout,UICollect
             let tagCell = collectionView.dequeueReusableCell(withReuseIdentifier: TagCollectionViewCell.identifier, for: indexPath) as! TagCollectionViewCell
             tagCell.backgroundColor = .clear
             tagCell.layer.borderWidth = 1
-            tagCell.layer.borderColor = UIColor.EZY_AFADFF.cgColor
+            tagCell.isSelected = false
             tagCell.bglabel.text = tagData[indexPath.row]
-            tagCell.bglabel.textColor = .EZY_AFADFF
+            tagCell.bglabel.textColor = tagColor.randomElement()
+            tagCell.layer.borderColor = tagCell.bglabel.textColor.cgColor
             if indexPath.item == 0 {
                 tagCell.bglabel.text = "선택해제"
                 tagCell.bglabel.textColor = .EZY_B7B4B4
-                tagCell.layer.borderColor = tagCell.bglabel.textColor.cgColor
+                tagCell.layer.borderColor = UIColor.EZY_B7B4B4.cgColor
             }
             if indexPath.item == 2{
                 tagCell.bglabel.text = "+ 추가"
                 tagCell.bglabel.textColor = .EZY_BAC8FF
                 tagCell.layer.borderColor = tagCell.bglabel.textColor.cgColor
             }
-            
+
+
             return tagCell
             
         }

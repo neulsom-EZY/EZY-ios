@@ -13,7 +13,7 @@ class AlarmSettingCell : UICollectionViewCell{
         $0.clipsToBounds = true
         $0.dynamicFont(fontSize: 12, weight: .bold)
     }
-    
+
     override init(frame: CGRect) {
         super.init(frame: frame)
         contentView.addSubview(bglabel)

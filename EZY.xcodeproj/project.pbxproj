@@ -31,7 +31,6 @@
 		EEEDB2BF2664B44200E5C53A /* AddMyToDoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEEDB2BE2664B44200E5C53A /* AddMyToDoViewController.swift */; };
 		EEEDB2C22664D30D00E5C53A /* extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEEDB2C12664D30D00E5C53A /* extensions.swift */; };
 		EEF7DF34266F83AA00832E95 /* MorePeopleToDo.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEF7DF33266F83AA00832E95 /* MorePeopleToDo.swift */; };
-		EEF7FF5C268653EB00FD7800 /* inputContainerTextFieldView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEF7FF5B268653EB00FD7800 /* inputContainerTextFieldView.swift */; };
 		EEFC3F9F26971BA000CEB09F /* ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEFC3F9E26971BA000CEB09F /* ViewModel.swift */; };
 /* End PBXBuildFile section */
 
@@ -82,7 +81,6 @@
 		EEEDB2BE2664B44200E5C53A /* AddMyToDoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddMyToDoViewController.swift; sourceTree = "<group>"; };
 		EEEDB2C12664D30D00E5C53A /* extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = extensions.swift; sourceTree = "<group>"; };
 		EEF7DF33266F83AA00832E95 /* MorePeopleToDo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MorePeopleToDo.swift; sourceTree = "<group>"; };
-		EEF7FF5B268653EB00FD7800 /* inputContainerTextFieldView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = inputContainerTextFieldView.swift; sourceTree = "<group>"; };
 		EEFC3F9E26971BA000CEB09F /* ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -166,7 +164,6 @@
 				EE896CC4269C35640099E8CB /* AddScheduleModalBtn .swift */,
 				EEA457F32682FFA100C08D17 /* AlertButton.swift */,
 				EE93B4D62687639F0055D7A6 /* OneAlertButton.swift */,
-				EEF7FF5B268653EB00FD7800 /* inputContainerTextFieldView.swift */,
 				EE2921FB26A2C97F0031F893 /* GradientTitle.swift */,
 				EE37790A2679FB3800334D4A /* Cell */,
 			);
@@ -374,7 +371,6 @@
 				EE782853268150A900AECC65 /* AddOurToDoViewController.swift in Sources */,
 				EEFC3F9F26971BA000CEB09F /* ViewModel.swift in Sources */,
 				EE2921FC26A2C97F0031F893 /* GradientTitle.swift in Sources */,
-				EEF7FF5C268653EB00FD7800 /* inputContainerTextFieldView.swift in Sources */,
 				EED007D526674AC2009A5A87 /* Utilities.swift in Sources */,
 				EE7828552681859200AECC65 /* AddErrandViewController.swift in Sources */,
 				EEA457F42682FFA100C08D17 /* AlertButton.swift in Sources */,

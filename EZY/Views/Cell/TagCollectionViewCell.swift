@@ -13,19 +13,21 @@ class TagCollectionViewCell:UICollectionViewCell{
         $0.clipsToBounds = true
         $0.dynamicFont(fontSize: 12, weight: .bold)
     }
-    
-    static func fittingSize(availableHeight: CGFloat, name: String?) -> CGSize {
-        let cell = TagCollectionViewCell()
-        cell.configure(name: name)
-        
-        let targetSize = CGSize(width: UIView.layoutFittingCompressedSize.width, height: availableHeight )
-        return cell.contentView.systemLayoutSizeFitting(targetSize, withHorizontalFittingPriority: .fittingSizeLevel , verticalFittingPriority: .required)
+
+    override var isSelected: Bool{
+        didSet{
+            if isSelected{
+                backgroundColor = bglabel.textColor
+                bglabel.textColor = .white
+            }
+            else {
+//                bglabel.textColor = backgroundColor
+//                backgroundColor = bglabel.textColor
+
+                
+            }
+        }
     }
-    
-    func configure(name: String?) {
-        bglabel.text = name
-    }
-    
     override init(frame: CGRect) {
         super.init(frame: frame)
         contentView.addSubview(bglabel)
