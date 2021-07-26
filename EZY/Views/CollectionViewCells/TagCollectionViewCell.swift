@@ -38,9 +38,11 @@ class TagCollectionViewCell: UICollectionViewCell {
         tagBackgroundView.addSubview(tagNameLabel)
         
         tagBackgroundView.snp.makeConstraints { make in
-            make.top.bottom.right.left.equalToSuperview()
+            make.centerY.equalToSuperview()
+            make.height.equalToSuperview().dividedBy(1.1)
+            make.width.equalToSuperview()
             
-            tagBackgroundView.layer.cornerRadius = contentView.frame.height/2
+            tagBackgroundView.layer.cornerRadius = contentView.frame.height/1.1/2
         }
         
         tagNameLabel.snp.makeConstraints { make in

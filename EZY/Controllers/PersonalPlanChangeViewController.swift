@@ -9,8 +9,6 @@ import UIKit
 
 class PersonalPlanChangeViewController: UIViewController {
     
-    lazy var topView = TopView()
-    
     lazy var calendarViewButton = WhiteBackgroundView()
     
     lazy var timeViewButton = WhiteBackgroundView()
@@ -25,13 +23,13 @@ class PersonalPlanChangeViewController: UIViewController {
     
     var isChecked: [Bool] = [true, false, false, false]
     
-    var RepeatModels: [RepeatCollectionViewModel] = [RepeatCollectionViewModel(backgroundColr: UIColor(red: 255/255, green: 188/255, blue: 188/255, alpha: 1), isSelected: false),
-                                                     RepeatCollectionViewModel(backgroundColr: UIColor(red: 255/255, green: 188/255, blue: 188/255, alpha: 1), isSelected: false),
-                                                     RepeatCollectionViewModel(backgroundColr: UIColor(red: 255/255, green: 188/255, blue: 188/255, alpha: 1), isSelected: false),
-                                                     RepeatCollectionViewModel(backgroundColr: UIColor(red: 255/255, green: 188/255, blue: 188/255, alpha: 1), isSelected: false),
-                                                     RepeatCollectionViewModel(backgroundColr: UIColor(red: 255/255, green: 188/255, blue: 188/255, alpha: 1), isSelected: false),
-                                                     RepeatCollectionViewModel(backgroundColr: UIColor(red: 255/255, green: 188/255, blue: 188/255, alpha: 1), isSelected: false),
-                                                     RepeatCollectionViewModel(backgroundColr: UIColor(red: 255/255, green: 188/255, blue: 188/255, alpha: 1), isSelected: false)]
+    var RepeatModels: [RepeatCollectionViewModel] = [RepeatCollectionViewModel(backgroundColr: UIColor(red: 255/255, green: 188/255, blue: 188/255, alpha: 1), isSelected: true),
+                                                     RepeatCollectionViewModel(backgroundColr: UIColor(red: 255/255, green: 188/255, blue: 188/255, alpha: 1), isSelected: true),
+                                                     RepeatCollectionViewModel(backgroundColr: UIColor(red: 255/255, green: 188/255, blue: 188/255, alpha: 1), isSelected: true),
+                                                     RepeatCollectionViewModel(backgroundColr: UIColor(red: 255/255, green: 188/255, blue: 188/255, alpha: 1), isSelected: true),
+                                                     RepeatCollectionViewModel(backgroundColr: UIColor(red: 255/255, green: 188/255, blue: 188/255, alpha: 1), isSelected: true),
+                                                     RepeatCollectionViewModel(backgroundColr: UIColor(red: 255/255, green: 188/255, blue: 188/255, alpha: 1), isSelected: true),
+                                                     RepeatCollectionViewModel(backgroundColr: UIColor(red: 255/255, green: 188/255, blue: 188/255, alpha: 1), isSelected: true)]
     
     var TagColorModels: [TagColorCollectionViewModel] = [TagColorCollectionViewModel(backgroundColor: UIColor(red: 186/255, green: 200/255, blue: 255/255, alpha: 1), isSelected: false),
                                                  TagColorCollectionViewModel(backgroundColor: UIColor(red: 196/255, green: 200/255, blue: 255/255, alpha: 1), isSelected: true),
@@ -140,10 +138,20 @@ class PersonalPlanChangeViewController: UIViewController {
         $0.dynamicFont(fontSize: 14, currentFontName: "AppleSDGothicNeo-Medium")
     }
     
+    lazy var calendarLabelView = UIView().then{
+        $0.backgroundColor = UIColor.clear
+    }
+    
     lazy var calendarLabelButton = UIButton().then {
         $0.setTitle("2021. 05. 09 화요일", for: .normal)
         $0.setTitleColor(UIColor(red: 101/255, green: 101/255, blue: 101/255, alpha: 1), for: .normal)
         $0.dynamicFont(fontSize: 16, currentFontName: "Poppins-Regular")
+    }
+    
+    lazy var calendarRepeatLabel = UILabel().then{
+        $0.text = "월, 화, 수, 목, 금, 반복"
+        $0.textColor = UIColor(red: 166/255, green: 166/255, blue: 166/255, alpha: 1)
+        $0.dynamicFont(fontSize: 10, currentFontName: "AppleSDGothicNeo-Light")
     }
     
     lazy var timeLabelButton = UIButton().then {
@@ -231,17 +239,37 @@ class PersonalPlanChangeViewController: UIViewController {
         $0.dynamicFont(fontSize: 14, currentFontName: "AppleSDGothicNeo-SemiBold")
     }
     
-    lazy var changeButtonLayoutBox = UIView().then {
-        $0.backgroundColor = .clear
+    lazy var mainTitleLabel = UILabel().then{
+        $0.text = "나의 할 일 변경"
+        $0.textColor = UIColor(red: 154/255, green: 174/255, blue: 254/255, alpha: 1)
+        $0.dynamicFont(fontSize: 22, currentFontName: "AppleSDGothicNeo-SemiBold")
+    }
+    
+    lazy var notificationTitleLabel = UILabel().then {
+        $0.text = "알림 설정"
+        $0.textColor = UIColor(red: 182/255, green: 182/255, blue: 182/255, alpha: 1)
+        $0.dynamicFont(fontSize: 14, currentFontName: "AppleSDGothicNeo-Bold")
+    }
+    
+    lazy var notificationBackgroundView = UIButton().then {
+        $0.backgroundColor = UIColor(red: 253/255, green: 253/255, blue: 253/255, alpha: 1)
+        $0.layer.borderWidth = 0.5
+        $0.layer.borderColor = UIColor(red: 207/255, green: 207/255, blue: 207/255, alpha: 1).cgColor
+        $0.layer.cornerRadius = 10
+        $0.setTitle("오전 12:12", for: .normal)
+        $0.dynamicFont(fontSize: 12, currentFontName: "Poppins-Light")
+        $0.setTitleColor(UIColor(red: 172/255, green: 172/255, blue: 172/255, alpha: 1), for: .normal)
+    }
+    
+    lazy var backButton = UIButton().then{
+        $0.setImage(UIImage(named: "EZY_LocationBackButton"), for: .normal)
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         self.view.backgroundColor = .white
-            
-        topViewSetting()
-        
+                
         layoutSetting()
         
         calendarViewSetting()
@@ -268,7 +296,7 @@ class PersonalPlanChangeViewController: UIViewController {
         
         repeatCollectionViewSetting()
     }
-    
+
     func tagCollectionViewSetting(){
         tagCollectionView.delegate = self
         tagCollectionView.dataSource = self
@@ -276,7 +304,7 @@ class PersonalPlanChangeViewController: UIViewController {
         tagCollectionView.register(TagCollectionViewCell.self, forCellWithReuseIdentifier: TagCollectionViewCell.reuseId)
         
         self.view.addSubview(tagCollectionView)
-        
+                
         tagCollectionView.snp.makeConstraints { make in
             tagCollectionView.backgroundColor = .clear
             
@@ -286,16 +314,24 @@ class PersonalPlanChangeViewController: UIViewController {
             make.right.equalToSuperview()
         }
         
-        changeButton.snp.makeConstraints { make in
+        notificationTitleLabel.snp.makeConstraints { make in
             make.left.equalTo(tagCollectionView)
-            make.centerX.equalToSuperview()
-            make.top.equalToSuperview().offset(self.view.frame.height/27)
-            make.height.equalToSuperview().dividedBy(2.8)
+            make.top.equalTo(tagCollectionView.snp.bottom).offset(self.view.frame.height/38.6)
         }
         
-        changeButtonLayoutBox.snp.makeConstraints { make in
-            make.top.equalTo(tagCollectionView.snp.bottom)
-            make.left.right.bottom.equalToSuperview()
+        notificationBackgroundView.snp.makeConstraints { make in
+            make.left.equalTo(notificationTitleLabel)
+            make.top.equalTo(notificationTitleLabel.snp.bottom).offset(self.view.frame.height/80)
+            make.height.equalToSuperview().dividedBy(22)
+            make.width.equalToSuperview().dividedBy(4.07)
+        }
+        
+        
+        changeButton.snp.makeConstraints { make in
+            make.top.equalTo(notificationBackgroundView.snp.bottom).offset(self.view.frame.height/38.6)
+            make.width.equalToSuperview().dividedBy(1.17)
+            make.centerX.equalToSuperview()
+            make.height.equalToSuperview().dividedBy(18.6)
         }
     }
     
@@ -611,8 +647,6 @@ class PersonalPlanChangeViewController: UIViewController {
         
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(_:)), name:UIResponder.keyboardWillShowNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide(_:)), name: UIResponder.keyboardWillHideNotification, object: nil)
-        
-
 
         tagColorCollectionView.showsHorizontalScrollIndicator = false
         tagColorCollectionView.dataSource = self
@@ -637,11 +671,13 @@ class PersonalPlanChangeViewController: UIViewController {
     
     @objc //MARK: 모달 창 올리기
     func keyboardWillShow(_ sender: Notification) {
+        explanationBackgroundView.frame.origin.y = self.view.frame.height/2.2
         tagAddModalView.modalBackgroundView.frame.origin.y = self.view.frame.height/5
     }
 
     @objc //MARK: 모달 창 원래대로
     func keyboardWillHide(_ sender: Notification) {
+        explanationBackgroundView.frame.origin.y = self.view.frame.height/1.85
         tagAddModalView.modalBackgroundView.frame.origin.y = (self.view.frame.height/2) - (tagAddModalView.modalBackgroundView.frame.height/2)
     }
     
@@ -727,16 +763,29 @@ class PersonalPlanChangeViewController: UIViewController {
         
     }
     
-    
     @objc func timeIconImageButton(sender:UIButton){
         selectTimeModalView.isHidden = false
     }
     
+    @objc func changeButtonClicked(sender:UIButton){
+        self.navigationController?.popViewController(animated: true)
+    }
+    
+    @objc func backButtonClicked(sender:UIButton){
+        self.navigationController?.popViewController(animated: true)
+    }
+    
     func layoutSetting(){
+        self.view.addSubview(backButton)
+        self.view.addSubview(mainTitleLabel)
+        self.view.addSubview(notificationTitleLabel)
+        self.view.addSubview(notificationBackgroundView)
         self.view.addSubview(titleBackgroundView)
         titleBackgroundView.addSubview(titleLabel)
         titleBackgroundView.addSubview(titleTextField)
-        self.view.addSubview(calendarLabelButton)
+        self.view.addSubview(calendarLabelView)
+        calendarLabelView.addSubview(calendarRepeatLabel)
+        calendarLabelView.addSubview(calendarLabelButton)
         self.view.addSubview(timeLabelButton)
         self.view.addSubview(locationLabelButton)
         self.view.addSubview(tagLabel)
@@ -745,14 +794,34 @@ class PersonalPlanChangeViewController: UIViewController {
         self.view.addSubview(tagMajorBandButton)
         self.view.addSubview(tagFreedomBandButton)
         self.view.addSubview(tagAddButton)
-        self.view.addSubview(changeButtonLayoutBox)
-        changeButtonLayoutBox.addSubview(changeButton)
+        
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(_:)), name:UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide(_:)), name: UIResponder.keyboardWillHideNotification, object: nil)
+        
+        explanationBackgroundView.addSubview(explanationTitleLabel)
+        explanationBackgroundView.addSubview(explanationTextView)
+        self.view.addSubview(changeButton)
+        
+        changeButton.addTarget(self, action: #selector(changeButtonClicked(sender:)), for: .touchUpInside)
+        backButton.addTarget(self, action: #selector(backButtonClicked(sender:)), for: .touchUpInside)
         
         tagStudyButton.tag = 0
         tagWalkButton.tag = 1
         tagMajorBandButton.tag = 2
         tagFreedomBandButton.tag = 3
         
+        backButton.snp.makeConstraints { make in
+            make.top.equalTo(self.view.safeAreaLayoutGuide).offset(self.view.frame.height/47.7)
+            make.left.equalToSuperview().offset(self.view.frame.width/12)
+            make.width.equalToSuperview().dividedBy(33.8/2)
+            make.height.equalTo(backButton.snp.width)
+        }
+        
+        mainTitleLabel.snp.makeConstraints { make in
+            make.left.equalTo(backButton)
+            make.top.equalTo(backButton.snp.bottom).offset(self.view.frame.height/50)
+        }
         
         calendarLabelButton.addTarget(self,action:#selector(calendarViewButtonClicked(sender:)),
                                  for:.touchUpInside)
@@ -773,15 +842,11 @@ class PersonalPlanChangeViewController: UIViewController {
         tagAddButton.addTarget(self,action:#selector(tagAddButtonClicked(sender:)),
                                  for:.touchUpInside)
         
-        self.view.addSubview(explanationBackgroundView)
-        explanationBackgroundView.addSubview(explanationTitleLabel)
-        explanationBackgroundView.addSubview(explanationTextView)
-        
         titleBackgroundView.snp.makeConstraints { make in
             make.centerX.equalToSuperview()
             make.left.equalToSuperview().offset(self.view.frame.width/13.3)
             make.height.equalToSuperview().dividedBy(12)
-            make.top.equalTo(topView.snp.bottom).offset(self.view.frame.height/19.8)
+            make.top.equalTo(mainTitleLabel.snp.bottom).offset(self.view.frame.height/30)
         }
         
         titleLabel.snp.makeConstraints { make in
@@ -796,21 +861,10 @@ class PersonalPlanChangeViewController: UIViewController {
             make.height.equalToSuperview()
         }
         
-        explanationTitleLabel.snp.makeConstraints { make in
-            make.centerY.equalToSuperview()
-            make.left.equalToSuperview().offset(self.view.frame.width/17.8)
-        }
         
-        explanationTextView.snp.makeConstraints { make in
-            make.centerY.equalToSuperview()
-            make.left.equalTo(explanationTitleLabel.snp.right).offset(self.view.frame.width/17.8)
-            make.width.equalToSuperview().dividedBy(1.45)
-            make.height.equalToSuperview().dividedBy(1.3)
-        }
 
     }
 
-    
     func calendarViewSetting(){
         self.view.addSubview(calendarViewButton)
         calendarViewButton.addSubview(calendarViewButton.backgroundView)
@@ -822,11 +876,12 @@ class PersonalPlanChangeViewController: UIViewController {
         calendarViewButton.iconImageButton.addTarget(self, action: #selector(calendarViewButtonClicked(sender:)), for: .touchUpInside)
         
         calendarViewButton.snp.makeConstraints { make in
-            make.top.equalTo(titleBackgroundView.snp.bottom).offset(self.view.frame.height/30)
+            make.top.equalTo(titleBackgroundView.snp.bottom).offset(self.view.frame.height/50)
             make.height.equalToSuperview().dividedBy(16)
             make.width.equalTo(calendarViewButton.snp.height)
             make.left.equalTo(titleBackgroundView)
         }
+        
         
         calendarViewButton.backgroundView.snp.makeConstraints { make in
             make.top.left.bottom.right.equalToSuperview()
@@ -835,6 +890,21 @@ class PersonalPlanChangeViewController: UIViewController {
         calendarViewButton.iconImageButton.snp.makeConstraints { make in
             make.centerX.centerY.equalToSuperview()
             make.height.width.equalToSuperview().dividedBy(2.4)
+        }
+        
+        calendarLabelView.snp.makeConstraints { make in
+            make.left.equalTo(calendarViewButton.snp.right).offset(self.view.frame.width/13.8)
+            make.height.equalTo(calendarViewButton).dividedBy(1.2)
+            make.right.equalToSuperview()
+            make.centerY.equalTo(calendarViewButton)
+        }
+                
+        calendarRepeatLabel.snp.makeConstraints { make in
+            make.bottom.left.equalToSuperview()
+        }
+        
+        calendarLabelButton.snp.makeConstraints { make in
+            make.left.top.equalToSuperview()
         }
     }
     
@@ -870,7 +940,8 @@ class PersonalPlanChangeViewController: UIViewController {
         self.view.addSubview(locationViewButton)
         locationViewButton.addSubview(locationViewButton.backgroundView)
         locationViewButton.backgroundView.addSubview(locationViewButton.iconImageButton)
-        
+        self.view.addSubview(explanationBackgroundView)
+
         locationViewButton.addTarget(self, action: #selector(locationViewButtonClicked(sender:)), for: .touchUpInside)
         
         locationViewButton.dataSetting(iconImage: UIImage(named: "EZY_Location.svg")!)
@@ -895,7 +966,7 @@ class PersonalPlanChangeViewController: UIViewController {
             make.centerX.equalToSuperview()
             make.left.equalTo(titleBackgroundView)
             make.height.equalToSuperview().dividedBy(12)
-            make.top.equalTo(locationViewButton.snp.bottom).offset(self.view.frame.height/30)
+            make.top.equalTo(locationViewButton.snp.bottom).offset(self.view.frame.height/50)
         }
         
         tagLabel.snp.makeConstraints { make in
@@ -903,34 +974,22 @@ class PersonalPlanChangeViewController: UIViewController {
             make.top.equalTo(explanationBackgroundView.snp.bottom).offset(self.view.frame.height/38.6)
         }
         
-
-
-        
-    }
-    
-    
-    func topViewSetting() {
-        self.view.addSubview(topView)
-        topView.addSubview(topView.backButton)
-        topView.addSubview(topView.titleLabel)
-        
-        topView.topViewDataSetting(backButtonImage: UIImage(named: "EZY_SettingBackButton")!, titleLabelText: "나의 할 일 변경",
-                                   textColor: UIColor(red: 154/255, green: 174/255, blue: 253/255, alpha: 1))
-
-        topView.topViewLayoutSetting(screenHeight: Double(self.view.bounds.height), screenWeight: Double(self.view.bounds.width))
-        
-        topView.snp.makeConstraints { make in
-            make.left.right.equalToSuperview()
-            make.top.equalTo(self.view.safeAreaLayoutGuide)
-            make.height.equalToSuperview().dividedBy(8)
+        explanationTitleLabel.snp.makeConstraints { make in
+            make.centerY.equalToSuperview()
+            make.left.equalToSuperview().offset(self.view.frame.width/17.8)
         }
+        
+        explanationTextView.snp.makeConstraints { make in
+            make.centerY.equalToSuperview()
+            make.left.equalTo(explanationTitleLabel.snp.right).offset(self.view.frame.width/17.8)
+            make.width.equalToSuperview().dividedBy(1.45)
+            make.height.equalToSuperview().dividedBy(1.3)
+        }
+        
     }
     
     func labelSetting(){
-        calendarLabelButton.snp.makeConstraints { make in
-            make.centerY.equalTo(calendarViewButton)
-            make.left.equalTo(calendarViewButton.snp.right).offset(self.view.frame.width/13.8)
-        }
+
         
         timeLabelButton.snp.makeConstraints { make in
             make.centerY.equalTo(timeViewButton)
@@ -986,8 +1045,19 @@ extension PersonalPlanChangeViewController: UICollectionViewDataSource, UICollec
             cell.setModel(RepeatModels[indexPath.row])
             return cell
         }else if collectionView == tagCollectionView{
-         
-            if indexPath == [0,0]{
+            if indexPath == [0,2]{
+                let cell = collectionView.dequeueReusableCell(withReuseIdentifier: TagCollectionViewCell.reuseId, for: indexPath) as! TagCollectionViewCell
+                
+                cell.tagNameLabel.text = "선택 안 함"
+                cell.tagNameLabel.textColor = UIColor(red: 187/255, green: 187/255, blue: 187/255, alpha: 1)
+                cell.tagBackgroundView.backgroundColor = .white
+                cell.tagBackgroundView.layer.borderWidth = 1.3
+                cell.tagBackgroundView.layer.borderColor = UIColor(red: 187/255, green: 187/255, blue: 187/255, alpha: 1).cgColor
+                
+                cell.setModel(TagModels[indexPath.row])
+                
+                return cell
+            }else if indexPath == [0,0]{
                 let cell = collectionView.dequeueReusableCell(withReuseIdentifier: TagCollectionViewCell.reuseId, for: indexPath) as! TagCollectionViewCell
                 
                 cell.tagNameLabel.text = "+ 추가"
@@ -1032,7 +1102,9 @@ extension PersonalPlanChangeViewController: UICollectionViewDataSource, UICollec
         }else if collectionView == tagCollectionView{
             print("click\(indexPath)")
             print("preciousSelectedIndex\(tagPreciousSelectedIndex)")
-            if indexPath.row != 0 {
+            if indexPath == [0,0]{
+                tagAddModalView.isHidden = false
+            }else{
                 if TagModels[indexPath.row].isSelected {
                     
                     TagModels[tagPreciousSelectedIndex].isSelected.toggle()
@@ -1045,8 +1117,6 @@ extension PersonalPlanChangeViewController: UICollectionViewDataSource, UICollec
                     
                 }
                 collectionView.reloadData()
-            }else{
-                tagAddModalView.isHidden = false
             }
         }
     }
