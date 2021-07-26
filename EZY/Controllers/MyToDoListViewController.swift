@@ -182,7 +182,7 @@ class MyToDoListViewController: UIViewController {
 extension MyToDoListViewController: UITableViewDataSource{
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if tableView == firstList {
+        if tableView == firstList.tableView {
             return firstDescriptionArray.count
         }
         return secondDescriptionArray.count
@@ -190,7 +190,7 @@ extension MyToDoListViewController: UITableViewDataSource{
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        if tableView == firstList {
+        if tableView == firstList.tableView {
             let cell = tableView.dequeueReusableCell(withIdentifier: ScheduleTimeTableViewCell.ScheduleTimeTableViewIdentifier, for: indexPath) as! ScheduleTimeTableViewCell
             
             cell.groupNameLabel.text = firstDescriptionArray[indexPath.row]
