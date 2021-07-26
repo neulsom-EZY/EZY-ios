@@ -231,16 +231,16 @@ class ErrandListViewController: UIViewController {
 extension ErrandListViewController: UITableViewDataSource{
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if tableView == acceptTableView {
+        if tableView == acceptTableView.tableView {
             return acceptDescriptionArray.count
-        } else if tableView == sendTableView {
+        } else if tableView == sendTableView.tableView {
             return sendDescriptionArray.count
         }
         return waitDescriptionArray.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        if tableView == acceptTableView {
+        if tableView == acceptTableView.tableView {
             let cell = tableView.dequeueReusableCell(withIdentifier: ScheduleTimeTableViewCell.ScheduleTimeTableViewIdentifier, for: indexPath) as! ScheduleTimeTableViewCell
             
             cell.groupNameLabel.text = acceptDescriptionArray[indexPath.row]
@@ -256,7 +256,7 @@ extension ErrandListViewController: UITableViewDataSource{
             cell.selectionStyle = UITableViewCell.SelectionStyle.none
             
             return cell
-        } else if tableView == sendTableView{
+        } else if tableView == sendTableView.tableView {
             let cell = tableView.dequeueReusableCell(withIdentifier: ScheduleTimeTableViewCell.ScheduleTimeTableViewIdentifier, for: indexPath) as! ScheduleTimeTableViewCell
             
             cell.groupNameLabel.text = sendDescriptionArray[indexPath.row]
