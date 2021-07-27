@@ -25,10 +25,12 @@ class Utilities{
             make.centerY.equalToSuperview()
         }
         view.addSubview(textField)
+        
         textField.snp.makeConstraints { (make) in
             make.right.equalTo(view.snp.right).offset(viewSize/31.2 * -1)
             make.centerY.equalToSuperview()
             make.height.equalTo(viewSize)
+            make.bottom.equalToSuperview()
             make.left.equalTo(label_Message.snp.right).offset(viewSize/31.2)
         }
         

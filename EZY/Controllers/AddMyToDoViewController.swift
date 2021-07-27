@@ -166,6 +166,7 @@ class AddMyToDoViewController:UIViewController{
         view.backgroundColor = .white
         tagCollectionView.contentInset = UIEdgeInsets(top: 0, left: view.frame.height/29, bottom: 0, right: view.frame.height/29)
         alarmSettingcollectionView.contentInset = UIEdgeInsets(top: 0, left: view.frame.height/29, bottom: 0, right: 0)
+        
         addView()
         cornerRadius()
         location()
