@@ -57,6 +57,11 @@ class SelectLocationViewController: UIViewController {
     
     @objc func okButtonClicked(sender:UIButton){
         selectLocationModalView.isHidden = true
+        self.navigationController?.popViewController(animated: true)
+    }
+    
+    @objc func backButtonClicked(sender:UIButton){
+        self.navigationController?.popViewController(animated: true)
     }
     
     func selectLocationModalViewSetting(){
@@ -151,6 +156,7 @@ class SelectLocationViewController: UIViewController {
         self.view.addSubview(textFieldBackgroundView)
         textFieldBackgroundView.addSubview(locationTextField)
     
+        backButton.addTarget(self, action: #selector(backButtonClicked(sender:)), for: .touchUpInside)
         
         backButton.snp.makeConstraints { make in
             make.top.equalTo(self.view.safeAreaLayoutGuide).offset(self.view.frame.height/30)
