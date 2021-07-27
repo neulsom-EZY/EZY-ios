@@ -12,6 +12,7 @@ extension UIColor{
     static func rgb(red: CGFloat ,green: CGFloat,blue:CGFloat) -> UIColor{
         return UIColor(red: red/255, green: green/255, blue: blue/255, alpha: 1)
     }
+    static let EZY_6C6C6C = UIColor.rgb(red: 108, green: 108, blue: 108)
     static let EZY_9EB1FC = UIColor.rgb(red: 158, green: 177, blue: 252)
     static let EZY_879FFF = UIColor.rgb(red: 135, green: 159, blue: 255)
     static let EZY_C9C9C9 = UIColor.rgb(red: 201, green: 201, blue: 201)
