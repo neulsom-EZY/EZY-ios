@@ -31,6 +31,7 @@
 		EEEDB2C22664D30D00E5C53A /* extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEEDB2C12664D30D00E5C53A /* extensions.swift */; };
 		EEF7DF34266F83AA00832E95 /* MorePeopleToDo.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEF7DF33266F83AA00832E95 /* MorePeopleToDo.swift */; };
 		EEFAD2AB26B031720011A246 /* TagCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEFAD2AA26B031720011A246 /* TagCell.swift */; };
+		EEFAD2AD26B0838F0011A246 /* ErrandDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEFAD2AC26B0838F0011A246 /* ErrandDetailsViewController.swift */; };
 		EEFC3F9F26971BA000CEB09F /* ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEFC3F9E26971BA000CEB09F /* ViewModel.swift */; };
 /* End PBXBuildFile section */
 
@@ -81,6 +82,7 @@
 		EEEDB2C12664D30D00E5C53A /* extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = extensions.swift; sourceTree = "<group>"; };
 		EEF7DF33266F83AA00832E95 /* MorePeopleToDo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MorePeopleToDo.swift; sourceTree = "<group>"; };
 		EEFAD2AA26B031720011A246 /* TagCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagCell.swift; sourceTree = "<group>"; };
+		EEFAD2AC26B0838F0011A246 /* ErrandDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrandDetailsViewController.swift; sourceTree = "<group>"; };
 		EEFC3F9E26971BA000CEB09F /* ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -187,6 +189,7 @@
 				EEEDB2BE2664B44200E5C53A /* AddMyToDoViewController.swift */,
 				EE782852268150A900AECC65 /* AddOurToDoViewController.swift */,
 				EE7828542681859200AECC65 /* AddErrandViewController.swift */,
+				EEFAD2AC26B0838F0011A246 /* ErrandDetailsViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -374,6 +377,7 @@
 				EED007D526674AC2009A5A87 /* Utilities.swift in Sources */,
 				EE7828552681859200AECC65 /* AddErrandViewController.swift in Sources */,
 				EEA457F42682FFA100C08D17 /* AlertButton.swift in Sources */,
+				EEFAD2AD26B0838F0011A246 /* ErrandDetailsViewController.swift in Sources */,
 				EEFAD2AB26B031720011A246 /* TagCell.swift in Sources */,
 				EED20D63266C0F90000E0856 /* AdditionalButton.swift in Sources */,
 				EE93B4D72687639F0055D7A6 /* OneAlertButton.swift in Sources */,
