@@ -891,17 +891,15 @@ class PersonalPlanChangeViewController: UIViewController {
             make.centerX.centerY.equalToSuperview()
             make.height.width.equalToSuperview().dividedBy(2.4)
         }
-<<<<<<< HEAD:EZY/Controllers/RescheduleViewController.swift
 
         calendarLabelView.snp.makeConstraints { make in
             make.left.equalTo(calendarViewButton.snp.right).offset(self.view.frame.width/13.8)
-            make.height.equalTo(calendarViewButton).dividedBy(1.2   )
-=======
+            make.height.equalTo(calendarViewButton).dividedBy(1.2)
+        }
         
         calendarLabelView.snp.makeConstraints { make in
             make.left.equalTo(calendarViewButton.snp.right).offset(self.view.frame.width/13.8)
             make.height.equalTo(calendarViewButton).dividedBy(1.2)
->>>>>>> bf0fd9a1819a39b6df353948a29bbbfae576866e:EZY/Controllers/PersonalPlanChangeViewController.swift
             make.right.equalToSuperview()
             make.centerY.equalTo(calendarViewButton)
         }
