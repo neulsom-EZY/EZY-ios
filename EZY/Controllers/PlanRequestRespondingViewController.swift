@@ -111,6 +111,7 @@ class PlanRequestRespondingViewController: UIViewController {
         $0.dynamicFont(fontSize: 14, currentFontName: "AppleSDGothicNeo-Bold")
     }
     
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         

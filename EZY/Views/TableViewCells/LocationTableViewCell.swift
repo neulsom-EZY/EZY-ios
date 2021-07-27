@@ -15,6 +15,7 @@ class LocationTableViewCell: UITableViewCell {
     
     lazy var alphabetLabel = UILabel().then {
         $0.text = "A"
+        $0.textAlignment = .center
         $0.dynamicFont(fontSize: 25, currentFontName: "Poppins-Bold")
         $0.updateGradientTextColor_vertical(gradientColors: alphabetLabelColorArray)
     }
@@ -66,6 +67,8 @@ class LocationTableViewCell: UITableViewCell {
         labelView.addSubview(subLocationLabel)
         
         alphabetLabel.snp.makeConstraints { make in
+            make.height.equalToSuperview().dividedBy(2.4)
+            make.width.equalTo(alphabetLabel.snp.height)
             make.left.equalToSuperview()
             make.centerY.equalToSuperview()
         }
@@ -92,7 +95,7 @@ class LocationTableViewCell: UITableViewCell {
         labelView.snp.makeConstraints { make in
             make.centerY.equalToSuperview()
             make.height.equalToSuperview().dividedBy(1.7)
-            make.left.equalTo(alphabetLabel.snp.right).offset(contentView.frame.width/20)
+            make.left.equalToSuperview().offset(contentView.frame.width/8)
             make.right.equalToSuperview()
         }
     }

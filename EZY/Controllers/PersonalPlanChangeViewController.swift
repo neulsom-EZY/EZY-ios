@@ -265,6 +265,34 @@ class PersonalPlanChangeViewController: UIViewController {
         $0.setImage(UIImage(named: "EZY_LocationBackButton"), for: .normal)
     }
     
+    lazy var selectLocationCheckView = UIView().then{
+        $0.backgroundColor = UIColor(red: 248/255, green: 248/255, blue: 248/255, alpha: 1)
+        $0.layer.cornerRadius = 10
+        $0.layer.borderWidth = 0.5
+        $0.layer.borderColor = UIColor(red: 226/255, green: 226/255, blue: 226/255, alpha: 1).cgColor
+        $0.layer.masksToBounds = false
+        $0.layer.shadowOpacity = 0.3
+        $0.layer.shadowRadius = 10
+        $0.layer.shadowOffset = CGSize(width: 0, height: 0)
+        $0.layer.shadowColor = UIColor(red: 163/255, green: 163/255, blue: 163/255, alpha: 1).cgColor
+    }
+    
+    lazy var selectedLocationLabelView = UIView().then{
+        $0.backgroundColor = .clear
+    }
+    
+    lazy var selectedLocationNameLabel = UILabel().then{
+        $0.text = "광주소프트웨어마이스터고등학교"
+        $0.textColor = UIColor(red: 186/255, green: 186/255, blue: 186/255, alpha: 1)
+        $0.dynamicFont(fontSize: 10, currentFontName: "AppleSDGothicNeo-SemiBold")
+    }
+    
+    lazy var selectedLabel = UILabel().then{
+        $0.text = "위치가 선택되었습니다!"
+        $0.textColor = UIColor(red: 122/255, green: 122/255, blue: 122/255, alpha: 1)
+        $0.dynamicFont(fontSize: 12, currentFontName: "AppleSDGothicNeo-SemiBold")
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -295,6 +323,35 @@ class PersonalPlanChangeViewController: UIViewController {
         TimeTableViewSetting()
         
         repeatCollectionViewSetting()
+        
+        checkViewSetting()
+    }
+    
+    func checkViewSetting(){
+        self.view.addSubview(selectLocationCheckView)
+        selectLocationCheckView.addSubview(selectedLocationLabelView)
+        selectedLocationLabelView.addSubview(selectedLabel)
+        selectedLocationLabelView.addSubview(selectedLocationNameLabel)
+        
+        selectLocationCheckView.snp.makeConstraints { make in
+            make.centerX.centerY.equalToSuperview()
+            make.height.equalToSuperview().dividedBy(10.82)
+            make.width.equalToSuperview().dividedBy(1.6)
+        }
+        
+        selectedLocationLabelView.snp.makeConstraints { make in
+            make.centerX.centerY.equalToSuperview()
+            make.width.equalToSuperview().dividedBy(1.2)
+            make.height.equalToSuperview().dividedBy(2.4)
+        }
+        
+        selectedLabel.snp.makeConstraints { make in
+            make.centerX.bottom.equalToSuperview()
+        }
+        
+        selectedLocationNameLabel.snp.makeConstraints { make in
+            make.centerX.top.equalToSuperview()
+        }
     }
 
     func tagCollectionViewSetting(){
@@ -795,7 +852,6 @@ class PersonalPlanChangeViewController: UIViewController {
         self.view.addSubview(tagFreedomBandButton)
         self.view.addSubview(tagAddButton)
         
-        
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(_:)), name:UIResponder.keyboardWillShowNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide(_:)), name: UIResponder.keyboardWillHideNotification, object: nil)
         
@@ -860,8 +916,7 @@ class PersonalPlanChangeViewController: UIViewController {
             make.width.equalToSuperview().dividedBy(1.45)
             make.height.equalToSuperview()
         }
-        
-        
+
 
     }
 
