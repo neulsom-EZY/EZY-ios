@@ -769,6 +769,21 @@ class RescheduleViewController: UIViewController {
             make.centerX.centerY.equalToSuperview()
             make.height.width.equalToSuperview().dividedBy(2.4)
         }
+
+        calendarLabelView.snp.makeConstraints { make in
+            make.left.equalTo(calendarViewButton.snp.right).offset(self.view.frame.width/13.8)
+            make.height.equalTo(calendarViewButton).dividedBy(1.2   )
+            make.right.equalToSuperview()
+            make.centerY.equalTo(calendarViewButton)
+        }
+                
+        calendarRepeatLabel.snp.makeConstraints { make in
+            make.bottom.left.equalToSuperview()
+        }
+        
+        calendarLabelButton.snp.makeConstraints { make in
+            make.left.top.equalToSuperview()
+        }
     }
     
     func timeViewSetting(){

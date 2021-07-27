@@ -63,14 +63,14 @@
 		6AE5BAFC26953E0F00A9731B /* EndTimeTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AE5BAFB26953E0F00A9731B /* EndTimeTableViewCell.swift */; };
 		6AE5BB012695746F00A9731B /* RepeatCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AE5BB002695746F00A9731B /* RepeatCollectionViewCell.swift */; };
 		6AE5BB0326957B0600A9731B /* RepeatCollectionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AE5BB0226957B0600A9731B /* RepeatCollectionViewModel.swift */; };
-		6AE5BB0726966E9E00A9731B /* Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AE5BB0526966E9E00A9731B /* Extension.swift */; };
-		6AE5BB0826966E9E00A9731B /* Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AE5BB0626966E9E00A9731B /* Utilities.swift */; };
 		6AE5BB0C269670CB00A9731B /* CustomGradientLoginBtnView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AE5BB09269670CB00A9731B /* CustomGradientLoginBtnView.swift */; };
 		6AE5BB0D269670CB00A9731B /* CustomGradientContinueBtnView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AE5BB0A269670CB00A9731B /* CustomGradientContinueBtnView.swift */; };
 		6AE5BB0E269670CB00A9731B /* CustomGradientTermsBtnView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AE5BB0B269670CB00A9731B /* CustomGradientTermsBtnView.swift */; };
 		6AE5BB102696733F00A9731B /* SelectLocationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AE5BB0F2696733F00A9731B /* SelectLocationViewController.swift */; };
 		6AE5BB14269690B200A9731B /* LocationTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AE5BB13269690B200A9731B /* LocationTableViewCell.swift */; };
 		6AE5BB1626969AFD00A9731B /* SelectLocationModalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AE5BB1526969AFD00A9731B /* SelectLocationModalView.swift */; };
+		6AF35BF726B00F9400CBA478 /* Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AF35BF526B00F9300CBA478 /* Utilities.swift */; };
+		6AF35BF826B00F9400CBA478 /* Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AF35BF626B00F9400CBA478 /* Extension.swift */; };
 		6AFB77F9267ECD6700B59482 /* WhiteBackgroundView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AFB77F8267ECD6700B59482 /* WhiteBackgroundView.swift */; };
 		6AFB77FE267F343500B59482 /* TagAddModalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AFB77FD267F343500B59482 /* TagAddModalView.swift */; };
 		6AFB7800267F812B00B59482 /* TagColorCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AFB77FF267F812B00B59482 /* TagColorCollectionViewCell.swift */; };
@@ -138,14 +138,14 @@
 		6AE5BAFB26953E0F00A9731B /* EndTimeTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EndTimeTableViewCell.swift; sourceTree = "<group>"; };
 		6AE5BB002695746F00A9731B /* RepeatCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepeatCollectionViewCell.swift; sourceTree = "<group>"; };
 		6AE5BB0226957B0600A9731B /* RepeatCollectionViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepeatCollectionViewModel.swift; sourceTree = "<group>"; };
-		6AE5BB0526966E9E00A9731B /* Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Extension.swift; path = ../../../../../Downloads/Utils/Extension.swift; sourceTree = "<group>"; };
-		6AE5BB0626966E9E00A9731B /* Utilities.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Utilities.swift; path = ../../../../../Downloads/Utils/Utilities.swift; sourceTree = "<group>"; };
 		6AE5BB09269670CB00A9731B /* CustomGradientLoginBtnView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomGradientLoginBtnView.swift; sourceTree = "<group>"; };
 		6AE5BB0A269670CB00A9731B /* CustomGradientContinueBtnView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomGradientContinueBtnView.swift; sourceTree = "<group>"; };
 		6AE5BB0B269670CB00A9731B /* CustomGradientTermsBtnView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomGradientTermsBtnView.swift; sourceTree = "<group>"; };
 		6AE5BB0F2696733F00A9731B /* SelectLocationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectLocationViewController.swift; sourceTree = "<group>"; };
 		6AE5BB13269690B200A9731B /* LocationTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationTableViewCell.swift; sourceTree = "<group>"; };
 		6AE5BB1526969AFD00A9731B /* SelectLocationModalView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectLocationModalView.swift; sourceTree = "<group>"; };
+		6AF35BF526B00F9300CBA478 /* Utilities.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Utilities.swift; sourceTree = "<group>"; };
+		6AF35BF626B00F9400CBA478 /* Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Extension.swift; sourceTree = "<group>"; };
 		6AFB77F8267ECD6700B59482 /* WhiteBackgroundView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WhiteBackgroundView.swift; sourceTree = "<group>"; };
 		6AFB77FD267F343500B59482 /* TagAddModalView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagAddModalView.swift; sourceTree = "<group>"; };
 		6AFB77FF267F812B00B59482 /* TagColorCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagColorCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -357,8 +357,8 @@
 		6AE5BB0426966DCA00A9731B /* Utils */ = {
 			isa = PBXGroup;
 			children = (
-				6AE5BB0526966E9E00A9731B /* Extension.swift */,
-				6AE5BB0626966E9E00A9731B /* Utilities.swift */,
+				6AF35BF626B00F9400CBA478 /* Extension.swift */,
+				6AF35BF526B00F9300CBA478 /* Utilities.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -509,10 +509,10 @@
 				6AE5BAD52693D46A00A9731B /* SelectTimeModalView.swift in Sources */,
 				6A4AE85D2678EBEE009E33CD /* GroupModifyDeleteModalView.swift in Sources */,
 				6AE5BB012695746F00A9731B /* RepeatCollectionViewCell.swift in Sources */,
+				6AF35BF726B00F9400CBA478 /* Utilities.swift in Sources */,
 				6A1E3E9026797CB600E7B198 /* DeleteModalView.swift in Sources */,
 				6AA76A0226636D2800B7E1F5 /* LoginViewController.swift in Sources */,
 				6AE5BB0E269670CB00A9731B /* CustomGradientTermsBtnView.swift in Sources */,
-				6AE5BB0826966E9E00A9731B /* Utilities.swift in Sources */,
 				6A705BB6267E3ABF001954CE /* RescheduleViewController.swift in Sources */,
 				6AA76A282663958B00B7E1F5 /* ShowScheduleViewController.swift in Sources */,
 				6A4EDA32266BD11600B809EC /* SettingViewController.swift in Sources */,
@@ -520,7 +520,6 @@
 				6A4EDA37266DA52A00B809EC /* SettingTableViewCell.swift in Sources */,
 				6A4EDA30266A336000B809EC /* NotificationTableView.swift in Sources */,
 				6A94934E2670DBC700CC5B37 /* SearchResultsView.swift in Sources */,
-				6AE5BB0726966E9E00A9731B /* Extension.swift in Sources */,
 				6AC1F4062684093700DDD08C /* TagColorCollectionViewModel.swift in Sources */,
 				6AE5BB0D269670CB00A9731B /* CustomGradientContinueBtnView.swift in Sources */,
 				6A4EDA41266E38E000B809EC /* GroupCollectionViewCell.swift in Sources */,
@@ -546,6 +545,7 @@
 				6AA769E726636AE700B7E1F5 /* SceneDelegate.swift in Sources */,
 				6A4EDA002668653200B809EC /* ScheduleTimeTableViewCell.swift in Sources */,
 				6A138F85266F866D00DBCE49 /* GroupManagementViewController.swift in Sources */,
+				6AF35BF826B00F9400CBA478 /* Extension.swift in Sources */,
 				6AFB7800267F812B00B59482 /* TagColorCollectionViewCell.swift in Sources */,
 				6A4EDA2E266A332100B809EC /* NotificationTableViewCell.swift in Sources */,
 				6A138F8D26703C1900DBCE49 /* selectedMemberCollectionViewCell.swift in Sources */,
