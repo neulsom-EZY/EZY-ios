@@ -60,6 +60,7 @@ class ShowPlanViewController: UIViewController{
         $0.textAlignment = .left
         $0.dynamicFont(fontSize: 22, currentFontName: "AppleSDGothicNeo-Bold")
         $0.updateGradientTextColor_vertical(gradientColors: questionMiddleLabelColorArray)
+
     }
     
     lazy var questionBottomLabel = UILabel().then{
@@ -79,6 +80,23 @@ class ShowPlanViewController: UIViewController{
         $0.setImage(UIImage(named: "EZY_PlanAddButton"), for: .normal)
     }
     
+    lazy var emptyPlanBoxView = UIView().then{
+        $0.backgroundColor = .white
+    }
+    
+    lazy var emptyLabel = UITextView().then{
+        $0.isScrollEnabled = false
+        $0.isEditable = false
+        $0.textColor = UIColor(red: 74/255, green: 74/255, blue: 74/255, alpha: 1)
+        $0.text = "아직 계획이 없네요 !\n가치있는 하루를 위해 계획을 세워보세요"
+        $0.textAlignment = .center
+        $0.dynamicFont(fontSize: 12, currentFontName: "AppleSDGothicNeo-Thin")
+    }
+    
+    lazy var emptyImageView = UIImageView().then{
+        $0.image = UIImage(named: "EZY_EmptyImage")
+    }
+    
     //MARK: Lifecycles
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -92,6 +110,28 @@ class ShowPlanViewController: UIViewController{
         layoutSetting()
         
         planCompleteModalViewSetting()
+        
+        self.view.addSubview(emptyPlanBoxView)
+        emptyPlanBoxView.addSubview(emptyLabel)
+        emptyPlanBoxView.addSubview(emptyImageView)
+        
+        emptyPlanBoxView.snp.makeConstraints { make in
+            make.top.equalTo(EZYLISTTitleLabel.snp.bottom).offset(self.view.frame.height/12.11)
+            make.bottom.equalToSuperview().offset(self.view.frame.height/12.11)
+            make.left.right.equalToSuperview()
+        }
+        
+        emptyImageView.snp.makeConstraints { make in
+            make.top.equalToSuperview()
+            make.centerX.equalToSuperview()
+            make.height.equalToSuperview().dividedBy(2)
+            make.width.equalToSuperview().dividedBy(1.4)
+        }
+        
+        emptyLabel.snp.makeConstraints { make in
+            make.top.equalTo(emptyImageView.snp.bottom).offset(self.view.frame.height/33.8)
+            make.centerX.equalToSuperview()
+        }
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -120,6 +160,7 @@ class ShowPlanViewController: UIViewController{
         scheduleTypeCollectionMainView.collectionView.dataSource = self
         
         scheduleTypeCollectionMainView.collectionView.register(ScheduleTypeCollectionViewCell.self, forCellWithReuseIdentifier: ScheduleTypeCollectionViewCell.ScheduleTypeCollectionViewIdentifier)
+        scheduleTypeCollectionMainView.backgroundColor = .clear
     }
     
     func ScheduleTimeTableMainViewSetting(){
@@ -128,6 +169,10 @@ class ShowPlanViewController: UIViewController{
         scheduleTimeTableMainView.tableView.delegate = self
         
         scheduleTimeTableMainView.tableView.register(ScheduleTimeTableViewCell.self, forCellReuseIdentifier: ScheduleTimeTableViewCell.ScheduleTimeTableViewIdentifier)
+        
+        scheduleTimeTableMainView.isHidden = true
+        scheduleTimeTableMainView.backgroundColor = .systemPurple
+
     }
     
     func planCompleteModalViewSetting(){
@@ -197,12 +242,11 @@ class ShowPlanViewController: UIViewController{
         }
         
         planCompleteModalView.isHidden = true
+        
+        self.view.backgroundColor = .white
     }
     
     func layoutSetting(){
-        self.view.backgroundColor = .white
-        
-        self.view.addSubview(scheduleTypeCollectionMainView)
         self.view.addSubview(questionTopLabel)
         self.view.addSubview(questionMiddleLabel)
         self.view.addSubview(questionBottomLabel)
@@ -212,7 +256,10 @@ class ShowPlanViewController: UIViewController{
         notificationButton.addSubview(badgeView)
         
         self.view.addSubview(scheduleTimeTableMainView)
+        self.view.addSubview(scheduleTypeCollectionMainView)
         
+        
+
         scheduleTimeTableMainView.snp.makeConstraints { make in
             scheduleTimeTableMainView.backgroundColor = .clear
             make.top.equalTo(EZYLISTTitleLabel.snp.bottom)
