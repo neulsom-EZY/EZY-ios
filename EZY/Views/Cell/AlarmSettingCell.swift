@@ -13,11 +13,22 @@ class AlarmSettingCell : UICollectionViewCell{
         $0.clipsToBounds = true
         $0.dynamicFont(fontSize: 12, weight: .bold)
     }
-
+    override var isSelected: Bool{
+        didSet{
+            if isSelected{
+                backgroundColor = .EZY_CDCDCD
+                bglabel.textColor = .EZY_FDFDFD
+            }
+            else {
+                bglabel.textColor = .EZY_CDCDCD
+                backgroundColor = .EZY_FDFDFD
+            }
+        }
+    }
     override init(frame: CGRect) {
         super.init(frame: frame)
         contentView.addSubview(bglabel)
-        contentView.backgroundColor = .EZY_FDFDFD
+//        contentView.backgroundColor = .EZY_FDFDFD
         bglabel.textAlignment = .center
         bglabel.snp.makeConstraints { (make) in
             make.center.equalToSuperview()

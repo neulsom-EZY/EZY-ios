@@ -166,7 +166,7 @@ class AddMyToDoViewController:UIViewController{
     //MARK: - Helpers
     func configureUI(){
         view.backgroundColor = .white
-        tagcollectionView.contentInset = UIEdgeInsets(top: 0, left: view.frame.height/29, bottom: 0, right: 0)
+        tagcollectionView.contentInset = UIEdgeInsets(top: 0, left: view.frame.height/29, bottom: 0, right: view.frame.height/29)
         alarmSettingcollectionView.contentInset = UIEdgeInsets(top: 0, left: view.frame.height/29, bottom: 0, right: 0)
 
         addView()
@@ -286,7 +286,6 @@ extension AddMyToDoViewController : UICollectionViewDelegateFlowLayout,UICollect
             let tagCell = collectionView.dequeueReusableCell(withReuseIdentifier: TagCollectionViewCell.identifier, for: indexPath) as! TagCollectionViewCell
             tagCell.backgroundColor = .clear
             tagCell.layer.borderWidth = 1
-            tagCell.isSelected = false
             tagCell.bglabel.text = tagData[indexPath.row]
             tagCell.bglabel.textColor = tagColor.randomElement()
             tagCell.layer.borderColor = tagCell.bglabel.textColor.cgColor
@@ -300,14 +299,11 @@ extension AddMyToDoViewController : UICollectionViewDelegateFlowLayout,UICollect
                 tagCell.bglabel.textColor = .EZY_BAC8FF
                 tagCell.layer.borderColor = tagCell.bglabel.textColor.cgColor
             }
-
-
             return tagCell
             
         }
         else{
             let alarmCell = collectionView.dequeueReusableCell(withReuseIdentifier: AlarmSettingCell.identifier, for: indexPath) as! AlarmSettingCell
-            alarmCell.backgroundColor = .EZY_FDFDFD
             alarmCell.layer.borderWidth = 1
             alarmCell.layer.borderColor = UIColor.EZY_CFCFCF.cgColor
             alarmCell.layer.cornerRadius = view.frame.height/81.2
@@ -331,6 +327,17 @@ extension AddMyToDoViewController : UICollectionViewDelegateFlowLayout,UICollect
         else{
             return view.frame.height/47.76
         }
+    }
+    func collectionView(_ collectionView: UICollectionView, shouldSelectItemAt indexPath: IndexPath) -> Bool {
+        let item = collectionView.cellForItem(at: indexPath)
+            if item?.isSelected ?? false {
+                collectionView.deselectItem(at: indexPath, animated: true)
+            } else {
+                collectionView.selectItem(at: indexPath, animated: true, scrollPosition: [])
+                return true
+            }
+
+            return false
     }
 }
 
