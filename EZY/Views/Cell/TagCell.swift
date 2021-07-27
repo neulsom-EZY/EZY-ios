@@ -1,14 +1,14 @@
 //
-//  alarmSettingCell.swift
+//  TagCell.swift
 //  EZY
 //
-//  Created by Ji-hoon Ahn on 2021/07/23.
+//  Created by Ji-hoon Ahn on 2021/07/27.
 //
 
 import UIKit
 
-class AlarmSettingCell : UICollectionViewCell{
-    static let identifier = "AlarmSettingCell"
+class TagCell : UICollectionViewCell{
+    static let identifier = "TagCell"
     let bglabel = UILabel().then {
         $0.clipsToBounds = true
         $0.dynamicFont(fontSize: 12, weight: .bold)
@@ -16,12 +16,12 @@ class AlarmSettingCell : UICollectionViewCell{
     override var isSelected: Bool{
         didSet{
             if isSelected{
-                backgroundColor = .EZY_B7B4B4
-                bglabel.textColor = .EZY_FDFDFD
+                backgroundColor = UIColor(cgColor: layer.borderColor!)
+                bglabel.textColor = .white
             }
             else {
-                bglabel.textColor = .EZY_B7B4B4
-                backgroundColor = .EZY_FDFDFD
+                bglabel.textColor = UIColor(cgColor: layer.borderColor!)
+                backgroundColor = .white
             }
         }
     }

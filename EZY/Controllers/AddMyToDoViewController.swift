@@ -99,7 +99,16 @@ class AddMyToDoViewController:UIViewController{
         return button
     }()
 
-    
+    fileprivate let tagCollectionView: UICollectionView = {
+        let layout = UICollectionViewFlowLayout()
+        let cv = UICollectionView(frame: .zero,collectionViewLayout: layout)
+        layout.scrollDirection = .horizontal
+        cv.translatesAutoresizingMaskIntoConstraints = false
+        cv.register(TagCell.self, forCellWithReuseIdentifier: TagCell.identifier)
+        cv.showsHorizontalScrollIndicator = false
+        cv.backgroundColor = .clear
+        return cv
+    }()
 
     fileprivate let alarmSettingcollectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
@@ -118,8 +127,8 @@ class AddMyToDoViewController:UIViewController{
     override func viewDidLoad() {
         super.viewDidLoad()
         configureUI()
- 
-
+        tagCollectionView.delegate = self
+        tagCollectionView.dataSource = self
         alarmSettingcollectionView.delegate = self
         alarmSettingcollectionView.dataSource = self
     }
@@ -155,8 +164,8 @@ class AddMyToDoViewController:UIViewController{
     //MARK: - Helpers
     func configureUI(){
         view.backgroundColor = .white
+        tagCollectionView.contentInset = UIEdgeInsets(top: 0, left: view.frame.height/29, bottom: 0, right: view.frame.height/29)
         alarmSettingcollectionView.contentInset = UIEdgeInsets(top: 0, left: view.frame.height/29, bottom: 0, right: 0)
-
         addView()
         cornerRadius()
         location()
@@ -174,6 +183,7 @@ class AddMyToDoViewController:UIViewController{
         view.addSubview(locationBtn)
         view.addSubview(explanationContainerView)
         view.addSubview(tagLabel)
+        view.addSubview(tagCollectionView)
         view.addSubview(addButton)
         view.addSubview(alarmSettings)
         view.addSubview(alarmSettingcollectionView)
@@ -232,11 +242,16 @@ class AddMyToDoViewController:UIViewController{
             make.left.equalTo(backbutton.snp.left)
             make.top.equalTo(explanationContainerView.snp.bottom).offset(view.frame.height/42.74)
         }
-
+        tagCollectionView.snp.makeConstraints { (make) in
+            make.top.equalTo(tagLabel.snp.bottom).offset(view.frame.height/58)
+            make.left.right.equalToSuperview()
+            make.width.equalTo(view.snp.width)
+            make.height.equalTo(view.frame.height/10.54)
+        }
        
         alarmSettings.snp.makeConstraints { (make) in
             make.left.equalTo(backbutton.snp.left)
-            make.top.equalTo(tagLabel.snp.bottom).offset(view.frame.height/36.91)
+            make.top.equalTo(tagCollectionView.snp.bottom).offset(view.frame.height/36.91)
         }
         alarmSettingcollectionView.snp.makeConstraints { (make) in
             make.top.equalTo(alarmSettings.snp.bottom).offset(view.frame.height/58)
@@ -254,13 +269,36 @@ class AddMyToDoViewController:UIViewController{
 }
 extension AddMyToDoViewController : UICollectionViewDelegateFlowLayout,UICollectionViewDataSource{
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        if collectionView == self.tagCollectionView{
+            return tagData.count
+        }else if collectionView == self.alarmSettingcollectionView{
             return alarmData.count
-
+        }
+        return 0
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
- 
-
+        if collectionView == self.tagCollectionView{
+            let tagCell = collectionView.dequeueReusableCell(withReuseIdentifier: TagCell.identifier, for: indexPath) as! TagCell
+            tagCell.isSelected = false
+            tagCell.layer.borderWidth = 1
+            tagCell.bglabel.text = tagData[indexPath.row]
+            tagCell.bglabel.textColor = tagColor.randomElement()
+            tagCell.layer.borderColor = tagCell.bglabel.textColor.cgColor
+            tagCell.layer.cornerRadius = tagCell.frame.height/2
+            if indexPath.item == 0 {
+                tagCell.bglabel.text = "선택해제"
+                tagCell.bglabel.textColor = .EZY_B7B4B4
+                tagCell.layer.borderColor = UIColor.EZY_C9C9C9.cgColor
+                
+            }
+            if indexPath.item == 2{
+                tagCell.bglabel.text = "+ 추가"
+                tagCell.bglabel.textColor = .EZY_BAC8FF
+                tagCell.layer.borderColor = UIColor.EZY_BAC8FF.cgColor
+            }
+            return tagCell
+        }else{
             let alarmCell = collectionView.dequeueReusableCell(withReuseIdentifier: AlarmSettingCell.identifier, for: indexPath) as! AlarmSettingCell
             alarmCell.layer.borderWidth = 1
             alarmCell.layer.borderColor = UIColor.EZY_CFCFCF.cgColor
@@ -268,17 +306,22 @@ extension AddMyToDoViewController : UICollectionViewDelegateFlowLayout,UICollect
             alarmCell.bglabel.text = alarmData[indexPath.row]
             alarmCell.bglabel.textColor = .EZY_B7B4B4
             return alarmCell
-        
+        }
     }
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-
+        if collectionView == self.tagCollectionView{
+            return CGSize(width: view.frame.height/9.66, height: view.frame.height/25.375)
+        }else{
             return CGSize(width: view.frame.height/9.78, height: view.frame.height/23.88)
-        
+        }
     }
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
-
+        if collectionView == self.tagCollectionView{
+            return view.frame.height/50.973
+        }else if collectionView == self.alarmSettingcollectionView{
             return view.frame.height/47.76
-        
+        }
+        return 0
     }
     func collectionView(_ collectionView: UICollectionView, shouldSelectItemAt indexPath: IndexPath) -> Bool {
         let item = collectionView.cellForItem(at: indexPath)
