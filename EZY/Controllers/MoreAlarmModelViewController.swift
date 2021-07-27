@@ -21,16 +21,16 @@ class MoreAlarmModelViewController : UIViewController{
     }
     let transparentView = UIView()
     
-    fileprivate let amPmCollectionView: UICollectionView = {
-        let layout = UICollectionViewFlowLayout()
-        let cv = UICollectionView(frame: .zero, collectionViewLayout: layout)
-        layout.scrollDirection = .vertical
-        cv.translatesAutoresizingMaskIntoConstraints = false
-        cv.register(TagCollectionViewCell.self, forCellWithReuseIdentifier: TagCollectionViewCell.identifier)
-        cv.showsHorizontalScrollIndicator = false
-        cv.backgroundColor = .clear
-        return cv
-    }()
+//    fileprivate let amPmCollectionView: UICollectionView = {
+//        let layout = UICollectionViewFlowLayout()
+//        let cv = UICollectionView(frame: .zero, collectionViewLayout: layout)
+//        layout.scrollDirection = .vertical
+//        cv.translatesAutoresizingMaskIntoConstraints = false
+//        cv.register(TagCollectionViewCell.self, forCellWithReuseIdentifier: TagCollectionViewCell.identifier)
+//        cv.showsHorizontalScrollIndicator = false
+//        cv.backgroundColor = .clear
+//        return cv
+//    }()
 
     
     static func instance() -> MoreAlarmModelViewController {
@@ -53,7 +53,7 @@ class MoreAlarmModelViewController : UIViewController{
     func configureUI(){
         view.addSubview(transparentView)
         view.addSubview(bgView)
-        view.addSubview(amPmCollectionView)
+//        view.addSubview(amPmCollectionView)
     }
 }
 //extension MoreAlarmModelViewController : UICollectionViewDelegateFlowLayout,UICollectionViewDataSource{
