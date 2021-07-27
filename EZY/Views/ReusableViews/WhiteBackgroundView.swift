@@ -25,7 +25,6 @@ class WhiteBackgroundView: UIButton {
     
     func dataSetting(iconImage: UIImage){
         iconImageButton.setImage(iconImage, for: .normal)
-
     }
     
 }

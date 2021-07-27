@@ -7,9 +7,7 @@
 
 import UIKit
 
-class RescheduleViewController: UIViewController {
-    
-    lazy var topView = TopView()
+class PersonalPlanChangeViewController: UIViewController {
     
     lazy var calendarViewButton = WhiteBackgroundView()
     
@@ -25,13 +23,13 @@ class RescheduleViewController: UIViewController {
     
     var isChecked: [Bool] = [true, false, false, false]
     
-    var RepeatModels: [RepeatCollectionViewModel] = [RepeatCollectionViewModel(backgroundColr: UIColor(red: 255/255, green: 188/255, blue: 188/255, alpha: 1), isSelected: false),
-                                                     RepeatCollectionViewModel(backgroundColr: UIColor(red: 255/255, green: 188/255, blue: 188/255, alpha: 1), isSelected: false),
-                                                     RepeatCollectionViewModel(backgroundColr: UIColor(red: 255/255, green: 188/255, blue: 188/255, alpha: 1), isSelected: false),
-                                                     RepeatCollectionViewModel(backgroundColr: UIColor(red: 255/255, green: 188/255, blue: 188/255, alpha: 1), isSelected: false),
-                                                     RepeatCollectionViewModel(backgroundColr: UIColor(red: 255/255, green: 188/255, blue: 188/255, alpha: 1), isSelected: false),
-                                                     RepeatCollectionViewModel(backgroundColr: UIColor(red: 255/255, green: 188/255, blue: 188/255, alpha: 1), isSelected: false),
-                                                     RepeatCollectionViewModel(backgroundColr: UIColor(red: 255/255, green: 188/255, blue: 188/255, alpha: 1), isSelected: false)]
+    var RepeatModels: [RepeatCollectionViewModel] = [RepeatCollectionViewModel(backgroundColr: UIColor(red: 255/255, green: 188/255, blue: 188/255, alpha: 1), isSelected: true),
+                                                     RepeatCollectionViewModel(backgroundColr: UIColor(red: 255/255, green: 188/255, blue: 188/255, alpha: 1), isSelected: true),
+                                                     RepeatCollectionViewModel(backgroundColr: UIColor(red: 255/255, green: 188/255, blue: 188/255, alpha: 1), isSelected: true),
+                                                     RepeatCollectionViewModel(backgroundColr: UIColor(red: 255/255, green: 188/255, blue: 188/255, alpha: 1), isSelected: true),
+                                                     RepeatCollectionViewModel(backgroundColr: UIColor(red: 255/255, green: 188/255, blue: 188/255, alpha: 1), isSelected: true),
+                                                     RepeatCollectionViewModel(backgroundColr: UIColor(red: 255/255, green: 188/255, blue: 188/255, alpha: 1), isSelected: true),
+                                                     RepeatCollectionViewModel(backgroundColr: UIColor(red: 255/255, green: 188/255, blue: 188/255, alpha: 1), isSelected: true)]
     
     var TagColorModels: [TagColorCollectionViewModel] = [TagColorCollectionViewModel(backgroundColor: UIColor(red: 186/255, green: 200/255, blue: 255/255, alpha: 1), isSelected: false),
                                                  TagColorCollectionViewModel(backgroundColor: UIColor(red: 196/255, green: 200/255, blue: 255/255, alpha: 1), isSelected: true),
@@ -47,9 +45,27 @@ class RescheduleViewController: UIViewController {
                                                  TagColorCollectionViewModel(backgroundColor: UIColor(red: 255/255, green: 160/255, blue: 255/255, alpha: 1), isSelected: true),
                                                  TagColorCollectionViewModel(backgroundColor: UIColor(red: 255/255, green: 150/255, blue: 255/255, alpha: 1), isSelected: true)]
     
+    var TagModels: [TagCollectionViewModel] = [TagCollectionViewModel(backgroundColor: UIColor(red: 186/255, green: 200/255, blue: 255/255, alpha: 1), isSelected: true),
+                                               TagCollectionViewModel(backgroundColor: UIColor(red: 196/255, green: 200/255, blue: 255/255, alpha: 1), isSelected: true),
+                                               TagCollectionViewModel(backgroundColor: UIColor(red: 206/255, green: 200/255, blue: 255/255, alpha: 1), isSelected: false),
+                                               TagCollectionViewModel(backgroundColor: UIColor(red: 216/255, green: 200/255, blue: 255/255, alpha: 1), isSelected: true),
+                                               TagCollectionViewModel(backgroundColor: UIColor(red: 226/255, green: 200/255, blue: 255/255, alpha: 1), isSelected: true),
+                                               TagCollectionViewModel(backgroundColor: UIColor(red: 236/255, green: 200/255, blue: 255/255, alpha: 1), isSelected: true),
+                                               TagCollectionViewModel(backgroundColor: UIColor(red: 246/255, green: 200/255, blue: 255/255, alpha: 1), isSelected: true),
+                                               TagCollectionViewModel(backgroundColor: UIColor(red: 255/255, green: 200/255, blue: 255/255, alpha: 1), isSelected: true),
+                                               TagCollectionViewModel(backgroundColor: UIColor(red: 255/255, green: 190/255, blue: 255/255, alpha: 1), isSelected: true),
+                                               TagCollectionViewModel(backgroundColor: UIColor(red: 255/255, green: 180/255, blue: 255/255, alpha: 1), isSelected: true),
+                                               TagCollectionViewModel(backgroundColor: UIColor(red: 255/255, green: 170/255, blue: 255/255, alpha: 1), isSelected: true),
+                                               TagCollectionViewModel(backgroundColor: UIColor(red: 255/255, green: 160/255, blue: 255/255, alpha: 1), isSelected: true),
+                                               TagCollectionViewModel(backgroundColor: UIColor(red: 255/255, green: 150/255, blue: 255/255, alpha: 1), isSelected: true)]
+    
     lazy var tagButton: [UIButton] = [tagStudyButton, tagWalkButton, tagMajorBandButton, tagFreedomBandButton]
     
-    var preciousSelectedIndex = 0
+    var tagColorPreciousSelectedIndex = 0
+    
+    var tagPreciousSelectedIndex = 2
+    
+    var tagNameTextArray = ["공부", "산책", "토익", "코딩", "요리", "운동", "정리", "청소","공부", "산책", "토익", "코딩", "요리", "운동", "정리", "청소","공부", "산책", "토익", "코딩", "요리", "운동", "정리", "청소","공부", "산책", "토익", "코딩", "요리", "운동", "정리", "청소"]
     
     var dayArray = ["24","25","26","27","28","29","30","1","2","3","24","25","26","27","28","29","30","1","2","3"]
     
@@ -78,6 +94,14 @@ class RescheduleViewController: UIViewController {
     let repeatCollectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewLayout()).then {
         let layout: UICollectionViewFlowLayout = UICollectionViewFlowLayout()
         layout.itemSize = CGSize(width: 30, height: 30)
+        layout.scrollDirection = .horizontal
+        $0.collectionViewLayout = layout
+        $0.showsHorizontalScrollIndicator = false
+        $0.backgroundColor = .white
+    }
+    
+    let tagCollectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewLayout()).then {
+        let layout: UICollectionViewFlowLayout = UICollectionViewFlowLayout()
         layout.scrollDirection = .horizontal
         $0.collectionViewLayout = layout
         $0.showsHorizontalScrollIndicator = false
@@ -114,10 +138,20 @@ class RescheduleViewController: UIViewController {
         $0.dynamicFont(fontSize: 14, currentFontName: "AppleSDGothicNeo-Medium")
     }
     
+    lazy var calendarLabelView = UIView().then{
+        $0.backgroundColor = UIColor.clear
+    }
+    
     lazy var calendarLabelButton = UIButton().then {
         $0.setTitle("2021. 05. 09 화요일", for: .normal)
         $0.setTitleColor(UIColor(red: 101/255, green: 101/255, blue: 101/255, alpha: 1), for: .normal)
         $0.dynamicFont(fontSize: 16, currentFontName: "Poppins-Regular")
+    }
+    
+    lazy var calendarRepeatLabel = UILabel().then{
+        $0.text = "월, 화, 수, 목, 금, 반복"
+        $0.textColor = UIColor(red: 166/255, green: 166/255, blue: 166/255, alpha: 1)
+        $0.dynamicFont(fontSize: 10, currentFontName: "AppleSDGothicNeo-Light")
     }
     
     lazy var timeLabelButton = UIButton().then {
@@ -198,17 +232,44 @@ class RescheduleViewController: UIViewController {
         $0.dynamicFont(fontSize: 12, currentFontName: "AppleSDGothicNeo-Bold")
     }
     
+    lazy var changeButton = UIButton().then {
+        $0.setTitle("변 경", for: .normal)
+        $0.layer.cornerRadius = 10
+        $0.backgroundColor = UIColor(red: 186/255, green: 200/255, blue: 255/255, alpha: 1)
+        $0.dynamicFont(fontSize: 14, currentFontName: "AppleSDGothicNeo-SemiBold")
+    }
     
+    lazy var mainTitleLabel = UILabel().then{
+        $0.text = "나의 할 일 변경"
+        $0.textColor = UIColor(red: 154/255, green: 174/255, blue: 254/255, alpha: 1)
+        $0.dynamicFont(fontSize: 22, currentFontName: "AppleSDGothicNeo-SemiBold")
+    }
     
+    lazy var notificationTitleLabel = UILabel().then {
+        $0.text = "알림 설정"
+        $0.textColor = UIColor(red: 182/255, green: 182/255, blue: 182/255, alpha: 1)
+        $0.dynamicFont(fontSize: 14, currentFontName: "AppleSDGothicNeo-Bold")
+    }
     
+    lazy var notificationBackgroundView = UIButton().then {
+        $0.backgroundColor = UIColor(red: 253/255, green: 253/255, blue: 253/255, alpha: 1)
+        $0.layer.borderWidth = 0.5
+        $0.layer.borderColor = UIColor(red: 207/255, green: 207/255, blue: 207/255, alpha: 1).cgColor
+        $0.layer.cornerRadius = 10
+        $0.setTitle("오전 12:12", for: .normal)
+        $0.dynamicFont(fontSize: 12, currentFontName: "Poppins-Light")
+        $0.setTitleColor(UIColor(red: 172/255, green: 172/255, blue: 172/255, alpha: 1), for: .normal)
+    }
+    
+    lazy var backButton = UIButton().then{
+        $0.setImage(UIImage(named: "EZY_LocationBackButton"), for: .normal)
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         self.view.backgroundColor = .white
-            
-        topViewSetting()
-        
+                
         layoutSetting()
         
         calendarViewSetting()
@@ -218,6 +279,8 @@ class RescheduleViewController: UIViewController {
         locationViewSetting()
 
         labelSetting()
+        
+        tagCollectionViewSetting()
         
         tagAddModalViewSetting()
         
@@ -233,12 +296,50 @@ class RescheduleViewController: UIViewController {
         
         repeatCollectionViewSetting()
     }
+
+    func tagCollectionViewSetting(){
+        tagCollectionView.delegate = self
+        tagCollectionView.dataSource = self
+        
+        tagCollectionView.register(TagCollectionViewCell.self, forCellWithReuseIdentifier: TagCollectionViewCell.reuseId)
+        
+        self.view.addSubview(tagCollectionView)
+                
+        tagCollectionView.snp.makeConstraints { make in
+            tagCollectionView.backgroundColor = .clear
+            
+            make.top.equalTo(tagLabel.snp.bottom).offset(self.view.frame.height/60)
+            make.left.equalTo(tagLabel)
+            make.height.equalToSuperview().dividedBy(10)
+            make.right.equalToSuperview()
+        }
+        
+        notificationTitleLabel.snp.makeConstraints { make in
+            make.left.equalTo(tagCollectionView)
+            make.top.equalTo(tagCollectionView.snp.bottom).offset(self.view.frame.height/38.6)
+        }
+        
+        notificationBackgroundView.snp.makeConstraints { make in
+            make.left.equalTo(notificationTitleLabel)
+            make.top.equalTo(notificationTitleLabel.snp.bottom).offset(self.view.frame.height/80)
+            make.height.equalToSuperview().dividedBy(22)
+            make.width.equalToSuperview().dividedBy(4.07)
+        }
+        
+        
+        changeButton.snp.makeConstraints { make in
+            make.top.equalTo(notificationBackgroundView.snp.bottom).offset(self.view.frame.height/38.6)
+            make.width.equalToSuperview().dividedBy(1.17)
+            make.centerX.equalToSuperview()
+            make.height.equalToSuperview().dividedBy(18.6)
+        }
+    }
     
     func repeatCollectionViewSetting(){
         repeatCollectionView.delegate = self
         repeatCollectionView.dataSource = self
         
-        repeatCollectionView.register(RepeatCollectionViewCell.self, forCellWithReuseIdentifier: RepeatCollectionViewCell.reuseId)
+        repeatCollectionView.register(PersonalPlanAddRepeatDayCollectionViewCell.self, forCellWithReuseIdentifier: PersonalPlanAddRepeatDayCollectionViewCell.reuseId)
         
         selectCalendarModalView.modalBackgroundView.addSubview(repeatCollectionView)
         
@@ -546,8 +647,6 @@ class RescheduleViewController: UIViewController {
         
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(_:)), name:UIResponder.keyboardWillShowNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide(_:)), name: UIResponder.keyboardWillHideNotification, object: nil)
-        
-
 
         tagColorCollectionView.showsHorizontalScrollIndicator = false
         tagColorCollectionView.dataSource = self
@@ -572,11 +671,13 @@ class RescheduleViewController: UIViewController {
     
     @objc //MARK: 모달 창 올리기
     func keyboardWillShow(_ sender: Notification) {
+        explanationBackgroundView.frame.origin.y = self.view.frame.height/2.2
         tagAddModalView.modalBackgroundView.frame.origin.y = self.view.frame.height/5
     }
 
     @objc //MARK: 모달 창 원래대로
     func keyboardWillHide(_ sender: Notification) {
+        explanationBackgroundView.frame.origin.y = self.view.frame.height/1.85
         tagAddModalView.modalBackgroundView.frame.origin.y = (self.view.frame.height/2) - (tagAddModalView.modalBackgroundView.frame.height/2)
     }
     
@@ -662,16 +763,29 @@ class RescheduleViewController: UIViewController {
         
     }
     
-    
     @objc func timeIconImageButton(sender:UIButton){
         selectTimeModalView.isHidden = false
     }
     
+    @objc func changeButtonClicked(sender:UIButton){
+        self.navigationController?.popViewController(animated: true)
+    }
+    
+    @objc func backButtonClicked(sender:UIButton){
+        self.navigationController?.popViewController(animated: true)
+    }
+    
     func layoutSetting(){
+        self.view.addSubview(backButton)
+        self.view.addSubview(mainTitleLabel)
+        self.view.addSubview(notificationTitleLabel)
+        self.view.addSubview(notificationBackgroundView)
         self.view.addSubview(titleBackgroundView)
         titleBackgroundView.addSubview(titleLabel)
         titleBackgroundView.addSubview(titleTextField)
-        self.view.addSubview(calendarLabelButton)
+        self.view.addSubview(calendarLabelView)
+        calendarLabelView.addSubview(calendarRepeatLabel)
+        calendarLabelView.addSubview(calendarLabelButton)
         self.view.addSubview(timeLabelButton)
         self.view.addSubview(locationLabelButton)
         self.view.addSubview(tagLabel)
@@ -681,11 +795,33 @@ class RescheduleViewController: UIViewController {
         self.view.addSubview(tagFreedomBandButton)
         self.view.addSubview(tagAddButton)
         
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(_:)), name:UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide(_:)), name: UIResponder.keyboardWillHideNotification, object: nil)
+        
+        explanationBackgroundView.addSubview(explanationTitleLabel)
+        explanationBackgroundView.addSubview(explanationTextView)
+        self.view.addSubview(changeButton)
+        
+        changeButton.addTarget(self, action: #selector(changeButtonClicked(sender:)), for: .touchUpInside)
+        backButton.addTarget(self, action: #selector(backButtonClicked(sender:)), for: .touchUpInside)
+        
         tagStudyButton.tag = 0
         tagWalkButton.tag = 1
         tagMajorBandButton.tag = 2
         tagFreedomBandButton.tag = 3
         
+        backButton.snp.makeConstraints { make in
+            make.top.equalTo(self.view.safeAreaLayoutGuide).offset(self.view.frame.height/47.7)
+            make.left.equalToSuperview().offset(self.view.frame.width/12)
+            make.width.equalToSuperview().dividedBy(33.8/2)
+            make.height.equalTo(backButton.snp.width)
+        }
+        
+        mainTitleLabel.snp.makeConstraints { make in
+            make.left.equalTo(backButton)
+            make.top.equalTo(backButton.snp.bottom).offset(self.view.frame.height/50)
+        }
         
         calendarLabelButton.addTarget(self,action:#selector(calendarViewButtonClicked(sender:)),
                                  for:.touchUpInside)
@@ -706,15 +842,11 @@ class RescheduleViewController: UIViewController {
         tagAddButton.addTarget(self,action:#selector(tagAddButtonClicked(sender:)),
                                  for:.touchUpInside)
         
-        self.view.addSubview(explanationBackgroundView)
-        explanationBackgroundView.addSubview(explanationTitleLabel)
-        explanationBackgroundView.addSubview(explanationTextView)
-        
         titleBackgroundView.snp.makeConstraints { make in
             make.centerX.equalToSuperview()
             make.left.equalToSuperview().offset(self.view.frame.width/13.3)
             make.height.equalToSuperview().dividedBy(12)
-            make.top.equalTo(topView.snp.bottom).offset(self.view.frame.height/19.8)
+            make.top.equalTo(mainTitleLabel.snp.bottom).offset(self.view.frame.height/30)
         }
         
         titleLabel.snp.makeConstraints { make in
@@ -729,21 +861,10 @@ class RescheduleViewController: UIViewController {
             make.height.equalToSuperview()
         }
         
-        explanationTitleLabel.snp.makeConstraints { make in
-            make.centerY.equalToSuperview()
-            make.left.equalToSuperview().offset(self.view.frame.width/17.8)
-        }
         
-        explanationTextView.snp.makeConstraints { make in
-            make.centerY.equalToSuperview()
-            make.left.equalTo(explanationTitleLabel.snp.right).offset(self.view.frame.width/17.8)
-            make.width.equalToSuperview().dividedBy(1.45)
-            make.height.equalToSuperview().dividedBy(1.3)
-        }
 
     }
 
-    
     func calendarViewSetting(){
         self.view.addSubview(calendarViewButton)
         calendarViewButton.addSubview(calendarViewButton.backgroundView)
@@ -755,11 +876,12 @@ class RescheduleViewController: UIViewController {
         calendarViewButton.iconImageButton.addTarget(self, action: #selector(calendarViewButtonClicked(sender:)), for: .touchUpInside)
         
         calendarViewButton.snp.makeConstraints { make in
-            make.top.equalTo(titleBackgroundView.snp.bottom).offset(self.view.frame.height/30)
+            make.top.equalTo(titleBackgroundView.snp.bottom).offset(self.view.frame.height/50)
             make.height.equalToSuperview().dividedBy(16)
             make.width.equalTo(calendarViewButton.snp.height)
             make.left.equalTo(titleBackgroundView)
         }
+        
         
         calendarViewButton.backgroundView.snp.makeConstraints { make in
             make.top.left.bottom.right.equalToSuperview()
@@ -769,10 +891,17 @@ class RescheduleViewController: UIViewController {
             make.centerX.centerY.equalToSuperview()
             make.height.width.equalToSuperview().dividedBy(2.4)
         }
+<<<<<<< HEAD:EZY/Controllers/RescheduleViewController.swift
 
         calendarLabelView.snp.makeConstraints { make in
             make.left.equalTo(calendarViewButton.snp.right).offset(self.view.frame.width/13.8)
             make.height.equalTo(calendarViewButton).dividedBy(1.2   )
+=======
+        
+        calendarLabelView.snp.makeConstraints { make in
+            make.left.equalTo(calendarViewButton.snp.right).offset(self.view.frame.width/13.8)
+            make.height.equalTo(calendarViewButton).dividedBy(1.2)
+>>>>>>> bf0fd9a1819a39b6df353948a29bbbfae576866e:EZY/Controllers/PersonalPlanChangeViewController.swift
             make.right.equalToSuperview()
             make.centerY.equalTo(calendarViewButton)
         }
@@ -818,7 +947,8 @@ class RescheduleViewController: UIViewController {
         self.view.addSubview(locationViewButton)
         locationViewButton.addSubview(locationViewButton.backgroundView)
         locationViewButton.backgroundView.addSubview(locationViewButton.iconImageButton)
-        
+        self.view.addSubview(explanationBackgroundView)
+
         locationViewButton.addTarget(self, action: #selector(locationViewButtonClicked(sender:)), for: .touchUpInside)
         
         locationViewButton.dataSetting(iconImage: UIImage(named: "EZY_Location.svg")!)
@@ -843,7 +973,7 @@ class RescheduleViewController: UIViewController {
             make.centerX.equalToSuperview()
             make.left.equalTo(titleBackgroundView)
             make.height.equalToSuperview().dividedBy(12)
-            make.top.equalTo(locationViewButton.snp.bottom).offset(self.view.frame.height/30)
+            make.top.equalTo(locationViewButton.snp.bottom).offset(self.view.frame.height/50)
         }
         
         tagLabel.snp.makeConstraints { make in
@@ -851,72 +981,22 @@ class RescheduleViewController: UIViewController {
             make.top.equalTo(explanationBackgroundView.snp.bottom).offset(self.view.frame.height/38.6)
         }
         
-        tagStudyButton.snp.makeConstraints{ make in
-            make.top.equalTo(tagLabel.snp.bottom).offset(self.view.frame.height/47.7)
-            make.left.equalTo(tagLabel)
-            make.height.equalToSuperview().dividedBy(25.3)
-            make.width.equalToSuperview().dividedBy(4.4)
-            
-            tagStudyButton.layer.cornerRadius = (self.view.frame.height/25.3)/2
+        explanationTitleLabel.snp.makeConstraints { make in
+            make.centerY.equalToSuperview()
+            make.left.equalToSuperview().offset(self.view.frame.width/17.8)
         }
         
-        tagWalkButton.snp.makeConstraints { make in
-            make.top.equalTo(tagStudyButton)
-            make.left.equalTo(tagStudyButton.snp.right).offset(self.view.frame.width/25)
-            make.height.width.equalTo(tagStudyButton)
-            
-            tagWalkButton.layer.cornerRadius = (self.view.frame.height/25.3)/2
+        explanationTextView.snp.makeConstraints { make in
+            make.centerY.equalToSuperview()
+            make.left.equalTo(explanationTitleLabel.snp.right).offset(self.view.frame.width/17.8)
+            make.width.equalToSuperview().dividedBy(1.45)
+            make.height.equalToSuperview().dividedBy(1.3)
         }
         
-        tagMajorBandButton.snp.makeConstraints { make in
-            make.top.equalTo(tagWalkButton)
-            make.left.equalTo(tagWalkButton.snp.right).offset(self.view.frame.width/25)
-            make.height.width.equalTo(tagStudyButton)
-            
-            tagMajorBandButton.layer.cornerRadius = (self.view.frame.height/25.3)/2
-        }
-        
-        tagFreedomBandButton.snp.makeConstraints { make in
-            make.top.equalTo(tagStudyButton.snp.bottom).offset(self.view.frame.height/60)
-            make.left.equalTo(tagStudyButton.snp.left)
-            make.height.width.equalTo(tagStudyButton)
-            
-            tagFreedomBandButton.layer.cornerRadius = (self.view.frame.height/25.3)/2
-        }
-        
-        tagAddButton.snp.makeConstraints { make in
-            make.top.equalTo(tagFreedomBandButton)
-            make.left.equalTo(tagFreedomBandButton.snp.right).offset(self.view.frame.width/25)
-            make.height.width.equalTo(tagStudyButton)
-            
-            tagAddButton.layer.cornerRadius = (self.view.frame.height/25.3)/2
-        }
-        
-    }
-    
-    
-    func topViewSetting() {
-        self.view.addSubview(topView)
-        topView.addSubview(topView.backButton)
-        topView.addSubview(topView.titleLabel)
-        
-        topView.topViewDataSetting(backButtonImage: UIImage(named: "EZY_SettingBackButton")!, titleLabelText: "나의 할 일 변경",
-                                   textColor: UIColor(red: 154/255, green: 174/255, blue: 253/255, alpha: 1))
-
-        topView.topViewLayoutSetting(screenHeight: Double(self.view.bounds.height), screenWeight: Double(self.view.bounds.width))
-        
-        topView.snp.makeConstraints { make in
-            make.left.right.equalToSuperview()
-            make.top.equalTo(self.view.safeAreaLayoutGuide)
-            make.height.equalToSuperview().dividedBy(8)
-        }
     }
     
     func labelSetting(){
-        calendarLabelButton.snp.makeConstraints { make in
-            make.centerY.equalTo(calendarViewButton)
-            make.left.equalTo(calendarViewButton.snp.right).offset(self.view.frame.width/13.8)
-        }
+
         
         timeLabelButton.snp.makeConstraints { make in
             make.centerY.equalTo(timeViewButton)
@@ -931,7 +1011,7 @@ class RescheduleViewController: UIViewController {
     
 }
 
-extension RescheduleViewController: UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout{
+extension PersonalPlanChangeViewController: UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout{
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         if collectionView == tagColorCollectionView{
             return TagColorModels.count
@@ -939,6 +1019,8 @@ extension RescheduleViewController: UICollectionViewDataSource, UICollectionView
             return dayArray.count
         }else if collectionView == repeatCollectionView{
             return 7
+        }else if collectionView == tagCollectionView{
+            return TagModels.count
         }
 
         return Int()
@@ -962,13 +1044,44 @@ extension RescheduleViewController: UICollectionViewDataSource, UICollectionView
 
             return cell
         }else if collectionView == repeatCollectionView{
-            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: RepeatCollectionViewCell.reuseId, for: indexPath) as! RepeatCollectionViewCell
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: PersonalPlanAddRepeatDayCollectionViewCell.reuseId, for: indexPath) as! PersonalPlanAddRepeatDayCollectionViewCell
             
             cell.label.text = RepeatDayOfTheWeekArray[indexPath.row]
             cell.backgroundColor = .white
             
             cell.setModel(RepeatModels[indexPath.row])
             return cell
+        }else if collectionView == tagCollectionView{
+            if indexPath == [0,2]{
+                let cell = collectionView.dequeueReusableCell(withReuseIdentifier: TagCollectionViewCell.reuseId, for: indexPath) as! TagCollectionViewCell
+                
+                cell.tagNameLabel.text = "선택 안 함"
+                cell.tagNameLabel.textColor = UIColor(red: 187/255, green: 187/255, blue: 187/255, alpha: 1)
+                cell.tagBackgroundView.backgroundColor = .white
+                cell.tagBackgroundView.layer.borderWidth = 1.3
+                cell.tagBackgroundView.layer.borderColor = UIColor(red: 187/255, green: 187/255, blue: 187/255, alpha: 1).cgColor
+                
+                cell.setModel(TagModels[indexPath.row])
+                
+                return cell
+            }else if indexPath == [0,0]{
+                let cell = collectionView.dequeueReusableCell(withReuseIdentifier: TagCollectionViewCell.reuseId, for: indexPath) as! TagCollectionViewCell
+                
+                cell.tagNameLabel.text = "+ 추가"
+                cell.tagNameLabel.textColor = UIColor(red: 186/255, green: 200/255, blue: 255/255, alpha: 1)
+                cell.tagBackgroundView.backgroundColor = .white
+                cell.tagBackgroundView.layer.borderWidth = 1.3
+                cell.tagBackgroundView.layer.borderColor = UIColor(red: 186/255, green: 200/255, blue: 255/255, alpha: 1).cgColor
+                
+                return cell
+            }else{
+                let cell = collectionView.dequeueReusableCell(withReuseIdentifier: TagCollectionViewCell.reuseId, for: indexPath) as! TagCollectionViewCell
+                
+                cell.setModel(TagModels[indexPath.row])
+                
+                cell.tagNameLabel.text = tagNameTextArray[indexPath.row]
+                return cell
+            }
         }
         
         return UICollectionViewCell()
@@ -979,22 +1092,40 @@ extension RescheduleViewController: UICollectionViewDataSource, UICollectionView
         if collectionView == tagColorCollectionView{
             if TagColorModels[indexPath.row].isSelected {
                 
-                TagColorModels[preciousSelectedIndex].isSelected.toggle()
+                TagColorModels[tagColorPreciousSelectedIndex].isSelected.toggle()
                 
                 if TagColorModels.filter({ $0.isSelected }).count >= 1 {
                     TagColorModels[indexPath.row].isSelected.toggle()
                     
-                    preciousSelectedIndex = indexPath.row
+                    tagColorPreciousSelectedIndex = indexPath.row
                 }
             }
+            
             collectionView.reloadData()
         }else if collectionView == repeatCollectionView{
             RepeatModels[indexPath.row].isSelected.toggle()
-            print("\(indexPath.row)번째 cell - \(RepeatModels[indexPath.row].isSelected)")
                 
             collectionView.reloadData()
+        }else if collectionView == tagCollectionView{
+            print("click\(indexPath)")
+            print("preciousSelectedIndex\(tagPreciousSelectedIndex)")
+            if indexPath == [0,0]{
+                tagAddModalView.isHidden = false
+            }else{
+                if TagModels[indexPath.row].isSelected {
+                    
+                    TagModels[tagPreciousSelectedIndex].isSelected.toggle()
+                    
+                    if TagModels.filter({ $0.isSelected }).count >= 1 {
+                        TagModels[indexPath.row].isSelected.toggle()
+                        
+                        tagPreciousSelectedIndex = indexPath.row
+                    }
+                    
+                }
+                collectionView.reloadData()
+            }
         }
-        
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
@@ -1004,6 +1135,8 @@ extension RescheduleViewController: UICollectionViewDataSource, UICollectionView
             return CGSize(width: 30, height: 30)
         }else if collectionView == repeatCollectionView{
             return CGSize(width: 30, height: 30)
+        }else if collectionView == tagCollectionView{
+            return CGSize(width: self.view.frame.width/4.4, height: self.view.frame.height/23)
         }
 
         return CGSize()
@@ -1014,13 +1147,15 @@ extension RescheduleViewController: UICollectionViewDataSource, UICollectionView
             return UIEdgeInsets(top: 0, left: self.view.frame.height/33.8, bottom: 0, right: self.view.frame.height/33.8)
         }else if collectionView == repeatCollectionView{
             return UIEdgeInsets(top: 0, left: self.view.frame.height/33.8, bottom: 0, right: self.view.frame.height/33.8)
+        }else if collectionView == tagCollectionView{
+            
         }
         
         return UIEdgeInsets()
     }
 }
 
-extension RescheduleViewController: HSCycleGalleryViewDelegate {
+extension PersonalPlanChangeViewController: HSCycleGalleryViewDelegate {
     
     func numberOfItemInCycleGalleryView(_ cycleGalleryView: CalendarView) -> Int {
         return 20
@@ -1033,13 +1168,13 @@ extension RescheduleViewController: HSCycleGalleryViewDelegate {
     
 }
 
-extension RescheduleViewController: UITableViewDelegate{
+extension PersonalPlanChangeViewController: UITableViewDelegate{
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return CGFloat(20)
     }
 }
 
-extension RescheduleViewController: UITableViewDataSource{
+extension PersonalPlanChangeViewController: UITableViewDataSource{
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return 7
     }

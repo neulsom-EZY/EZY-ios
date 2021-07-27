@@ -22,13 +22,13 @@ class CalendarCollectionViewCell: UICollectionViewCell {
     
     lazy var dateLabel = UILabel().then {
         $0.text = "12"
-        $0.textColor = UIColor(red: 255/255, green: 148/255, blue: 148/255, alpha: 1)
+        $0.textColor = UIColor(red: 125/255, green: 151/255, blue: 252/255, alpha: 1)
         $0.dynamicFont(fontSize: 20, currentFontName: "AppleSDGothicNeo-SemiBold")
     }
     
     
     lazy var calendarSelectedView = UIView().then {
-        $0.backgroundColor = UIColor(red: 255/255, green: 228/255, blue: 228/255, alpha: 1)
+        $0.backgroundColor = UIColor(red: 233/255, green: 237/255, blue: 255/255, alpha: 1)
     }
 
 

@@ -43,6 +43,7 @@ class SettingTableViewCell: UITableViewCell {
     
     lazy var listIconImageView = UIImageView().then {
         $0.self.image? = UIImage(named: "EZY_SettingGroup")!
+        $0.contentMode = .scaleAspectFit
     }
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {

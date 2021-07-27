@@ -38,15 +38,15 @@ class ScheduleTypeCollectionViewCell: UICollectionViewCell {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        configureUI()
+        layoutSetting()
     }
     
     required init?(coder: NSCoder) {
         super.init(coder: coder)
-        configureUI()
+        layoutSetting()
     }
     
-    func configureUI(){
+    func layoutSetting(){
         
         backgroundColor = .clear
         contentView.addSubview(mainView)

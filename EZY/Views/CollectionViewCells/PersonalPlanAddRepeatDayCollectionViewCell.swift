@@ -7,15 +7,15 @@
 
 import UIKit
 
-class RepeatCollectionViewCell: UICollectionViewCell {
+class PersonalPlanAddRepeatDayCollectionViewCell: UICollectionViewCell {
     
-    static let reuseId = "\(RepeatCollectionViewCell.self)"
+    static let reuseId = "\(PersonalPlanAddRepeatDayCollectionViewCell.self)"
     
     var model: RepeatCollectionViewModel?
 
         
     lazy var cellBackgroundView = UIView().then {
-        $0.backgroundColor = UIColor(red: 255/255, green: 188/255, blue: 188/255, alpha: 1)
+        $0.backgroundColor = UIColor(red: 170/255, green: 187/255, blue: 254/255, alpha: 1)
     }
     
     lazy var label = UILabel().then {
@@ -47,13 +47,13 @@ class RepeatCollectionViewCell: UICollectionViewCell {
             
             if model.isSelected == true{
                 cellBackgroundView.layer.borderWidth = 1
-                cellBackgroundView.layer.borderColor = UIColor(red: 255/255, green: 188/255, blue: 188/255, alpha: 1).cgColor
+                cellBackgroundView.layer.borderColor = UIColor(red: 170/255, green: 187/255, blue: 254/255, alpha: 1).cgColor
                 
                 cellBackgroundView.backgroundColor = .white
                 
-                label.textColor = UIColor(red: 255/255, green: 188/255, blue: 188/255, alpha: 1)
+                label.textColor = UIColor(red: 170/255, green: 187/255, blue: 254/255, alpha: 1)
             }else{
-                self.cellBackgroundView.backgroundColor = UIColor(red: 255/255, green: 188/255, blue: 188/255, alpha: 1)
+                self.cellBackgroundView.backgroundColor = UIColor(red: 170/255, green: 187/255, blue: 254/255, alpha: 1)
                 label.textColor = UIColor.white
             }
         
@@ -64,7 +64,7 @@ class RepeatCollectionViewCell: UICollectionViewCell {
         
         // 셀이 재사용되기 전에 셀의 속성을 초기화시켜준다.
         
-        self.cellBackgroundView.backgroundColor = UIColor(red: 255/255, green: 188/255, blue: 188/255, alpha: 1)
+        self.cellBackgroundView.backgroundColor = UIColor(red: 170/255, green: 187/255, blue: 254/255, alpha: 1)
         label.textColor = UIColor.white
     }
     

@@ -20,15 +20,27 @@ extension GroupManagementViewController: PinterestLayoutDelegate {
 class GroupManagementViewController: UIViewController, UITextFieldDelegate {
     
     //MARK: Properties
-    let topView = TopView()
-    
     let groupAddModalView = GroupAddModalView()
     
     let searchResultsView = SearchResultsView()
     
     let groupModifyDeleteModalView = GroupModifyDeleteModalView()
     
+    var modifyViewButtonSelected = true
+    
+    var deleteViewButtonSelected = false
+    
     let deleteModalView = DeleteModalView()
+    
+    lazy var backButton = UIButton().then{
+        $0.setImage(UIImage(named: "EZY_IdChangeBackButtonImage"), for: .normal)
+    }
+    
+    lazy var mainTitleLabel = UILabel().then {
+        $0.text = "그룹 관리"
+        $0.textColor = UIColor(red: 107/255, green: 64/255, blue: 255/255, alpha: 1)
+        $0.dynamicFont(fontSize: 22, currentFontName: "Poppins-SemiBold")
+    }
 
     private(set) var groupCollectionView: UICollectionView
     
@@ -70,6 +82,8 @@ class GroupManagementViewController: UIViewController, UITextFieldDelegate {
     lazy var EZYPlanBackgroundColor: [UIColor] = [greenColor, orangeColor, pinkColor, blueColor, purpleColor, yellowColor,greenColor, orangeColor, pinkColor, blueColor, purpleColor, yellowColor,greenColor, orangeColor, pinkColor, blueColor, purpleColor, yellowColor,greenColor, orangeColor, pinkColor, blueColor, purpleColor, yellowColor,greenColor, orangeColor, pinkColor, blueColor, purpleColor, yellowColor,greenColor, orangeColor, pinkColor, blueColor, purpleColor, yellowColor]
     
     let titleLabel = ["영어 스터디", "EZY", "NELSOM", "영어 스터디", "EZY", "NELSOM", "영어 스터디", "EZY", "NELSOM", "영어 스터디", "EZY", "NELSOM"]
+ 
+
     
     //MARK: Initializers
     init() {
@@ -89,26 +103,47 @@ class GroupManagementViewController: UIViewController, UITextFieldDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.view.backgroundColor = .white
-        
-        topViewSetting()
+        layoutSetting()
         
         setupCollectionView()
         
-        // selectedMemberCollectionView 설정
         selectedMemberCollectionViewSetting()
         
-        // selectedMemberCollectionView 설정
         groupModalViewSetting()
         
         groupModifyDeleteModalViewSetting()
         
         deleteModalViewSetting()
         
-        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(_:)), name:UIResponder.keyboardWillShowNotification, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide(_:)), name: UIResponder.keyboardWillHideNotification, object: nil)
+    }
+    
+    @objc func backButtonClicked(sender:UIButton){
+        self.navigationController?.popViewController(animated: true)
     }
 
+    func layoutSetting(){
+        self.view.backgroundColor = .white
+
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(_:)), name:UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide(_:)), name: UIResponder.keyboardWillHideNotification, object: nil)
+        
+        self.view.addSubview(backButton)
+        self.view.addSubview(mainTitleLabel)
+        
+        backButton.addTarget(self, action: #selector(backButtonClicked(sender:)), for: .touchUpInside)
+        
+        backButton.snp.makeConstraints { make in
+            make.top.equalTo(self.view.safeAreaLayoutGuide).offset(self.view.frame.height/47.7)
+            make.left.equalToSuperview().offset(self.view.frame.width/12)
+            make.width.equalToSuperview().dividedBy(33.8/2)
+            make.height.equalTo(backButton.snp.width)
+        }
+        
+        mainTitleLabel.snp.makeConstraints { make in
+            make.left.equalTo(backButton)
+            make.top.equalTo(backButton.snp.bottom).offset(self.view.frame.height/50)
+        }
+    }
     
     //MARK: deleteModalView Setting
     func deleteModalViewSetting(){
@@ -140,7 +175,7 @@ class GroupManagementViewController: UIViewController, UITextFieldDelegate {
         deleteModalView.modalBackgroundView.snp.makeConstraints { make in
             make.centerX.centerY.equalToSuperview()
             make.height.equalToSuperview().dividedBy(3.5)
-            make.width.equalToSuperview().dividedBy(1.2)
+            make.width.equalToSuperview().dividedBy(1.1)
         }
 
         deleteModalView.modalTitleLabel.snp.makeConstraints { make in
@@ -170,7 +205,7 @@ class GroupManagementViewController: UIViewController, UITextFieldDelegate {
             make.top.equalTo(deleteModalView.iconImageView.snp.bottom).offset(self.view.frame.height/30)
             make.height.equalToSuperview().dividedBy(10)
             make.centerX.equalToSuperview()
-            make.width.equalToSuperview().dividedBy(1.25)
+            make.width.equalToSuperview().dividedBy(1.4)
         }
         
         deleteModalView.planNameLabel.snp.makeConstraints { make in
@@ -212,14 +247,27 @@ class GroupManagementViewController: UIViewController, UITextFieldDelegate {
         self.view.addSubview(groupModifyDeleteModalView)
         groupModifyDeleteModalView.addSubview(groupModifyDeleteModalView.backgroundView)
         groupModifyDeleteModalView.backgroundView.addSubview(groupModifyDeleteModalView.modalBackgroundView)
-        groupModifyDeleteModalView.modalBackgroundView.addSubview(groupModifyDeleteModalView.lineView)
         groupModifyDeleteModalView.modalBackgroundView.addSubview(groupModifyDeleteModalView.groupModifyLabelBackgroundView)
         groupModifyDeleteModalView.modalBackgroundView.addSubview(groupModifyDeleteModalView.groupDeleteLabelBackgroundView)
-        groupModifyDeleteModalView.modalBackgroundView.addSubview(groupModifyDeleteModalView.groupModifyButton)
-        groupModifyDeleteModalView.modalBackgroundView.addSubview(groupModifyDeleteModalView.groupDeleteButton)
-
-        groupModifyDeleteModalView.groupModifyButton.addTarget(self, action: #selector(groupModifyLabelButtonClicked(_:)), for: .touchUpInside)
-        groupModifyDeleteModalView.groupDeleteButton.addTarget(self, action: #selector(groupDeleteLabelButtonClicked(_:)), for: .touchUpInside)
+        groupModifyDeleteModalView.modalBackgroundView.addSubview(groupModifyDeleteModalView.introTitleLabel)
+        groupModifyDeleteModalView.modalBackgroundView.addSubview(groupModifyDeleteModalView.modifyViewButton)
+        groupModifyDeleteModalView.modalBackgroundView.addSubview(groupModifyDeleteModalView.deleteViewButton)
+        
+        groupModifyDeleteModalView.deleteViewButton.addSubview(groupModifyDeleteModalView.deleteLabel)
+        groupModifyDeleteModalView.modifyViewButton.addSubview(groupModifyDeleteModalView.modifyLabel)
+        
+        groupModifyDeleteModalView.modifyViewButton.addSubview(groupModifyDeleteModalView.modifyIconBackgroundCircleView)
+        groupModifyDeleteModalView.deleteViewButton.addSubview(groupModifyDeleteModalView.deleteIconBackgroundCircleView)
+        groupModifyDeleteModalView.modifyIconBackgroundCircleView.addSubview(groupModifyDeleteModalView.modifyIconImageView)
+        groupModifyDeleteModalView.deleteIconBackgroundCircleView.addSubview(groupModifyDeleteModalView.deleteIconImageView)
+        
+        groupModifyDeleteModalView.modalBackgroundView.addSubview(groupModifyDeleteModalView.selectButton)
+        
+        groupModifyDeleteModalView.deleteViewButton.addTarget(self, action: #selector(groupDeleteViewButtonClicked(sender:)), for: .touchUpInside)
+        
+        groupModifyDeleteModalView.modifyViewButton.addTarget(self, action: #selector(groupModifyViewButtonClicked(sender:)), for: .touchUpInside)
+        
+        groupModifyDeleteModalView.selectButton.addTarget(self, action: #selector(selectButtonClicked(sender:)), for: .touchUpInside)
         
         groupModifyDeleteModalView.snp.makeConstraints { make in
             make.top.left.right.bottom.equalToSuperview()
@@ -230,44 +278,74 @@ class GroupManagementViewController: UIViewController, UITextFieldDelegate {
         }
         
         groupModifyDeleteModalView.modalBackgroundView.snp.makeConstraints { make in
-            make.bottom.equalTo(self.view)
-            make.width.equalTo(self.view)
-            make.height.equalTo(self.view).dividedBy(5)
+            make.bottom.equalToSuperview()
+            make.width.equalToSuperview()
+            make.height.equalToSuperview().dividedBy(2.9)
             make.centerX.equalToSuperview()
         }
         
-        groupModifyDeleteModalView.lineView.snp.makeConstraints { make in
-            make.height.equalTo(0.7)
-            make.width.equalToSuperview().dividedBy(1.3)
+        groupModifyDeleteModalView.introTitleLabel.snp.makeConstraints { make in
+            make.top.equalToSuperview().offset(self.view.frame.height/19.3)
+            make.centerX.equalToSuperview()
+        }
+        
+        groupModifyDeleteModalView.deleteViewButton.snp.makeConstraints { make in
+            make.height.equalTo(self.view).dividedBy(7.8)
+            make.width.equalTo(self.view).dividedBy(4.1)
+            make.top.equalTo(groupModifyDeleteModalView.introTitleLabel.snp.bottom).offset(self.view.frame.height/27)
+            make.left.equalToSuperview().offset(self.view.frame.width/5)
+        }
+        
+        groupModifyDeleteModalView.modifyViewButton.snp.makeConstraints { make in
+            make.height.equalTo(self.view).dividedBy(7.8)
+            make.width.equalTo(self.view).dividedBy(4.1)
+            make.top.equalTo(groupModifyDeleteModalView.introTitleLabel.snp.bottom).offset(self.view.frame.height/27)
+            make.right.equalToSuperview().offset(-self.view.frame.width/5)
+        }
+        
+        groupModifyDeleteModalView.modifyLabel.snp.makeConstraints { make in
+            make.centerX.equalToSuperview()
+            make.bottom.equalToSuperview().offset(-self.view.frame.height/40.6)
+        }
+        
+        groupModifyDeleteModalView.deleteLabel.snp.makeConstraints { make in
+            make.centerX.equalToSuperview()
+            make.bottom.equalToSuperview().offset(-self.view.frame.height/40.6)
+        }
+        
+        groupModifyDeleteModalView.deleteIconBackgroundCircleView.snp.makeConstraints { make in
+            make.centerX.equalToSuperview()
+            make.top.equalToSuperview().offset(self.view.frame.height/40.6)
+            make.height.equalTo(self.view).dividedBy(27)
+            make.width.equalTo(groupModifyDeleteModalView.deleteIconBackgroundCircleView.snp.height)
+            
+            groupModifyDeleteModalView.deleteIconBackgroundCircleView.layer.cornerRadius = (self.view.frame.height/27)/2
+        }
+        
+        groupModifyDeleteModalView.modifyIconBackgroundCircleView.snp.makeConstraints { make in
+            make.centerX.equalToSuperview()
+            make.top.equalToSuperview().offset(self.view.frame.height/40.6)
+            make.height.equalTo(self.view).dividedBy(27)
+            make.width.equalTo(groupModifyDeleteModalView.deleteIconBackgroundCircleView.snp.height)
+            
+            groupModifyDeleteModalView.modifyIconBackgroundCircleView.layer.cornerRadius = (self.view.frame.height/27)/2
+        }
+        
+        groupModifyDeleteModalView.deleteIconImageView.snp.makeConstraints { make in
             make.centerX.centerY.equalToSuperview()
+            make.height.width.equalToSuperview().dividedBy(2.3)
         }
         
-        groupModifyDeleteModalView.groupModifyButton.snp.makeConstraints { make in
-            make.centerY.equalToSuperview().offset(-36)
-            make.centerX.equalToSuperview()
-            make.height.equalToSuperview().dividedBy(9)
-            make.width.equalToSuperview().dividedBy(6.6)
+        groupModifyDeleteModalView.modifyIconImageView.snp.makeConstraints { make in
+            make.centerX.centerY.equalToSuperview()
+            make.height.width.equalToSuperview().dividedBy(2.3)
         }
         
-        groupModifyDeleteModalView.groupDeleteButton.snp.makeConstraints { make in
-            make.centerY.equalToSuperview().offset(36)
-            make.centerX.equalToSuperview()
-            make.height.equalToSuperview().dividedBy(9)
-            make.width.equalToSuperview().dividedBy(6.6)
-        }
-        
-        groupModifyDeleteModalView.groupModifyLabelBackgroundView.snp.makeConstraints { make in
-            make.centerY.equalToSuperview().offset(-30)
-            make.centerX.equalToSuperview()
-            make.width.equalTo(groupModifyDeleteModalView.groupModifyButton)
-            make.height.equalTo(groupModifyDeleteModalView.groupModifyButton).dividedBy(2)
-        }
-        
-        groupModifyDeleteModalView.groupDeleteLabelBackgroundView.snp.makeConstraints { make in
-            make.centerY.equalToSuperview().offset(42)
-            make.centerX.equalToSuperview()
-            make.width.equalTo(groupModifyDeleteModalView.groupDeleteButton)
-            make.height.equalTo(groupModifyDeleteModalView.groupDeleteButton).dividedBy(2)
+        groupModifyDeleteModalView.selectButton.snp.makeConstraints { make in
+            make.height.equalTo(self.view).dividedBy(24.6)
+            make.width.equalTo(self.view).dividedBy(5.3)
+            make.bottom.equalToSuperview().offset(-self.view.frame.width/15)
+            make.right.equalToSuperview().offset(-self.view.frame.width/15)
         }
         
         groupModifyDeleteModalView.isHidden = true
@@ -349,24 +427,6 @@ class GroupManagementViewController: UIViewController, UITextFieldDelegate {
         groupAddModalView.isHidden = true
     }
     
-    //MARK: topView Setting
-    func topViewSetting(){
-        self.view.addSubview(topView)
-        topView.addSubview(topView.backButton)
-        topView.addSubview(topView.titleLabel)
-        
-        topView.topViewDataSetting(backButtonImage: UIImage(named: "EZY_SettingBackButton")!, titleLabelText: "그룹 관리",
-                                   textColor: UIColor(red: 175/255, green: 173/255, blue: 255/255, alpha: 1))
-        
-        topView.topViewLayoutSetting(screenHeight: Double(self.view.bounds.height), screenWeight: Double(self.view.bounds.width))
-        
-        topView.snp.makeConstraints { make in
-            make.left.right.equalToSuperview()
-            make.top.equalTo(self.view.safeAreaLayoutGuide)
-            make.height.equalToSuperview().dividedBy(8)
-        }
-    }
-    
     //MARK: selectedMemberCollectionView Setting
     func selectedMemberCollectionViewSetting(){
         selectedMemberCollectionView.delegate = self
@@ -412,25 +472,56 @@ class GroupManagementViewController: UIViewController, UITextFieldDelegate {
         groupCollectionView.snp.makeConstraints { make in
             groupCollectionView.backgroundColor = .white
             make.bottom.left.right.equalToSuperview()
-            make.top.equalTo(topView.snp.bottom)
+            make.top.equalTo(mainTitleLabel.snp.bottom).offset(self.view.frame.height/40)
         }
         
         (groupCollectionView.collectionViewLayout as! UICollectionViewFlowLayout).estimatedItemSize = UICollectionViewFlowLayout.automaticSize
         (groupCollectionView.collectionViewLayout as! UICollectionViewFlowLayout).sectionInsetReference = .fromLayoutMargins
-
     }
     
-    @objc func groupDeleteLabelButtonClicked(_ button: UIButton){
-        print("groupDeleteButtonClicked")
+    @objc func selectButtonClicked(sender: UIButton){
         groupModifyDeleteModalView.isHidden = true
-        deleteModalView.isHidden = false
+        if deleteViewButtonSelected == true{ // 일정 삭제가 선택되었다면
+            deleteModalView.isHidden = false // 삭제 모달 띄우기
+        }else if modifyViewButtonSelected == true{ // 일정 수정이 선택되었다면
+            groupAddModalView.isHidden = false
+        }
     }
     
-    @objc func groupModifyLabelButtonClicked(_ button: UIButton){
-        print("groupModifyButtonClicked")
-        groupModifyDeleteModalView.isHidden = true
-        groupAddModalView.isHidden = false
-        groupAddModalView.GroupModalDataSetting(modalTitleText: "그룹 수정", modalColor: UIColor(red: 176/255, green: 209/255, blue: 174/255, alpha: 1))
+    @objc func groupDeleteViewButtonClicked(sender: UIButton){
+        if deleteViewButtonSelected == false{
+            // 삭제 버튼 테두리 주고, 강조 색 주기
+            groupModifyDeleteModalView.deleteViewButton.layer.borderWidth = 1
+            groupModifyDeleteModalView.deleteViewButton.layer.borderColor = UIColor(red: 131/255, green: 122/255, blue: 255/255, alpha: 1).cgColor
+            groupModifyDeleteModalView.deleteLabel.textColor = UIColor(red: 131/255, green: 122/255, blue: 255/255, alpha: 1)
+            groupModifyDeleteModalView.deleteIconBackgroundCircleView.backgroundColor = UIColor(red: 131/255, green: 122/255, blue: 255/255, alpha: 1)
+            
+            // 수정 버튼 테두리 없애고, 강조 색 빼기
+            groupModifyDeleteModalView.modifyViewButton.layer.borderWidth = 0
+            groupModifyDeleteModalView.modifyLabel.textColor = UIColor(red: 188/255, green: 183/255, blue: 255/255, alpha: 1)
+            groupModifyDeleteModalView.modifyIconBackgroundCircleView.backgroundColor = UIColor(red: 188/255, green: 183/255, blue: 255/255, alpha: 1)
+            
+            deleteViewButtonSelected.toggle()
+            modifyViewButtonSelected.toggle()
+        }
+    }
+    
+    @objc func groupModifyViewButtonClicked(sender: UIButton){
+        if modifyViewButtonSelected == false{
+            // 수정 버튼 테두리 주고, 강조 색 주기
+            groupModifyDeleteModalView.modifyViewButton.layer.borderWidth = 1
+            groupModifyDeleteModalView.modifyViewButton.layer.borderColor = UIColor(red: 131/255, green: 122/255, blue: 255/255, alpha: 1).cgColor
+            groupModifyDeleteModalView.modifyLabel.textColor = UIColor(red: 131/255, green: 122/255, blue: 255/255, alpha: 1)
+            groupModifyDeleteModalView.modifyIconBackgroundCircleView.backgroundColor = UIColor(red: 131/255, green: 122/255, blue: 255/255, alpha: 1)
+            
+            // 삭제 버튼 테두리 없애고, 강조 색 빼기
+            groupModifyDeleteModalView.deleteViewButton.layer.borderWidth = 0
+            groupModifyDeleteModalView.deleteLabel.textColor = UIColor(red: 188/255, green: 183/255, blue: 255/255, alpha: 1)
+            groupModifyDeleteModalView.deleteIconBackgroundCircleView.backgroundColor = UIColor(red: 188/255, green: 183/255, blue: 255/255, alpha: 1)
+            
+            deleteViewButtonSelected.toggle()
+            modifyViewButtonSelected.toggle()
+        }
     }
     
     @objc func groupCancelButtonClicked(_ button: UIButton){
@@ -547,7 +638,21 @@ extension GroupManagementViewController: UICollectionViewDelegate, UICollectionV
                 groupAddModalView.GroupModalDataSetting(modalTitleText: "그룹 추가", modalColor: UIColor(red: 255/255, green: 191/255, blue: 191/255, alpha: 1))
             }else{
                 groupModifyDeleteModalView.isHidden = false
-
+                
+                modifyViewButtonSelected = false
+                deleteViewButtonSelected = true
+                
+                // 삭제 버튼 테두리 주고, 강조 색 주기
+                groupModifyDeleteModalView.deleteViewButton.layer.borderWidth = 1
+                groupModifyDeleteModalView.deleteViewButton.layer.borderColor = UIColor(red: 131/255, green: 122/255, blue: 255/255, alpha: 1).cgColor
+                groupModifyDeleteModalView.deleteLabel.textColor = UIColor(red: 131/255, green: 122/255, blue: 255/255, alpha: 1)
+                groupModifyDeleteModalView.deleteIconBackgroundCircleView.backgroundColor = UIColor(red: 131/255, green: 122/255, blue: 255/255, alpha: 1)
+                
+                // 수정 버튼 테두리 없애고, 강조 색 빼기
+                groupModifyDeleteModalView.modifyViewButton.layer.borderWidth = 0
+                groupModifyDeleteModalView.modifyLabel.textColor = UIColor(red: 188/255, green: 183/255, blue: 255/255, alpha: 1)
+                groupModifyDeleteModalView.modifyIconBackgroundCircleView.backgroundColor = UIColor(red: 188/255, green: 183/255, blue: 255/255, alpha: 1)
+                
             }
         }
         
