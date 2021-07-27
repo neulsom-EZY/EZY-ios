@@ -170,9 +170,6 @@ class ShowPlanViewController: UIViewController{
         
         scheduleTimeTableMainView.tableView.register(ScheduleTimeTableViewCell.self, forCellReuseIdentifier: ScheduleTimeTableViewCell.ScheduleTimeTableViewIdentifier)
         
-        scheduleTimeTableMainView.isHidden = true
-        scheduleTimeTableMainView.backgroundColor = .systemPurple
-
     }
     
     func planCompleteModalViewSetting(){
@@ -379,7 +376,16 @@ extension ShowPlanViewController: UICollectionViewDataSource{
 extension ShowPlanViewController: UITableViewDataSource{
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return groupNameArray.count
+        if groupNameArray.count == 0{
+            tableView.isHidden = true
+            emptyPlanBoxView.isHidden = false
+        }else{
+            emptyPlanBoxView.isHidden = true
+            tableView.isHidden = false
+            return groupNameArray.count
+        }
+        
+        return Int()
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
