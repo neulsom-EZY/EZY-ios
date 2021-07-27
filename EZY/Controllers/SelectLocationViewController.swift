@@ -23,7 +23,7 @@ class SelectLocationViewController: UIViewController {
     }
     
     lazy var locationTextField = UITextField().then {
-        $0.placeholder = "광주소프트웨어마이스터고등학교"
+        $0.placeholder = "위치를 입력해주세요."
         $0.dynamicFont(fontSize: 10, currentFontName: "AppleSDGothicNeo-Bold")
     }
     
