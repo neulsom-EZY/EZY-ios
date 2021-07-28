@@ -84,7 +84,7 @@ extension SettingViewController: UITableViewDelegate{
             let nextViewController = TagManagementViewController()
             self.navigationController?.pushViewController(nextViewController, animated: true)
         }else if indexPath.row == 2{
-            let nextViewController = IdChangeViewController()
+            let nextViewController = ChangeIdAfterLoginViewController()
             self.navigationController?.pushViewController(nextViewController, animated: true)
         }else if indexPath.row == 3{
             let nextViewController = NewPasswordPhoneNumViewController()
