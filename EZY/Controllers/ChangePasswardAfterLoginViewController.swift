@@ -44,7 +44,8 @@ class ChangePasswardAfterLoginViewController: UIViewController {
     }
     
     @objc func changeButtonClicked(sender:UIButton){
-        self.navigationController?.popViewController(animated: true)
+        let nextViewController = SettingViewController()
+        self.navigationController?.pushViewController(nextViewController, animated: true)
     }
     
     @objc func backButtonClicked(sender:UIButton){

@@ -56,7 +56,8 @@ class ChangePasswardPhoneNumAfterLoginViewController: UIViewController {
     }
     
     @objc func changeButtonClicked(sender:UIButton){
-        self.navigationController?.popViewController(animated: true)
+        let nextViewController = ChangePasswardAfterLoginViewController()
+        self.navigationController?.pushViewController(nextViewController, animated: true)
     }
     
     @objc func backButtonClicked(sender:UIButton){
