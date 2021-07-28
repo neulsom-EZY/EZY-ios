@@ -303,7 +303,7 @@
 			children = (
 				6AE5BB0426966DCA00A9731B /* Utils */,
 				6A097D00268ED792001E011D /* Header */,
-				EEEDB2C02664D10100E5C53A /* Utilss */,
+				EEEDB2C02664D10100E5C53A /* Utils */,
 				6AA76A0026636C7B00B7E1F5 /* Font */,
 				6AA769FF26636C7600B7E1F5 /* Controllers */,
 				6AA769FE26636C7000B7E1F5 /* Models */,
@@ -513,13 +513,13 @@
 			name = "Recovered References";
 			sourceTree = "<group>";
 		};
-		EEEDB2C02664D10100E5C53A /* Utilss */ = {
+		EEEDB2C02664D10100E5C53A /* Utils */ = {
 			isa = PBXGroup;
 			children = (
 				EE93B4E22687BD740055D7A6 /* Data */,
 				EEEDB2C12664D30D00E5C53A /* extensions.swift */,
 			);
-			path = Utilss;
+			path = Utils;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
