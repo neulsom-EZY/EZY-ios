@@ -27,6 +27,12 @@ class ChangePasswardAfterLoginViewController: UIViewController {
         $0.backgroundColor = UIColor(red: 150/255, green: 141/255, blue: 255/255, alpha: 1)
     }
     
+    lazy var passwardConditionLabel = UILabel().then {
+        $0.text = "8자 이하, 영어 + 숫자최소 1개, 공백 허용x"
+        $0.textColor = UIColor(red: 116/255, green: 116/255, blue: 116/255, alpha: 1)
+        $0.dynamicFont(fontSize: 10, currentFontName: "AppleSDGothicNeo-Regular")
+    }
+    
     lazy var changeButton = UIButton().then {
         $0.setBackgroundImage(UIImage(named: "EZY_ChangeButtonImage"), for: .normal)
         $0.setTitle("변경하기", for: .normal)
@@ -88,9 +94,15 @@ class ChangePasswardAfterLoginViewController: UIViewController {
         self.view.addSubview(passwardTextField)
         self.view.addSubview(UnderLineView)
         self.view.addSubview(changeButton)
+        self.view.addSubview(passwardConditionLabel)
         
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(_:)), name:UIResponder.keyboardWillShowNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide(_:)), name: UIResponder.keyboardWillHideNotification, object: nil)
+        
+        passwardConditionLabel.snp.makeConstraints { make in
+            make.top.equalTo(UnderLineView.snp.bottom).offset(self.view.frame.height/100)
+            make.left.equalTo(UnderLineView)
+        }
         
         passwordNickNameLabel.snp.makeConstraints { make in
             make.top.equalTo(topView.titleLabel.snp.bottom).offset(self.view.frame.height/16.91)
