@@ -10,12 +10,10 @@ import UIKit
 class WhoShouldIAskCell : UICollectionViewCell{
     static let identifier = "WhoShouldIAskCell"
     
-    let bglabel : UILabel = {
-        let label = UILabel()
-        label.clipsToBounds = true
-        label.dynamicFont(fontSize: 12, weight: .ultraLight)
-        return label
-    }()
+    let bglabel = UILabel().then {
+        $0.clipsToBounds = true
+        $0.dynamicFont(fontSize: 12, weight: .ultraLight)
+    }
 
     
     static func fittingSize(availableHeight: CGFloat, name: String?) -> CGSize {

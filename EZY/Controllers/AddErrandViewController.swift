@@ -91,6 +91,7 @@ class AddErrandViewController : UIViewController{
         cv.translatesAutoresizingMaskIntoConstraints = false
         cv.register(WhoShouldIAskCell.self, forCellWithReuseIdentifier: WhoShouldIAskCell.identifier)
         cv.showsHorizontalScrollIndicator = false
+        cv.isScrollEnabled = false
         return cv
     }()
     

@@ -35,4 +35,10 @@ struct OneAlertBtn{
     let iconTintColor : UIColor?
 }
 
-
+struct ErrandinputContainerTv{
+    let viewbackColor : UIColor?
+    let titleText : String?
+    let titleColor : UIColor?
+    let explanationText : String?
+    let writeEditable : Bool?
+}

@@ -15,7 +15,6 @@ class OneAlertButton : UIButton {
     private let view = UIView()
     private let icon = UIImageView()
     private var viewModel : OneAlertBtn?
-
    
     override init(frame: CGRect) {
         self.viewModel = nil
@@ -26,9 +25,7 @@ class OneAlertButton : UIButton {
         super.init(frame: .zero)
         addView()
         configure(with: viewModel)
-        
     }
-    
     
     func addView(){
         addSubview(view)
@@ -52,7 +49,7 @@ class OneAlertButton : UIButton {
         view.layer.shadowOffset = CGSize(width: 0, height: frame.height/11.25)
         
         view.snp.makeConstraints { (make) in
-            make.top.left.bottom.equalToSuperview()
+            make.top.left.equalToSuperview()
             make.right.equalTo(view.snp.left)
             make.height.width.equalTo(frame.height)
         }
