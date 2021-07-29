@@ -61,18 +61,7 @@ class ErrandDetailsViewController: UIViewController {
         return button
     }()
     
-    fileprivate let userManagement : UICollectionView = {
-        let layout = UICollectionViewFlowLayout()
-        let cv = UICollectionView(frame: .zero,collectionViewLayout: layout)
-        layout.scrollDirection = .horizontal
-        cv.register(WhatAboutPeopleLikeThisCell.self, forCellWithReuseIdentifier: WhatAboutPeopleLikeThisCell.identifier)
-        cv.translatesAutoresizingMaskIntoConstraints = false
-        cv.backgroundColor = .clear
-        
-        cv.showsHorizontalScrollIndicator = false
-        cv.isScrollEnabled = false
-        return cv
-    }()
+
 
     
     private lazy var explanationContainerView : inputContainerErrandTextView = {
@@ -129,8 +118,6 @@ class ErrandDetailsViewController: UIViewController {
     //MARK: - Helpers
     func configureUI(){
         view.backgroundColor = .white
-        userManagement.delegate = self
-        userManagement.dataSource = self
         cornerRadius()
         addView()
         location()
@@ -151,7 +138,6 @@ class ErrandDetailsViewController: UIViewController {
         view.addSubview(clockBtn)
         view.addSubview(locationBtn)
         view.addSubview(userBtn)
-        view.addSubview(userManagement)
         view.addSubview(explanationContainerView)
         view.addSubview(addButton)
     }
@@ -202,12 +188,7 @@ class ErrandDetailsViewController: UIViewController {
             make.top.equalTo(locationBtn.snp.bottom).offset(view.frame.height/47.7)
             make.height.width.equalTo(self.view.frame.height/18)
         }
-        userManagement.snp.makeConstraints { (make) in
-            make.left.equalTo(userBtn.snp.right)
-            make.top.equalTo(userBtn.snp.top)
-            make.height.equalTo(100)
-            make.right.equalToSuperview()
-        }
+
         
         explanationContainerView.snp.makeConstraints { (make) in
             make.height.equalTo(self.view.frame.height/7.66)
@@ -225,33 +206,4 @@ class ErrandDetailsViewController: UIViewController {
             
         }
     }
-}
-extension ErrandDetailsViewController : UICollectionViewDelegate,UICollectionViewDataSource{
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 2
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: WhatAboutPeopleLikeThisCell.identifier, for: indexPath) as! WhatAboutPeopleLikeThisCell
-        cell.bglabel.text = "@ " + ErrandDetailsViewController.data[indexPath.row]
-        cell.bglabel.dynamicFont(fontSize: 12, weight:.thin)
-        cell.bglabel.textColor = .EZY_3D64FF
-        cell.layer.borderWidth = 1
-        cell.bglabel.sizeToFit()
-        cell.layer.borderColor = UIColor.EZY_6383FF.cgColor
-        return cell
-    }
-
-
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return WhatAboutPeopleLikeThisCell.fittingSize(availableHeight: view.frame.size.height/25.375, name: MorePeopleToDo.data[indexPath.row])
-    }
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
-        return 0
-    }
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
-        return view.frame.height/90.22
-    }
-    
-
 }

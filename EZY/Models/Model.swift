@@ -42,3 +42,12 @@ struct ErrandinputContainerTv{
     let explanationText : String?
     let writeEditable : Bool?
 }
+
+struct SendUserView {
+    let sender : String?
+    let recipient : String?
+    let senderColor : UIColor?
+    let recipientColor: UIColor?
+    let senderStrokeColor : UIColor?
+    let recipientStrokeColor : UIColor?
+}
