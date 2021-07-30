@@ -9,19 +9,23 @@ import UIKit
 
 class SendUser : UIView{
     private let view = UIView()
-    private let senderView = UIView()
-    private let recipientView = UIView()
+    private lazy var senderView = UIView().then{
+        $0.layer.borderWidth = 1
+    }
+    private lazy var recipientView = UIView().then{
+        $0.layer.borderWidth = 1
+    }
     
-    private var senderText = UILabel().then{
-        $0.dynamicFont(fontSize: 12, weight: .ultraLight)
+    private lazy var senderText = UILabel().then{
+        $0.dynamicFont(fontSize: 12, weight: .thin)
         $0.sizeToFit()
     }
     private let image = UIImageView().then{
         $0.image = UIImage.init(named: "EZY_chevron.right")?.withRenderingMode(.alwaysTemplate)
         $0.tintColor = .EZY_BAC8FF
     }
-    private var recipientText = UILabel().then{
-        $0.dynamicFont(fontSize: 12, weight: .ultraLight)
+    private lazy var recipientText = UILabel().then{
+        $0.dynamicFont(fontSize: 12, weight: .thin)
         $0.sizeToFit()
     }
     private var viewModel : SendUserView?
@@ -46,9 +50,14 @@ class SendUser : UIView{
         view.addSubview(image)
         recipientView.addSubview(recipientText)
     }
+    func cornerRadius(){
+        senderView.layer.cornerRadius = frame.height/6.4
+        recipientView.layer.cornerRadius = frame.height/6.4
+    }
     
     public func configure(with viewModel : SendUserView)
     {
+        
         senderText.text = "@ " + viewModel.sender!
         recipientText.text = "@ " + viewModel.recipient!
         senderText.textColor = viewModel.senderColor
@@ -58,32 +67,38 @@ class SendUser : UIView{
     }
     override func layoutSubviews() {
         super.layoutSubviews()
-        senderView.layer.borderWidth = 1
-        recipientView.layer.borderWidth = 1
+        cornerRadius()
+
+        senderText.sizeToFit()
+        recipientText.sizeToFit()
         view.snp.makeConstraints { (make) in
             make.top.right.bottom.left.equalToSuperview()
         }
-        
         senderView.snp.makeConstraints { (make) in
-            make.left.equalToSuperview()
+            make.left.equalToSuperview().offset(frame.height/1.185)
             make.top.equalToSuperview()
             make.height.equalToSuperview()
-            make.width.equalTo(senderText.frame.width)
+            make.width.equalTo(senderText.frame.width + frame.height/0.84)
         }
-        
+        senderText.snp.makeConstraints { (make) in
+            make.center.equalTo(senderView.snp.center)
+        }
         image.snp.makeConstraints { (make) in
             make.centerY.equalToSuperview()
             make.left.equalTo(senderView.snp.right).offset(frame.height/2.46)
-            make.right.equalTo(recipientView.snp.left).inset(frame.height/2.46)
             make.height.equalTo(frame.height/2.6667)
             make.width.equalTo(frame.height/5.3333)
         }
+        recipientText.snp.makeConstraints { (make) in
+            make.center.equalTo(recipientView.snp.center)
+        }
         recipientView.snp.makeConstraints { (make) in
-            make.left.equalToSuperview()
+            make.left.equalTo(image.snp.right).offset(frame.height/2.46)
             make.top.equalToSuperview()
             make.height.equalToSuperview()
-            make.width.equalTo(senderText.frame.width)
+            make.width.equalTo(recipientText.frame.width + frame.height/0.84)
         }
+
         
     }
     required init?(coder: NSCoder) {

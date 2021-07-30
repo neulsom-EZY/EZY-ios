@@ -16,7 +16,13 @@ class AddMyToDoViewController:UIViewController{
     let alarmData : [String] = ["선택안함", "+ 추가"]
     let tagColor : [UIColor] = [.EZY_879FFF,.EZY_968DFF,.EZY_9EB1FC]
     //MARK: - Properties
- 
+    
+    //모달 background 설정
+    let bgView = UIView().then {
+        $0.backgroundColor = .black
+        $0.alpha = 0
+    }
+    
     private let backbutton = UIButton().then{
         $0.tintColor = .EZY_BAC8FF
         $0.setImage(UIImage(systemName: "arrow.left"), for: .normal)
@@ -162,6 +168,28 @@ class AddMyToDoViewController:UIViewController{
     }
     
     //MARK: - Helpers
+    //모달 위치
+    static func instance() -> AddMyToDoViewController {
+        return AddMyToDoViewController(nibName: nil, bundle: nil)
+    }
+    //모달 실행시 Action
+    private func addDim() {
+        view.addSubview(bgView)
+        bgView.snp.makeConstraints { (make) in
+            make.edges.equalTo(0)
+        }
+        
+        DispatchQueue.main.async { [weak self] in
+            self?.bgView.alpha = 0.2
+        }
+    }
+    //모달 취소시 Action
+    private func removeDim() {
+        DispatchQueue.main.async { [weak self] in
+            self?.bgView.removeFromSuperview()
+        }
+    }
+    
     func configureUI(){
         view.backgroundColor = .white
         tagCollectionView.contentInset = UIEdgeInsets(top: 0, left: view.frame.height/29, bottom: 0, right: view.frame.height/29)
@@ -306,6 +334,7 @@ extension AddMyToDoViewController : UICollectionViewDelegateFlowLayout,UICollect
             alarmCell.layer.cornerRadius = view.frame.height/81.2
             alarmCell.bglabel.text = alarmData[indexPath.row]
             alarmCell.bglabel.textColor = .EZY_B7B4B4
+            
             return alarmCell
         }
     }
@@ -335,6 +364,29 @@ extension AddMyToDoViewController : UICollectionViewDelegateFlowLayout,UICollect
 
             return false
     }
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        if collectionView == self.tagCollectionView {
+            if indexPath.item == 0{
+                
+            }
+        }else {
+            if indexPath.item == 0{
+                
+            }
+            else if indexPath.item == 1{
+                let MoreCalendarModalsVC = MoreAlarmModelViewController.instance()
+
+                MoreCalendarModalsVC.delegate = self
+                addDim()
+                present(MoreCalendarModalsVC, animated: true, completion: nil)
+            }
+        }
+        
+    }
 }
 
-
+extension AddMyToDoViewController : AlarmModelDelegate{
+    func onTapClose() {
+        self.removeDim()
+    }
+}

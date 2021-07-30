@@ -50,6 +50,7 @@ class MoreCalendarModalsViewController : UIViewController{
     }()
     private let makeButton = UIButton().then{
         $0.backgroundColor = .EZY_AAA3FF
+        $0.isEnabled = false
         $0.addTarget(self, action: #selector(MakeTodo), for: .touchUpInside)
     }
 
@@ -82,18 +83,17 @@ class MoreCalendarModalsViewController : UIViewController{
     @objc func MyTodo(){
         myToDo.isSelected = !myToDo.isSelected
         if myToDo.isSelected{
+            makeButton.isEnabled = true
             myToDo.layer.borderWidth = 1
             myToDo.layer.borderColor = UIColor.EZY_AFADFF.cgColor
-            
             vc = AddMyToDoViewController() //ViewController 보내줌
 //            ourTodoState()
             ErrandTodoState()
-            makeButton.isEnabled = true
 
         }else{
+            makeButton.isEnabled = false
             myToDo.layer.borderWidth = 0
             myToDo.layer.borderColor = UIColor.clear.cgColor
-            makeButton.isEnabled = false
 
         }
     }

@@ -61,6 +61,11 @@ class ErrandDetailsViewController: UIViewController {
         return button
     }()
     
+    private let userManagement : SendUser = {
+        let viewModel = SendUserView(sender: data[0], recipient: data[1], senderColor: .EZY_9BAFFF, recipientColor: .EZY_FEBBBB, senderStrokeColor: .EZY_BAC8FF, recipientStrokeColor: .EZY_FFCCCC)
+        let view = SendUser(with: viewModel)
+        return view
+    }()
 
 
     
@@ -138,6 +143,8 @@ class ErrandDetailsViewController: UIViewController {
         view.addSubview(clockBtn)
         view.addSubview(locationBtn)
         view.addSubview(userBtn)
+        view.addSubview(userManagement)
+        
         view.addSubview(explanationContainerView)
         view.addSubview(addButton)
     }
@@ -188,7 +195,12 @@ class ErrandDetailsViewController: UIViewController {
             make.top.equalTo(locationBtn.snp.bottom).offset(view.frame.height/47.7)
             make.height.width.equalTo(self.view.frame.height/18)
         }
-
+        userManagement.snp.makeConstraints { (make) in
+            make.left.equalTo(userBtn.snp.right)
+            make.right.equalToSuperview()
+            make.height.equalTo(view.frame.height/25.375)
+            make.top.equalTo(userBtn.snp.top).offset(view.frame.height/81.2)
+        }
         
         explanationContainerView.snp.makeConstraints { (make) in
             make.height.equalTo(self.view.frame.height/7.66)
