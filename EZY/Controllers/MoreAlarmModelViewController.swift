@@ -13,6 +13,7 @@ protocol AlarmModelDelegate: class {
     func onTapClose()
 }
 class MoreAlarmModelViewController : UIViewController{
+    let ampmData = ["오전","오후"]
     
     //MARK: - Properties
     weak var delegate: AlarmModelDelegate?
@@ -22,17 +23,13 @@ class MoreAlarmModelViewController : UIViewController{
         $0.layer.cornerRadius = 40
     }
     let transparentView = UIView()
-       
     
-        
-
     private let makeButton = UIButton().then{
         $0.backgroundColor = .EZY_8176FF
         $0.addTarget(self, action: #selector(MakeTodo), for: .touchUpInside)
     }
-
     private let makeTitle = UILabel().then{
-        $0.text = "생 성"
+        $0.text = "완 료"
         $0.textColor = .white
         $0.dynamicFont(fontSize: 12, weight: .bold)
     }
@@ -48,7 +45,6 @@ class MoreAlarmModelViewController : UIViewController{
     override func viewDidLoad() {
         super.viewDidLoad()
         configureUI()
-        
     }
     
     //MARK: - Selectors
@@ -75,14 +71,12 @@ class MoreAlarmModelViewController : UIViewController{
     func addView(){
         view.addSubview(transparentView)
         view.addSubview(bgView)
-        view.addSubview(makeTitle)
+        makeButton.addSubview(makeTitle)
         view.addSubview(makeButton)
     }
     
     func cornerRadius(){
-
         makeButton.layer.cornerRadius = view.frame.height/81.2
-
     }
     
     func location(){
@@ -92,11 +86,8 @@ class MoreAlarmModelViewController : UIViewController{
             make.bottom.equalToSuperview().offset(30)
             make.height.equalToSuperview().dividedBy(3.85)
         }
-        
-
-
         makeButton.snp.makeConstraints { (make) in
-            make.bottom.equalTo(bgView.snp.bottom).inset(view.frame.height/31.23)
+            make.top.equalTo(bgView.snp.top).offset(view.frame.height/6.15)
             make.right.equalTo(view.snp.right).offset(view.frame.height/22.56 * -1)
             make.width.equalTo(view.frame.height/11.6 )
             make.height.equalTo(view.frame.height/24.61 )
@@ -104,6 +95,8 @@ class MoreAlarmModelViewController : UIViewController{
         makeTitle.snp.makeConstraints { (make) in
             make.center.equalTo(makeButton.snp.center)
         }
+        
+        
     }
 
     func addTransparentsview(frame : CGRect){

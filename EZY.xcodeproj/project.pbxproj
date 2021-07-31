@@ -18,6 +18,7 @@
 		EE245740269FDA6100E2EE9D /* WhatAboutPeopleLikeThisCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE24573F269FDA6100E2EE9D /* WhatAboutPeopleLikeThisCell.swift */; };
 		EE36219E267E18080099AF3A /* MoreCalendarModalsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE36219D267E18080099AF3A /* MoreCalendarModalsViewController.swift */; };
 		EE3779092679FAC100334D4A /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE3779082679FAC100334D4A /* Model.swift */; };
+		EE3B142626B48DF600B7184D /* CustomData.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE3B142526B48DF600B7184D /* CustomData.swift */; };
 		EE766B8926B317CC0030ADDA /* SendUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE766B8826B317CC0030ADDA /* SendUser.swift */; };
 		EE782853268150A900AECC65 /* AddOurToDoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE782852268150A900AECC65 /* AddOurToDoViewController.swift */; };
 		EE7828552681859200AECC65 /* AddErrandViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE7828542681859200AECC65 /* AddErrandViewController.swift */; };
@@ -52,6 +53,7 @@
 		EE24573F269FDA6100E2EE9D /* WhatAboutPeopleLikeThisCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WhatAboutPeopleLikeThisCell.swift; sourceTree = "<group>"; };
 		EE36219D267E18080099AF3A /* MoreCalendarModalsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoreCalendarModalsViewController.swift; sourceTree = "<group>"; };
 		EE3779082679FAC100334D4A /* Model.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Model.swift; sourceTree = "<group>"; };
+		EE3B142526B48DF600B7184D /* CustomData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomData.swift; sourceTree = "<group>"; };
 		EE766B8826B317CC0030ADDA /* SendUser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SendUser.swift; sourceTree = "<group>"; };
 		EE782852268150A900AECC65 /* AddOurToDoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddOurToDoViewController.swift; sourceTree = "<group>"; };
 		EE7828542681859200AECC65 /* AddErrandViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddErrandViewController.swift; sourceTree = "<group>"; };
@@ -172,6 +174,7 @@
 				EE93B4D62687639F0055D7A6 /* OneAlertButton.swift */,
 				EE0734F526B17EAC00EA2117 /* inputContainerErrandTextView.swift */,
 				EE766B8826B317CC0030ADDA /* SendUser.swift */,
+				EE3B142526B48DF600B7184D /* CustomData.swift */,
 				EE37790A2679FB3800334D4A /* Cell */,
 			);
 			path = Views;
@@ -383,6 +386,7 @@
 				EE0734F626B17EAC00EA2117 /* inputContainerErrandTextView.swift in Sources */,
 				EE9C91B126AEE84300115DD2 /* MoreAlarmModelViewController.swift in Sources */,
 				EED007D526674AC2009A5A87 /* Utilities.swift in Sources */,
+				EE3B142626B48DF600B7184D /* CustomData.swift in Sources */,
 				EE7828552681859200AECC65 /* AddErrandViewController.swift in Sources */,
 				EEA457F42682FFA100C08D17 /* AlertButton.swift in Sources */,
 				EEFAD2AD26B0838F0011A246 /* ErrandDetailsViewController.swift in Sources */,
