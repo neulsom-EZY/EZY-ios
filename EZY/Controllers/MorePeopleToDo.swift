@@ -29,14 +29,8 @@ class MorePeopleToDo: UIViewController{
         $0.dynamicFont(fontSize: 20, weight: .semibold)
         $0.updateGradientTextColor_vertical(gradientColors: [.EZY_968DFF,.EZY_968DFF,.EZY_968DFF,.white])
     }
-//    private let titleLabel : GradientTitle = {
-//        let tL = GradientTitle()
-//        tL.title = "누구와 일정을 함께하시나요?"
-//        tL.subTitle = "한명도 좋고 여러명도 좋아요!"
-//
-//        return tL
-//    }()
-//
+    
+
     private let GroupLabel = UILabel().then{
         $0.text = "그룹원"
         $0.dynamicFont(fontSize: 10, weight: .thin)
@@ -61,17 +55,15 @@ class MorePeopleToDo: UIViewController{
         let layout = UICollectionViewFlowLayout()
         let cv = UICollectionView(frame: .zero, collectionViewLayout: layout)
         layout.scrollDirection = .horizontal
-        layout.minimumLineSpacing = 0
         cv.translatesAutoresizingMaskIntoConstraints = false
         cv.register(WhatAboutPeopleLikeThisCell.self, forCellWithReuseIdentifier: WhatAboutPeopleLikeThisCell.identifier)
         cv.showsHorizontalScrollIndicator = false
         cv.backgroundColor = .clear
+
         return cv
     }()
     
-    private let divider = UIView().then{
-        $0.backgroundColor = .EZY_DEDEDE
-    }
+
     
     
     //MARK: - Lifecycle
@@ -98,14 +90,12 @@ class MorePeopleToDo: UIViewController{
     
     func addView(){
         view.addSubview(backbutton)
-//        view.addSubview(titleLabel)
         view.addSubview(TitleLabel)
         view.addSubview(SubLabel)
         view.addSubview(GroupLabel)
         view.addSubview(nickNameTextFieldContainerView)
         view.addSubview(recommendPeopleLabel)
         view.addSubview(WhatAboutPeopleLikeThis)
-        view.addSubview(divider)
     }
     
     
@@ -123,11 +113,7 @@ class MorePeopleToDo: UIViewController{
             make.top.equalTo(TitleLabel.snp.bottom)
             make.left.equalTo(TitleLabel.snp.left)
         }
-//        titleLabel.snp.makeConstraints { (make) in
-//            make.left.equalTo(backbutton.snp.left)
-//            make.top.equalTo(backbutton.snp.top).offset(view.frame.height/15.6)
-//            make.height.equalTo(view.frame.height/15.615) 
-//        }
+
         GroupLabel.snp.makeConstraints { (make) in
             make.left.equalTo(view.frame.height/20.8)
             make.top.equalTo(SubLabel.snp.bottom).offset(view.frame.height/17.6)
@@ -148,12 +134,7 @@ class MorePeopleToDo: UIViewController{
             make.height.equalTo(view.frame.height/11.277)
             make.right.equalToSuperview()
         }
-        divider.snp.makeConstraints { (make) in
-            make.height.equalTo(view.frame.height/1624)
-            make.top.equalTo(WhatAboutPeopleLikeThis.snp.bottom).offset(view.frame.height/35.3)
-            make.centerX.equalToSuperview()
-            make.width.equalTo(view.frame.height/2.689)
-        }
+
         
     }
     
@@ -185,7 +166,7 @@ extension MorePeopleToDo : UICollectionViewDelegateFlowLayout,UICollectionViewDa
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
         return view.frame.height/90.22
     }
-    
+
 
 }
 
