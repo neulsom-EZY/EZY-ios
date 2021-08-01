@@ -23,6 +23,10 @@ class PersonalPlanChangeViewController: UIViewController {
     
     var isChecked: [Bool] = [true, false, false, false]
     
+    var startSelectCircleButtonLocation = "Left"
+    
+    var endSelectCircleButtonLocation = "Left"
+    
     var RepeatModels: [RepeatCollectionViewModel] = [RepeatCollectionViewModel(backgroundColr: UIColor(red: 255/255, green: 188/255, blue: 188/255, alpha: 1), isSelected: true),
                                                      RepeatCollectionViewModel(backgroundColr: UIColor(red: 255/255, green: 188/255, blue: 188/255, alpha: 1), isSelected: true),
                                                      RepeatCollectionViewModel(backgroundColr: UIColor(red: 255/255, green: 188/255, blue: 188/255, alpha: 1), isSelected: true),
@@ -464,6 +468,9 @@ class PersonalPlanChangeViewController: UIViewController {
     func selectTimeModalViewSetting(){
         self.view.addSubview(selectTimeModalView)
         
+        selectTimeModalView.startSelectCircleButton.addTarget(self, action: #selector(startSelectCircleButtonClicked(sender:)), for: .touchUpInside)
+        selectTimeModalView.endSelectCircleButton.addTarget(self, action: #selector(endSelectCircleButtonClicked(sender:)), for: .touchUpInside)
+        
         selectTimeModalView.snp.makeConstraints { make in
             make.bottom.top.right.left.equalToSuperview()
         }
@@ -726,6 +733,54 @@ class PersonalPlanChangeViewController: UIViewController {
         let firstCell = tagColorCollectionView.cellForItem(at: [0, 0]) as? TagColorCollectionViewCell
         
         firstCell?.checkImage.isHidden = false
+    }
+    
+    @objc func startSelectCircleButtonClicked(sender:UIButton){
+        UIButton.animate(withDuration: 0.2, delay: 0, options: .curveEaseOut, animations: {
+            
+            if self.startSelectCircleButtonLocation == "Left"{
+                self.selectTimeModalView.startSelectCircleButton.snp.remakeConstraints { make in
+                    make.centerY.equalTo(self.selectTimeModalView.startSelectBackButton)
+                    make.right.equalTo(self.selectTimeModalView.startSelectBackButton).offset(-self.view.frame.width/300)
+                    make.height.width.equalTo(self.selectTimeModalView.startSelectBackButton.snp.height).dividedBy(1.2)
+                }
+                self.selectTimeModalView.startSelectCircleButton.superview?.layoutIfNeeded()
+                self.startSelectCircleButtonLocation = "Right"
+            }else{
+                self.selectTimeModalView.startSelectCircleButton.snp.remakeConstraints { make in
+                    make.centerY.equalTo(self.selectTimeModalView.startSelectBackButton)
+                    make.left.equalTo(self.selectTimeModalView.startSelectBackButton).offset(self.view.frame.width/300)
+                    make.height.width.equalTo(self.selectTimeModalView.startSelectBackButton.snp.height).dividedBy(1.2)
+                }
+                self.selectTimeModalView.startSelectCircleButton.superview?.layoutIfNeeded()
+                self.startSelectCircleButtonLocation = "Left"
+            }
+
+        })
+    }
+    
+    @objc func endSelectCircleButtonClicked(sender:UIButton){
+        UIButton.animate(withDuration: 0.2, delay: 0, options: .curveEaseOut, animations: {
+            
+            if self.endSelectCircleButtonLocation == "Left"{
+                self.selectTimeModalView.endSelectCircleButton.snp.remakeConstraints { make in
+                    make.centerY.equalTo(self.selectTimeModalView.endSelectBackButton)
+                    make.right.equalTo(self.selectTimeModalView.endSelectBackButton).offset(-self.view.frame.width/300)
+                    make.height.width.equalTo(self.selectTimeModalView.endSelectBackButton.snp.height).dividedBy(1.2)
+                }
+                self.selectTimeModalView.endSelectCircleButton.superview?.layoutIfNeeded()
+                self.endSelectCircleButtonLocation = "Right"
+            }else{
+                self.selectTimeModalView.endSelectCircleButton.snp.remakeConstraints { make in
+                    make.centerY.equalTo(self.selectTimeModalView.endSelectBackButton)
+                    make.left.equalTo(self.selectTimeModalView.endSelectBackButton).offset(self.view.frame.width/300)
+                    make.height.width.equalTo(self.selectTimeModalView.endSelectBackButton.snp.height).dividedBy(1.2)
+                }
+                self.selectTimeModalView.startSelectCircleButton.superview?.layoutIfNeeded()
+                self.endSelectCircleButtonLocation = "Left"
+            }
+
+        })
     }
     
     @objc //MARK: 모달 창 올리기
