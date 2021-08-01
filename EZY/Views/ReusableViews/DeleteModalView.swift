@@ -21,12 +21,12 @@ class DeleteModalView: UIView {
     
     lazy var modalTitleLabel = UILabel().then {
         $0.text = "그룹 삭제"
-        $0.textColor = UIColor(red: 236/255, green: 188/255, blue: 116/255, alpha: 1)
+        $0.textColor = UIColor(red: 124/255, green: 113/255, blue: 255/255, alpha: 1)
         $0.dynamicFont(fontSize: 12, currentFontName: "AppleSDGothicNeo-Bold")
     }
     
     lazy var circleView = UIView().then {
-        $0.backgroundColor = UIColor(red: 255/255, green: 225/255, blue: 181/255, alpha: 1)
+        $0.backgroundColor = UIColor(red: 124/255, green: 113/255, blue: 255/255, alpha: 1)
     }
     
     let iconImageView: UIImageView = UIImageView(image: UIImage(named: "EZY_OurJob"))
@@ -42,7 +42,7 @@ class DeleteModalView: UIView {
     
     lazy var planNameLabel = UILabel().then {
         $0.text = "STUDY GROUP"
-        $0.textColor = UIColor(red: 255/255, green: 203/255, blue: 124/255, alpha: 1)
+        $0.textColor = UIColor(red: 124/255, green: 113/255, blue: 255/255, alpha: 1)
         $0.dynamicFont(fontSize: 17, currentFontName: "AppleSDGothicNeo-Bold")
     }
     
@@ -55,14 +55,14 @@ class DeleteModalView: UIView {
     lazy var cancelButton = UIButton().then {
         $0.setTitle("취 소", for: .normal)
         $0.layer.cornerRadius = 10
-        $0.backgroundColor = UIColor(red: 255/255, green: 197/255, blue: 109/255, alpha: 1)
+        $0.backgroundColor = UIColor(red: 124/255, green: 113/255, blue: 255/255, alpha: 1)
         $0.titleLabel!.font = UIFont(name: "AppleSDGothicNeo-Bold", size: 12 * 0.92)
     }
     
     lazy var deleteButton = UIButton().then {
         $0.setTitle("삭 제", for: .normal)
         $0.layer.cornerRadius = 10
-        $0.backgroundColor = UIColor(red: 255/255, green: 214/255, blue: 153/255, alpha: 1)
+        $0.backgroundColor = UIColor(red: 147/255, green: 145/255, blue: 254/255, alpha: 1)
         $0.titleLabel!.font = UIFont(name: "AppleSDGothicNeo-Bold", size: 12 * 0.92)
 
     }

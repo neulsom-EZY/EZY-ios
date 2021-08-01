@@ -13,15 +13,14 @@ class StartTimeTableViewCell: UITableViewCell {
 
     lazy var hourLabel = UILabel().then{
         $0.text = "12"
-        $0.textColor = UIColor(red: 130/255, green: 197/255, blue: 165/255, alpha: 1)
+        $0.textColor = UIColor(red: 150/255, green: 145/255, blue: 255/255, alpha: 1)
         $0.dynamicFont(fontSize: 17, currentFontName: "AppleSDGothicNeo-SemiBold")
     }
     
     lazy var minuteLabel = UILabel().then{
         $0.text = "24"
-        $0.textColor = UIColor(red: 130/255, green: 197/255, blue: 165/255, alpha: 1)
+        $0.textColor = UIColor(red: 150/255, green: 145/255, blue: 255/255, alpha: 1)
         $0.dynamicFont(fontSize: 17, currentFontName: "AppleSDGothicNeo-SemiBold")
-
     }
 
     override func awakeFromNib() {
