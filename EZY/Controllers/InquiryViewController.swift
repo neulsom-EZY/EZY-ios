@@ -202,6 +202,8 @@ extension InquiryViewController: UITableViewDataSource{
         cell.backgroundColor = .white
         cell.titleTextView.text = beforeInquiryTitleText[indexPath.row]
         cell.contentTextView.text = beforeInquiryContentText[indexPath.row]
+        
+        cell.selectionStyle = .none
         return cell
     }
         
