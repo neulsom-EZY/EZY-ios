@@ -23,8 +23,5 @@ class WhiteBackgroundView: UIButton {
         $0.setImage(UIImage(named: "EZY_Calendar.svg"), for: .normal)
     }
     
-    func dataSetting(iconImage: UIImage){
-        iconImageButton.setImage(iconImage, for: .normal)
-    }
     
 }

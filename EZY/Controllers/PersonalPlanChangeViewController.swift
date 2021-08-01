@@ -1031,8 +1031,8 @@ class PersonalPlanChangeViewController: UIViewController {
         self.view.addSubview(calendarViewButton)
         calendarViewButton.addSubview(calendarViewButton.backgroundView)
         calendarViewButton.backgroundView.addSubview(calendarViewButton.iconImageButton)
-        
-        calendarViewButton.dataSetting(iconImage: UIImage(named: "EZY_Calendar.svg")!)
+
+        calendarViewButton.iconImageButton.setImage(UIImage(named: "EZY_Calendar.svg"), for: .normal)
         
         calendarViewButton.addTarget(self, action: #selector(calendarViewButtonClicked(sender:)), for: .touchUpInside)
         calendarViewButton.iconImageButton.addTarget(self, action: #selector(calendarViewButtonClicked(sender:)), for: .touchUpInside)
@@ -1082,7 +1082,7 @@ class PersonalPlanChangeViewController: UIViewController {
         
         timeViewButton.addTarget(self, action: #selector(timeViewButtonClicked(sender:)), for: .touchUpInside)
         
-        timeViewButton.dataSetting(iconImage: UIImage(named: "EZY_TimeSquare.svg")!)
+        timeViewButton.iconImageButton.setImage(UIImage(named: "EZY_TimeSquare.svg"), for: .normal)
         
         timeViewButton.snp.makeConstraints { make in
             make.top.equalTo(calendarViewButton.snp.bottom).offset(self.view.frame.height/47.7)
@@ -1111,7 +1111,7 @@ class PersonalPlanChangeViewController: UIViewController {
 
         locationViewButton.addTarget(self, action: #selector(locationViewButtonClicked(sender:)), for: .touchUpInside)
         
-        locationViewButton.dataSetting(iconImage: UIImage(named: "EZY_Location.svg")!)
+        locationViewButton.iconImageButton.setImage(UIImage(named: "EZY_location.svg"), for: .normal)
         
         locationViewButton.snp.makeConstraints { make in
             make.top.equalTo(timeViewButton.snp.bottom).offset(self.view.frame.height/47.7)
