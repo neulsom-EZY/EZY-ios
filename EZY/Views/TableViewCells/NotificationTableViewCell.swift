@@ -12,8 +12,8 @@ class NotificationTableViewCell: UITableViewCell {
     //MARK: Properties
     static let NotificationTableViewIdentifier = "\(NotificationTableViewCell.self)"
     
-    lazy var logoCircleImageView = UIImageView().then {
-        $0.self.image? = UIImage(named: "EZY_MyJob")!
+    lazy var logoCircleBackgroundView = UIView().then {
+        $0.backgroundColor = UIColor(red: 186/255, green: 200/255, blue: 255/255, alpha: 1)
     }
     
     lazy var cellBackgroundView = UIView().then {
@@ -46,7 +46,7 @@ class NotificationTableViewCell: UITableViewCell {
     }
     
     lazy var scheduleImageByTypeImageView = UIImageView().then {
-        $0.self.image? = UIImage(named: "EZY_MyJob")!
+        $0.image = UIImage(named: "EZY_Errand")
     }
     
     override func awakeFromNib() {
@@ -68,28 +68,29 @@ class NotificationTableViewCell: UITableViewCell {
         cellBackgroundView.addSubview(scheduleTypeLabel)
         cellBackgroundView.addSubview(notificationContentLabel)
         cellBackgroundView.addSubview(afterNotificationTimeLabel)
-        cellBackgroundView.addSubview(logoCircleImageView)
-        logoCircleImageView.addSubview(scheduleImageByTypeImageView)
+        cellBackgroundView.addSubview(logoCircleBackgroundView)
+        logoCircleBackgroundView.addSubview(scheduleImageByTypeImageView)
         
         cellBackgroundView.snp.makeConstraints { make in
-            make.height.equalTo(80)
+            make.height.equalToSuperview().dividedBy(1.18)
             make.top.equalToSuperview().offset(5)
             make.centerX.equalToSuperview()
             make.left.equalToSuperview().offset(contentView.frame.width/13.3)
         }
         
-        logoCircleImageView.snp.makeConstraints { make in
-            make.width.equalToSuperview().dividedBy(9.9)
-            make.height.equalTo(logoCircleImageView.snp.width)
+        logoCircleBackgroundView.snp.makeConstraints { make in
+            make.width.equalTo(logoCircleBackgroundView.snp.height)
+            make.height.equalToSuperview().dividedBy(2.4)
             make.centerY.equalToSuperview()
             make.left.equalToSuperview().offset(contentView.frame.width/20)
+            
+            logoCircleBackgroundView.layer.cornerRadius = ((contentView.frame.height/1.18)/2.4)/2
+            
         }
         
         scheduleImageByTypeImageView.snp.makeConstraints { make in
-            make.centerX.equalToSuperview()
-            make.centerY.equalToSuperview()
-            make.height.equalToSuperview().dividedBy(2.1)
-            make.width.equalTo(scheduleImageByTypeImageView.snp.height)
+            make.centerX.centerY.equalToSuperview()
+            make.height.width.equalToSuperview().dividedBy(2.1)
         }
         
         afterNotificationTimeLabel.snp.makeConstraints { make in
@@ -98,7 +99,7 @@ class NotificationTableViewCell: UITableViewCell {
         }
         
         scheduleTypeLabel.snp.makeConstraints { make in
-            make.left.equalTo(logoCircleImageView.snp.right).offset(contentView.frame.width/20)
+            make.left.equalTo(logoCircleBackgroundView.snp.right).offset(contentView.frame.width/20)
             make.top.equalToSuperview().offset(contentView.frame.height/2.7)
         }
         
@@ -106,9 +107,6 @@ class NotificationTableViewCell: UITableViewCell {
             make.top.equalTo(scheduleTypeLabel.snp.bottom)
             make.left.equalTo(scheduleTypeLabel)
         }
-        
-        logoCircleImageView.layer.cornerRadius = (cellBackgroundView.frame.width/9.9)/2
-        logoCircleImageView.clipsToBounds = true
         
     }
 

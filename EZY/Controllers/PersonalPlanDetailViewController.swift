@@ -7,7 +7,9 @@
 
 import UIKit
 
-class ScheduleDetailViewController: UIViewController {
+class PersonalPlanDetailViewController: UIViewController {
+    
+    var planDeleteModalView = PlanDeleteModalView()
     
     lazy var locationBackgroundView = UIView().then{
         $0.backgroundColor = .white
@@ -118,6 +120,12 @@ class ScheduleDetailViewController: UIViewController {
         $0.backgroundColor = UIColor(red: 150/255, green: 141/255, blue: 255/255, alpha: 1)
     }
     
+    lazy var repeatTitleLabel = UILabel().then {
+        $0.text = "반복 설정"
+        $0.textColor = UIColor(red: 182/255, green: 182/255, blue: 182/255, alpha: 1)
+        $0.dynamicFont(fontSize: 14, currentFontName: "AppleSDGothicNeo-Bold")
+    }
+    
     lazy var planDeleteButton = UIButton().then {
         $0.setImage(UIImage(named: "EZY_DeleteButton"), for: .normal)
     }
@@ -126,10 +134,143 @@ class ScheduleDetailViewController: UIViewController {
         $0.setImage(UIImage(named: "EZY_PlanModify"), for: .normal)
     }
     
+    lazy var repeatDayCollectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout())
+    
+    var dayLabelText = ["월","수","토","일"]
+    
+    lazy var notificationTitleLabel = UILabel().then {
+        $0.text = "알림 설정"
+        $0.textColor = UIColor(red: 182/255, green: 182/255, blue: 182/255, alpha: 1)
+        $0.dynamicFont(fontSize: 14, currentFontName: "AppleSDGothicNeo-Bold")
+    }
+    
+    lazy var notificationBackgroundView = UIView().then {
+        $0.backgroundColor = UIColor(red: 253/255, green: 253/255, blue: 253/255, alpha: 1)
+        $0.layer.borderWidth = 0.5
+        $0.layer.borderColor = UIColor(red: 207/255, green: 207/255, blue: 207/255, alpha: 1).cgColor
+        $0.layer.cornerRadius = 10
+    }
+    
+    lazy var notificationTimeLabel = UILabel().then {
+        $0.text = "오전 12:12"
+        $0.textColor = UIColor(red: 172/255, green: 172/255, blue: 172/255, alpha: 1)
+        $0.dynamicFont(fontSize: 12, currentFontName: "Poppins-Light")
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
         layoutSetting()
+        
+        repeatDayCollectionViewSetting()
+        
+        planDeleteModalViewSetting()
+        
+    }
+    
+    func repeatDayCollectionViewSetting(){
+        self.view.addSubview(repeatDayCollectionView)
+        
+        repeatDayCollectionView.backgroundColor = .white
+        
+        repeatDayCollectionView.delegate = self
+        repeatDayCollectionView.dataSource = self
+        
+        repeatDayCollectionView.register(PersonalPlanDetailRepeatDayCollectionViewCell.self, forCellWithReuseIdentifier: PersonalPlanDetailRepeatDayCollectionViewCell.reuseId)
+        
+        repeatDayCollectionView.snp.makeConstraints { make in
+            make.top.equalTo(repeatTitleLabel.snp.bottom).offset(self.view.frame.height/80)
+            make.left.equalTo(repeatTitleLabel)
+            make.centerX.equalToSuperview()
+            make.height.equalToSuperview().dividedBy(25.3)
+        }
+        
+        notificationTitleLabel.snp.makeConstraints { make in
+            make.left.equalTo(repeatDayCollectionView)
+            make.top.equalTo(repeatDayCollectionView.snp.bottom).offset(self.view.frame.height/38.6)
+        }
+        
+        notificationBackgroundView.snp.makeConstraints { make in
+            make.left.equalTo(notificationTitleLabel)
+            make.top.equalTo(notificationTitleLabel.snp.bottom).offset(self.view.frame.height/80)
+            make.height.equalToSuperview().dividedBy(25.3)
+            make.width.equalToSuperview().dividedBy(4.07)
+        }
+        
+        notificationTimeLabel.snp.makeConstraints { make in
+            make.centerY.centerX.equalToSuperview()
+        }
+    }
+    
+    func planDeleteModalViewSetting(){
+        self.view.addSubview(planDeleteModalView)
+        
+        planDeleteModalView.deleteButton.addTarget(self, action: #selector(planDeleteModalViewDeleteButtonClicked(sender:)), for: .touchUpInside)
+        
+        planDeleteModalView.snp.makeConstraints { make in
+            make.top.right.bottom.left.equalToSuperview()
+        }
+        
+        planDeleteModalView.shadowBackgroundView.snp.makeConstraints { make in
+            make.top.right.bottom.left.equalToSuperview()
+        }
+        
+        planDeleteModalView.modalBackgroundView.snp.makeConstraints { make in
+            make.width.equalToSuperview().dividedBy(1.1)
+            make.height.equalToSuperview().dividedBy(3.59)
+            make.centerY.centerX.equalToSuperview()
+        }
+        
+        planDeleteModalView.titleLabel.snp.makeConstraints { make in
+            make.top.equalToSuperview().offset(self.view.frame.height/33.8)
+            make.left.equalToSuperview().offset(self.view.frame.height/33.8)
+        }
+        
+        planDeleteModalView.iconCircleBackground.snp.makeConstraints { make in
+            make.top.equalTo(planDeleteModalView.titleLabel.snp.bottom).offset(self.view.frame.height/54.1)
+            make.centerX.equalToSuperview()
+            make.height.equalTo(self.view).dividedBy(15.6)
+            make.width.equalTo(planDeleteModalView.iconCircleBackground.snp.height)
+            
+            planDeleteModalView.iconCircleBackground.layer.cornerRadius = (self.view.frame.height/15.6)/2
+        }
+        
+        planDeleteModalView.iconImageView.snp.makeConstraints { make in
+            make.centerX.centerY.equalToSuperview()
+            make.height.width.equalToSuperview().dividedBy(2)
+        }
+        
+        planDeleteModalView.labelView.snp.makeConstraints { make in
+            make.centerX.equalToSuperview()
+            make.width.equalToSuperview().dividedBy(1.4)
+            make.height.equalToSuperview().dividedBy(10)
+            make.top.equalTo(planDeleteModalView.iconCircleBackground.snp.bottom).offset(self.view.frame.height/54.1)
+        }
+        
+        planDeleteModalView.planTitleNameLabel.snp.makeConstraints { make in
+            make.left.equalToSuperview()
+            make.centerY.equalToSuperview()
+        }
+        
+        planDeleteModalView.deleteQuestionsLabel.snp.makeConstraints { make in
+            make.right.equalToSuperview()
+            make.centerY.equalToSuperview()
+        }
+        
+        planDeleteModalView.deleteButton.snp.makeConstraints { make in
+            make.bottom.equalTo(planDeleteModalView.cancelButton)
+            make.right.equalTo(planDeleteModalView.cancelButton.snp.left).offset(-self.view.frame.width/35)
+            make.height.width.equalTo(planDeleteModalView.cancelButton)
+        }
+        
+        planDeleteModalView.cancelButton.snp.makeConstraints { make in
+            make.bottom.equalToSuperview().offset(-self.view.frame.height/30.6)
+            make.right.equalToSuperview().offset(-self.view.frame.width/15)
+            make.height.equalToSuperview().dividedBy(7.2)
+            make.width.equalToSuperview().dividedBy(4.7)
+        }
+        
+        planDeleteModalView.isHidden = true
         
     }
     
@@ -151,11 +292,18 @@ class ScheduleDetailViewController: UIViewController {
         self.view.addSubview(tagStudyButton)
         self.view.addSubview(planDeleteButton)
         self.view.addSubview(planModifyButton)
+        self.view.addSubview(repeatTitleLabel)
+        self.view.addSubview(notificationTitleLabel)
+        self.view.addSubview(notificationBackgroundView)
+        notificationBackgroundView.addSubview(notificationTimeLabel)
         self.timeBackgroundView.addSubview(timeIconImageView)
         self.calendarBackgroundView.addSubview(calendarIconImageView)
         self.locationBackgroundView.addSubview(locationIconImageView)
         explanationBackgroundView.addSubview(explanationTitleLabel)
         explanationBackgroundView.addSubview(explanationContentTextView)
+        
+        planModifyButton.addTarget(self, action: #selector(planModifyButtonClicked(sender:)), for: .touchUpInside)
+        planDeleteButton.addTarget(self, action: #selector(planDeleteButtonClicked(sender:)), for: .touchUpInside)
         
         backButton.snp.makeConstraints { make in
             make.top.equalTo(self.view.safeAreaLayoutGuide).offset(self.view.frame.height/47.7)
@@ -259,7 +407,7 @@ class ScheduleDetailViewController: UIViewController {
         }
         
         tagStudyButton.snp.makeConstraints{ make in
-            make.top.equalTo(tagLabel.snp.bottom).offset(self.view.frame.height/47.7)
+            make.top.equalTo(tagLabel.snp.bottom).offset(self.view.frame.height/80)
             make.left.equalTo(tagLabel)
             make.height.equalToSuperview().dividedBy(25.3)
             make.width.equalToSuperview().dividedBy(4.4)
@@ -267,6 +415,46 @@ class ScheduleDetailViewController: UIViewController {
             tagStudyButton.layer.cornerRadius = (self.view.frame.height/25.3)/2
         }
         
+        repeatTitleLabel.snp.makeConstraints { make in
+            make.left.equalTo(tagStudyButton)
+            make.top.equalTo(tagStudyButton.snp.bottom).offset(self.view.frame.height/35)
+        }
+        
+    }
+    
+    @objc func planDeleteButtonClicked(sender:UIButton){
+        planDeleteModalView.isHidden = false
+    }
+    
+    @objc func planModifyButtonClicked(sender:UIButton){
+        let nextViewController = PersonalPlanChangeViewController()
+        self.navigationController?.pushViewController(nextViewController, animated: true)
+    }
+    
+    @objc func planDeleteModalViewDeleteButtonClicked(sender:UIButton){
+        planDeleteModalView.isHidden = true
+//        let nextViewController = personallistVC()
+//        self.navigationController?.pushViewController(nextViewController, animated: true)
     }
 
+}
+
+extension PersonalPlanDetailViewController: UICollectionViewDelegate, UICollectionViewDelegateFlowLayout{
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        return CGSize.init(width: self.view.frame.height / 25.375, height: self.view.frame.height / 25.375)
+    }
+}
+
+extension PersonalPlanDetailViewController: UICollectionViewDataSource{
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return dayLabelText.count
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: PersonalPlanDetailRepeatDayCollectionViewCell.reuseId, for: indexPath) as! PersonalPlanDetailRepeatDayCollectionViewCell
+        
+        cell.dayLabel.text = dayLabelText[indexPath.row]
+        
+        return cell
+    }
 }

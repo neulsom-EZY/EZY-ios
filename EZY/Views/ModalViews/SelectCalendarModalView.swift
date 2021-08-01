@@ -9,14 +9,14 @@ import UIKit
 
 class SelectCalendarModalView: UIView {
     
-    var pinkColor: UIColor! = UIColor(red: 255/255, green: 148/255, blue: 148/255, alpha: 1)
+    var pinkColor: UIColor! = UIColor(red: 170/255, green: 187/255, blue: 254/255, alpha: 1)
     
     var whiteColor: UIColor! = UIColor.white
     
     lazy var labelColor: [UIColor] = [pinkColor, whiteColor]
     
     lazy var calendarTriangleImageView = UIImageView().then{
-        $0.image = UIImage(named:"EZY_CalendarTriangleViewImage.svg")
+        $0.image = UIImage(named:"EZY_CalendarTriangleViewBlue.svg")
     }
     
     lazy var shadowBackgroundView = UIView().then {
@@ -31,7 +31,7 @@ class SelectCalendarModalView: UIView {
     lazy var titleLabel = UILabel().then {
         $0.text = "날짜 선택"
         $0.dynamicFont(fontSize: 12, currentFontName: "AppleSDGothicNeo-Bold")
-        $0.textColor = UIColor(red: 255/255, green: 181/255, blue: 181/255, alpha: 1)
+        $0.textColor = UIColor(red: 170/255, green: 187/255, blue: 254/255, alpha: 1)
     }
     
     lazy var monthLabel = UILabel().then {
@@ -51,7 +51,7 @@ class SelectCalendarModalView: UIView {
     }
     
     lazy var calendarAddButton = UIButton().then{
-        $0.backgroundColor = UIColor(red: 255/255, green: 181/255, blue: 181/255, alpha: 1)
+        $0.backgroundColor = UIColor(red: 170/255, green: 187/255, blue: 254/255, alpha: 1)
         $0.setTitle("완료", for: .normal)
         $0.dynamicFont(fontSize: 12, currentFontName: "AppleSDGothicNeo-Bold")
         $0.layer.cornerRadius = 10

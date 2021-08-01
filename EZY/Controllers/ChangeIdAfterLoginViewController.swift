@@ -7,7 +7,7 @@
 
 import UIKit
 
-class IdChangeViewController: UIViewController {
+class ChangeIdAfterLoginViewController: UIViewController {
     
     //MARK: - Properties
     lazy var topView = TopView()
@@ -97,6 +97,9 @@ class IdChangeViewController: UIViewController {
         self.view.addSubview(idConditionLabel)
         self.view.addSubview(changeButton)
         
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(_:)), name:UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide(_:)), name: UIResponder.keyboardWillHideNotification, object: nil)
+        
         idNickNameLabel.snp.makeConstraints { make in
             make.top.equalTo(topView.titleLabel.snp.bottom).offset(self.view.frame.height/16.91)
             make.left.equalTo(topView.titleLabel)
@@ -127,5 +130,19 @@ class IdChangeViewController: UIViewController {
             make.height.equalToSuperview().dividedBy(16.24)
             make.bottom.equalToSuperview().offset(-self.view.frame.height/23.8)
         }
+    }
+    
+    @objc //MARK: 모달 창 올리기
+    func keyboardWillShow(_ sender: Notification) {
+        changeButton.frame.origin.y = self.view.frame.height/2
+    }
+
+    @objc //MARK: 모달 창 원래대로
+    func keyboardWillHide(_ sender: Notification) {
+        changeButton.frame.origin.y = self.view.frame.height-changeButton.frame.height-self.view.frame.height/23.8
+    }
+    
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        idTextField.resignFirstResponder()
     }
 }
