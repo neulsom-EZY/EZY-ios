@@ -89,7 +89,6 @@ class questionTableViewCell: UITableViewCell {
             make.left.equalToSuperview().offset(self.contentView.frame.height/8)
             make.centerY.equalToSuperview()
             
-            contentTextView.backgroundColor = .yellow
         }
         
         qnaBackgroundView.snp.makeConstraints { make in
