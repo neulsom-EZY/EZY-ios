@@ -9,7 +9,7 @@ import UIKit
 
 class SelectLocationModalView: UIView {
     
-    let locationLabelColorArray = [UIColor(red: 131/255, green: 120/255, blue: 255/255, alpha: 1), UIColor.white]
+    let locationLabelColorArray = [UIColor(red: 131/255, green: 120/255, blue: 255/255, alpha: 1), UIColor(red: 189/255, green: 188/255, blue: 255/255, alpha: 1)]
 
     lazy var shadowBackgroundView = UIView().then {
         $0.backgroundColor = UIColor.black.withAlphaComponent(0.2)

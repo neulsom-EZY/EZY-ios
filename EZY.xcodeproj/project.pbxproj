@@ -15,6 +15,8 @@
 		6A138F89266FACFE00DBCE49 /* GroupAddModalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A138F88266FACFE00DBCE49 /* GroupAddModalView.swift */; };
 		6A138F8D26703C1900DBCE49 /* selectedMemberCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A138F8C26703C1900DBCE49 /* selectedMemberCollectionViewCell.swift */; };
 		6A1E3E9026797CB600E7B198 /* DeleteModalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A1E3E8F26797CB600E7B198 /* DeleteModalView.swift */; };
+		6A3E2E7626B10D760078D749 /* ChangePasswardPhoneNumAfterLoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A3E2E7526B10D760078D749 /* ChangePasswardPhoneNumAfterLoginViewController.swift */; };
+		6A3E2E7826B111540078D749 /* ChangePasswardAfterLoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A3E2E7726B111540078D749 /* ChangePasswardAfterLoginViewController.swift */; };
 		6A44474D26677647004C4BC3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6A44474C26677647004C4BC3 /* Assets.xcassets */; };
 		6A4AE85D2678EBEE009E33CD /* GroupModifyDeleteModalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A4AE85C2678EBEE009E33CD /* GroupModifyDeleteModalView.swift */; };
 		6A4EDA002668653200B809EC /* ScheduleTimeTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A4ED9FF2668653200B809EC /* ScheduleTimeTableViewCell.swift */; };
@@ -27,6 +29,7 @@
 		6A4EDA35266BD27800B809EC /* TopView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A4EDA34266BD27800B809EC /* TopView.swift */; };
 		6A4EDA37266DA52A00B809EC /* SettingTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A4EDA36266DA52A00B809EC /* SettingTableViewCell.swift */; };
 		6A4EDA41266E38E000B809EC /* GroupCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A4EDA40266E38E000B809EC /* GroupCollectionViewCell.swift */; };
+		6A685C0D26AC1E2D0079BC30 /* PersonalPlanDetailRepeatDayCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A685C0C26AC1E2D0079BC30 /* PersonalPlanDetailRepeatDayCollectionViewCell.swift */; };
 		6A705BB6267E3ABF001954CE /* PersonalPlanChangeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A705BB5267E3ABF001954CE /* PersonalPlanChangeViewController.swift */; };
 		6A8283502698132000AC381B /* PlanDeleteModalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A82834F2698132000AC381B /* PlanDeleteModalView.swift */; };
 		6A82835426982A6C00AC381B /* InquiryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A82835326982A6C00AC381B /* InquiryViewController.swift */; };
@@ -66,7 +69,7 @@
 		6AA76A2526638C5600B7E1F5 /* Poppins-SemiBoldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 6AA76A132663844A00B7E1F5 /* Poppins-SemiBoldItalic.ttf */; };
 		6AA76A2626638C5600B7E1F5 /* Poppins-ExtraLight.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 6AA76A0E2663844A00B7E1F5 /* Poppins-ExtraLight.ttf */; };
 		6AA76A282663958B00B7E1F5 /* ShowPlanViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AA76A272663958B00B7E1F5 /* ShowPlanViewController.swift */; };
-		6AB27CAC269D758100B95C0F /* IdChangeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AB27CAB269D758100B95C0F /* IdChangeViewController.swift */; };
+		6AB27CAC269D758100B95C0F /* ChangeIdAfterLoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AB27CAB269D758100B95C0F /* ChangeIdAfterLoginViewController.swift */; };
 		6AB27CB0269D8C1600B95C0F /* WithdrawalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AB27CAF269D8C1600B95C0F /* WithdrawalViewController.swift */; };
 		6AB27CB2269DD1B900B95C0F /* InquiryChattingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AB27CB1269DD1B900B95C0F /* InquiryChattingViewController.swift */; };
 		6AB27CB4269DD42400B95C0F /* InquiryReceiveChattingBoxView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AB27CB3269DD42400B95C0F /* InquiryReceiveChattingBoxView.swift */; };
@@ -83,7 +86,7 @@
 		6AE5BAD52693D46A00A9731B /* SelectTimeModalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AE5BAD42693D46A00A9731B /* SelectTimeModalView.swift */; };
 		6AE5BAFA269534D300A9731B /* StartTimeTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AE5BAF9269534D300A9731B /* StartTimeTableViewCell.swift */; };
 		6AE5BAFC26953E0F00A9731B /* EndTimeTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AE5BAFB26953E0F00A9731B /* EndTimeTableViewCell.swift */; };
-		6AE5BB012695746F00A9731B /* RepeatCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AE5BB002695746F00A9731B /* RepeatCollectionViewCell.swift */; };
+		6AE5BB012695746F00A9731B /* PersonalPlanAddRepeatDayCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AE5BB002695746F00A9731B /* PersonalPlanAddRepeatDayCollectionViewCell.swift */; };
 		6AE5BB0326957B0600A9731B /* RepeatCollectionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AE5BB0226957B0600A9731B /* RepeatCollectionViewModel.swift */; };
 		6AE5BB0C269670CB00A9731B /* CustomGradientLoginBtnView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AE5BB09269670CB00A9731B /* CustomGradientLoginBtnView.swift */; };
 		6AE5BB0D269670CB00A9731B /* CustomGradientContinueBtnView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AE5BB0A269670CB00A9731B /* CustomGradientContinueBtnView.swift */; };
@@ -94,7 +97,7 @@
 		6AE5BB182696A6C600A9731B /* Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AE5BB172696A6C500A9731B /* Utilities.swift */; };
 		6AE5BB1A2696A6CE00A9731B /* Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AE5BB192696A6CE00A9731B /* Extension.swift */; };
 		6AE5BB1C2696B9C900A9731B /* PlanCompleteModalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AE5BB1B2696B9C900A9731B /* PlanCompleteModalView.swift */; };
-		6AE5BB1E2696DDA600A9731B /* ScheduleDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AE5BB1D2696DDA600A9731B /* ScheduleDetailViewController.swift */; };
+		6AE5BB1E2696DDA600A9731B /* PersonalPlanDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AE5BB1D2696DDA600A9731B /* PersonalPlanDetailViewController.swift */; };
 		6AFB77F9267ECD6700B59482 /* WhiteBackgroundView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AFB77F8267ECD6700B59482 /* WhiteBackgroundView.swift */; };
 		6AFB77FE267F343500B59482 /* TagAddModalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AFB77FD267F343500B59482 /* TagAddModalView.swift */; };
 		6AFB7800267F812B00B59482 /* TagColorCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AFB77FF267F812B00B59482 /* TagColorCollectionViewCell.swift */; };
@@ -112,6 +115,8 @@
 		6A138F88266FACFE00DBCE49 /* GroupAddModalView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupAddModalView.swift; sourceTree = "<group>"; };
 		6A138F8C26703C1900DBCE49 /* selectedMemberCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = selectedMemberCollectionViewCell.swift; sourceTree = "<group>"; };
 		6A1E3E8F26797CB600E7B198 /* DeleteModalView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteModalView.swift; sourceTree = "<group>"; };
+		6A3E2E7526B10D760078D749 /* ChangePasswardPhoneNumAfterLoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangePasswardPhoneNumAfterLoginViewController.swift; sourceTree = "<group>"; };
+		6A3E2E7726B111540078D749 /* ChangePasswardAfterLoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangePasswardAfterLoginViewController.swift; sourceTree = "<group>"; };
 		6A44474C26677647004C4BC3 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		6A4AE85C2678EBEE009E33CD /* GroupModifyDeleteModalView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupModifyDeleteModalView.swift; sourceTree = "<group>"; };
 		6A4ED9FF2668653200B809EC /* ScheduleTimeTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleTimeTableViewCell.swift; sourceTree = "<group>"; };
@@ -124,6 +129,7 @@
 		6A4EDA34266BD27800B809EC /* TopView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopView.swift; sourceTree = "<group>"; };
 		6A4EDA36266DA52A00B809EC /* SettingTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingTableViewCell.swift; sourceTree = "<group>"; };
 		6A4EDA40266E38E000B809EC /* GroupCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupCollectionViewCell.swift; sourceTree = "<group>"; };
+		6A685C0C26AC1E2D0079BC30 /* PersonalPlanDetailRepeatDayCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonalPlanDetailRepeatDayCollectionViewCell.swift; sourceTree = "<group>"; };
 		6A705BB5267E3ABF001954CE /* PersonalPlanChangeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonalPlanChangeViewController.swift; sourceTree = "<group>"; };
 		6A82834F2698132000AC381B /* PlanDeleteModalView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlanDeleteModalView.swift; sourceTree = "<group>"; };
 		6A82835326982A6C00AC381B /* InquiryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InquiryViewController.swift; sourceTree = "<group>"; };
@@ -165,7 +171,7 @@
 		6AA76A132663844A00B7E1F5 /* Poppins-SemiBoldItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Poppins-SemiBoldItalic.ttf"; path = "../../../../../Downloads/Poppins/Poppins-SemiBoldItalic.ttf"; sourceTree = "<group>"; };
 		6AA76A142663844A00B7E1F5 /* Poppins-SemiBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Poppins-SemiBold.ttf"; path = "../../../../../Downloads/Poppins/Poppins-SemiBold.ttf"; sourceTree = "<group>"; };
 		6AA76A272663958B00B7E1F5 /* ShowPlanViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowPlanViewController.swift; sourceTree = "<group>"; };
-		6AB27CAB269D758100B95C0F /* IdChangeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IdChangeViewController.swift; sourceTree = "<group>"; };
+		6AB27CAB269D758100B95C0F /* ChangeIdAfterLoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangeIdAfterLoginViewController.swift; sourceTree = "<group>"; };
 		6AB27CAF269D8C1600B95C0F /* WithdrawalViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WithdrawalViewController.swift; sourceTree = "<group>"; };
 		6AB27CB1269DD1B900B95C0F /* InquiryChattingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InquiryChattingViewController.swift; sourceTree = "<group>"; };
 		6AB27CB3269DD42400B95C0F /* InquiryReceiveChattingBoxView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InquiryReceiveChattingBoxView.swift; sourceTree = "<group>"; };
@@ -182,7 +188,7 @@
 		6AE5BAD42693D46A00A9731B /* SelectTimeModalView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectTimeModalView.swift; sourceTree = "<group>"; };
 		6AE5BAF9269534D300A9731B /* StartTimeTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartTimeTableViewCell.swift; sourceTree = "<group>"; };
 		6AE5BAFB26953E0F00A9731B /* EndTimeTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EndTimeTableViewCell.swift; sourceTree = "<group>"; };
-		6AE5BB002695746F00A9731B /* RepeatCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepeatCollectionViewCell.swift; sourceTree = "<group>"; };
+		6AE5BB002695746F00A9731B /* PersonalPlanAddRepeatDayCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonalPlanAddRepeatDayCollectionViewCell.swift; sourceTree = "<group>"; };
 		6AE5BB0226957B0600A9731B /* RepeatCollectionViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepeatCollectionViewModel.swift; sourceTree = "<group>"; };
 		6AE5BB09269670CB00A9731B /* CustomGradientLoginBtnView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomGradientLoginBtnView.swift; sourceTree = "<group>"; };
 		6AE5BB0A269670CB00A9731B /* CustomGradientContinueBtnView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomGradientContinueBtnView.swift; sourceTree = "<group>"; };
@@ -193,7 +199,7 @@
 		6AE5BB172696A6C500A9731B /* Utilities.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Utilities.swift; path = "../../../../../Downloads/Utils 2/Utilities.swift"; sourceTree = "<group>"; };
 		6AE5BB192696A6CE00A9731B /* Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Extension.swift; path = "../../../../../Downloads/Utils 2/Extension.swift"; sourceTree = "<group>"; };
 		6AE5BB1B2696B9C900A9731B /* PlanCompleteModalView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlanCompleteModalView.swift; sourceTree = "<group>"; };
-		6AE5BB1D2696DDA600A9731B /* ScheduleDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleDetailViewController.swift; sourceTree = "<group>"; };
+		6AE5BB1D2696DDA600A9731B /* PersonalPlanDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonalPlanDetailViewController.swift; sourceTree = "<group>"; };
 		6AFB77F8267ECD6700B59482 /* WhiteBackgroundView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WhiteBackgroundView.swift; sourceTree = "<group>"; };
 		6AFB77FD267F343500B59482 /* TagAddModalView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagAddModalView.swift; sourceTree = "<group>"; };
 		6AFB77FF267F812B00B59482 /* TagColorCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagColorCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -349,17 +355,20 @@
 				6A4EDA2B266A045B00B809EC /* NotificationViewController.swift */,
 				6AA6F796269C2E6200958D36 /* NewPasswordPhoneNumViewController.swift */,
 				6AA6F797269C2E6200958D36 /* NewPasswordPutViewController.swift */,
-				6A4EDA31266BD11600B809EC /* SettingViewController.swift */,
 				6A138F84266F866D00DBCE49 /* GroupManagementViewController.swift */,
 				6AE41E7926A9228A0072612C /* TagManagementViewController.swift */,
 				6AE41E7D26A9560C0072612C /* TagSettingViewController.swift */,
 				6AC3BF17267B475200DDCBB2 /* PlanRequestRespondingViewController.swift */,
 				6A705BB5267E3ABF001954CE /* PersonalPlanChangeViewController.swift */,
+				6AE5BB1D2696DDA600A9731B /* PersonalPlanDetailViewController.swift */,
+				6A4EDA31266BD11600B809EC /* SettingViewController.swift */,
 				6AE5BB0F2696733F00A9731B /* SelectLocationViewController.swift */,
-				6AE5BB1D2696DDA600A9731B /* ScheduleDetailViewController.swift */,
 				6A82835326982A6C00AC381B /* InquiryViewController.swift */,
 				6AB27CB1269DD1B900B95C0F /* InquiryChattingViewController.swift */,
 				6AB27CAB269D758100B95C0F /* IdChangeViewController.swift */,
+				6AB27CAB269D758100B95C0F /* ChangeIdAfterLoginViewController.swift */,
+				6A3E2E7526B10D760078D749 /* ChangePasswardPhoneNumAfterLoginViewController.swift */,
+				6A3E2E7726B111540078D749 /* ChangePasswardAfterLoginViewController.swift */,
 				6AB27CAF269D8C1600B95C0F /* WithdrawalViewController.swift */,
 			);
 			path = Controllers;
@@ -429,7 +438,8 @@
 				6A138F8C26703C1900DBCE49 /* selectedMemberCollectionViewCell.swift */,
 				6AFB77FF267F812B00B59482 /* TagColorCollectionViewCell.swift */,
 				6AB486FE26834D8C00E95D43 /* CalendarCollectionViewCell.swift */,
-				6AE5BB002695746F00A9731B /* RepeatCollectionViewCell.swift */,
+				6AE5BB002695746F00A9731B /* PersonalPlanAddRepeatDayCollectionViewCell.swift */,
+				6A685C0C26AC1E2D0079BC30 /* PersonalPlanDetailRepeatDayCollectionViewCell.swift */,
 			);
 			path = CollectionViewCells;
 			sourceTree = "<group>";
@@ -591,8 +601,14 @@
 				6AE41E7C26A9492C0072612C /* TagTableViewCell.swift in Sources */,
 				6AE5BAD52693D46A00A9731B /* SelectTimeModalView.swift in Sources */,
 				6A4AE85D2678EBEE009E33CD /* GroupModifyDeleteModalView.swift in Sources */,
-				6AB27CAC269D758100B95C0F /* IdChangeViewController.swift in Sources */,
-				6AE5BB012695746F00A9731B /* RepeatCollectionViewCell.swift in Sources */,
+				6AE5BB012695746F00A9731B /* PersonalPlanAddRepeatDayCollectionViewCell.swift in Sources */,
+				6A1E3E9026797CB600E7B198 /* DeleteModalView.swift in Sources */,
+				6AA76A0226636D2800B7E1F5 /* LoginViewController.swift in Sources */,
+				6AE5BB0E269670CB00A9731B /* CustomGradientTermsBtnView.swift in Sources */,
+				6A705BB6267E3ABF001954CE /* PersonalPlanChangeViewController.swift in Sources */,
+				6AA76A282663958B00B7E1F5 /* ShowPlanViewController.swift in Sources */,
+				6AB27CAC269D758100B95C0F /* ChangeIdAfterLoginViewController.swift in Sources */,
+				6AE5BB012695746F00A9731B /* PersonalPlanAddRepeatDayCollectionViewCell.swift in Sources */,
 				6A1E3E9026797CB600E7B198 /* DeleteModalView.swift in Sources */,
 				6AA76A0226636D2800B7E1F5 /* LoginViewController.swift in Sources */,
 				6AE5BB0E269670CB00A9731B /* CustomGradientTermsBtnView.swift in Sources */,
@@ -605,6 +621,7 @@
 				6A4EDA37266DA52A00B809EC /* SettingTableViewCell.swift in Sources */,
 				6A82835626982A8B00AC381B /* questionTableViewCell.swift in Sources */,
 				6ABA2C8C26A5366000CB1E16 /* WithdrawalModalView.swift in Sources */,
+				6A3E2E7826B111540078D749 /* ChangePasswardAfterLoginViewController.swift in Sources */,
 				6AA6F799269C2E6200958D36 /* NewPasswordPutViewController.swift in Sources */,
 				6ACB4ED2269C2FA8008606C5 /* TopBarView.swift in Sources */,
 				6A8283502698132000AC381B /* PlanDeleteModalView.swift in Sources */,
@@ -613,6 +630,7 @@
 				6AE5BB1C2696B9C900A9731B /* PlanCompleteModalView.swift in Sources */,
 				6AC1F4062684093700DDD08C /* TagColorCollectionViewModel.swift in Sources */,
 				6AE5BB0D269670CB00A9731B /* CustomGradientContinueBtnView.swift in Sources */,
+				6A685C0D26AC1E2D0079BC30 /* PersonalPlanDetailRepeatDayCollectionViewCell.swift in Sources */,
 				6A4EDA41266E38E000B809EC /* GroupCollectionViewCell.swift in Sources */,
 				6AA769EF26636AE700B7E1F5 /* EZY.xcdatamodeld in Sources */,
 				6AE5BB14269690B200A9731B /* LocationTableViewCell.swift in Sources */,
@@ -630,7 +648,7 @@
 				6AB486FF26834D8C00E95D43 /* CalendarCollectionViewCell.swift in Sources */,
 				6AE5BB1626969AFD00A9731B /* SelectLocationModalView.swift in Sources */,
 				6AE5BAFA269534D300A9731B /* StartTimeTableViewCell.swift in Sources */,
-				6AE5BB1E2696DDA600A9731B /* ScheduleDetailViewController.swift in Sources */,
+				6AE5BB1E2696DDA600A9731B /* PersonalPlanDetailViewController.swift in Sources */,
 				6A138F89266FACFE00DBCE49 /* GroupAddModalView.swift in Sources */,
 				6A82835A26997AB500AC381B /* TagCollectionViewModel.swift in Sources */,
 				6AB486FD26832B8500E95D43 /* SelectCalendarModalView.swift in Sources */,
@@ -648,6 +666,7 @@
 				6A4EDA002668653200B809EC /* ScheduleTimeTableViewCell.swift in Sources */,
 				6A138F85266F866D00DBCE49 /* GroupManagementViewController.swift in Sources */,
 				6AA6F794269C2E4D00958D36 /* SignUpPhoneNumViewController.swift in Sources */,
+				6A3E2E7626B10D760078D749 /* ChangePasswardPhoneNumAfterLoginViewController.swift in Sources */,
 				6AFB7800267F812B00B59482 /* TagColorCollectionViewCell.swift in Sources */,
 				6A4EDA2E266A332100B809EC /* NotificationTableViewCell.swift in Sources */,
 				6A138F8D26703C1900DBCE49 /* selectedMemberCollectionViewCell.swift in Sources */,

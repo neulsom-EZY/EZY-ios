@@ -71,7 +71,9 @@ class WithdrawalViewController: UIViewController {
     }
     
     @objc func okButtonClicked(sender:UIButton){
-        withdrawalModalView.isHidden = true
+        let nextViewController = LoginViewController()
+        self.navigationController?.pushViewController(nextViewController, animated: true)
+        
     }
     
     @objc func EyeButtondClicked(sender:UIButton){
@@ -156,6 +158,8 @@ class WithdrawalViewController: UIViewController {
         
         topView.backButton.addTarget(self, action: #selector(backButtonClicked(sender:)), for: .touchUpInside)
         
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(_:)), name:UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide(_:)), name: UIResponder.keyboardWillHideNotification, object: nil)
                 
         idNameLabel.snp.makeConstraints { make in
             make.top.equalTo(topView.titleLabel.snp.bottom).offset(self.view.frame.height/16.91)
@@ -236,5 +240,20 @@ class WithdrawalViewController: UIViewController {
             make.top.equalTo(self.view.safeAreaLayoutGuide)
             make.height.equalToSuperview().dividedBy(8)
         }
+    }
+    
+    @objc //MARK: 모달 창 올리기
+    func keyboardWillShow(_ sender: Notification) {
+        withdrawalButton.frame.origin.y = self.view.frame.height/2
+    }
+
+    @objc //MARK: 모달 창 원래대로
+    func keyboardWillHide(_ sender: Notification) {
+        withdrawalButton.frame.origin.y = self.view.frame.height-withdrawalButton.frame.height-self.view.frame.height/23.8
+    }
+    
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        idTextField.resignFirstResponder()
+        pwTextField.resignFirstResponder()
     }
 }
