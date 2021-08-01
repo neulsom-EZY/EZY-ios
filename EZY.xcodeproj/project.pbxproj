@@ -365,7 +365,6 @@
 				6AE5BB0F2696733F00A9731B /* SelectLocationViewController.swift */,
 				6A82835326982A6C00AC381B /* InquiryViewController.swift */,
 				6AB27CB1269DD1B900B95C0F /* InquiryChattingViewController.swift */,
-				6AB27CAB269D758100B95C0F /* IdChangeViewController.swift */,
 				6AB27CAB269D758100B95C0F /* ChangeIdAfterLoginViewController.swift */,
 				6A3E2E7526B10D760078D749 /* ChangePasswardPhoneNumAfterLoginViewController.swift */,
 				6A3E2E7726B111540078D749 /* ChangePasswardAfterLoginViewController.swift */,
@@ -404,12 +403,12 @@
 			children = (
 				6AE5BAD42693D46A00A9731B /* SelectTimeModalView.swift */,
 				6AB486FC26832B8500E95D43 /* SelectCalendarModalView.swift */,
-				6AFB77FD267F343500B59482 /* TagAddModalView.swift */,
 				6AE5BB1526969AFD00A9731B /* SelectLocationModalView.swift */,
 				6AE5BB1B2696B9C900A9731B /* PlanCompleteModalView.swift */,
 				6A82834F2698132000AC381B /* PlanDeleteModalView.swift */,
-				6ABA2C8B26A5366000CB1E16 /* WithdrawalModalView.swift */,
+				6AFB77FD267F343500B59482 /* TagAddModalView.swift */,
 				6AE41E8126A97C440072612C /* TagDeleteModalView.swift */,
+				6ABA2C8B26A5366000CB1E16 /* WithdrawalModalView.swift */,
 			);
 			path = ModalViews;
 			sourceTree = "<group>";

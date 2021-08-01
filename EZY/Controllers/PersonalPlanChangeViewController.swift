@@ -23,6 +23,10 @@ class PersonalPlanChangeViewController: UIViewController {
     
     var isChecked: [Bool] = [true, false, false, false]
     
+    var startSelectCircleButtonLocation = "Left"
+    
+    var endSelectCircleButtonLocation = "Left"
+    
     var RepeatModels: [RepeatCollectionViewModel] = [RepeatCollectionViewModel(backgroundColr: UIColor(red: 255/255, green: 188/255, blue: 188/255, alpha: 1), isSelected: true),
                                                      RepeatCollectionViewModel(backgroundColr: UIColor(red: 255/255, green: 188/255, blue: 188/255, alpha: 1), isSelected: true),
                                                      RepeatCollectionViewModel(backgroundColr: UIColor(red: 255/255, green: 188/255, blue: 188/255, alpha: 1), isSelected: true),
@@ -458,11 +462,34 @@ class PersonalPlanChangeViewController: UIViewController {
             make.right.equalToSuperview().offset(-self.view.frame.width/18)
         }
         
+        selectTimeModalView.startHourLabel.snp.makeConstraints { make in
+            make.centerY.equalTo(startTimeTableView)
+            make.centerX.equalTo(startTimeTableView).offset(-self.view.frame.width/40)
+        }
+        
+        selectTimeModalView.startMinLabel.snp.makeConstraints { make in
+            make.centerY.equalTo(startTimeTableView)
+            make.left.equalTo(startTimeTableView.snp.right)
+        }
+        
+        selectTimeModalView.endHourLabel.snp.makeConstraints { make in
+            make.centerY.equalTo(endTimeTableView)
+            make.centerX.equalTo(endTimeTableView).offset(-self.view.frame.width/40)
+        }
+        
+        selectTimeModalView.endMinLabel.snp.makeConstraints { make in
+            make.centerY.equalTo(endTimeTableView)
+            make.left.equalTo(endTimeTableView.snp.right)
+        }
+        
         selectTimeModalView.completeButton.addTarget(self, action: #selector(completeButtonClicked(sender:)), for: .touchUpInside)
     }
 
     func selectTimeModalViewSetting(){
         self.view.addSubview(selectTimeModalView)
+        
+        selectTimeModalView.startSelectCircleButton.addTarget(self, action: #selector(startSelectCircleButtonClicked(sender:)), for: .touchUpInside)
+        selectTimeModalView.endSelectCircleButton.addTarget(self, action: #selector(endSelectCircleButtonClicked(sender:)), for: .touchUpInside)
         
         selectTimeModalView.snp.makeConstraints { make in
             make.bottom.top.right.left.equalToSuperview()
@@ -502,13 +529,6 @@ class PersonalPlanChangeViewController: UIViewController {
             selectTimeModalView.startSelectCircleButton.layer.cornerRadius = ((((self.view.frame.height)/3.2)/19)/1.2)/2
         }
         
-        selectTimeModalView.startSelectBarView.snp.makeConstraints { make in
-            make.bottom.equalTo(selectTimeModalView.startMorningLabel)
-            make.left.equalTo(selectTimeModalView.startMorningLabel).offset(-self.view.frame.width/200)
-            make.right.equalTo(selectTimeModalView.startMorningLabel).offset(self.view.frame.width/200)
-            make.height.equalTo(selectTimeModalView.startMorningLabel).dividedBy(2)
-        }
-        
         selectTimeModalView.startSelectBackButton.snp.makeConstraints { make in
             make.left.equalTo(selectTimeModalView.startMorningLabel.snp.right).offset(self.view.frame.width/41.6)
             make.width.equalToSuperview().dividedBy(12.6)
@@ -526,13 +546,6 @@ class PersonalPlanChangeViewController: UIViewController {
             make.right.equalToSuperview().offset(-self.view.frame.width/10)
             make.top.equalTo(selectTimeModalView.modalTitleLabel.snp.bottom).offset(self.view.frame.height/28)
             make.height.equalToSuperview().dividedBy(19)
-        }
-
-        selectTimeModalView.endSelectBarView.snp.makeConstraints { make in
-            make.bottom.equalTo(selectTimeModalView.endMorningLabel)
-            make.left.equalTo(selectTimeModalView.endMorningLabel).offset(-self.view.frame.width/200)
-            make.right.equalTo(selectTimeModalView.endMorningLabel).offset(self.view.frame.width/200)
-            make.height.equalTo(selectTimeModalView.endMorningLabel).dividedBy(2)
         }
 
         selectTimeModalView.endSelectCircleButton.snp.makeConstraints { make in
@@ -726,6 +739,98 @@ class PersonalPlanChangeViewController: UIViewController {
         let firstCell = tagColorCollectionView.cellForItem(at: [0, 0]) as? TagColorCollectionViewCell
         
         firstCell?.checkImage.isHidden = false
+    }
+    
+    @objc func startSelectCircleButtonClicked(sender:UIButton){
+
+        UIButton.animate(withDuration: 0.2, delay: 0, options: .curveEaseOut, animations: {
+            
+            if self.startSelectCircleButtonLocation == "Left"{
+
+                
+                self.selectTimeModalView.startSelectCircleButton.snp.remakeConstraints { make in
+                    make.centerY.equalTo(self.selectTimeModalView.startSelectBackButton)
+                    make.right.equalTo(self.selectTimeModalView.startSelectBackButton).offset(-self.view.frame.width/300)
+                    make.height.width.equalTo(self.selectTimeModalView.startSelectBackButton.snp.height).dividedBy(1.2)
+                }
+                
+                self.selectTimeModalView.startSelectCircleButton.superview?.layoutIfNeeded()
+                
+                self.selectTimeModalView.startMorningLabel.dynamicFont(fontSize: 12, currentFontName: "AppleSDGothicNeo-Thin")
+                self.selectTimeModalView.startMorningLabel.textColor = UIColor.black
+                
+                self.selectTimeModalView.startAfternoonLabel.dynamicFont(fontSize: 12, currentFontName: "AppleSDGothicNeo-Regular")
+                self.selectTimeModalView.startAfternoonLabel.textColor = UIColor(red: 114/255, green: 114/255, blue: 114/255, alpha: 1)
+                
+                self.startSelectCircleButtonLocation = "Right"
+            }else{
+
+                
+                self.selectTimeModalView.startSelectCircleButton.snp.remakeConstraints { make in
+                    make.centerY.equalTo(self.selectTimeModalView.startSelectBackButton)
+                    make.left.equalTo(self.selectTimeModalView.startSelectBackButton).offset(self.view.frame.width/300)
+                    make.height.width.equalTo(self.selectTimeModalView.startSelectBackButton.snp.height).dividedBy(1.2)
+                }
+                
+                self.selectTimeModalView.startSelectCircleButton.superview?.layoutIfNeeded()
+                
+                self.selectTimeModalView.startMorningLabel.dynamicFont(fontSize: 12, currentFontName: "AppleSDGothicNeo-Regular")
+                self.selectTimeModalView.startMorningLabel.textColor = UIColor(red: 114/255, green: 114/255, blue: 114/255, alpha: 1)
+                
+                self.selectTimeModalView.startAfternoonLabel.dynamicFont(fontSize: 12, currentFontName: "AppleSDGothicNeo-Thin")
+                self.selectTimeModalView.startAfternoonLabel.textColor = UIColor.black
+                
+                self.startSelectCircleButtonLocation = "Left"
+            }
+
+        })
+    }
+    
+    @objc func endSelectCircleButtonClicked(sender:UIButton){
+
+
+        UIButton.animate(withDuration: 0.2, delay: 0, options: .curveEaseOut, animations: {
+            
+            if self.endSelectCircleButtonLocation == "Left"{
+                
+                
+                
+                self.selectTimeModalView.endSelectCircleButton.snp.remakeConstraints { make in
+                    make.centerY.equalTo(self.selectTimeModalView.endSelectBackButton)
+                    make.right.equalTo(self.selectTimeModalView.endSelectBackButton).offset(-self.view.frame.width/300)
+                    make.height.width.equalTo(self.selectTimeModalView.endSelectBackButton.snp.height).dividedBy(1.2)
+                }
+                
+                self.selectTimeModalView.endSelectCircleButton.superview?.layoutIfNeeded()
+                
+                self.selectTimeModalView.endMorningLabel.dynamicFont(fontSize: 12, currentFontName: "AppleSDGothicNeo-Thin")
+                self.selectTimeModalView.endMorningLabel.textColor = UIColor.black
+                
+                self.selectTimeModalView.endAfternoonLabel.dynamicFont(fontSize: 12, currentFontName: "AppleSDGothicNeo-Regular")
+                self.selectTimeModalView.endAfternoonLabel.textColor = UIColor(red: 114/255, green: 114/255, blue: 114/255, alpha: 1)
+                
+                self.selectTimeModalView.endSelectCircleButton.superview?.layoutIfNeeded()
+                self.endSelectCircleButtonLocation = "Right"
+            }else{
+                self.selectTimeModalView.endSelectCircleButton.snp.remakeConstraints { make in
+                    make.centerY.equalTo(self.selectTimeModalView.endSelectBackButton)
+                    make.left.equalTo(self.selectTimeModalView.endSelectBackButton).offset(self.view.frame.width/300)
+                    make.height.width.equalTo(self.selectTimeModalView.endSelectBackButton.snp.height).dividedBy(1.2)
+                }
+                
+                self.selectTimeModalView.endSelectCircleButton.superview?.layoutIfNeeded()
+                
+                self.selectTimeModalView.endMorningLabel.dynamicFont(fontSize: 12, currentFontName: "AppleSDGothicNeo-Regular")
+                self.selectTimeModalView.endMorningLabel.textColor = UIColor(red: 114/255, green: 114/255, blue: 114/255, alpha: 1)
+                
+                self.selectTimeModalView.endAfternoonLabel.dynamicFont(fontSize: 12, currentFontName: "AppleSDGothicNeo-Thin")
+                self.selectTimeModalView.endAfternoonLabel.textColor = UIColor.black
+                
+                self.selectTimeModalView.startSelectCircleButton.superview?.layoutIfNeeded()
+                self.endSelectCircleButtonLocation = "Left"
+            }
+
+        })
     }
     
     @objc //MARK: 모달 창 올리기
@@ -1237,13 +1342,13 @@ extension PersonalPlanChangeViewController: UITableViewDataSource{
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if tableView == startTimeTableView{
             let cell = tableView.dequeueReusableCell(withIdentifier: StartTimeTableViewCell.reuseId, for: indexPath) as! StartTimeTableViewCell
-            
+            cell.backgroundColor = .clear
             cell.selectionStyle = .none
 
             return cell
         }else if tableView == endTimeTableView{
             let cell = tableView.dequeueReusableCell(withIdentifier: EndTimeTableViewCell.reuseId, for: indexPath) as! EndTimeTableViewCell
-
+            cell.backgroundColor = .clear
             cell.selectionStyle = .none
 
             return cell
