@@ -21,7 +21,7 @@ class SelectTimeModalView: UIView {
     
     lazy var modalTitleLabel = UILabel().then {
         $0.text = "시간 선택"
-        $0.textColor = UIColor(red: 168/255, green: 224/255, blue: 197/255, alpha: 1)
+        $0.textColor = UIColor(red: 150/255, green: 141/255, blue: 255/255, alpha: 1)
         $0.dynamicFont(fontSize: 12, currentFontName: "AppleSDGothicNeo-Bold")
     }
     
@@ -57,19 +57,19 @@ class SelectTimeModalView: UIView {
     }
     
     lazy var startSelectBarView = UIView().then {
-        $0.backgroundColor = UIColor(red: 168/255, green: 224/255, blue: 197/255, alpha: 1).withAlphaComponent(0.6)
+        $0.backgroundColor = UIColor(red: 225/255, green: 222/255, blue: 255/255, alpha: 1).withAlphaComponent(0.6)
     }
     
     lazy var endSelectBarView = UIView().then {
-        $0.backgroundColor = UIColor(red: 168/255, green: 224/255, blue: 197/255, alpha: 1).withAlphaComponent(0.6)
+        $0.backgroundColor = UIColor(red: 225/255, green: 222/255, blue: 255/255, alpha: 1).withAlphaComponent(0.6)
     }
     
     lazy var startSelectBackButton = UIButton().then {
-        $0.backgroundColor = UIColor(red: 168/255, green: 224/255, blue: 197/255, alpha: 1)
+        $0.backgroundColor = UIColor(red: 150/255, green: 141/255, blue: 255/255, alpha: 1)
     }
     
     lazy var endSelectBackButton = UIButton().then {
-        $0.backgroundColor = UIColor(red: 168/255, green: 224/255, blue: 197/255, alpha: 1)
+        $0.backgroundColor = UIColor(red: 150/255, green: 141/255, blue: 255/255, alpha: 1)
     }
     
     lazy var startSelectCircleButton = UIButton().then {
@@ -89,7 +89,7 @@ class SelectTimeModalView: UIView {
     lazy var completeButton = UIButton().then{
         $0.setTitle("완료", for: .normal)
         $0.setTitleColor(UIColor.white, for: .normal)
-        $0.backgroundColor = UIColor(red: 168/255, green: 224/255, blue: 197/255, alpha: 1)
+        $0.backgroundColor = UIColor(red: 150/255, green: 141/255, blue: 255/255, alpha: 1)
         $0.layer.cornerRadius = 10
         $0.dynamicFont(fontSize: 12, currentFontName: "AppleSDGothicNeo-Bold")
     }
