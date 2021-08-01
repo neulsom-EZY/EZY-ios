@@ -358,9 +358,9 @@
 				6AE5BB0F2696733F00A9731B /* SelectLocationViewController.swift */,
 				6AE5BB1D2696DDA600A9731B /* ScheduleDetailViewController.swift */,
 				6A82835326982A6C00AC381B /* InquiryViewController.swift */,
+				6AB27CB1269DD1B900B95C0F /* InquiryChattingViewController.swift */,
 				6AB27CAB269D758100B95C0F /* IdChangeViewController.swift */,
 				6AB27CAF269D8C1600B95C0F /* WithdrawalViewController.swift */,
-				6AB27CB1269DD1B900B95C0F /* InquiryChattingViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";

@@ -13,8 +13,19 @@ class InquiryViewController: UIViewController {
     
     let bottomTitleBottomLabelColor = [UIColor(red: 135/255, green: 125/255, blue: 255/255, alpha: 1), UIColor(red: 196/255, green: 191/255, blue: 255/255, alpha: 1)]
     
+    var beforeInquiryTitleText: [String] = ["아이디는 어디서 변경할 수 있나요?", "심부름 내용은 변경이 불가능하나요?", "회원 탈퇴는 어떻게 하나요?","회원 탈퇴는 어떻게 하나요?"]
+    var beforeInquiryContentText: [String] = ["아이디는 설정 > 아이디 변경 창에서 변경할 수 있습니다.아이디는 설정 > \n 아이디 변경 창에서 변경할 수 있습니다.아이디는 설정 > \n아이디 변경 창에서 변경할 수 있습니다.","네. 심부름 내용은 변경이 불가능합니다.","회원탈퇴는 설정 > 회원 탈퇴  창에서  할 수 있습니다.","회원탈퇴는 설정 > 회원 탈퇴  창에서  할 수 있습니다."]
+    
     lazy var backButton = UIButton().then{
         $0.setImage(UIImage(named: "EZY_DetailBackButton"), for: .normal)
+    }
+    
+    lazy var inquiryTitleFontHeightLabel = UILabel().then{
+        $0.dynamicFont(fontSize: 12, currentFontName: "AppleSDGothicNeo-Medium")
+    }
+    
+    lazy var inquiryContentFontHeightLabel = UILabel().then{
+        $0.dynamicFont(fontSize: 10, currentFontName: "AppleSDGothicNeo-Medium")
     }
     
     lazy var titleTopLabel = UILabel().then {
@@ -183,16 +194,18 @@ extension InquiryViewController: UITableViewDelegate{
 
 extension InquiryViewController: UITableViewDataSource{
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 50
+        return beforeInquiryTitleText.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: questionTableViewCell.reuseId, for: indexPath) as! questionTableViewCell
         cell.backgroundColor = .white
+        cell.titleTextView.text = beforeInquiryTitleText[indexPath.row]
+        cell.contentTextView.text = beforeInquiryContentText[indexPath.row]
         return cell
     }
         
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return (self.view.frame.height/8)
+        return (beforeInquiryContentText[indexPath.row] as NSString).size(withAttributes: [NSAttributedString.Key.font : inquiryTitleFontHeightLabel.font ?? ""]).height + (beforeInquiryTitleText[indexPath.row] as NSString).size(withAttributes: [NSAttributedString.Key.font : inquiryContentFontHeightLabel.font ?? ""]).height + self.view.frame.height/15
     }
 }

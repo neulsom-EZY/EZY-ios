@@ -15,7 +15,7 @@ class questionTableViewCell: UITableViewCell {
         $0.backgroundColor = UIColor(red: 107/255, green: 64/255, blue: 255/255, alpha: 1)
     }
     
-    lazy var questionTitleLabel = UILabel().then {
+    lazy var questionLogoLabel = UILabel().then {
         $0.text = "Q"
         $0.dynamicFont(fontSize: 12, currentFontName: "Poppins-Bold")
         $0.textColor = UIColor.white
@@ -30,14 +30,14 @@ class questionTableViewCell: UITableViewCell {
         $0.image = UIImage(named: "EZY_QuestionArrow")
     }
     
-    lazy var questionTextView = UITextView().then {
+    lazy var titleTextView = UITextView().then {
         $0.text = "오늘 닭 칼국수가 맛있었나요?"
         $0.textColor = UIColor(red: 83/255, green: 83/255, blue: 83/255, alpha: 1)
         $0.dynamicFont(fontSize: 12, currentFontName: "AppleSDGothicNeo-Medium")
         $0.isScrollEnabled = false
     }
     
-    lazy var answerTextView = UITextView().then {
+    lazy var contentTextView = UITextView().then {
         $0.text = "네. 너무 맛있었습니다. 그리고 닭꼬치가 너무 맛있어서 정대우가 3개나 먹어버렸습니다요."
         $0.textColor = UIColor(red: 121/255, green: 121/255, blue: 121/255, alpha: 121/255)
         $0.dynamicFont(fontSize: 10, currentFontName: "AppleSDGothicNeo-Medium")
@@ -61,10 +61,10 @@ class questionTableViewCell: UITableViewCell {
     func layoutSetting(){
         contentView.addSubview(questionCircleBackgroundView)
         contentView.addSubview(qnaBackgroundView)
-        contentView.addSubview(questionTextView)
+        contentView.addSubview(titleTextView)
         qnaBackgroundView.addSubview(answerIconImageView)
-        questionCircleBackgroundView.addSubview(questionTitleLabel)
-        qnaBackgroundView.addSubview(answerTextView)
+        questionCircleBackgroundView.addSubview(questionLogoLabel)
+        qnaBackgroundView.addSubview(contentTextView)
         
         questionCircleBackgroundView.snp.makeConstraints { make in
             make.left.top.equalToSuperview()
@@ -74,26 +74,31 @@ class questionTableViewCell: UITableViewCell {
             questionCircleBackgroundView.layer.cornerRadius = (contentView.frame.width/13)/2
         }
         
-        questionTitleLabel.snp.makeConstraints { make in
+        questionLogoLabel.snp.makeConstraints { make in
             make.centerX.centerY.equalToSuperview()
         }
         
-        questionTextView.snp.makeConstraints { make in
+        titleTextView.snp.makeConstraints { make in
             make.left.equalTo(questionCircleBackgroundView.snp.right).offset(contentView.frame.width/44.5)
             make.centerY.equalTo(questionCircleBackgroundView)
             make.height.equalTo(questionCircleBackgroundView)
             make.right.equalToSuperview()
         }
         
+        contentTextView.snp.makeConstraints { make in
+            make.left.equalToSuperview().offset(self.contentView.frame.height/8)
+            make.centerY.equalToSuperview()
+            
+            contentTextView.backgroundColor = .yellow
+        }
+        
         qnaBackgroundView.snp.makeConstraints { make in
             make.width.equalToSuperview()
             make.top.equalTo(questionCircleBackgroundView.snp.bottom).offset(contentView.frame.height/11.5)
-            make.bottom.equalToSuperview().offset(-contentView.frame.height/5.75)
+            make.height.equalTo(contentTextView).multipliedBy(1.2)
+            make.centerX.equalToSuperview()
         }
-        
-        answerTextView.snp.makeConstraints { make in
-            make.top.bottom.right.left.equalToSuperview().offset(self.contentView.frame.height/8)
-        }
+
     }
 
 }
