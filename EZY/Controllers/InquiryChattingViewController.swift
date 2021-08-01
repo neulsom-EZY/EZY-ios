@@ -80,12 +80,14 @@ class InquiryChattingViewController: UIViewController, UITextFieldDelegate {
         self.chattingWriteTextField.resignFirstResponder()
     }
     
+    @objc func backButtonClicked(sender:UIButton){
+        self.navigationController?.popViewController(animated: true)
+    }
+    
     @objc func inquirySendButtonClicked(sender:UIButton){
         inquirySendChattingBoxView.isHidden = false
         inquirySendChattingBoxView.chattingContentLabel.text = chattingWriteTextField.text
-        if chattingWriteTextField.text!.count > 30 {
-            self.chattingWriteBackgroundView.frame = CGRect(x: 0, y: 0, width: 0, height: self.view.frame.height/3)
-        }
+        
         chattingWriteTextField.text = ""
     }
     
@@ -95,10 +97,6 @@ class InquiryChattingViewController: UIViewController, UITextFieldDelegate {
     
     @objc func keyboardWillShow(_ sender: Notification) {
         chattingWriteBackgroundView.frame.origin.y = self.view.frame.height/2
-    }
-    
-    @objc func backButtonClicked(sender: UIButton) {
-        self.navigationController?.popViewController(animated: true)
     }
     
     func inquirySendChattingBoxViewSetting(){
