@@ -15,9 +15,19 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
         guard let windowScene = (scene as? UIWindowScene) else { return }
         window = UIWindow(windowScene: windowScene)
+<<<<<<< HEAD
+<<<<<<< HEAD
+        let mainViewController = PushNotificationManagementViewController()
+        let navigationController = UINavigationController(rootViewController: PushNotificationManagementViewController())
+=======
+        let mainViewController = PersonalPlanChangeViewController()
+        let navigationController = UINavigationController(rootViewController: mainViewController)
+>>>>>>> develop
+=======
 
         let mainViewController = PersonalPlanChangeViewController()
         let navigationController = UINavigationController(rootViewController: mainViewController)
+>>>>>>> b351846a67346dc2a8d08edaa6ad21a011da71bc
         navigationController.navigationBar.isHidden = true
         window?.rootViewController = navigationController
         window?.makeKeyAndVisible()
