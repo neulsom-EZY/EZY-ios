@@ -51,7 +51,7 @@ class PushNotificationManagementViewController : UIViewController{
     
     //MARK: - Selectors
     @objc func backbtn(){
-        self.navigationController?.popViewController(animated: true)
+        navigationController?.popViewController(animated: true)
     }
     
     @objc func personalCalendarMove(){
