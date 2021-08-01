@@ -65,7 +65,7 @@ extension UIColor{
 
 // MARK: - UILabel 재정의
 extension UILabel {
-  func dynamicFont(fontSize size: CGFloat, weight: UIFont.Weight) {
+  func dynamicFont(fontSize size: CGFloat, weight: "String") {
     let currentFontName = self.font.fontName
     var calculatedFont: UIFont?
     let bounds = UIScreen.main.bounds

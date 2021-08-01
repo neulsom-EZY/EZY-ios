@@ -30,6 +30,7 @@
 		EED007D526674AC2009A5A87 /* Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = EED007D426674AC2009A5A87 /* Utilities.swift */; };
 		EED20D63266C0F90000E0856 /* AdditionalButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = EED20D62266C0F90000E0856 /* AdditionalButton.swift */; };
 		EEDA3A0326B6A4320027D78E /* ZoomAndSnapFlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEDA3A0226B6A4320027D78E /* ZoomAndSnapFlowLayout.swift */; };
+		EEDA3A0526B6D3880027D78E /* AmPmCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEDA3A0426B6D3880027D78E /* AmPmCell.swift */; };
 		EEE1E95326A9F38A0082B696 /* AlarmSettingCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEE1E95226A9F38A0082B696 /* AlarmSettingCell.swift */; };
 		EEEDB2BF2664B44200E5C53A /* AddMyToDoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEEDB2BE2664B44200E5C53A /* AddMyToDoViewController.swift */; };
 		EEEDB2C22664D30D00E5C53A /* extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEEDB2C12664D30D00E5C53A /* extensions.swift */; };
@@ -67,6 +68,7 @@
 		EED007D426674AC2009A5A87 /* Utilities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utilities.swift; sourceTree = "<group>"; };
 		EED20D62266C0F90000E0856 /* AdditionalButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdditionalButton.swift; sourceTree = "<group>"; };
 		EEDA3A0226B6A4320027D78E /* ZoomAndSnapFlowLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZoomAndSnapFlowLayout.swift; sourceTree = "<group>"; };
+		EEDA3A0426B6D3880027D78E /* AmPmCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AmPmCell.swift; sourceTree = "<group>"; };
 		EEE1E95226A9F38A0082B696 /* AlarmSettingCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlarmSettingCell.swift; sourceTree = "<group>"; };
 		EEEDB2AC2664ADCB00E5C53A /* Poppins-SemiBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Poppins-SemiBold.ttf"; sourceTree = "<group>"; };
 		EEEDB2AD2664ADCB00E5C53A /* Poppins-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Poppins-Light.ttf"; sourceTree = "<group>"; };
@@ -247,6 +249,7 @@
 				EE24573F269FDA6100E2EE9D /* WhatAboutPeopleLikeThisCell.swift */,
 				EEE1E95226A9F38A0082B696 /* AlarmSettingCell.swift */,
 				EEFAD2AA26B031720011A246 /* TagCell.swift */,
+				EEDA3A0426B6D3880027D78E /* AmPmCell.swift */,
 			);
 			path = Cell;
 			sourceTree = "<group>";
@@ -393,6 +396,7 @@
 				EE3B142626B48DF600B7184D /* CustomData.swift in Sources */,
 				EE7828552681859200AECC65 /* AddErrandViewController.swift in Sources */,
 				EEA457F42682FFA100C08D17 /* AlertButton.swift in Sources */,
+				EEDA3A0526B6D3880027D78E /* AmPmCell.swift in Sources */,
 				EEFAD2AD26B0838F0011A246 /* ErrandDetailsViewController.swift in Sources */,
 				EEFAD2AB26B031720011A246 /* TagCell.swift in Sources */,
 				EED20D63266C0F90000E0856 /* AdditionalButton.swift in Sources */,
