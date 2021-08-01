@@ -49,6 +49,30 @@ class SelectTimeModalView: UIView {
         $0.dynamicFont(fontSize: 12, currentFontName: "AppleSDGothicNeo-Thin")
     }
     
+    lazy var startHourLabel = UILabel().then{
+        $0.text = "시"
+        $0.textColor = UIColor.black
+        $0.dynamicFont(fontSize: 12, currentFontName: "AppleSDGothicNeo-Thin")
+    }
+    
+    lazy var startMinLabel = UILabel().then{
+        $0.text = "분"
+        $0.textColor = UIColor.black
+        $0.dynamicFont(fontSize: 12, currentFontName: "AppleSDGothicNeo-Thin")
+    }
+    
+    lazy var endHourLabel = UILabel().then{
+        $0.text = "시"
+        $0.textColor = UIColor.black
+        $0.dynamicFont(fontSize: 12, currentFontName: "AppleSDGothicNeo-Thin")
+    }
+    
+    lazy var endMinLabel = UILabel().then{
+        $0.text = "분"
+        $0.textColor = UIColor.black
+        $0.dynamicFont(fontSize: 12, currentFontName: "AppleSDGothicNeo-Thin")
+    }
+    
     lazy var deleteButton = UIButton().then {
         $0.setTitle("삭 제", for: .normal)
         $0.layer.cornerRadius = 10
@@ -103,6 +127,11 @@ class SelectTimeModalView: UIView {
         modalBackgroundView.addSubview(deleteButton)
         modalBackgroundView.addSubview(waveLabel)
         modalBackgroundView.addSubview(completeButton)
+        
+        modalBackgroundView.addSubview(startHourLabel)
+        modalBackgroundView.addSubview(startMinLabel)
+        modalBackgroundView.addSubview(endHourLabel)
+        modalBackgroundView.addSubview(endMinLabel)
         
         modalBackgroundView.addSubview(endMorningLabel)
         modalBackgroundView.addSubview(endAfternoonLabel)

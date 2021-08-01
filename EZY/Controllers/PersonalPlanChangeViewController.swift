@@ -462,6 +462,26 @@ class PersonalPlanChangeViewController: UIViewController {
             make.right.equalToSuperview().offset(-self.view.frame.width/18)
         }
         
+        selectTimeModalView.startHourLabel.snp.makeConstraints { make in
+            make.centerY.equalTo(startTimeTableView)
+            make.centerX.equalTo(startTimeTableView).offset(-self.view.frame.width/40)
+        }
+        
+        selectTimeModalView.startMinLabel.snp.makeConstraints { make in
+            make.centerY.equalTo(startTimeTableView)
+            make.left.equalTo(startTimeTableView.snp.right)
+        }
+        
+        selectTimeModalView.endHourLabel.snp.makeConstraints { make in
+            make.centerY.equalTo(endTimeTableView)
+            make.centerX.equalTo(endTimeTableView).offset(-self.view.frame.width/40)
+        }
+        
+        selectTimeModalView.endMinLabel.snp.makeConstraints { make in
+            make.centerY.equalTo(endTimeTableView)
+            make.left.equalTo(endTimeTableView.snp.right)
+        }
+        
         selectTimeModalView.completeButton.addTarget(self, action: #selector(completeButtonClicked(sender:)), for: .touchUpInside)
     }
 
@@ -1322,13 +1342,13 @@ extension PersonalPlanChangeViewController: UITableViewDataSource{
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if tableView == startTimeTableView{
             let cell = tableView.dequeueReusableCell(withIdentifier: StartTimeTableViewCell.reuseId, for: indexPath) as! StartTimeTableViewCell
-            
+            cell.backgroundColor = .clear
             cell.selectionStyle = .none
 
             return cell
         }else if tableView == endTimeTableView{
             let cell = tableView.dequeueReusableCell(withIdentifier: EndTimeTableViewCell.reuseId, for: indexPath) as! EndTimeTableViewCell
-
+            cell.backgroundColor = .clear
             cell.selectionStyle = .none
 
             return cell
