@@ -27,7 +27,7 @@ class MoreCalendarModalsViewController : UIViewController{
     
     let TitleLabel = UILabel().then{
         $0.text = "추가 할 항목을 선택해주세요"
-        $0.dynamicFont(fontSize: 22, weight: .ultraLight)
+        $0.dynamicFont(fontSize: 22, currentFontName: "AppleSDGothicNeo-UltraLight")
     }
     private var vc = UIViewController()
    
@@ -57,7 +57,7 @@ class MoreCalendarModalsViewController : UIViewController{
     private let makeTitle = UILabel().then{
         $0.text = "생 성"
         $0.textColor = .white
-        $0.dynamicFont(fontSize: 12, weight: .bold)
+        $0.dynamicFont(fontSize: 12, currentFontName: "AppleSDGothicNeo-Bold")
     }
   
     

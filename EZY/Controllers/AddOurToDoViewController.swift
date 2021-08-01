@@ -29,7 +29,7 @@ class AddOurToDoViewController: UIViewController {
     private let TitleLabel = UILabel().then{
         $0.textColor = .EZY_CFCBFF
         $0.text = "우리의 할 일 추가"
-        $0.dynamicFont(fontSize: 22, weight: .semibold)
+        $0.dynamicFont(fontSize: 22, currentFontName: "AppleSDGothicNeo-SemiBold")
     }
     
     private lazy var titleContainerView : UIView = {
@@ -80,7 +80,7 @@ class AddOurToDoViewController: UIViewController {
     private let selectPeople = UILabel().then{
         $0.text = "인원선택"
         $0.textColor = .EZY_B6B6B6
-        $0.dynamicFont(fontSize: 12, weight: .bold)
+        $0.dynamicFont(fontSize: 12, currentFontName: "AppleSDGothicNeo-Bold")
     }
     
     private var collectionView: UICollectionView?
@@ -88,19 +88,19 @@ class AddOurToDoViewController: UIViewController {
     private let tagLabel = UILabel().then{
         $0.text = "태그"
         $0.textColor = .EZY_B6B6B6
-        $0.dynamicFont(fontSize: 12, weight: .bold)
+        $0.dynamicFont(fontSize: 12, currentFontName: "AppleSDGothicNeo-Bold")
     }
     
     private let repeatSettings = UILabel().then{
         $0.text = "반복설정"
         $0.textColor = .EZY_B6B6B6
-        $0.dynamicFont(fontSize: 12, weight: .bold)
+        $0.dynamicFont(fontSize: 12, currentFontName: "AppleSDGothicNeo-Bold")
     }
     
     private let alertSettings = UILabel().then{
         $0.text = "알람 설정"
         $0.textColor = .EZY_B6B6B6
-        $0.dynamicFont(fontSize: 12, weight: .bold)
+        $0.dynamicFont(fontSize: 12, currentFontName: "AppleSDGothicNeo-Bold")
     }
     private let addButton : AdditionalButton = {
         let button = AdditionalButton(type: .system)

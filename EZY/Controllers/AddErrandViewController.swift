@@ -22,7 +22,7 @@ class AddErrandViewController : UIViewController{
     private let TitleLabel = UILabel().then{
         $0.textColor = .EZY_AFADFF
         $0.text = "심부름 추가"
-        $0.dynamicFont(fontSize: 22, weight: .semibold)
+        $0.dynamicFont(fontSize: 22, currentFontName: "AppleSDGothicNeo-SemiBold")
     }
     
     private lazy var titleContainerView : UIView = {
@@ -77,7 +77,7 @@ class AddErrandViewController : UIViewController{
     private let kindOfCollectionView = UILabel().then{
         $0.text = "어떤 분에게 부탁할까요?"
         $0.textColor = .EZY_B6B6B6
-        $0.dynamicFont(fontSize: 12, weight: .bold)
+        $0.dynamicFont(fontSize: 12, currentFontName: "AppleSDGothicNeo-Bold")
     }
     private let explanationTextView : UITextView = {
         let tf = Utilities().textView(TextColor: .EZY_929292, TextSize: 14,font: .medium)
@@ -243,14 +243,14 @@ extension AddErrandViewController : UICollectionViewDelegateFlowLayout,UICollect
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
          guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: WhoShouldIAskCell.identifier, for: indexPath) as? WhoShouldIAskCell else {return UICollectionViewCell()}
         cell.bglabel.text = AddErrandViewController.data[indexPath.row]
-        cell.bglabel.dynamicFont(fontSize: 12, weight:  .thin)
+        cell.bglabel.dynamicFont(fontSize: 12, currentFontName:  "AppleSDGothicNeo-Thin")
         cell.bglabel.textColor = .EZY_3D64FF
         cell.layer.borderWidth = 1
         cell.layer.borderColor = UIColor.EZY_6383FF.cgColor
         if cell.bglabel.text == AddErrandViewController.data.last{
             cell.bglabel.textColor = .EZY_BAC8FF
             cell.layer.borderColor = UIColor.EZY_BAC8FF.cgColor
-            cell.bglabel.dynamicFont(fontSize: 12, weight: .bold)
+            cell.bglabel.dynamicFont(fontSize: 12, currentFontName: "AppleSDGothicNeo-Bold")
         }
         
         return cell

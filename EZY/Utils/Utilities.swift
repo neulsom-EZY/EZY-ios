@@ -18,7 +18,7 @@ class Utilities{
         
         view.addSubview(label_Message)
         label_Message.text = message
-        label_Message.dynamicFont(fontSize: 14, weight: .bold)
+        label_Message.dynamicFont(fontSize: 14, currentFontName: "AppleSDGothicNeo-Bold")
         label_Message.textColor = .EZY_8099FF
         label_Message.snp.makeConstraints { (make) in
             make.left.equalToSuperview().offset(viewSize / 38.6)
@@ -54,7 +54,7 @@ class Utilities{
         
         view.addSubview(label_Message)
         label_Message.text = message
-        label_Message.dynamicFont(fontSize: 14, weight: .bold)
+        label_Message.dynamicFont(fontSize: 14, currentFontName: "AppleSDGothicNeo-Bold")
         label_Message.textColor = .EZY_968DFF
         label_Message.snp.makeConstraints { (make) in
             make.left.equalToSuperview().offset(viewSize / 38.6)
@@ -91,7 +91,7 @@ class Utilities{
         
         label_Message.text = message
         
-        label_Message.dynamicFont(fontSize: 14, weight: .bold)
+        label_Message.dynamicFont(fontSize: 14, currentFontName: "AppleSDGothicNeo-Bold")
         
         label_Message.textColor = .EZY_8099FF
         label_Message.snp.makeConstraints { (make) in

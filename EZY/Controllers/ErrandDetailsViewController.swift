@@ -21,11 +21,11 @@ class ErrandDetailsViewController: UIViewController {
     private let TitleLabel = UILabel().then{
         $0.textColor = .EZY_AFADFF
         $0.text = "마카롱 사오기"
-        $0.dynamicFont(fontSize: 22, weight: .semibold)
+        $0.dynamicFont(fontSize: 22, currentFontName: "AppleSDGothicNeo-SemiBold")
     }
     private let Errandlabel = UILabel().then{
         $0.text = "심부름"
-        $0.dynamicFont(fontSize: 10, weight: .thin)
+        $0.dynamicFont(fontSize: 10, currentFontName: "AppleSDGothicNeo-Thin")
         $0.textColor = .EZY_6C6C6C
     }
     private let RequestList : inputContainerErrandTextView = {

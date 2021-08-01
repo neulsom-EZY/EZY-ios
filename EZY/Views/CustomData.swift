@@ -24,7 +24,7 @@ class CustomData : UIView{
     }()
     private let timeLabel = UILabel().then{
         $0.text = "시"
-        $0.dynamicFont(fontSize: 12, weight: "AppleSDGothicNeo-Thin")
+        $0.dynamicFont(fontSize: 12, currentFontName: "AppleSDGothicNeo-Thin")
     }
     override init(frame: CGRect) {
         super.init(frame: frame)

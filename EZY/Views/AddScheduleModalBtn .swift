@@ -10,7 +10,7 @@ import UIKit
 class AddScheduleModalBtn : UIButton{
     
     private let label = UILabel().then{
-        $0.dynamicFont(fontSize: 10, weight: .semibold)
+        $0.dynamicFont(fontSize: 10, currentFontName: "AppleSDGothicNeo-SemiBold")
         $0.textColor = .EZY_AEA9F2
     }
     private let view = UIView()

@@ -32,7 +32,7 @@ class AddMyToDoViewController:UIViewController{
     private let TitleLabel = UILabel().then{
         $0.textColor = .EZY_BAC8FF
         $0.text = "나의 할 일 추가"
-        $0.dynamicFont(fontSize: 22, weight: .semibold)
+        $0.dynamicFont(fontSize: 22, currentFontName: "AppleSDGothicNeo-SemiBold")
     }
     
     private lazy var titleContainerView : UIView = {
@@ -84,18 +84,18 @@ class AddMyToDoViewController:UIViewController{
     private let tagLabel = UILabel().then{
         $0.text = "태그"
         $0.textColor = .EZY_B6B6B6
-        $0.dynamicFont(fontSize: 12, weight: .bold)
+        $0.dynamicFont(fontSize: 12, currentFontName: "AppleSDGothicNeo-Bold")
     }
     
     private let repeatSettings  = UILabel().then{
         $0.text = "반복 설정"
         $0.textColor = .EZY_B6B6B6
-        $0.dynamicFont(fontSize: 12, weight: .bold)
+        $0.dynamicFont(fontSize: 12, currentFontName: "AppleSDGothicNeo-Bold")
     }
     private let alarmSettings = UILabel().then{
         $0.text = "알림 설정"
         $0.textColor = .EZY_B6B6B6
-        $0.dynamicFont(fontSize: 12, weight: .bold)
+        $0.dynamicFont(fontSize: 12, currentFontName: "AppleSDGothicNeo-Bold")
     }
     
     private let addButton : AdditionalButton = {

@@ -12,7 +12,7 @@ class WhatAboutPeopleLikeThisCell:UICollectionViewCell{
     
     let bglabel = UILabel().then {
         $0.clipsToBounds = true
-        $0.dynamicFont(fontSize: 12, weight: .ultraLight)
+        $0.dynamicFont(fontSize: 12, currentFontName: "AppleSDGothicNeo-UltraLight")
     }
     
     static func fittingSize(availableHeight: CGFloat, name: String?) -> CGSize {

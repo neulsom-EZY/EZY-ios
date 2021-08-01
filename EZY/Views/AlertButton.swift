@@ -43,7 +43,7 @@ class AlertButton : UIButton {
         view.backgroundColor = .white
         view.layer.applySketchShadow(color: UIColor.black, alpha: 0.1, x: 0, y: 4, blur: 15, spread: 0)
         
-        label.dynamicFont(fontSize: 16, weight: .regular)
+        label.dynamicFont(fontSize: 16, currentFontName: "AppleSDGothicNeo-Regular")
         label.textColor = .EZY_656565
         
         icon.image = viewModel.icon

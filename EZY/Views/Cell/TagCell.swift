@@ -11,7 +11,7 @@ class TagCell : UICollectionViewCell{
     static let identifier = "TagCell"
     let bglabel = UILabel().then {
         $0.clipsToBounds = true
-        $0.dynamicFont(fontSize: 12, weight: .bold)
+        $0.dynamicFont(fontSize: 12, currentFontName: "AppleSDGothicNeo-Bold")
     }
     override var isSelected: Bool{
         didSet{

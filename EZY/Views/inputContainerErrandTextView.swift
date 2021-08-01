@@ -10,7 +10,7 @@ import UIKit
 class inputContainerErrandTextView : UIView{
     private let view = UIView()
     private let label = UILabel().then{
-        $0.dynamicFont(fontSize: 14, weight: .bold)
+        $0.dynamicFont(fontSize: 14, currentFontName: "AppleSDGothicNeo-Bold")
     }
     private var textView = UITextView().then{
         $0.backgroundColor = .clear

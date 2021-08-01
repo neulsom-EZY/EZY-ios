@@ -17,7 +17,7 @@ class SendUser : UIView{
     }
     
     private lazy var senderText = UILabel().then{
-        $0.dynamicFont(fontSize: 12, weight: .thin)
+        $0.dynamicFont(fontSize: 12, currentFontName: "AppleSDGothicNeo-Thin")
         $0.sizeToFit()
     }
     private let image = UIImageView().then{
@@ -25,7 +25,7 @@ class SendUser : UIView{
         $0.tintColor = .EZY_BAC8FF
     }
     private lazy var recipientText = UILabel().then{
-        $0.dynamicFont(fontSize: 12, weight: .thin)
+        $0.dynamicFont(fontSize: 12, currentFontName: "AppleSDGothicNeo-Thin")
         $0.sizeToFit()
     }
     private var viewModel : SendUserView?

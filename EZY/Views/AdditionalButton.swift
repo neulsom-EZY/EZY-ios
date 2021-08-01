@@ -9,7 +9,7 @@ import UIKit
 
 class AdditionalButton : UIButton{
     let lb = UILabel().then{
-        $0.dynamicFont(fontSize: 14, weight: .semibold)
+        $0.dynamicFont(fontSize: 14, currentFontName: "")
         $0.textColor = .white
     }
     

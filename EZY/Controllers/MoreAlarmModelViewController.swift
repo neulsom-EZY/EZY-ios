@@ -40,7 +40,7 @@ class MoreAlarmModelViewController : UIViewController{
     private let makeTitle = UILabel().then{
         $0.text = "완 료"
         $0.textColor = .white
-        $0.dynamicFont(fontSize: 12, weight: .bold)
+        $0.dynamicFont(fontSize: 12, currentFontName: "AppleSDGothicNeo-Bold")
     }
   
     

@@ -21,19 +21,19 @@ class MorePeopleToDo: UIViewController{
     }
     private let TitleLabel = UILabel().then{
         $0.text = "누구와 일정을 함께하시나요?"
-        $0.dynamicFont(fontSize: 24, weight: .semibold)
+        $0.dynamicFont(fontSize: 24, currentFontName: "AppleSDGothicNeo-SemiBold")
         $0.textColor = .EZY_968DFF
     }
     private let SubLabel = UILabel().then{
         $0.text = "한명도 좋고 여러명도 좋아요!"
-        $0.dynamicFont(fontSize: 20, weight: .semibold)
+        $0.dynamicFont(fontSize: 20, currentFontName: "AppleSDGothicNeo-SemiBold")
         $0.updateGradientTextColor_vertical(gradientColors: [.EZY_968DFF,.EZY_968DFF,.EZY_968DFF,.white])
     }
     
 
     private let GroupLabel = UILabel().then{
         $0.text = "그룹원"
-        $0.dynamicFont(fontSize: 10, weight: .thin)
+        $0.dynamicFont(fontSize: 10, currentFontName: "AppleSDGothicNeo-Thin")
         $0.textColor = .EZY_818181
     }
 
@@ -48,7 +48,7 @@ class MorePeopleToDo: UIViewController{
     }()
     private let recommendPeopleLabel = UILabel().then{
         $0.text = "이런 사람들은 어때요"
-        $0.dynamicFont(fontSize: 14, weight: .thin)
+        $0.dynamicFont(fontSize: 14, currentFontName: "AppleSDGothicNeo-Thin")
     }
     
     fileprivate let WhatAboutPeopleLikeThis: UICollectionView = {
@@ -151,7 +151,7 @@ extension MorePeopleToDo : UICollectionViewDelegateFlowLayout,UICollectionViewDa
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
          guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: WhatAboutPeopleLikeThisCell.identifier, for: indexPath) as? WhatAboutPeopleLikeThisCell else {return UICollectionViewCell()}
         cell.bglabel.text = "@ " + MorePeopleToDo.data[indexPath.row]
-        cell.bglabel.dynamicFont(fontSize: 12, weight:.thin)
+        cell.bglabel.dynamicFont(fontSize: 12, currentFontName:"AppleSDGothicNeo-Thin")
         cell.bglabel.textColor = .EZY_3D64FF
         cell.layer.borderWidth = 1
         cell.bglabel.sizeToFit()
