@@ -352,6 +352,8 @@ class PersonalPlanChangeViewController: UIViewController {
         selectedLocationNameLabel.snp.makeConstraints { make in
             make.centerX.top.equalToSuperview()
         }
+        
+        selectLocationCheckView.isHidden = true
     }
 
     func tagCollectionViewSetting(){
@@ -493,8 +495,8 @@ class PersonalPlanChangeViewController: UIViewController {
         }
 
         selectTimeModalView.startSelectCircleButton.snp.makeConstraints { make in
-            make.top.equalTo(selectTimeModalView.startSelectBackButton).offset(selectTimeModalView.startSelectBackButton.frame.height/2)
-            make.left.equalTo(selectTimeModalView.startSelectBackButton).offset(self.view.frame.width/200)
+            make.centerY.equalTo(selectTimeModalView.startSelectBackButton)
+            make.left.equalTo(selectTimeModalView.startSelectBackButton).offset(self.view.frame.width/300)
             make.height.width.equalTo(selectTimeModalView.startSelectBackButton.snp.height).dividedBy(1.2)
             
             selectTimeModalView.startSelectCircleButton.layer.cornerRadius = ((((self.view.frame.height)/3.2)/19)/1.2)/2
@@ -534,8 +536,8 @@ class PersonalPlanChangeViewController: UIViewController {
         }
 
         selectTimeModalView.endSelectCircleButton.snp.makeConstraints { make in
-            make.top.equalTo(selectTimeModalView.endSelectBackButton).offset(selectTimeModalView.startSelectBackButton.frame.height/2)
-            make.left.equalTo(selectTimeModalView.endSelectBackButton).offset(self.view.frame.width/200)
+            make.centerY.equalTo(selectTimeModalView.endSelectBackButton)
+            make.left.equalTo(selectTimeModalView.endSelectBackButton).offset(self.view.frame.width/300)
             make.height.width.equalTo(selectTimeModalView.endSelectBackButton.snp.height).dividedBy(1.2)
 
             selectTimeModalView.endSelectCircleButton.layer.cornerRadius = ((((self.view.frame.height)/3.2)/19)/1.2)/2
@@ -1045,8 +1047,8 @@ class PersonalPlanChangeViewController: UIViewController {
             make.width.equalToSuperview().dividedBy(1.45)
             make.height.equalToSuperview().dividedBy(1.3)
         }
-        
     }
+
     
     func labelSetting(){
 
