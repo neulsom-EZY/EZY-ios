@@ -327,17 +327,9 @@ class PersonalPlanChangeViewController: UIViewController {
         
         selectTimeModalViewSetting()
         
-        TimeTableViewSetting()
-        
         repeatCollectionViewSetting()
         
         checkViewSetting()
-        
-
-        
-
-        
-
     }
     
     func checkViewSetting(){
@@ -429,25 +421,7 @@ class PersonalPlanChangeViewController: UIViewController {
             make.height.equalToSuperview().dividedBy(10.4)
         }
     }
-    
-    func TimeTableViewSetting(){
 
-
-
-        selectTimeModalView.waveLabel.snp.makeConstraints { make in
-            make.centerX.equalToSuperview()
-            make.centerY.equalTo(selectTimeModalView.startPickerView)
-        }
-
-        selectTimeModalView.completeButton.snp.makeConstraints { make in
-            make.top.equalTo(selectTimeModalView.startPickerView.snp.bottom).offset(self.view.frame.height/60)
-            make.width.equalToSuperview().dividedBy(4.7)
-            make.height.equalToSuperview().dividedBy(8)
-            make.right.equalToSuperview().offset(-self.view.frame.width/18)
-        }
-        
-
-    }
 
     func selectTimeModalViewSetting(){
         self.view.addSubview(selectTimeModalView)
@@ -468,7 +442,7 @@ class PersonalPlanChangeViewController: UIViewController {
         selectTimeModalView.modalBackgroundView.snp.makeConstraints { make in
             make.centerX.centerY.equalToSuperview()
             make.width.equalToSuperview().dividedBy(1.2)
-            make.height.equalToSuperview().dividedBy(3.2)
+            make.height.equalToSuperview().dividedBy(3)
         }
         
         selectTimeModalView.modalTitleLabel.snp.makeConstraints { make in
@@ -542,13 +516,47 @@ class PersonalPlanChangeViewController: UIViewController {
         
         selectTimeModalView.startHourLabel.snp.makeConstraints { make in
             make.centerY.equalTo(selectTimeModalView.startPickerView)
-            make.centerX.equalTo(selectTimeModalView.startPickerView).offset(-self.view.frame.width/40)
+            make.centerX.equalTo(selectTimeModalView.startPickerView).offset(-self.view.frame.width/30)
         }
 
         selectTimeModalView.startMinLabel.snp.makeConstraints { make in
             make.centerY.equalTo(selectTimeModalView.startPickerView)
-            make.left.equalTo(selectTimeModalView.startPickerView.snp.right).offset(-self.view.frame.width/35)
+            make.left.equalTo(selectTimeModalView.startPickerView.snp.right).offset(-self.view.frame.width/25)
         }
+        
+        self.selectTimeModalView.endPickerView.delegate = self
+        self.selectTimeModalView.endPickerView.dataSource = self
+        
+        selectTimeModalView.endPickerView.snp.makeConstraints { make in
+            make.centerX.equalTo(selectTimeModalView.endSelectBackButton)
+            make.top.equalTo(selectTimeModalView.endSelectBackButton.snp.bottom)
+            make.width.equalToSuperview().dividedBy(3)
+            make.height.equalToSuperview().dividedBy(2)
+        }
+        
+        selectTimeModalView.endHourLabel.snp.makeConstraints { make in
+            make.centerY.equalTo(selectTimeModalView.endPickerView)
+            make.centerX.equalTo(selectTimeModalView.endPickerView).offset(-self.view.frame.width/30)
+        }
+
+        selectTimeModalView.endMinLabel.snp.makeConstraints { make in
+            make.centerY.equalTo(selectTimeModalView.endPickerView)
+            make.left.equalTo(selectTimeModalView.endPickerView.snp.right).offset(-self.view.frame.width/25)
+        }
+        
+        selectTimeModalView.waveLabel.snp.makeConstraints { make in
+            make.centerX.equalToSuperview()
+            make.centerY.equalTo(selectTimeModalView.startPickerView)
+        }
+
+        selectTimeModalView.completeButton.snp.makeConstraints { make in
+            make.top.equalTo(selectTimeModalView.endPickerView.snp.bottom).offset(self.view.frame.height/200)
+            make.width.equalToSuperview().dividedBy(4.7)
+            make.height.equalToSuperview().dividedBy(8)
+            make.right.equalToSuperview().offset(-self.view.frame.width/18)
+        }
+        
+        selectTimeModalView.completeButton.addTarget(self, action: #selector(completeButtonClicked(sender:)), for: .touchUpInside)
         
         selectTimeModalView.isHidden = true
     }
