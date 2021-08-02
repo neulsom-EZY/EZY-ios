@@ -27,6 +27,8 @@ class PersonalPlanChangeViewController: UIViewController {
     
     var endSelectCircleButtonLocation = "Left"
     
+    var startPickerViewText = [["2","3","4","5","6","7"],["2","3","4","5","6","7"]]
+    
     var RepeatModels: [RepeatCollectionViewModel] = [RepeatCollectionViewModel(backgroundColr: UIColor(red: 198/255, green: 198/255, blue: 198/255, alpha: 1), isSelected: false),
                                                      RepeatCollectionViewModel(backgroundColr: UIColor(red: 255/255, green: 188/255, blue: 188/255, alpha: 1), isSelected: true),
                                                      RepeatCollectionViewModel(backgroundColr: UIColor(red: 255/255, green: 188/255, blue: 188/255, alpha: 1), isSelected: true),
@@ -330,6 +332,12 @@ class PersonalPlanChangeViewController: UIViewController {
         repeatCollectionViewSetting()
         
         checkViewSetting()
+        
+
+        
+
+        
+
     }
     
     func checkViewSetting(){
@@ -423,67 +431,22 @@ class PersonalPlanChangeViewController: UIViewController {
     }
     
     func TimeTableViewSetting(){
-        startTimeTableView.delegate = self
-        startTimeTableView.dataSource = self
-        
-        selectTimeModalView.modalBackgroundView.addSubview(startTimeTableView)
-        
-        startTimeTableView.register(StartTimeTableViewCell.self, forCellReuseIdentifier: StartTimeTableViewCell.reuseId)
-        
-        startTimeTableView.snp.makeConstraints { make in
-            make.top.equalTo(selectTimeModalView.startMorningLabel.snp.bottom).offset(self.view.frame.height/60)
-            make.left.equalTo(selectTimeModalView.startMorningLabel)
-            make.right.equalTo(selectTimeModalView.startAfternoonLabel)
-            make.height.equalToSuperview().dividedBy(2.7)
-        }
-        
-        endTimeTableView.delegate = self
-        endTimeTableView.dataSource = self
-        
-        selectTimeModalView.modalBackgroundView.addSubview(endTimeTableView)
-        
-        endTimeTableView.register(EndTimeTableViewCell.self, forCellReuseIdentifier: EndTimeTableViewCell.reuseId)
-        
-        endTimeTableView.snp.makeConstraints { make in
-            make.top.equalTo(selectTimeModalView.endMorningLabel.snp.bottom).offset(self.view.frame.height/60)
-            make.left.equalTo(selectTimeModalView.endMorningLabel)
-            make.right.equalTo(selectTimeModalView.endAfternoonLabel)
-            make.height.equalToSuperview().dividedBy(2.7)
-        }
-        
+
+
+
         selectTimeModalView.waveLabel.snp.makeConstraints { make in
             make.centerX.equalToSuperview()
-            make.centerY.equalTo(endTimeTableView)
+            make.centerY.equalTo(selectTimeModalView.startPickerView)
         }
-        
+
         selectTimeModalView.completeButton.snp.makeConstraints { make in
-            make.top.equalTo(endTimeTableView.snp.bottom).offset(self.view.frame.height/60)
+            make.top.equalTo(selectTimeModalView.startPickerView.snp.bottom).offset(self.view.frame.height/60)
             make.width.equalToSuperview().dividedBy(4.7)
             make.height.equalToSuperview().dividedBy(8)
             make.right.equalToSuperview().offset(-self.view.frame.width/18)
         }
         
-        selectTimeModalView.startHourLabel.snp.makeConstraints { make in
-            make.centerY.equalTo(startTimeTableView)
-            make.centerX.equalTo(startTimeTableView).offset(-self.view.frame.width/40)
-        }
-        
-        selectTimeModalView.startMinLabel.snp.makeConstraints { make in
-            make.centerY.equalTo(startTimeTableView)
-            make.left.equalTo(startTimeTableView.snp.right)
-        }
-        
-        selectTimeModalView.endHourLabel.snp.makeConstraints { make in
-            make.centerY.equalTo(endTimeTableView)
-            make.centerX.equalTo(endTimeTableView).offset(-self.view.frame.width/40)
-        }
-        
-        selectTimeModalView.endMinLabel.snp.makeConstraints { make in
-            make.centerY.equalTo(endTimeTableView)
-            make.left.equalTo(endTimeTableView.snp.right)
-        }
-        
-        selectTimeModalView.completeButton.addTarget(self, action: #selector(completeButtonClicked(sender:)), for: .touchUpInside)
+
     }
 
     func selectTimeModalViewSetting(){
@@ -567,6 +530,26 @@ class PersonalPlanChangeViewController: UIViewController {
             selectTimeModalView.endSelectBackButton.layer.cornerRadius = ((self.view.frame.height/3.2)/19)/2
         }
         
+        self.selectTimeModalView.startPickerView.delegate = self
+        self.selectTimeModalView.startPickerView.dataSource = self
+        
+        selectTimeModalView.startPickerView.snp.makeConstraints { make in
+            make.centerX.equalTo(selectTimeModalView.startSelectBackButton)
+            make.top.equalTo(selectTimeModalView.startSelectBackButton.snp.bottom)
+            make.width.equalToSuperview().dividedBy(3)
+            make.height.equalToSuperview().dividedBy(2)
+        }
+        
+        selectTimeModalView.startHourLabel.snp.makeConstraints { make in
+            make.centerY.equalTo(selectTimeModalView.startPickerView)
+            make.centerX.equalTo(selectTimeModalView.startPickerView).offset(-self.view.frame.width/40)
+        }
+
+        selectTimeModalView.startMinLabel.snp.makeConstraints { make in
+            make.centerY.equalTo(selectTimeModalView.startPickerView)
+            make.left.equalTo(selectTimeModalView.startPickerView.snp.right).offset(-self.view.frame.width/35)
+        }
+        
         selectTimeModalView.isHidden = true
     }
     
@@ -630,7 +613,7 @@ class PersonalPlanChangeViewController: UIViewController {
         }
         
         calendarCollectionView.snp.makeConstraints { (make) in
-            make.left.equalTo(selectCalendarModalView.modalBackgroundView).offset(self.view.frame.width/10.4)
+            make.left.equalTo(selectCalendarModalView.modalBackgroundView).offset(self.view.frame.width/18)
             make.centerX.equalToSuperview()
             make.top.equalTo(selectCalendarModalView.calendarTriangleImageView.snp.bottom).offset(self.view.frame.height/61.2)
             make.height.equalToSuperview().dividedBy(4.7)
@@ -1397,6 +1380,43 @@ extension PersonalPlanChangeViewController: UITableViewDataSource{
         return UITableViewCell()
     }
     
+}
+
+extension PersonalPlanChangeViewController: UIPickerViewDelegate, UIPickerViewDataSource{
+    // 피커뷰의 구성요소(컬럼) 수
+      func numberOfComponents(in pickerView: UIPickerView) -> Int {
+          return 2    // 구성요소(컬럼)로 지역만 있으므로 1을 리턴
+      }
+      
+      // 구성요소(컬럼)의 행수
+      func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+          return startPickerViewText[component].count
+      }
+   
+      // 피커뷰에 보여줄 값 전달
+      func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+          return startPickerViewText[component][row]
+      }
+    
+    func pickerView(_ pickerView: UIPickerView, viewForRow row: Int, forComponent component: Int, reusing view: UIView?) -> UIView {
+        
+        var pickerLabel = view as? UILabel;
+
+        if (pickerLabel == nil)
+        {
+            pickerLabel = UILabel()
+
+            pickerLabel?.font = UIFont(name: "AppleSDGothicNeo-SemiBold", size: 20)
+            pickerLabel?.textColor = UIColor(red: 120/255, green: 108/255, blue: 255/255, alpha: 1)
+            pickerLabel?.textAlignment = .center
+        }
+
+        pickerLabel?.text = startPickerViewText[component][row]
+        
+        pickerView.subviews[1].backgroundColor = .clear // 회색 뷰 지우기
+        
+        return pickerLabel!
+    }
     
 }
 
