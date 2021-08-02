@@ -106,6 +106,10 @@ class ErrandListViewController: UIViewController {
         view.addSubview(acceptErrandTag)
         view.addSubview(sendErrandTag)
         view.addSubview(waitErrandTag)
+        
+        acceptTableView.tableView.contentSize = CGSize(width: self.view.frame.width, height: (self.view.frame.height/8) * CGFloat(acceptDescriptionArray.count))
+        sendTableView.tableView.contentSize = CGSize(width: self.view.frame.width, height: (self.view.frame.height/8) * CGFloat(sendDescriptionArray.count))
+        waitTableView.tableView.contentSize = CGSize(width: self.view.frame.width, height: (self.view.frame.height/8) * CGFloat(waitDescriptionArray.count))
     }
     
     func cornerRadius(){
@@ -148,13 +152,13 @@ class ErrandListViewController: UIViewController {
         
         acceptTableView.tableView.snp.makeConstraints { make in
             make.top.equalTo(acceptTableView).offset(self.view.frame.height/36)
-            make.width.equalToSuperview()
+            make.width.height.equalToSuperview()
             make.bottom.equalToSuperview()
             make.centerX.equalToSuperview()
         }
         
         sendErrandTag.snp.makeConstraints { make in
-            make.bottom.equalTo(acceptErrandTag).offset(self.view.frame.height/3.58)
+            make.top.equalTo(acceptTableView.tableView).offset(acceptTableView.tableView.contentSize.height + self.view.frame.height / 116)
             make.left.equalTo(line)
             make.width.equalTo(sendErrandTag.listLabel).offset(self.view.frame.width/12.5)
             make.height.equalTo(self.view.frame.height/31.23)
@@ -170,13 +174,13 @@ class ErrandListViewController: UIViewController {
         
         sendTableView.tableView.snp.makeConstraints { make in
             make.top.equalTo(sendTableView).offset(self.view.frame.height/36)
-            make.width.equalToSuperview()
+            make.width.height.equalToSuperview()
             make.bottom.equalToSuperview()
             make.centerX.equalToSuperview()
         }
         
         waitErrandTag.snp.makeConstraints { make in
-            make.bottom.equalTo(sendErrandTag).offset(self.view.frame.height/3.58)
+            make.top.equalTo(sendTableView.tableView).offset(sendTableView.tableView.contentSize.height + self.view.frame.height / 116)
             make.left.equalTo(line)
             make.width.equalTo(waitErrandTag.listLabel).offset(self.view.frame.width/12.5)
             make.height.equalTo(self.view.frame.height/31.23)
@@ -192,7 +196,7 @@ class ErrandListViewController: UIViewController {
         
         waitTableView.tableView.snp.makeConstraints { make in
             make.top.equalTo(waitTableView).offset(self.view.frame.height/36)
-            make.width.equalToSuperview()
+            make.width.height.equalToSuperview()
             make.bottom.equalToSuperview()
             make.centerX.equalToSuperview()
         }
@@ -311,7 +315,6 @@ extension ErrandListViewController: UITableViewDelegate{
 }
 
 //MARK: - Preview
-
 #if DEBUG
 import SwiftUI
 struct ErrandListViewControllerRepresentable: UIViewControllerRepresentable {
@@ -336,4 +339,3 @@ struct ErrandListViewControllerRepresentable_PreviewProvider: PreviewProvider {
         
     }
 } #endif
-
