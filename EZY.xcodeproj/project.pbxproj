@@ -79,6 +79,7 @@
 		6AC1F4062684093700DDD08C /* TagColorCollectionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AC1F4052684093700DDD08C /* TagColorCollectionViewModel.swift */; };
 		6AC3BF18267B475200DDCBB2 /* PlanRequestRespondingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AC3BF17267B475200DDCBB2 /* PlanRequestRespondingViewController.swift */; };
 		6ACB4ED2269C2FA8008606C5 /* TopBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6ACB4ED1269C2FA8008606C5 /* TopBarView.swift */; };
+		6ADE8A2726B7B76E002199E7 /* LocalAuthentication.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6ADE8A2626B7B76E002199E7 /* LocalAuthentication.framework */; };
 		6AE41E7A26A9228A0072612C /* TagManagementViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AE41E7926A9228A0072612C /* TagManagementViewController.swift */; };
 		6AE41E7C26A9492C0072612C /* TagTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AE41E7B26A9492C0072612C /* TagTableViewCell.swift */; };
 		6AE41E7E26A9560C0072612C /* TagSettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AE41E7D26A9560C0072612C /* TagSettingViewController.swift */; };
@@ -204,6 +205,7 @@
 		6AC1F4052684093700DDD08C /* TagColorCollectionViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagColorCollectionViewModel.swift; sourceTree = "<group>"; };
 		6AC3BF17267B475200DDCBB2 /* PlanRequestRespondingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlanRequestRespondingViewController.swift; sourceTree = "<group>"; };
 		6ACB4ED1269C2FA8008606C5 /* TopBarView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TopBarView.swift; sourceTree = "<group>"; };
+		6ADE8A2626B7B76E002199E7 /* LocalAuthentication.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = LocalAuthentication.framework; path = System/Library/Frameworks/LocalAuthentication.framework; sourceTree = SDKROOT; };
 		6AE41E7926A9228A0072612C /* TagManagementViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagManagementViewController.swift; sourceTree = "<group>"; };
 		6AE41E7B26A9492C0072612C /* TagTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagTableViewCell.swift; sourceTree = "<group>"; };
 		6AE41E7D26A9560C0072612C /* TagSettingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagSettingViewController.swift; sourceTree = "<group>"; };
@@ -246,6 +248,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6ADE8A2726B7B76E002199E7 /* LocalAuthentication.framework in Frameworks */,
 				E5052C73E73080AD40F6F655 /* Pods_EZY.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -256,6 +259,7 @@
 		2B62A8E180A8585A5EDF7361 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				6ADE8A2626B7B76E002199E7 /* LocalAuthentication.framework */,
 				A75C11C1873FE4E191601230 /* Pods_EZY.framework */,
 			);
 			name = Frameworks;
