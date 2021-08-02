@@ -67,6 +67,11 @@ extension UIColor{
     static let EZY_PLAN_DO_BACK = UIColor.rgb(red: 255, green: 255, blue: 255)
 }
 
+extension CGColor{
+    static let EZY_PLAN_DO_SHADOW = UIColor.EZY_000000.cgColor
+    static let EZY_PLAN_FINISH_SHADOW = UIColor.EZY_FFFFFF.cgColor
+}
+
 extension UILabel {
     func dynamicFont(fontSize size: CGFloat, currentFontName: String) {
     let bounds = UIScreen.main.bounds
