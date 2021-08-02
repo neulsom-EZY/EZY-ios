@@ -6,10 +6,13 @@
 //
 
 import UIKit
+import LocalAuthentication
 
 class WithdrawalViewController: UIViewController {
     
     //MARK: - Properties
+    let authContext = LAContext()
+    
     lazy var topView = TopView()
     
     lazy var withdrawalModalView = WithdrawalModalView()
@@ -85,7 +88,29 @@ class WithdrawalViewController: UIViewController {
     }
     
     @objc func withdrawalButtonClicked(sender:UIButton){
-        withdrawalModalView.isHidden = false
+        var error: NSError?
+        if authContext.canEvaluatePolicy(.deviceOwnerAuthentication, error: &error) {
+            switch authContext.biometryType {
+            case .faceID:
+                break
+            default:
+                break
+            }
+            
+            authContext.evaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, localizedReason: description) { success, error in
+                if success {
+                    print("인증성공")
+                    
+                    DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 1) {
+                        self.withdrawalModalView.isHidden = false
+                    }
+                    
+                }else{
+                    print("인증실패")
+                    print(error?.localizedDescription)
+                }
+            }
+        }
     }
     
     func withdrawalModalViewSetting() {
