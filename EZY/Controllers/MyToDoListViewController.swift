@@ -31,15 +31,18 @@ class MyToDoListViewController: UIViewController {
     
     lazy var firstList = ScheduleTimeTableView.init(frame: self.view.frame)
     
-    var firstDescriptionArray: [String] = ["NEULSOM", "NEULSOM", "NEULSOM"]
+    var firstDescriptionArray: [String] = ["NEULSOM", "NEULSOM"]
     
-    let firstTitleArray: [String] = ["EZY 회의", "EZY 회의", "EZY 회의"]
+    let firstTitleArray: [String] = ["EZY 회의", "EZY 회의"]
     
-    let firstPlanTimeArray: [String] = ["12:00 - 13:00", "12:00 - 13:00", "12:00 - 13:00"]
+    let firstPlanTimeArray: [String] = ["12:00 - 13:00", "12:00 - 13:00"]
     
-    lazy var firstPlanBackgroundColor: [UIColor] = [.EZY_PLAN_MIDDLEPURPLE, .EZY_PLAN_FINISH_PURPLE, .EZY_PLAN_FINISH_PURPLE]
+    lazy var firstPlanBackgroundColor: [UIColor] = [.EZY_PLAN_MIDDLEPURPLE, .EZY_PLAN_FINISH_PURPLE]
     
-    lazy var firstPlanDoOrFinishColor: [UIColor] = [.EZY_PLAN_DO_BACK, .EZY_PLAN_FINISH_BACK, .EZY_PLAN_FINISH_BACK]
+    lazy var firstPlanDoOrFinishColor: [UIColor] = [.EZY_PLAN_DO_BACK, .EZY_PLAN_FINISH_BACK]
+    
+    lazy var firstPlanShadow: [CGColor] = [.EZY_PLAN_DO_SHADOW, .EZY_PLAN_FINISH_SHADOW]
+
     
     lazy var secondListTag = ListTagView().then {
         $0.listLabel.text = "APP Programming"
@@ -56,6 +59,8 @@ class MyToDoListViewController: UIViewController {
     lazy var secondPlanBackgroundColor: [UIColor] = [.EZY_PLAN_PURPLE, .EZY_PLAN_LIGHTPURPLE, .EZY_PLAN_FINISH_PURPLE, .EZY_PLAN_FINISH_PURPLE]
     
     lazy var secondPlanDoOrFinishColor: [UIColor] = [.EZY_PLAN_DO_BACK, .EZY_PLAN_DO_BACK, .EZY_PLAN_FINISH_BACK, .EZY_PLAN_FINISH_BACK]
+    
+    lazy var secondPlanShadow: [CGColor] = [.EZY_PLAN_DO_SHADOW, .EZY_PLAN_DO_SHADOW, .EZY_PLAN_FINISH_SHADOW, .EZY_PLAN_FINISH_SHADOW]
     
     
     //MARK: - Lifecycle
@@ -204,7 +209,7 @@ extension MyToDoListViewController: UITableViewDataSource{
             cell.EZYLISTCellRightDecorationView.backgroundColor = firstPlanDoOrFinishColor[indexPath.row]
             cell.titleLabel.textColor = firstPlanBackgroundColor[indexPath.row]
             cell.groupNameLabel.textColor = firstPlanBackgroundColor[indexPath.row]
-            
+            cell.EZYLISTCellRightDecorationView.layer.shadowColor = firstPlanShadow[indexPath.row]
             cell.backgroundColor = .clear
             cell.selectionStyle = UITableViewCell.SelectionStyle.none
             
@@ -219,7 +224,7 @@ extension MyToDoListViewController: UITableViewDataSource{
             cell.EZYLISTCellRightDecorationView.backgroundColor = secondPlanDoOrFinishColor[indexPath.row]
             cell.titleLabel.textColor = secondPlanBackgroundColor[indexPath.row]
             cell.groupNameLabel.textColor = secondPlanBackgroundColor[indexPath.row]
-            
+            cell.EZYLISTCellRightDecorationView.layer.shadowColor = secondPlanShadow[indexPath.row]
             cell.backgroundColor = .clear
             cell.selectionStyle = UITableViewCell.SelectionStyle.none
             
