@@ -27,7 +27,8 @@ class PersonalPlanChangeViewController: UIViewController {
     
     var endSelectCircleButtonLocation = "Left"
     
-    var RepeatModels: [RepeatCollectionViewModel] = [RepeatCollectionViewModel(backgroundColr: UIColor(red: 255/255, green: 188/255, blue: 188/255, alpha: 1), isSelected: true),
+    var RepeatModels: [RepeatCollectionViewModel] = [RepeatCollectionViewModel(backgroundColr: UIColor(red: 198/255, green: 198/255, blue: 198/255, alpha: 1), isSelected: false),
+                                                     RepeatCollectionViewModel(backgroundColr: UIColor(red: 255/255, green: 188/255, blue: 188/255, alpha: 1), isSelected: true),
                                                      RepeatCollectionViewModel(backgroundColr: UIColor(red: 255/255, green: 188/255, blue: 188/255, alpha: 1), isSelected: true),
                                                      RepeatCollectionViewModel(backgroundColr: UIColor(red: 255/255, green: 188/255, blue: 188/255, alpha: 1), isSelected: true),
                                                      RepeatCollectionViewModel(backgroundColr: UIColor(red: 255/255, green: 188/255, blue: 188/255, alpha: 1), isSelected: true),
@@ -75,7 +76,7 @@ class PersonalPlanChangeViewController: UIViewController {
     
     var dayOfTheWeekArray = ["S","M","T","W","T","F","S","S","M","T","S","M","T","W","T","F","S","S","M","T"]
     
-    var RepeatDayOfTheWeekArray = ["S","M", "T","W","T","F","S"]
+    var RepeatDayOfTheWeekArray = ["","S","M", "T","W","T","F","S"]
     
     let calendarCollectionView = UICollectionView(frame: .zero, collectionViewLayout: CalendarViewLayout()).then {
         let layout = UICollectionViewFlowLayout()
@@ -489,7 +490,9 @@ class PersonalPlanChangeViewController: UIViewController {
         self.view.addSubview(selectTimeModalView)
         
         selectTimeModalView.startSelectCircleButton.addTarget(self, action: #selector(startSelectCircleButtonClicked(sender:)), for: .touchUpInside)
+        selectTimeModalView.startSelectBackButton.addTarget(self, action: #selector(startSelectCircleButtonClicked(sender:)), for: .touchUpInside)
         selectTimeModalView.endSelectCircleButton.addTarget(self, action: #selector(endSelectCircleButtonClicked(sender:)), for: .touchUpInside)
+        selectTimeModalView.endSelectBackButton.addTarget(self, action: #selector(endSelectCircleButtonClicked(sender:)), for: .touchUpInside)
         
         selectTimeModalView.snp.makeConstraints { make in
             make.bottom.top.right.left.equalToSuperview()
@@ -924,7 +927,9 @@ class PersonalPlanChangeViewController: UIViewController {
     }
     
     @objc func locationViewButtonClicked(sender:UIButton){
-        
+        print("adsfadfew")
+        let nextViewController = SelectLocationViewController()
+        self.navigationController?.pushViewController(nextViewController, animated: true)
     }
     
     @objc func timeIconImageButton(sender:UIButton){
@@ -1109,8 +1114,7 @@ class PersonalPlanChangeViewController: UIViewController {
         locationViewButton.backgroundView.addSubview(locationViewButton.iconImageButton)
         self.view.addSubview(explanationBackgroundView)
 
-        locationViewButton.addTarget(self, action: #selector(locationViewButtonClicked(sender:)), for: .touchUpInside)
-        
+        locationViewButton.iconImageButton.addTarget(self, action: #selector(locationViewButtonClicked(sender:)), for: .touchUpInside)
         locationViewButton.iconImageButton.setImage(UIImage(named: "EZY_location.svg"), for: .normal)
         
         locationViewButton.snp.makeConstraints { make in
@@ -1178,7 +1182,7 @@ extension PersonalPlanChangeViewController: UICollectionViewDataSource, UICollec
         }else if collectionView == calendarCollectionView{
             return dayArray.count
         }else if collectionView == repeatCollectionView{
-            return 7
+            return 8
         }else if collectionView == tagCollectionView{
             return TagModels.count
         }
@@ -1204,13 +1208,25 @@ extension PersonalPlanChangeViewController: UICollectionViewDataSource, UICollec
 
             return cell
         }else if collectionView == repeatCollectionView{
-            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: PersonalPlanAddRepeatDayCollectionViewCell.reuseId, for: indexPath) as! PersonalPlanAddRepeatDayCollectionViewCell
-            
-            cell.label.text = RepeatDayOfTheWeekArray[indexPath.row]
-            cell.backgroundColor = .white
-            
-            cell.setModel(RepeatModels[indexPath.row])
-            return cell
+            if indexPath == [0,0]{
+                let cell = collectionView.dequeueReusableCell(withReuseIdentifier: PersonalPlanAddRepeatDayCollectionViewCell.reuseId, for: indexPath) as! PersonalPlanAddRepeatDayCollectionViewCell
+                
+                cell.label.text = RepeatDayOfTheWeekArray[indexPath.row]
+                cell.cellBackgroundView.layer.borderColor = UIColor(red: 198/255, green: 198/255, blue: 198/255, alpha: 1).cgColor
+                cell.label.text = "X"
+                cell.label.textColor = UIColor(red: 198/255, green: 198/255, blue: 198/255, alpha: 1)
+                
+                cell.setModel(RepeatModels[indexPath.row], indexPath: indexPath)
+                return cell
+            }else{
+                let cell = collectionView.dequeueReusableCell(withReuseIdentifier: PersonalPlanAddRepeatDayCollectionViewCell.reuseId, for: indexPath) as! PersonalPlanAddRepeatDayCollectionViewCell
+                
+                cell.label.text = RepeatDayOfTheWeekArray[indexPath.row]
+                cell.backgroundColor = .white
+                
+                cell.setModel(RepeatModels[indexPath.row], indexPath: indexPath)
+                return cell
+            }
         }else if collectionView == tagCollectionView{
             if indexPath == [0,2]{
                 let cell = collectionView.dequeueReusableCell(withReuseIdentifier: TagCollectionViewCell.reuseId, for: indexPath) as! TagCollectionViewCell
@@ -1263,8 +1279,32 @@ extension PersonalPlanChangeViewController: UICollectionViewDataSource, UICollec
             
             collectionView.reloadData()
         }else if collectionView == repeatCollectionView{
-            RepeatModels[indexPath.row].isSelected.toggle()
-                
+            if indexPath == [0,0]{
+                if RepeatModels[0].isSelected == true{ // 채울 때
+                    print("채워")
+                    for i in 0...RepeatModels.count-1 {
+                        if RepeatModels[i].isSelected == false{
+                            RepeatModels[i].isSelected.toggle()
+                            RepeatModels[0].isSelected = false
+                        }
+                    }
+                }else{ // 비울 때
+                    // 비워지면 안됌
+                }
+            }else{ // 선택 안함이 아닌 cell 을 클릭했을 때
+                RepeatModels[indexPath.row].isSelected.toggle()
+                print(RepeatModels.filter({ $0.isSelected == true }).count)
+                if RepeatModels[indexPath.row].isSelected == false{ // 채울때
+                    if RepeatModels.filter({ $0.isSelected == false }).count == 2 {
+                        RepeatModels[0].isSelected = true
+                    }
+                }else{ // 선택 취소할때
+                    if RepeatModels.filter({ $0.isSelected == true }).count == 8 {
+                        RepeatModels[0].isSelected = false
+                    }
+                }
+            }
+            
             collectionView.reloadData()
         }else if collectionView == tagCollectionView{
             print("click\(indexPath)")
@@ -1294,7 +1334,7 @@ extension PersonalPlanChangeViewController: UICollectionViewDataSource, UICollec
         }else if collectionView == tagColorCollectionView{
             return CGSize(width: 30, height: 30)
         }else if collectionView == repeatCollectionView{
-            return CGSize(width: 30, height: 30)
+            return CGSize(width: self.view.frame.width/14.4, height: self.view.frame.width/14.4)
         }else if collectionView == tagCollectionView{
             return CGSize(width: self.view.frame.width/4.4, height: self.view.frame.height/23)
         }
