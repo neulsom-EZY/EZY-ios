@@ -24,14 +24,7 @@ class MoreAlarmModelViewController : UIViewController{
     }
     let transparentView = UIView()
     
-    fileprivate let ampmCollectionView : UICollectionView = {
-        let layout = UICollectionViewFlowLayout()
-        let cv = UICollectionView(frame: .zero, collectionViewLayout: layout)
-        layout.scrollDirection = .vertical
-        cv.register(AmPmCell.self, forCellWithReuseIdentifier: AmPmCell.identifier)
-        cv.translatesAutoresizingMaskIntoConstraints = false
-        return cv
-    }()
+
     
     private let makeButton = UIButton().then{
         $0.backgroundColor = .EZY_8176FF
@@ -42,7 +35,9 @@ class MoreAlarmModelViewController : UIViewController{
         $0.textColor = .white
         $0.dynamicFont(fontSize: 12, currentFontName: "AppleSDGothicNeo-Bold")
     }
-  
+    private let AlarmDateView = AlarmDatePickerView().then{
+        $0.backgroundColor = .red
+    }
     
     static func instance() -> MoreAlarmModelViewController {
         return MoreAlarmModelViewController(nibName: nil, bundle: nil).then {
@@ -53,8 +48,7 @@ class MoreAlarmModelViewController : UIViewController{
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        ampmCollectionView.delegate = self
-        ampmCollectionView.dataSource = self
+
         configureUI()
     }
     
@@ -74,8 +68,7 @@ class MoreAlarmModelViewController : UIViewController{
     
     
     func configureUI(){
-        ampmCollectionView.backgroundColor = .clear
-        ampmCollectionView.collectionViewLayout = ZoomAndSnapFlowLayout()
+
         addView()
         cornerRadius()
         location()
@@ -84,9 +77,9 @@ class MoreAlarmModelViewController : UIViewController{
     func addView(){
         view.addSubview(transparentView)
         view.addSubview(bgView)
-        bgView.addSubview(ampmCollectionView)
         makeButton.addSubview(makeTitle)
         view.addSubview(makeButton)
+        bgView.addSubview(AlarmDateView)
     }
     
     func cornerRadius(){
@@ -100,12 +93,12 @@ class MoreAlarmModelViewController : UIViewController{
             make.bottom.equalToSuperview().offset(30)
             make.height.equalToSuperview().dividedBy(3.85)
         }
-        ampmCollectionView.snp.makeConstraints { (make) in
-            make.centerY.equalTo(bgView.snp.centerY)
-            make.height.equalTo(view.frame.height/22.5556)
+        AlarmDateView.snp.makeConstraints { (make) in
+            make.center.equalTo(bgView.snp.center)
+            make.height.equalTo(200)
             make.width.equalTo(100)
         }
-        
+   
         makeButton.snp.makeConstraints { (make) in
             make.top.equalTo(bgView.snp.top).offset(view.frame.height/6.15)
             make.right.equalTo(view.snp.right).offset(view.frame.height/22.56 * -1)
@@ -124,25 +117,5 @@ class MoreAlarmModelViewController : UIViewController{
         transparentView.frame = window?.frame ?? self.view.frame
         let tapgesture = UITapGestureRecognizer(target: self, action: #selector(onTapClose))
         transparentView.addGestureRecognizer(tapgesture)
-    }
-}
-extension MoreAlarmModelViewController : UICollectionViewDelegateFlowLayout,UICollectionViewDataSource{
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        if collectionView == self.ampmCollectionView{
-            return ampmData.count
-        }
-        else{
-            return 0
-        }
-        
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let tagCell = collectionView.dequeueReusableCell(withReuseIdentifier: AmPmCell.identifier, for: indexPath) as! AmPmCell
-        tagCell.bglabel.text = MoreAlarmModelViewController().ampmData[indexPath.row]
-        return tagCell
-    }
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: 200, height: 100)
     }
 }
