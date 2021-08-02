@@ -86,6 +86,9 @@ class MyToDoListViewController: UIViewController {
         view.addSubview(firstList)
         view.addSubview(secondListTag)
         view.addSubview(secondList)
+        
+        firstList.tableView.contentSize = CGSize(width: self.view.frame.width, height: (self.view.frame.height/8) * CGFloat(firstDescriptionArray.count))
+        secondList.tableView.contentSize = CGSize(width: self.view.frame.width, height: (self.view.frame.height/8) * CGFloat(secondDescriptionArray.count))
     }
     
     func cornerRadius(){
@@ -129,13 +132,13 @@ class MyToDoListViewController: UIViewController {
         
         firstList.tableView.snp.makeConstraints { make in
             make.top.equalTo(firstList).offset(self.view.frame.height/36)
-            make.width.equalToSuperview()
+            make.width.height.equalToSuperview()
             make.bottom.equalToSuperview()
             make.centerX.equalToSuperview()
         }
         
         secondListTag.snp.makeConstraints { make in
-            make.bottom.equalTo(firstListTag).offset(self.view.frame.height/3.58)
+            make.top.equalTo(firstList.tableView).offset(firstList.tableView.contentSize.height + self.view.frame.height / 116)
             make.left.equalTo(line)
             make.width.equalTo(secondListTag.listLabel).offset(self.view.frame.width/12.5)
             make.height.equalTo(self.view.frame.height/31.23)
@@ -151,7 +154,7 @@ class MyToDoListViewController: UIViewController {
         
         secondList.tableView.snp.makeConstraints { make in
             make.top.equalTo(secondList).offset(self.view.frame.height/36)
-            make.width.equalToSuperview()
+            make.width.height.equalToSuperview()
             make.bottom.equalToSuperview()
             make.centerX.equalToSuperview()
         }
