@@ -42,6 +42,8 @@ class ErrandListViewController: UIViewController {
     
     lazy var acceptPlanDoOrFinishColor: [UIColor] = [.EZY_PLAN_DO_BACK, .EZY_PLAN_FINISH_BACK]
     
+    lazy var acceptPlanShadow: [CGColor] = [.EZY_PLAN_DO_SHADOW, .EZY_PLAN_FINISH_SHADOW]
+    
     lazy var sendErrandTag = ListTagView().then {
         $0.listLabel.text = "부탁한 심부름"
         $0.listLabel.textColor = .EZY_8F85FF
@@ -59,6 +61,8 @@ class ErrandListViewController: UIViewController {
     lazy var sendPlanBackgroundColor: [UIColor] = [.EZY_PLAN_FINISH_PURPLE, .EZY_PLAN_FINISH_PURPLE]
     
     lazy var sendPlanDoOrFinishColor: [UIColor] = [.EZY_PLAN_DO_BACK, .EZY_PLAN_FINISH_BACK]
+    
+    lazy var sendPlanShadow: [CGColor] = [.EZY_PLAN_DO_SHADOW, .EZY_PLAN_FINISH_SHADOW]
 
     lazy var waitErrandTag = ListTagView().then {
         $0.listLabel.text = "수락 대기 중인 심부름"
@@ -75,6 +79,8 @@ class ErrandListViewController: UIViewController {
     lazy var waitPlanBackgroundColor: [UIColor] = [.EZY_PLAN_FINISH_PURPLE, .EZY_PLAN_FINISH_PURPLE]
     
     lazy var waitPlanDoOrFinishColor: [UIColor] = [.EZY_PLAN_DO_BACK, .EZY_PLAN_DO_BACK]
+    
+    lazy var waitPlanShadow: [CGColor] = [.EZY_PLAN_DO_SHADOW, .EZY_PLAN_DO_SHADOW]
     
     //MARK: - Lifecycle
     override func viewDidLoad() {
@@ -255,6 +261,7 @@ extension ErrandListViewController: UITableViewDataSource{
             cell.EZYLISTCellRightDecorationView.backgroundColor = acceptPlanDoOrFinishColor[indexPath.row]
             cell.titleLabel.textColor = acceptPlanBackgroundColor[indexPath.row]
             cell.groupNameLabel.textColor = acceptPlanBackgroundColor[indexPath.row]
+            cell.EZYLISTCellRightDecorationView.layer.shadowColor = acceptPlanShadow[indexPath.row]
             
             cell.backgroundColor = .clear
             cell.selectionStyle = UITableViewCell.SelectionStyle.none
@@ -271,6 +278,7 @@ extension ErrandListViewController: UITableViewDataSource{
             cell.EZYLISTCellRightDecorationView.backgroundColor = sendPlanDoOrFinishColor[indexPath.row]
             cell.titleLabel.textColor = sendPlanBackgroundColor[indexPath.row]
             cell.groupNameLabel.textColor = sendPlanBackgroundColor[indexPath.row]
+            cell.EZYLISTCellRightDecorationView.layer.shadowColor = sendPlanShadow[indexPath.row]
             
             cell.backgroundColor = .clear
             cell.selectionStyle = UITableViewCell.SelectionStyle.none
@@ -287,6 +295,7 @@ extension ErrandListViewController: UITableViewDataSource{
             cell.EZYLISTCellRightDecorationView.backgroundColor = waitPlanDoOrFinishColor[indexPath.row]
             cell.titleLabel.textColor = waitPlanBackgroundColor[indexPath.row]
             cell.groupNameLabel.textColor = waitPlanBackgroundColor[indexPath.row]
+            cell.EZYLISTCellRightDecorationView.layer.shadowColor = waitPlanShadow[indexPath.row]
             
             cell.backgroundColor = .clear
             cell.selectionStyle = UITableViewCell.SelectionStyle.none
