@@ -106,10 +106,6 @@ class ErrandListViewController: UIViewController {
         view.addSubview(acceptErrandTag)
         view.addSubview(sendErrandTag)
         view.addSubview(waitErrandTag)
-        
-        acceptTableView.tableView.contentSize = CGSize(width: self.view.frame.width, height: (self.view.frame.height/8) * CGFloat(acceptDescriptionArray.count))
-        sendTableView.tableView.contentSize = CGSize(width: self.view.frame.width, height: (self.view.frame.height/8) * CGFloat(sendDescriptionArray.count))
-        waitTableView.tableView.contentSize = CGSize(width: self.view.frame.width, height: (self.view.frame.height/8) * CGFloat(waitDescriptionArray.count))
     }
     
     func cornerRadius(){
@@ -228,6 +224,10 @@ class ErrandListViewController: UIViewController {
         waitTableView.tableView.delegate = self
         
         waitTableView.tableView.register(ScheduleTimeTableViewCell.self, forCellReuseIdentifier: ScheduleTimeTableViewCell.ScheduleTimeTableViewIdentifier)
+        
+        acceptTableView.tableView.contentSize = CGSize(width: self.view.frame.width, height: (self.view.frame.height/8) * CGFloat(acceptDescriptionArray.count))
+        sendTableView.tableView.contentSize = CGSize(width: self.view.frame.width, height: (self.view.frame.height/8) * CGFloat(sendDescriptionArray.count))
+        waitTableView.tableView.contentSize = CGSize(width: self.view.frame.width, height: (self.view.frame.height/8) * CGFloat(waitDescriptionArray.count))
     }
 
 }
