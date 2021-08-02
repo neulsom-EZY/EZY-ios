@@ -86,9 +86,6 @@ class MyToDoListViewController: UIViewController {
         view.addSubview(firstList)
         view.addSubview(secondListTag)
         view.addSubview(secondList)
-        
-        firstList.tableView.contentSize = CGSize(width: self.view.frame.width, height: (self.view.frame.height/8) * CGFloat(firstDescriptionArray.count))
-        secondList.tableView.contentSize = CGSize(width: self.view.frame.width, height: (self.view.frame.height/8) * CGFloat(secondDescriptionArray.count))
     }
     
     func cornerRadius(){
@@ -178,6 +175,9 @@ class MyToDoListViewController: UIViewController {
         secondList.tableView.delegate = self
         
         secondList.tableView.register(ScheduleTimeTableViewCell.self, forCellReuseIdentifier: ScheduleTimeTableViewCell.ScheduleTimeTableViewIdentifier)
+        
+        firstList.tableView.contentSize = CGSize(width: self.view.frame.width, height: (self.view.frame.height/8) * CGFloat(firstDescriptionArray.count))
+        secondList.tableView.contentSize = CGSize(width: self.view.frame.width, height: (self.view.frame.height/8) * CGFloat(secondDescriptionArray.count))
     }
 
 }
