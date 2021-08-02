@@ -604,7 +604,7 @@ class PersonalPlanChangeViewController: UIViewController {
         
         selectCalendarModalView.modalBackgroundView.snp.makeConstraints { make in
             make.centerX.centerY.equalToSuperview()
-            make.width.equalToSuperview().dividedBy(1.2)
+            make.width.equalToSuperview().dividedBy(1.13)
             make.height.equalToSuperview().dividedBy(2.3)
         }
         
