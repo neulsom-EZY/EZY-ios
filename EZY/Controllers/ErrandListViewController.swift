@@ -26,6 +26,14 @@ class ErrandListViewController: UIViewController {
         $0.backgroundColor = .EZY_D0D0D0
     }
     
+    lazy var scrollView = UIScrollView().then {
+        $0.backgroundColor = .clear
+    }
+    
+    lazy var scrollInnerView = UIView().then {
+        $0.backgroundColor = .clear
+    }
+    
     lazy var acceptErrandTag = ListTagView().then {
         $0.listLabel.text = "부탁받은 심부름"
     }
@@ -106,12 +114,14 @@ class ErrandListViewController: UIViewController {
         view.addSubview(backButton)
         view.addSubview(listName)
         view.addSubview(line)
-        view.addSubview(acceptTableView)
-        view.addSubview(sendTableView)
-        view.addSubview(waitTableView)
-        view.addSubview(acceptErrandTag)
-        view.addSubview(sendErrandTag)
-        view.addSubview(waitErrandTag)
+        view.addSubview(scrollView)
+        scrollView.addSubview(scrollInnerView)
+        scrollInnerView.addSubview(acceptTableView)
+        scrollInnerView.addSubview(sendTableView)
+        scrollInnerView.addSubview(waitTableView)
+        scrollInnerView.addSubview(acceptErrandTag)
+        scrollInnerView.addSubview(sendErrandTag)
+        scrollInnerView.addSubview(waitErrandTag)
     }
     
     func cornerRadius(){
@@ -139,8 +149,24 @@ class ErrandListViewController: UIViewController {
             make.top.equalTo(listName).offset(self.view.frame.height/16.57)
         }
         
+        scrollView.snp.makeConstraints { make in
+            make.top.equalTo(line).offset(self.view.frame.height/1624)
+            make.bottom.equalToSuperview()
+            make.leading.equalToSuperview()
+            make.trailing.equalToSuperview()
+        }
+        
+        scrollInnerView.snp.makeConstraints { make in
+            make.top.equalTo(scrollView.contentLayoutGuide)
+            make.bottom.equalTo(scrollView.contentLayoutGuide)
+            make.leading.equalTo(scrollView.contentLayoutGuide)
+            make.bottom.equalTo(scrollView.contentLayoutGuide)
+            make.width.equalTo(scrollView.frameLayoutGuide)
+            make.height.equalToSuperview().offset(100)
+        }
+        
         acceptErrandTag.snp.makeConstraints { make in
-            make.top.equalTo(line).offset(self.view.frame.height/62.46)
+            make.top.equalTo(scrollInnerView).offset(self.view.frame.height/62.46)
             make.left.equalTo(line)
             make.width.equalTo(acceptErrandTag.listLabel).offset(self.view.frame.width/12.5)
             make.height.equalTo(self.view.frame.height/31.23)
