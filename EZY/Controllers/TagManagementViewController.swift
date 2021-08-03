@@ -266,18 +266,21 @@ extension TagManagementViewController: UICollectionViewDataSource, UICollectionV
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        if TagColorModels[indexPath.row].isSelected {
-            
-            TagColorModels[tagColorPreciousSelectedIndex].isSelected.toggle()
-            
-            if TagColorModels.filter({ $0.isSelected }).count >= 1 {
-                TagColorModels[indexPath.row].isSelected.toggle()
+        if collectionView == tagColorCollectionView{
+            if TagColorModels[indexPath.row].isSelected {
                 
-                tagColorPreciousSelectedIndex = indexPath.row
+                TagColorModels[tagColorPreciousSelectedIndex].isSelected.toggle()
+                
+                if TagColorModels.filter({ $0.isSelected }).count >= 1 {
+                    TagColorModels[indexPath.row].isSelected.toggle()
+                    
+                    tagColorPreciousSelectedIndex = indexPath.row
+                }
             }
+            
+            collectionView.reloadData()
         }
-        
-        collectionView.reloadData()
+
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
