@@ -183,6 +183,9 @@ class MyToDoListViewController: UIViewController {
         
         firstList.tableView.contentSize = CGSize(width: self.view.frame.width, height: (self.view.frame.height/8) * CGFloat(firstDescriptionArray.count))
         secondList.tableView.contentSize = CGSize(width: self.view.frame.width, height: (self.view.frame.height/8) * CGFloat(secondDescriptionArray.count))
+        
+        firstList.tableView.isScrollEnabled = false
+        secondList.tableView.isScrollEnabled = false
     }
 
 }
