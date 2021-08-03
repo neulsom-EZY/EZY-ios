@@ -14,6 +14,7 @@ class ErrandListViewController: UIViewController {
 
     lazy var backButton = UIButton().then {
         $0.setImage(UIImage(named: "EZY_ListBackBtn"), for: .normal)
+        $0.addTarget(self, action: #selector(goBack), for: .touchUpInside)
     }
     
     lazy var listName = UILabel().then {
@@ -98,6 +99,11 @@ class ErrandListViewController: UIViewController {
     
     //MARK: - Selectors
     
+    @objc
+    func goBack(){
+        navigationController?.popViewController(animated: true )
+    }
+    
     //MARK: - Helpers
     func configureUI(){
         view.backgroundColor = .white
@@ -162,11 +168,11 @@ class ErrandListViewController: UIViewController {
             make.leading.equalTo(scrollView.contentLayoutGuide)
             make.bottom.equalTo(scrollView.contentLayoutGuide)
             make.width.equalTo(scrollView.frameLayoutGuide)
-            make.height.equalToSuperview().offset(100)
+            make.height.equalTo(acceptTableView.tableView.contentSize.height + sendTableView.tableView.contentSize.height + waitTableView.tableView.contentSize.height + (self.view.frame.height / 13.5) * 3)
         }
         
         acceptErrandTag.snp.makeConstraints { make in
-            make.top.equalTo(scrollInnerView).offset(self.view.frame.height/62.46)
+            make.top.equalTo(scrollInnerView).offset(self.view.frame.height/46.4)
             make.left.equalTo(line)
             make.width.equalTo(acceptErrandTag.listLabel).offset(self.view.frame.width/12.5)
             make.height.equalTo(self.view.frame.height/31.23)
@@ -174,7 +180,7 @@ class ErrandListViewController: UIViewController {
         
         acceptTableView.snp.makeConstraints { make in
             acceptTableView.backgroundColor = .clear
-            make.top.equalTo(acceptErrandTag).offset(self.view.frame.height/67.67)
+            make.top.equalTo(acceptErrandTag).offset(self.view.frame.height/47.76)
             make.centerX.equalToSuperview()
             make.width.equalToSuperview()
             make.bottom.equalTo(sendErrandTag).offset(self.view.frame.height/18.92 * -1)
@@ -188,7 +194,7 @@ class ErrandListViewController: UIViewController {
         }
         
         sendErrandTag.snp.makeConstraints { make in
-            make.top.equalTo(acceptTableView.tableView).offset(acceptTableView.tableView.contentSize.height + self.view.frame.height / 116)
+            make.top.equalTo(acceptTableView.tableView).offset(acceptTableView.tableView.contentSize.height + self.view.frame.height / 81.2)
             make.left.equalTo(line)
             make.width.equalTo(sendErrandTag.listLabel).offset(self.view.frame.width/12.5)
             make.height.equalTo(self.view.frame.height/31.23)
@@ -196,7 +202,7 @@ class ErrandListViewController: UIViewController {
         
         sendTableView.snp.makeConstraints { make in
             sendTableView.backgroundColor = .clear
-            make.top.equalTo(sendErrandTag).offset(self.view.frame.height/67.67)
+            make.top.equalTo(sendErrandTag).offset(self.view.frame.height/47.76)
             make.centerX.equalToSuperview()
             make.width.equalToSuperview()
             make.bottom.equalTo(waitErrandTag).offset(self.view.frame.height/18.92 * -1)
@@ -210,7 +216,7 @@ class ErrandListViewController: UIViewController {
         }
         
         waitErrandTag.snp.makeConstraints { make in
-            make.top.equalTo(sendTableView.tableView).offset(sendTableView.tableView.contentSize.height + self.view.frame.height / 116)
+            make.top.equalTo(sendTableView.tableView).offset(sendTableView.tableView.contentSize.height + self.view.frame.height / 81.2)
             make.left.equalTo(line)
             make.width.equalTo(waitErrandTag.listLabel).offset(self.view.frame.width/12.5)
             make.height.equalTo(self.view.frame.height/31.23)
@@ -218,7 +224,7 @@ class ErrandListViewController: UIViewController {
         
         waitTableView.snp.makeConstraints { make in
             waitTableView.backgroundColor = .clear
-            make.top.equalTo(waitErrandTag).offset(self.view.frame.height/67.67)
+            make.top.equalTo(waitErrandTag).offset(self.view.frame.height/47.76)
             make.centerX.equalToSuperview()
             make.width.equalToSuperview()
             make.bottom.equalToSuperview()
