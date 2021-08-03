@@ -13,7 +13,7 @@ protocol AlarmModelDelegate: class {
     func onTapClose()
 }
 class MoreAlarmModelViewController : UIViewController{
-    let ampmData = ["오전","오후"]
+    let ampmData = ["오후","오전"]
     
     //MARK: - Properties
     weak var delegate: AlarmModelDelegate?
@@ -95,8 +95,8 @@ class MoreAlarmModelViewController : UIViewController{
         }
         AlarmDateView.snp.makeConstraints { (make) in
             make.center.equalTo(bgView.snp.center)
-            make.height.equalTo(200)
-            make.width.equalTo(100)
+            make.height.equalTo(view.frame.height/8.0396)
+            make.width.equalTo(view.frame.height/7.061)
         }
    
         makeButton.snp.makeConstraints { (make) in
