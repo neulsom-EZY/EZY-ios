@@ -126,10 +126,12 @@ class ErrandListViewController: UIViewController {
             make.left.equalToSuperview().offset(self.view.frame.width/13.39)
             make.width.height.equalTo(self.view.frame.width/15.63)
         }
+        
         listName.snp.makeConstraints { make in
             make.top.equalTo(backButton).offset(self.view.frame.height/15.32)
             make.left.equalTo(backButton)
         }
+        
         line.snp.makeConstraints { make in
             make.width.equalTo(self.view.frame.width/1.18)
             make.height.equalTo(self.view.frame.height/1624)
@@ -167,7 +169,7 @@ class ErrandListViewController: UIViewController {
         }
         
         sendTableView.snp.makeConstraints { make in
-            acceptTableView.backgroundColor = .clear
+            sendTableView.backgroundColor = .clear
             make.top.equalTo(sendErrandTag).offset(self.view.frame.height/67.67)
             make.centerX.equalToSuperview()
             make.width.equalToSuperview()
@@ -189,7 +191,7 @@ class ErrandListViewController: UIViewController {
         }
         
         waitTableView.snp.makeConstraints { make in
-            acceptTableView.backgroundColor = .clear
+            waitTableView.backgroundColor = .clear
             make.top.equalTo(waitErrandTag).offset(self.view.frame.height/67.67)
             make.centerX.equalToSuperview()
             make.width.equalToSuperview()
@@ -234,6 +236,10 @@ class ErrandListViewController: UIViewController {
         acceptTableView.tableView.contentSize = CGSize(width: self.view.frame.width, height: (self.view.frame.height/8) * CGFloat(acceptDescriptionArray.count))
         sendTableView.tableView.contentSize = CGSize(width: self.view.frame.width, height: (self.view.frame.height/8) * CGFloat(sendDescriptionArray.count))
         waitTableView.tableView.contentSize = CGSize(width: self.view.frame.width, height: (self.view.frame.height/8) * CGFloat(waitDescriptionArray.count))
+        
+        acceptTableView.tableView.isScrollEnabled = false
+        sendTableView.tableView.isScrollEnabled = false
+        waitTableView.tableView.isScrollEnabled = false
     }
 
 }
