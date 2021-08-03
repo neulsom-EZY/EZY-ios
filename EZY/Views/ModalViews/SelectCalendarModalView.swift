@@ -57,6 +57,10 @@ class SelectCalendarModalView: UIView {
         $0.layer.cornerRadius = 10
     }
     
+    lazy var dayPickerView = UIPickerView().then{
+        $0.tintColor = UIColor(red: 150/255, green: 141/255, blue: 255/255, alpha: 1)
+    }
+    
     lazy var repeatLabel = UILabel().then {
         $0.text = "반복 설정"
         $0.textColor = UIColor(red: 129/255, green: 129/255, blue: 129/255, alpha: 1)
