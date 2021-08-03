@@ -13,6 +13,7 @@ class MyToDoListViewController: UIViewController {
     //MARK: - Properties
     lazy var backButton = UIButton().then {
         $0.setImage(UIImage(named: "EZY_ListBackBtn"), for: .normal)
+        $0.addTarget(self, action: #selector(goBack), for: .touchUpInside)
     }
     
     lazy var listName = UILabel().then {
@@ -79,6 +80,11 @@ class MyToDoListViewController: UIViewController {
     
     //MARK: - Selectors
     
+    @objc
+    func goBack(){
+        navigationController?.popViewController(animated: true )
+    }
+    
     //MARK: - Helpers
     func configureUI(){
         view.backgroundColor = .white
@@ -140,11 +146,11 @@ class MyToDoListViewController: UIViewController {
             make.leading.equalTo(scrollView.contentLayoutGuide)
             make.bottom.equalTo(scrollView.contentLayoutGuide)
             make.width.equalTo(scrollView.frameLayoutGuide)
-            make.height.equalToSuperview().offset(100)
+            make.height.equalTo(firstList.tableView.contentSize.height + secondList.tableView.contentSize.height + (self.view.frame.height / 13.5) * 2) // tableView Height만큼 + tag 차지 높이 * tag 수
         }
         
         firstListTag.snp.makeConstraints { make in
-            make.top.equalTo(scrollInnerView).offset(self.view.frame.height/62.46)
+            make.top.equalTo(scrollInnerView).offset(self.view.frame.height/46.4)
             make.left.equalTo(line)
             make.width.equalTo(firstListTag.listLabel).offset(self.view.frame.width/12.5)
             make.height.equalTo(self.view.frame.height/31.23)
@@ -152,7 +158,7 @@ class MyToDoListViewController: UIViewController {
         
         firstList.snp.makeConstraints { make in
             firstList.backgroundColor = .clear
-            make.top.equalTo(firstListTag).offset(self.view.frame.height/67.67)
+            make.top.equalTo(firstListTag).offset(self.view.frame.height/47.76)
             make.centerX.equalToSuperview()
             make.width.equalToSuperview()
             make.bottom.equalTo(secondListTag).offset(self.view.frame.height/18.92 * -1)
@@ -166,7 +172,7 @@ class MyToDoListViewController: UIViewController {
         }
         
         secondListTag.snp.makeConstraints { make in
-            make.top.equalTo(firstList.tableView).offset(firstList.tableView.contentSize.height + self.view.frame.height / 116)
+            make.top.equalTo(firstList.tableView).offset(firstList.tableView.contentSize.height + self.view.frame.height / 81.2)
             make.left.equalTo(line)
             make.width.equalTo(secondListTag.listLabel).offset(self.view.frame.width/12.5)
             make.height.equalTo(self.view.frame.height/31.23)
@@ -174,7 +180,7 @@ class MyToDoListViewController: UIViewController {
         
         secondList.snp.makeConstraints { make in
             secondList.backgroundColor = .clear
-            make.top.equalTo(secondListTag).offset(self.view.frame.height/67.67)
+            make.top.equalTo(secondListTag).offset(self.view.frame.height/47.76)
             make.centerX.equalToSuperview()
             make.width.equalToSuperview()
             make.bottom.equalToSuperview()
