@@ -25,6 +25,14 @@ class MyToDoListViewController: UIViewController {
         $0.backgroundColor = .EZY_D0D0D0
     }
     
+    lazy var scrollView = UIScrollView().then {
+        $0.backgroundColor = .clear
+    }
+    
+    lazy var scrollInnerView = UIView().then {
+        $0.backgroundColor = .clear
+    }
+    
     lazy var firstListTag = ListTagView().then {
         $0.listLabel.text = "STUDY"
     }
@@ -87,10 +95,12 @@ class MyToDoListViewController: UIViewController {
         view.addSubview(backButton)
         view.addSubview(listName)
         view.addSubview(line)
-        view.addSubview(firstListTag)
-        view.addSubview(firstList)
-        view.addSubview(secondListTag)
-        view.addSubview(secondList)
+        view.addSubview(scrollView)
+        scrollView.addSubview(scrollInnerView)
+        scrollInnerView.addSubview(firstListTag)
+        scrollInnerView.addSubview(firstList)
+        scrollInnerView.addSubview(secondListTag)
+        scrollInnerView.addSubview(secondList)
     }
     
     func cornerRadius(){
@@ -117,8 +127,24 @@ class MyToDoListViewController: UIViewController {
             make.top.equalTo(listName).offset(self.view.frame.height/16.57)
         }
         
+        scrollView.snp.makeConstraints { make in
+            make.top.equalTo(line).offset(self.view.frame.height/1624)
+            make.bottom.equalToSuperview()
+            make.leading.equalToSuperview()
+            make.trailing.equalToSuperview()
+        }
+        
+        scrollInnerView.snp.makeConstraints { make in
+            make.top.equalTo(scrollView.contentLayoutGuide)
+            make.bottom.equalTo(scrollView.contentLayoutGuide)
+            make.leading.equalTo(scrollView.contentLayoutGuide)
+            make.bottom.equalTo(scrollView.contentLayoutGuide)
+            make.width.equalTo(scrollView.frameLayoutGuide)
+            make.height.equalToSuperview().offset(100)
+        }
+        
         firstListTag.snp.makeConstraints { make in
-            make.top.equalTo(line).offset(self.view.frame.height/62.46)
+            make.top.equalTo(scrollInnerView).offset(self.view.frame.height/62.46)
             make.left.equalTo(line)
             make.width.equalTo(firstListTag.listLabel).offset(self.view.frame.width/12.5)
             make.height.equalTo(self.view.frame.height/31.23)
