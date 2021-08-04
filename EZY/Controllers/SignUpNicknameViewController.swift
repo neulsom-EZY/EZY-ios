@@ -71,6 +71,8 @@ class SignUpNicknameViewController: UIViewController{
         topBarViewSetting()
         cornerRadius()
         location()
+        
+        alreadyExistLabel.isHidden = true
     }
     
     func addView(){
