@@ -41,15 +41,15 @@ class GroupAddModalView: UIView {
     }
     
     lazy var modalTitleLabel = UILabel().then {
-        $0.text = "모달추가"
-        $0.textColor = UIColor(red: 255/255, green: 191/255, blue: 191/255, alpha: 1)
-        $0.dynamicFont(fontSize: 14, currentFontName: "AppleSDGothicNeo-Bold")
+        $0.text = "그룹 추가"
+        $0.textColor = UIColor(red: 161/255, green: 180/255, blue: 255/255, alpha: 1)
+        $0.dynamicFont(fontSize: 12, currentFontName: "AppleSDGothicNeo-Bold")
     }
     
     lazy var modalButton = UIButton().then {
         $0.setTitle("생 성", for: .normal)
         $0.layer.cornerRadius = 10
-        $0.backgroundColor = UIColor(red: 255/255, green: 191/255, blue: 191/255, alpha: 1)
+        $0.backgroundColor = UIColor(red: 161/255, green: 180/255, blue: 255/255, alpha: 1)
         $0.titleLabel?.dynamicFont(fontSize: 12, currentFontName: "AppleSDGothicNeo-Bold")
     }
     

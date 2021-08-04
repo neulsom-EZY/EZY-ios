@@ -21,14 +21,14 @@ class SelectTimeModalView: UIView {
     
     lazy var modalTitleLabel = UILabel().then {
         $0.text = "시간 선택"
-        $0.textColor = UIColor(red: 168/255, green: 224/255, blue: 197/255, alpha: 1)
+        $0.textColor = UIColor(red: 150/255, green: 141/255, blue: 255/255, alpha: 1)
         $0.dynamicFont(fontSize: 12, currentFontName: "AppleSDGothicNeo-Bold")
     }
     
     lazy var startMorningLabel = UILabel().then {
         $0.text = "오전"
-        $0.textColor = UIColor.black
-        $0.dynamicFont(fontSize: 12, currentFontName: "AppleSDGothicNeo-Thin")
+        $0.textColor = UIColor(red: 114/255, green: 114/255, blue: 114/255, alpha: 1)
+        $0.dynamicFont(fontSize: 12, currentFontName: "AppleSDGothicNeo-Medium")
     }
     
     lazy var startAfternoonLabel = UILabel().then {
@@ -39,12 +39,36 @@ class SelectTimeModalView: UIView {
     
     lazy var endMorningLabel = UILabel().then {
         $0.text = "오전"
-        $0.textColor = UIColor.black
-        $0.dynamicFont(fontSize: 12, currentFontName: "AppleSDGothicNeo-Thin")
+        $0.textColor = UIColor(red: 114/255, green: 114/255, blue: 114/255, alpha: 1)
+        $0.dynamicFont(fontSize: 12, currentFontName: "AppleSDGothicNeo-Medium")
     }
     
     lazy var endAfternoonLabel = UILabel().then {
         $0.text = "오후"
+        $0.textColor = UIColor.black
+        $0.dynamicFont(fontSize: 12, currentFontName: "AppleSDGothicNeo-Thin")
+    }
+    
+    lazy var startHourLabel = UILabel().then{
+        $0.text = "시"
+        $0.textColor = UIColor.black
+        $0.dynamicFont(fontSize: 12, currentFontName: "AppleSDGothicNeo-Thin")
+    }
+    
+    lazy var startMinLabel = UILabel().then{
+        $0.text = "분"
+        $0.textColor = UIColor.black
+        $0.dynamicFont(fontSize: 12, currentFontName: "AppleSDGothicNeo-Thin")
+    }
+    
+    lazy var endHourLabel = UILabel().then{
+        $0.text = "시"
+        $0.textColor = UIColor.black
+        $0.dynamicFont(fontSize: 12, currentFontName: "AppleSDGothicNeo-Thin")
+    }
+    
+    lazy var endMinLabel = UILabel().then{
+        $0.text = "분"
         $0.textColor = UIColor.black
         $0.dynamicFont(fontSize: 12, currentFontName: "AppleSDGothicNeo-Thin")
     }
@@ -56,20 +80,12 @@ class SelectTimeModalView: UIView {
         $0.dynamicFont(fontSize: 12, currentFontName: "AppleSDGothicNeo-Bold")
     }
     
-    lazy var startSelectBarView = UIView().then {
-        $0.backgroundColor = UIColor(red: 168/255, green: 224/255, blue: 197/255, alpha: 1).withAlphaComponent(0.6)
-    }
-    
-    lazy var endSelectBarView = UIView().then {
-        $0.backgroundColor = UIColor(red: 168/255, green: 224/255, blue: 197/255, alpha: 1).withAlphaComponent(0.6)
-    }
-    
     lazy var startSelectBackButton = UIButton().then {
-        $0.backgroundColor = UIColor(red: 168/255, green: 224/255, blue: 197/255, alpha: 1)
+        $0.backgroundColor = UIColor(red: 150/255, green: 141/255, blue: 255/255, alpha: 1)
     }
     
     lazy var endSelectBackButton = UIButton().then {
-        $0.backgroundColor = UIColor(red: 168/255, green: 224/255, blue: 197/255, alpha: 1)
+        $0.backgroundColor = UIColor(red: 150/255, green: 141/255, blue: 255/255, alpha: 1)
     }
     
     lazy var startSelectCircleButton = UIButton().then {
@@ -89,9 +105,17 @@ class SelectTimeModalView: UIView {
     lazy var completeButton = UIButton().then{
         $0.setTitle("완료", for: .normal)
         $0.setTitleColor(UIColor.white, for: .normal)
-        $0.backgroundColor = UIColor(red: 168/255, green: 224/255, blue: 197/255, alpha: 1)
+        $0.backgroundColor = UIColor(red: 150/255, green: 141/255, blue: 255/255, alpha: 1)
         $0.layer.cornerRadius = 10
         $0.dynamicFont(fontSize: 12, currentFontName: "AppleSDGothicNeo-Bold")
+    }
+    
+    lazy var startPickerView = UIPickerView().then{
+        $0.tintColor = UIColor(red: 150/255, green: 141/255, blue: 255/255, alpha: 1)
+    }
+    
+    lazy var endPickerView = UIPickerView().then{
+        $0.tintColor = UIColor(red: 150/255, green: 141/255, blue: 255/255, alpha: 1)
     }
     
     override init(frame: CGRect) {
@@ -112,13 +136,19 @@ class SelectTimeModalView: UIView {
         modalBackgroundView.addSubview(waveLabel)
         modalBackgroundView.addSubview(completeButton)
         
-        modalBackgroundView.addSubview(endSelectBarView)
+        modalBackgroundView.addSubview(startPickerView)
+        modalBackgroundView.addSubview(endPickerView)
+        
+        modalBackgroundView.addSubview(startHourLabel)
+        modalBackgroundView.addSubview(startMinLabel)
+        modalBackgroundView.addSubview(endHourLabel)
+        modalBackgroundView.addSubview(endMinLabel)
+        
         modalBackgroundView.addSubview(endMorningLabel)
         modalBackgroundView.addSubview(endAfternoonLabel)
         modalBackgroundView.addSubview(endSelectBackButton)
         modalBackgroundView.addSubview(endSelectCircleButton)
         
-        modalBackgroundView.addSubview(startSelectBarView)
         modalBackgroundView.addSubview(startMorningLabel)
         modalBackgroundView.addSubview(startAfternoonLabel)
         modalBackgroundView.addSubview(startSelectBackButton)

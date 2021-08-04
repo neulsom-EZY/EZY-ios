@@ -9,7 +9,7 @@ import UIKit
 
 class SelectLocationViewController: UIViewController {
     
-    var alphabetTextArray = ["A","B","C","D","E","F","G","H","I","J","K"]
+    var alphabetTextArray = ["A","B","C","D","E","F","G","H","I","J","K","A","B","C","D","E","F","G","H","I","J","K","A","B","C","D","E","F","G","H","I","J","K"]
     
     var selectLocationModalView = SelectLocationModalView()
         
@@ -23,16 +23,17 @@ class SelectLocationViewController: UIViewController {
     }
     
     lazy var locationTextField = UITextField().then {
-        $0.placeholder = "광주소프트웨어마이스터고등학교"
+        $0.placeholder = "위치를 입력해주세요."
         $0.dynamicFont(fontSize: 10, currentFontName: "AppleSDGothicNeo-Bold")
     }
     
-    lazy var locationHalfModalView = UIView().then{
+    lazy var topViewHalfModalView = UIView().then{
         $0.backgroundColor = .white
 //        $0.roundCorners(cornerRadius: 50, maskedCorners: [.layerMinXMinYCorner, .layerMaxXMinYCorner]) // 그림자 코드 뒤에 넣으면 그림자가 안먹음
+        $0.roundCorners(cornerRadius: 50, maskedCorners: [.layerMaxXMaxYCorner, .layerMinXMaxYCorner]) // 그림자 코드 뒤에 넣으면 그림자가 안먹음
         $0.layer.masksToBounds = false
         $0.layer.shadowOpacity = 0.3
-        $0.layer.shadowRadius = 20
+        $0.layer.shadowRadius = 10
         $0.layer.shadowOffset = CGSize(width: 0, height: 0)
         $0.layer.shadowColor = UIColor(red: 163/255, green: 163/255, blue: 163/255, alpha: 1).cgColor
     }
@@ -57,6 +58,11 @@ class SelectLocationViewController: UIViewController {
     
     @objc func okButtonClicked(sender:UIButton){
         selectLocationModalView.isHidden = true
+        self.navigationController?.popViewController(animated: true)
+    }
+    
+    @objc func backButtonClicked(sender:UIButton){
+        self.navigationController?.popViewController(animated: true)
     }
     
     func selectLocationModalViewSetting(){
@@ -128,26 +134,30 @@ class SelectLocationViewController: UIViewController {
         locationTableView.delegate = self
         locationTableView.dataSource = self
         
-        locationHalfModalView.addSubview(locationTableView)
+        self.view.addSubview(locationTableView)
+        
+        locationTableView.backgroundColor = .clear
         
         locationTableView.register(LocationTableViewCell.self, forCellReuseIdentifier: LocationTableViewCell.reuseId)
         
         locationTableView.showsHorizontalScrollIndicator = false
         
         locationTableView.snp.makeConstraints { make in
-            make.top.bottom.equalToSuperview().offset(self.view.frame.height/80)
+            make.top.equalTo(topViewHalfModalView.snp.bottom).offset(self.view.frame.height/28)
+            make.left.equalToSuperview().offset(self.view.frame.width/14.2)
             make.centerX.equalToSuperview()
-            make.right.equalToSuperview().offset(-self.view.frame.width/10)
-            make.left.equalToSuperview().offset(self.view.frame.width/15)
+            make.bottom.equalToSuperview()
         }
 
     }
     
     func layoutSetting(){
+        self.view.addSubview(topViewHalfModalView)
         self.view.addSubview(backButton)
         self.view.addSubview(textFieldBackgroundView)
-        self.view.addSubview(locationHalfModalView)
         textFieldBackgroundView.addSubview(locationTextField)
+    
+        backButton.addTarget(self, action: #selector(backButtonClicked(sender:)), for: .touchUpInside)
         
         backButton.snp.makeConstraints { make in
             make.top.equalTo(self.view.safeAreaLayoutGuide).offset(self.view.frame.height/30)
@@ -169,9 +179,9 @@ class SelectLocationViewController: UIViewController {
             make.height.equalToSuperview()
         }
         
-        locationHalfModalView.snp.makeConstraints { make in
-            make.bottom.left.right.equalToSuperview()
-            make.height.equalToSuperview().dividedBy(4)
+        topViewHalfModalView.snp.makeConstraints { make in
+            make.top.left.right.equalToSuperview()
+            make.height.equalToSuperview().dividedBy(6.24)
         }
     }
 
@@ -183,7 +193,7 @@ extension SelectLocationViewController: UITableViewDelegate{
 
 extension SelectLocationViewController: UITableViewDataSource{
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 10
+        return alphabetTextArray.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -198,7 +208,7 @@ extension SelectLocationViewController: UITableViewDataSource{
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return CGFloat(locationTableView.frame.height/3.15)
+        return CGFloat(self.view.frame.height/14)
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {

@@ -17,7 +17,6 @@ class TopView: UIView {
 
     func topViewDataSetting(backButtonImage: UIImage, titleLabelText: String, textColor: UIColor){
         backButton.setImage(backButtonImage, for: .normal)
-        
         titleLabel.text = titleLabelText
         titleLabel.textColor = textColor
     }
