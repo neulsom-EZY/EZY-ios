@@ -19,7 +19,7 @@ class CustomGradientTermsBtnView : UIButton {
     override init(frame:CGRect) {
         super.init(frame: frame)
         setTitle("가입하기", for: .normal)
-        setBackgroundImage(UIImage(named: "EZY_TermsBtn_Background"), for: .normal)
+        setBackgroundImage(UIImage(named: "EZY-TermButtonBack"), for: .normal)
         setTitleColor(UIColor.EZY_FFFFFF, for: .normal)
         alpha = 0.5
     }
