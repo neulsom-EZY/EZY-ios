@@ -90,12 +90,6 @@ class WithdrawalViewController: UIViewController {
     @objc func withdrawalButtonClicked(sender:UIButton){
         var error: NSError?
         if authContext.canEvaluatePolicy(.deviceOwnerAuthentication, error: &error) {
-            switch authContext.biometryType {
-            case .faceID:
-                break
-            default:
-                break
-            }
             
             authContext.evaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, localizedReason: description) { success, error in
                 if success {

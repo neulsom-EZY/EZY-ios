@@ -3,7 +3,7 @@
 <plist version="1.0">
 <dict>
 	<key>NSFaceIDUsageDescription</key>
-	<string>&quot;ddd&quot;</string>
+	<string>앱이 Face ID를 사용합니다.</string>
 	<key>UIAppFonts</key>
 	<array>
 		<string>Poppins-BlackItalic.ttf</string>
