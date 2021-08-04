@@ -102,6 +102,9 @@
 		6AFB77F9267ECD6700B59482 /* WhiteBackgroundView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AFB77F8267ECD6700B59482 /* WhiteBackgroundView.swift */; };
 		6AFB77FE267F343500B59482 /* TagAddModalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AFB77FD267F343500B59482 /* TagAddModalView.swift */; };
 		6AFB7800267F812B00B59482 /* TagColorCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AFB77FF267F812B00B59482 /* TagColorCollectionViewCell.swift */; };
+		AAA7885226A5921000230855 /* ErrandListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAA7885126A5921000230855 /* ErrandListViewController.swift */; };
+		AAADFD4E26ABD7A5000FBCCA /* MyToDoListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAADFD4D26ABD7A5000FBCCA /* MyToDoListViewController.swift */; };
+		AAADFD7226AC20DB000FBCCA /* ListTagView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAADFD7126AC20DB000FBCCA /* ListTagView.swift */; };
 		E5052C73E73080AD40F6F655 /* Pods_EZY.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A75C11C1873FE4E191601230 /* Pods_EZY.framework */; };
 		EE93B4D926876C6F0055D7A6 /* PushNotificationManagementViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE93B4D826876C6F0055D7A6 /* PushNotificationManagementViewController.swift */; };
 		EE93B4DB26876F430055D7A6 /* AlarmManagementButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE93B4DA26876F430055D7A6 /* AlarmManagementButton.swift */; };
@@ -180,6 +183,24 @@
 		6AA769EE26636AE700B7E1F5 /* EZY.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = EZY.xcdatamodel; sourceTree = "<group>"; };
 		6AA769F526636AE800B7E1F5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		6AA76A0126636D2800B7E1F5 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
+		6AA76A032663844A00B7E1F5 /* Poppins-Black.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Poppins-Black.ttf"; sourceTree = "<group>"; };
+		6AA76A042663844A00B7E1F5 /* Poppins-BlackItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Poppins-BlackItalic.ttf"; sourceTree = "<group>"; };
+		6AA76A052663844A00B7E1F5 /* Poppins-ExtraBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Poppins-ExtraBold.ttf"; sourceTree = "<group>"; };
+		6AA76A062663844A00B7E1F5 /* Poppins-ExtraBoldItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Poppins-ExtraBoldItalic.ttf"; sourceTree = "<group>"; };
+		6AA76A072663844A00B7E1F5 /* Poppins-LightItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Poppins-LightItalic.ttf"; sourceTree = "<group>"; };
+		6AA76A082663844A00B7E1F5 /* Poppins-ExtraLightItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Poppins-ExtraLightItalic.ttf"; sourceTree = "<group>"; };
+		6AA76A092663844A00B7E1F5 /* Poppins-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Poppins-Light.ttf"; sourceTree = "<group>"; };
+		6AA76A0A2663844A00B7E1F5 /* Poppins-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Poppins-Medium.ttf"; sourceTree = "<group>"; };
+		6AA76A0B2663844A00B7E1F5 /* Poppins-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Poppins-Bold.ttf"; sourceTree = "<group>"; };
+		6AA76A0C2663844A00B7E1F5 /* Poppins-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Poppins-Regular.ttf"; sourceTree = "<group>"; };
+		6AA76A0D2663844A00B7E1F5 /* Poppins-Thin.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Poppins-Thin.ttf"; sourceTree = "<group>"; };
+		6AA76A0E2663844A00B7E1F5 /* Poppins-ExtraLight.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Poppins-ExtraLight.ttf"; sourceTree = "<group>"; };
+		6AA76A0F2663844A00B7E1F5 /* Poppins-Italic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Poppins-Italic.ttf"; sourceTree = "<group>"; };
+		6AA76A102663844A00B7E1F5 /* Poppins-ThinItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Poppins-ThinItalic.ttf"; sourceTree = "<group>"; };
+		6AA76A112663844A00B7E1F5 /* Poppins-BoldItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Poppins-BoldItalic.ttf"; sourceTree = "<group>"; };
+		6AA76A122663844A00B7E1F5 /* Poppins-MediumItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Poppins-MediumItalic.ttf"; sourceTree = "<group>"; };
+		6AA76A132663844A00B7E1F5 /* Poppins-SemiBoldItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Poppins-SemiBoldItalic.ttf"; sourceTree = "<group>"; };
+		6AA76A142663844A00B7E1F5 /* Poppins-SemiBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Poppins-SemiBold.ttf"; sourceTree = "<group>"; };
 		6AA76A032663844A00B7E1F5 /* Poppins-Black.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Poppins-Black.ttf"; path = "/Downloads/Poppins/Poppins-Black.ttf"; sourceTree = "<absolute>"; };
 		6AA76A042663844A00B7E1F5 /* Poppins-BlackItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Poppins-BlackItalic.ttf"; path = "/Downloads/Poppins/Poppins-BlackItalic.ttf"; sourceTree = "<absolute>"; };
 		6AA76A052663844A00B7E1F5 /* Poppins-ExtraBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Poppins-ExtraBold.ttf"; path = "/Downloads/Poppins/Poppins-ExtraBold.ttf"; sourceTree = "<absolute>"; };
@@ -221,8 +242,8 @@
 		6AE5BB0F2696733F00A9731B /* SelectLocationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectLocationViewController.swift; sourceTree = "<group>"; };
 		6AE5BB13269690B200A9731B /* LocationTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationTableViewCell.swift; sourceTree = "<group>"; };
 		6AE5BB1526969AFD00A9731B /* SelectLocationModalView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectLocationModalView.swift; sourceTree = "<group>"; };
-		6AE5BB172696A6C500A9731B /* Utilities.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Utilities.swift; path = "../../../../../Downloads/Utils 2/Utilities.swift"; sourceTree = "<group>"; };
-		6AE5BB192696A6CE00A9731B /* Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Extension.swift; path = "../../../../../Downloads/Utils 2/Extension.swift"; sourceTree = "<group>"; };
+		6AE5BB172696A6C500A9731B /* Utilities.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Utilities.swift; sourceTree = "<group>"; };
+		6AE5BB192696A6CE00A9731B /* Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Extension.swift; sourceTree = "<group>"; };
 		6AE5BB1B2696B9C900A9731B /* PlanCompleteModalView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlanCompleteModalView.swift; sourceTree = "<group>"; };
 		6AE5BB1D2696DDA600A9731B /* PersonalPlanDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonalPlanDetailViewController.swift; sourceTree = "<group>"; };
 		6AFB77F8267ECD6700B59482 /* WhiteBackgroundView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WhiteBackgroundView.swift; sourceTree = "<group>"; };
@@ -230,6 +251,9 @@
 		6AFB77FF267F812B00B59482 /* TagColorCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagColorCollectionViewCell.swift; sourceTree = "<group>"; };
 		8B5046DC93C289B5AC6C406E /* Pods-EZY.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EZY.debug.xcconfig"; path = "Target Support Files/Pods-EZY/Pods-EZY.debug.xcconfig"; sourceTree = "<group>"; };
 		A75C11C1873FE4E191601230 /* Pods_EZY.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_EZY.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		AAA7885126A5921000230855 /* ErrandListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrandListViewController.swift; sourceTree = "<group>"; };
+		AAADFD4D26ABD7A5000FBCCA /* MyToDoListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyToDoListViewController.swift; sourceTree = "<group>"; };
+		AAADFD7126AC20DB000FBCCA /* ListTagView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListTagView.swift; sourceTree = "<group>"; };
 		EE93B4D826876C6F0055D7A6 /* PushNotificationManagementViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PushNotificationManagementViewController.swift; sourceTree = "<group>"; };
 		EE93B4DA26876F430055D7A6 /* AlarmManagementButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlarmManagementButton.swift; sourceTree = "<group>"; };
 		EE93B4DC26878A5D0055D7A6 /* PersonalCalendarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonalCalendarViewController.swift; sourceTree = "<group>"; };
@@ -371,6 +395,7 @@
 				6A138F82266F864300DBCE49 /* PinterestLayout.swift */,
 				6A097CFC268ED628001E011D /* CalendarView.swift */,
 				6A097CFE268ED68B001E011D /* CalendarViewLayout.swift */,
+				AAADFD7126AC20DB000FBCCA /* ListTagView.swift */,
 				EE93B4DA26876F430055D7A6 /* AlarmManagementButton.swift */,
 				EE93B4DE268797230055D7A6 /* CustomManagePushNotificationCell.swift */,
 				EEDCAF97268D85F1001E2B4F /* SwitchBtn.swift */,
@@ -410,6 +435,8 @@
 				6A4EDA31266BD11600B809EC /* SettingViewController.swift */,
 				6AE5BB0F2696733F00A9731B /* SelectLocationViewController.swift */,
 				6A82835326982A6C00AC381B /* InquiryViewController.swift */,
+				AAA7885126A5921000230855 /* ErrandListViewController.swift */,
+				AAADFD4D26ABD7A5000FBCCA /* MyToDoListViewController.swift */,
 				6AB27CAB269D758100B95C0F /* ChangeIdAfterLoginViewController.swift */,
 				6A3E2E7526B10D760078D749 /* ChangePasswardPhoneNumAfterLoginViewController.swift */,
 				6A3E2E7726B111540078D749 /* ChangePasswardAfterLoginViewController.swift */,
@@ -700,6 +727,7 @@
 				6A9DF2EB26A7C7B90026F89D /* InquirySendChattingBoxView.swift in Sources */,
 				6AA76A282663958B00B7E1F5 /* ShowPlanViewController.swift in Sources */,
 				6A4EDA32266BD11600B809EC /* SettingViewController.swift in Sources */,
+				AAADFD4E26ABD7A5000FBCCA /* MyToDoListViewController.swift in Sources */,
 				6AE5BB182696A6C600A9731B /* Utilities.swift in Sources */,
 				6A4EDA04266866FC00B809EC /* ScheduleTypeCollectionView.swift in Sources */,
 				6A4EDA37266DA52A00B809EC /* SettingTableViewCell.swift in Sources */,
@@ -737,6 +765,7 @@
 				6AE5BB1E2696DDA600A9731B /* PersonalPlanDetailViewController.swift in Sources */,
 				6A138F89266FACFE00DBCE49 /* GroupAddModalView.swift in Sources */,
 				6A82835A26997AB500AC381B /* TagCollectionViewModel.swift in Sources */,
+				AAA7885226A5921000230855 /* ErrandListViewController.swift in Sources */,
 				6AB486FD26832B8500E95D43 /* SelectCalendarModalView.swift in Sources */,
 				6A097CFF268ED68B001E011D /* CalendarViewLayout.swift in Sources */,
 				6A8283582699742300AC381B /* TagCollectionViewCell.swift in Sources */,
@@ -759,6 +788,7 @@
 				6AE41E8226A97C440072612C /* TagDeleteModalView.swift in Sources */,
 				6AA6F795269C2E4D00958D36 /* SignUpTermsViewController.swift in Sources */,
 				6AE5BAFC26953E0F00A9731B /* EndTimeTableViewCell.swift in Sources */,
+				AAADFD7226AC20DB000FBCCA /* ListTagView.swift in Sources */,
 				6AA769EF26636AE700B7E1F5 /* EZY.xcdatamodeld in Sources */,
 				EE93B4E62687E1C30055D7A6 /* TeamCalendarViewController.swift in Sources */,
 				EE93B4DD26878A5D0055D7A6 /* PersonalCalendarViewController.swift in Sources */,
