@@ -29,6 +29,10 @@ class PersonalPlanChangeViewController: UIViewController {
     
     var startPickerViewText = [["2","3","4","5","6","7"],["2","3","4","5","6","7"]]
     
+    var dayPickerViewText1 = ["S","M","T","W","T","F","S","M","T","W","T","F","S","M","T","W","T","F"]
+    
+    var dayPickerViewText2 = ["2","3","4","5","6","7","2","3","4","5","6","7","2","3","4","5","6","7"]
+    
     var RepeatModels: [RepeatCollectionViewModel] = [RepeatCollectionViewModel(backgroundColr: UIColor(red: 198/255, green: 198/255, blue: 198/255, alpha: 1), isSelected: false),
                                                      RepeatCollectionViewModel(backgroundColr: UIColor(red: 255/255, green: 188/255, blue: 188/255, alpha: 1), isSelected: true),
                                                      RepeatCollectionViewModel(backgroundColr: UIColor(red: 255/255, green: 188/255, blue: 188/255, alpha: 1), isSelected: true),
@@ -567,6 +571,7 @@ class PersonalPlanChangeViewController: UIViewController {
         selectCalendarModalView.dayPickerView.dataSource = self
         rotationAngle = 90 * ( .pi/180 )
         selectCalendarModalView.dayPickerView.transform = CGAffineTransform(rotationAngle: rotationAngle)
+        selectCalendarModalView.dayPickerView.selectRow(dayPickerViewText2.count/2, inComponent: 0, animated: true)
         
         selectCalendarModalView.calendarAddButton.addTarget(self,action:#selector(calendarAddButtonClicked(sender:)),
                                  for:.touchUpInside)
@@ -608,16 +613,13 @@ class PersonalPlanChangeViewController: UIViewController {
         
         selectCalendarModalView.dayPickerView.snp.makeConstraints { make in
             make.centerX.equalToSuperview()
-            make.left.equalToSuperview().offset(self.view.frame.width/20)
-            make.height.equalToSuperview().dividedBy(3.6)
-            make.top.equalTo(selectCalendarModalView.calendarTriangleImageView.snp.bottom)
-            
-            selectCalendarModalView.dayPickerView.backgroundColor = .blue
+            make.left.equalToSuperview().offset(self.view.frame.width/3)
+            make.height.equalToSuperview().dividedBy(1.1)
+            make.centerY.equalToSuperview().offset(-self.view.frame.height/70)
         }
         
         selectCalendarModalView.divideLineView.snp.makeConstraints { make in
-//            make.top.equalTo(calendarCollectionView.snp.bottom)
-            make.centerY.equalToSuperview()
+            make.top.equalTo(selectCalendarModalView.dayPickerView.snp.bottom).offset(-self.view.frame.height/7)
             make.right.equalToSuperview().offset(-self.view.frame.width/18)
             make.left.equalToSuperview().offset(self.view.frame.width/18)
             make.height.equalTo(0.5)
@@ -1373,9 +1375,9 @@ extension PersonalPlanChangeViewController: UIPickerViewDelegate, UIPickerViewDa
         if pickerView == selectTimeModalView.startPickerView || pickerView == selectTimeModalView.endPickerView{
             return 2    // 구성요소(컬럼)로 지역만 있으므로 1을 리턴
         }else if pickerView == selectCalendarModalView.dayPickerView{
-            return 2
+            return 1
         }
-        
+    
         return Int()
       }
       
@@ -1384,7 +1386,7 @@ extension PersonalPlanChangeViewController: UIPickerViewDelegate, UIPickerViewDa
         if pickerView == selectTimeModalView.startPickerView || pickerView == selectTimeModalView.endPickerView{
             return startPickerViewText[component].count
         }else if pickerView == selectCalendarModalView.dayPickerView{
-            return startPickerViewText[component].count
+            return dayPickerViewText1.count
         }
 
         
@@ -1422,22 +1424,39 @@ extension PersonalPlanChangeViewController: UIPickerViewDelegate, UIPickerViewDa
             
             return pickerLabel!
         }else if pickerView == selectCalendarModalView.dayPickerView{
-            var pickerLabel = view as? UILabel;
+            let pickerLabel1 = UILabel()
+            let pickerLabel2 = UILabel()
+            let view = UIView(frame: CGRect(x: 0, y: 0, width:0, height:0))
             
-            if (pickerLabel == nil)
-            {
-                pickerLabel = UILabel()
-                
-                pickerLabel?.font = UIFont(name: "AppleSDGothicNeo-SemiBold", size: 20)
-                pickerLabel?.textColor = UIColor(red: 120/255, green: 108/255, blue: 255/255, alpha: 1)
-                pickerLabel?.textAlignment = .center
+            pickerLabel1.font = UIFont(name: "AppleSDGothicNeo-SemiBold", size: 20)
+            pickerLabel1.textColor = UIColor(red: 120/255, green: 108/255, blue: 255/255, alpha: 1)
+            pickerLabel1.textAlignment = .center
+            
+            pickerLabel2.font = UIFont(name: "AppleSDGothicNeo-SemiBold", size: 20)
+            pickerLabel2.textColor = UIColor(red: 120/255, green: 108/255, blue: 255/255, alpha: 1)
+            pickerLabel2.textAlignment = .center
+            
+            view.addSubview(pickerLabel1)
+            view.addSubview(pickerLabel2)
+            
+            pickerLabel1.text = dayPickerViewText1[row]
+            pickerLabel2.text = dayPickerViewText2[row]
+            
+            pickerLabel2.snp.makeConstraints { make in
+                make.top.equalToSuperview().offset(self.view.frame.height/18)
+                make.centerX.equalToSuperview()
             }
-            
-            pickerLabel?.text = startPickerViewText[component][row]
+            pickerLabel1.snp.makeConstraints { make in
+                make.centerX.equalToSuperview()
+                make.bottom.equalToSuperview().offset(-self.view.frame.height/18)
+            }
             
             pickerView.subviews[1].backgroundColor = .clear // 회색 뷰 지우기
             
-            return pickerLabel!
+            
+            view.transform = CGAffineTransform(rotationAngle: (90 * (.pi / 180*3)))
+            
+            return view
         }
 
         
