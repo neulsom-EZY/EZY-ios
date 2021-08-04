@@ -72,6 +72,14 @@ extension CGColor{
     static let EZY_PLAN_FINISH_SHADOW = UIColor.EZY_FFFFFF.cgColor
 }
 
+extension UIView {
+    func roundCorners(cornerRadius: CGFloat, maskedCorners: CACornerMask) {
+        clipsToBounds = true
+        layer.cornerRadius = cornerRadius
+        layer.maskedCorners = CACornerMask(arrayLiteral: maskedCorners)
+    }
+}
+
 extension UILabel {
     func dynamicFont(fontSize size: CGFloat, currentFontName: String) {
     let bounds = UIScreen.main.bounds
