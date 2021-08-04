@@ -1428,7 +1428,6 @@ extension PersonalPlanChangeViewController: UIPickerViewDelegate, UIPickerViewDa
             let pickerLabel2 = UILabel()
             let view = UIView(frame: CGRect(x: 0, y: 0, width:0, height:0))
             
-            print(dayPickerViewText1[row])
             if dayPickerViewText1[row] == "S"{
                 pickerLabel1.textColor = UIColor(red: 170/255, green: 187/255, blue: 255/255, alpha: 1)
                 pickerLabel2.textColor = UIColor(red: 170/255, green: 187/255, blue: 255/255, alpha: 1)
