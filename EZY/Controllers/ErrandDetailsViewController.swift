@@ -20,7 +20,7 @@ class ErrandDetailsViewController: UIViewController {
     }
     private let TitleLabel = UILabel().then{
         $0.textColor = .EZY_AFADFF
-        $0.text = "마카롱 사오기"
+        $0.text = "받은 심부름"
         $0.dynamicFont(fontSize: 22, currentFontName: "AppleSDGothicNeo-SemiBold")
     }
     private let Errandlabel = UILabel().then{

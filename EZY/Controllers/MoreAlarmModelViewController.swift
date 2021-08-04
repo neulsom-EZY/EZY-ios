@@ -14,7 +14,7 @@ protocol AlarmModelDelegate: class {
 }
 class MoreAlarmModelViewController : UIViewController{
     let ampmData = ["오후","오전"]
-    
+
     //MARK: - Properties
     weak var delegate: AlarmModelDelegate?
     
@@ -36,7 +36,7 @@ class MoreAlarmModelViewController : UIViewController{
         $0.dynamicFont(fontSize: 12, currentFontName: "AppleSDGothicNeo-Bold")
     }
     private let AlarmDateView = AlarmDatePickerView().then{
-        $0.backgroundColor = .red
+        $0.backgroundColor = .clear
     }
     
     static func instance() -> MoreAlarmModelViewController {
@@ -68,7 +68,6 @@ class MoreAlarmModelViewController : UIViewController{
     
     
     func configureUI(){
-
         addView()
         cornerRadius()
         location()
@@ -94,9 +93,10 @@ class MoreAlarmModelViewController : UIViewController{
             make.height.equalToSuperview().dividedBy(3.85)
         }
         AlarmDateView.snp.makeConstraints { (make) in
-            make.center.equalTo(bgView.snp.center)
-            make.height.equalTo(view.frame.height/8.0396)
-            make.width.equalTo(view.frame.height/7.061)
+            make.top.equalTo(bgView.snp.top).offset(view.frame.height/21.368)
+            make.left.equalTo(view.snp.left).offset(view.frame.height/6.656)
+            make.height.equalTo(view.frame.height/8.04)
+            make.width.equalTo(view.frame.width/3.261)
         }
    
         makeButton.snp.makeConstraints { (make) in

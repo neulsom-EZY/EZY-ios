@@ -14,6 +14,12 @@ class AlarmDatePickerView : UIView{
     private let ampmPickerView = UIPickerView().then{
         $0.backgroundColor = .white
     }
+    private let timePickerView = UIPickerView().then{
+        $0.backgroundColor = .white
+    }
+    private let minutePickerView = UIPickerView().then{
+        $0.backgroundColor = .white
+    }
     private let timeLabel = UILabel().then{
         $0.dynamicFont(fontSize: 12, currentFontName: "AppleSDGothicNeo-Thin")
         $0.textColor = .black
@@ -28,14 +34,19 @@ class AlarmDatePickerView : UIView{
         super.init(frame: frame)
         self.ampmPickerView.delegate = self
         self.ampmPickerView.dataSource = self
-        ampmPickerView.tintColor = .clear
+        self.timePickerView.dataSource = self
+        self.timePickerView.delegate = self
+        self.minutePickerView.dataSource = self
+        self.minutePickerView.delegate = self
         addView()
     }
     func addView(){
         addSubview(view)
-        view.addSubview(ampmPickerView)
-//        view.addSubview(timeLabel)
-//        view.addSubview(minuteLabel)
+        addSubview(ampmPickerView)
+        addSubview(timePickerView)
+        addSubview(minutePickerView)
+        addSubview(timeLabel)
+        addSubview(minuteLabel)
     }
     override func layoutSubviews() {
         super.layoutSubviews()
@@ -44,17 +55,33 @@ class AlarmDatePickerView : UIView{
         }
         ampmPickerView.snp.makeConstraints { (make) in
             make.left.equalTo(view.snp.left)
-            make.height.equalTo(frame.height/2.80556)
-            make.width.equalTo(frame.width)
+            make.top.equalToSuperview().offset(view.frame.height/4.8095)
+            make.height.equalTo(frame.height)
+            make.width.equalTo(40)
         }
-//        timeLabel.snp.makeConstraints { (make) in
-//            make.centerY.equalToSuperview()
-//        }
-//
-//        minuteLabel.snp.makeConstraints { (make) in
-//            make.centerY.equalToSuperview()
-//        }
+        timePickerView.snp.makeConstraints { (make) in
+            make.left.equalTo(ampmPickerView.snp.right)
+            make.top.equalToSuperview().offset(view.frame.height/4.8095)
+            make.height.equalTo(frame.height)
+            make.width.equalTo(40)
+        }
+        minutePickerView.snp.makeConstraints { (make) in
+            make.right.equalToSuperview()
+            make.top.equalToSuperview().offset(view.frame.height/4.8095)
+            make.height.equalTo(frame.height)
+            make.width.equalTo(40)
+        }
+        timeLabel.snp.makeConstraints { (make) in
+            make.centerY.equalToSuperview()
+            make.left.equalTo(timePickerView.snp.right)
+        }
+
+        minuteLabel.snp.makeConstraints { (make) in
+            make.left.equalTo(minutePickerView.snp.right)
+            make.centerY.equalToSuperview()
+        }
     }
+    
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
@@ -65,27 +92,69 @@ extension AlarmDatePickerView : UIPickerViewDataSource,UIPickerViewDelegate{
     }
     
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-        return MoreAlarmModelViewController().ampmData.count
+        if pickerView == self.ampmPickerView{
+            return MoreAlarmModelViewController().ampmData.count
+        }
+        else if pickerView == self.timePickerView{
+            return 12
+        }
+        else if pickerView == self.minutePickerView{
+            return 60
+        }
+        return 0
     }
     
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+        if pickerView == self.ampmPickerView{
         return MoreAlarmModelViewController().ampmData[row]
+        }
+        else if pickerView == self.timePickerView{
+            return "\(row)"
+        }
+        else if pickerView == self.minutePickerView{
+            return "\(row)"
+        }
+        return ""
     }
     
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         print("\(row)")
     }
-    func pickerView(_ pickerView: UIPickerView, rowHeightForComponent component: Int) -> CGFloat {
-        return frame.height/2.80556
-    }
+
+
 
     func pickerView(_ pickerView: UIPickerView, viewForRow row: Int, forComponent component: Int, reusing view: UIView?) -> UIView {
         var label = UILabel()
         if let v = view as? UILabel { label = v }
-        label.dynamicFont(fontSize: 12, currentFontName: "AppleSDGothicNeo-Thin")
-        label.text =  MoreAlarmModelViewController().ampmData[row]
+        if pickerView == self.ampmPickerView{
+            label.text =  MoreAlarmModelViewController().ampmData[row]
+            label.dynamicFont(fontSize: 12, currentFontName: "AppleSDGothicNeo-Thin")
+   
+        }else if pickerView == self.timePickerView{
+            label.text = "\(row + 1)"
+            label.dynamicFont(fontSize: 20, currentFontName: "AppleSDGothicNeo-SemiBold")
+            label.textColor = .EZY_8176FF
+        }else if pickerView == self.minutePickerView{
+            label.text = "\(row)"
+            label.dynamicFont(fontSize: 20, currentFontName: "AppleSDGothicNeo-SemiBold")
+            label.textColor = .EZY_8176FF
+        }
+        
         label.textAlignment = .center
         return label
     }
+    func numberOfComponentsInPickerView(pickerView: UIPickerView) -> Int {
+
+         pickerView.subviews.forEach({
+
+              $0.isHidden = $0.frame.height < 1.0
+         })
+
+         return 1
+    }
+    func pickerView(_ pickerView: UIPickerView, rowHeightForComponent component: Int) -> CGFloat {
+        return 25
+    }
     
+
 }

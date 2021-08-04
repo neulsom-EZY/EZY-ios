@@ -373,7 +373,7 @@ extension AddMyToDoViewController : UICollectionViewDelegateFlowLayout,UICollect
             if indexPath.item == 0{
                 
             }
-            else if indexPath.item == 1{
+            else if indexPath.item == indexPath.last{
                 let MoreCalendarModalsVC = MoreAlarmModelViewController.instance()
 
                 MoreCalendarModalsVC.delegate = self
