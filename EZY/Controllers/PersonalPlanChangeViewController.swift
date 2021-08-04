@@ -1428,12 +1428,18 @@ extension PersonalPlanChangeViewController: UIPickerViewDelegate, UIPickerViewDa
             let pickerLabel2 = UILabel()
             let view = UIView(frame: CGRect(x: 0, y: 0, width:0, height:0))
             
-            pickerLabel1.font = UIFont(name: "AppleSDGothicNeo-SemiBold", size: 20)
-            pickerLabel1.textColor = UIColor(red: 120/255, green: 108/255, blue: 255/255, alpha: 1)
-            pickerLabel1.textAlignment = .center
+            print(dayPickerViewText1[row])
+            if dayPickerViewText1[row] == "S"{
+                pickerLabel1.textColor = UIColor(red: 170/255, green: 187/255, blue: 255/255, alpha: 1)
+                pickerLabel2.textColor = UIColor(red: 170/255, green: 187/255, blue: 255/255, alpha: 1)
+            }else{
+                pickerLabel1.textColor = UIColor(red: 168/255, green: 168/255, blue: 168/255, alpha: 1)
+                pickerLabel2.textColor = UIColor(red: 168/255, green: 168/255, blue: 168/255, alpha: 1)
+            }
             
+            pickerLabel1.font = UIFont(name: "AppleSDGothicNeo-SemiBold", size: 20)
+            pickerLabel1.textAlignment = .center
             pickerLabel2.font = UIFont(name: "AppleSDGothicNeo-SemiBold", size: 20)
-            pickerLabel2.textColor = UIColor(red: 120/255, green: 108/255, blue: 255/255, alpha: 1)
             pickerLabel2.textAlignment = .center
             
             view.addSubview(pickerLabel1)
