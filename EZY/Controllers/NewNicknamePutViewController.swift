@@ -16,6 +16,18 @@ class NewNicknamePutViewController: UIViewController{
         $0.goBackButton.addTarget(self, action: #selector(goBack), for: .touchUpInside)
     }
     
+    lazy var toNewNicknameLabel = UILabel().then {
+        $0.text = "새로운 닉네임을"
+        $0.dynamicFont(fontSize: 25, currentFontName: "AppleSDGothicNeo-SemiBold")
+        $0.textColor = UIColor.EZY_968DFF
+    }
+    
+    lazy var putLabel = UILabel().then {
+        $0.text = "입력해주세요."
+        $0.dynamicFont(fontSize: 22, currentFontName: "AppleSDGothicNeo-SemiBold")
+        $0.updateGradientTextColor_vertical(gradientColors: [.EZY_968DFF, UIColor.rgba(red: 148, green: 139, blue: 255, alpha: 0.4)])
+    }
+    
     //MARK: - Lifecycle
     
     override func viewDidLoad() {
@@ -42,6 +54,8 @@ class NewNicknamePutViewController: UIViewController{
     
     func addView(){
         view.addSubview(topBarView)
+        view.addSubview(toNewNicknameLabel)
+        view.addSubview(putLabel)
     }
     
     func cornerRadius(){
