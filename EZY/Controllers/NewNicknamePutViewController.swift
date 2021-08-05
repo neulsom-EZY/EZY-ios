@@ -35,7 +35,6 @@ class NewNicknamePutViewController: UIViewController{
     
     lazy var nicknameField:UITextField = {
         let tf = Utilities().textField(withPlaceholder: "")
-        tf.isSecureTextEntry = true
         return tf
     }()
     
