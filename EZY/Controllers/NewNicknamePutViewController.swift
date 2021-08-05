@@ -28,6 +28,17 @@ class NewNicknamePutViewController: UIViewController{
         $0.updateGradientTextColor_vertical(gradientColors: [.EZY_968DFF, UIColor.rgba(red: 148, green: 139, blue: 255, alpha: 0.4)])
     }
     
+    lazy var nicknameContainerView: UIView = {
+        let view = Utilities().inputContainerView(textField: nicknameField, text: "닉네임", fonts: 14)
+        return view
+    }()
+    
+    lazy var nicknameField:UITextField = {
+        let tf = Utilities().textField(withPlaceholder: "")
+        tf.isSecureTextEntry = true
+        return tf
+    }()
+    
     //MARK: - Lifecycle
     
     override func viewDidLoad() {
@@ -56,6 +67,7 @@ class NewNicknamePutViewController: UIViewController{
         view.addSubview(topBarView)
         view.addSubview(toNewNicknameLabel)
         view.addSubview(putLabel)
+        view.addSubview(nicknameContainerView)
     }
     
     func cornerRadius(){
