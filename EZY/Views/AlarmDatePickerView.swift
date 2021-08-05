@@ -126,6 +126,7 @@ extension AlarmDatePickerView : UIPickerViewDataSource,UIPickerViewDelegate{
     func pickerView(_ pickerView: UIPickerView, viewForRow row: Int, forComponent component: Int, reusing view: UIView?) -> UIView {
         var label = UILabel()
         if let v = view as? UILabel { label = v }
+        pickerView.subviews[1].backgroundColor = .clear // 회색 뷰 지우기
         if pickerView == self.ampmPickerView{
             label.text =  MoreAlarmModelViewController().ampmData[row]
             label.dynamicFont(fontSize: 12, currentFontName: "AppleSDGothicNeo-Thin")

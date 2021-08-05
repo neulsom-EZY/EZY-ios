@@ -10,7 +10,7 @@ import SnapKit
 import Then
     
 class MorePeopleToDo: UIViewController{
-    static let data = ["JiHoooooon","siwony","NoName","mingki","johnjihwan","noplayy","gyeongggggjuunnn"]
+    static let data = ["JiHoooooon","siwonnnny","NoName","mingki","johnjihwan","noplayy","gyeongggggjuunnn"]
     
     
     //MARK: - Properties
