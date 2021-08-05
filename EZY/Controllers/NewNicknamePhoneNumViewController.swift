@@ -55,7 +55,7 @@ class NewNicknamePhoneNumViewController: UIViewController{
     lazy var continueButton = CustomGradientContinueBtnView().then {
         $0.setTitle("닉네임 바꾸러 가기", for: .normal)
         $0.titleLabel?.dynamicFont(fontSize: 14, currentFontName: "AppleSDGothicNeo-Bold")
-        $0.addTarget(self, action: #selector(onTapContinueNewPasswordPut), for: .touchUpInside)
+        $0.addTarget(self, action: #selector(onTapContinueNewNicknamePut), for: .touchUpInside)
     }
     
     //MARK: - Lifecycle
@@ -78,7 +78,7 @@ class NewNicknamePhoneNumViewController: UIViewController{
     }
     
     @objc
-    func onTapContinueNewPasswordPut(){
+    func onTapContinueNewNicknamePut(){
         
     }
     
