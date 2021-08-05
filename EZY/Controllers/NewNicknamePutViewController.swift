@@ -39,6 +39,12 @@ class NewNicknamePutViewController: UIViewController{
         return tf
     }()
     
+    lazy var nicknameConstraintsLabel = UILabel().then {
+        $0.text = "영어로 1 ~ 10자를 입력해주세요"
+        $0.textColor = UIColor.EZY_747474
+        $0.dynamicFont(fontSize: 10, currentFontName: "AppleSDGothicNeo-Regular")
+    }
+    
     //MARK: - Lifecycle
     
     override func viewDidLoad() {
@@ -68,6 +74,7 @@ class NewNicknamePutViewController: UIViewController{
         view.addSubview(toNewNicknameLabel)
         view.addSubview(putLabel)
         view.addSubview(nicknameContainerView)
+        view.addSubview(nicknameConstraintsLabel)
     }
     
     func cornerRadius(){
