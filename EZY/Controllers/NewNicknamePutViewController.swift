@@ -12,6 +12,10 @@ import Then
 class NewNicknamePutViewController: UIViewController{
     //MARK: - Properties
     
+    let topBarView = TopBarView().then {
+        $0.goBackButton.addTarget(self, action: #selector(goBack), for: .touchUpInside)
+    }
+    
     //MARK: - Lifecycle
     
     override func viewDidLoad() {
@@ -20,6 +24,11 @@ class NewNicknamePutViewController: UIViewController{
     }
     
     //MARK: - Selectors
+    
+    @objc
+    func goBack(){
+        navigationController?.popViewController(animated: true )
+    }
     
     //MARK: - Helpers
     
@@ -32,11 +41,7 @@ class NewNicknamePutViewController: UIViewController{
     }
     
     func addView(){
-        
-    }
-    
-    func topBarViewSetting(){
-        
+        view.addSubview(topBarView)
     }
     
     func cornerRadius(){
@@ -44,7 +49,18 @@ class NewNicknamePutViewController: UIViewController{
     }
     
     func location(){
-        
+        topBarView.snp.makeConstraints { make in
+            make.left.right.equalToSuperview()
+            make.top.equalToSuperview()
+            make.height.equalTo(self.view.frame.height/7.19)
+        }
+    }
+    
+    func topBarViewSetting(){
+        topBarView.addSubview(topBarView.goBackButton)
+        topBarView.addSubview(topBarView.EZY_Logo)
+                       
+        topBarView.topBarViewLayoutSetting(screenHeight: self.view.frame.height, screenWidth: self.view.frame.width)
     }
 }
 
