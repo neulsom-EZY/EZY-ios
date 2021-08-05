@@ -45,7 +45,7 @@ class NewNicknamePutViewController: UIViewController{
     }
     
     lazy var continueButton = CustomGradientContinueBtnView().then {
-        $0.setTitle("비밀번호 바꾸기", for: .normal)
+        $0.setTitle("닉네임 바꾸기", for: .normal)
         $0.titleLabel?.dynamicFont(fontSize: 14, currentFontName: "AppleSDGothicNeo-Bold")
         $0.addTarget(self, action: #selector(onTapContinueNewNickname), for: .touchUpInside)
     }
