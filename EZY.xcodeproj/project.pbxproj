@@ -43,6 +43,7 @@
 		AA1357762695C4C600C1CAAB /* Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA1357742695C4C600C1CAAB /* Utilities.swift */; };
 		AA1357772695C4C600C1CAAB /* Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA1357752695C4C600C1CAAB /* Extension.swift */; };
 		AA58558C2697BF06000C4185 /* TopBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA58558B2697BF06000C4185 /* TopBarView.swift */; };
+		AA881D7226BB698500C04028 /* NewNicknamePhoneNumViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA881D7126BB698500C04028 /* NewNicknamePhoneNumViewController.swift */; };
 		E5052C73E73080AD40F6F655 /* Pods_EZY.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A75C11C1873FE4E191601230 /* Pods_EZY.framework */; };
 /* End PBXBuildFile section */
 
@@ -88,6 +89,7 @@
 		AA1357742695C4C600C1CAAB /* Utilities.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Utilities.swift; sourceTree = "<group>"; };
 		AA1357752695C4C600C1CAAB /* Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Extension.swift; sourceTree = "<group>"; };
 		AA58558B2697BF06000C4185 /* TopBarView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TopBarView.swift; sourceTree = "<group>"; };
+		AA881D7126BB698500C04028 /* NewNicknamePhoneNumViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewNicknamePhoneNumViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -190,6 +192,7 @@
 				AA1357652695BFC400C1CAAB /* SignUpPasswordViewController.swift */,
 				AA1357632695BFC400C1CAAB /* SignUpPhoneNumViewController.swift */,
 				AA1357662695BFC400C1CAAB /* SignUpTermsViewController.swift */,
+				AA881D7126BB698500C04028 /* NewNicknamePhoneNumViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -385,6 +388,7 @@
 				AA1357672695BFC400C1CAAB /* NewPasswordPutViewController.swift in Sources */,
 				AA1357602695BF8200C1CAAB /* CustomGradientTermsBtnView.swift in Sources */,
 				6AA769E526636AE700B7E1F5 /* AppDelegate.swift in Sources */,
+				AA881D7226BB698500C04028 /* NewNicknamePhoneNumViewController.swift in Sources */,
 				AA13576C2695BFC400C1CAAB /* SignUpTermsViewController.swift in Sources */,
 				AA1357692695BFC400C1CAAB /* SignUpPhoneNumViewController.swift in Sources */,
 				6AA769E726636AE700B7E1F5 /* SceneDelegate.swift in Sources */,
