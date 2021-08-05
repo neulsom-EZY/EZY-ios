@@ -16,6 +16,18 @@ class NewNicknamePhoneNumViewController: UIViewController{
         $0.goBackButton.addTarget(self, action: #selector(goBack), for: .touchUpInside)
     }
     
+    lazy var toNewNicknameLabel = UILabel().then {
+        $0.text = "새 닉네임을 위해"
+        $0.dynamicFont(fontSize: 25, currentFontName: "AppleSDGothicNeo-SemiBold")
+        $0.textColor = UIColor.EZY_968DFF
+    }
+    
+    lazy var putPhoneNumLabel = UILabel().then {
+        $0.text = "전화번호를 입력해주세요."
+        $0.dynamicFont(fontSize: 20, currentFontName: "AppleSDGothicNeo-SemiBold")
+        $0.updateGradientTextColor_vertical(gradientColors: [.EZY_968DFF, UIColor.rgba(red: 148, green: 139, blue: 255, alpha: 0.4)])
+    }
+    
     //MARK: - Lifecycle
     
     override func viewDidLoad() {
@@ -42,6 +54,8 @@ class NewNicknamePhoneNumViewController: UIViewController{
     
     func addView(){
         view.addSubview(topBarView)
+        view.addSubview(toNewNicknameLabel)
+        view.addSubview(putPhoneNumLabel)
     }
     
     func cornerRadius(){
@@ -54,6 +68,7 @@ class NewNicknamePhoneNumViewController: UIViewController{
             make.top.equalToSuperview()
             make.height.equalTo(self.view.frame.height/7.19)
         }
+
     }
     
     func topBarViewSetting(){
