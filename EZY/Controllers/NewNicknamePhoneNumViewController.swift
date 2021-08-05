@@ -46,6 +46,12 @@ class NewNicknamePhoneNumViewController: UIViewController{
         $0.addTarget(self, action: #selector(onTapcertified), for: .touchUpInside)
     }
     
+    lazy var doNotMatchLabel = UILabel().then {
+        $0.text = "일치하지 않는 전화번호입니다."
+        $0.textColor = UIColor.EZY_FCA1A1
+        $0.dynamicFont(fontSize: 10, currentFontName: "AppleSDGothicNeo-SemiBold")
+    }
+    
     //MARK: - Lifecycle
     
     override func viewDidLoad() {
@@ -81,6 +87,7 @@ class NewNicknamePhoneNumViewController: UIViewController{
         view.addSubview(putPhoneNumLabel)
         view.addSubview(phoneNumContainerView)
         view.addSubview(certifiedButton)
+        view.addSubview(doNotMatchLabel)
     }
     
     func cornerRadius(){
