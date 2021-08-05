@@ -103,7 +103,8 @@ class NewNicknamePhoneNumViewController: UIViewController{
     }
     
     func cornerRadius(){
-        
+        certifiedButton.layer.cornerRadius = self.view.frame.height/75
+        continueButton.layer.cornerRadius = self.view.frame.height/81.2
     }
     
     func location(){
