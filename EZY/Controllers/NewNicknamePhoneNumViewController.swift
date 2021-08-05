@@ -38,6 +38,14 @@ class NewNicknamePhoneNumViewController: UIViewController{
         return tf
     }()
     
+    lazy var certifiedButton = UIButton().then {
+        $0.setTitle("번호인증", for: .normal)
+        $0.titleLabel?.dynamicFont(fontSize: 10, currentFontName: "AppleSDGothicNeo-SemiBold")
+        $0.setTitleColor(UIColor.EZY_FFFFFF, for: .normal)
+        $0.backgroundColor = UIColor.EZY_E3E3E3
+        $0.addTarget(self, action: #selector(onTapcertified), for: .touchUpInside)
+    }
+    
     //MARK: - Lifecycle
     
     override func viewDidLoad() {
@@ -50,6 +58,11 @@ class NewNicknamePhoneNumViewController: UIViewController{
     @objc
     func goBack(){
         navigationController?.popViewController(animated: true )
+    }
+    
+    @objc
+    func onTapcertified(){
+        print("DEBUG : Click bottom certified button Button")
     }
     
     //MARK: - Helpers
@@ -67,6 +80,7 @@ class NewNicknamePhoneNumViewController: UIViewController{
         view.addSubview(toNewNicknameLabel)
         view.addSubview(putPhoneNumLabel)
         view.addSubview(phoneNumContainerView)
+        view.addSubview(certifiedButton)
     }
     
     func cornerRadius(){
