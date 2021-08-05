@@ -52,6 +52,12 @@ class NewNicknamePhoneNumViewController: UIViewController{
         $0.dynamicFont(fontSize: 10, currentFontName: "AppleSDGothicNeo-SemiBold")
     }
     
+    lazy var continueButton = CustomGradientContinueBtnView().then {
+        $0.setTitle("닉네임 바꾸러 가기", for: .normal)
+        $0.titleLabel?.dynamicFont(fontSize: 14, currentFontName: "AppleSDGothicNeo-Bold")
+        $0.addTarget(self, action: #selector(onTapContinueNewPasswordPut), for: .touchUpInside)
+    }
+    
     //MARK: - Lifecycle
     
     override func viewDidLoad() {
@@ -71,6 +77,11 @@ class NewNicknamePhoneNumViewController: UIViewController{
         print("DEBUG : Click bottom certified button Button")
     }
     
+    @objc
+    func onTapContinueNewPasswordPut(){
+        
+    }
+    
     //MARK: - Helpers
     
     func configureUI(){
@@ -88,6 +99,7 @@ class NewNicknamePhoneNumViewController: UIViewController{
         view.addSubview(phoneNumContainerView)
         view.addSubview(certifiedButton)
         view.addSubview(doNotMatchLabel)
+        view.addSubview(continueButton)
     }
     
     func cornerRadius(){
