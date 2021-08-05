@@ -112,7 +112,42 @@ class NewNicknamePhoneNumViewController: UIViewController{
             make.top.equalToSuperview()
             make.height.equalTo(self.view.frame.height/7.19)
         }
-
+        
+        toNewNicknameLabel.snp.makeConstraints { make in
+            make.left.equalTo(phoneNumContainerView)
+            make.top.equalToSuperview().offset(self.view.frame.height/5.04)
+        }
+        
+        putPhoneNumLabel.snp.makeConstraints { make in
+            make.top.equalTo(toNewNicknameLabel).offset(self.view.frame.height/27.07)
+            make.left.equalTo(phoneNumContainerView)
+        }
+        
+        phoneNumContainerView.snp.makeConstraints { make in
+            make.top.equalTo(putPhoneNumLabel).offset(self.view.frame.height/11.77)
+            make.centerX.equalToSuperview()
+            make.width.equalTo(self.view.frame.width/1.34)
+            make.height.equalTo(self.view.frame.height/15.62)
+        }
+        
+        certifiedButton.snp.makeConstraints { make in
+            make.top.equalTo(putPhoneNumLabel).offset(self.view.frame.height/12.49)
+            make.right.equalToSuperview().offset(self.view.frame.width/8.3 * -1)
+            make.width.equalTo(self.view.frame.width/6.36)
+            make.height.equalTo(self.view.frame.height/36.9)
+        }
+        
+        doNotMatchLabel.snp.makeConstraints { make in
+            make.top.equalTo(phoneNumContainerView).offset(self.view.frame.height/13.76)
+            make.left.equalTo(phoneNumContainerView)
+        }
+        
+        continueButton.snp.makeConstraints { make in
+            make.top.equalTo(phoneNumContainerView).offset(self.view.frame.height/4.34)
+            make.centerX.equalToSuperview()
+            make.width.equalTo(self.view.frame.width/1.13)
+            make.height.equalTo(self.view.frame.height/16.24)
+        }
     }
     
     func topBarViewSetting(){
