@@ -90,6 +90,8 @@ class NewNicknamePhoneNumViewController: UIViewController{
         topBarViewSetting()
         cornerRadius()
         location()
+        
+        doNotMatchLabel.isHidden = true
     }
     
     func addView(){
