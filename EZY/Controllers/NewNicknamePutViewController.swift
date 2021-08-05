@@ -45,6 +45,12 @@ class NewNicknamePutViewController: UIViewController{
         $0.dynamicFont(fontSize: 10, currentFontName: "AppleSDGothicNeo-Regular")
     }
     
+    lazy var continueButton = CustomGradientContinueBtnView().then {
+        $0.setTitle("비밀번호 바꾸기", for: .normal)
+        $0.titleLabel?.dynamicFont(fontSize: 14, currentFontName: "AppleSDGothicNeo-Bold")
+        $0.addTarget(self, action: #selector(onTapContinueNewNickname), for: .touchUpInside)
+    }
+    
     //MARK: - Lifecycle
     
     override func viewDidLoad() {
@@ -57,6 +63,11 @@ class NewNicknamePutViewController: UIViewController{
     @objc
     func goBack(){
         navigationController?.popViewController(animated: true )
+    }
+    
+    @objc
+    func onTapContinueNewNickname(){
+        print("DEBUG : Click bottom Nickname change button Button")
     }
     
     //MARK: - Helpers
@@ -75,6 +86,7 @@ class NewNicknamePutViewController: UIViewController{
         view.addSubview(putLabel)
         view.addSubview(nicknameContainerView)
         view.addSubview(nicknameConstraintsLabel)
+        view.addSubview(continueButton)
     }
     
     func cornerRadius(){
