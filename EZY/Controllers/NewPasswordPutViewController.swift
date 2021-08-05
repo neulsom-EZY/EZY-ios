@@ -48,7 +48,7 @@ class NewPasswordPutViewController: UIViewController{
     lazy var continueButton = CustomGradientContinueBtnView().then {
         $0.setTitle("비밀번호 바꾸기", for: .normal)
         $0.titleLabel?.dynamicFont(fontSize: 14, currentFontName: "AppleSDGothicNeo-Bold")
-        $0.addTarget(self, action: #selector(onTapContinueNewPasswordPut), for: .touchUpInside)
+        $0.addTarget(self, action: #selector(onTapContinueNewPassword), for: .touchUpInside)
     }
     
     //MARK: - Lifecycle
@@ -65,7 +65,7 @@ class NewPasswordPutViewController: UIViewController{
     }
     
     @objc
-    func onTapContinueNewPasswordPut(){
+    func onTapContinueNewPassword(){
         print("DEBUG : Click bottom password change button Button")
     }
 
