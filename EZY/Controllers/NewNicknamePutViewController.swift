@@ -90,7 +90,7 @@ class NewNicknamePutViewController: UIViewController{
     }
     
     func cornerRadius(){
-        
+        continueButton.layer.cornerRadius = self.view.frame.height/81.2
     }
     
     func location(){
@@ -98,6 +98,35 @@ class NewNicknamePutViewController: UIViewController{
             make.left.right.equalToSuperview()
             make.top.equalToSuperview()
             make.height.equalTo(self.view.frame.height/7.19)
+        }
+        
+        toNewNicknameLabel.snp.makeConstraints { make in
+            make.left.equalTo(nicknameContainerView)
+            make.top.equalToSuperview().offset(self.view.frame.height/5.04)
+        }
+        
+        putLabel.snp.makeConstraints { make in
+            make.top.equalTo(toNewNicknameLabel).offset(self.view.frame.height/27.07)
+            make.left.equalTo(nicknameContainerView)
+        }
+        
+        nicknameContainerView.snp.makeConstraints { make in
+            make.top.equalTo(putLabel).offset(self.view.frame.height/11.94)
+            make.centerX.equalToSuperview()
+            make.width.equalTo(self.view.frame.width/1.34)
+            make.height.equalTo(self.view.frame.height/15.62)
+        }
+        
+        nicknameConstraintsLabel.snp.makeConstraints { make in
+            make.top.equalTo(nicknameContainerView).offset(self.view.frame.height/13.53)
+            make.left.equalTo(nicknameContainerView)
+        }
+        
+        continueButton.snp.makeConstraints { make in
+            make.top.equalTo(nicknameContainerView).offset(self.view.frame.height/4.34)
+            make.centerX.equalToSuperview()
+            make.width.equalTo(self.view.frame.width/1.13)
+            make.height.equalTo(self.view.frame.height/16.24)
         }
     }
     
