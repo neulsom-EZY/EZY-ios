@@ -28,6 +28,16 @@ class NewNicknamePhoneNumViewController: UIViewController{
         $0.updateGradientTextColor_vertical(gradientColors: [.EZY_968DFF, UIColor.rgba(red: 148, green: 139, blue: 255, alpha: 0.4)])
     }
     
+    lazy var phoneNumContainerView: UIView = {
+        let view = Utilities().inputContainerView(textField: phoneNumField, text: "전화번호", fonts: 14)
+        return view
+    }()
+    
+    lazy var phoneNumField:UITextField = {
+        let tf = Utilities().textField(withPlaceholder: "")
+        return tf
+    }()
+    
     //MARK: - Lifecycle
     
     override func viewDidLoad() {
@@ -56,6 +66,7 @@ class NewNicknamePhoneNumViewController: UIViewController{
         view.addSubview(topBarView)
         view.addSubview(toNewNicknameLabel)
         view.addSubview(putPhoneNumLabel)
+        view.addSubview(phoneNumContainerView)
     }
     
     func cornerRadius(){
