@@ -102,7 +102,7 @@ class MoreAlarmModelViewController : UIViewController{
         makeButton.snp.makeConstraints { (make) in
             make.top.equalTo(bgView.snp.top).offset(view.frame.height/6.15)
             make.right.equalTo(view.snp.right).offset(view.frame.height/22.56 * -1)
-            make.width.equalTo(view.frame.height/11.6 )
+            make.width.equalTo(view.frame.height/11.6)
             make.height.equalTo(view.frame.height/24.61 )
         }
         makeTitle.snp.makeConstraints { (make) in

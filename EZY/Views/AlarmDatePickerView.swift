@@ -43,12 +43,12 @@ class AlarmDatePickerView : UIView{
     func addView(){
         addSubview(view)
         addSubview(ampmPickerView)
-        addSubview(timePickerView)
-        addSubview(minutePickerView)
+        view.addSubview(timePickerView)
+        view.addSubview(minutePickerView)
         addSubview(timeLabel)
         addSubview(minuteLabel)
     }
-    override func layoutSubviews() {
+    override func layoutSubviews(){
         super.layoutSubviews()
         view.snp.makeConstraints { (make) in
             make.top.right.bottom.left.equalToSuperview()
@@ -57,27 +57,27 @@ class AlarmDatePickerView : UIView{
             make.left.equalTo(view.snp.left)
             make.top.equalToSuperview().offset(view.frame.height/4.8095)
             make.height.equalTo(frame.height)
-            make.width.equalTo(40)
+            make.width.equalTo(frame.height/2.8)
         }
         timePickerView.snp.makeConstraints { (make) in
-            make.left.equalTo(ampmPickerView.snp.right)
+            make.left.equalTo(ampmPickerView.snp.right).inset(frame.height/20.2)
             make.top.equalToSuperview().offset(view.frame.height/4.8095)
             make.height.equalTo(frame.height)
-            make.width.equalTo(40)
+            make.width.equalTo(frame.height/2.5)
         }
         minutePickerView.snp.makeConstraints { (make) in
-            make.right.equalToSuperview()
+            make.left.equalTo(timeLabel.snp.right)
             make.top.equalToSuperview().offset(view.frame.height/4.8095)
             make.height.equalTo(frame.height)
-            make.width.equalTo(40)
+            make.width.equalTo(frame.height/2.5)
         }
         timeLabel.snp.makeConstraints { (make) in
             make.centerY.equalToSuperview()
-            make.left.equalTo(timePickerView.snp.right)
+            make.left.equalTo(timePickerView.snp.right).inset(frame.height/20.2)
         }
 
         minuteLabel.snp.makeConstraints { (make) in
-            make.left.equalTo(minutePickerView.snp.right)
+            make.left.equalTo(minutePickerView.snp.right).inset(frame.height/20.2)
             make.centerY.equalToSuperview()
         }
     }
@@ -124,13 +124,15 @@ extension AlarmDatePickerView : UIPickerViewDataSource,UIPickerViewDelegate{
 
 
     func pickerView(_ pickerView: UIPickerView, viewForRow row: Int, forComponent component: Int, reusing view: UIView?) -> UIView {
+        pickerView.subviews[1].backgroundColor = .clear // 회색 뷰 지우기
+        
         var label = UILabel()
         if let v = view as? UILabel { label = v }
-        pickerView.subviews[1].backgroundColor = .clear // 회색 뷰 지우기
         if pickerView == self.ampmPickerView{
+            
             label.text =  MoreAlarmModelViewController().ampmData[row]
             label.dynamicFont(fontSize: 12, currentFontName: "AppleSDGothicNeo-Thin")
-   
+
         }else if pickerView == self.timePickerView{
             label.text = "\(row + 1)"
             label.dynamicFont(fontSize: 20, currentFontName: "AppleSDGothicNeo-SemiBold")
@@ -140,9 +142,12 @@ extension AlarmDatePickerView : UIPickerViewDataSource,UIPickerViewDelegate{
             label.dynamicFont(fontSize: 20, currentFontName: "AppleSDGothicNeo-SemiBold")
             label.textColor = .EZY_8176FF
         }
-        
-        label.textAlignment = .center
+        label.adjustsFontSizeToFitWidth = true
+        label.adjustsFontForContentSizeCategory = true
+
+        label.textAlignment = .right
         return label
+  
     }
     func numberOfComponentsInPickerView(pickerView: UIPickerView) -> Int {
 
@@ -153,8 +158,9 @@ extension AlarmDatePickerView : UIPickerViewDataSource,UIPickerViewDelegate{
 
          return 1
     }
-    func pickerView(_ pickerView: UIPickerView, rowHeightForComponent component: Int) -> CGFloat {
-        return 25
+    func pickerView(_ pickerView: UIPickerView, widthForComponent component: Int) -> CGFloat {
+        let w = pickerView.frame.size.width
+        return component == 0 ? (2/3.6) * w : (1 / 3.6) * w
     }
     
 
