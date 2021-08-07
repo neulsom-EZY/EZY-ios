@@ -32,7 +32,7 @@ class AddErrandViewController : UIViewController{
     }()
 
     private let titleTextField : UITextField = {
-        let tf = Utilities().textField(textColor: .EZY_656565, textSize: 14,font: .medium)
+        let tf = Utilities().textField(textColor: .EZY_656565, textSize: 14,font: "AppleSDGothicNeo-Medium")
         return tf
     }()
     

@@ -38,10 +38,10 @@ class Utilities{
     }
     
     
-    func textField(textColor tc: UIColor,textSize ts : Int, font : UIFont.Weight) -> UITextField{
+    func textField(textColor tc: UIColor,textSize ts : Int, font : String) -> UITextField{
         let tf = UITextField()
         tf.textColor = tc
-        tf.dynamicFont(fontSize: CGFloat(ts), weight: font)
+        tf.dynamicFont(fontSize: CGFloat(ts), currentFontName: font)
         return tf
     }
     

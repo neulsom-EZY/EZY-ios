@@ -11,7 +11,7 @@ import Then
     
 class MorePeopleToDo: UIViewController{
     static let recommendData = ["JiHoooooon","siwonnnny","NoName","mingki","johnjihwan","noplayy","gyeongggggjuunnn"]
-    
+    static let searchData = ["JiHoon","Siwony","gyeongjun","noplayy","cat","dog"]
     
     //MARK: - Properties
     private let backbutton = UIButton().then{
@@ -32,18 +32,15 @@ class MorePeopleToDo: UIViewController{
     
 
     private let GroupLabel = UILabel().then{
-        $0.text = "그룹원"
+        $0.text = "닉네임"
         $0.dynamicFont(fontSize: 10, currentFontName: "AppleSDGothicNeo-Thin")
         $0.textColor = .EZY_818181
     }
 
-    private let nickNameTextField : UITextField = {
-        let tf = Utilities().textField(textColor: .EZY_6A6A6A, textSize: 10,font: .bold)
+    
+    private lazy var nickNameTextFieldContainerView: GroupSearchTextfield = {
+        let tf = GroupSearchTextfield(placeholder: "닉네임을 검색하세요")
         return tf
-    }()
-    private lazy var nickNameTextFieldContainerView: UIView = {
-        let view = Utilities().customTextField(withMessage: "닉네임을 검색하세요.", textField: nickNameTextField, Color: .EZY_F5F5F5, viewSize: Double(view.frame.height))
-        return view
         
     }()
     private let recommendPeopleLabel = UILabel().then{
