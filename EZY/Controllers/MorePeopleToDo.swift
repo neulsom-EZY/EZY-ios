@@ -10,7 +10,7 @@ import SnapKit
 import Then
     
 class MorePeopleToDo: UIViewController{
-    static let data = ["JiHoooooon","siwonnnny","NoName","mingki","johnjihwan","noplayy","gyeongggggjuunnn"]
+    static let recommendData = ["JiHoooooon","siwonnnny","NoName","mingki","johnjihwan","noplayy","gyeongggggjuunnn"]
     
     
     //MARK: - Properties
@@ -145,12 +145,12 @@ class MorePeopleToDo: UIViewController{
 
 extension MorePeopleToDo : UICollectionViewDelegateFlowLayout,UICollectionViewDataSource{
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return MorePeopleToDo.data.count
+        return MorePeopleToDo.recommendData.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
          guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: WhatAboutPeopleLikeThisCell.identifier, for: indexPath) as? WhatAboutPeopleLikeThisCell else {return UICollectionViewCell()}
-        cell.bglabel.text = "@ " + MorePeopleToDo.data[indexPath.row]
+        cell.bglabel.text = "@ " + MorePeopleToDo.recommendData[indexPath.row]
         cell.bglabel.dynamicFont(fontSize: 12, currentFontName:"AppleSDGothicNeo-Thin")
         cell.bglabel.textColor = .EZY_3D64FF
         cell.layer.borderWidth = 1
@@ -161,7 +161,7 @@ extension MorePeopleToDo : UICollectionViewDelegateFlowLayout,UICollectionViewDa
 
 
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return WhatAboutPeopleLikeThisCell.fittingSize(availableHeight: view.frame.size.height/25.375, name: MorePeopleToDo.data[indexPath.row])
+        return WhatAboutPeopleLikeThisCell.fittingSize(availableHeight: view.frame.size.height/25.375, name: MorePeopleToDo.recommendData[indexPath.row])
     }
 
 }

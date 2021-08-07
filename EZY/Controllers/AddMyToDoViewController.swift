@@ -13,7 +13,7 @@ import Alamofire
 
 class AddMyToDoViewController:UIViewController{
     let tagData : [String] = ["전공동아리","산책","자율동아리","공부","자율동아리","전공동아리","전공동아리","산책","자율동아리","공부","자율동아리","전공동아리","산책"]
-    let alarmData : [String] = ["선택안함", "+ 추가"]
+    var alarmData : [String] = ["선택안함", "+ 추가"]
     let tagColor : [UIColor] = [.EZY_879FFF,.EZY_968DFF,.EZY_9EB1FC]
     //MARK: - Properties
     
@@ -116,7 +116,7 @@ class AddMyToDoViewController:UIViewController{
         return cv
     }()
 
-    fileprivate let alarmSettingcollectionView: UICollectionView = {
+    let alarmSettingcollectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
         
         let cv = UICollectionView(frame: .zero, collectionViewLayout: layout)
@@ -372,6 +372,7 @@ extension AddMyToDoViewController : UICollectionViewDelegateFlowLayout,UICollect
         }else {
             if indexPath.item == 0{
                 
+                
             }
             else if indexPath.item == indexPath.last{
                 let MoreCalendarModalsVC = MoreAlarmModelViewController.instance()
@@ -380,6 +381,7 @@ extension AddMyToDoViewController : UICollectionViewDelegateFlowLayout,UICollect
                 addDim()
                 present(MoreCalendarModalsVC, animated: true, completion: nil)
             }
+            
         }
         
     }

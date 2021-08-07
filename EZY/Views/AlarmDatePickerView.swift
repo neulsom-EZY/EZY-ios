@@ -118,7 +118,15 @@ extension AlarmDatePickerView : UIPickerViewDataSource,UIPickerViewDelegate{
     }
     
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-        print("\(row)")
+        if pickerView == self.ampmPickerView{
+            MoreAlarmModelViewController().ampm = MoreAlarmModelViewController().ampmData[row]
+        }
+        else if pickerView == self.timePickerView{
+            MoreAlarmModelViewController().time = row
+        }
+        else if pickerView == self.minutePickerView{
+            MoreAlarmModelViewController().minute = row
+        }
     }
 
 

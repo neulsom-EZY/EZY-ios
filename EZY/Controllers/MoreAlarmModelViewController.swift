@@ -14,7 +14,9 @@ protocol AlarmModelDelegate: class {
 }
 class MoreAlarmModelViewController : UIViewController{
     let ampmData = ["오후","오전"]
-
+    var ampm = ""
+    var time = 0
+    var minute = 0
     //MARK: - Properties
     weak var delegate: AlarmModelDelegate?
     
@@ -62,6 +64,7 @@ class MoreAlarmModelViewController : UIViewController{
     @objc func MakeTodo(){
         delegate?.onTapClose()
         dismiss(animated: true, completion: nil)
+        
     }
     //MARK: - HELPERS
  
