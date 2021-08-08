@@ -143,6 +143,10 @@ class SignUpNicknameViewController: UIViewController{
     func keyboardWillHide(_ sender: Notification) {
         continueButton.frame.origin.y = self.view.frame.height - continueButton.frame.height - self.view.frame.height/32.48
     }
+    
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        nicknameField.resignFirstResponder()
+    }
 }
 
 
