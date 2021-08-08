@@ -14,6 +14,8 @@ class MorePeopleToDo: UIViewController{
     static let searchData = ["JiHoon","Siwony","gyeongjun","noplayy","cat","dog"]
     
     //MARK: - Properties
+
+
     private let backbutton = UIButton().then{
         $0.tintColor = .EZY_968DFF
         $0.setImage(UIImage(systemName: "arrow.left"), for: .normal)
@@ -41,8 +43,9 @@ class MorePeopleToDo: UIViewController{
     private lazy var nickNameTextFieldContainerView: GroupSearchTextfield = {
         let tf = GroupSearchTextfield(placeholder: "닉네임을 검색하세요")
         return tf
-        
     }()
+    private let searchTableView = SearchTableView()
+    
     private let recommendPeopleLabel = UILabel().then{
         $0.text = "이런 사람들은 어때요"
         $0.dynamicFont(fontSize: 14, currentFontName: "AppleSDGothicNeo-Thin")
@@ -79,6 +82,12 @@ class MorePeopleToDo: UIViewController{
     @objc func backButton(){
         navigationController?.popViewController(animated: true)
     }
+    @objc func textDidChage(_ sender: UITextField){
+        if sender == nickNameTextFieldContainerView{
+            
+        }
+    }
+    
     
     //MARK: - Helpers
     func configureUI(){
@@ -94,6 +103,7 @@ class MorePeopleToDo: UIViewController{
         view.addSubview(SubLabel)
         view.addSubview(GroupLabel)
         view.addSubview(nickNameTextFieldContainerView)
+        view.addSubview(searchTableView)
         view.addSubview(recommendPeopleLabel)
         view.addSubview(WhatAboutPeopleLikeThis)
     }
@@ -124,6 +134,12 @@ class MorePeopleToDo: UIViewController{
             make.left.equalTo(view.snp.left).offset(self.view.frame.height/23.2)
             make.right.equalTo(view.snp.right).offset(self.view.frame.height/23.8 * -1)
         }
+        searchTableView.snp.makeConstraints { (make) in
+            make.top.equalTo(nickNameTextFieldContainerView.snp.bottom)
+            make.left.right.equalToSuperview()
+            make.height.equalTo(view.frame.height/20)
+        }
+        
         recommendPeopleLabel.snp.makeConstraints { (make) in
             make.top.equalTo(nickNameTextFieldContainerView.snp.bottom).offset(view.frame.height/21.9)
             make.left.equalTo(view.frame.height/22.5)
@@ -134,9 +150,11 @@ class MorePeopleToDo: UIViewController{
             make.height.equalTo(view.frame.height/11.277)
             make.right.equalToSuperview()
         }
-
-        
     }
+    func configureNotificationObservers(){
+        nickNameTextFieldContainerView.addTarget(self, action: #selector(textDidChage), for: .editingChanged)
+    }
+
     
 }
 
@@ -163,6 +181,10 @@ extension MorePeopleToDo : UICollectionViewDelegateFlowLayout,UICollectionViewDa
 
 }
 
-
+extension MorePeopleToDo: FormViewModel{
+    func updateForm() {
+        
+    }
+}
 
 
