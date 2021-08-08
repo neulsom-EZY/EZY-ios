@@ -13,7 +13,7 @@ class GroupSearchTextfield: UITextField {
     
     init(placeholder : String) {
         super.init(frame: .zero)
-        
+        tf.delegate = self
         leftView = spacer
         leftViewMode = .always
         borderStyle = .none
@@ -40,4 +40,23 @@ class GroupSearchTextfield: UITextField {
         fatalError("init(coder:) has not been implemented")
     }
     
+}
+extension GroupSearchTextfield : UITextFieldDelegate{
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        if let text = textField.text{
+            filterText(text+string)
+        }
+        return true
+    }
+    func filterText(_ query: String){
+        MorePeopleToDo.filterData.removeAll()
+        for string in MorePeopleToDo.data{
+            if string.lowercased().starts(with: query.lowercased()){
+                MorePeopleToDo.filterData.append(string)
+            }
+        }
+        SearchTableView().tv.reloadData()
+        MorePeopleToDo.filtered = true
+        
+    }
 }

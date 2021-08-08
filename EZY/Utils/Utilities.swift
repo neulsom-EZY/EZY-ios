@@ -108,32 +108,5 @@ class Utilities{
         return view
     }
     
-    //MARK: - Alert
-    
-  
-    
-    //MARK: - CustomTextField
-    func customTextField(withMessage message : String,textField : UITextField ,Color messageColor : UIColor, viewSize : Double) -> UIView{
-        let view = UIView()
-        view.layer.cornerRadius = 10
-        view.backgroundColor = messageColor
-        
-        view.addSubview(textField)
-        textField.attributedPlaceholder = NSAttributedString(string: message, attributes: [NSAttributedString.Key.foregroundColor: UIColor.EZY_CACACA])
-        
-        textField.snp.makeConstraints { (make) in
-            make.left.equalTo(view.snp.left).offset(viewSize/42.7)
-            make.right.equalTo(view.snp.right)
-            make.top.equalTo(view.snp.top)
-            make.bottom.equalTo(view.snp.bottom)
-        }
-
-        return view
-    }
-    
-   
-    
-
-    
     
 }

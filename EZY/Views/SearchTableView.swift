@@ -9,7 +9,9 @@ import UIKit
 
 class SearchTableView : UIView {
     let view = UIView()
-    let tv = UITableView()
+    let tv = UITableView().then{
+        $0.register(SearchTableCell.self, forCellReuseIdentifier: SearchTableCell.identifier)
+    }
 
     
     override init(frame: CGRect) {
@@ -50,22 +52,27 @@ class SearchTableView : UIView {
 }
 extension SearchTableView : UITableViewDelegate, UITableViewDataSource{
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return MorePeopleToDo.searchData.count
-    }
-    
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        var cell = tableView.dequeueReusableCell(withIdentifier: "numberofRooms")
-        
-        if cell == nil {
-            cell = UITableViewCell(style: .default, reuseIdentifier: "numberofRooms")
-            cell?.textLabel?.text = "\(MorePeopleToDo.searchData[indexPath.row])"
-            cell?.textLabel?.dynamicFont(fontSize: 10, currentFontName:  "AppleSDGothicNeo-Bold")
-
+        if !MorePeopleToDo.filterData.isEmpty{
+            return MorePeopleToDo.filterData.count
         }
-        return cell!
+        return MorePeopleToDo.filtered ? 0 : MorePeopleToDo.data.count
+    }
+
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+    }
+
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: SearchTableCell.identifier) as! SearchTableCell
+        if !MorePeopleToDo.filterData.isEmpty {
+            cell.personName.text = MorePeopleToDo.filterData[indexPath.row]
+        }else{
+            cell.personName.text = MorePeopleToDo.data[indexPath.row]
+        }
+        return cell
     }
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return frame.height/4.270
+        return frame.height/3.95
     }
     
 }

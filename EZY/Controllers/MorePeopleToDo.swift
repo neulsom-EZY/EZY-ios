@@ -11,11 +11,17 @@ import Then
     
 class MorePeopleToDo: UIViewController{
     static let recommendData = ["JiHoooooon","siwonnnny","NoName","mingki","johnjihwan","noplayy","gyeongggggjuunnn"]
-    static let searchData = ["JiHoon","Siwony","gyeongjun","noplayy","cat","dog"]
+    static let searchData = ["정시원 (Siwony)","전지환 (gyeongjun)","김기홍 (KimKiHong)","안지훈 (JiHoon)","노경준 (NohKyung-joon)","김유진 (y0000000ujin)"]
+    
+    static var data = [String]()
+    static var filterData = [String]()
+    static var filtered = false
+
     
     //MARK: - Properties
-    var tblDropDownHC = NSLayoutConstraint()
-
+    
+    var isTableVisible = false
+    var viewModel = MoreTodoModel()
     private let backbutton = UIButton().then{
         $0.tintColor = .EZY_968DFF
         $0.setImage(UIImage(systemName: "arrow.left"), for: .normal)
@@ -68,17 +74,24 @@ class MorePeopleToDo: UIViewController{
         return cv
     }()
     
-
+    private let userChoose : AdditionalButton = {
+        let button = AdditionalButton(type: .system)
+        button.title = "인원 선택"
+        button.addTarget(self, action: #selector(chooseUser), for: .touchUpInside)
+        return button
+    }()
     
     
     //MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
+        setupData()
         configureUI()
         WhatAboutPeopleLikeThis.dataSource = self
         WhatAboutPeopleLikeThis.delegate = self
         WhatAboutPeopleLikeThis.allowsMultipleSelection = true
-        tblDropDownHC.constant = 0
+        configureNotificationObservers()
+
     }
     
     //MARK: - Selectors
@@ -87,12 +100,13 @@ class MorePeopleToDo: UIViewController{
     }
     @objc func textDidChage(_ sender: UITextField){
         if sender == nickNameTextFieldContainerView{
-            UIView.animate(withDuration: 0.25) {
-                
-            }
+            viewModel.nickName = sender.text
         }
+        updateForm()
     }
-    
+    @objc func chooseUser(){
+        
+    }
     
     //MARK: - Helpers
     func configureUI(){
@@ -112,8 +126,17 @@ class MorePeopleToDo: UIViewController{
         view.addSubview(recommendPeopleLabel)
         view.addSubview(WhatAboutPeopleLikeThis)
         view.addSubview(searcherView)
+        view.addSubview(userChoose)
     }
     
+    private func setupData(){
+        MorePeopleToDo.data.append("John")
+        MorePeopleToDo.data.append("JiHoon")
+        MorePeopleToDo.data.append("Cat")
+        MorePeopleToDo.data.append("Dog")
+        MorePeopleToDo.data.append("JiHooooon")
+        MorePeopleToDo.data.append("JiiiiHoooon")
+    }
     
     func location(){
         backbutton.snp.makeConstraints { (make) in
@@ -180,17 +203,27 @@ extension MorePeopleToDo : UICollectionViewDelegateFlowLayout,UICollectionViewDa
         cell.layer.borderColor = UIColor.EZY_6383FF.cgColor
         return cell
     }
-
-
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         return WhatAboutPeopleLikeThisCell.fittingSize(availableHeight: view.frame.size.height/25.375, name: MorePeopleToDo.recommendData[indexPath.row])
     }
-
 }
+
+
 
 extension MorePeopleToDo: FormViewModel{
     func updateForm() {
-        
+        isTableVisible = viewModel.showView
+        if isTableVisible == false{
+            UIView.animate(withDuration: 0.2) {
+
+                self.view.layoutIfNeeded()
+            }
+        }else{
+            UIView.animate(withDuration: 0.2) {
+                
+                self.view.layoutIfNeeded()
+            }
+        }
     }
 }
 
