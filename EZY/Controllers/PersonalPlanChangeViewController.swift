@@ -27,7 +27,7 @@ class PersonalPlanChangeViewController: UIViewController {
     
     lazy var endSelectCircleButtonLocation = "Left"
     
-    lazy var startPickerViewText = [["2","3","4","5","6","7"],["2","3","4","5","6","7"]]
+    lazy var startPickerViewText = [["1","2","3","4","5","6","7","8","9","10","11","12"],["00","05","10","15","20","25","30","35","40","45","50","55"]]
     
     lazy var dayPickerViewText1 = ["Sun","Mon","Tue","Wed","Thr","Fri","Sat","Mon","Tue","Wed","Thr","Fri","Mon","Tue","Wed","Thr","Fri"]
     
@@ -506,8 +506,11 @@ class PersonalPlanChangeViewController: UIViewController {
         self.selectTimeModalView.startPickerView.delegate = self
         self.selectTimeModalView.startPickerView.dataSource = self
         
+        selectTimeModalView.startPickerView.selectRow(startPickerViewText.count/2, inComponent:0, animated: true)
+        selectTimeModalView.startPickerView.selectRow(startPickerViewText.count/2, inComponent:startPickerViewText.count/2, animated: true)
+        
         selectTimeModalView.startPickerView.snp.makeConstraints { make in
-            make.centerX.equalTo(selectTimeModalView.startSelectBackButton)
+            make.centerX.equalTo(selectTimeModalView.startSelectBackButton).offset(-self.view.frame.width/40)
             make.top.equalTo(selectTimeModalView.startSelectBackButton.snp.bottom)
             make.width.equalToSuperview().dividedBy(3)
             make.height.equalToSuperview().dividedBy(2)
@@ -520,14 +523,17 @@ class PersonalPlanChangeViewController: UIViewController {
 
         selectTimeModalView.startMinLabel.snp.makeConstraints { make in
             make.centerY.equalTo(selectTimeModalView.startPickerView)
-            make.left.equalTo(selectTimeModalView.startPickerView.snp.right).offset(-self.view.frame.width/25)
+            make.left.equalTo(selectTimeModalView.startPickerView.snp.right).offset(-self.view.frame.width/45)
         }
         
         self.selectTimeModalView.endPickerView.delegate = self
         self.selectTimeModalView.endPickerView.dataSource = self
         
+        selectTimeModalView.endPickerView.selectRow(startPickerViewText.count/2, inComponent:0, animated: true)
+        selectTimeModalView.endPickerView.selectRow(startPickerViewText.count/2, inComponent:startPickerViewText.count/2, animated: true)
+        
         selectTimeModalView.endPickerView.snp.makeConstraints { make in
-            make.centerX.equalTo(selectTimeModalView.endSelectBackButton)
+            make.centerX.equalTo(selectTimeModalView.endSelectBackButton).offset(-self.view.frame.width/40)
             make.top.equalTo(selectTimeModalView.endSelectBackButton.snp.bottom)
             make.width.equalToSuperview().dividedBy(3)
             make.height.equalToSuperview().dividedBy(2)
@@ -540,7 +546,7 @@ class PersonalPlanChangeViewController: UIViewController {
 
         selectTimeModalView.endMinLabel.snp.makeConstraints { make in
             make.centerY.equalTo(selectTimeModalView.endPickerView)
-            make.left.equalTo(selectTimeModalView.endPickerView.snp.right).offset(-self.view.frame.width/25)
+            make.left.equalTo(selectTimeModalView.endPickerView.snp.right).offset(-self.view.frame.width/45)
         }
         
         selectTimeModalView.waveLabel.snp.makeConstraints { make in
@@ -1534,7 +1540,7 @@ extension PersonalPlanChangeViewController: UIPickerViewDelegate, UIPickerViewDa
             }
             
             pickerView.subviews[1].backgroundColor = UIColor(red: 170/255, green: 187/255, blue: 255/255, alpha: 0.1)
-            
+
             
             view.transform = CGAffineTransform(rotationAngle: (90 * (.pi / 180*3)))
             
