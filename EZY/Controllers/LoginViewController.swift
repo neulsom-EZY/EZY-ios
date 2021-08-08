@@ -69,6 +69,7 @@ class LoginViewController: UIViewController{
         $0.setTitle("닉네임을 잊으셨나요?", for: .normal)
         $0.setTitleColor(UIColor.EZY_B2B2B2, for: .normal)
         $0.titleLabel?.dynamicFont(fontSize: 10, currentFontName: "AppleSDGothicNeo-Bold")
+        $0.addTarget(self, action: #selector(onTapForgotNickname), for: .touchUpInside)
     }
     
     lazy var doNotHaveAccountButton = UIButton().then {
@@ -106,6 +107,12 @@ class LoginViewController: UIViewController{
         } else {
             passwordField.isSecureTextEntry = true
         }
+    }
+    
+    @objc
+    func onTapForgotNickname(){
+        let controller = NewNicknamePhoneNumViewController()
+        navigationController?.pushViewController(controller, animated: true)
     }
     
     @objc
