@@ -20,6 +20,7 @@
 		EE3779092679FAC100334D4A /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE3779082679FAC100334D4A /* Model.swift */; };
 		EE3B142626B48DF600B7184D /* CustomData.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE3B142526B48DF600B7184D /* CustomData.swift */; };
 		EE47140F26BEF0B000BC495F /* GroupSearchTextfield.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE47140E26BEF0B000BC495F /* GroupSearchTextfield.swift */; };
+		EE47143626BFC33600BC495F /* SearchTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE47143526BFC33600BC495F /* SearchTableView.swift */; };
 		EE766B8926B317CC0030ADDA /* SendUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE766B8826B317CC0030ADDA /* SendUser.swift */; };
 		EE782853268150A900AECC65 /* AddOurToDoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE782852268150A900AECC65 /* AddOurToDoViewController.swift */; };
 		EE7828552681859200AECC65 /* AddErrandViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE7828542681859200AECC65 /* AddErrandViewController.swift */; };
@@ -57,6 +58,7 @@
 		EE3779082679FAC100334D4A /* Model.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Model.swift; sourceTree = "<group>"; };
 		EE3B142526B48DF600B7184D /* CustomData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomData.swift; sourceTree = "<group>"; };
 		EE47140E26BEF0B000BC495F /* GroupSearchTextfield.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupSearchTextfield.swift; sourceTree = "<group>"; };
+		EE47143526BFC33600BC495F /* SearchTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchTableView.swift; sourceTree = "<group>"; };
 		EE766B8826B317CC0030ADDA /* SendUser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SendUser.swift; sourceTree = "<group>"; };
 		EE782852268150A900AECC65 /* AddOurToDoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddOurToDoViewController.swift; sourceTree = "<group>"; };
 		EE7828542681859200AECC65 /* AddErrandViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddErrandViewController.swift; sourceTree = "<group>"; };
@@ -181,6 +183,7 @@
 				EE3B142526B48DF600B7184D /* CustomData.swift */,
 				EEDE967826B882B0000AEE4D /* AlarmDatePickerView.swift */,
 				EE47140E26BEF0B000BC495F /* GroupSearchTextfield.swift */,
+				EE47143526BFC33600BC495F /* SearchTableView.swift */,
 				EE37790A2679FB3800334D4A /* Cell */,
 			);
 			path = Views;
@@ -381,6 +384,7 @@
 				6AA76A0226636D2800B7E1F5 /* LoginViewController.swift in Sources */,
 				6AA769EF26636AE700B7E1F5 /* EZY.xcdatamodeld in Sources */,
 				EE36219E267E18080099AF3A /* MoreCalendarModalsViewController.swift in Sources */,
+				EE47143626BFC33600BC495F /* SearchTableView.swift in Sources */,
 				EEEDB2BF2664B44200E5C53A /* AddMyToDoViewController.swift in Sources */,
 				EE766B8926B317CC0030ADDA /* SendUser.swift in Sources */,
 				EE245740269FDA6100E2EE9D /* WhatAboutPeopleLikeThisCell.swift in Sources */,

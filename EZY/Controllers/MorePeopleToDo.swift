@@ -14,7 +14,7 @@ class MorePeopleToDo: UIViewController{
     static let searchData = ["JiHoon","Siwony","gyeongjun","noplayy","cat","dog"]
     
     //MARK: - Properties
-
+    var tblDropDownHC = NSLayoutConstraint()
 
     private let backbutton = UIButton().then{
         $0.tintColor = .EZY_968DFF
@@ -38,13 +38,15 @@ class MorePeopleToDo: UIViewController{
         $0.dynamicFont(fontSize: 10, currentFontName: "AppleSDGothicNeo-Thin")
         $0.textColor = .EZY_818181
     }
-
     
     private lazy var nickNameTextFieldContainerView: GroupSearchTextfield = {
         let tf = GroupSearchTextfield(placeholder: "닉네임을 검색하세요")
         return tf
     }()
-    private let searchTableView = SearchTableView()
+    
+    private let searcherView  = SearchTableView().then{
+        $0.layer.applySketchShadow(color: .gray, alpha: 0.25, x: 0, y: 6, blur: 15, spread: 0)
+    }
     
     private let recommendPeopleLabel = UILabel().then{
         $0.text = "이런 사람들은 어때요"
@@ -76,6 +78,7 @@ class MorePeopleToDo: UIViewController{
         WhatAboutPeopleLikeThis.dataSource = self
         WhatAboutPeopleLikeThis.delegate = self
         WhatAboutPeopleLikeThis.allowsMultipleSelection = true
+        tblDropDownHC.constant = 0
     }
     
     //MARK: - Selectors
@@ -84,7 +87,9 @@ class MorePeopleToDo: UIViewController{
     }
     @objc func textDidChage(_ sender: UITextField){
         if sender == nickNameTextFieldContainerView{
-            
+            UIView.animate(withDuration: 0.25) {
+                
+            }
         }
     }
     
@@ -93,6 +98,7 @@ class MorePeopleToDo: UIViewController{
     func configureUI(){
         view.backgroundColor = .white
         WhatAboutPeopleLikeThis.contentInset = UIEdgeInsets(top: 0, left: view.frame.height/21.95, bottom: 0, right: view.frame.height/21.95)
+        searcherView.layer.cornerRadius = view.frame.height/81.2
         addView()
         location()
     }
@@ -103,9 +109,9 @@ class MorePeopleToDo: UIViewController{
         view.addSubview(SubLabel)
         view.addSubview(GroupLabel)
         view.addSubview(nickNameTextFieldContainerView)
-        view.addSubview(searchTableView)
         view.addSubview(recommendPeopleLabel)
         view.addSubview(WhatAboutPeopleLikeThis)
+        view.addSubview(searcherView)
     }
     
     
@@ -134,12 +140,12 @@ class MorePeopleToDo: UIViewController{
             make.left.equalTo(view.snp.left).offset(self.view.frame.height/23.2)
             make.right.equalTo(view.snp.right).offset(self.view.frame.height/23.8 * -1)
         }
-        searchTableView.snp.makeConstraints { (make) in
-            make.top.equalTo(nickNameTextFieldContainerView.snp.bottom)
-            make.left.right.equalToSuperview()
-            make.height.equalTo(view.frame.height/20)
+        searcherView.snp.makeConstraints { (make) in
+            make.top.equalTo(nickNameTextFieldContainerView.snp.bottom).offset(view.frame.height/135.333)
+            make.left.equalTo(nickNameTextFieldContainerView.snp.left)
+            make.right.equalTo(nickNameTextFieldContainerView.snp.right)
+            make.height.equalTo(view.frame.height/5.1392)
         }
-        
         recommendPeopleLabel.snp.makeConstraints { (make) in
             make.top.equalTo(nickNameTextFieldContainerView.snp.bottom).offset(view.frame.height/21.9)
             make.left.equalTo(view.frame.height/22.5)
@@ -150,6 +156,7 @@ class MorePeopleToDo: UIViewController{
             make.height.equalTo(view.frame.height/11.277)
             make.right.equalToSuperview()
         }
+
     }
     func configureNotificationObservers(){
         nickNameTextFieldContainerView.addTarget(self, action: #selector(textDidChage), for: .editingChanged)
