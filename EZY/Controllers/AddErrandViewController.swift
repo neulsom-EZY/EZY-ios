@@ -98,6 +98,7 @@ class AddErrandViewController : UIViewController{
     private lazy var addButton : AdditionalButton = {
         let button = AdditionalButton(type: .system)
         button.title = "부탁하기"
+        button.color = .EZY_BAC8FF
         button.addTarget(self, action: #selector(Addmytodobtn), for: .touchUpInside)
         return button
     }()

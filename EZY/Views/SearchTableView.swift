@@ -25,7 +25,7 @@ class SearchTableView : UIView {
     }
     func addView(){
         addSubview(view)
-        view.addSubview(tv)
+        addSubview(tv)
     }
     
     override func layoutSubviews() {
@@ -39,8 +39,9 @@ class SearchTableView : UIView {
         tv.snp.makeConstraints { (make) in
             make.top.equalToSuperview()
             make.left.equalToSuperview()
-            make.right.equalTo(view.snp.right)
+            make.right.equalToSuperview()
             make.bottom.equalToSuperview()
+            make.height.equalTo(frame.height)
         }
 
 

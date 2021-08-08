@@ -41,22 +41,4 @@ class GroupSearchTextfield: UITextField {
     }
     
 }
-extension GroupSearchTextfield : UITextFieldDelegate{
-    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
-        if let text = textField.text{
-            filterText(text+string)
-        }
-        return true
-    }
-    func filterText(_ query: String){
-        MorePeopleToDo.filterData.removeAll()
-        for string in MorePeopleToDo.data{
-            if string.lowercased().starts(with: query.lowercased()){
-                MorePeopleToDo.filterData.append(string)
-            }
-        }
-        SearchTableView().tv.reloadData()
-        MorePeopleToDo.filtered = true
-        
-    }
-}
+

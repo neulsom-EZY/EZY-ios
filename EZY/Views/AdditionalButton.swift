@@ -9,7 +9,7 @@ import UIKit
 
 class AdditionalButton : UIButton{
     let lb = UILabel().then{
-        $0.dynamicFont(fontSize: 14, currentFontName: "")
+        $0.dynamicFont(fontSize: 14, currentFontName: "AppleSDGothicNeo-SemiBold")
         $0.textColor = .white
     }
     
@@ -18,12 +18,15 @@ class AdditionalButton : UIButton{
             lb.text = title
         }
     }
-    
+    var color : UIColor?{
+        didSet{
+            backgroundColor = color
+        }
+    }
     
     override init(frame: CGRect) {
         super.init(frame: frame)
         
-        backgroundColor = .EZY_BAC8FF
         isEnabled = true
         addSubview(lb)
         lb.snp.makeConstraints { (make) in

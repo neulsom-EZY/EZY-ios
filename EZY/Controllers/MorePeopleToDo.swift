@@ -13,7 +13,7 @@ class MorePeopleToDo: UIViewController{
     static let recommendData = ["JiHoooooon","siwonnnny","NoName","mingki","johnjihwan","noplayy","gyeongggggjuunnn"]
     static let searchData = ["정시원 (Siwony)","전지환 (gyeongjun)","김기홍 (KimKiHong)","안지훈 (JiHoon)","노경준 (NohKyung-joon)","김유진 (y0000000ujin)"]
     
-    static var data = [String]()
+    static var data = searchData
     static var filterData = [String]()
     static var filtered = false
 
@@ -66,7 +66,6 @@ class MorePeopleToDo: UIViewController{
         layout.minimumInteritemSpacing = 10
         layout.minimumLineSpacing = 0
         cv.translatesAutoresizingMaskIntoConstraints = false
-        
         cv.register(WhatAboutPeopleLikeThisCell.self, forCellWithReuseIdentifier: WhatAboutPeopleLikeThisCell.identifier)
         cv.showsHorizontalScrollIndicator = false
         cv.backgroundColor = .clear
@@ -77,6 +76,7 @@ class MorePeopleToDo: UIViewController{
     private let userChoose : AdditionalButton = {
         let button = AdditionalButton(type: .system)
         button.title = "인원 선택"
+        button.color = .EZY_978EFF
         button.addTarget(self, action: #selector(chooseUser), for: .touchUpInside)
         return button
     }()
@@ -85,10 +85,10 @@ class MorePeopleToDo: UIViewController{
     //MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        setupData()
         configureUI()
         WhatAboutPeopleLikeThis.dataSource = self
         WhatAboutPeopleLikeThis.delegate = self
+        nickNameTextFieldContainerView.delegate = self
         WhatAboutPeopleLikeThis.allowsMultipleSelection = true
         configureNotificationObservers()
 
@@ -113,6 +113,7 @@ class MorePeopleToDo: UIViewController{
         view.backgroundColor = .white
         WhatAboutPeopleLikeThis.contentInset = UIEdgeInsets(top: 0, left: view.frame.height/21.95, bottom: 0, right: view.frame.height/21.95)
         searcherView.layer.cornerRadius = view.frame.height/81.2
+        userChoose.layer.cornerRadius = view.frame.height/81.2
         addView()
         location()
     }
@@ -129,14 +130,7 @@ class MorePeopleToDo: UIViewController{
         view.addSubview(userChoose)
     }
     
-    private func setupData(){
-        MorePeopleToDo.data.append("John")
-        MorePeopleToDo.data.append("JiHoon")
-        MorePeopleToDo.data.append("Cat")
-        MorePeopleToDo.data.append("Dog")
-        MorePeopleToDo.data.append("JiHooooon")
-        MorePeopleToDo.data.append("JiiiiHoooon")
-    }
+
     
     func location(){
         backbutton.snp.makeConstraints { (make) in
@@ -179,7 +173,13 @@ class MorePeopleToDo: UIViewController{
             make.height.equalTo(view.frame.height/11.277)
             make.right.equalToSuperview()
         }
-
+        userChoose.snp.makeConstraints { (make) in
+            make.bottom.equalTo(view.snp.bottom).inset(view.frame.height/13.3)
+            make.height.equalTo(self.view.frame.height/18.044)
+            make.left.equalTo(view.snp.left).offset(view.frame.height/30.07)
+            make.right.equalTo(view.snp.right).inset(view.frame.height/29)
+            
+        }
     }
     func configureNotificationObservers(){
         nickNameTextFieldContainerView.addTarget(self, action: #selector(textDidChage), for: .editingChanged)
@@ -215,15 +215,32 @@ extension MorePeopleToDo: FormViewModel{
         isTableVisible = viewModel.showView
         if isTableVisible == false{
             UIView.animate(withDuration: 0.2) {
-
                 self.view.layoutIfNeeded()
             }
         }else{
             UIView.animate(withDuration: 0.2) {
-                
                 self.view.layoutIfNeeded()
             }
         }
+    }
+}
+extension MorePeopleToDo : UITextFieldDelegate{
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        if let text = textField.text{
+            filterText(text+string)
+        }
+        return true
+    }
+    func filterText(_ query: String){
+        MorePeopleToDo.filterData.removeAll()
+        for string in MorePeopleToDo.data{
+            if string.lowercased().starts(with: query.lowercased()){
+                MorePeopleToDo.filterData.append(string)
+            }
+        }
+        SearchTableView().tv.reloadData()
+        MorePeopleToDo.filtered = true
+        
     }
 }
 

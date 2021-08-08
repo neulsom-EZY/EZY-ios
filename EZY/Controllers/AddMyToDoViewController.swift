@@ -101,6 +101,7 @@ class AddMyToDoViewController:UIViewController{
     private let addButton : AdditionalButton = {
         let button = AdditionalButton(type: .system)
         button.title = "추가"
+        button.color = .EZY_BAC8FF
         button.addTarget(self, action: #selector(Addmytodobtn), for: .touchUpInside)
         return button
     }()
