@@ -35,6 +35,18 @@ class PersonalPlanChangeViewController: UIViewController {
     
     lazy var selectedDayRow = 0
     
+    lazy var selectedTimeEndAMPM = "AM"
+    
+    lazy var selectedTimeStartAMPM = "AM"
+    
+    lazy var selectedTimeStartHourIndex = 0
+    
+    lazy var selectedTimeStartMinIndex = 0
+    
+    lazy var selectedTimeEndHourIndex = 0
+    
+    lazy var selectedTimeEndMinIndex = 0
+    
     lazy var selectedRepeatRow = [Int]()
     
     lazy var selectedRepeatText = ""
@@ -760,6 +772,7 @@ class PersonalPlanChangeViewController: UIViewController {
                 self.selectTimeModalView.startAfternoonLabel.textColor = UIColor(red: 114/255, green: 114/255, blue: 114/255, alpha: 1)
                 
                 self.startSelectCircleButtonLocation = "Right"
+                self.selectedTimeStartAMPM = "PM"
             }else{
 
                 
@@ -778,6 +791,7 @@ class PersonalPlanChangeViewController: UIViewController {
                 self.selectTimeModalView.startAfternoonLabel.textColor = UIColor.black
                 
                 self.startSelectCircleButtonLocation = "Left"
+                self.selectedTimeStartAMPM = "AM"
             }
 
         })
@@ -808,6 +822,7 @@ class PersonalPlanChangeViewController: UIViewController {
                 
                 self.selectTimeModalView.endSelectCircleButton.superview?.layoutIfNeeded()
                 self.endSelectCircleButtonLocation = "Right"
+                self.selectedTimeEndAMPM = "PM"
             }else{
                 self.selectTimeModalView.endSelectCircleButton.snp.remakeConstraints { make in
                     make.centerY.equalTo(self.selectTimeModalView.endSelectBackButton)
@@ -825,6 +840,7 @@ class PersonalPlanChangeViewController: UIViewController {
                 
                 self.selectTimeModalView.startSelectCircleButton.superview?.layoutIfNeeded()
                 self.endSelectCircleButtonLocation = "Left"
+                self.selectedTimeEndAMPM = "AM"
             }
 
         })
@@ -925,6 +941,8 @@ class PersonalPlanChangeViewController: UIViewController {
     
     @objc func selectTimeCompleteButtonClicked(sender:UIButton){
         selectTimeModalView.isHidden = true
+        
+        timeLabelButton.setTitle("\(startPickerViewText[0][selectedTimeStartHourIndex]):\(startPickerViewText[1][selectedTimeStartMinIndex])\(selectedTimeStartAMPM) - \(startPickerViewText[0][selectedTimeEndHourIndex]):\(startPickerViewText[1][selectedTimeEndMinIndex])\(selectedTimeEndAMPM)", for: .normal)
     }
     
     @objc func tagbuttonClicked(sender:UIButton)
@@ -1483,9 +1501,23 @@ extension PersonalPlanChangeViewController: UIPickerViewDelegate, UIPickerViewDa
       }
     
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-        selectedDayRow = row
-        
-    
+        if pickerView == selectCalendarModalView.dayPickerView{
+            selectedDayRow = row
+        }else if pickerView == selectTimeModalView.startPickerView{
+            if component == 0{
+                selectedTimeStartHourIndex = row
+            }else if component == 1{
+                selectedTimeStartMinIndex = row
+            }
+            print("startPickerView : row[\(row)], component[\(component)] ")
+        }else if pickerView == selectTimeModalView.endPickerView{
+            if component == 0{
+                selectedTimeEndHourIndex = row
+            }else if component == 1{
+                selectedTimeEndMinIndex = row
+            }
+            print("endPickerView : row[\(row)], component[\(component)] ")
+        }
     }
     
     func pickerView(_ pickerView: UIPickerView, viewForRow row: Int, forComponent component: Int, reusing view: UIView?) -> UIView {
