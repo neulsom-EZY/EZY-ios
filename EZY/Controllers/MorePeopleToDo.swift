@@ -13,9 +13,10 @@ class MorePeopleToDo: UIViewController{
     static let recommendData = ["JiHoooooon","siwonnnny","NoName","mingki","johnjihwan","noplayy","gyeongggggjuunnn"]
     static let searchData = ["정시원 (Siwony)","전지환 (gyeongjun)","김기홍 (KimKiHong)","안지훈 (JiHoon)","노경준 (NohKyung-joon)","김유진 (y0000000ujin)"]
     
-    static var data = searchData
-    static var filterData = [String]()
-    static var filtered = false
+    
+    var data = searchData
+    var filterData = [String]()
+    var filtered = false
 
     
     //MARK: - Properties
@@ -50,7 +51,7 @@ class MorePeopleToDo: UIViewController{
         return tf
     }()
     
-    private let searcherView  = SearchTableView().then{
+    private lazy var searcherView  = SearchTableView().then{
         $0.layer.applySketchShadow(color: .gray, alpha: 0.25, x: 0, y: 6, blur: 15, spread: 0)
     }
     
@@ -205,7 +206,9 @@ extension MorePeopleToDo : UICollectionViewDelegateFlowLayout,UICollectionViewDa
     }
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         return WhatAboutPeopleLikeThisCell.fittingSize(availableHeight: view.frame.size.height/25.375, name: MorePeopleToDo.recommendData[indexPath.row])
+
     }
+    
 }
 
 
@@ -215,10 +218,12 @@ extension MorePeopleToDo: FormViewModel{
         isTableVisible = viewModel.showView
         if isTableVisible == false{
             UIView.animate(withDuration: 0.2) {
+                self.searcherView.transform = CGAffineTransform.init(scaleX: 0, y: 0)
                 self.view.layoutIfNeeded()
             }
         }else{
             UIView.animate(withDuration: 0.2) {
+                self.searcherView.transform = CGAffineTransform.init(scaleX: 1.0, y: 1.0)
                 self.view.layoutIfNeeded()
             }
         }
@@ -232,16 +237,15 @@ extension MorePeopleToDo : UITextFieldDelegate{
         return true
     }
     func filterText(_ query: String){
-        MorePeopleToDo.filterData.removeAll()
-        for string in MorePeopleToDo.data{
+        filterData.removeAll()
+        for string in data{
             if string.lowercased().starts(with: query.lowercased()){
-                MorePeopleToDo.filterData.append(string)
+                filterData.append(string)
             }
         }
         SearchTableView().tv.reloadData()
-        MorePeopleToDo.filtered = true
+        filtered = true
         
     }
 }
-
 

@@ -8,7 +8,6 @@
 import UIKit
 
 class SearchTableView : UIView {
-    let view = UIView()
     let tv = UITableView().then{
         $0.register(SearchTableCell.self, forCellReuseIdentifier: SearchTableCell.identifier)
     }
@@ -24,18 +23,13 @@ class SearchTableView : UIView {
         tv.separatorStyle = .none
     }
     func addView(){
-        addSubview(view)
         addSubview(tv)
     }
     
     override func layoutSubviews() {
         super.layoutSubviews()
-        view.layer.cornerRadius = frame.height/15.8
         tv.layer.cornerRadius = frame.height/15.8
-        view.snp.makeConstraints { (make) in
-            make.top.bottom.left.right.equalToSuperview()
-            make.height.equalTo(frame.height)
-        }
+
         tv.snp.makeConstraints { (make) in
             make.top.equalToSuperview()
             make.left.equalToSuperview()
@@ -53,10 +47,10 @@ class SearchTableView : UIView {
 }
 extension SearchTableView : UITableViewDelegate, UITableViewDataSource{
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if !MorePeopleToDo.filterData.isEmpty{
-            return MorePeopleToDo.filterData.count
+        if !MorePeopleToDo().filterData.isEmpty{
+            return MorePeopleToDo().filterData.count
         }
-        return MorePeopleToDo.filtered ? 0 : MorePeopleToDo.data.count
+        return MorePeopleToDo().filtered ? 0 : MorePeopleToDo().data.count
     }
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -65,10 +59,10 @@ extension SearchTableView : UITableViewDelegate, UITableViewDataSource{
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: SearchTableCell.identifier) as! SearchTableCell
-        if !MorePeopleToDo.filterData.isEmpty {
-            cell.personName.text = MorePeopleToDo.filterData[indexPath.row]
+        if !MorePeopleToDo().filterData.isEmpty {
+            cell.personName.text = MorePeopleToDo().filterData[indexPath.row]
         }else{
-            cell.personName.text = MorePeopleToDo.data[indexPath.row]
+            cell.personName.text = MorePeopleToDo().data[indexPath.row]
         }
         return cell
     }

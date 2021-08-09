@@ -13,7 +13,6 @@ class GroupSearchTextfield: UITextField {
     
     init(placeholder : String) {
         super.init(frame: .zero)
-        tf.delegate = self
         leftView = spacer
         leftViewMode = .always
         borderStyle = .none
