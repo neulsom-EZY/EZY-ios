@@ -11,7 +11,7 @@ import Then
 
 class AddErrandViewController : UIViewController{
     //MARK: - Properties
-    static let data = ["@JiHoooooon","+ 수정"]
+    static let data = ["JihoonAhn","+ 수정"]
     
     private let backbutton = UIButton().then{
         $0.tintColor = .EZY_AFADFF
@@ -244,7 +244,7 @@ extension AddErrandViewController : UICollectionViewDelegateFlowLayout,UICollect
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
          guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: WhoShouldIAskCell.identifier, for: indexPath) as? WhoShouldIAskCell else {return UICollectionViewCell()}
         cell.bglabel.text = AddErrandViewController.data[indexPath.row]
-        cell.bglabel.dynamicFont(fontSize: 12, currentFontName:  "AppleSDGothicNeo-Thin")
+        cell.bglabel.dynamicFont(fontSize: 12, currentFontName:  "AppleSDGothicNeo-UltraLight")
         cell.bglabel.textColor = .EZY_3D64FF
         cell.layer.borderWidth = 1
         cell.layer.borderColor = UIColor.EZY_6383FF.cgColor
@@ -253,12 +253,36 @@ extension AddErrandViewController : UICollectionViewDelegateFlowLayout,UICollect
             cell.layer.borderColor = UIColor.EZY_BAC8FF.cgColor
             cell.bglabel.dynamicFont(fontSize: 12, currentFontName: "AppleSDGothicNeo-Bold")
         }
+        if AddErrandViewController.data.count == 2 {
+            if indexPath.item == indexPath.first{
+                cell.bglabel.text = "@" + AddErrandViewController.data[indexPath.item]
+            }
+        }
         
         return cell
     }
 
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         return WhoShouldIAskCell.fittingSize(availableHeight: view.frame.height/25.375, name: AddErrandViewController.data[indexPath.row])
+    }
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        if collectionView == self.collectionView{
+            if AddErrandViewController.data.count == 1 {
+                let controller = MorePeopleToDo()
+                navigationController?.pushViewController(controller, animated: true)
+            }else{
+                if indexPath.item == 0{
+                    
+                    
+                }
+                else if indexPath.item == indexPath.last{
+                    let controller = MorePeopleToDo()
+                    navigationController?.pushViewController(controller, animated: true)
+                }
+      
+            }
+                
+        }
     }
 }
 

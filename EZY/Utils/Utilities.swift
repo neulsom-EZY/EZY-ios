@@ -62,12 +62,12 @@ class Utilities{
         }
         view.addSubview(textView)
         textView.showsVerticalScrollIndicator = false
-        textView.contentInset = UIEdgeInsets(top: 0, left: CGFloat(viewSize/31.2), bottom: 0, right: CGFloat(viewSize/31.2))
+        textView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
         textView.snp.makeConstraints { (make) in
             make.top.equalToSuperview().offset(viewSize/60)
             make.bottom.equalToSuperview().offset(viewSize/60 * -1)
-            make.left.equalTo(label_Message.snp.right)
-            make.right.equalToSuperview()
+            make.left.equalTo(label_Message.snp.right).offset(viewSize/31.2)
+            make.right.equalToSuperview().inset(viewSize/31.2)
 
         }
         return view

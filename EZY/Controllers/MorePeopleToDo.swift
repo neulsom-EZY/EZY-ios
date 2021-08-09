@@ -12,7 +12,7 @@ import Then
 class MorePeopleToDo: UIViewController{
     static let recommendData = ["JiHoooooon","siwonnnny","NoName","mingki","johnjihwan","noplayy","gyeongggggjuunnn"]
     static let searchData = ["정시원 (Siwony)","전지환 (gyeongjun)","김기홍 (KimKiHong)","안지훈 (JiHoon)","노경준 (NohKyung-joon)","김유진 (y0000000ujin)"]
-    
+    let randomColorData : [UIColor] = [.EZY_BAC8FF,.EZY_FFCCCC,.EZY_BADEFF,.EZY_CFE3CE,.EZY_FFD18D]
     
     var data = searchData
     var filterData = [String]()
@@ -106,7 +106,8 @@ class MorePeopleToDo: UIViewController{
         updateForm()
     }
     @objc func chooseUser(){
-        
+        navigationController?.popViewController(animated: true)
+
     }
     
     //MARK: - Helpers
@@ -197,11 +198,11 @@ extension MorePeopleToDo : UICollectionViewDelegateFlowLayout,UICollectionViewDa
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
          guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: WhatAboutPeopleLikeThisCell.identifier, for: indexPath) as? WhatAboutPeopleLikeThisCell else {return UICollectionViewCell()}
         cell.bglabel.text = "@ " + MorePeopleToDo.recommendData[indexPath.row]
-        cell.bglabel.dynamicFont(fontSize: 12, currentFontName:"AppleSDGothicNeo-Thin")
-        cell.bglabel.textColor = .EZY_3D64FF
+        cell.bglabel.dynamicFont(fontSize: 12, currentFontName:"AppleSDGothicNeo-UltraLight")
+        cell.bglabel.textColor = MorePeopleToDo().randomColorData.randomElement()
         cell.layer.borderWidth = 1
         cell.bglabel.sizeToFit()
-        cell.layer.borderColor = UIColor.EZY_6383FF.cgColor
+        cell.layer.borderColor = cell.bglabel.textColor.cgColor
         return cell
     }
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
