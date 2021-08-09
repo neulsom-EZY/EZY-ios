@@ -72,7 +72,7 @@ class ErrandCalendarViewController : UIViewController{
     }
     
     private func makeData() {
-        for i in 0...3 {
+        for i in 0...6 {
             manageData.append(ManageData.init(title: titleNotification[i], explanation: explanation[i]))
         }
     }
