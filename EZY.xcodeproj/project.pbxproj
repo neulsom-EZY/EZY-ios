@@ -68,6 +68,38 @@
 		6AA769E726636AE700B7E1F5 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AA769E626636AE700B7E1F5 /* SceneDelegate.swift */; };
 		6AA769EF26636AE700B7E1F5 /* EZY.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 6AA769ED26636AE700B7E1F5 /* EZY.xcdatamodeld */; };
 		6AA76A0226636D2800B7E1F5 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AA76A0126636D2800B7E1F5 /* LoginViewController.swift */; };
+		6AA76A1526638C5600B7E1F5 /* Poppins-MediumItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 6AA76A122663844A00B7E1F5 /* Poppins-MediumItalic.ttf */; };
+		6AA76A1626638C5600B7E1F5 /* Poppins-ThinItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 6AA76A102663844A00B7E1F5 /* Poppins-ThinItalic.ttf */; };
+		6AA76A1726638C5600B7E1F5 /* Poppins-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 6AA76A0C2663844A00B7E1F5 /* Poppins-Regular.ttf */; };
+		6AA76A1826638C5600B7E1F5 /* Poppins-BoldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 6AA76A112663844A00B7E1F5 /* Poppins-BoldItalic.ttf */; };
+		6AA76A1926638C5600B7E1F5 /* Poppins-Italic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 6AA76A0F2663844A00B7E1F5 /* Poppins-Italic.ttf */; };
+		6AA76A1A26638C5600B7E1F5 /* Poppins-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 6AA76A0A2663844A00B7E1F5 /* Poppins-Medium.ttf */; };
+		6AA76A1B26638C5600B7E1F5 /* Poppins-Thin.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 6AA76A0D2663844A00B7E1F5 /* Poppins-Thin.ttf */; };
+		6AA76A1C26638C5600B7E1F5 /* Poppins-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 6AA76A092663844A00B7E1F5 /* Poppins-Light.ttf */; };
+		6AA76A1D26638C5600B7E1F5 /* Poppins-LightItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 6AA76A072663844A00B7E1F5 /* Poppins-LightItalic.ttf */; };
+		6AA76A1E26638C5600B7E1F5 /* Poppins-ExtraLightItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 6AA76A082663844A00B7E1F5 /* Poppins-ExtraLightItalic.ttf */; };
+		6AA76A1F26638C5600B7E1F5 /* Poppins-ExtraBoldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 6AA76A062663844A00B7E1F5 /* Poppins-ExtraBoldItalic.ttf */; };
+		6AA76A2026638C5600B7E1F5 /* Poppins-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 6AA76A142663844A00B7E1F5 /* Poppins-SemiBold.ttf */; };
+		6AA76A2126638C5600B7E1F5 /* Poppins-Black.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 6AA76A032663844A00B7E1F5 /* Poppins-Black.ttf */; };
+		6AA76A2226638C5600B7E1F5 /* Poppins-BlackItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 6AA76A042663844A00B7E1F5 /* Poppins-BlackItalic.ttf */; };
+		6AA76A2326638C5600B7E1F5 /* Poppins-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 6AA76A0B2663844A00B7E1F5 /* Poppins-Bold.ttf */; };
+		6AA76A2426638C5600B7E1F5 /* Poppins-ExtraBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 6AA76A052663844A00B7E1F5 /* Poppins-ExtraBold.ttf */; };
+		6AA76A2526638C5600B7E1F5 /* Poppins-SemiBoldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 6AA76A132663844A00B7E1F5 /* Poppins-SemiBoldItalic.ttf */; };
+		6AA76A2626638C5600B7E1F5 /* Poppins-ExtraLight.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 6AA76A0E2663844A00B7E1F5 /* Poppins-ExtraLight.ttf */; };
+		AA13575E2695BF8200C1CAAB /* CustomGradientLoginBtnView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA13575A2695BF8200C1CAAB /* CustomGradientLoginBtnView.swift */; };
+		AA13575F2695BF8200C1CAAB /* CustomGradientContinueBtnView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA13575B2695BF8200C1CAAB /* CustomGradientContinueBtnView.swift */; };
+		AA1357602695BF8200C1CAAB /* CustomGradientTermsBtnView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA13575C2695BF8200C1CAAB /* CustomGradientTermsBtnView.swift */; };
+		AA1357672695BFC400C1CAAB /* NewPasswordPutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA1357612695BFC400C1CAAB /* NewPasswordPutViewController.swift */; };
+		AA1357682695BFC400C1CAAB /* SignUpNicknameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA1357622695BFC400C1CAAB /* SignUpNicknameViewController.swift */; };
+		AA1357692695BFC400C1CAAB /* SignUpPhoneNumViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA1357632695BFC400C1CAAB /* SignUpPhoneNumViewController.swift */; };
+		AA13576A2695BFC400C1CAAB /* NewPasswordPhoneNumViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA1357642695BFC400C1CAAB /* NewPasswordPhoneNumViewController.swift */; };
+		AA13576B2695BFC400C1CAAB /* SignUpPasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA1357652695BFC400C1CAAB /* SignUpPasswordViewController.swift */; };
+		AA13576C2695BFC400C1CAAB /* SignUpTermsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA1357662695BFC400C1CAAB /* SignUpTermsViewController.swift */; };
+		AA1357762695C4C600C1CAAB /* Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA1357742695C4C600C1CAAB /* Utilities.swift */; };
+		AA1357772695C4C600C1CAAB /* Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA1357752695C4C600C1CAAB /* Extension.swift */; };
+		AA58558C2697BF06000C4185 /* TopBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA58558B2697BF06000C4185 /* TopBarView.swift */; };
+		AA881D7226BB698500C04028 /* NewNicknamePhoneNumViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA881D7126BB698500C04028 /* NewNicknamePhoneNumViewController.swift */; };
+		AA881D7426BBB21100C04028 /* NewNicknamePutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA881D7326BBB21100C04028 /* NewNicknamePutViewController.swift */; };
 		6AA76A282663958B00B7E1F5 /* ShowPlanViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AA76A272663958B00B7E1F5 /* ShowPlanViewController.swift */; };
 		6AB27CAC269D758100B95C0F /* ChangeIdAfterLoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AB27CAB269D758100B95C0F /* ChangeIdAfterLoginViewController.swift */; };
 		6AB27CB0269D8C1600B95C0F /* WithdrawalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AB27CAF269D8C1600B95C0F /* WithdrawalViewController.swift */; };
@@ -201,6 +233,22 @@
 		6AA76A122663844A00B7E1F5 /* Poppins-MediumItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Poppins-MediumItalic.ttf"; sourceTree = "<group>"; };
 		6AA76A132663844A00B7E1F5 /* Poppins-SemiBoldItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Poppins-SemiBoldItalic.ttf"; sourceTree = "<group>"; };
 		6AA76A142663844A00B7E1F5 /* Poppins-SemiBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Poppins-SemiBold.ttf"; sourceTree = "<group>"; };
+		8B5046DC93C289B5AC6C406E /* Pods-EZY.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EZY.debug.xcconfig"; path = "Target Support Files/Pods-EZY/Pods-EZY.debug.xcconfig"; sourceTree = "<group>"; };
+		A75C11C1873FE4E191601230 /* Pods_EZY.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_EZY.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		AA13575A2695BF8200C1CAAB /* CustomGradientLoginBtnView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomGradientLoginBtnView.swift; sourceTree = "<group>"; };
+		AA13575B2695BF8200C1CAAB /* CustomGradientContinueBtnView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomGradientContinueBtnView.swift; sourceTree = "<group>"; };
+		AA13575C2695BF8200C1CAAB /* CustomGradientTermsBtnView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomGradientTermsBtnView.swift; sourceTree = "<group>"; };
+		AA1357612695BFC400C1CAAB /* NewPasswordPutViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewPasswordPutViewController.swift; sourceTree = "<group>"; };
+		AA1357622695BFC400C1CAAB /* SignUpNicknameViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignUpNicknameViewController.swift; sourceTree = "<group>"; };
+		AA1357632695BFC400C1CAAB /* SignUpPhoneNumViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignUpPhoneNumViewController.swift; sourceTree = "<group>"; };
+		AA1357642695BFC400C1CAAB /* NewPasswordPhoneNumViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewPasswordPhoneNumViewController.swift; sourceTree = "<group>"; };
+		AA1357652695BFC400C1CAAB /* SignUpPasswordViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignUpPasswordViewController.swift; sourceTree = "<group>"; };
+		AA1357662695BFC400C1CAAB /* SignUpTermsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignUpTermsViewController.swift; sourceTree = "<group>"; };
+		AA1357742695C4C600C1CAAB /* Utilities.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Utilities.swift; sourceTree = "<group>"; };
+		AA1357752695C4C600C1CAAB /* Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Extension.swift; sourceTree = "<group>"; };
+		AA58558B2697BF06000C4185 /* TopBarView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TopBarView.swift; sourceTree = "<group>"; };
+		AA881D7126BB698500C04028 /* NewNicknamePhoneNumViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewNicknamePhoneNumViewController.swift; sourceTree = "<group>"; };
+		AA881D7326BBB21100C04028 /* NewNicknamePutViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewNicknamePutViewController.swift; sourceTree = "<group>"; };
 		6AA76A032663844A00B7E1F5 /* Poppins-Black.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Poppins-Black.ttf"; path = "/Downloads/Poppins/Poppins-Black.ttf"; sourceTree = "<absolute>"; };
 		6AA76A042663844A00B7E1F5 /* Poppins-BlackItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Poppins-BlackItalic.ttf"; path = "/Downloads/Poppins/Poppins-BlackItalic.ttf"; sourceTree = "<absolute>"; };
 		6AA76A052663844A00B7E1F5 /* Poppins-ExtraBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Poppins-ExtraBold.ttf"; path = "/Downloads/Poppins/Poppins-ExtraBold.ttf"; sourceTree = "<absolute>"; };
@@ -345,6 +393,7 @@
 		6AA769E326636AE700B7E1F5 /* EZY */ = {
 			isa = PBXGroup;
 			children = (
+				AA1357732695C4A700C1CAAB /* Utils */,
 				6AE5BB0426966DCA00A9731B /* Utils */,
 				6A097D00268ED792001E011D /* Header */,
 				EEEDB2C02664D10100E5C53A /* Utils */,
@@ -381,6 +430,10 @@
 		6AA769FD26636C6B00B7E1F5 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				AA58558A2697BEEC000C4185 /* ReusableViews */,
+				AA13575B2695BF8200C1CAAB /* CustomGradientContinueBtnView.swift */,
+				AA13575A2695BF8200C1CAAB /* CustomGradientLoginBtnView.swift */,
+				AA13575C2695BF8200C1CAAB /* CustomGradientTermsBtnView.swift */,
 				6AE5BAFF26954B9900A9731B /* CollectionViewCells */,
 				6AE5BAFE26954B6A00A9731B /* TableViewCells */,
 				6AE5BAFD26954B4800A9731B /* ModalViews */,
@@ -422,6 +475,14 @@
 				6AA6F790269C2E4C00958D36 /* SignUpPhoneNumViewController.swift */,
 				6AA6F791269C2E4D00958D36 /* SignUpTermsViewController.swift */,
 				6AA76A0126636D2800B7E1F5 /* LoginViewController.swift */,
+				AA1357642695BFC400C1CAAB /* NewPasswordPhoneNumViewController.swift */,
+				AA1357612695BFC400C1CAAB /* NewPasswordPutViewController.swift */,
+				AA1357622695BFC400C1CAAB /* SignUpNicknameViewController.swift */,
+				AA1357652695BFC400C1CAAB /* SignUpPasswordViewController.swift */,
+				AA1357632695BFC400C1CAAB /* SignUpPhoneNumViewController.swift */,
+				AA1357662695BFC400C1CAAB /* SignUpTermsViewController.swift */,
+				AA881D7126BB698500C04028 /* NewNicknamePhoneNumViewController.swift */,
+				AA881D7326BBB21100C04028 /* NewNicknamePutViewController.swift */,
 				6AA76A272663958B00B7E1F5 /* ShowPlanViewController.swift */,
 				6A4EDA2B266A045B00B809EC /* NotificationViewController.swift */,
 				6AA6F796269C2E6200958D36 /* NewPasswordPhoneNumViewController.swift */,
@@ -474,6 +535,21 @@
 			path = Font;
 			sourceTree = "<group>";
 		};
+		AA1357732695C4A700C1CAAB /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				AA1357752695C4C600C1CAAB /* Extension.swift */,
+				AA1357742695C4C600C1CAAB /* Utilities.swift */,
+			);
+			path = Utils;
+			sourceTree = "<group>";
+		};
+		AA58558A2697BEEC000C4185 /* ReusableViews */ = {
+			isa = PBXGroup;
+			children = (
+				AA58558B2697BF06000C4185 /* TopBarView.swift */,
+			);
+			path = ReusableViews;
 		6AE5BAFD26954B4800A9731B /* ModalViews */ = {
 			isa = PBXGroup;
 			children = (
@@ -704,6 +780,24 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AA1357772695C4C600C1CAAB /* Extension.swift in Sources */,
+				6AA76A0226636D2800B7E1F5 /* LoginViewController.swift in Sources */,
+				AA1357682695BFC400C1CAAB /* SignUpNicknameViewController.swift in Sources */,
+				AA1357762695C4C600C1CAAB /* Utilities.swift in Sources */,
+				6AA769EF26636AE700B7E1F5 /* EZY.xcdatamodeld in Sources */,
+				AA13576A2695BFC400C1CAAB /* NewPasswordPhoneNumViewController.swift in Sources */,
+				AA1357672695BFC400C1CAAB /* NewPasswordPutViewController.swift in Sources */,
+				AA1357602695BF8200C1CAAB /* CustomGradientTermsBtnView.swift in Sources */,
+				6AA769E526636AE700B7E1F5 /* AppDelegate.swift in Sources */,
+				AA881D7226BB698500C04028 /* NewNicknamePhoneNumViewController.swift in Sources */,
+				AA13576C2695BFC400C1CAAB /* SignUpTermsViewController.swift in Sources */,
+				AA881D7426BBB21100C04028 /* NewNicknamePutViewController.swift in Sources */,
+				AA1357692695BFC400C1CAAB /* SignUpPhoneNumViewController.swift in Sources */,
+				6AA769E726636AE700B7E1F5 /* SceneDelegate.swift in Sources */,
+				AA13576B2695BFC400C1CAAB /* SignUpPasswordViewController.swift in Sources */,
+				AA13575E2695BF8200C1CAAB /* CustomGradientLoginBtnView.swift in Sources */,
+				AA58558C2697BF06000C4185 /* TopBarView.swift in Sources */,
+				AA13575F2695BF8200C1CAAB /* CustomGradientContinueBtnView.swift in Sources */,
 				6A138F83266F864300DBCE49 /* PinterestLayout.swift in Sources */,
 				6A4EDA35266BD27800B809EC /* TopView.swift in Sources */,
 				6AE5BB1A2696A6CE00A9731B /* Extension.swift in Sources */,
@@ -800,7 +894,6 @@
 				6AA769E726636AE700B7E1F5 /* SceneDelegate.swift in Sources */,
 				EE93B4DF268797230055D7A6 /* CustomManagePushNotificationCell.swift in Sources */,
 				EE93B4E82687FB660055D7A6 /* ErrandCalendarViewController.swift in Sources */,
-				EEEDB2C22664D30D00E5C53A /* extensions.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
