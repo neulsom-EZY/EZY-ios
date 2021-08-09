@@ -6,8 +6,10 @@
 //
 
 import UIKit
-import SnapKit
 import Then
+import SnapKit
+
+// merge test
 
 class LoginViewController: UIViewController{
     //MARK: - Properties
@@ -130,6 +132,8 @@ class LoginViewController: UIViewController{
     @objc
     func onTapLogin(){
         print("DEBUG : Click bottom login button Button")
+        let controller = ShowPlanViewController()
+        navigationController?.pushViewController(controller, animated: true)
     }
 
     //MARK: - Helpers
@@ -232,7 +236,9 @@ func updateUIViewController(_ uiView: UIViewController,context: Context) {
     @available(iOS 13.0.0, *)
     func makeUIViewController(context: Context) -> UIViewController{
         LoginViewController()
+
     }
+
 }
 @available(iOS 13.0, *)
 struct LoginViewControllerRepresentable_PreviewProvider: PreviewProvider {
@@ -246,5 +252,6 @@ struct LoginViewControllerRepresentable_PreviewProvider: PreviewProvider {
         
     }
 } #endif
+
 
 
