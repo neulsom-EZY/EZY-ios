@@ -78,8 +78,8 @@ class SettingViewController: UIViewController {
 extension SettingViewController: UITableViewDelegate{
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if indexPath.row == 0{
-//            let nextViewController = GroupManagementViewController()
-//            self.navigationController?.pushViewController(nextViewController, animated: true)
+            let nextViewController = PushNotificationManagementViewController()
+            self.navigationController?.pushViewController(nextViewController, animated: true)
         }else if indexPath.row == 1{
             let nextViewController = TagManagementViewController()
             self.navigationController?.pushViewController(nextViewController, animated: true)

@@ -52,7 +52,6 @@ class LoginViewController: UIViewController{
     lazy var passwordField:UITextField = {
         let tf = Utilities().textField(withPlaceholder: "비밀번호를 입력해주세요.")
         tf.isSecureTextEntry = true
-
         return tf
     }()
     
@@ -66,6 +65,13 @@ class LoginViewController: UIViewController{
         $0.setTitleColor(UIColor.EZY_B2B2B2, for: .normal)
         $0.titleLabel?.dynamicFont(fontSize: 10, currentFontName: "AppleSDGothicNeo-Bold")
         $0.addTarget(self, action: #selector(onTapForgotPassword), for: .touchUpInside)
+    }
+    
+    lazy var forgotNicknameButton = UIButton().then {
+        $0.setTitle("닉네임을 잊으셨나요?", for: .normal)
+        $0.setTitleColor(UIColor.EZY_B2B2B2, for: .normal)
+        $0.titleLabel?.dynamicFont(fontSize: 10, currentFontName: "AppleSDGothicNeo-Bold")
+        $0.addTarget(self, action: #selector(onTapForgotNickname), for: .touchUpInside)
     }
     
     lazy var doNotHaveAccountButton = UIButton().then {
@@ -106,6 +112,12 @@ class LoginViewController: UIViewController{
     }
     
     @objc
+    func onTapForgotNickname(){
+        let controller = NewNicknamePhoneNumViewController()
+        navigationController?.pushViewController(controller, animated: true)
+    }
+    
+    @objc
     func onTapForgotPassword(){
         let controller = NewPasswordPhoneNumViewController()
         navigationController?.pushViewController(controller, animated: true)
@@ -140,6 +152,7 @@ class LoginViewController: UIViewController{
         view.addSubview(passwordContainerView)
         view.addSubview(showPasswordButton)
         view.addSubview(forgotPasswordButton)
+        view.addSubview(forgotNicknameButton)
         view.addSubview(doNotHaveAccountButton)
         view.addSubview(loginButton)
     }
@@ -188,6 +201,11 @@ class LoginViewController: UIViewController{
         forgotPasswordButton.snp.makeConstraints { make in
             make.bottom.equalTo(passwordContainerView).offset(self.view.frame.height/30.07)
             make.left.equalToSuperview().offset(self.view.frame.width/7.98)
+        }
+       
+        forgotNicknameButton.snp.makeConstraints { make in
+            make.bottom.equalTo(passwordContainerView).offset(self.view.frame.height/30.07)
+            make.right.equalToSuperview().offset(self.view.frame.width/7.98 * -1)
         }
        
         doNotHaveAccountButton.snp.makeConstraints { make in

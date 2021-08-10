@@ -110,6 +110,14 @@ class SelectTimeModalView: UIView {
         $0.dynamicFont(fontSize: 12, currentFontName: "AppleSDGothicNeo-Bold")
     }
     
+    lazy var startPickerView = UIPickerView().then{
+        $0.tintColor = UIColor(red: 150/255, green: 141/255, blue: 255/255, alpha: 1)
+    }
+    
+    lazy var endPickerView = UIPickerView().then{
+        $0.tintColor = UIColor(red: 150/255, green: 141/255, blue: 255/255, alpha: 1)
+    }
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         
@@ -127,6 +135,9 @@ class SelectTimeModalView: UIView {
         modalBackgroundView.addSubview(deleteButton)
         modalBackgroundView.addSubview(waveLabel)
         modalBackgroundView.addSubview(completeButton)
+        
+        modalBackgroundView.addSubview(startPickerView)
+        modalBackgroundView.addSubview(endPickerView)
         
         modalBackgroundView.addSubview(startHourLabel)
         modalBackgroundView.addSubview(startMinLabel)
