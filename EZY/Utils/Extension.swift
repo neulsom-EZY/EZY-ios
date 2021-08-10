@@ -53,6 +53,31 @@ extension UIColor{
     static let EZY_FAFAFA = UIColor.rgb(red: 250, green: 250, blue: 250)
     static let EZY_AFAFAF = UIColor.rgb(red: 175, green: 175, blue: 175)
     static let EZY_E1E1E1 = UIColor.rgb(red: 225, green: 225, blue: 225)
+    static let EZY_AAA8FF = UIColor.rgb(red: 170, green: 168, blue: 255)
+    static let EZY_D0D0D0 = UIColor.rgb(red: 208, green: 208, blue: 208)
+    static let EZY_796DFF = UIColor.rgb(red: 121, green: 109, blue: 255)
+    static let EZY_8F85FF = UIColor.rgb(red: 143, green: 133, blue: 255)
+    static let EZY_PLAN_FINISH_PURPLE = UIColor.rgb(red: 189, green: 170, blue: 255)
+    static let EZY_PLAN_YELLOW = UIColor.rgb(red: 255, green: 209, blue: 141)
+    static let EZY_PLAN_ORANGE = UIColor.rgb(red: 255, green: 166, blue: 128)
+    static let EZY_PLAN_PURPLE = UIColor.rgb(red: 141, green: 138, blue: 255)
+    static let EZY_PLAN_MIDDLEPURPLE = UIColor.rgb(red: 175, green: 173, blue: 255)
+    static let EZY_PLAN_LIGHTPURPLE = UIColor.rgb(red: 200, green: 199, blue: 255)
+    static let EZY_PLAN_FINISH_BACK = UIColor.rgb(red: 242, green: 242, blue: 242)
+    static let EZY_PLAN_DO_BACK = UIColor.rgb(red: 255, green: 255, blue: 255)
+}
+
+extension CGColor{
+    static let EZY_PLAN_DO_SHADOW = UIColor.EZY_000000.cgColor
+    static let EZY_PLAN_FINISH_SHADOW = UIColor.EZY_FFFFFF.cgColor
+}
+
+extension UIView {
+    func roundCorners(cornerRadius: CGFloat, maskedCorners: CACornerMask) {
+        clipsToBounds = true
+        layer.cornerRadius = cornerRadius
+        layer.maskedCorners = CACornerMask(arrayLiteral: maskedCorners)
+    }
 }
 
 extension UILabel {
@@ -85,6 +110,73 @@ extension UILabel {
     }
   }
 }
+
+extension UITextView {
+    func dynamicFont(fontSize size: CGFloat, currentFontName: String) {
+    let bounds = UIScreen.main.bounds
+    let height = bounds.size.height
+
+    switch height {
+    case 480.0: //Iphone 3,4S => 3.5 inch
+        self.font = UIFont(name: currentFontName, size: size * 0.7)
+      break
+    case 568.0: //iphone 5, SE => 4 inch
+        self.font = UIFont(name: currentFontName, size: size * 0.8)
+      break
+    case 667.0: //iphone 6, 6s, 7, 8 => 4.7 inch
+        self.font = UIFont(name: currentFontName, size: size * 0.92)
+      break
+    case 736.0: //iphone 6s+ 6+, 7+, 8+ => 5.5 inch
+        self.font = UIFont(name: currentFontName, size: size * 0.95)
+      break
+    case 812.0: //iphone X, XS => 5.8 inch
+        self.font = UIFont(name: currentFontName, size: size)
+      break
+    case 896.0: //iphone XR => 6.1 inch  // iphone XS MAX => 6.5 inch
+        self.font = UIFont(name: currentFontName, size: size * 1.15)
+      break
+    case 926.0: //iphone 12 Pro Max
+        self.font = UIFont(name:currentFontName, size: size * 1.18)
+    default:
+      print("not an iPhone")
+      break
+    }
+  }
+}
+
+extension UIButton {
+    func dynamicFont(fontSize size: CGFloat, currentFontName: String) {
+    let bounds = UIScreen.main.bounds
+    let height = bounds.size.height
+
+    switch height {
+    case 480.0: //Iphone 3,4S => 3.5 inch
+        self.titleLabel?.font = UIFont(name: currentFontName, size: size * 0.7)
+      break
+    case 568.0: //iphone 5, SE => 4 inch
+        self.titleLabel?.font = UIFont(name: currentFontName, size: size * 0.8)
+      break
+    case 667.0: //iphone 6, 6s, 7, 8 => 4.7 inch
+        self.titleLabel?.font = UIFont(name: currentFontName, size: size * 0.92)
+      break
+    case 736.0: //iphone 6s+ 6+, 7+, 8+ => 5.5 inch
+        self.titleLabel?.font = UIFont(name: currentFontName, size: size * 0.95)
+      break
+    case 812.0: //iphone X, XS => 5.8 inch
+        self.titleLabel?.font = UIFont(name: currentFontName, size: size)
+      break
+    case 896.0: //iphone XR => 6.1 inch  // iphone XS MAX => 6.5 inch
+        self.titleLabel?.font = UIFont(name: currentFontName, size: size * 1.15)
+      break
+    case 926.0: //iphone 12 Pro Max
+        self.titleLabel?.font = UIFont(name:currentFontName, size: size * 1.18)
+    default:
+      print("not an iPhone")
+      break
+    }
+  }
+}
+
 
 extension UITextField {
     func dynamicFont(fontSize size: CGFloat, currentFontName: String) {
