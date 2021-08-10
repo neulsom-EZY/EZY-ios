@@ -112,6 +112,7 @@ class SelectTimeModalView: UIView {
     
     lazy var startPickerView = UIPickerView().then{
         $0.tintColor = UIColor(red: 150/255, green: 141/255, blue: 255/255, alpha: 1)
+        
     }
     
     lazy var endPickerView = UIPickerView().then{
