@@ -8,9 +8,7 @@
 import UIKit
 
 class PersonalPlanChangeViewController: UIViewController {
-    
-    //test
-    
+
     lazy var calendarViewButton = WhiteBackgroundView()
     
     lazy var timeViewButton = WhiteBackgroundView()
