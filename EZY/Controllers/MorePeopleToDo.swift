@@ -219,7 +219,6 @@ extension MorePeopleToDo: FormViewModel{
         isTableVisible = viewModel.showView
         if isTableVisible == false{
             UIView.animate(withDuration: 0.2) {
-                self.searcherView
                 self.view.layoutIfNeeded()
             }
         }else{
