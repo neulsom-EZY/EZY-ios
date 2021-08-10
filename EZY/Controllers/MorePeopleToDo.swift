@@ -163,7 +163,7 @@ class MorePeopleToDo: UIViewController{
             make.top.equalTo(nickNameTextFieldContainerView.snp.bottom).offset(view.frame.height/135.333)
             make.left.equalTo(nickNameTextFieldContainerView.snp.left)
             make.right.equalTo(nickNameTextFieldContainerView.snp.right)
-            make.height.equalTo(view.frame.height/5.1392)
+            make.height.equalTo(0)//view.frame.height/5.1392)
         }
         recommendPeopleLabel.snp.makeConstraints { (make) in
             make.top.equalTo(nickNameTextFieldContainerView.snp.bottom).offset(view.frame.height/21.9)
@@ -219,12 +219,12 @@ extension MorePeopleToDo: FormViewModel{
         isTableVisible = viewModel.showView
         if isTableVisible == false{
             UIView.animate(withDuration: 0.2) {
-                self.searcherView.transform = CGAffineTransform.init(scaleX: 0, y: 0)
+                self.searcherView
                 self.view.layoutIfNeeded()
             }
         }else{
             UIView.animate(withDuration: 0.2) {
-                self.searcherView.transform = CGAffineTransform.init(scaleX: 1.0, y: 1.0)
+
                 self.view.layoutIfNeeded()
             }
         }
