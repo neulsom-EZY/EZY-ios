@@ -42,7 +42,7 @@ class PersonalPlanDetailViewController: UIViewController {
     }
     
     lazy var locationIconImageView = UIImageView().then {
-        $0.image = UIImage(named: "EZY_Location")
+        $0.image = UIImage(named: "EZY_location")
     }
     
     lazy var timeIconImageView = UIImageView().then {
