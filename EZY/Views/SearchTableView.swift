@@ -8,6 +8,7 @@
 import UIKit
 
 class SearchTableView : UIView {
+    let view = UIView()
     let tv = UITableView().then{
         $0.register(SearchTableCell.self, forCellReuseIdentifier: SearchTableCell.identifier)
     }
@@ -18,24 +19,29 @@ class SearchTableView : UIView {
         tv.delegate = self
         tv.dataSource = self
         addView()
-        backgroundColor = .white
+        view.backgroundColor = .white
         tv.showsVerticalScrollIndicator = false
         tv.separatorStyle = .none
     }
     func addView(){
-        addSubview(tv)
+        addSubview(view)
+        view.addSubview(tv)
     }
     
     override func layoutSubviews() {
         super.layoutSubviews()
+        view.layer.cornerRadius = frame.height/15.8
         tv.layer.cornerRadius = frame.height/15.8
-
+        view.snp.makeConstraints { (make) in
+            make.top.left.right.bottom.equalToSuperview()
+            make.height.equalTo(frame.height)
+        }
         tv.snp.makeConstraints { (make) in
             make.top.equalToSuperview()
             make.left.equalToSuperview()
             make.right.equalToSuperview()
             make.bottom.equalToSuperview()
-            make.height.equalTo(frame.height)
+            make.height.equalTo(view.frame.height)
         }
 
 

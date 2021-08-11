@@ -20,7 +20,6 @@ class MorePeopleToDo: UIViewController{
 
     
     //MARK: - Properties
-    
     var isTableVisible = false
     var viewModel = MoreTodoModel()
     private let backbutton = UIButton().then{
@@ -34,9 +33,9 @@ class MorePeopleToDo: UIViewController{
         $0.textColor = .EZY_968DFF
     }
     private let SubLabel = UILabel().then{
-        $0.text = "한명도 좋고 여러명도 좋아요!"
+        $0.text = "한명만 선택해주세요!"
         $0.dynamicFont(fontSize: 20, currentFontName: "AppleSDGothicNeo-SemiBold")
-        $0.updateGradientTextColor_vertical(gradientColors: [.EZY_968DFF,.EZY_968DFF,.EZY_968DFF,.white])
+        $0.updateGradientTextColor_vertical(gradientColors: [.EZY_968DFF,.EZY_968DFF,.white])
     }
     
 
@@ -53,6 +52,8 @@ class MorePeopleToDo: UIViewController{
     
     private lazy var searcherView  = SearchTableView().then{
         $0.layer.applySketchShadow(color: .gray, alpha: 0.25, x: 0, y: 6, blur: 15, spread: 0)
+        $0.frame = CGRect(x: self.view.frame.height/23.2, y: self.view.frame.height/3.0526, width: self.view.frame.width/1.2255, height: 0)
+
     }
     
     private let recommendPeopleLabel = UILabel().then{
@@ -138,7 +139,7 @@ class MorePeopleToDo: UIViewController{
         backbutton.snp.makeConstraints { (make) in
             make.height.width.equalTo(self.view.frame.height/33.8)
             make.left.equalTo(self.view.frame.height/29)
-            make.top.equalTo(self.view.frame.height/13.3)
+            make.top.equalTo(self.view.frame.height/15.6154)
         }
         TitleLabel.snp.makeConstraints { (make) in
             make.left.equalTo(backbutton.snp.left)
@@ -151,20 +152,15 @@ class MorePeopleToDo: UIViewController{
 
         GroupLabel.snp.makeConstraints { (make) in
             make.left.equalTo(view.frame.height/20.8)
-            make.top.equalTo(SubLabel.snp.bottom).offset(view.frame.height/17.6)
+            make.top.equalTo(SubLabel.snp.bottom).offset(view.frame.height/17.65)
         }
         nickNameTextFieldContainerView.snp.makeConstraints { (make) in
             make.top.equalTo(GroupLabel.snp.bottom).offset(view.frame.height/135.3)
-            make.height.equalTo(self.view.frame.height/21.3)
+            make.height.equalTo(self.view.frame.height/21.368)
             make.left.equalTo(view.snp.left).offset(self.view.frame.height/23.2)
             make.right.equalTo(view.snp.right).offset(self.view.frame.height/23.8 * -1)
         }
-        searcherView.snp.makeConstraints { (make) in
-            make.top.equalTo(nickNameTextFieldContainerView.snp.bottom).offset(view.frame.height/135.333)
-            make.left.equalTo(nickNameTextFieldContainerView.snp.left)
-            make.right.equalTo(nickNameTextFieldContainerView.snp.right)
-            make.height.equalTo(0)//view.frame.height/5.1392)
-        }
+
         recommendPeopleLabel.snp.makeConstraints { (make) in
             make.top.equalTo(nickNameTextFieldContainerView.snp.bottom).offset(view.frame.height/21.9)
             make.left.equalTo(view.frame.height/22.5)
@@ -219,13 +215,18 @@ extension MorePeopleToDo: FormViewModel{
         isTableVisible = viewModel.showView
         if isTableVisible == false{
             UIView.animate(withDuration: 0.2) {
+                self.searcherView.frame = CGRect(x: self.view.frame.height/23.2, y: self.view.frame.height/3.0526, width: self.view.frame.width/1.2255, height: 0)
                 self.view.layoutIfNeeded()
             }
+//            self.searcherView.isHidden = true
+
         }else{
             UIView.animate(withDuration: 0.2) {
+                self.searcherView.frame = CGRect(x: self.view.frame.height/23.2, y: self.view.frame.height/3.0526, width: self.view.frame.width/1.2255, height: self.view.frame.height/5.1392)
 
                 self.view.layoutIfNeeded()
             }
+//            self.searcherView.isHidden = false
         }
     }
 }
