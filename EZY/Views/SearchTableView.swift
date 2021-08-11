@@ -16,8 +16,8 @@ class SearchTableView : UIView {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        tv.delegate = self
-        tv.dataSource = self
+//        tv.delegate = self
+//        tv.dataSource = self
         addView()
         view.backgroundColor = .white
         tv.showsVerticalScrollIndicator = false
@@ -51,29 +51,30 @@ class SearchTableView : UIView {
         fatalError("init(coder:) has not been implemented")
     }
 }
-extension SearchTableView : UITableViewDelegate, UITableViewDataSource{
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if !MorePeopleToDo().filterData.isEmpty{
-            return MorePeopleToDo().filterData.count
-        }
-        return MorePeopleToDo().filtered ? 0 : MorePeopleToDo().data.count
-    }
-
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
-    }
-
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: SearchTableCell.identifier) as! SearchTableCell
-        if !MorePeopleToDo().filterData.isEmpty {
-            cell.personName.text = MorePeopleToDo().filterData[indexPath.row]
-        }else{
-            cell.personName.text = MorePeopleToDo().data[indexPath.row]
-        }
-        return cell
-    }
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return frame.height/3.95
-    }
-    
-}
+//extension SearchTableView : UITableViewDelegate, UITableViewDataSource{
+//    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+//        if !MorePeopleToDo().filterData.isEmpty{
+//            return MorePeopleToDo().filterData.count
+//        }
+//        return MorePeopleToDo().filtered ? 0 : MorePeopleToDo().data.count
+//    }
+//
+//    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+//
+//    }
+//
+//    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+//        let cell = tableView.dequeueReusableCell(withIdentifier: SearchTableCell.identifier) as! SearchTableCell
+//        cell.selectionStyle = .none
+//        if !MorePeopleToDo().filterData.isEmpty {
+//            cell.personName.text = MorePeopleToDo().filterData[indexPath.row]
+//        }else{
+//            cell.personName.text = MorePeopleToDo().data[indexPath.row]
+//        }
+//        return cell
+//    }
+//    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+//        return frame.height/3.95
+//    }
+//
+//}

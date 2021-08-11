@@ -14,7 +14,7 @@ class MorePeopleToDo: UIViewController{
     static let searchData = ["정시원 (Siwony)","전지환 (gyeongjun)","김기홍 (KimKiHong)","안지훈 (JiHoon)","노경준 (NohKyung-joon)","김유진 (y0000000ujin)"]
     let randomColorData : [UIColor] = [.EZY_BAC8FF,.EZY_FFCCCC,.EZY_BADEFF,.EZY_CFE3CE,.EZY_FFD18D]
     
-    var data = searchData
+    var data = recommendData
     var filterData = [String]()
     var filtered = false
 
@@ -89,6 +89,8 @@ class MorePeopleToDo: UIViewController{
         super.viewDidLoad()
         configureUI()
         WhatAboutPeopleLikeThis.dataSource = self
+        searcherView.tv.delegate = self
+        searcherView.tv.dataSource = self
         WhatAboutPeopleLikeThis.delegate = self
         nickNameTextFieldContainerView.delegate = self
         WhatAboutPeopleLikeThis.allowsMultipleSelection = true
@@ -244,9 +246,36 @@ extension MorePeopleToDo : UITextFieldDelegate{
                 filterData.append(string)
             }
         }
-        SearchTableView().tv.reloadData()
+        searcherView.tv.reloadData()
         filtered = true
         
     }
 }
 
+extension MorePeopleToDo : UITableViewDelegate,UITableViewDataSource{
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        if !filterData.isEmpty{
+            return filterData.count
+        }
+        return filtered ? 0 : data.count
+    }
+
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+    }
+
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: SearchTableCell.identifier) as! SearchTableCell
+        cell.selectionStyle = .none
+        if !filterData.isEmpty {
+            cell.personName.text = filterData[indexPath.row]
+        }else{
+            cell.personName.text = data[indexPath.row]
+        }
+        return cell
+    }
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return view.frame.height/20.3
+    }
+    
+}
