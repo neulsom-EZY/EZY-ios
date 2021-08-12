@@ -97,6 +97,9 @@ class MorePeopleToDo: UIViewController{
         configureNotificationObservers()
 
     }
+    override func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
+    }
     
     //MARK: - Selectors
     @objc func backButton(){
@@ -220,62 +223,99 @@ extension MorePeopleToDo: FormViewModel{
                 self.searcherView.frame = CGRect(x: self.view.frame.height/23.2, y: self.view.frame.height/3.0526, width: self.view.frame.width/1.2255, height: 0)
                 self.view.layoutIfNeeded()
             }
-//            self.searcherView.isHidden = true
-
         }else{
             UIView.animate(withDuration: 0.2) {
                 self.searcherView.frame = CGRect(x: self.view.frame.height/23.2, y: self.view.frame.height/3.0526, width: self.view.frame.width/1.2255, height: self.view.frame.height/5.1392)
-
                 self.view.layoutIfNeeded()
             }
-//            self.searcherView.isHidden = false
         }
     }
 }
-extension MorePeopleToDo : UITextFieldDelegate{
-    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
-        if let text = textField.text{
-            filterText(text+string)
-        }
-        return true
-    }
-    func filterText(_ query: String){
-        filterData.removeAll()
-        for string in data{
-            if string.lowercased().starts(with: query.lowercased()){
-                filterData.append(string)
-            }
-        }
-        searcherView.tv.reloadData()
-        filtered = true
-        
-    }
-}
+//extension MorePeopleToDo : UITextFieldDelegate{
+//    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+//        if let text = textField.text{
+//            filterText(text+string)
+//        }
+//        return true
+//    }
+//
+//    func filterText(_ query: String){
+//        filterData.removeAll()
+//        for string in data{
+//            if string.lowercased().starts(with: query.lowercased()){
+//                filterData.append(string)
+//            }
+//        }
+//        searcherView.tv.reloadData()
+//        filtered = true
+//
+//    }
+//}
+//
+//extension MorePeopleToDo : UITableViewDelegate,UITableViewDataSource{
+//    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+//        if !filterData.isEmpty{
+//            return filterData.count
+//        }
+//        return 0
+//    }
+//
+//    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+//
+//    }
+//
+//    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+//        let cell = tableView.dequeueReusableCell(withIdentifier: SearchTableCell.identifier) as! SearchTableCell
+//        cell.selectionStyle = .none
+//        if !filterData.isEmpty {
+//            cell.personName.text = filterData[indexPath.row]
+//        }
+//        return cell
+//    }
+//    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+//        return view.frame.height/20.3
+//    }
+//
+//}
 
-extension MorePeopleToDo : UITableViewDelegate,UITableViewDataSource{
+//MARK: - Private instance methods
+
+extension MorePeopleToDo : UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if !filterData.isEmpty{
-            return filterData.count
-        }
-        return filtered ? 0 : data.count
+        return 9
     }
-
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
-    }
-
+    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: SearchTableCell.identifier) as! SearchTableCell
-        cell.selectionStyle = .none
+            cell.selectionStyle = .none
         if !filterData.isEmpty {
             cell.personName.text = filterData[indexPath.row]
-        }else{
-            cell.personName.text = data[indexPath.row]
         }
         return cell
     }
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return view.frame.height/20.3
+    
+    
+}
+extension MorePeopleToDo : UITextFieldDelegate{
+    func filterContentForSearchText(_ searchText: String, scope: String = "All") {
+      filteredCandies = candies.filter({( candy : Candy) -> Bool in
+        let doesCategoryMatch = (scope == "All") || (candy.category == scope)
+        
+        if searchBarIsEmpty() {
+          return doesCategoryMatch
+        } else {
+          return doesCategoryMatch && candy.name.lowercased().contains(searchText.lowercased())
+        }
+      })
+      tableView.reloadData()
     }
     
+    func searchBarIsEmpty() -> Bool {
+      return searchController.searchBar.text?.isEmpty ?? true
+    }
+    
+    func isFiltering() -> Bool {
+      let searchBarScopeIsFiltering = searchController.searchBar.selectedScopeButtonIndex != 0
+      return searchController.isActive && (!searchBarIsEmpty() || searchBarScopeIsFiltering)
+    }
 }

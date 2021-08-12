@@ -51,3 +51,11 @@ struct SendUserView {
     let senderStrokeColor : UIColor?
     let recipientStrokeColor : UIColor?
 }
+
+//MARK: - SearchData
+struct SearchData {
+    let koreanName : String
+    let name : String
+}
+
+
