@@ -11,11 +11,11 @@ import Then
     
 class MorePeopleToDo: UIViewController{
     static let recommendData = ["JiHoooooon","siwonnnny","NoName","mingki","johnjihwan","noplayy","gyeongggggjuunnn"]
-    static let searchData = ["정시원 (Siwony)","전지환 (gyeongjun)","김기홍 (KimKiHong)","안지훈 (JiHoon)","노경준 (NohKyung-joon)","김유진 (y0000000ujin)"]
+    static let searchData = ["정시원 (Siwony)","전지환 (gyeongjun)","김기홍 (KimKiHong)","안지훈 (JiHoon)","노경준 (NohKyung-joon)","김유진 (youjin)"]
     let randomColorData : [UIColor] = [.EZY_BAC8FF,.EZY_FFCCCC,.EZY_BADEFF,.EZY_CFE3CE,.EZY_FFD18D]
     
-    var data = recommendData
-    var filterData = [String]()
+    var data = [SearchData]()
+    var filterData = [SearchData]()
     var filtered = false
 
     
@@ -95,10 +95,7 @@ class MorePeopleToDo: UIViewController{
         nickNameTextFieldContainerView.delegate = self
         WhatAboutPeopleLikeThis.allowsMultipleSelection = true
         configureNotificationObservers()
-
-    }
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
+        Data()
     }
     
     //MARK: - Selectors
@@ -117,6 +114,18 @@ class MorePeopleToDo: UIViewController{
     }
     
     //MARK: - Helpers
+    func Data() {
+        data = [
+            SearchData(koreanName: "정시원", name: "Siwony"),
+            SearchData(koreanName: "전지환", name: "gyeongjun"),
+            SearchData(koreanName: "김유진", name: "youjin"),
+            SearchData(koreanName: "김기홍", name: "KiHong"),
+            SearchData(koreanName: "안지훈", name: "Jihoon")
+            
+        ]
+    }
+    
+    
     func configureUI(){
         view.backgroundColor = .white
         WhatAboutPeopleLikeThis.contentInset = UIEdgeInsets(top: 0, left: view.frame.height/21.95, bottom: 0, right: view.frame.height/21.95)
@@ -187,7 +196,12 @@ class MorePeopleToDo: UIViewController{
     func configureNotificationObservers(){
         nickNameTextFieldContainerView.addTarget(self, action: #selector(textDidChage), for: .editingChanged)
     }
-
+    func filterContentForSearchText(_ searchText: String) {
+        filterData = data.filter({( data : SearchData) -> Bool in
+          return data.koreanName.lowercased().contains(searchText.lowercased())
+      })
+        searcherView.tv.reloadData()
+    }
     
 }
 
@@ -231,91 +245,30 @@ extension MorePeopleToDo: FormViewModel{
         }
     }
 }
-//extension MorePeopleToDo : UITextFieldDelegate{
-//    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
-//        if let text = textField.text{
-//            filterText(text+string)
-//        }
-//        return true
-//    }
-//
-//    func filterText(_ query: String){
-//        filterData.removeAll()
-//        for string in data{
-//            if string.lowercased().starts(with: query.lowercased()){
-//                filterData.append(string)
-//            }
-//        }
-//        searcherView.tv.reloadData()
-//        filtered = true
-//
-//    }
-//}
-//
-//extension MorePeopleToDo : UITableViewDelegate,UITableViewDataSource{
-//    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-//        if !filterData.isEmpty{
-//            return filterData.count
-//        }
-//        return 0
-//    }
-//
-//    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-//
-//    }
-//
-//    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-//        let cell = tableView.dequeueReusableCell(withIdentifier: SearchTableCell.identifier) as! SearchTableCell
-//        cell.selectionStyle = .none
-//        if !filterData.isEmpty {
-//            cell.personName.text = filterData[indexPath.row]
-//        }
-//        return cell
-//    }
-//    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-//        return view.frame.height/20.3
-//    }
-//
-//}
+extension MorePeopleToDo : UITextFieldDelegate{
+    func textFieldDidChangeSelection(_ textField: UITextField) {
+        if let text = textField.text{
+            filterContentForSearchText(nickNameTextFieldContainerView.text!)
+        }
+    }
+}
 
-//MARK: - Private instance methods
-
-extension MorePeopleToDo : UITableViewDelegate, UITableViewDataSource {
+extension MorePeopleToDo : UITableViewDelegate , UITableViewDataSource{
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 9
+        return filterData.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: SearchTableCell.identifier) as! SearchTableCell
-            cell.selectionStyle = .none
-        if !filterData.isEmpty {
-            cell.personName.text = filterData[indexPath.row]
-        }
+        let personData : SearchData
+        personData = filterData[indexPath.row]
+
+        cell.personName.text = personData.koreanName + " (" + personData.name  + ")"
         return cell
     }
-    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return view.frame.height/20.3
+    }
     
 }
-extension MorePeopleToDo : UITextFieldDelegate{
-    func filterContentForSearchText(_ searchText: String, scope: String = "All") {
-      filteredCandies = candies.filter({( candy : Candy) -> Bool in
-        let doesCategoryMatch = (scope == "All") || (candy.category == scope)
-        
-        if searchBarIsEmpty() {
-          return doesCategoryMatch
-        } else {
-          return doesCategoryMatch && candy.name.lowercased().contains(searchText.lowercased())
-        }
-      })
-      tableView.reloadData()
-    }
-    
-    func searchBarIsEmpty() -> Bool {
-      return searchController.searchBar.text?.isEmpty ?? true
-    }
-    
-    func isFiltering() -> Bool {
-      let searchBarScopeIsFiltering = searchController.searchBar.selectedScopeButtonIndex != 0
-      return searchController.isActive && (!searchBarIsEmpty() || searchBarScopeIsFiltering)
-    }
-}
+
