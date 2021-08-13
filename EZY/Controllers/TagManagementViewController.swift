@@ -9,7 +9,26 @@ import UIKit
 
 class TagManagementViewController: UIViewController {
     
+    var tagNameText = [String]()
+    var tagColor = [UIColor]()
+    
     lazy var tagAddModalView = TagAddModalView()
+    
+    lazy var noTagImageView = UIImageView().then{
+        $0.image = UIImage(named: "EZY_NoTagImage")
+    }
+    
+    lazy var tagGoodLabel = UILabel().then{
+        $0.text = "태그를 사용하시면 더 쉽게 일정을 정리할 수 있어요!"
+        $0.textColor = UIColor(red: 82/255, green: 82/255, blue: 82/255, alpha: 1)
+        $0.dynamicFont(fontSize: 14, currentFontName: "AppleSDGothicNeo-Medium")
+    }
+    
+    lazy var tagAddLabel = UILabel().then{
+        $0.text = "추가 버튼을 눌러 태그를 추가해보세요!"
+        $0.textColor = .black
+        $0.dynamicFont(fontSize: 13, currentFontName: "AppleSDGothicNeo-Thin")
+    }
     
     lazy var backButton = UIButton().then{
         $0.setImage(UIImage(named: "EZY_TagManagementBackButtonImage"), for: .normal)
@@ -39,6 +58,8 @@ class TagManagementViewController: UIViewController {
         $0.showsHorizontalScrollIndicator = false
         $0.backgroundColor = .white
     }
+    
+    
     
     var TagColorModels: [TagColorCollectionViewModel] = [TagColorCollectionViewModel(backgroundColor: UIColor(red: 186/255, green: 200/255, blue: 255/255, alpha: 1), isSelected: false),
                                                  TagColorCollectionViewModel(backgroundColor: UIColor(red: 196/255, green: 200/255, blue: 255/255, alpha: 1), isSelected: true),
@@ -172,6 +193,10 @@ class TagManagementViewController: UIViewController {
             make.left.equalTo(backButton)
             make.centerX.equalToSuperview()
         }
+        
+        if tagNameText.count == 0{
+            tagTableView.isHidden = true
+        }
     }
     
     func layoutSetting(){
@@ -180,6 +205,9 @@ class TagManagementViewController: UIViewController {
         self.view.addSubview(backButton)
         self.view.addSubview(mainTitleLabel)
         self.view.addSubview(tagAddButton)
+        self.view.addSubview(noTagImageView)
+        self.view.addSubview(tagGoodLabel)
+        self.view.addSubview(tagAddLabel)
         
         backButton.addTarget(self, action: #selector(backButtonClicked(sender:)), for: .touchUpInside)
         tagAddButton.addTarget(self, action: #selector(tagAddButtonClicked(sender:)), for: .touchUpInside)
@@ -200,6 +228,23 @@ class TagManagementViewController: UIViewController {
             make.centerY.equalTo(backButton)
             make.right.equalToSuperview().offset(-self.view.frame.width/12)
             make.height.width.equalTo(backButton)
+        }
+        
+        noTagImageView.snp.makeConstraints { make in
+            make.top.equalTo(mainTitleLabel.snp.bottom).offset(self.view.frame.height/8.45)
+            make.height.equalToSuperview().dividedBy(4)
+            make.width.equalTo(noTagImageView.snp.height)
+            make.centerX.equalToSuperview()
+        }
+        
+        tagGoodLabel.snp.makeConstraints { make in
+            make.centerX.equalTo(noTagImageView)
+            make.top.equalTo(noTagImageView.snp.bottom).offset(self.view.frame.height/30)
+        }
+        
+        tagAddLabel.snp.makeConstraints { make in
+            make.centerX.equalTo(tagGoodLabel)
+            make.top.equalTo(tagGoodLabel.snp.bottom).offset(self.view.frame.height/135.3)
         }
     }
     
@@ -229,7 +274,7 @@ extension TagManagementViewController: UITableViewDelegate{
 extension TagManagementViewController: UITableViewDataSource{
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
 
-        return 20
+        return tagNameText.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
