@@ -45,7 +45,6 @@ class TagManagementViewController: UIViewController {
     lazy var tagAddButton = UIButton().then{
         $0.setImage(UIImage(named: "EZY_PlanAddButton"), for: .normal)
     }
-
     
     lazy var tagTableView = UITableView().then {
         $0.separatorStyle = .none
@@ -113,7 +112,7 @@ class TagManagementViewController: UIViewController {
         recommendedTagCollectionView.snp.makeConstraints { make in
             make.top.equalTo(tagAddLabel.snp.bottom).offset(self.view.frame.height/120.6)
             make.left.right.equalToSuperview()
-            make.height.equalToSuperview().dividedBy(6.24)
+            make.height.equalToSuperview().dividedBy(6.6)
         }
     }
     
@@ -229,11 +228,11 @@ class TagManagementViewController: UIViewController {
     
     func layoutSetting(){
         self.view.backgroundColor = .white
-        
         self.view.addSubview(backButton)
         self.view.addSubview(mainTitleLabel)
         self.view.addSubview(tagAddButton)
         self.view.addSubview(noTagImageView)
+        
         self.view.addSubview(tagGoodLabel)
         self.view.addSubview(tagAddLabel)
         
@@ -264,7 +263,7 @@ class TagManagementViewController: UIViewController {
             make.width.equalTo(noTagImageView.snp.height)
             make.centerX.equalToSuperview()
         }
-        
+    
         tagGoodLabel.snp.makeConstraints { make in
             make.centerX.equalTo(noTagImageView)
             make.top.equalTo(noTagImageView.snp.bottom).offset(self.view.frame.height/30)
@@ -277,7 +276,32 @@ class TagManagementViewController: UIViewController {
     }
     
     @objc func recommendedTagAddButtonClicked(sender:UIButton){
-        
+        UIView.animate(withDuration: 1, delay: 0, options: .curveEaseOut, animations: {
+            
+            self.tagGoodLabel.snp.remakeConstraints { make in
+                make.centerX.equalTo(self.tagAddLabel)
+                make.bottom.equalTo(self.tagAddLabel.snp.top).offset(-self.view.frame.height/100)
+            }
+            
+            self.tagGoodLabel.text = "이런 태그는 어때요?"
+            
+            self.tagAddLabel.snp.remakeConstraints { make in
+                make.centerX.equalTo(self.recommendedTagCollectionView)
+                make.bottom.equalTo(self.recommendedTagCollectionView.snp.top).offset(-self.view.frame.height/135.3)
+            }
+            
+            self.recommendedTagCollectionView.snp.remakeConstraints { make in
+                make.bottom.equalToSuperview().offset(-self.view.frame.height/30)
+                make.left.right.equalToSuperview()
+                make.height.equalToSuperview().dividedBy(6.6)
+            }
+            
+            self.noTagImageView.isHidden = true
+            
+            self.recommendedTagCollectionView.superview?.layoutIfNeeded()
+            
+
+        })
     }
     
     @objc func tagAddButtonClicked(sender:UIButton){
