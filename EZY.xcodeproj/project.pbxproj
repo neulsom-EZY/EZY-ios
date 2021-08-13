@@ -29,6 +29,7 @@
 		EE93B4D72687639F0055D7A6 /* OneAlertButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE93B4D62687639F0055D7A6 /* OneAlertButton.swift */; };
 		EE9C91B126AEE84300115DD2 /* MoreAlarmModelViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE9C91B026AEE84300115DD2 /* MoreAlarmModelViewController.swift */; };
 		EEA457F42682FFA100C08D17 /* AlertButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEA457F32682FFA100C08D17 /* AlertButton.swift */; };
+		EEC7109326C5ACC800E53434 /* NotFoundUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEC7109226C5ACC800E53434 /* NotFoundUser.swift */; };
 		EED007D526674AC2009A5A87 /* Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = EED007D426674AC2009A5A87 /* Utilities.swift */; };
 		EED20D63266C0F90000E0856 /* AdditionalButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = EED20D62266C0F90000E0856 /* AdditionalButton.swift */; };
 		EEDE967926B882B0000AEE4D /* AlarmDatePickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEDE967826B882B0000AEE4D /* AlarmDatePickerView.swift */; };
@@ -68,6 +69,7 @@
 		EE9C91B026AEE84300115DD2 /* MoreAlarmModelViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoreAlarmModelViewController.swift; sourceTree = "<group>"; };
 		EEA457F32682FFA100C08D17 /* AlertButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertButton.swift; sourceTree = "<group>"; };
 		EEB26ABE26ADAD7E00A32C76 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		EEC7109226C5ACC800E53434 /* NotFoundUser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotFoundUser.swift; sourceTree = "<group>"; };
 		EED007D426674AC2009A5A87 /* Utilities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utilities.swift; sourceTree = "<group>"; };
 		EED20D62266C0F90000E0856 /* AdditionalButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdditionalButton.swift; sourceTree = "<group>"; };
 		EEDE967826B882B0000AEE4D /* AlarmDatePickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlarmDatePickerView.swift; sourceTree = "<group>"; };
@@ -184,6 +186,7 @@
 				EEDE967826B882B0000AEE4D /* AlarmDatePickerView.swift */,
 				EE47140E26BEF0B000BC495F /* GroupSearchTextfield.swift */,
 				EE47143526BFC33600BC495F /* SearchTableView.swift */,
+				EEC7109226C5ACC800E53434 /* NotFoundUser.swift */,
 				EE37790A2679FB3800334D4A /* Cell */,
 			);
 			path = Views;
@@ -406,6 +409,7 @@
 				EE93B4D72687639F0055D7A6 /* OneAlertButton.swift in Sources */,
 				EE47140F26BEF0B000BC495F /* GroupSearchTextfield.swift in Sources */,
 				EE896CC3269BEA450099E8CB /* WhoShouldIAskCell.swift in Sources */,
+				EEC7109326C5ACC800E53434 /* NotFoundUser.swift in Sources */,
 				EEE1E95326A9F38A0082B696 /* AlarmSettingCell.swift in Sources */,
 				EEEDB2C22664D30D00E5C53A /* extensions.swift in Sources */,
 			);

@@ -11,12 +11,12 @@ import Then
     
 class MorePeopleToDo: UIViewController{
     static let recommendData = ["JiHoooooon","siwonnnny","NoName","mingki","johnjihwan","noplayy","gyeongggggjuunnn"]
-    static let searchData = ["정시원 (Siwony)","전지환 (gyeongjun)","김기홍 (KimKiHong)","안지훈 (JiHoon)","노경준 (NohKyung-joon)","김유진 (youjin)"]
     let randomColorData : [UIColor] = [.EZY_BAC8FF,.EZY_FFCCCC,.EZY_BADEFF,.EZY_CFE3CE,.EZY_FFD18D]
-    
+
     var data = [SearchData]()
     var filterData = [SearchData]()
     var filtered = false
+    private let noUser = NotFoundUser()
 
     
     //MARK: - Properties
@@ -38,7 +38,6 @@ class MorePeopleToDo: UIViewController{
         $0.updateGradientTextColor_vertical(gradientColors: [.EZY_968DFF,.EZY_968DFF,.white])
     }
     
-
     private let GroupLabel = UILabel().then{
         $0.text = "닉네임"
         $0.dynamicFont(fontSize: 10, currentFontName: "AppleSDGothicNeo-Thin")
@@ -145,6 +144,7 @@ class MorePeopleToDo: UIViewController{
         view.addSubview(WhatAboutPeopleLikeThis)
         view.addSubview(searcherView)
         view.addSubview(userChoose)
+        
     }
     
 
@@ -196,13 +196,21 @@ class MorePeopleToDo: UIViewController{
     func configureNotificationObservers(){
         nickNameTextFieldContainerView.addTarget(self, action: #selector(textDidChage), for: .editingChanged)
     }
-    func filterContentForSearchText(_ searchText: String) {
+    
+    
+    //MARK: - Search filter
+    func filterContentForSearchTextKor(_ searchText: String) {
         filterData = data.filter({( data : SearchData) -> Bool in
-          return data.koreanName.lowercased().contains(searchText.lowercased())
+            return data.koreanName.lowercased().contains(searchText.lowercased())
       })
         searcherView.tv.reloadData()
     }
-    
+    func filterContentForSearchTextEng(_ searchText: String) {
+        filterData = data.filter({( data : SearchData) -> Bool in
+            return data.name.lowercased().contains(searchText.lowercased())
+      })
+        searcherView.tv.reloadData()
+    }
 }
 
 extension MorePeopleToDo : UICollectionViewDelegateFlowLayout,UICollectionViewDataSource{
@@ -248,7 +256,8 @@ extension MorePeopleToDo: FormViewModel{
 extension MorePeopleToDo : UITextFieldDelegate{
     func textFieldDidChangeSelection(_ textField: UITextField) {
         if let text = textField.text{
-            filterContentForSearchText(nickNameTextFieldContainerView.text!)
+            filterContentForSearchTextKor(nickNameTextFieldContainerView.text!)
+            filterContentForSearchTextEng(nickNameTextFieldContainerView.text!)
         }
     }
 }
@@ -256,14 +265,15 @@ extension MorePeopleToDo : UITextFieldDelegate{
 extension MorePeopleToDo : UITableViewDelegate , UITableViewDataSource{
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return filterData.count
+    
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: SearchTableCell.identifier) as! SearchTableCell
         let personData : SearchData
         personData = filterData[indexPath.row]
-
         cell.personName.text = personData.koreanName + " (" + personData.name  + ")"
+        
         return cell
     }
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
