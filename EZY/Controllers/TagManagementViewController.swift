@@ -12,6 +12,8 @@ class TagManagementViewController: UIViewController {
     var tagNameText = [String]()
     var tagColor = [UIColor]()
     
+    lazy var selectedRecommendedTagIndex = 0
+    
     lazy var tagAddModalView = TagAddModalView()
     
     lazy var recommendedTagNameText = ["STUDY","EXCERISE","ENGLISH","EAT"]
@@ -49,6 +51,10 @@ class TagManagementViewController: UIViewController {
     lazy var tagTableView = UITableView().then {
         $0.separatorStyle = .none
         $0.showsVerticalScrollIndicator = false
+    }
+    
+    lazy var lineView = UIView().then{
+        $0.backgroundColor = UIColor(red: 222/255, green: 222/255, blue: 222/255, alpha: 1)
     }
     
     let tagColorCollectionView = UICollectionView(frame: .zero, collectionViewLayout: CalendarViewLayout()).then{
@@ -117,8 +123,6 @@ class TagManagementViewController: UIViewController {
     }
     
     func tagColorCollectionViewSetting(){
-        
-
         tagColorCollectionView.showsHorizontalScrollIndicator = false
         tagColorCollectionView.dataSource = self
         tagColorCollectionView.delegate = self
@@ -216,9 +220,16 @@ class TagManagementViewController: UIViewController {
         
         tagTableView.snp.makeConstraints { make in
             make.top.equalTo(mainTitleLabel.snp.bottom).offset(self.view.frame.height/26.1)
-            make.bottom.equalToSuperview()
+            make.height.equalToSuperview().dividedBy(2)
             make.left.equalTo(backButton)
             make.centerX.equalToSuperview()
+        }
+        
+        lineView.snp.makeConstraints { make in
+            make.height.equalTo(0.5)
+            make.left.equalTo(mainTitleLabel)
+            make.centerX.equalToSuperview()
+            make.top.equalTo(tagTableView.snp.bottom).offset(self.view.frame.height/40)
         }
         
         if tagNameText.count == 0{
@@ -232,7 +243,7 @@ class TagManagementViewController: UIViewController {
         self.view.addSubview(mainTitleLabel)
         self.view.addSubview(tagAddButton)
         self.view.addSubview(noTagImageView)
-        
+        self.view.addSubview(lineView)
         self.view.addSubview(tagGoodLabel)
         self.view.addSubview(tagAddLabel)
         
@@ -276,14 +287,14 @@ class TagManagementViewController: UIViewController {
     }
     
     @objc func recommendedTagAddButtonClicked(sender:UIButton){
-        UIView.animate(withDuration: 1, delay: 0, options: .curveEaseOut, animations: {
+        self.tagGoodLabel.text = "이런 태그는 어때요?"
+        UIView.animate(withDuration: 0.5, delay: 0, options: .curveEaseOut, animations: {
             
             self.tagGoodLabel.snp.remakeConstraints { make in
                 make.centerX.equalTo(self.tagAddLabel)
                 make.bottom.equalTo(self.tagAddLabel.snp.top).offset(-self.view.frame.height/100)
             }
             
-            self.tagGoodLabel.text = "이런 태그는 어때요?"
             
             self.tagAddLabel.snp.remakeConstraints { make in
                 make.centerX.equalTo(self.recommendedTagCollectionView)
@@ -299,9 +310,17 @@ class TagManagementViewController: UIViewController {
             self.noTagImageView.isHidden = true
             
             self.recommendedTagCollectionView.superview?.layoutIfNeeded()
-            
-
         })
+        
+        recommendedTagCollectionView.deleteItems(at: [IndexPath.init(row: sender.tag, section: 0)])
+        recommendedTagNameText.remove(at: sender.tag)
+        print(recommendedTagNameText)
+        
+        tagTableView.isHidden = false
+        tagTableView.backgroundColor = .clear
+        tagNameText.append(recommendedTagNameText[sender.tag])
+        tagColor.append(UIColor(red: 196/255, green: 200/255, blue: 255/255, alpha: 1))
+        tagTableView.reloadData()
     }
     
     @objc func tagAddButtonClicked(sender:UIButton){
@@ -382,9 +401,13 @@ extension TagManagementViewController: UICollectionViewDataSource, UICollectionV
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: RecommendedTagCollectionViewCell.reuseId, for: indexPath) as! RecommendedTagCollectionViewCell
             
             cell.addButton.addTarget(self, action: #selector(recommendedTagAddButtonClicked(sender:)), for: .touchUpInside)
+            cell.tagButton.setTitle(recommendedTagNameText[indexPath.row], for: .normal)
             cell.clipsToBounds = false
             cell.backgroundColor = .white
-        
+            
+            selectedRecommendedTagIndex = indexPath.row
+
+            cell.tagButton.tag = indexPath.row
             return cell
         }
         
