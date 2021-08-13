@@ -14,6 +14,8 @@ class TagManagementViewController: UIViewController {
     
     lazy var tagAddModalView = TagAddModalView()
     
+    lazy var recommendedTagNameText = ["STUDY","EXCERISE","ENGLISH","EAT"]
+    
     lazy var noTagImageView = UIImageView().then{
         $0.image = UIImage(named: "EZY_NoTagImage")
     }
@@ -50,7 +52,7 @@ class TagManagementViewController: UIViewController {
         $0.showsVerticalScrollIndicator = false
     }
     
-    let tagColorCollectionView = UICollectionView(frame: .zero, collectionViewLayout: CalendarViewLayout()).then {
+    let tagColorCollectionView = UICollectionView(frame: .zero, collectionViewLayout: CalendarViewLayout()).then{
         let layout: UICollectionViewFlowLayout = UICollectionViewFlowLayout()
         layout.itemSize = CGSize(width: 30, height: 30)
         layout.scrollDirection = .horizontal
@@ -59,7 +61,14 @@ class TagManagementViewController: UIViewController {
         $0.backgroundColor = .white
     }
     
-    
+    let recommendedTagCollectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewLayout()).then{
+        let layout: UICollectionViewFlowLayout = UICollectionViewFlowLayout()
+        layout.scrollDirection = .horizontal
+        $0.collectionViewLayout = layout
+        $0.showsHorizontalScrollIndicator = false
+        $0.backgroundColor = .white
+    }
+
     
     var TagColorModels: [TagColorCollectionViewModel] = [TagColorCollectionViewModel(backgroundColor: UIColor(red: 186/255, green: 200/255, blue: 255/255, alpha: 1), isSelected: false),
                                                  TagColorCollectionViewModel(backgroundColor: UIColor(red: 196/255, green: 200/255, blue: 255/255, alpha: 1), isSelected: true),
@@ -82,11 +91,30 @@ class TagManagementViewController: UIViewController {
 
         layoutSetting()
         
+        recommendedTagCollectionViewSetting()
+        
         tagTableViewSetting()
         
         tagAddModalViewSetting()
         
         tagColorCollectionViewSetting()
+    }
+    
+    func recommendedTagCollectionViewSetting(){
+        self.view.addSubview(recommendedTagCollectionView)
+        
+        recommendedTagCollectionView.showsHorizontalScrollIndicator = false
+        
+        recommendedTagCollectionView.dataSource = self
+        recommendedTagCollectionView.delegate = self
+        
+        recommendedTagCollectionView.register(RecommendedTagCollectionViewCell.self, forCellWithReuseIdentifier: RecommendedTagCollectionViewCell.reuseId)
+        
+        recommendedTagCollectionView.snp.makeConstraints { make in
+            make.top.equalTo(tagAddLabel.snp.bottom).offset(self.view.frame.height/120.6)
+            make.left.right.equalToSuperview()
+            make.height.equalToSuperview().dividedBy(6.24)
+        }
     }
     
     func tagColorCollectionViewSetting(){
@@ -101,7 +129,7 @@ class TagManagementViewController: UIViewController {
         tagColorCollectionView.backgroundColor = UIColor.white
         tagAddModalView.modalBackgroundView.addSubview(tagColorCollectionView)
         
-            tagColorCollectionView.snp.makeConstraints { make in
+        tagColorCollectionView.snp.makeConstraints { make in
             make.top.equalTo(tagAddModalView.tagColorLabel.snp.bottom)
             make.left.equalToSuperview()
             make.height.equalTo(tagAddModalView.modalBackgroundView).dividedBy(5)
@@ -248,6 +276,10 @@ class TagManagementViewController: UIViewController {
         }
     }
     
+    @objc func recommendedTagAddButtonClicked(sender:UIButton){
+        
+    }
+    
     @objc func tagAddButtonClicked(sender:UIButton){
         tagAddModalView.isHidden = false
     }
@@ -273,16 +305,23 @@ extension TagManagementViewController: UITableViewDelegate{
 
 extension TagManagementViewController: UITableViewDataSource{
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-
-        return tagNameText.count
+        if tableView == tagTableView{
+            return tagNameText.count
+        }
+        
+        return Int()
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: TagTableViewCell.reuseId, for: indexPath) as! TagTableViewCell
-        cell.tagSettingButton.addTarget(self, action: #selector(tagSettingButtonClicked(sender:)), for: .touchUpInside)
+        if tableView == tagTableView{
+            let cell = tableView.dequeueReusableCell(withIdentifier: TagTableViewCell.reuseId, for: indexPath) as! TagTableViewCell
+            cell.tagSettingButton.addTarget(self, action: #selector(tagSettingButtonClicked(sender:)), for: .touchUpInside)
+            
+            cell.selectionStyle = .none
+            return cell
+        }
         
-        cell.selectionStyle = .none
-        return cell
+        return UITableViewCell()
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -297,17 +336,35 @@ extension TagManagementViewController: UICollectionViewDelegate{
 
 extension TagManagementViewController: UICollectionViewDataSource, UICollectionViewDelegateFlowLayout{
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return TagColorModels.count
+        if collectionView == tagColorCollectionView{
+            return TagColorModels.count
+        }else if collectionView == recommendedTagCollectionView{
+            return recommendedTagNameText.count
+        }
+        
+        return Int()
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: TagColorCollectionViewCell.reuseId, for: indexPath) as! TagColorCollectionViewCell
+        if collectionView == tagColorCollectionView{
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: TagColorCollectionViewCell.reuseId, for: indexPath) as! TagColorCollectionViewCell
+            
+            cell.backgroundColor = .white
+            
+            cell.setModel(TagColorModels[indexPath.row])
         
-        cell.backgroundColor = .white
+            return cell
+        }else if collectionView == recommendedTagCollectionView{
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: RecommendedTagCollectionViewCell.reuseId, for: indexPath) as! RecommendedTagCollectionViewCell
+            
+            cell.addButton.addTarget(self, action: #selector(recommendedTagAddButtonClicked(sender:)), for: .touchUpInside)
+            cell.clipsToBounds = false
+            cell.backgroundColor = .white
         
-        cell.setModel(TagColorModels[indexPath.row])
-    
-        return cell
+            return cell
+        }
+        
+        return UICollectionViewCell()
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
@@ -329,11 +386,23 @@ extension TagManagementViewController: UICollectionViewDataSource, UICollectionV
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: self.view.frame.height/27, height: self.view.frame.height/27)
+        if collectionView == tagColorCollectionView{
+            return CGSize(width: self.view.frame.height/27, height: self.view.frame.height/27)
+        }else if collectionView == recommendedTagCollectionView{
+            return CGSize(width: self.view.frame.height/8, height: self.view.frame.height/8)
+        }
+        
+        return CGSize()
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
-        return UIEdgeInsets(top: 0, left: self.view.frame.height/33.8, bottom: 0, right: self.view.frame.height/33.8)
+        if collectionView == tagColorCollectionView{
+            return UIEdgeInsets(top: 0, left: self.view.frame.height/33.8, bottom: 0, right: self.view.frame.height/33.8)
+        }else if collectionView == recommendedTagCollectionView{
+            return UIEdgeInsets(top: 0, left: self.view.frame.width/13.3, bottom: 0, right: self.view.frame.width/13.3)
+        }
+        
+        return UIEdgeInsets()
     }
     
     
