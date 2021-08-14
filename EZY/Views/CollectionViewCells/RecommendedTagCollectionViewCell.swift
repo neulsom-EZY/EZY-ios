@@ -7,8 +7,16 @@
 
 import UIKit
 
+protocol CustomCollectionViewCellDelegate: AnyObject{
+    func didTabButton(with string: String)
+}
+
 class RecommendedTagCollectionViewCell: UICollectionViewCell {
     static let reuseId = "\(RecommendedTagCollectionViewCell.self)"
+    var index: Int = 0
+    public weak var delegate: CustomCollectionViewCellDelegate?
+    
+    lazy var cellIndex: IndexPath = [0,0]
     
     lazy var cellBackgroundView = UIView().then {
         $0.layer.cornerRadius = 10
@@ -49,19 +57,34 @@ class RecommendedTagCollectionViewCell: UICollectionViewCell {
         layoutSetting()
     }
     
+    private var string: String?
+    
+    public func configure(with string: String){
+        self.string = string
+    }
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         layoutSetting()
     }
     
+    @objc func addButtonClicked(sender:UIButton){
+        
+        guard let string = string else {
+            return
+        }
+        
+        delegate?.didTabButton(with: string)
+    }
+    
     
     func layoutSetting(){
-        
-        contentView.clipsToBounds = false
-        
         contentView.addSubview(cellBackgroundView)
+        
         cellBackgroundView.addSubview(addButton)
         cellBackgroundView.addSubview(tagButton)
+        
+        addButton.addTarget(self, action: #selector(addButtonClicked(sender:)), for: .touchUpInside)
         
         cellBackgroundView.snp.makeConstraints { make in
             make.centerX.centerY.equalToSuperview()
