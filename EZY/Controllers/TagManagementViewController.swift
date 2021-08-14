@@ -261,6 +261,9 @@ class TagManagementViewController: UIViewController {
         self.view.addSubview(tagGoodLabel)
         self.view.addSubview(tagAddLabel)
         
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(_:)), name:UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide(_:)), name: UIResponder.keyboardWillHideNotification, object: nil)
+        
         backButton.addTarget(self, action: #selector(backButtonClicked(sender:)), for: .touchUpInside)
         tagAddButton.addTarget(self, action: #selector(tagAddButtonClicked(sender:)), for: .touchUpInside)
         
@@ -341,6 +344,18 @@ class TagManagementViewController: UIViewController {
         recommendedTagNameText.remove(at: selectedRecommendedTagIndex)
         
         if recommendedTagNameText.count == 0{
+            lineView.isHidden = true
+            tagGoodLabel.isHidden = true
+            tagAddLabel.isHidden = true
+            recommendedTagCollectionView.isHidden = true
+            
+            tagTableView.snp.remakeConstraints { make in
+                make.top.equalTo(mainTitleLabel.snp.bottom).offset(self.view.frame.height/26.1)
+                make.bottom.equalToSuperview()
+                make.left.equalTo(backButton)
+                make.centerX.equalToSuperview()
+            }
+            
             UIView.animate(withDuration: 0.25, delay: 0, options: .curveEaseOut, animations: {
                 self.lineView.snp.remakeConstraints { make in
                     make.height.equalTo(0.5)
@@ -402,6 +417,9 @@ class TagManagementViewController: UIViewController {
                     Timer.scheduledTimer(timeInterval: TimeInterval(0.8), target: self, selector: #selector(self.hideSnackbarView), userInfo: nil, repeats: false)
             })
         }else{
+            
+            self.view.endEditing(true)
+
             tagAddModalView.isHidden = true
                         
             recommendedTagViewDown()
@@ -422,6 +440,22 @@ class TagManagementViewController: UIViewController {
     @objc func tagSettingButtonClicked(sender:UIButton){
         let nextViewController = TagSettingViewController()
         self.navigationController?.pushViewController(nextViewController, animated: true)
+    }
+    
+    @objc //MARK: 모달 창 올리기
+    func keyboardWillShow(_ sender: Notification) {
+        tagAddModalView.modalBackgroundView.frame.origin.y = self.view.frame.height/5
+    }
+
+    @objc //MARK: 모달 창 원래대로
+    func keyboardWillHide(_ sender: Notification) {
+        tagAddModalView.modalBackgroundView.frame.origin.y = (self.view.frame.height/2) - (tagAddModalView.modalBackgroundView.frame.height/2)
+    }
+    
+    //MARK: 화면터치하여 모달 추가 창 나가기
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?){
+         self.view.endEditing(true)
+        tagAddModalView.isHidden = true
     }
 
 }
