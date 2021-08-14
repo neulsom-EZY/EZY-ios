@@ -319,6 +319,37 @@ class TagManagementViewController: UIViewController {
         recommendedTagCollectionView.deleteItems(at: [IndexPath.init(row: selectedRecommendedTagIndex, section: 0)])
         recommendedTagNameText.remove(at: selectedRecommendedTagIndex)
         
+        if recommendedTagNameText.count == 0{
+            print("끝")
+            UIView.animate(withDuration: 0.25, delay: 0, options: .curveEaseOut, animations: {
+                self.lineView.snp.remakeConstraints { make in
+                    make.height.equalTo(0.5)
+                    make.left.equalTo(self.mainTitleLabel)
+                    make.centerX.equalToSuperview()
+                    make.top.equalTo(self.view.snp.bottom)
+                }
+                
+                self.tagGoodLabel.snp.remakeConstraints { make in
+                    make.centerX.equalTo(self.tagAddLabel)
+                    make.top.equalTo(self.lineView.snp.bottom)
+                }
+                
+                
+                self.tagAddLabel.snp.remakeConstraints { make in
+                    make.centerX.equalTo(self.recommendedTagCollectionView)
+                    make.top.equalTo(self.tagGoodLabel.snp.bottom)
+                }
+                
+                self.recommendedTagCollectionView.snp.remakeConstraints { make in
+                    make.top.equalTo(self.tagAddLabel.snp.bottom)
+                    make.left.right.equalToSuperview()
+                    make.height.equalToSuperview().dividedBy(6.6)
+                }
+                
+                self.recommendedTagCollectionView.superview?.layoutIfNeeded()
+            })
+        }
+        
         tagTableView.isHidden = false
         tagTableView.backgroundColor = .clear
         tagTableView.reloadData()
