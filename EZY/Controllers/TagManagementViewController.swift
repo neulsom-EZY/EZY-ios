@@ -217,7 +217,10 @@ class TagManagementViewController: UIViewController {
         tagAddModalView.tagAddButton.addTarget(self,action:#selector(tagAddCompletionbuttonClicked(sender:)),
                                  for:.touchUpInside)
         
+        tagAddModalView.tagNameTextField.delegate = self
+        
         tagAddModalView.writeTagNameView.isHidden = true
+        
         tagAddModalView.isHidden = true
     }
 
@@ -546,3 +549,19 @@ extension TagManagementViewController: CustomCollectionViewCellDelegate{
     }
 }
 
+// 글자수제한
+extension TagManagementViewController: UITextFieldDelegate{
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        guard let text = tagAddModalView.tagNameTextField.text else { return true }
+
+        let newLength = text.count + string.count - range.length
+
+        if newLength > 30 {
+            for _ in 0 ..< newLength - 30 {
+                textField.deleteBackward()
+            }
+
+        }
+        return true
+    }
+}
