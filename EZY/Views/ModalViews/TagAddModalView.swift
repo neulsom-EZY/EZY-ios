@@ -53,4 +53,17 @@ class TagAddModalView: UIView {
         $0.dynamicFont(fontSize: 12, currentFontName: "AppleSDGothicNeo-Bold")
         $0.setTitleColor(UIColor.white, for: .normal)
     }
+    
+    lazy var writeTagNameView = UIButton().then{
+        $0.backgroundColor = .white
+        $0.setTitle("태그 이름을 입력해주세요!", for: .normal)
+        $0.layer.cornerRadius = 10
+        $0.setTitleColor(UIColor(red: 147/255, green: 147/255, blue: 147/255, alpha: 1), for: .normal)
+        $0.dynamicFont(fontSize: 12, currentFontName: "AppleSDGothicNeo-SemiBold")
+        $0.layer.masksToBounds = false
+        $0.layer.shadowOpacity = 0.1
+        $0.layer.shadowRadius = 6
+        $0.layer.shadowOffset = CGSize(width: 0, height: 3)
+        $0.layer.shadowColor = UIColor.darkGray.cgColor
+    }
 }

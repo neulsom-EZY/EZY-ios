@@ -15,6 +15,8 @@ class TagManagementViewController: UIViewController {
     
     lazy var selectedRecommendedTagIndex: Int = 0
     
+    lazy var selectedTagColor: UIColor = TagColorModels[0].backgroundColor
+    
     lazy var tagAddModalView = TagAddModalView()
     
     lazy var recommendedTagNameText = ["STUDY","EXCERISE","ENGLISH","EAT"]
@@ -131,7 +133,6 @@ class TagManagementViewController: UIViewController {
         tagColorCollectionView.register(TagColorCollectionViewCell.self, forCellWithReuseIdentifier: TagColorCollectionViewCell.reuseId)
         
         tagColorCollectionView.backgroundColor = UIColor.white
-        tagAddModalView.modalBackgroundView.addSubview(tagColorCollectionView)
         
         tagColorCollectionView.snp.makeConstraints { make in
             make.top.equalTo(tagAddModalView.tagColorLabel.snp.bottom)
@@ -148,6 +149,7 @@ class TagManagementViewController: UIViewController {
     func tagAddModalViewSetting(){
         self.view.addSubview(tagAddModalView)
         tagAddModalView.addSubview(tagAddModalView.shadowBackgroundView)
+        tagAddModalView.modalBackgroundView.addSubview(tagColorCollectionView)
         tagAddModalView.shadowBackgroundView.addSubview(tagAddModalView.modalBackgroundView)
         tagAddModalView.modalBackgroundView.addSubview(tagAddModalView.titleLabel)
         tagAddModalView.modalBackgroundView.addSubview(tagAddModalView.tagNameLabel)
@@ -155,6 +157,7 @@ class TagManagementViewController: UIViewController {
         tagAddModalView.tagNameBackgroundView.addSubview(tagAddModalView.tagNameTextField)
         tagAddModalView.modalBackgroundView.addSubview(tagAddModalView.tagColorLabel)
         tagAddModalView.modalBackgroundView.addSubview(tagAddModalView.tagAddButton)
+        tagAddModalView.modalBackgroundView.addSubview(tagAddModalView.writeTagNameView)
         
         tagAddModalView.snp.makeConstraints { make in
             make.top.right.bottom.left.equalToSuperview()
@@ -205,9 +208,16 @@ class TagManagementViewController: UIViewController {
             make.width.equalToSuperview().dividedBy(4.7)
         }
         
+        tagAddModalView.writeTagNameView.snp.makeConstraints { make in
+            make.centerX.centerY.equalToSuperview()
+            make.width.equalToSuperview().dividedBy(1.3)
+            make.height.equalToSuperview().dividedBy(4)
+        }
+        
         tagAddModalView.tagAddButton.addTarget(self,action:#selector(tagAddCompletionbuttonClicked(sender:)),
                                  for:.touchUpInside)
         
+        tagAddModalView.writeTagNameView.isHidden = true
         tagAddModalView.isHidden = true
     }
 
@@ -287,14 +297,16 @@ class TagManagementViewController: UIViewController {
         }
     }
     
-    @objc func recommendedTagAddButtonClicked(sender:UIButton){
+    func recommendedTagViewDown(){
+        
+        tagTableView.isHidden = false
+        
         UIView.animate(withDuration: 0.4, delay: 0, options: .curveEaseOut, animations: {
             
             self.tagGoodLabel.snp.remakeConstraints { make in
                 make.centerX.equalTo(self.tagAddLabel)
                 make.bottom.equalTo(self.tagAddLabel.snp.top).offset(-self.view.frame.height/100)
             }
-            
             
             self.tagAddLabel.snp.remakeConstraints { make in
                 make.centerX.equalTo(self.recommendedTagCollectionView)
@@ -311,7 +323,13 @@ class TagManagementViewController: UIViewController {
             
             self.recommendedTagCollectionView.superview?.layoutIfNeeded()
         })
+        
         self.tagGoodLabel.text = "이런 태그는 어때요?"
+    }
+    
+    @objc func recommendedTagAddButtonClicked(sender:UIButton){
+       
+        recommendedTagViewDown()
 
         tagNameText.append(recommendedTagNameText[selectedRecommendedTagIndex])
         tagColor.append(UIColor(red: 154/255, green: 145/255, blue: 254/255, alpha: 1))
@@ -320,7 +338,6 @@ class TagManagementViewController: UIViewController {
         recommendedTagNameText.remove(at: selectedRecommendedTagIndex)
         
         if recommendedTagNameText.count == 0{
-            print("끝")
             UIView.animate(withDuration: 0.25, delay: 0, options: .curveEaseOut, animations: {
                 self.lineView.snp.remakeConstraints { make in
                     make.height.equalTo(0.5)
@@ -350,17 +367,49 @@ class TagManagementViewController: UIViewController {
             })
         }
         
-        tagTableView.isHidden = false
         tagTableView.backgroundColor = .clear
         tagTableView.reloadData()
     }
     
     @objc func tagAddButtonClicked(sender:UIButton){
         tagAddModalView.isHidden = false
+        tagAddModalView.tagNameTextField.text = ""
+    }
+    
+    @objc private func hideSnackbarView() {
+            UIView.animate(withDuration: 0.4, animations: {
+                self.tagAddModalView.writeTagNameView.alpha = 0
+            }, completion: {
+                _ in
+                self.tagAddModalView.writeTagNameView.isHidden = true
+            })
     }
     
     @objc func tagAddCompletionbuttonClicked(sender:UIButton){
-        tagAddModalView.isHidden = true
+        
+        if tagAddModalView.tagNameTextField.text?.isEmpty == true{
+            tagAddModalView.writeTagNameView.alpha = 1
+            
+            UIView.animate(withDuration: 0.4, animations: {
+
+                self.tagAddModalView.writeTagNameView.isHidden = false
+
+                  }, completion: {
+                  _ in
+                    Timer.scheduledTimer(timeInterval: TimeInterval(0.8), target: self, selector: #selector(self.hideSnackbarView), userInfo: nil, repeats: false)
+            })
+        }else{
+            tagAddModalView.isHidden = true
+                        
+            recommendedTagViewDown()
+            
+            tagNameText.append(tagAddModalView.tagNameTextField.text!)
+            tagColor.append(selectedTagColor)
+            
+            print("tagNameText = \(tagNameText)")
+            
+            tagTableView.reloadData()
+        }
     }
     
     @objc func backButtonClicked(sender:UIButton){
@@ -430,6 +479,7 @@ extension TagManagementViewController: UICollectionViewDataSource, UICollectionV
             cell.backgroundColor = .white
             
             cell.setModel(TagColorModels[indexPath.row])
+            
         
             return cell
         }else if collectionView == recommendedTagCollectionView{
@@ -460,6 +510,8 @@ extension TagManagementViewController: UICollectionViewDataSource, UICollectionV
                     tagColorPreciousSelectedIndex = indexPath.row
                 }
             }
+
+            selectedTagColor = TagColorModels[indexPath.row].backgroundColor
             
             collectionView.reloadData()
         }
