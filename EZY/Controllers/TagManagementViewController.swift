@@ -344,19 +344,8 @@ class TagManagementViewController: UIViewController {
         recommendedTagNameText.remove(at: selectedRecommendedTagIndex)
         
         if recommendedTagNameText.count == 0{
-            lineView.isHidden = true
-            tagGoodLabel.isHidden = true
-            tagAddLabel.isHidden = true
-            recommendedTagCollectionView.isHidden = true
-            
-            tagTableView.snp.remakeConstraints { make in
-                make.top.equalTo(mainTitleLabel.snp.bottom).offset(self.view.frame.height/26.1)
-                make.bottom.equalToSuperview()
-                make.left.equalTo(backButton)
-                make.centerX.equalToSuperview()
-            }
-            
-            UIView.animate(withDuration: 0.25, delay: 0, options: .curveEaseOut, animations: {
+
+            UIView.animate(withDuration: 0.5, delay: 0, options: .curveEaseOut, animations: {
                 self.lineView.snp.remakeConstraints { make in
                     make.height.equalTo(0.5)
                     make.left.equalTo(self.mainTitleLabel)
@@ -381,8 +370,22 @@ class TagManagementViewController: UIViewController {
                     make.height.equalToSuperview().dividedBy(6.6)
                 }
                 
+                self.tagTableView.snp.remakeConstraints { make in
+                    make.top.equalTo(self.mainTitleLabel.snp.bottom).offset(self.view.frame.height/26.1)
+                    make.bottom.equalToSuperview()
+                    make.left.equalTo(self.backButton)
+                    make.centerX.equalToSuperview()
+                }
+                
+                self.lineView.isHidden = true
+                self.tagGoodLabel.isHidden = true
+                self.tagAddLabel.isHidden = true
+                self.recommendedTagCollectionView.isHidden = true
+                
                 self.recommendedTagCollectionView.superview?.layoutIfNeeded()
             })
+            
+
         }
         
         tagTableView.backgroundColor = .clear
