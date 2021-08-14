@@ -545,3 +545,4 @@ extension TagManagementViewController: CustomCollectionViewCellDelegate{
         selectedRecommendedTagIndex = Int(string)!
     }
 }
+
