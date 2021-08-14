@@ -12,6 +12,9 @@ class SearchTableView : UIView {
     let tv = UITableView().then{
         $0.register(SearchTableCell.self, forCellReuseIdentifier: SearchTableCell.identifier)
     }
+    let noUser = NotFoundUser().then{
+        $0.isHidden = true
+    }
     override init(frame: CGRect) {
         super.init(frame: frame)
         addView()
@@ -21,6 +24,7 @@ class SearchTableView : UIView {
     }
     func addView(){
         addSubview(view)
+        addSubview(noUser)
         view.addSubview(tv)
     }
     
@@ -32,6 +36,12 @@ class SearchTableView : UIView {
             make.top.left.right.bottom.equalToSuperview()
             make.height.equalTo(frame.height)
         }
+        noUser.snp.makeConstraints { (make) in
+            make.center.equalToSuperview()
+            make.height.equalTo(MorePeopleToDo().view.frame.height/9.44)
+            make.width.equalTo(noUser.label.frame.width)
+        }
+        
         tv.snp.makeConstraints { (make) in
             make.top.equalToSuperview()
             make.left.equalToSuperview()

@@ -16,7 +16,6 @@ class MorePeopleToDo: UIViewController{
     var data = [SearchData]()
     var filterData = [SearchData]()
     var filtered = false
-    private let noUser = NotFoundUser()
 
     
     //MARK: - Properties
@@ -199,18 +198,13 @@ class MorePeopleToDo: UIViewController{
     
     
     //MARK: - Search filter
-    func filterContentForSearchTextKor(_ searchText: String) {
+    func filterContentForSearchText(_ searchText: String) {
         filterData = data.filter({( data : SearchData) -> Bool in
-            return data.koreanName.lowercased().contains(searchText.lowercased())
+            return data.koreanName.lowercased().contains(searchText.lowercased()) || data.name.lowercased().contains(searchText.lowercased())
       })
         searcherView.tv.reloadData()
     }
-    func filterContentForSearchTextEng(_ searchText: String) {
-        filterData = data.filter({( data : SearchData) -> Bool in
-            return data.name.lowercased().contains(searchText.lowercased())
-      })
-        searcherView.tv.reloadData()
-    }
+
 }
 
 extension MorePeopleToDo : UICollectionViewDelegateFlowLayout,UICollectionViewDataSource{
@@ -241,6 +235,7 @@ extension MorePeopleToDo: FormViewModel{
     func updateForm() {
         isTableVisible = viewModel.showView
         if isTableVisible == false{
+            searcherView.noUser.isHidden = true
             UIView.animate(withDuration: 0.2) {
                 self.searcherView.frame = CGRect(x: self.view.frame.height/23.2, y: self.view.frame.height/3.0526, width: self.view.frame.width/1.2255, height: 0)
                 self.view.layoutIfNeeded()
@@ -256,8 +251,12 @@ extension MorePeopleToDo: FormViewModel{
 extension MorePeopleToDo : UITextFieldDelegate{
     func textFieldDidChangeSelection(_ textField: UITextField) {
         if let text = textField.text{
-            filterContentForSearchTextKor(nickNameTextFieldContainerView.text!)
-            filterContentForSearchTextEng(nickNameTextFieldContainerView.text!)
+            filterContentForSearchText(nickNameTextFieldContainerView.text!)
+        }
+        if filterData.count == 0 {
+            searcherView.noUser.isHidden = false
+        }else{
+            searcherView.noUser.isHidden = true
         }
     }
 }
@@ -265,15 +264,16 @@ extension MorePeopleToDo : UITextFieldDelegate{
 extension MorePeopleToDo : UITableViewDelegate , UITableViewDataSource{
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return filterData.count
-    
     }
-    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        WhatAboutPeopleLikeThis.backgroundColor = .blue
+    }
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: SearchTableCell.identifier) as! SearchTableCell
         let personData : SearchData
         personData = filterData[indexPath.row]
         cell.personName.text = personData.koreanName + " (" + personData.name  + ")"
-        
+//        cell.selectionStyle = .none
         return cell
     }
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
