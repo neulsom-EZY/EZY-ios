@@ -1,23 +1,27 @@
 //
-//  WhoShouldIAsk.swift
+//  ErrandPeopoleChooseAfterCell.swift.swift
 //  EZY
 //
-//  Created by Ji-hoon Ahn on 2021/07/12.
+//  Created by Ji-hoon Ahn on 2021/08/15.
 //
 
 import UIKit
 
-class WhoShouldIAskCell : UICollectionViewCell{
-    static let identifier = "WhoShouldIAskCell"
-    
+class ErrandPeopoleChooseAfterCell : UICollectionViewCell{
+    static let identifier = "ErrandPeopoleChooseAfterCell"
+    let view = UIView()
     let bglabel = UILabel().then {
         $0.clipsToBounds = true
-        $0.dynamicFont(fontSize: 12, currentFontName: "AppleSDGothicNeo-UltraLight")
+        $0.sizeToFit()
+        $0.dynamicFont(fontSize: 11, currentFontName: "AppleSDGothicNeo-SemiBold")
+    }
+    let button = UIButton().then{
+        $0.setImage(UIImage(named: "EZY_Cancel"), for: .normal)
+        $0.tintColor = .gray
     }
 
-    
     static func fittingSize(availableHeight: CGFloat, name: String?) -> CGSize {
-            let cell = WhoShouldIAskCell()
+            let cell = ErrandPeopoleChooseAfterCell()
             cell.configure(name: name)
             
         let targetSize = CGSize(width: UIView.layoutFittingCompressedSize.width , height: availableHeight)
@@ -26,8 +30,6 @@ class WhoShouldIAskCell : UICollectionViewCell{
     func configure(name: String?) {
         bglabel.text = name
     }
-   
-
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -35,15 +37,14 @@ class WhoShouldIAskCell : UICollectionViewCell{
         contentView.backgroundColor = .clear
         layer.cornerRadius = frame.height/6.4
         bglabel.textAlignment = .center
-        bglabel.snp.makeConstraints { (make) in
-            make.edges.equalToSuperview().inset(20 - frame.height)
-        }
         
+        bglabel.snp.makeConstraints { (make) in
+            make.edges.equalToSuperview().inset(20-frame.height)
+        }
     }
-
+    
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
 }

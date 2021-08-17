@@ -14,19 +14,17 @@ class WhatAboutPeopleLikeThisCell:UICollectionViewCell{
         $0.clipsToBounds = true
         $0.dynamicFont(fontSize: 12, currentFontName: "AppleSDGothicNeo-UltraLight")
     }
-    
     static func fittingSize(availableHeight: CGFloat, name: String?) -> CGSize {
-        let cell = WhatAboutPeopleLikeThisCell()
-        cell.configure(name: name)
-        
-        let targetSize = CGSize(width: UIView.layoutFittingCompressedSize.width, height: availableHeight )
-        return cell.contentView.systemLayoutSizeFitting(targetSize, withHorizontalFittingPriority: .fittingSizeLevel , verticalFittingPriority: .required)
+            let cell = WhatAboutPeopleLikeThisCell()
+            cell.configure(name: name)
+            
+        let targetSize = CGSize(width: UIView.layoutFittingCompressedSize.width , height: availableHeight)
+            return cell.contentView.systemLayoutSizeFitting(targetSize, withHorizontalFittingPriority: .fittingSizeLevel, verticalFittingPriority: .required)
     }
-    
     func configure(name: String?) {
         bglabel.text = name
     }
-    
+   
     override init(frame: CGRect) {
         super.init(frame: frame)
         contentView.addSubview(bglabel)

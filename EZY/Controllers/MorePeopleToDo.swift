@@ -16,7 +16,8 @@ class MorePeopleToDo: UIViewController{
     var data = [SearchData]()
     var filterData = [SearchData]()
     var filtered = false
-
+    
+    var clickData : String = ""
     
     //MARK: - Properties
     var isTableVisible = false
@@ -58,6 +59,15 @@ class MorePeopleToDo: UIViewController{
         $0.text = "이런 사람들은 어때요"
         $0.dynamicFont(fontSize: 14, currentFontName: "AppleSDGothicNeo-Thin")
     }
+    fileprivate lazy var ErrandPersonCollectionView : UICollectionView = {
+        let layout = UICollectionViewFlowLayout()
+        let cv = UICollectionView(frame: .zero, collectionViewLayout: layout)
+        cv.translatesAutoresizingMaskIntoConstraints = false
+        cv.register(ErrandPeopoleChooseAfterCell.self, forCellWithReuseIdentifier: ErrandPeopoleChooseAfterCell.identifier)
+        cv.backgroundColor = .clear
+        cv.isHidden = true
+        return cv
+    }()
     
     fileprivate let WhatAboutPeopleLikeThis: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
@@ -92,6 +102,8 @@ class MorePeopleToDo: UIViewController{
         WhatAboutPeopleLikeThis.delegate = self
         nickNameTextFieldContainerView.delegate = self
         WhatAboutPeopleLikeThis.allowsMultipleSelection = true
+        ErrandPersonCollectionView.delegate = self
+        ErrandPersonCollectionView.dataSource = self
         configureNotificationObservers()
         Data()
     }
@@ -127,6 +139,8 @@ class MorePeopleToDo: UIViewController{
     func configureUI(){
         view.backgroundColor = .white
         WhatAboutPeopleLikeThis.contentInset = UIEdgeInsets(top: 0, left: view.frame.height/21.95, bottom: 0, right: view.frame.height/21.95)
+        ErrandPersonCollectionView.contentInset =  UIEdgeInsets(top: 0, left: view.frame.height/21.95, bottom: 0, right: view.frame.height/21.95)
+
         searcherView.layer.cornerRadius = view.frame.height/81.2
         userChoose.layer.cornerRadius = view.frame.height/81.2
         addView()
@@ -141,6 +155,7 @@ class MorePeopleToDo: UIViewController{
         view.addSubview(nickNameTextFieldContainerView)
         view.addSubview(recommendPeopleLabel)
         view.addSubview(WhatAboutPeopleLikeThis)
+        view.addSubview(ErrandPersonCollectionView)
         view.addSubview(searcherView)
         view.addSubview(userChoose)
         
@@ -184,6 +199,12 @@ class MorePeopleToDo: UIViewController{
             make.height.equalTo(view.frame.height/11.277)
             make.right.equalToSuperview()
         }
+        ErrandPersonCollectionView.snp.makeConstraints { (make) in
+            make.top.equalTo(recommendPeopleLabel.snp.bottom).offset(view.frame.height/81.2)
+            make.left.equalToSuperview()
+            make.height.equalTo(view.frame.height/11.277)
+            make.right.equalToSuperview()
+        }
         userChoose.snp.makeConstraints { (make) in
             make.bottom.equalTo(view.snp.bottom).inset(view.frame.height/13.3)
             make.height.equalTo(self.view.frame.height/18.044)
@@ -209,24 +230,48 @@ class MorePeopleToDo: UIViewController{
 
 extension MorePeopleToDo : UICollectionViewDelegateFlowLayout,UICollectionViewDataSource{
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return MorePeopleToDo.recommendData.count
+        if collectionView == WhatAboutPeopleLikeThis{
+            return MorePeopleToDo.recommendData.count
+        }
+        else if collectionView === ErrandPersonCollectionView{
+            return 1
+        }
+        return 0
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: WhatAboutPeopleLikeThisCell.identifier, for: indexPath) as? WhatAboutPeopleLikeThisCell else {return UICollectionViewCell()}
-        cell.bglabel.text = "@ " + MorePeopleToDo.recommendData[indexPath.row]
-        cell.bglabel.dynamicFont(fontSize: 12, currentFontName:"AppleSDGothicNeo-UltraLight")
-        cell.bglabel.textColor = MorePeopleToDo().randomColorData.randomElement()
-        cell.layer.borderWidth = 1
-        cell.bglabel.sizeToFit()
-        cell.layer.borderColor = cell.bglabel.textColor.cgColor
-        return cell
+        if collectionView == WhatAboutPeopleLikeThis{
+            guard let whatAboutPeoplecell = collectionView.dequeueReusableCell(withReuseIdentifier: WhatAboutPeopleLikeThisCell.identifier, for: indexPath) as? WhatAboutPeopleLikeThisCell else {return UICollectionViewCell()}
+            whatAboutPeoplecell.bglabel.text = "@ " + MorePeopleToDo.recommendData[indexPath.row]
+            whatAboutPeoplecell.bglabel.dynamicFont(fontSize: 12, currentFontName:"AppleSDGothicNeo-UltraLight")
+            whatAboutPeoplecell.bglabel.textColor = MorePeopleToDo().randomColorData.randomElement()
+            whatAboutPeoplecell.layer.borderWidth = 1
+            whatAboutPeoplecell.bglabel.sizeToFit()
+            whatAboutPeoplecell.layer.borderColor = whatAboutPeoplecell.bglabel.textColor.cgColor
+            return whatAboutPeoplecell
+        }else {
+            guard let errandPersonChooseCell  = collectionView.dequeueReusableCell(withReuseIdentifier: ErrandPeopoleChooseAfterCell.identifier, for: indexPath) as? ErrandPeopoleChooseAfterCell else {return UICollectionViewCell()}
+            errandPersonChooseCell.bglabel.text = clickData
+            errandPersonChooseCell.layer.borderWidth = 1
+            errandPersonChooseCell.backgroundColor = .clear
+            errandPersonChooseCell.bglabel.sizeToFit()
+            errandPersonChooseCell.bglabel.textColor = .black
+//            errandPersonChooseCell.button.addTarget(self, action: <#T##Selector#>, for: <#T##UIControl.Event#>)
+            errandPersonChooseCell.bglabel.dynamicFont(fontSize: 11, currentFontName: "AppleSDGothicNeo-SemiBold")
+            errandPersonChooseCell.layer.borderColor = UIColor.EZY_E0E0E0.cgColor
+            return errandPersonChooseCell
+        }
+        
     }
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return WhatAboutPeopleLikeThisCell.fittingSize(availableHeight: view.frame.size.height/25.375, name: MorePeopleToDo.recommendData[indexPath.row])
-
+        if collectionView == WhatAboutPeopleLikeThis{
+            return WhatAboutPeopleLikeThisCell.fittingSize(availableHeight: view.frame.size.height/25.375, name: MorePeopleToDo.recommendData[indexPath.row])
+        }else if collectionView == ErrandPersonCollectionView{
+            return ErrandPeopoleChooseAfterCell.fittingSize(availableHeight: view.frame.size.height/27.06667, name: clickData)
+        }
+        return CGSize(width: 0, height: 0)
     }
-    
+
 }
 
 
@@ -265,15 +310,24 @@ extension MorePeopleToDo : UITableViewDelegate , UITableViewDataSource{
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return filterData.count
     }
+    //SearcherView 안에 Cell 을 넣었을 때
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        WhatAboutPeopleLikeThis.backgroundColor = .blue
+        clickData = filterData[indexPath.row].name
+        WhatAboutPeopleLikeThis.isHidden = true
+        ErrandPersonCollectionView.isHidden = false
+        recommendPeopleLabel.text = "심부름을 부탁할 분이군요!"
+        UIView.animate(withDuration: 0.2) {
+            self.searcherView.frame = CGRect(x: self.view.frame.height/23.2, y: self.view.frame.height/3.0526, width: self.view.frame.width/1.2255, height: 0)
+            self.view.layoutIfNeeded()
+        }
+        ErrandPersonCollectionView.reloadData()
     }
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: SearchTableCell.identifier) as! SearchTableCell
         let personData : SearchData
         personData = filterData[indexPath.row]
         cell.personName.text = personData.koreanName + " (" + personData.name  + ")"
-//        cell.selectionStyle = .none
+        cell.selectionStyle = .none
         return cell
     }
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
