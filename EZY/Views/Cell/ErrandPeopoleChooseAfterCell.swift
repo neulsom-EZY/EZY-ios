@@ -20,27 +20,36 @@ class ErrandPeopoleChooseAfterCell : UICollectionViewCell{
         $0.tintColor = .gray
     }
 
-    static func fittingSize(availableHeight: CGFloat, name: String?) -> CGSize {
-            let cell = ErrandPeopoleChooseAfterCell()
-            cell.configure(name: name)
-            
-        let targetSize = CGSize(width: UIView.layoutFittingCompressedSize.width , height: availableHeight)
-            return cell.contentView.systemLayoutSizeFitting(targetSize, withHorizontalFittingPriority: .fittingSizeLevel, verticalFittingPriority: .required)
-    }
-    func configure(name: String?) {
-        bglabel.text = name
-    }
+
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        contentView.addSubview(bglabel)
+  
+        
+        contentView.addSubview(view)
+        view.addSubview(bglabel)
+        view.addSubview(button)
         contentView.backgroundColor = .clear
+        view.backgroundColor = .clear
         layer.cornerRadius = frame.height/6.4
         bglabel.textAlignment = .center
-        
-        bglabel.snp.makeConstraints { (make) in
-            make.edges.equalToSuperview().inset(20-frame.height)
+        view.snp.makeConstraints { (make) in
+            make.center.equalToSuperview()
+            make.height.equalToSuperview()
+            make.left.equalTo(bglabel.snp.left)
+            make.right.equalTo(button.snp.right)
         }
+        bglabel.snp.makeConstraints { (make) in
+            make.centerY.equalTo(view.snp.centerY)
+            make.left.equalTo(view.snp.left)
+        }
+        button.snp.makeConstraints { (make) in
+            make.height.equalTo(frame.height/4.2857)
+            make.width.equalTo(button.snp.height)
+            make.left.equalTo(bglabel.snp.right).offset(frame.height/3.3333)
+            make.centerY.equalToSuperview()
+        }
+
     }
     
     

@@ -267,7 +267,10 @@ extension MorePeopleToDo : UICollectionViewDelegateFlowLayout,UICollectionViewDa
         if collectionView == WhatAboutPeopleLikeThis{
             return WhatAboutPeopleLikeThisCell.fittingSize(availableHeight: view.frame.size.height/25.375, name: MorePeopleToDo.recommendData[indexPath.row])
         }else if collectionView == ErrandPersonCollectionView{
-            return ErrandPeopoleChooseAfterCell.fittingSize(availableHeight: view.frame.size.height/27.06667, name: clickData)
+            let label = UILabel()
+            label.text = clickData
+            label.sizeToFit()
+            return CGSize(width:label.frame.width + view.frame.height/50.75 , height: view.frame.size.height/27.06667)
         }
         return CGSize(width: 0, height: 0)
     }
