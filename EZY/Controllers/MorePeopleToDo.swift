@@ -21,6 +21,7 @@ class MorePeopleToDo: UIViewController{
     
     //MARK: - Properties
     var isTableVisible = false
+    var dataState = false
     var viewModel = MoreTodoModel()
     private let backbutton = UIButton().then{
         $0.tintColor = .EZY_968DFF
@@ -87,6 +88,7 @@ class MorePeopleToDo: UIViewController{
         let button = AdditionalButton(type: .system)
         button.title = "인원 선택"
         button.color = .EZY_978EFF
+        button.isEnabled = false
         button.addTarget(self, action: #selector(chooseUser), for: .touchUpInside)
         return button
     }()
@@ -142,7 +144,10 @@ class MorePeopleToDo: UIViewController{
             SearchData(koreanName: "전지환", name: "gyeongjun"),
             SearchData(koreanName: "김유진", name: "youjin"),
             SearchData(koreanName: "김기홍", name: "KiHong"),
-            SearchData(koreanName: "안지훈", name: "Jihoon")
+            SearchData(koreanName: "안지훈", name: "Jihoon"),
+            SearchData(koreanName: "김기홍", name: "KimKiHooooong"),
+            SearchData(koreanName: "안지훈", name: "JiHoooooon"),
+            SearchData(koreanName: "안지훈", name: "JiHun")
             
         ]
     }
@@ -293,6 +298,14 @@ extension MorePeopleToDo : UICollectionViewDelegateFlowLayout,UICollectionViewDa
 
 extension MorePeopleToDo: FormViewModel{
     func updateForm() {
+        dataStatue = viewModel.data
+        if dataState == false{
+            userChoose.isEnabled = true
+        }else{
+            userChoose.isEnabled = false
+        }
+        
+        
         isTableVisible = viewModel.showView
         if isTableVisible == false{
             searcherView.noUser.isHidden = true
