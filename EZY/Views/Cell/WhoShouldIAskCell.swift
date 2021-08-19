@@ -15,18 +15,6 @@ class WhoShouldIAskCell : UICollectionViewCell{
         $0.dynamicFont(fontSize: 12, currentFontName: "AppleSDGothicNeo-UltraLight")
     }
 
-    
-    static func fittingSize(availableHeight: CGFloat, name: String?) -> CGSize {
-            let cell = WhoShouldIAskCell()
-            cell.configure(name: name)
-            
-        let targetSize = CGSize(width: UIView.layoutFittingCompressedSize.width , height: availableHeight)
-            return cell.contentView.systemLayoutSizeFitting(targetSize, withHorizontalFittingPriority: .fittingSizeLevel, verticalFittingPriority: .required)
-    }
-    func configure(name: String?) {
-        bglabel.text = name
-    }
-   
 
     
     override init(frame: CGRect) {
@@ -36,7 +24,7 @@ class WhoShouldIAskCell : UICollectionViewCell{
         layer.cornerRadius = frame.height/6.4
         bglabel.textAlignment = .center
         bglabel.snp.makeConstraints { (make) in
-            make.edges.equalToSuperview().inset(20 - frame.height)
+            make.center.equalToSuperview()
         }
         
     }

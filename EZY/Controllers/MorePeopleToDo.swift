@@ -65,7 +65,7 @@ class MorePeopleToDo: UIViewController{
         cv.translatesAutoresizingMaskIntoConstraints = false
         cv.register(ErrandPeopoleChooseAfterCell.self, forCellWithReuseIdentifier: ErrandPeopoleChooseAfterCell.identifier)
         cv.backgroundColor = .clear
-        cv.isHidden = true
+        cv.alpha = 0
         return cv
     }()
     
@@ -118,10 +118,22 @@ class MorePeopleToDo: UIViewController{
         }
         updateForm()
     }
+    
     @objc func chooseUser(){
         navigationController?.popViewController(animated: true)
 
     }
+    @objc func deleteCollectionViewBehavior(){
+        UIView.animate(withDuration: 0.4) {
+            self.ErrandPersonCollectionView.alpha = 0
+        }
+        UIView.animate(withDuration: 0.4) {
+            self.WhatAboutPeopleLikeThis.alpha = 1
+        }
+        recommendPeopleLabel.text = "이런 분들은 어때요?"
+        clickData = ""
+    }
+
     
     //MARK: - Helpers
     func Data() {
@@ -256,7 +268,7 @@ extension MorePeopleToDo : UICollectionViewDelegateFlowLayout,UICollectionViewDa
             errandPersonChooseCell.backgroundColor = .clear
             errandPersonChooseCell.bglabel.sizeToFit()
             errandPersonChooseCell.bglabel.textColor = .black
-//            errandPersonChooseCell.button.addTarget(self, action: <#T##Selector#>, for: <#T##UIControl.Event#>)
+            errandPersonChooseCell.button.addTarget(self, action: #selector(deleteCollectionViewBehavior), for: .touchUpInside)
             errandPersonChooseCell.bglabel.dynamicFont(fontSize: 11, currentFontName: "AppleSDGothicNeo-SemiBold")
             errandPersonChooseCell.layer.borderColor = UIColor.EZY_E0E0E0.cgColor
             return errandPersonChooseCell
@@ -296,6 +308,7 @@ extension MorePeopleToDo: FormViewModel{
         }
     }
 }
+
 extension MorePeopleToDo : UITextFieldDelegate{
     func textFieldDidChangeSelection(_ textField: UITextField) {
         if let text = textField.text{
@@ -316,8 +329,13 @@ extension MorePeopleToDo : UITableViewDelegate , UITableViewDataSource{
     //SearcherView 안에 Cell 을 넣었을 때
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         clickData = filterData[indexPath.row].name
-        WhatAboutPeopleLikeThis.isHidden = true
-        ErrandPersonCollectionView.isHidden = false
+
+        UIView.animate(withDuration: 0.4) {
+            self.ErrandPersonCollectionView.alpha = 1
+        }
+        UIView.animate(withDuration: 0.4) {
+            self.WhatAboutPeopleLikeThis.alpha = 0
+        }
         recommendPeopleLabel.text = "심부름을 부탁할 분이군요!"
         UIView.animate(withDuration: 0.2) {
             self.searcherView.frame = CGRect(x: self.view.frame.height/23.2, y: self.view.frame.height/3.0526, width: self.view.frame.width/1.2255, height: 0)

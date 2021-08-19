@@ -11,7 +11,7 @@ import Then
 
 class AddErrandViewController : UIViewController{
     //MARK: - Properties
-    static let data = ["JihoonAhn","+ 수정"]
+    var data = ["jihoooooooon","+ 수정"]
     
     private let backbutton = UIButton().then{
         $0.tintColor = .EZY_AFADFF
@@ -84,10 +84,9 @@ class AddErrandViewController : UIViewController{
         return tf
     }()
     
-    fileprivate let collectionView: UICollectionView = {
+    let addPersonCollectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
         let cv = UICollectionView(frame: .zero, collectionViewLayout: layout)
-        layout.scrollDirection = .horizontal
         cv.translatesAutoresizingMaskIntoConstraints = false
         cv.register(WhoShouldIAskCell.self, forCellWithReuseIdentifier: WhoShouldIAskCell.identifier)
         cv.showsHorizontalScrollIndicator = false
@@ -109,9 +108,9 @@ class AddErrandViewController : UIViewController{
     override func viewDidLoad() {
         super.viewDidLoad()
         configureUI()
-        collectionView.dataSource = self
-        collectionView.delegate = self
-        collectionView.allowsMultipleSelection = true
+        addPersonCollectionView.dataSource = self
+        addPersonCollectionView.delegate = self
+        addPersonCollectionView.allowsMultipleSelection = true
     }
     
     //MARK: - Selectors
@@ -146,9 +145,9 @@ class AddErrandViewController : UIViewController{
     //MARK: - Helpers
     func configureUI(){
         view.backgroundColor = .white
-        collectionView.contentInset = UIEdgeInsets(top: 0, left: view.frame.height/29, bottom: 0, right: 0)
+        addPersonCollectionView.contentInset = UIEdgeInsets(top: 0, left: view.frame.height/29, bottom: 0, right: 0)
 
-        collectionView.backgroundColor = .clear
+        addPersonCollectionView.backgroundColor = .clear
         cornerRadius()
         addView()
         location()
@@ -168,7 +167,7 @@ class AddErrandViewController : UIViewController{
         view.addSubview(clockBtn)
         view.addSubview(locationBtn)
         view.addSubview(explanationContainerView)
-        view.addSubview(collectionView)
+        view.addSubview(addPersonCollectionView)
         view.addSubview(kindOfCollectionView)
         view.addSubview(addButton)
     }
@@ -218,72 +217,64 @@ class AddErrandViewController : UIViewController{
         }
         kindOfCollectionView.snp.makeConstraints { (make) in
             make.left.equalTo(backbutton.snp.left)
-            make.top.equalTo(explanationContainerView.snp.bottom).offset(view.frame.height/38.6)
+            make.top.equalTo(explanationContainerView.snp.bottom).offset(view.frame.height/33.83333)
         }
-        collectionView.snp.makeConstraints { (make) in
-            make.right.left.equalToSuperview()
-            make.height.equalTo(view.frame.height/20)
+        addPersonCollectionView.snp.makeConstraints { (make) in
+            make.left.right.equalToSuperview()
+            make.height.equalTo(view.frame.height/25.375)
             make.top.equalTo(kindOfCollectionView.snp.bottom).offset(view.frame.height/81.2)
         }
         addButton.snp.makeConstraints { (make) in
-            make.bottom.equalToSuperview().offset(view.frame.height/8.2 * -1)
+            make.bottom.equalToSuperview().inset(view.frame.height/8.202)
             make.height.equalTo(self.view.frame.height/18.0)
             make.left.equalTo(backbutton.snp.left)
             make.right.equalTo(RequestList.snp.right)
             
         }
     }
+
 }
 //MARK: - AddErrandViewController CollectionView
 
 extension AddErrandViewController : UICollectionViewDelegateFlowLayout,UICollectionViewDataSource{
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return AddErrandViewController.data.count
+        return data.count
     }
-    
+    func collectionView(_ collectionView: UICollectionView, didHighlightItemAt indexPath: IndexPath) {
+        if collectionView == addPersonCollectionView{
+            let controller = MorePeopleToDo()
+            navigationController?.pushViewController(controller, animated: true)
+        }
+    }
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
          guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: WhoShouldIAskCell.identifier, for: indexPath) as? WhoShouldIAskCell else {return UICollectionViewCell()}
-        cell.bglabel.text = AddErrandViewController.data[indexPath.row]
+        cell.bglabel.text = data[indexPath.row]
         cell.bglabel.dynamicFont(fontSize: 12, currentFontName:  "AppleSDGothicNeo-UltraLight")
         cell.bglabel.textColor = .EZY_3D64FF
         cell.layer.borderWidth = 1
         cell.layer.borderColor = UIColor.EZY_6383FF.cgColor
-        if cell.bglabel.text == AddErrandViewController.data.last{
+        if cell.bglabel.text == data.last{
             cell.bglabel.textColor = .EZY_BAC8FF
             cell.layer.borderColor = UIColor.EZY_BAC8FF.cgColor
             cell.bglabel.dynamicFont(fontSize: 12, currentFontName: "AppleSDGothicNeo-Bold")
         }
-        if AddErrandViewController.data.count == 2 {
+        if data.count == 2 {
             if indexPath.item == indexPath.first{
-                cell.bglabel.text = "@" + AddErrandViewController.data[indexPath.item]
+                cell.bglabel.text = "@" + data[indexPath.item]
             }
+
         }
         
         return cell
     }
 
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return WhoShouldIAskCell.fittingSize(availableHeight: view.frame.height/25.375, name: AddErrandViewController.data[indexPath.row])
+        let label = UILabel()
+        label.text = data[indexPath.row]
+        label.sizeToFit()
+        return CGSize(width: label.frame.width + view.frame.height/42.736842, height: view.frame.height/25.375)
     }
-    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        if collectionView == self.collectionView{
-            if AddErrandViewController.data.count == 1 {
-                let controller = MorePeopleToDo()
-                navigationController?.pushViewController(controller, animated: true)
-            }else{
-                if indexPath.item == 0{
-                    
-                    
-                }
-                else if indexPath.item == indexPath.last{
-                    let controller = MorePeopleToDo()
-                    navigationController?.pushViewController(controller, animated: true)
-                }
-      
-            }
-                
-        }
-    }
+
 }
 
 

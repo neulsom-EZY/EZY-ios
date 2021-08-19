@@ -24,7 +24,6 @@ class ErrandPeopoleChooseAfterCell : UICollectionViewCell{
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-  
         
         contentView.addSubview(view)
         view.addSubview(bglabel)
