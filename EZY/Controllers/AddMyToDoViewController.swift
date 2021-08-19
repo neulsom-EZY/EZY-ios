@@ -166,7 +166,7 @@ class AddMyToDoViewController:UIViewController{
     @objc func Addmytodobtn(){
         print("DEBUG:AddButton")
         //추가페이지 작성후 실행시키는 코드
-        
+
     }
     
     //MARK: - Helpers
@@ -377,10 +377,11 @@ extension AddMyToDoViewController : UICollectionViewDelegateFlowLayout,UICollect
             }
             else if indexPath.item == indexPath.last{
                 let MoreCalendarModalsVC = MoreAlarmModelViewController.instance()
-
                 MoreCalendarModalsVC.delegate = self
                 addDim()
                 present(MoreCalendarModalsVC, animated: true, completion: nil)
+                collectionView.deselectItem(at: indexPath, animated: true)
+                AlarmSettingCell().isSelected = false
             }
             
         }

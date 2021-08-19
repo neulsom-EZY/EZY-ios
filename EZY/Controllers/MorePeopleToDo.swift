@@ -21,7 +21,6 @@ class MorePeopleToDo: UIViewController{
     
     //MARK: - Properties
     var isTableVisible = false
-    var dataState = false
     var viewModel = MoreTodoModel()
     private let backbutton = UIButton().then{
         $0.tintColor = .EZY_968DFF
@@ -88,7 +87,6 @@ class MorePeopleToDo: UIViewController{
         let button = AdditionalButton(type: .system)
         button.title = "인원 선택"
         button.color = .EZY_978EFF
-        button.isEnabled = false
         button.addTarget(self, action: #selector(chooseUser), for: .touchUpInside)
         return button
     }()
@@ -298,13 +296,6 @@ extension MorePeopleToDo : UICollectionViewDelegateFlowLayout,UICollectionViewDa
 
 extension MorePeopleToDo: FormViewModel{
     func updateForm() {
-        dataStatue = viewModel.data
-        if dataState == false{
-            userChoose.isEnabled = true
-        }else{
-            userChoose.isEnabled = false
-        }
-        
         
         isTableVisible = viewModel.showView
         if isTableVisible == false{

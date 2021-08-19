@@ -13,11 +13,8 @@ protocol FormViewModel {
 protocol SearchViewModel {
     var formIsValid: Bool{get}
     var showView: Bool{get}
-    var data: Bool{get}
 }
 struct MoreTodoModel : SearchViewModel {
-    
-    
     var nickName : String?
     var formIsValid: Bool{
         return nickName?.isEmpty == false
@@ -25,9 +22,7 @@ struct MoreTodoModel : SearchViewModel {
     var showView: Bool{
         return formIsValid
     }
-    var data: Bool {
-        return MorePeopleToDo().data.isEmpty == false
-    }
+
 
 }
 

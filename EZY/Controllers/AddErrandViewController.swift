@@ -11,7 +11,7 @@ import Then
 
 class AddErrandViewController : UIViewController{
     //MARK: - Properties
-    var data = ["jihoooooooon","+ 수정"]
+    var data = ["JiHooooooooon","+ 추가"]
     
     private let backbutton = UIButton().then{
         $0.tintColor = .EZY_AFADFF
@@ -217,7 +217,7 @@ class AddErrandViewController : UIViewController{
         }
         kindOfCollectionView.snp.makeConstraints { (make) in
             make.left.equalTo(backbutton.snp.left)
-            make.top.equalTo(explanationContainerView.snp.bottom).offset(view.frame.height/33.83333)
+            make.top.equalTo(explanationContainerView.snp.bottom).offset(view.frame.height/33.75)
         }
         addPersonCollectionView.snp.makeConstraints { (make) in
             make.left.right.equalToSuperview()
@@ -242,8 +242,23 @@ extension AddErrandViewController : UICollectionViewDelegateFlowLayout,UICollect
     }
     func collectionView(_ collectionView: UICollectionView, didHighlightItemAt indexPath: IndexPath) {
         if collectionView == addPersonCollectionView{
-            let controller = MorePeopleToDo()
-            navigationController?.pushViewController(controller, animated: true)
+            if data.count == 1{
+                if indexPath.item == indexPath.last{
+                    let controller = MorePeopleToDo()
+                    navigationController?.pushViewController(controller, animated: true)
+                }
+                
+            }else{
+                
+                if indexPath.item == 0{
+                    
+                }
+                else if indexPath.item == indexPath.last{
+                    let controller = MorePeopleToDo()
+                    navigationController?.pushViewController(controller, animated: true)
+                }
+            }
+            
         }
     }
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -253,6 +268,7 @@ extension AddErrandViewController : UICollectionViewDelegateFlowLayout,UICollect
         cell.bglabel.textColor = .EZY_3D64FF
         cell.layer.borderWidth = 1
         cell.layer.borderColor = UIColor.EZY_6383FF.cgColor
+   
         if cell.bglabel.text == data.last{
             cell.bglabel.textColor = .EZY_BAC8FF
             cell.layer.borderColor = UIColor.EZY_BAC8FF.cgColor
@@ -262,19 +278,15 @@ extension AddErrandViewController : UICollectionViewDelegateFlowLayout,UICollect
             if indexPath.item == indexPath.first{
                 cell.bglabel.text = "@" + data[indexPath.item]
             }
-
         }
-        
         return cell
     }
-
+    
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         let label = UILabel()
         label.text = data[indexPath.row]
         label.sizeToFit()
-        return CGSize(width: label.frame.width + view.frame.height/42.736842, height: view.frame.height/25.375)
+        return CGSize(width: label.frame.width + view.frame.height/40.6, height: view.frame.height/25.375)
     }
 
 }
-
-
