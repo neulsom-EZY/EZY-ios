@@ -25,26 +25,23 @@ class AddErrandViewController : UIViewController{
         $0.dynamicFont(fontSize: 22, currentFontName: "AppleSDGothicNeo-SemiBold")
     }
     
-    private lazy var titleContainerView : UIView = {
-        let title = "제목"
-        let view = Utilities().inputContainerView(withMessage: title, textField: titleTextField, color: .EZY_F4F6FF,viewSize: Double(view.frame.height))
-        return view
-    }()
-
-    private let titleTextField : UITextField = {
-        let tf = Utilities().textField(textColor: .EZY_656565, textSize: 14,font: "AppleSDGothicNeo-Medium")
+ 
+    
+//    private lazy var  RequestList : UIView = {
+//        let title = "어떤 심부름을 부탁할까요?"
+//        let view = Utilities().inputContainerView(withMessage: title, textField: RequestTextfield, color: .EZY_F4F6FF, viewSize: Double(view.frame.height))
+//        return view
+//    }()
+//    private let RequestTextfield : UITextField = {
+//
+//        let tf = Utilities().textField(textColor: .EZY_A7A7A7, textSize: 12, font: "AppleSDGothicNeo-Medium")
+//        return tf
+//    }()
+    private var RequestList : ErrandInputContainterTextField = {
+        let tf = ErrandInputContainterTextField(title: "어떤 심부름을 부탁할까요?")
         return tf
     }()
     
-    private lazy var  RequestList : UIView = {
-        let title = "어떤 심부름을 부탁할까요?"
-        let view = Utilities().inputContainerCustomTextView(withMessage: title, textView: RequestTextView, Color: .EZY_F4F6FF, viewSize: Double(view.frame.height))
-        return view
-    }()
-    private let RequestTextView : UITextView = {
-        let tv = Utilities().textView(TextColor: .EZY_A7A7A7, TextSize: 12, font: .medium)
-        return tv
-    }()
     private let calendarBtn : AlertButton = {
         let viewModel = AlertBtn(icon: UIImage(named: "EZY_calendar")?.withRenderingMode(.alwaysTemplate), iconTintColor: .EZY_FFB5B5, message: "2021.6.6 일요일")
         let button = AlertButton(with: viewModel)

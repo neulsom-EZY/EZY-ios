@@ -36,9 +36,10 @@ class LoginViewController: UIViewController{
         
         // 이벤트 추가
         button.addTarget(self, action: #selector(onTapBtn), for: .touchUpInside)
+        
     }
     
-    
+
     @objc
     func onTapBtn() {
         // BulletinBoard Modal 생성
@@ -70,6 +71,9 @@ class LoginViewController: UIViewController{
 
 extension LoginViewController: BulletinDelegate {
     func onTapClose() {
+        self.removeDim()
+    }
+    func update(){
         self.removeDim()
     }
 }

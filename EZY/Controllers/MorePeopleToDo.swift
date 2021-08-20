@@ -12,7 +12,7 @@ import Then
 class MorePeopleToDo: UIViewController{
     static let recommendData = ["JiHoooooon","siwonnnny","NoName","mingki","johnjihwan","noplayy","gyeongggggjuunnn"]
     let randomColorData : [UIColor] = [.EZY_BAC8FF,.EZY_FFCCCC,.EZY_BADEFF,.EZY_CFE3CE,.EZY_FFD18D]
-
+    let identifier = "MorePeopleToDo"
     var data = [SearchData]()
     var filterData = [SearchData]()
     var filtered = false

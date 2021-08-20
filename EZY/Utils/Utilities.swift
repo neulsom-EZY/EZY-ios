@@ -82,7 +82,7 @@ class Utilities{
     
     
     //MARK: - inputcontainerCustomTextView
-    func inputContainerCustomTextView(withMessage message:String,textView : UITextView,Color messageColor: UIColor, viewSize : Double) -> UIView{
+    func inputContainerCustomTextView(withMessage message:String,textfield : UITextView,Color messageColor: UIColor, viewSize : Double) -> UIView{
         let view = UIView()
         let label_Message = UILabel()
         view.backgroundColor = messageColor
@@ -98,11 +98,11 @@ class Utilities{
             make.left.equalToSuperview().offset(viewSize / 47.8)
             make.top.equalToSuperview().offset(viewSize/45.1)
         }
-        view.addSubview(textView)
-        textView.snp.makeConstraints { (make) in
+        view.addSubview(textfield)
+        textfield.snp.makeConstraints { (make) in
             make.left.equalTo(label_Message.snp.left)
             make.right.equalToSuperview().offset(viewSize/40.6 * -1)
-            make.top.equalTo(label_Message.snp.bottom).offset(viewSize/90.2)
+            make.top.equalTo(label_Message.snp.bottom)
             make.bottom.equalToSuperview()
         }
         return view

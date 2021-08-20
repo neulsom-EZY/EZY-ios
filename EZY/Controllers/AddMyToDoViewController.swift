@@ -146,9 +146,7 @@ class AddMyToDoViewController:UIViewController{
     
     @objc func todobackbtn(){
         //전페이지로 되돌아가는 버튼
-        let vc = LoginViewController()
-        vc.modalPresentationStyle = .fullScreen
-        present(vc, animated: false, completion: nil)
+        dismiss(animated: true, completion: nil)
     }
     
     
@@ -199,10 +197,7 @@ class AddMyToDoViewController:UIViewController{
         addView()
         cornerRadius()
         location()
-
     }
-    
-   
     
     func addView(){
         view.addSubview(backbutton)

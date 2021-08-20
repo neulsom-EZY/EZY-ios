@@ -87,7 +87,6 @@ class MoreCalendarModalsViewController : UIViewController{
             myToDo.layer.borderWidth = 1
             myToDo.layer.borderColor = UIColor.EZY_AFADFF.cgColor
             vc = AddMyToDoViewController() //ViewController 보내줌
-//            ourTodoState()
             ErrandTodoState()
 
         }else{
