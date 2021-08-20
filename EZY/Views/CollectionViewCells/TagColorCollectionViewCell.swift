@@ -12,7 +12,10 @@ class TagColorCollectionViewCell: UICollectionViewCell {
     //MARK: Properties
     static let reuseId = "\(TagColorCollectionViewCell.self)"
     
+    var selectedCellbackgroundColor: UIColor!
+    
     var model: TagColorCollectionViewModel?
+    
     
     lazy var colorBackgroundView = UIView().then {
         $0.backgroundColor = UIColor(red: 186/255, green: 200/255, blue: 255/255, alpha: 1)
@@ -25,6 +28,7 @@ class TagColorCollectionViewCell: UICollectionViewCell {
     //MARK: LifeCycles
     override init(frame: CGRect) {
         super.init(frame: frame)
+        
         
         layoutSetting()
     }
@@ -63,7 +67,7 @@ class TagColorCollectionViewCell: UICollectionViewCell {
         self.model = model
         colorBackgroundView.backgroundColor = model.backgroundColor
         checkImage.isHidden = model.isSelected
-        
+                
         if model.isSelected == false{
             colorBackgroundView.layer.masksToBounds = false
             colorBackgroundView.layer.shadowOpacity = 0.5

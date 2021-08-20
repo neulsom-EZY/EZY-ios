@@ -55,8 +55,7 @@ class TagTableViewCell: UITableViewCell {
             make.height.equalToSuperview().dividedBy(1.7)
             make.centerY.equalToSuperview()
             make.left.equalToSuperview()
-//            make.width.equalTo(tagNameLabel).offset(self.contentView.frame.width/20)
-            make.width.equalToSuperview().dividedBy(2)
+            make.width.equalTo(tagNameLabel).offset(self.contentView.frame.width/10)
         }
         
         tagSettingButton.snp.makeConstraints { make in
