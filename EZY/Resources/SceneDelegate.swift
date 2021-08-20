@@ -15,12 +15,9 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
         guard let windowScene = (scene as? UIWindowScene) else { return }        
         window = UIWindow(windowScene: windowScene)
-        let mainViewController = LoginViewController()
-<<<<<<< HEAD:EZY/SceneDelegate.swift
-        let navigationController = UINavigationController(rootViewController: AddErrandViewController())
-=======
+
+        let mainViewController = TagManagementViewController()
         let navigationController = UINavigationController(rootViewController: mainViewController)
->>>>>>> develop:EZY/Resources/SceneDelegate.swift
         navigationController.navigationBar.isHidden = true
         window?.rootViewController = navigationController
         window?.makeKeyAndVisible()
