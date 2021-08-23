@@ -59,7 +59,6 @@ class TagSettingViewController: UIViewController, UITextFieldDelegate {
         $0.collectionViewLayout = layout
         $0.showsHorizontalScrollIndicator = false
         $0.backgroundColor = .white
-        $0.isScrollEnabled = false
     }
     
     lazy var writeTagNameView = UIButton().then{
@@ -91,10 +90,7 @@ class TagSettingViewController: UIViewController, UITextFieldDelegate {
                                                          TagColorCollectionViewModel(backgroundColor: UIColor(red: 127/255, green: 124/255, blue: 226/255, alpha: 1), isSelected: true),
                                                          TagColorCollectionViewModel(backgroundColor: UIColor(red: 166/255, green: 152/255, blue: 255/255, alpha: 1), isSelected: true),
                                                          TagColorCollectionViewModel(backgroundColor: UIColor(red: 186/255, green: 154/255, blue: 255/255, alpha: 1), isSelected: true),
-                                                         TagColorCollectionViewModel(backgroundColor: UIColor(red: 198/255, green: 171/255, blue: 255/255, alpha: 1), isSelected: true),
-                                                         TagColorCollectionViewModel(backgroundColor: UIColor(red: 129/255, green: 85/255, blue: 255/255, alpha: 1), isSelected: true),
-                                                         TagColorCollectionViewModel(backgroundColor: UIColor(red: 114/255, green: 110/255, blue: 255/255, alpha: 1), isSelected: true),
-                                                         TagColorCollectionViewModel(backgroundColor: UIColor(red: 100/255, green: 131/255, blue: 255/255, alpha: 1), isSelected: true)]
+                                                         TagColorCollectionViewModel(backgroundColor: UIColor(red: 198/255, green: 171/255, blue: 255/255, alpha: 1), isSelected: true)]
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -117,7 +113,7 @@ class TagSettingViewController: UIViewController, UITextFieldDelegate {
         
         tagColorCollectionView.snp.makeConstraints { make in
             make.top.equalTo(tagColorTitleLabel.snp.bottom)
-            make.height.equalToSuperview().dividedBy(8)
+            make.height.equalToSuperview().dividedBy(13)
             make.left.equalToSuperview()
             make.centerX.equalToSuperview()
         }
