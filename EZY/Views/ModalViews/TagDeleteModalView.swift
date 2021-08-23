@@ -17,30 +17,17 @@ class TagDeleteModalView: UIView {
         $0.backgroundColor = .white
         $0.layer.cornerRadius = 10
     }
-    
-    lazy var titleLabel = UILabel().then {
-        $0.text = "태그 삭제"
-        $0.dynamicFont(fontSize: 12, currentFontName: "AppleSDGothicNeo-Bold")
-        $0.textColor = UIColor(red: 104/255, green: 134/255, blue: 254/255, alpha: 1)
-    }
-    
-    lazy var iconCircleBackground = UIView().then {
-        $0.backgroundColor = UIColor(red: 104/255, green: 134/255, blue: 254/255, alpha: 1)
-    }
-    
-    lazy var iconImageView = UIImageView().then {
-        $0.image = UIImage(named: "EZY_OurJob")
-    }
+
     
     lazy var cancleButton = UIButton().then {
-        $0.setTitle("취소", for: .normal)
+        $0.setTitle("취 소", for: .normal)
         $0.backgroundColor = UIColor(red: 104/255, green: 134/255, blue: 254/255, alpha: 1)
         $0.layer.cornerRadius = 10
         $0.dynamicFont(fontSize: 12, currentFontName: "AppleSDGothicNeo-Bold")
     }
     
     lazy var deleteButton = UIButton().then {
-        $0.setTitle("삭제", for: .normal)
+        $0.setTitle("삭 제", for: .normal)
         $0.backgroundColor = UIColor(red: 154/255, green: 174/255, blue: 252/255, alpha: 1)
         $0.layer.cornerRadius = 10
         $0.dynamicFont(fontSize: 12, currentFontName: "AppleSDGothicNeo-Bold")
@@ -74,9 +61,6 @@ class TagDeleteModalView: UIView {
     func layoutSetting(){
         self.addSubview(shadowBackgroundView)
         shadowBackgroundView.addSubview(modalBackgroundView)
-        modalBackgroundView.addSubview(titleLabel)
-        modalBackgroundView.addSubview(iconCircleBackground)
-        iconCircleBackground.addSubview(iconImageView)
         modalBackgroundView.addSubview(cancleButton)
         modalBackgroundView.addSubview(deleteButton)
         modalBackgroundView.addSubview(labelView)

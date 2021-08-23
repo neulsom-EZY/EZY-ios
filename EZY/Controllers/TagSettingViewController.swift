@@ -192,35 +192,16 @@ class TagSettingViewController: UIViewController, UITextFieldDelegate {
         }
         
         tagDeleteModalView.modalBackgroundView.snp.makeConstraints { make in
-            make.width.equalToSuperview().dividedBy(1.13)
-            make.height.equalToSuperview().dividedBy(3.59)
+            make.width.equalToSuperview().dividedBy(1.1)
+            make.height.equalToSuperview().dividedBy(5.7)
             make.centerX.centerY.equalToSuperview()
         }
-        
-        tagDeleteModalView.titleLabel.snp.makeConstraints { make in
-            make.top.equalToSuperview().offset(self.view.frame.height/33.8)
-            make.left.equalToSuperview().offset(self.view.frame.height/33.8)
-        }
-        
-        tagDeleteModalView.iconCircleBackground.snp.makeConstraints { make in
-            make.centerX.equalToSuperview()
-            make.width.equalToSuperview().dividedBy(6.3)
-            make.height.equalTo(tagDeleteModalView.iconCircleBackground.snp.width)
-            make.top.equalTo(tagDeleteModalView.titleLabel.snp.bottom).offset(self.view.frame.height/62)
-            
-            tagDeleteModalView.iconCircleBackground.layer.cornerRadius = ((self.view.frame.width/1.13)/6.3)/2
-        }
-        
-        tagDeleteModalView.iconImageView.snp.makeConstraints { make in
-            make.centerX.centerY.equalToSuperview()
-            make.height.width.equalToSuperview().dividedBy(2)
-        }
-        
+
         tagDeleteModalView.labelView.snp.makeConstraints { make in
             make.centerX.equalToSuperview()
             make.width.equalToSuperview().dividedBy(1.7)
-            make.height.equalToSuperview().dividedBy(5.5)
-            make.top.equalTo(tagDeleteModalView.iconCircleBackground.snp.bottom).offset(self.view.frame.height/63)
+            make.height.equalToSuperview().dividedBy(3.7)
+            make.top.equalToSuperview().offset(self.view.frame.height/22.5)
         }
         
         tagDeleteModalView.tagTitleNameLabel.snp.makeConstraints { make in
@@ -238,10 +219,10 @@ class TagSettingViewController: UIViewController, UITextFieldDelegate {
         }
         
         tagDeleteModalView.deleteButton.snp.makeConstraints { make in
-            make.bottom.equalToSuperview().offset(-self.view.frame.height/30.6)
+            make.bottom.equalToSuperview().offset(-self.view.frame.height/45.1)
             make.right.equalToSuperview().offset(-self.view.frame.width/15)
-            make.height.equalToSuperview().dividedBy(7.2)
-            make.width.equalToSuperview().dividedBy(4.7)
+            make.height.equalToSuperview().dividedBy(4.27)
+            make.width.equalToSuperview().dividedBy(4.44)
         }
         
         tagDeleteModalView.isHidden = true
