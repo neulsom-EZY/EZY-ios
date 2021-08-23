@@ -82,15 +82,18 @@ class TagSettingViewController: UIViewController, UITextFieldDelegate {
                                                  TagColorCollectionViewModel(backgroundColor: UIColor(red: 255/255, green: 170/255, blue: 255/255, alpha: 1), isSelected: true),
                                                  TagColorCollectionViewModel(backgroundColor: UIColor(red: 255/255, green: 160/255, blue: 255/255, alpha: 1), isSelected: true),
                                                  TagColorCollectionViewModel(backgroundColor: UIColor(red: 255/255, green: 150/255, blue: 255/255, alpha: 1), isSelected: true)]
+    
+    var tagName: String?
+    var selectedColorIndex: Int?
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
         layoutSetting()
         
         tagColorCollectionViewSetting()
         
         tagDeleteModalViewSetting()
+        
     }
     
     func tagColorCollectionViewSetting(){
@@ -112,6 +115,8 @@ class TagSettingViewController: UIViewController, UITextFieldDelegate {
     }
     
     func layoutSetting(){
+        TagManagementViewController.delegate = self
+        
         self.view.backgroundColor = .white
         
         self.view.addSubview(backButton)
@@ -307,6 +312,13 @@ extension TagSettingViewController: UICollectionViewDataSource, UICollectionView
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
         return UIEdgeInsets(top: self.view.frame.width/24, left: self.view.frame.width/12, bottom: self.view.frame.width/24, right: self.view.frame.width/12)
+    }
+}
+
+extension TagSettingViewController: SendTagNameSelectedCellIndexDelegate{
+    func didTabTagSettingButton(with tagName: String, index: Int) {
+        tagNameTextField.text = tagName
+        print("tagName \(tagName)")
     }
 }
 
