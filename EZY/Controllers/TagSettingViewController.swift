@@ -76,6 +76,8 @@ class TagSettingViewController: UIViewController {
     
     var tagColorPreciousSelectedIndex = 0
     
+    var tagNameTextCount = 0
+    
     var tagDeleteModalView = TagDeleteModalView()
     
 
@@ -206,7 +208,7 @@ class TagSettingViewController: UIViewController {
     func tagDeleteModalViewSetting(){
         self.view.addSubview(tagDeleteModalView)
         
-        tagDeleteModalView.deleteButton.addTarget(self, action: #selector(deleteButtonClicked(sender:)), for: .touchUpInside)
+        tagDeleteModalView.deleteButton.addTarget(self, action: #selector(modalDeleteButtonClicked(sender:)), for: .touchUpInside)
         tagDeleteModalView.cancleButton.addTarget(self, action: #selector(cancleButtonClicked(sender:)), for: .touchUpInside)
         
         tagDeleteModalView.snp.makeConstraints { make in
@@ -223,19 +225,36 @@ class TagSettingViewController: UIViewController {
             make.centerX.centerY.equalToSuperview()
         }
 
-        tagDeleteModalView.labelView.snp.makeConstraints { make in
-            make.centerX.equalToSuperview()
-            make.width.equalToSuperview().dividedBy(1.7)
-            make.height.equalToSuperview().dividedBy(3.7)
-            make.top.equalToSuperview().offset(self.view.frame.height/22.5)
-        }
-        
-        tagDeleteModalView.tagTitleNameLabel.snp.makeConstraints { make in
-            make.centerX.top.equalToSuperview()
-        }
-        
-        tagDeleteModalView.completeQuestionsLabel.snp.makeConstraints { make in
-            make.bottom.centerX.equalToSuperview()
+        if tagNameTextCount >= 15{ // tagName이 길 때
+            tagDeleteModalView.labelView.snp.makeConstraints { make in
+                make.centerX.equalToSuperview()
+                make.width.equalToSuperview().dividedBy(1.7)
+                make.height.equalToSuperview().dividedBy(3.7)
+                make.top.equalToSuperview().offset(self.view.frame.height/22.5)
+            }
+            
+            tagDeleteModalView.tagTitleNameLabel.snp.makeConstraints { make in
+                make.centerX.top.equalToSuperview()
+            }
+            
+            tagDeleteModalView.completeQuestionsLabel.snp.makeConstraints { make in
+                make.bottom.centerX.equalToSuperview()
+            }
+        }else{ // tagName이 짧을 때
+            tagDeleteModalView.labelView.snp.makeConstraints { make in
+                make.centerX.equalToSuperview()
+                make.width.equalTo((tagDeleteModalView.tagTitleNameLabel.text! as NSString).size(withAttributes: [NSAttributedString.Key.font : tagDeleteModalView.tagTitleNameLabel.font as Any]).width + (tagDeleteModalView.completeQuestionsLabel.text! as NSString).size(withAttributes: [NSAttributedString.Key.font : tagDeleteModalView.completeQuestionsLabel.font as Any]).width + 10)
+                make.height.equalToSuperview().dividedBy(5)
+                make.top.equalToSuperview().offset(self.view.frame.height/22.5)
+            }
+            
+            tagDeleteModalView.tagTitleNameLabel.snp.makeConstraints { make in
+                make.centerY.left.equalToSuperview()
+            }
+            
+            tagDeleteModalView.completeQuestionsLabel.snp.makeConstraints { make in
+                make.right.centerY.equalToSuperview()
+            }
         }
         
         tagDeleteModalView.cancleButton.snp.makeConstraints { make in
@@ -254,7 +273,7 @@ class TagSettingViewController: UIViewController {
         tagDeleteModalView.isHidden = true
     }
     
-    @objc func deleteButtonClicked(sender:UIButton){
+    @objc func modalDeleteButtonClicked(sender:UIButton){
         let nextViewController = TagManagementViewController()
         self.navigationController?.pushViewController(nextViewController, animated: true)
     }
@@ -297,8 +316,6 @@ class TagSettingViewController: UIViewController {
                 self.writeTagNameView.isHidden = true
             })
     }
-    
-    
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         self.tagNameTextField.resignFirstResponder()
