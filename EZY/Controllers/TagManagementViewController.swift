@@ -355,7 +355,7 @@ class TagManagementViewController: UIViewController {
         
         if recommendedTagNameText.count == 0{
 
-            UIView.animate(withDuration: 0.5, delay: 0, options: .curveEaseOut, animations: {
+            UIView.animate(withDuration: 0.3, delay: 0, options: .curveEaseOut, animations: {
                 self.lineView.snp.remakeConstraints { make in
                     make.height.equalTo(0.5)
                     make.left.equalTo(self.mainTitleLabel)
@@ -387,15 +387,14 @@ class TagManagementViewController: UIViewController {
                     make.centerX.equalToSuperview()
                 }
                 
-                self.lineView.isHidden = true
-                self.tagGoodLabel.isHidden = true
-                self.tagAddLabel.isHidden = true
-                self.recommendedTagCollectionView.isHidden = true
+//                self.lineView.isHidden = true
+//                self.tagGoodLabel.isHidden = true
+//                self.tagAddLabel.isHidden = true
+//                self.recommendedTagCollectionView.isHidden = true
                 
                 self.recommendedTagCollectionView.superview?.layoutIfNeeded()
             })
             
-
         }
         
         tagTableView.backgroundColor = .clear
