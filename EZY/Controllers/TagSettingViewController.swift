@@ -7,7 +7,7 @@
 
 import UIKit
 
-class TagSettingViewController: UIViewController, UITextFieldDelegate {
+class TagSettingViewController: UIViewController {
     
     lazy var backButton = UIButton().then{
         $0.setImage(UIImage(named: "EZY_TagManagementBackButtonImage"), for: .normal)
@@ -357,3 +357,18 @@ extension TagSettingViewController: SendTagNameSelectedCellIndexDelegate{
     }
 }
 
+extension TagSettingViewController: UITextFieldDelegate{
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        guard let text = tagNameTextField.text else { return true }
+
+        let newLength = text.count + string.count - range.length
+
+        if newLength > 30 {
+            for _ in 0 ..< newLength - 30 {
+                textField.deleteBackward()
+            }
+
+        }
+        return true
+    }
+}
