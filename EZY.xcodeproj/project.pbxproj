@@ -50,6 +50,7 @@
 		6A4EDA41266E38E000B809EC /* GroupCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A4EDA40266E38E000B809EC /* GroupCollectionViewCell.swift */; };
 		6A685C0D26AC1E2D0079BC30 /* PersonalPlanDetailRepeatDayCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A685C0C26AC1E2D0079BC30 /* PersonalPlanDetailRepeatDayCollectionViewCell.swift */; };
 		6A705BB6267E3ABF001954CE /* PersonalPlanChangeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A705BB5267E3ABF001954CE /* PersonalPlanChangeViewController.swift */; };
+		6A72073426C618600098830F /* RecommendedTagCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A72073326C618600098830F /* RecommendedTagCollectionViewCell.swift */; };
 		6A8283502698132000AC381B /* PlanDeleteModalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A82834F2698132000AC381B /* PlanDeleteModalView.swift */; };
 		6A82835426982A6C00AC381B /* InquiryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A82835326982A6C00AC381B /* InquiryViewController.swift */; };
 		6A82835626982A8B00AC381B /* questionTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A82835526982A8B00AC381B /* questionTableViewCell.swift */; };
@@ -124,6 +125,7 @@
 		6A138F84266F866D00DBCE49 /* GroupManagementViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupManagementViewController.swift; sourceTree = "<group>"; };
 		6A138F88266FACFE00DBCE49 /* GroupAddModalView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupAddModalView.swift; sourceTree = "<group>"; };
 		6A138F8C26703C1900DBCE49 /* selectedMemberCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = selectedMemberCollectionViewCell.swift; sourceTree = "<group>"; };
+		6A15D8A326D485DE00D932EC /* EZY.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = EZY.entitlements; sourceTree = "<group>"; };
 		6A1E3E8F26797CB600E7B198 /* DeleteModalView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteModalView.swift; sourceTree = "<group>"; };
 		6A3E2E7526B10D760078D749 /* ChangePasswardPhoneNumAfterLoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangePasswardPhoneNumAfterLoginViewController.swift; sourceTree = "<group>"; };
 		6A3E2E7726B111540078D749 /* ChangePasswardAfterLoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangePasswardAfterLoginViewController.swift; sourceTree = "<group>"; };
@@ -160,6 +162,7 @@
 		6A4EDA40266E38E000B809EC /* GroupCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupCollectionViewCell.swift; sourceTree = "<group>"; };
 		6A685C0C26AC1E2D0079BC30 /* PersonalPlanDetailRepeatDayCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonalPlanDetailRepeatDayCollectionViewCell.swift; sourceTree = "<group>"; };
 		6A705BB5267E3ABF001954CE /* PersonalPlanChangeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonalPlanChangeViewController.swift; sourceTree = "<group>"; };
+		6A72073326C618600098830F /* RecommendedTagCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecommendedTagCollectionViewCell.swift; sourceTree = "<group>"; };
 		6A82834F2698132000AC381B /* PlanDeleteModalView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlanDeleteModalView.swift; sourceTree = "<group>"; };
 		6A82835326982A6C00AC381B /* InquiryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InquiryViewController.swift; sourceTree = "<group>"; };
 		6A82835526982A8B00AC381B /* questionTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = questionTableViewCell.swift; sourceTree = "<group>"; };
@@ -180,20 +183,6 @@
 		6AA769EE26636AE700B7E1F5 /* EZY.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = EZY.xcdatamodel; sourceTree = "<group>"; };
 		6AA769F526636AE800B7E1F5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		6AA76A0126636D2800B7E1F5 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
-		6AA76A032663844A00B7E1F5 /* Poppins-Black.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Poppins-Black.ttf"; path = "/Downloads/Poppins/Poppins-Black.ttf"; sourceTree = "<absolute>"; };
-		6AA76A042663844A00B7E1F5 /* Poppins-BlackItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Poppins-BlackItalic.ttf"; path = "/Downloads/Poppins/Poppins-BlackItalic.ttf"; sourceTree = "<absolute>"; };
-		6AA76A052663844A00B7E1F5 /* Poppins-ExtraBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Poppins-ExtraBold.ttf"; path = "/Downloads/Poppins/Poppins-ExtraBold.ttf"; sourceTree = "<absolute>"; };
-		6AA76A062663844A00B7E1F5 /* Poppins-ExtraBoldItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Poppins-ExtraBoldItalic.ttf"; path = "/Downloads/Poppins/Poppins-ExtraBoldItalic.ttf"; sourceTree = "<absolute>"; };
-		6AA76A072663844A00B7E1F5 /* Poppins-LightItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Poppins-LightItalic.ttf"; path = "/Downloads/Poppins/Poppins-LightItalic.ttf"; sourceTree = "<absolute>"; };
-		6AA76A092663844A00B7E1F5 /* Poppins-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Poppins-Light.ttf"; path = "/Downloads/Poppins/Poppins-Light.ttf"; sourceTree = "<absolute>"; };
-		6AA76A0A2663844A00B7E1F5 /* Poppins-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Poppins-Medium.ttf"; path = "/Downloads/Poppins/Poppins-Medium.ttf"; sourceTree = "<absolute>"; };
-		6AA76A0B2663844A00B7E1F5 /* Poppins-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Poppins-Bold.ttf"; path = "/Downloads/Poppins/Poppins-Bold.ttf"; sourceTree = "<absolute>"; };
-		6AA76A0C2663844A00B7E1F5 /* Poppins-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Poppins-Regular.ttf"; path = "/Downloads/Poppins/Poppins-Regular.ttf"; sourceTree = "<absolute>"; };
-		6AA76A0D2663844A00B7E1F5 /* Poppins-Thin.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Poppins-Thin.ttf"; path = "/Downloads/Poppins/Poppins-Thin.ttf"; sourceTree = "<absolute>"; };
-		6AA76A0F2663844A00B7E1F5 /* Poppins-Italic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Poppins-Italic.ttf"; path = "/Downloads/Poppins/Poppins-Italic.ttf"; sourceTree = "<absolute>"; };
-		6AA76A102663844A00B7E1F5 /* Poppins-ThinItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Poppins-ThinItalic.ttf"; path = "/Downloads/Poppins/Poppins-ThinItalic.ttf"; sourceTree = "<absolute>"; };
-		6AA76A112663844A00B7E1F5 /* Poppins-BoldItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Poppins-BoldItalic.ttf"; path = "/Downloads/Poppins/Poppins-BoldItalic.ttf"; sourceTree = "<absolute>"; };
-		6AA76A122663844A00B7E1F5 /* Poppins-MediumItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Poppins-MediumItalic.ttf"; path = "/Downloads/Poppins/Poppins-MediumItalic.ttf"; sourceTree = "<absolute>"; };
 		6AA76A272663958B00B7E1F5 /* ShowPlanViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowPlanViewController.swift; sourceTree = "<group>"; };
 		6AB27CAB269D758100B95C0F /* ChangeIdAfterLoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangeIdAfterLoginViewController.swift; sourceTree = "<group>"; };
 		6AB27CAF269D8C1600B95C0F /* WithdrawalViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WithdrawalViewController.swift; sourceTree = "<group>"; };
@@ -306,7 +295,6 @@
 				6AA769E226636AE700B7E1F5 /* Products */,
 				D97C84BDB41C12F061081FBC /* Pods */,
 				2B62A8E180A8585A5EDF7361 /* Frameworks */,
-				EEE1E92E26A9478F0082B696 /* Recovered References */,
 			);
 			sourceTree = "<group>";
 		};
@@ -321,6 +309,7 @@
 		6AA769E326636AE700B7E1F5 /* EZY */ = {
 			isa = PBXGroup;
 			children = (
+				6A15D8A326D485DE00D932EC /* EZY.entitlements */,
 				6AE5BB0426966DCA00A9731B /* Utils */,
 				6A097D00268ED792001E011D /* Header */,
 				EEEDB2C02664D10100E5C53A /* Utils */,
@@ -488,6 +477,7 @@
 				6AB486FE26834D8C00E95D43 /* CalendarCollectionViewCell.swift */,
 				6AE5BB002695746F00A9731B /* PersonalPlanAddRepeatDayCollectionViewCell.swift */,
 				6A685C0C26AC1E2D0079BC30 /* PersonalPlanDetailRepeatDayCollectionViewCell.swift */,
+				6A72073326C618600098830F /* RecommendedTagCollectionViewCell.swift */,
 			);
 			path = CollectionViewCells;
 			sourceTree = "<group>";
@@ -516,27 +506,6 @@
 				EE93B4E32687BD8A0055D7A6 /* ManageData.swift */,
 			);
 			path = Data;
-			sourceTree = "<group>";
-		};
-		EEE1E92E26A9478F0082B696 /* Recovered References */ = {
-			isa = PBXGroup;
-			children = (
-				6AA76A092663844A00B7E1F5 /* Poppins-Light.ttf */,
-				6AA76A102663844A00B7E1F5 /* Poppins-ThinItalic.ttf */,
-				6AA76A0F2663844A00B7E1F5 /* Poppins-Italic.ttf */,
-				6AA76A062663844A00B7E1F5 /* Poppins-ExtraBoldItalic.ttf */,
-				6AA76A0D2663844A00B7E1F5 /* Poppins-Thin.ttf */,
-				6AA76A122663844A00B7E1F5 /* Poppins-MediumItalic.ttf */,
-				6AA76A032663844A00B7E1F5 /* Poppins-Black.ttf */,
-				6AA76A052663844A00B7E1F5 /* Poppins-ExtraBold.ttf */,
-				6AA76A112663844A00B7E1F5 /* Poppins-BoldItalic.ttf */,
-				6AA76A0A2663844A00B7E1F5 /* Poppins-Medium.ttf */,
-				6AA76A0B2663844A00B7E1F5 /* Poppins-Bold.ttf */,
-				6AA76A042663844A00B7E1F5 /* Poppins-BlackItalic.ttf */,
-				6AA76A0C2663844A00B7E1F5 /* Poppins-Regular.ttf */,
-				6AA76A072663844A00B7E1F5 /* Poppins-LightItalic.ttf */,
-			);
-			name = "Recovered References";
 			sourceTree = "<group>";
 		};
 		EEEDB2C02664D10100E5C53A /* Utils */ = {
@@ -729,6 +698,7 @@
 				6AB27CB4269DD42400B95C0F /* InquiryReceiveChattingBoxView.swift in Sources */,
 				6AA6F792269C2E4D00958D36 /* SignUpPasswordViewController.swift in Sources */,
 				6AA6F798269C2E6200958D36 /* NewPasswordPhoneNumViewController.swift in Sources */,
+				6A72073426C618600098830F /* RecommendedTagCollectionViewCell.swift in Sources */,
 				6AE5BB0326957B0600A9731B /* RepeatCollectionViewModel.swift in Sources */,
 				6AFB77F9267ECD6700B59482 /* WhiteBackgroundView.swift in Sources */,
 				6AB486FF26834D8C00E95D43 /* CalendarCollectionViewCell.swift in Sources */,
@@ -899,6 +869,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = EZY/EZY.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = Q25U65UWAP;
 				INFOPLIST_FILE = EZY/Info.plist;
@@ -919,6 +890,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = EZY/EZY.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = Q25U65UWAP;
 				INFOPLIST_FILE = EZY/Info.plist;
