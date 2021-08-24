@@ -169,7 +169,7 @@ class TagSettingViewController: UIViewController, UITextFieldDelegate {
         }
         
         tagNameTextField.snp.makeConstraints { make in
-            make.left.equalTo(tagNameTitleLabel).offset(self.view.frame.width/30)
+            make.left.equalTo(tagNameTitleLabel).offset(self.view.frame.width/70)
             make.centerX.equalToSuperview()
             make.top.equalTo(tagNameTitleLabel.snp.bottom)
             make.height.equalToSuperview().dividedBy(25.3)
