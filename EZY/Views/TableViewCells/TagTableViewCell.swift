@@ -7,10 +7,15 @@
 
 import UIKit
 
+protocol TagTableViewCellDelegate: AnyObject{
+    func didTabAddButton(with string: String)
+}
+
 class TagTableViewCell: UITableViewCell {
-    
-    
+            
     static var reuseId = "\(TagTableViewCell.self)"
+    
+    public weak var delegate: TagTableViewCellDelegate?
     
     lazy var tagLabelBackgroundView = UIView().then {
         $0.backgroundColor = .white
@@ -45,11 +50,28 @@ class TagTableViewCell: UITableViewCell {
         layoutSetting()
     }
     
-    func layoutSetting(){        
+    private var string: String?
+    
+    public func configure(with string: String){
+        self.string = string
+    }
+    
+    @objc func tagSettingButtonClicked(sender:UIButton){
+
+    }
+    
+    func layoutSetting(){
+        guard let string = string else {
+            return
+        }
+        
+        delegate?.didTabAddButton(with: string)
+        
         self.contentView.addSubview(tagLabelBackgroundView)
         self.contentView.addSubview(tagSettingButton)
         tagLabelBackgroundView.addSubview(tagNameLabel)
         
+        tagSettingButton.addTarget(self, action: #selector(tagSettingButtonClicked(sender:)), for: .touchUpInside)
         
         tagLabelBackgroundView.snp.makeConstraints { make in
             make.height.equalToSuperview().dividedBy(1.7)

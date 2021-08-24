@@ -78,28 +78,35 @@ class TagSettingViewController: UIViewController, UITextFieldDelegate {
     
     var tagDeleteModalView = TagDeleteModalView()
     
-    var TagColorModels: [TagColorCollectionViewModel] = [TagColorCollectionViewModel(backgroundColor: UIColor(red: 154/255, green: 119/255, blue: 255/255, alpha: 1), isSelected: false),
-                                                         TagColorCollectionViewModel(backgroundColor: UIColor(red: 129/255, green: 85/255, blue: 255/255, alpha: 1), isSelected: true),
-                                                         TagColorCollectionViewModel(backgroundColor: UIColor(red: 114/255, green: 110/255, blue: 255/255, alpha: 1), isSelected: true),
-                                                         TagColorCollectionViewModel(backgroundColor: UIColor(red: 100/255, green: 131/255, blue: 255/255, alpha: 1), isSelected: true),
-                                                         TagColorCollectionViewModel(backgroundColor: UIColor(red: 129/255, green: 154/255, blue: 255/255, alpha: 1), isSelected: true),
-                                                         TagColorCollectionViewModel(backgroundColor: UIColor(red: 159/255, green: 168/255, blue: 255/255, alpha: 1), isSelected: true),
-                                                         TagColorCollectionViewModel(backgroundColor: UIColor(red: 175/255, green: 173/255, blue: 255/255, alpha: 1), isSelected: true),
-                                                         TagColorCollectionViewModel(backgroundColor: UIColor(red: 156/255, green: 154/255, blue: 255/255, alpha: 1), isSelected: true),
-                                                         TagColorCollectionViewModel(backgroundColor: UIColor(red: 129/255, green: 126/255, blue: 255/255, alpha: 1), isSelected: true),
-                                                         TagColorCollectionViewModel(backgroundColor: UIColor(red: 127/255, green: 124/255, blue: 226/255, alpha: 1), isSelected: true),
-                                                         TagColorCollectionViewModel(backgroundColor: UIColor(red: 166/255, green: 152/255, blue: 255/255, alpha: 1), isSelected: true),
-                                                         TagColorCollectionViewModel(backgroundColor: UIColor(red: 186/255, green: 154/255, blue: 255/255, alpha: 1), isSelected: true),
-                                                         TagColorCollectionViewModel(backgroundColor: UIColor(red: 198/255, green: 171/255, blue: 255/255, alpha: 1), isSelected: true)]
+
+    var TagColorModels: [TagColorCollectionViewModel] = [TagColorCollectionViewModel(backgroundColor: UIColor(red: 186/255, green: 200/255, blue: 255/255, alpha: 1), isSelected: false),
+                                                 TagColorCollectionViewModel(backgroundColor: UIColor(red: 196/255, green: 200/255, blue: 255/255, alpha: 1), isSelected: true),
+                                                 TagColorCollectionViewModel(backgroundColor: UIColor(red: 206/255, green: 200/255, blue: 255/255, alpha: 1), isSelected: true),
+                                                 TagColorCollectionViewModel(backgroundColor: UIColor(red: 216/255, green: 200/255, blue: 255/255, alpha: 1), isSelected: true),
+                                                 TagColorCollectionViewModel(backgroundColor: UIColor(red: 226/255, green: 200/255, blue: 255/255, alpha: 1), isSelected: true),
+                                                 TagColorCollectionViewModel(backgroundColor: UIColor(red: 236/255, green: 200/255, blue: 255/255, alpha: 1), isSelected: true),
+                                                 TagColorCollectionViewModel(backgroundColor: UIColor(red: 246/255, green: 200/255, blue: 255/255, alpha: 1), isSelected: true),
+                                                 TagColorCollectionViewModel(backgroundColor: UIColor(red: 255/255, green: 200/255, blue: 255/255, alpha: 1), isSelected: true),
+                                                 TagColorCollectionViewModel(backgroundColor: UIColor(red: 255/255, green: 190/255, blue: 255/255, alpha: 1), isSelected: true),
+                                                 TagColorCollectionViewModel(backgroundColor: UIColor(red: 255/255, green: 180/255, blue: 255/255, alpha: 1), isSelected: true),
+                                                 TagColorCollectionViewModel(backgroundColor: UIColor(red: 255/255, green: 170/255, blue: 255/255, alpha: 1), isSelected: true),
+                                                 TagColorCollectionViewModel(backgroundColor: UIColor(red: 255/255, green: 160/255, blue: 255/255, alpha: 1), isSelected: true),
+                                                 TagColorCollectionViewModel(backgroundColor: UIColor(red: 255/255, green: 150/255, blue: 255/255, alpha: 1), isSelected: true),
+                                                 TagColorCollectionViewModel(backgroundColor: UIColor(red: 255/255, green: 170/255, blue: 255/255, alpha: 1), isSelected: true),
+                                                 TagColorCollectionViewModel(backgroundColor: UIColor(red: 255/255, green: 160/255, blue: 255/255, alpha: 1), isSelected: true),
+                                                 TagColorCollectionViewModel(backgroundColor: UIColor(red: 255/255, green: 150/255, blue: 255/255, alpha: 1), isSelected: true)]
+    
+    var tagName: String?
+    var selectedColorIndex: Int?
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
         layoutSetting()
         
         tagColorCollectionViewSetting()
         
         tagDeleteModalViewSetting()
+        
     }
     
     func tagColorCollectionViewSetting(){
@@ -120,6 +127,8 @@ class TagSettingViewController: UIViewController, UITextFieldDelegate {
     }
     
     func layoutSetting(){
+        TagManagementViewController.delegate = self
+        
         self.view.backgroundColor = .white
         
         self.view.addSubview(tagColorCollectionView)
@@ -336,6 +345,13 @@ extension TagSettingViewController: UICollectionViewDataSource, UICollectionView
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
         return UIEdgeInsets(top: self.view.frame.width/24, left: self.view.frame.width/12, bottom: self.view.frame.width/24, right: self.view.frame.width/12)
+    }
+}
+
+extension TagSettingViewController: SendTagNameSelectedCellIndexDelegate{
+    func didTabTagSettingButton(with tagName: String, index: Int) {
+        tagNameTextField.text = tagName
+        print("tagName \(tagName)")
     }
 }
 

@@ -7,17 +7,24 @@
 
 import UIKit
 
+protocol SendTagNameSelectedCellIndexDelegate: AnyObject {
+    func didTabTagSettingButton(with tagName: String, index: Int)
+}
 
 class TagManagementViewController: UIViewController {
     
     var tagNameText = [String]()
     var tagColor = [UIColor]()
     
+    static weak var delegate: SendTagNameSelectedCellIndexDelegate?
+    
     lazy var selectedRecommendedTagIndex: Int = 0
     
     lazy var selectedTagColor: UIColor = TagColorModels[0].backgroundColor
     
     lazy var tagAddModalView = TagAddModalView()
+    
+    lazy var selectedTagIndex: Int = 0
     
     lazy var recommendedTagNameText = ["STUDY","EXCERISE","ENGLISH","EAT"]
     
@@ -106,6 +113,7 @@ class TagManagementViewController: UIViewController {
         tagAddModalViewSetting()
         
         tagColorCollectionViewSetting()
+        
     }
     
     func recommendedTagCollectionViewSetting(){
@@ -339,13 +347,15 @@ class TagManagementViewController: UIViewController {
 
         tagNameText.append(recommendedTagNameText[selectedRecommendedTagIndex])
         tagColor.append(UIColor(red: 154/255, green: 145/255, blue: 254/255, alpha: 1))
+        
+        print("추천 태그 눌러서 추가 : \(tagNameText)")
 
         recommendedTagCollectionView.deleteItems(at: [IndexPath.init(row: selectedRecommendedTagIndex, section: 0)])
         recommendedTagNameText.remove(at: selectedRecommendedTagIndex)
         
         if recommendedTagNameText.count == 0{
 
-            UIView.animate(withDuration: 0.5, delay: 0, options: .curveEaseOut, animations: {
+            UIView.animate(withDuration: 0.3, delay: 0, options: .curveEaseOut, animations: {
                 self.lineView.snp.remakeConstraints { make in
                     make.height.equalTo(0.5)
                     make.left.equalTo(self.mainTitleLabel)
@@ -377,15 +387,14 @@ class TagManagementViewController: UIViewController {
                     make.centerX.equalToSuperview()
                 }
                 
-                self.lineView.isHidden = true
-                self.tagGoodLabel.isHidden = true
-                self.tagAddLabel.isHidden = true
-                self.recommendedTagCollectionView.isHidden = true
+//                self.lineView.isHidden = true
+//                self.tagGoodLabel.isHidden = true
+//                self.tagAddLabel.isHidden = true
+//                self.recommendedTagCollectionView.isHidden = true
                 
                 self.recommendedTagCollectionView.superview?.layoutIfNeeded()
             })
             
-
         }
         
         tagTableView.backgroundColor = .clear
@@ -430,6 +439,8 @@ class TagManagementViewController: UIViewController {
             tagNameText.append(tagAddModalView.tagNameTextField.text!)
             tagColor.append(selectedTagColor)
             
+            print("모달 추가 버튼 눌러서 추가 : \(tagNameText)")
+            
             print("tagNameText = \(tagNameText)")
             
             tagTableView.reloadData()
@@ -441,7 +452,14 @@ class TagManagementViewController: UIViewController {
     }
     
     @objc func tagSettingButtonClicked(sender:UIButton){
+        print("tagSettingButtonClicked : \(selectedTagIndex)")
+
+        print("tagNameText : \(tagNameText)")
+        
         let nextViewController = TagSettingViewController()
+        
+        nextViewController.tagNameTextField.text = "\(tagNameText[selectedTagIndex])"
+        
         self.navigationController?.pushViewController(nextViewController, animated: true)
     }
     
@@ -483,6 +501,9 @@ extension TagManagementViewController: UITableViewDataSource{
             cell.tagNameLabel.text = tagNameText[indexPath.row]
             cell.tagNameLabel.textColor = tagColor[indexPath.row]
             cell.tagLabelBackgroundView.layer.borderColor = tagColor[indexPath.row].cgColor
+            
+            cell.delegate = self
+            cell.configure(with: "\(indexPath.row)")
             
             cell.selectionStyle = .none
             return cell
@@ -583,6 +604,14 @@ extension TagManagementViewController: CustomCollectionViewCellDelegate{
     func didTabButton(with string: String) {
         print("string : \(string)")
         selectedRecommendedTagIndex = Int(string)!
+    }
+}
+
+extension TagManagementViewController: TagTableViewCellDelegate{
+    func didTabAddButton(with string: String) {
+        print("index : \(string)")
+        selectedTagIndex = Int(string)!
+        print("selectedTagIndex : \(selectedTagIndex)")
     }
 }
 

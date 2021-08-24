@@ -13,11 +13,9 @@ protocol CustomCollectionViewCellDelegate: AnyObject{
 
 class RecommendedTagCollectionViewCell: UICollectionViewCell {
     static let reuseId = "\(RecommendedTagCollectionViewCell.self)"
-    var index: Int = 0
+        
     public weak var delegate: CustomCollectionViewCellDelegate?
-    
-    lazy var cellIndex: IndexPath = [0,0]
-    
+        
     lazy var cellBackgroundView = UIView().then {
         $0.layer.cornerRadius = 10
         $0.layer.shadowOpacity = 0.11
