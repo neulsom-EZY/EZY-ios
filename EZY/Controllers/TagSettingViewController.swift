@@ -207,6 +207,7 @@ class TagSettingViewController: UIViewController, UITextFieldDelegate {
         self.view.addSubview(tagDeleteModalView)
         
         tagDeleteModalView.deleteButton.addTarget(self, action: #selector(deleteButtonClicked(sender:)), for: .touchUpInside)
+        tagDeleteModalView.cancleButton.addTarget(self, action: #selector(cancleButtonClicked(sender:)), for: .touchUpInside)
         
         tagDeleteModalView.snp.makeConstraints { make in
             make.top.right.bottom.left.equalToSuperview()
@@ -264,6 +265,10 @@ class TagSettingViewController: UIViewController, UITextFieldDelegate {
     
     @objc func tagDeleteButtonClicked(sender:UIButton){
         tagDeleteModalView.isHidden = false
+    }
+    
+    @objc func cancleButtonClicked(sender:UIButton){
+        tagDeleteModalView.isHidden = true
     }
     
     @objc func completeButtonClicked(sender:UIButton){
