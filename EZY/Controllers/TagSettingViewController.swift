@@ -272,7 +272,7 @@ class TagSettingViewController: UIViewController, UITextFieldDelegate {
     @objc func completeButtonClicked(sender:UIButton){
         
         if tagNameTextField.text?.isEmpty == true{
-            writeTagNameView.alpha = 1
+            writeTagNameView.alpha = 13
             
             UIView.animate(withDuration: 0.4, animations: {
 
