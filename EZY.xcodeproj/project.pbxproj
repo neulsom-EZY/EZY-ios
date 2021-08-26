@@ -49,6 +49,7 @@
 		6A4EDA37266DA52A00B809EC /* SettingTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A4EDA36266DA52A00B809EC /* SettingTableViewCell.swift */; };
 		6A4EDA41266E38E000B809EC /* GroupCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A4EDA40266E38E000B809EC /* GroupCollectionViewCell.swift */; };
 		6A685C0D26AC1E2D0079BC30 /* PersonalPlanDetailRepeatDayCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A685C0C26AC1E2D0079BC30 /* PersonalPlanDetailRepeatDayCollectionViewCell.swift */; };
+		6A6A66E026D608D40096A14B /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 6A6A66DF26D608D40096A14B /* GoogleService-Info.plist */; };
 		6A705BB6267E3ABF001954CE /* PersonalPlanChangeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A705BB5267E3ABF001954CE /* PersonalPlanChangeViewController.swift */; };
 		6A72073426C618600098830F /* RecommendedTagCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A72073326C618600098830F /* RecommendedTagCollectionViewCell.swift */; };
 		6A8283502698132000AC381B /* PlanDeleteModalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A82834F2698132000AC381B /* PlanDeleteModalView.swift */; };
@@ -161,6 +162,7 @@
 		6A4EDA36266DA52A00B809EC /* SettingTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingTableViewCell.swift; sourceTree = "<group>"; };
 		6A4EDA40266E38E000B809EC /* GroupCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupCollectionViewCell.swift; sourceTree = "<group>"; };
 		6A685C0C26AC1E2D0079BC30 /* PersonalPlanDetailRepeatDayCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonalPlanDetailRepeatDayCollectionViewCell.swift; sourceTree = "<group>"; };
+		6A6A66DF26D608D40096A14B /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../../../Downloads/GoogleService-Info.plist"; sourceTree = "<group>"; };
 		6A705BB5267E3ABF001954CE /* PersonalPlanChangeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonalPlanChangeViewController.swift; sourceTree = "<group>"; };
 		6A72073326C618600098830F /* RecommendedTagCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecommendedTagCollectionViewCell.swift; sourceTree = "<group>"; };
 		6A82834F2698132000AC381B /* PlanDeleteModalView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlanDeleteModalView.swift; sourceTree = "<group>"; };
@@ -281,6 +283,7 @@
 		6A9B7547269E82D800703ADF /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				6A6A66DF26D608D40096A14B /* GoogleService-Info.plist */,
 				EEE1E95626AAB71A0082B696 /* LaunchScreen.storyboard */,
 				6AA769E426636AE700B7E1F5 /* AppDelegate.swift */,
 				6AA769E626636AE700B7E1F5 /* SceneDelegate.swift */,
@@ -587,6 +590,7 @@
 				6A3E2E9B26B6A84F0078D749 /* Poppins-ExtraBold.ttf in Resources */,
 				6A3E2E9C26B6A84F0078D749 /* Poppins-Italic.ttf in Resources */,
 				6A3E2E9D26B6A84F0078D749 /* Poppins-MediumItalic.ttf in Resources */,
+				6A6A66E026D608D40096A14B /* GoogleService-Info.plist in Resources */,
 				6A3E2E9E26B6A84F0078D749 /* Poppins-ExtraLightItalic.ttf in Resources */,
 				6A3E2E9F26B6A84F0078D749 /* Poppins-SemiBoldItalic.ttf in Resources */,
 				6A3E2EA026B6A84F0078D749 /* Poppins-ExtraBoldItalic.ttf in Resources */,
@@ -877,7 +881,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.yujin.EZY;
+				PRODUCT_BUNDLE_IDENTIFIER = com.app.EZY;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -898,7 +902,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.yujin.EZY;
+				PRODUCT_BUNDLE_IDENTIFIER = com.app.EZY;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
