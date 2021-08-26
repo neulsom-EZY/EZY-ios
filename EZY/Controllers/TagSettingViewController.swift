@@ -13,6 +13,8 @@ class TagSettingViewController: UIViewController {
         $0.setImage(UIImage(named: "EZY_TagManagementBackButtonImage"), for: .normal)
     }
     
+    lazy var tagNameText = ""
+    
     lazy var mainTitleLabel = UILabel().then {
         $0.text = "태그 설정"
         $0.textColor = UIColor(red: 150/255, green: 141/255, blue: 255/255, alpha: 1)
@@ -232,37 +234,37 @@ class TagSettingViewController: UIViewController {
                 make.height.equalToSuperview().dividedBy(3.7)
                 make.top.equalToSuperview().offset(self.view.frame.height/22.5)
             }
-            
+
             tagDeleteModalView.tagTitleNameLabel.snp.makeConstraints { make in
                 make.centerX.top.equalToSuperview()
             }
-            
-            tagDeleteModalView.completeQuestionsLabel.snp.makeConstraints { make in
+
+            tagDeleteModalView.deleteQuestionsLabel.snp.makeConstraints { make in
                 make.bottom.centerX.equalToSuperview()
             }
         }else{ // tagName이 짧을 때
             tagDeleteModalView.labelView.snp.makeConstraints { make in
                 make.centerX.equalToSuperview()
-                make.width.equalTo((tagDeleteModalView.tagTitleNameLabel.text! as NSString).size(withAttributes: [NSAttributedString.Key.font : tagDeleteModalView.tagTitleNameLabel.font as Any]).width + (tagDeleteModalView.completeQuestionsLabel.text! as NSString).size(withAttributes: [NSAttributedString.Key.font : tagDeleteModalView.completeQuestionsLabel.font as Any]).width + 10)
+                make.width.equalTo((tagDeleteModalView.tagTitleNameLabel.text! as NSString).size(withAttributes: [NSAttributedString.Key.font : tagDeleteModalView.tagTitleNameLabel.font as Any]).width + (tagDeleteModalView.deleteQuestionsLabel.text! as NSString).size(withAttributes: [NSAttributedString.Key.font : tagDeleteModalView.deleteQuestionsLabel.font as Any]).width + 10)
                 make.height.equalToSuperview().dividedBy(5)
                 make.top.equalToSuperview().offset(self.view.frame.height/22.5)
             }
-            
+
             tagDeleteModalView.tagTitleNameLabel.snp.makeConstraints { make in
                 make.centerY.left.equalToSuperview()
             }
-            
-            tagDeleteModalView.completeQuestionsLabel.snp.makeConstraints { make in
+
+            tagDeleteModalView.deleteQuestionsLabel.snp.makeConstraints { make in
                 make.right.centerY.equalToSuperview()
             }
         }
-        
+
         tagDeleteModalView.cancleButton.snp.makeConstraints { make in
             make.bottom.equalTo(tagDeleteModalView.deleteButton)
             make.right.equalTo(tagDeleteModalView.deleteButton.snp.left).offset(-self.view.frame.width/35)
             make.height.width.equalTo(tagDeleteModalView.deleteButton)
         }
-        
+
         tagDeleteModalView.deleteButton.snp.makeConstraints { make in
             make.bottom.equalToSuperview().offset(-self.view.frame.height/45.1)
             make.right.equalToSuperview().offset(-self.view.frame.width/15)
@@ -305,6 +307,8 @@ class TagSettingViewController: UIViewController {
                     Timer.scheduledTimer(timeInterval: TimeInterval(0.8), target: self, selector: #selector(self.hideView), userInfo: nil, repeats: false)
             })
         
+        }else{
+            navigationController?.popViewController(animated: true)
         }
     }
     
@@ -369,7 +373,9 @@ extension TagSettingViewController: UICollectionViewDataSource, UICollectionView
 
 extension TagSettingViewController: SendTagNameSelectedCellIndexDelegate{
     func didTabTagSettingButton(with tagName: String, index: Int) {
-        tagNameTextField.text = tagName
+        tagNameText = tagName
+        tagNameTextField.text = tagNameText
+
         print("tagName \(tagName)")
     }
 }
@@ -380,11 +386,10 @@ extension TagSettingViewController: UITextFieldDelegate{
 
         let newLength = text.count + string.count - range.length
 
-        if newLength > 30 {
-            for _ in 0 ..< newLength - 30 {
+        if newLength > 27 {
+            for _ in 0 ..< newLength - 27 {
                 textField.deleteBackward()
             }
-
         }
         return true
     }
