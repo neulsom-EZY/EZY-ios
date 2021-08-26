@@ -370,9 +370,6 @@ extension ShowPlanViewController: UITableViewDataSource{
         cell.EZYLISTCellLeftDecorationView.backgroundColor = EZYPlanBackgroundColor[indexPath.row]
         cell.titleLabel.textColor = EZYPlanBackgroundColor[indexPath.row]
         cell.groupNameLabel.textColor = EZYPlanBackgroundColor[indexPath.row]
-        
-        cell.delegate = self
-        cell.configure(with: indexPath.row)
                 
         cell.backgroundColor = .clear
         cell.selectionStyle = UITableViewCell.SelectionStyle.none
@@ -396,7 +393,6 @@ extension ShowPlanViewController: UITableViewDelegate{
         
         // 일정 이름 길이에 따른 모달의 layout 변경
         if planTitleTextArray[indexPath.row].count <= 10{
-            print("일정 이름은 \(planTitleTextArray[indexPath.row])이고, 일정 이름 길이는 \(planTitleTextArray[indexPath.row].count)입니다.")
             planCompleteModalView.modalBackgroundView.snp.remakeConstraints { make in
                 make.width.equalToSuperview().dividedBy(1.1)
                 make.height.equalToSuperview().dividedBy(6.29)
@@ -418,7 +414,6 @@ extension ShowPlanViewController: UITableViewDelegate{
                 make.right.centerY.equalToSuperview()
             }
         }else{
-            print("일정 이름은 \(planTitleTextArray[indexPath.row])이고, 일정 이름 길이는 \(planTitleTextArray[indexPath.row].count)입니다.")
             planCompleteModalView.modalBackgroundView.snp.remakeConstraints { make in
                 make.width.equalToSuperview().dividedBy(1.1)
                 make.height.equalToSuperview().dividedBy(5.75)
@@ -447,10 +442,3 @@ extension ShowPlanViewController: UITableViewDelegate{
         
     }
 }
-
-extension ShowPlanViewController: sendIndex{
-    func sendSelectedIndex(selectedIndex: Int) {
-        print("selectedIndexxxxx : \(selectedIndex)")
-    }
-}
-
