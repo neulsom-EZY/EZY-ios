@@ -10,7 +10,7 @@ import SnapKit
 
 class ScheduleTimeTableViewCell: UITableViewCell {
     static let ScheduleTimeTableViewIdentifier = "\(ScheduleTimeTableViewCell.self)"
-
+    
     var groupNameLabel = UILabel().then {
         $0.dynamicFont(fontSize: 8, currentFontName: "Poppins-SemiBold")
     }
@@ -58,15 +58,13 @@ class ScheduleTimeTableViewCell: UITableViewCell {
     }
     
     private func configureUI(){
-        
+
         contentView.addSubview(EZYLISTCellRightDecorationView)
         EZYLISTCellRightDecorationView.addSubview(EZYLISTCellLeftDecorationView)
         EZYLISTCellLeftDecorationView.addSubview(EZYLISTCellBackground)
         EZYLISTCellBackground.addSubview(groupNameLabel)
         EZYLISTCellBackground.addSubview(titleLabel)
         EZYLISTCellBackground.addSubview(planTimeLabel)
-        
-        
         
         EZYLISTCellBackground.snp.makeConstraints { make in
             make.top.equalToSuperview()

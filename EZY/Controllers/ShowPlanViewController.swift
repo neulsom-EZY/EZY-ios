@@ -10,12 +10,15 @@ import SnapKit
 import Then
 
 class ShowPlanViewController: UIViewController{
+
     
     //MARK: Properties
     let planCompleteModalView = PlanCompleteModalView()
     
+    var selectedPlanIndex: Int = 0
+    
     var groupNameArray: [String] = ["EZY 회의", "디자인 이론 공부", "강아지 산책시키기", "카페에서 마카롱 사오기", "EZY 회의", "디자인 이론 공부", "강아지 산책시키기", "카페에서 마카롱 사오기"]
-    let titleArray: [String] = ["EZY 회의", "디자인 이론 공부", "강아지 산책시키기", "카페에서 마카롱 사오기", "EZY 회의", "디자인 이론 공부", "강아지 산책시키기", "카페에서 마카롱 사오기"]
+    let planTitleTextArray: [String] = ["EZY 회의", "디자인 이론 공부", "강아지 산책시키기", "카페에서 마카롱 사오기", "EZY 회의", "디자인 이론 공부", "강아지 산책시키기", "카페에서 마카롱 사오기"]
     let planTimeArray: [String] = ["12:00 - 13:00", "12:00 - 13:00", "12:00 - 13:00", "12:00 - 13:00", "12:00 - 13:00", "12:00 - 13:00", "12:00 - 13:00", "12:00 - 13:00"]
     
     let scheduleTypesArray = ["나의 할 일","심부름","문의하기", "설정"]
@@ -47,7 +50,6 @@ class ShowPlanViewController: UIViewController{
     lazy var questionTopLabel = UILabel().then {
         $0.text = "\(userName)님,"
         $0.textAlignment = .left
-//        $0.textColor = .blue
         $0.dynamicFont(fontSize: 28, currentFontName: "AppleSDGothicNeo-Bold")
         $0.updateGradientTextColor_vertical(gradientColors: questionTopLabelColorArray)
     }
@@ -227,6 +229,10 @@ class ShowPlanViewController: UIViewController{
         planCompleteModalView.isHidden = true
     }
     
+    @objc func completeCancelButtonClicked(sender: UIButton){
+        planCompleteModalView.isHidden = true
+    }
+    
     func ScheduleTypeCollectionMainViewSetting(){
         
         self.view.addSubview(scheduleTypeCollectionMainView)
@@ -247,7 +253,7 @@ class ShowPlanViewController: UIViewController{
     
     func ScheduleTimeTableMainViewSetting(){
         self.view.addSubview(scheduleTimeTableView)
-        
+            
         scheduleTimeTableView.dataSource = self
         scheduleTimeTableView.delegate = self
         
@@ -266,6 +272,7 @@ class ShowPlanViewController: UIViewController{
         self.view.addSubview(planCompleteModalView)
         
         planCompleteModalView.okButton.addTarget(self, action: #selector(completeOkButtonClicked(sender:)), for: .touchUpInside)
+        planCompleteModalView.cancelButton.addTarget(self, action: #selector(completeCancelButtonClicked(sender:)), for: .touchUpInside)
         
         planCompleteModalView.snp.makeConstraints { make in
             make.top.right.bottom.left.equalToSuperview()
@@ -276,35 +283,16 @@ class ShowPlanViewController: UIViewController{
         }
         
         planCompleteModalView.modalBackgroundView.snp.makeConstraints { make in
-            make.width.equalToSuperview().dividedBy(1.13)
-            make.height.equalToSuperview().dividedBy(3.59)
+            make.width.equalToSuperview().dividedBy(1.1)
+            make.height.equalToSuperview().dividedBy(6.29)
             make.centerX.centerY.equalToSuperview()
-        }
-        
-        planCompleteModalView.titleLabel.snp.makeConstraints { make in
-            make.top.equalToSuperview().offset(self.view.frame.height/33.8)
-            make.left.equalToSuperview().offset(self.view.frame.height/33.8)
-        }
-        
-        planCompleteModalView.iconCircleBackground.snp.makeConstraints { make in
-            make.centerX.equalToSuperview()
-            make.width.equalToSuperview().dividedBy(6.3)
-            make.height.equalTo(planCompleteModalView.iconCircleBackground.snp.width)
-            make.top.equalTo(planCompleteModalView.titleLabel.snp.bottom).offset(self.view.frame.height/62)
-            
-            planCompleteModalView.iconCircleBackground.layer.cornerRadius = ((self.view.frame.width/1.13)/6.3)/2
-        }
-        
-        planCompleteModalView.iconImageView.snp.makeConstraints { make in
-            make.centerX.centerY.equalToSuperview()
-            make.height.width.equalToSuperview().dividedBy(2)
         }
         
         planCompleteModalView.labelView.snp.makeConstraints { make in
             make.centerX.equalToSuperview()
-            make.width.equalToSuperview().dividedBy(1.7)
+            make.width.equalTo((planCompleteModalView.planTitleNameLabel.text! as NSString).size(withAttributes: [NSAttributedString.Key.font : planCompleteModalView.planTitleNameLabel.font!]).width + (planCompleteModalView.completeQuestionsLabel.text! as NSString).size(withAttributes: [NSAttributedString.Key.font : planCompleteModalView.completeQuestionsLabel.font!]).width + self.view.frame.width/70)
             make.height.equalToSuperview().dividedBy(10)
-            make.top.equalTo(planCompleteModalView.iconCircleBackground.snp.bottom).offset(self.view.frame.height/54.1)
+            make.top.equalToSuperview().offset(self.view.frame.height/21)
         }
         
         planCompleteModalView.planTitleNameLabel.snp.makeConstraints { make in
@@ -315,17 +303,17 @@ class ShowPlanViewController: UIViewController{
             make.right.centerY.equalToSuperview()
         }
         
-        planCompleteModalView.okButton.snp.makeConstraints { make in
-            make.bottom.equalTo(planCompleteModalView.cancelButton)
-            make.right.equalTo(planCompleteModalView.cancelButton.snp.left).offset(-self.view.frame.width/35)
-            make.height.width.equalTo(planCompleteModalView.cancelButton)
+        planCompleteModalView.cancelButton.snp.makeConstraints { make in
+            make.bottom.equalTo(planCompleteModalView.okButton)
+            make.right.equalTo(planCompleteModalView.okButton.snp.left).offset(-self.view.frame.width/35)
+            make.height.width.equalTo(planCompleteModalView.okButton)
         }
         
-        planCompleteModalView.cancelButton.snp.makeConstraints { make in
-            make.bottom.equalToSuperview().offset(-self.view.frame.height/30.6)
-            make.right.equalToSuperview().offset(-self.view.frame.width/15)
-            make.height.equalToSuperview().dividedBy(7.2)
-            make.width.equalToSuperview().dividedBy(4.7)
+        planCompleteModalView.okButton.snp.makeConstraints { make in
+            make.bottom.equalToSuperview().offset(-self.view.frame.width/22)
+            make.right.equalToSuperview().offset(-self.view.frame.width/18)
+            make.height.equalToSuperview().dividedBy(3.9)
+            make.width.equalToSuperview().dividedBy(4.44)
         }
         
         planCompleteModalView.isHidden = true
@@ -399,17 +387,13 @@ extension ShowPlanViewController: UITableViewDataSource{
         let cell = tableView.dequeueReusableCell(withIdentifier: ScheduleTimeTableViewCell.ScheduleTimeTableViewIdentifier, for: indexPath) as! ScheduleTimeTableViewCell
         
         cell.groupNameLabel.text = groupNameArray[indexPath.row]
-        cell.titleLabel.text = titleArray[indexPath.row]
+        cell.titleLabel.text = planTitleTextArray[indexPath.row]
         cell.planTimeLabel.text = planTimeArray[indexPath.row]
 
         cell.EZYLISTCellLeftDecorationView.backgroundColor = EZYPlanBackgroundColor[indexPath.row]
         cell.titleLabel.textColor = EZYPlanBackgroundColor[indexPath.row]
         cell.groupNameLabel.textColor = EZYPlanBackgroundColor[indexPath.row]
         
-        print("tableView - cellForRowAt")
-        print(indexPath.row)
-        print(cell.titleLabel.text ?? "")
-                
         cell.backgroundColor = .clear
         cell.selectionStyle = UITableViewCell.SelectionStyle.none
         
@@ -429,12 +413,9 @@ extension ShowPlanViewController: UITableViewDataSource{
 extension ShowPlanViewController: UITableViewDelegate{
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        print("tableView - didSelectRowAt")
-        print(indexPath.row)
-        print(titleArray[indexPath.row])
-        
+        planCompleteModalView.planTitleNameLabel.text = planTitleTextArray[indexPath.row]
+
         planCompleteModalView.isHidden = false
         
     }
 }
-
