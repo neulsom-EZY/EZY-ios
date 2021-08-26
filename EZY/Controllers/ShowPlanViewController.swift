@@ -15,10 +15,8 @@ class ShowPlanViewController: UIViewController{
     //MARK: Properties
     let planCompleteModalView = PlanCompleteModalView()
     
-    var selectedPlanIndex: Int = 0
-    
     var groupNameArray: [String] = ["EZY 회의", "디자인 이론 공부", "강아지 산책시키기", "카페에서 마카롱 사오기", "EZY 회의", "디자인 이론 공부", "강아지 산책시키기", "카페에서 마카롱 사오기"]
-    let planTitleTextArray: [String] = ["EZY 회의", "디자인 이론 공부", "강아지 산책시키기", "카페에서 마카롱 사오기", "EZY 회의", "디자인 이론 공부", "강아지 산책시키기", "카페에서 마카롱 사오기"]
+    let planTitleTextArray: [String] = ["EZY 회의", "디자인 이론 공부", "강아지 산책시키기", "카페에서 마카롱 사오기", "EZY 회의댜댵", "디자인 이론 공부", "강아지 산책시키기", "카페에서 마카롱 사오기"]
     let planTimeArray: [String] = ["12:00 - 13:00", "12:00 - 13:00", "12:00 - 13:00", "12:00 - 13:00", "12:00 - 13:00", "12:00 - 13:00", "12:00 - 13:00", "12:00 - 13:00"]
     
     let scheduleTypesArray = ["나의 할 일","심부름","문의하기", "설정"]
@@ -253,7 +251,7 @@ class ShowPlanViewController: UIViewController{
     
     func ScheduleTimeTableMainViewSetting(){
         self.view.addSubview(scheduleTimeTableView)
-            
+                
         scheduleTimeTableView.dataSource = self
         scheduleTimeTableView.delegate = self
         
@@ -280,27 +278,6 @@ class ShowPlanViewController: UIViewController{
         
         planCompleteModalView.shadowBackgroundView.snp.makeConstraints { make in
             make.top.right.bottom.left.equalToSuperview()
-        }
-        
-        planCompleteModalView.modalBackgroundView.snp.makeConstraints { make in
-            make.width.equalToSuperview().dividedBy(1.1)
-            make.height.equalToSuperview().dividedBy(6.29)
-            make.centerX.centerY.equalToSuperview()
-        }
-        
-        planCompleteModalView.labelView.snp.makeConstraints { make in
-            make.centerX.equalToSuperview()
-            make.width.equalTo((planCompleteModalView.planTitleNameLabel.text! as NSString).size(withAttributes: [NSAttributedString.Key.font : planCompleteModalView.planTitleNameLabel.font!]).width + (planCompleteModalView.completeQuestionsLabel.text! as NSString).size(withAttributes: [NSAttributedString.Key.font : planCompleteModalView.completeQuestionsLabel.font!]).width + self.view.frame.width/70)
-            make.height.equalToSuperview().dividedBy(10)
-            make.top.equalToSuperview().offset(self.view.frame.height/21)
-        }
-        
-        planCompleteModalView.planTitleNameLabel.snp.makeConstraints { make in
-            make.left.centerY.equalToSuperview()
-        }
-        
-        planCompleteModalView.completeQuestionsLabel.snp.makeConstraints { make in
-            make.right.centerY.equalToSuperview()
         }
         
         planCompleteModalView.cancelButton.snp.makeConstraints { make in
@@ -394,6 +371,9 @@ extension ShowPlanViewController: UITableViewDataSource{
         cell.titleLabel.textColor = EZYPlanBackgroundColor[indexPath.row]
         cell.groupNameLabel.textColor = EZYPlanBackgroundColor[indexPath.row]
         
+        cell.delegate = self
+        cell.configure(with: indexPath.row)
+                
         cell.backgroundColor = .clear
         cell.selectionStyle = UITableViewCell.SelectionStyle.none
         
@@ -413,9 +393,64 @@ extension ShowPlanViewController: UITableViewDataSource{
 extension ShowPlanViewController: UITableViewDelegate{
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+        // 일정 이름 길이에 따른 모달의 layout 변경
+        if planTitleTextArray[indexPath.row].count <= 10{
+            print("일정 이름은 \(planTitleTextArray[indexPath.row])이고, 일정 이름 길이는 \(planTitleTextArray[indexPath.row].count)입니다.")
+            planCompleteModalView.modalBackgroundView.snp.remakeConstraints { make in
+                make.width.equalToSuperview().dividedBy(1.1)
+                make.height.equalToSuperview().dividedBy(6.29)
+                make.centerX.centerY.equalToSuperview()
+            }
+                        
+            planCompleteModalView.labelView.snp.remakeConstraints { make in
+                make.centerX.equalToSuperview()
+                make.width.equalTo((planTitleTextArray[indexPath.row] as NSString).size(withAttributes: [NSAttributedString.Key.font : planCompleteModalView.planTitleNameLabel.font!]).width + (planCompleteModalView.completeQuestionsLabel.text! as NSString).size(withAttributes: [NSAttributedString.Key.font : planCompleteModalView.completeQuestionsLabel.font!]).width + self.view.frame.width/70)
+                make.height.equalToSuperview().dividedBy(10)
+                make.top.equalToSuperview().offset(self.view.frame.height/21)
+            }
+            
+            planCompleteModalView.planTitleNameLabel.snp.remakeConstraints { make in
+                make.left.centerY.equalToSuperview()
+            }
+            
+            planCompleteModalView.completeQuestionsLabel.snp.remakeConstraints { make in
+                make.right.centerY.equalToSuperview()
+            }
+        }else{
+            print("일정 이름은 \(planTitleTextArray[indexPath.row])이고, 일정 이름 길이는 \(planTitleTextArray[indexPath.row].count)입니다.")
+            planCompleteModalView.modalBackgroundView.snp.remakeConstraints { make in
+                make.width.equalToSuperview().dividedBy(1.1)
+                make.height.equalToSuperview().dividedBy(5.75)
+                make.centerX.centerY.equalToSuperview()
+            }
+            
+            planCompleteModalView.labelView.snp.remakeConstraints { make in
+                make.centerX.equalToSuperview()
+                make.width.equalToSuperview()
+                make.height.equalToSuperview().dividedBy(3.8)
+                make.top.equalToSuperview().offset(self.view.frame.height/21)
+            }
+            
+            planCompleteModalView.planTitleNameLabel.snp.remakeConstraints { make in
+                make.top.centerX.equalToSuperview()
+            }
+            
+            planCompleteModalView.completeQuestionsLabel.snp.remakeConstraints { make in
+                make.bottom.centerX.equalToSuperview()
+            }
+        }
+    
         planCompleteModalView.planTitleNameLabel.text = planTitleTextArray[indexPath.row]
-
+        
         planCompleteModalView.isHidden = false
         
     }
 }
+
+extension ShowPlanViewController: sendIndex{
+    func sendSelectedIndex(selectedIndex: Int) {
+        print("selectedIndexxxxx : \(selectedIndex)")
+    }
+}
+

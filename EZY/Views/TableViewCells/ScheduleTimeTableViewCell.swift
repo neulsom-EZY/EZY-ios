@@ -8,9 +8,15 @@
 import UIKit
 import SnapKit
 
+protocol sendIndex: AnyObject {
+    func sendSelectedIndex(selectedIndex: Int)
+}
+
 class ScheduleTimeTableViewCell: UITableViewCell {
     static let ScheduleTimeTableViewIdentifier = "\(ScheduleTimeTableViewCell.self)"
     
+    public weak var delegate: sendIndex?
+
     var groupNameLabel = UILabel().then {
         $0.dynamicFont(fontSize: 8, currentFontName: "Poppins-SemiBold")
     }
@@ -57,8 +63,13 @@ class ScheduleTimeTableViewCell: UITableViewCell {
         super.setSelected(selected, animated: animated)
     }
     
+    private var index: Int?
+    
+    public func configure(with index: Int){
+        self.index = index
+    }
+    
     private func configureUI(){
-
         contentView.addSubview(EZYLISTCellRightDecorationView)
         EZYLISTCellRightDecorationView.addSubview(EZYLISTCellLeftDecorationView)
         EZYLISTCellLeftDecorationView.addSubview(EZYLISTCellBackground)
@@ -101,5 +112,11 @@ class ScheduleTimeTableViewCell: UITableViewCell {
             make.top.equalTo(titleLabel.snp.bottom).offset(3)
             make.left.equalTo(titleLabel)
         }
+        
+        guard let index = index else {
+            return
+        }
+        
+        delegate?.sendSelectedIndex(selectedIndex: index)
     }
 }
