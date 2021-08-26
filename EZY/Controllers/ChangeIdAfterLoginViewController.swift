@@ -7,7 +7,7 @@
 
 import UIKit
 
-class IdChangeViewController: UIViewController {
+class ChangeIdAfterLoginViewController: UIViewController {
     
     //MARK: - Properties
     lazy var topView = TopView()

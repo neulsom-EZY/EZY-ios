@@ -342,11 +342,11 @@ extension ShowPlanViewController: UICollectionViewDelegate, UICollectionViewDele
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        if indexPath.row == 3{
+        if indexPath.row == 2{
             let nextViewController = InquiryViewController()
             self.navigationController?.pushViewController(nextViewController, animated: true)
         }
-        if indexPath.row == 4{
+        if indexPath.row == 3{
             let nextViewController = SettingViewController()
             self.navigationController?.pushViewController(nextViewController, animated: true)
 
