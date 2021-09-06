@@ -34,7 +34,6 @@
 		EE9D63C626CFC8BC006FFE3C /* ErrandInputContainterTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE9D63C526CFC8BC006FFE3C /* ErrandInputContainterTextField.swift */; };
 		EEA457F42682FFA100C08D17 /* AlertButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEA457F32682FFA100C08D17 /* AlertButton.swift */; };
 		EEC7109326C5ACC800E53434 /* NotFoundUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEC7109226C5ACC800E53434 /* NotFoundUser.swift */; };
-		EED007D526674AC2009A5A87 /* Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = EED007D426674AC2009A5A87 /* Utilities.swift */; };
 		EED20D63266C0F90000E0856 /* AdditionalButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = EED20D62266C0F90000E0856 /* AdditionalButton.swift */; };
 		EEDE967926B882B0000AEE4D /* AlarmDatePickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEDE967826B882B0000AEE4D /* AlarmDatePickerView.swift */; };
 		EEE1E95326A9F38A0082B696 /* AlarmSettingCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEE1E95226A9F38A0082B696 /* AlarmSettingCell.swift */; };
@@ -78,7 +77,6 @@
 		EEA457F32682FFA100C08D17 /* AlertButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertButton.swift; sourceTree = "<group>"; };
 		EEB26ABE26ADAD7E00A32C76 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		EEC7109226C5ACC800E53434 /* NotFoundUser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotFoundUser.swift; sourceTree = "<group>"; };
-		EED007D426674AC2009A5A87 /* Utilities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utilities.swift; sourceTree = "<group>"; };
 		EED20D62266C0F90000E0856 /* AdditionalButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdditionalButton.swift; sourceTree = "<group>"; };
 		EEDE967826B882B0000AEE4D /* AlarmDatePickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlarmDatePickerView.swift; sourceTree = "<group>"; };
 		EEE1E95226A9F38A0082B696 /* AlarmSettingCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlarmSettingCell.swift; sourceTree = "<group>"; };
@@ -196,9 +194,9 @@
 				EE47143526BFC33600BC495F /* SearchTableView.swift */,
 				EEC7109226C5ACC800E53434 /* NotFoundUser.swift */,
 				EE9D63C526CFC8BC006FFE3C /* ErrandInputContainterTextField.swift */,
+				EE89812526E65C2E0086D2D6 /* TitleContainerTextFieldView.swift */,
 				EE89812326E6593E0086D2D6 /* ExplanationContainerTextView.swift */,
 				EE37790A2679FB3800334D4A /* Cell */,
-				EE89812526E65C2E0086D2D6 /* TitleContainerTextFieldView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -276,7 +274,6 @@
 			isa = PBXGroup;
 			children = (
 				EEEDB2C12664D30D00E5C53A /* extensions.swift */,
-				EED007D426674AC2009A5A87 /* Utilities.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -414,7 +411,6 @@
 				EEFC3F9F26971BA000CEB09F /* SearchViewModel.swift in Sources */,
 				EE0734F626B17EAC00EA2117 /* inputContainerErrandTextView.swift in Sources */,
 				EE9C91B126AEE84300115DD2 /* MoreAlarmModelViewController.swift in Sources */,
-				EED007D526674AC2009A5A87 /* Utilities.swift in Sources */,
 				EE3B142626B48DF600B7184D /* CustomData.swift in Sources */,
 				EE7828552681859200AECC65 /* AddErrandViewController.swift in Sources */,
 				EEA457F42682FFA100C08D17 /* AlertButton.swift in Sources */,
