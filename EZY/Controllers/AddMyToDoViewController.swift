@@ -127,6 +127,10 @@ class AddMyToDoViewController:UIViewController{
         alarmSettingcollectionView.delegate = self
         alarmSettingcollectionView.dataSource = self
     }
+    //MARK: - 키보드 받기
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?){
+         self.view.endEditing(true)
+   }
 
     
     //MARK: - Selectors

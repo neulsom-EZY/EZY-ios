@@ -104,7 +104,10 @@ class AddErrandViewController : UIViewController{
         addPersonCollectionView.delegate = self
         addPersonCollectionView.allowsMultipleSelection = true
     }
-    
+    //MARK: - 키보드 받기
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?){
+         self.view.endEditing(true)
+   }
     //MARK: - Selectors
     
     @objc func todobackbtn(){
@@ -135,6 +138,7 @@ class AddErrandViewController : UIViewController{
         present(vc, animated: true, completion: nil)    }
 
     //MARK: - Helpers
+    
     func configureUI(){
         view.backgroundColor = .white
         addPersonCollectionView.contentInset = UIEdgeInsets(top: 0, left: view.frame.height/29, bottom: 0, right: 0)
