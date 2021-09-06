@@ -129,7 +129,7 @@
 		6A1E3E8F26797CB600E7B198 /* DeleteModalView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteModalView.swift; sourceTree = "<group>"; };
 		6A3E2E7526B10D760078D749 /* ChangePasswardPhoneNumAfterLoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangePasswardPhoneNumAfterLoginViewController.swift; sourceTree = "<group>"; };
 		6A3E2E7726B111540078D749 /* ChangePasswardAfterLoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangePasswardAfterLoginViewController.swift; sourceTree = "<group>"; };
-		6A3E2E7D26B6A5FB0078D749 /* ViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ViewModel.swift; path = EZY/ViewModel/ViewModel.swift; sourceTree = SOURCE_ROOT; };
+		6A3E2E7D26B6A5FB0078D749 /* ViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ViewModel.swift; path = EZY/ViewModels/ViewModel.swift; sourceTree = SOURCE_ROOT; };
 		6A3E2E7F26B6A60B0078D749 /* ManagementbtnModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ManagementbtnModel.swift; sourceTree = "<group>"; };
 		6A3E2E8226B6A84E0078D749 /* Poppins-BlackItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Poppins-BlackItalic.ttf"; sourceTree = "<group>"; };
 		6A3E2E8326B6A84E0078D749 /* Poppins-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Poppins-Regular.ttf"; sourceTree = "<group>"; };
