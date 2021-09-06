@@ -83,6 +83,8 @@ class ShowPlanViewController: UIViewController{
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        print(EZYPlanAddButton.dynamicFont(fontSize: 12, currentFontName: "AppleSDGothicNeo-UltraLight"))
+        
         notificationButtonSetting()
         
         ScheduleTypeCollectionMainViewSetting()

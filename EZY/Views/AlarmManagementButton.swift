@@ -13,7 +13,7 @@ class AlarmManagementButton : UIButton {
     private let icon = UIImageView()
     
     private let title = UILabel().then{
-        $0.textColor = .EZY_656565
+        $0.textColor = UIColor.EZY_656565
         $0.dynamicFont(fontSize: 14, weight: .regular)
         
     }
