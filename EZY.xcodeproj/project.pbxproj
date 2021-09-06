@@ -161,7 +161,7 @@
 		6A4EDA36266DA52A00B809EC /* SettingTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingTableViewCell.swift; sourceTree = "<group>"; };
 		6A4EDA40266E38E000B809EC /* GroupCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupCollectionViewCell.swift; sourceTree = "<group>"; };
 		6A685C0C26AC1E2D0079BC30 /* PersonalPlanDetailRepeatDayCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonalPlanDetailRepeatDayCollectionViewCell.swift; sourceTree = "<group>"; };
-		6A6A66DF26D608D40096A14B /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../../../Downloads/GoogleService-Info.plist"; sourceTree = "<group>"; };
+		6A6A66DF26D608D40096A14B /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		6A705BB5267E3ABF001954CE /* PersonalPlanChangeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonalPlanChangeViewController.swift; sourceTree = "<group>"; };
 		6A72073326C618600098830F /* RecommendedTagCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecommendedTagCollectionViewCell.swift; sourceTree = "<group>"; };
 		6A82834F2698132000AC381B /* PlanDeleteModalView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlanDeleteModalView.swift; sourceTree = "<group>"; };
