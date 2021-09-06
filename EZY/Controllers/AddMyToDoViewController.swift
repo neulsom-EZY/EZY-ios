@@ -288,7 +288,7 @@ class AddMyToDoViewController:UIViewController{
         alarmSettings.snp.makeConstraints { (make) in
             make.left.equalTo(backbutton.snp.left)
             make.top.equalTo(tagCollectionView.snp.bottom).offset(view.frame.height/36.91)
-        }
+        } 
 >>>>>>> 9bbc5407cdf17955541ca51e4b109690faf78959
         alarmSettingcollectionView.snp.makeConstraints { (make) in
             make.top.equalTo(alarmSettings.snp.bottom).offset(view.frame.height/58)
