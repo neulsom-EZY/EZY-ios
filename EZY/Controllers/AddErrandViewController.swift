@@ -65,10 +65,8 @@ class AddErrandViewController : UIViewController{
     }()
     
     
-    private lazy var explanationContainerView : UIView = {
-        let title = "설명"
-        let view = Utilities().inputContainerTextView(withMessage: title, textView: explanationTextView, Color: .EZY_F6F3FF, viewSize: Double(view.frame.height))
-
+    private let explanationContainerView : ExplanationContainerTextView = {
+        let view = ExplanationContainerTextView(tvTitle: "설명")
         return view
     }()
     private let kindOfCollectionView = UILabel().then{
@@ -76,10 +74,7 @@ class AddErrandViewController : UIViewController{
         $0.textColor = .EZY_B6B6B6
         $0.dynamicFont(fontSize: 12, currentFontName: "AppleSDGothicNeo-Bold")
     }
-    private let explanationTextView : UITextView = {
-        let tf = Utilities().textView(TextColor: .EZY_929292, TextSize: 14,font: .medium)
-        return tf
-    }()
+ 
     
     let addPersonCollectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
