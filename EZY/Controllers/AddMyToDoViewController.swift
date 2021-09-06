@@ -41,6 +41,7 @@ class AddMyToDoViewController:UIViewController{
         return view
     }()
     
+
     private let calendarBtn : AlertButton = {
         let viewModel = AlertBtn(icon: UIImage(named: "EZY_calendar")?.withRenderingMode(.alwaysTemplate), iconTintColor: .EZY_FFB5B5, message: "2021.6.6 일요일")
         let button = AlertButton(with: viewModel)
@@ -131,6 +132,7 @@ class AddMyToDoViewController:UIViewController{
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?){
          self.view.endEditing(true)
    }
+
 
     
     //MARK: - Selectors
@@ -253,6 +255,7 @@ class AddMyToDoViewController:UIViewController{
             make.top.equalTo(locationBtn.snp.bottom).offset(self.view.frame.height/45.11)
             make.left.equalTo(backbutton.snp.left)
             make.right.equalTo(titleContainerView.snp.right)
+<<<<<<< HEAD
         }
         tagLabel.snp.makeConstraints { (make) in
             make.left.equalTo(backbutton.snp.left)
@@ -269,6 +272,24 @@ class AddMyToDoViewController:UIViewController{
             make.left.equalTo(backbutton.snp.left)
             make.top.equalTo(tagCollectionView.snp.bottom).offset(view.frame.height/36.91)
         }
+=======
+        }
+        tagLabel.snp.makeConstraints { (make) in
+            make.left.equalTo(backbutton.snp.left)
+            make.top.equalTo(explanationContainerView.snp.bottom).offset(view.frame.height/42.74)
+        }
+        tagCollectionView.snp.makeConstraints { (make) in
+            make.top.equalTo(tagLabel.snp.bottom).offset(view.frame.height/58)
+            make.left.right.equalToSuperview()
+            make.width.equalTo(view.snp.width)
+            make.height.equalTo(view.frame.height/10.54)
+        }
+       
+        alarmSettings.snp.makeConstraints { (make) in
+            make.left.equalTo(backbutton.snp.left)
+            make.top.equalTo(tagCollectionView.snp.bottom).offset(view.frame.height/36.91)
+        }
+>>>>>>> 9bbc5407cdf17955541ca51e4b109690faf78959
         alarmSettingcollectionView.snp.makeConstraints { (make) in
             make.top.equalTo(alarmSettings.snp.bottom).offset(view.frame.height/58)
             make.height.equalTo(view.frame.height/23.7)

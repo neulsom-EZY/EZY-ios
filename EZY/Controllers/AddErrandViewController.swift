@@ -74,7 +74,14 @@ class AddErrandViewController : UIViewController{
         $0.textColor = .EZY_B6B6B6
         $0.dynamicFont(fontSize: 12, currentFontName: "AppleSDGothicNeo-Bold")
     }
+<<<<<<< HEAD
  
+=======
+    private let explanationTextView : UITextView = {
+        let tf = Utilities().textView(TextColor: .EZY_929292, TextSize: 14,font: .medium)
+        return tf
+    }()
+>>>>>>> 9bbc5407cdf17955541ca51e4b109690faf78959
     
     let addPersonCollectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()

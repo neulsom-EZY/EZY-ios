@@ -234,6 +234,7 @@ class MorePeopleToDo: UIViewController{
     }
     func configureNotificationObservers(){
         nickNameTextFieldContainerView.addTarget(self, action: #selector(textDidChage), for: .editingChanged)
+<<<<<<< HEAD
     }
     
     
@@ -330,6 +331,104 @@ extension MorePeopleToDo : UITextFieldDelegate{
     }
 }
 
+=======
+    }
+    
+    
+    //MARK: - Search filter
+    func filterContentForSearchText(_ searchText: String) {
+        filterData = data.filter({( data : SearchData) -> Bool in
+            return data.koreanName.lowercased().contains(searchText.lowercased()) || data.name.lowercased().contains(searchText.lowercased())
+      })
+        searcherView.tv.reloadData()
+    }
+
+}
+
+extension MorePeopleToDo : UICollectionViewDelegateFlowLayout,UICollectionViewDataSource{
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        if collectionView == WhatAboutPeopleLikeThis{
+            return MorePeopleToDo.recommendData.count
+        }
+        else if collectionView === ErrandPersonCollectionView{
+            return 1
+        }
+        return 0
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        if collectionView == WhatAboutPeopleLikeThis{
+            guard let whatAboutPeoplecell = collectionView.dequeueReusableCell(withReuseIdentifier: WhatAboutPeopleLikeThisCell.identifier, for: indexPath) as? WhatAboutPeopleLikeThisCell else {return UICollectionViewCell()}
+            whatAboutPeoplecell.bglabel.text = "@ " + MorePeopleToDo.recommendData[indexPath.row]
+            whatAboutPeoplecell.bglabel.dynamicFont(fontSize: 12, currentFontName:"AppleSDGothicNeo-UltraLight")
+            whatAboutPeoplecell.bglabel.textColor = MorePeopleToDo().randomColorData.randomElement()
+            whatAboutPeoplecell.layer.borderWidth = 1
+            whatAboutPeoplecell.bglabel.sizeToFit()
+            whatAboutPeoplecell.layer.borderColor = whatAboutPeoplecell.bglabel.textColor.cgColor
+            return whatAboutPeoplecell
+        }else {
+            guard let errandPersonChooseCell  = collectionView.dequeueReusableCell(withReuseIdentifier: ErrandPeopoleChooseAfterCell.identifier, for: indexPath) as? ErrandPeopoleChooseAfterCell else {return UICollectionViewCell()}
+            errandPersonChooseCell.bglabel.text = clickData
+            errandPersonChooseCell.layer.borderWidth = 1
+            errandPersonChooseCell.backgroundColor = .clear
+            errandPersonChooseCell.bglabel.sizeToFit()
+            errandPersonChooseCell.bglabel.textColor = .black
+            errandPersonChooseCell.button.addTarget(self, action: #selector(deleteCollectionViewBehavior), for: .touchUpInside)
+            errandPersonChooseCell.bglabel.dynamicFont(fontSize: 11, currentFontName: "AppleSDGothicNeo-SemiBold")
+            errandPersonChooseCell.layer.borderColor = UIColor.EZY_E0E0E0.cgColor
+            return errandPersonChooseCell
+        }
+        
+    }
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        if collectionView == WhatAboutPeopleLikeThis{
+            return WhatAboutPeopleLikeThisCell.fittingSize(availableHeight: view.frame.size.height/25.375, name: MorePeopleToDo.recommendData[indexPath.row])
+        }else if collectionView == ErrandPersonCollectionView{
+            let label = UILabel()
+            label.text = clickData
+            label.sizeToFit()
+            return CGSize(width:label.frame.width + view.frame.height/50.75 , height: view.frame.size.height/27.06667)
+        }
+        return CGSize(width: 0, height: 0)
+    }
+
+}
+
+
+
+extension MorePeopleToDo: FormViewModel{
+    func updateForm() {
+        
+        isTableVisible = viewModel.showView
+        if isTableVisible == false{
+            searcherView.noUser.isHidden = true
+            UIView.animate(withDuration: 0.2) {
+                self.searcherView.frame = CGRect(x: self.view.frame.height/23.2, y: self.view.frame.height/3.0526, width: self.view.frame.width/1.2255, height: 0)
+                self.view.layoutIfNeeded()
+            }
+        }else{
+            UIView.animate(withDuration: 0.2) {
+                self.searcherView.frame = CGRect(x: self.view.frame.height/23.2, y: self.view.frame.height/3.0526, width: self.view.frame.width/1.2255, height: self.view.frame.height/5.1392)
+                self.view.layoutIfNeeded()
+            }
+        }
+    }
+}
+
+extension MorePeopleToDo : UITextFieldDelegate{
+    func textFieldDidChangeSelection(_ textField: UITextField) {
+        if let text = textField.text{
+            filterContentForSearchText(nickNameTextFieldContainerView.text!)
+        }
+        if filterData.count == 0 {
+            searcherView.noUser.isHidden = false
+        }else{
+            searcherView.noUser.isHidden = true
+        }
+    }
+}
+
+>>>>>>> 9bbc5407cdf17955541ca51e4b109690faf78959
 extension MorePeopleToDo : UITableViewDelegate , UITableViewDataSource{
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return filterData.count
@@ -364,4 +463,3 @@ extension MorePeopleToDo : UITableViewDelegate , UITableViewDataSource{
     }
     
 }
-
