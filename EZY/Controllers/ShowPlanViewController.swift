@@ -80,27 +80,6 @@ class ShowPlanViewController: UIViewController{
 
     lazy var emptyPlanBoxView = UIView().then{
         $0.backgroundColor = .white
-
-    //MARK: Lifecycles
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        
-        print(EZYPlanAddButton.dynamicFont(fontSize: 12, currentFontName: "AppleSDGothicNeo-UltraLight"))
-        
-        notificationButtonSetting()
-        
-        ScheduleTypeCollectionMainViewSetting()
-        
-        ScheduleTimeTableMainViewSetting()
-
-        layoutSetting()
-        
-        planCompleteModalViewSetting()
-    }
-    
-    override func viewDidAppear(_ animated: Bool) {
-        badgeView.layer.cornerRadius = badgeView.bounds.width/2
-
     }
     
     lazy var emptyLabel = UITextView().then{
@@ -131,6 +110,12 @@ class ShowPlanViewController: UIViewController{
     }
     
     //MARK: Lifecycles
+        
+    override func viewDidAppear(_ animated: Bool) {
+        badgeView.layer.cornerRadius = badgeView.bounds.width/2
+
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         topLayoutSetting()
@@ -234,10 +219,6 @@ class ShowPlanViewController: UIViewController{
             make.top.equalTo(emptyImageView.snp.bottom).offset(self.view.frame.height/33.8)
             make.centerX.equalToSuperview()
         }
-    }
-    
-    override func viewDidAppear(_ animated: Bool) {
-        badgeView.layer.cornerRadius = badgeView.bounds.width/2
     }
     
     @objc func NotificationButtonClicked(sender: UIButton) {
