@@ -52,6 +52,8 @@ extension UIColor{
     static let EZY_E1E1E1 = UIColor.rgb(red: 225, green: 225, blue: 225)
     static let EZY_FFFFFF = UIColor.rgb(red: 255, green: 255, blue: 255)
     static let EZY_656565 = UIColor.rgb(red: 101, green: 101, blue: 101)
+    static let EZY_DEDEDE = UIColor.rgb(red: 222, green: 222, blue: 222)
+    static let EZY_CDCDCD = UIColor.rgb(red: 205, green: 205, blue: 205)
 }
 
 //MARK: - UILabel dynamic font extension
