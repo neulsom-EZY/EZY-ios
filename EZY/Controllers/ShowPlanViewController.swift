@@ -317,14 +317,18 @@ extension ShowPlanViewController: UICollectionViewDelegate, UICollectionViewDele
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        if indexPath.row == 2{
+        if indexPath.row == 0{
+            let nextViewController = MyToDoListViewController()
+            self.navigationController?.pushViewController(nextViewController, animated: true)
+        }else if indexPath.row == 1{
+            let nextViewController = ErrandListViewController()
+            self.navigationController?.pushViewController(nextViewController, animated: true)
+        }else if indexPath.row == 2{
             let nextViewController = InquiryViewController()
             self.navigationController?.pushViewController(nextViewController, animated: true)
-        }
-        if indexPath.row == 3{
+        }else if indexPath.row == 3{
             let nextViewController = SettingViewController()
             self.navigationController?.pushViewController(nextViewController, animated: true)
-
         }
     }
 }
