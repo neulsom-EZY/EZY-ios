@@ -14,12 +14,12 @@ class AlarmManagementButton : UIButton {
     
     private let title = UILabel().then{
         $0.textColor = UIColor.EZY_656565
-        $0.dynamicFont(fontSize: 14, weight: .regular)
+        $0.dynamicFont(fontSize: 14, currentFontName: "AppleSDGothicNeo-Regular")
         
     }
     private let subtitle = UILabel().then{
         $0.textColor = .EZY_CDCDCD
-        $0.dynamicFont(fontSize: 8, weight: .thin)
+        $0.dynamicFont(fontSize: 8, currentFontName: "AppleSDGothicNeo-Thin")
     }
     private let image = UIImageView().then{
         $0.image = UIImage(named: "EZY_chevron.right")

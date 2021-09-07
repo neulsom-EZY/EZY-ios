@@ -7,11 +7,13 @@
 
 import UIKit
 
-class TagSettingViewController: UIViewController, UITextFieldDelegate {
+class TagSettingViewController: UIViewController {
     
     lazy var backButton = UIButton().then{
         $0.setImage(UIImage(named: "EZY_TagManagementBackButtonImage"), for: .normal)
     }
+    
+    lazy var tagNameText = ""
     
     lazy var mainTitleLabel = UILabel().then {
         $0.text = "태그 설정"
@@ -76,25 +78,24 @@ class TagSettingViewController: UIViewController, UITextFieldDelegate {
     
     var tagColorPreciousSelectedIndex = 0
     
+    var tagNameTextCount = 0
+    
     var tagDeleteModalView = TagDeleteModalView()
     
 
-    var TagColorModels: [TagColorCollectionViewModel] = [TagColorCollectionViewModel(backgroundColor: UIColor(red: 186/255, green: 200/255, blue: 255/255, alpha: 1), isSelected: false),
-                                                 TagColorCollectionViewModel(backgroundColor: UIColor(red: 196/255, green: 200/255, blue: 255/255, alpha: 1), isSelected: true),
-                                                 TagColorCollectionViewModel(backgroundColor: UIColor(red: 206/255, green: 200/255, blue: 255/255, alpha: 1), isSelected: true),
-                                                 TagColorCollectionViewModel(backgroundColor: UIColor(red: 216/255, green: 200/255, blue: 255/255, alpha: 1), isSelected: true),
-                                                 TagColorCollectionViewModel(backgroundColor: UIColor(red: 226/255, green: 200/255, blue: 255/255, alpha: 1), isSelected: true),
-                                                 TagColorCollectionViewModel(backgroundColor: UIColor(red: 236/255, green: 200/255, blue: 255/255, alpha: 1), isSelected: true),
-                                                 TagColorCollectionViewModel(backgroundColor: UIColor(red: 246/255, green: 200/255, blue: 255/255, alpha: 1), isSelected: true),
-                                                 TagColorCollectionViewModel(backgroundColor: UIColor(red: 255/255, green: 200/255, blue: 255/255, alpha: 1), isSelected: true),
-                                                 TagColorCollectionViewModel(backgroundColor: UIColor(red: 255/255, green: 190/255, blue: 255/255, alpha: 1), isSelected: true),
-                                                 TagColorCollectionViewModel(backgroundColor: UIColor(red: 255/255, green: 180/255, blue: 255/255, alpha: 1), isSelected: true),
-                                                 TagColorCollectionViewModel(backgroundColor: UIColor(red: 255/255, green: 170/255, blue: 255/255, alpha: 1), isSelected: true),
-                                                 TagColorCollectionViewModel(backgroundColor: UIColor(red: 255/255, green: 160/255, blue: 255/255, alpha: 1), isSelected: true),
-                                                 TagColorCollectionViewModel(backgroundColor: UIColor(red: 255/255, green: 150/255, blue: 255/255, alpha: 1), isSelected: true),
-                                                 TagColorCollectionViewModel(backgroundColor: UIColor(red: 255/255, green: 170/255, blue: 255/255, alpha: 1), isSelected: true),
-                                                 TagColorCollectionViewModel(backgroundColor: UIColor(red: 255/255, green: 160/255, blue: 255/255, alpha: 1), isSelected: true),
-                                                 TagColorCollectionViewModel(backgroundColor: UIColor(red: 255/255, green: 150/255, blue: 255/255, alpha: 1), isSelected: true)]
+    var TagColorModels: [TagColorCollectionViewModel] = [TagColorCollectionViewModel(backgroundColor: UIColor(red: 154/255, green: 119/255, blue: 255/255, alpha: 1), isSelected: false),
+                                                         TagColorCollectionViewModel(backgroundColor: UIColor(red: 129/255, green: 85/255, blue: 255/255, alpha: 1), isSelected: true),
+                                                         TagColorCollectionViewModel(backgroundColor: UIColor(red: 114/255, green: 110/255, blue: 255/255, alpha: 1), isSelected: true),
+                                                         TagColorCollectionViewModel(backgroundColor: UIColor(red: 100/255, green: 131/255, blue: 255/255, alpha: 1), isSelected: true),
+                                                         TagColorCollectionViewModel(backgroundColor: UIColor(red: 129/255, green: 154/255, blue: 255/255, alpha: 1), isSelected: true),
+                                                         TagColorCollectionViewModel(backgroundColor: UIColor(red: 159/255, green: 168/255, blue: 255/255, alpha: 1), isSelected: true),
+                                                         TagColorCollectionViewModel(backgroundColor: UIColor(red: 175/255, green: 173/255, blue: 255/255, alpha: 1), isSelected: true),
+                                                         TagColorCollectionViewModel(backgroundColor: UIColor(red: 156/255, green: 154/255, blue: 255/255, alpha: 1), isSelected: true),
+                                                         TagColorCollectionViewModel(backgroundColor: UIColor(red: 129/255, green: 126/255, blue: 255/255, alpha: 1), isSelected: true),
+                                                         TagColorCollectionViewModel(backgroundColor: UIColor(red: 127/255, green: 124/255, blue: 226/255, alpha: 1), isSelected: true),
+                                                         TagColorCollectionViewModel(backgroundColor: UIColor(red: 166/255, green: 152/255, blue: 255/255, alpha: 1), isSelected: true),
+                                                         TagColorCollectionViewModel(backgroundColor: UIColor(red: 186/255, green: 154/255, blue: 255/255, alpha: 1), isSelected: true),
+                                                         TagColorCollectionViewModel(backgroundColor: UIColor(red: 198/255, green: 171/255, blue: 255/255, alpha: 1), isSelected: true)]
     
     var tagName: String?
     var selectedColorIndex: Int?
@@ -172,7 +173,7 @@ class TagSettingViewController: UIViewController, UITextFieldDelegate {
         }
         
         tagNameTextField.snp.makeConstraints { make in
-            make.left.equalTo(tagNameTitleLabel).offset(self.view.frame.width/30)
+            make.left.equalTo(tagNameTitleLabel).offset(self.view.frame.width/70)
             make.centerX.equalToSuperview()
             make.top.equalTo(tagNameTitleLabel.snp.bottom)
             make.height.equalToSuperview().dividedBy(25.3)
@@ -209,7 +210,8 @@ class TagSettingViewController: UIViewController, UITextFieldDelegate {
     func tagDeleteModalViewSetting(){
         self.view.addSubview(tagDeleteModalView)
         
-        tagDeleteModalView.deleteButton.addTarget(self, action: #selector(deleteButtonClicked(sender:)), for: .touchUpInside)
+        tagDeleteModalView.deleteButton.addTarget(self, action: #selector(modalDeleteButtonClicked(sender:)), for: .touchUpInside)
+        tagDeleteModalView.cancleButton.addTarget(self, action: #selector(cancleButtonClicked(sender:)), for: .touchUpInside)
         
         tagDeleteModalView.snp.makeConstraints { make in
             make.top.right.bottom.left.equalToSuperview()
@@ -225,27 +227,44 @@ class TagSettingViewController: UIViewController, UITextFieldDelegate {
             make.centerX.centerY.equalToSuperview()
         }
 
-        tagDeleteModalView.labelView.snp.makeConstraints { make in
-            make.centerX.equalToSuperview()
-            make.width.equalToSuperview().dividedBy(1.7)
-            make.height.equalToSuperview().dividedBy(3.7)
-            make.top.equalToSuperview().offset(self.view.frame.height/22.5)
+        if tagNameTextCount >= 15{ // tagName이 길 때
+            tagDeleteModalView.labelView.snp.makeConstraints { make in
+                make.centerX.equalToSuperview()
+                make.width.equalToSuperview().dividedBy(1.7)
+                make.height.equalToSuperview().dividedBy(3.7)
+                make.top.equalToSuperview().offset(self.view.frame.height/22.5)
+            }
+
+            tagDeleteModalView.tagTitleNameLabel.snp.makeConstraints { make in
+                make.centerX.top.equalToSuperview()
+            }
+
+            tagDeleteModalView.deleteQuestionsLabel.snp.makeConstraints { make in
+                make.bottom.centerX.equalToSuperview()
+            }
+        }else{ // tagName이 짧을 때
+            tagDeleteModalView.labelView.snp.makeConstraints { make in
+                make.centerX.equalToSuperview()
+                make.width.equalTo((tagDeleteModalView.tagTitleNameLabel.text! as NSString).size(withAttributes: [NSAttributedString.Key.font : tagDeleteModalView.tagTitleNameLabel.font as Any]).width + (tagDeleteModalView.deleteQuestionsLabel.text! as NSString).size(withAttributes: [NSAttributedString.Key.font : tagDeleteModalView.deleteQuestionsLabel.font as Any]).width + 10)
+                make.height.equalToSuperview().dividedBy(5)
+                make.top.equalToSuperview().offset(self.view.frame.height/22.5)
+            }
+
+            tagDeleteModalView.tagTitleNameLabel.snp.makeConstraints { make in
+                make.centerY.left.equalToSuperview()
+            }
+
+            tagDeleteModalView.deleteQuestionsLabel.snp.makeConstraints { make in
+                make.right.centerY.equalToSuperview()
+            }
         }
-        
-        tagDeleteModalView.tagTitleNameLabel.snp.makeConstraints { make in
-            make.centerX.top.equalToSuperview()
-        }
-        
-        tagDeleteModalView.completeQuestionsLabel.snp.makeConstraints { make in
-            make.bottom.centerX.equalToSuperview()
-        }
-        
+
         tagDeleteModalView.cancleButton.snp.makeConstraints { make in
             make.bottom.equalTo(tagDeleteModalView.deleteButton)
             make.right.equalTo(tagDeleteModalView.deleteButton.snp.left).offset(-self.view.frame.width/35)
             make.height.width.equalTo(tagDeleteModalView.deleteButton)
         }
-        
+
         tagDeleteModalView.deleteButton.snp.makeConstraints { make in
             make.bottom.equalToSuperview().offset(-self.view.frame.height/45.1)
             make.right.equalToSuperview().offset(-self.view.frame.width/15)
@@ -256,7 +275,7 @@ class TagSettingViewController: UIViewController, UITextFieldDelegate {
         tagDeleteModalView.isHidden = true
     }
     
-    @objc func deleteButtonClicked(sender:UIButton){
+    @objc func modalDeleteButtonClicked(sender:UIButton){
         let nextViewController = TagManagementViewController()
         self.navigationController?.pushViewController(nextViewController, animated: true)
     }
@@ -267,6 +286,10 @@ class TagSettingViewController: UIViewController, UITextFieldDelegate {
     
     @objc func tagDeleteButtonClicked(sender:UIButton){
         tagDeleteModalView.isHidden = false
+    }
+    
+    @objc func cancleButtonClicked(sender:UIButton){
+        tagDeleteModalView.isHidden = true
     }
     
     @objc func completeButtonClicked(sender:UIButton){
@@ -284,6 +307,8 @@ class TagSettingViewController: UIViewController, UITextFieldDelegate {
                     Timer.scheduledTimer(timeInterval: TimeInterval(0.8), target: self, selector: #selector(self.hideView), userInfo: nil, repeats: false)
             })
         
+        }else{
+            navigationController?.popViewController(animated: true)
         }
     }
     
@@ -295,8 +320,6 @@ class TagSettingViewController: UIViewController, UITextFieldDelegate {
                 self.writeTagNameView.isHidden = true
             })
     }
-    
-    
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         self.tagNameTextField.resignFirstResponder()
@@ -350,8 +373,24 @@ extension TagSettingViewController: UICollectionViewDataSource, UICollectionView
 
 extension TagSettingViewController: SendTagNameSelectedCellIndexDelegate{
     func didTabTagSettingButton(with tagName: String, index: Int) {
-        tagNameTextField.text = tagName
+        tagNameText = tagName
+        tagNameTextField.text = tagNameText
+
         print("tagName \(tagName)")
     }
 }
 
+extension TagSettingViewController: UITextFieldDelegate{
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        guard let text = tagNameTextField.text else { return true }
+
+        let newLength = text.count + string.count - range.length
+
+        if newLength > 27 {
+            for _ in 0 ..< newLength - 27 {
+                textField.deleteBackward()
+            }
+        }
+        return true
+    }
+}

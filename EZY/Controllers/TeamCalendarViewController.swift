@@ -20,7 +20,7 @@ class TeamCalendarViewController : UIViewController {
     private let TitleLabel = UILabel().then{
         $0.textColor = .EZY_6B40FF
         $0.text = "팀 일정 알림 관리"
-        $0.dynamicFont(fontSize: 22, weight: .semibold)
+        $0.dynamicFont(fontSize: 22, currentFontName: "AppleSDGothicNeo-SemiBold")
     }
     private let tableView = UITableView().then{
         $0.translatesAutoresizingMaskIntoConstraints = false

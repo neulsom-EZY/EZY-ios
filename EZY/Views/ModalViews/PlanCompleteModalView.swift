@@ -18,30 +18,16 @@ class PlanCompleteModalView: UIView {
         $0.layer.cornerRadius = 10
     }
     
-    lazy var titleLabel = UILabel().then {
-        $0.text = "일정 완료"
-        $0.dynamicFont(fontSize: 12, currentFontName: "AppleSDGothicNeo-Bold")
-        $0.textColor = UIColor(red: 104/255, green: 134/255, blue: 254/255, alpha: 1)
-    }
-    
-    lazy var iconCircleBackground = UIView().then {
-        $0.backgroundColor = UIColor(red: 104/255, green: 134/255, blue: 254/255, alpha: 1)
-    }
-    
-    lazy var iconImageView = UIImageView().then {
-        $0.image = UIImage(named: "EZY_OurJob")
-    }
-    
     lazy var okButton = UIButton().then {
         $0.setTitle("네!", for: .normal)
-        $0.backgroundColor = UIColor(red: 104/255, green: 134/255, blue: 254/255, alpha: 1)
+        $0.backgroundColor = UIColor(red: 147/255, green: 145/255, blue: 254/255, alpha: 1)
         $0.layer.cornerRadius = 10
         $0.dynamicFont(fontSize: 12, currentFontName: "AppleSDGothicNeo-Bold")
     }
     
     lazy var cancelButton = UIButton().then {
         $0.setTitle("아니요!", for: .normal)
-        $0.backgroundColor = UIColor(red: 154/255, green: 174/255, blue: 252/255, alpha: 1)
+        $0.backgroundColor = UIColor(red: 223/255, green: 223/255, blue: 223/255, alpha: 1)
         $0.layer.cornerRadius = 10
         $0.dynamicFont(fontSize: 12, currentFontName: "AppleSDGothicNeo-Bold")
     }
@@ -57,7 +43,7 @@ class PlanCompleteModalView: UIView {
     }
     
     lazy var completeQuestionsLabel = UILabel().then {
-        $0.text = "일정을 완료하셨나요?"
+        $0.text = "일정을 완료할까요?"
         $0.dynamicFont(fontSize: 15, currentFontName: "AppleSDGothicNeo-Thin")
     }
 
@@ -74,9 +60,6 @@ class PlanCompleteModalView: UIView {
     func layoutSetting(){
         self.addSubview(shadowBackgroundView)
         shadowBackgroundView.addSubview(modalBackgroundView)
-        modalBackgroundView.addSubview(titleLabel)
-        modalBackgroundView.addSubview(iconCircleBackground)
-        iconCircleBackground.addSubview(iconImageView)
         modalBackgroundView.addSubview(okButton)
         modalBackgroundView.addSubview(cancelButton)
         modalBackgroundView.addSubview(labelView)
