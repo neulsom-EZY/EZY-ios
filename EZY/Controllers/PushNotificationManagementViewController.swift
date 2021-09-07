@@ -21,7 +21,7 @@ class PushNotificationManagementViewController : UIViewController{
     private let TitleLabel = UILabel().then{ 
         $0.textColor = .EZY_AFADFF
         $0.text = "푸쉬 알림 관리"
-        $0.dynamicFont(fontSize: 22, weight: .semibold)
+        $0.dynamicFont(fontSize: 22, currentFontName: "AppleSDGothicNeo-SemiBold")
     }
     private let personalCalendar : AlarmManagementButton = {
         let viewModel = Managementbtn(icon: UIImage(named: "EZY_user")?.withRenderingMode(.alwaysTemplate), iconTintColor : .EZY_BAC8FF, title: "개인 일정 알림 관리", subTitle: "개인, 팀, 심부름관련 알림을 관리합니다.")

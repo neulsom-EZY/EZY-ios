@@ -1,20 +1,17 @@
 //
-//  ErrandCalendarViewController.swift
+//  TeamCalendarViewController.swift
 //  EZY
 //
 //  Created by Ji-hoon Ahn on 2021/06/27.
 //
 
 import UIKit
-import SnapKit
-import Then
 
-class ErrandCalendarViewController : UIViewController{
+class TeamCalendarViewController : UIViewController {
     //MARK: - Properties
     var manageData : [ManageData] = []
-    let titleNotification = ["심부름 완료 알림","심부름 수락 알림","심부름 거절 알림","심부름 포기 알림","심부름 받기 알림","심부름 취소 알림","종료 심부름 미리 알림"]
-    let explanation = ["상대방이 심부름을 완료했을 시 알림을 보내드립니다","상대방이 심부름 일정을 수락했을 시 알림을 보내드립니다","보낸 심부름이 거절당했을 시 알림을 보내드립니다","상대방이 심부름을 포기했을 시 알림을 보내드립니다","심부름이 왔을 때 알림을 보내드립니다","부탁받은 심부름이 취소되었을 때 알림을 보내드립니다","심부름이 종료되기 30분 전 알림을 보내드립니다"]
-    
+    let titleNotification = ["팀 일정 삭제 알림", "팀 일정 받기 알림","팀 일정 변경 확인 알림","팀 일정 변경 요청 알림","팀 일정 변경 요청 확인 알림","팀 일정 변경 요청 알림"]
+    let explanation = ["팀 리더가 일정을 삭제했을 시 알림을 보내드립니다","팀 일정을 받았을 시 알림을 보내드립니다","팀 리더가 일정을 변경했을 시 알림을 보내드립니다 ","팀 리더일 시 일정 변경 요청을 받았을 시 알림을 보내드립니다","팀 리더가 일정을 변경했을 시 알림을 보내드립니다 ","팀 리더일 시 일정 변경 요청을 받았을 시 알림을 보내드립니다"]
     private let backbutton = UIButton().then{
         $0.tintColor = .EZY_6B40FF
         $0.setImage(UIImage(systemName: "arrow.left"), for: .normal)
@@ -22,7 +19,7 @@ class ErrandCalendarViewController : UIViewController{
     }
     private let TitleLabel = UILabel().then{
         $0.textColor = .EZY_6B40FF
-        $0.text = "심부름 일정 알림 관리"
+        $0.text = "팀 일정 알림 관리"
         $0.dynamicFont(fontSize: 22, currentFontName: "AppleSDGothicNeo-SemiBold")
     }
     private let tableView = UITableView().then{
@@ -34,7 +31,7 @@ class ErrandCalendarViewController : UIViewController{
     override func viewDidLoad() {
         super.viewDidLoad()
         configureUI()
-         
+        
     }
     //MARK: - Selectors
     @objc func backbtn(){
@@ -72,7 +69,7 @@ class ErrandCalendarViewController : UIViewController{
     }
     
     private func makeData() {
-        for i in 0...6 {
+        for i in 0...5  {
             manageData.append(ManageData.init(title: titleNotification[i], explanation: explanation[i]))
         }
     }
@@ -86,7 +83,7 @@ class ErrandCalendarViewController : UIViewController{
     }
 }
 
-extension ErrandCalendarViewController : UITableViewDataSource{
+extension TeamCalendarViewController : UITableViewDataSource{
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return manageData.count
     }

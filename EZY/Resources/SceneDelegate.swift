@@ -15,7 +15,13 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
         guard let windowScene = (scene as? UIWindowScene) else { return }        
         window = UIWindow(windowScene: windowScene)
+<<<<<<< HEAD
         let mainViewController = LoginViewController()
+=======
+
+        let mainViewController = ShowPlanViewController()
+
+>>>>>>> d2f6fac03cd2fe4c6903d6eddb34a20147e3874b
         let navigationController = UINavigationController(rootViewController: mainViewController)
         navigationController.navigationBar.isHidden = true
         window?.rootViewController = navigationController
