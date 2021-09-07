@@ -5,6 +5,7 @@
 //  Created by 노연주 on 2021/06/10.
 //
 
+
 import UIKit
 import Then
 import SnapKit
@@ -109,6 +110,7 @@ class LoginViewController: UIViewController{
         } else {
             passwordField.isSecureTextEntry = true
         }
+
     }
     
     @objc
@@ -238,8 +240,6 @@ func updateUIViewController(_ uiView: UIViewController,context: Context) {
         LoginViewController()
 
     }
-
-}
 @available(iOS 13.0, *)
 struct LoginViewControllerRepresentable_PreviewProvider: PreviewProvider {
     static var previews: some View {
@@ -251,7 +251,8 @@ struct LoginViewControllerRepresentable_PreviewProvider: PreviewProvider {
         }
         
     }
+}
+    
 } #endif
-
 
 
