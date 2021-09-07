@@ -7,7 +7,19 @@
 
 import UIKit
 import SnapKit
+<<<<<<< HEAD
+<<<<<<< HEAD
+<<<<<<< HEAD
+=======
 
+>>>>>>> d2f6fac03cd2fe4c6903d6eddb34a20147e3874b
+=======
+
+<<<<<<< HEAD
+>>>>>>> 920819ae5e7c9dabc49a615e0742caedba1293ac
+=======
+
+>>>>>>> 19d6eb730b5d1416bdbb7072919b5a02da8344da
 class Utilities {
     func textField(withPlaceholder placeholder :String) -> UITextField{
         let tf = UITextField()

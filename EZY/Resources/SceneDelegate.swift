@@ -15,9 +15,25 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
         guard let windowScene = (scene as? UIWindowScene) else { return }
         window = UIWindow(windowScene: windowScene)
+<<<<<<< HEAD
+<<<<<<< HEAD
+<<<<<<< HEAD
+        let mainViewController = LoginViewController()
+=======
+<<<<<<< HEAD:EZY/SceneDelegate.swift
+        let mainViewController = LoginViewController()
+        let navigationController = UINavigationController(rootViewController: ErrandDetailsViewController())
+>>>>>>> 920819ae5e7c9dabc49a615e0742caedba1293ac
+=======
+=======
+>>>>>>> 19d6eb730b5d1416bdbb7072919b5a02da8344da
 
         let mainViewController = ShowPlanViewController()
 
+<<<<<<< HEAD
+>>>>>>> d2f6fac03cd2fe4c6903d6eddb34a20147e3874b
+=======
+>>>>>>> 920819ae5e7c9dabc49a615e0742caedba1293ac
         let navigationController = UINavigationController(rootViewController: mainViewController)
 
         navigationController.navigationBar.isHidden = true
