@@ -133,7 +133,6 @@ class ShowPlanViewController: UIViewController{
     
     
     // MARK: - layoutSetting
-    
     func topLayoutSetting(){
         self.view.backgroundColor = .white
         
