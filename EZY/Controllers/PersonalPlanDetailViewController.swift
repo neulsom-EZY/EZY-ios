@@ -42,7 +42,7 @@ class PersonalPlanDetailViewController: UIViewController {
     }
     
     lazy var locationIconImageView = UIImageView().then {
-        $0.image = UIImage(named: "EZY_Location")
+        $0.image = UIImage(named: "EZY_location")
     }
     
     lazy var timeIconImageView = UIImageView().then {
@@ -55,6 +55,16 @@ class PersonalPlanDetailViewController: UIViewController {
     
     lazy var backButton = UIButton().then{
         $0.setImage(UIImage(named: "EZY_DetailBackButton"), for: .normal)
+    }
+    
+    lazy var noRepeatButton = UIButton().then{
+        $0.backgroundColor = UIColor(red: 253/255, green: 253/255, blue: 253/255, alpha: 1)
+        $0.layer.borderWidth = 1
+        $0.layer.borderColor = UIColor(red: 231/255, green: 231/255, blue: 231/255, alpha: 1).cgColor
+        $0.setTitle("반복이 없습니다.", for: .normal)
+        $0.dynamicFont(fontSize: 11, currentFontName: "Poppins-Light")
+        $0.isEnabled = true
+        $0.setTitleColor(UIColor(red: 183/255, green: 180/255, blue: 180/255, alpha: 1), for: .normal)
     }
     
     lazy var planNameLabel = UILabel().then {
@@ -108,7 +118,7 @@ class PersonalPlanDetailViewController: UIViewController {
     lazy var tagLabel = UILabel().then {
         $0.text = "태그"
         $0.textColor = UIColor(red: 182/255, green: 182/255, blue: 182/255, alpha: 1)
-        $0.dynamicFont(fontSize: 14, currentFontName: "AppleSDGothicNeo-Bold")
+        $0.dynamicFont(fontSize: 14, currentFontName: "AppleSDGothicNeo-Medium")
     }
     
     lazy var tagStudyButton = UIButton().then {
@@ -123,7 +133,7 @@ class PersonalPlanDetailViewController: UIViewController {
     lazy var repeatTitleLabel = UILabel().then {
         $0.text = "반복 설정"
         $0.textColor = UIColor(red: 182/255, green: 182/255, blue: 182/255, alpha: 1)
-        $0.dynamicFont(fontSize: 14, currentFontName: "AppleSDGothicNeo-Bold")
+        $0.dynamicFont(fontSize: 14, currentFontName: "AppleSDGothicNeo-Medium")
     }
     
     lazy var planDeleteButton = UIButton().then {
@@ -141,20 +151,20 @@ class PersonalPlanDetailViewController: UIViewController {
     lazy var notificationTitleLabel = UILabel().then {
         $0.text = "알림 설정"
         $0.textColor = UIColor(red: 182/255, green: 182/255, blue: 182/255, alpha: 1)
-        $0.dynamicFont(fontSize: 14, currentFontName: "AppleSDGothicNeo-Bold")
+        $0.dynamicFont(fontSize: 14, currentFontName: "AppleSDGothicNeo-Medium")
     }
     
     lazy var notificationBackgroundView = UIView().then {
         $0.backgroundColor = UIColor(red: 253/255, green: 253/255, blue: 253/255, alpha: 1)
-        $0.layer.borderWidth = 0.5
-        $0.layer.borderColor = UIColor(red: 207/255, green: 207/255, blue: 207/255, alpha: 1).cgColor
+        $0.layer.borderWidth = 1
+        $0.layer.borderColor = UIColor(red: 231/255, green: 231/255, blue: 231/255, alpha: 1).cgColor
         $0.layer.cornerRadius = 10
     }
     
     lazy var notificationTimeLabel = UILabel().then {
         $0.text = "오전 12:12"
-        $0.textColor = UIColor(red: 172/255, green: 172/255, blue: 172/255, alpha: 1)
-        $0.dynamicFont(fontSize: 12, currentFontName: "Poppins-Light")
+        $0.textColor = UIColor(red: 183/255, green: 180/255, blue: 180/255, alpha: 1)
+        $0.dynamicFont(fontSize: 11, currentFontName: "Poppins-Light")
     }
     
     override func viewDidLoad() {
@@ -200,6 +210,8 @@ class PersonalPlanDetailViewController: UIViewController {
         notificationTimeLabel.snp.makeConstraints { make in
             make.centerY.centerX.equalToSuperview()
         }
+        
+        repeatDayCollectionView.isHidden = true
     }
     
     func planDeleteModalViewSetting(){
@@ -295,6 +307,7 @@ class PersonalPlanDetailViewController: UIViewController {
         self.view.addSubview(repeatTitleLabel)
         self.view.addSubview(notificationTitleLabel)
         self.view.addSubview(notificationBackgroundView)
+        self.view.addSubview(noRepeatButton)
         notificationBackgroundView.addSubview(notificationTimeLabel)
         self.timeBackgroundView.addSubview(timeIconImageView)
         self.calendarBackgroundView.addSubview(calendarIconImageView)
@@ -420,6 +433,15 @@ class PersonalPlanDetailViewController: UIViewController {
             make.top.equalTo(tagStudyButton.snp.bottom).offset(self.view.frame.height/35)
         }
         
+        noRepeatButton.snp.makeConstraints { make in
+            make.top.equalTo(repeatTitleLabel.snp.bottom).offset(self.view.frame.height/80)
+            make.left.equalTo(repeatTitleLabel)
+            make.height.equalToSuperview().dividedBy(25.3)
+            make.width.equalToSuperview().dividedBy(3.1)
+            
+            noRepeatButton.layer.cornerRadius = self.view.frame.height/25.3/2
+        }
+        
     }
     
     @objc func planDeleteButtonClicked(sender:UIButton){
@@ -433,7 +455,7 @@ class PersonalPlanDetailViewController: UIViewController {
     
     @objc func planDeleteModalViewDeleteButtonClicked(sender:UIButton){
         planDeleteModalView.isHidden = true
-//        let nextViewController = personallistVC()
+//        let nextViewController = 나의할일리스트()
 //        self.navigationController?.pushViewController(nextViewController, animated: true)
     }
 

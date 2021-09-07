@@ -23,7 +23,7 @@ class ErrandCalendarViewController : UIViewController{
     private let TitleLabel = UILabel().then{
         $0.textColor = .EZY_6B40FF
         $0.text = "심부름 일정 알림 관리"
-        $0.dynamicFont(fontSize: 22, weight: .semibold)
+        $0.dynamicFont(fontSize: 22, currentFontName: "AppleSDGothicNeo-SemiBold")
     }
     private let tableView = UITableView().then{
         $0.translatesAutoresizingMaskIntoConstraints = false
@@ -83,5 +83,17 @@ class ErrandCalendarViewController : UIViewController{
         tableView.rowHeight = view.frame.height/14.2
         self.tableView.separatorStyle = .none
         self.tableView.bounces = false;
+    }
+}
+
+extension ErrandCalendarViewController : UITableViewDataSource{
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return manageData.count
+    }
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: CustomManagePushNotificationCell.identifier, for: indexPath) as! CustomManagePushNotificationCell
+        cell.title.text = titleNotification[indexPath.row]
+        cell.explanation.text = explanation[indexPath.row]
+        return cell
     }
 }

@@ -22,12 +22,12 @@ class CustomManagePushNotificationCell: UITableViewCell {
 
     let title = UILabel().then{
         $0.translatesAutoresizingMaskIntoConstraints = false
-        $0.dynamicFont(fontSize: 14, weight: .regular)
+        $0.dynamicFont(fontSize: 14, currentFontName: "AppleSDGothicNeo-Regular")
         $0.textColor = .EZY_656565
     }
      let explanation = UILabel().then{
         $0.translatesAutoresizingMaskIntoConstraints = false
-        $0.dynamicFont(fontSize: 8, weight: .regular)
+        $0.dynamicFont(fontSize: 8, currentFontName: "AppleSDGothicNeo-Regular")
         $0.textColor = .EZY_CDCDCD
     }
     
