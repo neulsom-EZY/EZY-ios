@@ -21,19 +21,37 @@ class PersonalPlanChangeViewController: UIViewController {
     
     lazy var selectTimeModalView = SelectTimeModalView()
     
-    var isChecked: [Bool] = [true, false, false, false]
+    lazy var isChecked: [Bool] = [true, false, false, false]
     
-    var startSelectCircleButtonLocation = "Left"
+    lazy var startSelectCircleButtonLocation = "Left"
     
-    var endSelectCircleButtonLocation = "Left"
+    lazy var endSelectCircleButtonLocation = "Left"
     
-    var startPickerViewText = [["2","3","4","5","6","7"],["2","3","4","5","6","7"]]
+    lazy var startPickerViewText = [["1","2","3","4","5","6","7","8","9","10","11","12"],["00","05","10","15","20","25","30","35","40","45","50","55"]]
     
-    var dayPickerViewText1 = ["S","M","T","W","T","F","S","M","T","W","T","F","S","M","T","W","T","F"]
+    lazy var dayPickerViewText1 = ["Sun","Mon","Tue","Wed","Thr","Fri","Sat","Mon","Tue","Wed","Thr","Fri","Mon","Tue","Wed","Thr","Fri"]
     
-    var dayPickerViewText2 = ["2","3","4","5","6","7","2","3","4","5","6","7","2","3","4","5","6","7"]
+    lazy var dayPickerViewText2 = ["12","3","4","5","6","7","2","3","4","5","6","7","2","3","4","5","6","7"]
     
-    var RepeatModels: [RepeatCollectionViewModel] = [RepeatCollectionViewModel(backgroundColr: UIColor(red: 198/255, green: 198/255, blue: 198/255, alpha: 1), isSelected: false),
+    lazy var selectedDayRow = 0
+    
+    lazy var selectedTimeEndAMPM = "AM"
+    
+    lazy var selectedTimeStartAMPM = "AM"
+    
+    lazy var selectedTimeStartHourIndex = 0
+    
+    lazy var selectedTimeStartMinIndex = 0
+    
+    lazy var selectedTimeEndHourIndex = 0
+    
+    lazy var selectedTimeEndMinIndex = 0
+    
+    lazy var selectedRepeatRow = [Int]()
+    
+    lazy var selectedRepeatText = ""
+    
+    var RepeatModels: [RepeatCollectionViewModel] = [RepeatCollectionViewModel(backgroundColr: UIColor(red: 198/255, green: 198/255, blue: 198/255, alpha: 1),                                                          isSelected: false),
                                                      RepeatCollectionViewModel(backgroundColr: UIColor(red: 255/255, green: 188/255, blue: 188/255, alpha: 1), isSelected: true),
                                                      RepeatCollectionViewModel(backgroundColr: UIColor(red: 255/255, green: 188/255, blue: 188/255, alpha: 1), isSelected: true),
                                                      RepeatCollectionViewModel(backgroundColr: UIColor(red: 255/255, green: 188/255, blue: 188/255, alpha: 1), isSelected: true),
@@ -145,7 +163,7 @@ class PersonalPlanChangeViewController: UIViewController {
     }
     
     lazy var calendarLabelButton = UIButton().then {
-        $0.setTitle("2021. 05. 09 화요일", for: .normal)
+        $0.setTitle("2021. \("MM".stringFromDate()). 09 화요일", for: .normal)
         $0.setTitleColor(UIColor(red: 101/255, green: 101/255, blue: 101/255, alpha: 1), for: .normal)
         $0.dynamicFont(fontSize: 16, currentFontName: "Poppins-Regular")
     }
@@ -500,8 +518,11 @@ class PersonalPlanChangeViewController: UIViewController {
         self.selectTimeModalView.startPickerView.delegate = self
         self.selectTimeModalView.startPickerView.dataSource = self
         
+        selectTimeModalView.startPickerView.selectRow(startPickerViewText.count/2, inComponent:0, animated: true)
+        selectTimeModalView.startPickerView.selectRow(startPickerViewText.count/2, inComponent:startPickerViewText.count/2, animated: true)
+        
         selectTimeModalView.startPickerView.snp.makeConstraints { make in
-            make.centerX.equalTo(selectTimeModalView.startSelectBackButton)
+            make.centerX.equalTo(selectTimeModalView.startSelectBackButton).offset(-self.view.frame.width/40)
             make.top.equalTo(selectTimeModalView.startSelectBackButton.snp.bottom)
             make.width.equalToSuperview().dividedBy(3)
             make.height.equalToSuperview().dividedBy(2)
@@ -514,14 +535,17 @@ class PersonalPlanChangeViewController: UIViewController {
 
         selectTimeModalView.startMinLabel.snp.makeConstraints { make in
             make.centerY.equalTo(selectTimeModalView.startPickerView)
-            make.left.equalTo(selectTimeModalView.startPickerView.snp.right).offset(-self.view.frame.width/25)
+            make.left.equalTo(selectTimeModalView.startPickerView.snp.right).offset(-self.view.frame.width/45)
         }
         
         self.selectTimeModalView.endPickerView.delegate = self
         self.selectTimeModalView.endPickerView.dataSource = self
         
+        selectTimeModalView.endPickerView.selectRow(startPickerViewText.count/2, inComponent:0, animated: true)
+        selectTimeModalView.endPickerView.selectRow(startPickerViewText.count/2, inComponent:startPickerViewText.count/2, animated: true)
+        
         selectTimeModalView.endPickerView.snp.makeConstraints { make in
-            make.centerX.equalTo(selectTimeModalView.endSelectBackButton)
+            make.centerX.equalTo(selectTimeModalView.endSelectBackButton).offset(-self.view.frame.width/40)
             make.top.equalTo(selectTimeModalView.endSelectBackButton.snp.bottom)
             make.width.equalToSuperview().dividedBy(3)
             make.height.equalToSuperview().dividedBy(2)
@@ -534,7 +558,7 @@ class PersonalPlanChangeViewController: UIViewController {
 
         selectTimeModalView.endMinLabel.snp.makeConstraints { make in
             make.centerY.equalTo(selectTimeModalView.endPickerView)
-            make.left.equalTo(selectTimeModalView.endPickerView.snp.right).offset(-self.view.frame.width/25)
+            make.left.equalTo(selectTimeModalView.endPickerView.snp.right).offset(-self.view.frame.width/45)
         }
         
         selectTimeModalView.waveLabel.snp.makeConstraints { make in
@@ -549,7 +573,7 @@ class PersonalPlanChangeViewController: UIViewController {
             make.right.equalToSuperview().offset(-self.view.frame.width/18)
         }
         
-        selectTimeModalView.completeButton.addTarget(self, action: #selector(completeButtonClicked(sender:)), for: .touchUpInside)
+        selectTimeModalView.completeButton.addTarget(self, action: #selector(selectTimeCompleteButtonClicked(sender:)), for: .touchUpInside)
         
         selectTimeModalView.isHidden = true
     }
@@ -573,7 +597,7 @@ class PersonalPlanChangeViewController: UIViewController {
         selectCalendarModalView.dayPickerView.transform = CGAffineTransform(rotationAngle: rotationAngle)
         selectCalendarModalView.dayPickerView.selectRow(dayPickerViewText2.count/2, inComponent: 0, animated: true)
         
-        selectCalendarModalView.calendarAddButton.addTarget(self,action:#selector(calendarAddButtonClicked(sender:)),
+        selectCalendarModalView.calendarAddButton.addTarget(self,action:#selector(selectCalendarCompleteButtonClicked(sender:)),
                                  for:.touchUpInside)
         
         selectCalendarModalView.snp.makeConstraints { make in
@@ -748,6 +772,7 @@ class PersonalPlanChangeViewController: UIViewController {
                 self.selectTimeModalView.startAfternoonLabel.textColor = UIColor(red: 114/255, green: 114/255, blue: 114/255, alpha: 1)
                 
                 self.startSelectCircleButtonLocation = "Right"
+                self.selectedTimeStartAMPM = "PM"
             }else{
 
                 
@@ -766,6 +791,7 @@ class PersonalPlanChangeViewController: UIViewController {
                 self.selectTimeModalView.startAfternoonLabel.textColor = UIColor.black
                 
                 self.startSelectCircleButtonLocation = "Left"
+                self.selectedTimeStartAMPM = "AM"
             }
 
         })
@@ -796,6 +822,7 @@ class PersonalPlanChangeViewController: UIViewController {
                 
                 self.selectTimeModalView.endSelectCircleButton.superview?.layoutIfNeeded()
                 self.endSelectCircleButtonLocation = "Right"
+                self.selectedTimeEndAMPM = "PM"
             }else{
                 self.selectTimeModalView.endSelectCircleButton.snp.remakeConstraints { make in
                     make.centerY.equalTo(self.selectTimeModalView.endSelectBackButton)
@@ -813,6 +840,7 @@ class PersonalPlanChangeViewController: UIViewController {
                 
                 self.selectTimeModalView.startSelectCircleButton.superview?.layoutIfNeeded()
                 self.endSelectCircleButtonLocation = "Left"
+                self.selectedTimeEndAMPM = "AM"
             }
 
         })
@@ -846,12 +874,75 @@ class PersonalPlanChangeViewController: UIViewController {
         tagColorCollectionView.isHidden = false
     }
     
-    @objc func calendarAddButtonClicked(sender:UIButton){
+    @objc func selectCalendarCompleteButtonClicked(sender:UIButton){
         selectCalendarModalView.isHidden = true
+        
+        selectedRepeatText = ""
+        
+        for i in 0...(selectedRepeatRow.count == 0 ? 0 : selectedRepeatRow.count-1){
+            if selectedRepeatRow.count != 0{
+                switch selectedRepeatRow[i] {
+                case 1:
+                    selectedRepeatText += selectedRepeatText == "" ? "월" : ", 월"
+                    break
+                case 2:
+                    selectedRepeatText += selectedRepeatText == "" ? "화" : ", 화"
+                    break
+                case 3:
+                    selectedRepeatText += selectedRepeatText == "" ? "수" : ", 수"
+                    break
+                case 4:
+                    selectedRepeatText += selectedRepeatText == "" ? "목" : ", 목"
+                    break
+                case 5:
+                    selectedRepeatText += selectedRepeatText == "" ? "금" : ", 금"
+                    break
+                case 6:
+                    selectedRepeatText += selectedRepeatText == "" ? "토" : ", 토"
+                    break
+                case 7:
+                    selectedRepeatText += selectedRepeatText == "" ? "일" : ", 일"
+                    break
+                default:
+                    break
+                }
+            }
+        }
+        
+        calendarRepeatLabel.text = selectedRepeatText == "" ? "반복 없음" : "\(selectedRepeatText) 반복"
+                
+        switch dayPickerViewText1[selectedDayRow] {
+        case "Sun":
+            calendarLabelButton.setTitle("\("yyyy".stringFromDate()). \("MM".stringFromDate()). \(Int(dayPickerViewText2[selectedDayRow])! < 10 ? "0\(Int(dayPickerViewText2[selectedDayRow]) ?? 0)" : dayPickerViewText2[selectedDayRow]) 일요일", for: .normal)
+            break
+            
+        case "Mon":
+            calendarLabelButton.setTitle("\("yyyy".stringFromDate()). \("MM".stringFromDate()). \(Int(dayPickerViewText2[selectedDayRow])! < 10 ? "0\(Int(dayPickerViewText2[selectedDayRow]) ?? 0)" : dayPickerViewText2[selectedDayRow]) 월요일", for: .normal)
+            break
+        case "Tue":
+            calendarLabelButton.setTitle("\("yyyy".stringFromDate()). \("MM".stringFromDate()). \(Int(dayPickerViewText2[selectedDayRow])! < 10 ? "0\(Int(dayPickerViewText2[selectedDayRow]) ?? 0)" : dayPickerViewText2[selectedDayRow]) 화요일", for: .normal)
+            break
+        case "Wed":
+            calendarLabelButton.setTitle("\("yyyy".stringFromDate()). \("MM".stringFromDate()). \(Int(dayPickerViewText2[selectedDayRow])! < 10 ? "0\(Int(dayPickerViewText2[selectedDayRow]) ?? 0)" : dayPickerViewText2[selectedDayRow]) 수요일", for: .normal)
+            break
+        case "Thr":
+            calendarLabelButton.setTitle("\("yyyy".stringFromDate()). \("MM".stringFromDate()). \(Int(dayPickerViewText2[selectedDayRow])! < 10 ? "0\(Int(dayPickerViewText2[selectedDayRow]) ?? 0)" : dayPickerViewText2[selectedDayRow]) 목요일", for: .normal)
+            break
+        case "Fri":
+            calendarLabelButton.setTitle("\("yyyy".stringFromDate()). \("MM".stringFromDate()). \(Int(dayPickerViewText2[selectedDayRow])! < 10 ? "0\(Int(dayPickerViewText2[selectedDayRow]) ?? 0)" : dayPickerViewText2[selectedDayRow]) 금요일", for: .normal)
+            break
+        case "Sat":
+            calendarLabelButton.setTitle("\("yyyy".stringFromDate()). \("MM".stringFromDate()). \(Int(dayPickerViewText2[selectedDayRow])! < 10 ? "0\(Int(dayPickerViewText2[selectedDayRow]) ?? 0)" : dayPickerViewText2[selectedDayRow]) 토요일", for: .normal)
+            break
+        default:
+            break
+        }
     }
     
-    @objc func completeButtonClicked(sender:UIButton){
+    @objc func selectTimeCompleteButtonClicked(sender:UIButton){
         selectTimeModalView.isHidden = true
+        
+        timeLabelButton.setTitle("\(startPickerViewText[0][selectedTimeStartHourIndex]):\(startPickerViewText[1][selectedTimeStartMinIndex])\(selectedTimeStartAMPM) - \(startPickerViewText[0][selectedTimeEndHourIndex]):\(startPickerViewText[1][selectedTimeEndMinIndex])\(selectedTimeEndAMPM)", for: .normal)
     }
     
     @objc func tagbuttonClicked(sender:UIButton)
@@ -909,7 +1000,6 @@ class PersonalPlanChangeViewController: UIViewController {
     }
     
     @objc func locationViewButtonClicked(sender:UIButton){
-        print("adsfadfew")
         let nextViewController = SelectLocationViewController()
         self.navigationController?.pushViewController(nextViewController, animated: true)
     }
@@ -1253,11 +1343,13 @@ extension PersonalPlanChangeViewController: UICollectionViewDataSource, UICollec
         }else if collectionView == repeatCollectionView{
             if indexPath == [0,0]{
                 if RepeatModels[0].isSelected == true{ // 채울 때
-                    print("채워")
+                    print("다 지운다~~~")
+                    selectedRepeatRow.removeAll()
                     for i in 0...RepeatModels.count-1 {
                         if RepeatModels[i].isSelected == false{
                             RepeatModels[i].isSelected.toggle()
                             RepeatModels[0].isSelected = false
+
                         }
                     }
                 }else{ // 비울 때
@@ -1265,22 +1357,25 @@ extension PersonalPlanChangeViewController: UICollectionViewDataSource, UICollec
                 }
             }else{ // 선택 안함이 아닌 cell 을 클릭했을 때
                 RepeatModels[indexPath.row].isSelected.toggle()
-                print(RepeatModels.filter({ $0.isSelected == true }).count)
                 if RepeatModels[indexPath.row].isSelected == false{ // 채울때
+                    print("\(indexPath.row) 넣은다~~응~??")
+                    selectedRepeatRow.append(indexPath.row)
                     if RepeatModels.filter({ $0.isSelected == false }).count == 2 {
                         RepeatModels[0].isSelected = true
+   
                     }
                 }else{ // 선택 취소할때
+                    print("\(selectedRepeatRow.firstIndex(of: indexPath.row)!+1) <~ 요거 삭제한다~?")
+                    selectedRepeatRow.remove(at: selectedRepeatRow.firstIndex(of: indexPath.row)!)
                     if RepeatModels.filter({ $0.isSelected == true }).count == 8 {
                         RepeatModels[0].isSelected = false
+
                     }
                 }
             }
             
             collectionView.reloadData()
         }else if collectionView == tagCollectionView{
-            print("click\(indexPath)")
-            print("preciousSelectedIndex\(tagPreciousSelectedIndex)")
             if indexPath == [0,0]{
                 tagAddModalView.isHidden = false
             }else{
@@ -1405,6 +1500,26 @@ extension PersonalPlanChangeViewController: UIPickerViewDelegate, UIPickerViewDa
         return String()
       }
     
+    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+        if pickerView == selectCalendarModalView.dayPickerView{
+            selectedDayRow = row
+        }else if pickerView == selectTimeModalView.startPickerView{
+            if component == 0{
+                selectedTimeStartHourIndex = row
+            }else if component == 1{
+                selectedTimeStartMinIndex = row
+            }
+            print("startPickerView : row[\(row)], component[\(component)] ")
+        }else if pickerView == selectTimeModalView.endPickerView{
+            if component == 0{
+                selectedTimeEndHourIndex = row
+            }else if component == 1{
+                selectedTimeEndMinIndex = row
+            }
+            print("endPickerView : row[\(row)], component[\(component)] ")
+        }
+    }
+    
     func pickerView(_ pickerView: UIPickerView, viewForRow row: Int, forComponent component: Int, reusing view: UIView?) -> UIView {
         if pickerView == selectTimeModalView.startPickerView || pickerView == selectTimeModalView.endPickerView{
             var pickerLabel = view as? UILabel;
@@ -1436,7 +1551,7 @@ extension PersonalPlanChangeViewController: UIPickerViewDelegate, UIPickerViewDa
                 pickerLabel2.textColor = UIColor(red: 168/255, green: 168/255, blue: 168/255, alpha: 1)
             }
             
-            pickerLabel1.font = UIFont(name: "AppleSDGothicNeo-SemiBold", size: 20)
+            pickerLabel1.font = UIFont(name: "AppleSDGothicNeo-SemiBold", size: 15)
             pickerLabel1.textAlignment = .center
             pickerLabel2.font = UIFont(name: "AppleSDGothicNeo-SemiBold", size: 20)
             pickerLabel2.textAlignment = .center
@@ -1456,10 +1571,11 @@ extension PersonalPlanChangeViewController: UIPickerViewDelegate, UIPickerViewDa
                 make.bottom.equalToSuperview().offset(-self.view.frame.height/18)
             }
             
-            pickerView.subviews[1].backgroundColor = .clear // 회색 뷰 지우기
-            
+            pickerView.subviews[1].backgroundColor = UIColor(red: 170/255, green: 187/255, blue: 255/255, alpha: 0.1)
+
             
             view.transform = CGAffineTransform(rotationAngle: (90 * (.pi / 180*3)))
+            
             
             return view
         }
