@@ -13,10 +13,6 @@ import Alamofire
     
 class MoreCalendarModalsButton : UIButton{
     
-    private let viewbackground = UIView().then{
-        $0.backgroundColor = .clear
-        
-    }
     private let toDoLabel = UILabel().then{
         $0.numberOfLines = 1
         $0.dynamicFont(fontSize: 18, weight: .semibold)
@@ -43,7 +39,6 @@ class MoreCalendarModalsButton : UIButton{
     }
     
     private func addSubViews(){
-        addSubview(viewbackground)
         addSubview(toDoLabel)
         addSubview(iconView)
     }
@@ -56,7 +51,7 @@ class MoreCalendarModalsButton : UIButton{
         layer.masksToBounds = true
         layer.borderColor = viewModel.color?.cgColor
         layer.borderWidth = 2
-        viewbackground.isUserInteractionEnabled = false
+        
         iconView.tintColor = viewModel.color
         toDoLabel.textColor = viewModel.color
         toDoLabel.text = viewModel.title
@@ -65,21 +60,28 @@ class MoreCalendarModalsButton : UIButton{
     
     override func layoutSubviews() {
         super.layoutSubviews()
-
-        viewbackground.snp.makeConstraints { (make) in
-            make.height.equalTo(frame.height/2.9)
-            make.center.equalTo(snp.center)
-        }
         iconView.snp.makeConstraints { (make) in
-            make.left.equalTo(viewbackground.snp.left)
-            make.centerY.equalTo(snp.centerY)
-            make.height.width.equalTo(viewbackground.snp.height)
+            make.centerY.equalToSuperview()
+            make.left.equalTo(frame.height/1.5)
+            make.height.width.equalTo(frame.height/2.9)
+            
         }
         toDoLabel.snp.makeConstraints { (make) in
-            make.centerY.equalTo(viewbackground.snp.centerY)
+            make.centerY.equalToSuperview()
             make.left.equalTo(iconView.snp.right).offset(frame.height/8.8)
-            make.right.equalTo(viewbackground.snp.right)
         }
-        
+    }
+    
+    func ViewBtn(icon : UIImageView, label : UILabel) -> UIView{
+        let view = UIView()
+        view.addSubview(icon)
+        view.addSubview(label)
+        icon.snp.makeConstraints { (make) in
+            make.left.equalTo(view.snp.left)
+            make.top.equalTo(view.snp.top)
+            make.height.equalToSuperview()
+            make.width.equalTo(view.snp.width)
+        }
+        return view
     }
 }

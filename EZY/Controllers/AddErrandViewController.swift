@@ -65,8 +65,10 @@ class AddErrandViewController : UIViewController{
     }()
     
     
-    private let explanationContainerView : ExplanationContainerTextView = {
-        let view = ExplanationContainerTextView(tvTitle: "설명")
+    private lazy var explanationContainerView : UIView = {
+        let title = "설명"
+        let view = Utilities().inputContainerTextView(withMessage: title, textView: explanationTextView, Color: .EZY_F6F3FF, viewSize: Double(view.frame.height))
+
         return view
     }()
     private let kindOfCollectionView = UILabel().then{
@@ -74,14 +76,10 @@ class AddErrandViewController : UIViewController{
         $0.textColor = .EZY_B6B6B6
         $0.dynamicFont(fontSize: 12, currentFontName: "AppleSDGothicNeo-Bold")
     }
-<<<<<<< HEAD
- 
-=======
     private let explanationTextView : UITextView = {
         let tf = Utilities().textView(TextColor: .EZY_929292, TextSize: 14,font: .medium)
         return tf
     }()
->>>>>>> 9bbc5407cdf17955541ca51e4b109690faf78959
     
     let addPersonCollectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
@@ -111,17 +109,14 @@ class AddErrandViewController : UIViewController{
         addPersonCollectionView.delegate = self
         addPersonCollectionView.allowsMultipleSelection = true
     }
-    //MARK: - 키보드 받기
-    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?){
-         self.view.endEditing(true)
-   }
+    
     //MARK: - Selectors
     
     @objc func todobackbtn(){
         //전페이지로 되돌아가는 버튼
-//        let vc = LoginViewController()
-//        vc.modalPresentationStyle = .fullScreen
-//        present(vc, animated: false, completion: nil)
+        let vc = LoginViewController()
+        vc.modalPresentationStyle = .fullScreen
+        present(vc, animated: false, completion: nil)
     }
     
     @objc func calendarAlert(){
@@ -145,7 +140,6 @@ class AddErrandViewController : UIViewController{
         present(vc, animated: true, completion: nil)    }
 
     //MARK: - Helpers
-    
     func configureUI(){
         view.backgroundColor = .white
         addPersonCollectionView.contentInset = UIEdgeInsets(top: 0, left: view.frame.height/29, bottom: 0, right: 0)

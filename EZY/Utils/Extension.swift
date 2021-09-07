@@ -9,9 +9,12 @@ import UIKit
 
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 =======
 >>>>>>> 920819ae5e7c9dabc49a615e0742caedba1293ac
+=======
+>>>>>>> 19d6eb730b5d1416bdbb7072919b5a02da8344da
 //MARK: - TextField 재정의
 extension UITextField {
       private func resizeFont(calculatedFont: UIFont?, weight: UIFont.Weight) {
@@ -33,18 +36,24 @@ extension String {
 
 // MARK: - EZY_ reuse color extension
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> d2f6fac03cd2fe4c6903d6eddb34a20147e3874b
 =======
 =======
 >>>>>>> 9bbc5407cdf17955541ca51e4b109690faf78959
 >>>>>>> 920819ae5e7c9dabc49a615e0742caedba1293ac
+=======
+>>>>>>> 19d6eb730b5d1416bdbb7072919b5a02da8344da
 extension UIColor{
     static func rgb(red: CGFloat ,green: CGFloat,blue:CGFloat) -> UIColor{
         return UIColor(red: red/255, green: green/255, blue: blue/255, alpha: 1)
     }
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> 19d6eb730b5d1416bdbb7072919b5a02da8344da
     
     static func rgba(red: CGFloat ,green: CGFloat,blue:CGFloat, alpha:CGFloat) -> UIColor{
         return UIColor(red: red/255, green: green/255, blue: blue/255, alpha: alpha)
@@ -57,6 +66,7 @@ extension UIColor{
     static let EZY_6B40FF = UIColor.rgb(red: 107, green: 64,  blue: 255)
     static let EZY_C9BCFF = UIColor.rgb(red: 201, green: 188, blue: 255)
     static let EZY_B2B2B2 = UIColor.rgb(red: 178, green: 178, blue: 178)
+<<<<<<< HEAD
 =======
 >>>>>>> 920819ae5e7c9dabc49a615e0742caedba1293ac
     static func rgba(red: CGFloat ,green: CGFloat,blue:CGFloat, alpha:CGFloat) -> UIColor{
@@ -112,6 +122,8 @@ extension UIColor{
 =======
 >>>>>>> 9bbc5407cdf17955541ca51e4b109690faf78959
 >>>>>>> 920819ae5e7c9dabc49a615e0742caedba1293ac
+=======
+>>>>>>> 19d6eb730b5d1416bdbb7072919b5a02da8344da
     static let EZY_000000 = UIColor.rgb(red: 0, green: 0, blue: 0)
     static let EZY_FCA1A1 = UIColor.rgb(red: 252, green: 161, blue: 161)
     static let EZY_747474 = UIColor.rgb(red: 116, green: 116, blue: 116)
@@ -121,7 +133,10 @@ extension UIColor{
     static let EZY_E1E1E1 = UIColor.rgb(red: 225, green: 225, blue: 225)
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> 19d6eb730b5d1416bdbb7072919b5a02da8344da
     static let EZY_FFFFFF = UIColor.rgb(red: 255, green: 255, blue: 255)
     static let EZY_656565 = UIColor.rgb(red: 101, green: 101, blue: 101)
     static let EZY_DEDEDE = UIColor.rgb(red: 222, green: 222, blue: 222)
@@ -129,6 +144,7 @@ extension UIColor{
 }
 
 //MARK: - UILabel dynamic font extension
+<<<<<<< HEAD
 =======
 >>>>>>> 920819ae5e7c9dabc49a615e0742caedba1293ac
     static let EZY_AAA8FF = UIColor.rgb(red: 170, green: 168, blue: 255)
@@ -171,6 +187,8 @@ extension UIView {
 =======
 >>>>>>> 9bbc5407cdf17955541ca51e4b109690faf78959
 >>>>>>> 920819ae5e7c9dabc49a615e0742caedba1293ac
+=======
+>>>>>>> 19d6eb730b5d1416bdbb7072919b5a02da8344da
 extension UILabel {
     func dynamicFont(fontSize size: CGFloat, currentFontName: String) {
     let bounds = UIScreen.main.bounds
@@ -197,9 +215,12 @@ extension UILabel {
       break
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 =======
 >>>>>>> 920819ae5e7c9dabc49a615e0742caedba1293ac
+=======
+>>>>>>> 19d6eb730b5d1416bdbb7072919b5a02da8344da
     case 844.0: //iphone 12, 12Pro => 6.1 inch
         self.font = UIFont(name: currentFontName, size: size * 1.08)
         break
@@ -207,11 +228,14 @@ extension UILabel {
         self.font = UIFont(name: currentFontName, size: size * 1.19)
         break
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> d2f6fac03cd2fe4c6903d6eddb34a20147e3874b
 =======
 =======
 >>>>>>> 9bbc5407cdf17955541ca51e4b109690faf78959
 >>>>>>> 920819ae5e7c9dabc49a615e0742caedba1293ac
+=======
+>>>>>>> 19d6eb730b5d1416bdbb7072919b5a02da8344da
     default:
       print("not an iPhone")
       break
@@ -221,6 +245,7 @@ extension UILabel {
 
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 extension UITextView {
 =======
 //MARK: - UITextField dynamic font extension
@@ -233,6 +258,10 @@ extension UITextField {
 extension UITextView {
 >>>>>>> 9bbc5407cdf17955541ca51e4b109690faf78959
 >>>>>>> 920819ae5e7c9dabc49a615e0742caedba1293ac
+=======
+//MARK: - UITextField dynamic font extension
+extension UITextField {
+>>>>>>> 19d6eb730b5d1416bdbb7072919b5a02da8344da
     func dynamicFont(fontSize size: CGFloat, currentFontName: String) {
     let bounds = UIScreen.main.bounds
     let height = bounds.size.height
@@ -258,17 +287,21 @@ extension UITextView {
       break
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
     case 926.0: //iphone 12 Pro Max
         self.font = UIFont(name:currentFontName, size: size * 1.18)
 =======
 =======
 >>>>>>> 920819ae5e7c9dabc49a615e0742caedba1293ac
+=======
+>>>>>>> 19d6eb730b5d1416bdbb7072919b5a02da8344da
     case 844.0: //iphone 12, 12Pro => 6.1 inch
         self.font = UIFont(name: currentFontName, size: size * 1.08)
         break
     case 926.0: //iphone 12Pro MAX
         self.font = UIFont(name: currentFontName, size: size * 1.19)
         break
+<<<<<<< HEAD
 <<<<<<< HEAD
 >>>>>>> d2f6fac03cd2fe4c6903d6eddb34a20147e3874b
 =======
@@ -277,6 +310,8 @@ extension UITextView {
         self.font = UIFont(name:currentFontName, size: size * 1.18)
 >>>>>>> 9bbc5407cdf17955541ca51e4b109690faf78959
 >>>>>>> 920819ae5e7c9dabc49a615e0742caedba1293ac
+=======
+>>>>>>> 19d6eb730b5d1416bdbb7072919b5a02da8344da
     default:
       print("not an iPhone")
       break
@@ -286,9 +321,12 @@ extension UITextView {
 
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 =======
 >>>>>>> 920819ae5e7c9dabc49a615e0742caedba1293ac
+=======
+>>>>>>> 19d6eb730b5d1416bdbb7072919b5a02da8344da
 //MARK: - UIView roundCornerRadius extension
 extension UIView {
     func roundCorners(cornerRadius: CGFloat, maskedCorners: CACornerMask) {
@@ -300,11 +338,14 @@ extension UIView {
 
 //MARK: - UIButton dynamic font extension
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> d2f6fac03cd2fe4c6903d6eddb34a20147e3874b
 =======
 =======
 >>>>>>> 9bbc5407cdf17955541ca51e4b109690faf78959
 >>>>>>> 920819ae5e7c9dabc49a615e0742caedba1293ac
+=======
+>>>>>>> 19d6eb730b5d1416bdbb7072919b5a02da8344da
 extension UIButton {
     func dynamicFont(fontSize size: CGFloat, currentFontName: String) {
     let bounds = UIScreen.main.bounds
@@ -331,17 +372,21 @@ extension UIButton {
       break
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
     case 926.0: //iphone 12 Pro Max
         self.titleLabel?.font = UIFont(name:currentFontName, size: size * 1.18)
 =======
 =======
 >>>>>>> 920819ae5e7c9dabc49a615e0742caedba1293ac
+=======
+>>>>>>> 19d6eb730b5d1416bdbb7072919b5a02da8344da
     case 844.0: //iphone 12, 12Pro => 6.1 inch
         self.titleLabel?.font = UIFont(name: currentFontName, size: size * 1.08)
         break
     case 926.0: //iphone 12Pro MAX
         self.titleLabel?.font = UIFont(name: currentFontName, size: size * 1.19)
         break
+<<<<<<< HEAD
 <<<<<<< HEAD
 >>>>>>> d2f6fac03cd2fe4c6903d6eddb34a20147e3874b
 =======
@@ -350,6 +395,8 @@ extension UIButton {
         self.titleLabel?.font = UIFont(name:currentFontName, size: size * 1.18)
 >>>>>>> 9bbc5407cdf17955541ca51e4b109690faf78959
 >>>>>>> 920819ae5e7c9dabc49a615e0742caedba1293ac
+=======
+>>>>>>> 19d6eb730b5d1416bdbb7072919b5a02da8344da
     default:
       print("not an iPhone")
       break
@@ -359,6 +406,7 @@ extension UIButton {
 
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 extension UITextField {
 =======
@@ -373,6 +421,10 @@ extension UITextView {
 extension UITextField {
 >>>>>>> 9bbc5407cdf17955541ca51e4b109690faf78959
 >>>>>>> 920819ae5e7c9dabc49a615e0742caedba1293ac
+=======
+//MARK: - UITextView dynamic font extension
+extension UITextView {
+>>>>>>> 19d6eb730b5d1416bdbb7072919b5a02da8344da
     func dynamicFont(fontSize size: CGFloat, currentFontName: String) {
     let bounds = UIScreen.main.bounds
     let height = bounds.size.height
@@ -398,17 +450,21 @@ extension UITextField {
       break
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
     case 926.0: //iphone 12 Pro Max
         self.font = UIFont(name:currentFontName, size: size * 1.18)
 =======
 =======
 >>>>>>> 920819ae5e7c9dabc49a615e0742caedba1293ac
+=======
+>>>>>>> 19d6eb730b5d1416bdbb7072919b5a02da8344da
     case 844.0: //iphone 12, 12Pro => 6.1 inch
         self.font = UIFont(name: currentFontName, size: size * 1.08)
         break
     case 926.0: //iphone 12Pro MAX
         self.font = UIFont(name: currentFontName, size: size * 1.19)
         break
+<<<<<<< HEAD
 <<<<<<< HEAD
 >>>>>>> d2f6fac03cd2fe4c6903d6eddb34a20147e3874b
 =======
@@ -417,6 +473,8 @@ extension UITextField {
         self.font = UIFont(name:currentFontName, size: size * 1.18)
 >>>>>>> 9bbc5407cdf17955541ca51e4b109690faf78959
 >>>>>>> 920819ae5e7c9dabc49a615e0742caedba1293ac
+=======
+>>>>>>> 19d6eb730b5d1416bdbb7072919b5a02da8344da
     default:
       print("not an iPhone")
       break
@@ -426,6 +484,7 @@ extension UITextField {
 
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 //MARK: - label gradient extension
 >>>>>>> d2f6fac03cd2fe4c6903d6eddb34a20147e3874b
@@ -434,6 +493,9 @@ extension UITextField {
 =======
 >>>>>>> 9bbc5407cdf17955541ca51e4b109690faf78959
 >>>>>>> 920819ae5e7c9dabc49a615e0742caedba1293ac
+=======
+//MARK: - label gradient extension
+>>>>>>> 19d6eb730b5d1416bdbb7072919b5a02da8344da
 extension UILabel{
     public func updateGradientTextColor_horizontal(gradientColors: [UIColor] = [UIColor(white: 0, alpha: 0.95), UIColor(white: 0, alpha: 0.6)]){
         let size = CGSize(width: intrinsicContentSize.width, height: 1)
@@ -467,6 +529,7 @@ extension UILabel{
         UIGraphicsBeginImageContextWithOptions(size, false, 0)
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
         
 =======
           
@@ -477,6 +540,9 @@ extension UILabel{
         
 >>>>>>> 9bbc5407cdf17955541ca51e4b109690faf78959
 >>>>>>> 920819ae5e7c9dabc49a615e0742caedba1293ac
+=======
+          
+>>>>>>> 19d6eb730b5d1416bdbb7072919b5a02da8344da
         defer { UIGraphicsEndImageContext()}
         guard let context = UIGraphicsGetCurrentContext() else {return}
         var colors: [CGColor] = []
@@ -502,6 +568,7 @@ extension UILabel{
 
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 // MARK: - view gradient color extension
 >>>>>>> d2f6fac03cd2fe4c6903d6eddb34a20147e3874b
@@ -510,6 +577,9 @@ extension UILabel{
 =======
 >>>>>>> 9bbc5407cdf17955541ca51e4b109690faf78959
 >>>>>>> 920819ae5e7c9dabc49a615e0742caedba1293ac
+=======
+// MARK: - view gradient color extension
+>>>>>>> 19d6eb730b5d1416bdbb7072919b5a02da8344da
 extension UIView {
     @discardableResult
     func applyGradient(colors: [UIColor]) -> CAGradientLayer {
@@ -529,9 +599,12 @@ extension UIView {
 
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 =======
 >>>>>>> 920819ae5e7c9dabc49a615e0742caedba1293ac
+=======
+>>>>>>> 19d6eb730b5d1416bdbb7072919b5a02da8344da
 
 //MARK: - Shadow extension
 extension CALayer {
@@ -604,8 +677,11 @@ extension UITextField {
 
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> d2f6fac03cd2fe4c6903d6eddb34a20147e3874b
 =======
 =======
 >>>>>>> 9bbc5407cdf17955541ca51e4b109690faf78959
 >>>>>>> 920819ae5e7c9dabc49a615e0742caedba1293ac
+=======
+>>>>>>> 19d6eb730b5d1416bdbb7072919b5a02da8344da

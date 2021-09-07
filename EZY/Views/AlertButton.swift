@@ -41,9 +41,11 @@ class AlertButton : UIButton {
     public func configure( with viewModel : AlertBtn){
         view.isUserInteractionEnabled = false
         view.backgroundColor = .white
-        view.layer.applySketchShadow(color: UIColor.black, alpha: 0.1, x: 0, y: 4, blur: 15, spread: 0)
+        view.layer.shadowColor = UIColor.black.cgColor
+        view.layer.shadowOpacity = 0.1
+
         
-        label.dynamicFont(fontSize: 16, currentFontName: "AppleSDGothicNeo-Regular")
+        label.dynamicFont(fontSize: 16, weight: .regular)
         label.textColor = .EZY_656565
         
         icon.image = viewModel.icon
@@ -59,7 +61,7 @@ class AlertButton : UIButton {
         view.snp.makeConstraints { (make) in
             make.left.equalTo(snp.left)
             make.height.width.equalTo(frame.height)
-            make.top.left.equalToSuperview()
+            make.top.equalTo(snp.top)
         }
         icon.snp.makeConstraints { (make) in
             make.height.width.equalTo(frame.height/2)
