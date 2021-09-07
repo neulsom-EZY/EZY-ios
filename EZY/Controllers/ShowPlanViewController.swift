@@ -77,8 +77,30 @@ class ShowPlanViewController: UIViewController{
         $0.setImage(UIImage(named: "EZY_PlanAddButton"), for: .normal)
     }
     
+
     lazy var emptyPlanBoxView = UIView().then{
         $0.backgroundColor = .white
+
+    //MARK: Lifecycles
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        print(EZYPlanAddButton.dynamicFont(fontSize: 12, currentFontName: "AppleSDGothicNeo-UltraLight"))
+        
+        notificationButtonSetting()
+        
+        ScheduleTypeCollectionMainViewSetting()
+        
+        ScheduleTimeTableMainViewSetting()
+
+        layoutSetting()
+        
+        planCompleteModalViewSetting()
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        badgeView.layer.cornerRadius = badgeView.bounds.width/2
+
     }
     
     lazy var emptyLabel = UITextView().then{

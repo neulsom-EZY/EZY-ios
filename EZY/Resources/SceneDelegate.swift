@@ -17,6 +17,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         window = UIWindow(windowScene: windowScene)
 
         let mainViewController = ShowPlanViewController()
+
         let navigationController = UINavigationController(rootViewController: mainViewController)
 
         navigationController.navigationBar.isHidden = true

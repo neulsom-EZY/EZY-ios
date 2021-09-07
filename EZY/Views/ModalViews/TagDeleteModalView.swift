@@ -43,7 +43,7 @@ class TagDeleteModalView: UIView {
         $0.dynamicFont(fontSize: 17, currentFontName: "AppleSDGothicNeo-Bold")
     }
     
-    lazy var completeQuestionsLabel = UILabel().then {
+    lazy var deleteQuestionsLabel = UILabel().then {
         $0.text = "태그를 삭제할까요?"
         $0.dynamicFont(fontSize: 15, currentFontName: "AppleSDGothicNeo-Thin")
     }
@@ -65,6 +65,6 @@ class TagDeleteModalView: UIView {
         modalBackgroundView.addSubview(deleteButton)
         modalBackgroundView.addSubview(labelView)
         labelView.addSubview(tagTitleNameLabel)
-        labelView.addSubview(completeQuestionsLabel)
+        labelView.addSubview(deleteQuestionsLabel)
     }
 }

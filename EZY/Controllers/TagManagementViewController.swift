@@ -459,6 +459,8 @@ class TagManagementViewController: UIViewController {
         let nextViewController = TagSettingViewController()
         
         nextViewController.tagNameTextField.text = "\(tagNameText[selectedTagIndex])"
+        nextViewController.tagDeleteModalView.tagTitleNameLabel.text = "\(tagNameText[selectedTagIndex])"
+        nextViewController.tagNameTextCount = tagNameText[selectedTagIndex].map{ $0 }.count
         
         self.navigationController?.pushViewController(nextViewController, animated: true)
     }
