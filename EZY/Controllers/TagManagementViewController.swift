@@ -611,7 +611,6 @@ extension TagManagementViewController: CustomCollectionViewCellDelegate{
 
 extension TagManagementViewController: TagTableViewCellDelegate{
     func didTabAddButton(with string: String) {
-        print("index : \(string)")
         selectedTagIndex = Int(string)!
         print("selectedTagIndex : \(selectedTagIndex)")
     }
