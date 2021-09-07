@@ -48,7 +48,7 @@ class NewPasswordPutViewController: UIViewController{
     lazy var continueButton = CustomGradientContinueBtnView().then {
         $0.setTitle("비밀번호 바꾸기", for: .normal)
         $0.titleLabel?.dynamicFont(fontSize: 14, currentFontName: "AppleSDGothicNeo-Bold")
-        $0.addTarget(self, action: #selector(onTapContinueNewPassword), for: .touchUpInside)
+        $0.addTarget(self, action: #selector(onTapContinueNewPasswordPut), for: .touchUpInside)
     }
     
     //MARK: - Lifecycle
@@ -65,7 +65,7 @@ class NewPasswordPutViewController: UIViewController{
     }
     
     @objc
-    func onTapContinueNewPassword(){
+    func onTapContinueNewPasswordPut(){
         print("DEBUG : Click bottom password change button Button")
     }
 
@@ -92,9 +92,6 @@ class NewPasswordPutViewController: UIViewController{
     }
     
     func location(){
-        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(_:)), name:UIResponder.keyboardWillShowNotification, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide(_:)), name: UIResponder.keyboardWillHideNotification, object: nil)
-        
         topBarView.snp.makeConstraints { make in
             make.left.right.equalToSuperview()
             make.top.equalToSuperview()
@@ -124,7 +121,7 @@ class NewPasswordPutViewController: UIViewController{
         }
         
         continueButton.snp.makeConstraints { make in
-            make.bottom.equalToSuperview().offset(self.view.frame.height/32.48 * -1)
+            make.top.equalTo(passwordContainerView).offset(self.view.frame.height/4.34)
             make.centerX.equalToSuperview()
             make.width.equalTo(self.view.frame.width/1.13)
             make.height.equalTo(self.view.frame.height/16.24)
@@ -136,25 +133,6 @@ class NewPasswordPutViewController: UIViewController{
         topBarView.addSubview(topBarView.EZY_Logo)
         
         topBarView.topBarViewLayoutSetting(screenHeight: self.view.frame.height, screenWidth: self.view.frame.width)
-    }
-    
-    @objc
-    func keyboardWillShow(_ sender: Notification) {
-        var keyboardHeight: CGFloat = CGFloat(0)
-        if let keyboardFrame: NSValue = sender.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue {
-            let keyboardRectangle = keyboardFrame.cgRectValue
-            keyboardHeight = keyboardRectangle.height
-        }
-        continueButton.frame.origin.y -= keyboardHeight
-    }
-
-    @objc
-    func keyboardWillHide(_ sender: Notification) {
-        continueButton.frame.origin.y = self.view.frame.height - continueButton.frame.height - self.view.frame.height/32.48
-    }
-    
-    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        passwordField.resignFirstResponder()
     }
 }
 

@@ -19,8 +19,9 @@ class CustomGradientContinueBtnView : UIButton {
     override init(frame:CGRect) {
         super.init(frame: frame)
         setTitle("계속하기", for: .normal)
-        setBackgroundImage(UIImage(named: "EZY_ContinueButtonBackImg"), for: .normal)
+        setBackgroundImage(UIImage(named: "EZY_ContinueBtn_Background"), for: .normal)
         setTitleColor(UIColor.EZY_FFFFFF, for: .normal)
+        alpha = 0.5
     }
     
     required init?(coder: NSCoder) {

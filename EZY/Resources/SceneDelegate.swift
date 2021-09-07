@@ -13,27 +13,23 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
 
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
-        guard let windowScene = (scene as? UIWindowScene) else { return }        
+        guard let windowScene = (scene as? UIWindowScene) else { return }
         window = UIWindow(windowScene: windowScene)
-<<<<<<< HEAD
-<<<<<<< HEAD:EZY/SceneDelegate.swift
-        let mainViewController = LoginViewController()
-        let navigationController = UINavigationController(rootViewController: ErrandDetailsViewController())
-=======
 
         let mainViewController = ShowPlanViewController()
-=======
->>>>>>> 9bbc5407cdf17955541ca51e4b109690faf78959
 
         let navigationController = UINavigationController(rootViewController: mainViewController)
-<<<<<<< HEAD
 
->>>>>>> 1c1d2435560be1aa01b7127b4b07761cd6fd8049:EZY/Resources/SceneDelegate.swift
-=======
->>>>>>> 9bbc5407cdf17955541ca51e4b109690faf78959
         navigationController.navigationBar.isHidden = true
         window?.rootViewController = navigationController
         window?.makeKeyAndVisible()
+        
+
+        for fontFaily in UIFont.familyNames{
+            for fontName in UIFont.fontNames(forFamilyName: fontFaily){
+                print(fontName)
+            }
+        }
     }
 
     func sceneDidDisconnect(_ scene: UIScene) {
