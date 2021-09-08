@@ -108,7 +108,6 @@
 		EE93B4DD26878A5D0055D7A6 /* PersonalCalendarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE93B4DC26878A5D0055D7A6 /* PersonalCalendarViewController.swift */; };
 		EE93B4DF268797230055D7A6 /* CustomManagePushNotificationCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE93B4DE268797230055D7A6 /* CustomManagePushNotificationCell.swift */; };
 		EE93B4E42687BD8A0055D7A6 /* ManageData.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE93B4E32687BD8A0055D7A6 /* ManageData.swift */; };
-		EE93B4E62687E1C30055D7A6 /* TeamCalendarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE93B4E52687E1C30055D7A6 /* TeamCalendarViewController.swift */; };
 		EE93B4E82687FB660055D7A6 /* ErrandCalendarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE93B4E72687FB660055D7A6 /* ErrandCalendarViewController.swift */; };
 		EE9F0D2226E8A2AC0015E81B /* ErrandDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE9F0D1C26E8A2AC0015E81B /* ErrandDetailsViewController.swift */; };
 		EE9F0D2326E8A2AC0015E81B /* MoreAlarmModelViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE9F0D1D26E8A2AC0015E81B /* MoreAlarmModelViewController.swift */; };
@@ -249,7 +248,6 @@
 		EE93B4DC26878A5D0055D7A6 /* PersonalCalendarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonalCalendarViewController.swift; sourceTree = "<group>"; };
 		EE93B4DE268797230055D7A6 /* CustomManagePushNotificationCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomManagePushNotificationCell.swift; sourceTree = "<group>"; };
 		EE93B4E32687BD8A0055D7A6 /* ManageData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManageData.swift; sourceTree = "<group>"; };
-		EE93B4E52687E1C30055D7A6 /* TeamCalendarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeamCalendarViewController.swift; sourceTree = "<group>"; };
 		EE93B4E72687FB660055D7A6 /* ErrandCalendarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrandCalendarViewController.swift; sourceTree = "<group>"; };
 		EE9F0D1C26E8A2AC0015E81B /* ErrandDetailsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ErrandDetailsViewController.swift; sourceTree = "<group>"; };
 		EE9F0D1D26E8A2AC0015E81B /* MoreAlarmModelViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MoreAlarmModelViewController.swift; sourceTree = "<group>"; };
@@ -479,7 +477,6 @@
 				6AB27CB1269DD1B900B95C0F /* InquiryChattingViewController.swift */,
 				EE93B4D826876C6F0055D7A6 /* PushNotificationManagementViewController.swift */,
 				EE93B4DC26878A5D0055D7A6 /* PersonalCalendarViewController.swift */,
-				EE93B4E52687E1C30055D7A6 /* TeamCalendarViewController.swift */,
 				EE93B4E72687FB660055D7A6 /* ErrandCalendarViewController.swift */,
 			);
 			path = Controllers;
@@ -816,7 +813,6 @@
 				6AE5BAFC26953E0F00A9731B /* EndTimeTableViewCell.swift in Sources */,
 				6AA769EF26636AE700B7E1F5 /* EZY.xcdatamodeld in Sources */,
 				EE9F0D2726E8A2AC0015E81B /* MoreCalendarModalsViewController.swift in Sources */,
-				EE93B4E62687E1C30055D7A6 /* TeamCalendarViewController.swift in Sources */,
 				EE93B4DD26878A5D0055D7A6 /* PersonalCalendarViewController.swift in Sources */,
 				EE93B4D926876C6F0055D7A6 /* PushNotificationManagementViewController.swift in Sources */,
 				EE93B4E42687BD8A0055D7A6 /* ManageData.swift in Sources */,
