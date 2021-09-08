@@ -5,8 +5,7 @@
 //  Created by 노연주 on 2021/06/10.
 //
 
-<<<<<<< HEAD
-=======
+
 import UIKit
 import Then
 import SnapKit
@@ -239,4 +238,3 @@ struct LoginViewControllerRepresentable_PreviewProvider: PreviewProvider {
 
 
 
->>>>>>> a415bb8b8e9f1d6d7ac71e175b81a3d2baa94033
