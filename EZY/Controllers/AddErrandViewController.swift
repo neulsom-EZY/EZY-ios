@@ -26,17 +26,6 @@ class AddErrandViewController : UIViewController{
     }
     
  
-    
-//    private lazy var  RequestList : UIView = {
-//        let title = "어떤 심부름을 부탁할까요?"
-//        let view = Utilities().inputContainerView(withMessage: title, textField: RequestTextfield, color: .EZY_F4F6FF, viewSize: Double(view.frame.height))
-//        return view
-//    }()
-//    private let RequestTextfield : UITextField = {
-//
-//        let tf = Utilities().textField(textColor: .EZY_A7A7A7, textSize: 12, font: "AppleSDGothicNeo-Medium")
-//        return tf
-//    }()
     private var RequestList : ErrandInputContainterTextField = {
         let tf = ErrandInputContainterTextField(title: "어떤 심부름을 부탁할까요?")
         return tf
@@ -109,9 +98,9 @@ class AddErrandViewController : UIViewController{
     
     @objc func todobackbtn(){
         //전페이지로 되돌아가는 버튼
-        let vc = LoginViewController()
-        vc.modalPresentationStyle = .fullScreen
-        present(vc, animated: false, completion: nil)
+//        let vc = LoginViewController()
+//        vc.modalPresentationStyle = .fullScreen
+//        present(vc, animated: false, completion: nil)
     }
     
     @objc func calendarAlert(){

@@ -96,9 +96,9 @@ class ErrandDetailsViewController: UIViewController {
     
     @objc func todobackbtn(){
         //전페이지로 되돌아가는 버튼
-        let vc = LoginViewController()
-        vc.modalPresentationStyle = .fullScreen
-        present(vc, animated: false, completion: nil)
+//        let vc = LoginViewController()
+//        vc.modalPresentationStyle = .fullScreen
+//        present(vc, animated: false, completion: nil)
     }
     
     @objc func calendarAlert(){
