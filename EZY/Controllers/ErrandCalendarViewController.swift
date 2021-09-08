@@ -12,8 +12,8 @@ import Then
 class ErrandCalendarViewController : UIViewController{
     //MARK: - Properties
     var manageData : [ManageData] = []
-    let titleNotification = ["심부름 완료 알림","심부름 수락 알림","심부름 거절 알림","심부름 포기 알림","심부름 받기 알림","심부름 취소 알림","종료 심부름 미리 알림"]
-    let explanation = ["상대방이 심부름을 완료했을 시 알림을 보내드립니다","상대방이 심부름 일정을 수락했을 시 알림을 보내드립니다","보낸 심부름이 거절당했을 시 알림을 보내드립니다","상대방이 심부름을 포기했을 시 알림을 보내드립니다","심부름이 왔을 때 알림을 보내드립니다","부탁받은 심부름이 취소되었을 때 알림을 보내드립니다","심부름이 종료되기 30분 전 알림을 보내드립니다"]
+    let titleNotification = ["심부름 완료 알림","심부름 수락 알림","심부름 거절 알림","심부름 받기 알림"]
+    let explanation = ["상대방이 심부름을 완료했을 시 알림을 보내드립니다","상대방이 심부름 일정을 수락했을 시 알림을 보내드립니다","보낸 심부름이 거절당했을 시 알림을 보내드립니다","심부름이 왔을 때 알림을 보내드립니다"]
     
     private let backbutton = UIButton().then{
         $0.tintColor = .EZY_6B40FF
@@ -72,7 +72,7 @@ class ErrandCalendarViewController : UIViewController{
     }
     
     private func makeData() {
-        for i in 0...6 {
+        for i in 0...3 {
             manageData.append(ManageData.init(title: titleNotification[i], explanation: explanation[i]))
         }
     }

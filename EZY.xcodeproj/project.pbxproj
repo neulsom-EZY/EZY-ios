@@ -41,6 +41,7 @@
 		6A4EDA002668653200B809EC /* ScheduleTimeTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A4ED9FF2668653200B809EC /* ScheduleTimeTableViewCell.swift */; };
 		6A4EDA2C266A045B00B809EC /* NotificationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A4EDA2B266A045B00B809EC /* NotificationViewController.swift */; };
 		6A4EDA2E266A332100B809EC /* NotificationTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A4EDA2D266A332100B809EC /* NotificationTableViewCell.swift */; };
+		6A4EDA30266A336000B809EC /* NotificationTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A4EDA2F266A336000B809EC /* NotificationTableView.swift */; };
 		6A4EDA32266BD11600B809EC /* SettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A4EDA31266BD11600B809EC /* SettingViewController.swift */; };
 		6A4EDA35266BD27800B809EC /* TopView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A4EDA34266BD27800B809EC /* TopView.swift */; };
 		6A4EDA37266DA52A00B809EC /* SettingTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A4EDA36266DA52A00B809EC /* SettingTableViewCell.swift */; };
@@ -107,6 +108,7 @@
 		EE93B4DD26878A5D0055D7A6 /* PersonalCalendarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE93B4DC26878A5D0055D7A6 /* PersonalCalendarViewController.swift */; };
 		EE93B4DF268797230055D7A6 /* CustomManagePushNotificationCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE93B4DE268797230055D7A6 /* CustomManagePushNotificationCell.swift */; };
 		EE93B4E42687BD8A0055D7A6 /* ManageData.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE93B4E32687BD8A0055D7A6 /* ManageData.swift */; };
+		EE93B4E62687E1C30055D7A6 /* TeamCalendarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE93B4E52687E1C30055D7A6 /* TeamCalendarViewController.swift */; };
 		EE93B4E82687FB660055D7A6 /* ErrandCalendarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE93B4E72687FB660055D7A6 /* ErrandCalendarViewController.swift */; };
 		EEDCAF98268D85F1001E2B4F /* SwitchBtn.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEDCAF97268D85F1001E2B4F /* SwitchBtn.swift */; };
 /* End PBXBuildFile section */
@@ -149,6 +151,7 @@
 		6A4ED9FF2668653200B809EC /* ScheduleTimeTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleTimeTableViewCell.swift; sourceTree = "<group>"; };
 		6A4EDA2B266A045B00B809EC /* NotificationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationViewController.swift; sourceTree = "<group>"; };
 		6A4EDA2D266A332100B809EC /* NotificationTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationTableViewCell.swift; sourceTree = "<group>"; };
+		6A4EDA2F266A336000B809EC /* NotificationTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationTableView.swift; sourceTree = "<group>"; };
 		6A4EDA31266BD11600B809EC /* SettingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingViewController.swift; sourceTree = "<group>"; };
 		6A4EDA34266BD27800B809EC /* TopView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopView.swift; sourceTree = "<group>"; };
 		6A4EDA36266DA52A00B809EC /* SettingTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingTableViewCell.swift; sourceTree = "<group>"; };
@@ -218,6 +221,7 @@
 		EE93B4DC26878A5D0055D7A6 /* PersonalCalendarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonalCalendarViewController.swift; sourceTree = "<group>"; };
 		EE93B4DE268797230055D7A6 /* CustomManagePushNotificationCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomManagePushNotificationCell.swift; sourceTree = "<group>"; };
 		EE93B4E32687BD8A0055D7A6 /* ManageData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManageData.swift; sourceTree = "<group>"; };
+		EE93B4E52687E1C30055D7A6 /* TeamCalendarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeamCalendarViewController.swift; sourceTree = "<group>"; };
 		EE93B4E72687FB660055D7A6 /* ErrandCalendarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrandCalendarViewController.swift; sourceTree = "<group>"; };
 		EEDCAF97268D85F1001E2B4F /* SwitchBtn.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwitchBtn.swift; sourceTree = "<group>"; };
 		EEE1E95626AAB71A0082B696 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -345,6 +349,7 @@
 				6AE5BB0A269670CB00A9731B /* CustomGradientContinueBtnView.swift */,
 				6AE5BB09269670CB00A9731B /* CustomGradientLoginBtnView.swift */,
 				6AE5BB0B269670CB00A9731B /* CustomGradientTermsBtnView.swift */,
+				6A4EDA2F266A336000B809EC /* NotificationTableView.swift */,
 				6A138F80266F862200DBCE49 /* GroupAddCollectionViewCell.swift */,
 				6A138F82266F864300DBCE49 /* PinterestLayout.swift */,
 				6A097CFC268ED628001E011D /* CalendarView.swift */,
@@ -392,12 +397,6 @@
 				6AB27CAB269D758100B95C0F /* ChangeIdAfterLoginViewController.swift */,
 				6A3E2E7526B10D760078D749 /* ChangePasswardPhoneNumAfterLoginViewController.swift */,
 				6A3E2E7726B111540078D749 /* ChangePasswardAfterLoginViewController.swift */,
-				6AB27CAF269D8C1600B95C0F /* WithdrawalViewController.swift */,
-				6AB27CB1269DD1B900B95C0F /* InquiryChattingViewController.swift */,
-				EE93B4D826876C6F0055D7A6 /* PushNotificationManagementViewController.swift */,
-				EE93B4DC26878A5D0055D7A6 /* PersonalCalendarViewController.swift */,
-				EE93B4E72687FB660055D7A6 /* ErrandCalendarViewController.swift */,
-				6AB27CAB269D758100B95C0F /* IdChangeViewController.swift */,
 				6AB27CAF269D8C1600B95C0F /* WithdrawalViewController.swift */,
 				6AB27CB1269DD1B900B95C0F /* InquiryChattingViewController.swift */,
 				EE93B4D826876C6F0055D7A6 /* PushNotificationManagementViewController.swift */,
@@ -566,14 +565,6 @@
 				6A3E2E9B26B6A84F0078D749 /* Poppins-ExtraBold.ttf in Resources */,
 				6A3E2E9C26B6A84F0078D749 /* Poppins-Italic.ttf in Resources */,
 				6A3E2E9D26B6A84F0078D749 /* Poppins-MediumItalic.ttf in Resources */,
-				6A6A66E026D608D40096A14B /* GoogleService-Info.plist in Resources */,
-				6A3E2E9E26B6A84F0078D749 /* Poppins-ExtraLightItalic.ttf in Resources */,
-				6A3E2E9F26B6A84F0078D749 /* Poppins-SemiBoldItalic.ttf in Resources */,
-				6A3E2EA026B6A84F0078D749 /* Poppins-ExtraBoldItalic.ttf in Resources */,
-				6A3E2EA126B6A84F0078D749 /* Poppins-Thin.ttf in Resources */,
-				6A3E2EA226B6A84F0078D749 /* Poppins-Bold.ttf in Resources */,
-				6A3E2EA326B6A84F0078D749 /* Poppins-BoldItalic.ttf in Resources */,
-				6A44474D26677647004C4BC3 /* Assets.xcassets in Resources */,
 				6A6A66E026D608D40096A14B /* GoogleService-Info.plist in Resources */,
 				6A3E2E9E26B6A84F0078D749 /* Poppins-ExtraLightItalic.ttf in Resources */,
 				6A3E2E9F26B6A84F0078D749 /* Poppins-SemiBoldItalic.ttf in Resources */,
