@@ -25,7 +25,6 @@ class AddErrandViewController : UIViewController{
         $0.dynamicFont(fontSize: 22, currentFontName: "AppleSDGothicNeo-SemiBold")
     }
     
- 
     private var RequestList : ErrandInputContainterTextField = {
         let tf = ErrandInputContainterTextField(title: "어떤 심부름을 부탁할까요?")
         return tf
@@ -98,9 +97,9 @@ class AddErrandViewController : UIViewController{
     
     @objc func todobackbtn(){
         //전페이지로 되돌아가는 버튼
-//        let vc = LoginViewController()
-//        vc.modalPresentationStyle = .fullScreen
-//        present(vc, animated: false, completion: nil)
+        let vc = LoginViewController()
+        vc.modalPresentationStyle = .fullScreen
+        present(vc, animated: false, completion: nil)
     }
     
     @objc func calendarAlert(){

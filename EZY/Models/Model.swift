@@ -9,14 +9,14 @@ import UIKit
 
 enum CellModel {
     case collectionView(models: [CollectionTableCellModel], rows: Int)
- 
+
 }
 struct CollectionTableCellModel{
     let title : String
     let color : UIColor
 }
 
-//MARK: - MoreCalendarModal Button 
+//MARK: - MoreCalendarModal Button
 
 struct CustomButtonViewModel{
     let title : String?
