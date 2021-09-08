@@ -29,7 +29,12 @@ class PushNotificationManagementViewController : UIViewController{
         button.addTarget(self, action: #selector(personalCalendarMove), for: .touchUpInside)
         return button
     }()
-
+    private let teamCalendar : AlarmManagementButton = {
+        let viewModel = Managementbtn(icon: UIImage(named: "EZY_user-3")?.withRenderingMode(.alwaysTemplate), iconTintColor : .EZY_CFCBFF, title: "팀 일정 알림 관리", subTitle: "현재 버전을 표시합니다.")
+        let button = AlarmManagementButton(with: viewModel)
+        button.addTarget(self, action: #selector(teamCalendarMove), for: .touchUpInside)
+        return button
+    }()
     private let errandCalendar : AlarmManagementButton = {
         let viewModel = Managementbtn(icon: UIImage(named: "EZY_work")?.withRenderingMode(.alwaysTemplate), iconTintColor : .EZY_AFADFF, title: "심부름 알림 관리", subTitle: "팀 일정의 그룹을 관리합니다.")
         let button = AlarmManagementButton(with: viewModel)
@@ -45,7 +50,7 @@ class PushNotificationManagementViewController : UIViewController{
     
     
     //MARK: - Selectors
-    @objc func backbtn(){   
+    @objc func backbtn(){
         navigationController?.popViewController(animated: true)
     }
     
@@ -54,7 +59,10 @@ class PushNotificationManagementViewController : UIViewController{
         navigationController?.pushViewController(controller, animated: true)
  
     }
-
+    @objc func teamCalendarMove(){
+        let controller = TeamCalendarViewController()
+        navigationController?.pushViewController(controller, animated: true)
+    }
     @objc func errandCalendarMove(){
         let controller = ErrandCalendarViewController()
         navigationController?.pushViewController(controller, animated: true)
@@ -70,6 +78,7 @@ class PushNotificationManagementViewController : UIViewController{
         view.addSubview(backbutton)
         view.addSubview(TitleLabel)
         view.addSubview(personalCalendar)
+        view.addSubview(teamCalendar)
         view.addSubview(errandCalendar)
     }
     func Location(){
@@ -88,9 +97,14 @@ class PushNotificationManagementViewController : UIViewController{
             make.left.equalToSuperview().offset(view.frame.height/28)
             make.right.equalToSuperview().offset(view.frame.height/29 * -1)
         }
-
-        errandCalendar.snp.makeConstraints { (make) in
+        teamCalendar.snp.makeConstraints { (make) in
             make.top.equalTo(personalCalendar.snp.bottom).offset(view.frame.height/47.8)
+            make.height.equalTo(view.frame.height/12.9)
+            make.left.equalToSuperview().offset(view.frame.height/28)
+            make.right.equalToSuperview().offset(view.frame.height/29 * -1)
+        }
+        errandCalendar.snp.makeConstraints { (make) in
+            make.top.equalTo(teamCalendar.snp.bottom).offset(view.frame.height/47.8)
             make.height.equalTo(view.frame.height/12.9)
             make.left.equalToSuperview().offset(view.frame.height/28)
             make.right.equalToSuperview().offset(view.frame.height/29 * -1)
