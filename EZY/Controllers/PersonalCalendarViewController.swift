@@ -12,10 +12,11 @@ import Alamofire
 
 class PersonalCalendarViewController : UIViewController{
     
+    
     //MARK: - Properties
     var manageData : [ManageData] = []
-    let titleNotification = ["종료 일정 미리 알림", "종료 일정 미리 알림"]
-    let explanation = ["일정이 종료되기 30분 전 알림을 보내드립니다","일정이 종료되기 30분 전 알림을 보내드립니다"]
+    let titleNotification = ["종료 일정 미리 알림"]
+    let explanation = ["일정이 종료되기 30분 전 알림을 보내드립니다"]
     
     
     private let backbutton = UIButton().then{
@@ -75,11 +76,9 @@ class PersonalCalendarViewController : UIViewController{
     }
     
     private func makeData() {
-        for i in 0...1 {
-            manageData.append(ManageData.init(title: titleNotification[i], explanation: explanation[i]))
+            manageData.append(ManageData.init(title: titleNotification[0], explanation: explanation[0]))
             
         }
-    }
 
     private func configure() {
         tableView.allowsSelection = false
