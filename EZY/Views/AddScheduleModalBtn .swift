@@ -11,7 +11,7 @@ class AddScheduleModalBtn : UIButton{
     
     private let label = UILabel().then{
         $0.dynamicFont(fontSize: 10, currentFontName: "AppleSDGothicNeo-SemiBold")
-        $0.textColor = .EZY_AEA9F2
+        $0.textColor = .rgb(red: 174, green: 169, blue: 242)
     }
     private let view = UIView()
     private let image = UIImageView().then{

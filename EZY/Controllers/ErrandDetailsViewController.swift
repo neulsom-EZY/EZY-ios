@@ -26,43 +26,43 @@ class ErrandDetailsViewController: UIViewController {
     private let Errandlabel = UILabel().then{
         $0.text = "심부름"
         $0.dynamicFont(fontSize: 10, currentFontName: "AppleSDGothicNeo-Thin")
-        $0.textColor = .EZY_6C6C6C
+        $0.textColor = .rgb(red: 108, green: 108, blue: 108)
     }
     private let RequestList : inputContainerErrandTextView = {
-        let viewModel = ErrandinputContainerTv(viewbackColor: .EZY_F4F6FF, titleText: "어떤 심부름을 부탁 받았나요?", titleColor: .EZY_8099FF, explanationText: "송정카페에서 초코마카롱 사오기송정카페에서 초코마카롱 사오기송정카페에서 초코마카롱 사오기송정카페에서 초코마카롱 송정카페에서 초코마카롱 사오기롱 사오기송정카페에서 초코", writeEditable: false)
+        let viewModel = ErrandinputContainerTv(viewbackColor: .rgb(red: 244, green: 246, blue: 255), titleText: "어떤 심부름을 부탁 받았나요?", titleColor: .rgb(red: 128, green: 153, blue: 255), explanationText: "송정카페에서 초코마카롱 사오기송정카페에서 초코마카롱 사오기송정카페에서 초코마카롱 사오기송정카페에서 초코마카롱 송정카페에서 초코마카롱 사오기롱 사오기송정카페에서 초코", writeEditable: false)
         let view = inputContainerErrandTextView(with: viewModel)
         return view
     }()
 
     private let calendarBtn : AlertButton = {
-        let viewModel = AlertBtn(icon: UIImage(named: "EZY_calendar")?.withRenderingMode(.alwaysTemplate), iconTintColor: .EZY_FFB5B5, message: "2021.6.6 일요일")
+        let viewModel = AlertBtn(icon: UIImage(named: "EZY_calendar")?.withRenderingMode(.alwaysTemplate), iconTintColor: .rgb(red: 255, green: 181, blue: 181), message: "2021.6.6 일요일")
         let button = AlertButton(with: viewModel)
         
         button.addTarget(self, action: #selector(calendarAlert), for: .touchUpInside)
         return button
     }()
     private let clockBtn : AlertButton = {
-        let viewModel = AlertBtn(icon: UIImage(named: "EZY_clock")?.withRenderingMode(.alwaysTemplate), iconTintColor: .EZY_FFCBB5, message: "11:00AM - 1:00PM")
+        let viewModel = AlertBtn(icon: UIImage(named: "EZY_clock")?.withRenderingMode(.alwaysTemplate), iconTintColor: .rgb(red: 255, green: 203, blue: 181), message: "11:00AM - 1:00PM")
         let button = AlertButton(with: viewModel)
         
         button.addTarget(self, action: #selector(clockAlert), for: .touchUpInside)
         return button
     }()
     private let locationBtn : AlertButton = {
-        let viewModel = AlertBtn(icon: UIImage(named: "EZY_location")?.withRenderingMode(.alwaysTemplate), iconTintColor: .EZY_C7E0D4, message: "광주소프트웨어마이스터고등학교")
+        let viewModel = AlertBtn(icon: UIImage(named: "EZY_location")?.withRenderingMode(.alwaysTemplate), iconTintColor: .rgb(red: 199, green: 224, blue: 212), message: "광주소프트웨어마이스터고등학교")
         let button = AlertButton(with: viewModel)
         
         button.addTarget(self, action: #selector(locationAlert), for: .touchUpInside)
         return button
     }()
     private let userBtn: OneAlertButton = {
-        let viewModel = OneAlertBtn(icon: UIImage(named: "EZY_user-3")?.withRenderingMode(.alwaysTemplate), iconTintColor: .EZY_ADCAE5)
+        let viewModel = OneAlertBtn(icon: UIImage(named: "EZY_user-3")?.withRenderingMode(.alwaysTemplate), iconTintColor: .rgb(red: 173, green: 202, blue: 239))
         let button = OneAlertButton(with: viewModel)
         return button
     }()
     
     private let userManagement : SendUser = {
-        let viewModel = SendUserView(sender: data[0], recipient: data[1], senderColor: .EZY_9BAFFF, recipientColor: .EZY_FEBBBB, senderStrokeColor: .EZY_BAC8FF, recipientStrokeColor: .EZY_FFCCCC)
+        let viewModel = SendUserView(sender: data[0], recipient: data[1], senderColor: .rgb(red: 155, green: 175, blue: 255), recipientColor: .rgb(red: 254, green: 187, blue: 187), senderStrokeColor: .rgb(red: 186, green: 200, blue: 255), recipientStrokeColor: .rgb(red: 255, green: 204, blue: 204))
         let view = SendUser(with: viewModel)
         return view
     }()
@@ -70,7 +70,7 @@ class ErrandDetailsViewController: UIViewController {
 
     
     private lazy var explanationContainerView : inputContainerErrandTextView = {
-        let viewModel = ErrandinputContainerTv(viewbackColor: .EZY_F6F3FF, titleText: "설명", titleColor: .EZY_968DFF, explanationText: "송정카페에서 초코마카롱 사오기송정카페에서 초코마카롱 사오기송정카페에서 초코마카롱 사오기송정카페에서 초코마카롱 송정카페에서 초코마카롱 사오기롱 사오기송정카페에서 초코 송정카페에서 초코마카롱 사오기송정카페에서 초코마카롱 사오기송정카페에서 초코마카롱 사오기송정카페에서 초코마카롱 송정카페에서 초코마카롱 사오기롱 사오기송정카페에서 초코", writeEditable: false)
+        let viewModel = ErrandinputContainerTv(viewbackColor: .rgb(red: 246, green: 243, blue: 255), titleText: "설명", titleColor: .rgb(red: 150, green: 141, blue: 255), explanationText: "송정카페에서 초코마카롱 사오기송정카페에서 초코마카롱 사오기송정카페에서 초코마카롱 사오기송정카페에서 초코마카롱 송정카페에서 초코마카롱 사오기롱 사오기송정카페에서 초코 송정카페에서 초코마카롱 사오기송정카페에서 초코마카롱 사오기송정카페에서 초코마카롱 사오기송정카페에서 초코마카롱 송정카페에서 초코마카롱 사오기롱 사오기송정카페에서 초코", writeEditable: false)
         let view = inputContainerErrandTextView(with: viewModel)
         return view
     }()

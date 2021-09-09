@@ -11,7 +11,7 @@ import SnapKit
 
 class OneAlertButton : UIButton {
     
-    static let randomColorlist : [UIColor] = [.EZY_FFCDB8,.EZY_BADEFF,.EZY_CFE3CE,.EZY_E4C9FF,.EZY_BAC8FF]
+    static let randomColorlist : [UIColor] = [.rgb(red: 255, green: 205, blue: 184),.rgb(red: 186, green: 222, blue: 255),.rgb(red: 207, green: 227, blue: 206),.rgb(red: 228, green: 201, blue: 255),.rgb(red: 186, green: 200, blue: 255)]
     private let view = UIView()
     private let icon = UIImageView()
     private var viewModel : OneAlertBtn?

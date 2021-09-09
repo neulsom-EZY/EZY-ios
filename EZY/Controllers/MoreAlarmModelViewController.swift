@@ -29,7 +29,7 @@ class MoreAlarmModelViewController : UIViewController{
 
     
     private let makeButton = UIButton().then{
-        $0.backgroundColor = .EZY_8176FF
+        $0.backgroundColor = .rgb(red: 129, green: 118, blue: 255)
         $0.addTarget(self, action: #selector(MakeTodo), for: .touchUpInside)
     }
     private let makeTitle = UILabel().then{

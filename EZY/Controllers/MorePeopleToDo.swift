@@ -11,7 +11,7 @@ import Then
     
 class MorePeopleToDo: UIViewController{
     static let recommendData = ["JiHoooooon","siwonnnny","NoName","mingki","johnjihwan","noplayy","gyeongggggjuunnn"]
-    let randomColorData : [UIColor] = [.EZY_BAC8FF,.EZY_FFCCCC,.EZY_BADEFF,.EZY_CFE3CE,.EZY_FFD18D]
+    let randomColorData : [UIColor] = [.rgb(red: 186, green: 200, blue: 255),.rgb(red: 255, green: 204, blue: 204),.rgb(red: 186, green: 222, blue: 255),.rgb(red: 207, green: 227, blue: 206),.rgb(red: 255, green: 209, blue: 141)]
     let identifier = "MorePeopleToDo"
     var data = [SearchData]()
     var filterData = [SearchData]()
@@ -41,7 +41,7 @@ class MorePeopleToDo: UIViewController{
     private let GroupLabel = UILabel().then{
         $0.text = "닉네임"
         $0.dynamicFont(fontSize: 10, currentFontName: "AppleSDGothicNeo-Thin")
-        $0.textColor = .EZY_818181
+        $0.textColor = .rgb(red: 129, green: 129, blue: 129)
     }
     
     private lazy var nickNameTextFieldContainerView: GroupSearchTextfield = {
@@ -86,7 +86,7 @@ class MorePeopleToDo: UIViewController{
     private let userChoose : AdditionalButton = {
         let button = AdditionalButton(type: .system)
         button.title = "인원 선택"
-        button.color = .EZY_978EFF
+        button.color = .rgb(red: 151, green: 142, blue: 255)
         button.addTarget(self, action: #selector(chooseUser), for: .touchUpInside)
         return button
     }()
@@ -273,7 +273,7 @@ extension MorePeopleToDo : UICollectionViewDelegateFlowLayout,UICollectionViewDa
             errandPersonChooseCell.bglabel.textColor = .black
             errandPersonChooseCell.button.addTarget(self, action: #selector(deleteCollectionViewBehavior), for: .touchUpInside)
             errandPersonChooseCell.bglabel.dynamicFont(fontSize: 11, currentFontName: "AppleSDGothicNeo-SemiBold")
-            errandPersonChooseCell.layer.borderColor = UIColor.EZY_E0E0E0.cgColor
+            errandPersonChooseCell.layer.borderColor = UIColor.rgb(red: 224, green: 224, blue: 224).cgColor
             return errandPersonChooseCell
         }
         

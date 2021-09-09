@@ -14,22 +14,24 @@ class inputContainerErrandTextView : UIView{
     }
     private var textView = UITextView().then{
         $0.backgroundColor = .clear
-        $0.textColor = .EZY_A7A7A7
+        $0.textColor = .rgb(red: 167, green: 167, blue: 167)
         $0.dynamicFont(fontSize: 12, currentFontName: "AppleSDGothicNeo-Bold")
         let point = CGPoint(x: 0, y: 0)
     }
     private var viewModel : ErrandinputContainerTv?
 
-    override init(frame: CGRect) {
-        self.viewModel = nil
-        super.init(frame: frame)
-    }
     init(with viewModel: ErrandinputContainerTv) {
         self.viewModel = viewModel
         super.init(frame: .zero)
         addView()
         configure(with: viewModel)
     }
+    
+    override init(frame: CGRect) {
+        self.viewModel = nil
+        super.init(frame: frame)
+    }
+
     
     private func addView(){
         addSubview(view)

@@ -17,10 +17,10 @@ class GroupSearchTextfield: UITextField {
         leftViewMode = .always
         borderStyle = .none
         keyboardAppearance = .dark
-        backgroundColor = .EZY_F5F5F5
+        backgroundColor = .rgb(red: 245, green: 245, blue: 245)
         textColor = .EZY_656565
         dynamicFont(fontSize: 12, currentFontName: "AppleSDGothicNeo-Bold")
-        attributedPlaceholder = NSAttributedString(string: placeholder, attributes: [NSAttributedString.Key.foregroundColor: UIColor.EZY_CACACA])
+        attributedPlaceholder = NSAttributedString(string: placeholder, attributes: [NSAttributedString.Key.foregroundColor: UIColor.rgb(red: 202, green: 202, blue: 202)])
         tf.snp.makeConstraints { (make) in
             make.height.equalTo(frame.height)
             make.width.equalTo(frame.width)

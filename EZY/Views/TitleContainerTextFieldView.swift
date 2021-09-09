@@ -9,11 +9,11 @@ import UIKit
 
 class TitleContainerTextFieldView : UIView {
     let view = UIView().then{
-        $0.backgroundColor = .EZY_F4F6FF
+        $0.backgroundColor = .rgb(red: 244, green: 246, blue: 255)
     }
     let tfTitleLabel = UILabel().then{
         $0.dynamicFont(fontSize: 14, currentFontName: "AppleSDGothicNeo-Bold")
-        $0.textColor = .EZY_8099FF
+        $0.textColor = .rgb(red: 128, green: 153, blue: 255)
     }
     
     let tf = UITextField().then{

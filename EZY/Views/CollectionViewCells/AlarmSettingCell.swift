@@ -16,12 +16,12 @@ class AlarmSettingCell : UICollectionViewCell{
     override var isSelected: Bool{
         didSet{
             if isSelected{
-                backgroundColor = .EZY_B7B4B4
-                bglabel.textColor = .EZY_FDFDFD
+                backgroundColor = .rgb(red: 183, green: 180, blue: 180)
+                bglabel.textColor = .rgb(red: 253, green: 253, blue: 253)
             }
             else {
-                bglabel.textColor = .EZY_B7B4B4
-                backgroundColor = .EZY_FDFDFD
+                bglabel.textColor = .rgb(red: 183, green: 180, blue: 180)
+                backgroundColor = .rgb(red: 253, green: 253, blue: 253)
             }
         }
     }

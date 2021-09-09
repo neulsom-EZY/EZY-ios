@@ -11,15 +11,15 @@ class ErrandInputContainterTextField : UIView {
     let tf = UITextField()
     let tfTitle = UILabel().then{
         $0.dynamicFont(fontSize: 14, currentFontName: "AppleSDGothicNeo-Bold")
-        $0.textColor = .EZY_8099FF
+        $0.textColor = .rgb(red: 128, green: 153, blue: 255)
     }
     let spacer = UIView()
     init(title : String) {
         super.init(frame: .zero)
         addSubview(tfTitle)
         addSubview(tf)
-        backgroundColor = .EZY_F4F6FF
-        tf.textColor = .EZY_A7A7A7
+        backgroundColor = .rgb(red: 244, green: 246, blue: 255)
+        tf.textColor = .rgb(red: 167, green: 167, blue: 167)
         tfTitle.text = title
         tf.dynamicFont(fontSize: 12, currentFontName: "AppleSDGothicNeo-Medium")
     }

@@ -144,11 +144,11 @@ extension AlarmDatePickerView : UIPickerViewDataSource,UIPickerViewDelegate{
         }else if pickerView == self.timePickerView{
             label.text = "\(row + 1)"
             label.dynamicFont(fontSize: 20, currentFontName: "AppleSDGothicNeo-SemiBold")
-            label.textColor = .EZY_8176FF
+            label.textColor = .rgb(red: 129, green: 118, blue: 255)
         }else if pickerView == self.minutePickerView{
             label.text = "\(row)"
             label.dynamicFont(fontSize: 20, currentFontName: "AppleSDGothicNeo-SemiBold")
-            label.textColor = .EZY_8176FF
+            label.textColor = .rgb(red: 129, green: 118, blue: 255)
         }
         label.adjustsFontSizeToFitWidth = true
         label.adjustsFontForContentSizeCategory = true
