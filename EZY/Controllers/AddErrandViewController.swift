@@ -31,21 +31,21 @@ class AddErrandViewController : UIViewController{
     }()
     
     private let calendarBtn : AlertButton = {
-        let viewModel = AlertBtn(icon: UIImage(named: "EZY_calendar")?.withRenderingMode(.alwaysTemplate), iconTintColor: .EZY_FFB5B5, message: "2021.6.6 일요일")
+        let viewModel = AlertBtn(icon: UIImage(named: "EZY_calendar")?.withRenderingMode(.alwaysTemplate), iconTintColor: .rgb(red: 255, green: 181, blue: 181), message: "2021.6.6 일요일")
         let button = AlertButton(with: viewModel)
         
         button.addTarget(self, action: #selector(calendarAlert), for: .touchUpInside)
         return button
     }()
     private let clockBtn : AlertButton = {
-        let viewModel = AlertBtn(icon: UIImage(named: "EZY_clock")?.withRenderingMode(.alwaysTemplate), iconTintColor: .EZY_FFCBB5, message: "11:00AM - 1:00PM")
+        let viewModel = AlertBtn(icon: UIImage(named: "EZY_clock")?.withRenderingMode(.alwaysTemplate), iconTintColor: .rgb(red: 255, green: 203, blue: 181), message: "11:00AM - 1:00PM")
         let button = AlertButton(with: viewModel)
         
         button.addTarget(self, action: #selector(clockAlert), for: .touchUpInside)
         return button
     }()
     private let locationBtn : AlertButton = {
-        let viewModel = AlertBtn(icon: UIImage(named: "EZY_location")?.withRenderingMode(.alwaysTemplate), iconTintColor: .EZY_C7E0D4, message: "광주소프트웨어마이스터고등학교")
+        let viewModel = AlertBtn(icon: UIImage(named: "EZY_location")?.withRenderingMode(.alwaysTemplate), iconTintColor: .rgb(red: 199, green: 224, blue: 212), message: "광주소프트웨어마이스터고등학교")
         let button = AlertButton(with: viewModel)
         
         button.addTarget(self, action: #selector(locationAlert), for: .touchUpInside)
@@ -59,7 +59,7 @@ class AddErrandViewController : UIViewController{
     }()
     private let kindOfCollectionView = UILabel().then{
         $0.text = "어떤 분에게 부탁할까요?"
-        $0.textColor = .EZY_B6B6B6
+        $0.textColor = .rgb(red: 182, green: 182, blue: 182)
         $0.dynamicFont(fontSize: 12, currentFontName: "AppleSDGothicNeo-Bold")
     }
  
@@ -245,9 +245,9 @@ extension AddErrandViewController : UICollectionViewDelegateFlowLayout,UICollect
          guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: WhoShouldIAskCell.identifier, for: indexPath) as? WhoShouldIAskCell else {return UICollectionViewCell()}
         cell.bglabel.text = data[indexPath.row]
         cell.bglabel.dynamicFont(fontSize: 12, currentFontName:  "AppleSDGothicNeo-UltraLight")
-        cell.bglabel.textColor = .EZY_3D64FF
+        cell.bglabel.textColor = .rgb(red: 61, green: 100, blue: 255)
         cell.layer.borderWidth = 1
-        cell.layer.borderColor = UIColor.EZY_6383FF.cgColor
+        cell.layer.borderColor = UIColor.rgb(red: 99, green: 131, blue: 255).cgColor
    
         if cell.bglabel.text == data.last{
             cell.bglabel.textColor = .EZY_BAC8FF

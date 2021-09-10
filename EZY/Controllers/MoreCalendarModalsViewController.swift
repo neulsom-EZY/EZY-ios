@@ -49,7 +49,7 @@ class MoreCalendarModalsViewController : UIViewController{
         return button
     }()
     private let makeButton = UIButton().then{
-        $0.backgroundColor = .EZY_AAA3FF
+        $0.backgroundColor = .rgb(red: 170, green: 163, blue:255)
         $0.isEnabled = false
         $0.addTarget(self, action: #selector(MakeTodo), for: .touchUpInside)
     }

@@ -9,7 +9,7 @@ import UIKit
 
 class ExplanationContainerTextView : UIView{
     let view = UIView().then{
-        $0.backgroundColor = .EZY_F6F3FF
+        $0.backgroundColor = .rgb(red: 246, green: 243, blue: 255)
     }
     let tvTitleLabel = UILabel().then{
         $0.dynamicFont(fontSize: 14, currentFontName: "AppleSDGothicNeo-Bold")
@@ -17,7 +17,7 @@ class ExplanationContainerTextView : UIView{
     }
     let tv = UITextView().then{
         $0.dynamicFont(fontSize: 14, currentFontName: "AppleSDGothicNeo-Medium")
-        $0.textColor = .EZY_929292
+        $0.textColor = .rgb(red: 146, green: 146, blue: 146)
         $0.backgroundColor = .clear
     }
     

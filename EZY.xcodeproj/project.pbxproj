@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		08B81D198F46995E749BD8A0 /* Pods_EZY.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C37AD74ACD84F363045FF654 /* Pods_EZY.framework */; };
 		6A097CFD268ED628001E011D /* CalendarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A097CFC268ED628001E011D /* CalendarView.swift */; };
 		6A097CFF268ED68B001E011D /* CalendarViewLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A097CFE268ED68B001E011D /* CalendarViewLayout.swift */; };
 		6A138F81266F862200DBCE49 /* GroupAddCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A138F80266F862200DBCE49 /* GroupAddCollectionViewCell.swift */; };
@@ -102,7 +103,6 @@
 		6AFB77F9267ECD6700B59482 /* WhiteBackgroundView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AFB77F8267ECD6700B59482 /* WhiteBackgroundView.swift */; };
 		6AFB77FE267F343500B59482 /* TagAddModalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AFB77FD267F343500B59482 /* TagAddModalView.swift */; };
 		6AFB7800267F812B00B59482 /* TagColorCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AFB77FF267F812B00B59482 /* TagColorCollectionViewCell.swift */; };
-		E5052C73E73080AD40F6F655 /* Pods_EZY.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A75C11C1873FE4E191601230 /* Pods_EZY.framework */; };
 		EE93B4D926876C6F0055D7A6 /* PushNotificationManagementViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE93B4D826876C6F0055D7A6 /* PushNotificationManagementViewController.swift */; };
 		EE93B4DB26876F430055D7A6 /* AlarmManagementButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE93B4DA26876F430055D7A6 /* AlarmManagementButton.swift */; };
 		EE93B4DD26878A5D0055D7A6 /* PersonalCalendarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE93B4DC26878A5D0055D7A6 /* PersonalCalendarViewController.swift */; };
@@ -141,7 +141,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		14AF3F335899880714FDA1B3 /* Pods-EZY.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EZY.release.xcconfig"; path = "Target Support Files/Pods-EZY/Pods-EZY.release.xcconfig"; sourceTree = "<group>"; };
+		2FC16614E9BCACF88D1AB480 /* Pods-EZY.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EZY.release.xcconfig"; path = "Target Support Files/Pods-EZY/Pods-EZY.release.xcconfig"; sourceTree = "<group>"; };
 		6A097CFC268ED628001E011D /* CalendarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarView.swift; sourceTree = "<group>"; };
 		6A097CFE268ED68B001E011D /* CalendarViewLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarViewLayout.swift; sourceTree = "<group>"; };
 		6A097D01268ED7B1001E011D /* CalendarView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CalendarView.h; sourceTree = "<group>"; };
@@ -241,8 +241,7 @@
 		6AFB77F8267ECD6700B59482 /* WhiteBackgroundView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WhiteBackgroundView.swift; sourceTree = "<group>"; };
 		6AFB77FD267F343500B59482 /* TagAddModalView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagAddModalView.swift; sourceTree = "<group>"; };
 		6AFB77FF267F812B00B59482 /* TagColorCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagColorCollectionViewCell.swift; sourceTree = "<group>"; };
-		8B5046DC93C289B5AC6C406E /* Pods-EZY.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EZY.debug.xcconfig"; path = "Target Support Files/Pods-EZY/Pods-EZY.debug.xcconfig"; sourceTree = "<group>"; };
-		A75C11C1873FE4E191601230 /* Pods_EZY.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_EZY.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		C37AD74ACD84F363045FF654 /* Pods_EZY.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_EZY.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		EE93B4D826876C6F0055D7A6 /* PushNotificationManagementViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PushNotificationManagementViewController.swift; sourceTree = "<group>"; };
 		EE93B4DA26876F430055D7A6 /* AlarmManagementButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlarmManagementButton.swift; sourceTree = "<group>"; };
 		EE93B4DC26878A5D0055D7A6 /* PersonalCalendarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonalCalendarViewController.swift; sourceTree = "<group>"; };
@@ -280,6 +279,7 @@
 		EEDCAF97268D85F1001E2B4F /* SwitchBtn.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwitchBtn.swift; sourceTree = "<group>"; };
 		EEE1E95626AAB71A0082B696 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
 		EEE1E95826AAB72E0082B696 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
+		F4A8BD50658C41664783D861 /* Pods-EZY.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EZY.debug.xcconfig"; path = "Target Support Files/Pods-EZY/Pods-EZY.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -288,7 +288,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				6ADE8A2726B7B76E002199E7 /* LocalAuthentication.framework in Frameworks */,
-				E5052C73E73080AD40F6F655 /* Pods_EZY.framework in Frameworks */,
+				08B81D198F46995E749BD8A0 /* Pods_EZY.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -299,7 +299,7 @@
 			isa = PBXGroup;
 			children = (
 				6ADE8A2626B7B76E002199E7 /* LocalAuthentication.framework */,
-				A75C11C1873FE4E191601230 /* Pods_EZY.framework */,
+				C37AD74ACD84F363045FF654 /* Pods_EZY.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -570,8 +570,8 @@
 		D97C84BDB41C12F061081FBC /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				8B5046DC93C289B5AC6C406E /* Pods-EZY.debug.xcconfig */,
-				14AF3F335899880714FDA1B3 /* Pods-EZY.release.xcconfig */,
+				F4A8BD50658C41664783D861 /* Pods-EZY.debug.xcconfig */,
+				2FC16614E9BCACF88D1AB480 /* Pods-EZY.release.xcconfig */,
 			);
 			path = Pods;
 			sourceTree = "<group>";
@@ -583,11 +583,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 6AA769F826636AE800B7E1F5 /* Build configuration list for PBXNativeTarget "EZY" */;
 			buildPhases = (
-				403E3B89B0999B5A60799CB9 /* [CP] Check Pods Manifest.lock */,
+				2EEEBD26844D7FB51B68F058 /* [CP] Check Pods Manifest.lock */,
 				6AA769DD26636AE700B7E1F5 /* Sources */,
 				6AA769DE26636AE700B7E1F5 /* Frameworks */,
 				6AA769DF26636AE700B7E1F5 /* Resources */,
-				8F426DE6A00A79981FB7B8D3 /* [CP] Embed Pods Frameworks */,
+				053764C923AB5A12868D2F1D /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -660,7 +660,24 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		403E3B89B0999B5A60799CB9 /* [CP] Check Pods Manifest.lock */ = {
+		053764C923AB5A12868D2F1D /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-EZY/Pods-EZY-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-EZY/Pods-EZY-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-EZY/Pods-EZY-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		2EEEBD26844D7FB51B68F058 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -680,23 +697,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
-		8F426DE6A00A79981FB7B8D3 /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-EZY/Pods-EZY-frameworks-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-EZY/Pods-EZY-frameworks-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-EZY/Pods-EZY-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -949,7 +949,7 @@
 		};
 		6AA769F926636AE800B7E1F5 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 8B5046DC93C289B5AC6C406E /* Pods-EZY.debug.xcconfig */;
+			baseConfigurationReference = F4A8BD50658C41664783D861 /* Pods-EZY.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -970,7 +970,7 @@
 		};
 		6AA769FA26636AE800B7E1F5 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 14AF3F335899880714FDA1B3 /* Pods-EZY.release.xcconfig */;
+			baseConfigurationReference = 2FC16614E9BCACF88D1AB480 /* Pods-EZY.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;

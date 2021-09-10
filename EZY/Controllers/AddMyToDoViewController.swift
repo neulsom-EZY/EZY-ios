@@ -14,7 +14,7 @@ import Alamofire
 class AddMyToDoViewController:UIViewController{
     let tagData : [String] = ["전공동아리","산책","자율동아리","공부","자율동아리","전공동아리","전공동아리","산책","자율동아리","공부","자율동아리","전공동아리","산책"]
     var alarmData : [String] = ["선택안함", "+ 추가"]
-    let tagColor : [UIColor] = [.EZY_879FFF,.EZY_968DFF,.EZY_9EB1FC]
+    let tagColor : [UIColor] = [.rgb(red: 135, green: 159, blue: 255),.rgb(red: 150, green: 141, blue: 255),.rgb(red: 158, green: 177, blue: 252)]
     //MARK: - Properties
     
     //모달 background 설정
@@ -42,20 +42,20 @@ class AddMyToDoViewController:UIViewController{
     }()
     
     private let calendarBtn : AlertButton = {
-        let viewModel = AlertBtn(icon: UIImage(named: "EZY_calendar")?.withRenderingMode(.alwaysTemplate), iconTintColor: .EZY_FFB5B5, message: "2021.6.6 일요일")
+        let viewModel = AlertBtn(icon: UIImage(named: "EZY_calendar")?.withRenderingMode(.alwaysTemplate), iconTintColor: .rgb(red: 255, green: 181, blue: 181), message: "2021.6.6 일요일")
         let button = AlertButton(with: viewModel)
         button.addTarget(self, action: #selector(calendarAlert), for: .touchUpInside)
         return button
     }()
     private let clockBtn : AlertButton = {
-        let viewModel = AlertBtn(icon: UIImage(named: "EZY_clock")?.withRenderingMode(.alwaysTemplate), iconTintColor: .EZY_FFCBB5, message: "11:00AM - 1:00PM")
+        let viewModel = AlertBtn(icon: UIImage(named: "EZY_clock")?.withRenderingMode(.alwaysTemplate), iconTintColor: .rgb(red: 255, green: 203, blue: 181), message: "11:00AM - 1:00PM")
         let button = AlertButton(with: viewModel)
         button.addTarget(self, action: #selector(clockAlert), for: .touchUpInside)
         return button
     }()
     
     private let locationBtn : AlertButton = {
-        let viewModel = AlertBtn(icon: UIImage(named: "EZY_location")?.withRenderingMode(.alwaysTemplate), iconTintColor: .EZY_C7E0D4, message: "광주소프트웨어마이스터고등학교")
+        let viewModel = AlertBtn(icon: UIImage(named: "EZY_location")?.withRenderingMode(.alwaysTemplate), iconTintColor: .rgb(red: 199, green: 224, blue: 212), message: "광주소프트웨어마이스터고등학교")
         let button = AlertButton(with: viewModel)
         button.addTarget(self, action: #selector(locationAlert), for: .touchUpInside)
         return button
@@ -70,18 +70,18 @@ class AddMyToDoViewController:UIViewController{
     
     private let tagLabel = UILabel().then{
         $0.text = "태그"
-        $0.textColor = .EZY_B6B6B6
+        $0.textColor = .rgb(red: 182, green: 182, blue: 182)
         $0.dynamicFont(fontSize: 12, currentFontName: "AppleSDGothicNeo-Bold")
     }
     
     private let repeatSettings  = UILabel().then{
         $0.text = "반복 설정"
-        $0.textColor = .EZY_B6B6B6
+        $0.textColor = .rgb(red: 182, green: 182, blue: 182)
         $0.dynamicFont(fontSize: 12, currentFontName: "AppleSDGothicNeo-Bold")
     }
     private let alarmSettings = UILabel().then{
         $0.text = "알림 설정"
-        $0.textColor = .EZY_B6B6B6
+        $0.textColor = .rgb(red: 182, green: 182, blue: 182)
         $0.dynamicFont(fontSize: 12, currentFontName: "AppleSDGothicNeo-Bold")
     }
     
@@ -300,8 +300,8 @@ extension AddMyToDoViewController : UICollectionViewDelegateFlowLayout,UICollect
             tagCell.layer.cornerRadius = tagCell.frame.height/2
             if indexPath.item == 0 {
                 tagCell.bglabel.text = "선택해제"
-                tagCell.bglabel.textColor = .EZY_B7B4B4
-                tagCell.layer.borderColor = UIColor.EZY_C9C9C9.cgColor
+                tagCell.bglabel.textColor = .rgb(red: 183, green: 180, blue: 180)
+                tagCell.layer.borderColor = UIColor.rgb(red: 201, green: 201, blue: 201).cgColor
                 
             }
             if indexPath.item == 2{
@@ -313,10 +313,10 @@ extension AddMyToDoViewController : UICollectionViewDelegateFlowLayout,UICollect
         }else{
             let alarmCell = collectionView.dequeueReusableCell(withReuseIdentifier: AlarmSettingCell.identifier, for: indexPath) as! AlarmSettingCell
             alarmCell.layer.borderWidth = 1
-            alarmCell.layer.borderColor = UIColor.EZY_CFCFCF.cgColor
+            alarmCell.layer.borderColor = UIColor.rgb(red: 207, green: 207, blue: 207).cgColor
             alarmCell.layer.cornerRadius = view.frame.height/81.2
             alarmCell.bglabel.text = alarmData[indexPath.row]
-            alarmCell.bglabel.textColor = .EZY_B7B4B4
+            alarmCell.bglabel.textColor = .rgb(red: 183, green: 180, blue: 180)
             
             return alarmCell
         }
