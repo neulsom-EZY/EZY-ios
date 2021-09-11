@@ -10,8 +10,6 @@ import UIKit
 import Then
 import SnapKit
 
-// merge test
-
 class LoginViewController: UIViewController{
     //MARK: - Properties
     
@@ -41,7 +39,6 @@ class LoginViewController: UIViewController{
     
     lazy var passwordContainerView: UIView = {
         let view = Utilities().inputContainerView(textField: passwordField, text: "비밀번호", fonts: 10)
-        
         return view
     }()
     
@@ -69,12 +66,18 @@ class LoginViewController: UIViewController{
         $0.addTarget(self, action: #selector(onTapForgotPassword), for: .touchUpInside)
     }
     
+    lazy var forgotNicknameButton = UIButton().then {
+        $0.setTitle("닉네임을 잊으셨나요?", for: .normal)
+        $0.setTitleColor(UIColor.EZY_B2B2B2, for: .normal)
+        $0.titleLabel?.dynamicFont(fontSize: 10, currentFontName: "AppleSDGothicNeo-Bold")
+        $0.addTarget(self, action: #selector(onTapForgotNickname), for: .touchUpInside)
+    }
+    
     lazy var doNotHaveAccountButton = UIButton().then {
         $0.setTitle("아직 회원이 아니신가요?", for: .normal)
         $0.setTitleColor(UIColor.EZY_B2B2B2, for: .normal)
         $0.titleLabel?.dynamicFont(fontSize: 10, currentFontName: "AppleSDGothicNeo-Bold")
         $0.addTarget(self, action: #selector(onTapSignUp), for: .touchUpInside)
-
     }
     
     lazy var loginButton = CustomGradientLoginBtnView().then {
@@ -104,6 +107,12 @@ class LoginViewController: UIViewController{
         } else {
             passwordField.isSecureTextEntry = true
         }
+    }
+    
+    @objc
+    func onTapForgotNickname(){
+//        let controller = NewNicknamePhoneNumViewController()
+//        navigationController?.pushViewController(controller, animated: true)
     }
     
     @objc
@@ -141,6 +150,7 @@ class LoginViewController: UIViewController{
         view.addSubview(passwordContainerView)
         view.addSubview(showPasswordButton)
         view.addSubview(forgotPasswordButton)
+        view.addSubview(forgotNicknameButton)
         view.addSubview(doNotHaveAccountButton)
         view.addSubview(loginButton)
     }
@@ -189,6 +199,11 @@ class LoginViewController: UIViewController{
         forgotPasswordButton.snp.makeConstraints { make in
             make.bottom.equalTo(passwordContainerView).offset(self.view.frame.height/30.07)
             make.left.equalToSuperview().offset(self.view.frame.width/7.98)
+        }
+        
+        forgotNicknameButton.snp.makeConstraints { make in
+            make.bottom.equalTo(passwordContainerView).offset(self.view.frame.height/30.07)
+            make.right.equalToSuperview().offset(self.view.frame.width/7.98 * -1)
         }
        
         doNotHaveAccountButton.snp.makeConstraints { make in
