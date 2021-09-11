@@ -123,6 +123,9 @@ class SignUpPasswordViewController: UIViewController{
         
         topBarView.topBarViewLayoutSetting(screenHeight: self.view.frame.height, screenWidth: self.view.frame.width)
     }
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        passwordField.resignFirstResponder()
+    }
 }
 
 
