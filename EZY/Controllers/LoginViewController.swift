@@ -111,8 +111,8 @@ class LoginViewController: UIViewController{
     
     @objc
     func onTapForgotNickname(){
-//        let controller = NewNicknamePhoneNumViewController()
-//        navigationController?.pushViewController(controller, animated: true)
+        let controller = NewNicknamePhoneNumViewController()
+        navigationController?.pushViewController(controller, animated: true)
     }
     
     @objc
