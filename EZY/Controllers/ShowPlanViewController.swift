@@ -109,6 +109,11 @@ class ShowPlanViewController: UIViewController{
         $0.collectionViewLayout = layout
     }
     
+    let bgView = UIView().then {
+        $0.backgroundColor = .black
+        $0.alpha = 0
+    }
+    
     //MARK: Lifecycles
         
     override func viewDidAppear(_ animated: Bool) {
@@ -129,7 +134,34 @@ class ShowPlanViewController: UIViewController{
         planCompleteModalViewSetting()
 
         emptyPlanBoxViewSetting()
+        
+
     }
+    
+    @objc func EZYPlanAddButtonClicked(sender:UIButton){
+        let MoreCalendarModalsVC = MoreCalendarModalsViewController.instance()
+        
+        MoreCalendarModalsVC.delegate = self
+        addDim()
+        present(MoreCalendarModalsVC, animated: true, completion: nil)
+    }
+    
+    private func addDim() {
+           view.addSubview(bgView)
+           bgView.snp.makeConstraints { (make) in
+               make.edges.equalTo(0)
+           }
+           
+           DispatchQueue.main.async { [weak self] in
+               self?.bgView.alpha = 0.2
+           }
+       }
+       
+       private func removeDim() {
+           DispatchQueue.main.async { [weak self] in
+               self?.bgView.removeFromSuperview()
+           }
+       }
     
     
     // MARK: - layoutSetting
@@ -142,6 +174,7 @@ class ShowPlanViewController: UIViewController{
         self.view.addSubview(notificationButton)
         self.notificationButton.addSubview(badgeView)
         
+        EZYPlanAddButton.addTarget(self, action: #selector(EZYPlanAddButtonClicked(sender:)), for: .touchUpInside)
         notificationButton.addTarget(self, action: #selector(NotificationButtonClicked), for: .touchUpInside)
         
         questionTopLabel.snp.makeConstraints { make in
@@ -442,5 +475,14 @@ extension ShowPlanViewController: UITableViewDelegate{
         
         planCompleteModalView.isHidden = false
         
+    }
+}
+
+extension ShowPlanViewController: BulletinDelegate {
+    func onTapClose() {
+        self.removeDim()
+    }
+    func update(){
+        self.removeDim()
     }
 }
