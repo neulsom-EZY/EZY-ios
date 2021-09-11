@@ -79,8 +79,8 @@ class NewNicknamePhoneNumViewController: UIViewController{
     
     @objc
     func onTapContinueNewNicknamePut(){
-//        let controller = NewNicknamePutViewController()
-//        navigationController?.pushViewController(controller, animated: true)
+        let controller = NewNicknamePutViewController()
+        navigationController?.pushViewController(controller, animated: true)
     }
     
     //MARK: - Helpers
