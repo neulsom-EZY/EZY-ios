@@ -42,7 +42,7 @@ class AddMyToDoViewController:UIViewController{
     }()
     
     private let calendarBtn : AlertButton = {
-        let viewModel = AlertBtn(icon: UIImage(named: "EZY_calendar")?.withRenderingMode(.alwaysTemplate), iconTintColor: .rgb(red: 255, green: 181, blue: 181), message: "2021.6.6 일요일")
+        let viewModel = AlertBtn(icon: UIImage(named: "EZY_Calendar")?.withRenderingMode(.alwaysTemplate), iconTintColor: .rgb(red: 255, green: 181, blue: 181), message: "2021.6.6 일요일")
         let button = AlertButton(with: viewModel)
         button.addTarget(self, action: #selector(calendarAlert), for: .touchUpInside)
         return button
