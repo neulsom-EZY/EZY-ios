@@ -11,7 +11,6 @@ import Then
 
 class ShowPlanViewController: UIViewController{
 
-    
     //MARK: Properties
     let planCompleteModalView = PlanCompleteModalView()
     
@@ -178,7 +177,6 @@ class ShowPlanViewController: UIViewController{
         notificationButton.addTarget(self, action: #selector(NotificationButtonClicked), for: .touchUpInside)
         
         questionTopLabel.snp.makeConstraints { make in
-            make.centerX.equalToSuperview()
             make.left.equalToSuperview().offset(self.view.frame.width/12.9)
             make.top.equalToSuperview().offset(self.view.frame.height/12)
             make.width.equalToSuperview().dividedBy(2)
