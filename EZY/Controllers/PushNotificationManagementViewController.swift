@@ -97,4 +97,3 @@ class PushNotificationManagementViewController : UIViewController{
         }
     }
 }
-
