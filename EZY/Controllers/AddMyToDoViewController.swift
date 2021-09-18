@@ -17,6 +17,8 @@ class AddMyToDoViewController:UIViewController{
     let tagColor : [UIColor] = [.rgb(red: 135, green: 159, blue: 255),.rgb(red: 150, green: 141, blue: 255),.rgb(red: 158, green: 177, blue: 252)]
     //MARK: - Properties
     
+    let bounds = UIScreen.main.bounds
+
     //모달 background 설정
     let bgView = UIView().then {
         $0.backgroundColor = .black
@@ -60,7 +62,11 @@ class AddMyToDoViewController:UIViewController{
         button.addTarget(self, action: #selector(locationAlert), for: .touchUpInside)
         return button
     }()
-    
+    fileprivate lazy var btnStackView = UIStackView(arrangedSubviews: [calendarBtn,clockBtn,locationBtn]).then{
+        $0.axis = .vertical
+        $0.distribution = .fillEqually
+        $0.spacing = bounds.height/47.7647
+    }
 
     private let explanationContainerView : ExplanationContainerTextView = {
         let view = ExplanationContainerTextView(tvTitle: "설명")
@@ -190,9 +196,7 @@ class AddMyToDoViewController:UIViewController{
         view.addSubview(backbutton)
         view.addSubview(TitleLabel)
         view.addSubview(titleContainerView)
-        view.addSubview(calendarBtn)
-        view.addSubview(clockBtn)
-        view.addSubview(locationBtn)
+        view.addSubview(btnStackView)
         view.addSubview(explanationContainerView)
         view.addSubview(tagLabel)
         view.addSubview(tagCollectionView)
@@ -223,27 +227,13 @@ class AddMyToDoViewController:UIViewController{
             make.left.equalTo(backbutton.snp.left)
             make.right.equalTo(view.snp.right).offset(self.view.frame.height/19.8 * -1)
         }
-        calendarBtn.snp.makeConstraints { (make) in
-            make.height.equalTo(self.view.frame.height/18.0)
-            make.width.equalTo(view.frame.height/3.14)
-            make.right.equalTo(view.snp.right).offset(view.frame.height/9.23 * -1)
-            make.left.equalTo(backbutton.snp.left)
-            make.top.equalTo(titleContainerView.snp.bottom).offset(view.frame.height/42.74)
+        btnStackView.snp.makeConstraints {
+            $0.top.equalTo(titleContainerView.snp.bottom).offset(bounds.self.height/42.74)
+            $0.left.equalTo(backbutton.snp.left)
+            $0.right.equalToSuperview().inset(bounds.height/9.23)
+            $0.height.equalTo(bounds.height/4.805)
         }
-        clockBtn.snp.makeConstraints { (make) in
-            make.height.equalTo(self.view.frame.height/18.0)
-            make.right.equalTo(view.snp.right).offset(view.frame.height/9.23 * -1)
-            make.width.equalTo(view.frame.height/3.14)
-            make.left.equalTo(calendarBtn.snp.left)
-            make.top.equalTo(calendarBtn.snp.bottom).offset(view.frame.height/47.7)
-        }
-        locationBtn.snp.makeConstraints { (make) in
-            make.height.equalTo(self.view.frame.height/18.0)
-            make.right.equalTo(view.snp.right).offset(view.frame.height/9.23 * -1)
-            make.width.equalTo(view.frame.height/3.14)
-            make.left.equalTo(calendarBtn.snp.left)
-            make.top.equalTo(clockBtn.snp.bottom).offset(view.frame.height/47.7)
-        }
+     
         explanationContainerView.snp.makeConstraints { (make) in
             make.height.equalTo(self.view.frame.height/10.8)
             make.top.equalTo(locationBtn.snp.bottom).offset(self.view.frame.height/45.11)
@@ -257,7 +247,6 @@ class AddMyToDoViewController:UIViewController{
         tagCollectionView.snp.makeConstraints { (make) in
             make.top.equalTo(tagLabel.snp.bottom).offset(view.frame.height/58)
             make.left.right.equalToSuperview()
-            make.width.equalTo(view.snp.width)
             make.height.equalTo(view.frame.height/10.54)
         }
        
@@ -268,14 +257,13 @@ class AddMyToDoViewController:UIViewController{
         alarmSettingcollectionView.snp.makeConstraints { (make) in
             make.top.equalTo(alarmSettings.snp.bottom).offset(view.frame.height/58)
             make.height.equalTo(view.frame.height/23.7)
-            make.width.equalToSuperview()
+            make.left.right.equalToSuperview()
         }
         
         addButton.snp.makeConstraints { (make) in
             make.top.equalTo(alarmSettingcollectionView.snp.bottom).offset(view.frame.height/38.67)
             make.height.equalTo(self.view.frame.height/18.0)
-            make.left.equalTo(backbutton.snp.left)
-            make.right.equalTo(titleContainerView.snp.right)
+            make.left.right.equalToSuperview().inset(view.frame.width/13.636363)
         }
     }
 }
