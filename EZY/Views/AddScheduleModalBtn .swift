@@ -63,6 +63,8 @@ class AddScheduleModalBtn : UIButton{
         }
         image.snp.makeConstraints { (make) in
             make.center.equalTo(view.snp.center)
+            make.width.equalToSuperview().dividedBy(2)
+            make.height.equalToSuperview().dividedBy(2)
         }
         
     }

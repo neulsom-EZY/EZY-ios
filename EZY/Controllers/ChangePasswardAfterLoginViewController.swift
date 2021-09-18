@@ -137,7 +137,7 @@ class ChangePasswardAfterLoginViewController: UIViewController {
         changeButton.frame.origin.y = self.view.frame.height/2
     }
 
-    @objc //MARK: 모달 창 원래대로
+    @objc //MARK: 모달 창 원래대로 
     func keyboardWillHide(_ sender: Notification) {
         changeButton.frame.origin.y = self.view.frame.height-changeButton.frame.height-self.view.frame.height/23.8
     }
