@@ -13,7 +13,7 @@ import Alamofire
 
 class AddMyToDoViewController:UIViewController{
     let tagData : [String] = ["전공동아리","산책","자율동아리","공부","자율동아리","전공동아리","전공동아리","산책","자율동아리","공부","자율동아리","전공동아리","산책"]
-    var alarmData : [String] = ["선택안함", "+ 추가"]
+    var alarmData  = "추가"
     let tagColor : [UIColor] = [.rgb(red: 135, green: 159, blue: 255),.rgb(red: 150, green: 141, blue: 255),.rgb(red: 158, green: 177, blue: 252)]
     //MARK: - Properties
     
@@ -36,7 +36,6 @@ class AddMyToDoViewController:UIViewController{
         $0.text = "나의 할 일 추가"
         $0.dynamicFont(fontSize: 22, currentFontName: "AppleSDGothicNeo-SemiBold")
     }
-    
 
     private let titleContainerView : TitleContainerTextFieldView = {
         let view = TitleContainerTextFieldView(tfTitle: "제목")
@@ -267,12 +266,13 @@ class AddMyToDoViewController:UIViewController{
         }
     }
 }
+//MARK: - extension
 extension AddMyToDoViewController : UICollectionViewDelegateFlowLayout,UICollectionViewDataSource{
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         if collectionView == self.tagCollectionView{
             return tagData.count
         }else if collectionView == self.alarmSettingcollectionView{
-            return alarmData.count
+            return 2
         }
         return 0
     }
@@ -290,7 +290,6 @@ extension AddMyToDoViewController : UICollectionViewDelegateFlowLayout,UICollect
                 tagCell.bglabel.text = "선택해제"
                 tagCell.bglabel.textColor = .rgb(red: 183, green: 180, blue: 180)
                 tagCell.layer.borderColor = UIColor.rgb(red: 201, green: 201, blue: 201).cgColor
-                
             }
             if indexPath.item == 2{
                 tagCell.bglabel.text = "+ 추가"
@@ -303,9 +302,11 @@ extension AddMyToDoViewController : UICollectionViewDelegateFlowLayout,UICollect
             alarmCell.layer.borderWidth = 1
             alarmCell.layer.borderColor = UIColor.rgb(red: 207, green: 207, blue: 207).cgColor
             alarmCell.layer.cornerRadius = view.frame.height/81.2
-            alarmCell.bglabel.text = alarmData[indexPath.row]
+            alarmCell.bglabel.text = alarmData
             alarmCell.bglabel.textColor = .rgb(red: 183, green: 180, blue: 180)
-            
+            if indexPath.item == 0{
+                alarmCell.bglabel.text = "선택안함"
+            }
             return alarmCell
         }
     }
@@ -332,14 +333,12 @@ extension AddMyToDoViewController : UICollectionViewDelegateFlowLayout,UICollect
                 collectionView.selectItem(at: indexPath, animated: true, scrollPosition: [])
                 return true
             }
-
             return false
     }
+    
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         if collectionView == self.tagCollectionView {
-            if indexPath.item == 0{
-                
-            }
+
         }else {
             if indexPath.item == 0{
                 
