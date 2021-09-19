@@ -17,8 +17,6 @@ class SettingViewController: UIViewController {
         $0.showsVerticalScrollIndicator = false
     }
     
-    lazy var settingiconImage = [UIImage(named: "EZY_SettingBell"),  UIImage(named: "EZY_SettingTag"),UIImage(named: "EZY_SettingId"),UIImage(named: "EZY_SettingId"), UIImage(named: "EZY_Withdrawal")]
-    
     lazy var settingListTitleLabel = ["푸시 알림 관리", "태그 관리","아이디 변경","비밀번호 변경", "회원 탈퇴"]
     
     lazy var settingListDescriptionLabel = ["개인, 심부름관련 알림을 관리합니다.","일정의 태그를 관리합니다.","현재 사용 중인 닉네임을 변경합니다.","현재 사용 중인 비밀번호를 변경합니다.", "EZY 계정을 탈퇴합니다."]
@@ -106,8 +104,6 @@ extension SettingViewController: UITableViewDataSource{
         
         cell.listDescriptionLabel.text = settingListDescriptionLabel[indexPath.row]
         cell.listTitleLabel.text = settingListTitleLabel[indexPath.row]
-        cell.listIconImageView.image = settingiconImage[indexPath.row]
-        
         
         cell.selectionStyle = .none
         
