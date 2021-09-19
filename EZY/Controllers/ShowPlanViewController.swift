@@ -112,14 +112,9 @@ class ShowPlanViewController: UIViewController{
     
     let bgView = UIView().then {
         $0.backgroundColor = .black
-        $0.alpha = 0
     }
     
     //MARK: Lifecycles
-    override func viewDidAppear(_ animated: Bool) {
-        badgeView.layer.cornerRadius = badgeView.bounds.width/2
-    }
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         topLayoutSetting()
@@ -196,6 +191,10 @@ class ShowPlanViewController: UIViewController{
             make.width.equalToSuperview().dividedBy(3)
             make.height.equalTo(badgeView.snp.width)
         }
+        
+//        badgeView.layer.cornerRadius = (((view.frame.width/31.2)/2)/3)/2
+        
+        badgeView.layer.cornerRadius = view.frame.height/54.1/4
 
         notificationButton.snp.makeConstraints { make in
             make.top.equalTo(questionTopLabel)
