@@ -38,6 +38,7 @@ class ShowPlanViewController: UIViewController{
     
     lazy var badgeView = UIView().then {
         $0.backgroundColor = UIColor(red: 107/255, green: 64/255, blue: 255/255, alpha: 1)
+        $0.isHidden = true
     }
     
     lazy var notificationButton = UIButton().then {
@@ -198,6 +199,8 @@ class ShowPlanViewController: UIViewController{
             make.width.equalToSuperview().dividedBy(3)
             make.height.equalTo(badgeView.snp.width)
         }
+        
+        badgeView.layer.cornerRadius = view.frame.height/54.1/4
 
         notificationButton.snp.makeConstraints { make in
             make.top.equalTo(questionTopLabel)
