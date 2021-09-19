@@ -8,8 +8,6 @@
 import UIKit
 
 struct Managementbtn {
-    let icon : UIImage?
-    let iconTintColor : UIColor?
     let title : String?
     let subTitle : String?
 }
