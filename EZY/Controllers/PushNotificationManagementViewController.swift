@@ -32,13 +32,13 @@ class PushNotificationManagementViewController : UIViewController{
         $0.spacing = bounds.height/45.11111
     }
     private let personalCalendar : AlarmManagementButton = {
-        let viewModel = Managementbtn(icon: UIImage(named: "EZY_user")?.withRenderingMode(.alwaysTemplate), iconTintColor : .EZY_BAC8FF, title: "개인 일정 알림 관리", subTitle: "개인, 팀, 심부름관련 알림을 관리합니다.")
+        let viewModel = Managementbtn(title: "개인 일정 알림 관리", subTitle: "개인, 팀, 심부름관련 알림을 관리합니다.")
         let button = AlarmManagementButton(with: viewModel)
         button.addTarget(self, action: #selector(personalCalendarMove), for: .touchUpInside)
         return button
     }()
     private let errandCalendar : AlarmManagementButton = {
-        let viewModel = Managementbtn(icon: UIImage(named: "EZY_work")?.withRenderingMode(.alwaysTemplate), iconTintColor : .EZY_AFADFF, title: "심부름 알림 관리", subTitle: "팀 일정의 그룹을 관리합니다.")
+        let viewModel = Managementbtn( title: "심부름 알림 관리", subTitle: "팀 일정의 그룹을 관리합니다.")
         let button = AlarmManagementButton(with: viewModel)
         button.addTarget(self, action: #selector(errandCalendarMove), for: .touchUpInside)
         return button
