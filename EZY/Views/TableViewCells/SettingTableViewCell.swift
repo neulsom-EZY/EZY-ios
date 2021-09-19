@@ -27,13 +27,11 @@ class SettingTableViewCell: UITableViewCell {
     }
     
     lazy var listTitleLabel = UILabel().then {
-        $0.text = "그룹 관리"
         $0.textColor = UIColor.rgb(red: 101, green: 101, blue: 101)
-        $0.dynamicFont(fontSize: 13, currentFontName: "Poppins-Light")
+        $0.dynamicFont(fontSize: 12.5, currentFontName: "Poppins-Light")
     }
     
     lazy var listDescriptionLabel = UILabel().then {
-        $0.text = "팀 일정의 그룹을 관리합니다."
         $0.dynamicFont(fontSize: 8, currentFontName: "Poppins-SemiBold")
         $0.textColor = UIColor(red: 205/255, green: 205/255, blue: 205/255, alpha: 1)
     }
