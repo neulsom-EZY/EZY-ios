@@ -28,6 +28,7 @@ class SettingTableViewCell: UITableViewCell {
     
     lazy var listTitleLabel = UILabel().then {
         $0.text = "그룹 관리"
+        $0.textColor = UIColor.rgb(red: 101, green: 101, blue: 101)
         $0.dynamicFont(fontSize: 13, currentFontName: "Poppins-Light")
     }
     
@@ -39,11 +40,6 @@ class SettingTableViewCell: UITableViewCell {
     
     lazy var rightButton = UIButton().then {
         $0.setImage(UIImage(named: "EZY_SettingRightButton"), for: .normal)
-    }
-    
-    lazy var listIconImageView = UIImageView().then {
-        $0.self.image? = UIImage(named: "EZY_SettingGroup")!
-        $0.contentMode = .scaleAspectFit
     }
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
@@ -58,19 +54,12 @@ class SettingTableViewCell: UITableViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
         
         configureUI()
-    }
-
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-        
     }
     
     func configureUI(){
         contentView.addSubview(cellBackgroundView)
-        cellBackgroundView.addSubview(listIconImageView)
         cellBackgroundView.addSubview(rightButton)
         labelGroup.addSubview(listTitleLabel)
         labelGroup.addSubview(listDescriptionLabel)
@@ -78,7 +67,7 @@ class SettingTableViewCell: UITableViewCell {
         
         labelGroup.snp.makeConstraints { make in
             make.centerY.equalToSuperview()
-            make.left.equalTo(listIconImageView.snp.right).offset(contentView.frame.width/20)
+            make.left.equalToSuperview().offset(contentView.frame.width/15.9)
             make.height.equalToSuperview().dividedBy(2)
         }
 
@@ -87,13 +76,6 @@ class SettingTableViewCell: UITableViewCell {
             make.height.equalToSuperview().dividedBy(1.3)
             make.centerX.equalToSuperview()
             make.left.equalToSuperview().offset(contentView.frame.width/13.3)
-        }
-        
-        listIconImageView.snp.makeConstraints { make in
-            make.centerY.equalToSuperview()
-            make.left.equalToSuperview().offset(contentView.frame.width/20)
-            make.height.equalToSuperview().dividedBy(2.1)
-            make.width.equalTo(listIconImageView.snp.height)
         }
         
         listTitleLabel.snp.makeConstraints { make in
