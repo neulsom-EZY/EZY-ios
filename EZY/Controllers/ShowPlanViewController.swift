@@ -15,13 +15,15 @@ class ShowPlanViewController: UIViewController{
     let planCompleteModalView = PlanCompleteModalView()
     
     var groupNameArray: [String] = ["EZY 회의", "디자인 이론 공부", "강아지 산책시키기", "카페에서 마카롱 사오기", "EZY 회의", "디자인 이론 공부", "강아지 산책시키기", "카페에서 마카롱 사오기"]
-    let planTitleTextArray: [String] = ["EZY 회의", "디자인 이론 공부", "강아지 산책시키기", "카페에서 마카롱 사오기", "EZY 회의댜댵", "디자인 이론 공부", "강아지 산책시키기", "카페에서 마카롱 사오기"]
-    let planTimeArray: [String] = ["12:00 - 13:00", "12:00 - 13:00", "12:00 - 13:00", "12:00 - 13:00", "12:00 - 13:00", "12:00 - 13:00", "12:00 - 13:00", "12:00 - 13:00"]
+    var planTitleTextArray: [String] = ["EZY 회의", "디자인 이론 공부", "강아지 산책시키기", "카페에서 마카롱 사오기", "EZY 회의댜댵", "디자인 이론 공부", "강아지 산책시키기", "카페에서 마카롱 사오기"]
+    var planTimeArray: [String] = ["12:00 - 13:00", "12:00 - 13:00", "12:00 - 13:00", "12:00 - 13:00", "12:00 - 13:00", "12:00 - 13:00", "12:00 - 13:00", "12:00 - 13:00"]
     
     let scheduleTypesArray = ["나의 할 일","심부름","문의하기", "설정"]
     let icon = [UIImage(named: "EZY_OnePersonImage"), UIImage(named: "EZY_Errand"), UIImage(named: "EZY_InquiryImage"), UIImage(named: "EZY_settingsIcon")]
     
     lazy var userName = "Y00ujin"
+    
+    var selectedIndex = 0
     
     var purpleColor: UIColor! = UIColor(red: 150/255, green: 141/255, blue: 255/255, alpha: 1)
     var orangeColor: UIColor! = UIColor(red: 255/255, green: 166/255, blue: 128/255, alpha: 1)
@@ -110,16 +112,9 @@ class ShowPlanViewController: UIViewController{
     
     let bgView = UIView().then {
         $0.backgroundColor = .black
-        $0.alpha = 0
     }
     
     //MARK: Lifecycles
-        
-    override func viewDidAppear(_ animated: Bool) {
-        badgeView.layer.cornerRadius = badgeView.bounds.width/2
-
-    }
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         topLayoutSetting()
@@ -133,8 +128,6 @@ class ShowPlanViewController: UIViewController{
         planCompleteModalViewSetting()
 
         emptyPlanBoxViewSetting()
-        
-
     }
     
     @objc func EZYPlanAddButtonClicked(sender:UIButton){
@@ -198,6 +191,10 @@ class ShowPlanViewController: UIViewController{
             make.width.equalToSuperview().dividedBy(3)
             make.height.equalTo(badgeView.snp.width)
         }
+        
+//        badgeView.layer.cornerRadius = (((view.frame.width/31.2)/2)/3)/2
+        
+        badgeView.layer.cornerRadius = view.frame.height/54.1/4
 
         notificationButton.snp.makeConstraints { make in
             make.top.equalTo(questionTopLabel)
@@ -257,6 +254,13 @@ class ShowPlanViewController: UIViewController{
     }
     
     @objc func completeOkButtonClicked(sender: UIButton) {
+        groupNameArray.remove(at: selectedIndex)
+        planTitleTextArray.remove(at: selectedIndex)
+        planTimeArray.remove(at: selectedIndex)
+        EZYPlanBackgroundColor.remove(at: selectedIndex)
+        
+        scheduleTimeTableView.reloadData()
+        
         planCompleteModalView.isHidden = true
     }
     
@@ -431,7 +435,7 @@ extension ShowPlanViewController: UITableViewDelegate{
                 make.height.equalToSuperview().dividedBy(6.29)
                 make.centerX.centerY.equalToSuperview()
             }
-                        
+                                    
             planCompleteModalView.labelView.snp.remakeConstraints { make in
                 make.centerX.equalToSuperview()
                 make.width.equalTo((planTitleTextArray[indexPath.row] as NSString).size(withAttributes: [NSAttributedString.Key.font : planCompleteModalView.planTitleNameLabel.font!]).width + (planCompleteModalView.completeQuestionsLabel.text! as NSString).size(withAttributes: [NSAttributedString.Key.font : planCompleteModalView.completeQuestionsLabel.font!]).width + self.view.frame.width/70)
@@ -470,6 +474,8 @@ extension ShowPlanViewController: UITableViewDelegate{
         }
     
         planCompleteModalView.planTitleNameLabel.text = planTitleTextArray[indexPath.row]
+        
+        selectedIndex = indexPath.row
         
         planCompleteModalView.isHidden = false
         
