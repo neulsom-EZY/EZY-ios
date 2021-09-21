@@ -19,9 +19,8 @@ class CustomGradientLoginBtnView : UIButton {
     override init(frame:CGRect) {
         super.init(frame: frame)
         setTitle("로그인", for: .normal)
-        setBackgroundImage(UIImage(named: "EZY_LoginBtn_Background"), for: .normal)
+        setBackgroundImage(UIImage(named: "EZY_LoginButton"), for: .normal)
         setTitleColor(UIColor.EZY_FFFFFF, for: .normal)
-        alpha = 0.5
     }
     
     required init?(coder: NSCoder) {
