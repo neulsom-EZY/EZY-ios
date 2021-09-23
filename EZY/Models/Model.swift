@@ -57,5 +57,3 @@ struct SearchData {
     let koreanName : String
     let name : String
 }
-
-
