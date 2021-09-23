@@ -13,7 +13,7 @@ class NotificationTableViewCell: UITableViewCell {
     static let NotificationTableViewIdentifier = "\(NotificationTableViewCell.self)"
     
     lazy var logoCircleBackgroundView = UIView().then {
-        $0.backgroundColor = UIColor(red: 186/255, green: 200/255, blue: 255/255, alpha: 1)
+        $0.backgroundColor = UIColor(red: 150/255, green: 141/255, blue: 255/255, alpha: 1)
     }
     
     lazy var cellBackgroundView = UIView().then {
@@ -28,20 +28,20 @@ class NotificationTableViewCell: UITableViewCell {
     
     lazy var scheduleTypeLabel = UILabel().then {
         $0.text = "개인일정"
-        $0.textColor = UIColor(red: 186/255, green: 200/255, blue: 255/255, alpha: 1)
-        $0.dynamicFont(fontSize: 8, currentFontName: "Poppins-SemiBold")
+        $0.textColor = UIColor(red: 144/255, green: 144/255, blue: 144/255, alpha: 1)
+        $0.dynamicFont(fontSize: 8, currentFontName: "AppleSDGothicNeo-Light")
     }
 
     lazy var notificationContentLabel = UILabel().then {
         $0.text = "지환님이 심부름 일정 변경을 요청했어요. \n확인해볼까요?"
-        $0.textColor = UIColor(red: 186/255, green: 200/255, blue: 255/255, alpha: 1)
+        $0.textColor = UIColor(red: 150/255, green: 141/255, blue: 255/255, alpha: 1)
         $0.dynamicFont(fontSize: 12, currentFontName: "Poppins-SemiBold")
         $0.numberOfLines = 2
     }
     
     lazy var afterNotificationTimeLabel = UILabel().then {
         $0.text = "12분 전"
-        $0.dynamicFont(fontSize: 10, currentFontName: "Poppins-Light")
+        $0.dynamicFont(fontSize: 10, currentFontName: "AppleSDGothicNeo-Light")
         $0.textColor = UIColor(red: 144/255, green: 144/255, blue: 144/255, alpha: 1)
     }
     
