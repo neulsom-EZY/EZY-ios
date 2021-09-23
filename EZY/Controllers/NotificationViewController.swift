@@ -32,11 +32,6 @@ class NotificationViewController: UIViewController {
         $0.dynamicFont(fontSize: 23, currentFontName: "AppleSDGothicNeo-SemiBold")
     }
     
-    var personalScheduleColor: UIColor! = UIColor(red: 167/255, green: 161/255, blue: 255/255, alpha: 1)
-    var teamScheduleColor: UIColor! = UIColor(red: 167/255, green: 161/255, blue: 255/255, alpha: 1)
-    var errendColor: UIColor! = UIColor(red: 167/255, green: 161/255, blue: 255/255, alpha: 1)
-    
-    lazy var notificationColor: [UIColor] = [personalScheduleColor, teamScheduleColor, errendColor, personalScheduleColor, teamScheduleColor, errendColor, personalScheduleColor, teamScheduleColor, errendColor]
     
     //MARK: Lifecycles
     override func viewDidLoad() {
@@ -57,7 +52,6 @@ class NotificationViewController: UIViewController {
     }
     
     func configureUI(){
-        
         self.view.addSubview(backButton)
         self.view.addSubview(notificationTitleLabel)
         self.view.addSubview(notificationTableMainView.tableView)
@@ -102,9 +96,7 @@ extension NotificationViewController: UITableViewDataSource{
         let cell = tableView.dequeueReusableCell(withIdentifier: NotificationTableViewCell.NotificationTableViewIdentifier, for: indexPath) as! NotificationTableViewCell
         
         cell.scheduleTypeLabel.text = scheduleType[indexPath.row]
-        cell.scheduleTypeLabel.textColor = notificationColor[indexPath.row]
         cell.notificationContentLabel.text = notificationContent[indexPath.row]
-        cell.notificationContentLabel.textColor = notificationColor[indexPath.row]
         cell.afterNotificationTimeLabel.text = afterNotificationTime[indexPath.row]
         
         cell.selectionStyle = .none
