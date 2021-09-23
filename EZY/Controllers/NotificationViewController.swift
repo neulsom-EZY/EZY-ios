@@ -83,15 +83,18 @@ class NotificationViewController: UIViewController {
 
 extension NotificationViewController: UITableViewDelegate{
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        print("index: \(indexPath.row)")
         if scheduleType[indexPath.row] == "개인 일정"{
             let nextViewController = PersonalPlanDetailViewController()
             self.navigationController?.pushViewController(nextViewController, animated: true)
         }else if scheduleType[indexPath.row] == "심부름"{
-            let nextViewController = ErrandDetailsViewController()
+            // 심부름을 수락한 후라면 심부름 상세 페이지로 전환
+            // let nextViewController = ErrandDetailsViewController()
+            // self.navigationController?.pushViewController(nextViewController, animated: true)
+            
+            // 심부름을 수락하기 전이라면 심부름 요청 응답 페이지로 전환
+            let nextViewController = PlanRequestRespondingViewController()
             self.navigationController?.pushViewController(nextViewController, animated: true)
         }
-        
     }
 }
 
