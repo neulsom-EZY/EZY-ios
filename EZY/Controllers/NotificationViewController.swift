@@ -35,7 +35,7 @@ class NotificationViewController: UIViewController {
     }
     
     var errendAcceptCheckView = UIView().then{
-        $0.backgroundColor = UIColor.rgb(red: 245, green: 245, blue: 245)
+        $0.backgroundColor = UIColor.rgb(red: 250, green: 250, blue: 250)
         $0.layer.applySketchShadow(color: .lightGray, alpha: 0.4, x: 0, y: 4, blur: 15, spread: 0)
         $0.layer.cornerRadius = 10
     }
@@ -112,7 +112,7 @@ class NotificationViewController: UIViewController {
         errendAcceptCheckView.snp.makeConstraints { make in
             make.centerX.centerY.equalToSuperview()
             make.width.equalToSuperview().dividedBy(1.49)
-            make.height.equalToSuperview().dividedBy(10.82)
+            make.height.equalToSuperview().dividedBy(12)
         }
         
         acceptedErrendLabelView.snp.makeConstraints { make in
