@@ -14,9 +14,9 @@ class NotificationViewController: UIViewController {
     
     private lazy var notificationTableView = notificationTableMainView.tableView
     
-    lazy var scheduleType = ["개인 일정", "팀 일정", "심부름","개인 일정", "팀 일정", "심부름","개인 일정", "팀 일정", "심부름"]
+    lazy var scheduleType = ["개인 일정", "심부름", "심부름","개인 일정", "심부름", "심부름","개인 일정", "심부름", "심부름"]
     
-    lazy var notificationContent = ["산책 일정이 30분 남았어요. \n준비하세요!","지환님이 팀 일정을 보내셨어요. \n확인해볼까요?","지환님이 심부름 일정 변경을 요청했어요. \n확인해볼까요?","산책 일정이 30분 남았어요. \n준비하세요!","지환님이 팀 일정을 보내셨어요. \n확인해볼까요?","지환님이 심부름 일정 변경을 요청했어요. \n확인해볼까요?","산책 일정이 30분 남았어요. \n준비하세요!","지환님이 팀 일정을 보내셨어요. \n확인해볼까요?","지환님이 심부름 일정 변경을 요청했어요. \n확인해볼까요?"]
+    lazy var notificationContent = ["산책 일정이 30분 남았어요. \n준비하세요!","지환님이 심부름 일정을 보내셨어요. \n확인해볼까요?","지환님이 심부름 일정 변경을 요청했어요. \n확인해볼까요?","산책 일정이 30분 남았어요. \n준비하세요!","지환님이 심부름 일정을 보내셨어요. \n확인해볼까요?","지환님이 심부름 일정 변경을 요청했어요. \n확인해볼까요?","산책 일정이 30분 남았어요. \n준비하세요!","지환님이 심부름 일정을 보내셨어요. \n확인해볼까요?","지환님이 심부름 일정 변경을 요청했어요. \n확인해볼까요?"]
     
     lazy var afterNotificationTime = ["12분 전", "17분 전", "1시간 전","12분 전", "17분 전", "1시간 전","12분 전", "17분 전", "1시간 전"]
     
@@ -83,7 +83,15 @@ class NotificationViewController: UIViewController {
 
 extension NotificationViewController: UITableViewDelegate{
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        print("tableView - didSelectRowAt")
+        print("index: \(indexPath.row)")
+        if scheduleType[indexPath.row] == "개인 일정"{
+            let nextViewController = PersonalPlanDetailViewController()
+            self.navigationController?.pushViewController(nextViewController, animated: true)
+        }else if scheduleType[indexPath.row] == "심부름"{
+            let nextViewController = ErrandDetailsViewController()
+            self.navigationController?.pushViewController(nextViewController, animated: true)
+        }
+        
     }
 }
 
@@ -110,10 +118,5 @@ extension NotificationViewController: UITableViewDataSource{
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
            return 0
-    }
-    
-    func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
-        let nextViewController = PlanRequestRespondingViewController()
-        self.navigationController?.pushViewController(nextViewController, animated: true)
     }
 }

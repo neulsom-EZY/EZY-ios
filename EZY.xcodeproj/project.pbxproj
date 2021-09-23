@@ -449,6 +449,7 @@
 				EE9F0D2026E8A2AC0015E81B /* AddErrandViewController.swift */,
 				EE9F0D1F26E8A2AC0015E81B /* AddMyToDoViewController.swift */,
 				EE9F0D1C26E8A2AC0015E81B /* ErrandDetailsViewController.swift */,
+				EE93B4E72687FB660055D7A6 /* ErrandCalendarViewController.swift */,
 				EE9F0D1D26E8A2AC0015E81B /* MoreAlarmModelViewController.swift */,
 				EE9F0D2126E8A2AC0015E81B /* MoreCalendarModalsViewController.swift */,
 				EE9F0D1E26E8A2AC0015E81B /* MorePeopleToDo.swift */,
@@ -477,7 +478,6 @@
 				6AB27CB1269DD1B900B95C0F /* InquiryChattingViewController.swift */,
 				EE93B4D826876C6F0055D7A6 /* PushNotificationManagementViewController.swift */,
 				EE93B4DC26878A5D0055D7A6 /* PersonalCalendarViewController.swift */,
-				EE93B4E72687FB660055D7A6 /* ErrandCalendarViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
