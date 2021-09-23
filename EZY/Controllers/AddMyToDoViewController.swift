@@ -33,7 +33,6 @@ class AddMyToDoViewController:UIViewController{
         $0.tintColor = .EZY_BAC8FF
         $0.setImage(UIImage(systemName: "arrow.left"), for: .normal)
         $0.addTarget(self, action: #selector(todobackbtn), for: .touchUpInside)
-
     }
     private let TitleLabel = UILabel().then{
         $0.textColor = .EZY_BAC8FF
@@ -113,7 +112,6 @@ class AddMyToDoViewController:UIViewController{
 
     let alarmSettingcollectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
-        
         let cv = UICollectionView(frame: .zero, collectionViewLayout: layout)
         layout.scrollDirection = .horizontal
         cv.translatesAutoresizingMaskIntoConstraints = false
@@ -157,6 +155,9 @@ class AddMyToDoViewController:UIViewController{
         //추가페이지 작성후 실행시키는 코드
     }
     
+
+    
+    //MARK: - Keyboard Action
     @objc func KeyboardShow(){
         backGroundView.isHidden = false
         backGroundView.addTarget(self, action: #selector(KeyboardDown), for: .touchUpInside)
@@ -165,7 +166,6 @@ class AddMyToDoViewController:UIViewController{
         backGroundView.isHidden = true
 
     }
-    //MARK: - Keyboard Action
     @objc func KeyboardDown(){
         self.view.endEditing(true)
     }
@@ -181,7 +181,6 @@ class AddMyToDoViewController:UIViewController{
         bgView.snp.makeConstraints { (make) in
             make.edges.equalTo(0)
         }
-
         DispatchQueue.main.async { [weak self] in
             self?.bgView.alpha = 0.2
         }
@@ -371,7 +370,6 @@ extension AddMyToDoViewController : UICollectionViewDelegateFlowLayout,UICollect
 
         }else {
             if indexPath.item == 0{
-                
                 
             }
             else if indexPath.item == indexPath.last{
