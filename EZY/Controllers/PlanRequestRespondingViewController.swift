@@ -238,13 +238,14 @@ class PlanRequestRespondingViewController: UIViewController {
     }
     
     @objc func acceptButtonClicked(sender:UIButton){
-        let nextViewController = ShowPlanViewController()
-        self.navigationController?.pushViewController(nextViewController, animated: true)
+        let notificationVC = NotificationViewController()
+        notificationVC.isErrendAccept = true
+        
+        self.navigationController?.popViewController(animated: true)
     }
     
     @objc func rejectionButtonClicked(sender:UIButton){
-        let nextViewController = ShowPlanViewController()
-        self.navigationController?.pushViewController(nextViewController, animated: true)
+        self.navigationController?.popViewController(animated: true)
     }
     
     @objc func backButtonClicked(sender:UIButton){

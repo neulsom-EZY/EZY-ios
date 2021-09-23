@@ -22,6 +22,8 @@ class NotificationViewController: UIViewController {
     
     lazy var scheduleImageByTypeImage = [UIImage(named: "EZY_MyJob"), UIImage(named: "EZY_OurJob"), UIImage(named: "EZY_Errand"),UIImage(named: "EZY_MyJob"), UIImage(named: "EZY_OurJob"), UIImage(named: "EZY_Errand"),UIImage(named: "EZY_MyJob"), UIImage(named: "EZY_OurJob"), UIImage(named: "EZY_Errand")]
     
+    var isErrendAccept: Bool = false
+    
     lazy var backButton = UIButton().then {
         $0.setImage(UIImage(named: "EZY_NotificationBackButton"), for: .normal)
     }
@@ -32,33 +34,62 @@ class NotificationViewController: UIViewController {
         $0.dynamicFont(fontSize: 23, currentFontName: "AppleSDGothicNeo-SemiBold")
     }
     
+    var errendAcceptCheckView = UIView().then{
+        $0.backgroundColor = UIColor.rgb(red: 245, green: 245, blue: 245)
+        $0.layer.applySketchShadow(color: .lightGray, alpha: 0.4, x: 0, y: 4, blur: 15, spread: 0)
+        $0.layer.cornerRadius = 10
+    }
+    
+    var acceptedErrendLabelView = UIView().then{
+        $0.backgroundColor = .clear
+    }
+    
+    var acceptedErrendNameLabel = UILabel().then{
+        $0.text = "마카롱 사오기"
+        $0.textColor = UIColor.rgb(red: 174, green: 174, blue: 174)
+        $0.dynamicFont(fontSize: 10, currentFontName: "AppleSDGothicNeo-SemiBold")
+    }
+    
+    var acceptedErrendAddCheckLabel = UILabel().then{
+        $0.text = "심부름이 추가되었습니다."
+        $0.textColor = UIColor.rgb(red: 122, green: 122, blue: 122)
+        $0.dynamicFont(fontSize: 12, currentFontName: "AppleSDGothicNeo-SemiBold")
+    }
+    
     
     //MARK: Lifecycles
     override func viewDidLoad() {
-        self.view.backgroundColor = .white
         super.viewDidLoad()
-        
-        notificationTableMainView.tableView.delegate = self
-        notificationTableMainView.tableView.dataSource = self
-        
-        print("height\(self.view.bounds.size.height)")
         
         configureUI()
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        // 심부름 요청 응답페이지에서 수락버튼을 클릭 할 시 errendAcceptCheckView표시
+        // errendAcceptCheckView.isHidden = false
+    }
+    
     @objc func backButtonClicked(sender:UIButton){
         self.navigationController?.popViewController(animated: true)
-        print("fdasdfasdf")
     }
     
     func configureUI(){
+        self.view.backgroundColor = .white
+        
         self.view.addSubview(backButton)
         self.view.addSubview(notificationTitleLabel)
         self.view.addSubview(notificationTableMainView.tableView)
+        self.view.addSubview(errendAcceptCheckView)
+        errendAcceptCheckView.addSubview(acceptedErrendLabelView)
+        acceptedErrendLabelView.addSubview(acceptedErrendNameLabel)
+        acceptedErrendLabelView.addSubview(acceptedErrendAddCheckLabel)
         
         backButton.addTarget(self, action: #selector(backButtonClicked(sender:)), for: .touchUpInside)
         
         notificationTableMainView.tableView.register(NotificationTableViewCell.self, forCellReuseIdentifier: NotificationTableViewCell.NotificationTableViewIdentifier)
+        
+        notificationTableMainView.tableView.delegate = self
+        notificationTableMainView.tableView.dataSource = self
         
         notificationTitleLabel.snp.makeConstraints { make in
             make.top.equalTo(backButton.snp.bottom).offset(self.view.frame.height/30)
@@ -77,8 +108,31 @@ class NotificationViewController: UIViewController {
             make.bottom.equalToSuperview()
             make.width.equalToSuperview()
         }
+        
+        errendAcceptCheckView.snp.makeConstraints { make in
+            make.centerX.centerY.equalToSuperview()
+            make.width.equalToSuperview().dividedBy(1.49)
+            make.height.equalToSuperview().dividedBy(10.82)
+        }
+        
+        acceptedErrendLabelView.snp.makeConstraints { make in
+            make.centerX.centerY.equalToSuperview()
+            make.width.equalToSuperview()
+            make.height.equalToSuperview().dividedBy(2)
+        }
+        
+        acceptedErrendNameLabel.snp.makeConstraints { make in
+            make.centerX.equalToSuperview()
+            make.top.equalToSuperview()
+        }
+        
+        acceptedErrendAddCheckLabel.snp.makeConstraints { make in
+            make.centerX.equalToSuperview()
+            make.bottom.equalToSuperview()
+        }
+        
+        errendAcceptCheckView.isHidden = true
     }
-
 }
 
 extension NotificationViewController: UITableViewDelegate{
