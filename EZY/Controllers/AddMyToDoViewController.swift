@@ -18,11 +18,15 @@ class AddMyToDoViewController:UIViewController{
     //MARK: - Properties
     
     let bounds = UIScreen.main.bounds
-
-    //모달 background 설정
+    
+    //MARK: - 모달 background 설정
     let bgView = UIView().then {
         $0.backgroundColor = .black
         $0.alpha = 0
+    }
+    //MARK: - 키보드 실행 됬을때 바탕이 되는 뷰
+    let backGroundView = UIButton().then{
+        $0.isHidden = true
     }
     
     private let backbutton = UIButton().then{
@@ -37,10 +41,7 @@ class AddMyToDoViewController:UIViewController{
         $0.dynamicFont(fontSize: 22, currentFontName: "AppleSDGothicNeo-SemiBold")
     }
 
-    private let titleContainerView : TitleContainerTextFieldView = {
-        let view = TitleContainerTextFieldView(tfTitle: "제목")
-        return view
-    }()
+    private let titleContainerView = TitleContainerTextFieldView(tfTitle: "제목")
     
     private let calendarBtn : AlertButton = {
         let viewModel = AlertBtn(icon: UIImage(named: "EZY_Calendar")?.withRenderingMode(.alwaysTemplate), iconTintColor: .rgb(red: 255, green: 181, blue: 181), message: "2021.6.6 일요일")
@@ -61,6 +62,7 @@ class AddMyToDoViewController:UIViewController{
         button.addTarget(self, action: #selector(locationAlert), for: .touchUpInside)
         return button
     }()
+    //MARK: - StackView
     fileprivate lazy var btnStackView = UIStackView(arrangedSubviews: [calendarBtn,clockBtn,locationBtn]).then{
         $0.axis = .vertical
         $0.distribution = .fillEqually
@@ -127,10 +129,7 @@ class AddMyToDoViewController:UIViewController{
     override func viewDidLoad() {
         super.viewDidLoad()
         configureUI()
-        tagCollectionView.delegate = self
-        tagCollectionView.dataSource = self
-        alarmSettingcollectionView.delegate = self
-        alarmSettingcollectionView.dataSource = self
+      
     }
 
     
@@ -156,7 +155,19 @@ class AddMyToDoViewController:UIViewController{
     @objc func Addmytodobtn(){
         print("DEBUG:AddButton")
         //추가페이지 작성후 실행시키는 코드
+    }
+    
+    @objc func KeyboardShow(){
+        backGroundView.isHidden = false
+        backGroundView.addTarget(self, action: #selector(KeyboardDown), for: .touchUpInside)
+    }
+    @objc func KeyboardHide(){
+        backGroundView.isHidden = true
 
+    }
+    //MARK: - Keyboard Action
+    @objc func KeyboardDown(){
+        self.view.endEditing(true)
     }
     
     //MARK: - Helpers
@@ -170,7 +181,7 @@ class AddMyToDoViewController:UIViewController{
         bgView.snp.makeConstraints { (make) in
             make.edges.equalTo(0)
         }
-        
+
         DispatchQueue.main.async { [weak self] in
             self?.bgView.alpha = 0.2
         }
@@ -181,36 +192,54 @@ class AddMyToDoViewController:UIViewController{
             self?.bgView.removeFromSuperview()
         }
     }
-    
+    //MARK: - Helper
     func configureUI(){
         view.backgroundColor = .white
         tagCollectionView.contentInset = UIEdgeInsets(top: 0, left: view.frame.height/29, bottom: 0, right: view.frame.height/29)
         alarmSettingcollectionView.contentInset = UIEdgeInsets(top: 0, left: view.frame.height/29, bottom: 0, right: 0)
         addView()
         cornerRadius()
+        collectionViewDataSourceAndDelegate()
         location()
+        keyboardStatus()
     }
-    
+    //MARK: - keyboard Setting
+    func keyboardStatus(){
+        NotificationCenter.default.addObserver(self, selector: #selector(KeyboardShow), name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(KeyboardHide), name: UIResponder.keyboardWillHideNotification, object: nil)
+    }
+    //MARK: - CollectionView DataSource & Delegate
+    func collectionViewDataSourceAndDelegate(){
+        tagCollectionView.delegate = self
+        tagCollectionView.dataSource = self
+        alarmSettingcollectionView.delegate = self
+        alarmSettingcollectionView.dataSource = self
+    }
+    //MARK: - AddView
     func addView(){
         view.addSubview(backbutton)
         view.addSubview(TitleLabel)
-        view.addSubview(titleContainerView)
         view.addSubview(btnStackView)
-        view.addSubview(explanationContainerView)
         view.addSubview(tagLabel)
         view.addSubview(tagCollectionView)
         view.addSubview(addButton)
         view.addSubview(alarmSettings)
         view.addSubview(alarmSettingcollectionView)
+        view.addSubview(backGroundView)
+        view.addSubview(titleContainerView)
+        view.addSubview(explanationContainerView)
     }
-    
+    //MARK: - CornerRadius
     func cornerRadius(){
         titleContainerView.layer.cornerRadius = view.frame.height/40.6
         addButton.layer.cornerRadius = view.frame.height/81.2
         explanationContainerView.layer.cornerRadius = view.frame.height/40.6
     }
-    
+    //MARK: - Location
     func location(){
+        backGroundView.snp.makeConstraints { (make) in
+            make.top.left.bottom.right.equalToSuperview()
+        }
         backbutton.snp.makeConstraints { (make) in
             make.height.width.equalTo(self.view.frame.height/33.8)
             make.left.equalTo(self.view.frame.height/29)
@@ -265,6 +294,7 @@ class AddMyToDoViewController:UIViewController{
             make.left.right.equalToSuperview().inset(view.frame.width/13.636363)
         }
     }
+
 }
 //MARK: - extension
 extension AddMyToDoViewController : UICollectionViewDelegateFlowLayout,UICollectionViewDataSource{
