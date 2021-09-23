@@ -111,7 +111,7 @@ class SignUpNicknameViewController: UIViewController{
         }
         
         continueButton.snp.makeConstraints { make in
-            make.top.equalTo(alreadyExistLabel).offset(self.view.frame.height/6.34)
+            make.bottom.equalToSuperview().offset(-self.view.frame.height/32.48)
             make.centerX.equalToSuperview()
             make.width.equalTo(self.view.frame.width/1.13)
             make.height.equalTo(self.view.frame.height/16.24)
