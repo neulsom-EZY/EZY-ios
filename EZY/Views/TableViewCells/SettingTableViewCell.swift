@@ -16,12 +16,12 @@ class SettingTableViewCell: UITableViewCell {
         $0.backgroundColor = .white
     }
     
-    private let listTitleLabel = UILabel().then {
+    var listTitleLabel = UILabel().then {
         $0.textColor = UIColor.rgb(red: 101, green: 101, blue: 101)
         $0.dynamicFont(fontSize: 12.5, currentFontName: "Poppins-Light")
     }
     
-    private let listDescriptionLabel = UILabel().then {
+    var listDescriptionLabel = UILabel().then {
         $0.dynamicFont(fontSize: 8, currentFontName: "Poppins-SemiBold")
         $0.textColor = UIColor(red: 205/255, green: 205/255, blue: 205/255, alpha: 1)
     }

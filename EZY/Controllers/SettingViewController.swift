@@ -25,12 +25,22 @@ class SettingViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        configureUI()
+
+    }
+    
+    //MARK: - helpers
+    func configureUI(){
         self.view.backgroundColor = .white
         
+        addView()
+        
         topViewSetting()
+        
         settingtableViewSetting()
     }
     
+    //MARK: - SettingTableView setting
     func settingtableViewSetting(){
         settingTableView.delegate = self
         settingTableView.dataSource = self
@@ -47,10 +57,9 @@ class SettingViewController: UIViewController {
         }
     }
     
+    //MARK: - topViewSetting()
     func topViewSetting(){
-        self.view.addSubview(topView)
-        topView.addSubview(topView.backButton)
-        topView.addSubview(topView.titleLabel)
+
 
         topView.backButton.addTarget(self, action: #selector(backButtonClicked(sender:)), for: .touchUpInside)
         
@@ -66,7 +75,14 @@ class SettingViewController: UIViewController {
         }
     }
     
+    //MARK: - addSubview
+    func addView(){
+        self.view.addSubview(topView)
+        topView.addSubview(topView.backButton)
+        topView.addSubview(topView.titleLabel)
+    }
     
+    //MARK: - selectors
     @objc func backButtonClicked(sender: UIButton!) {
         self.navigationController?.popViewController(animated: true)
     }
