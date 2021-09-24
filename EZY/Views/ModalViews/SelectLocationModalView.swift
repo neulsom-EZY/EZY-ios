@@ -81,4 +81,10 @@ class SelectLocationModalView: UIView {
         modalBackgroundView.addSubview(selectQuestionsLabel)
         iconCircleBackground.addSubview(iconImageView)
     }
+    
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        
+        
+    }
 }

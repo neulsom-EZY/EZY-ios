@@ -577,7 +577,9 @@ class PersonalPlanChangeViewController: UIViewController {
         
         selectTimeModalView.isHidden = true
     }
+    
     var rotationAngle: CGFloat!
+    
     func calendarModalViewSetting(){
         self.view.addSubview(selectCalendarModalView)
         selectCalendarModalView.addSubview(selectCalendarModalView.shadowBackgroundView)

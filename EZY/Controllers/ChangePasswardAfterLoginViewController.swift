@@ -50,8 +50,9 @@ class ChangePasswardAfterLoginViewController: UIViewController {
     }
     
     @objc func changeButtonClicked(sender:UIButton){
-        let nextViewController = SettingViewController()
-        self.navigationController?.pushViewController(nextViewController, animated: true)
+        let vc = SettingViewController()
+        vc.modalPresentationStyle = .fullScreen
+        present(vc, animated: true, completion: nil)
     }
     
     @objc func backButtonClicked(sender:UIButton){
