@@ -9,7 +9,7 @@ import UIKit
 
 class SettingViewController: UIViewController {
     
-    //MARK: Properties
+    // MARK: - Properties
     lazy var topView = TopView()
     
     let settingTableView = UITableView().then {
@@ -25,12 +25,21 @@ class SettingViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        configureUI()
+    }
+    
+    //MARK: - helpers
+    func configureUI(){
         self.view.backgroundColor = .white
         
+        addView()
+        
         topViewSetting()
+        
         settingtableViewSetting()
     }
     
+    //MARK: - SettingTableView setting
     func settingtableViewSetting(){
         settingTableView.delegate = self
         settingTableView.dataSource = self
@@ -41,17 +50,14 @@ class SettingViewController: UIViewController {
         self.view.addSubview(settingTableView)
         
         settingTableView.snp.makeConstraints { make in
-            make.top.equalTo(topView.snp.bottom).offset(self.view.frame.height/30)
+            make.top.equalTo(topView.snp.bottom).offset(self.view.frame.height/50)
             make.width.equalToSuperview()
             make.bottom.equalToSuperview()
         }
     }
     
+    //MARK: - topViewSetting
     func topViewSetting(){
-        self.view.addSubview(topView)
-        topView.addSubview(topView.backButton)
-        topView.addSubview(topView.titleLabel)
-
         topView.backButton.addTarget(self, action: #selector(backButtonClicked(sender:)), for: .touchUpInside)
         
         topView.topViewDataSetting(backButtonImage: UIImage(named: "EZY_SettingBackButton")!, titleLabelText: "설정",
@@ -66,13 +72,22 @@ class SettingViewController: UIViewController {
         }
     }
     
+    //MARK: - addSubview
+    func addView(){
+        self.view.addSubview(topView)
+        topView.addSubview(topView.backButton)
+        topView.addSubview(topView.titleLabel)
+    }
     
+    //MARK: - selectors
     @objc func backButtonClicked(sender: UIButton!) {
         self.navigationController?.popViewController(animated: true)
     }
 
 }
 
+
+//MARK: - extensions
 extension SettingViewController: UITableViewDelegate{
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if indexPath.row == 0{
