@@ -161,7 +161,7 @@ class MorePeopleToDo: UIViewController{
         addView()
         location()
     }
-    
+    //MARK: - AddView
     func addView(){
         view.addSubview(backbutton)
         view.addSubview(TitleLabel)
@@ -177,7 +177,7 @@ class MorePeopleToDo: UIViewController{
     }
     
 
-    
+    //MARK: - location
     func location(){
         backbutton.snp.makeConstraints { (make) in
             make.height.width.equalTo(self.view.frame.height/33.8)

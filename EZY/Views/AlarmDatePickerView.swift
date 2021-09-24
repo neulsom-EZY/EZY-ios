@@ -12,13 +12,13 @@ class AlarmDatePickerView : UIView{
     private let view = UIView()
     
     private let ampmPickerView = UIPickerView().then{
-        $0.backgroundColor = .white
+        $0.backgroundColor = .clear
     }
     private let timePickerView = UIPickerView().then{
-        $0.backgroundColor = .white
+        $0.backgroundColor = .clear
     }
     private let minutePickerView = UIPickerView().then{
-        $0.backgroundColor = .white
+        $0.backgroundColor = .clear
     }
     private let timeLabel = UILabel().then{
         $0.dynamicFont(fontSize: 12, currentFontName: "AppleSDGothicNeo-Thin")
@@ -32,6 +32,7 @@ class AlarmDatePickerView : UIView{
     }
     override init(frame: CGRect) {
         super.init(frame: frame)
+        view.backgroundColor = .clear
         self.ampmPickerView.delegate = self
         self.ampmPickerView.dataSource = self
         self.timePickerView.dataSource = self
@@ -42,7 +43,7 @@ class AlarmDatePickerView : UIView{
     }
     func addView(){
         addSubview(view)
-        addSubview(ampmPickerView)
+        view.addSubview(ampmPickerView)
         view.addSubview(timePickerView)
         view.addSubview(minutePickerView)
         addSubview(timeLabel)
@@ -51,25 +52,25 @@ class AlarmDatePickerView : UIView{
     override func layoutSubviews(){
         super.layoutSubviews()
         view.snp.makeConstraints { (make) in
-            make.top.right.bottom.left.equalToSuperview()
+            make.top.bottom.equalToSuperview()
+            make.left.equalTo(ampmPickerView.snp.left)
+            make.right.equalTo(minuteLabel)
+            make.centerX.equalToSuperview()
         }
         ampmPickerView.snp.makeConstraints { (make) in
-            make.left.equalTo(view.snp.left)
-            make.top.equalToSuperview().offset(view.frame.height/4.8095)
-            make.height.equalTo(frame.height)
-            make.width.equalTo(frame.height/2.8)
+            make.left.equalTo(view)
+            make.top.bottom.equalToSuperview()
+            make.width.equalTo(frame.width/9.375)
         }
         timePickerView.snp.makeConstraints { (make) in
-            make.left.equalTo(ampmPickerView.snp.right).inset(frame.height/20.2)
-            make.top.equalToSuperview().offset(view.frame.height/4.8095)
-            make.height.equalTo(frame.height)
-            make.width.equalTo(frame.height/2.5)
+            make.left.equalTo(ampmPickerView.snp.right)
+            make.top.bottom.equalTo(view)
+            make.width.equalTo(frame.width/9.375)
         }
         minutePickerView.snp.makeConstraints { (make) in
             make.left.equalTo(timeLabel.snp.right)
-            make.top.equalToSuperview().offset(view.frame.height/4.8095)
-            make.height.equalTo(frame.height)
-            make.width.equalTo(frame.height/2.5)
+            make.top.bottom.equalToSuperview()
+            make.width.equalTo(frame.width/9.375)
         }
         timeLabel.snp.makeConstraints { (make) in
             make.centerY.equalToSuperview()
