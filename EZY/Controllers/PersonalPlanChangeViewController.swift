@@ -65,6 +65,8 @@ class PersonalPlanChangeViewController: UIViewController {
     
     private var isChecked: [Bool] = [true, false, false, false]
     
+    private var bounds = UIScreen.main.bounds
+    
     private var startPickerViewText = [["1","2","3","4","5","6","7","8","9","10","11","12"],["00","05","10","15","20","25","30","35","40","45","50","55"]]
     
     private var dayPickerViewText1 = ["Sun","Mon","Tue","Wed","Thr","Fri","Sat","Mon","Tue","Wed","Thr","Fri","Mon","Tue","Wed","Thr","Fri"]
@@ -104,6 +106,8 @@ class PersonalPlanChangeViewController: UIViewController {
     private var tagColorPreciousSelectedIndex = 0
     
     private var tagPreciousSelectedIndex = 2
+    
+    var rotationAngle: CGFloat!
     
     private let tagColorCollectionView = UICollectionView(frame: .zero, collectionViewLayout: CalendarViewLayout()).then {
         let layout: UICollectionViewFlowLayout = UICollectionViewFlowLayout()
@@ -189,17 +193,6 @@ class PersonalPlanChangeViewController: UIViewController {
         $0.dynamicFont(fontSize: 16, currentFontName: "Poppins-Regular")
     }
     
-    private let explanationBackgroundView = UIView().then {
-        $0.backgroundColor = UIColor(red: 246/255, green: 243/255, blue: 255/255, alpha: 1)
-        $0.layer.cornerRadius = 20
-    }
-    
-    private let explanationTitleLabel = UILabel().then {
-        $0.text = "설명"
-        $0.textColor = UIColor(red: 150/255, green: 141/255, blue: 255/255, alpha: 1)
-        $0.dynamicFont(fontSize: 14, currentFontName: "AppleSDGothicNeo-Bold")
-    }
-    
     private let explanationTextView = UITextView().then {
         $0.text = "카페에서 디자인 이론 공부 하기, 카페에서 디자인 이론 공부 하기"
         $0.textAlignment = .left
@@ -239,7 +232,7 @@ class PersonalPlanChangeViewController: UIViewController {
         $0.dynamicFont(fontSize: 12, currentFontName: "AppleSDGothicNeo-Bold")
     }
     
-    lazy var tagFreedomBandButton = UIButton().then {
+    private let tagFreedomBandButton = UIButton().then {
         $0.setTitle("자율동아리", for: .normal)
         $0.setTitleColor(UIColor(red: 228/255, green: 201/255, blue: 255/255, alpha: 1), for: .normal)
         $0.layer.borderWidth = 1
@@ -247,7 +240,7 @@ class PersonalPlanChangeViewController: UIViewController {
         $0.dynamicFont(fontSize: 12, currentFontName: "AppleSDGothicNeo-Bold")
     }
     
-    lazy var tagAddButton = UIButton().then {
+    private let tagAddButton = UIButton().then {
         $0.setTitle("+ 추가", for: .normal)
         $0.setTitleColor(UIColor(red: 186/255, green: 200/255, blue: 255/255, alpha: 1), for: .normal)
         $0.layer.borderWidth = 1
@@ -316,6 +309,37 @@ class PersonalPlanChangeViewController: UIViewController {
         $0.dynamicFont(fontSize: 12, currentFontName: "AppleSDGothicNeo-SemiBold")
     }
     
+    private let calendarBtn : AlertButton = {
+        let viewModel = AlertBtn(icon: UIImage(named: "EZY_Calendar")?.withRenderingMode(.alwaysTemplate), iconTintColor: .rgb(red: 255, green: 181, blue: 181), message: "2021.6.6 일요일")
+        let button = AlertButton(with: viewModel)
+        button.addTarget(self, action: #selector(calendarAlert), for: .touchUpInside)
+        return button
+    }()
+    private let clockBtn : AlertButton = {
+        let viewModel = AlertBtn(icon: UIImage(named: "EZY_clock")?.withRenderingMode(.alwaysTemplate), iconTintColor: .rgb(red: 255, green: 203, blue: 181), message: "11:00AM - 1:00PM")
+        let button = AlertButton(with: viewModel)
+        button.addTarget(self, action: #selector(clockAlert), for: .touchUpInside)
+        return button
+    }()
+    
+    private let locationBtn : AlertButton = {
+        let viewModel = AlertBtn(icon: UIImage(named: "EZY_Location")?.withRenderingMode(.alwaysTemplate), iconTintColor: .rgb(red: 199, green: 224, blue: 212), message: "광주소프트웨어마이스터고등학교")
+        let button = AlertButton(with: viewModel)
+        button.addTarget(self, action: #selector(locationAlert), for: .touchUpInside)
+        return button
+    }()
+    
+    fileprivate lazy var btnStackView = UIStackView(arrangedSubviews: [calendarBtn,clockBtn,locationBtn]).then{
+        $0.axis = .vertical
+        $0.distribution = .fillEqually
+        $0.spacing = bounds.height/47.7647
+    }
+    
+    private let explanationContainerView : ExplanationContainerTextView = {
+        let view = ExplanationContainerTextView(tvTitle: "설명")
+        return view
+    }()
+    
     
     //MARK: - lifeCycles
     override func viewDidLoad() {
@@ -346,6 +370,660 @@ class PersonalPlanChangeViewController: UIViewController {
 //        repeatCollectionViewSetting()
 //
 //        checkViewSetting()
+    }
+    
+    //MARK: - helpers
+    func configureUI(){
+        addView()
+        
+        addTarget()
+        
+        addLayout()
+    }
+    
+    //MARK: - addLayout
+    func addLayout(){
+        backButton.snp.makeConstraints { make in
+            make.top.equalTo(self.view.safeAreaLayoutGuide).offset(self.view.frame.height/47.7)
+            make.left.equalToSuperview().offset(self.view.frame.width/12)
+            make.width.equalToSuperview().dividedBy(33.8/2)
+            make.height.equalTo(backButton.snp.width)
+        }
+        
+        mainTitleLabel.snp.makeConstraints { make in
+            make.left.equalTo(backButton)
+            make.top.equalTo(backButton.snp.bottom).offset(self.view.frame.height/50)
+        }
+        
+        titleBackgroundView.snp.makeConstraints { make in
+            make.centerX.equalToSuperview()
+            make.left.equalToSuperview().offset(self.view.frame.width/13.3)
+            make.height.equalToSuperview().dividedBy(12)
+            make.top.equalTo(mainTitleLabel.snp.bottom).offset(self.view.frame.height/30)
+        }
+        
+        titleLabel.snp.makeConstraints { make in
+            make.centerY.equalToSuperview()
+            make.left.equalToSuperview().offset(self.view.frame.width/17.8)
+        }
+        
+        titleTextField.snp.makeConstraints { make in
+            make.centerY.equalToSuperview()
+            make.left.equalTo(titleLabel.snp.right).offset(self.view.frame.width/17.8)
+            make.width.equalToSuperview().dividedBy(1.45)
+            make.height.equalToSuperview()
+        }
+        
+        btnStackView.snp.makeConstraints {
+            $0.top.equalTo(titleBackgroundView.snp.bottom).offset(bounds.height/30.1)
+            $0.left.equalTo(mainTitleLabel.snp.left)
+            $0.right.equalToSuperview().inset(bounds.height/9.23)
+            $0.height.equalTo(bounds.height/4.805)
+        }
+        
+        explanationContainerView.snp.makeConstraints { (make) in
+            make.height.equalTo(self.view.frame.height/10.8)
+            make.top.equalTo(btnStackView.snp.bottom).offset(self.view.frame.height/30.0)
+            make.left.equalTo(backButton.snp.left)
+            make.right.equalTo(self.view.frame.width/13.8 * -1)
+        }
+    }
+    
+    //MARK: - addTarget
+    func addTarget(){
+        tagStudyButton.tag = 0
+        tagWalkButton.tag = 1
+        tagMajorBandButton.tag = 2
+        tagFreedomBandButton.tag = 3
+        
+        calendarLabelButton.addTarget(self,action:#selector(calendarViewButtonClicked(sender:)),
+                                 for:.touchUpInside)
+        timeLabelButton.addTarget(self,action:#selector(timeViewButtonClicked(sender:)),
+                                 for:.touchUpInside)
+        locationLabelButton.addTarget(self,action:#selector(locationViewButtonClicked(sender:)),
+                                 for:.touchUpInside)
+        tagStudyButton.addTarget(self,action:#selector(tagbuttonClicked),
+                                 for:.touchUpInside)
+        tagWalkButton.addTarget(self,action:#selector(tagbuttonClicked),
+                                 for:.touchUpInside)
+        tagMajorBandButton.addTarget(self,action:#selector(tagbuttonClicked),
+                                 for:.touchUpInside)
+        tagFreedomBandButton.addTarget(self,action:#selector(tagbuttonClicked),
+                                 for:.touchUpInside)
+        tagAddButton.addTarget(self,action:#selector(tagAddButtonClicked(sender:)),
+                                 for:.touchUpInside)
+        changeButton.addTarget(self, action: #selector(changeButtonClicked(sender:)), for: .touchUpInside)
+        backButton.addTarget(self, action: #selector(backButtonClicked(sender:)), for: .touchUpInside)
+    }
+    
+    //MARK: - addView
+    func addView(){
+        self.view.addSubview(backButton)
+        self.view.addSubview(mainTitleLabel)
+        self.view.addSubview(notificationTitleLabel)
+        self.view.addSubview(notificationBackgroundView)
+        self.view.addSubview(titleBackgroundView)
+        self.view.addSubview(btnStackView)
+        self.view.addSubview(explanationContainerView)
+        titleBackgroundView.addSubview(titleLabel)
+        titleBackgroundView.addSubview(titleTextField)
+        self.view.addSubview(calendarLabelView)
+        calendarLabelView.addSubview(calendarRepeatLabel)
+        calendarLabelView.addSubview(calendarLabelButton)
+        self.view.addSubview(timeLabelButton)
+        self.view.addSubview(locationLabelButton)
+        self.view.addSubview(tagLabel)
+        self.view.addSubview(tagStudyButton)
+        self.view.addSubview(tagWalkButton)
+        self.view.addSubview(tagMajorBandButton)
+        self.view.addSubview(tagFreedomBandButton)
+        self.view.addSubview(tagAddButton)
+        self.view.addSubview(changeButton)
+    }
+
+    func calendarViewSetting(){
+        self.view.addSubview(calendarViewButton)
+        calendarViewButton.addSubview(calendarViewButton.backgroundView)
+        calendarViewButton.backgroundView.addSubview(calendarViewButton.iconImageButton)
+
+        calendarViewButton.iconImageButton.setImage(UIImage(named: "EZY_Calendar.svg"), for: .normal)
+        
+        calendarViewButton.addTarget(self, action: #selector(calendarViewButtonClicked(sender:)), for: .touchUpInside)
+        calendarViewButton.iconImageButton.addTarget(self, action: #selector(calendarViewButtonClicked(sender:)), for: .touchUpInside)
+        
+        calendarViewButton.snp.makeConstraints { make in
+            make.top.equalTo(titleBackgroundView.snp.bottom).offset(self.view.frame.height/50)
+            make.height.equalToSuperview().dividedBy(16)
+            make.width.equalTo(calendarViewButton.snp.height)
+            make.left.equalTo(titleBackgroundView)
+        }
+        
+        calendarViewButton.backgroundView.snp.makeConstraints { make in
+            make.top.left.bottom.right.equalToSuperview()
+        }
+        
+        calendarViewButton.iconImageButton.snp.makeConstraints { make in
+            make.centerX.centerY.equalToSuperview()
+            make.height.width.equalToSuperview().dividedBy(2.4)
+        }
+
+        calendarLabelView.snp.makeConstraints { make in
+            make.left.equalTo(calendarViewButton.snp.right).offset(self.view.frame.width/13.8)
+            make.height.equalTo(calendarViewButton).dividedBy(1.2)
+        }
+        
+        calendarLabelView.snp.makeConstraints { make in
+            make.left.equalTo(calendarViewButton.snp.right).offset(self.view.frame.width/13.8)
+            make.height.equalTo(calendarViewButton).dividedBy(1.2)
+            make.right.equalToSuperview()
+            make.centerY.equalTo(calendarViewButton)
+        }
+                
+        calendarRepeatLabel.snp.makeConstraints { make in
+            make.bottom.left.equalToSuperview()
+        }
+        
+        calendarLabelButton.snp.makeConstraints { make in
+            make.left.top.equalToSuperview()
+        }
+    }
+    
+    func timeViewSetting(){
+        self.view.addSubview(timeViewButton)
+        timeViewButton.addSubview(timeViewButton.backgroundView)
+        timeViewButton.backgroundView.addSubview(timeViewButton.iconImageButton)
+        
+        timeViewButton.addTarget(self, action: #selector(timeViewButtonClicked(sender:)), for: .touchUpInside)
+        
+        timeViewButton.iconImageButton.setImage(UIImage(named: "EZY_TimeSquare.svg"), for: .normal)
+        
+        timeViewButton.snp.makeConstraints { make in
+            make.top.equalTo(calendarViewButton.snp.bottom).offset(self.view.frame.height/47.7)
+            make.height.equalToSuperview().dividedBy(16)
+            make.width.equalTo(timeViewButton.snp.height)
+            make.left.equalTo(calendarViewButton)
+        }
+        
+        timeViewButton.backgroundView.snp.makeConstraints { make in
+            make.top.left.bottom.right.equalToSuperview()
+        }
+        
+        timeViewButton.iconImageButton.snp.makeConstraints { make in
+            make.centerX.centerY.equalToSuperview()
+            make.height.width.equalToSuperview().dividedBy(2.4)
+        }
+        
+        timeViewButton.iconImageButton.addTarget(self, action: #selector(timeIconImageButton(sender:)), for: .touchUpInside)
+    }
+    
+    func locationViewSetting(){
+        self.view.addSubview(locationViewButton)
+        locationViewButton.addSubview(locationViewButton.backgroundView)
+        locationViewButton.backgroundView.addSubview(locationViewButton.iconImageButton)
+
+        locationViewButton.iconImageButton.addTarget(self, action: #selector(locationViewButtonClicked(sender:)), for: .touchUpInside)
+        locationViewButton.iconImageButton.setImage(UIImage(named: "EZY_location.svg"), for: .normal)
+        
+        locationViewButton.snp.makeConstraints { make in
+            make.top.equalTo(timeViewButton.snp.bottom).offset(self.view.frame.height/47.7)
+            make.height.equalToSuperview().dividedBy(16)
+            make.width.equalTo(timeViewButton.snp.height)
+            make.left.equalTo(timeViewButton)
+        }
+        
+        locationViewButton.backgroundView.snp.makeConstraints { make in
+            make.top.left.bottom.right.equalToSuperview()
+        }
+        
+        locationViewButton.iconImageButton.snp.makeConstraints { make in
+            make.centerX.centerY.equalToSuperview()
+            make.height.width.equalToSuperview().dividedBy(2)
+        }
+        
+        explanationContainerView.snp.makeConstraints { (make) in
+            make.height.equalTo(self.view.frame.height/10.8)
+            make.top.equalTo(locationBtn.snp.bottom).offset(self.view.frame.height/45.11)
+            make.left.equalTo(backButton.snp.left)
+            make.centerX.equalToSuperview()
+        }
+        
+        tagLabel.snp.makeConstraints { make in
+            make.left.equalTo(titleBackgroundView)
+            make.top.equalTo(explanationContainerView.snp.bottom).offset(self.view.frame.height/38.6)
+        }
+    }
+
+    
+    func labelSetting(){
+        timeLabelButton.snp.makeConstraints { make in
+            make.centerY.equalTo(timeViewButton)
+            make.left.equalTo(timeViewButton.snp.right).offset(self.view.frame.width/13.8)
+        }
+        
+        locationLabelButton.snp.makeConstraints { make in
+            make.centerY.equalTo(locationViewButton)
+            make.left.equalTo(locationViewButton.snp.right).offset(self.view.frame.width/13.8)
+        }
+    }
+    
+    //MARK: - selectors
+    @objc func startSelectCircleButtonClicked(sender:UIButton){
+        UIButton.animate(withDuration: 0.2, delay: 0, options: .curveEaseOut, animations: {
+            if self.startSelectCircleButtonLocation == "Left"{
+                self.selectTimeModalView.startSelectCircleButton.snp.remakeConstraints { make in
+                    make.centerY.equalTo(self.selectTimeModalView.startSelectBackButton)
+                    make.right.equalTo(self.selectTimeModalView.startSelectBackButton).offset(-self.view.frame.width/300)
+                    make.height.width.equalTo(self.selectTimeModalView.startSelectBackButton.snp.height).dividedBy(1.2)
+                }
+                
+                self.selectTimeModalView.startSelectCircleButton.superview?.layoutIfNeeded()
+                
+                self.selectTimeModalView.startMorningLabel.dynamicFont(fontSize: 12, currentFontName: "AppleSDGothicNeo-Thin")
+                self.selectTimeModalView.startMorningLabel.textColor = UIColor.black
+                
+                self.selectTimeModalView.startAfternoonLabel.dynamicFont(fontSize: 12, currentFontName: "AppleSDGothicNeo-Regular")
+                self.selectTimeModalView.startAfternoonLabel.textColor = UIColor(red: 114/255, green: 114/255, blue: 114/255, alpha: 1)
+                
+                self.startSelectCircleButtonLocation = "Right"
+                self.selectedTimeStartAMPM = "PM"
+            }else{
+                self.selectTimeModalView.startSelectCircleButton.snp.remakeConstraints { make in
+                    make.centerY.equalTo(self.selectTimeModalView.startSelectBackButton)
+                    make.left.equalTo(self.selectTimeModalView.startSelectBackButton).offset(self.view.frame.width/300)
+                    make.height.width.equalTo(self.selectTimeModalView.startSelectBackButton.snp.height).dividedBy(1.2)
+                }
+                
+                self.selectTimeModalView.startSelectCircleButton.superview?.layoutIfNeeded()
+                
+                self.selectTimeModalView.startMorningLabel.dynamicFont(fontSize: 12, currentFontName: "AppleSDGothicNeo-Regular")
+                self.selectTimeModalView.startMorningLabel.textColor = UIColor(red: 114/255, green: 114/255, blue: 114/255, alpha: 1)
+                
+                self.selectTimeModalView.startAfternoonLabel.dynamicFont(fontSize: 12, currentFontName: "AppleSDGothicNeo-Thin")
+                self.selectTimeModalView.startAfternoonLabel.textColor = UIColor.black
+                
+                self.startSelectCircleButtonLocation = "Left"
+                self.selectedTimeStartAMPM = "AM"
+            }
+        })
+    }
+    
+    @objc func endSelectCircleButtonClicked(sender:UIButton){
+        UIButton.animate(withDuration: 0.2, delay: 0, options: .curveEaseOut, animations: {
+            if self.endSelectCircleButtonLocation == "Left"{
+                
+                self.selectTimeModalView.endSelectCircleButton.snp.remakeConstraints { make in
+                    make.centerY.equalTo(self.selectTimeModalView.endSelectBackButton)
+                    make.right.equalTo(self.selectTimeModalView.endSelectBackButton).offset(-self.view.frame.width/300)
+                    make.height.width.equalTo(self.selectTimeModalView.endSelectBackButton.snp.height).dividedBy(1.2)
+                }
+                
+                self.selectTimeModalView.endSelectCircleButton.superview?.layoutIfNeeded()
+                
+                self.selectTimeModalView.endMorningLabel.dynamicFont(fontSize: 12, currentFontName: "AppleSDGothicNeo-Thin")
+                self.selectTimeModalView.endMorningLabel.textColor = UIColor.black
+                
+                self.selectTimeModalView.endAfternoonLabel.dynamicFont(fontSize: 12, currentFontName: "AppleSDGothicNeo-Regular")
+                self.selectTimeModalView.endAfternoonLabel.textColor = UIColor(red: 114/255, green: 114/255, blue: 114/255, alpha: 1)
+                
+                self.selectTimeModalView.endSelectCircleButton.superview?.layoutIfNeeded()
+                self.endSelectCircleButtonLocation = "Right"
+                self.selectedTimeEndAMPM = "PM"
+            }else{
+                self.selectTimeModalView.endSelectCircleButton.snp.remakeConstraints { make in
+                    make.centerY.equalTo(self.selectTimeModalView.endSelectBackButton)
+                    make.left.equalTo(self.selectTimeModalView.endSelectBackButton).offset(self.view.frame.width/300)
+                    make.height.width.equalTo(self.selectTimeModalView.endSelectBackButton.snp.height).dividedBy(1.2)
+                }
+                
+                self.selectTimeModalView.endSelectCircleButton.superview?.layoutIfNeeded()
+                
+                self.selectTimeModalView.endMorningLabel.dynamicFont(fontSize: 12, currentFontName: "AppleSDGothicNeo-Regular")
+                self.selectTimeModalView.endMorningLabel.textColor = UIColor(red: 114/255, green: 114/255, blue: 114/255, alpha: 1)
+                
+                self.selectTimeModalView.endAfternoonLabel.dynamicFont(fontSize: 12, currentFontName: "AppleSDGothicNeo-Thin")
+                self.selectTimeModalView.endAfternoonLabel.textColor = UIColor.black
+                
+                self.selectTimeModalView.startSelectCircleButton.superview?.layoutIfNeeded()
+                self.endSelectCircleButtonLocation = "Left"
+                self.selectedTimeEndAMPM = "AM"
+            }
+        })
+    }
+    
+    @objc func calendarAlert(){
+        print("calendarAlert - calendar alert appear")
+    }
+    
+    @objc func clockAlert(){
+        print("clockAlert - clock alert appear")
+    }
+    
+    @objc func locationAlert(){
+        print("locationAlert - location alert appear")
+    }
+
+    @objc func tagAddCompletionbuttonClicked(sender:UIButton){
+        tagAddModalView.isHidden = true
+    }
+    
+    @objc func tagAddButtonClicked(sender:UIButton){
+        tagAddModalView.isHidden = false
+        tagColorCollectionView.isHidden = false
+    }
+    
+    @objc func selectCalendarCompleteButtonClicked(sender:UIButton){
+        selectCalendarModalView.isHidden = true
+        
+        selectedRepeatText = ""
+        
+        for i in 0...(selectedRepeatRow.count == 0 ? 0 : selectedRepeatRow.count-1){
+            if selectedRepeatRow.count != 0{
+                switch selectedRepeatRow[i] {
+                case 1:
+                    selectedRepeatText += selectedRepeatText == "" ? "월" : ", 월"
+                    break
+                case 2:
+                    selectedRepeatText += selectedRepeatText == "" ? "화" : ", 화"
+                    break
+                case 3:
+                    selectedRepeatText += selectedRepeatText == "" ? "수" : ", 수"
+                    break
+                case 4:
+                    selectedRepeatText += selectedRepeatText == "" ? "목" : ", 목"
+                    break
+                case 5:
+                    selectedRepeatText += selectedRepeatText == "" ? "금" : ", 금"
+                    break
+                case 6:
+                    selectedRepeatText += selectedRepeatText == "" ? "토" : ", 토"
+                    break
+                case 7:
+                    selectedRepeatText += selectedRepeatText == "" ? "일" : ", 일"
+                    break
+                default:
+                    break
+                }
+            }
+        }
+        
+        calendarRepeatLabel.text = selectedRepeatText == "" ? "반복 없음" : "\(selectedRepeatText) 반복"
+                
+        switch dayPickerViewText1[selectedDayRow] {
+        case "Sun":
+            calendarLabelButton.setTitle("\("yyyy".stringFromDate()). \("MM".stringFromDate()). \(Int(dayPickerViewText2[selectedDayRow])! < 10 ? "0\(Int(dayPickerViewText2[selectedDayRow]) ?? 0)" : dayPickerViewText2[selectedDayRow]) 일요일", for: .normal)
+            break
+            
+        case "Mon":
+            calendarLabelButton.setTitle("\("yyyy".stringFromDate()). \("MM".stringFromDate()). \(Int(dayPickerViewText2[selectedDayRow])! < 10 ? "0\(Int(dayPickerViewText2[selectedDayRow]) ?? 0)" : dayPickerViewText2[selectedDayRow]) 월요일", for: .normal)
+            break
+        case "Tue":
+            calendarLabelButton.setTitle("\("yyyy".stringFromDate()). \("MM".stringFromDate()). \(Int(dayPickerViewText2[selectedDayRow])! < 10 ? "0\(Int(dayPickerViewText2[selectedDayRow]) ?? 0)" : dayPickerViewText2[selectedDayRow]) 화요일", for: .normal)
+            break
+        case "Wed":
+            calendarLabelButton.setTitle("\("yyyy".stringFromDate()). \("MM".stringFromDate()). \(Int(dayPickerViewText2[selectedDayRow])! < 10 ? "0\(Int(dayPickerViewText2[selectedDayRow]) ?? 0)" : dayPickerViewText2[selectedDayRow]) 수요일", for: .normal)
+            break
+        case "Thr":
+            calendarLabelButton.setTitle("\("yyyy".stringFromDate()). \("MM".stringFromDate()). \(Int(dayPickerViewText2[selectedDayRow])! < 10 ? "0\(Int(dayPickerViewText2[selectedDayRow]) ?? 0)" : dayPickerViewText2[selectedDayRow]) 목요일", for: .normal)
+            break
+        case "Fri":
+            calendarLabelButton.setTitle("\("yyyy".stringFromDate()). \("MM".stringFromDate()). \(Int(dayPickerViewText2[selectedDayRow])! < 10 ? "0\(Int(dayPickerViewText2[selectedDayRow]) ?? 0)" : dayPickerViewText2[selectedDayRow]) 금요일", for: .normal)
+            break
+        case "Sat":
+            calendarLabelButton.setTitle("\("yyyy".stringFromDate()). \("MM".stringFromDate()). \(Int(dayPickerViewText2[selectedDayRow])! < 10 ? "0\(Int(dayPickerViewText2[selectedDayRow]) ?? 0)" : dayPickerViewText2[selectedDayRow]) 토요일", for: .normal)
+            break
+        default:
+            break
+        }
+    }
+    
+    @objc func selectTimeCompleteButtonClicked(sender:UIButton){
+        selectTimeModalView.isHidden = true
+        
+        timeLabelButton.setTitle("\(startPickerViewText[0][selectedTimeStartHourIndex]):\(startPickerViewText[1][selectedTimeStartMinIndex])\(selectedTimeStartAMPM) - \(startPickerViewText[0][selectedTimeEndHourIndex]):\(startPickerViewText[1][selectedTimeEndMinIndex])\(selectedTimeEndAMPM)", for: .normal)
+    }
+    
+    @objc func tagbuttonClicked(sender:UIButton){
+        var backgroundColor: UIColor
+        var borderColor: CGColor
+        
+        if isChecked[sender.tag] == true{
+            // 1개만 체크되어있을때 눌러서 체크해제하려고할때 다른 버튼이 체크되어있는지 확인하고 체크되어있으면 바꾸고 되어있지않으면 그냥 나가게
+            for index in 0...isChecked.count-1{
+                if isChecked[index] == true{
+                    if isChecked[index] != isChecked[sender.tag]{
+                        backgroundColor = sender.backgroundColor!
+                        
+                        sender.backgroundColor = .white
+                        sender.setTitleColor(backgroundColor, for: .normal)
+                        sender.layer.borderWidth = 1
+                        sender.layer.borderColor = backgroundColor.cgColor
+                        
+                        isChecked[sender.tag] = false
+                    }
+                }
+            }
+        }else{
+            // 다른 버튼중에 선택된게 있다면 지우기
+            for index in 0...isChecked.count-1{
+                if isChecked[index] == true{
+                    backgroundColor = tagButton[index].backgroundColor!
+                    
+                    tagButton[index].backgroundColor = .white
+                    tagButton[index].setTitleColor(backgroundColor, for: .normal)
+                    tagButton[index].layer.borderWidth = 1
+                    tagButton[index].layer.borderColor = backgroundColor.cgColor
+                    
+                    isChecked[index] = false
+                }
+            }
+            
+            borderColor = sender.layer.borderColor!
+            
+            sender.backgroundColor = UIColor(cgColor: borderColor)
+            sender.setTitleColor(UIColor.white, for: .normal)
+            sender.layer.borderWidth = 0
+            
+            isChecked[sender.tag] = true
+        }
+    }
+    
+    @objc func calendarViewButtonClicked(sender:UIButton){
+        selectCalendarModalView.isHidden = false
+    }
+    
+    @objc func timeViewButtonClicked(sender:UIButton){
+        selectTimeModalView.isHidden = false
+    }
+    
+    @objc func locationViewButtonClicked(sender:UIButton){
+        let nextViewController = SelectLocationViewController()
+        self.navigationController?.pushViewController(nextViewController, animated: true)
+    }
+    
+    @objc func timeIconImageButton(sender:UIButton){
+        selectTimeModalView.isHidden = false
+    }
+    
+    @objc func changeButtonClicked(sender:UIButton){
+        self.navigationController?.popViewController(animated: true)
+    }
+    
+    @objc func backButtonClicked(sender:UIButton){
+        self.navigationController?.popViewController(animated: true)
+    }
+    
+}
+
+extension PersonalPlanChangeViewController: UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout{
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        if collectionView == tagColorCollectionView{
+            return TagColorModels.count
+        }else if collectionView == repeatCollectionView{
+            return 8
+        }else if collectionView == tagCollectionView{
+            return TagModels.count
+        }
+
+        return Int()
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        if collectionView == tagColorCollectionView{
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: TagColorCollectionViewCell.reuseId, for: indexPath) as! TagColorCollectionViewCell
+            
+            cell.backgroundColor = .white
+            
+            cell.setModel(TagColorModels[indexPath.row])
+        
+            return cell
+        }else if collectionView == repeatCollectionView{
+            if indexPath == [0,0]{
+                let cell = collectionView.dequeueReusableCell(withReuseIdentifier: PersonalPlanAddRepeatDayCollectionViewCell.reuseId, for: indexPath) as! PersonalPlanAddRepeatDayCollectionViewCell
+                
+                cell.label.text = RepeatDayOfTheWeekArray[indexPath.row]
+                cell.cellBackgroundView.layer.borderColor = UIColor(red: 198/255, green: 198/255, blue: 198/255, alpha: 1).cgColor
+                cell.label.text = "X"
+                cell.label.textColor = UIColor(red: 198/255, green: 198/255, blue: 198/255, alpha: 1)
+                
+                cell.setModel(RepeatModels[indexPath.row], indexPath: indexPath)
+                return cell
+            }else{
+                let cell = collectionView.dequeueReusableCell(withReuseIdentifier: PersonalPlanAddRepeatDayCollectionViewCell.reuseId, for: indexPath) as! PersonalPlanAddRepeatDayCollectionViewCell
+                
+                cell.label.text = RepeatDayOfTheWeekArray[indexPath.row]
+                cell.backgroundColor = .white
+                
+                cell.setModel(RepeatModels[indexPath.row], indexPath: indexPath)
+                return cell
+            }
+        }else if collectionView == tagCollectionView{
+            if indexPath == [0,2]{
+                let cell = collectionView.dequeueReusableCell(withReuseIdentifier: TagCollectionViewCell.reuseId, for: indexPath) as! TagCollectionViewCell
+                
+                cell.tagNameLabel.text = "선택 안 함"
+                cell.tagNameLabel.textColor = UIColor(red: 187/255, green: 187/255, blue: 187/255, alpha: 1)
+                cell.tagBackgroundView.backgroundColor = .white
+                cell.tagBackgroundView.layer.borderWidth = 1.3
+                cell.tagBackgroundView.layer.borderColor = UIColor(red: 187/255, green: 187/255, blue: 187/255, alpha: 1).cgColor
+                
+                cell.setModel(TagModels[indexPath.row])
+                
+                return cell
+            }else if indexPath == [0,0]{
+                let cell = collectionView.dequeueReusableCell(withReuseIdentifier: TagCollectionViewCell.reuseId, for: indexPath) as! TagCollectionViewCell
+                
+                cell.tagNameLabel.text = "+ 추가"
+                cell.tagNameLabel.textColor = UIColor(red: 186/255, green: 200/255, blue: 255/255, alpha: 1)
+                cell.tagBackgroundView.backgroundColor = .white
+                cell.tagBackgroundView.layer.borderWidth = 1.3
+                cell.tagBackgroundView.layer.borderColor = UIColor(red: 186/255, green: 200/255, blue: 255/255, alpha: 1).cgColor
+                
+                return cell
+            }else{
+                let cell = collectionView.dequeueReusableCell(withReuseIdentifier: TagCollectionViewCell.reuseId, for: indexPath) as! TagCollectionViewCell
+                
+                cell.setModel(TagModels[indexPath.row])
+                
+                cell.tagNameLabel.text = tagNameTextArray[indexPath.row]
+                return cell
+            }
+        }
+        
+        return UICollectionViewCell()
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath)
+    {
+        if collectionView == tagColorCollectionView{
+            if TagColorModels[indexPath.row].isSelected {
+                
+                TagColorModels[tagColorPreciousSelectedIndex].isSelected.toggle()
+                
+                if TagColorModels.filter({ $0.isSelected }).count >= 1 {
+                    TagColorModels[indexPath.row].isSelected.toggle()
+                    
+                    tagColorPreciousSelectedIndex = indexPath.row
+                }
+            }
+            
+            collectionView.reloadData()
+        }else if collectionView == repeatCollectionView{
+            if indexPath == [0,0]{
+                if RepeatModels[0].isSelected == true{ // 채울 때
+                    print("다 지운다~~~")
+                    selectedRepeatRow.removeAll()
+                    for i in 0...RepeatModels.count-1 {
+                        if RepeatModels[i].isSelected == false{
+                            RepeatModels[i].isSelected.toggle()
+                            RepeatModels[0].isSelected = false
+
+                        }
+                    }
+                }else{ // 비울 때
+                    // 비워지면 안됌
+                }
+            }else{ // 선택 안함이 아닌 cell 을 클릭했을 때
+                RepeatModels[indexPath.row].isSelected.toggle()
+                if RepeatModels[indexPath.row].isSelected == false{ // 채울때
+                    print("\(indexPath.row) 넣은다~~응~??")
+                    selectedRepeatRow.append(indexPath.row)
+                    if RepeatModels.filter({ $0.isSelected == false }).count == 2 {
+                        RepeatModels[0].isSelected = true
+   
+                    }
+                }else{ // 선택 취소할때
+                    print("\(selectedRepeatRow.firstIndex(of: indexPath.row)!+1) <~ 요거 삭제한다~?")
+                    selectedRepeatRow.remove(at: selectedRepeatRow.firstIndex(of: indexPath.row)!)
+                    if RepeatModels.filter({ $0.isSelected == true }).count == 8 {
+                        RepeatModels[0].isSelected = false
+
+                    }
+                }
+            }
+            
+            collectionView.reloadData()
+        }else if collectionView == tagCollectionView{
+            if indexPath == [0,0]{
+                tagAddModalView.isHidden = false
+            }else{
+                if TagModels[indexPath.row].isSelected {
+                    
+                    TagModels[tagPreciousSelectedIndex].isSelected.toggle()
+                    
+                    if TagModels.filter({ $0.isSelected }).count >= 1 {
+                        TagModels[indexPath.row].isSelected.toggle()
+                        
+                        tagPreciousSelectedIndex = indexPath.row
+                    }
+                    
+                }
+                collectionView.reloadData()
+            }
+        }
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        if collectionView == tagColorCollectionView{
+            return CGSize(width: 30, height: 30)
+        }else if collectionView == repeatCollectionView{
+            return CGSize(width: self.view.frame.width/14.4, height: self.view.frame.width/14.4)
+        }else if collectionView == tagCollectionView{
+            return CGSize(width: self.view.frame.width/4.4, height: self.view.frame.height/23)
+        }
+
+        return CGSize()
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
+        if collectionView == tagColorCollectionView{
+            return UIEdgeInsets(top: 0, left: self.view.frame.height/33.8, bottom: 0, right: self.view.frame.height/33.8)
+        }else if collectionView == repeatCollectionView{
+            return UIEdgeInsets(top: 0, left: self.view.frame.height/33.8, bottom: 0, right: self.view.frame.height/33.8)
+        }else if collectionView == tagCollectionView{
+            
+        }
+        
+        return UIEdgeInsets()
     }
     
     func checkViewSetting(){
@@ -583,7 +1261,6 @@ class PersonalPlanChangeViewController: UIViewController {
         selectTimeModalView.isHidden = true
     }
     
-    var rotationAngle: CGFloat!
     
     func calendarModalViewSetting(){
         self.view.addSubview(selectCalendarModalView)
@@ -731,22 +1408,7 @@ class PersonalPlanChangeViewController: UIViewController {
         tagAddModalView.isHidden = true
     }
     
-    @objc //MARK: 모달 창 올리기
-    func keyboardWillShow(_ sender: Notification) {
-        explanationBackgroundView.frame.origin.y = self.view.frame.height/2.2
-        tagAddModalView.modalBackgroundView.frame.origin.y = self.view.frame.height/5
-    }
-
-    @objc //MARK: 모달 창 원래대로
-    func keyboardWillHide(_ sender: Notification) {
-        explanationBackgroundView.frame.origin.y = self.view.frame.height/1.85
-        tagAddModalView.modalBackgroundView.frame.origin.y = (self.view.frame.height/2) - (tagAddModalView.modalBackgroundView.frame.height/2)
-    }
-    
     func tagColorCollectionViewSetting(){
-        
-        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(_:)), name:UIResponder.keyboardWillShowNotification, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide(_:)), name: UIResponder.keyboardWillHideNotification, object: nil)
 
         tagColorCollectionView.showsHorizontalScrollIndicator = false
         tagColorCollectionView.dataSource = self
@@ -775,658 +1437,6 @@ class PersonalPlanChangeViewController: UIViewController {
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?){
          self.view.endEditing(true)
         tagAddModalView.isHidden = true
-    }
-    
-    //MARK: - selectors
-    @objc func startSelectCircleButtonClicked(sender:UIButton){
-        UIButton.animate(withDuration: 0.2, delay: 0, options: .curveEaseOut, animations: {
-            if self.startSelectCircleButtonLocation == "Left"{
-                self.selectTimeModalView.startSelectCircleButton.snp.remakeConstraints { make in
-                    make.centerY.equalTo(self.selectTimeModalView.startSelectBackButton)
-                    make.right.equalTo(self.selectTimeModalView.startSelectBackButton).offset(-self.view.frame.width/300)
-                    make.height.width.equalTo(self.selectTimeModalView.startSelectBackButton.snp.height).dividedBy(1.2)
-                }
-                
-                self.selectTimeModalView.startSelectCircleButton.superview?.layoutIfNeeded()
-                
-                self.selectTimeModalView.startMorningLabel.dynamicFont(fontSize: 12, currentFontName: "AppleSDGothicNeo-Thin")
-                self.selectTimeModalView.startMorningLabel.textColor = UIColor.black
-                
-                self.selectTimeModalView.startAfternoonLabel.dynamicFont(fontSize: 12, currentFontName: "AppleSDGothicNeo-Regular")
-                self.selectTimeModalView.startAfternoonLabel.textColor = UIColor(red: 114/255, green: 114/255, blue: 114/255, alpha: 1)
-                
-                self.startSelectCircleButtonLocation = "Right"
-                self.selectedTimeStartAMPM = "PM"
-            }else{
-                self.selectTimeModalView.startSelectCircleButton.snp.remakeConstraints { make in
-                    make.centerY.equalTo(self.selectTimeModalView.startSelectBackButton)
-                    make.left.equalTo(self.selectTimeModalView.startSelectBackButton).offset(self.view.frame.width/300)
-                    make.height.width.equalTo(self.selectTimeModalView.startSelectBackButton.snp.height).dividedBy(1.2)
-                }
-                
-                self.selectTimeModalView.startSelectCircleButton.superview?.layoutIfNeeded()
-                
-                self.selectTimeModalView.startMorningLabel.dynamicFont(fontSize: 12, currentFontName: "AppleSDGothicNeo-Regular")
-                self.selectTimeModalView.startMorningLabel.textColor = UIColor(red: 114/255, green: 114/255, blue: 114/255, alpha: 1)
-                
-                self.selectTimeModalView.startAfternoonLabel.dynamicFont(fontSize: 12, currentFontName: "AppleSDGothicNeo-Thin")
-                self.selectTimeModalView.startAfternoonLabel.textColor = UIColor.black
-                
-                self.startSelectCircleButtonLocation = "Left"
-                self.selectedTimeStartAMPM = "AM"
-            }
-        })
-    }
-    
-    @objc func endSelectCircleButtonClicked(sender:UIButton){
-        UIButton.animate(withDuration: 0.2, delay: 0, options: .curveEaseOut, animations: {
-            if self.endSelectCircleButtonLocation == "Left"{
-                
-                self.selectTimeModalView.endSelectCircleButton.snp.remakeConstraints { make in
-                    make.centerY.equalTo(self.selectTimeModalView.endSelectBackButton)
-                    make.right.equalTo(self.selectTimeModalView.endSelectBackButton).offset(-self.view.frame.width/300)
-                    make.height.width.equalTo(self.selectTimeModalView.endSelectBackButton.snp.height).dividedBy(1.2)
-                }
-                
-                self.selectTimeModalView.endSelectCircleButton.superview?.layoutIfNeeded()
-                
-                self.selectTimeModalView.endMorningLabel.dynamicFont(fontSize: 12, currentFontName: "AppleSDGothicNeo-Thin")
-                self.selectTimeModalView.endMorningLabel.textColor = UIColor.black
-                
-                self.selectTimeModalView.endAfternoonLabel.dynamicFont(fontSize: 12, currentFontName: "AppleSDGothicNeo-Regular")
-                self.selectTimeModalView.endAfternoonLabel.textColor = UIColor(red: 114/255, green: 114/255, blue: 114/255, alpha: 1)
-                
-                self.selectTimeModalView.endSelectCircleButton.superview?.layoutIfNeeded()
-                self.endSelectCircleButtonLocation = "Right"
-                self.selectedTimeEndAMPM = "PM"
-            }else{
-                self.selectTimeModalView.endSelectCircleButton.snp.remakeConstraints { make in
-                    make.centerY.equalTo(self.selectTimeModalView.endSelectBackButton)
-                    make.left.equalTo(self.selectTimeModalView.endSelectBackButton).offset(self.view.frame.width/300)
-                    make.height.width.equalTo(self.selectTimeModalView.endSelectBackButton.snp.height).dividedBy(1.2)
-                }
-                
-                self.selectTimeModalView.endSelectCircleButton.superview?.layoutIfNeeded()
-                
-                self.selectTimeModalView.endMorningLabel.dynamicFont(fontSize: 12, currentFontName: "AppleSDGothicNeo-Regular")
-                self.selectTimeModalView.endMorningLabel.textColor = UIColor(red: 114/255, green: 114/255, blue: 114/255, alpha: 1)
-                
-                self.selectTimeModalView.endAfternoonLabel.dynamicFont(fontSize: 12, currentFontName: "AppleSDGothicNeo-Thin")
-                self.selectTimeModalView.endAfternoonLabel.textColor = UIColor.black
-                
-                self.selectTimeModalView.startSelectCircleButton.superview?.layoutIfNeeded()
-                self.endSelectCircleButtonLocation = "Left"
-                self.selectedTimeEndAMPM = "AM"
-            }
-        })
-    }
-
-    @objc func tagAddCompletionbuttonClicked(sender:UIButton){
-        tagAddModalView.isHidden = true
-    }
-    
-    @objc func tagAddButtonClicked(sender:UIButton){
-        tagAddModalView.isHidden = false
-        tagColorCollectionView.isHidden = false
-    }
-    
-    @objc func selectCalendarCompleteButtonClicked(sender:UIButton){
-        selectCalendarModalView.isHidden = true
-        
-        selectedRepeatText = ""
-        
-        for i in 0...(selectedRepeatRow.count == 0 ? 0 : selectedRepeatRow.count-1){
-            if selectedRepeatRow.count != 0{
-                switch selectedRepeatRow[i] {
-                case 1:
-                    selectedRepeatText += selectedRepeatText == "" ? "월" : ", 월"
-                    break
-                case 2:
-                    selectedRepeatText += selectedRepeatText == "" ? "화" : ", 화"
-                    break
-                case 3:
-                    selectedRepeatText += selectedRepeatText == "" ? "수" : ", 수"
-                    break
-                case 4:
-                    selectedRepeatText += selectedRepeatText == "" ? "목" : ", 목"
-                    break
-                case 5:
-                    selectedRepeatText += selectedRepeatText == "" ? "금" : ", 금"
-                    break
-                case 6:
-                    selectedRepeatText += selectedRepeatText == "" ? "토" : ", 토"
-                    break
-                case 7:
-                    selectedRepeatText += selectedRepeatText == "" ? "일" : ", 일"
-                    break
-                default:
-                    break
-                }
-            }
-        }
-        
-        calendarRepeatLabel.text = selectedRepeatText == "" ? "반복 없음" : "\(selectedRepeatText) 반복"
-                
-        switch dayPickerViewText1[selectedDayRow] {
-        case "Sun":
-            calendarLabelButton.setTitle("\("yyyy".stringFromDate()). \("MM".stringFromDate()). \(Int(dayPickerViewText2[selectedDayRow])! < 10 ? "0\(Int(dayPickerViewText2[selectedDayRow]) ?? 0)" : dayPickerViewText2[selectedDayRow]) 일요일", for: .normal)
-            break
-            
-        case "Mon":
-            calendarLabelButton.setTitle("\("yyyy".stringFromDate()). \("MM".stringFromDate()). \(Int(dayPickerViewText2[selectedDayRow])! < 10 ? "0\(Int(dayPickerViewText2[selectedDayRow]) ?? 0)" : dayPickerViewText2[selectedDayRow]) 월요일", for: .normal)
-            break
-        case "Tue":
-            calendarLabelButton.setTitle("\("yyyy".stringFromDate()). \("MM".stringFromDate()). \(Int(dayPickerViewText2[selectedDayRow])! < 10 ? "0\(Int(dayPickerViewText2[selectedDayRow]) ?? 0)" : dayPickerViewText2[selectedDayRow]) 화요일", for: .normal)
-            break
-        case "Wed":
-            calendarLabelButton.setTitle("\("yyyy".stringFromDate()). \("MM".stringFromDate()). \(Int(dayPickerViewText2[selectedDayRow])! < 10 ? "0\(Int(dayPickerViewText2[selectedDayRow]) ?? 0)" : dayPickerViewText2[selectedDayRow]) 수요일", for: .normal)
-            break
-        case "Thr":
-            calendarLabelButton.setTitle("\("yyyy".stringFromDate()). \("MM".stringFromDate()). \(Int(dayPickerViewText2[selectedDayRow])! < 10 ? "0\(Int(dayPickerViewText2[selectedDayRow]) ?? 0)" : dayPickerViewText2[selectedDayRow]) 목요일", for: .normal)
-            break
-        case "Fri":
-            calendarLabelButton.setTitle("\("yyyy".stringFromDate()). \("MM".stringFromDate()). \(Int(dayPickerViewText2[selectedDayRow])! < 10 ? "0\(Int(dayPickerViewText2[selectedDayRow]) ?? 0)" : dayPickerViewText2[selectedDayRow]) 금요일", for: .normal)
-            break
-        case "Sat":
-            calendarLabelButton.setTitle("\("yyyy".stringFromDate()). \("MM".stringFromDate()). \(Int(dayPickerViewText2[selectedDayRow])! < 10 ? "0\(Int(dayPickerViewText2[selectedDayRow]) ?? 0)" : dayPickerViewText2[selectedDayRow]) 토요일", for: .normal)
-            break
-        default:
-            break
-        }
-    }
-    
-    @objc func selectTimeCompleteButtonClicked(sender:UIButton){
-        selectTimeModalView.isHidden = true
-        
-        timeLabelButton.setTitle("\(startPickerViewText[0][selectedTimeStartHourIndex]):\(startPickerViewText[1][selectedTimeStartMinIndex])\(selectedTimeStartAMPM) - \(startPickerViewText[0][selectedTimeEndHourIndex]):\(startPickerViewText[1][selectedTimeEndMinIndex])\(selectedTimeEndAMPM)", for: .normal)
-    }
-    
-    @objc func tagbuttonClicked(sender:UIButton){
-        var backgroundColor: UIColor
-        var borderColor: CGColor
-        
-        if isChecked[sender.tag] == true{
-            // 1개만 체크되어있을때 눌러서 체크해제하려고할때 다른 버튼이 체크되어있는지 확인하고 체크되어있으면 바꾸고 되어있지않으면 그냥 나가게
-            for index in 0...isChecked.count-1{
-                if isChecked[index] == true{
-                    if isChecked[index] != isChecked[sender.tag]{
-                        backgroundColor = sender.backgroundColor!
-                        
-                        sender.backgroundColor = .white
-                        sender.setTitleColor(backgroundColor, for: .normal)
-                        sender.layer.borderWidth = 1
-                        sender.layer.borderColor = backgroundColor.cgColor
-                        
-                        isChecked[sender.tag] = false
-                    }
-                }
-            }
-        }else{
-            // 다른 버튼중에 선택된게 있다면 지우기
-            for index in 0...isChecked.count-1{
-                if isChecked[index] == true{
-                    backgroundColor = tagButton[index].backgroundColor!
-                    
-                    tagButton[index].backgroundColor = .white
-                    tagButton[index].setTitleColor(backgroundColor, for: .normal)
-                    tagButton[index].layer.borderWidth = 1
-                    tagButton[index].layer.borderColor = backgroundColor.cgColor
-                    
-                    isChecked[index] = false
-                }
-            }
-            
-            borderColor = sender.layer.borderColor!
-            
-            sender.backgroundColor = UIColor(cgColor: borderColor)
-            sender.setTitleColor(UIColor.white, for: .normal)
-            sender.layer.borderWidth = 0
-            
-            isChecked[sender.tag] = true
-        }
-    }
-    
-    @objc func calendarViewButtonClicked(sender:UIButton){
-        selectCalendarModalView.isHidden = false
-    }
-    
-    @objc func timeViewButtonClicked(sender:UIButton){
-        selectTimeModalView.isHidden = false
-    }
-    
-    @objc func locationViewButtonClicked(sender:UIButton){
-        let nextViewController = SelectLocationViewController()
-        self.navigationController?.pushViewController(nextViewController, animated: true)
-    }
-    
-    @objc func timeIconImageButton(sender:UIButton){
-        selectTimeModalView.isHidden = false
-    }
-    
-    @objc func changeButtonClicked(sender:UIButton){
-        self.navigationController?.popViewController(animated: true)
-    }
-    
-    @objc func backButtonClicked(sender:UIButton){
-        self.navigationController?.popViewController(animated: true)
-    }
-    
-    //MARK: - helpers
-    func configureUI(){
-        addView()
-        
-        addTarget()
-        
-        addObserver()
-
-        addLayout()
-    }
-    
-    //MARK: - addLayout
-    func addLayout(){
-        backButton.snp.makeConstraints { make in
-            make.top.equalTo(self.view.safeAreaLayoutGuide).offset(self.view.frame.height/47.7)
-            make.left.equalToSuperview().offset(self.view.frame.width/12)
-            make.width.equalToSuperview().dividedBy(33.8/2)
-            make.height.equalTo(backButton.snp.width)
-        }
-        
-        mainTitleLabel.snp.makeConstraints { make in
-            make.left.equalTo(backButton)
-            make.top.equalTo(backButton.snp.bottom).offset(self.view.frame.height/50)
-        }
-        
-        titleBackgroundView.snp.makeConstraints { make in
-            make.centerX.equalToSuperview()
-            make.left.equalToSuperview().offset(self.view.frame.width/13.3)
-            make.height.equalToSuperview().dividedBy(12)
-            make.top.equalTo(mainTitleLabel.snp.bottom).offset(self.view.frame.height/30)
-        }
-        
-        titleLabel.snp.makeConstraints { make in
-            make.centerY.equalToSuperview()
-            make.left.equalToSuperview().offset(self.view.frame.width/17.8)
-        }
-        
-        titleTextField.snp.makeConstraints { make in
-            make.centerY.equalToSuperview()
-            make.left.equalTo(titleLabel.snp.right).offset(self.view.frame.width/17.8)
-            make.width.equalToSuperview().dividedBy(1.45)
-            make.height.equalToSuperview()
-        }
-    }
-    
-    //MARK: - addObserver
-    func addObserver(){
-        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(_:)), name:UIResponder.keyboardWillShowNotification, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide(_:)), name: UIResponder.keyboardWillHideNotification, object: nil)
-    }
-    
-    //MARK: - addTarget
-    func addTarget(){
-        tagStudyButton.tag = 0
-        tagWalkButton.tag = 1
-        tagMajorBandButton.tag = 2
-        tagFreedomBandButton.tag = 3
-        
-        calendarLabelButton.addTarget(self,action:#selector(calendarViewButtonClicked(sender:)),
-                                 for:.touchUpInside)
-        timeLabelButton.addTarget(self,action:#selector(timeViewButtonClicked(sender:)),
-                                 for:.touchUpInside)
-        locationLabelButton.addTarget(self,action:#selector(locationViewButtonClicked(sender:)),
-                                 for:.touchUpInside)
-        tagStudyButton.addTarget(self,action:#selector(tagbuttonClicked),
-                                 for:.touchUpInside)
-        tagWalkButton.addTarget(self,action:#selector(tagbuttonClicked),
-                                 for:.touchUpInside)
-        tagMajorBandButton.addTarget(self,action:#selector(tagbuttonClicked),
-                                 for:.touchUpInside)
-        tagFreedomBandButton.addTarget(self,action:#selector(tagbuttonClicked),
-                                 for:.touchUpInside)
-        tagAddButton.addTarget(self,action:#selector(tagAddButtonClicked(sender:)),
-                                 for:.touchUpInside)
-        changeButton.addTarget(self, action: #selector(changeButtonClicked(sender:)), for: .touchUpInside)
-        backButton.addTarget(self, action: #selector(backButtonClicked(sender:)), for: .touchUpInside)
-    }
-    
-    //MARK: - addView
-    func addView(){
-        self.view.addSubview(backButton)
-        self.view.addSubview(mainTitleLabel)
-        self.view.addSubview(notificationTitleLabel)
-        self.view.addSubview(notificationBackgroundView)
-        self.view.addSubview(titleBackgroundView)
-        titleBackgroundView.addSubview(titleLabel)
-        titleBackgroundView.addSubview(titleTextField)
-        self.view.addSubview(calendarLabelView)
-        calendarLabelView.addSubview(calendarRepeatLabel)
-        calendarLabelView.addSubview(calendarLabelButton)
-        self.view.addSubview(timeLabelButton)
-        self.view.addSubview(locationLabelButton)
-        self.view.addSubview(tagLabel)
-        self.view.addSubview(tagStudyButton)
-        self.view.addSubview(tagWalkButton)
-        self.view.addSubview(tagMajorBandButton)
-        self.view.addSubview(tagFreedomBandButton)
-        self.view.addSubview(tagAddButton)
-        explanationBackgroundView.addSubview(explanationTitleLabel)
-        explanationBackgroundView.addSubview(explanationTextView)
-        self.view.addSubview(changeButton)
-    }
-
-    func calendarViewSetting(){
-        self.view.addSubview(calendarViewButton)
-        calendarViewButton.addSubview(calendarViewButton.backgroundView)
-        calendarViewButton.backgroundView.addSubview(calendarViewButton.iconImageButton)
-
-        calendarViewButton.iconImageButton.setImage(UIImage(named: "EZY_Calendar.svg"), for: .normal)
-        
-        calendarViewButton.addTarget(self, action: #selector(calendarViewButtonClicked(sender:)), for: .touchUpInside)
-        calendarViewButton.iconImageButton.addTarget(self, action: #selector(calendarViewButtonClicked(sender:)), for: .touchUpInside)
-        
-        calendarViewButton.snp.makeConstraints { make in
-            make.top.equalTo(titleBackgroundView.snp.bottom).offset(self.view.frame.height/50)
-            make.height.equalToSuperview().dividedBy(16)
-            make.width.equalTo(calendarViewButton.snp.height)
-            make.left.equalTo(titleBackgroundView)
-        }
-        
-        
-        calendarViewButton.backgroundView.snp.makeConstraints { make in
-            make.top.left.bottom.right.equalToSuperview()
-        }
-        
-        calendarViewButton.iconImageButton.snp.makeConstraints { make in
-            make.centerX.centerY.equalToSuperview()
-            make.height.width.equalToSuperview().dividedBy(2.4)
-        }
-
-        calendarLabelView.snp.makeConstraints { make in
-            make.left.equalTo(calendarViewButton.snp.right).offset(self.view.frame.width/13.8)
-            make.height.equalTo(calendarViewButton).dividedBy(1.2)
-        }
-        
-        calendarLabelView.snp.makeConstraints { make in
-            make.left.equalTo(calendarViewButton.snp.right).offset(self.view.frame.width/13.8)
-            make.height.equalTo(calendarViewButton).dividedBy(1.2)
-            make.right.equalToSuperview()
-            make.centerY.equalTo(calendarViewButton)
-        }
-                
-        calendarRepeatLabel.snp.makeConstraints { make in
-            make.bottom.left.equalToSuperview()
-        }
-        
-        calendarLabelButton.snp.makeConstraints { make in
-            make.left.top.equalToSuperview()
-        }
-    }
-    
-    func timeViewSetting(){
-        self.view.addSubview(timeViewButton)
-        timeViewButton.addSubview(timeViewButton.backgroundView)
-        timeViewButton.backgroundView.addSubview(timeViewButton.iconImageButton)
-        
-        timeViewButton.addTarget(self, action: #selector(timeViewButtonClicked(sender:)), for: .touchUpInside)
-        
-        timeViewButton.iconImageButton.setImage(UIImage(named: "EZY_TimeSquare.svg"), for: .normal)
-        
-        timeViewButton.snp.makeConstraints { make in
-            make.top.equalTo(calendarViewButton.snp.bottom).offset(self.view.frame.height/47.7)
-            make.height.equalToSuperview().dividedBy(16)
-            make.width.equalTo(timeViewButton.snp.height)
-            make.left.equalTo(calendarViewButton)
-        }
-        
-        timeViewButton.backgroundView.snp.makeConstraints { make in
-            make.top.left.bottom.right.equalToSuperview()
-        }
-        
-        timeViewButton.iconImageButton.snp.makeConstraints { make in
-            make.centerX.centerY.equalToSuperview()
-            make.height.width.equalToSuperview().dividedBy(2.4)
-        }
-        
-        timeViewButton.iconImageButton.addTarget(self, action: #selector(timeIconImageButton(sender:)), for: .touchUpInside)
-    }
-    
-    func locationViewSetting(){
-        self.view.addSubview(locationViewButton)
-        locationViewButton.addSubview(locationViewButton.backgroundView)
-        locationViewButton.backgroundView.addSubview(locationViewButton.iconImageButton)
-        self.view.addSubview(explanationBackgroundView)
-
-        locationViewButton.iconImageButton.addTarget(self, action: #selector(locationViewButtonClicked(sender:)), for: .touchUpInside)
-        locationViewButton.iconImageButton.setImage(UIImage(named: "EZY_location.svg"), for: .normal)
-        
-        locationViewButton.snp.makeConstraints { make in
-            make.top.equalTo(timeViewButton.snp.bottom).offset(self.view.frame.height/47.7)
-            make.height.equalToSuperview().dividedBy(16)
-            make.width.equalTo(timeViewButton.snp.height)
-            make.left.equalTo(timeViewButton)
-        }
-        
-        locationViewButton.backgroundView.snp.makeConstraints { make in
-            make.top.left.bottom.right.equalToSuperview()
-        }
-        
-        locationViewButton.iconImageButton.snp.makeConstraints { make in
-            make.centerX.centerY.equalToSuperview()
-            make.height.width.equalToSuperview().dividedBy(2)
-        }
-        
-        explanationBackgroundView.snp.makeConstraints { make in
-            make.centerX.equalToSuperview()
-            make.left.equalTo(titleBackgroundView)
-            make.height.equalToSuperview().dividedBy(12)
-            make.top.equalTo(locationViewButton.snp.bottom).offset(self.view.frame.height/50)
-        }
-        
-        tagLabel.snp.makeConstraints { make in
-            make.left.equalTo(titleBackgroundView)
-            make.top.equalTo(explanationBackgroundView.snp.bottom).offset(self.view.frame.height/38.6)
-        }
-        
-        explanationTitleLabel.snp.makeConstraints { make in
-            make.centerY.equalToSuperview()
-            make.left.equalToSuperview().offset(self.view.frame.width/17.8)
-        }
-        
-        explanationTextView.snp.makeConstraints { make in
-            make.centerY.equalToSuperview()
-            make.left.equalTo(explanationTitleLabel.snp.right).offset(self.view.frame.width/17.8)
-            make.width.equalToSuperview().dividedBy(1.45)
-            make.height.equalToSuperview().dividedBy(1.3)
-        }
-    }
-
-    
-    func labelSetting(){
-
-        
-        timeLabelButton.snp.makeConstraints { make in
-            make.centerY.equalTo(timeViewButton)
-            make.left.equalTo(timeViewButton.snp.right).offset(self.view.frame.width/13.8)
-        }
-        
-        locationLabelButton.snp.makeConstraints { make in
-            make.centerY.equalTo(locationViewButton)
-            make.left.equalTo(locationViewButton.snp.right).offset(self.view.frame.width/13.8)
-        }
-    }
-    
-}
-
-extension PersonalPlanChangeViewController: UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout{
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        if collectionView == tagColorCollectionView{
-            return TagColorModels.count
-        }else if collectionView == repeatCollectionView{
-            return 8
-        }else if collectionView == tagCollectionView{
-            return TagModels.count
-        }
-
-        return Int()
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        if collectionView == tagColorCollectionView{
-            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: TagColorCollectionViewCell.reuseId, for: indexPath) as! TagColorCollectionViewCell
-            
-            cell.backgroundColor = .white
-            
-            cell.setModel(TagColorModels[indexPath.row])
-        
-            return cell
-        }else if collectionView == repeatCollectionView{
-            if indexPath == [0,0]{
-                let cell = collectionView.dequeueReusableCell(withReuseIdentifier: PersonalPlanAddRepeatDayCollectionViewCell.reuseId, for: indexPath) as! PersonalPlanAddRepeatDayCollectionViewCell
-                
-                cell.label.text = RepeatDayOfTheWeekArray[indexPath.row]
-                cell.cellBackgroundView.layer.borderColor = UIColor(red: 198/255, green: 198/255, blue: 198/255, alpha: 1).cgColor
-                cell.label.text = "X"
-                cell.label.textColor = UIColor(red: 198/255, green: 198/255, blue: 198/255, alpha: 1)
-                
-                cell.setModel(RepeatModels[indexPath.row], indexPath: indexPath)
-                return cell
-            }else{
-                let cell = collectionView.dequeueReusableCell(withReuseIdentifier: PersonalPlanAddRepeatDayCollectionViewCell.reuseId, for: indexPath) as! PersonalPlanAddRepeatDayCollectionViewCell
-                
-                cell.label.text = RepeatDayOfTheWeekArray[indexPath.row]
-                cell.backgroundColor = .white
-                
-                cell.setModel(RepeatModels[indexPath.row], indexPath: indexPath)
-                return cell
-            }
-        }else if collectionView == tagCollectionView{
-            if indexPath == [0,2]{
-                let cell = collectionView.dequeueReusableCell(withReuseIdentifier: TagCollectionViewCell.reuseId, for: indexPath) as! TagCollectionViewCell
-                
-                cell.tagNameLabel.text = "선택 안 함"
-                cell.tagNameLabel.textColor = UIColor(red: 187/255, green: 187/255, blue: 187/255, alpha: 1)
-                cell.tagBackgroundView.backgroundColor = .white
-                cell.tagBackgroundView.layer.borderWidth = 1.3
-                cell.tagBackgroundView.layer.borderColor = UIColor(red: 187/255, green: 187/255, blue: 187/255, alpha: 1).cgColor
-                
-                cell.setModel(TagModels[indexPath.row])
-                
-                return cell
-            }else if indexPath == [0,0]{
-                let cell = collectionView.dequeueReusableCell(withReuseIdentifier: TagCollectionViewCell.reuseId, for: indexPath) as! TagCollectionViewCell
-                
-                cell.tagNameLabel.text = "+ 추가"
-                cell.tagNameLabel.textColor = UIColor(red: 186/255, green: 200/255, blue: 255/255, alpha: 1)
-                cell.tagBackgroundView.backgroundColor = .white
-                cell.tagBackgroundView.layer.borderWidth = 1.3
-                cell.tagBackgroundView.layer.borderColor = UIColor(red: 186/255, green: 200/255, blue: 255/255, alpha: 1).cgColor
-                
-                return cell
-            }else{
-                let cell = collectionView.dequeueReusableCell(withReuseIdentifier: TagCollectionViewCell.reuseId, for: indexPath) as! TagCollectionViewCell
-                
-                cell.setModel(TagModels[indexPath.row])
-                
-                cell.tagNameLabel.text = tagNameTextArray[indexPath.row]
-                return cell
-            }
-        }
-        
-        return UICollectionViewCell()
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath)
-    {
-        if collectionView == tagColorCollectionView{
-            if TagColorModels[indexPath.row].isSelected {
-                
-                TagColorModels[tagColorPreciousSelectedIndex].isSelected.toggle()
-                
-                if TagColorModels.filter({ $0.isSelected }).count >= 1 {
-                    TagColorModels[indexPath.row].isSelected.toggle()
-                    
-                    tagColorPreciousSelectedIndex = indexPath.row
-                }
-            }
-            
-            collectionView.reloadData()
-        }else if collectionView == repeatCollectionView{
-            if indexPath == [0,0]{
-                if RepeatModels[0].isSelected == true{ // 채울 때
-                    print("다 지운다~~~")
-                    selectedRepeatRow.removeAll()
-                    for i in 0...RepeatModels.count-1 {
-                        if RepeatModels[i].isSelected == false{
-                            RepeatModels[i].isSelected.toggle()
-                            RepeatModels[0].isSelected = false
-
-                        }
-                    }
-                }else{ // 비울 때
-                    // 비워지면 안됌
-                }
-            }else{ // 선택 안함이 아닌 cell 을 클릭했을 때
-                RepeatModels[indexPath.row].isSelected.toggle()
-                if RepeatModels[indexPath.row].isSelected == false{ // 채울때
-                    print("\(indexPath.row) 넣은다~~응~??")
-                    selectedRepeatRow.append(indexPath.row)
-                    if RepeatModels.filter({ $0.isSelected == false }).count == 2 {
-                        RepeatModels[0].isSelected = true
-   
-                    }
-                }else{ // 선택 취소할때
-                    print("\(selectedRepeatRow.firstIndex(of: indexPath.row)!+1) <~ 요거 삭제한다~?")
-                    selectedRepeatRow.remove(at: selectedRepeatRow.firstIndex(of: indexPath.row)!)
-                    if RepeatModels.filter({ $0.isSelected == true }).count == 8 {
-                        RepeatModels[0].isSelected = false
-
-                    }
-                }
-            }
-            
-            collectionView.reloadData()
-        }else if collectionView == tagCollectionView{
-            if indexPath == [0,0]{
-                tagAddModalView.isHidden = false
-            }else{
-                if TagModels[indexPath.row].isSelected {
-                    
-                    TagModels[tagPreciousSelectedIndex].isSelected.toggle()
-                    
-                    if TagModels.filter({ $0.isSelected }).count >= 1 {
-                        TagModels[indexPath.row].isSelected.toggle()
-                        
-                        tagPreciousSelectedIndex = indexPath.row
-                    }
-                    
-                }
-                collectionView.reloadData()
-            }
-        }
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        if collectionView == tagColorCollectionView{
-            return CGSize(width: 30, height: 30)
-        }else if collectionView == repeatCollectionView{
-            return CGSize(width: self.view.frame.width/14.4, height: self.view.frame.width/14.4)
-        }else if collectionView == tagCollectionView{
-            return CGSize(width: self.view.frame.width/4.4, height: self.view.frame.height/23)
-        }
-
-        return CGSize()
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
-        if collectionView == tagColorCollectionView{
-            return UIEdgeInsets(top: 0, left: self.view.frame.height/33.8, bottom: 0, right: self.view.frame.height/33.8)
-        }else if collectionView == repeatCollectionView{
-            return UIEdgeInsets(top: 0, left: self.view.frame.height/33.8, bottom: 0, right: self.view.frame.height/33.8)
-        }else if collectionView == tagCollectionView{
-            
-        }
-        
-        return UIEdgeInsets()
     }
 }
 
