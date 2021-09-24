@@ -318,29 +318,29 @@ class PersonalPlanChangeViewController: UIViewController {
         
         self.view.backgroundColor = .white
                 
-        layoutSetting()
+        configureUI()
         
-        calendarViewSetting()
-        
-        timeViewSetting()
-        
-        locationViewSetting()
-
-        labelSetting()
-        
-        tagCollectionViewSetting()
-        
-        tagAddModalViewSetting()
-        
-        tagColorCollectionViewSetting()
-        
-        calendarModalViewSetting()
-                
-        selectTimeModalViewSetting()
-        
-        repeatCollectionViewSetting()
-        
-        checkViewSetting()
+//        calendarViewSetting()
+//
+//        timeViewSetting()
+//
+//        locationViewSetting()
+//
+//        labelSetting()
+//
+//        tagCollectionViewSetting()
+//
+//        tagAddModalViewSetting()
+//
+//        tagColorCollectionViewSetting()
+//
+//        calendarModalViewSetting()
+//
+//        selectTimeModalViewSetting()
+//
+//        repeatCollectionViewSetting()
+//
+//        checkViewSetting()
     }
     
     func checkViewSetting(){
@@ -1018,41 +1018,18 @@ class PersonalPlanChangeViewController: UIViewController {
         self.navigationController?.popViewController(animated: true)
     }
     
-    func layoutSetting(){
-        self.view.addSubview(backButton)
-        self.view.addSubview(mainTitleLabel)
-        self.view.addSubview(notificationTitleLabel)
-        self.view.addSubview(notificationBackgroundView)
-        self.view.addSubview(titleBackgroundView)
-        titleBackgroundView.addSubview(titleLabel)
-        titleBackgroundView.addSubview(titleTextField)
-        self.view.addSubview(calendarLabelView)
-        calendarLabelView.addSubview(calendarRepeatLabel)
-        calendarLabelView.addSubview(calendarLabelButton)
-        self.view.addSubview(timeLabelButton)
-        self.view.addSubview(locationLabelButton)
-        self.view.addSubview(tagLabel)
-        self.view.addSubview(tagStudyButton)
-        self.view.addSubview(tagWalkButton)
-        self.view.addSubview(tagMajorBandButton)
-        self.view.addSubview(tagFreedomBandButton)
-        self.view.addSubview(tagAddButton)
+    
+    func configureUI(){
+        addView()
         
-        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(_:)), name:UIResponder.keyboardWillShowNotification, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide(_:)), name: UIResponder.keyboardWillHideNotification, object: nil)
+        addTarget()
         
-        explanationBackgroundView.addSubview(explanationTitleLabel)
-        explanationBackgroundView.addSubview(explanationTextView)
-        self.view.addSubview(changeButton)
-        
-        changeButton.addTarget(self, action: #selector(changeButtonClicked(sender:)), for: .touchUpInside)
-        backButton.addTarget(self, action: #selector(backButtonClicked(sender:)), for: .touchUpInside)
-        
-        tagStudyButton.tag = 0
-        tagWalkButton.tag = 1
-        tagMajorBandButton.tag = 2
-        tagFreedomBandButton.tag = 3
-        
+        addObserver()
+
+        addLayout()
+    }
+    
+    func addLayout(){
         backButton.snp.makeConstraints { make in
             make.top.equalTo(self.view.safeAreaLayoutGuide).offset(self.view.frame.height/47.7)
             make.left.equalToSuperview().offset(self.view.frame.width/12)
@@ -1064,25 +1041,6 @@ class PersonalPlanChangeViewController: UIViewController {
             make.left.equalTo(backButton)
             make.top.equalTo(backButton.snp.bottom).offset(self.view.frame.height/50)
         }
-        
-        calendarLabelButton.addTarget(self,action:#selector(calendarViewButtonClicked(sender:)),
-                                 for:.touchUpInside)
-        timeLabelButton.addTarget(self,action:#selector(timeViewButtonClicked(sender:)),
-                                 for:.touchUpInside)
-        locationLabelButton.addTarget(self,action:#selector(locationViewButtonClicked(sender:)),
-                                 for:.touchUpInside)
-        
-        tagStudyButton.addTarget(self,action:#selector(tagbuttonClicked),
-                                 for:.touchUpInside)
-        tagWalkButton.addTarget(self,action:#selector(tagbuttonClicked),
-                                 for:.touchUpInside)
-        tagMajorBandButton.addTarget(self,action:#selector(tagbuttonClicked),
-                                 for:.touchUpInside)
-        tagFreedomBandButton.addTarget(self,action:#selector(tagbuttonClicked),
-                                 for:.touchUpInside)
-        
-        tagAddButton.addTarget(self,action:#selector(tagAddButtonClicked(sender:)),
-                                 for:.touchUpInside)
         
         titleBackgroundView.snp.makeConstraints { make in
             make.centerX.equalToSuperview()
@@ -1102,8 +1060,61 @@ class PersonalPlanChangeViewController: UIViewController {
             make.width.equalToSuperview().dividedBy(1.45)
             make.height.equalToSuperview()
         }
-
-
+    }
+    
+    func addObserver(){
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(_:)), name:UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide(_:)), name: UIResponder.keyboardWillHideNotification, object: nil)
+    }
+    
+    func addTarget(){
+        tagStudyButton.tag = 0
+        tagWalkButton.tag = 1
+        tagMajorBandButton.tag = 2
+        tagFreedomBandButton.tag = 3
+        
+        calendarLabelButton.addTarget(self,action:#selector(calendarViewButtonClicked(sender:)),
+                                 for:.touchUpInside)
+        timeLabelButton.addTarget(self,action:#selector(timeViewButtonClicked(sender:)),
+                                 for:.touchUpInside)
+        locationLabelButton.addTarget(self,action:#selector(locationViewButtonClicked(sender:)),
+                                 for:.touchUpInside)
+        tagStudyButton.addTarget(self,action:#selector(tagbuttonClicked),
+                                 for:.touchUpInside)
+        tagWalkButton.addTarget(self,action:#selector(tagbuttonClicked),
+                                 for:.touchUpInside)
+        tagMajorBandButton.addTarget(self,action:#selector(tagbuttonClicked),
+                                 for:.touchUpInside)
+        tagFreedomBandButton.addTarget(self,action:#selector(tagbuttonClicked),
+                                 for:.touchUpInside)
+        tagAddButton.addTarget(self,action:#selector(tagAddButtonClicked(sender:)),
+                                 for:.touchUpInside)
+        changeButton.addTarget(self, action: #selector(changeButtonClicked(sender:)), for: .touchUpInside)
+        backButton.addTarget(self, action: #selector(backButtonClicked(sender:)), for: .touchUpInside)
+    }
+    
+    func addView(){
+        self.view.addSubview(backButton)
+        self.view.addSubview(mainTitleLabel)
+        self.view.addSubview(notificationTitleLabel)
+        self.view.addSubview(notificationBackgroundView)
+        self.view.addSubview(titleBackgroundView)
+        titleBackgroundView.addSubview(titleLabel)
+        titleBackgroundView.addSubview(titleTextField)
+        self.view.addSubview(calendarLabelView)
+        calendarLabelView.addSubview(calendarRepeatLabel)
+        calendarLabelView.addSubview(calendarLabelButton)
+        self.view.addSubview(timeLabelButton)
+        self.view.addSubview(locationLabelButton)
+        self.view.addSubview(tagLabel)
+        self.view.addSubview(tagStudyButton)
+        self.view.addSubview(tagWalkButton)
+        self.view.addSubview(tagMajorBandButton)
+        self.view.addSubview(tagFreedomBandButton)
+        self.view.addSubview(tagAddButton)
+        explanationBackgroundView.addSubview(explanationTitleLabel)
+        explanationBackgroundView.addSubview(explanationTextView)
+        self.view.addSubview(changeButton)
     }
 
     func calendarViewSetting(){
