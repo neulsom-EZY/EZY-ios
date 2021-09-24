@@ -9,49 +9,8 @@ import UIKit
 
 class PersonalPlanChangeViewController: UIViewController {
 
-    lazy var calendarViewButton = WhiteBackgroundView()
-    
-    lazy var timeViewButton = WhiteBackgroundView()
-    
-    lazy var locationViewButton = WhiteBackgroundView()
-    
-    lazy var tagAddModalView = TagAddModalView()
-    
-    lazy var selectCalendarModalView = SelectCalendarModalView()
-    
-    lazy var selectTimeModalView = SelectTimeModalView()
-    
-    lazy var isChecked: [Bool] = [true, false, false, false]
-    
-    lazy var startSelectCircleButtonLocation = "Left"
-    
-    lazy var endSelectCircleButtonLocation = "Left"
-    
-    lazy var startPickerViewText = [["1","2","3","4","5","6","7","8","9","10","11","12"],["00","05","10","15","20","25","30","35","40","45","50","55"]]
-    
-    lazy var dayPickerViewText1 = ["Sun","Mon","Tue","Wed","Thr","Fri","Sat","Mon","Tue","Wed","Thr","Fri","Mon","Tue","Wed","Thr","Fri"]
-    
-    lazy var dayPickerViewText2 = ["12","3","4","5","6","7","2","3","4","5","6","7","2","3","4","5","6","7"]
-    
-    lazy var selectedDayRow = 0
-    
-    lazy var selectedTimeEndAMPM = "AM"
-    
-    lazy var selectedTimeStartAMPM = "AM"
-    
-    lazy var selectedTimeStartHourIndex = 0
-    
-    lazy var selectedTimeStartMinIndex = 0
-    
-    lazy var selectedTimeEndHourIndex = 0
-    
-    lazy var selectedTimeEndMinIndex = 0
-    
-    lazy var selectedRepeatRow = [Int]()
-    
-    lazy var selectedRepeatText = ""
-    
-    var RepeatModels: [RepeatCollectionViewModel] = [RepeatCollectionViewModel(backgroundColr: UIColor(red: 198/255, green: 198/255, blue: 198/255, alpha: 1),                                                          isSelected: false),
+    //MARK: - Properties
+    private var RepeatModels: [RepeatCollectionViewModel] = [RepeatCollectionViewModel(backgroundColr: UIColor(red: 198/255, green: 198/255, blue: 198/255, alpha: 1),                                                          isSelected: false),
                                                      RepeatCollectionViewModel(backgroundColr: UIColor(red: 255/255, green: 188/255, blue: 188/255, alpha: 1), isSelected: true),
                                                      RepeatCollectionViewModel(backgroundColr: UIColor(red: 255/255, green: 188/255, blue: 188/255, alpha: 1), isSelected: true),
                                                      RepeatCollectionViewModel(backgroundColr: UIColor(red: 255/255, green: 188/255, blue: 188/255, alpha: 1), isSelected: true),
@@ -60,7 +19,7 @@ class PersonalPlanChangeViewController: UIViewController {
                                                      RepeatCollectionViewModel(backgroundColr: UIColor(red: 255/255, green: 188/255, blue: 188/255, alpha: 1), isSelected: true),
                                                      RepeatCollectionViewModel(backgroundColr: UIColor(red: 255/255, green: 188/255, blue: 188/255, alpha: 1), isSelected: true)]
     
-    var TagColorModels: [TagColorCollectionViewModel] = [TagColorCollectionViewModel(backgroundColor: UIColor(red: 186/255, green: 200/255, blue: 255/255, alpha: 1), isSelected: false),
+    private var TagColorModels: [TagColorCollectionViewModel] = [TagColorCollectionViewModel(backgroundColor: UIColor(red: 186/255, green: 200/255, blue: 255/255, alpha: 1), isSelected: false),
                                                  TagColorCollectionViewModel(backgroundColor: UIColor(red: 196/255, green: 200/255, blue: 255/255, alpha: 1), isSelected: true),
                                                  TagColorCollectionViewModel(backgroundColor: UIColor(red: 206/255, green: 200/255, blue: 255/255, alpha: 1), isSelected: true),
                                                  TagColorCollectionViewModel(backgroundColor: UIColor(red: 216/255, green: 200/255, blue: 255/255, alpha: 1), isSelected: true),
@@ -74,7 +33,7 @@ class PersonalPlanChangeViewController: UIViewController {
                                                  TagColorCollectionViewModel(backgroundColor: UIColor(red: 255/255, green: 160/255, blue: 255/255, alpha: 1), isSelected: true),
                                                  TagColorCollectionViewModel(backgroundColor: UIColor(red: 255/255, green: 150/255, blue: 255/255, alpha: 1), isSelected: true)]
     
-    var TagModels: [TagCollectionViewModel] = [TagCollectionViewModel(backgroundColor: UIColor(red: 186/255, green: 200/255, blue: 255/255, alpha: 1), isSelected: true),
+    private var TagModels: [TagCollectionViewModel] = [TagCollectionViewModel(backgroundColor: UIColor(red: 186/255, green: 200/255, blue: 255/255, alpha: 1), isSelected: true),
                                                TagCollectionViewModel(backgroundColor: UIColor(red: 196/255, green: 200/255, blue: 255/255, alpha: 1), isSelected: true),
                                                TagCollectionViewModel(backgroundColor: UIColor(red: 206/255, green: 200/255, blue: 255/255, alpha: 1), isSelected: false),
                                                TagCollectionViewModel(backgroundColor: UIColor(red: 216/255, green: 200/255, blue: 255/255, alpha: 1), isSelected: true),
@@ -88,21 +47,65 @@ class PersonalPlanChangeViewController: UIViewController {
                                                TagCollectionViewModel(backgroundColor: UIColor(red: 255/255, green: 160/255, blue: 255/255, alpha: 1), isSelected: true),
                                                TagCollectionViewModel(backgroundColor: UIColor(red: 255/255, green: 150/255, blue: 255/255, alpha: 1), isSelected: true)]
     
-    lazy var tagButton: [UIButton] = [tagStudyButton, tagWalkButton, tagMajorBandButton, tagFreedomBandButton]
+
     
-    var tagColorPreciousSelectedIndex = 0
+    private var calendarViewButton = WhiteBackgroundView()
     
-    var tagPreciousSelectedIndex = 2
+    private var timeViewButton = WhiteBackgroundView()
     
-    var tagNameTextArray = ["공부", "산책", "토익", "코딩", "요리", "운동", "정리", "청소","공부", "산책", "토익", "코딩", "요리", "운동", "정리", "청소","공부", "산책", "토익", "코딩", "요리", "운동", "정리", "청소","공부", "산책", "토익", "코딩", "요리", "운동", "정리", "청소"]
+    private var locationViewButton = WhiteBackgroundView()
     
-    var dayArray = ["24","25","26","27","28","29","30","1","2","3","24","25","26","27","28","29","30","1","2","3"]
+    private var tagAddModalView = TagAddModalView()
     
-    var dayOfTheWeekArray = ["S","M","T","W","T","F","S","S","M","T","S","M","T","W","T","F","S","S","M","T"]
+    private var selectCalendarModalView = SelectCalendarModalView()
     
-    var RepeatDayOfTheWeekArray = ["","S","M", "T","W","T","F","S"]
+    private var selectTimeModalView = SelectTimeModalView()
     
-    let tagColorCollectionView = UICollectionView(frame: .zero, collectionViewLayout: CalendarViewLayout()).then {
+    private lazy var tagButton: [UIButton] = [tagStudyButton, tagWalkButton, tagMajorBandButton, tagFreedomBandButton]
+    
+    private var isChecked: [Bool] = [true, false, false, false]
+    
+    private var startPickerViewText = [["1","2","3","4","5","6","7","8","9","10","11","12"],["00","05","10","15","20","25","30","35","40","45","50","55"]]
+    
+    private var dayPickerViewText1 = ["Sun","Mon","Tue","Wed","Thr","Fri","Sat","Mon","Tue","Wed","Thr","Fri","Mon","Tue","Wed","Thr","Fri"]
+    
+    private var dayPickerViewText2 = ["12","3","4","5","6","7","2","3","4","5","6","7","2","3","4","5","6","7"]
+    
+    private var tagNameTextArray = ["공부", "산책", "토익", "코딩", "요리", "운동", "정리", "청소","공부", "산책", "토익", "코딩", "요리", "운동", "정리", "청소","공부", "산책", "토익", "코딩", "요리", "운동", "정리", "청소","공부", "산책", "토익", "코딩", "요리", "운동", "정리", "청소"]
+    
+    private var dayArray = ["24","25","26","27","28","29","30","1","2","3","24","25","26","27","28","29","30","1","2","3"]
+    
+    private var dayOfTheWeekArray = ["S","M","T","W","T","F","S","S","M","T","S","M","T","W","T","F","S","S","M","T"]
+    
+    private var RepeatDayOfTheWeekArray = ["","S","M", "T","W","T","F","S"]
+    
+    private var startSelectCircleButtonLocation = "Left"
+    
+    private var endSelectCircleButtonLocation = "Left"
+    
+    private var selectedTimeEndAMPM = "AM"
+    
+    private var selectedTimeStartAMPM = "AM"
+    
+    private var selectedRepeatText = ""
+    
+    private var selectedDayRow = 0
+    
+    private var selectedTimeStartHourIndex = 0
+    
+    private var selectedTimeStartMinIndex = 0
+    
+    private var selectedTimeEndHourIndex = 0
+    
+    private var selectedTimeEndMinIndex = 0
+    
+    private var selectedRepeatRow = [Int]()
+    
+    private var tagColorPreciousSelectedIndex = 0
+    
+    private var tagPreciousSelectedIndex = 2
+    
+    private let tagColorCollectionView = UICollectionView(frame: .zero, collectionViewLayout: CalendarViewLayout()).then {
         let layout: UICollectionViewFlowLayout = UICollectionViewFlowLayout()
         layout.itemSize = CGSize(width: 30, height: 30)
         layout.scrollDirection = .horizontal
@@ -111,7 +114,7 @@ class PersonalPlanChangeViewController: UIViewController {
         $0.backgroundColor = .white
     }
     
-    let repeatCollectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewLayout()).then {
+    private let repeatCollectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewLayout()).then {
         let layout: UICollectionViewFlowLayout = UICollectionViewFlowLayout()
         layout.itemSize = CGSize(width: 30, height: 30)
         layout.scrollDirection = .horizontal
@@ -120,7 +123,7 @@ class PersonalPlanChangeViewController: UIViewController {
         $0.backgroundColor = .white
     }
     
-    let tagCollectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewLayout()).then {
+    private let tagCollectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewLayout()).then {
         let layout: UICollectionViewFlowLayout = UICollectionViewFlowLayout()
         layout.scrollDirection = .horizontal
         $0.collectionViewLayout = layout
@@ -128,76 +131,76 @@ class PersonalPlanChangeViewController: UIViewController {
         $0.backgroundColor = .white
     }
     
-    let startTimeTableView = UITableView().then{
+    private let startTimeTableView = UITableView().then{
         $0.backgroundColor = .clear
         $0.showsVerticalScrollIndicator = false
         $0.separatorStyle = .none
     }
     
-    let endTimeTableView = UITableView().then{
+    private let endTimeTableView = UITableView().then{
         $0.backgroundColor = .clear
         $0.showsVerticalScrollIndicator = false
         $0.separatorStyle = .none
     }
     
-    lazy var titleBackgroundView = UIView().then {
+    private let titleBackgroundView = UIView().then {
         $0.backgroundColor = UIColor(red: 244/255, green: 246/255, blue: 255/255, alpha: 1)
         $0.layer.cornerRadius = 20
     }
     
-    lazy var titleLabel = UILabel().then {
+    private let titleLabel = UILabel().then {
         $0.text = "제목"
         $0.textColor = UIColor(red: 128/255, green: 153/255, blue: 255/255, alpha: 1)
         $0.dynamicFont(fontSize: 14, currentFontName: "AppleSDGothicNeo-Bold")
     }
     
-    lazy var titleTextField = UITextField().then {
+    private let titleTextField = UITextField().then {
         $0.text = "강아지 산책 시키기"
         $0.textAlignment = .left
         $0.textColor = UIColor(red: 101/255, green: 101/255, blue: 101/255, alpha: 1)
         $0.dynamicFont(fontSize: 14, currentFontName: "AppleSDGothicNeo-Medium")
     }
     
-    lazy var calendarLabelView = UIView().then{
+    private let calendarLabelView = UIView().then{
         $0.backgroundColor = UIColor.clear
     }
     
-    lazy var calendarLabelButton = UIButton().then {
+    private let calendarLabelButton = UIButton().then {
         $0.setTitle("2021. \("MM".stringFromDate()). 09 화요일", for: .normal)
         $0.setTitleColor(UIColor(red: 101/255, green: 101/255, blue: 101/255, alpha: 1), for: .normal)
         $0.dynamicFont(fontSize: 16, currentFontName: "Poppins-Regular")
     }
     
-    lazy var calendarRepeatLabel = UILabel().then{
+    private let calendarRepeatLabel = UILabel().then{
         $0.text = "월, 화, 수, 목, 금, 반복"
         $0.textColor = UIColor(red: 166/255, green: 166/255, blue: 166/255, alpha: 1)
         $0.dynamicFont(fontSize: 10, currentFontName: "AppleSDGothicNeo-Light")
     }
     
-    lazy var timeLabelButton = UIButton().then {
+    private let timeLabelButton = UIButton().then {
         $0.setTitle("11:00AM - 1:00PM", for: .normal)
         $0.setTitleColor(UIColor(red: 101/255, green: 101/255, blue: 101/255, alpha: 1), for: .normal)
         $0.dynamicFont(fontSize: 16, currentFontName: "Poppins-Regular")
     }
     
-    lazy var locationLabelButton = UIButton().then {
+    private let locationLabelButton = UIButton().then {
         $0.setTitle("송정역 이디야 카페", for: .normal)
         $0.setTitleColor(UIColor(red: 101/255, green: 101/255, blue: 101/255, alpha: 1), for: .normal)
         $0.dynamicFont(fontSize: 16, currentFontName: "Poppins-Regular")
     }
     
-    lazy var explanationBackgroundView = UIView().then {
+    private let explanationBackgroundView = UIView().then {
         $0.backgroundColor = UIColor(red: 246/255, green: 243/255, blue: 255/255, alpha: 1)
         $0.layer.cornerRadius = 20
     }
     
-    lazy var explanationTitleLabel = UILabel().then {
+    private let explanationTitleLabel = UILabel().then {
         $0.text = "설명"
         $0.textColor = UIColor(red: 150/255, green: 141/255, blue: 255/255, alpha: 1)
         $0.dynamicFont(fontSize: 14, currentFontName: "AppleSDGothicNeo-Bold")
     }
     
-    lazy var explanationTextView = UITextView().then {
+    private let explanationTextView = UITextView().then {
         $0.text = "카페에서 디자인 이론 공부 하기, 카페에서 디자인 이론 공부 하기"
         $0.textAlignment = .left
         $0.backgroundColor = .clear
@@ -205,13 +208,13 @@ class PersonalPlanChangeViewController: UIViewController {
         $0.dynamicFont(fontSize: 14, currentFontName: "AppleSDGothicNeo-Medium")
     }
     
-    lazy var tagLabel = UILabel().then {
+    private let tagLabel = UILabel().then {
         $0.text = "태그"
         $0.textColor = UIColor(red: 182/255, green: 182/255, blue: 182/255, alpha: 1)
         $0.dynamicFont(fontSize: 14, currentFontName: "AppleSDGothicNeo-Bold")
     }
     
-    lazy var tagStudyButton = UIButton().then {
+    private let tagStudyButton = UIButton().then {
         $0.setTitle("공부", for: .normal)
         $0.setTitleColor(UIColor.white, for: .normal)
         $0.layer.borderWidth = 1
@@ -220,7 +223,7 @@ class PersonalPlanChangeViewController: UIViewController {
         $0.backgroundColor = UIColor(red: 150/255, green: 141/255, blue: 255/255, alpha: 1)
     }
     
-    lazy var tagWalkButton = UIButton().then {
+    private let tagWalkButton = UIButton().then {
         $0.setTitle("산책", for: .normal)
         $0.setTitleColor(UIColor(red: 186/255, green: 222/255, blue: 255/255, alpha: 1), for: .normal)
         $0.layer.borderWidth = 1
@@ -228,7 +231,7 @@ class PersonalPlanChangeViewController: UIViewController {
         $0.dynamicFont(fontSize: 12, currentFontName: "AppleSDGothicNeo-Bold")
     }
     
-    lazy var tagMajorBandButton = UIButton().then {
+    private let tagMajorBandButton = UIButton().then {
         $0.setTitle("전공동아리", for: .normal)
         $0.setTitleColor(UIColor(red: 207/255, green: 227/255, blue: 206/255, alpha: 1), for: .normal)
         $0.layer.borderWidth = 1
@@ -252,26 +255,26 @@ class PersonalPlanChangeViewController: UIViewController {
         $0.dynamicFont(fontSize: 12, currentFontName: "AppleSDGothicNeo-Bold")
     }
     
-    lazy var changeButton = UIButton().then {
+    private let changeButton = UIButton().then {
         $0.setTitle("변 경", for: .normal)
         $0.layer.cornerRadius = 10
         $0.backgroundColor = UIColor(red: 186/255, green: 200/255, blue: 255/255, alpha: 1)
         $0.dynamicFont(fontSize: 14, currentFontName: "AppleSDGothicNeo-SemiBold")
     }
     
-    lazy var mainTitleLabel = UILabel().then{
+    private let mainTitleLabel = UILabel().then{
         $0.text = "나의 할 일 변경"
         $0.textColor = UIColor(red: 154/255, green: 174/255, blue: 254/255, alpha: 1)
         $0.dynamicFont(fontSize: 22, currentFontName: "AppleSDGothicNeo-SemiBold")
     }
     
-    lazy var notificationTitleLabel = UILabel().then {
+    private let notificationTitleLabel = UILabel().then {
         $0.text = "알림 설정"
         $0.textColor = UIColor(red: 182/255, green: 182/255, blue: 182/255, alpha: 1)
         $0.dynamicFont(fontSize: 14, currentFontName: "AppleSDGothicNeo-Bold")
     }
     
-    lazy var notificationBackgroundView = UIButton().then {
+    private let notificationBackgroundView = UIButton().then {
         $0.backgroundColor = UIColor(red: 253/255, green: 253/255, blue: 253/255, alpha: 1)
         $0.layer.borderWidth = 0.5
         $0.layer.borderColor = UIColor(red: 207/255, green: 207/255, blue: 207/255, alpha: 1).cgColor
@@ -281,11 +284,11 @@ class PersonalPlanChangeViewController: UIViewController {
         $0.setTitleColor(UIColor(red: 172/255, green: 172/255, blue: 172/255, alpha: 1), for: .normal)
     }
     
-    lazy var backButton = UIButton().then{
+    private let backButton = UIButton().then{
         $0.setImage(UIImage(named: "EZY_LocationBackButton"), for: .normal)
     }
     
-    lazy var selectLocationCheckView = UIView().then{
+    private let selectLocationCheckView = UIView().then{
         $0.backgroundColor = UIColor(red: 248/255, green: 248/255, blue: 248/255, alpha: 1)
         $0.layer.cornerRadius = 10
         $0.layer.borderWidth = 0.5
@@ -297,22 +300,24 @@ class PersonalPlanChangeViewController: UIViewController {
         $0.layer.shadowColor = UIColor(red: 163/255, green: 163/255, blue: 163/255, alpha: 1).cgColor
     }
     
-    lazy var selectedLocationLabelView = UIView().then{
+    private let selectedLocationLabelView = UIView().then{
         $0.backgroundColor = .clear
     }
     
-    lazy var selectedLocationNameLabel = UILabel().then{
+    private var selectedLocationNameLabel = UILabel().then{
         $0.text = "광주소프트웨어마이스터고등학교"
         $0.textColor = UIColor(red: 186/255, green: 186/255, blue: 186/255, alpha: 1)
         $0.dynamicFont(fontSize: 10, currentFontName: "AppleSDGothicNeo-SemiBold")
     }
     
-    lazy var selectedLabel = UILabel().then{
+    private let selectedLabel = UILabel().then{
         $0.text = "위치가 선택되었습니다!"
         $0.textColor = UIColor(red: 122/255, green: 122/255, blue: 122/255, alpha: 1)
         $0.dynamicFont(fontSize: 12, currentFontName: "AppleSDGothicNeo-SemiBold")
     }
     
+    
+    //MARK: - lifeCycles
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -726,6 +731,18 @@ class PersonalPlanChangeViewController: UIViewController {
         tagAddModalView.isHidden = true
     }
     
+    @objc //MARK: 모달 창 올리기
+    func keyboardWillShow(_ sender: Notification) {
+        explanationBackgroundView.frame.origin.y = self.view.frame.height/2.2
+        tagAddModalView.modalBackgroundView.frame.origin.y = self.view.frame.height/5
+    }
+
+    @objc //MARK: 모달 창 원래대로
+    func keyboardWillHide(_ sender: Notification) {
+        explanationBackgroundView.frame.origin.y = self.view.frame.height/1.85
+        tagAddModalView.modalBackgroundView.frame.origin.y = (self.view.frame.height/2) - (tagAddModalView.modalBackgroundView.frame.height/2)
+    }
+    
     func tagColorCollectionViewSetting(){
         
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(_:)), name:UIResponder.keyboardWillShowNotification, object: nil)
@@ -752,13 +769,18 @@ class PersonalPlanChangeViewController: UIViewController {
         firstCell?.checkImage.isHidden = false
     }
     
+
+    
+    //MARK: 화면터치하여 모달 추가 창 나가기
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?){
+         self.view.endEditing(true)
+        tagAddModalView.isHidden = true
+    }
+    
+    //MARK: - selectors
     @objc func startSelectCircleButtonClicked(sender:UIButton){
-
         UIButton.animate(withDuration: 0.2, delay: 0, options: .curveEaseOut, animations: {
-            
             if self.startSelectCircleButtonLocation == "Left"{
-
-                
                 self.selectTimeModalView.startSelectCircleButton.snp.remakeConstraints { make in
                     make.centerY.equalTo(self.selectTimeModalView.startSelectBackButton)
                     make.right.equalTo(self.selectTimeModalView.startSelectBackButton).offset(-self.view.frame.width/300)
@@ -776,8 +798,6 @@ class PersonalPlanChangeViewController: UIViewController {
                 self.startSelectCircleButtonLocation = "Right"
                 self.selectedTimeStartAMPM = "PM"
             }else{
-
-                
                 self.selectTimeModalView.startSelectCircleButton.snp.remakeConstraints { make in
                     make.centerY.equalTo(self.selectTimeModalView.startSelectBackButton)
                     make.left.equalTo(self.selectTimeModalView.startSelectBackButton).offset(self.view.frame.width/300)
@@ -795,18 +815,12 @@ class PersonalPlanChangeViewController: UIViewController {
                 self.startSelectCircleButtonLocation = "Left"
                 self.selectedTimeStartAMPM = "AM"
             }
-
         })
     }
     
     @objc func endSelectCircleButtonClicked(sender:UIButton){
-
-
         UIButton.animate(withDuration: 0.2, delay: 0, options: .curveEaseOut, animations: {
-            
             if self.endSelectCircleButtonLocation == "Left"{
-                
-                
                 
                 self.selectTimeModalView.endSelectCircleButton.snp.remakeConstraints { make in
                     make.centerY.equalTo(self.selectTimeModalView.endSelectBackButton)
@@ -844,30 +858,10 @@ class PersonalPlanChangeViewController: UIViewController {
                 self.endSelectCircleButtonLocation = "Left"
                 self.selectedTimeEndAMPM = "AM"
             }
-
         })
     }
-    
-    @objc //MARK: 모달 창 올리기
-    func keyboardWillShow(_ sender: Notification) {
-        explanationBackgroundView.frame.origin.y = self.view.frame.height/2.2
-        tagAddModalView.modalBackgroundView.frame.origin.y = self.view.frame.height/5
-    }
 
-    @objc //MARK: 모달 창 원래대로
-    func keyboardWillHide(_ sender: Notification) {
-        explanationBackgroundView.frame.origin.y = self.view.frame.height/1.85
-        tagAddModalView.modalBackgroundView.frame.origin.y = (self.view.frame.height/2) - (tagAddModalView.modalBackgroundView.frame.height/2)
-    }
-    
-    //MARK: 화면터치하여 모달 추가 창 나가기
-    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?){
-         self.view.endEditing(true)
-        tagAddModalView.isHidden = true
-    }
-    
-    @objc func tagAddCompletionbuttonClicked(sender:UIButton)
-    {
+    @objc func tagAddCompletionbuttonClicked(sender:UIButton){
         tagAddModalView.isHidden = true
     }
     
@@ -947,8 +941,7 @@ class PersonalPlanChangeViewController: UIViewController {
         timeLabelButton.setTitle("\(startPickerViewText[0][selectedTimeStartHourIndex]):\(startPickerViewText[1][selectedTimeStartMinIndex])\(selectedTimeStartAMPM) - \(startPickerViewText[0][selectedTimeEndHourIndex]):\(startPickerViewText[1][selectedTimeEndMinIndex])\(selectedTimeEndAMPM)", for: .normal)
     }
     
-    @objc func tagbuttonClicked(sender:UIButton)
-    {
+    @objc func tagbuttonClicked(sender:UIButton){
         var backgroundColor: UIColor
         var borderColor: CGColor
         
@@ -1018,7 +1011,7 @@ class PersonalPlanChangeViewController: UIViewController {
         self.navigationController?.popViewController(animated: true)
     }
     
-    
+    //MARK: - helpers
     func configureUI(){
         addView()
         
@@ -1029,6 +1022,7 @@ class PersonalPlanChangeViewController: UIViewController {
         addLayout()
     }
     
+    //MARK: - addLayout
     func addLayout(){
         backButton.snp.makeConstraints { make in
             make.top.equalTo(self.view.safeAreaLayoutGuide).offset(self.view.frame.height/47.7)
@@ -1062,11 +1056,13 @@ class PersonalPlanChangeViewController: UIViewController {
         }
     }
     
+    //MARK: - addObserver
     func addObserver(){
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(_:)), name:UIResponder.keyboardWillShowNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide(_:)), name: UIResponder.keyboardWillHideNotification, object: nil)
     }
     
+    //MARK: - addTarget
     func addTarget(){
         tagStudyButton.tag = 0
         tagWalkButton.tag = 1
@@ -1093,6 +1089,7 @@ class PersonalPlanChangeViewController: UIViewController {
         backButton.addTarget(self, action: #selector(backButtonClicked(sender:)), for: .touchUpInside)
     }
     
+    //MARK: - addView
     func addView(){
         self.view.addSubview(backButton)
         self.view.addSubview(mainTitleLabel)
