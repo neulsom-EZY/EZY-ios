@@ -340,36 +340,11 @@ class PersonalPlanChangeViewController: UIViewController {
         return view
     }()
     
-    
     //MARK: - lifeCycles
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        self.view.backgroundColor = .white
-                
+                        
         configureUI()
-        
-//        calendarViewSetting()
-//
-//        timeViewSetting()
-//
-//        locationViewSetting()
-//
-//        labelSetting()
-//
-//        tagCollectionViewSetting()
-//
-//        tagAddModalViewSetting()
-//
-//        tagColorCollectionViewSetting()
-//
-//        calendarModalViewSetting()
-//
-//        selectTimeModalViewSetting()
-//
-//        repeatCollectionViewSetting()
-//
-//        checkViewSetting()
     }
     
     //MARK: - helpers
@@ -383,6 +358,8 @@ class PersonalPlanChangeViewController: UIViewController {
     
     //MARK: - addLayout
     func addLayout(){
+        self.view.backgroundColor = .white
+        
         backButton.snp.makeConstraints { make in
             make.top.equalTo(self.view.safeAreaLayoutGuide).offset(self.view.frame.height/47.7)
             make.left.equalToSuperview().offset(self.view.frame.width/12)
@@ -426,6 +403,11 @@ class PersonalPlanChangeViewController: UIViewController {
             make.top.equalTo(btnStackView.snp.bottom).offset(self.view.frame.height/30.0)
             make.left.equalTo(backButton.snp.left)
             make.right.equalTo(self.view.frame.width/13.8 * -1)
+        }
+        
+        tagLabel.snp.makeConstraints { (make) in
+            make.left.equalTo(backButton.snp.left)
+            make.top.equalTo(explanationContainerView.snp.bottom).offset(view.frame.height/42.74)
         }
     }
     
@@ -481,131 +463,6 @@ class PersonalPlanChangeViewController: UIViewController {
         self.view.addSubview(changeButton)
     }
 
-    func calendarViewSetting(){
-        self.view.addSubview(calendarViewButton)
-        calendarViewButton.addSubview(calendarViewButton.backgroundView)
-        calendarViewButton.backgroundView.addSubview(calendarViewButton.iconImageButton)
-
-        calendarViewButton.iconImageButton.setImage(UIImage(named: "EZY_Calendar.svg"), for: .normal)
-        
-        calendarViewButton.addTarget(self, action: #selector(calendarViewButtonClicked(sender:)), for: .touchUpInside)
-        calendarViewButton.iconImageButton.addTarget(self, action: #selector(calendarViewButtonClicked(sender:)), for: .touchUpInside)
-        
-        calendarViewButton.snp.makeConstraints { make in
-            make.top.equalTo(titleBackgroundView.snp.bottom).offset(self.view.frame.height/50)
-            make.height.equalToSuperview().dividedBy(16)
-            make.width.equalTo(calendarViewButton.snp.height)
-            make.left.equalTo(titleBackgroundView)
-        }
-        
-        calendarViewButton.backgroundView.snp.makeConstraints { make in
-            make.top.left.bottom.right.equalToSuperview()
-        }
-        
-        calendarViewButton.iconImageButton.snp.makeConstraints { make in
-            make.centerX.centerY.equalToSuperview()
-            make.height.width.equalToSuperview().dividedBy(2.4)
-        }
-
-        calendarLabelView.snp.makeConstraints { make in
-            make.left.equalTo(calendarViewButton.snp.right).offset(self.view.frame.width/13.8)
-            make.height.equalTo(calendarViewButton).dividedBy(1.2)
-        }
-        
-        calendarLabelView.snp.makeConstraints { make in
-            make.left.equalTo(calendarViewButton.snp.right).offset(self.view.frame.width/13.8)
-            make.height.equalTo(calendarViewButton).dividedBy(1.2)
-            make.right.equalToSuperview()
-            make.centerY.equalTo(calendarViewButton)
-        }
-                
-        calendarRepeatLabel.snp.makeConstraints { make in
-            make.bottom.left.equalToSuperview()
-        }
-        
-        calendarLabelButton.snp.makeConstraints { make in
-            make.left.top.equalToSuperview()
-        }
-    }
-    
-    func timeViewSetting(){
-        self.view.addSubview(timeViewButton)
-        timeViewButton.addSubview(timeViewButton.backgroundView)
-        timeViewButton.backgroundView.addSubview(timeViewButton.iconImageButton)
-        
-        timeViewButton.addTarget(self, action: #selector(timeViewButtonClicked(sender:)), for: .touchUpInside)
-        
-        timeViewButton.iconImageButton.setImage(UIImage(named: "EZY_TimeSquare.svg"), for: .normal)
-        
-        timeViewButton.snp.makeConstraints { make in
-            make.top.equalTo(calendarViewButton.snp.bottom).offset(self.view.frame.height/47.7)
-            make.height.equalToSuperview().dividedBy(16)
-            make.width.equalTo(timeViewButton.snp.height)
-            make.left.equalTo(calendarViewButton)
-        }
-        
-        timeViewButton.backgroundView.snp.makeConstraints { make in
-            make.top.left.bottom.right.equalToSuperview()
-        }
-        
-        timeViewButton.iconImageButton.snp.makeConstraints { make in
-            make.centerX.centerY.equalToSuperview()
-            make.height.width.equalToSuperview().dividedBy(2.4)
-        }
-        
-        timeViewButton.iconImageButton.addTarget(self, action: #selector(timeIconImageButton(sender:)), for: .touchUpInside)
-    }
-    
-    func locationViewSetting(){
-        self.view.addSubview(locationViewButton)
-        locationViewButton.addSubview(locationViewButton.backgroundView)
-        locationViewButton.backgroundView.addSubview(locationViewButton.iconImageButton)
-
-        locationViewButton.iconImageButton.addTarget(self, action: #selector(locationViewButtonClicked(sender:)), for: .touchUpInside)
-        locationViewButton.iconImageButton.setImage(UIImage(named: "EZY_location.svg"), for: .normal)
-        
-        locationViewButton.snp.makeConstraints { make in
-            make.top.equalTo(timeViewButton.snp.bottom).offset(self.view.frame.height/47.7)
-            make.height.equalToSuperview().dividedBy(16)
-            make.width.equalTo(timeViewButton.snp.height)
-            make.left.equalTo(timeViewButton)
-        }
-        
-        locationViewButton.backgroundView.snp.makeConstraints { make in
-            make.top.left.bottom.right.equalToSuperview()
-        }
-        
-        locationViewButton.iconImageButton.snp.makeConstraints { make in
-            make.centerX.centerY.equalToSuperview()
-            make.height.width.equalToSuperview().dividedBy(2)
-        }
-        
-        explanationContainerView.snp.makeConstraints { (make) in
-            make.height.equalTo(self.view.frame.height/10.8)
-            make.top.equalTo(locationBtn.snp.bottom).offset(self.view.frame.height/45.11)
-            make.left.equalTo(backButton.snp.left)
-            make.centerX.equalToSuperview()
-        }
-        
-        tagLabel.snp.makeConstraints { make in
-            make.left.equalTo(titleBackgroundView)
-            make.top.equalTo(explanationContainerView.snp.bottom).offset(self.view.frame.height/38.6)
-        }
-    }
-
-    
-    func labelSetting(){
-        timeLabelButton.snp.makeConstraints { make in
-            make.centerY.equalTo(timeViewButton)
-            make.left.equalTo(timeViewButton.snp.right).offset(self.view.frame.width/13.8)
-        }
-        
-        locationLabelButton.snp.makeConstraints { make in
-            make.centerY.equalTo(locationViewButton)
-            make.left.equalTo(locationViewButton.snp.right).offset(self.view.frame.width/13.8)
-        }
-    }
-    
     //MARK: - selectors
     @objc func startSelectCircleButtonClicked(sender:UIButton){
         UIButton.animate(withDuration: 0.2, delay: 0, options: .curveEaseOut, animations: {
