@@ -12,25 +12,25 @@ class SettingTableViewCell: UITableViewCell {
     //MARK: - Properties
     static let settingTableViewCellIdentifier = "\(SettingTableViewCell.self)"
     
-    lazy var labelGroup = UIView().then {
+    private let labelGroup = UIView().then {
         $0.backgroundColor = .white
     }
     
-    lazy var listTitleLabel = UILabel().then {
+    private let listTitleLabel = UILabel().then {
         $0.textColor = UIColor.rgb(red: 101, green: 101, blue: 101)
         $0.dynamicFont(fontSize: 12.5, currentFontName: "Poppins-Light")
     }
     
-    lazy var listDescriptionLabel = UILabel().then {
+    private let listDescriptionLabel = UILabel().then {
         $0.dynamicFont(fontSize: 8, currentFontName: "Poppins-SemiBold")
         $0.textColor = UIColor(red: 205/255, green: 205/255, blue: 205/255, alpha: 1)
     }
     
-    lazy var rightButton = UIButton().then {
+    private let rightButton = UIButton().then {
         $0.setImage(UIImage(named: "EZY_SettingRightButton"), for: .normal)
     }
     
-    lazy var lineView = UIView().then{
+    private let lineView = UIView().then{
         $0.backgroundColor = UIColor.rgb(red: 236, green: 236, blue: 236)
     }
     
