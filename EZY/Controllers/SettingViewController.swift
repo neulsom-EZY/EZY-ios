@@ -50,7 +50,7 @@ class SettingViewController: UIViewController {
         self.view.addSubview(settingTableView)
         
         settingTableView.snp.makeConstraints { make in
-            make.top.equalTo(topView.snp.bottom).offset(self.view.frame.height/30)
+            make.top.equalTo(topView.snp.bottom).offset(self.view.frame.height/50)
             make.width.equalToSuperview()
             make.bottom.equalToSuperview()
         }
