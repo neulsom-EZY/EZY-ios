@@ -34,6 +34,7 @@ class SettingTableViewCell: UITableViewCell {
         $0.backgroundColor = UIColor.rgb(red: 236, green: 236, blue: 236)
     }
     
+    //MARK: - lifeCycles
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         configureUI()
@@ -50,6 +51,7 @@ class SettingTableViewCell: UITableViewCell {
         configureUI()
     }
     
+    //MARK: - helper
     func configureUI(){
 
         addview()
@@ -58,6 +60,7 @@ class SettingTableViewCell: UITableViewCell {
         
     }
     
+    //MARK: - layoutSetting of view
     func layoutSetting(){
         labelGroup.snp.makeConstraints { make in
             make.centerY.equalToSuperview()
@@ -90,6 +93,7 @@ class SettingTableViewCell: UITableViewCell {
         }
     }
     
+    //MARK: - addSubview
     func addview(){
         contentView.addSubview(rightButton)
         labelGroup.addSubview(listTitleLabel)
