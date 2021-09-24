@@ -9,7 +9,7 @@ import UIKit
 
 class SettingViewController: UIViewController {
     
-    //MARK: Properties
+    // MARK: - Properties
     lazy var topView = TopView()
     
     let settingTableView = UITableView().then {
