@@ -26,7 +26,6 @@ class SettingViewController: UIViewController {
         super.viewDidLoad()
         
         configureUI()
-
     }
     
     //MARK: - helpers
@@ -57,10 +56,8 @@ class SettingViewController: UIViewController {
         }
     }
     
-    //MARK: - topViewSetting()
+    //MARK: - topViewSetting
     func topViewSetting(){
-
-
         topView.backButton.addTarget(self, action: #selector(backButtonClicked(sender:)), for: .touchUpInside)
         
         topView.topViewDataSetting(backButtonImage: UIImage(named: "EZY_SettingBackButton")!, titleLabelText: "설정",
@@ -89,6 +86,8 @@ class SettingViewController: UIViewController {
 
 }
 
+
+//MARK: - extensions
 extension SettingViewController: UITableViewDelegate{
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if indexPath.row == 0{
