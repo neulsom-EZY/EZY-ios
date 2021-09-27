@@ -35,7 +35,7 @@ class SelectTimeModalView: UIView {
     
     lazy var startAfternoonLabel = UILabel().then {
         $0.text = "오후"
-        $0.textColor = UIColor.black
+        $0.textColor = UIColor(red: 114/255, green: 114/255, blue: 114/255, alpha: 1)
         $0.dynamicFont(fontSize: 12, currentFontName: "AppleSDGothicNeo-Thin")
     }
     
@@ -47,7 +47,7 @@ class SelectTimeModalView: UIView {
     
     lazy var endAfternoonLabel = UILabel().then {
         $0.text = "오후"
-        $0.textColor = UIColor.black
+        $0.textColor = UIColor(red: 114/255, green: 114/255, blue: 114/255, alpha: 1)
         $0.dynamicFont(fontSize: 12, currentFontName: "AppleSDGothicNeo-Thin")
     }
     
@@ -77,18 +77,22 @@ class SelectTimeModalView: UIView {
     
     lazy var startSelectBackButton = UIButton().then {
         $0.backgroundColor = UIColor(red: 150/255, green: 141/255, blue: 255/255, alpha: 1)
+        $0.addTarget(self, action: #selector(startSelectCircleButton(sender:)), for: .touchUpInside)
     }
     
     lazy var endSelectBackButton = UIButton().then {
         $0.backgroundColor = UIColor(red: 150/255, green: 141/255, blue: 255/255, alpha: 1)
+        $0.addTarget(self, action: #selector(endSelectCircleButton(sender:)), for: .touchUpInside)
     }
     
     lazy var startSelectCircleButton = UIButton().then {
         $0.backgroundColor = UIColor.white
+        $0.isUserInteractionEnabled = false
     }
     
     lazy var endSelectCircleButton = UIButton().then {
         $0.backgroundColor = UIColor.white
+        $0.isUserInteractionEnabled = false
     }
     
     lazy var waveLabel = UILabel().then {
@@ -115,6 +119,10 @@ class SelectTimeModalView: UIView {
         $0.backgroundColor = .lightGray
     }
     
+    private var startSelectedLabelText = "오전"
+    
+    private var endSelectedLabelText = "오전"
+    
     //MARK: - LifeCycles
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -131,6 +139,62 @@ class SelectTimeModalView: UIView {
         addView()
 
         addLayout()
+    }
+    
+    @objc func endSelectCircleButton(sender:UIButton){
+        UIView.animate(withDuration: 0.3) {
+            self.endSelectCircleButton.snp.remakeConstraints { make in
+                make.centerY.equalToSuperview()
+                make.height.equalToSuperview().dividedBy(1.2)
+                make.width.equalTo(self.endSelectBackButton.snp.height).dividedBy(1.2)
+                
+                if self.endSelectedLabelText == "오전"{
+                    make.right.equalToSuperview().offset(-self.viewBounds.width/290)
+                    
+                    self.highlightedLabel(label: self.endAfternoonLabel)
+                    self.unHighlightedLabel(label: self.endMorningLabel)
+                    
+                    self.endSelectedLabelText = "오후"
+                }else{
+                    make.left.equalToSuperview().offset(self.viewBounds.width/290)
+                    
+                    self.highlightedLabel(label: self.endMorningLabel)
+                    self.unHighlightedLabel(label: self.endAfternoonLabel)
+                    
+                    self.endSelectedLabelText = "오전"
+                }
+            }
+            
+            self.layoutIfNeeded()
+        }
+    }
+    
+    @objc func startSelectCircleButton(sender:UIButton){
+        UIView.animate(withDuration: 0.3) {
+            self.startSelectCircleButton.snp.remakeConstraints { make in
+                make.centerY.equalToSuperview()
+                make.height.equalToSuperview().dividedBy(1.2)
+                make.width.equalTo(self.startSelectBackButton.snp.height).dividedBy(1.2)
+                
+                if self.startSelectedLabelText == "오전"{
+                    make.right.equalToSuperview().offset(-self.viewBounds.width/290)
+                    
+                    self.highlightedLabel(label: self.startAfternoonLabel)
+                    self.unHighlightedLabel(label: self.startMorningLabel)
+                    
+                    self.startSelectedLabelText = "오후"
+                }else{
+                    make.left.equalToSuperview().offset(self.viewBounds.width/290)
+                    
+                    self.highlightedLabel(label: self.startMorningLabel)
+                    self.unHighlightedLabel(label: self.startAfternoonLabel)
+                    
+                    self.startSelectedLabelText = "오전"
+                }
+            }
+            
+            self.layoutIfNeeded()
+        }
     }
     
     //MARK: - addLayout
@@ -254,5 +318,13 @@ class SelectTimeModalView: UIView {
         modalBackgroundView.addSubview(startMinLabel)
         modalBackgroundView.addSubview(endHourLabel)
         modalBackgroundView.addSubview(endMinLabel)
+    }
+    
+    func highlightedLabel(label:UILabel){
+        label.dynamicFont(fontSize: 12, currentFontName: "AppleSDGothicNeo-SemiBold")
+    }
+    
+    func unHighlightedLabel(label:UILabel){
+        label.dynamicFont(fontSize: 12, currentFontName: "AppleSDGothicNeo-Thin")
     }
 }
