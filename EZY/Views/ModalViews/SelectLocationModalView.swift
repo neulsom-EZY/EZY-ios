@@ -85,6 +85,6 @@ class SelectLocationModalView: UIView {
     override func layoutSubviews() {
         super.layoutSubviews()
         
-        
+        layoutSetting()
     }
 }

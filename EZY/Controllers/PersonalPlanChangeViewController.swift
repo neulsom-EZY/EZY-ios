@@ -47,11 +47,13 @@ class PersonalPlanChangeViewController: UIViewController {
                                                TagCollectionViewModel(backgroundColor: UIColor(red: 255/255, green: 160/255, blue: 255/255, alpha: 1), isSelected: true),
                                                TagCollectionViewModel(backgroundColor: UIColor(red: 255/255, green: 150/255, blue: 255/255, alpha: 1), isSelected: true)]
         
+    private let selectCalendarModalView = SelectCalendarModalView()
+    
     private var bounds = UIScreen.main.bounds
     
-    private var tagNameTextArray = ["공부", "산책", "토익", "코딩", "요리", "운동", "정리", "청소","공부", "산책", "토익", "코딩", "요리", "운동", "정리", "청소","공부", "산책", "토익", "코딩", "요리", "운동", "정리", "청소","공부", "산책", "토익", "코딩", "요리", "운동", "정리", "청소"]
-    
     var rotationAngle: CGFloat!
+    
+    private var tagNameTextArray = ["공부", "산책", "토익", "코딩", "요리", "운동", "정리", "청소","공부", "산책", "토익", "코딩", "요리", "운동", "정리", "청소","공부", "산책", "토익", "코딩", "요리", "운동", "정리", "청소","공부", "산책", "토익", "코딩", "요리", "운동", "정리", "청소"]
     
     private let tagCollectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewLayout()).then {
         let layout: UICollectionViewFlowLayout = UICollectionViewFlowLayout()
@@ -270,6 +272,10 @@ class PersonalPlanChangeViewController: UIViewController {
             make.height.equalToSuperview().dividedBy(20)
             make.top.equalTo(notificationButton.snp.bottom).offset(self.view.frame.height/38.6)
         }
+        
+        selectCalendarModalView.snp.makeConstraints { make in
+            make.top.bottom.left.right.equalToSuperview()
+        }
     }
     
     //MARK: - addTarget
@@ -282,17 +288,18 @@ class PersonalPlanChangeViewController: UIViewController {
     func addView(){
         self.view.addSubview(backButton)
         self.view.addSubview(mainTitleLabel)
-        self.view.addSubview(notificationTitleLabel)
         self.view.addSubview(titleBackgroundView)
-        self.view.addSubview(btnStackView)
-        self.view.addSubview(explanationContainerView)
         titleBackgroundView.addSubview(titleLabel)
         titleBackgroundView.addSubview(titleTextField)
+        self.view.addSubview(btnStackView)
+        self.view.addSubview(explanationContainerView)
         self.view.addSubview(tagLabel)
-        self.view.addSubview(changeButton)
         self.view.addSubview(tagCollectionView)
+        self.view.addSubview(notificationTitleLabel)
         self.view.addSubview(notificationButton)
         self.view.addSubview(notificationAddButton)
+        self.view.addSubview(changeButton)
+        self.view.addSubview(selectCalendarModalView)
     }
 
     //MARK: - selectors
