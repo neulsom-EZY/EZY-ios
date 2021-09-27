@@ -23,15 +23,9 @@ class SignUpPhoneNumViewController: UIViewController{
         $0.textColor = UIColor.EZY_968DFF
     }
     
-    lazy var phoneNumContainerView: UIView = {
-        let view = Utilities().inputContainerView(textField: phoneNumField, text: "전화번호", fonts: 14)
-        return view
-    }()
-    
-    lazy var phoneNumField:UITextField = {
-        let tf = Utilities().textField(withPlaceholder: "")
-        return tf
-    }()
+    lazy var phoneNumContainer = SignUpTextFieldContainerView().then {
+        $0.tfTitle.text = "전화번호"
+    }
     
     lazy var continueButton = CustomGradientContinueBtnView().then {
         $0.titleLabel?.dynamicFont(fontSize: 14, currentFontName: "AppleSDGothicNeo-Bold")
@@ -75,6 +69,7 @@ class SignUpPhoneNumViewController: UIViewController{
         view.backgroundColor = .white
         addView()
         topBarViewSetting()
+        phoneNumContainerViewSetting()
         cornerRadius()
         location()
     }
@@ -82,7 +77,7 @@ class SignUpPhoneNumViewController: UIViewController{
     func addView(){
         view.addSubview(topBarView)
         view.addSubview(putPhoneNumLabel)
-        view.addSubview(phoneNumContainerView)
+        view.addSubview(phoneNumContainer)
         view.addSubview(continueButton)
         view.addSubview(certifiedButton)
     }
@@ -101,10 +96,10 @@ class SignUpPhoneNumViewController: UIViewController{
         
         putPhoneNumLabel.snp.makeConstraints { make in
             make.top.equalToSuperview().offset(self.view.frame.height/5.04)
-            make.left.equalTo(phoneNumContainerView)
+            make.left.equalTo(phoneNumContainer)
         }
         
-        phoneNumContainerView.snp.makeConstraints { make in
+        phoneNumContainer.snp.makeConstraints { make in
             make.top.equalTo(putPhoneNumLabel).offset(self.view.frame.height/8.29)
             make.centerX.equalToSuperview()
             make.width.equalTo(self.view.frame.width/1.34)
@@ -126,6 +121,8 @@ class SignUpPhoneNumViewController: UIViewController{
         }
     }
     
+    //MARK: - topBarViewSetting
+    
     func topBarViewSetting(){
         topBarView.addSubview(topBarView.goBackButton)
         topBarView.addSubview(topBarView.EZY_Logo)
@@ -133,8 +130,18 @@ class SignUpPhoneNumViewController: UIViewController{
         topBarView.topBarViewLayoutSetting(screenHeight: self.view.frame.height, screenWidth: self.view.frame.width)
     }
     
+    //MARK: - phoneNumContainerViewSetting
+
+    func phoneNumContainerViewSetting(){
+        phoneNumContainer.addSubview(phoneNumContainer.tfTitle)
+        phoneNumContainer.addSubview(phoneNumContainer.tf)
+        phoneNumContainer.addSubview(phoneNumContainer.divView)
+        
+        phoneNumContainer.loginTfSetting(screenHeight: self.view.frame.height, screenWidth: self.view.frame.width)
+    }
+    
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        phoneNumField.resignFirstResponder()
+        phoneNumContainer.tf.resignFirstResponder()
     }
 }
 
