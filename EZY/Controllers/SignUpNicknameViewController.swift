@@ -23,15 +23,7 @@ class SignUpNicknameViewController: UIViewController{
         $0.textColor = UIColor.EZY_968DFF
     }
     
-    lazy var nicknameContainerView: UIView = {
-        let view = Utilities().inputContainerView(textField: nicknameField, text: "닉네임", fonts: 14)
-        return view
-    }()
-    
-    lazy var nicknameField:UITextField = {
-        let tf = Utilities().textField(withPlaceholder: "")
-        return tf
-    }()
+    lazy var nicknameContainer = SignUpTextFieldContainerView()
     
     lazy var alreadyExistLabel = UILabel().then {
         $0.text = "이미 존재하는 닉네임입니다!"
@@ -69,6 +61,7 @@ class SignUpNicknameViewController: UIViewController{
         view.backgroundColor = .white
         addView()
         topBarViewSetting()
+        nicknameContainerViewSetting()
         cornerRadius()
         location()
     }
@@ -76,7 +69,7 @@ class SignUpNicknameViewController: UIViewController{
     func addView(){
         view.addSubview(topBarView)
         view.addSubview(putNicknameLabel)
-        view.addSubview(nicknameContainerView)
+        view.addSubview(nicknameContainer)
         view.addSubview(alreadyExistLabel)
         view.addSubview(continueButton)
     }
@@ -95,10 +88,10 @@ class SignUpNicknameViewController: UIViewController{
         
         putNicknameLabel.snp.makeConstraints { make in
             make.top.equalToSuperview().offset(self.view.frame.height/5.04)
-            make.left.equalTo(nicknameContainerView)
+            make.left.equalTo(nicknameContainer)
         }
         
-        nicknameContainerView.snp.makeConstraints { make in
+        nicknameContainer.snp.makeConstraints { make in
             make.top.equalTo(putNicknameLabel).offset(self.view.frame.height/8.29)
             make.centerX.equalToSuperview()
             make.width.equalTo(self.view.frame.width/1.34)
@@ -106,8 +99,8 @@ class SignUpNicknameViewController: UIViewController{
         }
         
         alreadyExistLabel.snp.makeConstraints { make in
-            make.top.equalTo(nicknameContainerView).offset(self.view.frame.height/13.76)
-            make.left.equalTo(nicknameContainerView)
+            make.top.equalTo(nicknameContainer).offset(self.view.frame.height/13.76)
+            make.left.equalTo(nicknameContainer)
         }
         
         continueButton.snp.makeConstraints { make in
@@ -118,6 +111,8 @@ class SignUpNicknameViewController: UIViewController{
         }
     }
     
+    //MARK: - topBarViewSetting
+    
     func topBarViewSetting(){
         topBarView.addSubview(topBarView.goBackButton)
         topBarView.addSubview(topBarView.EZY_Logo)
@@ -125,8 +120,18 @@ class SignUpNicknameViewController: UIViewController{
         topBarView.topBarViewLayoutSetting(screenHeight: self.view.frame.height, screenWidth: self.view.frame.width)
     }
     
+    //MARK: - nicknameContainerViewSetting
+    
+    func nicknameContainerViewSetting(){
+        nicknameContainer.addSubview(nicknameContainer.tfTitle)
+        nicknameContainer.addSubview(nicknameContainer.tf)
+        nicknameContainer.addSubview(nicknameContainer.divView)
+        
+        nicknameContainer.loginTfSetting(screenHeight: self.view.frame.height, screenWidth: self.view.frame.width)
+    }
+    
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        nicknameField.resignFirstResponder()
+        nicknameContainer.tf.resignFirstResponder()
     }
 }
 
