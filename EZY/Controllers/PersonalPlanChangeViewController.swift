@@ -51,6 +51,10 @@ class PersonalPlanChangeViewController: UIViewController {
         $0.isHidden = true
     }
     
+    private let selectTimeModalView = SelectTimeModalView().then{
+        $0.isHidden = false
+    }
+    
     private var bounds = UIScreen.main.bounds
     
     var rotationAngle: CGFloat!
@@ -278,6 +282,10 @@ class PersonalPlanChangeViewController: UIViewController {
         selectCalendarModalView.snp.makeConstraints { make in
             make.top.bottom.left.right.equalToSuperview()
         }
+        
+        selectTimeModalView.snp.makeConstraints { make in
+            make.top.bottom.left.right.equalToSuperview()
+        }
     }
     
     //MARK: - addTarget
@@ -302,6 +310,7 @@ class PersonalPlanChangeViewController: UIViewController {
         self.view.addSubview(notificationAddButton)
         self.view.addSubview(changeButton)
         self.view.addSubview(selectCalendarModalView)
+        self.view.addSubview(selectTimeModalView)
     }
 
     //MARK: - selectors
