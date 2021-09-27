@@ -28,15 +28,9 @@ class NewPasswordPhoneNumViewController: UIViewController{
         $0.updateGradientTextColor_vertical(gradientColors: [.EZY_968DFF, UIColor.rgba(red: 148, green: 139, blue: 255, alpha: 0.4)])
     }
     
-    lazy var phoneNumContainerView: UIView = {
-        let view = Utilities().inputContainerView(textField: phoneNumField, text: "전화번호", fonts: 14)
-        return view
-    }()
-    
-    lazy var phoneNumField:UITextField = {
-        let tf = Utilities().textField(withPlaceholder: "")
-        return tf
-    }()
+    lazy var phoneNumContainer = SignUpTextFieldContainerView().then {
+        $0.tfTitle.text = "전화번호"
+    }
     
     lazy var continueButton = CustomGradientContinueBtnView().then {
         $0.setTitle("비밀번호 바꾸러 가기", for: .normal)
@@ -80,6 +74,7 @@ class NewPasswordPhoneNumViewController: UIViewController{
         view.backgroundColor = .white
         addView()
         topBarViewSetting()
+        phoneNumContainerViewSetting()
         cornerRadius()
         location()
     }
@@ -88,7 +83,7 @@ class NewPasswordPhoneNumViewController: UIViewController{
         view.addSubview(topBarView)
         view.addSubview(toNewPassWordLabel)
         view.addSubview(putPhoneNumLabel)
-        view.addSubview(phoneNumContainerView)
+        view.addSubview(phoneNumContainer)
         view.addSubview(continueButton)
         view.addSubview(certifiedButton)
     }
@@ -106,16 +101,16 @@ class NewPasswordPhoneNumViewController: UIViewController{
         }
         
         toNewPassWordLabel.snp.makeConstraints { make in
-            make.left.equalTo(phoneNumContainerView)
+            make.left.equalTo(phoneNumContainer)
             make.top.equalToSuperview().offset(self.view.frame.height/5.04)
         }
         
         putPhoneNumLabel.snp.makeConstraints { make in
             make.top.equalTo(toNewPassWordLabel).offset(self.view.frame.height/27.07)
-            make.left.equalTo(phoneNumContainerView)
+            make.left.equalTo(phoneNumContainer)
         }
         
-        phoneNumContainerView.snp.makeConstraints { make in
+        phoneNumContainer.snp.makeConstraints { make in
             make.top.equalTo(putPhoneNumLabel).offset(self.view.frame.height/11.77)
             make.centerX.equalToSuperview()
             make.width.equalTo(self.view.frame.width/1.34)
@@ -137,15 +132,26 @@ class NewPasswordPhoneNumViewController: UIViewController{
         }
     }
     
+    //MARK: - topBarViewSetting
+    
     func topBarViewSetting(){
         topBarView.addSubview(topBarView.goBackButton)
         topBarView.addSubview(topBarView.EZY_Logo)
-                       
         topBarView.topBarViewLayoutSetting(screenHeight: self.view.frame.height, screenWidth: self.view.frame.width)
     }
     
+    //MARK: - phoneNumContainerViewSetting
+
+    func phoneNumContainerViewSetting(){
+        phoneNumContainer.addSubview(phoneNumContainer.tfTitle)
+        phoneNumContainer.addSubview(phoneNumContainer.tf)
+        phoneNumContainer.addSubview(phoneNumContainer.divView)
+        
+        phoneNumContainer.loginTfSetting(screenHeight: self.view.frame.height, screenWidth: self.view.frame.width)
+    }
+    
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        phoneNumField.resignFirstResponder()
+        phoneNumContainer.tf.resignFirstResponder()
     }
 }
 

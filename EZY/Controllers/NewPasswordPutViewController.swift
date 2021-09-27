@@ -28,16 +28,10 @@ class NewPasswordPutViewController: UIViewController{
         $0.updateGradientTextColor_vertical(gradientColors: [.EZY_968DFF, UIColor.rgba(red: 148, green: 139, blue: 255, alpha: 0.4)])
     }
     
-    lazy var passwordContainerView: UIView = {
-        let view = Utilities().inputContainerView(textField: passwordField, text: "비밀번호", fonts: 14)
-        return view
-    }()
-    
-    lazy var passwordField:UITextField = {
-        let tf = Utilities().textField(withPlaceholder: "")
-        tf.isSecureTextEntry = true
-        return tf
-    }()
+    lazy var passwordContainer = SignUpTextFieldContainerView().then {
+        $0.tfTitle.text = "비밀번호"
+        $0.tf.isSecureTextEntry = true
+    }
     
     lazy var passwordConstraintsLabel = UILabel().then {
         $0.text = "8자 이하, 영어 + 숫자최소 1개, 공백 허용x"
@@ -74,6 +68,7 @@ class NewPasswordPutViewController: UIViewController{
         view.backgroundColor = .white
         addView()
         topBarViewSetting()
+        passwordContainerViewSetting()
         cornerRadius()
         location()
     }
@@ -82,7 +77,7 @@ class NewPasswordPutViewController: UIViewController{
         view.addSubview(topBarView)
         view.addSubview(toNewPassWordLabel)
         view.addSubview(putLabel)
-        view.addSubview(passwordContainerView)
+        view.addSubview(passwordContainer)
         view.addSubview(passwordConstraintsLabel)
         view.addSubview(continueButton)
     }
@@ -99,16 +94,16 @@ class NewPasswordPutViewController: UIViewController{
         }
         
         toNewPassWordLabel.snp.makeConstraints { make in
-            make.left.equalTo(passwordContainerView)
+            make.left.equalTo(passwordContainer)
             make.top.equalToSuperview().offset(self.view.frame.height/5.04)
         }
         
         putLabel.snp.makeConstraints { make in
             make.top.equalTo(toNewPassWordLabel).offset(self.view.frame.height/27.07)
-            make.left.equalTo(passwordContainerView)
+            make.left.equalTo(passwordContainer)
         }
         
-        passwordContainerView.snp.makeConstraints { make in
+        passwordContainer.snp.makeConstraints { make in
             make.top.equalTo(putLabel).offset(self.view.frame.height/11.94)
             make.centerX.equalToSuperview()
             make.width.equalTo(self.view.frame.width/1.34)
@@ -116,8 +111,8 @@ class NewPasswordPutViewController: UIViewController{
         }
         
         passwordConstraintsLabel.snp.makeConstraints { make in
-            make.top.equalTo(passwordContainerView).offset(self.view.frame.height/13.53)
-            make.left.equalTo(passwordContainerView)
+            make.top.equalTo(passwordContainer).offset(self.view.frame.height/13.53)
+            make.left.equalTo(passwordContainer)
         }
         
         continueButton.snp.makeConstraints { make in
@@ -128,6 +123,8 @@ class NewPasswordPutViewController: UIViewController{
         }
     }
     
+    //MARK: - topBarViewSetting
+    
     func topBarViewSetting(){
         topBarView.addSubview(topBarView.goBackButton)
         topBarView.addSubview(topBarView.EZY_Logo)
@@ -135,8 +132,18 @@ class NewPasswordPutViewController: UIViewController{
         topBarView.topBarViewLayoutSetting(screenHeight: self.view.frame.height, screenWidth: self.view.frame.width)
     }
     
+    //MARK: - passwordContainerViewSetting
+
+    func passwordContainerViewSetting(){
+        passwordContainer.addSubview(passwordContainer.tfTitle)
+        passwordContainer.addSubview(passwordContainer.tf)
+        passwordContainer.addSubview(passwordContainer.divView)
+        
+        passwordContainer.loginTfSetting(screenHeight: self.view.frame.height, screenWidth: self.view.frame.width)
+    }
+    
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        passwordField.resignFirstResponder()
+        passwordContainer.tf.resignFirstResponder()
     }
 }
 

@@ -28,15 +28,9 @@ class NewNicknamePhoneNumViewController: UIViewController{
         $0.updateGradientTextColor_vertical(gradientColors: [.EZY_968DFF, UIColor.rgba(red: 148, green: 139, blue: 255, alpha: 0.4)])
     }
     
-    lazy var phoneNumContainerView: UIView = {
-        let view = Utilities().inputContainerView(textField: phoneNumField, text: "전화번호", fonts: 14)
-        return view
-    }()
-    
-    lazy var phoneNumField:UITextField = {
-        let tf = Utilities().textField(withPlaceholder: "")
-        return tf
-    }()
+    lazy var phoneNumContainer = SignUpTextFieldContainerView().then {
+        $0.tfTitle.text = "전화번호"
+    }
     
     lazy var certifiedButton = UIButton().then {
         $0.setTitle("번호인증", for: .normal)
@@ -89,6 +83,7 @@ class NewNicknamePhoneNumViewController: UIViewController{
         view.backgroundColor = .white
         addView()
         topBarViewSetting()
+        phoneNumContainerViewSetting()
         cornerRadius()
         location()
         
@@ -99,7 +94,7 @@ class NewNicknamePhoneNumViewController: UIViewController{
         view.addSubview(topBarView)
         view.addSubview(toNewNicknameLabel)
         view.addSubview(putPhoneNumLabel)
-        view.addSubview(phoneNumContainerView)
+        view.addSubview(phoneNumContainer)
         view.addSubview(certifiedButton)
         view.addSubview(doNotMatchLabel)
         view.addSubview(continueButton)
@@ -119,16 +114,16 @@ class NewNicknamePhoneNumViewController: UIViewController{
         }
         
         toNewNicknameLabel.snp.makeConstraints { make in
-            make.left.equalTo(phoneNumContainerView)
+            make.left.equalTo(phoneNumContainer)
             make.top.equalToSuperview().offset(self.view.frame.height/5.04)
         }
         
         putPhoneNumLabel.snp.makeConstraints { make in
             make.top.equalTo(toNewNicknameLabel).offset(self.view.frame.height/27.07)
-            make.left.equalTo(phoneNumContainerView)
+            make.left.equalTo(phoneNumContainer)
         }
         
-        phoneNumContainerView.snp.makeConstraints { make in
+        phoneNumContainer.snp.makeConstraints { make in
             make.top.equalTo(putPhoneNumLabel).offset(self.view.frame.height/11.77)
             make.centerX.equalToSuperview()
             make.width.equalTo(self.view.frame.width/1.34)
@@ -143,8 +138,8 @@ class NewNicknamePhoneNumViewController: UIViewController{
         }
         
         doNotMatchLabel.snp.makeConstraints { make in
-            make.top.equalTo(phoneNumContainerView).offset(self.view.frame.height/13.76)
-            make.left.equalTo(phoneNumContainerView)
+            make.top.equalTo(phoneNumContainer).offset(self.view.frame.height/13.76)
+            make.left.equalTo(phoneNumContainer)
         }
         
         continueButton.snp.makeConstraints { make in
@@ -155,16 +150,26 @@ class NewNicknamePhoneNumViewController: UIViewController{
         }
     }
     
+    //MARK: - topBarViewSetting
+    
     func topBarViewSetting(){
         topBarView.addSubview(topBarView.goBackButton)
         topBarView.addSubview(topBarView.EZY_Logo)
-                       
         topBarView.topBarViewLayoutSetting(screenHeight: self.view.frame.height, screenWidth: self.view.frame.width)
     }
     
-   
+    //MARK: - phoneNumContainerViewSetting
+
+    func phoneNumContainerViewSetting(){
+        phoneNumContainer.addSubview(phoneNumContainer.tfTitle)
+        phoneNumContainer.addSubview(phoneNumContainer.tf)
+        phoneNumContainer.addSubview(phoneNumContainer.divView)
+        
+        phoneNumContainer.loginTfSetting(screenHeight: self.view.frame.height, screenWidth: self.view.frame.width)
+    }
+    
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        phoneNumField.resignFirstResponder()
+        phoneNumContainer.tf.resignFirstResponder()
     }
 }
 

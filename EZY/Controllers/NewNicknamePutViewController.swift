@@ -28,15 +28,7 @@ class NewNicknamePutViewController: UIViewController{
         $0.updateGradientTextColor_vertical(gradientColors: [.EZY_968DFF, UIColor.rgba(red: 148, green: 139, blue: 255, alpha: 0.4)])
     }
     
-    lazy var nicknameContainerView: UIView = {
-        let view = Utilities().inputContainerView(textField: nicknameField, text: "닉네임", fonts: 14)
-        return view
-    }()
-    
-    lazy var nicknameField:UITextField = {
-        let tf = Utilities().textField(withPlaceholder: "")
-        return tf
-    }()
+    lazy var nicknameContainer = SignUpTextFieldContainerView()
     
     lazy var nicknameConstraintsLabel = UILabel().then {
         $0.text = "영어로 1 ~ 10자를 입력해주세요"
@@ -75,6 +67,7 @@ class NewNicknamePutViewController: UIViewController{
         view.backgroundColor = .white
         addView()
         topBarViewSetting()
+        nicknameContainerViewSetting()
         cornerRadius()
         location()
     }
@@ -83,7 +76,7 @@ class NewNicknamePutViewController: UIViewController{
         view.addSubview(topBarView)
         view.addSubview(toNewNicknameLabel)
         view.addSubview(putLabel)
-        view.addSubview(nicknameContainerView)
+        view.addSubview(nicknameContainer)
         view.addSubview(nicknameConstraintsLabel)
         view.addSubview(continueButton)
     }
@@ -101,16 +94,16 @@ class NewNicknamePutViewController: UIViewController{
         }
         
         toNewNicknameLabel.snp.makeConstraints { make in
-            make.left.equalTo(nicknameContainerView)
+            make.left.equalTo(nicknameContainer)
             make.top.equalToSuperview().offset(self.view.frame.height/5.04)
         }
         
         putLabel.snp.makeConstraints { make in
             make.top.equalTo(toNewNicknameLabel).offset(self.view.frame.height/27.07)
-            make.left.equalTo(nicknameContainerView)
+            make.left.equalTo(nicknameContainer)
         }
         
-        nicknameContainerView.snp.makeConstraints { make in
+        nicknameContainer.snp.makeConstraints { make in
             make.top.equalTo(putLabel).offset(self.view.frame.height/11.94)
             make.centerX.equalToSuperview()
             make.width.equalTo(self.view.frame.width/1.34)
@@ -118,8 +111,8 @@ class NewNicknamePutViewController: UIViewController{
         }
         
         nicknameConstraintsLabel.snp.makeConstraints { make in
-            make.top.equalTo(nicknameContainerView).offset(self.view.frame.height/13.53)
-            make.left.equalTo(nicknameContainerView)
+            make.top.equalTo(nicknameContainer).offset(self.view.frame.height/13.53)
+            make.left.equalTo(nicknameContainer)
         }
         
         continueButton.snp.makeConstraints { make in
@@ -130,6 +123,8 @@ class NewNicknamePutViewController: UIViewController{
         }
     }
     
+    //MARK: - topBarViewSetting
+    
     func topBarViewSetting(){
         topBarView.addSubview(topBarView.goBackButton)
         topBarView.addSubview(topBarView.EZY_Logo)
@@ -137,8 +132,18 @@ class NewNicknamePutViewController: UIViewController{
         topBarView.topBarViewLayoutSetting(screenHeight: self.view.frame.height, screenWidth: self.view.frame.width)
     }
     
+    //MARK: - nicknameContainerViewSetting
+    
+    func nicknameContainerViewSetting(){
+        nicknameContainer.addSubview(nicknameContainer.tfTitle)
+        nicknameContainer.addSubview(nicknameContainer.tf)
+        nicknameContainer.addSubview(nicknameContainer.divView)
+        
+        nicknameContainer.loginTfSetting(screenHeight: self.view.frame.height, screenWidth: self.view.frame.width)
+    }
+    
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        nicknameField.resignFirstResponder()
+        nicknameContainer.tf.resignFirstResponder()
     }
 }
 
