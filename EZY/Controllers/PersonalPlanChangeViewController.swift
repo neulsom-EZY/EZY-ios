@@ -49,45 +49,7 @@ class PersonalPlanChangeViewController: UIViewController {
         
     private var bounds = UIScreen.main.bounds
     
-    private var startPickerViewText = [["1","2","3","4","5","6","7","8","9","10","11","12"],["00","05","10","15","20","25","30","35","40","45","50","55"]]
-    
-    private var dayPickerViewText1 = ["Sun","Mon","Tue","Wed","Thr","Fri","Sat","Mon","Tue","Wed","Thr","Fri","Mon","Tue","Wed","Thr","Fri"]
-    
-    private var dayPickerViewText2 = ["12","3","4","5","6","7","2","3","4","5","6","7","2","3","4","5","6","7"]
-    
     private var tagNameTextArray = ["공부", "산책", "토익", "코딩", "요리", "운동", "정리", "청소","공부", "산책", "토익", "코딩", "요리", "운동", "정리", "청소","공부", "산책", "토익", "코딩", "요리", "운동", "정리", "청소","공부", "산책", "토익", "코딩", "요리", "운동", "정리", "청소"]
-    
-    private var dayArray = ["24","25","26","27","28","29","30","1","2","3","24","25","26","27","28","29","30","1","2","3"]
-    
-    private var dayOfTheWeekArray = ["S","M","T","W","T","F","S","S","M","T","S","M","T","W","T","F","S","S","M","T"]
-    
-    private var RepeatDayOfTheWeekArray = ["","S","M", "T","W","T","F","S"]
-    
-    private var startSelectCircleButtonLocation = "Left"
-    
-    private var endSelectCircleButtonLocation = "Left"
-    
-    private var selectedTimeEndAMPM = "AM"
-    
-    private var selectedTimeStartAMPM = "AM"
-    
-    private var selectedRepeatText = ""
-    
-    private var selectedDayRow = 0
-    
-    private var selectedTimeStartHourIndex = 0
-    
-    private var selectedTimeStartMinIndex = 0
-    
-    private var selectedTimeEndHourIndex = 0
-    
-    private var selectedTimeEndMinIndex = 0
-    
-    private var selectedRepeatRow = [Int]()
-    
-    private var tagColorPreciousSelectedIndex = 0
-    
-    private var tagPreciousSelectedIndex = 2
     
     var rotationAngle: CGFloat!
     
@@ -98,18 +60,6 @@ class PersonalPlanChangeViewController: UIViewController {
         $0.showsHorizontalScrollIndicator = false
         $0.backgroundColor = .clear
         $0.register(TagCollectionViewCell.self, forCellWithReuseIdentifier: TagCollectionViewCell.reuseId)
-    }
-    
-    private let startTimeTableView = UITableView().then{
-        $0.backgroundColor = .clear
-        $0.showsVerticalScrollIndicator = false
-        $0.separatorStyle = .none
-    }
-    
-    private let endTimeTableView = UITableView().then{
-        $0.backgroundColor = .clear
-        $0.showsVerticalScrollIndicator = false
-        $0.separatorStyle = .none
     }
     
     private let titleBackgroundView = UIView().then {
@@ -155,6 +105,16 @@ class PersonalPlanChangeViewController: UIViewController {
         $0.dynamicFont(fontSize: 14, currentFontName: "AppleSDGothicNeo-Bold")
     }
     
+    private let notificationButton = UIButton().then{
+        $0.setTitle("선택 안 함", for: .normal)
+        $0.dynamicFont(fontSize: 12, currentFontName: "AppleSDGothicNeo-SemiBold")
+        $0.backgroundColor = UIColor.rgb(red: 253, green: 253, blue: 253)
+        $0.setTitleColor(UIColor.rgb(red: 182, green: 182, blue: 182), for: .normal)
+        $0.layer.borderWidth = 1
+        $0.layer.borderColor = UIColor.rgb(red: 207, green: 207, blue: 207).cgColor
+        $0.layer.cornerRadius = 10
+    }
+    
     private let backButton = UIButton().then{
         $0.setImage(UIImage(named: "EZY_LocationBackButton"), for: .normal)
     }
@@ -165,6 +125,7 @@ class PersonalPlanChangeViewController: UIViewController {
         button.addTarget(self, action: #selector(calendarAlert), for: .touchUpInside)
         return button
     }()
+    
     private let clockBtn : AlertButton = {
         let viewModel = AlertBtn(icon: UIImage(named: "EZY_clock")?.withRenderingMode(.alwaysTemplate), iconTintColor: .rgb(red: 255, green: 203, blue: 181), message: "11:00AM - 1:00PM")
         let button = AlertButton(with: viewModel)
@@ -279,6 +240,13 @@ class PersonalPlanChangeViewController: UIViewController {
             make.left.equalTo(tagCollectionView)
             make.top.equalTo(tagCollectionView.snp.bottom).offset(self.view.frame.height/38.6)
         }
+        
+        notificationButton.snp.makeConstraints { make in
+            make.left.equalTo(notificationTitleLabel)
+            make.top.equalTo(notificationTitleLabel.snp.bottom).offset(self.view.frame.height/73.11)
+            make.width.equalToSuperview().dividedBy(4.15)
+            make.height.equalToSuperview().dividedBy(23.88)
+        }
     }
     
     //MARK: - addTarget
@@ -300,8 +268,8 @@ class PersonalPlanChangeViewController: UIViewController {
         self.view.addSubview(tagLabel)
         self.view.addSubview(changeButton)
         self.view.addSubview(tagCollectionView)
+        self.view.addSubview(notificationButton)
         
-
     }
 
     //MARK: - selectors
@@ -393,34 +361,5 @@ extension PersonalPlanChangeViewController: UICollectionViewDataSource, UICollec
             
             collectionView.reloadData()
         }
-    }
-}
-
-extension PersonalPlanChangeViewController: UITableViewDelegate{
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return CGFloat(20)
-    }
-}
-
-extension PersonalPlanChangeViewController: UITableViewDataSource{
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 7
-    }
-    
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        if tableView == startTimeTableView{
-            let cell = tableView.dequeueReusableCell(withIdentifier: StartTimeTableViewCell.reuseId, for: indexPath) as! StartTimeTableViewCell
-            cell.backgroundColor = .clear
-            cell.selectionStyle = .none
-
-            return cell
-        }else if tableView == endTimeTableView{
-            let cell = tableView.dequeueReusableCell(withIdentifier: EndTimeTableViewCell.reuseId, for: indexPath) as! EndTimeTableViewCell
-            cell.backgroundColor = .clear
-            cell.selectionStyle = .none
-
-            return cell
-        }
-        return UITableViewCell()
     }
 }
