@@ -55,6 +55,10 @@ class PersonalPlanChangeViewController: UIViewController {
         $0.isHidden = true
     }
     
+    private let tagAddModalView = TagAddModalView().then{
+        $0.isHidden = false
+    }
+    
     private var bounds = UIScreen.main.bounds
     
     var rotationAngle: CGFloat!
@@ -286,6 +290,10 @@ class PersonalPlanChangeViewController: UIViewController {
         selectTimeModalView.snp.makeConstraints { make in
             make.top.bottom.left.right.equalToSuperview()
         }
+        
+        tagAddModalView.snp.makeConstraints { make in
+            make.top.bottom.left.right.equalToSuperview()
+        }
     }
     
     //MARK: - addTarget
@@ -311,6 +319,7 @@ class PersonalPlanChangeViewController: UIViewController {
         self.view.addSubview(changeButton)
         self.view.addSubview(selectCalendarModalView)
         self.view.addSubview(selectTimeModalView)
+        self.view.addSubview(tagAddModalView)
     }
 
     //MARK: - selectors
@@ -334,9 +343,7 @@ class PersonalPlanChangeViewController: UIViewController {
     @objc func backButtonClicked(sender:UIButton){
         self.navigationController?.popViewController(animated: true)
     }
-    
 }
-
 
 //MARK: - extension
 extension PersonalPlanChangeViewController: UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout{
