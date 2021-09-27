@@ -115,6 +115,16 @@ class PersonalPlanChangeViewController: UIViewController {
         $0.layer.cornerRadius = 10
     }
     
+    private let notificationAddButton = UIButton().then{
+        $0.setTitle("+ 추가", for: .normal)
+        $0.dynamicFont(fontSize: 12, currentFontName: "AppleSDGothicNeo-SemiBold")
+        $0.backgroundColor = UIColor.rgb(red: 253, green: 253, blue: 253)
+        $0.setTitleColor(UIColor.rgb(red: 182, green: 182, blue: 182), for: .normal)
+        $0.layer.borderWidth = 1
+        $0.layer.borderColor = UIColor.rgb(red: 207, green: 207, blue: 207).cgColor
+        $0.layer.cornerRadius = 10
+    }
+    
     private let backButton = UIButton().then{
         $0.setImage(UIImage(named: "EZY_LocationBackButton"), for: .normal)
     }
@@ -247,6 +257,12 @@ class PersonalPlanChangeViewController: UIViewController {
             make.width.equalToSuperview().dividedBy(4.15)
             make.height.equalToSuperview().dividedBy(23.88)
         }
+        
+        notificationAddButton.snp.makeConstraints { make in
+            make.centerY.equalTo(notificationButton)
+            make.width.height.equalTo(notificationButton)
+            make.left.equalTo(notificationButton.snp.right).offset(self.view.frame.width/20.29)
+        }
     }
     
     //MARK: - addTarget
@@ -269,7 +285,7 @@ class PersonalPlanChangeViewController: UIViewController {
         self.view.addSubview(changeButton)
         self.view.addSubview(tagCollectionView)
         self.view.addSubview(notificationButton)
-        
+        self.view.addSubview(notificationAddButton)
     }
 
     //MARK: - selectors
