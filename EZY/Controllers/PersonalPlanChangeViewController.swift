@@ -205,7 +205,7 @@ class PersonalPlanChangeViewController: UIViewController {
             make.centerX.equalToSuperview()
             make.left.equalToSuperview().offset(self.view.frame.width/13.3)
             make.height.equalToSuperview().dividedBy(12)
-            make.top.equalTo(mainTitleLabel.snp.bottom).offset(self.view.frame.height/30)
+            make.top.equalTo(mainTitleLabel.snp.bottom).offset(self.view.frame.height/50)
         }
         
         titleLabel.snp.makeConstraints { make in
@@ -262,6 +262,13 @@ class PersonalPlanChangeViewController: UIViewController {
             make.centerY.equalTo(notificationButton)
             make.width.height.equalTo(notificationButton)
             make.left.equalTo(notificationButton.snp.right).offset(self.view.frame.width/20.29)
+        }
+        
+        changeButton.snp.makeConstraints { make in
+            make.centerX.equalToSuperview()
+            make.left.equalTo(notificationButton)
+            make.height.equalToSuperview().dividedBy(20)
+            make.top.equalTo(notificationButton.snp.bottom).offset(self.view.frame.height/38.6)
         }
     }
     
