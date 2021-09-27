@@ -64,6 +64,8 @@ class SignUpNicknameViewController: UIViewController{
         nicknameContainerViewSetting()
         cornerRadius()
         location()
+        
+        alreadyExistLabel.isHidden = true
     }
     
     func addView(){
