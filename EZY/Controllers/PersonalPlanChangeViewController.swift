@@ -52,7 +52,7 @@ class PersonalPlanChangeViewController: UIViewController {
     }
     
     private let selectTimeModalView = SelectTimeModalView().then{
-        $0.isHidden = false
+        $0.isHidden = true
     }
     
     private var bounds = UIScreen.main.bounds
@@ -319,14 +319,10 @@ class PersonalPlanChangeViewController: UIViewController {
     }
     
     @objc func clockAlert(){
-        print("clockAlert - clock alert appear")
+        selectTimeModalView.isHidden = false
     }
     
     @objc func locationAlert(){
-        print("locationAlert - location alert appear")
-    }
-    
-    @objc func locationViewButtonClicked(sender:UIButton){
         let nextViewController = SelectLocationViewController()
         self.navigationController?.pushViewController(nextViewController, animated: true)
     }
