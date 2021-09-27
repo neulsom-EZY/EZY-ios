@@ -37,6 +37,7 @@ class LoginViewController: UIViewController{
     lazy var passwordContainer = LoginTextFieldContainerView().then {
         $0.tfTitle.text = "비밀번호"
         $0.tf.placeholder = "비밀번호를 입력해주세요."
+        $0.tf.isSecureTextEntry = true
     }
     
     lazy var showPasswordButton = UIButton().then {
