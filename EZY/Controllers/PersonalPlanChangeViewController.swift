@@ -56,7 +56,7 @@ class PersonalPlanChangeViewController: UIViewController {
     }
     
     private let tagAddModalView = TagAddModalView().then{
-        $0.isHidden = false
+        $0.isHidden = true
     }
     
     private var bounds = UIScreen.main.bounds
@@ -391,7 +391,7 @@ extension PersonalPlanChangeViewController: UICollectionViewDataSource, UICollec
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         if indexPath == [0,0]{
-            print("tagAddModal appear")
+            tagAddModalView.isHidden = false
         }else{
             // 이전에 선택되어있던 cell 선택 해제
             for i in 0...TagModels.count-1{
