@@ -47,7 +47,9 @@ class PersonalPlanChangeViewController: UIViewController {
                                                TagCollectionViewModel(backgroundColor: UIColor(red: 255/255, green: 160/255, blue: 255/255, alpha: 1), isSelected: true),
                                                TagCollectionViewModel(backgroundColor: UIColor(red: 255/255, green: 150/255, blue: 255/255, alpha: 1), isSelected: true)]
         
-    private let selectCalendarModalView = SelectCalendarModalView()
+    private let selectCalendarModalView = SelectCalendarModalView().then{
+        $0.isHidden = true
+    }
     
     private var bounds = UIScreen.main.bounds
     
@@ -304,7 +306,7 @@ class PersonalPlanChangeViewController: UIViewController {
 
     //MARK: - selectors
     @objc func calendarAlert(){
-        print("calendarAlert - calendar alert appear")
+        selectCalendarModalView.isHidden = false
     }
     
     @objc func clockAlert(){
