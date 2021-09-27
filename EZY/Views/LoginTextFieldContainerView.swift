@@ -11,7 +11,7 @@ import Then
 
 class LoginTextFieldContainerView: UIView {
     lazy var tfTitle = UILabel().then {
-        $0.text = "아이디"
+        $0.text = "닉네임"
         $0.dynamicFont(fontSize: 10, currentFontName: "AppleSDGothicNeo-SemiBold")
         $0.textColor = .rgb(red: 150, green: 141, blue: 255)
     }
