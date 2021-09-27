@@ -32,27 +32,12 @@ class LoginViewController: UIViewController{
         $0.textColor = UIColor.EZY_000000
     }
     
-    lazy var nicknameContainerView: UIView = {
-        let view = Utilities().inputContainerView(textField: nicknameField, text: "닉네임", fonts: 10)
-        return view
-    }()
+    lazy var nicknameContainer = LoginTextFieldContainerView()
     
-    lazy var passwordContainerView: UIView = {
-        let view = Utilities().inputContainerView(textField: passwordField, text: "비밀번호", fonts: 10)
-        return view
-    }()
-    
-    lazy var nicknameField:UITextField = {
-        let tf = Utilities().textField(withPlaceholder: "닉네임을 입력해주세요.")
-        return tf
-    }()
-
-    lazy var passwordField:UITextField = {
-        let tf = Utilities().textField(withPlaceholder: "비밀번호를 입력해주세요.")
-        tf.isSecureTextEntry = true
-
-        return tf
-    }()
+    lazy var passwordContainer = LoginTextFieldContainerView().then {
+        $0.tfTitle.text = "비밀번호"
+        $0.tf.placeholder = "비밀번호를 입력해주세요."
+    }
     
     lazy var showPasswordButton = UIButton().then {
         $0.setImage(UIImage(named: "EZY_eye"), for: .normal)
@@ -102,10 +87,10 @@ class LoginViewController: UIViewController{
 
     @objc
     func onTapEyeButton(){
-        if passwordField.isSecureTextEntry == true {
-            passwordField.isSecureTextEntry = false
+        if passwordContainer.tf.isSecureTextEntry == true {
+            passwordContainer.tf.isSecureTextEntry = false
         } else {
-            passwordField.isSecureTextEntry = true
+            passwordContainer.tf.isSecureTextEntry = true
         }
     }
     
@@ -137,6 +122,10 @@ class LoginViewController: UIViewController{
     //MARK: - Helpers
     func configureUI(){
         view.backgroundColor = .white
+        
+        nicknameContainerViewSetting()
+        passwordContainerViewSetting()
+        
         addView()
         cornerRadius()
         location()
@@ -146,8 +135,8 @@ class LoginViewController: UIViewController{
         view.addSubview(titleLabel)
         view.addSubview(subLabel)
         view.addSubview(textLabel)
-        view.addSubview(nicknameContainerView)
-        view.addSubview(passwordContainerView)
+        view.addSubview(nicknameContainer)
+        view.addSubview(passwordContainer)
         view.addSubview(showPasswordButton)
         view.addSubview(forgotPasswordButton)
         view.addSubview(forgotNicknameButton)
@@ -175,34 +164,34 @@ class LoginViewController: UIViewController{
             make.left.equalToSuperview().offset(self.view.frame.width/7.98)
         }
         
-        nicknameContainerView.snp.makeConstraints { make in
+        nicknameContainer.snp.makeConstraints { make in
             make.bottom.equalTo(textLabel).offset(self.view.frame.height/7.44)
             make.centerX.equalToSuperview()
             make.height.equalTo(self.view.frame.height/16.57)
             make.width.equalTo(self.view.frame.width/1.33)
         }
 
-        passwordContainerView.snp.makeConstraints { make in
-            make.bottom.equalTo(nicknameContainerView).offset(self.view.frame.height/10.68)
+        passwordContainer.snp.makeConstraints { make in
+            make.bottom.equalTo(nicknameContainer).offset(self.view.frame.height/10.68)
             make.centerX.equalToSuperview()
             make.height.equalTo(self.view.frame.height/16.57)
             make.width.equalTo(self.view.frame.width/1.33)
         }
         
         showPasswordButton.snp.makeConstraints { make in
-            make.centerY.equalTo(passwordField)
-            make.right.equalTo(passwordContainerView)
+            make.centerY.equalTo(passwordContainer.tf)
+            make.right.equalTo(passwordContainer)
             make.height.equalTo(self.view.frame.height/90.22)
             make.width.equalTo(self.view.frame.width/25)
         }
         
         forgotPasswordButton.snp.makeConstraints { make in
-            make.bottom.equalTo(passwordContainerView).offset(self.view.frame.height/30.07)
+            make.bottom.equalTo(passwordContainer).offset(self.view.frame.height/30.07)
             make.left.equalToSuperview().offset(self.view.frame.width/7.98)
         }
         
         forgotNicknameButton.snp.makeConstraints { make in
-            make.bottom.equalTo(passwordContainerView).offset(self.view.frame.height/30.07)
+            make.bottom.equalTo(passwordContainer).offset(self.view.frame.height/30.07)
             make.right.equalToSuperview().offset(self.view.frame.width/7.98 * -1)
         }
        
@@ -219,10 +208,30 @@ class LoginViewController: UIViewController{
         }
 
     }
+    
+    //MARK: - nicknameContainerViewSetting
+    
+    func nicknameContainerViewSetting(){
+        nicknameContainer.addSubview(nicknameContainer.tfTitle)
+        nicknameContainer.addSubview(nicknameContainer.tf)
+        nicknameContainer.addSubview(nicknameContainer.divView)
+        
+        nicknameContainer.loginTfSetting(screenHeight: self.view.frame.height, screenWidth: self.view.frame.width)
+    }
+    
+    //MARK: - passwordContainerViewSetting
 
+    func passwordContainerViewSetting(){
+        passwordContainer.addSubview(passwordContainer.tfTitle)
+        passwordContainer.addSubview(passwordContainer.tf)
+        passwordContainer.addSubview(passwordContainer.divView)
+        
+        passwordContainer.loginTfSetting(screenHeight: self.view.frame.height, screenWidth: self.view.frame.width)
+    }
+    
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        nicknameField.resignFirstResponder()
-        passwordField.resignFirstResponder()
+        nicknameContainer.tf.resignFirstResponder()
+        passwordContainer.tf.resignFirstResponder()
     }
 
 }
