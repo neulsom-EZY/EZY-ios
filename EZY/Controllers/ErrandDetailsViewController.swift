@@ -102,9 +102,7 @@ class ErrandDetailsViewController: UIViewController {
     
     @objc func todobackbtn(){
         //전페이지로 되돌아가는 버튼
-        let vc = LoginViewController()
-        vc.modalPresentationStyle = .fullScreen
-        present(vc, animated: false, completion: nil)
+        navigationController?.popViewController(animated: true)
     }
     
     @objc func calendarAlert(){
@@ -119,13 +117,7 @@ class ErrandDetailsViewController: UIViewController {
     @objc func Addmytodobtn(){
         print("DEBUG:AddButton")
         //추가페이지 작성후 실행시키는 코드
-        
-        
     }
-    @objc func Addlocationbtn(){
-        let vc = AddMyToDoViewController()
-        vc.modalPresentationStyle = .fullScreen
-        present(vc, animated: true, completion: nil)    }
 
     //MARK: - Helpers
     private func configureUI(){
@@ -133,9 +125,7 @@ class ErrandDetailsViewController: UIViewController {
         cornerRadius()
         addView()
         location()
-        
     }
-    
     private func cornerRadius(){
         RequestList.layer.cornerRadius = view.frame.height/40.6
         addButton.layer.cornerRadius = view.frame.height/81.2
@@ -167,13 +157,11 @@ class ErrandDetailsViewController: UIViewController {
         RequestList.snp.makeConstraints { (make) in
             make.height.equalTo(self.view.frame.height/7.38)
             make.top.equalTo(TitleLabel.snp.bottom).offset(self.view.frame.height/19.8)
-            make.left.equalTo(backbutton.snp.left)
-            make.right.equalTo(self.view.frame.width/13.8 * -1)
+            make.left.right.equalToSuperview().inset(bounds.width/13.6363)
         }
         btnStackView.snp.makeConstraints {
             $0.top.equalTo(RequestList.snp.bottom).offset(bounds.self.height/42.74)
-            $0.left.equalTo(backbutton.snp.left)
-            $0.right.equalToSuperview().inset(bounds.height/9.23)
+            $0.left.right.equalToSuperview().inset(bounds.width/13.6363)
             $0.height.equalTo(bounds.height/3.59)
         }
         explanationContainerView.snp.makeConstraints { (make) in
@@ -182,7 +170,7 @@ class ErrandDetailsViewController: UIViewController {
             make.left.right.equalToSuperview().inset(bounds.width/13.6363)
         }
         addButton.snp.makeConstraints { (make) in
-            make.bottom.equalToSuperview().inset(view.frame.height/12.6875)
+            make.bottom.equalToSuperview().inset(bounds.height/12.6875)
             make.height.equalTo(self.view.frame.height/18.0)
             make.left.right.equalToSuperview().inset(bounds.width/13.6363)
         }

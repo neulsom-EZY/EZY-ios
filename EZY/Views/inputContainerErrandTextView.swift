@@ -8,15 +8,19 @@
 import UIKit
 
 class inputContainerErrandTextView : UIView{
-    private let view = UIView()
+    private let view = UIView().then{
+        $0.layer.cornerRadius = 20
+    }
     private let label = UILabel().then{
         $0.dynamicFont(fontSize: 14, currentFontName: "AppleSDGothicNeo-Bold")
     }
-    private var textView = UITextView().then{
+    private lazy var textView = UITextView().then{
         $0.backgroundColor = .clear
         $0.textColor = .rgb(red: 167, green: 167, blue: 167)
         $0.dynamicFont(fontSize: 12, currentFontName: "AppleSDGothicNeo-Bold")
-        let point = CGPoint(x: 0, y: 0)
+        $0.translatesAutoresizingMaskIntoConstraints = false
+        $0.showsVerticalScrollIndicator = false
+        $0.textAlignment = NSTextAlignment.left
     }
     private var viewModel : ErrandinputContainerTv?
 
@@ -47,12 +51,10 @@ class inputContainerErrandTextView : UIView{
     }
     override func layoutSubviews() {
         super.layoutSubviews()
-        view.layer.cornerRadius = frame.height/5
-        textView.textAlignment = NSTextAlignment.left
-        textView.showsVerticalScrollIndicator = false
+        
         textView.contentOffset.y = 6
         view.snp.makeConstraints { (make) in
-            make.top.left.right.bottom.height.width.equalToSuperview()
+            make.top.left.right.bottom.equalToSuperview()
         }
         label.snp.makeConstraints { (make) in
             make.top.equalToSuperview().offset(frame.height/5.79)
@@ -60,10 +62,8 @@ class inputContainerErrandTextView : UIView{
         }
         textView.snp.makeConstraints { (make) in
             make.top.equalTo(label.snp.bottom).offset(frame.height/13.75)
-            make.left.equalTo(label.snp.left)
-            make.right.equalTo(view.snp.right).inset(frame.height/6.47)
-            make.bottom.equalToSuperview().inset(view.frame.height/6.47)
-            
+            make.left.right.equalTo(view).inset(bounds.width/29.7297)
+            make.height.equalTo(bounds.width/7.16)
         }
     }
     
