@@ -80,9 +80,9 @@ class SettingTableViewCell: UITableViewCell {
         
         rightButton.snp.makeConstraints { make in
             make.centerY.equalToSuperview()
-            make.right.equalToSuperview().offset(-contentView.frame.width/13.8)
-            make.height.equalToSuperview().dividedBy(5.25)
-            make.width.equalToSuperview().dividedBy(47.11)
+            make.right.equalToSuperview().offset(-contentView.frame.width/7.5)
+            make.height.equalToSuperview().dividedBy(5.25*1.3)
+            make.width.equalToSuperview().dividedBy(47.11*1.3)
         }
         
         lineView.snp.makeConstraints { make in
