@@ -44,22 +44,12 @@ class ChangePasswardAfterLoginViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        topViewSetting()
+        addView()
         
-        layoutSetting()
+        addLayout()
     }
     
-    @objc func changeButtonClicked(sender:UIButton){
-        let vc = SettingViewController()
-        vc.modalPresentationStyle = .fullScreen
-        present(vc, animated: true, completion: nil)
-    }
-    
-    @objc func backButtonClicked(sender:UIButton){
-        self.navigationController?.popViewController(animated: true)
-    }
-    
-    func topViewSetting(){
+    func addView(){
         self.view.addSubview(topView)
         topView.addSubview(topView.backButton)
         topView.addSubview(topView.titleLabel)
@@ -89,7 +79,7 @@ class ChangePasswardAfterLoginViewController: UIViewController {
         }
     }
     
-    func layoutSetting() {
+    func addLayout() {
         self.view.backgroundColor = .white
         self.view.addSubview(passwordNickNameLabel)
         self.view.addSubview(passwardTextField)
@@ -133,6 +123,7 @@ class ChangePasswardAfterLoginViewController: UIViewController {
         }
     }
     
+    // MARK: - Selectors
     @objc //MARK: 모달 창 올리기
     func keyboardWillShow(_ sender: Notification) {
         changeButton.frame.origin.y = self.view.frame.height/2
@@ -143,10 +134,40 @@ class ChangePasswardAfterLoginViewController: UIViewController {
         changeButton.frame.origin.y = self.view.frame.height-changeButton.frame.height-self.view.frame.height/23.8
     }
     
+    @objc func changeButtonClicked(sender:UIButton){
+        if isValidPassward(Passward: passwardTextField.text) == true{
+            let vc = SettingViewController()
+            vc.modalPresentationStyle = .fullScreen
+            present(vc, animated: true, completion: nil)
+        }else{
+            shakeView(passwordNickNameLabel)
+        }
+
+    }
+    
+    @objc func backButtonClicked(sender:UIButton){
+        self.navigationController?.popViewController(animated: true)
+    }
+    
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         passwardTextField.resignFirstResponder()
     }
     
+    func shakeView(_ view: UIView?) {
+        let shake = CABasicAnimation(keyPath: "position")
+        shake.duration = 0.08
+        shake.repeatCount = 2
+        shake.autoreverses = true
+        shake.fromValue = NSValue(cgPoint: CGPoint(x: (view?.center.x)! - 2, y: view?.center.y ?? 0.0))
+        shake.toValue = NSValue(cgPoint: CGPoint(x: (view?.center.x)! + 2, y: view?.center.y ?? 0.0))
+        view?.layer.add(shake, forKey: "position")
+    }
     
-
+    func isValidPassward(Passward: String?) -> Bool {
+        guard Passward != nil else { return false }
+        
+        let PasswardRegEx = ("(?=.*[A-Za-z~!@#$%^&*])(?=.*[0-9]).{8,}")
+        let pred = NSPredicate(format:"SELF MATCHES %@", PasswardRegEx)
+        return pred.evaluate(with: Passward)
+    }
 }
