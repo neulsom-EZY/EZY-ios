@@ -9,11 +9,14 @@ import UIKit
 import SnapKit
 import Then
 
+
+
+
 class ShowPlanViewController: UIViewController{
 
     //MARK: Properties
     let planCompleteModalView = PlanCompleteModalView()
-    
+        
     var groupNameArray: [String] = ["EZY 회의", "디자인 이론 공부", "강아지 산책시키기", "카페에서 마카롱 사오기", "EZY 회의", "디자인 이론 공부", "강아지 산책시키기", "카페에서 마카롱 사오기"]
     var planTitleTextArray: [String] = ["EZY 회의", "디자인 이론 공부", "강아지 산책시키기", "카페에서 마카롱 사오기", "EZY 회의댜댵", "디자인 이론 공부", "강아지 산책시키기", "카페에서 마카롱 사오기"]
     var planTimeArray: [String] = ["12:00 - 13:00", "12:00 - 13:00", "12:00 - 13:00", "12:00 - 13:00", "12:00 - 13:00", "12:00 - 13:00", "12:00 - 13:00", "12:00 - 13:00"]
@@ -150,11 +153,17 @@ class ShowPlanViewController: UIViewController{
            }
        }
        
-       private func removeDim() {
-           DispatchQueue.main.async { [weak self] in
-               self?.bgView.removeFromSuperview()
-           }
-       }
+    private func removeDim() {
+        DispatchQueue.main.async { [weak self] in
+            self?.bgView.removeFromSuperview()
+            self?.dismiss(animated: true)
+        }
+    }
+    private func updateDim(viewcontroller : UIViewController){
+        DispatchQueue.main.async { [weak self] in
+            self?.navigationController?.pushViewController(viewcontroller ?? UIViewController(), animated: true)
+        }
+    }
     
     
     // MARK: - layoutSetting
@@ -482,10 +491,13 @@ extension ShowPlanViewController: UITableViewDelegate{
 }
 
 extension ShowPlanViewController: BulletinDelegate {
+    func update(vc: UIViewController) {
+        self.removeDim()
+        self.updateDim(viewcontroller: vc)
+    }
+    
     func onTapClose() {
         self.removeDim()
     }
-    func update(){
-        self.removeDim()
-    }
+ 
 }

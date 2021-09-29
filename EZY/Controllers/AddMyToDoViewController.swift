@@ -123,12 +123,9 @@ class AddMyToDoViewController:UIViewController{
     }()
     
     //MARK: - Lifecycle
-    
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         configureUI()
-      
     }
 
     
@@ -136,7 +133,7 @@ class AddMyToDoViewController:UIViewController{
     
     @objc func todobackbtn(){
         //전페이지로 되돌아가는 버튼
-        dismiss(animated: true, completion: nil)
+        navigationController?.popViewController(animated: true)
     }
     
     
@@ -261,7 +258,6 @@ class AddMyToDoViewController:UIViewController{
             $0.right.equalToSuperview().inset(bounds.height/9.23)
             $0.height.equalTo(bounds.height/4.805)
         }
-     
         explanationContainerView.snp.makeConstraints { (make) in
             make.height.equalTo(self.view.frame.height/10.8)
             make.top.equalTo(locationBtn.snp.bottom).offset(self.view.frame.height/45.11)
