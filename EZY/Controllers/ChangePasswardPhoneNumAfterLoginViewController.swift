@@ -159,7 +159,7 @@ class ChangePasswardPhoneNumAfterLoginViewController: UIViewController {
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         phoneNumTextField.resignFirstResponder()
     }
-    
+  
     func shakeView(_ view: UIView?) {
         let shake = CABasicAnimation(keyPath: "position")
         shake.duration = 0.08
