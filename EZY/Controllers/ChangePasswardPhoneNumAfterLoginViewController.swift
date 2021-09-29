@@ -9,7 +9,10 @@ import UIKit
 
 class ChangePasswardPhoneNumAfterLoginViewController: UIViewController {
     //MARK: - Properties
-    lazy var topView = TopView()
+    lazy var topView = TopView().then{
+        $0.backButton.addTarget(self, action: #selector(backButtonClicked(sender:)), for: .touchUpInside)
+        $0.topViewDataSetting(backButtonImage: UIImage(named: "EZY_IdChangeBackButtonImage")!, titleLabelText: "비밀번호 변경", textColor: UIColor(red: 120/255, green: 81/255, blue: 255/255, alpha: 1))
+    }
     
     lazy var phoneNumNickNameLabel = UILabel().then {
         $0.textColor = UIColor(red: 150/255, green: 141/255, blue: 255/255, alpha: 1)
@@ -46,34 +49,30 @@ class ChangePasswardPhoneNumAfterLoginViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        topViewSetting()
+        addView()
         
-        layoutSetting()
+        addLayout()
     }
     
-    @objc func certifiedButtonClicked(sender:UIButton){
-        print("번호인증")
-    }
-    
-    @objc func changeButtonClicked(sender:UIButton){
-        let nextViewController = ChangePasswardAfterLoginViewController()
-        self.navigationController?.pushViewController(nextViewController, animated: true)
-    }
-    
-    @objc func backButtonClicked(sender:UIButton){
-        self.navigationController?.popViewController(animated: true)
-    }
-    
-    func topViewSetting(){
+    func addView(){
+        self.view.backgroundColor = .white
         self.view.addSubview(topView)
         topView.addSubview(topView.backButton)
         topView.addSubview(topView.titleLabel)
+        self.view.addSubview(phoneNumNickNameLabel)
+        self.view.addSubview(phoneNumTextField)
+        self.view.addSubview(phoneNumUnderLineView)
+        self.view.addSubview(changeButton)
+        self.view.addSubview(certifiedButton)
+
         
-        topView.backButton.addTarget(self, action: #selector(backButtonClicked(sender:)), for: .touchUpInside)
-        
-        topView.titleLabel.text = "비밀번호 변경"
-        
-        topView.topViewDataSetting(backButtonImage: UIImage(named: "EZY_IdChangeBackButtonImage")!, titleLabelText: "비밀번호 변경", textColor: UIColor(red: 120/255, green: 81/255, blue: 255/255, alpha: 1))
+
+    }
+    
+    // MARK: - Selectors
+    func addLayout() {
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(_:)), name:UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide(_:)), name: UIResponder.keyboardWillHideNotification, object: nil)
         
         topView.backButton.snp.makeConstraints { make in
             make.top.equalTo(self.view.safeAreaLayoutGuide).offset(self.view.frame.height/47.7)
@@ -92,18 +91,6 @@ class ChangePasswardPhoneNumAfterLoginViewController: UIViewController {
             make.top.equalTo(self.view.safeAreaLayoutGuide)
             make.height.equalToSuperview().dividedBy(8)
         }
-    }
-    
-    func layoutSetting() {
-        self.view.backgroundColor = .white
-        self.view.addSubview(phoneNumNickNameLabel)
-        self.view.addSubview(phoneNumTextField)
-        self.view.addSubview(phoneNumUnderLineView)
-        self.view.addSubview(changeButton)
-        self.view.addSubview(certifiedButton)
-        
-        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(_:)), name:UIResponder.keyboardWillShowNotification, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide(_:)), name: UIResponder.keyboardWillHideNotification, object: nil)
         
         phoneNumNickNameLabel.snp.makeConstraints { make in
             make.top.equalTo(topView.titleLabel.snp.bottom).offset(self.view.frame.height/16.91)
@@ -129,7 +116,6 @@ class ChangePasswardPhoneNumAfterLoginViewController: UIViewController {
             make.centerX.equalToSuperview()
             make.height.equalToSuperview().dividedBy(16.24)
             make.bottom.equalToSuperview().offset(-self.view.frame.height/23.8)
-            
         }
         
         certifiedButton.snp.makeConstraints { make in
@@ -140,6 +126,24 @@ class ChangePasswardPhoneNumAfterLoginViewController: UIViewController {
             
             certifiedButton.layer.cornerRadius = self.view.frame.height/36.9/2
         }
+    }
+    
+    // MARK: - Selectors
+    @objc func certifiedButtonClicked(sender:UIButton){
+        print("번호인증")
+    }
+    
+    @objc func changeButtonClicked(sender:UIButton){
+        if isValidPhoneNumber(PhoneNumber: phoneNumTextField.text){
+            let nextViewController = ChangePasswardAfterLoginViewController()
+            self.navigationController?.pushViewController(nextViewController, animated: true)
+        }else{
+            shakeView(phoneNumNickNameLabel)
+        }
+    }
+    
+    @objc func backButtonClicked(sender:UIButton){
+        self.navigationController?.popViewController(animated: true)
     }
     
     @objc //MARK: 모달 창 올리기
@@ -154,5 +158,23 @@ class ChangePasswardPhoneNumAfterLoginViewController: UIViewController {
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         phoneNumTextField.resignFirstResponder()
+    }
+  
+    func shakeView(_ view: UIView?) {
+        let shake = CABasicAnimation(keyPath: "position")
+        shake.duration = 0.08
+        shake.repeatCount = 2
+        shake.autoreverses = true
+        shake.fromValue = NSValue(cgPoint: CGPoint(x: (view?.center.x)! - 2, y: view?.center.y ?? 0.0))
+        shake.toValue = NSValue(cgPoint: CGPoint(x: (view?.center.x)! + 2, y: view?.center.y ?? 0.0))
+        view?.layer.add(shake, forKey: "position")
+    }
+    
+    func isValidPhoneNumber(PhoneNumber: String?) -> Bool {
+        guard PhoneNumber != nil else { return false }
+        
+        let idRegEx = "^01([0-9])([0-9]{3,4})([0-9]{4})$"
+        let pred = NSPredicate(format:"SELF MATCHES %@", idRegEx)
+        return pred.evaluate(with: PhoneNumber)
     }
 }
