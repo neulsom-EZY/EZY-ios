@@ -9,15 +9,18 @@ import UIKit
 
 class ChangeIdAfterLoginViewController: UIViewController {
     
-    //MARK: - Properties
-    lazy var topView = TopView()
+    // MARK: - Properties
+    lazy var topView = TopView().then{
+        $0.backButton.addTarget(self, action: #selector(backButtonClicked(sender:)), for: .touchUpInside)
+        $0.topViewDataSetting(backButtonImage: UIImage(named: "EZY_IdChangeBackButtonImage")!, titleLabelText: "닉네임 변경", textColor: UIColor(red: 120/255, green: 81/255, blue: 255/255, alpha: 1))
+    }
     
     lazy var idNickNameLabel = UILabel().then {
         $0.textColor = UIColor(red: 150/255, green: 141/255, blue: 255/255, alpha: 1)
         $0.text = "아이디/닉네임"
         $0.dynamicFont(fontSize: 10, currentFontName: "AppleSDGothicNeo-SemiBold")
     }
-    
+
     lazy var idTextField = UITextField().then {
         $0.textColor = UIColor(red: 101/255, green: 101/255, blue: 101/255, alpha: 1)
         $0.placeholder = "아이디를 입력해주세요"
@@ -29,7 +32,7 @@ class ChangeIdAfterLoginViewController: UIViewController {
     }
     
     lazy var idConditionLabel = UILabel().then {
-        $0.text = "8자 이하, 영어 + 숫자최소 1개, 공백 허용x"
+        $0.text = "1 ~ 10자 사이 영어로 작성해주세요!"
         $0.textColor = UIColor(red: 116/255, green: 116/255, blue: 116/255, alpha: 1)
         $0.dynamicFont(fontSize: 10, currentFontName: "AppleSDGothicNeo-Regular")
     }
@@ -42,33 +45,44 @@ class ChangeIdAfterLoginViewController: UIViewController {
         $0.addTarget(self, action: #selector(changeButtonClicked(sender:)), for: .touchUpInside)
     }
     
-    //MARK: - LifyCycle
+    // MARK: - LifyCycle
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        topViewSetting()
+        configure()
+    }
+    
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        idTextField.resignFirstResponder()
+    }
+    
+    // MARK: - Helpers
+    func configure(){
+        addView()
         
-        layoutSetting()
+        addLayout()
     }
     
-    @objc func changeButtonClicked(sender:UIButton){
-        self.navigationController?.popViewController(animated: true)
-    }
-    
-    @objc func backButtonClicked(sender:UIButton){
-        self.navigationController?.popViewController(animated: true)
-    }
-    
-    func topViewSetting(){
+    // MARK: - addView
+    func addView(){
+        self.view.backgroundColor = .white
         self.view.addSubview(topView)
         topView.addSubview(topView.backButton)
         topView.addSubview(topView.titleLabel)
+        self.view.addSubview(idNickNameLabel)
+        self.view.addSubview(idTextField)
+        self.view.addSubview(idUnderLineView)
+        self.view.addSubview(idConditionLabel)
+        self.view.addSubview(changeButton)
+    }
+    
+    // MARK: - addLayout
+    func addLayout(){
+        let idRegEx = "[A-Za-z0-9]{5,13}"
         
-        topView.backButton.addTarget(self, action: #selector(backButtonClicked(sender:)), for: .touchUpInside)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(_:)), name:UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide(_:)), name: UIResponder.keyboardWillHideNotification, object: nil)
         
-        topView.titleLabel.text = "아이디 변경"
-        
-        topView.topViewDataSetting(backButtonImage: UIImage(named: "EZY_IdChangeBackButtonImage")!, titleLabelText: "아이디 변경", textColor: UIColor(red: 120/255, green: 81/255, blue: 255/255, alpha: 1))
         
         topView.backButton.snp.makeConstraints { make in
             make.top.equalTo(self.view.safeAreaLayoutGuide).offset(self.view.frame.height/47.7)
@@ -87,18 +101,6 @@ class ChangeIdAfterLoginViewController: UIViewController {
             make.top.equalTo(self.view.safeAreaLayoutGuide)
             make.height.equalToSuperview().dividedBy(8)
         }
-    }
-    
-    func layoutSetting() {
-        self.view.backgroundColor = .white
-        self.view.addSubview(idNickNameLabel)
-        self.view.addSubview(idTextField)
-        self.view.addSubview(idUnderLineView)
-        self.view.addSubview(idConditionLabel)
-        self.view.addSubview(changeButton)
-        
-        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(_:)), name:UIResponder.keyboardWillShowNotification, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide(_:)), name: UIResponder.keyboardWillHideNotification, object: nil)
         
         idNickNameLabel.snp.makeConstraints { make in
             make.top.equalTo(topView.titleLabel.snp.bottom).offset(self.view.frame.height/16.91)
@@ -132,17 +134,45 @@ class ChangeIdAfterLoginViewController: UIViewController {
         }
     }
     
-    @objc //MARK: 모달 창 올리기
-    func keyboardWillShow(_ sender: Notification) {
+    // MARK: - Selectors
+    @objc func changeButtonClicked(sender:UIButton){
+        if isValidId(id: idTextField.text) == true{
+            let nextVC = SettingViewController()
+            nextVC.modalPresentationStyle = .fullScreen
+            present(nextVC, animated: true, completion: nil)
+        }else{
+            shakeView(idNickNameLabel)
+        }
+    }
+    
+    @objc func backButtonClicked(sender:UIButton){
+        self.navigationController?.popViewController(animated: true)
+    }
+    
+    // MARK: - Notification
+    @objc func keyboardWillShow(_ sender: Notification) {
         changeButton.frame.origin.y = self.view.frame.height/2
     }
 
-    @objc //MARK: 모달 창 원래대로
-    func keyboardWillHide(_ sender: Notification) {
+    @objc func keyboardWillHide(_ sender: Notification) {
         changeButton.frame.origin.y = self.view.frame.height-changeButton.frame.height-self.view.frame.height/23.8
     }
     
-    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        idTextField.resignFirstResponder()
+    func shakeView(_ view: UIView?) {
+        let shake = CABasicAnimation(keyPath: "position")
+        shake.duration = 0.08
+        shake.repeatCount = 2
+        shake.autoreverses = true
+        shake.fromValue = NSValue(cgPoint: CGPoint(x: (view?.center.x)! - 2, y: view?.center.y ?? 0.0))
+        shake.toValue = NSValue(cgPoint: CGPoint(x: (view?.center.x)! + 2, y: view?.center.y ?? 0.0))
+        view?.layer.add(shake, forKey: "position")
+    }
+    
+    func isValidId(id: String?) -> Bool {
+        guard id != nil else { return false }
+        
+        let idRegEx = "[A-Za-z]{1,10}"
+        let pred = NSPredicate(format:"SELF MATCHES %@", idRegEx)
+        return pred.evaluate(with: id)
     }
 }
