@@ -15,7 +15,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         guard let windowScene = (scene as? UIWindowScene) else { return }
         window = UIWindow(windowScene: windowScene)
 
-        let mainViewController = ChangePasswardPhoneNumAfterLoginViewController()
+        let mainViewController = TagManagementViewController()
 
         let navigationController = UINavigationController(rootViewController: mainViewController)
 
@@ -23,7 +23,6 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         
         window?.rootViewController = navigationController
         window?.makeKeyAndVisible()
-        
 
         for fontFaily in UIFont.familyNames{
             for fontName in UIFont.fontNames(forFamilyName: fontFaily){

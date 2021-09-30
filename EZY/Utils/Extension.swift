@@ -54,6 +54,21 @@ extension UIColor{
     static let EZY_656565 = UIColor.rgb(red: 101, green: 101, blue: 101)
     static let EZY_DEDEDE = UIColor.rgb(red: 222, green: 222, blue: 222)
     static let EZY_CDCDCD = UIColor.rgb(red: 205, green: 205, blue: 205)
+    static var EZY_TagColor1 = UIColor(red: 154/255, green: 119/255, blue: 255/255, alpha: 1)
+    static var EZY_TagColor2 = UIColor(red: 129/255, green: 85/255, blue: 255/255, alpha: 1)
+    static var EZY_TagColor3 = UIColor(red: 114/255, green: 110/255, blue: 255/255, alpha: 1)
+    static var EZY_TagColor4 = UIColor(red: 100/255, green: 131/255, blue: 255/255, alpha: 1)
+    static var EZY_TagColor5 = UIColor(red: 129/255, green: 154/255, blue: 255/255, alpha: 1)
+    static var EZY_TagColor6 = UIColor(red: 159/255, green: 168/255, blue: 255/255, alpha: 1)
+    static var EZY_TagColor7 = UIColor(red: 175/255, green: 173/255, blue: 255/255, alpha: 1)
+    static var EZY_TagColor8 = UIColor(red: 156/255, green: 154/255, blue: 255/255, alpha: 1)
+    static var EZY_TagColor9 = UIColor(red: 129/255, green: 126/255, blue: 255/255, alpha: 1)
+    static var EZY_TagColor10 = UIColor(red: 127/255, green: 124/255, blue: 226/255, alpha: 1)
+    static var EZY_TagColor11 = UIColor(red: 166/255, green: 152/255, blue: 255/255, alpha: 1)
+    static var EZY_TagColor12 = UIColor(red: 186/255, green: 154/255, blue: 255/255, alpha: 1)
+    static var EZY_TagColor13 = UIColor(red: 198/255, green: 171/255, blue: 255/255, alpha: 1)
+    
+    static var EZY_TagColorArray = [EZY_TagColor1,EZY_TagColor2,EZY_TagColor3,EZY_TagColor4,EZY_TagColor5,EZY_TagColor6,EZY_TagColor7,EZY_TagColor8,EZY_TagColor9,EZY_TagColor10,EZY_TagColor11,EZY_TagColor12,EZY_TagColor13]
 }
 
 //MARK: - UILabel dynamic font extension

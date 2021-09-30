@@ -7,6 +7,10 @@
 
 import UIKit
 
+protocol TagColorCollectionViewCellDelegate: AnyObject{
+    func tagColordidTabAddButton(with string: String)
+}
+
 class TagColorCollectionViewCell: UICollectionViewCell {
     
     //MARK: Properties
@@ -16,6 +20,7 @@ class TagColorCollectionViewCell: UICollectionViewCell {
     
     var model: TagColorCollectionViewModel?
     
+    public weak var delegate: TagColorCollectionViewCellDelegate?
     
     lazy var colorBackgroundView = UIView().then {
         $0.backgroundColor = UIColor(red: 186/255, green: 200/255, blue: 255/255, alpha: 1)
@@ -45,7 +50,16 @@ class TagColorCollectionViewCell: UICollectionViewCell {
         layoutSetting()
     }
     
+    private var string: String?
+    
+    public func configure(with string: String){
+        self.string = string
+    }
+    
     func layoutSetting(){
+         
+        delegate?.tagColordidTabAddButton(with: string!)
+
         contentView.addSubview(colorBackgroundView)
         colorBackgroundView.addSubview(checkImage)
         colorBackgroundView.snp.makeConstraints { make in

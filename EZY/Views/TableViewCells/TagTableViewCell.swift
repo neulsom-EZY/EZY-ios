@@ -57,13 +57,11 @@ class TagTableViewCell: UITableViewCell {
     }
     
     @objc func tagSettingButtonClicked(sender:UIButton){
-
+        
     }
     
     func layoutSetting(){
-        guard let string = string else {
-            return
-        }
+        guard let string = string else {return}
         
         delegate?.didTabAddButton(with: string)
         
