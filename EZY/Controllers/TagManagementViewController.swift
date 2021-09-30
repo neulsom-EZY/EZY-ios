@@ -368,6 +368,20 @@ class TagManagementViewController: UIViewController {
     @objc func tagAddButtonClicked(sender:UIButton){
         tagAddModalView.isHidden = false
         tagAddModalView.tagNameTextField.text = ""
+        
+        // TagColorCollection 초기화
+        let firstCell = tagColorCollectionView.cellForItem(at: [0, 0]) as? TagColorCollectionViewCell
+        firstCell?.checkImage.isHidden = false
+        
+        for i in 0...TagColorModels.count-1{
+            TagColorModels[i].isSelected = true
+        }
+        
+        TagColorModels[0].isSelected = false
+
+        tagColorCollectionView.reloadData()
+        
+        tagColorPreciousSelectedIndex = 0
     }
     
     @objc func tagAddCompletionbuttonClicked(sender:UIButton){
@@ -549,17 +563,18 @@ extension TagManagementViewController: UICollectionViewDataSource, UICollectionV
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         if collectionView == tagColorCollectionView{
             selectedTagColorIndex = indexPath.row
-            
-            if TagColorModels[indexPath.row].isSelected == true {
+            print("이전에 선택하 index : \(tagColorPreciousSelectedIndex)")
+            if TagColorModels[indexPath.row].isSelected == true{
                 
-                TagColorModels[tagColorPreciousSelectedIndex].isSelected.toggle()
+                TagColorModels[tagColorPreciousSelectedIndex].isSelected = true
                 
-                if TagColorModels.filter({ $0.isSelected }).count >= 1 {
-                    TagColorModels[indexPath.row].isSelected.toggle()
+                TagColorModels[indexPath.row].isSelected.toggle()
+                
+                
                     
-                    tagColorPreciousSelectedIndex = indexPath.row
-                }
+                tagColorPreciousSelectedIndex = indexPath.row
             }
+            print("바뀐후 model : \(TagColorModels)")
 
             selectedTagColor = TagColorModels[indexPath.row].backgroundColor
             
