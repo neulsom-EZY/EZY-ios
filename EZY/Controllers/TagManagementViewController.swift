@@ -181,16 +181,7 @@ class TagManagementViewController: UIViewController {
         self.view.addSubview(recommendedTagCollectionView)
         self.view.addSubview(tagTableView)
         self.view.addSubview(tagAddModalView)
-        tagAddModalView.addSubview(tagAddModalView.shadowBackgroundView)
-        tagAddModalView.modalBackgroundView.addSubview(tagColorCollectionView)
-        tagAddModalView.shadowBackgroundView.addSubview(tagAddModalView.modalBackgroundView)
-        tagAddModalView.modalBackgroundView.addSubview(tagAddModalView.titleLabel)
-        tagAddModalView.modalBackgroundView.addSubview(tagAddModalView.tagNameLabel)
-        tagAddModalView.modalBackgroundView.addSubview(tagAddModalView.tagNameBackgroundView)
-        tagAddModalView.tagNameBackgroundView.addSubview(tagAddModalView.tagNameTextField)
-        tagAddModalView.modalBackgroundView.addSubview(tagAddModalView.tagColorLabel)
-        tagAddModalView.modalBackgroundView.addSubview(tagAddModalView.tagAddButton)
-        tagAddModalView.modalBackgroundView.addSubview(tagAddModalView.writeTagNameView)
+        self.tagAddModalView.modalBackgroundView.addSubview(tagColorCollectionView)
     }
     
     func location(){
@@ -252,58 +243,7 @@ class TagManagementViewController: UIViewController {
         tagAddModalView.snp.makeConstraints { make in
             make.top.right.bottom.left.equalToSuperview()
         }
-        
-        tagAddModalView.shadowBackgroundView.snp.makeConstraints { make in
-            make.top.right.bottom.left.equalToSuperview()
-        }
-        
-        tagAddModalView.modalBackgroundView.snp.makeConstraints { make in
-            make.centerX.centerY.equalToSuperview()
-            make.width.equalToSuperview().dividedBy(1.2)
-            make.height.equalToSuperview().dividedBy(3.3)
-        }
-        
-        tagAddModalView.titleLabel.snp.makeConstraints { make in
-            make.top.equalToSuperview().offset(self.view.frame.height/33.8)
-            make.left.equalToSuperview().offset(self.view.frame.height/33.8)
-        }
-        
-        tagAddModalView.tagNameLabel.snp.makeConstraints { make in
-            make.top.equalTo(tagAddModalView.titleLabel.snp.bottom).offset(self.view.frame.height/62.4)
-            make.left.equalTo(tagAddModalView.titleLabel)
-        }
-        
-        tagAddModalView.tagNameBackgroundView.snp.makeConstraints { make in
-            make.left.equalTo(tagAddModalView.tagNameLabel)
-            make.centerX.equalToSuperview()
-            make.height.equalToSuperview().dividedBy(6.3)
-            make.top.equalTo(tagAddModalView.tagNameLabel.snp.bottom).offset(self.view.frame.height/135.3)
-        }
-        
-        tagAddModalView.tagNameTextField.snp.makeConstraints { make in
-            make.left.equalToSuperview().offset(self.view.frame.width/28.8)
-            make.centerX.equalToSuperview()
-            make.height.equalToSuperview()
-        }
-        
-        tagAddModalView.tagColorLabel.snp.makeConstraints { make in
-            make.top.equalTo(tagAddModalView.tagNameBackgroundView.snp.bottom).offset(self.view.frame.height/50.7)
-            make.left.equalTo(tagAddModalView.tagNameBackgroundView)
-        }
-        
-        tagAddModalView.tagAddButton.snp.makeConstraints { make in
-            make.bottom.equalToSuperview().offset(-self.view.frame.height/40.6)
-            make.right.equalToSuperview().offset(-self.view.frame.width/15)
-            make.height.equalToSuperview().dividedBy(7.2)
-            make.width.equalToSuperview().dividedBy(4.7)
-        }
-        
-        tagAddModalView.writeTagNameView.snp.makeConstraints { make in
-            make.centerX.centerY.equalToSuperview()
-            make.width.equalToSuperview().dividedBy(1.3)
-            make.height.equalToSuperview().dividedBy(4)
-        }
-        
+
         tagColorCollectionView.snp.makeConstraints { make in
             make.top.equalTo(tagAddModalView.tagColorLabel.snp.bottom)
             make.left.equalToSuperview()
@@ -385,30 +325,26 @@ class TagManagementViewController: UIViewController {
     }
     
     @objc func tagAddCompletionbuttonClicked(sender:UIButton){
-        if tagAddModalView.tagNameTextField.text?.isEmpty == true{
-            tagAddModalView.writeTagNameView.alpha = 1
-            
-            UIView.animate(withDuration: 0.4, animations: {
-
-                self.tagAddModalView.writeTagNameView.isHidden = false
-
-                  }, completion: {
-                  _ in
-                    Timer.scheduledTimer(timeInterval: TimeInterval(0.8), target: self, selector: #selector(self.hideSnackbarView), userInfo: nil, repeats: false)
-            })
-        }else{
-            self.view.endEditing(true)
-
-            tagAddModalView.isHidden = true
-                        
-            recommendedTagViewDown()
-            
-            selectedTagColorIndexArray.append(selectedTagColorIndex)
-            tagNameText.append(tagAddModalView.tagNameTextField.text!)
-            tagColor.append(UIColor.EZY_TagColorArray[selectedTagIndex])
-            
-            tagTableView.reloadData()
+        
+        if tagAddModalView.tagNameTextField.text == ""{
+            print("이름을 입력안 함")
         }
+//        if tagAddModalView.tagNameTextField.text == ""{
+//            shakeView(tagAddModalView.tagNameLabel)
+//        }else{
+//            print("asfd")
+//            self.view.endEditing(true)
+//
+//            tagAddModalView.isHidden = true
+//
+//            recommendedTagViewDown()
+//
+//            selectedTagColorIndexArray.append(selectedTagColorIndex)
+//            tagNameText.append(tagAddModalView.tagNameTextField.text!)
+//            tagColor.append(UIColor.EZY_TagColorArray[selectedTagIndex])
+//
+//            tagTableView.reloadData()
+//        }
     }
     
     @objc func backButtonClicked(sender:UIButton){
@@ -441,12 +377,6 @@ class TagManagementViewController: UIViewController {
 
     @objc func keyboardWillHide(_ sender: Notification) {
         tagAddModalView.modalBackgroundView.frame.origin.y = (self.view.frame.height/2) - (tagAddModalView.modalBackgroundView.frame.height/2)
-    }
-    
-    // MARK: - TouchEvent
-    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?){
-         self.view.endEditing(true)
-        tagAddModalView.isHidden = true
     }
     
     // MARK: - recommendedTagViewDown
@@ -487,6 +417,17 @@ class TagManagementViewController: UIViewController {
             _ in
             self.tagAddModalView.writeTagNameView.isHidden = true
         })
+    }
+    
+    // MARK: - shakeView
+    func shakeView(_ view: UIView?) {
+        let shake = CABasicAnimation(keyPath: "position")
+        shake.duration = 0.08
+        shake.repeatCount = 2
+        shake.autoreverses = true
+        shake.fromValue = NSValue(cgPoint: CGPoint(x: (view?.center.x)! - 2, y: view?.center.y ?? 0.0))
+        shake.toValue = NSValue(cgPoint: CGPoint(x: (view?.center.x)! + 2, y: view?.center.y ?? 0.0))
+        view?.layer.add(shake, forKey: "position")
     }
 }
 
