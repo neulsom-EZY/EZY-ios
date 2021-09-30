@@ -325,26 +325,22 @@ class TagManagementViewController: UIViewController {
     }
     
     @objc func tagAddCompletionbuttonClicked(sender:UIButton){
-        
-        if tagAddModalView.tagNameTextField.text == ""{
-            print("이름을 입력안 함")
+        // tagNameTextField.text가 공백으로만 이루어져있거나 empty일 때
+        if tagAddModalView.tagNameTextField.text!.trimmingCharacters(in: .whitespaces).isEmpty || tagAddModalView.tagNameTextField.text == ""{
+            shakeView(tagAddModalView.tagNameLabel)
+        }else{
+            self.view.endEditing(true)
+
+            tagAddModalView.isHidden = true
+
+            recommendedTagViewDown()
+
+            selectedTagColorIndexArray.append(selectedTagColorIndex)
+            tagNameText.append(tagAddModalView.tagNameTextField.text!)
+            tagColor.append(UIColor.EZY_TagColorArray[selectedTagColorIndex])
+
+            tagTableView.reloadData()
         }
-//        if tagAddModalView.tagNameTextField.text == ""{
-//            shakeView(tagAddModalView.tagNameLabel)
-//        }else{
-//            print("asfd")
-//            self.view.endEditing(true)
-//
-//            tagAddModalView.isHidden = true
-//
-//            recommendedTagViewDown()
-//
-//            selectedTagColorIndexArray.append(selectedTagColorIndex)
-//            tagNameText.append(tagAddModalView.tagNameTextField.text!)
-//            tagColor.append(UIColor.EZY_TagColorArray[selectedTagIndex])
-//
-//            tagTableView.reloadData()
-//        }
     }
     
     @objc func backButtonClicked(sender:UIButton){
@@ -503,19 +499,16 @@ extension TagManagementViewController: UICollectionViewDataSource, UICollectionV
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         if collectionView == tagColorCollectionView{
-            selectedTagColorIndex = indexPath.row
-            print("이전에 선택하 index : \(tagColorPreciousSelectedIndex)")
             if TagColorModels[indexPath.row].isSelected == true{
                 
                 TagColorModels[tagColorPreciousSelectedIndex].isSelected = true
                 
                 TagColorModels[indexPath.row].isSelected.toggle()
                 
+                selectedTagColorIndex = indexPath.row
                 
-                    
                 tagColorPreciousSelectedIndex = indexPath.row
             }
-            print("바뀐후 model : \(TagColorModels)")
 
             selectedTagColor = TagColorModels[indexPath.row].backgroundColor
             
