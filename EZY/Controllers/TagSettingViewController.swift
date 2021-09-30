@@ -86,7 +86,8 @@ class TagSettingViewController: UIViewController {
     
     var selectedTagIndex = 0
     
-
+    var selectedTagColorIndex = 0
+    
     var TagColorModels: [TagColorCollectionViewModel] = [
                                                 TagColorCollectionViewModel(backgroundColor: UIColor.EZY_TagColorArray[0], isSelected: true),
                                                  TagColorCollectionViewModel(backgroundColor: UIColor.EZY_TagColorArray[1], isSelected: true),
@@ -115,8 +116,8 @@ class TagSettingViewController: UIViewController {
     }
     
     override func viewDidAppear(_ animated: Bool) {
-        TagColorModels[selectedTagIndex].isSelected = false
-        print("선택된 color index입니다~ : \(selectedTagIndex)")
+        TagColorModels[selectedTagColorIndex].isSelected = false
+        print("선택된 color index입니다~ : \(selectedTagColorIndex)")
         tagColorCollectionView.reloadData()
     }
     

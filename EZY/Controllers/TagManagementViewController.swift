@@ -27,6 +27,8 @@ class TagManagementViewController: UIViewController {
     
     lazy var selectedTagColorIndex = 0
     
+    var selectedTagColorIndexArray = [Int]()
+    
     var tagColorPreciousSelectedIndex = 0
     
     lazy var recommendedTagNameText = ["STUDY","EXCERISE","ENGLISH","EAT"]
@@ -152,6 +154,9 @@ class TagManagementViewController: UIViewController {
         recommendedTagCollectionView.delegate = self
         tagColorCollectionView.dataSource = self
         tagColorCollectionView.delegate = self
+        
+        let firstCell = tagColorCollectionView.cellForItem(at: [0, 0]) as? TagColorCollectionViewCell
+        firstCell?.checkImage.isHidden = false
     }
     
     // MARK: - tableViewDataSourceAndDelegate
@@ -306,11 +311,11 @@ class TagManagementViewController: UIViewController {
     
     // MARK: - selectors
     @objc func recommendedTagAddButtonClicked(sender:UIButton){
-       
         recommendedTagViewDown()
 
+        selectedTagColorIndexArray.append(0)
         tagNameText.append(recommendedTagNameText[selectedRecommendedTagIndex])
-        tagColor.append(UIColor.EZY_TagColorArray[5])
+        tagColor.append(UIColor.EZY_TagColorArray[0])
         
         recommendedTagCollectionView.deleteItems(at: [IndexPath.init(row: selectedRecommendedTagIndex, section: 0)])
         recommendedTagNameText.remove(at: selectedRecommendedTagIndex)
@@ -363,7 +368,6 @@ class TagManagementViewController: UIViewController {
     }
     
     @objc func tagAddCompletionbuttonClicked(sender:UIButton){
-        
         if tagAddModalView.tagNameTextField.text?.isEmpty == true{
             tagAddModalView.writeTagNameView.alpha = 1
             
@@ -383,8 +387,11 @@ class TagManagementViewController: UIViewController {
                         
             recommendedTagViewDown()
             
+            selectedTagColorIndexArray.append(selectedTagColorIndex)
             tagNameText.append(tagAddModalView.tagNameTextField.text!)
             tagColor.append(UIColor.EZY_TagColorArray[selectedTagIndex])
+            
+            print("이름 : \(tagAddModalView.tagNameTextField.text!), 인덱스 : \(selectedTagColorIndex)")
             
             
             tagTableView.reloadData()
@@ -397,9 +404,8 @@ class TagManagementViewController: UIViewController {
     
     @objc func tagSettingButtonClicked(sender:UIButton){
         let nextViewController = TagSettingViewController()
-        
-        nextViewController.tagColor = UIColor.EZY_TagColorArray[selectedTagIndex]
-        
+                
+        nextViewController.selectedTagColorIndex = selectedTagColorIndexArray[selectedTagIndex]
         nextViewController.tagNameTextField.text = "\(tagNameText[selectedTagIndex])"
         nextViewController.tagDeleteModalView.tagTitleNameLabel.text = "\(tagNameText[selectedTagIndex])"
         nextViewController.tagNameTextCount = tagNameText[selectedTagIndex].map{ $0 }.count
@@ -454,14 +460,13 @@ class TagManagementViewController: UIViewController {
     
     // MARK: - hideSnackbarView
     @objc private func hideSnackbarView() {
-            UIView.animate(withDuration: 0.4, animations: {
-                self.tagAddModalView.writeTagNameView.alpha = 0
-            }, completion: {
-                _ in
-                self.tagAddModalView.writeTagNameView.isHidden = true
-            })
+        UIView.animate(withDuration: 0.4, animations: {
+            self.tagAddModalView.writeTagNameView.alpha = 0
+        }, completion: {
+            _ in
+            self.tagAddModalView.writeTagNameView.isHidden = true
+        })
     }
-
 }
 
 // MARK: - Extension
@@ -496,8 +501,6 @@ extension TagManagementViewController: UITableViewDataSource, UITableViewDelegat
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return self.view.frame.height/15
     }
-    
-
 }
 
 extension TagManagementViewController: UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout{
@@ -514,9 +517,7 @@ extension TagManagementViewController: UICollectionViewDataSource, UICollectionV
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         if collectionView == tagColorCollectionView{
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: TagColorCollectionViewCell.reuseId, for: indexPath) as! TagColorCollectionViewCell
-            
-            let firstCell = tagColorCollectionView.cellForItem(at: [0, 0]) as? TagColorCollectionViewCell
-            firstCell?.checkImage.isHidden = false
+
             
             cell.backgroundColor = .white
             
@@ -541,6 +542,8 @@ extension TagManagementViewController: UICollectionViewDataSource, UICollectionV
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         if collectionView == tagColorCollectionView{
+            selectedTagColorIndex = indexPath.row
+            
             if TagColorModels[indexPath.row].isSelected {
                 
                 TagColorModels[tagColorPreciousSelectedIndex].isSelected.toggle()
@@ -556,7 +559,6 @@ extension TagManagementViewController: UICollectionViewDataSource, UICollectionV
             
             collectionView.reloadData()
         }
-
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
