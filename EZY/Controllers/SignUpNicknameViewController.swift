@@ -12,26 +12,26 @@ import Then
 class SignUpNicknameViewController: UIViewController{
     //MARK: - Properties
     
-    let topBarView = TopBarView().then {
+    private let topBarView = TopBarView().then {
         $0.goBackButton.addTarget(self, action: #selector(goBack), for: .touchUpInside)
     }
     
-    lazy var putNicknameLabel = UILabel().then {
+    private let putNicknameLabel = UILabel().then {
         $0.text = "닉네임을\n입력해주세요."
         $0.numberOfLines = 2
         $0.dynamicFont(fontSize: 25, currentFontName: "AppleSDGothicNeo-SemiBold")
         $0.textColor = UIColor.EZY_968DFF
     }
     
-    lazy var nicknameContainer = SignUpTextFieldContainerView()
+    private let nicknameContainer = SignUpTextFieldContainerView()
     
-    lazy var alreadyExistLabel = UILabel().then {
+    private let alreadyExistLabel = UILabel().then {
         $0.text = "이미 존재하는 닉네임입니다!"
         $0.textColor = UIColor.EZY_FCA1A1
         $0.dynamicFont(fontSize: 10, currentFontName: "AppleSDGothicNeo-SemiBold")
     }
     
-    lazy var continueButton = CustomGradientContinueBtnView().then {
+    private let continueButton = CustomGradientContinueBtnView().then {
         $0.titleLabel?.dynamicFont(fontSize: 14, currentFontName: "AppleSDGothicNeo-Bold")
         $0.addTarget(self, action: #selector(onTapContinuePassword), for: .touchUpInside)
     }
@@ -57,7 +57,7 @@ class SignUpNicknameViewController: UIViewController{
     
     
     //MARK: - Helpers
-    func configureUI(){
+    private func configureUI(){
         view.backgroundColor = .white
         addView()
         topBarViewSetting()
@@ -68,7 +68,7 @@ class SignUpNicknameViewController: UIViewController{
         alreadyExistLabel.isHidden = true
     }
     
-    func addView(){
+    private func addView(){
         view.addSubview(topBarView)
         view.addSubview(putNicknameLabel)
         view.addSubview(nicknameContainer)
@@ -76,11 +76,11 @@ class SignUpNicknameViewController: UIViewController{
         view.addSubview(continueButton)
     }
     
-    func cornerRadius(){
+    private func cornerRadius(){
         continueButton.layer.cornerRadius = self.view.frame.height/81.2
     }
     
-    func location(){
+    private func location(){
         
         topBarView.snp.makeConstraints { make in
             make.left.right.equalToSuperview()
@@ -115,7 +115,7 @@ class SignUpNicknameViewController: UIViewController{
     
     //MARK: - topBarViewSetting
     
-    func topBarViewSetting(){
+    private func topBarViewSetting(){
         topBarView.addSubview(topBarView.goBackButton)
         topBarView.addSubview(topBarView.EZY_Logo)
         
@@ -124,7 +124,7 @@ class SignUpNicknameViewController: UIViewController{
     
     //MARK: - nicknameContainerViewSetting
     
-    func nicknameContainerViewSetting(){
+    private func nicknameContainerViewSetting(){
         nicknameContainer.addSubview(nicknameContainer.tfTitle)
         nicknameContainer.addSubview(nicknameContainer.tf)
         nicknameContainer.addSubview(nicknameContainer.divView)

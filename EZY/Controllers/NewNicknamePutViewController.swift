@@ -12,31 +12,31 @@ import Then
 class NewNicknamePutViewController: UIViewController{
     //MARK: - Properties
     
-    let topBarView = TopBarView().then {
+    private let topBarView = TopBarView().then {
         $0.goBackButton.addTarget(self, action: #selector(goBack), for: .touchUpInside)
     }
     
-    lazy var toNewNicknameLabel = UILabel().then {
+    private let toNewNicknameLabel = UILabel().then {
         $0.text = "새로운 닉네임을"
         $0.dynamicFont(fontSize: 25, currentFontName: "AppleSDGothicNeo-SemiBold")
         $0.textColor = UIColor.EZY_968DFF
     }
     
-    lazy var putLabel = UILabel().then {
+    private let putLabel = UILabel().then {
         $0.text = "입력해주세요."
         $0.dynamicFont(fontSize: 22, currentFontName: "AppleSDGothicNeo-SemiBold")
         $0.updateGradientTextColor_vertical(gradientColors: [.EZY_968DFF, UIColor.rgba(red: 148, green: 139, blue: 255, alpha: 0.4)])
     }
     
-    lazy var nicknameContainer = SignUpTextFieldContainerView()
+    private let nicknameContainer = SignUpTextFieldContainerView()
     
-    lazy var nicknameConstraintsLabel = UILabel().then {
+    private let nicknameConstraintsLabel = UILabel().then {
         $0.text = "영어로 1 ~ 10자를 입력해주세요"
         $0.textColor = UIColor.EZY_747474
         $0.dynamicFont(fontSize: 10, currentFontName: "AppleSDGothicNeo-Regular")
     }
     
-    lazy var continueButton = CustomGradientContinueBtnView().then {
+    private let continueButton = CustomGradientContinueBtnView().then {
         $0.setTitle("닉네임 바꾸기", for: .normal)
         $0.titleLabel?.dynamicFont(fontSize: 14, currentFontName: "AppleSDGothicNeo-Bold")
         $0.addTarget(self, action: #selector(onTapContinueNewNickname), for: .touchUpInside)
@@ -63,7 +63,7 @@ class NewNicknamePutViewController: UIViewController{
     
     //MARK: - Helpers
     
-    func configureUI(){
+    private func configureUI(){
         view.backgroundColor = .white
         addView()
         topBarViewSetting()
@@ -72,7 +72,7 @@ class NewNicknamePutViewController: UIViewController{
         location()
     }
     
-    func addView(){
+    private func addView(){
         view.addSubview(topBarView)
         view.addSubview(toNewNicknameLabel)
         view.addSubview(putLabel)
@@ -81,11 +81,11 @@ class NewNicknamePutViewController: UIViewController{
         view.addSubview(continueButton)
     }
     
-    func cornerRadius(){
+    private func cornerRadius(){
         continueButton.layer.cornerRadius = self.view.frame.height/81.2
     }
     
-    func location(){
+    private func location(){
         
         topBarView.snp.makeConstraints { make in
             make.left.right.equalToSuperview()
@@ -125,7 +125,7 @@ class NewNicknamePutViewController: UIViewController{
     
     //MARK: - topBarViewSetting
     
-    func topBarViewSetting(){
+    private func topBarViewSetting(){
         topBarView.addSubview(topBarView.goBackButton)
         topBarView.addSubview(topBarView.EZY_Logo)
                        
@@ -134,7 +134,7 @@ class NewNicknamePutViewController: UIViewController{
     
     //MARK: - nicknameContainerViewSetting
     
-    func nicknameContainerViewSetting(){
+    private func nicknameContainerViewSetting(){
         nicknameContainer.addSubview(nicknameContainer.tfTitle)
         nicknameContainer.addSubview(nicknameContainer.tf)
         nicknameContainer.addSubview(nicknameContainer.divView)

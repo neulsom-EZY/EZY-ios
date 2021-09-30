@@ -12,29 +12,29 @@ import Then
 class SignUpPasswordViewController: UIViewController{
     //MARK: - Properties
     
-    let topBarView = TopBarView().then {
+    private let topBarView = TopBarView().then {
         $0.goBackButton.addTarget(self, action: #selector(goBack), for: .touchUpInside)
     }
     
-    lazy var putPasswordLabel = UILabel().then {
+    private let putPasswordLabel = UILabel().then {
         $0.text = "비밀번호를\n입력해주세요."
         $0.numberOfLines = 2
         $0.dynamicFont(fontSize: 25, currentFontName: "AppleSDGothicNeo-SemiBold")
         $0.textColor = UIColor.EZY_968DFF
     }
     
-    lazy var passwordContainer = SignUpTextFieldContainerView().then {
+    private let passwordContainer = SignUpTextFieldContainerView().then {
         $0.tfTitle.text = "비밀번호"
         $0.tf.isSecureTextEntry = true
     }
     
-    lazy var passwordConstraintsLabel = UILabel().then {
+    private let passwordConstraintsLabel = UILabel().then {
         $0.text = "8자 이하, 영어 + 숫자최소 1개, 공백 허용x"
         $0.textColor = UIColor.EZY_747474
         $0.dynamicFont(fontSize: 10, currentFontName: "AppleSDGothicNeo-Regular")
     }
     
-    lazy var continueButton = CustomGradientContinueBtnView().then {
+    private let continueButton = CustomGradientContinueBtnView().then {
         $0.titleLabel?.dynamicFont(fontSize: 14, currentFontName: "AppleSDGothicNeo-Bold")
         $0.addTarget(self, action: #selector(onTapContinuePhoneNum), for: .touchUpInside)
     }
@@ -59,7 +59,7 @@ class SignUpPasswordViewController: UIViewController{
     }
     
     //MARK: - Helpers
-    func configureUI(){
+    private func configureUI(){
         view.backgroundColor = .white
         addView()
         topBarViewSetting()
@@ -68,7 +68,7 @@ class SignUpPasswordViewController: UIViewController{
         location()
     }
     
-    func addView(){
+    private func addView(){
         view.addSubview(topBarView)
         view.addSubview(putPasswordLabel)
         view.addSubview(passwordContainer)
@@ -76,11 +76,11 @@ class SignUpPasswordViewController: UIViewController{
         view.addSubview(continueButton)
     }
     
-    func cornerRadius(){
+    private func cornerRadius(){
         continueButton.layer.cornerRadius = self.view.frame.height/81.2
     }
     
-    func location(){
+    private func location(){
         topBarView.snp.makeConstraints { make in
             make.left.right.equalToSuperview()
             make.top.equalToSuperview()
@@ -114,7 +114,7 @@ class SignUpPasswordViewController: UIViewController{
     
     //MARK: - topBarViewSetting
     
-    func topBarViewSetting(){
+    private func topBarViewSetting(){
         topBarView.addSubview(topBarView.goBackButton)
         topBarView.addSubview(topBarView.EZY_Logo)
         
@@ -123,7 +123,7 @@ class SignUpPasswordViewController: UIViewController{
     
     //MARK: - passwordContainerViewSetting
 
-    func passwordContainerViewSetting(){
+    private func passwordContainerViewSetting(){
         passwordContainer.addSubview(passwordContainer.tfTitle)
         passwordContainer.addSubview(passwordContainer.tf)
         passwordContainer.addSubview(passwordContainer.divView)

@@ -12,33 +12,33 @@ import Then
 class NewPasswordPhoneNumViewController: UIViewController{
     //MARK: - Properties
    
-    let topBarView = TopBarView().then {
+    private let topBarView = TopBarView().then {
         $0.goBackButton.addTarget(self, action: #selector(goBack), for: .touchUpInside)
     }
     
-    lazy var toNewPassWordLabel = UILabel().then {
+    private let toNewPassWordLabel = UILabel().then {
         $0.text = "새 비밀번호를 위해"
         $0.dynamicFont(fontSize: 25, currentFontName: "AppleSDGothicNeo-SemiBold")
         $0.textColor = UIColor.EZY_968DFF
     }
     
-    lazy var putPhoneNumLabel = UILabel().then {
+    private let putPhoneNumLabel = UILabel().then {
         $0.text = "전화번호를 입력해주세요."
         $0.dynamicFont(fontSize: 20, currentFontName: "AppleSDGothicNeo-SemiBold")
         $0.updateGradientTextColor_vertical(gradientColors: [.EZY_968DFF, UIColor.rgba(red: 148, green: 139, blue: 255, alpha: 0.4)])
     }
     
-    lazy var phoneNumContainer = SignUpTextFieldContainerView().then {
+    private let phoneNumContainer = SignUpTextFieldContainerView().then {
         $0.tfTitle.text = "전화번호"
     }
     
-    lazy var continueButton = CustomGradientContinueBtnView().then {
+    private let continueButton = CustomGradientContinueBtnView().then {
         $0.setTitle("비밀번호 바꾸러 가기", for: .normal)
         $0.titleLabel?.dynamicFont(fontSize: 14, currentFontName: "AppleSDGothicNeo-Bold")
         $0.addTarget(self, action: #selector(onTapContinueNewPasswordPut), for: .touchUpInside)
     }
     
-    lazy var certifiedButton = UIButton().then {
+    private let certifiedButton = UIButton().then {
         $0.setTitle("번호인증", for: .normal)
         $0.titleLabel?.dynamicFont(fontSize: 10, currentFontName: "AppleSDGothicNeo-SemiBold")
         $0.setTitleColor(UIColor.EZY_FFFFFF, for: .normal)
@@ -70,7 +70,7 @@ class NewPasswordPhoneNumViewController: UIViewController{
     }
     
     //MARK: - Helpers
-    func configureUI(){
+    private func configureUI(){
         view.backgroundColor = .white
         addView()
         topBarViewSetting()
@@ -79,7 +79,7 @@ class NewPasswordPhoneNumViewController: UIViewController{
         location()
     }
     
-    func addView(){
+    private func addView(){
         view.addSubview(topBarView)
         view.addSubview(toNewPassWordLabel)
         view.addSubview(putPhoneNumLabel)
@@ -88,12 +88,12 @@ class NewPasswordPhoneNumViewController: UIViewController{
         view.addSubview(certifiedButton)
     }
     
-    func cornerRadius(){
+    private func cornerRadius(){
         continueButton.layer.cornerRadius = self.view.frame.height/81.2
         certifiedButton.layer.cornerRadius = self.view.frame.height/75
     }
     
-    func location(){
+    private func location(){
         topBarView.snp.makeConstraints { make in
             make.left.right.equalToSuperview()
             make.top.equalToSuperview()
@@ -134,7 +134,7 @@ class NewPasswordPhoneNumViewController: UIViewController{
     
     //MARK: - topBarViewSetting
     
-    func topBarViewSetting(){
+    private func topBarViewSetting(){
         topBarView.addSubview(topBarView.goBackButton)
         topBarView.addSubview(topBarView.EZY_Logo)
         topBarView.topBarViewLayoutSetting(screenHeight: self.view.frame.height, screenWidth: self.view.frame.width)
@@ -142,7 +142,7 @@ class NewPasswordPhoneNumViewController: UIViewController{
     
     //MARK: - phoneNumContainerViewSetting
 
-    func phoneNumContainerViewSetting(){
+    private func phoneNumContainerViewSetting(){
         phoneNumContainer.addSubview(phoneNumContainer.tfTitle)
         phoneNumContainer.addSubview(phoneNumContainer.tf)
         phoneNumContainer.addSubview(phoneNumContainer.divView)
