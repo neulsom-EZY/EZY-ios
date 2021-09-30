@@ -383,7 +383,6 @@ class TagManagementViewController: UIViewController {
                     Timer.scheduledTimer(timeInterval: TimeInterval(0.8), target: self, selector: #selector(self.hideSnackbarView), userInfo: nil, repeats: false)
             })
         }else{
-            
             self.view.endEditing(true)
 
             tagAddModalView.isHidden = true
@@ -393,9 +392,6 @@ class TagManagementViewController: UIViewController {
             selectedTagColorIndexArray.append(selectedTagColorIndex)
             tagNameText.append(tagAddModalView.tagNameTextField.text!)
             tagColor.append(UIColor.EZY_TagColorArray[selectedTagIndex])
-            
-            print("이름 : \(tagAddModalView.tagNameTextField.text!), 인덱스 : \(selectedTagColorIndex)")
-            
             
             tagTableView.reloadData()
         }
@@ -528,7 +524,6 @@ extension TagManagementViewController: UICollectionViewDataSource, UICollectionV
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         if collectionView == tagColorCollectionView{
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: TagColorCollectionViewCell.reuseId, for: indexPath) as! TagColorCollectionViewCell
-
             
             cell.backgroundColor = .white
             
@@ -555,7 +550,7 @@ extension TagManagementViewController: UICollectionViewDataSource, UICollectionV
         if collectionView == tagColorCollectionView{
             selectedTagColorIndex = indexPath.row
             
-            if TagColorModels[indexPath.row].isSelected {
+            if TagColorModels[indexPath.row].isSelected == true {
                 
                 TagColorModels[tagColorPreciousSelectedIndex].isSelected.toggle()
                 
