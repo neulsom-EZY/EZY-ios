@@ -6,8 +6,11 @@
 //
 
 import UIKit
+import Combine
 
 class TagSettingViewController: UIViewController {
+    
+    var passButton = PassthroughSubject<UIButton, Never>()
     
     lazy var backButton = UIButton().then{
         $0.setImage(UIImage(named: "EZY_TagManagementBackButtonImage"), for: .normal)
@@ -287,8 +290,8 @@ class TagSettingViewController: UIViewController {
     }
     
     @objc func modalDeleteButtonClicked(sender:UIButton){
-        let nextViewController = TagManagementViewController()
-        self.navigationController?.pushViewController(nextViewController, animated: true)
+        passButton.send(sender)
+        self.navigationController?.popViewController(animated: true)
     }
     
     @objc func backButtonClicked(sender:UIButton){

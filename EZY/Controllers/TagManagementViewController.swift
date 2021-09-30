@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Combine
 
 protocol SendTagNameSelectedCellIndexDelegate: AnyObject {
     func didTabTagSettingButton(with tagName: String, index: Int)
@@ -13,6 +14,8 @@ protocol SendTagNameSelectedCellIndexDelegate: AnyObject {
 
 class TagManagementViewController: UIViewController {
     // MARK: - Properties
+    var bag = Set<AnyCancellable>()
+    
     var tagNameText = [String]()
     
     var tagColor = [UIColor]()
@@ -405,6 +408,14 @@ class TagManagementViewController: UIViewController {
     @objc func tagSettingButtonClicked(sender:UIButton){
         let nextViewController = TagSettingViewController()
                 
+        nextViewController.passButton.sink { [weak self] button in
+            self!.selectedTagColorIndexArray.remove(at: self!.selectedTagIndex)
+            self!.tagNameText.remove(at: self!.selectedTagIndex)
+            self!.tagColor.remove(at: self!.selectedTagIndex)
+            
+            self!.tagTableView.deleteRows(at: [IndexPath(row: self!.selectedTagIndex, section: 0)], with: .automatic)
+        }.store(in: &bag)
+        
         nextViewController.selectedTagColorIndex = selectedTagColorIndexArray[selectedTagIndex]
         nextViewController.tagNameTextField.text = "\(tagNameText[selectedTagIndex])"
         nextViewController.tagDeleteModalView.tagTitleNameLabel.text = "\(tagNameText[selectedTagIndex])"
