@@ -16,7 +16,7 @@ class TagManagementViewController: UIViewController {
     // MARK: - Properties
     var bag = Set<AnyCancellable>()
     
-    var tagNameText = [String]()
+    var tagNameTextArray = [String]()
     
     var tagColor = [UIColor]()
     
@@ -26,7 +26,7 @@ class TagManagementViewController: UIViewController {
     
     lazy var selectedTagColor: UIColor = TagColorModels[0].backgroundColor
     
-    lazy var selectedTagIndex: Int = 0
+    var selectedTagIndex: Int = 0
     
     lazy var selectedTagColorIndex = 0
     
@@ -34,7 +34,9 @@ class TagManagementViewController: UIViewController {
     
     var tagColorPreciousSelectedIndex = 0
     
-    lazy var recommendedTagNameText = ["STUDY","EXCERISE","ENGLISH","EAT"]
+    var recommendedTextDataArray = ["STUDY","EXCERISE","ENGLISH","EAT"]
+    
+    lazy var recommendedTagNameTextArray = recommendedTextDataArray
     
     lazy var tagAddModalView = TagAddModalView().then{
         $0.tagAddButton.addTarget(self,action:#selector(tagAddCompletionbuttonClicked(sender:)), for:.touchUpInside)
@@ -127,7 +129,7 @@ class TagManagementViewController: UIViewController {
     }
     
     override func viewDidAppear(_ animated: Bool) {
-        if tagNameText.count == 0{
+        if tagNameTextArray.count == 0{
             tagTableView.isHidden = true
         }
     }
@@ -257,13 +259,13 @@ class TagManagementViewController: UIViewController {
         recommendedTagViewDown()
 
         selectedTagColorIndexArray.append(0)
-        tagNameText.append(recommendedTagNameText[selectedRecommendedTagIndex])
+        tagNameTextArray.append(recommendedTagNameTextArray[selectedRecommendedTagIndex])
         tagColor.append(UIColor.EZY_TagColorArray[0])
         
         recommendedTagCollectionView.deleteItems(at: [IndexPath.init(row: selectedRecommendedTagIndex, section: 0)])
-        recommendedTagNameText.remove(at: selectedRecommendedTagIndex)
+        recommendedTagNameTextArray.remove(at: selectedRecommendedTagIndex)
         
-        if recommendedTagNameText.count == 0{
+        if recommendedTagNameTextArray.count == 0{
 
             UIView.animate(withDuration: 0.3, delay: 0, options: .curveEaseOut, animations: {
                 self.lineView.snp.remakeConstraints { make in
@@ -336,7 +338,7 @@ class TagManagementViewController: UIViewController {
             recommendedTagViewDown()
 
             selectedTagColorIndexArray.append(selectedTagColorIndex)
-            tagNameText.append(tagAddModalView.tagNameTextField.text!)
+            tagNameTextArray.append(tagAddModalView.tagNameTextField.text!)
             tagColor.append(UIColor.EZY_TagColorArray[selectedTagColorIndex])
 
             tagTableView.reloadData()
@@ -345,25 +347,6 @@ class TagManagementViewController: UIViewController {
     
     @objc func backButtonClicked(sender:UIButton){
         self.navigationController?.popViewController(animated: true)
-    }
-    
-    @objc func tagSettingButtonClicked(sender:UIButton){
-        let nextViewController = TagSettingViewController()
-                
-        nextViewController.passButton.sink { [weak self] button in
-            self!.selectedTagColorIndexArray.remove(at: self!.selectedTagIndex)
-            self!.tagNameText.remove(at: self!.selectedTagIndex)
-            self!.tagColor.remove(at: self!.selectedTagIndex)
-            
-            self!.tagTableView.deleteRows(at: [IndexPath(row: self!.selectedTagIndex, section: 0)], with: .automatic)
-        }.store(in: &bag)
-        
-        nextViewController.selectedTagColorIndex = selectedTagColorIndexArray[selectedTagIndex]
-        nextViewController.tagNameTextField.text = "\(tagNameText[selectedTagIndex])"
-        nextViewController.tagDeleteModalView.tagTitleNameLabel.text = "\(tagNameText[selectedTagIndex])"
-        nextViewController.tagNameTextCount = tagNameText[selectedTagIndex].map{ $0 }.count
-        
-        self.navigationController?.pushViewController(nextViewController, animated: true)
     }
     
     // MARK: - Notification
@@ -397,12 +380,53 @@ class TagManagementViewController: UIViewController {
                 make.height.equalToSuperview().dividedBy(6.6)
             }
             
+            self.lineView.isHidden = false
+            
             self.noTagImageView.isHidden = true
             
             self.recommendedTagCollectionView.superview?.layoutIfNeeded()
         })
         
         self.tagGoodLabel.text = "이런 태그는 어때요?"
+    }
+    
+    // MARK: - recommendedTagViewUp
+    func recommendedTagViewUp(){
+        tagTableView.isHidden = true
+        
+        UIView.animate(withDuration: 0.4, delay: 0, options: .curveEaseOut, animations: {
+            
+            self.noTagImageView.snp.remakeConstraints { make in
+                make.top.equalTo(self.mainTitleLabel.snp.bottom).offset(self.view.frame.height/8.45)
+                make.height.equalToSuperview().dividedBy(4)
+                make.width.equalTo(self.noTagImageView.snp.height)
+                make.centerX.equalToSuperview()
+            }
+            
+            self.tagGoodLabel.snp.remakeConstraints { make in
+                make.centerX.equalTo(self.noTagImageView)
+                make.top.equalTo(self.noTagImageView.snp.bottom).offset(self.view.frame.height/30)
+            }
+            
+            self.tagAddLabel.snp.remakeConstraints { make in
+                make.centerX.equalTo(self.tagGoodLabel)
+                make.top.equalTo(self.tagGoodLabel.snp.bottom).offset(self.view.frame.height/135.3)
+            }
+            
+            self.recommendedTagCollectionView.snp.remakeConstraints { make in
+                make.top.equalTo(self.tagAddLabel.snp.bottom).offset(self.view.frame.height/120.6)
+                make.left.right.equalToSuperview()
+                make.height.equalToSuperview().dividedBy(6.6)
+            }
+            
+            self.tagGoodLabel.text = "태그를 사용하시면 더 쉽게 일정을 정리할 수 있어요!"
+            
+            self.lineView.isHidden = true
+            
+            self.noTagImageView.isHidden = false
+            
+            self.recommendedTagCollectionView.superview?.layoutIfNeeded()
+        })
     }
     
     // MARK: - hideSnackbarView
@@ -431,7 +455,7 @@ class TagManagementViewController: UIViewController {
 extension TagManagementViewController: UITableViewDataSource, UITableViewDelegate{
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if tableView == tagTableView{
-            return tagNameText.count
+            return tagNameTextArray.count
         }
         
         return Int()
@@ -440,9 +464,8 @@ extension TagManagementViewController: UITableViewDataSource, UITableViewDelegat
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if tableView == tagTableView{
             let cell = tableView.dequeueReusableCell(withIdentifier: TagTableViewCell.reuseId, for: indexPath) as! TagTableViewCell
-            cell.tagSettingButton.addTarget(self, action: #selector(tagSettingButtonClicked(sender:)), for: .touchUpInside)
-                    
-            cell.tagNameLabel.text = tagNameText[indexPath.row]
+            cell.tagSettingButton.isUserInteractionEnabled = false
+            cell.tagNameLabel.text = tagNameTextArray[indexPath.row]
             cell.tagNameLabel.textColor = tagColor[indexPath.row]
             cell.tagLabelBackgroundView.layer.borderColor = tagColor[indexPath.row].cgColor
             
@@ -459,6 +482,39 @@ extension TagManagementViewController: UITableViewDataSource, UITableViewDelegat
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return self.view.frame.height/15
     }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let nextViewController = TagSettingViewController()
+                
+        // TagSettingViewController에서 tag delete action을 받았을 때
+        nextViewController.passButton.sink { [weak self] button in
+            self!.selectedTagColorIndexArray.remove(at: indexPath.row)
+            self!.tagNameTextArray.remove(at: indexPath.row)
+            self!.tagColor.remove(at: indexPath.row)
+            
+            self!.tagTableView.deleteRows(at: [IndexPath(row: indexPath.row, section: 0)], with: .automatic)
+            
+            if self!.tagNameTextArray.isEmpty {
+                self!.recommendedTagViewUp()
+            }
+            
+            // 삭제된 추천 태그 다시 RecommendCollectionView에 추가하기
+            for i in 0...self!.recommendedTextDataArray.count-1{
+                if self!.recommendedTagNameTextArray.contains(self!.recommendedTextDataArray[i]) == false{
+                    self!.recommendedTagNameTextArray.append(self!.recommendedTextDataArray[i])
+                }
+            }
+            
+            self!.recommendedTagCollectionView.reloadData()
+        }.store(in: &bag)
+
+        nextViewController.selectedTagColorIndex = selectedTagColorIndexArray[indexPath.row]
+        nextViewController.tagNameTextField.text = "\(tagNameTextArray[indexPath.row])"
+        nextViewController.tagDeleteModalView.tagTitleNameLabel.text = "\(tagNameTextArray[indexPath.row])"
+        nextViewController.tagNameTextCount = tagNameTextArray[indexPath.row].map{ $0 }.count
+        
+        self.navigationController?.pushViewController(nextViewController, animated: true)
+    }
 }
 
 extension TagManagementViewController: UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout{
@@ -466,7 +522,7 @@ extension TagManagementViewController: UICollectionViewDataSource, UICollectionV
         if collectionView == tagColorCollectionView{
             return TagColorModels.count
         }else if collectionView == recommendedTagCollectionView{
-            return recommendedTagNameText.count
+            return recommendedTagNameTextArray.count
         }
         
         return Int()
@@ -486,7 +542,7 @@ extension TagManagementViewController: UICollectionViewDataSource, UICollectionV
             
             cell.addButton.addTarget(self, action: #selector(recommendedTagAddButtonClicked(sender:)), for: .touchUpInside)
             
-            cell.tagButton.setTitle(recommendedTagNameText[indexPath.row], for: .normal)
+            cell.tagButton.setTitle(recommendedTagNameTextArray[indexPath.row], for: .normal)
             
             cell.delegate = self
             cell.configure(with: "\(indexPath.row)")
@@ -546,6 +602,8 @@ extension TagManagementViewController: CustomCollectionViewCellDelegate{
 extension TagManagementViewController: TagTableViewCellDelegate{
     func didTabAddButton(with string: String) {
         selectedTagIndex = Int(string)!
+        
+        print("didTabAddButton에서 selectedTagIndex : \(selectedTagIndex)")
     }
 }
 

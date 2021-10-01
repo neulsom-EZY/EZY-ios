@@ -120,7 +120,7 @@ class TagSettingViewController: UIViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         TagColorModels[selectedTagColorIndex].isSelected = false
-        print("선택된 color index입니다~ : \(selectedTagColorIndex)")
+
         tagColorCollectionView.reloadData()
     }
     
@@ -389,8 +389,6 @@ extension TagSettingViewController: SendTagNameSelectedCellIndexDelegate{
     func didTabTagSettingButton(with tagName: String, index: Int) {
         tagNameText = tagName
         tagNameTextField.text = tagNameText
-
-        print("tagName \(tagName)")
     }
 }
 
