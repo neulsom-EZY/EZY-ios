@@ -307,7 +307,6 @@ class TagSettingViewController: UIViewController {
     }
     
     @objc func completeButtonClicked(sender:UIButton){
-        
         if tagNameTextField.text?.isEmpty == true{
             writeTagNameView.alpha = 13
             

@@ -15,7 +15,7 @@ protocol SendTagNameSelectedCellIndexDelegate: AnyObject {
 class TagManagementViewController: UIViewController {
     // MARK: - Properties
     var bag = Set<AnyCancellable>()
-    
+        
     var tagNameTextArray = [String]()
     
     var tagColor = [UIColor]()
@@ -34,7 +34,9 @@ class TagManagementViewController: UIViewController {
     
     var tagColorPreciousSelectedIndex = 0
     
-    var recommendedTextDataArray = ["STUDY","EXCERISE","ENGLISH","EAT"]
+    var changedTagName = ""
+    
+    var recommendedTextDataArray = ["STUDY","EXCERISE","ENGLISH","EAT","ROUTINE", "CLEANING"]
     
     lazy var recommendedTagNameTextArray = recommendedTextDataArray
     
@@ -451,7 +453,7 @@ class TagManagementViewController: UIViewController {
     }
 }
 
-// MARK: - Extension
+// MARK: - TableView Extension
 extension TagManagementViewController: UITableViewDataSource, UITableViewDelegate{
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if tableView == tagTableView{
@@ -494,6 +496,7 @@ extension TagManagementViewController: UITableViewDataSource, UITableViewDelegat
             
             self!.tagTableView.deleteRows(at: [IndexPath(row: indexPath.row, section: 0)], with: .automatic)
             
+            // 태그가 없으면 없을 때 나타는 요소들 표시하기
             if self!.tagNameTextArray.isEmpty {
                 self!.recommendedTagViewUp()
             }
@@ -506,6 +509,7 @@ extension TagManagementViewController: UITableViewDataSource, UITableViewDelegat
             }
             
             self!.recommendedTagCollectionView.reloadData()
+            
         }.store(in: &bag)
 
         nextViewController.selectedTagColorIndex = selectedTagColorIndexArray[indexPath.row]
@@ -517,6 +521,7 @@ extension TagManagementViewController: UITableViewDataSource, UITableViewDelegat
     }
 }
 
+// MARK: - CollectionView Extension
 extension TagManagementViewController: UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout{
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         if collectionView == tagColorCollectionView{
@@ -593,12 +598,14 @@ extension TagManagementViewController: UICollectionViewDataSource, UICollectionV
     }
 }
 
+// MARK: - CustomCollectionViewCellDelegate Extension
 extension TagManagementViewController: CustomCollectionViewCellDelegate{
     func didTabButton(with string: String) {
         selectedRecommendedTagIndex = Int(string)!
     }
 }
 
+// MARK: - TagTableViewCellDelegate Extension
 extension TagManagementViewController: TagTableViewCellDelegate{
     func didTabAddButton(with string: String) {
         selectedTagIndex = Int(string)!
@@ -607,6 +614,7 @@ extension TagManagementViewController: TagTableViewCellDelegate{
     }
 }
 
+// MARK: - UITextFieldDelegate Extension
 extension TagManagementViewController: UITextFieldDelegate{
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
         guard let text = tagAddModalView.tagNameTextField.text else { return true }
