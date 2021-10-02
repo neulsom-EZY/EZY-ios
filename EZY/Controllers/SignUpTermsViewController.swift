@@ -255,7 +255,12 @@ class SignUpTermsViewController: UIViewController{
     
     @objc
     func onTapSignIn(){
-        print("DEBUG : Click bottom SignIn button Button")
+        if flag1 == true && flag2 == true {
+            let controller = ShowPlanViewController()
+            navigationController?.pushViewController(controller, animated: true)
+        }else{
+            shakeView(self.view)
+        }
     }
 
     //MARK: - Helpers
@@ -464,6 +469,16 @@ class SignUpTermsViewController: UIViewController{
         topBarView.addSubview(topBarView.EZY_Logo)
         
         topBarView.topBarViewLayoutSetting(screenHeight: self.view.frame.height, screenWidth: self.view.frame.width)
+    }
+    
+    private func shakeView(_ view: UIView?) {
+        let shake = CABasicAnimation(keyPath: "position")
+        shake.duration = 0.08
+        shake.repeatCount = 2
+        shake.autoreverses = true
+        shake.fromValue = NSValue(cgPoint: CGPoint(x: (view?.center.x)! - 2, y: view?.center.y ?? 0.0))
+        shake.toValue = NSValue(cgPoint: CGPoint(x: (view?.center.x)! + 2, y: view?.center.y ?? 0.0))
+        view?.layer.add(shake, forKey: "position")
     }
 }
 

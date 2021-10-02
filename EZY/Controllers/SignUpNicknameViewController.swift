@@ -51,8 +51,12 @@ class SignUpNicknameViewController: UIViewController{
     
     @objc
     func onTapContinuePassword(){
-        let controller = SignUpPasswordViewController()
-        navigationController?.pushViewController(controller, animated: true)
+        if isValidNickname(Nickname: nicknameContainer.tf.text) == true {
+            let controller = SignUpPasswordViewController()
+            navigationController?.pushViewController(controller, animated: true)
+        }else{
+            shakeView(self.view)
+        }
     }
     
     
@@ -134,6 +138,24 @@ class SignUpNicknameViewController: UIViewController{
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         nicknameContainer.tf.resignFirstResponder()
+    }
+    
+    private func shakeView(_ view: UIView?) {
+        let shake = CABasicAnimation(keyPath: "position")
+        shake.duration = 0.08
+        shake.repeatCount = 2
+        shake.autoreverses = true
+        shake.fromValue = NSValue(cgPoint: CGPoint(x: (view?.center.x)! - 2, y: view?.center.y ?? 0.0))
+        shake.toValue = NSValue(cgPoint: CGPoint(x: (view?.center.x)! + 2, y: view?.center.y ?? 0.0))
+        view?.layer.add(shake, forKey: "position")
+    }
+    
+    private func isValidNickname(Nickname: String?) -> Bool {
+        guard Nickname != nil else { return false }
+            
+        let NicknameRegEx = ("[A-Za-z].{0,9}")
+        let pred = NSPredicate(format:"SELF MATCHES %@", NicknameRegEx)
+        return pred.evaluate(with: Nickname)
     }
 }
 

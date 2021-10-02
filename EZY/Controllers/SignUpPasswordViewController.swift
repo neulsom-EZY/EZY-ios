@@ -54,8 +54,12 @@ class SignUpPasswordViewController: UIViewController{
     
     @objc
     func onTapContinuePhoneNum(){
-        let controller = SignUpPhoneNumViewController()
-        navigationController?.pushViewController(controller, animated: true)
+        if isValidPassword(Password: passwordContainer.tf.text) == true{
+            let controller = SignUpPhoneNumViewController()
+            navigationController?.pushViewController(controller, animated: true)
+        }else{
+            shakeView(self.view)
+        }
     }
     
     //MARK: - Helpers
@@ -133,6 +137,24 @@ class SignUpPasswordViewController: UIViewController{
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         passwordContainer.tf.resignFirstResponder()
+    }
+    
+    private func shakeView(_ view: UIView?) {
+        let shake = CABasicAnimation(keyPath: "position")
+        shake.duration = 0.08
+        shake.repeatCount = 2
+        shake.autoreverses = true
+        shake.fromValue = NSValue(cgPoint: CGPoint(x: (view?.center.x)! - 2, y: view?.center.y ?? 0.0))
+        shake.toValue = NSValue(cgPoint: CGPoint(x: (view?.center.x)! + 2, y: view?.center.y ?? 0.0))
+        view?.layer.add(shake, forKey: "position")
+    }
+        
+    private func isValidPassword(Password: String?) -> Bool {
+        guard Password != nil else { return false }
+            
+        let PasswordRegEx = ("(?=.*[A-Za-z~!@#$%^&*])(?=.*[0-9]).{8,}")
+        let pred = NSPredicate(format:"SELF MATCHES %@", PasswordRegEx)
+        return pred.evaluate(with: Password)
     }
 }
 

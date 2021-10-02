@@ -55,8 +55,12 @@ class SignUpPhoneNumViewController: UIViewController{
     
     @objc
     func onTapContinueTerms(){
-        let controller = SignUpTermsViewController()
-        navigationController?.pushViewController(controller, animated: true)
+        if isValidPhoneNum(PhoneNumber: phoneNumContainer.tf.text) == true{
+            let controller = SignUpTermsViewController()
+            navigationController?.pushViewController(controller, animated: true)
+        }else{
+            shakeView(self.view)
+        }
     }
     
     @objc
@@ -142,6 +146,24 @@ class SignUpPhoneNumViewController: UIViewController{
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         phoneNumContainer.tf.resignFirstResponder()
+    }
+    
+    private func shakeView(_ view: UIView?) {
+        let shake = CABasicAnimation(keyPath: "position")
+        shake.duration = 0.08
+        shake.repeatCount = 2
+        shake.autoreverses = true
+        shake.fromValue = NSValue(cgPoint: CGPoint(x: (view?.center.x)! - 2, y: view?.center.y ?? 0.0))
+        shake.toValue = NSValue(cgPoint: CGPoint(x: (view?.center.x)! + 2, y: view?.center.y ?? 0.0))
+        view?.layer.add(shake, forKey: "position")
+    }
+        
+    private func isValidPhoneNum(PhoneNumber: String?) -> Bool {
+        guard PhoneNumber != nil else { return false }
+        
+        let idRegEx = "^01([0-9])([0-9]{3,4})([0-9]{4})$"
+        let pred = NSPredicate(format:"SELF MATCHES %@", idRegEx)
+        return pred.evaluate(with: PhoneNumber)
     }
 }
 
