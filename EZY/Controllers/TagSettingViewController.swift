@@ -8,8 +8,14 @@
 import UIKit
 import Combine
 
+protocol SendChangedTagName{
+    func didTagCompleteButton(changedTagName: String)
+}
+
 class TagSettingViewController: UIViewController {
     // MARK: - Properties
+    var delegate: SendChangedTagName?
+    
     var passButton = PassthroughSubject<UIButton, Never>()
     
     lazy var backButton = UIButton().then{
@@ -324,6 +330,8 @@ class TagSettingViewController: UIViewController {
             })
         
         }else{
+            delegate?.didTagCompleteButton(changedTagName: tagNameTextField.text!)
+            
             navigationController?.popViewController(animated: true)
         }
     }

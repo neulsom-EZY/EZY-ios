@@ -517,6 +517,8 @@ extension TagManagementViewController: UITableViewDataSource, UITableViewDelegat
         nextViewController.tagDeleteModalView.tagTitleNameLabel.text = "\(tagNameTextArray[indexPath.row])"
         nextViewController.tagNameTextCount = tagNameTextArray[indexPath.row].map{ $0 }.count
         
+        nextViewController.delegate = self
+        
         self.navigationController?.pushViewController(nextViewController, animated: true)
     }
 }
@@ -595,6 +597,15 @@ extension TagManagementViewController: UICollectionViewDataSource, UICollectionV
         }
         
         return UIEdgeInsets()
+    }
+}
+
+extension TagManagementViewController: SendChangedTagName{
+    func didTagCompleteButton(changedTagName: String) {
+        print("changedTagName : \(changedTagName)")
+        tagNameTextArray[selectedTagIndex] = changedTagName
+        
+        tagTableView.reloadData()
     }
 }
 
