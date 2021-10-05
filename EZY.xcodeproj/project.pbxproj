@@ -475,19 +475,9 @@
 				6AA6F78E269C2E4C00958D36 /* SignUpPasswordViewController.swift */,
 				6AA6F790269C2E4C00958D36 /* SignUpPhoneNumViewController.swift */,
 				6AA6F791269C2E4D00958D36 /* SignUpTermsViewController.swift */,
-				6AA76A272663958B00B7E1F5 /* ShowPlanViewController.swift */,
-				6AA76A0126636D2800B7E1F5 /* LoginViewController.swift */,
-				6A4EDA2B266A045B00B809EC /* NotificationViewController.swift */,
-				6AB27CB1269DD1B900B95C0F /* InquiryChattingViewController.swift */,
-				6AA6F796269C2E6200958D36 /* NewPasswordPhoneNumViewController.swift */,
-				6AA6F797269C2E6200958D36 /* NewPasswordPutViewController.swift */,
-				6A138F84266F866D00DBCE49 /* GroupManagementViewController.swift */,
 				6AE41E7926A9228A0072612C /* TagManagementViewController.swift */,
 				6AE41E7D26A9560C0072612C /* TagSettingViewController.swift */,
 				6AB27CAF269D8C1600B95C0F /* WithdrawalViewController.swift */,
-				EE93B4D826876C6F0055D7A6 /* PushNotificationManagementViewController.swift */,
-				EE93B4DC26878A5D0055D7A6 /* PersonalCalendarViewController.swift */,
-				EE93B4E72687FB660055D7A6 /* ErrandCalendarViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
