@@ -12,15 +12,12 @@ import Then
 class MorePeopleToDo: UIViewController{
     let bounds = UIScreen.main.bounds
     
-    static let recommendData = ["JiHoooooon","siwonnnny","NoName","mingki","johnjihwan","noplayy","gyeongggggjuunnn"]
+    let recommendData = ["JiHoooooon","siwonnnny","NoName","mingki","johnjihwan","noplayy","gyeongggggjuunnn"]
     let randomColorData : [UIColor] = [.rgb(red: 186, green: 200, blue: 255),.rgb(red: 255, green: 204, blue: 204),.rgb(red: 186, green: 222, blue: 255),.rgb(red: 207, green: 227, blue: 206),.rgb(red: 255, green: 209, blue: 141)]
-    let identifier = "MorePeopleToDo"
     var data = [SearchData]()
     var filterData = [SearchData]()
-    var filtered = false
-    
     var clickData : String = ""
-    
+
     //MARK: - Properties
     var isTableVisible = false
     private var viewModel = MoreTodoModel()
@@ -224,7 +221,6 @@ class MorePeopleToDo: UIViewController{
             make.height.equalTo(self.view.frame.height/18.044)
             make.left.equalTo(view.snp.left).offset(view.frame.height/30.07)
             make.right.equalTo(view.snp.right).inset(view.frame.height/29)
-            
         }
     }
     func configureNotificationObservers(){
@@ -245,18 +241,17 @@ class MorePeopleToDo: UIViewController{
 extension MorePeopleToDo : UICollectionViewDelegateFlowLayout,UICollectionViewDataSource{
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         if collectionView == WhatAboutPeopleLikeThis{
-            return MorePeopleToDo.recommendData.count
+            return recommendData.count
         }
         else if collectionView === ErrandPersonCollectionView{
             return 1
         }
         return 0
     }
-    
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         if collectionView == WhatAboutPeopleLikeThis{
             guard let whatAboutPeoplecell = collectionView.dequeueReusableCell(withReuseIdentifier: WhatAboutPeopleLikeThisCell.identifier, for: indexPath) as? WhatAboutPeopleLikeThisCell else {return UICollectionViewCell()}
-            whatAboutPeoplecell.bglabel.text = "@ " + MorePeopleToDo.recommendData[indexPath.row]
+            whatAboutPeoplecell.bglabel.text = "@ " + recommendData[indexPath.row]
             whatAboutPeoplecell.bglabel.dynamicFont(fontSize: 12, currentFontName:"AppleSDGothicNeo-UltraLight")
             whatAboutPeoplecell.bglabel.textColor = MorePeopleToDo().randomColorData.randomElement()
             whatAboutPeoplecell.layer.borderWidth = 1
@@ -275,11 +270,10 @@ extension MorePeopleToDo : UICollectionViewDelegateFlowLayout,UICollectionViewDa
             errandPersonChooseCell.layer.borderColor = UIColor.rgb(red: 224, green: 224, blue: 224).cgColor
             return errandPersonChooseCell
         }
-        
     }
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         if collectionView == WhatAboutPeopleLikeThis{
-            return CGSize(width: 100, height: WhatAboutPeopleLikeThis.frame.height/2 - 5)
+            return CGSize(width: bounds.width/3, height: WhatAboutPeopleLikeThis.frame.height/2 - 5)
         }else if collectionView == ErrandPersonCollectionView{
             let label = UILabel()
             label.text = clickData
@@ -290,6 +284,24 @@ extension MorePeopleToDo : UICollectionViewDelegateFlowLayout,UICollectionViewDa
     }
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
         return bounds.width/41.67
+    }
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        if collectionView == WhatAboutPeopleLikeThis{
+            clickData = recommendData[indexPath.row]
+            print(clickData)
+            UIView.animate(withDuration: 0.4) {
+                self.ErrandPersonCollectionView.alpha = 1
+                self.WhatAboutPeopleLikeThis.alpha = 0
+            }
+            recommendPeopleLabel.text = "심부름을 부탁할 분이군요!"
+            UIView.animate(withDuration: 0.1) {
+                self.searcherView.frame = CGRect(x: self.view.frame.height/23.2, y: self.view.frame.height/3.0526, width: self.view.frame.width/1.2255, height: 0)
+                self.view.layoutIfNeeded()
+            }
+            ErrandPersonCollectionView.reloadData()
+        }else{
+            
+        }
     }
 }
 
