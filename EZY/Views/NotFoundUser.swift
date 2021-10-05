@@ -10,7 +10,7 @@ import UIKit
 class NotFoundUser : UIView {
     
     let iv = UIImageView().then{
-        $0.image = UIImage(named: "EZY_undraw_feeling")
+        $0.image = UIImage(named: "EZY_NoMember")
         $0.sizeToFit()
         
     }
@@ -33,9 +33,10 @@ class NotFoundUser : UIView {
             make.top.equalToSuperview()
             make.centerX.equalToSuperview()
             make.width.equalTo(label.frame.width/1.2625)
+            make.height.equalTo(bounds.height/1.45)
         }
         label.snp.makeConstraints { (make) in
-            make.bottom.equalToSuperview()
+            make.top.equalTo(iv.snp.bottom).offset(bounds.height/5.73)
             make.centerX.equalToSuperview()
         }
         

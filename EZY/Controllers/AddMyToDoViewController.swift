@@ -24,11 +24,6 @@ class AddMyToDoViewController:UIViewController{
         $0.backgroundColor = .black
         $0.alpha = 0
     }
-    //MARK: - 키보드 실행 됬을때 바탕이 되는 뷰
-    let backGroundView = UIButton().then{
-        $0.isHidden = true
-    }
-    
     private let backbutton = UIButton().then{
         $0.tintColor = .EZY_BAC8FF
         $0.setImage(UIImage(systemName: "arrow.left"), for: .normal)
@@ -155,18 +150,6 @@ class AddMyToDoViewController:UIViewController{
     
 
     
-    //MARK: - Keyboard Action
-    @objc func KeyboardShow(){
-        backGroundView.isHidden = false
-        backGroundView.addTarget(self, action: #selector(KeyboardDown), for: .touchUpInside)
-    }
-    @objc func KeyboardHide(){
-        backGroundView.isHidden = true
-
-    }
-    @objc func KeyboardDown(){
-        self.view.endEditing(true)
-    }
     
     //MARK: - Helpers
     //모달 위치
@@ -198,12 +181,10 @@ class AddMyToDoViewController:UIViewController{
         cornerRadius()
         collectionViewDataSourceAndDelegate()
         location()
-        keyboardStatus()
     }
-    //MARK: - keyboard Setting
-    func keyboardStatus(){
-        NotificationCenter.default.addObserver(self, selector: #selector(KeyboardShow), name: UIResponder.keyboardWillShowNotification, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(KeyboardHide), name: UIResponder.keyboardWillHideNotification, object: nil)
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        super.touchesBegan(touches, with: event)
+        view.endEditing(true)
     }
     //MARK: - CollectionView DataSource & Delegate
     func collectionViewDataSourceAndDelegate(){
@@ -222,7 +203,6 @@ class AddMyToDoViewController:UIViewController{
         view.addSubview(addButton)
         view.addSubview(alarmSettings)
         view.addSubview(alarmSettingcollectionView)
-        view.addSubview(backGroundView)
         view.addSubview(titleContainerView)
         view.addSubview(explanationContainerView)
     }
@@ -234,9 +214,6 @@ class AddMyToDoViewController:UIViewController{
     }
     //MARK: - Location
     func location(){
-        backGroundView.snp.makeConstraints { (make) in
-            make.top.left.bottom.right.equalToSuperview()
-        }
         backbutton.snp.makeConstraints { (make) in
             make.height.width.equalTo(self.view.frame.height/33.8)
             make.left.equalTo(self.view.frame.height/29)

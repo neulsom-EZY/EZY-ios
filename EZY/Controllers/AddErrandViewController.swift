@@ -103,9 +103,7 @@ class AddErrandViewController : UIViewController{
     
     @objc func todobackbtn(){
         //전페이지로 되돌아가는 버튼
-        let vc = LoginViewController()
-        vc.modalPresentationStyle = .fullScreen
-        present(vc, animated: false, completion: nil)
+        navigationController?.popViewController(animated: true)
     }
     
     @objc func calendarAlert(){
@@ -120,8 +118,6 @@ class AddErrandViewController : UIViewController{
     @objc func Addmytodobtn(){
         print("DEBUG:AddButton")
         //추가페이지 작성후 실행시키는 코드
-        
-        
     }
     @objc func Addlocationbtn(){
         let vc = AddMyToDoViewController()
@@ -138,6 +134,10 @@ class AddErrandViewController : UIViewController{
         addView()
         location()
         
+    }
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        super.touchesBegan(touches, with: event)
+        view.endEditing(true)
     }
     
     func cornerRadius(){
@@ -250,5 +250,4 @@ extension AddErrandViewController : UICollectionViewDelegateFlowLayout,UICollect
         label.sizeToFit()
         return CGSize(width: label.frame.width + view.frame.height/40.6, height: view.frame.height/25.375)
     }
-
 }
