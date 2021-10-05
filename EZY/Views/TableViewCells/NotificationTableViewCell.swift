@@ -85,7 +85,6 @@ class NotificationTableViewCell: UITableViewCell {
             make.left.equalToSuperview().offset(contentView.frame.width/20)
             
             logoCircleBackgroundView.layer.cornerRadius = ((contentView.frame.height/1.18)/2.4)/2
-            
         }
         
         scheduleImageByTypeImageView.snp.makeConstraints { make in
