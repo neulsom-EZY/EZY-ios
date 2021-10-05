@@ -76,6 +76,7 @@ class SignUpPhoneNumViewController: UIViewController{
         phoneNumContainerViewSetting()
         cornerRadius()
         location()
+        addNotificationCenter()
     }
     
     private func addView(){
@@ -144,9 +145,20 @@ class SignUpPhoneNumViewController: UIViewController{
         phoneNumContainer.loginTfSetting(screenHeight: self.view.frame.height, screenWidth: self.view.frame.width)
     }
     
+    //MARK: - textField Point Set
+    
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         phoneNumContainer.tf.resignFirstResponder()
     }
+    
+    //MARK: - Add NotificationCenter
+    
+    private func addNotificationCenter(){
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(_:)), name:UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide(_:)), name: UIResponder.keyboardWillHideNotification, object: nil)
+    }
+    
+    //MARK: - shakeAnimation
     
     private func shakeView(_ view: UIView?) {
         let shake = CABasicAnimation(keyPath: "position")
@@ -157,6 +169,8 @@ class SignUpPhoneNumViewController: UIViewController{
         shake.toValue = NSValue(cgPoint: CGPoint(x: (view?.center.x)! + 2, y: view?.center.y ?? 0.0))
         view?.layer.add(shake, forKey: "position")
     }
+    
+    //MARK: - PhoneNum Test
         
     private func isValidPhoneNum(PhoneNumber: String?) -> Bool {
         guard PhoneNumber != nil else { return false }
@@ -164,6 +178,33 @@ class SignUpPhoneNumViewController: UIViewController{
         let idRegEx = "^01([0-9])([0-9]{3,4})([0-9]{4})$"
         let pred = NSPredicate(format:"SELF MATCHES %@", idRegEx)
         return pred.evaluate(with: PhoneNumber)
+    }
+    
+    //MARK: - KeyboardWillShow -> continueButton Up
+    @objc
+    func keyboardWillShow(_ sender: Notification) {
+        var keyboardHeight: CGFloat = CGFloat(0) //keyboardHeight
+        if let keyboardFrame: NSValue = sender.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue {
+            let keyboardRectangle = keyboardFrame.cgRectValue
+            keyboardHeight = keyboardRectangle.height
+        }
+        continueButton.snp.remakeConstraints { make in
+            make.left.equalToSuperview().offset(self.view.frame.width/17)
+            make.centerX.equalToSuperview()
+            make.height.equalToSuperview().dividedBy(16.24)
+            make.bottom.equalToSuperview().offset(-keyboardHeight - self.view.frame.height/32.48)
+        }
+    }
+    
+    //MARK: - KeyboardWillHide -> continueButton Down
+    @objc
+    func keyboardWillHide(_ sender: Notification) {
+        continueButton.snp.remakeConstraints { make in
+            make.left.equalToSuperview().offset(self.view.frame.width/17)
+            make.centerX.equalToSuperview()
+            make.height.equalToSuperview().dividedBy(16.24)
+            make.bottom.equalToSuperview().offset(self.view.frame.height/32.48 * -1)
+        }
     }
 }
 

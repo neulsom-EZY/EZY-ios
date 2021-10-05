@@ -75,6 +75,7 @@ class NewNicknamePutViewController: UIViewController{
         nicknameContainerViewSetting()
         cornerRadius()
         location()
+        addNotificationCenter()
     }
     
     private func addView(){
@@ -147,9 +148,20 @@ class NewNicknamePutViewController: UIViewController{
         nicknameContainer.loginTfSetting(screenHeight: self.view.frame.height, screenWidth: self.view.frame.width)
     }
     
+    //MARK: - textField Point Set
+    
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         nicknameContainer.tf.resignFirstResponder()
     }
+    
+    //MARK: - Add NotificationCenter
+    
+    private func addNotificationCenter(){
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(_:)), name:UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide(_:)), name: UIResponder.keyboardWillHideNotification, object: nil)
+    }
+    
+    //MARK: - shakeAnimation
     
     private func shakeView(_ view: UIView?) {
         let shake = CABasicAnimation(keyPath: "position")
@@ -161,12 +173,41 @@ class NewNicknamePutViewController: UIViewController{
         view?.layer.add(shake, forKey: "position")
     }
     
+    //MARK: - Nickname Test
+    
     private func isValidNickname(Nickname: String?) -> Bool {
         guard Nickname != nil else { return false }
             
         let NicknameRegEx = ("[A-Za-z].{0,9}")
         let pred = NSPredicate(format:"SELF MATCHES %@", NicknameRegEx)
         return pred.evaluate(with: Nickname)
+    }
+    
+    //MARK: - KeyboardWillShow -> continueButton Up
+    @objc
+    func keyboardWillShow(_ sender: Notification) {
+        var keyboardHeight: CGFloat = CGFloat(0) //keyboardHeight
+        if let keyboardFrame: NSValue = sender.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue {
+            let keyboardRectangle = keyboardFrame.cgRectValue
+            keyboardHeight = keyboardRectangle.height
+        }
+        continueButton.snp.remakeConstraints { make in
+            make.left.equalToSuperview().offset(self.view.frame.width/17)
+            make.centerX.equalToSuperview()
+            make.height.equalToSuperview().dividedBy(16.24)
+            make.bottom.equalToSuperview().offset(-keyboardHeight - self.view.frame.height/32.48)
+        }
+    }
+    
+    //MARK: - KeyboardWillHide -> continueButton Down
+    @objc
+    func keyboardWillHide(_ sender: Notification) {
+        continueButton.snp.remakeConstraints { make in
+            make.left.equalToSuperview().offset(self.view.frame.width/17)
+            make.centerX.equalToSuperview()
+            make.height.equalToSuperview().dividedBy(16.24)
+            make.bottom.equalToSuperview().offset(self.view.frame.height/32.48 * -1)
+        }
     }
 }
 

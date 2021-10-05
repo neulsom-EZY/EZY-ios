@@ -464,12 +464,16 @@ class SignUpTermsViewController: UIViewController{
         }
     }
     
+    //MARK: - topBarViewSetting
+    
     private func topBarViewSetting(){
         topBarView.addSubview(topBarView.goBackButton)
         topBarView.addSubview(topBarView.EZY_Logo)
         
         topBarView.topBarViewLayoutSetting(screenHeight: self.view.frame.height, screenWidth: self.view.frame.width)
     }
+    
+    //MARK: - shakeAnimation
     
     private func shakeView(_ view: UIView?) {
         let shake = CABasicAnimation(keyPath: "position")
