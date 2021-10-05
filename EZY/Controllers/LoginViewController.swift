@@ -238,6 +238,8 @@ class LoginViewController: UIViewController{
         passwordContainer.tf.resignFirstResponder()
     }
     
+    //MARK: - shakeAnimation
+    
     private func shakeView(_ view: UIView?) {
         let shake = CABasicAnimation(keyPath: "position")
         shake.duration = 0.08
@@ -248,6 +250,8 @@ class LoginViewController: UIViewController{
         view?.layer.add(shake, forKey: "position")
     }
     
+    //MARK: - Nickname Test
+    
     private func isValidNickname(Nickname: String?) -> Bool {
         guard Nickname != nil else { return false }
             
@@ -255,6 +259,8 @@ class LoginViewController: UIViewController{
         let pred = NSPredicate(format:"SELF MATCHES %@", NicknameRegEx)
         return pred.evaluate(with: Nickname)
     }
+    
+    //MARK: - Password Test
         
     private func isValidPassword(Password: String?) -> Bool {
         guard Password != nil else { return false }
