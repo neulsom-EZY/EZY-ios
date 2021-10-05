@@ -489,7 +489,7 @@ extension TagManagementViewController: UITableViewDataSource, UITableViewDelegat
         let nextViewController = TagSettingViewController()
                 
         // TagSettingViewController에서 tag delete action을 받았을 때
-        nextViewController.passButton.sink { [weak self] button in
+        nextViewController.passDeleteEventButton.sink { [weak self] button in
             self!.selectedTagColorIndexArray.remove(at: indexPath.row)
             self!.tagNameTextArray.remove(at: indexPath.row)
             self!.tagColor.remove(at: indexPath.row)
@@ -516,6 +516,7 @@ extension TagManagementViewController: UITableViewDataSource, UITableViewDelegat
         nextViewController.tagNameTextField.text = "\(tagNameTextArray[indexPath.row])"
         nextViewController.tagDeleteModalView.tagTitleNameLabel.text = "\(tagNameTextArray[indexPath.row])"
         nextViewController.tagNameTextCount = tagNameTextArray[indexPath.row].map{ $0 }.count
+        nextViewController.tagColorPreciousSelectedIndex = tagColorPreciousSelectedIndex
         
         nextViewController.delegate = self
         
@@ -600,11 +601,12 @@ extension TagManagementViewController: UICollectionViewDataSource, UICollectionV
     }
 }
 
-extension TagManagementViewController: SendChangedTagName{
-    func didTagCompleteButton(changedTagName: String) {
-        print("changedTagName : \(changedTagName)")
+extension TagManagementViewController: SendChangedTagSetting{
+    func didTagCompleteButton(changedTagName: String, changedColorIndex : Int, tagColorPreciousSelectedIndex: Int) {
         tagNameTextArray[selectedTagIndex] = changedTagName
-        
+        selectedTagColorIndexArray[selectedTagIndex] = changedColorIndex
+        tagColor[selectedTagIndex] = UIColor.EZY_TagColorArray[changedColorIndex]
+        self.tagColorPreciousSelectedIndex = tagColorPreciousSelectedIndex
         tagTableView.reloadData()
     }
 }
@@ -620,8 +622,6 @@ extension TagManagementViewController: CustomCollectionViewCellDelegate{
 extension TagManagementViewController: TagTableViewCellDelegate{
     func didTabAddButton(with string: String) {
         selectedTagIndex = Int(string)!
-        
-        print("didTabAddButton에서 selectedTagIndex : \(selectedTagIndex)")
     }
 }
 

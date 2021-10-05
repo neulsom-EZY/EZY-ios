@@ -8,15 +8,15 @@
 import UIKit
 import Combine
 
-protocol SendChangedTagName{
-    func didTagCompleteButton(changedTagName: String)
+protocol SendChangedTagSetting{
+    func didTagCompleteButton(changedTagName: String, changedColorIndex: Int, tagColorPreciousSelectedIndex: Int)
 }
 
 class TagSettingViewController: UIViewController {
     // MARK: - Properties
-    var delegate: SendChangedTagName?
+    var delegate: SendChangedTagSetting?
     
-    var passButton = PassthroughSubject<UIButton, Never>()
+    var passDeleteEventButton = PassthroughSubject<UIButton, Never>()
     
     lazy var backButton = UIButton().then{
         $0.setImage(UIImage(named: "EZY_TagManagementBackButtonImage"), for: .normal)
@@ -299,7 +299,7 @@ class TagSettingViewController: UIViewController {
     
     // MARK: - Selectors
     @objc func modalDeleteButtonClicked(sender:UIButton){
-        passButton.send(sender)
+        passDeleteEventButton.send(sender)
         self.navigationController?.popViewController(animated: true)
     }
     
@@ -330,7 +330,7 @@ class TagSettingViewController: UIViewController {
             })
         
         }else{
-            delegate?.didTagCompleteButton(changedTagName: tagNameTextField.text!)
+            delegate?.didTagCompleteButton(changedTagName: tagNameTextField.text!, changedColorIndex: selectedTagColorIndex, tagColorPreciousSelectedIndex: tagColorPreciousSelectedIndex)
             
             navigationController?.popViewController(animated: true)
         }
@@ -367,18 +367,22 @@ extension TagSettingViewController: UICollectionViewDataSource, UICollectionView
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        if TagColorModels[indexPath.row].isSelected {
-            
-            TagColorModels[tagColorPreciousSelectedIndex].isSelected.toggle()
-            
-            if TagColorModels.filter({ $0.isSelected }).count >= 1 {
+        if collectionView == tagColorCollectionView{
+            if TagColorModels[indexPath.row].isSelected == true{
+                print("이전에 선택된 index : \(tagColorPreciousSelectedIndex)")
+                // 이전에 선택되어있던 거 지우기
+                TagColorModels[tagColorPreciousSelectedIndex].isSelected = true
+                
                 TagColorModels[indexPath.row].isSelected.toggle()
                 
+                selectedTagColorIndex = indexPath.row
+                
                 tagColorPreciousSelectedIndex = indexPath.row
+                print("현재 선택된 index : \(tagColorPreciousSelectedIndex)")
             }
+            
+            tagColorCollectionView.reloadData()
         }
-        
-        collectionView.reloadData()
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
