@@ -66,6 +66,25 @@ class NotificationViewController: UIViewController {
         $0.image = UIImage(named: "EZY_NotificationNoImage")
     }
     
+    private var noNotificationLabel = UILabel().then{
+        $0.text = "알림이 없네요!"
+        $0.textColor = UIColor.rgb(red: 82, green: 82, blue: 82)
+        $0.dynamicFont(fontSize: 14, currentFontName: "AppleSDGothicNeo-Medium")
+    }
+    
+    private var addPlanLabel = UILabel().then{
+        $0.text = "추가 버튼을 눌러 일정을 추가해보세요!"
+        $0.textColor = UIColor.rgb(red: 82, green: 82, blue: 82)
+        $0.dynamicFont(fontSize: 13, currentFontName: "AppleSDGothicNeo-Thin")
+    }
+    
+    private var planAddButton = UIButton().then{
+        $0.backgroundColor = UIColor.rgb(red: 142, green: 132, blue: 255)
+        $0.layer.cornerRadius = 10
+        $0.setTitle("일정 추가", for: .normal)
+        $0.dynamicFont(fontSize: 14, currentFontName: "AppleSDGothicNeo-SemiBold")
+    }
+    
     // MARK: - Lifecycles
     override func viewDidLoad() {
         super.viewDidLoad()
