@@ -85,6 +85,10 @@ class NotificationViewController: UIViewController {
         $0.dynamicFont(fontSize: 14, currentFontName: "AppleSDGothicNeo-SemiBold")
     }
     
+    private var noNotificationComponentView = UIView().then{
+        $0.backgroundColor = .cyan
+    }
+    
     // MARK: - Lifecycles
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -97,6 +101,15 @@ class NotificationViewController: UIViewController {
         addView()
         
         location()
+        
+        tableViewSetting()
+    }
+    
+    // MARK: - tableViewSetting
+    func tableViewSetting(){
+        if notificationContentArray.isEmpty {
+            
+        }
     }
     
     // MARK: - tagleViewDelegateAndDataSource
