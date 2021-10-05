@@ -10,6 +10,8 @@ import SnapKit
 import Then
     
 class MorePeopleToDo: UIViewController{
+    let bounds = UIScreen.main.bounds
+    
     static let recommendData = ["JiHoooooon","siwonnnny","NoName","mingki","johnjihwan","noplayy","gyeongggggjuunnn"]
     let randomColorData : [UIColor] = [.rgb(red: 186, green: 200, blue: 255),.rgb(red: 255, green: 204, blue: 204),.rgb(red: 186, green: 222, blue: 255),.rgb(red: 207, green: 227, blue: 206),.rgb(red: 255, green: 209, blue: 141)]
     let identifier = "MorePeopleToDo"
@@ -21,7 +23,7 @@ class MorePeopleToDo: UIViewController{
     
     //MARK: - Properties
     var isTableVisible = false
-    var viewModel = MoreTodoModel()
+    private var viewModel = MoreTodoModel()
     private let backbutton = UIButton().then{
         $0.tintColor = .EZY_968DFF
         $0.setImage(UIImage(systemName: "arrow.left"), for: .normal)
@@ -44,10 +46,7 @@ class MorePeopleToDo: UIViewController{
         $0.textColor = .rgb(red: 129, green: 129, blue: 129)
     }
     
-    private lazy var nickNameTextFieldContainerView: GroupSearchTextfield = {
-        let tf = GroupSearchTextfield(placeholder: "닉네임을 검색하세요")
-        return tf
-    }()
+    private lazy var nickNameTextFieldContainerView =  GroupSearchTextfield(placeholder: "닉네임을 검색하세요")
     
     private lazy var searcherView  = SearchTableView().then{
         $0.layer.applySketchShadow(color: .gray, alpha: 0.25, x: 0, y: 6, blur: 15, spread: 0)
@@ -242,7 +241,7 @@ class MorePeopleToDo: UIViewController{
     }
 
 }
-
+//MARK: - CollectionView
 extension MorePeopleToDo : UICollectionViewDelegateFlowLayout,UICollectionViewDataSource{
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         if collectionView == WhatAboutPeopleLikeThis{
@@ -280,7 +279,7 @@ extension MorePeopleToDo : UICollectionViewDelegateFlowLayout,UICollectionViewDa
     }
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         if collectionView == WhatAboutPeopleLikeThis{
-            return WhatAboutPeopleLikeThisCell.fittingSize(availableHeight: view.frame.size.height/25.375, name: MorePeopleToDo.recommendData[indexPath.row])
+            return CGSize(width: 100, height: WhatAboutPeopleLikeThis.frame.height/2 - 5)
         }else if collectionView == ErrandPersonCollectionView{
             let label = UILabel()
             label.text = clickData
@@ -289,11 +288,13 @@ extension MorePeopleToDo : UICollectionViewDelegateFlowLayout,UICollectionViewDa
         }
         return CGSize(width: 0, height: 0)
     }
-
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
+        return bounds.width/41.67
+    }
 }
 
 
-
+//MARK: - TextView에 값 없으면 animate
 extension MorePeopleToDo: FormViewModel{
     func updateForm() {
         
@@ -312,7 +313,7 @@ extension MorePeopleToDo: FormViewModel{
         }
     }
 }
-
+//MARK: - 값 기져오기
 extension MorePeopleToDo : UITextFieldDelegate{
     func textFieldDidChangeSelection(_ textField: UITextField) {
         if let text = textField.text{
@@ -325,7 +326,7 @@ extension MorePeopleToDo : UITextFieldDelegate{
         }
     }
 }
-
+//MARK: - TableView
 extension MorePeopleToDo : UITableViewDelegate , UITableViewDataSource{
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return filterData.count
@@ -336,8 +337,6 @@ extension MorePeopleToDo : UITableViewDelegate , UITableViewDataSource{
 
         UIView.animate(withDuration: 0.4) {
             self.ErrandPersonCollectionView.alpha = 1
-        }
-        UIView.animate(withDuration: 0.4) {
             self.WhatAboutPeopleLikeThis.alpha = 0
         }
         recommendPeopleLabel.text = "심부름을 부탁할 분이군요!"
@@ -358,6 +357,4 @@ extension MorePeopleToDo : UITableViewDelegate , UITableViewDataSource{
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return view.frame.height/20.3
     }
-    
 }
-

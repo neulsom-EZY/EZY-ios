@@ -20,20 +20,18 @@ class MoreCalendarModalsViewController : UIViewController{
     //MARK: - Properties
     weak var delegate: BulletinDelegate?
     
-    let bgView = UIView().then {
+    private let bgView = UIView().then {
         $0.backgroundColor = .white
         $0.layer.cornerRadius = 40
     }
-    let transparentView = UIView()
+    private let transparentView = UIView()
     
-    let TitleLabel = UILabel().then{
+    private let TitleLabel = UILabel().then{
         $0.text = "추가 할 항목을 선택해주세요"
         $0.dynamicFont(fontSize: 22, currentFontName: "AppleSDGothicNeo-Thin")
     }
     
-    var viewControlelrChoose = UIViewController()
-   
-    
+    private var viewControlelrChoose = UIViewController()
         
     private lazy var myToDo : AddScheduleModalBtn = {
         let viewModel = CustomButtonViewModel(title: "나의 할 일", image: UIImage(named: "EZY_user")?.withRenderingMode(.alwaysTemplate), color: .EZY_AFADFF)
@@ -195,8 +193,4 @@ class MoreCalendarModalsViewController : UIViewController{
         let tapgesture = UITapGestureRecognizer(target: self, action: #selector(onTapClose))
         transparentView.addGestureRecognizer(tapgesture)
     }
-
-    
 }
-
-
