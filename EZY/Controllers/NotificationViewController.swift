@@ -78,16 +78,14 @@ class NotificationViewController: UIViewController {
         $0.dynamicFont(fontSize: 13, currentFontName: "AppleSDGothicNeo-Thin")
     }
     
-    private var planAddButton = UIButton().then{
+    private var addPlanButton = UIButton().then{
         $0.backgroundColor = UIColor.rgb(red: 142, green: 132, blue: 255)
         $0.layer.cornerRadius = 10
         $0.setTitle("일정 추가", for: .normal)
         $0.dynamicFont(fontSize: 14, currentFontName: "AppleSDGothicNeo-SemiBold")
     }
     
-    private var noNotificationComponentView = UIView().then{
-        $0.backgroundColor = .cyan
-    }
+    private var noNotificationComponentView = UIView()
     
     // MARK: - Lifecycles
     override func viewDidLoad() {
@@ -121,7 +119,6 @@ class NotificationViewController: UIViewController {
     // MARK: - addView
     func addView(){
         self.view.backgroundColor = .white
-        
         self.view.addSubview(backButton)
         self.view.addSubview(notificationTitleLabel)
         self.view.addSubview(notificationTableMainView.tableView)
@@ -129,6 +126,11 @@ class NotificationViewController: UIViewController {
         errendAcceptCheckView.addSubview(acceptedErrendLabelView)
         acceptedErrendLabelView.addSubview(acceptedErrendNameLabel)
         acceptedErrendLabelView.addSubview(acceptedErrendAddCheckLabel)
+        self.view.addSubview(noNotificationComponentView)
+        noNotificationComponentView.addSubview(noNotificationImageView)
+        noNotificationComponentView.addSubview(noNotificationLabel)
+        noNotificationComponentView.addSubview(addPlanLabel)
+        noNotificationComponentView.addSubview(addPlanButton)
     }
     
     // MARK: - location
@@ -140,7 +142,7 @@ class NotificationViewController: UIViewController {
 
         backButton.snp.makeConstraints { make in
             make.top.equalToSuperview().offset(self.view.frame.height/13.3)
-            make.left.equalToSuperview().offset(20)
+            make.left.equalToSuperview().offset(self.view.frame.width/13.39)
             make.width.equalToSuperview().dividedBy(33.8/2)
             make.height.equalTo(backButton.snp.width)
         }
@@ -173,6 +175,35 @@ class NotificationViewController: UIViewController {
             make.bottom.equalToSuperview()
         }
         
+        noNotificationComponentView.snp.makeConstraints { make in
+            make.height.equalToSuperview().dividedBy(2.84)
+            make.width.equalToSuperview().dividedBy(1.55)
+            make.centerX.centerY.equalToSuperview()
+        }
+        
+        noNotificationImageView.snp.makeConstraints { make in
+            make.top.equalToSuperview()
+            make.centerX.equalToSuperview()
+            make.width.equalToSuperview()
+            make.height.equalToSuperview().dividedBy(1.82)
+        }
+        
+        noNotificationLabel.snp.makeConstraints { make in
+            make.top.equalTo(noNotificationImageView.snp.bottom).offset(self.view.frame.height/29)
+            make.centerX.equalToSuperview()
+        }
+        
+        addPlanLabel.snp.makeConstraints { make in
+            make.top.equalTo(noNotificationLabel.snp.bottom).offset(self.view.frame.height/162.4)
+            make.centerX.equalToSuperview()
+        }
+        
+        addPlanButton.snp.makeConstraints { make in
+            make.centerX.equalToSuperview()
+            make.width.equalToSuperview()
+            make.bottom.equalToSuperview()
+            make.height.equalToSuperview().dividedBy(6.33)
+        }
     }
     
     // MARK: - Selectors
