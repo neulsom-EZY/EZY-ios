@@ -12,7 +12,7 @@ import Then
 class MorePeopleToDo: UIViewController{
     let bounds = UIScreen.main.bounds
     
-    let recommendData = ["JiHoooooon","siwonnnny","NoName","mingki","johnjihwan","noplayy","gyeongggggjuunnn"]
+    let recommendData = ["JiHoooooon","siwonnnny","NoName","mingki","johnjihwan","noplayy"]
     let randomColorData : [UIColor] = [.rgb(red: 186, green: 200, blue: 255),.rgb(red: 255, green: 204, blue: 204),.rgb(red: 186, green: 222, blue: 255),.rgb(red: 207, green: 227, blue: 206),.rgb(red: 255, green: 209, blue: 141)]
     var data = [SearchData]()
     var filterData = [SearchData]()
@@ -65,7 +65,7 @@ class MorePeopleToDo: UIViewController{
         return cv
     }()
     
-    fileprivate let WhatAboutPeopleLikeThis: UICollectionView = {
+    private let WhatAboutPeopleLikeThis: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
         let cv = UICollectionView(frame: .zero, collectionViewLayout: layout)
         layout.scrollDirection = .horizontal
@@ -299,9 +299,7 @@ extension MorePeopleToDo : UICollectionViewDelegateFlowLayout,UICollectionViewDa
                 self.view.layoutIfNeeded()
             }
             ErrandPersonCollectionView.reloadData()
-        }else{
-            
-        }
+        }else{ }
     }
 }
 

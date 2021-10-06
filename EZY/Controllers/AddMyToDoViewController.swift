@@ -10,17 +10,16 @@ import SnapKit
 import Then
 import Alamofire
 
-
 class AddMyToDoViewController:UIViewController{
-    let tagData : [String] = ["전공동아리","산책","자율동아리","공부","자율동아리","전공동아리","전공동아리","산책","자율동아리","공부","자율동아리","전공동아리","산책"]
-    var alarmData  = "추가"
-    let tagColor : [UIColor] = [.rgb(red: 135, green: 159, blue: 255),.rgb(red: 150, green: 141, blue: 255),.rgb(red: 158, green: 177, blue: 252)]
+    private let tagData : [String] = ["전공동아리","산책","자율동아리","공부","자율동아리","전공동아리","전공동아리","산책","자율동아리","공부","자율동아리","전공동아리","산책"]
+    private var alarmData  = "추가"
+    private let tagColor : [UIColor] = [.rgb(red: 135, green: 159, blue: 255),.rgb(red: 150, green: 141, blue: 255),.rgb(red: 158, green: 177, blue: 252)]
     //MARK: - Properties
     
     let bounds = UIScreen.main.bounds
     
     //MARK: - 모달 background 설정
-    let bgView = UIView().then {
+    private let bgView = UIView().then {
         $0.backgroundColor = .black
         $0.alpha = 0
     }
@@ -58,7 +57,7 @@ class AddMyToDoViewController:UIViewController{
     }()
     
     //MARK: - StackView
-    fileprivate lazy var btnStackView = UIStackView(arrangedSubviews: [calendarBtn,clockBtn,locationBtn]).then{
+    private lazy var btnStackView = UIStackView(arrangedSubviews: [calendarBtn,clockBtn,locationBtn]).then{
         $0.axis = .vertical
         $0.distribution = .fillEqually
         $0.spacing = bounds.height/47.7647
@@ -95,7 +94,7 @@ class AddMyToDoViewController:UIViewController{
         return button
     }()
 
-    fileprivate let tagCollectionView: UICollectionView = {
+    private let tagCollectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
         let cv = UICollectionView(frame: .zero,collectionViewLayout: layout)
         layout.scrollDirection = .horizontal
@@ -106,7 +105,7 @@ class AddMyToDoViewController:UIViewController{
         return cv
     }()
 
-    let alarmSettingcollectionView: UICollectionView = {
+    private let alarmSettingcollectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
         let cv = UICollectionView(frame: .zero, collectionViewLayout: layout)
         layout.scrollDirection = .horizontal
@@ -126,7 +125,7 @@ class AddMyToDoViewController:UIViewController{
     
     //MARK: - Selectors
     
-    @objc func todobackbtn(){
+    @objc private func todobackbtn(){
         //전페이지로 되돌아가는 버튼
         navigationController?.popViewController(animated: true)
     }
@@ -173,7 +172,7 @@ class AddMyToDoViewController:UIViewController{
         }
     }
     //MARK: - Helper
-    func configureUI(){
+    private func configureUI(){
         view.backgroundColor = .white
         tagCollectionView.contentInset = UIEdgeInsets(top: 0, left: view.frame.height/29, bottom: 0, right: view.frame.height/29)
         alarmSettingcollectionView.contentInset = UIEdgeInsets(top: 0, left: view.frame.height/29, bottom: 0, right: 0)
@@ -187,14 +186,14 @@ class AddMyToDoViewController:UIViewController{
         view.endEditing(true)
     }
     //MARK: - CollectionView DataSource & Delegate
-    func collectionViewDataSourceAndDelegate(){
+    private func collectionViewDataSourceAndDelegate(){
         tagCollectionView.delegate = self
         tagCollectionView.dataSource = self
         alarmSettingcollectionView.delegate = self
         alarmSettingcollectionView.dataSource = self
     }
     //MARK: - AddView
-    func addView(){
+    private func addView(){
         view.addSubview(backbutton)
         view.addSubview(TitleLabel)
         view.addSubview(btnStackView)
@@ -207,13 +206,18 @@ class AddMyToDoViewController:UIViewController{
         view.addSubview(explanationContainerView)
     }
     //MARK: - CornerRadius
-    func cornerRadius(){
+    private func cornerRadius(){
         titleContainerView.layer.cornerRadius = view.frame.height/40.6
         addButton.layer.cornerRadius = view.frame.height/81.2
         explanationContainerView.layer.cornerRadius = view.frame.height/40.6
     }
+    //MARK: - Alarm Setting Function
+    func alarmReloadSetting(_ ampm: String,_ time: Int,_ minute: Int){
+        alarmData = "\(ampm) \(time):\(minute)"
+        alarmSettingcollectionView.reloadData()
+    }
     //MARK: - Location
-    func location(){
+    private func location(){
         backbutton.snp.makeConstraints { (make) in
             make.height.width.equalTo(self.view.frame.height/33.8)
             make.left.equalTo(self.view.frame.height/29)
@@ -343,9 +347,7 @@ extension AddMyToDoViewController : UICollectionViewDelegateFlowLayout,UICollect
         if collectionView == self.tagCollectionView {
 
         }else {
-            if indexPath.item == 0{
-                
-            }
+            if indexPath.item == 0{ }
             else if indexPath.item == indexPath.last{
                 let MoreCalendarModalsVC = MoreAlarmModelViewController.instance()
                 MoreCalendarModalsVC.delegate = self
@@ -361,7 +363,13 @@ extension AddMyToDoViewController : UICollectionViewDelegateFlowLayout,UICollect
 }
 
 extension AddMyToDoViewController : AlarmModelDelegate{
+    func updateData(ampm: String, time: Int, minute: Int) {
+        self.alarmReloadSetting(ampm, time + 1, minute)
+    }
+    
+    
     func onTapClose() {
         self.removeDim()
     }
+    
 }
