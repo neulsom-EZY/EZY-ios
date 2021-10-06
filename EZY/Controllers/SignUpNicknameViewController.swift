@@ -12,34 +12,26 @@ import Then
 class SignUpNicknameViewController: UIViewController{
     //MARK: - Properties
     
-    let topBarView = TopBarView().then {
+    private let topBarView = TopBarView().then {
         $0.goBackButton.addTarget(self, action: #selector(goBack), for: .touchUpInside)
     }
     
-    lazy var putNicknameLabel = UILabel().then {
+    private let putNicknameLabel = UILabel().then {
         $0.text = "닉네임을\n입력해주세요."
         $0.numberOfLines = 2
         $0.dynamicFont(fontSize: 25, currentFontName: "AppleSDGothicNeo-SemiBold")
         $0.textColor = UIColor.EZY_968DFF
     }
     
-    lazy var nicknameContainerView: UIView = {
-        let view = Utilities().inputContainerView(textField: nicknameField, text: "닉네임", fonts: 14)
-        return view
-    }()
+    private let nicknameContainer = SignUpTextFieldContainerView()
     
-    lazy var nicknameField:UITextField = {
-        let tf = Utilities().textField(withPlaceholder: "")
-        return tf
-    }()
-    
-    lazy var alreadyExistLabel = UILabel().then {
+    private let alreadyExistLabel = UILabel().then {
         $0.text = "이미 존재하는 닉네임입니다!"
         $0.textColor = UIColor.EZY_FCA1A1
         $0.dynamicFont(fontSize: 10, currentFontName: "AppleSDGothicNeo-SemiBold")
     }
     
-    lazy var continueButton = CustomGradientContinueBtnView().then {
+    private let continueButton = CustomGradientContinueBtnView().then {
         $0.titleLabel?.dynamicFont(fontSize: 14, currentFontName: "AppleSDGothicNeo-Bold")
         $0.addTarget(self, action: #selector(onTapContinuePassword), for: .touchUpInside)
     }
@@ -59,33 +51,41 @@ class SignUpNicknameViewController: UIViewController{
     
     @objc
     func onTapContinuePassword(){
-        let controller = SignUpPasswordViewController()
-        navigationController?.pushViewController(controller, animated: true)
+        if isValidNickname(Nickname: nicknameContainer.tf.text) == true {
+            let controller = SignUpPasswordViewController()
+            navigationController?.pushViewController(controller, animated: true)
+        }else{
+            shakeView(self.view)
+        }
     }
     
     
     //MARK: - Helpers
-    func configureUI(){
+    private func configureUI(){
         view.backgroundColor = .white
         addView()
         topBarViewSetting()
+        nicknameContainerViewSetting()
         cornerRadius()
         location()
+        addNotificationCenter()
+        
+        alreadyExistLabel.isHidden = true
     }
     
-    func addView(){
+    private func addView(){
         view.addSubview(topBarView)
         view.addSubview(putNicknameLabel)
-        view.addSubview(nicknameContainerView)
+        view.addSubview(nicknameContainer)
         view.addSubview(alreadyExistLabel)
         view.addSubview(continueButton)
     }
     
-    func cornerRadius(){
+    private func cornerRadius(){
         continueButton.layer.cornerRadius = self.view.frame.height/81.2
     }
     
-    func location(){
+    private func location(){
         
         topBarView.snp.makeConstraints { make in
             make.left.right.equalToSuperview()
@@ -95,10 +95,10 @@ class SignUpNicknameViewController: UIViewController{
         
         putNicknameLabel.snp.makeConstraints { make in
             make.top.equalToSuperview().offset(self.view.frame.height/5.04)
-            make.left.equalTo(nicknameContainerView)
+            make.left.equalTo(nicknameContainer)
         }
         
-        nicknameContainerView.snp.makeConstraints { make in
+        nicknameContainer.snp.makeConstraints { make in
             make.top.equalTo(putNicknameLabel).offset(self.view.frame.height/8.29)
             make.centerX.equalToSuperview()
             make.width.equalTo(self.view.frame.width/1.34)
@@ -106,12 +106,12 @@ class SignUpNicknameViewController: UIViewController{
         }
         
         alreadyExistLabel.snp.makeConstraints { make in
-            make.top.equalTo(nicknameContainerView).offset(self.view.frame.height/13.76)
-            make.left.equalTo(nicknameContainerView)
+            make.top.equalTo(nicknameContainer).offset(self.view.frame.height/13.76)
+            make.left.equalTo(nicknameContainer)
         }
         
         continueButton.snp.makeConstraints { make in
-            make.top.equalTo(alreadyExistLabel).offset(self.view.frame.height/6.34)
+            make.bottom.equalToSuperview().offset(-self.view.frame.height/32.48)
             make.centerX.equalToSuperview()
             make.width.equalTo(self.view.frame.width/1.13)
             make.height.equalTo(self.view.frame.height/16.24)
@@ -125,11 +125,85 @@ class SignUpNicknameViewController: UIViewController{
         }
     }
     
-    func topBarViewSetting(){
+    //MARK: - topBarViewSetting
+    
+    private func topBarViewSetting(){
         topBarView.addSubview(topBarView.goBackButton)
         topBarView.addSubview(topBarView.EZY_Logo)
         
         topBarView.topBarViewLayoutSetting(screenHeight: self.view.frame.height, screenWidth: self.view.frame.width)
+    }
+    
+    //MARK: - nicknameContainerViewSetting
+    
+    private func nicknameContainerViewSetting(){
+        nicknameContainer.addSubview(nicknameContainer.tfTitle)
+        nicknameContainer.addSubview(nicknameContainer.tf)
+        nicknameContainer.addSubview(nicknameContainer.divView)
+        
+        nicknameContainer.loginTfSetting(screenHeight: self.view.frame.height, screenWidth: self.view.frame.width)
+    }
+    
+    //MARK: - textField Point Set
+    
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        nicknameContainer.tf.resignFirstResponder()
+    }
+    
+    //MARK: - Add NotificationCenter
+    
+    private func addNotificationCenter(){
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(_:)), name:UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide(_:)), name: UIResponder.keyboardWillHideNotification, object: nil)
+    }
+    
+    //MARK: - shakeAnimation
+    
+    private func shakeView(_ view: UIView?) {
+        let shake = CABasicAnimation(keyPath: "position")
+        shake.duration = 0.08
+        shake.repeatCount = 2
+        shake.autoreverses = true
+        shake.fromValue = NSValue(cgPoint: CGPoint(x: (view?.center.x)! - 2, y: view?.center.y ?? 0.0))
+        shake.toValue = NSValue(cgPoint: CGPoint(x: (view?.center.x)! + 2, y: view?.center.y ?? 0.0))
+        view?.layer.add(shake, forKey: "position")
+    }
+    
+    //MARK: - Nickname Test
+    
+    private func isValidNickname(Nickname: String?) -> Bool {
+        guard Nickname != nil else { return false }
+            
+        let NicknameRegEx = ("[A-Za-z].{0,9}")
+        let pred = NSPredicate(format:"SELF MATCHES %@", NicknameRegEx)
+        return pred.evaluate(with: Nickname)
+    }
+    
+    //MARK: - KeyboardWillShow -> continueButton Up
+    @objc
+    func keyboardWillShow(_ sender: Notification) {
+        var keyboardHeight: CGFloat = CGFloat(0) //keyboardHeight
+        if let keyboardFrame: NSValue = sender.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue {
+            let keyboardRectangle = keyboardFrame.cgRectValue
+            keyboardHeight = keyboardRectangle.height
+        }
+        continueButton.snp.remakeConstraints { make in
+            make.left.equalToSuperview().offset(self.view.frame.width/17)
+            make.centerX.equalToSuperview()
+            make.height.equalToSuperview().dividedBy(16.24)
+            make.bottom.equalToSuperview().offset(-keyboardHeight - self.view.frame.height/32.48)
+        }
+    }
+    
+    //MARK: - KeyboardWillHide -> continueButton Down
+    @objc
+    func keyboardWillHide(_ sender: Notification) {
+        continueButton.snp.remakeConstraints { make in
+            make.left.equalToSuperview().offset(self.view.frame.width/17)
+            make.centerX.equalToSuperview()
+            make.height.equalToSuperview().dividedBy(16.24)
+            make.bottom.equalToSuperview().offset(self.view.frame.height/32.48 * -1)
+        }
     }
 }
 

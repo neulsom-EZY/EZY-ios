@@ -12,150 +12,150 @@ import Then
 class SignUpTermsViewController: UIViewController{
     //MARK: - Properties
     
-    let topBarView = TopBarView().then {
+    private let topBarView = TopBarView().then {
         $0.goBackButton.addTarget(self, action: #selector(goBack), for: .touchUpInside)
     }
     
-    lazy var agreeTermsLabel = UILabel().then {
+    private let agreeTermsLabel = UILabel().then {
         $0.text = "이용 약관에\n동의를 해주세요."
         $0.numberOfLines = 2
         $0.dynamicFont(fontSize: 25, currentFontName: "AppleSDGothicNeo-SemiBold")
         $0.textColor = UIColor.EZY_968DFF
     }
     
-    lazy var allAgreeContainer = UIView().then {
+    private let allAgreeContainer = UIView().then {
         $0.backgroundColor = .EZY_FAFAFA
         $0.layer.borderColor = UIColor.EZY_E1E1E1.cgColor
         $0.layer.borderWidth = 1
     }
     
-    lazy var allCheckBox = UIButton().then {
+    private let allCheckBox = UIButton().then {
         $0.setImage(UIImage(named: "EZY_UncheckedBox"), for: .normal)
         $0.addTarget(self, action: #selector(AonTapButton), for: .touchUpInside)
     }
     
-    lazy var allAgreeLabel = UILabel().then {
+    private let allAgreeLabel = UILabel().then {
         $0.text = "모두 확인, 동의합니다."
         $0.dynamicFont(fontSize: 14, currentFontName: "AppleSDGothicNeo-Medium")
         $0.textColor = .EZY_AFAFAF
     }
     
-    lazy var termsContainer = UIView().then {
+    private let termsContainer = UIView().then {
         $0.backgroundColor = .EZY_FAFAFA
         $0.layer.borderColor = UIColor.EZY_E1E1E1.cgColor
         $0.layer.borderWidth = 1
     }
     
-    lazy var checkBox1 = UIButton().then {
+    private let checkBox1 = UIButton().then {
         $0.setImage(UIImage(named: "EZY_UncheckedBox"), for: .normal)
         $0.addTarget(self, action: #selector(onTapButton1), for: .touchUpInside)
     }
     
-    lazy var firstMainTermLabel = UILabel().then {
+    private let firstMainTermLabel = UILabel().then {
         $0.text = "이용 약관 전체 동의 (필수)"
         $0.dynamicFont(fontSize: 14, currentFontName: "AppleSDGothicNeo-Medium")
         $0.textColor = .EZY_AFAFAF
     }
     
-    lazy var firstSubTermLabel1 = UILabel().then {
+    private let firstSubTermLabel1 = UILabel().then {
         $0.text = "[필수] EZY 개인정보 수집 및 이용 안내"
         $0.dynamicFont(fontSize: 10, currentFontName: "AppleSDGothicNeo-Medium")
         $0.textColor = .EZY_AFAFAF
     }
     
-    lazy var firstSubTermButton1 = UIButton().then {
+    private let firstSubTermButton1 = UIButton().then {
         $0.setImage(UIImage(named: "EZY_TermButton"), for: .normal)
     }
     
-    lazy var firstSubTermLabel2 = UILabel().then {
+    private let firstSubTermLabel2 = UILabel().then {
         $0.text = "[필수] EZY 개인정보 수집 및 이용 안내"
         $0.dynamicFont(fontSize: 10, currentFontName: "AppleSDGothicNeo-Medium")
         $0.textColor = .EZY_AFAFAF
     }
     
-    lazy var firstSubTermButton2 = UIButton().then {
+    private let firstSubTermButton2 = UIButton().then {
         $0.setImage(UIImage(named: "EZY_TermButton"), for: .normal)
     }
     
-    lazy var firstSubTermLabel3 = UILabel().then {
+    private let firstSubTermLabel3 = UILabel().then {
         $0.text = "[필수] EZY 개인정보 수집 및 이용 안내"
         $0.dynamicFont(fontSize: 10, currentFontName: "AppleSDGothicNeo-Medium")
         $0.textColor = .EZY_AFAFAF
     }
     
-    lazy var firstSubTermButton3 = UIButton().then {
+    private let firstSubTermButton3 = UIButton().then {
         $0.setImage(UIImage(named: "EZY_TermButton"), for: .normal)
     }
     
-    lazy var checkBox2 = UIButton().then {
+    private let checkBox2 = UIButton().then {
         $0.setImage(UIImage(named: "EZY_UncheckedBox"), for: .normal)
         $0.addTarget(self, action: #selector(onTapButton2), for: .touchUpInside)
     }
     
-    lazy var secondMainTermLabel = UILabel().then {
+    private let secondMainTermLabel = UILabel().then {
         $0.text = "이용 약관 전체 동의 (필수)"
         $0.dynamicFont(fontSize: 14, currentFontName: "AppleSDGothicNeo-Medium")
         $0.textColor = .EZY_AFAFAF
     }
     
-    lazy var secondSubTermLabel1 = UILabel().then {
+    private let secondSubTermLabel1 = UILabel().then {
         $0.text = "[필수] EZY 개인정보 수집 및 이용 안내"
         $0.dynamicFont(fontSize: 10, currentFontName: "AppleSDGothicNeo-Medium")
         $0.textColor = .EZY_AFAFAF
     }
     
-    lazy var secondSubTermButton1 = UIButton().then {
+    private let secondSubTermButton1 = UIButton().then {
         $0.setImage(UIImage(named: "EZY_TermButton"), for: .normal)
     }
     
-    lazy var secondSubTermLabel2 = UILabel().then {
+    private let secondSubTermLabel2 = UILabel().then {
         $0.text = "[필수] EZY 개인정보 수집 및 이용 안내"
         $0.dynamicFont(fontSize: 10, currentFontName: "AppleSDGothicNeo-Medium")
         $0.textColor = .EZY_AFAFAF
     }
     
-    lazy var secondSubTermButton2 = UIButton().then {
+    private let secondSubTermButton2 = UIButton().then {
         $0.setImage(UIImage(named: "EZY_TermButton"), for: .normal)
     }
     
-    lazy var secondSubTermLabel3 = UILabel().then {
+    private let secondSubTermLabel3 = UILabel().then {
         $0.text = "[필수] EZY 개인정보 수집 및 이용 안내"
         $0.dynamicFont(fontSize: 10, currentFontName: "AppleSDGothicNeo-Medium")
         $0.textColor = .EZY_AFAFAF
     }
     
-    lazy var secondSubTermButton3 = UIButton().then {
+    private let secondSubTermButton3 = UIButton().then {
         $0.setImage(UIImage(named: "EZY_TermButton"), for: .normal)
     }
     
-    lazy var locationTermContainer = UIView().then {
+    private let locationTermContainer = UIView().then {
         $0.backgroundColor = .EZY_FFFFFF
         $0.layer.borderColor = UIColor.EZY_E1E1E1.cgColor
         $0.layer.borderWidth = 1
     }
     
-    lazy var checkBox3 = UIButton().then {
+    private let checkBox3 = UIButton().then {
         $0.setImage(UIImage(named: "EZY_UncheckedBox"), for: .normal)
         $0.addTarget(self, action: #selector(onTapButton3), for: .touchUpInside)
     }
     
-    lazy var locationMainLabel = UILabel().then {
+    private let locationMainLabel = UILabel().then {
         $0.text = "위치기반서비스 동의 (선택)"
         $0.dynamicFont(fontSize: 14, currentFontName: "AppleSDGothicNeo-Medium")
         $0.textColor = .EZY_AFAFAF
     }
     
-    lazy var locationSubTermLabel = UILabel().then {
+    private let locationSubTermLabel = UILabel().then {
         $0.text = "[필수] EZY 개인정보 수집 및 이용 안내"
         $0.dynamicFont(fontSize: 10, currentFontName: "AppleSDGothicNeo-Medium")
         $0.textColor = .EZY_AFAFAF
     }
     
-    lazy var locationSubTermButton = UIButton().then {
+    private let locationSubTermButton = UIButton().then {
         $0.setImage(UIImage(named: "EZY_TermButton"), for: .normal)
     }
     
-    lazy var continueButton = CustomGradientTermsBtnView().then {
+    private let continueButton = CustomGradientTermsBtnView().then {
         $0.titleLabel?.dynamicFont(fontSize: 14, currentFontName: "AppleSDGothicNeo-Bold")
         $0.addTarget(self, action: #selector(onTapSignIn), for: .touchUpInside)
     }
@@ -255,18 +255,23 @@ class SignUpTermsViewController: UIViewController{
     
     @objc
     func onTapSignIn(){
-        print("DEBUG : Click bottom SignIn button Button")
+        if flag1 == true && flag2 == true {
+            let controller = ShowPlanViewController()
+            navigationController?.pushViewController(controller, animated: true)
+        }else{
+            shakeView(self.view)
+        }
     }
 
     //MARK: - Helpers
-    func configureUI(){
+    private func configureUI(){
         view.backgroundColor = .white
         addView()
         topBarViewSetting()
         cornerRadius()
         location()
     }
-    func addView(){
+    private func addView(){
         view.addSubview(topBarView)
         view.addSubview(agreeTermsLabel)
         view.addSubview(allAgreeContainer)
@@ -297,14 +302,14 @@ class SignUpTermsViewController: UIViewController{
         view.addSubview(continueButton)
     }
     
-    func cornerRadius(){
+    private func cornerRadius(){
         allAgreeContainer.layer.cornerRadius = self.view.frame.height/162.4
         termsContainer.layer.cornerRadius = self.view.frame.height/162.4
         locationTermContainer.layer.cornerRadius = self.view.frame.height/162.4
         continueButton.layer.cornerRadius = self.view.frame.height/81.2
     }
     
-    func location(){
+    private func location(){
         
         topBarView.snp.makeConstraints { make in
             make.left.right.equalToSuperview()
@@ -459,11 +464,25 @@ class SignUpTermsViewController: UIViewController{
         }
     }
     
-    func topBarViewSetting(){
+    //MARK: - topBarViewSetting
+    
+    private func topBarViewSetting(){
         topBarView.addSubview(topBarView.goBackButton)
         topBarView.addSubview(topBarView.EZY_Logo)
         
         topBarView.topBarViewLayoutSetting(screenHeight: self.view.frame.height, screenWidth: self.view.frame.width)
+    }
+    
+    //MARK: - shakeAnimation
+    
+    private func shakeView(_ view: UIView?) {
+        let shake = CABasicAnimation(keyPath: "position")
+        shake.duration = 0.08
+        shake.repeatCount = 2
+        shake.autoreverses = true
+        shake.fromValue = NSValue(cgPoint: CGPoint(x: (view?.center.x)! - 2, y: view?.center.y ?? 0.0))
+        shake.toValue = NSValue(cgPoint: CGPoint(x: (view?.center.x)! + 2, y: view?.center.y ?? 0.0))
+        view?.layer.add(shake, forKey: "position")
     }
 }
 

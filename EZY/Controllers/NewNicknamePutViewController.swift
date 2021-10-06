@@ -1,46 +1,49 @@
 //
-//  SignUpPhoneNumViewController.swift
+//  NewNicknamePutViewController.swift
 //  EZY
 //
-//  Created by 노연주 on 2021/06/13.
+//  Created by 노연주 on 2021/09/11.
 //
 
 import UIKit
 import SnapKit
 import Then
 
-class SignUpPhoneNumViewController: UIViewController{
+class NewNicknamePutViewController: UIViewController{
     //MARK: - Properties
     
     private let topBarView = TopBarView().then {
         $0.goBackButton.addTarget(self, action: #selector(goBack), for: .touchUpInside)
     }
     
-    private let putPhoneNumLabel = UILabel().then {
-        $0.text = "전화번호\n인증을 해주세요."
-        $0.numberOfLines = 2
+    private let toNewNicknameLabel = UILabel().then {
+        $0.text = "새로운 닉네임을"
         $0.dynamicFont(fontSize: 25, currentFontName: "AppleSDGothicNeo-SemiBold")
         $0.textColor = UIColor.EZY_968DFF
     }
     
-    private let phoneNumContainer = SignUpTextFieldContainerView().then {
-        $0.tfTitle.text = "전화번호"
+    private let putLabel = UILabel().then {
+        $0.text = "입력해주세요."
+        $0.dynamicFont(fontSize: 22, currentFontName: "AppleSDGothicNeo-SemiBold")
+        $0.updateGradientTextColor_vertical(gradientColors: [.EZY_968DFF, UIColor.rgba(red: 148, green: 139, blue: 255, alpha: 0.4)])
+    }
+    
+    private let nicknameContainer = SignUpTextFieldContainerView()
+    
+    private let nicknameConstraintsLabel = UILabel().then {
+        $0.text = "영어로 1 ~ 10자를 입력해주세요"
+        $0.textColor = UIColor.EZY_747474
+        $0.dynamicFont(fontSize: 10, currentFontName: "AppleSDGothicNeo-Regular")
     }
     
     private let continueButton = CustomGradientContinueBtnView().then {
+        $0.setTitle("닉네임 바꾸기", for: .normal)
         $0.titleLabel?.dynamicFont(fontSize: 14, currentFontName: "AppleSDGothicNeo-Bold")
-        $0.addTarget(self, action: #selector(onTapContinueTerms), for: .touchUpInside)
-    }
-    
-    private let certifiedButton = UIButton().then {
-        $0.setTitle("번호인증", for: .normal)
-        $0.titleLabel?.dynamicFont(fontSize: 10, currentFontName: "AppleSDGothicNeo-SemiBold")
-        $0.setTitleColor(UIColor.EZY_FFFFFF, for: .normal)
-        $0.backgroundColor = UIColor.EZY_E3E3E3
-        $0.addTarget(self, action: #selector(onTapcertified), for: .touchUpInside)
+        $0.addTarget(self, action: #selector(onTapContinueNewNickname), for: .touchUpInside)
     }
     
     //MARK: - Lifecycle
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         configureUI()
@@ -54,26 +57,22 @@ class SignUpPhoneNumViewController: UIViewController{
     }
     
     @objc
-    func onTapContinueTerms(){
-        if isValidPhoneNum(PhoneNumber: phoneNumContainer.tf.text) == true{
-            let controller = SignUpTermsViewController()
+    func onTapContinueNewNickname(){
+        if isValidNickname(Nickname: nicknameContainer.tf.text) == true {
+            let controller = LoginViewController()
             navigationController?.pushViewController(controller, animated: true)
         }else{
             shakeView(self.view)
         }
     }
     
-    @objc
-    func onTapcertified(){
-        print("DEBUG : Click bottom certified button Button")
-    }
-
     //MARK: - Helpers
+    
     private func configureUI(){
         view.backgroundColor = .white
         addView()
         topBarViewSetting()
-        phoneNumContainerViewSetting()
+        nicknameContainerViewSetting()
         cornerRadius()
         location()
         addNotificationCenter()
@@ -81,34 +80,45 @@ class SignUpPhoneNumViewController: UIViewController{
     
     private func addView(){
         view.addSubview(topBarView)
-        view.addSubview(putPhoneNumLabel)
-        view.addSubview(phoneNumContainer)
+        view.addSubview(toNewNicknameLabel)
+        view.addSubview(putLabel)
+        view.addSubview(nicknameContainer)
+        view.addSubview(nicknameConstraintsLabel)
         view.addSubview(continueButton)
-        view.addSubview(certifiedButton)
     }
     
     private func cornerRadius(){
         continueButton.layer.cornerRadius = self.view.frame.height/81.2
-        certifiedButton.layer.cornerRadius = self.view.frame.height/75
     }
     
     private func location(){
+        
         topBarView.snp.makeConstraints { make in
             make.left.right.equalToSuperview()
             make.top.equalToSuperview()
             make.height.equalTo(self.view.frame.height/7.19)
         }
         
-        putPhoneNumLabel.snp.makeConstraints { make in
+        toNewNicknameLabel.snp.makeConstraints { make in
+            make.left.equalTo(nicknameContainer)
             make.top.equalToSuperview().offset(self.view.frame.height/5.04)
-            make.left.equalTo(phoneNumContainer)
         }
         
-        phoneNumContainer.snp.makeConstraints { make in
-            make.top.equalTo(putPhoneNumLabel).offset(self.view.frame.height/8.29)
+        putLabel.snp.makeConstraints { make in
+            make.top.equalTo(toNewNicknameLabel).offset(self.view.frame.height/27.07)
+            make.left.equalTo(nicknameContainer)
+        }
+        
+        nicknameContainer.snp.makeConstraints { make in
+            make.top.equalTo(putLabel).offset(self.view.frame.height/11.94)
             make.centerX.equalToSuperview()
             make.width.equalTo(self.view.frame.width/1.34)
             make.height.equalTo(self.view.frame.height/15.62)
+        }
+        
+        nicknameConstraintsLabel.snp.makeConstraints { make in
+            make.top.equalTo(nicknameContainer).offset(self.view.frame.height/13.53)
+            make.left.equalTo(nicknameContainer)
         }
         
         continueButton.snp.makeConstraints { make in
@@ -117,13 +127,6 @@ class SignUpPhoneNumViewController: UIViewController{
             make.width.equalTo(self.view.frame.width/1.13)
             make.height.equalTo(self.view.frame.height/16.24)
         }
-        
-        certifiedButton.snp.makeConstraints { make in
-            make.top.equalTo(putPhoneNumLabel).offset(self.view.frame.height/8.55)
-            make.right.equalToSuperview().offset(self.view.frame.width/8.3 * -1)
-            make.width.equalTo(self.view.frame.width/6.36)
-            make.height.equalTo(self.view.frame.height/36.9)
-        }
     }
     
     //MARK: - topBarViewSetting
@@ -131,24 +134,24 @@ class SignUpPhoneNumViewController: UIViewController{
     private func topBarViewSetting(){
         topBarView.addSubview(topBarView.goBackButton)
         topBarView.addSubview(topBarView.EZY_Logo)
-        
+                       
         topBarView.topBarViewLayoutSetting(screenHeight: self.view.frame.height, screenWidth: self.view.frame.width)
     }
     
-    //MARK: - phoneNumContainerViewSetting
-
-    private func phoneNumContainerViewSetting(){
-        phoneNumContainer.addSubview(phoneNumContainer.tfTitle)
-        phoneNumContainer.addSubview(phoneNumContainer.tf)
-        phoneNumContainer.addSubview(phoneNumContainer.divView)
+    //MARK: - nicknameContainerViewSetting
+    
+    private func nicknameContainerViewSetting(){
+        nicknameContainer.addSubview(nicknameContainer.tfTitle)
+        nicknameContainer.addSubview(nicknameContainer.tf)
+        nicknameContainer.addSubview(nicknameContainer.divView)
         
-        phoneNumContainer.loginTfSetting(screenHeight: self.view.frame.height, screenWidth: self.view.frame.width)
+        nicknameContainer.loginTfSetting(screenHeight: self.view.frame.height, screenWidth: self.view.frame.width)
     }
     
     //MARK: - textField Point Set
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        phoneNumContainer.tf.resignFirstResponder()
+        nicknameContainer.tf.resignFirstResponder()
     }
     
     //MARK: - Add NotificationCenter
@@ -170,14 +173,14 @@ class SignUpPhoneNumViewController: UIViewController{
         view?.layer.add(shake, forKey: "position")
     }
     
-    //MARK: - PhoneNum Test
-        
-    private func isValidPhoneNum(PhoneNumber: String?) -> Bool {
-        guard PhoneNumber != nil else { return false }
-        
-        let idRegEx = "^01([0-9])([0-9]{3,4})([0-9]{4})$"
-        let pred = NSPredicate(format:"SELF MATCHES %@", idRegEx)
-        return pred.evaluate(with: PhoneNumber)
+    //MARK: - Nickname Test
+    
+    private func isValidNickname(Nickname: String?) -> Bool {
+        guard Nickname != nil else { return false }
+            
+        let NicknameRegEx = ("[A-Za-z].{0,9}")
+        let pred = NSPredicate(format:"SELF MATCHES %@", NicknameRegEx)
+        return pred.evaluate(with: Nickname)
     }
     
     //MARK: - KeyboardWillShow -> continueButton Up
@@ -208,25 +211,24 @@ class SignUpPhoneNumViewController: UIViewController{
     }
 }
 
-
 //MARK: - Preview
 #if DEBUG
 import SwiftUI
-struct SignUpPhoneNumViewControllerRepresentable: UIViewControllerRepresentable {
+struct NewNicknamePutViewControllerRepresentable: UIViewControllerRepresentable {
     
 func updateUIViewController(_ uiView: UIViewController,context: Context) {
         // leave this empty
 }
     @available(iOS 13.0.0, *)
     func makeUIViewController(context: Context) -> UIViewController{
-        SignUpPhoneNumViewController()
+        NewNicknamePutViewController()
     }
 }
 @available(iOS 13.0, *)
-struct SignUpPhoneNumViewControllerRepresentable_PreviewProvider: PreviewProvider {
+struct NewNicknamePutViewControllerRepresentable_PreviewProvider: PreviewProvider {
     static var previews: some View {
         Group {
-            SignUpPhoneNumViewControllerRepresentable()
+            NewNicknamePutViewControllerRepresentable()
                 .ignoresSafeArea()
                 .previewDisplayName(/*@START_MENU_TOKEN@*/"Preview"/*@END_MENU_TOKEN@*/)
                 .previewDevice(PreviewDevice(rawValue: "iPhone 11"))
@@ -234,5 +236,3 @@ struct SignUpPhoneNumViewControllerRepresentable_PreviewProvider: PreviewProvide
         
     }
 } #endif
-
-

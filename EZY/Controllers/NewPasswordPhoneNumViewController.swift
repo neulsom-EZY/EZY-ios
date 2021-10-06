@@ -12,39 +12,33 @@ import Then
 class NewPasswordPhoneNumViewController: UIViewController{
     //MARK: - Properties
    
-    let topBarView = TopBarView().then {
+    private let topBarView = TopBarView().then {
         $0.goBackButton.addTarget(self, action: #selector(goBack), for: .touchUpInside)
     }
     
-    lazy var toNewPassWordLabel = UILabel().then {
+    private let toNewPassWordLabel = UILabel().then {
         $0.text = "새 비밀번호를 위해"
         $0.dynamicFont(fontSize: 25, currentFontName: "AppleSDGothicNeo-SemiBold")
         $0.textColor = UIColor.EZY_968DFF
     }
     
-    lazy var putPhoneNumLabel = UILabel().then {
+    private let putPhoneNumLabel = UILabel().then {
         $0.text = "전화번호를 입력해주세요."
         $0.dynamicFont(fontSize: 20, currentFontName: "AppleSDGothicNeo-SemiBold")
         $0.updateGradientTextColor_vertical(gradientColors: [.EZY_968DFF, UIColor.rgba(red: 148, green: 139, blue: 255, alpha: 0.4)])
     }
     
-    lazy var phoneNumContainerView: UIView = {
-        let view = Utilities().inputContainerView(textField: phoneNumField, text: "전화번호", fonts: 14)
-        return view
-    }()
+    private let phoneNumContainer = SignUpTextFieldContainerView().then {
+        $0.tfTitle.text = "전화번호"
+    }
     
-    lazy var phoneNumField:UITextField = {
-        let tf = Utilities().textField(withPlaceholder: "")
-        return tf
-    }()
-    
-    lazy var continueButton = CustomGradientContinueBtnView().then {
+    private let continueButton = CustomGradientContinueBtnView().then {
         $0.setTitle("비밀번호 바꾸러 가기", for: .normal)
         $0.titleLabel?.dynamicFont(fontSize: 14, currentFontName: "AppleSDGothicNeo-Bold")
         $0.addTarget(self, action: #selector(onTapContinueNewPasswordPut), for: .touchUpInside)
     }
     
-    lazy var certifiedButton = UIButton().then {
+    private let certifiedButton = UIButton().then {
         $0.setTitle("번호인증", for: .normal)
         $0.titleLabel?.dynamicFont(fontSize: 10, currentFontName: "AppleSDGothicNeo-SemiBold")
         $0.setTitleColor(UIColor.EZY_FFFFFF, for: .normal)
@@ -66,8 +60,12 @@ class NewPasswordPhoneNumViewController: UIViewController{
     
     @objc
     func onTapContinueNewPasswordPut(){
-        let controller = NewPasswordPutViewController()
-        navigationController?.pushViewController(controller, animated: true)
+        if isValidPhoneNum(PhoneNumber: phoneNumContainer.tf.text) == true{
+            let controller = NewPasswordPutViewController()
+            navigationController?.pushViewController(controller, animated: true)
+        }else{
+            shakeView(self.view)
+        }
     }
     
     @objc
@@ -76,29 +74,31 @@ class NewPasswordPhoneNumViewController: UIViewController{
     }
     
     //MARK: - Helpers
-    func configureUI(){
+    private func configureUI(){
         view.backgroundColor = .white
         addView()
         topBarViewSetting()
+        phoneNumContainerViewSetting()
         cornerRadius()
         location()
+        addNotificationCenter()
     }
     
-    func addView(){
+    private func addView(){
         view.addSubview(topBarView)
         view.addSubview(toNewPassWordLabel)
         view.addSubview(putPhoneNumLabel)
-        view.addSubview(phoneNumContainerView)
+        view.addSubview(phoneNumContainer)
         view.addSubview(continueButton)
         view.addSubview(certifiedButton)
     }
     
-    func cornerRadius(){
+    private func cornerRadius(){
         continueButton.layer.cornerRadius = self.view.frame.height/81.2
         certifiedButton.layer.cornerRadius = self.view.frame.height/75
     }
     
-    func location(){
+    private func location(){
         topBarView.snp.makeConstraints { make in
             make.left.right.equalToSuperview()
             make.top.equalToSuperview()
@@ -106,16 +106,16 @@ class NewPasswordPhoneNumViewController: UIViewController{
         }
         
         toNewPassWordLabel.snp.makeConstraints { make in
-            make.left.equalTo(phoneNumContainerView)
+            make.left.equalTo(phoneNumContainer)
             make.top.equalToSuperview().offset(self.view.frame.height/5.04)
         }
         
         putPhoneNumLabel.snp.makeConstraints { make in
             make.top.equalTo(toNewPassWordLabel).offset(self.view.frame.height/27.07)
-            make.left.equalTo(phoneNumContainerView)
+            make.left.equalTo(phoneNumContainer)
         }
         
-        phoneNumContainerView.snp.makeConstraints { make in
+        phoneNumContainer.snp.makeConstraints { make in
             make.top.equalTo(putPhoneNumLabel).offset(self.view.frame.height/11.77)
             make.centerX.equalToSuperview()
             make.width.equalTo(self.view.frame.width/1.34)
@@ -123,7 +123,7 @@ class NewPasswordPhoneNumViewController: UIViewController{
         }
         
         continueButton.snp.makeConstraints { make in
-            make.top.equalTo(phoneNumContainerView).offset(self.view.frame.height/4.34)
+            make.bottom.equalToSuperview().offset(-self.view.frame.height/32.48)
             make.centerX.equalToSuperview()
             make.width.equalTo(self.view.frame.width/1.13)
             make.height.equalTo(self.view.frame.height/16.24)
@@ -137,11 +137,84 @@ class NewPasswordPhoneNumViewController: UIViewController{
         }
     }
     
-    func topBarViewSetting(){
+    //MARK: - topBarViewSetting
+    
+    private func topBarViewSetting(){
         topBarView.addSubview(topBarView.goBackButton)
         topBarView.addSubview(topBarView.EZY_Logo)
-                       
         topBarView.topBarViewLayoutSetting(screenHeight: self.view.frame.height, screenWidth: self.view.frame.width)
+    }
+    
+    //MARK: - phoneNumContainerViewSetting
+
+    private func phoneNumContainerViewSetting(){
+        phoneNumContainer.addSubview(phoneNumContainer.tfTitle)
+        phoneNumContainer.addSubview(phoneNumContainer.tf)
+        phoneNumContainer.addSubview(phoneNumContainer.divView)
+        
+        phoneNumContainer.loginTfSetting(screenHeight: self.view.frame.height, screenWidth: self.view.frame.width)
+    }
+    
+    //MARK: - textField Point Set
+    
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        phoneNumContainer.tf.resignFirstResponder()
+    }
+    
+    //MARK: - Add NotificationCenter
+    
+    private func addNotificationCenter(){
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(_:)), name:UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide(_:)), name: UIResponder.keyboardWillHideNotification, object: nil)
+    }
+    
+    //MARK: - shakeAnimation
+    
+    private func shakeView(_ view: UIView?) {
+        let shake = CABasicAnimation(keyPath: "position")
+        shake.duration = 0.08
+        shake.repeatCount = 2
+        shake.autoreverses = true
+        shake.fromValue = NSValue(cgPoint: CGPoint(x: (view?.center.x)! - 2, y: view?.center.y ?? 0.0))
+        shake.toValue = NSValue(cgPoint: CGPoint(x: (view?.center.x)! + 2, y: view?.center.y ?? 0.0))
+        view?.layer.add(shake, forKey: "position")
+    }
+    
+    //MARK: - PhoneNum Test
+        
+    private func isValidPhoneNum(PhoneNumber: String?) -> Bool {
+        guard PhoneNumber != nil else { return false }
+        
+        let idRegEx = "^01([0-9])([0-9]{3,4})([0-9]{4})$"
+        let pred = NSPredicate(format:"SELF MATCHES %@", idRegEx)
+        return pred.evaluate(with: PhoneNumber)
+    }
+    
+    //MARK: - KeyboardWillShow -> continueButton Up
+    @objc
+    func keyboardWillShow(_ sender: Notification) {
+        var keyboardHeight: CGFloat = CGFloat(0) //keyboardHeight
+        if let keyboardFrame: NSValue = sender.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue {
+            let keyboardRectangle = keyboardFrame.cgRectValue
+            keyboardHeight = keyboardRectangle.height
+        }
+        continueButton.snp.remakeConstraints { make in
+            make.left.equalToSuperview().offset(self.view.frame.width/17)
+            make.centerX.equalToSuperview()
+            make.height.equalToSuperview().dividedBy(16.24)
+            make.bottom.equalToSuperview().offset(-keyboardHeight - self.view.frame.height/32.48)
+        }
+    }
+    
+    //MARK: - KeyboardWillHide -> continueButton Down
+    @objc
+    func keyboardWillHide(_ sender: Notification) {
+        continueButton.snp.remakeConstraints { make in
+            make.left.equalToSuperview().offset(self.view.frame.width/17)
+            make.centerX.equalToSuperview()
+            make.height.equalToSuperview().dividedBy(16.24)
+            make.bottom.equalToSuperview().offset(self.view.frame.height/32.48 * -1)
+        }
     }
 }
 
