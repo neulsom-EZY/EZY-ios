@@ -1,51 +1,59 @@
 //
-//  NewPasswordPutViewController.swift
+//  NewNicknamePhoneNumViewController.swift
 //  EZY
 //
-//  Created by 노연주 on 2021/06/13.
+//  Created by 노연주 on 2021/09/11.
 //
 
 import UIKit
 import SnapKit
 import Then
 
-class NewPasswordPutViewController: UIViewController{
+class NewNicknamePhoneNumViewController: UIViewController{
     //MARK: - Properties
     
     private let topBarView = TopBarView().then {
         $0.goBackButton.addTarget(self, action: #selector(goBack), for: .touchUpInside)
     }
     
-    private let toNewPassWordLabel = UILabel().then {
-        $0.text = "새로운 비밀번호를"
+    private let toNewNicknameLabel = UILabel().then {
+        $0.text = "새 닉네임을 위해"
         $0.dynamicFont(fontSize: 25, currentFontName: "AppleSDGothicNeo-SemiBold")
         $0.textColor = UIColor.EZY_968DFF
     }
     
-    private let putLabel = UILabel().then {
-        $0.text = "입력해주세요."
-        $0.dynamicFont(fontSize: 22, currentFontName: "AppleSDGothicNeo-SemiBold")
+    private let putPhoneNumLabel = UILabel().then {
+        $0.text = "전화번호를 입력해주세요."
+        $0.dynamicFont(fontSize: 20, currentFontName: "AppleSDGothicNeo-SemiBold")
         $0.updateGradientTextColor_vertical(gradientColors: [.EZY_968DFF, UIColor.rgba(red: 148, green: 139, blue: 255, alpha: 0.4)])
     }
     
-    private let passwordContainer = SignUpTextFieldContainerView().then {
-        $0.tfTitle.text = "비밀번호"
-        $0.tf.isSecureTextEntry = true
+    private let phoneNumContainer = SignUpTextFieldContainerView().then {
+        $0.tfTitle.text = "전화번호"
     }
     
-    private let passwordConstraintsLabel = UILabel().then {
-        $0.text = "8자 이하, 영어 + 숫자최소 1개, 공백 허용x"
-        $0.textColor = UIColor.EZY_747474
-        $0.dynamicFont(fontSize: 10, currentFontName: "AppleSDGothicNeo-Regular")
+    private let certifiedButton = UIButton().then {
+        $0.setTitle("번호인증", for: .normal)
+        $0.titleLabel?.dynamicFont(fontSize: 10, currentFontName: "AppleSDGothicNeo-SemiBold")
+        $0.setTitleColor(UIColor.EZY_FFFFFF, for: .normal)
+        $0.backgroundColor = UIColor.EZY_E3E3E3
+        $0.addTarget(self, action: #selector(onTapcertified), for: .touchUpInside)
+    }
+    
+    private let doNotMatchLabel = UILabel().then {
+        $0.text = "일치하지 않는 전화번호입니다."
+        $0.textColor = UIColor.EZY_FCA1A1
+        $0.dynamicFont(fontSize: 10, currentFontName: "AppleSDGothicNeo-SemiBold")
     }
     
     private let continueButton = CustomGradientContinueBtnView().then {
-        $0.setTitle("비밀번호 바꾸기", for: .normal)
+        $0.setTitle("닉네임 바꾸러 가기", for: .normal)
         $0.titleLabel?.dynamicFont(fontSize: 14, currentFontName: "AppleSDGothicNeo-Bold")
-        $0.addTarget(self, action: #selector(onTapContinueNewPasswordPut), for: .touchUpInside)
+        $0.addTarget(self, action: #selector(onTapContinueNewNicknamePut), for: .touchUpInside)
     }
     
     //MARK: - Lifecycle
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         configureUI()
@@ -59,66 +67,84 @@ class NewPasswordPutViewController: UIViewController{
     }
     
     @objc
-    private func onTapContinueNewPasswordPut(){
-        if isValidPassword(Password: passwordContainer.tf.text) == true{
-            let controller = LoginViewController()
+    private func onTapcertified(){
+        print("DEBUG : Click bottom certified button Button")
+    }
+    
+    @objc
+    private func onTapContinueNewNicknamePut(){
+        if isValidPhoneNum(PhoneNumber: phoneNumContainer.tf.text) == true{
+            let controller = NewNicknamePutViewController()
             navigationController?.pushViewController(controller, animated: true)
         }else{
             shakeView(self.view)
         }
     }
-
+    
     //MARK: - Helpers
+    
     private func configureUI(){
         view.backgroundColor = .white
         addView()
         topBarViewSetting()
-        passwordContainerViewSetting()
+        phoneNumContainerViewSetting()
         cornerRadius()
         location()
         addNotificationCenter()
+        
+        doNotMatchLabel.isHidden = true
     }
     
     private func addView(){
         view.addSubview(topBarView)
-        view.addSubview(toNewPassWordLabel)
-        view.addSubview(putLabel)
-        view.addSubview(passwordContainer)
-        view.addSubview(passwordConstraintsLabel)
+        view.addSubview(toNewNicknameLabel)
+        view.addSubview(putPhoneNumLabel)
+        view.addSubview(phoneNumContainer)
+        view.addSubview(certifiedButton)
+        view.addSubview(doNotMatchLabel)
         view.addSubview(continueButton)
     }
     
     private func cornerRadius(){
+        certifiedButton.layer.cornerRadius = self.view.frame.height/75
         continueButton.layer.cornerRadius = self.view.frame.height/81.2
     }
     
     private func location(){
+
         topBarView.snp.makeConstraints { make in
             make.left.right.equalToSuperview()
             make.top.equalToSuperview()
             make.height.equalTo(self.view.frame.height/7.19)
         }
         
-        toNewPassWordLabel.snp.makeConstraints { make in
-            make.left.equalTo(passwordContainer)
+        toNewNicknameLabel.snp.makeConstraints { make in
+            make.left.equalTo(phoneNumContainer)
             make.top.equalToSuperview().offset(self.view.frame.height/5.04)
         }
         
-        putLabel.snp.makeConstraints { make in
-            make.top.equalTo(toNewPassWordLabel).offset(self.view.frame.height/27.07)
-            make.left.equalTo(passwordContainer)
+        putPhoneNumLabel.snp.makeConstraints { make in
+            make.top.equalTo(toNewNicknameLabel).offset(self.view.frame.height/27.07)
+            make.left.equalTo(phoneNumContainer)
         }
         
-        passwordContainer.snp.makeConstraints { make in
-            make.top.equalTo(putLabel).offset(self.view.frame.height/11.94)
+        phoneNumContainer.snp.makeConstraints { make in
+            make.top.equalTo(putPhoneNumLabel).offset(self.view.frame.height/11.77)
             make.centerX.equalToSuperview()
             make.width.equalTo(self.view.frame.width/1.34)
             make.height.equalTo(self.view.frame.height/15.62)
         }
         
-        passwordConstraintsLabel.snp.makeConstraints { make in
-            make.top.equalTo(passwordContainer).offset(self.view.frame.height/13.53)
-            make.left.equalTo(passwordContainer)
+        certifiedButton.snp.makeConstraints { make in
+            make.top.equalTo(putPhoneNumLabel).offset(self.view.frame.height/12.49)
+            make.right.equalToSuperview().offset(self.view.frame.width/8.3 * -1)
+            make.width.equalTo(self.view.frame.width/6.36)
+            make.height.equalTo(self.view.frame.height/36.9)
+        }
+        
+        doNotMatchLabel.snp.makeConstraints { make in
+            make.top.equalTo(phoneNumContainer).offset(self.view.frame.height/13.76)
+            make.left.equalTo(phoneNumContainer)
         }
         
         continueButton.snp.makeConstraints { make in
@@ -134,24 +160,23 @@ class NewPasswordPutViewController: UIViewController{
     private func topBarViewSetting(){
         topBarView.addSubview(topBarView.goBackButton)
         topBarView.addSubview(topBarView.EZY_Logo)
-        
         topBarView.topBarViewLayoutSetting(screenHeight: self.view.frame.height, screenWidth: self.view.frame.width)
     }
     
-    //MARK: - passwordContainerViewSetting
+    //MARK: - phoneNumContainerViewSetting
 
-    private func passwordContainerViewSetting(){
-        passwordContainer.addSubview(passwordContainer.tfTitle)
-        passwordContainer.addSubview(passwordContainer.tf)
-        passwordContainer.addSubview(passwordContainer.divView)
+    private func phoneNumContainerViewSetting(){
+        phoneNumContainer.addSubview(phoneNumContainer.tfTitle)
+        phoneNumContainer.addSubview(phoneNumContainer.tf)
+        phoneNumContainer.addSubview(phoneNumContainer.divView)
         
-        passwordContainer.loginTfSetting(screenHeight: self.view.frame.height, screenWidth: self.view.frame.width)
+        phoneNumContainer.loginTfSetting(screenHeight: self.view.frame.height, screenWidth: self.view.frame.width)
     }
     
     //MARK: - textField Point Set
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        passwordContainer.tf.resignFirstResponder()
+        phoneNumContainer.tf.resignFirstResponder()
     }
     
     //MARK: - Add NotificationCenter
@@ -162,7 +187,7 @@ class NewPasswordPutViewController: UIViewController{
     }
     
     //MARK: - shakeAnimation
-    
+
     private func shakeView(_ view: UIView?) {
         let shake = CABasicAnimation(keyPath: "position")
         shake.duration = 0.08
@@ -172,15 +197,15 @@ class NewPasswordPutViewController: UIViewController{
         shake.toValue = NSValue(cgPoint: CGPoint(x: (view?.center.x)! + 2, y: view?.center.y ?? 0.0))
         view?.layer.add(shake, forKey: "position")
     }
-        
-    //MARK: - Password Test
     
-    private func isValidPassword(Password: String?) -> Bool {
-        guard Password != nil else { return false }
-            
-        let PasswordRegEx = ("(?=.*[A-Za-z~!@#$%^&*])(?=.*[0-9]).{8,}")
-        let pred = NSPredicate(format:"SELF MATCHES %@", PasswordRegEx)
-        return pred.evaluate(with: Password)
+    //MARK: - PhoneNum Test
+        
+    private func isValidPhoneNum(PhoneNumber: String?) -> Bool {
+        guard PhoneNumber != nil else { return false }
+        
+        let idRegEx = "^01([0-9])([0-9]{3,4})([0-9]{4})$"
+        let pred = NSPredicate(format:"SELF MATCHES %@", idRegEx)
+        return pred.evaluate(with: PhoneNumber)
     }
     
     //MARK: - KeyboardWillShow -> continueButton Up

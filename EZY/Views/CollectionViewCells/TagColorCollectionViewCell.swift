@@ -7,6 +7,10 @@
 
 import UIKit
 
+protocol TagColorCollectionViewCellDelegate: AnyObject{
+    func tagColordidTabAddButton(with string: String)
+}
+
 class TagColorCollectionViewCell: UICollectionViewCell {
     
     //MARK: Properties
@@ -16,6 +20,7 @@ class TagColorCollectionViewCell: UICollectionViewCell {
     
     var model: TagColorCollectionViewModel?
     
+    public weak var delegate: TagColorCollectionViewCellDelegate?
     
     lazy var colorBackgroundView = UIView().then {
         $0.backgroundColor = UIColor(red: 186/255, green: 200/255, blue: 255/255, alpha: 1)
@@ -45,9 +50,19 @@ class TagColorCollectionViewCell: UICollectionViewCell {
         layoutSetting()
     }
     
+    private var string: String?
+    
+    public func configure(with string: String){
+        self.string = string
+    }
+    
     func layoutSetting(){
+         
+        delegate?.tagColordidTabAddButton(with: string!)
+
         contentView.addSubview(colorBackgroundView)
         colorBackgroundView.addSubview(checkImage)
+        
         colorBackgroundView.snp.makeConstraints { make in
             make.top.right.bottom.left.equalToSuperview()
             
@@ -59,8 +74,6 @@ class TagColorCollectionViewCell: UICollectionViewCell {
             make.width.equalToSuperview().dividedBy(2.6/1.2)
             make.height.equalToSuperview().dividedBy(3.7/1.2)
         }
-        
-        checkImage.isHidden = true
     }
     
     func setModel(_ model: TagColorCollectionViewModel){
@@ -70,7 +83,8 @@ class TagColorCollectionViewCell: UICollectionViewCell {
                 
         if model.isSelected == false{
             colorBackgroundView.layer.masksToBounds = false
-            colorBackgroundView.layer.shadowOpacity = 0.5
+//            colorBackgroundView.layer.shadowOpacity = 0.5
+            colorBackgroundView.layer.shadowOpacity = 1
             colorBackgroundView.layer.shadowRadius = 6
             colorBackgroundView.layer.shadowOffset = CGSize(width: 0, height: 0)
             colorBackgroundView.layer.shadowColor = UIColor.lightGray.cgColor
@@ -87,5 +101,6 @@ class TagColorCollectionViewCell: UICollectionViewCell {
         colorBackgroundView.layer.shadowOffset = CGSize(width: 0, height: 0)
         colorBackgroundView.layer.shadowColor = .none
         
+        checkImage.isHidden = true
     }
 }

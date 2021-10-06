@@ -51,7 +51,7 @@ class ChangePasswardPhoneNumAfterLoginViewController: UIViewController {
         
         addView()
         
-        addLayout()
+        location()
     }
     
     func addView(){
@@ -64,13 +64,10 @@ class ChangePasswardPhoneNumAfterLoginViewController: UIViewController {
         self.view.addSubview(phoneNumUnderLineView)
         self.view.addSubview(changeButton)
         self.view.addSubview(certifiedButton)
-
-        
-
     }
     
     // MARK: - Selectors
-    func addLayout() {
+    func location() {
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(_:)), name:UIResponder.keyboardWillShowNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide(_:)), name: UIResponder.keyboardWillHideNotification, object: nil)
         

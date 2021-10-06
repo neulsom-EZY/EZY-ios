@@ -38,6 +38,8 @@ class TagTableViewCell: UITableViewCell {
     lazy var tagSettingButton = UIButton().then{
         $0.setImage(UIImage(named: "EZY_TagSettingButton"), for: .normal)
     }
+    
+    private var string: String?
 
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -50,29 +52,20 @@ class TagTableViewCell: UITableViewCell {
         layoutSetting()
     }
     
-    private var string: String?
     
     public func configure(with string: String){
         self.string = string
     }
     
-    @objc func tagSettingButtonClicked(sender:UIButton){
-
-    }
-    
     func layoutSetting(){
-        guard let string = string else {
-            return
-        }
-        
+        guard let string = string else {return}
+
         delegate?.didTabAddButton(with: string)
         
         self.contentView.addSubview(tagLabelBackgroundView)
         self.contentView.addSubview(tagSettingButton)
         tagLabelBackgroundView.addSubview(tagNameLabel)
-        
-        tagSettingButton.addTarget(self, action: #selector(tagSettingButtonClicked(sender:)), for: .touchUpInside)
-        
+                
         tagLabelBackgroundView.snp.makeConstraints { make in
             make.height.equalToSuperview().dividedBy(1.7)
             make.centerY.equalToSuperview()
