@@ -96,10 +96,9 @@ class MoreAlarmModelViewController : UIViewController{
             make.height.equalToSuperview().dividedBy(3.85)
         }
         AlarmDateView.snp.makeConstraints { (make) in
-            make.top.equalTo(bgView.snp.top).offset(view.frame.height/21.368)
-            make.left.equalTo(view.snp.left).offset(view.frame.height/6.656)
+            make.top.equalTo(bgView).offset(view.frame.height/22.5555)
             make.height.equalTo(view.frame.height/8.04)
-            make.width.equalTo(view.frame.width/3.261)
+            make.left.right.equalToSuperview()
         }
    
         makeButton.snp.makeConstraints { (make) in

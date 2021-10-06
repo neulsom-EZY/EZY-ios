@@ -116,6 +116,13 @@ class SignUpNicknameViewController: UIViewController{
             make.width.equalTo(self.view.frame.width/1.13)
             make.height.equalTo(self.view.frame.height/16.24)
         }
+        
+        continueButton.snp.makeConstraints { make in
+            make.top.equalToSuperview().offset(266)
+            make.centerX.equalToSuperview()
+            make.width.equalToSuperview().dividedBy(1.23)
+            make.height.equalTo(149)
+        }
     }
     
     //MARK: - topBarViewSetting

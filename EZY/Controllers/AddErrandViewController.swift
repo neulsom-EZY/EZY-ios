@@ -12,6 +12,7 @@ import Then
 class AddErrandViewController : UIViewController{
     //MARK: - Properties
     var data = ["JiHooooooooon","+ 추가"]
+    let bounds = UIScreen.main.bounds
     
     private let backbutton = UIButton().then{
         $0.tintColor = .EZY_AFADFF
@@ -29,6 +30,11 @@ class AddErrandViewController : UIViewController{
         let tf = ErrandInputContainterTextField(title: "어떤 심부름을 부탁할까요?")
         return tf
     }()
+    fileprivate lazy var btnStackView = UIStackView(arrangedSubviews: [calendarBtn,clockBtn,locationBtn]).then{
+        $0.axis = .vertical
+        $0.distribution = .fillEqually
+        $0.spacing = bounds.height/47.7647
+    }
     
     private let calendarBtn : AlertButton = {
         let viewModel = AlertBtn(icon: UIImage(named: "EZY_calendar")?.withRenderingMode(.alwaysTemplate), iconTintColor: .rgb(red: 255, green: 181, blue: 181), message: "2021.6.6 일요일")
@@ -143,9 +149,7 @@ class AddErrandViewController : UIViewController{
         view.addSubview(backbutton)
         view.addSubview(TitleLabel)
         view.addSubview(RequestList)
-        view.addSubview(calendarBtn)
-        view.addSubview(clockBtn)
-        view.addSubview(locationBtn)
+        view.addSubview(btnStackView)
         view.addSubview(explanationContainerView)
         view.addSubview(addPersonCollectionView)
         view.addSubview(kindOfCollectionView)
@@ -168,30 +172,15 @@ class AddErrandViewController : UIViewController{
             make.right.equalTo(self.view.frame.width/13.8 * -1)
             
         }
-        calendarBtn.snp.makeConstraints { (make) in
-            make.height.equalTo(self.view.frame.height/18.0)
-            make.width.equalTo(view.frame.height/3.14)
-            make.right.equalTo(view.snp.right).offset(view.frame.height/9.23 * -1)
-            make.left.equalTo(backbutton.snp.left)
-            make.top.equalTo(RequestList.snp.bottom).offset(view.frame.height/30.1)
-        }
-        clockBtn.snp.makeConstraints { (make) in
-            make.height.equalTo(self.view.frame.height/18.0)
-            make.right.equalTo(view.snp.right).offset(view.frame.height/9.23 * -1)
-            make.width.equalTo(view.frame.height/3.14)
-            make.left.equalTo(calendarBtn.snp.left)
-            make.top.equalTo(calendarBtn.snp.bottom).offset(view.frame.height/47.7)
-        }
-        locationBtn.snp.makeConstraints { (make) in
-            make.height.equalTo(self.view.frame.height/18.0)
-            make.right.equalTo(view.snp.right).offset(view.frame.height/9.23 * -1)
-            make.width.equalTo(view.frame.height/3.14)
-            make.left.equalTo(calendarBtn.snp.left)
-            make.top.equalTo(clockBtn.snp.bottom).offset(view.frame.height/47.7)
+        btnStackView.snp.makeConstraints {
+            $0.top.equalTo(RequestList.snp.bottom).offset(bounds.height/30.1)
+            $0.left.equalTo(backbutton.snp.left)
+            $0.right.equalToSuperview().inset(bounds.height/9.23)
+            $0.height.equalTo(bounds.height/4.805)
         }
         explanationContainerView.snp.makeConstraints { (make) in
             make.height.equalTo(self.view.frame.height/10.8)
-            make.top.equalTo(locationBtn.snp.bottom).offset(self.view.frame.height/30.0)
+            make.top.equalTo(btnStackView.snp.bottom).offset(self.view.frame.height/30.0)
             make.left.equalTo(backbutton.snp.left)
             make.right.equalTo(self.view.frame.width/13.8 * -1)
         }
@@ -207,9 +196,7 @@ class AddErrandViewController : UIViewController{
         addButton.snp.makeConstraints { (make) in
             make.bottom.equalToSuperview().inset(view.frame.height/8.202)
             make.height.equalTo(self.view.frame.height/18.0)
-            make.left.equalTo(backbutton.snp.left)
-            make.right.equalTo(RequestList.snp.right)
-            
+            make.left.right.equalToSuperview().inset(view.frame.width/13.636363)
         }
     }
 
@@ -221,24 +208,19 @@ extension AddErrandViewController : UICollectionViewDelegateFlowLayout,UICollect
         return data.count
     }
     func collectionView(_ collectionView: UICollectionView, didHighlightItemAt indexPath: IndexPath) {
-        if collectionView == addPersonCollectionView{
-            if data.count == 1{
-                if indexPath.item == indexPath.last{
+        if data.count == 1{
+            if indexPath.item == indexPath.last{
                     let controller = MorePeopleToDo()
-                    navigationController?.pushViewController(controller, animated: true)
-                }
-                
-            }else{
-                
-                if indexPath.item == 0{
-                    
-                }
-                else if indexPath.item == indexPath.last{
-                    let controller = MorePeopleToDo()
-                    navigationController?.pushViewController(controller, animated: true)
-                }
+                navigationController?.pushViewController(controller, animated: true)
             }
-            
+        }else{
+            if indexPath.item == 0{
+                    
+            }
+            else if indexPath.item == indexPath.last{
+                let controller = MorePeopleToDo()
+                navigationController?.pushViewController(controller, animated:true)
+            }
         }
     }
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {

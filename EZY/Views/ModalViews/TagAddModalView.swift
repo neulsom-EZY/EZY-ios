@@ -8,6 +8,9 @@
 import UIKit
 
 class TagAddModalView: UIView {
+    //MARK: - Properties
+    private let viewBounds = UIScreen.main.bounds
+    
     lazy var shadowBackgroundView = UIView().then {
         $0.backgroundColor = UIColor.black.withAlphaComponent(0.2)
     }
@@ -65,5 +68,102 @@ class TagAddModalView: UIView {
         $0.layer.shadowRadius = 6
         $0.layer.shadowOffset = CGSize(width: 0, height: 3)
         $0.layer.shadowColor = UIColor.darkGray.cgColor
+    }
+    
+    private let tagCollectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewLayout()).then{
+        let layout = UICollectionViewFlowLayout()
+        $0.collectionViewLayout = layout
+        $0.translatesAutoresizingMaskIntoConstraints = false
+        $0.register(WhoShouldIAskCell.self, forCellWithReuseIdentifier: WhoShouldIAskCell.identifier)
+        $0.showsHorizontalScrollIndicator = false
+        $0.isScrollEnabled = false
+        $0.backgroundColor = .lightGray
+    }
+    
+    //MARK: - LifeCycles
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        
+        contigureUI()
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    //MARK: - helpers
+    func contigureUI(){
+        addView()
+
+        addLayout()
+    }
+    
+    //MARK: - addLayout
+    func addLayout(){
+        shadowBackgroundView.snp.makeConstraints { make in
+            make.top.bottom.left.right.equalToSuperview()
+        }
+        
+        modalBackgroundView.snp.makeConstraints { make in
+            make.centerX.centerY.equalToSuperview()
+            make.width.equalToSuperview().dividedBy(1.13)
+            make.height.equalToSuperview().dividedBy(3.38)
+        }
+        
+        titleLabel.snp.makeConstraints { make in
+            make.left.equalToSuperview().offset(viewBounds.width/15.62)
+            make.top.equalToSuperview().offset(viewBounds.height/33.83)
+        }
+        
+        tagNameLabel.snp.makeConstraints { make in
+            make.left.equalTo(titleLabel).offset(viewBounds.height/200)
+            make.top.equalTo(titleLabel.snp.bottom).offset(viewBounds.height/81.2)
+        }
+        
+        tagNameBackgroundView.snp.makeConstraints { make in
+            make.left.equalTo(titleLabel)
+            make.top.equalTo(tagNameLabel.snp.bottom).offset(viewBounds.height/135.3)
+            make.centerX.equalToSuperview()
+            make.height.equalToSuperview().dividedBy(6.31)
+        }
+        
+        tagNameTextField.snp.makeConstraints { make in
+            make.centerX.centerY.equalToSuperview()
+            make.left.equalToSuperview().offset(viewBounds.width/28)
+            make.height.equalToSuperview().dividedBy(1.2)
+        }
+        
+        tagColorLabel.snp.makeConstraints { make in
+            make.left.equalTo(tagNameLabel)
+            make.top.equalTo(tagNameBackgroundView.snp.bottom).offset(viewBounds.height/50.75)
+        }
+        
+        tagCollectionView.snp.makeConstraints { make in
+            make.left.equalTo(tagNameBackgroundView)
+            make.centerX.equalToSuperview()
+            make.height.equalToSuperview().dividedBy(7)
+            make.top.equalTo(tagColorLabel.snp.bottom).offset(viewBounds.height/203)
+        }
+        
+        tagAddButton.snp.makeConstraints { make in
+            make.right.equalToSuperview().offset(-viewBounds.width/13.2)
+            make.top.equalTo(tagCollectionView.snp.bottom).offset(viewBounds.height/50)
+            make.width.equalToSuperview().dividedBy(4.71)
+            make.height.equalToSuperview().dividedBy(7.27)
+        }
+    }
+    
+    //MARK: - addView
+    func addView(){
+        self.addSubview(shadowBackgroundView)
+        shadowBackgroundView.addSubview(modalBackgroundView)
+        modalBackgroundView.addSubview(titleLabel)
+        modalBackgroundView.addSubview(tagNameLabel)
+        modalBackgroundView.addSubview(tagNameBackgroundView)
+        tagNameBackgroundView.addSubview(tagNameTextField)
+        modalBackgroundView.addSubview(tagColorLabel)
+        modalBackgroundView.addSubview(tagAddButton)
+        modalBackgroundView.addSubview(writeTagNameView)
+        modalBackgroundView.addSubview(tagCollectionView)
     }
 }

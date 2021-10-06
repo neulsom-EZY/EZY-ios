@@ -9,15 +9,13 @@ import UIKit
 
 class SettingViewController: UIViewController {
     
-    //MARK: Properties
+    // MARK: - Properties
     lazy var topView = TopView()
     
     let settingTableView = UITableView().then {
         $0.separatorStyle = .none
         $0.showsVerticalScrollIndicator = false
     }
-    
-    lazy var settingiconImage = [UIImage(named: "EZY_SettingBell"),  UIImage(named: "EZY_SettingTag"),UIImage(named: "EZY_SettingId"),UIImage(named: "EZY_SettingId"), UIImage(named: "EZY_Withdrawal")]
     
     lazy var settingListTitleLabel = ["푸시 알림 관리", "태그 관리","아이디 변경","비밀번호 변경", "회원 탈퇴"]
     
@@ -27,12 +25,21 @@ class SettingViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        configureUI()
+    }
+    
+    //MARK: - helpers
+    func configureUI(){
         self.view.backgroundColor = .white
         
+        addView()
+        
         topViewSetting()
+        
         settingtableViewSetting()
     }
     
+    //MARK: - SettingTableView setting
     func settingtableViewSetting(){
         settingTableView.delegate = self
         settingTableView.dataSource = self
@@ -43,17 +50,14 @@ class SettingViewController: UIViewController {
         self.view.addSubview(settingTableView)
         
         settingTableView.snp.makeConstraints { make in
-            make.top.equalTo(topView.snp.bottom).offset(self.view.frame.height/30)
+            make.top.equalTo(topView.snp.bottom).offset(self.view.frame.height/50)
             make.width.equalToSuperview()
             make.bottom.equalToSuperview()
         }
     }
     
+    //MARK: - topViewSetting
     func topViewSetting(){
-        self.view.addSubview(topView)
-        topView.addSubview(topView.backButton)
-        topView.addSubview(topView.titleLabel)
-
         topView.backButton.addTarget(self, action: #selector(backButtonClicked(sender:)), for: .touchUpInside)
         
         topView.topViewDataSetting(backButtonImage: UIImage(named: "EZY_SettingBackButton")!, titleLabelText: "설정",
@@ -68,13 +72,22 @@ class SettingViewController: UIViewController {
         }
     }
     
+    //MARK: - addSubview
+    func addView(){
+        self.view.addSubview(topView)
+        topView.addSubview(topView.backButton)
+        topView.addSubview(topView.titleLabel)
+    }
     
+    //MARK: - selectors
     @objc func backButtonClicked(sender: UIButton!) {
         self.navigationController?.popViewController(animated: true)
     }
 
 }
 
+
+//MARK: - extensions
 extension SettingViewController: UITableViewDelegate{
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if indexPath.row == 0{
@@ -106,8 +119,6 @@ extension SettingViewController: UITableViewDataSource{
         
         cell.listDescriptionLabel.text = settingListDescriptionLabel[indexPath.row]
         cell.listTitleLabel.text = settingListTitleLabel[indexPath.row]
-        cell.listIconImageView.image = settingiconImage[indexPath.row]
-        
         
         cell.selectionStyle = .none
         

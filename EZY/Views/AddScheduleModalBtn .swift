@@ -45,9 +45,8 @@ class AddScheduleModalBtn : UIButton{
         view.backgroundColor = viewModel.color
         image.image = viewModel.image
         image.tintColor = .white
-        
-
     }
+    
     override func layoutSubviews() {
         super.layoutSubviews()
         view.layer.cornerRadius = view.frame.height/2
@@ -63,9 +62,11 @@ class AddScheduleModalBtn : UIButton{
         }
         image.snp.makeConstraints { (make) in
             make.center.equalTo(view.snp.center)
+            make.width.equalToSuperview().dividedBy(2)
+            make.height.equalToSuperview().dividedBy(2)
         }
-        
     }
+    
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }

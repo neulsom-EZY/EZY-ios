@@ -9,43 +9,32 @@ import UIKit
 
 class SettingTableViewCell: UITableViewCell {
     
-    //MARK: Properties
+    //MARK: - Properties
     static let settingTableViewCellIdentifier = "\(SettingTableViewCell.self)"
     
-    lazy var cellBackgroundView = UIView().then{
-        $0.backgroundColor = .white
-        $0.layer.cornerRadius = 10
-        $0.layer.masksToBounds = false
-        $0.layer.shadowOpacity = 0.9
-        $0.layer.shadowRadius = 8
-        $0.layer.shadowOffset = CGSize(width: 0, height: 4)
-        $0.layer.shadowColor = UIColor(red: 222/255, green: 222/255, blue: 222/255, alpha: 1).cgColor
-    }
-    
-    lazy var labelGroup = UIView().then {
+    private let labelGroup = UIView().then {
         $0.backgroundColor = .white
     }
     
-    lazy var listTitleLabel = UILabel().then {
-        $0.text = "그룹 관리"
-        $0.dynamicFont(fontSize: 13, currentFontName: "Poppins-Light")
+    var listTitleLabel = UILabel().then {
+        $0.textColor = UIColor.rgb(red: 101, green: 101, blue: 101)
+        $0.dynamicFont(fontSize: 12.5, currentFontName: "Poppins-Light")
     }
     
-    lazy var listDescriptionLabel = UILabel().then {
-        $0.text = "팀 일정의 그룹을 관리합니다."
+    var listDescriptionLabel = UILabel().then {
         $0.dynamicFont(fontSize: 8, currentFontName: "Poppins-SemiBold")
         $0.textColor = UIColor(red: 205/255, green: 205/255, blue: 205/255, alpha: 1)
     }
     
-    lazy var rightButton = UIButton().then {
+    private let rightButton = UIButton().then {
         $0.setImage(UIImage(named: "EZY_SettingRightButton"), for: .normal)
     }
     
-    lazy var listIconImageView = UIImageView().then {
-        $0.self.image? = UIImage(named: "EZY_SettingGroup")!
-        $0.contentMode = .scaleAspectFit
+    private let lineView = UIView().then{
+        $0.backgroundColor = UIColor.rgb(red: 236, green: 236, blue: 236)
     }
     
+    //MARK: - lifeCycles
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         configureUI()
@@ -58,42 +47,25 @@ class SettingTableViewCell: UITableViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
         
         configureUI()
     }
+    
+    //MARK: - helper
+    func configureUI(){
 
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
+        addview()
+        
+        layoutSetting()
         
     }
     
-    func configureUI(){
-        contentView.addSubview(cellBackgroundView)
-        cellBackgroundView.addSubview(listIconImageView)
-        cellBackgroundView.addSubview(rightButton)
-        labelGroup.addSubview(listTitleLabel)
-        labelGroup.addSubview(listDescriptionLabel)
-        cellBackgroundView.addSubview(labelGroup)
-        
+    //MARK: - layoutSetting of view
+    func layoutSetting(){
         labelGroup.snp.makeConstraints { make in
             make.centerY.equalToSuperview()
-            make.left.equalTo(listIconImageView.snp.right).offset(contentView.frame.width/20)
-            make.height.equalToSuperview().dividedBy(2)
-        }
-
-        cellBackgroundView.snp.makeConstraints { make in
-            make.top.equalToSuperview().offset(10)
-            make.height.equalToSuperview().dividedBy(1.3)
-            make.centerX.equalToSuperview()
-            make.left.equalToSuperview().offset(contentView.frame.width/13.3)
-        }
-        
-        listIconImageView.snp.makeConstraints { make in
-            make.centerY.equalToSuperview()
-            make.left.equalToSuperview().offset(contentView.frame.width/20)
-            make.height.equalToSuperview().dividedBy(2.1)
-            make.width.equalTo(listIconImageView.snp.height)
+            make.left.equalToSuperview().offset(contentView.frame.width/7.5)
+            make.height.equalToSuperview().dividedBy(2.5)
         }
         
         listTitleLabel.snp.makeConstraints { make in
@@ -108,10 +80,26 @@ class SettingTableViewCell: UITableViewCell {
         
         rightButton.snp.makeConstraints { make in
             make.centerY.equalToSuperview()
-            make.right.equalToSuperview().offset(-contentView.frame.width/13.8)
-            make.height.equalToSuperview().dividedBy(3.9)
+            make.right.equalToSuperview().offset(-contentView.frame.width/7.5)
+            make.height.equalToSuperview().dividedBy(5.25*1.3)
+            make.width.equalToSuperview().dividedBy(47.11*1.3)
         }
         
+        lineView.snp.makeConstraints { make in
+            make.bottom.equalToSuperview()
+            make.centerX.equalToSuperview()
+            make.width.equalToSuperview().dividedBy(1.23)
+            make.height.equalTo(0.5)
+        }
+    }
+    
+    //MARK: - addSubview
+    func addview(){
+        contentView.addSubview(rightButton)
+        labelGroup.addSubview(listTitleLabel)
+        labelGroup.addSubview(listDescriptionLabel)
+        contentView.addSubview(labelGroup)
+        contentView.addSubview(lineView)
     }
 
 }

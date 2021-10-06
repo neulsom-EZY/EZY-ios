@@ -90,15 +90,15 @@ class WithdrawalViewController: UIViewController {
     @objc func withdrawalButtonClicked(sender:UIButton){
         var error: NSError?
         if authContext.canEvaluatePolicy(.deviceOwnerAuthentication, error: &error) {
-            
+
             authContext.evaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, localizedReason: description) { success, error in
                 if success {
                     print("인증성공")
-                    
+
                     DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 1) {
                         self.withdrawalModalView.isHidden = false
                     }
-                    
+
                 }else{
                     print("인증실패")
                     print(error?.localizedDescription)

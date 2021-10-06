@@ -10,6 +10,7 @@ import UIKit
 class PlanRequestRespondingViewController: UIViewController {
     
     var purpleColor: UIColor! = UIColor(red: 150/255, green: 141/255, blue: 255/255, alpha: 1)
+    
     var whitePurpleColor: UIColor! = UIColor(red: 227/255, green: 225/255, blue: 255/255, alpha: 1)
     
     lazy var labelColor: [UIColor] = [purpleColor, whitePurpleColor]
@@ -237,13 +238,14 @@ class PlanRequestRespondingViewController: UIViewController {
     }
     
     @objc func acceptButtonClicked(sender:UIButton){
-        let nextViewController = ShowPlanViewController()
-        self.navigationController?.pushViewController(nextViewController, animated: true)
+        let notificationVC = NotificationViewController()
+        notificationVC.isErrendAccept = true
+        
+        self.navigationController?.popViewController(animated: true)
     }
     
     @objc func rejectionButtonClicked(sender:UIButton){
-        let nextViewController = ShowPlanViewController()
-        self.navigationController?.pushViewController(nextViewController, animated: true)
+        self.navigationController?.popViewController(animated: true)
     }
     
     @objc func backButtonClicked(sender:UIButton){
