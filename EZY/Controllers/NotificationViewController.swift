@@ -20,11 +20,18 @@ class NotificationViewController: UIViewController {
 
     private var scheduleImageByTypeImageArray = [UIImage]()
     
+    private var testScheduleTypeArray = ["개인일정","심부름","심부름","개인일정","심부름","심부름","심부름","심부름"]
+
+    private var testNotificationContentArray = ["강아지 산책시키기 일정을 완료하셨나요?\n확인해보세요!","지환님이 마카롱 사기 심부름을 부탁했어요. \n확인해볼까요?","지환님이 마카롱 사기 심부름을 취소했어요!\n심부름이 삭제되었어요!","강아지 산책시키기 일정을 완료하셨나요?\n확인해보세요!","시원님이 마카롱 사기 심부름을 포기했어요!\n심부름이 삭제되었어요!","시원님이 마카롱 사기 심부름을 거절했어요!\n심부름이 삭제되었어요!","시원님이 마카롱 사기 심부름을 수락했어요!\n심부름이 추가되었어요!", "시원님이 마카롱 사기 심부름을 완료했어요!\n감사인사를 전해보세요!"]
+
+    private var testAfterNotificationTimeArray = ["12분 전","12분 전","12분 전","12분 전","12분 전","12분 전","12분 전","12분 전"]
+    
     var isErrendAccept: Bool = false
     
     let notificationTableView: UITableView = UITableView().then{
         $0.separatorStyle = .none
         $0.register(NotificationTableViewCell.self, forCellReuseIdentifier: NotificationTableViewCell.NotificationTableViewIdentifier)
+    
     }
     
     let items: [String] = ["abc", "def", "ghi"]
@@ -100,7 +107,7 @@ class NotificationViewController: UIViewController {
     }
     
     func tableViewSetting(){
-        if notificationContentArray.isEmpty {
+        if testNotificationContentArray.isEmpty {
             noNotificationComponentView.isHidden = false
             notificationTableView.isHidden = true
         }else{
@@ -205,20 +212,33 @@ class NotificationViewController: UIViewController {
 }
 
 extension NotificationViewController: UITableViewDelegate{
-    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if testScheduleTypeArray[indexPath.row] == "개인일정"{
+            let nextVC = PersonalPlanDetailViewController()
+            self.navigationController?.pushViewController(nextVC, animated: true)
+        }else{
+            let nextVC = PlanRequestRespondingViewController()
+            self.navigationController?.pushViewController(nextVC, animated: true)
+        }
+    }
 }
 
 extension NotificationViewController: UITableViewDataSource{
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return scheduleTypeArray.count
+        return testScheduleTypeArray.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell: NotificationTableViewCell = tableView.dequeueReusableCell(withIdentifier: NotificationTableViewCell.NotificationTableViewIdentifier, for: indexPath) as! NotificationTableViewCell
+        cell.selectionStyle = .none
+//        cell.scheduleTypeLabel.text = scheduleTypeArray[indexPath.row]
+//        cell.notificationContentLabel.text = notificationContentArray[indexPath.row]
+//        cell.afterNotificationTimeLabel.text = afterNotificationTimeArray[indexPath.row]
         
-        cell.scheduleTypeLabel.text = scheduleTypeArray[indexPath.row]
-        cell.notificationContentLabel.text = notificationContentArray[indexPath.row]
-        cell.afterNotificationTimeLabel.text = afterNotificationTimeArray[indexPath.row]
+        // 테스트
+                cell.scheduleTypeLabel.text = testScheduleTypeArray[indexPath.row]
+                cell.notificationContentLabel.text = testNotificationContentArray[indexPath.row]
+                cell.afterNotificationTimeLabel.text = testAfterNotificationTimeArray[indexPath.row]
         
         return cell
     }
