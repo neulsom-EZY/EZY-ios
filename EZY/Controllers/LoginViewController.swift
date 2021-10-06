@@ -87,7 +87,7 @@ class LoginViewController: UIViewController{
     //MARK: - Selectors
 
     @objc
-    func onTapEyeButton(){
+    private func onTapEyeButton(){
         if passwordContainer.tf.isSecureTextEntry == true {
             passwordContainer.tf.isSecureTextEntry = false
         } else {
@@ -96,25 +96,25 @@ class LoginViewController: UIViewController{
     }
     
     @objc
-    func onTapForgotNickname(){
+    private func onTapForgotNickname(){
         let controller = NewNicknamePhoneNumViewController()
         navigationController?.pushViewController(controller, animated: true)
     }
     
     @objc
-    func onTapForgotPassword(){
+    private func onTapForgotPassword(){
         let controller = NewPasswordPhoneNumViewController()
         navigationController?.pushViewController(controller, animated: true)
     }
     
     @objc
-    func onTapSignUp(){
+    private func onTapSignUp(){
         let controller = SignUpNicknameViewController()
         navigationController?.pushViewController(controller, animated: true)
     }
     
     @objc
-    func onTapLogin(){
+    private func onTapLogin(){
         if isValidNickname(Nickname: nicknameContainer.tf.text) == true && isValidPassword(Password: passwordContainer.tf.text) == true{
             let controller = ShowPlanViewController()
             navigationController?.pushViewController(controller, animated: true)

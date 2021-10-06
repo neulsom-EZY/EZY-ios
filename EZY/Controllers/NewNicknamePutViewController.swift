@@ -52,12 +52,12 @@ class NewNicknamePutViewController: UIViewController{
     //MARK: - Selectors
     
     @objc
-    func goBack(){
+    private func goBack(){
         navigationController?.popViewController(animated: true )
     }
     
     @objc
-    func onTapContinueNewNickname(){
+    private func onTapContinueNewNickname(){
         if isValidNickname(Nickname: nicknameContainer.tf.text) == true {
             let controller = LoginViewController()
             navigationController?.pushViewController(controller, animated: true)
@@ -185,7 +185,7 @@ class NewNicknamePutViewController: UIViewController{
     
     //MARK: - KeyboardWillShow -> continueButton Up
     @objc
-    func keyboardWillShow(_ sender: Notification) {
+    private func keyboardWillShow(_ sender: Notification) {
         var keyboardHeight: CGFloat = CGFloat(0) //keyboardHeight
         if let keyboardFrame: NSValue = sender.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue {
             let keyboardRectangle = keyboardFrame.cgRectValue
@@ -201,7 +201,7 @@ class NewNicknamePutViewController: UIViewController{
     
     //MARK: - KeyboardWillHide -> continueButton Down
     @objc
-    func keyboardWillHide(_ sender: Notification) {
+    private func keyboardWillHide(_ sender: Notification) {
         continueButton.snp.remakeConstraints { make in
             make.left.equalToSuperview().offset(self.view.frame.width/17)
             make.centerX.equalToSuperview()
@@ -210,29 +210,3 @@ class NewNicknamePutViewController: UIViewController{
         }
     }
 }
-
-//MARK: - Preview
-#if DEBUG
-import SwiftUI
-struct NewNicknamePutViewControllerRepresentable: UIViewControllerRepresentable {
-    
-func updateUIViewController(_ uiView: UIViewController,context: Context) {
-        // leave this empty
-}
-    @available(iOS 13.0.0, *)
-    func makeUIViewController(context: Context) -> UIViewController{
-        NewNicknamePutViewController()
-    }
-}
-@available(iOS 13.0, *)
-struct NewNicknamePutViewControllerRepresentable_PreviewProvider: PreviewProvider {
-    static var previews: some View {
-        Group {
-            NewNicknamePutViewControllerRepresentable()
-                .ignoresSafeArea()
-                .previewDisplayName(/*@START_MENU_TOKEN@*/"Preview"/*@END_MENU_TOKEN@*/)
-                .previewDevice(PreviewDevice(rawValue: "iPhone 11"))
-        }
-        
-    }
-} #endif

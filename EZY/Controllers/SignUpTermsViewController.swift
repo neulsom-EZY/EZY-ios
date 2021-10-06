@@ -175,12 +175,12 @@ class SignUpTermsViewController: UIViewController{
     lazy var AllFlag = false
     
     @objc
-    func goBack(){
+    private func goBack(){
         navigationController?.popViewController(animated: true )
     }
     
     @objc
-    func onTapButton1(){
+    private func onTapButton1(){
         if flag1 == false {
             checkBox1.setImage(UIImage(named: "EZY_CheckedBox"), for: .normal)
             flag1 = true
@@ -197,7 +197,7 @@ class SignUpTermsViewController: UIViewController{
     }
     
     @objc
-    func onTapButton2(){
+    private func onTapButton2(){
         if flag2 == false {
             checkBox2.setImage(UIImage(named: "EZY_CheckedBox"), for: .normal)
             flag2 = true
@@ -214,7 +214,7 @@ class SignUpTermsViewController: UIViewController{
     }
     
     @objc
-    func onTapButton3(){
+    private func onTapButton3(){
         if flag3 == false {
             checkBox3.setImage(UIImage(named: "EZY_CheckedBox"), for: .normal)
             flag3 = true
@@ -231,7 +231,7 @@ class SignUpTermsViewController: UIViewController{
     }
     
     @objc
-    func AonTapButton(){
+    private func AonTapButton(){
         if AllFlag == false {
             allCheckBox.setImage(UIImage(named: "EZY_CheckedBox"), for: .normal)
             checkBox1.setImage(UIImage(named: "EZY_CheckedBox"), for: .normal)
@@ -254,7 +254,7 @@ class SignUpTermsViewController: UIViewController{
     }
     
     @objc
-    func onTapSignIn(){
+    private func onTapSignIn(){
         if flag1 == true && flag2 == true {
             let controller = ShowPlanViewController()
             navigationController?.pushViewController(controller, animated: true)
@@ -485,32 +485,3 @@ class SignUpTermsViewController: UIViewController{
         view?.layer.add(shake, forKey: "position")
     }
 }
-
-
-//MARK: - Preview
-#if DEBUG
-import SwiftUI
-struct SignUpTermsViewControllerRepresentable: UIViewControllerRepresentable {
-    
-func updateUIViewController(_ uiView: UIViewController,context: Context) {
-        // leave this empty
-}
-    @available(iOS 13.0.0, *)
-    func makeUIViewController(context: Context) -> UIViewController{
-        SignUpTermsViewController()
-    }
-}
-@available(iOS 13.0, *)
-struct SignUpTermsViewControllerRepresentable_PreviewProvider: PreviewProvider {
-    static var previews: some View {
-        Group {
-            SignUpTermsViewControllerRepresentable()
-                .ignoresSafeArea()
-                .previewDisplayName(/*@START_MENU_TOKEN@*/"Preview"/*@END_MENU_TOKEN@*/)
-                .previewDevice(PreviewDevice(rawValue: "iPhone 11"))
-        }
-        
-    }
-} #endif
-
-
