@@ -48,12 +48,12 @@ class SignUpPasswordViewController: UIViewController{
     //MARK: - Selectors
 
     @objc
-    func goBack(){
+    private func goBack(){
         navigationController?.popViewController(animated: true )
     }
     
     @objc
-    func onTapContinuePhoneNum(){
+    private func onTapContinuePhoneNum(){
         if isValidPassword(Password: passwordContainer.tf.text) == true{
             let controller = SignUpPhoneNumViewController()
             navigationController?.pushViewController(controller, animated: true)
@@ -173,7 +173,7 @@ class SignUpPasswordViewController: UIViewController{
     
     //MARK: - KeyboardWillShow -> continueButton Up
     @objc
-    func keyboardWillShow(_ sender: Notification) {
+    private func keyboardWillShow(_ sender: Notification) {
         var keyboardHeight: CGFloat = CGFloat(0) //keyboardHeight
         if let keyboardFrame: NSValue = sender.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue {
             let keyboardRectangle = keyboardFrame.cgRectValue
@@ -189,7 +189,7 @@ class SignUpPasswordViewController: UIViewController{
     
     //MARK: - KeyboardWillHide -> continueButton Down
     @objc
-    func keyboardWillHide(_ sender: Notification) {
+    private func keyboardWillHide(_ sender: Notification) {
         continueButton.snp.remakeConstraints { make in
             make.left.equalToSuperview().offset(self.view.frame.width/17)
             make.centerX.equalToSuperview()
@@ -198,32 +198,4 @@ class SignUpPasswordViewController: UIViewController{
         }
     }
 }
-
-
-//MARK: - Preview
-#if DEBUG
-import SwiftUI
-struct SignUpPasswordViewControllerRepresentable: UIViewControllerRepresentable {
-    
-func updateUIViewController(_ uiView: UIViewController,context: Context) {
-        // leave this empty
-}
-    @available(iOS 13.0.0, *)
-    func makeUIViewController(context: Context) -> UIViewController{
-        SignUpPasswordViewController()
-    }
-}
-@available(iOS 13.0, *)
-struct SignUpPasswordViewControllerRepresentable_PreviewProvider: PreviewProvider {
-    static var previews: some View {
-        Group {
-            SignUpPasswordViewControllerRepresentable()
-                .ignoresSafeArea()
-                .previewDisplayName(/*@START_MENU_TOKEN@*/"Preview"/*@END_MENU_TOKEN@*/)
-                .previewDevice(PreviewDevice(rawValue: "iPhone 11"))
-        }
-        
-    }
-} #endif
-
 
