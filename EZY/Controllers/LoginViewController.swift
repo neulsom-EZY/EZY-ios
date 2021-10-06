@@ -90,8 +90,10 @@ class LoginViewController: UIViewController{
     private func onTapEyeButton(){
         if passwordContainer.tf.isSecureTextEntry == true {
             passwordContainer.tf.isSecureTextEntry = false
+            showPasswordButton.setImage(UIImage(named: "EZY_closedEye"), for: .normal)
         } else {
             passwordContainer.tf.isSecureTextEntry = true
+            showPasswordButton.setImage(UIImage(named: "EZY_eye"), for: .normal)
         }
     }
     
