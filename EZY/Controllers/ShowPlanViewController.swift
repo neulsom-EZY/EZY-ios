@@ -24,8 +24,12 @@ class ShowPlanViewController: UIViewController{
     
     fileprivate var userName = "Y00ujin"
     
-    private let planCompleteModalView = PlanCompleteModalView().then{
+    private lazy var planCompleteModalView = PlanCompleteModalView().then{
         $0.isHidden = true
+        $0.okButton.addTarget(self, action: #selector(completeOkButtonClicked(sender:)), for: .touchUpInside)
+        $0.cancelButton.addTarget(self, action: #selector(completeCancelButtonClicked(sender:)), for: .touchUpInside)
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(handleTap(sender:)))
+        $0.shadowBackgroundView.addGestureRecognizer(tapGesture)
     }
     
     private var selectedIndex = 0
@@ -53,7 +57,7 @@ class ShowPlanViewController: UIViewController{
     
     private let notificationButton = UIButton().then {
         $0.setImage(UIImage(named: "EZY_Notification"), for: .normal)
-        $0.addTarget(self, action: #selector(NotificationButtonClicked), for: .touchUpInside)
+        $0.addTarget(self, action: #selector(notificationButtonClicked), for: .touchUpInside)
     }
 
     private lazy var questionTopLabel = UILabel().then {
@@ -135,11 +139,10 @@ class ShowPlanViewController: UIViewController{
         $0.layer.shadowColor = UIColor.white.cgColor
         $0.addTarget(self, action: #selector(middleComponemtViewClicked(sender:)), for: .touchUpInside)
     }
-
+    
     //MARK: Lifecycles
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         addView()
         
         location()
@@ -279,7 +282,6 @@ class ShowPlanViewController: UIViewController{
         self.view.addSubview(questionBottomLabel)
         self.view.addSubview(notificationButton)
         self.notificationButton.addSubview(badgeView)
-        self.view.addSubview(planCompleteModalView)
         self.view.addSubview(emptyPlanBoxView)
         emptyPlanBoxView.addSubview(emptyLabel)
         emptyPlanBoxView.addSubview(emptyImageView)
@@ -288,10 +290,14 @@ class ShowPlanViewController: UIViewController{
         middleComponemtView.addSubview(EZYLISTTitleLabel)
         middleComponemtView.addSubview(EZYPlanAddButton)
         self.view.addSubview(scheduleTypeCollectionMainView)
-
+        self.view.addSubview(planCompleteModalView)
     }
     
-    // MAKR: - Selectors
+    // MARK: - Selectors
+    @objc func handleTap(sender:UITapGestureRecognizer){
+        planCompleteModalView.isHidden = true
+    }
+    
     @objc func middleComponemtViewClicked(sender:UIButton){
         let indexPath = NSIndexPath(row: NSNotFound, section: 0)
         self.scheduleTimeTableView.scrollToRow(at: indexPath as IndexPath, at: .top, animated: true)
@@ -305,7 +311,7 @@ class ShowPlanViewController: UIViewController{
         present(MoreCalendarModalsVC, animated: true, completion: nil)
     }
     
-    @objc func NotificationButtonClicked(sender: UIButton) {
+    @objc func notificationButtonClicked(sender: UIButton) {
         let pushVC = NotificationViewController()
         self.navigationController?.pushViewController(pushVC, animated: true)
     }
@@ -316,8 +322,8 @@ class ShowPlanViewController: UIViewController{
         planTimeArray.remove(at: selectedIndex)
         EZYPlanBackgroundColor.remove(at: selectedIndex)
         
-        scheduleTimeTableView.reloadData()
-        
+        scheduleTimeTableView.deleteRows(at: [IndexPath(row: selectedIndex, section: 0)], with: .automatic)
+                
         planCompleteModalView.isHidden = true
     }
     
