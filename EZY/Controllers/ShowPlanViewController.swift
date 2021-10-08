@@ -81,7 +81,7 @@ class ShowPlanViewController: UIViewController{
         $0.updateGradientTextColor_vertical(gradientColors: questionBottomLabelColorArray)
     }
     
-    private lazy var EZYLISTTitleLabel = UILabel().then {
+    fileprivate lazy var ezyListTitleLabel = UILabel().then {
         $0.textColor = UIColor(red: 150/255, green: 141/255, blue: 255/255, alpha: 1)
         $0.text = "EZYLIST"
         $0.dynamicFont(fontSize: 12, currentFontName: "Poppins-Bold")
@@ -150,12 +150,9 @@ class ShowPlanViewController: UIViewController{
         tableViewDataSourceAndDelegate()
         
         collectionViewDataSourceAndDelegate()
-        
-        let attributedString = NSMutableAttributedString(string: EZYLISTTitleLabel.text!)
-        attributedString.addAttribute(NSAttributedString.Key.kern, value: CGFloat(3.0), range: NSRange(location: 0, length: attributedString.length))
-        EZYLISTTitleLabel.attributedText = attributedString
     }
     
+    // MARK: - resetTableViewCollectionView
     func resetTableViewCollectionView(){
         scheduleTimeTableView.resetTableViewScrollPositionToTop()
         scheduleTypeCollectionMainView.resetCollectionViewScrollPositionToTop()
@@ -186,10 +183,14 @@ class ShowPlanViewController: UIViewController{
         emptyPlanBoxView.addSubview(emptyImageView)
         self.view.addSubview(scheduleTimeTableView)
         self.view.addSubview(middleComponemtView)
-        middleComponemtView.addSubview(EZYLISTTitleLabel)
+        middleComponemtView.addSubview(ezyListTitleLabel)
         middleComponemtView.addSubview(EZYPlanAddButton)
         self.view.addSubview(scheduleTypeCollectionMainView)
         self.view.addSubview(planCompleteModalView)
+        
+        let attributedString = NSMutableAttributedString(string: ezyListTitleLabel.text!)
+        attributedString.addAttribute(NSAttributedString.Key.kern, value: CGFloat(3.0), range: NSRange(location: 0, length: attributedString.length))
+        ezyListTitleLabel.attributedText = attributedString
     }
     
     // MARK: - location
@@ -241,7 +242,7 @@ class ShowPlanViewController: UIViewController{
             make.height.equalToSuperview().dividedBy(13)
         }
         
-        EZYLISTTitleLabel.snp.makeConstraints { make in
+        ezyListTitleLabel.snp.makeConstraints { make in
             make.centerY.equalToSuperview()
             make.left.equalTo(questionTopLabel)
         }
@@ -252,7 +253,7 @@ class ShowPlanViewController: UIViewController{
         }
         
         scheduleTimeTableView.snp.makeConstraints { make in
-            make.top.equalTo(EZYLISTTitleLabel.snp.bottom).offset(self.view.frame.height/36)
+            make.top.equalTo(ezyListTitleLabel.snp.bottom).offset(self.view.frame.height/36)
             make.width.equalToSuperview()
             make.bottom.equalToSuperview()
             make.centerX.equalToSuperview()
@@ -280,7 +281,7 @@ class ShowPlanViewController: UIViewController{
         }
         
         emptyPlanBoxView.snp.makeConstraints { make in
-            make.top.equalTo(EZYLISTTitleLabel.snp.bottom).offset(self.view.frame.height/12.11)
+            make.top.equalTo(ezyListTitleLabel.snp.bottom).offset(self.view.frame.height/12.11)
             make.bottom.equalToSuperview().offset(self.view.frame.height/12.11)
             make.left.right.equalToSuperview()
         }
