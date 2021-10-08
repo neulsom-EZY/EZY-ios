@@ -134,7 +134,7 @@ class ShowPlanViewController: UIViewController{
         $0.backgroundColor = .white
         $0.layer.masksToBounds = false
         $0.layer.shadowOpacity = 1
-        $0.layer.shadowRadius = 5
+        $0.layer.shadowRadius = 4
         $0.layer.shadowOffset = CGSize(width: 0, height: 5)
         $0.layer.shadowColor = UIColor.white.cgColor
         $0.addTarget(self, action: #selector(middleComponemtViewClicked(sender:)), for: .touchUpInside)
@@ -156,6 +156,11 @@ class ShowPlanViewController: UIViewController{
         EZYLISTTitleLabel.attributedText = attributedString
     }
     
+    func resetTableViewCollectionView(){
+        scheduleTimeTableView.resetTableViewScrollPositionToTop()
+        scheduleTypeCollectionMainView.resetCollectionViewScrollPositionToTop()
+    }
+    
     // MARK: - collectionViewDataSourceAndDelegate
     func collectionViewDataSourceAndDelegate(){
         scheduleTypeCollectionMainView.delegate = self
@@ -166,6 +171,25 @@ class ShowPlanViewController: UIViewController{
     func tableViewDataSourceAndDelegate(){
         scheduleTimeTableView.dataSource = self
         scheduleTimeTableView.delegate = self
+    }
+    
+    // MARK: - addView
+    func addView(){
+        self.view.backgroundColor = .white
+        self.view.addSubview(questionTopLabel)
+        self.view.addSubview(questionMiddleLabel)
+        self.view.addSubview(questionBottomLabel)
+        self.view.addSubview(notificationButton)
+        self.notificationButton.addSubview(badgeView)
+        self.view.addSubview(emptyPlanBoxView)
+        emptyPlanBoxView.addSubview(emptyLabel)
+        emptyPlanBoxView.addSubview(emptyImageView)
+        self.view.addSubview(scheduleTimeTableView)
+        self.view.addSubview(middleComponemtView)
+        middleComponemtView.addSubview(EZYLISTTitleLabel)
+        middleComponemtView.addSubview(EZYPlanAddButton)
+        self.view.addSubview(scheduleTypeCollectionMainView)
+        self.view.addSubview(planCompleteModalView)
     }
     
     // MARK: - location
@@ -274,25 +298,6 @@ class ShowPlanViewController: UIViewController{
         }
     }
     
-    // MARK: - addView
-    func addView(){
-        self.view.backgroundColor = .white
-        self.view.addSubview(questionTopLabel)
-        self.view.addSubview(questionMiddleLabel)
-        self.view.addSubview(questionBottomLabel)
-        self.view.addSubview(notificationButton)
-        self.notificationButton.addSubview(badgeView)
-        self.view.addSubview(emptyPlanBoxView)
-        emptyPlanBoxView.addSubview(emptyLabel)
-        emptyPlanBoxView.addSubview(emptyImageView)
-        self.view.addSubview(scheduleTimeTableView)
-        self.view.addSubview(middleComponemtView)
-        middleComponemtView.addSubview(EZYLISTTitleLabel)
-        middleComponemtView.addSubview(EZYPlanAddButton)
-        self.view.addSubview(scheduleTypeCollectionMainView)
-        self.view.addSubview(planCompleteModalView)
-    }
-    
     // MARK: - Selectors
     @objc func handleTap(sender:UITapGestureRecognizer){
         planCompleteModalView.isHidden = true
@@ -305,13 +310,15 @@ class ShowPlanViewController: UIViewController{
     
     @objc func EZYPlanAddButtonClicked(sender:UIButton){
         let MoreCalendarModalsVC = MoreCalendarModalsViewController.instance()
+        present(MoreCalendarModalsVC, animated: true, completion: nil)
         
         MoreCalendarModalsVC.delegate = self
+        
         addDim()
-        present(MoreCalendarModalsVC, animated: true, completion: nil)
     }
     
     @objc func notificationButtonClicked(sender: UIButton) {
+        resetTableViewCollectionView()
         let pushVC = NotificationViewController()
         self.navigationController?.pushViewController(pushVC, animated: true)
     }
@@ -369,13 +376,14 @@ extension ShowPlanViewController: UICollectionViewDelegate, UICollectionViewDele
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         if indexPath.row == 2{
+            resetTableViewCollectionView()
             let nextViewController = InquiryViewController()
             self.navigationController?.pushViewController(nextViewController, animated: true)
         }
         if indexPath.row == 3{
+            resetTableViewCollectionView()
             let nextViewController = SettingViewController()
             self.navigationController?.pushViewController(nextViewController, animated: true)
-
         }
     }
 }
@@ -506,5 +514,18 @@ extension ShowPlanViewController: BulletinDelegate {
     }
     func update(){
         self.removeDim()
+    }
+}
+
+extension UIScrollView {
+    func resetCollectionViewScrollPositionToTop() {
+        self.contentOffset = CGPoint(x: -contentInset.left, y: -contentInset.top)
+    }
+}
+
+extension UITableView {
+    func resetTableViewScrollPositionToTop() {
+        let indexPath = NSIndexPath(row: NSNotFound, section: 0)
+        self.scrollToRow(at: indexPath as IndexPath, at: .top, animated: true)
     }
 }

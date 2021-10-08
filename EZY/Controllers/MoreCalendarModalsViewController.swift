@@ -61,7 +61,6 @@ class MoreCalendarModalsViewController : UIViewController{
         $0.dynamicFont(fontSize: 12, currentFontName: "AppleSDGothicNeo-Bold")
     }
   
-    
     static func instance() -> MoreCalendarModalsViewController {
         return MoreCalendarModalsViewController(nibName: nil, bundle: nil).then {
             $0.modalPresentationStyle = .overFullScreen
