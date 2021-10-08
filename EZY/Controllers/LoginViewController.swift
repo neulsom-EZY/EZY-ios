@@ -243,6 +243,8 @@ class LoginViewController: UIViewController{
         passwordContainer.tf.keyboardType = .asciiCapable
     }
     
+    //MARK: - textField Point Set
+    
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         nicknameContainer.tf.resignFirstResponder()
         passwordContainer.tf.resignFirstResponder()
