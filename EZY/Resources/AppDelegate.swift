@@ -28,8 +28,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
       let deviceTokenString = deviceToken.reduce("", {$0 + String(format: "%02X", $1)})
-      print("origin token : \(deviceTokenString)")
-      print("[Log] deviceToken :", deviceTokenString)
+      print("deviceToken :", deviceTokenString)
         
       Messaging.messaging().apnsToken = deviceToken
     }
@@ -104,10 +103,15 @@ extension AppDelegate : MessagingDelegate {
 
 extension AppDelegate: UNUserNotificationCenterDelegate {
   func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
-    completionHandler([.alert, .badge, .sound])
+      completionHandler([.alert, .badge, .sound])
   }
-  
-  func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Void) {
-    completionHandler()
-  }
+    
+    func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Void) {
+        // 사용자의 push 알림에 대한 response 처리
+        print("response.notification.request.content.userInfo \(response.notification.request.content.userInfo)")
+        let aps = response.notification.request.content.userInfo["aps"]
+        
+        // title, body notificationVC 변수에 넣기
+        print(aps)
+    }
 }
