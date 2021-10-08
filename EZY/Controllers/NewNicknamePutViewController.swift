@@ -73,6 +73,7 @@ class NewNicknamePutViewController: UIViewController{
         addView()
         topBarViewSetting()
         nicknameContainerViewSetting()
+        keyboardTypeSetting()
         cornerRadius()
         location()
         addNotificationCenter()
@@ -146,6 +147,12 @@ class NewNicknamePutViewController: UIViewController{
         nicknameContainer.addSubview(nicknameContainer.divView)
         
         nicknameContainer.loginTfSetting(screenHeight: self.view.frame.height, screenWidth: self.view.frame.width)
+    }
+    
+    //MARK: - KeyboardType Setting
+    
+    private func keyboardTypeSetting(){
+        nicknameContainer.tf.keyboardType = .asciiCapable
     }
     
     //MARK: - textField Point Set

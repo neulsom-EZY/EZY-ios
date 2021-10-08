@@ -131,6 +131,7 @@ class LoginViewController: UIViewController{
         
         nicknameContainerViewSetting()
         passwordContainerViewSetting()
+        keyboardTypeSetting()
         
         addView()
         cornerRadius()
@@ -234,6 +235,15 @@ class LoginViewController: UIViewController{
         
         passwordContainer.loginTfSetting(screenHeight: self.view.frame.height, screenWidth: self.view.frame.width)
     }
+    
+    //MARK: - KeyboardType Setting
+    
+    private func keyboardTypeSetting(){
+        nicknameContainer.tf.keyboardType = .asciiCapable
+        passwordContainer.tf.keyboardType = .asciiCapable
+    }
+    
+    //MARK: - textField Point Set
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         nicknameContainer.tf.resignFirstResponder()
