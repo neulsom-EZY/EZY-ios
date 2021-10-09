@@ -63,7 +63,8 @@ class PersonalPlanChangeViewController: UIViewController, UIGestureRecognizerDel
     
     var rotationAngle: CGFloat!
     
-    private let dayTextArray = [["1","2","3","4","5","6","7"],["1","2","3","4","5","6","7"]]
+    lazy var startPickerViewText = [["1","2","3","4","5","6","7","8","9","10","11","12"],["00","05","10","15","20","25","30","35","40","45","50","55"]]
+    
     
     private var tagNameTextArray = ["공부", "산책", "토익", "코딩", "요리", "운동", "정리", "청소","공부", "산책", "토익", "코딩", "요리", "운동", "정리", "청소","공부", "산책", "토익", "코딩", "요리", "운동", "정리", "청소","공부", "산책", "토익", "코딩", "요리", "운동", "정리", "청소"]
     
@@ -415,43 +416,122 @@ extension PersonalPlanChangeViewController: UICollectionViewDataSource, UICollec
 }
 
 extension PersonalPlanChangeViewController: UIPickerViewDelegate, UIPickerViewDataSource{
-    func numberOfComponents(in pickerView: UIPickerView) -> Int {
-        return 2
-    }
+    // 피커뷰의 구성요소(컬럼) 수
+      func numberOfComponents(in pickerView: UIPickerView) -> Int {
+        if pickerView == selectTimeModalView.startPickerView || pickerView == selectTimeModalView.endPickerView{
+            return 2    // 구성요소(컬럼)로 지역만 있으므로 1을 리턴
+        }else if pickerView == selectCalendarModalView.dayPickerView{
+            return 1
+        }
     
-    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-        return dayTextArray.count
-    }
+        return Int()
+      }
+      
+      // 구성요소(컬럼)의 행수
+      func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+        if pickerView == selectTimeModalView.startPickerView || pickerView == selectTimeModalView.endPickerView{
+            return startPickerViewText[component].count
+        }else if pickerView == selectCalendarModalView.dayPickerView{
+            return dayPickerViewText1.count
+        }
+
+        
+        return Int()
+      }
+   
+      // 피커뷰에 보여줄 값 전달
+      func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+        if pickerView == selectTimeModalView.startPickerView || pickerView == selectTimeModalView.endPickerView{
+            return startPickerViewText[component][row]
+        }else if pickerView == selectCalendarModalView.dayPickerView{
+            return startPickerViewText[component][row]
+        }
+
+        
+        return String()
+      }
     
-    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-        return dayTextArray[row][component]
-    }
-    
-    func pickerView(_ pickerView: UIPickerView, rowHeightForComponent component: Int) -> CGFloat {
-        return 100
-    }
-    
-    func pickerView(_ pickerView: UIPickerView, widthForComponent component: Int) -> CGFloat {
-        return 100
+    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+        if pickerView == selectCalendarModalView.dayPickerView{
+            selectedDayRow = row
+        }else if pickerView == selectTimeModalView.startPickerView{
+            if component == 0{
+                selectedTimeStartHourIndex = row
+            }else if component == 1{
+                selectedTimeStartMinIndex = row
+            }
+            print("startPickerView : row[\(row)], component[\(component)] ")
+        }else if pickerView == selectTimeModalView.endPickerView{
+            if component == 0{
+                selectedTimeEndHourIndex = row
+            }else if component == 1{
+                selectedTimeEndMinIndex = row
+            }
+            print("endPickerView : row[\(row)], component[\(component)] ")
+        }
     }
     
     func pickerView(_ pickerView: UIPickerView, viewForRow row: Int, forComponent component: Int, reusing view: UIView?) -> UIView {
-        let view = UIView()
-        view.frame = CGRect(x: 0, y: 0, width: 100, height: 100)
-        let label1 = UILabel()
-        label1.frame = CGRect(x: 0, y: 0, width: 100, height: 100)
+        if pickerView == selectTimeModalView.startPickerView || pickerView == selectTimeModalView.endPickerView{
+            var pickerLabel = view as? UILabel;
+            
+            if (pickerLabel == nil)
+            {
+                pickerLabel = UILabel()
+                
+                pickerLabel?.font = UIFont(name: "AppleSDGothicNeo-SemiBold", size: 20)
+                pickerLabel?.textColor = UIColor(red: 120/255, green: 108/255, blue: 255/255, alpha: 1)
+                pickerLabel?.textAlignment = .center
+            }
+            
+            pickerLabel?.text = startPickerViewText[component][row]
+            
+            pickerView.subviews[1].backgroundColor = .clear // 회색 뷰 지우기
+            
+            return pickerLabel!
+        }else if pickerView == selectCalendarModalView.dayPickerView{
+            let pickerLabel1 = UILabel()
+            let pickerLabel2 = UILabel()
+            let view = UIView(frame: CGRect(x: 0, y: 0, width:0, height:0))
+            
+            if dayPickerViewText1[row] == "S"{
+                pickerLabel1.textColor = UIColor(red: 170/255, green: 187/255, blue: 255/255, alpha: 1)
+                pickerLabel2.textColor = UIColor(red: 170/255, green: 187/255, blue: 255/255, alpha: 1)
+            }else{
+                pickerLabel1.textColor = UIColor(red: 168/255, green: 168/255, blue: 168/255, alpha: 1)
+                pickerLabel2.textColor = UIColor(red: 168/255, green: 168/255, blue: 168/255, alpha: 1)
+            }
+            
+            pickerLabel1.font = UIFont(name: "AppleSDGothicNeo-SemiBold", size: 15)
+            pickerLabel1.textAlignment = .center
+            pickerLabel2.font = UIFont(name: "AppleSDGothicNeo-SemiBold", size: 20)
+            pickerLabel2.textAlignment = .center
+            
+            view.addSubview(pickerLabel1)
+            view.addSubview(pickerLabel2)
+            
+            pickerLabel1.text = dayPickerViewText1[row]
+            pickerLabel2.text = dayPickerViewText2[row]
+            
+            pickerLabel2.snp.makeConstraints { make in
+                make.top.equalToSuperview().offset(self.view.frame.height/18)
+                make.centerX.equalToSuperview()
+            }
+            pickerLabel1.snp.makeConstraints { make in
+                make.centerX.equalToSuperview()
+                make.bottom.equalToSuperview().offset(-self.view.frame.height/18)
+            }
+            
+            pickerView.subviews[1].backgroundColor = UIColor(red: 170/255, green: 187/255, blue: 255/255, alpha: 0.1)
 
-        label1.text = "1"
-        
-        let label2 = UILabel()
-        label2.frame = CGRect(x: 0, y: 0, width: 100, height: 100)
+            
+            view.transform = CGAffineTransform(rotationAngle: (90 * (.pi / 180*3)))
+            
+            
+            return view
+        }
 
-        label2.text = "2"
         
-        view.addSubview(label1)
-        view.addSubview(label2)
-        
-        view.transform = CGAffineTransform(rotationAngle: -90 * (.pi/180))
-        return view
+        return UIView()
     }
 }
