@@ -452,18 +452,12 @@ extension PersonalPlanChangeViewController: UIPickerViewDelegate, UIPickerViewDa
         }else if pickerView == selectCalendarModalView.dayPickerView{
             return startPickerViewText[component][row]
         }
+
         
         return String()
       }
     
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-        if pickerView == selectCalendarModalView.dayPickerView{
-            print("dayPickerView : row[\(row)], component[\(component)] ")
-        }else if pickerView == selectTimeModalView.startPickerView{
-            print("startPickerView : row[\(row)], component[\(component)] ")
-
-            print("endPickerView : row[\(row)], component[\(component)] ")
-        }
     }
     
     func pickerView(_ pickerView: UIPickerView, viewForRow row: Int, forComponent component: Int, reusing view: UIView?) -> UIView {
@@ -487,7 +481,7 @@ extension PersonalPlanChangeViewController: UIPickerViewDelegate, UIPickerViewDa
         }else if pickerView == selectCalendarModalView.dayPickerView{
             let pickerLabel1 = UILabel()
             let pickerLabel2 = UILabel()
-            let view = UIView(frame: CGRect(x: 0, y: 0, width: 200, height: 120))
+            let view = UIView(frame: CGRect(x: 0, y: 0, width:0, height:0))
             
             if dayPickerViewText1[row] == "S"{
                 pickerLabel1.textColor = UIColor(red: 170/255, green: 187/255, blue: 255/255, alpha: 1)
@@ -520,10 +514,15 @@ extension PersonalPlanChangeViewController: UIPickerViewDelegate, UIPickerViewDa
             pickerView.subviews[1].backgroundColor = UIColor(red: 170/255, green: 187/255, blue: 255/255, alpha: 0.1)
 
             
-            view.transform = CGAffineTransform(rotationAngle: (90 * (.pi / 180)))
+            view.transform = CGAffineTransform(rotationAngle: (90 * (.pi / 180*3)))
+            
+            
             return view
         }
+
         
         return UIView()
     }
+    
 }
+
