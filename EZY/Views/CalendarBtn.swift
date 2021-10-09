@@ -18,7 +18,9 @@ class CalendarBtn: UIButton {
         $0.layer.cornerRadius = 10
     }
     
-    private let labelView = UIView()
+    private let labelView = UIView().then{
+        $0.isUserInteractionEnabled = false
+    }
     
     var repeatLabel = UILabel().then{
         $0.textColor = .black
