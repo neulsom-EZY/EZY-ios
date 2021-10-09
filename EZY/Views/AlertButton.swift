@@ -23,7 +23,6 @@ class AlertButton : UIButton {
     override init(frame: CGRect) {
         self.viewModel = nil
         super.init(frame: frame)
-        
     }
     
     init(with viewModel : AlertBtn){

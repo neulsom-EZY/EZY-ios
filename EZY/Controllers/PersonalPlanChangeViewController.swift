@@ -161,9 +161,9 @@ class PersonalPlanChangeViewController: UIViewController, UIGestureRecognizerDel
         $0.addTarget(self, action: #selector(backButtonClicked(sender:)), for: .touchUpInside)
     }
     
-    private let calendarBtn : AlertButton = {
-        let viewModel = AlertBtn(icon: UIImage(named: "EZY_Calendar")?.withRenderingMode(.alwaysTemplate), iconTintColor: .rgb(red: 255, green: 181, blue: 181), message: "2021.6.6 일요일")
-        let button = AlertButton(with: viewModel)
+    private let calendarBtn : CalendarBtn = {
+        let viewModel = CalendarModel(icon: UIImage(named: "EZY_Calendar")?.withRenderingMode(.alwaysTemplate), iconTintColor: .rgb(red: 255, green: 181, blue: 181), message: "2021.6.6 일요일", repeatText: "반복 없음")
+        let button = CalendarBtn(with: viewModel)
         button.addTarget(self, action: #selector(calendarAlert), for: .touchUpInside)
         return button
     }()
@@ -182,7 +182,7 @@ class PersonalPlanChangeViewController: UIViewController, UIGestureRecognizerDel
         return button
     }()
     
-    fileprivate lazy var btnStackView = UIStackView(arrangedSubviews: [calendarBtn,clockBtn,locationBtn]).then{
+    fileprivate lazy var btnStackView = UIStackView(arrangedSubviews: [clockBtn,locationBtn]).then{
         $0.axis = .vertical
         $0.distribution = .fillEqually
         $0.spacing = bounds.height/47.7647
@@ -262,10 +262,10 @@ class PersonalPlanChangeViewController: UIViewController, UIGestureRecognizerDel
         }
         
         btnStackView.snp.makeConstraints {
-            $0.top.equalTo(titleBackgroundView.snp.bottom).offset(bounds.height/30.1)
-            $0.left.equalTo(mainTitleLabel.snp.left)
+            $0.top.equalTo(calendarBtn.snp.bottom).offset(bounds.height/47.76)
+            $0.left.equalTo(calendarBtn)
             $0.right.equalToSuperview().inset(bounds.height/9.23)
-            $0.height.equalTo(bounds.height/4.805)
+            $0.height.equalTo(bounds.height/7.58)
         }
         
         explanationContainerView.snp.makeConstraints { (make) in
@@ -323,6 +323,13 @@ class PersonalPlanChangeViewController: UIViewController, UIGestureRecognizerDel
         tagAddModalView.snp.makeConstraints { make in
             make.top.bottom.left.right.equalToSuperview()
         }
+        
+        calendarBtn.snp.makeConstraints { make in
+            make.left.equalTo(titleBackgroundView)
+            make.height.equalToSuperview().dividedBy(18.04)
+            make.centerX.equalToSuperview()
+            make.top.equalTo(titleBackgroundView.snp.bottom).offset(self.view.frame.height/30.07)
+        }
     }
     
     //MARK: - addView
@@ -332,6 +339,7 @@ class PersonalPlanChangeViewController: UIViewController, UIGestureRecognizerDel
         self.view.addSubview(titleBackgroundView)
         titleBackgroundView.addSubview(titleLabel)
         titleBackgroundView.addSubview(titleTextField)
+        self.view.addSubview(calendarBtn)
         self.view.addSubview(btnStackView)
         self.view.addSubview(explanationContainerView)
         self.view.addSubview(tagLabel)

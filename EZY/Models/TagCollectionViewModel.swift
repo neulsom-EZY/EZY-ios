@@ -11,3 +11,10 @@ struct TagCollectionViewModel {
     var backgroundColor: UIColor
     var isSelected: Bool
 }
+
+struct CalendarModel{
+    let icon : UIImage?
+    let iconTintColor : UIColor?
+    let message : String?
+    let repeatText : String?
+}
