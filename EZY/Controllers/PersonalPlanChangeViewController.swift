@@ -48,7 +48,7 @@ class PersonalPlanChangeViewController: UIViewController, UIGestureRecognizerDel
                                                TagCollectionViewModel(backgroundColor: UIColor(red: 255/255, green: 150/255, blue: 255/255, alpha: 1), isSelected: true)]
         
     private let selectCalendarModalView = SelectCalendarModalView().then{
-        $0.isHidden = true
+        $0.isHidden = false
     }
     
     private let selectTimeModalView = SelectTimeModalView().then{
@@ -193,11 +193,10 @@ class PersonalPlanChangeViewController: UIViewController, UIGestureRecognizerDel
     override func viewDidLoad() {
         super.viewDidLoad()
         selectCalendarModalView.dayPickerView.delegate = self
-        selectCalendarModalView.dayPickerView.dataSource = self
-        
-        rotationAngle = 90 * ( .pi/180 )
-//        selectCalendarModalView.dayPickerView.transform = CGAffineTransform(rotationAngle: rotationAngle)
-        selectCalendarModalView.dayPickerView.selectRow(dayPickerViewText2.count/2, inComponent: 0, animated: true)
+                selectCalendarModalView.dayPickerView.dataSource = self
+                rotationAngle = 90 * ( .pi/180 )
+                selectCalendarModalView.dayPickerView.transform = CGAffineTransform(rotationAngle: rotationAngle)
+                selectCalendarModalView.dayPickerView.selectRow(dayPickerViewText2.count/2, inComponent: 0, animated: true)
         configureUI()
     }
     

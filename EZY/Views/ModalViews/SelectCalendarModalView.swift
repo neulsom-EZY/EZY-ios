@@ -155,10 +155,11 @@ class SelectCalendarModalView: UIView {
         
         dayPickerView.snp.makeConstraints { make in
             make.centerX.equalToSuperview()
-            make.left.equalTo(monthLabel)
-            make.height.equalToSuperview().dividedBy(5.93)
-            make.top.equalTo(calendarTriangleImageView.snp.bottom).offset(viewBounds.height/116)
+            make.left.equalToSuperview().offset(viewBounds.width/3)
+            make.height.equalToSuperview().dividedBy(1.1)
+            make.centerY.equalToSuperview().offset(viewBounds.height/70)
         }
+        
         
         divideLineView.snp.makeConstraints { make in
             make.centerX.equalToSuperview()
