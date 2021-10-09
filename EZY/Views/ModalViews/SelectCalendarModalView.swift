@@ -128,49 +128,47 @@ class SelectCalendarModalView: UIView {
         modalBackgroundView.snp.makeConstraints { make in
             make.centerX.centerY.equalToSuperview()
             make.width.equalToSuperview().dividedBy(1.13)
-            make.height.equalToSuperview().dividedBy(2.36)
+            make.height.equalToSuperview().dividedBy(2.3)
         }
         
         titleLabel.snp.makeConstraints { make in
-            make.left.equalToSuperview().offset(viewBounds.width/15.62)
-            make.top.equalToSuperview().offset(viewBounds.height/33.83)
+            make.top.equalToSuperview().offset(viewBounds.height/33.8)
+            make.left.equalToSuperview().offset(viewBounds.height/33.8)
         }
         
         monthLabel.snp.makeConstraints { make in
-            make.left.equalTo(titleLabel)
-            make.top.equalTo(titleLabel.snp.bottom).offset(viewBounds.height/45.83)
+            make.left.equalTo(titleLabel).offset(viewBounds.height/61.2)
+            make.top.equalTo(titleLabel.snp.bottom).offset(viewBounds.height/40)
         }
         
         monthYearLabel.snp.makeConstraints { make in
-            make.left.equalTo(monthLabel.snp.right).offset(viewBounds.width/75)
-            make.bottom.equalTo(monthLabel).offset(-viewBounds.height/140)
+            make.bottom.equalTo(monthLabel).offset(-viewBounds.height/131.2)
+            make.left.equalTo(monthLabel.snp.right).offset(viewBounds.height/161.2)
         }
         
         calendarTriangleImageView.snp.makeConstraints { make in
+            make.top.equalTo(monthLabel.snp.bottom).offset(viewBounds.height/300)
+            make.height.width.equalTo(10)
             make.centerX.equalToSuperview()
-            make.top.equalTo(monthLabel.snp.bottom).offset(viewBounds.height/120)
-            make.width.equalToSuperview().dividedBy(36.66)
-            make.height.equalToSuperview().dividedBy(26.46)
         }
         
         dayPickerView.snp.makeConstraints { make in
             make.centerX.equalToSuperview()
             make.left.equalToSuperview().offset(viewBounds.width/3)
             make.height.equalToSuperview().dividedBy(1.1)
-            make.centerY.equalToSuperview().offset(viewBounds.height/70)
+            make.centerY.equalToSuperview().offset(-viewBounds.height/25)
         }
         
-        
         divideLineView.snp.makeConstraints { make in
-            make.centerX.equalToSuperview()
-            make.left.equalTo(dayPickerView)
+            make.top.equalTo(dayPickerView.snp.bottom).offset(-viewBounds.height/7.5)
+            make.right.equalToSuperview().offset(-viewBounds.width/18)
+            make.left.equalToSuperview().offset(viewBounds.width/18)
             make.height.equalTo(0.5)
-            make.top.equalTo(dayPickerView.snp.bottom).offset(viewBounds.height/47.76)
         }
         
         repeatLabel.snp.makeConstraints { make in
+            make.top.equalTo(divideLineView.snp.bottom).offset(viewBounds.height/33.8)
             make.left.equalTo(divideLineView)
-            make.top.equalTo(divideLineView.snp.bottom).offset(viewBounds.height/47.76)
         }
         
         repeatCollectionView.snp.makeConstraints { make in
@@ -182,7 +180,7 @@ class SelectCalendarModalView: UIView {
         
         calendarAddButton.snp.makeConstraints { make in
             make.right.equalTo(repeatCollectionView)
-            make.top.equalTo(repeatCollectionView.snp.bottom).offset(viewBounds.height/58)
+            make.top.equalTo(repeatCollectionView.snp.bottom).offset(viewBounds.height/52)
             make.width.equalToSuperview().dividedBy(4.71)
             make.height.equalToSuperview().dividedBy(10.42)
         }

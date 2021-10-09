@@ -47,8 +47,10 @@ class PersonalPlanChangeViewController: UIViewController, UIGestureRecognizerDel
                                                TagCollectionViewModel(backgroundColor: UIColor(red: 255/255, green: 160/255, blue: 255/255, alpha: 1), isSelected: true),
                                                TagCollectionViewModel(backgroundColor: UIColor(red: 255/255, green: 150/255, blue: 255/255, alpha: 1), isSelected: true)]
         
-    private let selectCalendarModalView = SelectCalendarModalView().then{
-        $0.isHidden = false
+    private lazy var selectCalendarModalView = SelectCalendarModalView().then{
+        rotationAngle = 90 * ( .pi/180 )
+        $0.dayPickerView.transform = CGAffineTransform(rotationAngle: rotationAngle)
+        $0.isHidden = true
     }
     
     private let selectTimeModalView = SelectTimeModalView().then{
@@ -192,11 +194,8 @@ class PersonalPlanChangeViewController: UIViewController, UIGestureRecognizerDel
     //MARK: - lifeCycles
     override func viewDidLoad() {
         super.viewDidLoad()
-        selectCalendarModalView.dayPickerView.delegate = self
-                selectCalendarModalView.dayPickerView.dataSource = self
-                rotationAngle = 90 * ( .pi/180 )
-                selectCalendarModalView.dayPickerView.transform = CGAffineTransform(rotationAngle: rotationAngle)
-                selectCalendarModalView.dayPickerView.selectRow(dayPickerViewText2.count/2, inComponent: 0, animated: true)
+
+
         configureUI()
     }
     
@@ -206,13 +205,18 @@ class PersonalPlanChangeViewController: UIViewController, UIGestureRecognizerDel
                 
         location()
         
-        collectionViewDataSourceAndDelegate()
+        dataSourceAndDelegate()
     }
     
-    //MARK: - addRegister
-    func collectionViewDataSourceAndDelegate(){
+    //MARK: - dataSourceAndDelegate
+    func dataSourceAndDelegate(){
+        selectCalendarModalView.dayPickerView.delegate = self
+        selectCalendarModalView.dayPickerView.dataSource = self
+        
         tagCollectionView.delegate = self
         tagCollectionView.dataSource = self
+        
+        selectCalendarModalView.dayPickerView.selectRow(dayPickerViewText2.count/2, inComponent: 0, animated: true)
     }
     
     //MARK: - addLayout
@@ -502,12 +506,12 @@ extension PersonalPlanChangeViewController: UIPickerViewDelegate, UIPickerViewDa
             pickerLabel2.text = dayPickerViewText2[row]
             
             pickerLabel2.snp.makeConstraints { make in
-                make.top.equalToSuperview().offset(self.view.frame.height/18)
+                make.top.equalToSuperview().offset(self.view.frame.height/23)
                 make.centerX.equalToSuperview()
             }
             pickerLabel1.snp.makeConstraints { make in
                 make.centerX.equalToSuperview()
-                make.bottom.equalToSuperview().offset(-self.view.frame.height/18)
+                make.bottom.equalToSuperview().offset(-self.view.frame.height/23)
             }
             
             pickerView.subviews[1].backgroundColor = UIColor(red: 170/255, green: 187/255, blue: 255/255, alpha: 0.1)
