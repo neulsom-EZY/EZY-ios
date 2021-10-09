@@ -36,7 +36,7 @@ class AddMyToDoViewController:UIViewController{
 
     private let titleContainerView = TitleContainerTextFieldView(tfTitle: "제목")
     
-    private let calendarBtn = CalendarAlertBtn(icon: (UIImage(named: "EZY_Calendar")?.withRenderingMode(.alwaysTemplate))!, iconColor: .rgb(red: 255, green: 181, blue: 181), titleText: "2021.6.6 일요일", repeatText: "월, 화, 수").then {
+    private let calendarBtn = CalendarAlertBtn(icon: (UIImage(named: "EZY_Calendar")?.withRenderingMode(.alwaysTemplate))!, iconColor: .rgb(red: 255, green: 181, blue: 181), titleText: "2021.6.6 일요일", repeatText: "반복 없음").then {
         $0.addTarget(self, action: #selector(calendarAlert), for: .touchUpInside)
     }
     private let clockBtn : AlertButton = {
@@ -303,8 +303,6 @@ extension AddMyToDoViewController : UICollectionViewDelegateFlowLayout,UICollect
             return tagCell
         }else{
             let alarmCell = collectionView.dequeueReusableCell(withReuseIdentifier: AlarmSettingCell.identifier, for: indexPath) as! AlarmSettingCell
-            alarmCell.layer.borderWidth = 1
-            alarmCell.layer.borderColor = UIColor.rgb(red: 207, green: 207, blue: 207).cgColor
             alarmCell.layer.cornerRadius = view.frame.height/81.2
             alarmCell.bglabel.text = alarmData
             alarmCell.bglabel.textColor = .rgb(red: 183, green: 180, blue: 180)
@@ -316,7 +314,7 @@ extension AddMyToDoViewController : UICollectionViewDelegateFlowLayout,UICollect
     }
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         if collectionView == self.tagCollectionView{
-            return CGSize(width: view.frame.height/9.66, height: view.frame.height/25.375)
+            return CGSize(width: view.frame.height/9.66, height: 10)
         }else{
             return CGSize(width: view.frame.height/9.78, height: view.frame.height/23.88)
         }
@@ -344,16 +342,12 @@ extension AddMyToDoViewController : UICollectionViewDelegateFlowLayout,UICollect
         if collectionView == self.tagCollectionView {
 
         }else {
-            if indexPath.item == 0{ }
-            else if indexPath.item == indexPath.last{
-                let MoreCalendarModalsVC = MoreAlarmModelViewController.instance()
-                MoreCalendarModalsVC.delegate = self
-                addDim()
-                present(MoreCalendarModalsVC, animated: true, completion: nil)
-                collectionView.deselectItem(at: indexPath, animated: true)
-                AlarmSettingCell().isSelected = false
-            }
-            
+            let MoreCalendarModalsVC = MoreAlarmModelViewController.instance()
+            MoreCalendarModalsVC.delegate = self
+            addDim()
+            present(MoreCalendarModalsVC, animated: true, completion: nil)
+            collectionView.deselectItem(at: indexPath, animated: true)
+            AlarmSettingCell().isSelected = false
         }
         
     }

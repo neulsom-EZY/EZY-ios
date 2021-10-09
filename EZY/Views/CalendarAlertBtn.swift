@@ -14,11 +14,11 @@ class CalendarAlertBtn : UIButton{
         $0.layer.applySketchShadow(color: .black, alpha: 0.1, x: 0, y: 4, blur: 15, spread: 0)
     }
     private let iconImage = UIImageView()
-    private let title = UILabel().then{
+    private lazy var title = UILabel().then{
         $0.dynamicFont(fontSize: 16, currentFontName: "AppleSDGothicNeo-Regular")
         $0.textColor = .EZY_656565
     }
-    private let repeatLabel = UILabel().then{
+    private lazy var  repeatLabel = UILabel().then{
         $0.dynamicFont(fontSize: 10, currentFontName: "AppleSDGothicNeo-Thin")
         $0.textColor = .black
     }

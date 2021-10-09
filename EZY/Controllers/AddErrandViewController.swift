@@ -185,7 +185,7 @@ class AddErrandViewController : UIViewController{
             $0.width.equalTo(bounds.width/4.07)
         }
         addButton.snp.makeConstraints { (make) in
-            make.bottom.equalToSuperview().inset(view.frame.height/8.202)
+            make.bottom.equalToSuperview().inset(bounds.height/33.833)
             make.height.equalTo(self.view.frame.height/18.0)
             make.left.right.equalToSuperview().inset(view.frame.width/13.636363)
         }
