@@ -59,9 +59,18 @@ class PersonalPlanChangeViewController: UIViewController, UIGestureRecognizerDel
         $0.isHidden = true
     }
     
+    fileprivate var selectedTimeStartHourIndex = 0
+    
+    fileprivate var selectedTimeEndHourIndex = 0
+
+    
     private var bounds = UIScreen.main.bounds
     
     var rotationAngle: CGFloat!
+    
+    lazy var dayPickerViewText1 = ["Sun","Mon","Tue","Wed","Thr","Fri","Sat","Mon","Tue","Wed","Thr","Fri","Mon","Tue","Wed","Thr","Fri"]
+    
+    lazy var dayPickerViewText2 = ["12","3","4","5","6","7","2","3","4","5","6","7","2","3","4","5","6","7"]
     
     lazy var startPickerViewText = [["1","2","3","4","5","6","7","8","9","10","11","12"],["00","05","10","15","20","25","30","35","40","45","50","55"]]
     
@@ -183,15 +192,8 @@ class PersonalPlanChangeViewController: UIViewController, UIGestureRecognizerDel
     //MARK: - lifeCycles
     override func viewDidLoad() {
         super.viewDidLoad()
-        rotationAngle = -90 * (.pi/180)
-//        selectCalendarModalView.dayPickerView.transform = CGAffineTransform(rotationAngle: rotationAngle)
-        
-        selectCalendarModalView.dayPickerView.frame = CGRect(x: 0, y: 0, width: view.frame.width, height: 100)
-        selectCalendarModalView.dayPickerView.center = self.view.center
-        
         selectCalendarModalView.dayPickerView.delegate = self
         selectCalendarModalView.dayPickerView.dataSource = self
-
         configureUI()
     }
     
@@ -446,27 +448,16 @@ extension PersonalPlanChangeViewController: UIPickerViewDelegate, UIPickerViewDa
         }else if pickerView == selectCalendarModalView.dayPickerView{
             return startPickerViewText[component][row]
         }
-
         
         return String()
       }
     
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         if pickerView == selectCalendarModalView.dayPickerView{
-            selectedDayRow = row
+            print("dayPickerView : row[\(row)], component[\(component)] ")
         }else if pickerView == selectTimeModalView.startPickerView{
-            if component == 0{
-                selectedTimeStartHourIndex = row
-            }else if component == 1{
-                selectedTimeStartMinIndex = row
-            }
             print("startPickerView : row[\(row)], component[\(component)] ")
-        }else if pickerView == selectTimeModalView.endPickerView{
-            if component == 0{
-                selectedTimeEndHourIndex = row
-            }else if component == 1{
-                selectedTimeEndMinIndex = row
-            }
+
             print("endPickerView : row[\(row)], component[\(component)] ")
         }
     }
@@ -526,11 +517,8 @@ extension PersonalPlanChangeViewController: UIPickerViewDelegate, UIPickerViewDa
 
             
             view.transform = CGAffineTransform(rotationAngle: (90 * (.pi / 180*3)))
-            
-            
             return view
         }
-
         
         return UIView()
     }
