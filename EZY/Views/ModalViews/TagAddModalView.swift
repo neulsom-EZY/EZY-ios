@@ -55,7 +55,6 @@ class TagAddModalView: UIView {
         $0.layer.cornerRadius = 10
         $0.dynamicFont(fontSize: 12, currentFontName: "AppleSDGothicNeo-Bold")
         $0.setTitleColor(UIColor.white, for: .normal)
-        $0.addTarget(self, action: #selector(tagAddButtonClicked(sender:)), for: .touchUpInside)
     }
     
     lazy var writeTagNameView = UIButton().then{
@@ -166,10 +165,5 @@ class TagAddModalView: UIView {
         modalBackgroundView.addSubview(tagAddButton)
         modalBackgroundView.addSubview(writeTagNameView)
         modalBackgroundView.addSubview(tagCollectionView)
-    }
-    
-    //MARK: - Selectors
-    @objc func tagAddButtonClicked(sender:UIButton){
-        self.isHidden = true
     }
 }

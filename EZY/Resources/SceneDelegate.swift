@@ -23,7 +23,6 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         
         window?.rootViewController = navigationController
         window?.makeKeyAndVisible()
-        
 
         for fontFaily in UIFont.familyNames{
             for fontName in UIFont.fontNames(forFamilyName: fontFaily){

@@ -1,23 +1,23 @@
 //
-//  NewPasswordPutViewController.swift
+//  NewNicknamePutViewController.swift
 //  EZY
 //
-//  Created by 노연주 on 2021/06/13.
+//  Created by 노연주 on 2021/09/11.
 //
 
 import UIKit
 import SnapKit
 import Then
 
-class NewPasswordPutViewController: UIViewController{
+class NewNicknamePutViewController: UIViewController{
     //MARK: - Properties
     
     private let topBarView = TopBarView().then {
         $0.goBackButton.addTarget(self, action: #selector(goBack), for: .touchUpInside)
     }
     
-    private let toNewPassWordLabel = UILabel().then {
-        $0.text = "새로운 비밀번호를"
+    private let toNewNicknameLabel = UILabel().then {
+        $0.text = "새로운 닉네임을"
         $0.dynamicFont(fontSize: 25, currentFontName: "AppleSDGothicNeo-SemiBold")
         $0.textColor = UIColor.EZY_968DFF
     }
@@ -28,24 +28,22 @@ class NewPasswordPutViewController: UIViewController{
         $0.updateGradientTextColor_vertical(gradientColors: [.EZY_968DFF, UIColor.rgba(red: 148, green: 139, blue: 255, alpha: 0.4)])
     }
     
-    private let passwordContainer = SignUpTextFieldContainerView().then {
-        $0.tfTitle.text = "비밀번호"
-        $0.tf.isSecureTextEntry = true
-    }
+    private let nicknameContainer = SignUpTextFieldContainerView()
     
-    private let passwordConstraintsLabel = UILabel().then {
-        $0.text = "8자 이하, 영어 + 숫자최소 1개, 공백 허용x"
+    private let nicknameConstraintsLabel = UILabel().then {
+        $0.text = "영어로 1 ~ 10자를 입력해주세요"
         $0.textColor = UIColor.EZY_747474
         $0.dynamicFont(fontSize: 10, currentFontName: "AppleSDGothicNeo-Regular")
     }
     
     private let continueButton = CustomGradientContinueBtnView().then {
-        $0.setTitle("비밀번호 바꾸기", for: .normal)
+        $0.setTitle("닉네임 바꾸기", for: .normal)
         $0.titleLabel?.dynamicFont(fontSize: 14, currentFontName: "AppleSDGothicNeo-Bold")
-        $0.addTarget(self, action: #selector(onTapContinueNewPasswordPut), for: .touchUpInside)
+        $0.addTarget(self, action: #selector(onTapContinueNewNickname), for: .touchUpInside)
     }
     
     //MARK: - Lifecycle
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         configureUI()
@@ -59,21 +57,22 @@ class NewPasswordPutViewController: UIViewController{
     }
     
     @objc
-    private func onTapContinueNewPasswordPut(){
-        if isValidPassword(Password: passwordContainer.tf.text) == true{
+    private func onTapContinueNewNickname(){
+        if isValidNickname(Nickname: nicknameContainer.tf.text) == true {
             let controller = LoginViewController()
             navigationController?.pushViewController(controller, animated: true)
         }else{
             shakeView(self.view)
         }
     }
-
+    
     //MARK: - Helpers
+    
     private func configureUI(){
         view.backgroundColor = .white
         addView()
         topBarViewSetting()
-        passwordContainerViewSetting()
+        nicknameContainerViewSetting()
         keyboardTypeSetting()
         cornerRadius()
         location()
@@ -82,10 +81,10 @@ class NewPasswordPutViewController: UIViewController{
     
     private func addView(){
         view.addSubview(topBarView)
-        view.addSubview(toNewPassWordLabel)
+        view.addSubview(toNewNicknameLabel)
         view.addSubview(putLabel)
-        view.addSubview(passwordContainer)
-        view.addSubview(passwordConstraintsLabel)
+        view.addSubview(nicknameContainer)
+        view.addSubview(nicknameConstraintsLabel)
         view.addSubview(continueButton)
     }
     
@@ -94,32 +93,33 @@ class NewPasswordPutViewController: UIViewController{
     }
     
     private func location(){
+        
         topBarView.snp.makeConstraints { make in
             make.left.right.equalToSuperview()
             make.top.equalToSuperview()
             make.height.equalTo(self.view.frame.height/7.19)
         }
         
-        toNewPassWordLabel.snp.makeConstraints { make in
-            make.left.equalTo(passwordContainer)
+        toNewNicknameLabel.snp.makeConstraints { make in
+            make.left.equalTo(nicknameContainer)
             make.top.equalToSuperview().offset(self.view.frame.height/5.04)
         }
         
         putLabel.snp.makeConstraints { make in
-            make.top.equalTo(toNewPassWordLabel).offset(self.view.frame.height/27.07)
-            make.left.equalTo(passwordContainer)
+            make.top.equalTo(toNewNicknameLabel).offset(self.view.frame.height/27.07)
+            make.left.equalTo(nicknameContainer)
         }
         
-        passwordContainer.snp.makeConstraints { make in
+        nicknameContainer.snp.makeConstraints { make in
             make.top.equalTo(putLabel).offset(self.view.frame.height/11.94)
             make.centerX.equalToSuperview()
             make.width.equalTo(self.view.frame.width/1.34)
             make.height.equalTo(self.view.frame.height/15.62)
         }
         
-        passwordConstraintsLabel.snp.makeConstraints { make in
-            make.top.equalTo(passwordContainer).offset(self.view.frame.height/13.53)
-            make.left.equalTo(passwordContainer)
+        nicknameConstraintsLabel.snp.makeConstraints { make in
+            make.top.equalTo(nicknameContainer).offset(self.view.frame.height/13.53)
+            make.left.equalTo(nicknameContainer)
         }
         
         continueButton.snp.makeConstraints { make in
@@ -135,30 +135,30 @@ class NewPasswordPutViewController: UIViewController{
     private func topBarViewSetting(){
         topBarView.addSubview(topBarView.goBackButton)
         topBarView.addSubview(topBarView.EZY_Logo)
-        
+                       
         topBarView.topBarViewLayoutSetting(screenHeight: self.view.frame.height, screenWidth: self.view.frame.width)
     }
     
-    //MARK: - passwordContainerViewSetting
-
-    private func passwordContainerViewSetting(){
-        passwordContainer.addSubview(passwordContainer.tfTitle)
-        passwordContainer.addSubview(passwordContainer.tf)
-        passwordContainer.addSubview(passwordContainer.divView)
+    //MARK: - nicknameContainerViewSetting
+    
+    private func nicknameContainerViewSetting(){
+        nicknameContainer.addSubview(nicknameContainer.tfTitle)
+        nicknameContainer.addSubview(nicknameContainer.tf)
+        nicknameContainer.addSubview(nicknameContainer.divView)
         
-        passwordContainer.loginTfSetting(screenHeight: self.view.frame.height, screenWidth: self.view.frame.width)
+        nicknameContainer.loginTfSetting(screenHeight: self.view.frame.height, screenWidth: self.view.frame.width)
     }
     
     //MARK: - KeyboardType Setting
     
     private func keyboardTypeSetting(){
-        passwordContainer.tf.keyboardType = .asciiCapable
+        nicknameContainer.tf.keyboardType = .asciiCapable
     }
     
     //MARK: - textField Point Set
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        passwordContainer.tf.resignFirstResponder()
+        nicknameContainer.tf.resignFirstResponder()
     }
     
     //MARK: - Add NotificationCenter
@@ -179,15 +179,15 @@ class NewPasswordPutViewController: UIViewController{
         shake.toValue = NSValue(cgPoint: CGPoint(x: (view?.center.x)! + 2, y: view?.center.y ?? 0.0))
         view?.layer.add(shake, forKey: "position")
     }
-        
-    //MARK: - Password Test
     
-    private func isValidPassword(Password: String?) -> Bool {
-        guard Password != nil else { return false }
+    //MARK: - Nickname Test
+    
+    private func isValidNickname(Nickname: String?) -> Bool {
+        guard Nickname != nil else { return false }
             
-        let PasswordRegEx = ("(?=.*[A-Za-z~!@#$%^&*])(?=.*[0-9]).{8,}")
-        let pred = NSPredicate(format:"SELF MATCHES %@", PasswordRegEx)
-        return pred.evaluate(with: Password)
+        let NicknameRegEx = ("[A-Za-z].{0,9}")
+        let pred = NSPredicate(format:"SELF MATCHES %@", NicknameRegEx)
+        return pred.evaluate(with: Nickname)
     }
     
     //MARK: - KeyboardWillShow -> continueButton Up

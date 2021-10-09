@@ -10,79 +10,68 @@ import UIKit
 import Then
 import SnapKit
 
-// merge test
-
 class LoginViewController: UIViewController{
     //MARK: - Properties
     
-    lazy var titleLabel = UILabel().then {
+    private let titleLabel = UILabel().then {
         $0.text = "EZY"
         $0.dynamicFont(fontSize: 38, currentFontName: "AppleSDGothicNeo-Bold")
         $0.updateGradientTextColor_vertical(gradientColors: [.EZY_C9BCFF, .EZY_6B40FF])
     }
     
-    lazy var subLabel = UILabel().then {
+    private let subLabel = UILabel().then {
         $0.text = "는"
         $0.dynamicFont(fontSize: 25, currentFontName: "AppleSDGothicNeo-Thin")
         $0.textColor = UIColor.EZY_000000
     }
     
-    lazy var textLabel = UILabel().then {
+    private let textLabel = UILabel().then {
         $0.text = "자신만의 라이프스타일\n역사를 쓰고 있습니다."
         $0.numberOfLines = 2
         $0.dynamicFont(fontSize: 25, currentFontName: "AppleSDGothicNeo-Thin")
         $0.textColor = UIColor.EZY_000000
     }
     
-    lazy var nicknameContainerView: UIView = {
-        let view = Utilities().inputContainerView(textField: nicknameField, text: "닉네임", fonts: 10)
-        return view
-    }()
+    private let nicknameContainer = LoginTextFieldContainerView()
     
-    lazy var passwordContainerView: UIView = {
-        let view = Utilities().inputContainerView(textField: passwordField, text: "비밀번호", fonts: 10)
-        
-        return view
-    }()
+    private let passwordContainer = LoginTextFieldContainerView().then {
+        $0.tfTitle.text = "비밀번호"
+        $0.tf.placeholder = "비밀번호를 입력해주세요."
+        $0.tf.isSecureTextEntry = true
+    }
     
-    lazy var nicknameField:UITextField = {
-        let tf = Utilities().textField(withPlaceholder: "닉네임을 입력해주세요.")
-        return tf
-    }()
-
-    lazy var passwordField:UITextField = {
-        let tf = Utilities().textField(withPlaceholder: "비밀번호를 입력해주세요.")
-        tf.isSecureTextEntry = true
-
-        return tf
-    }()
-    
-    lazy var showPasswordButton = UIButton().then {
+    private let showPasswordButton = UIButton().then {
         $0.setImage(UIImage(named: "EZY_eye"), for: .normal)
         $0.addTarget(self, action: #selector(onTapEyeButton), for: .touchUpInside)
     }
     
-    lazy var forgotPasswordButton = UIButton().then {
+    private let forgotPasswordButton = UIButton().then {
         $0.setTitle("비밀번호를 잊으셨나요?", for: .normal)
         $0.setTitleColor(UIColor.EZY_B2B2B2, for: .normal)
         $0.titleLabel?.dynamicFont(fontSize: 10, currentFontName: "AppleSDGothicNeo-Bold")
         $0.addTarget(self, action: #selector(onTapForgotPassword), for: .touchUpInside)
     }
     
-    lazy var doNotHaveAccountButton = UIButton().then {
+    private let forgotNicknameButton = UIButton().then {
+        $0.setTitle("닉네임을 잊으셨나요?", for: .normal)
+        $0.setTitleColor(UIColor.EZY_B2B2B2, for: .normal)
+        $0.titleLabel?.dynamicFont(fontSize: 10, currentFontName: "AppleSDGothicNeo-Bold")
+        $0.addTarget(self, action: #selector(onTapForgotNickname), for: .touchUpInside)
+    }
+    
+    private let doNotHaveAccountButton = UIButton().then {
         $0.setTitle("아직 회원이 아니신가요?", for: .normal)
         $0.setTitleColor(UIColor.EZY_B2B2B2, for: .normal)
         $0.titleLabel?.dynamicFont(fontSize: 10, currentFontName: "AppleSDGothicNeo-Bold")
         $0.addTarget(self, action: #selector(onTapSignUp), for: .touchUpInside)
-
     }
     
-    lazy var loginButton = CustomGradientLoginBtnView().then {
+    private let loginButton = CustomGradientLoginBtnView().then {
         $0.titleLabel?.dynamicFont(fontSize: 14, currentFontName: "AppleSDGothicNeo-Bold")
         $0.addTarget(self, action: #selector(onTapLogin), for: .touchUpInside)
     }
     
-    lazy var notCorrectLabel = UILabel().then {
+    private let notCorrectLabel = UILabel().then {
         $0.text = "닉네임과 비밀번호가 올바르지 않습니다!"
         $0.dynamicFont(fontSize: 10, currentFontName: "AppleSDGothicNeo-SemiBold")
         $0.textColor = UIColor.EZY_FCA1A1
@@ -98,58 +87,75 @@ class LoginViewController: UIViewController{
     //MARK: - Selectors
 
     @objc
-    func onTapEyeButton(){
-        if passwordField.isSecureTextEntry == true {
-            passwordField.isSecureTextEntry = false
+    private func onTapEyeButton(){
+        if passwordContainer.tf.isSecureTextEntry == true {
+            passwordContainer.tf.isSecureTextEntry = false
+            showPasswordButton.setImage(UIImage(named: "EZY_closedEye"), for: .normal)
         } else {
-            passwordField.isSecureTextEntry = true
+            passwordContainer.tf.isSecureTextEntry = true
+            showPasswordButton.setImage(UIImage(named: "EZY_eye"), for: .normal)
         }
     }
     
     @objc
-    func onTapForgotPassword(){
+    private func onTapForgotNickname(){
+        let controller = NewNicknamePhoneNumViewController()
+        navigationController?.pushViewController(controller, animated: true)
+    }
+    
+    @objc
+    private func onTapForgotPassword(){
         let controller = NewPasswordPhoneNumViewController()
         navigationController?.pushViewController(controller, animated: true)
     }
     
     @objc
-    func onTapSignUp(){
+    private func onTapSignUp(){
         let controller = SignUpNicknameViewController()
         navigationController?.pushViewController(controller, animated: true)
     }
     
     @objc
-    func onTapLogin(){
-        print("DEBUG : Click bottom login button Button")
-        let controller = ShowPlanViewController()
-        navigationController?.pushViewController(controller, animated: true)
+    private func onTapLogin(){
+        if isValidNickname(Nickname: nicknameContainer.tf.text) == true && isValidPassword(Password: passwordContainer.tf.text) == true{
+            let controller = ShowPlanViewController()
+            navigationController?.pushViewController(controller, animated: true)
+        }else{
+            shakeView(self.view)
+        }
     }
 
     //MARK: - Helpers
-    func configureUI(){
+    private func configureUI(){
         view.backgroundColor = .white
+        
+        nicknameContainerViewSetting()
+        passwordContainerViewSetting()
+        keyboardTypeSetting()
+        
         addView()
         cornerRadius()
         location()
     }
     
-    func addView(){
+    private func addView(){
         view.addSubview(titleLabel)
         view.addSubview(subLabel)
         view.addSubview(textLabel)
-        view.addSubview(nicknameContainerView)
-        view.addSubview(passwordContainerView)
+        view.addSubview(nicknameContainer)
+        view.addSubview(passwordContainer)
         view.addSubview(showPasswordButton)
         view.addSubview(forgotPasswordButton)
+        view.addSubview(forgotNicknameButton)
         view.addSubview(doNotHaveAccountButton)
         view.addSubview(loginButton)
     }
     
-    func cornerRadius(){
+    private func cornerRadius(){
         loginButton.layer.cornerRadius = self.view.frame.height/81.2
     }
     
-    func location(){
+    private func location(){
         titleLabel.snp.makeConstraints { make in
             make.top.equalToSuperview().offset(self.view.frame.height/6.6)
             make.left.equalToSuperview().offset(self.view.frame.width/7.98)
@@ -165,30 +171,35 @@ class LoginViewController: UIViewController{
             make.left.equalToSuperview().offset(self.view.frame.width/7.98)
         }
         
-        nicknameContainerView.snp.makeConstraints { make in
+        nicknameContainer.snp.makeConstraints { make in
             make.bottom.equalTo(textLabel).offset(self.view.frame.height/7.44)
             make.centerX.equalToSuperview()
             make.height.equalTo(self.view.frame.height/16.57)
             make.width.equalTo(self.view.frame.width/1.33)
         }
 
-        passwordContainerView.snp.makeConstraints { make in
-            make.bottom.equalTo(nicknameContainerView).offset(self.view.frame.height/10.68)
+        passwordContainer.snp.makeConstraints { make in
+            make.bottom.equalTo(nicknameContainer).offset(self.view.frame.height/10.68)
             make.centerX.equalToSuperview()
             make.height.equalTo(self.view.frame.height/16.57)
             make.width.equalTo(self.view.frame.width/1.33)
         }
         
         showPasswordButton.snp.makeConstraints { make in
-            make.centerY.equalTo(passwordField)
-            make.right.equalTo(passwordContainerView)
+            make.centerY.equalTo(passwordContainer.tf)
+            make.right.equalTo(passwordContainer)
             make.height.equalTo(self.view.frame.height/90.22)
             make.width.equalTo(self.view.frame.width/25)
         }
         
         forgotPasswordButton.snp.makeConstraints { make in
-            make.bottom.equalTo(passwordContainerView).offset(self.view.frame.height/30.07)
+            make.bottom.equalTo(passwordContainer).offset(self.view.frame.height/30.07)
             make.left.equalToSuperview().offset(self.view.frame.width/7.98)
+        }
+        
+        forgotNicknameButton.snp.makeConstraints { make in
+            make.bottom.equalTo(passwordContainer).offset(self.view.frame.height/30.07)
+            make.right.equalToSuperview().offset(self.view.frame.width/7.98 * -1)
         }
        
         doNotHaveAccountButton.snp.makeConstraints { make in
@@ -204,6 +215,71 @@ class LoginViewController: UIViewController{
         }
 
     }
+    
+    //MARK: - nicknameContainerViewSetting
+    
+    private func nicknameContainerViewSetting(){
+        nicknameContainer.addSubview(nicknameContainer.tfTitle)
+        nicknameContainer.addSubview(nicknameContainer.tf)
+        nicknameContainer.addSubview(nicknameContainer.divView)
+        
+        nicknameContainer.loginTfSetting(screenHeight: self.view.frame.height, screenWidth: self.view.frame.width)
+    }
+    
+    //MARK: - passwordContainerViewSetting
 
+    private func passwordContainerViewSetting(){
+        passwordContainer.addSubview(passwordContainer.tfTitle)
+        passwordContainer.addSubview(passwordContainer.tf)
+        passwordContainer.addSubview(passwordContainer.divView)
+        
+        passwordContainer.loginTfSetting(screenHeight: self.view.frame.height, screenWidth: self.view.frame.width)
+    }
+    
+    //MARK: - KeyboardType Setting
+    
+    private func keyboardTypeSetting(){
+        nicknameContainer.tf.keyboardType = .asciiCapable
+        passwordContainer.tf.keyboardType = .asciiCapable
+    }
+    
+    //MARK: - textField Point Set
+    
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        nicknameContainer.tf.resignFirstResponder()
+        passwordContainer.tf.resignFirstResponder()
+    }
+    
+    //MARK: - shakeAnimation
+    
+    private func shakeView(_ view: UIView?) {
+        let shake = CABasicAnimation(keyPath: "position")
+        shake.duration = 0.08
+        shake.repeatCount = 2
+        shake.autoreverses = true
+        shake.fromValue = NSValue(cgPoint: CGPoint(x: (view?.center.x)! - 2, y: view?.center.y ?? 0.0))
+        shake.toValue = NSValue(cgPoint: CGPoint(x: (view?.center.x)! + 2, y: view?.center.y ?? 0.0))
+        view?.layer.add(shake, forKey: "position")
+    }
+    
+    //MARK: - Nickname Test
+    
+    private func isValidNickname(Nickname: String?) -> Bool {
+        guard Nickname != nil else { return false }
+            
+        let NicknameRegEx = ("[A-Za-z].{0,9}")
+        let pred = NSPredicate(format:"SELF MATCHES %@", NicknameRegEx)
+        return pred.evaluate(with: Nickname)
+    }
+    
+    //MARK: - Password Test
+        
+    private func isValidPassword(Password: String?) -> Bool {
+        guard Password != nil else { return false }
+            
+        let PasswordRegEx = ("(?=.*[A-Za-z~!@#$%^&*])(?=.*[0-9]).{8,}")
+        let pred = NSPredicate(format:"SELF MATCHES %@", PasswordRegEx)
+        return pred.evaluate(with: Password)
+    }
 
 }
