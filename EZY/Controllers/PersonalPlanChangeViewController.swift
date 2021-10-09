@@ -194,6 +194,10 @@ class PersonalPlanChangeViewController: UIViewController, UIGestureRecognizerDel
         super.viewDidLoad()
         selectCalendarModalView.dayPickerView.delegate = self
         selectCalendarModalView.dayPickerView.dataSource = self
+        
+        rotationAngle = 90 * ( .pi/180 )
+//        selectCalendarModalView.dayPickerView.transform = CGAffineTransform(rotationAngle: rotationAngle)
+        selectCalendarModalView.dayPickerView.selectRow(dayPickerViewText2.count/2, inComponent: 0, animated: true)
         configureUI()
     }
     
@@ -483,7 +487,7 @@ extension PersonalPlanChangeViewController: UIPickerViewDelegate, UIPickerViewDa
         }else if pickerView == selectCalendarModalView.dayPickerView{
             let pickerLabel1 = UILabel()
             let pickerLabel2 = UILabel()
-            let view = UIView(frame: CGRect(x: 0, y: 0, width:0, height:0))
+            let view = UIView(frame: CGRect(x: 0, y: 0, width: 200, height: 120))
             
             if dayPickerViewText1[row] == "S"{
                 pickerLabel1.textColor = UIColor(red: 170/255, green: 187/255, blue: 255/255, alpha: 1)
@@ -516,7 +520,7 @@ extension PersonalPlanChangeViewController: UIPickerViewDelegate, UIPickerViewDa
             pickerView.subviews[1].backgroundColor = UIColor(red: 170/255, green: 187/255, blue: 255/255, alpha: 0.1)
 
             
-            view.transform = CGAffineTransform(rotationAngle: (90 * (.pi / 180*3)))
+            view.transform = CGAffineTransform(rotationAngle: (90 * (.pi / 180)))
             return view
         }
         

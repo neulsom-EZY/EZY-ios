@@ -53,7 +53,6 @@ class SelectCalendarModalView: UIView {
     
     var dayPickerView = UIPickerView().then{
         $0.tintColor = UIColor(red: 150/255, green: 141/255, blue: 255/255, alpha: 1)
-        $0.backgroundColor = .lightGray
     }
     
     private let repeatCollectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewLayout()).then{
