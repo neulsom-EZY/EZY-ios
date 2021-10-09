@@ -7,7 +7,7 @@
 
 import UIKit
 
-class PersonalPlanChangeViewController: UIViewController {
+class PersonalPlanChangeViewController: UIViewController, UIGestureRecognizerDelegate{
 
     //MARK: - Properties
     private var RepeatModels: [RepeatCollectionViewModel] = [RepeatCollectionViewModel(backgroundColr: UIColor(red: 198/255, green: 198/255, blue: 198/255, alpha: 1),                                                          isSelected: false),
@@ -62,6 +62,8 @@ class PersonalPlanChangeViewController: UIViewController {
     private var bounds = UIScreen.main.bounds
     
     var rotationAngle: CGFloat!
+    
+    private let dayTextArray = [["1","2","3","4","5","6","7"],["1","2","3","4","5","6","7"]]
     
     private var tagNameTextArray = ["공부", "산책", "토익", "코딩", "요리", "운동", "정리", "청소","공부", "산책", "토익", "코딩", "요리", "운동", "정리", "청소","공부", "산책", "토익", "코딩", "요리", "운동", "정리", "청소","공부", "산책", "토익", "코딩", "요리", "운동", "정리", "청소"]
     
@@ -158,7 +160,7 @@ class PersonalPlanChangeViewController: UIViewController {
     }()
     
     private let locationBtn : AlertButton = {
-        let viewModel = AlertBtn(icon: UIImage(named: "EZY_Location")?.withRenderingMode(.alwaysTemplate), iconTintColor: .rgb(red: 199, green: 224, blue: 212), message: "광주소프트웨어마이스터고등학교")
+        let viewModel = AlertBtn(icon: UIImage(named: "EZY_location")?.withRenderingMode(.alwaysTemplate), iconTintColor: .rgb(red: 199, green: 224, blue: 212), message: "광주소프트웨어마이스터고등학교")
         let button = AlertButton(with: viewModel)
         button.addTarget(self, action: #selector(locationAlert), for: .touchUpInside)
         return button
@@ -175,19 +177,27 @@ class PersonalPlanChangeViewController: UIViewController {
         return view
     }()
     
+    
+    
     //MARK: - lifeCycles
     override func viewDidLoad() {
         super.viewDidLoad()
-                        
+        rotationAngle = -90 * (.pi/180)
+//        selectCalendarModalView.dayPickerView.transform = CGAffineTransform(rotationAngle: rotationAngle)
+        
+        selectCalendarModalView.dayPickerView.frame = CGRect(x: 0, y: 0, width: view.frame.width, height: 100)
+        selectCalendarModalView.dayPickerView.center = self.view.center
+        
+        selectCalendarModalView.dayPickerView.delegate = self
+        selectCalendarModalView.dayPickerView.dataSource = self
+
         configureUI()
     }
     
     //MARK: - helpers
     func configureUI(){
         addView()
-        
-        addTarget()
-        
+                
         location()
         
         collectionViewDataSourceAndDelegate()
@@ -401,5 +411,47 @@ extension PersonalPlanChangeViewController: UICollectionViewDataSource, UICollec
             
             collectionView.reloadData()
         }
+    }
+}
+
+extension PersonalPlanChangeViewController: UIPickerViewDelegate, UIPickerViewDataSource{
+    func numberOfComponents(in pickerView: UIPickerView) -> Int {
+        return 2
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+        return dayTextArray.count
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+        return dayTextArray[row][component]
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, rowHeightForComponent component: Int) -> CGFloat {
+        return 100
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, widthForComponent component: Int) -> CGFloat {
+        return 100
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, viewForRow row: Int, forComponent component: Int, reusing view: UIView?) -> UIView {
+        let view = UIView()
+        view.frame = CGRect(x: 0, y: 0, width: 100, height: 100)
+        let label1 = UILabel()
+        label1.frame = CGRect(x: 0, y: 0, width: 100, height: 100)
+
+        label1.text = "1"
+        
+        let label2 = UILabel()
+        label2.frame = CGRect(x: 0, y: 0, width: 100, height: 100)
+
+        label2.text = "2"
+        
+        view.addSubview(label1)
+        view.addSubview(label2)
+        
+        view.transform = CGAffineTransform(rotationAngle: -90 * (.pi/180))
+        return view
     }
 }
