@@ -103,6 +103,7 @@ class PersonalPlanChangeViewController: UIViewController {
         $0.layer.cornerRadius = 10
         $0.backgroundColor = UIColor(red: 186/255, green: 200/255, blue: 255/255, alpha: 1)
         $0.dynamicFont(fontSize: 14, currentFontName: "AppleSDGothicNeo-SemiBold")
+        $0.addTarget(self, action: #selector(changeButtonClicked(sender:)), for: .touchUpInside)
     }
     
     private let mainTitleLabel = UILabel().then{
@@ -139,6 +140,7 @@ class PersonalPlanChangeViewController: UIViewController {
     
     private let backButton = UIButton().then{
         $0.setImage(UIImage(named: "EZY_LocationBackButton"), for: .normal)
+        $0.addTarget(self, action: #selector(backButtonClicked(sender:)), for: .touchUpInside)
     }
     
     private let calendarBtn : AlertButton = {
@@ -186,19 +188,19 @@ class PersonalPlanChangeViewController: UIViewController {
         
         addTarget()
         
-        addLayout()
+        location()
         
-        addRegister()
+        collectionViewDataSourceAndDelegate()
     }
     
     //MARK: - addRegister
-    func addRegister(){
+    func collectionViewDataSourceAndDelegate(){
         tagCollectionView.delegate = self
         tagCollectionView.dataSource = self
     }
     
     //MARK: - addLayout
-    func addLayout(){
+    func location(){
         self.view.backgroundColor = .white
         
         backButton.snp.makeConstraints { make in
@@ -294,12 +296,6 @@ class PersonalPlanChangeViewController: UIViewController {
         tagAddModalView.snp.makeConstraints { make in
             make.top.bottom.left.right.equalToSuperview()
         }
-    }
-    
-    //MARK: - addTarget
-    func addTarget(){
-        changeButton.addTarget(self, action: #selector(changeButtonClicked(sender:)), for: .touchUpInside)
-        backButton.addTarget(self, action: #selector(backButtonClicked(sender:)), for: .touchUpInside)
     }
     
     //MARK: - addView
