@@ -74,7 +74,7 @@ class TagAddModalView: UIView {
         let layout = UICollectionViewFlowLayout()
         $0.collectionViewLayout = layout
         $0.translatesAutoresizingMaskIntoConstraints = false
-        $0.register(WhoShouldIAskCell.self, forCellWithReuseIdentifier: WhoShouldIAskCell.identifier)
+        $0.register(DayCollectionViewCell.self, forCellWithReuseIdentifier: DayCollectionViewCell.identifier)
         $0.showsHorizontalScrollIndicator = false
         $0.isScrollEnabled = false
         $0.backgroundColor = .lightGray

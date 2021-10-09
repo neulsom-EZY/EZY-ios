@@ -74,7 +74,7 @@ class AddErrandViewController : UIViewController{
         let layout = UICollectionViewFlowLayout()
         let cv = UICollectionView(frame: .zero, collectionViewLayout: layout)
         cv.translatesAutoresizingMaskIntoConstraints = false
-        cv.register(WhoShouldIAskCell.self, forCellWithReuseIdentifier: WhoShouldIAskCell.identifier)
+        cv.register(DayCollectionViewCell.self, forCellWithReuseIdentifier: DayCollectionViewCell.identifier)
         cv.showsHorizontalScrollIndicator = false
         cv.isScrollEnabled = false
         return cv
@@ -225,7 +225,7 @@ extension AddErrandViewController : UICollectionViewDelegateFlowLayout,UICollect
         }
     }
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: WhoShouldIAskCell.identifier, for: indexPath) as? WhoShouldIAskCell else {return UICollectionViewCell()}
+         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: DayCollectionViewCell.identifier, for: indexPath) as? DayCollectionViewCell else {return UICollectionViewCell()}
         cell.bglabel.text = data[indexPath.row]
         cell.bglabel.dynamicFont(fontSize: 12, currentFontName:  "AppleSDGothicNeo-UltraLight")
         cell.bglabel.textColor = .rgb(red: 61, green: 100, blue: 255)

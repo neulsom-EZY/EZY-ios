@@ -55,11 +55,11 @@ class SelectCalendarModalView: UIView {
         $0.tintColor = UIColor(red: 150/255, green: 141/255, blue: 255/255, alpha: 1)
     }
     
-    private let repeatCollectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewLayout()).then{
+    let repeatCollectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewLayout()).then{
         let layout = UICollectionViewFlowLayout()
         $0.collectionViewLayout = layout
         $0.translatesAutoresizingMaskIntoConstraints = false
-        $0.register(WhoShouldIAskCell.self, forCellWithReuseIdentifier: WhoShouldIAskCell.identifier)
+        $0.register(DayCollectionViewCell.self, forCellWithReuseIdentifier: DayCollectionViewCell.identifier)
         $0.showsHorizontalScrollIndicator = false
         $0.isScrollEnabled = false
         $0.backgroundColor = .lightGray
@@ -102,6 +102,8 @@ class SelectCalendarModalView: UIView {
     //MARK: - Selectors
     @objc func calendarAddButtonClicked(sender:UIButton){
         self.isHidden = true
+        self.dayPickerView.selectRow(5, inComponent: 0, animated: true)
+
     }
     
     //MARK: - addView

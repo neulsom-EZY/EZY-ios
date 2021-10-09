@@ -213,6 +213,9 @@ class PersonalPlanChangeViewController: UIViewController, UIGestureRecognizerDel
         selectCalendarModalView.dayPickerView.delegate = self
         selectCalendarModalView.dayPickerView.dataSource = self
         
+        selectCalendarModalView.repeatCollectionView.delegate = self
+        selectCalendarModalView.repeatCollectionView.dataSource = self
+        
         tagCollectionView.delegate = self
         tagCollectionView.dataSource = self
         
@@ -424,6 +427,7 @@ extension PersonalPlanChangeViewController: UICollectionViewDataSource, UICollec
     }
 }
 
+// MARK: - pickerview extension
 extension PersonalPlanChangeViewController: UIPickerViewDelegate, UIPickerViewDataSource{
     // 피커뷰의 구성요소(컬럼) 수
       func numberOfComponents(in pickerView: UIPickerView) -> Int {
