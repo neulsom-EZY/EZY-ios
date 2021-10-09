@@ -11,6 +11,7 @@ import SnapKit
 
 protocol BulletinDelegate: class {
     func onTapClose()
+    func update(vc : UIViewController)
 }
 
 class MoreCalendarModalsViewController : UIViewController{
@@ -19,20 +20,18 @@ class MoreCalendarModalsViewController : UIViewController{
     //MARK: - Properties
     weak var delegate: BulletinDelegate?
     
-    let bgView = UIView().then {
+    private let bgView = UIView().then {
         $0.backgroundColor = .white
         $0.layer.cornerRadius = 40
     }
-    let transparentView = UIView()
+    private let transparentView = UIView()
     
-    let TitleLabel = UILabel().then{
+    private let TitleLabel = UILabel().then{
         $0.text = "추가 할 항목을 선택해주세요"
         $0.dynamicFont(fontSize: 22, currentFontName: "AppleSDGothicNeo-Thin")
     }
     
-    private var vc = UIViewController()
-   
-    
+    private var viewControlelrChoose = UIViewController()
         
     private lazy var myToDo : AddScheduleModalBtn = {
         let viewModel = CustomButtonViewModel(title: "나의 할 일", image: UIImage(named: "EZY_user")?.withRenderingMode(.alwaysTemplate), color: .EZY_AFADFF)
@@ -86,7 +85,7 @@ class MoreCalendarModalsViewController : UIViewController{
             makeButton.isEnabled = true
             myToDo.layer.borderWidth = 1
             myToDo.layer.borderColor = UIColor.EZY_AFADFF.cgColor
-            vc = AddMyToDoViewController() //ViewController 보내줌
+            viewControlelrChoose = AddMyToDoViewController() //ViewController 보내줌
             ErrandTodoState()
 
         }else{
@@ -102,7 +101,7 @@ class MoreCalendarModalsViewController : UIViewController{
         if errand.isSelected{
             errand.layer.borderWidth = 1
             errand.layer.borderColor = UIColor.EZY_AFADFF.cgColor
-            vc = AddErrandViewController()//ViewController 보내줌
+            viewControlelrChoose = AddErrandViewController()//ViewController 보내줌
             myTodoState()
             makeButton.isEnabled = true
 
@@ -113,12 +112,10 @@ class MoreCalendarModalsViewController : UIViewController{
         }
     }
     @objc func MakeTodo(){
-        vc.modalPresentationStyle = .fullScreen
-        present(vc, animated: true, completion: nil)
+        delegate?.update(vc: viewControlelrChoose)
+        delegate?.onTapClose()
     }
     //MARK: - HELPERS
- 
-    
     
     func configureUI(){
         addView()
@@ -195,7 +192,4 @@ class MoreCalendarModalsViewController : UIViewController{
         let tapgesture = UITapGestureRecognizer(target: self, action: #selector(onTapClose))
         transparentView.addGestureRecognizer(tapgesture)
     }
-    
 }
-
-

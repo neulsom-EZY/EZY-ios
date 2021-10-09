@@ -34,12 +34,11 @@ class SearchTableView : UIView {
         tv.layer.cornerRadius = frame.height/15.8
         view.snp.makeConstraints { (make) in
             make.top.left.right.bottom.equalToSuperview()
-            make.height.equalTo(frame.height)
         }
         noUser.snp.makeConstraints { (make) in
             make.center.equalToSuperview()
             make.height.equalTo(MorePeopleToDo().view.frame.height/9.44)
-            make.width.equalTo(noUser.label.frame.width)
+            make.width.equalTo(bounds.width/3.029)
         }
         
         tv.snp.makeConstraints { (make) in
@@ -47,7 +46,6 @@ class SearchTableView : UIView {
             make.left.equalToSuperview()
             make.right.equalToSuperview()
             make.bottom.equalToSuperview()
-            make.height.equalTo(view.frame.height)
         }
 
 

@@ -50,17 +50,13 @@ class OneAlertButton : UIButton {
         
         view.snp.makeConstraints { (make) in
             make.top.left.equalToSuperview()
-            make.right.equalTo(view.snp.left)
             make.height.width.equalTo(frame.height)
         }
         icon.snp.makeConstraints { (make) in
             make.center.equalTo(view.snp.center)
             make.height.width.equalTo(frame.height/2)
         }
-
-        
     }
-    
     required init?(coder: NSCoder) {
         super.init(coder: coder)
     }

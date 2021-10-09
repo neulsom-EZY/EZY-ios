@@ -11,10 +11,11 @@ import Then
 
 protocol AlarmModelDelegate: class {
     func onTapClose()
+    func updateData(ampm : String , time : Int , minute : Int) 
 }
 class MoreAlarmModelViewController : UIViewController{
     let ampmData = ["오후","오전"]
-    var ampm = ""
+    lazy var ampm = self.ampmData[0]
     var time = 0
     var minute = 0
     //MARK: - Properties
@@ -64,31 +65,36 @@ class MoreAlarmModelViewController : UIViewController{
     @objc func MakeTodo(){
         delegate?.onTapClose()
         dismiss(animated: true, completion: nil)
-        
+        delegate?.updateData(ampm: ampm , time: time, minute: minute)
     }
     //MARK: - HELPERS
- 
-    
-    
-    func configureUI(){
+    private func configureUI(){
         addView()
         cornerRadius()
         location()
         addTransparentsview(frame: transparentView.frame)
+        
+        delegateAndDataSource()
     }
-    func addView(){
+    private func addView(){
         view.addSubview(transparentView)
         view.addSubview(bgView)
         makeButton.addSubview(makeTitle)
         view.addSubview(makeButton)
         bgView.addSubview(AlarmDateView)
     }
-    
-    func cornerRadius(){
+    private func delegateAndDataSource(){
+        AlarmDateView.ampmPickerView.dataSource = self
+        AlarmDateView.timePickerView.dataSource = self
+        AlarmDateView.minutePickerView.dataSource = self
+        AlarmDateView.ampmPickerView.delegate = self
+        AlarmDateView.timePickerView.delegate = self
+        AlarmDateView.minutePickerView.delegate = self
+    }
+    private func cornerRadius(){
         makeButton.layer.cornerRadius = view.frame.height/81.2
     }
-    
-    func location(){
+    private func location(){
         bgView.snp.makeConstraints { (make) in
             make.left.equalToSuperview()
             make.right.equalToSuperview()
@@ -114,10 +120,86 @@ class MoreAlarmModelViewController : UIViewController{
         
     }
 
-    func addTransparentsview(frame : CGRect){
+    private func addTransparentsview(frame : CGRect){
         let window = UIApplication.shared.keyWindow
         transparentView.frame = window?.frame ?? self.view.frame
         let tapgesture = UITapGestureRecognizer(target: self, action: #selector(onTapClose))
         transparentView.addGestureRecognizer(tapgesture)
+    }
+}
+//MARK: - PickerView Setting
+extension MoreAlarmModelViewController : UIPickerViewDelegate, UIPickerViewDataSource{
+    func numberOfComponents(in pickerView: UIPickerView) -> Int {
+        return 1
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+        if pickerView == AlarmDateView.ampmPickerView{
+            return ampmData.count
+        }
+        else if pickerView == AlarmDateView.timePickerView{
+            return 12
+        }
+        else if pickerView == AlarmDateView.minutePickerView{
+            return 60
+        }
+        return 0
+    }
+    //MARK: - Picker 갯수
+    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+        if pickerView == AlarmDateView.ampmPickerView{
+        return ampmData[row]
+        }
+        else if pickerView == AlarmDateView.timePickerView{
+            return "\(row)"
+        }
+        else if pickerView == AlarmDateView.minutePickerView{
+            return "\(row)"
+        }
+        return ""
+    }
+    //MARK: - picker Result
+    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+        if pickerView == AlarmDateView.ampmPickerView{
+            ampm = ampmData[row]
+            print(ampmData[row])
+        }
+        else if pickerView == AlarmDateView.timePickerView{
+            time = row
+            print(row + 1)
+        }
+        else if pickerView == AlarmDateView.minutePickerView{
+            minute = row
+            print(row)
+        }
+    }
+    //MARK: - PickerView Setting
+    func pickerView(_ pickerView: UIPickerView, viewForRow row: Int, forComponent component: Int, reusing view: UIView?) -> UIView {
+        pickerView.subviews[1].backgroundColor = .clear // 회색 뷰 지우기
+        var label = UILabel()
+        if let v = view as? UILabel { label = v }
+        if pickerView == AlarmDateView.ampmPickerView{
+            label.text = ampmData[row]
+            label.dynamicFont(fontSize: 12, currentFontName: "AppleSDGothicNeo-Thin")
+        }else if pickerView == AlarmDateView.timePickerView{
+            label.text = "\(row + 1)"
+            label.dynamicFont(fontSize: 20, currentFontName: "AppleSDGothicNeo-SemiBold")
+            label.textColor = .rgb(red: 129, green: 118, blue: 255)
+        }else if pickerView == AlarmDateView.minutePickerView{
+            label.text = "\(row)"
+            label.dynamicFont(fontSize: 20, currentFontName: "AppleSDGothicNeo-SemiBold")
+            label.textColor = .rgb(red: 129, green: 118, blue: 255)
+        }
+        label.adjustsFontSizeToFitWidth = true
+        label.adjustsFontForContentSizeCategory = true
+
+        label.textAlignment = .right
+        return label
+  
+    }
+    //MARK: - Picker width
+    func pickerView(_ pickerView: UIPickerView, widthForComponent component: Int) -> CGFloat {
+        let w = pickerView.frame.size.width
+        return component == 0 ? (2/3.6) * w : (1 / 3.6) * w
     }
 }
