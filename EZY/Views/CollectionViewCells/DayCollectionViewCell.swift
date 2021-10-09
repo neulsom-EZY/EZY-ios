@@ -9,12 +9,15 @@ import UIKit
 
 class DayCollectionViewCell : UICollectionViewCell{
     // MARK: - properties
-    static let identifier = "WhoShouldIAskCell"
+    static let identifier = "DayCollectionViewCell"
+    
+    var model: RepeatCollectionViewModal?
     
     private let cellBackgroundView = UIView().then{
         $0.backgroundColor = .white
         $0.layer.applySketchShadow(color: UIColor.rgb(red: 225, green: 225, blue: 225), alpha: 1, x: 0, y: 0, blur: 9, spread: 0)
         $0.layer.cornerRadius = 5
+        $0.layer.borderWidth = 0.7
     }
     
     let dayKoreanLabel = UILabel().then{
@@ -37,6 +40,22 @@ class DayCollectionViewCell : UICollectionViewCell{
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+    
+    func setModel(_ model: RepeatCollectionViewModal){
+        self.model = model
+        if model.isSelected == false{
+            cellBackgroundView.layer.borderColor = UIColor.white.cgColor
+        }else{
+            cellBackgroundView.layer.borderColor = UIColor(red: 170/255, green: 187/255, blue: 255/255, alpha: 1).cgColor
+        }
+    }
+    
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        
+        // 셀이 재사용되기 전에 셀의 속성을 초기화시켜준다.
+        cellBackgroundView.layer.borderColor = UIColor.white.cgColor
     }
     
     func configureUI(){

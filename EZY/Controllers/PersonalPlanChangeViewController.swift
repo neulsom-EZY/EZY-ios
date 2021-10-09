@@ -10,14 +10,6 @@ import UIKit
 class PersonalPlanChangeViewController: UIViewController, UIGestureRecognizerDelegate{
 
     //MARK: - Properties
-    private var RepeatModels: [RepeatCollectionViewModel] = [RepeatCollectionViewModel(backgroundColr: UIColor(red: 198/255, green: 198/255, blue: 198/255, alpha: 1),                                                          isSelected: false),
-                                                     RepeatCollectionViewModel(backgroundColr: UIColor(red: 255/255, green: 188/255, blue: 188/255, alpha: 1), isSelected: true),
-                                                     RepeatCollectionViewModel(backgroundColr: UIColor(red: 255/255, green: 188/255, blue: 188/255, alpha: 1), isSelected: true),
-                                                     RepeatCollectionViewModel(backgroundColr: UIColor(red: 255/255, green: 188/255, blue: 188/255, alpha: 1), isSelected: true),
-                                                     RepeatCollectionViewModel(backgroundColr: UIColor(red: 255/255, green: 188/255, blue: 188/255, alpha: 1), isSelected: true),
-                                                     RepeatCollectionViewModel(backgroundColr: UIColor(red: 255/255, green: 188/255, blue: 188/255, alpha: 1), isSelected: true),
-                                                     RepeatCollectionViewModel(backgroundColr: UIColor(red: 255/255, green: 188/255, blue: 188/255, alpha: 1), isSelected: true),
-                                                     RepeatCollectionViewModel(backgroundColr: UIColor(red: 255/255, green: 188/255, blue: 188/255, alpha: 1), isSelected: true)]
     
     private var TagColorModels: [TagColorCollectionViewModel] = [TagColorCollectionViewModel(backgroundColor: UIColor(red: 186/255, green: 200/255, blue: 255/255, alpha: 1), isSelected: false),
                                                  TagColorCollectionViewModel(backgroundColor: UIColor(red: 196/255, green: 200/255, blue: 255/255, alpha: 1), isSelected: true),
@@ -46,6 +38,10 @@ class PersonalPlanChangeViewController: UIViewController, UIGestureRecognizerDel
                                                TagCollectionViewModel(backgroundColor: UIColor(red: 255/255, green: 170/255, blue: 255/255, alpha: 1), isSelected: true),
                                                TagCollectionViewModel(backgroundColor: UIColor(red: 255/255, green: 160/255, blue: 255/255, alpha: 1), isSelected: true),
                                                TagCollectionViewModel(backgroundColor: UIColor(red: 255/255, green: 150/255, blue: 255/255, alpha: 1), isSelected: true)]
+    
+    fileprivate let selectedRepeatColor = UIColor.rgb(red: 170, green: 187, blue: 255)
+    
+    fileprivate lazy var repeatModels: [RepeatCollectionViewModal] = [RepeatCollectionViewModal(isSelected: false),RepeatCollectionViewModal(isSelected: false),RepeatCollectionViewModal(isSelected: false),RepeatCollectionViewModal(isSelected: false),RepeatCollectionViewModal(isSelected: false),RepeatCollectionViewModal(isSelected: false),RepeatCollectionViewModal(isSelected: false)]
         
     private lazy var selectCalendarModalView = SelectCalendarModalView().then{
         rotationAngle = 90 * ( .pi/180 )
@@ -421,6 +417,8 @@ extension PersonalPlanChangeViewController: UICollectionViewDataSource, UICollec
             cell.dayKoreanLabel.text = dayKoreanTextArray[indexPath.row]
             cell.dayEnglishLabel.text = dayEnglishTextArray[indexPath.row]
             
+            cell.setModel(repeatModels[indexPath.row])
+            
             return cell
         }
 
@@ -459,12 +457,12 @@ extension PersonalPlanChangeViewController: UICollectionViewDataSource, UICollec
 
                 // 클릭한 cell 선택
                 TagModels[indexPath.row].isSelected.toggle()
-                
-                collectionView.reloadData()
             }
         }else if collectionView == selectCalendarModalView.repeatCollectionView{
-            
+            repeatModels[indexPath.row].isSelected.toggle()
         }
+        
+        collectionView.reloadData()
     }
 }
 

@@ -58,7 +58,6 @@ class SelectCalendarModalView: UIView {
     let repeatCollectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewLayout()).then{
         let layout = UICollectionViewFlowLayout()
         $0.collectionViewLayout = layout
-        $0.translatesAutoresizingMaskIntoConstraints = false
         $0.register(DayCollectionViewCell.self, forCellWithReuseIdentifier: DayCollectionViewCell.identifier)
         $0.showsHorizontalScrollIndicator = false
         $0.isScrollEnabled = false
