@@ -62,7 +62,6 @@ class SelectCalendarModalView: UIView {
         $0.register(DayCollectionViewCell.self, forCellWithReuseIdentifier: DayCollectionViewCell.identifier)
         $0.showsHorizontalScrollIndicator = false
         $0.isScrollEnabled = false
-        $0.backgroundColor = .lightGray
     }
     
     private let repeatLabel = UILabel().then {
@@ -175,13 +174,13 @@ class SelectCalendarModalView: UIView {
         
         repeatCollectionView.snp.makeConstraints { make in
             make.centerX.equalToSuperview()
-            make.left.equalTo(repeatLabel)
+            make.width.equalToSuperview()
             make.top.equalTo(repeatLabel.snp.bottom).offset(viewBounds.height/73.81)
             make.height.equalToSuperview().dividedBy(8.6)
         }
         
         calendarAddButton.snp.makeConstraints { make in
-            make.right.equalTo(repeatCollectionView)
+            make.right.equalTo(divideLineView)
             make.top.equalTo(repeatCollectionView.snp.bottom).offset(viewBounds.height/52)
             make.width.equalToSuperview().dividedBy(4.71)
             make.height.equalToSuperview().dividedBy(10.42)

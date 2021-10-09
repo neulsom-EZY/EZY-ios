@@ -13,19 +13,19 @@ class DayCollectionViewCell : UICollectionViewCell{
     
     private let cellBackgroundView = UIView().then{
         $0.backgroundColor = .white
-        $0.layer.applySketchShadow(color: UIColor.rgb(red: 235, green: 235, blue: 235), alpha: 1, x: 0, y: 0, blur: 6, spread: 0)
+        $0.layer.applySketchShadow(color: UIColor.rgb(red: 225, green: 225, blue: 225), alpha: 1, x: 0, y: 0, blur: 9, spread: 0)
         $0.layer.cornerRadius = 5
     }
     
-    private let dayKoreanLabel = UILabel().then{
+    let dayKoreanLabel = UILabel().then{
         $0.dynamicFont(fontSize: 10, currentFontName: "AppleSDGothicNeo-SemiBold")
         $0.textColor = UIColor.rgb(red: 149, green: 149, blue: 149)
         $0.textAlignment = .center
     }
     
-    private let dayEnglishLabel = UILabel().then{
+    let dayEnglishLabel = UILabel().then{
         $0.dynamicFont(fontSize: 10, currentFontName: "AppleSDGothicNeo-Thin")
-        $0.textColor = UIColor.rgb(red: 149, green: 149, blue: 149)
+        $0.textColor = UIColor.rgb(red: 100, green: 100, blue: 100)
         $0.textAlignment = .center
     }
 
@@ -63,7 +63,7 @@ class DayCollectionViewCell : UICollectionViewCell{
         
         dayEnglishLabel.snp.makeConstraints { make in
             make.centerX.equalToSuperview()
-            make.bottom.equalToSuperview().offset(contentView.frame.width/6.8)
+            make.bottom.equalToSuperview().offset(-contentView.frame.width/6.8)
         }
     }
     

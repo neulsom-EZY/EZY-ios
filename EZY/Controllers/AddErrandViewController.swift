@@ -226,22 +226,22 @@ extension AddErrandViewController : UICollectionViewDelegateFlowLayout,UICollect
     }
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
          guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: DayCollectionViewCell.identifier, for: indexPath) as? DayCollectionViewCell else {return UICollectionViewCell()}
-        cell.bglabel.text = data[indexPath.row]
-        cell.bglabel.dynamicFont(fontSize: 12, currentFontName:  "AppleSDGothicNeo-UltraLight")
-        cell.bglabel.textColor = .rgb(red: 61, green: 100, blue: 255)
-        cell.layer.borderWidth = 1
-        cell.layer.borderColor = UIColor.rgb(red: 99, green: 131, blue: 255).cgColor
-   
-        if cell.bglabel.text == data.last{
-            cell.bglabel.textColor = .EZY_BAC8FF
-            cell.layer.borderColor = UIColor.EZY_BAC8FF.cgColor
-            cell.bglabel.dynamicFont(fontSize: 12, currentFontName: "AppleSDGothicNeo-Bold")
-        }
-        if data.count == 2 {
-            if indexPath.item == indexPath.first{
-                cell.bglabel.text = "@" + data[indexPath.item]
-            }
-        }
+//        cell.bglabel.text = data[indexPath.row]
+//        cell.bglabel.dynamicFont(fontSize: 12, currentFontName:  "AppleSDGothicNeo-UltraLight")
+//        cell.bglabel.textColor = .rgb(red: 61, green: 100, blue: 255)
+//        cell.layer.borderWidth = 1
+//        cell.layer.borderColor = UIColor.rgb(red: 99, green: 131, blue: 255).cgColor
+//   
+//        if cell.bglabel.text == data.last{
+//            cell.bglabel.textColor = .EZY_BAC8FF
+//            cell.layer.borderColor = UIColor.EZY_BAC8FF.cgColor
+//            cell.bglabel.dynamicFont(fontSize: 12, currentFontName: "AppleSDGothicNeo-Bold")
+//        }
+//        if data.count == 2 {
+//            if indexPath.item == indexPath.first{
+//                cell.bglabel.text = "@" + data[indexPath.item]
+//            }
+//        }
         return cell
     }
     

@@ -68,13 +68,19 @@ class PersonalPlanChangeViewController: UIViewController, UIGestureRecognizerDel
     
     private var bounds = UIScreen.main.bounds
     
-    var rotationAngle: CGFloat!
+    private var rotationAngle: CGFloat!
     
-    lazy var dayPickerViewText1 = ["Sun","Mon","Tue","Wed","Thr","Fri","Sat","Mon","Tue","Wed","Thr","Fri","Mon","Tue","Wed","Thr","Fri"]
+    private let dayEnglishTextArray = ["Mon","Tue","Wed","Thr","Fri","Sat","Sun"]
     
-    lazy var dayPickerViewText2 = ["12","3","4","5","6","7","2","3","4","5","6","7","2","3","4","5","6","7"]
+    private let dayKoreanTextArray = ["월","화","수","목","금","토","일"]
     
-    lazy var startPickerViewText = [["1","2","3","4","5","6","7","8","9","10","11","12"],["00","05","10","15","20","25","30","35","40","45","50","55"]]
+    private var dayPickerViewText1 = ["Sun","Mon","Tue","Wed","Thr","Fri","Sat","Mon","Tue","Wed","Thr","Fri","Mon","Tue","Wed","Thr","Fri"]
+    
+    private var dayPickerViewText2 = ["12","3","4","5","6","7","2","3","4","5","6","7","2","3","4","5","6","7"]
+    
+    private var startPickerViewText = [["1","2","3","4","5","6","7","8","9","10","11","12"],["00","05","10","15","20","25","30","35","40","45","50","55"]]
+    
+    private var dayPickerViewTextArray = [["Mon","Tue","Wed","Thr","Fri","Sat","Sun","Mon","Tue","Wed","Thr","Fri","Sat","Sun"].reversed(),["1","2","3","4","5","6","7","1","2","3","4","5","6","7"]]
     
     
     private var tagNameTextArray = ["공부", "산책", "토익", "코딩", "요리", "운동", "정리", "청소","공부", "산책", "토익", "코딩", "요리", "운동", "정리", "청소","공부", "산책", "토익", "코딩", "요리", "운동", "정리", "청소","공부", "산책", "토익", "코딩", "요리", "운동", "정리", "청소"]
@@ -367,62 +373,97 @@ class PersonalPlanChangeViewController: UIViewController, UIGestureRecognizerDel
 //MARK: - extension
 extension PersonalPlanChangeViewController: UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout{
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return TagModels.count
+        if collectionView == tagCollectionView{
+            return TagModels.count
+        }else if collectionView == selectCalendarModalView.repeatCollectionView{
+            return dayKoreanTextArray.count
+        }
+        
+        return Int()
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        if indexPath == [0,2]{
-            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: TagCollectionViewCell.reuseId, for: indexPath) as! TagCollectionViewCell
+        if collectionView == tagCollectionView{
+            if indexPath == [0,2]{
+                let cell = collectionView.dequeueReusableCell(withReuseIdentifier: TagCollectionViewCell.reuseId, for: indexPath) as! TagCollectionViewCell
+                
+                cell.tagNameLabel.text = "선택 안 함"
+                cell.tagNameLabel.textColor = UIColor(red: 187/255, green: 187/255, blue: 187/255, alpha: 1)
+                cell.tagBackgroundView.backgroundColor = .white
+                cell.tagBackgroundView.layer.borderWidth = 1.3
+                cell.tagBackgroundView.layer.borderColor = UIColor(red: 187/255, green: 187/255, blue: 187/255, alpha: 1).cgColor
+                
+                cell.setModel(TagModels[indexPath.row])
+                
+                return cell
+            }else if indexPath == [0,0]{
+                let cell = collectionView.dequeueReusableCell(withReuseIdentifier: TagCollectionViewCell.reuseId, for: indexPath) as! TagCollectionViewCell
+                
+                cell.tagNameLabel.text = "+ 추가"
+                cell.tagNameLabel.textColor = UIColor(red: 186/255, green: 200/255, blue: 255/255, alpha: 1)
+                cell.tagBackgroundView.backgroundColor = .white
+                cell.tagBackgroundView.layer.borderWidth = 1.3
+                cell.tagBackgroundView.layer.borderColor = UIColor(red: 186/255, green: 200/255, blue: 255/255, alpha: 1).cgColor
+                
+                return cell
+            }else{
+                let cell = collectionView.dequeueReusableCell(withReuseIdentifier: TagCollectionViewCell.reuseId, for: indexPath) as! TagCollectionViewCell
+                
+                cell.setModel(TagModels[indexPath.row])
+                
+                cell.tagNameLabel.text = tagNameTextArray[indexPath.row]
+                
+                return cell
+            }
+        }else if collectionView == selectCalendarModalView.repeatCollectionView{
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: DayCollectionViewCell.identifier, for: indexPath) as! DayCollectionViewCell
             
-            cell.tagNameLabel.text = "선택 안 함"
-            cell.tagNameLabel.textColor = UIColor(red: 187/255, green: 187/255, blue: 187/255, alpha: 1)
-            cell.tagBackgroundView.backgroundColor = .white
-            cell.tagBackgroundView.layer.borderWidth = 1.3
-            cell.tagBackgroundView.layer.borderColor = UIColor(red: 187/255, green: 187/255, blue: 187/255, alpha: 1).cgColor
-            
-            cell.setModel(TagModels[indexPath.row])
-            
-            return cell
-        }else if indexPath == [0,0]{
-            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: TagCollectionViewCell.reuseId, for: indexPath) as! TagCollectionViewCell
-            
-            cell.tagNameLabel.text = "+ 추가"
-            cell.tagNameLabel.textColor = UIColor(red: 186/255, green: 200/255, blue: 255/255, alpha: 1)
-            cell.tagBackgroundView.backgroundColor = .white
-            cell.tagBackgroundView.layer.borderWidth = 1.3
-            cell.tagBackgroundView.layer.borderColor = UIColor(red: 186/255, green: 200/255, blue: 255/255, alpha: 1).cgColor
-            
-            return cell
-        }else{
-            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: TagCollectionViewCell.reuseId, for: indexPath) as! TagCollectionViewCell
-            
-            cell.setModel(TagModels[indexPath.row])
-            
-            cell.tagNameLabel.text = tagNameTextArray[indexPath.row]
+            cell.dayKoreanLabel.text = dayKoreanTextArray[indexPath.row]
+            cell.dayEnglishLabel.text = dayEnglishTextArray[indexPath.row]
             
             return cell
         }
+
+        return UICollectionViewCell()
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
+        if collectionView == selectCalendarModalView.repeatCollectionView {
+            return UIEdgeInsets(top: self.view.frame.width/100, left: self.view.frame.width/15.62, bottom: 0, right: self.view.frame.width/15.62)
+        }
+        
+        return UIEdgeInsets()
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: self.view.frame.width/4.4, height: self.view.frame.height/23)
+        if collectionView == tagCollectionView{
+            return CGSize(width: self.view.frame.width/4.4, height: self.view.frame.height/23)
+        }else if collectionView == selectCalendarModalView.repeatCollectionView{
+            return CGSize(width: self.view.frame.width/12.18, height: self.view.frame.height/23.88)
+        }
+        
+        return CGSize()
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        if indexPath == [0,0]{
-            tagAddModalView.isHidden = false
-        }else{
-            // 이전에 선택되어있던 cell 선택 해제
-            for i in 0...TagModels.count-1{
-                if TagModels[i].isSelected == false{
-                    TagModels[i].isSelected.toggle()
+        if collectionView == tagCollectionView{
+            if indexPath == [0,0]{
+                tagAddModalView.isHidden = false
+            }else{
+                // 이전에 선택되어있던 cell 선택 해제
+                for i in 0...TagModels.count-1{
+                    if TagModels[i].isSelected == false{
+                        TagModels[i].isSelected.toggle()
+                    }
                 }
-            }
 
-            // 클릭한 cell 선택
-            TagModels[indexPath.row].isSelected.toggle()
+                // 클릭한 cell 선택
+                TagModels[indexPath.row].isSelected.toggle()
+                
+                collectionView.reloadData()
+            }
+        }else if collectionView == selectCalendarModalView.repeatCollectionView{
             
-            collectionView.reloadData()
         }
     }
 }
@@ -445,10 +486,9 @@ extension PersonalPlanChangeViewController: UIPickerViewDelegate, UIPickerViewDa
         if pickerView == selectTimeModalView.startPickerView || pickerView == selectTimeModalView.endPickerView{
             return startPickerViewText[component].count
         }else if pickerView == selectCalendarModalView.dayPickerView{
-            return dayPickerViewText1.count
+            return dayPickerViewTextArray[component].count
         }
 
-        
         return Int()
       }
    
@@ -457,10 +497,9 @@ extension PersonalPlanChangeViewController: UIPickerViewDelegate, UIPickerViewDa
         if pickerView == selectTimeModalView.startPickerView || pickerView == selectTimeModalView.endPickerView{
             return startPickerViewText[component][row]
         }else if pickerView == selectCalendarModalView.dayPickerView{
-            return startPickerViewText[component][row]
+            return dayPickerViewTextArray[component][row]
         }
 
-        
         return String()
       }
     
@@ -490,12 +529,15 @@ extension PersonalPlanChangeViewController: UIPickerViewDelegate, UIPickerViewDa
             let pickerLabel2 = UILabel()
             let view = UIView(frame: CGRect(x: 0, y: 0, width:0, height:0))
             
-            if dayPickerViewText1[row] == "S"{
-                pickerLabel1.textColor = UIColor(red: 170/255, green: 187/255, blue: 255/255, alpha: 1)
-                pickerLabel2.textColor = UIColor(red: 170/255, green: 187/255, blue: 255/255, alpha: 1)
+            pickerLabel1.text = dayPickerViewTextArray[0][row]
+            pickerLabel2.text = dayPickerViewTextArray[1][row]
+            
+            if dayPickerViewText1[row] == "Sun"{
+                pickerLabel1.textColor = UIColor(red: 125/255, green: 151/255, blue: 255/255, alpha: 1)
+                pickerLabel2.textColor = UIColor(red: 125/255, green: 151/255, blue: 255/255, alpha: 1)
             }else{
-                pickerLabel1.textColor = UIColor(red: 168/255, green: 168/255, blue: 168/255, alpha: 1)
-                pickerLabel2.textColor = UIColor(red: 168/255, green: 168/255, blue: 168/255, alpha: 1)
+                pickerLabel1.textColor = UIColor(red: 100/255, green: 100/255, blue: 100/255, alpha: 1)
+                pickerLabel2.textColor = UIColor(red: 100/255, green: 100/255, blue: 100/255, alpha: 1)
             }
             
             pickerLabel1.font = UIFont(name: "AppleSDGothicNeo-SemiBold", size: 15)
@@ -505,9 +547,6 @@ extension PersonalPlanChangeViewController: UIPickerViewDelegate, UIPickerViewDa
             
             view.addSubview(pickerLabel1)
             view.addSubview(pickerLabel2)
-            
-            pickerLabel1.text = dayPickerViewText1[row]
-            pickerLabel2.text = dayPickerViewText2[row]
             
             pickerLabel2.snp.makeConstraints { make in
                 make.top.equalToSuperview().offset(self.view.frame.height/23)
