@@ -74,6 +74,7 @@ class NewPasswordPutViewController: UIViewController{
         addView()
         topBarViewSetting()
         passwordContainerViewSetting()
+        keyboardTypeSetting()
         cornerRadius()
         location()
         addNotificationCenter()
@@ -146,6 +147,12 @@ class NewPasswordPutViewController: UIViewController{
         passwordContainer.addSubview(passwordContainer.divView)
         
         passwordContainer.loginTfSetting(screenHeight: self.view.frame.height, screenWidth: self.view.frame.width)
+    }
+    
+    //MARK: - KeyboardType Setting
+    
+    private func keyboardTypeSetting(){
+        passwordContainer.tf.keyboardType = .asciiCapable
     }
     
     //MARK: - textField Point Set
