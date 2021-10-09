@@ -47,6 +47,8 @@ class PersonalPlanChangeViewController: UIViewController, UIGestureRecognizerDel
         rotationAngle = 90 * ( .pi/180 )
         $0.dayPickerView.transform = CGAffineTransform(rotationAngle: rotationAngle)
         $0.isHidden = true
+        $0.calendarAddButton.addTarget(self, action: #selector(calendarAddButtonClicked(sender:)), for: .touchUpInside)
+
     }
     
     private let selectTimeModalView = SelectTimeModalView().then{
@@ -363,6 +365,13 @@ class PersonalPlanChangeViewController: UIViewController, UIGestureRecognizerDel
     
     @objc func backButtonClicked(sender:UIButton){
         self.navigationController?.popViewController(animated: true)
+    }
+    
+    @objc func calendarAddButtonClicked(sender:UIButton){
+        selectCalendarModalView.isHidden = true
+        selectCalendarModalView.dayPickerView.selectRow(5, inComponent: 0, animated: true)
+        
+        
     }
 }
 

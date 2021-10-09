@@ -43,12 +43,11 @@ class SelectCalendarModalView: UIView {
         $0.backgroundColor = UIColor(red: 233/255, green: 233/255, blue: 233/255, alpha: 1)
     }
     
-    private let calendarAddButton = UIButton().then{
+    let calendarAddButton = UIButton().then{
         $0.backgroundColor = UIColor(red: 170/255, green: 187/255, blue: 254/255, alpha: 1)
         $0.setTitle("완 료", for: .normal)
         $0.dynamicFont(fontSize: 12, currentFontName: "AppleSDGothicNeo-Bold")
         $0.layer.cornerRadius = 10
-        $0.addTarget(self, action: #selector(calendarAddButtonClicked(sender:)), for: .touchUpInside)
     }
     
     var dayPickerView = UIPickerView().then{
@@ -95,13 +94,6 @@ class SelectCalendarModalView: UIView {
         addView()
 
         addLayout()
-    }
-    
-    //MARK: - Selectors
-    @objc func calendarAddButtonClicked(sender:UIButton){
-        self.isHidden = true
-        self.dayPickerView.selectRow(5, inComponent: 0, animated: true)
-
     }
     
     //MARK: - addView
