@@ -36,13 +36,9 @@ class AddErrandViewController : UIViewController{
         $0.spacing = bounds.height/47.7647
     }
     
-    private let calendarBtn : AlertButton = {
-        let viewModel = AlertBtn(icon: UIImage(named: "EZY_calendar")?.withRenderingMode(.alwaysTemplate), iconTintColor: .rgb(red: 255, green: 181, blue: 181), message: "2021.6.6 일요일")
-        let button = AlertButton(with: viewModel)
-        
-        button.addTarget(self, action: #selector(calendarAlert), for: .touchUpInside)
-        return button
-    }()
+    private let calendarBtn = CalendarAlertBtn(icon: (UIImage(named: "EZY_Calendar")?.withRenderingMode(.alwaysTemplate))!, iconColor: .rgb(red: 255, green: 181, blue: 181), titleText: "2021.6.6 일요일", repeatText: "월, 화, 수").then {
+        $0.addTarget(self, action: #selector(calendarAlert), for: .touchUpInside)
+    }
     private let clockBtn : AlertButton = {
         let viewModel = AlertBtn(icon: UIImage(named: "EZY_clock")?.withRenderingMode(.alwaysTemplate), iconTintColor: .rgb(red: 255, green: 203, blue: 181), message: "11:00AM - 1:00PM")
         let button = AlertButton(with: viewModel)
@@ -53,7 +49,6 @@ class AddErrandViewController : UIViewController{
     private let locationBtn : AlertButton = {
         let viewModel = AlertBtn(icon: UIImage(named: "EZY_location")?.withRenderingMode(.alwaysTemplate), iconTintColor: .rgb(red: 199, green: 224, blue: 212), message: "광주소프트웨어마이스터고등학교")
         let button = AlertButton(with: viewModel)
-        
         button.addTarget(self, action: #selector(locationAlert), for: .touchUpInside)
         return button
     }()
@@ -68,17 +63,14 @@ class AddErrandViewController : UIViewController{
         $0.textColor = .rgb(red: 182, green: 182, blue: 182)
         $0.dynamicFont(fontSize: 12, currentFontName: "AppleSDGothicNeo-Bold")
     }
- 
-    
-    let addPersonCollectionView: UICollectionView = {
-        let layout = UICollectionViewFlowLayout()
-        let cv = UICollectionView(frame: .zero, collectionViewLayout: layout)
-        cv.translatesAutoresizingMaskIntoConstraints = false
-        cv.register(WhoShouldIAskCell.self, forCellWithReuseIdentifier: WhoShouldIAskCell.identifier)
-        cv.showsHorizontalScrollIndicator = false
-        cv.isScrollEnabled = false
-        return cv
-    }()
+    let askForFavor  = UIButton().then{
+        $0.setTitle("+ 인원 선택", for: .normal)
+        $0.dynamicFont(fontSize: 12, currentFontName: "AppleSDGothicNeo-Bold")
+        $0.setTitleColor(UIColor.rgb(red: 129, green: 129, blue: 129), for: .normal)
+        $0.backgroundColor = .white
+        $0.layer.applySketchShadow(color: .black, alpha: 0.1, x: 0, y: 4, blur: 14, spread: 0)
+        $0.addTarget(self, action: #selector(addPerson), for: .touchUpInside)
+    }
     
     private lazy var addButton : AdditionalButton = {
         let button = AdditionalButton(type: .system)
@@ -94,25 +86,25 @@ class AddErrandViewController : UIViewController{
     override func viewDidLoad() {
         super.viewDidLoad()
         configureUI()
-        addPersonCollectionView.dataSource = self
-        addPersonCollectionView.delegate = self
-        addPersonCollectionView.allowsMultipleSelection = true
     }
     
     //MARK: - Selectors
     
-    @objc func todobackbtn(){
+    @objc private func todobackbtn(){
         //전페이지로 되돌아가는 버튼
         navigationController?.popViewController(animated: true)
     }
+    @objc private func addPerson(){
+        navigationController?.pushViewController(MorePeopleToDo(), animated: true)
+    }
     
-    @objc func calendarAlert(){
+    @objc private func calendarAlert(){
         // 날짜 Alert를 실행시킬 부분
     }
-    @objc func clockAlert(){
+    @objc private func clockAlert(){
         //시간 Alert를 실행시킬 부분
     }
-    @objc func locationAlert(){
+    @objc private func locationAlert(){
         //위치 Alert 실행시킬 부분
     }
     @objc func Addmytodobtn(){
@@ -127,9 +119,6 @@ class AddErrandViewController : UIViewController{
     //MARK: - Helpers
     func configureUI(){
         view.backgroundColor = .white
-        addPersonCollectionView.contentInset = UIEdgeInsets(top: 0, left: view.frame.height/29, bottom: 0, right: 0)
-
-        addPersonCollectionView.backgroundColor = .clear
         cornerRadius()
         addView()
         location()
@@ -144,6 +133,7 @@ class AddErrandViewController : UIViewController{
         RequestList.layer.cornerRadius = view.frame.height/40.6
         addButton.layer.cornerRadius = view.frame.height/81.2
         explanationContainerView.layer.cornerRadius = view.frame.height/40.6
+        askForFavor.layer.cornerRadius = 10
     }
     func addView(){
         view.addSubview(backbutton)
@@ -151,8 +141,8 @@ class AddErrandViewController : UIViewController{
         view.addSubview(RequestList)
         view.addSubview(btnStackView)
         view.addSubview(explanationContainerView)
-        view.addSubview(addPersonCollectionView)
         view.addSubview(kindOfCollectionView)
+        view.addSubview(askForFavor)
         view.addSubview(addButton)
     }
     func location(){
@@ -188,10 +178,11 @@ class AddErrandViewController : UIViewController{
             make.left.equalTo(backbutton.snp.left)
             make.top.equalTo(explanationContainerView.snp.bottom).offset(view.frame.height/33.75)
         }
-        addPersonCollectionView.snp.makeConstraints { (make) in
-            make.left.right.equalToSuperview()
-            make.height.equalTo(view.frame.height/25.375)
-            make.top.equalTo(kindOfCollectionView.snp.bottom).offset(view.frame.height/81.2)
+        askForFavor.snp.makeConstraints {
+            $0.top.equalTo(kindOfCollectionView.snp.bottom).offset(bounds.height/54)
+            $0.left.equalTo(backbutton.snp.left)
+            $0.height.equalTo(bounds.height/18.88)
+            $0.width.equalTo(bounds.width/4.07)
         }
         addButton.snp.makeConstraints { (make) in
             make.bottom.equalToSuperview().inset(view.frame.height/8.202)
@@ -200,54 +191,4 @@ class AddErrandViewController : UIViewController{
         }
     }
 
-}
-//MARK: - AddErrandViewController CollectionView
-
-extension AddErrandViewController : UICollectionViewDelegateFlowLayout,UICollectionViewDataSource{
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return data.count
-    }
-    func collectionView(_ collectionView: UICollectionView, didHighlightItemAt indexPath: IndexPath) {
-        if data.count == 1{
-            if indexPath.item == indexPath.last{
-                    let controller = MorePeopleToDo()
-                navigationController?.pushViewController(controller, animated: true)
-            }
-        }else{
-            if indexPath.item == 0{
-                    
-            }
-            else if indexPath.item == indexPath.last{
-                let controller = MorePeopleToDo()
-                navigationController?.pushViewController(controller, animated:true)
-            }
-        }
-    }
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: WhoShouldIAskCell.identifier, for: indexPath) as? WhoShouldIAskCell else {return UICollectionViewCell()}
-        cell.bglabel.text = data[indexPath.row]
-        cell.bglabel.dynamicFont(fontSize: 12, currentFontName:  "AppleSDGothicNeo-UltraLight")
-        cell.bglabel.textColor = .rgb(red: 61, green: 100, blue: 255)
-        cell.layer.borderWidth = 1
-        cell.layer.borderColor = UIColor.rgb(red: 99, green: 131, blue: 255).cgColor
-   
-        if cell.bglabel.text == data.last{
-            cell.bglabel.textColor = .EZY_BAC8FF
-            cell.layer.borderColor = UIColor.EZY_BAC8FF.cgColor
-            cell.bglabel.dynamicFont(fontSize: 12, currentFontName: "AppleSDGothicNeo-Bold")
-        }
-        if data.count == 2 {
-            if indexPath.item == indexPath.first{
-                cell.bglabel.text = "@" + data[indexPath.item]
-            }
-        }
-        return cell
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        let label = UILabel()
-        label.text = data[indexPath.row]
-        label.sizeToFit()
-        return CGSize(width: label.frame.width + view.frame.height/40.6, height: view.frame.height/25.375)
-    }
 }

@@ -140,6 +140,7 @@
 		EE9F0D4F26E8A9700015E81B /* AlarmSettingCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE9F0D4A26E8A9700015E81B /* AlarmSettingCell.swift */; };
 		EE9F0D5126E8AA810015E81B /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE9F0D5026E8AA810015E81B /* Model.swift */; };
 		EE9F0D5326E8AA9E0015E81B /* SearchViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE9F0D5226E8AA9E0015E81B /* SearchViewModel.swift */; };
+		EEA49A132711C7B200265258 /* CalendarAlertBtn.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEA49A122711C7B200265258 /* CalendarAlertBtn.swift */; };
 		EEDCAF98268D85F1001E2B4F /* SwitchBtn.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEDCAF97268D85F1001E2B4F /* SwitchBtn.swift */; };
 /* End PBXBuildFile section */
 
@@ -282,6 +283,7 @@
 		EE9F0D4A26E8A9700015E81B /* AlarmSettingCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlarmSettingCell.swift; sourceTree = "<group>"; };
 		EE9F0D5026E8AA810015E81B /* Model.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Model.swift; sourceTree = "<group>"; };
 		EE9F0D5226E8AA9E0015E81B /* SearchViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchViewModel.swift; sourceTree = "<group>"; };
+		EEA49A122711C7B200265258 /* CalendarAlertBtn.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarAlertBtn.swift; sourceTree = "<group>"; };
 		EEDCAF97268D85F1001E2B4F /* SwitchBtn.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwitchBtn.swift; sourceTree = "<group>"; };
 		EEE1E95626AAB71A0082B696 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
 		EEE1E95826AAB72E0082B696 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -411,6 +413,7 @@
 				EE9F0D2926E8A9330015E81B /* AddScheduleModalBtn .swift */,
 				EE9F0D3426E8A9340015E81B /* AlarmDatePickerView.swift */,
 				EE9F0D3226E8A9330015E81B /* AlertButton.swift */,
+				EEA49A122711C7B200265258 /* CalendarAlertBtn.swift */,
 				EE9F0D3026E8A9330015E81B /* CustomData.swift */,
 				EE9F0D2E26E8A9330015E81B /* ErrandInputContainterTextField.swift */,
 				EE9F0D2D26E8A9330015E81B /* ExplanationContainerTextView.swift */,
@@ -787,6 +790,7 @@
 				6A72073426C618600098830F /* RecommendedTagCollectionViewCell.swift in Sources */,
 				6AE5BB0326957B0600A9731B /* RepeatCollectionViewModel.swift in Sources */,
 				6AFB77F9267ECD6700B59482 /* WhiteBackgroundView.swift in Sources */,
+				EEA49A132711C7B200265258 /* CalendarAlertBtn.swift in Sources */,
 				EE9F0D3826E8A9340015E81B /* inputContainerErrandTextView.swift in Sources */,
 				EE9F0D4526E8A95C0015E81B /* SearchTableCell.swift in Sources */,
 				6AB486FF26834D8C00E95D43 /* CalendarCollectionViewCell.swift in Sources */,
