@@ -228,6 +228,8 @@ class PersonalPlanChangeViewController: UIViewController, UIGestureRecognizerDel
         tagCollectionView.delegate = self
         tagCollectionView.dataSource = self
         
+        explanationContainerView.tv.delegate = self
+        
         selectCalendarModalView.dayPickerView.selectRow(dayPickerViewText2.count/2, inComponent: 0, animated: true)
     }
     
@@ -276,13 +278,13 @@ class PersonalPlanChangeViewController: UIViewController, UIGestureRecognizerDel
         explanationContainerView.snp.makeConstraints { (make) in
             make.height.equalTo(self.view.frame.height/10.8)
             make.top.equalTo(btnStackView.snp.bottom).offset(self.view.frame.height/30.0)
-            make.left.equalTo(backButton.snp.left)
-            make.right.equalTo(self.view.frame.width/13.8 * -1)
+            make.left.equalTo(self.btnStackView.snp.left)
+            make.centerX.equalToSuperview()
         }
         
         tagLabel.snp.makeConstraints { (make) in
             make.left.equalTo(backButton.snp.left)
-            make.top.equalTo(explanationContainerView.snp.bottom).offset(view.frame.height/42.74)
+            make.top.equalTo(btnStackView.snp.bottom).offset(self.view.frame.height/6.44)
         }
         
         tagCollectionView.snp.makeConstraints { make in
@@ -414,8 +416,29 @@ class PersonalPlanChangeViewController: UIViewController, UIGestureRecognizerDel
             selectedDayOfWeekText = "일"
         }
         
+        // 선택한 내용 dayLabel에 적용
         if selectedDayOfWeekText != ""{
             calendarBtn.dayLabel.text = "2021.6.\(selectedDayText) \(selectedDayOfWeekText)요일"
+        }
+    }
+    
+    //MARK: 화면터치하여 내리기
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?){
+         self.view.endEditing(true)
+        
+        if locationBtn.alpha == 0{
+            UIView.animate(withDuration: 0.5) {
+                self.explanationContainerView.snp.remakeConstraints { make in
+                    make.height.equalTo(self.view.frame.height/10.8)
+                    make.top.equalTo(self.btnStackView.snp.bottom).offset(self.view.frame.height/30.0)
+                    make.left.equalTo(self.btnStackView.snp.left)
+                    make.centerX.equalToSuperview()
+                }
+                
+                self.locationBtn.alpha = 1
+                
+                self.view.layoutIfNeeded()
+            }
         }
     }
 }
@@ -605,4 +628,32 @@ extension PersonalPlanChangeViewController: UIPickerViewDelegate, UIPickerViewDa
     }
     
 }
+
+extension PersonalPlanChangeViewController: UITextViewDelegate{
+    func textViewDidBeginEditing(_ textView: UITextView) {
+        UIView.animate(withDuration: 0.5) {
+            self.explanationContainerView.snp.remakeConstraints { make in
+                make.height.equalTo(self.view.frame.height/10.8)
+                make.top.equalTo(self.locationBtn).offset(self.view.frame.height/55)
+                make.left.equalTo(self.btnStackView.snp.left)
+                make.centerX.equalToSuperview()
+            }
+            
+            self.locationBtn.alpha = 0
+            
+            self.view.layoutIfNeeded()
+        }
+        
+        btnStackView.isUserInteractionEnabled = false
+        
+        calendarBtn.isUserInteractionEnabled = false
+    }
+    
+    func textViewDidEndEditing(_ textView: UITextView) {
+        btnStackView.isUserInteractionEnabled = true
+        
+        calendarBtn.isUserInteractionEnabled = true
+    }
+}
+
 
