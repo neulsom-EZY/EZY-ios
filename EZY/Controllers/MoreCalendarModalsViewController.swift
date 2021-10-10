@@ -112,8 +112,8 @@ class MoreCalendarModalsViewController : UIViewController{
         }
     }
     @objc func MakeTodo(){
-        delegate?.update(vc: viewControlelrChoose)
         delegate?.onTapClose()
+        delegate?.update(vc: viewControlelrChoose)
     }
     //MARK: - HELPERS
     
