@@ -11,24 +11,28 @@ class SendUser : UIView{
     //MARK: - Properties
     private let view = UIView()
     private lazy var senderView = UIView().then{
-        $0.layer.borderWidth = 1
-        $0.layer.cornerRadius = 5
+        $0.layer.cornerRadius = 10
+        $0.backgroundColor = .white
+        $0.layer.applySketchShadow(color: .black, alpha: 0.1, x: 0, y: 4, blur: 14, spread: 0)
     }
     private lazy var recipientView = UIView().then{
-        $0.layer.borderWidth = 1
-        $0.layer.cornerRadius = 5
+        $0.layer.cornerRadius = 10
+        $0.backgroundColor = .white
+        $0.layer.applySketchShadow(color: .black, alpha: 0.1, x: 0, y: 4, blur: 14, spread: 0)
     }
     
     private lazy var senderText = UILabel().then{
-        $0.dynamicFont(fontSize: 12, currentFontName: "AppleSDGothicNeo-UltraLight")
+        $0.dynamicFont(fontSize: 12, currentFontName: "AppleSDGothicNeo-Bold")
+        $0.textColor = .rgb(red: 164, green: 137, blue: 255)
     }
     private let image = UIImageView().then{
         $0.image = UIImage.init(named: "EZY_chevron.right")?.withRenderingMode(.alwaysTemplate)
         $0.contentMode = .scaleAspectFill
-        $0.tintColor = .EZY_BAC8FF
+        $0.tintColor = .rgb(red: 164, green: 137, blue: 255)
     }
     private lazy var recipientText = UILabel().then{
-        $0.dynamicFont(fontSize: 12, currentFontName: "AppleSDGothicNeo-UltraLight")
+        $0.dynamicFont(fontSize: 12, currentFontName: "AppleSDGothicNeo-Bold")
+        $0.textColor = .rgb(red: 164, green: 137, blue: 255)
     }
     private var viewModel : SendUserView?
     
@@ -58,10 +62,6 @@ class SendUser : UIView{
     {
         senderText.text = "@ " + viewModel.sender!
         recipientText.text = "@ " + viewModel.recipient!
-        senderText.textColor = viewModel.senderColor
-        recipientText.textColor = viewModel.recipientColor
-        senderView.layer.borderColor = viewModel.senderStrokeColor?.cgColor
-        recipientView.layer.borderColor = viewModel.recipientStrokeColor?.cgColor
     }
     //MARK: - Label SizeToFit
     private func SizeToFit(){
@@ -80,7 +80,7 @@ class SendUser : UIView{
         senderView.snp.makeConstraints { (make) in
             make.left.equalToSuperview().offset(bounds.width/13.888)
             make.centerY.equalToSuperview()
-            make.height.equalTo(bounds.height/1.40625)
+            make.height.equalToSuperview()
             make.width.equalTo(senderText.frame.width + bounds.width/8.4)
         }
         senderText.snp.makeConstraints { (make) in
@@ -98,7 +98,7 @@ class SendUser : UIView{
         recipientView.snp.makeConstraints { (make) in
             make.left.equalTo(image.snp.right).offset(bounds.width/24.6)
             make.centerY.equalToSuperview()
-            make.height.equalTo(bounds.height/1.40625)
+            make.height.equalToSuperview()
             make.width.equalTo(recipientText.frame.width + bounds.width/8.4)
         }
 

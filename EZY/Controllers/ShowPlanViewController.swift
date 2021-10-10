@@ -9,9 +9,6 @@ import UIKit
 import SnapKit
 import Then
 
-
-
-
 class ShowPlanViewController: UIViewController{
 
     //MARK: Properties
@@ -161,28 +158,6 @@ class ShowPlanViewController: UIViewController{
         scheduleTypeCollectionMainView.resetCollectionViewScrollPositionToTop()
     }
     
-    private func addDim() {
-           view.addSubview(bgView)
-           bgView.snp.makeConstraints { (make) in
-               make.edges.equalTo(0)
-           }
-           
-           DispatchQueue.main.async { [weak self] in
-               self?.bgView.alpha = 0.2
-           }
-       }
-       
-    private func removeDim() {
-        DispatchQueue.main.async { [weak self] in
-            self?.bgView.removeFromSuperview()
-            self?.dismiss(animated: true)
-        }
-    }
-    private func updateDim(viewcontroller : UIViewController){
-        DispatchQueue.main.async { [weak self] in
-            self?.navigationController?.pushViewController(viewcontroller ?? UIViewController(), animated: true)
-        }
-
     // MARK: - collectionViewDataSourceAndDelegate
     func collectionViewDataSourceAndDelegate(){
         scheduleTypeCollectionMainView.delegate = self
@@ -382,6 +357,11 @@ class ShowPlanViewController: UIViewController{
             self?.bgView.removeFromSuperview()
         }
     }
+    private func updateDim(viewcontroller : UIViewController){
+        DispatchQueue.main.async { [weak self] in
+            self?.navigationController?.pushViewController(viewcontroller ?? UIViewController(), animated: true)
+        }
+    }
 }
 
 // MARK: - collectionView Extension
@@ -535,15 +515,13 @@ extension ShowPlanViewController: UITableViewDelegate{
 
 // MARK: - BulletinDelegate Extension
 extension ShowPlanViewController: BulletinDelegate {
+    func onTapClose() {
+        self.removeDim()
+    }
     func update(vc: UIViewController) {
         self.removeDim()
         self.updateDim(viewcontroller: vc)
     }
-    
-    func onTapClose() {
-        self.removeDim()
-    }
- 
 }
 
 extension UIScrollView {

@@ -60,7 +60,7 @@ class ErrandDetailsViewController: UIViewController {
         return button
     }()
     private let userManagement : SendUser = {
-        let viewModel = SendUserView(sender: data[0], recipient: data[1], senderColor: .rgb(red: 155, green: 175, blue: 255), recipientColor: .rgb(red: 254, green: 187, blue: 187), senderStrokeColor: .rgb(red: 186, green: 200, blue: 255), recipientStrokeColor: .rgb(red: 255, green: 204, blue: 204))
+        let viewModel = SendUserView(sender: data[0], recipient: data[1])
         let view = SendUser(with: viewModel)
         return view
     }()
