@@ -8,18 +8,13 @@
 import UIKit
 import SnapKit
 import Then
-    
+
+protocol UserDataDelegate : class{
+    func updateData(name : String , Color : UIColor)
+}
 class MorePeopleToDo: UIViewController{
     let bounds = UIScreen.main.bounds
-    let data = [
-        SearchData(koreanName: "정시원", name: "Siwony"),
-        SearchData(koreanName: "전지환", name: "gyeongjun"),
-        SearchData(koreanName: "김유진", name: "youjin"),
-        SearchData(koreanName: "김기홍", name: "KiHong"),
-        SearchData(koreanName: "안지훈", name: "Jihoon"),
-        SearchData(koreanName: "김기홍", name: "KimKiHooooong"),
-        SearchData(koreanName: "안지훈", name: "JiHoooooon"),
-        SearchData(koreanName: "안지훈", name: "JiHun")]
+    let data = ["Jihoooooon","siwonnnny","NoName","mingki","johnjihwan","noplayy"]
 
     let recommendData = ["Jihoooooon","siwonnnny","NoName","mingki","johnjihwan","noplayy"]
         
@@ -28,7 +23,7 @@ class MorePeopleToDo: UIViewController{
     var filtered = false
 
     //MARK: - Properties
-    private var viewModel = MoreTodoModel()
+    weak var delegate : UserDataDelegate?
     
     private let backbutton = UIButton().then{
         $0.tintColor = .EZY_968DFF
@@ -96,12 +91,7 @@ class MorePeopleToDo: UIViewController{
     }
     
     @objc func chooseUser(){
-        if filterData.count == 0 {
-            shakeView(view)
-        }
-        else{
-            navigationController?.popViewController(animated: true)
-        }
+        DataIsRight()
     }
     
     func configureUI(){
@@ -122,7 +112,17 @@ class MorePeopleToDo: UIViewController{
         view.addSubview(WhatAboutPeopleLikeThis)
         view.addSubview(userChoose)
     }
-
+    //MARK: - Data 일치 여부
+    func DataIsRight(){
+        for item in data{
+            if item == (nickNameTextFieldContainerView.text ?? ""){
+                delegate?.updateData(name: nickNameTextFieldContainerView.text ?? "", Color: .blue)
+                navigationController?.popViewController(animated: true)
+            }else{
+                shakeView(view)
+            }
+        }
+    }
     //MARK: - location
     func location(){
         backbutton.snp.makeConstraints { (make) in
@@ -192,8 +192,8 @@ class MorePeopleToDo: UIViewController{
 
 
 extension MorePeopleToDo : UITextFieldDelegate{
-    func textFieldDidEndEditing(_ textField: UITextField) {
-
+    func textFieldDidChangeSelection(_ textField: UITextField) {
+        print(textField.text!)
     }
 }
 //MARK: - CollectionView

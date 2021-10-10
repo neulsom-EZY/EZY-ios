@@ -9,6 +9,8 @@ import UIKit
 import SnapKit
 import Then
 
+
+
 class AddErrandViewController : UIViewController{
     //MARK: - Properties
     var data = ["JiHooooooooon","+ 추가"]
@@ -63,7 +65,7 @@ class AddErrandViewController : UIViewController{
         $0.textColor = .rgb(red: 182, green: 182, blue: 182)
         $0.dynamicFont(fontSize: 12, currentFontName: "AppleSDGothicNeo-Bold")
     }
-    let askForFavor  = UIButton().then{
+    private let askForFavor  = UIButton().then{
         $0.setTitle("+ 인원 선택", for: .normal)
         $0.dynamicFont(fontSize: 12, currentFontName: "AppleSDGothicNeo-Bold")
         $0.setTitleColor(UIColor.rgb(red: 129, green: 129, blue: 129), for: .normal)
