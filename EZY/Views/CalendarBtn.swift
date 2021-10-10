@@ -27,7 +27,7 @@ class CalendarBtn: UIButton {
         $0.dynamicFont(fontSize: 10, currentFontName: "AppleSDGothicNeo-Thin")
     }
     
-    private let label = UILabel().then{
+    var dayLabel = UILabel().then{
         $0.dynamicFont(fontSize: 16, currentFontName: "AppleSDGothicNeo-Regular")
         $0.textColor = .EZY_656565
     }
@@ -56,13 +56,13 @@ class CalendarBtn: UIButton {
         iconBackgroundView.addSubview(icon)
         addSubview(labelView)
         labelView.addSubview(repeatLabel)
-        labelView.addSubview(label)
+        labelView.addSubview(dayLabel)
     }
     
     public func configure( with viewModel : CalendarModel){
         icon.image = viewModel.icon
         icon.tintColor = viewModel.iconTintColor
-        label.text = viewModel.message
+        dayLabel.text = viewModel.message
         repeatLabel.text = viewModel.repeatText
     }
     
@@ -77,7 +77,7 @@ class CalendarBtn: UIButton {
         
         labelView.snp.makeConstraints { make in
             make.centerY.equalTo(iconBackgroundView)
-            make.height.equalTo(frame.height).dividedBy(1.03)
+            make.height.equalToSuperview().multipliedBy(1.06)
             make.left.equalTo(iconBackgroundView.snp.right).offset(frame.height/1.7)
             make.right.equalToSuperview()
         }
@@ -87,7 +87,7 @@ class CalendarBtn: UIButton {
             make.center.equalTo(iconBackgroundView.snp.center)
         }
         
-        label.snp.makeConstraints { (make) in
+        dayLabel.snp.makeConstraints { (make) in
             make.left.equalToSuperview()
             make.top.equalToSuperview().offset(viewBounds.height/101.5)
         }

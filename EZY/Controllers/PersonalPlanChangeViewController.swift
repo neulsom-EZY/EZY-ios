@@ -63,6 +63,11 @@ class PersonalPlanChangeViewController: UIViewController, UIGestureRecognizerDel
     
     fileprivate var selectedTimeEndHourIndex = 0
 
+    private var selectedRepeatDayTextArray = [String]()
+    
+    private var selectedDayOfWeekText = ""
+    
+    private var selectedDayText = ""
     
     private var bounds = UIScreen.main.bounds
     
@@ -355,6 +360,7 @@ class PersonalPlanChangeViewController: UIViewController, UIGestureRecognizerDel
 
     //MARK: - selectors
     @objc func calendarAlert(){
+        selectedRepeatDayTextArray = []
         selectCalendarModalView.isHidden = false
     }
     
@@ -377,9 +383,40 @@ class PersonalPlanChangeViewController: UIViewController, UIGestureRecognizerDel
     
     @objc func calendarAddButtonClicked(sender:UIButton){
         selectCalendarModalView.isHidden = true
-        selectCalendarModalView.dayPickerView.selectRow(5, inComponent: 0, animated: true)
         
+        // 선택된 반복일 저장
+        for i in 0...repeatModels.count-1{
+            if repeatModels[i].isSelected == true{
+                selectedRepeatDayTextArray.append(dayKoreanTextArray[i])
+            }
+        }
         
+        // 반복라벨에 적용
+        if selectedRepeatDayTextArray.count == 0{
+            calendarBtn.repeatLabel.text = "반복 없음"
+        }else{
+            calendarBtn.repeatLabel.text = "\(selectedRepeatDayTextArray.joined(separator: ",")) 반복"
+        }
+        
+        if selectedDayOfWeekText == "Mon"{
+            selectedDayOfWeekText = "월"
+        }else if selectedDayOfWeekText == "Tue"{
+            selectedDayOfWeekText = "화"
+        }else if selectedDayOfWeekText == "Wed"{
+            selectedDayOfWeekText = "수"
+        }else if selectedDayOfWeekText == "Thr"{
+            selectedDayOfWeekText = "목"
+        }else if selectedDayOfWeekText == "Fri"{
+            selectedDayOfWeekText = "금"
+        }else if selectedDayOfWeekText == "Sat"{
+            selectedDayOfWeekText = "토"
+        }else if selectedDayOfWeekText == "Sun"{
+            selectedDayOfWeekText = "일"
+        }
+        
+        if selectedDayOfWeekText != ""{
+            calendarBtn.dayLabel.text = "2021.6.\(selectedDayText) \(selectedDayOfWeekText)요일"
+        }
     }
 }
 
@@ -397,37 +434,15 @@ extension PersonalPlanChangeViewController: UICollectionViewDataSource, UICollec
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         if collectionView == tagCollectionView{
-            if indexPath == [0,2]{
-                let cell = collectionView.dequeueReusableCell(withReuseIdentifier: TagCollectionViewCell.reuseId, for: indexPath) as! TagCollectionViewCell
+            
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: TagCollectionViewCell.reuseId, for: indexPath) as! TagCollectionViewCell
                 
-                cell.tagNameLabel.text = "선택 안 함"
-                cell.tagNameLabel.textColor = UIColor(red: 187/255, green: 187/255, blue: 187/255, alpha: 1)
-                cell.tagBackgroundView.backgroundColor = .white
-                cell.tagBackgroundView.layer.borderWidth = 1.3
-                cell.tagBackgroundView.layer.borderColor = UIColor(red: 187/255, green: 187/255, blue: 187/255, alpha: 1).cgColor
+            cell.setModel(TagModels[indexPath.row])
                 
-                cell.setModel(TagModels[indexPath.row])
+            cell.tagNameLabel.text = tagNameTextArray[indexPath.row]
                 
-                return cell
-            }else if indexPath == [0,0]{
-                let cell = collectionView.dequeueReusableCell(withReuseIdentifier: TagCollectionViewCell.reuseId, for: indexPath) as! TagCollectionViewCell
-                
-                cell.tagNameLabel.text = "+ 추가"
-                cell.tagNameLabel.textColor = UIColor(red: 186/255, green: 200/255, blue: 255/255, alpha: 1)
-                cell.tagBackgroundView.backgroundColor = .white
-                cell.tagBackgroundView.layer.borderWidth = 1.3
-                cell.tagBackgroundView.layer.borderColor = UIColor(red: 186/255, green: 200/255, blue: 255/255, alpha: 1).cgColor
-                
-                return cell
-            }else{
-                let cell = collectionView.dequeueReusableCell(withReuseIdentifier: TagCollectionViewCell.reuseId, for: indexPath) as! TagCollectionViewCell
-                
-                cell.setModel(TagModels[indexPath.row])
-                
-                cell.tagNameLabel.text = tagNameTextArray[indexPath.row]
-                
-                return cell
-            }
+            return cell
+            
         }else if collectionView == selectCalendarModalView.repeatCollectionView{
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: DayCollectionViewCell.identifier, for: indexPath) as! DayCollectionViewCell
             
@@ -519,6 +534,12 @@ extension PersonalPlanChangeViewController: UIPickerViewDelegate, UIPickerViewDa
       }
     
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+        if pickerView == selectCalendarModalView.dayPickerView{
+            selectedDayOfWeekText = dayPickerViewTextArray[0][row]
+            selectedDayText = dayPickerViewTextArray[1][row]
+            
+            print("selectedDayTextArray : \(selectedDayOfWeekText), \(selectedDayText)")
+        }
     }
     
     func pickerView(_ pickerView: UIPickerView, viewForRow row: Int, forComponent component: Int, reusing view: UIView?) -> UIView {
@@ -542,6 +563,7 @@ extension PersonalPlanChangeViewController: UIPickerViewDelegate, UIPickerViewDa
         }else if pickerView == selectCalendarModalView.dayPickerView{
             let pickerLabel1 = UILabel()
             let pickerLabel2 = UILabel()
+            
             let view = UIView(frame: CGRect(x: 0, y: 0, width:0, height:0))
             
             pickerLabel1.text = dayPickerViewTextArray[0][row]
@@ -567,21 +589,18 @@ extension PersonalPlanChangeViewController: UIPickerViewDelegate, UIPickerViewDa
                 make.top.equalToSuperview().offset(self.view.frame.height/23)
                 make.centerX.equalToSuperview()
             }
+            
             pickerLabel1.snp.makeConstraints { make in
                 make.centerX.equalToSuperview()
                 make.bottom.equalToSuperview().offset(-self.view.frame.height/23)
             }
             
             pickerView.subviews[1].backgroundColor = UIColor(red: 170/255, green: 187/255, blue: 255/255, alpha: 0.1)
-
             
             view.transform = CGAffineTransform(rotationAngle: (90 * (.pi / 180*3)))
             
-            
             return view
         }
-
-        
         return UIView()
     }
     
