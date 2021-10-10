@@ -13,6 +13,10 @@ class PushNotificationManagementViewController : UIViewController{
     
     //MARK: - Properties
     let bounds = UIScreen.main.bounds
+    var manageData : [ManageData] = []
+    let titleNotification = ["EZY 앱 알림"]
+    let explanation = ["EZY 앱의 알림을 관리합니다."]
+    
     
     private let backbutton = UIButton().then{
         $0.tintColor = .EZY_AFADFF
@@ -21,63 +25,38 @@ class PushNotificationManagementViewController : UIViewController{
     }
     private let TitleLabel = UILabel().then{
         $0.textColor = .EZY_AFADFF
-        $0.text = "푸쉬 알림 관리"
+        $0.text = "푸시 알림 관리"
         $0.dynamicFont(fontSize: 22, currentFontName: "AppleSDGothicNeo-SemiBold")
     }
-    fileprivate lazy var btnStackView = UIStackView(arrangedSubviews: [personalCalendar,errandCalendar]).then{
-        $0.axis = .vertical
-        $0.alignment = .fill
-        $0.distribution = .fillEqually
+    private let tableView = UITableView().then{
         $0.translatesAutoresizingMaskIntoConstraints = false
-        $0.spacing = bounds.height/45.11111
+        $0.register(CustomManagePushNotificationCell.self, forCellReuseIdentifier: CustomManagePushNotificationCell.identifier)
     }
-    private let personalCalendar : AlarmManagementButton = {
-        let viewModel = Managementbtn(title: "개인 일정 알림 관리", subTitle: "개인, 팀, 심부름관련 알림을 관리합니다.")
-        let button = AlarmManagementButton(with: viewModel)
-        button.addTarget(self, action: #selector(personalCalendarMove), for: .touchUpInside)
-        return button
-    }()
-    private let errandCalendar : AlarmManagementButton = {
-        let viewModel = Managementbtn( title: "심부름 알림 관리", subTitle: "팀 일정의 그룹을 관리합니다.")
-        let button = AlarmManagementButton(with: viewModel)
-        button.addTarget(self, action: #selector(errandCalendarMove), for: .touchUpInside)
-        return button
-    }()
     
-    //MARK: - LifeCycle
+    //MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         configureUI()
+        
     }
-    
     //MARK: - Selectors
     @objc func backbtn(){
-        navigationController?.popViewController(animated: true)
+        navigationController?.popViewController(animated: true )
     }
-    
-    @objc func personalCalendarMove(){
-        let controller = PersonalCalendarViewController()
-        navigationController?.pushViewController(controller, animated: true)
- 
-    }
-    @objc func errandCalendarMove(){
-        let controller = ErrandCalendarViewController()
-        navigationController?.pushViewController(controller, animated: true)
-    }
-
     //MARK: - Helpers
     func configureUI(){
         view.backgroundColor = .white
-        AddView()
-        Location()
+        addView()
+        location()
+        makeData()
+        configure()
     }
-    func AddView(){
+    func addView(){
         view.addSubview(backbutton)
         view.addSubview(TitleLabel)
-
-        view.addSubview(btnStackView)
+        view.addSubview(tableView)
     }
-    func Location(){
+    func location(){
         backbutton.snp.makeConstraints { (make) in
             make.height.width.equalTo(self.view.frame.height/33.8)
             make.left.equalTo(self.view.frame.height/29)
@@ -87,10 +66,37 @@ class PushNotificationManagementViewController : UIViewController{
             make.top.equalTo(backbutton.snp.bottom).offset(self.view.frame.height/30.1)
             make.left.equalTo(backbutton.snp.left)
         }
-        btnStackView.snp.makeConstraints {
-            $0.top.equalTo(TitleLabel.snp.bottom).offset(view.frame.height/31.2)
-            $0.left.right.equalToSuperview().inset(bounds.width/13.157895)
-            $0.height.equalTo(bounds.height/5.64)
+        tableView.snp.makeConstraints { (make) in
+            make.top.equalTo(TitleLabel.snp.bottom).offset(view.frame.height/21.95)
+            make.bottom.equalToSuperview()
+            make.left.equalToSuperview().offset(view.frame.height/22.6)
+            make.right.equalToSuperview().offset(view.frame.height/22.6 * -1)
         }
+    }
+    
+    private func makeData() {
+            manageData.append(ManageData.init(title: titleNotification[0], explanation: explanation[0]))
+            
+        }
+
+    private func configure() {
+        tableView.allowsSelection = false
+        tableView.dataSource = self
+        tableView.rowHeight = view.frame.height/13.69
+        self.tableView.separatorStyle = .none
+        self.tableView.bounces = false;
+    }
+}
+
+//MARK: - PersonalCalendarViewController TableView
+extension PushNotificationManagementViewController : UITableViewDataSource{
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return manageData.count
+    }
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: CustomManagePushNotificationCell.identifier, for: indexPath) as! CustomManagePushNotificationCell
+        cell.title.text = titleNotification[indexPath.row]
+        cell.explanation.text = explanation[indexPath.row]
+        return cell
     }
 }
