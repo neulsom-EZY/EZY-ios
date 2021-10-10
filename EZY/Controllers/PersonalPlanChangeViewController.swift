@@ -427,7 +427,7 @@ class PersonalPlanChangeViewController: UIViewController, UIGestureRecognizerDel
          self.view.endEditing(true)
         
         if locationBtn.alpha == 0{
-            UIView.animate(withDuration: 0.5) {
+            UIView.animate(withDuration: 0.3) {
                 self.explanationContainerView.snp.remakeConstraints { make in
                     make.height.equalTo(self.view.frame.height/10.8)
                     make.top.equalTo(self.btnStackView.snp.bottom).offset(self.view.frame.height/30.0)
@@ -631,7 +631,7 @@ extension PersonalPlanChangeViewController: UIPickerViewDelegate, UIPickerViewDa
 
 extension PersonalPlanChangeViewController: UITextViewDelegate{
     func textViewDidBeginEditing(_ textView: UITextView) {
-        UIView.animate(withDuration: 0.5) {
+        UIView.animate(withDuration: 0.3) {
             self.explanationContainerView.snp.remakeConstraints { make in
                 make.height.equalTo(self.view.frame.height/10.8)
                 make.top.equalTo(self.locationBtn).offset(self.view.frame.height/55)
@@ -655,5 +655,3 @@ extension PersonalPlanChangeViewController: UITextViewDelegate{
         calendarBtn.isUserInteractionEnabled = true
     }
 }
-
-
