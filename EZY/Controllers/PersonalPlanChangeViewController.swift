@@ -39,27 +39,6 @@ class PersonalPlanChangeViewController: UIViewController, UIGestureRecognizerDel
                                                TagCollectionViewModel(backgroundColor: UIColor(red: 255/255, green: 160/255, blue: 255/255, alpha: 1), isSelected: true, iconImgae: UIImage(named: "EZY_UnSelectedTagAddButtonImage")!),
                                                TagCollectionViewModel(backgroundColor: UIColor(red: 255/255, green: 150/255, blue: 255/255, alpha: 1), isSelected: true, iconImgae: UIImage(named: "EZY_UnSelectedTagAddButtonImage")!)]
     
-    fileprivate let selectedRepeatColor = UIColor.rgb(red: 170, green: 187, blue: 255)
-    
-    fileprivate lazy var repeatModels: [RepeatCollectionViewModal] = [RepeatCollectionViewModal(isSelected: false),RepeatCollectionViewModal(isSelected: false),RepeatCollectionViewModal(isSelected: false),RepeatCollectionViewModal(isSelected: false),RepeatCollectionViewModal(isSelected: false),RepeatCollectionViewModal(isSelected: false),RepeatCollectionViewModal(isSelected: false)]
-        
-    private lazy var selectCalendarModalView = SelectCalendarModalView().then{
-        rotationAngle = 90 * ( .pi/180 )
-        $0.dayPickerView.transform = CGAffineTransform(rotationAngle: rotationAngle)
-        $0.isHidden = true
-        $0.calendarAddButton.addTarget(self, action: #selector(calendarAddButtonClicked(sender:)), for: .touchUpInside)
-
-    }
-    
-    private let selectTimeModalView = SelectTimeModalView().then{
-        $0.isHidden = true
-    }
-    
-    private let tagAddModalView = TagAddModalView().then{
-        $0.isHidden = true
-        $0.tagAddButton.addTarget(self, action: #selector(tagAddButtonClicked(sender:)), for: .touchUpInside)
-    }
-    
     fileprivate var selectedTimeStartHourIndex = 0
     
     fileprivate var selectedTimeEndHourIndex = 0
@@ -72,13 +51,13 @@ class PersonalPlanChangeViewController: UIViewController, UIGestureRecognizerDel
 
     private var selectedRepeatDayTextArray = [String]()
     
-    private var selectedDayOfWeekText = ""
-    
-    private var selectedDayText = ""
-    
     private var bounds = UIScreen.main.bounds
     
     private var rotationAngle: CGFloat!
+    
+    private var selectedDayOfWeekText = ""
+    
+    private var selectedDayText = ""
     
     private let dayEnglishTextArray = ["Mon","Tue","Wed","Thr","Fri","Sat","Sun"]
     
@@ -94,6 +73,28 @@ class PersonalPlanChangeViewController: UIViewController, UIGestureRecognizerDel
     
     
     private var tagNameTextArray = ["x", "+", "TOEIC", "CODING", "COOKING", "EXERCISE", "CLEANING", "CLEANINNNNG","공부", "산책", "토익", "코딩", "요리", "운동", "정리", "청소","공부", "산책", "토익", "코딩", "요리", "운동", "정리", "청소","공부", "산책", "토익", "코딩", "요리", "운동", "정리", "청소"]
+    
+    fileprivate let selectedRepeatColor = UIColor.rgb(red: 170, green: 187, blue: 255)
+    
+    fileprivate lazy var repeatModels: [RepeatCollectionViewModal] = [RepeatCollectionViewModal(isSelected: false),RepeatCollectionViewModal(isSelected: false),RepeatCollectionViewModal(isSelected: false),RepeatCollectionViewModal(isSelected: false),RepeatCollectionViewModal(isSelected: false),RepeatCollectionViewModal(isSelected: false),RepeatCollectionViewModal(isSelected: false)]
+        
+    private lazy var selectCalendarModalView = SelectCalendarModalView().then{
+        rotationAngle = 90 * ( .pi/180 )
+        $0.dayPickerView.transform = CGAffineTransform(rotationAngle: rotationAngle)
+        $0.isHidden = true
+        $0.calendarAddButton.addTarget(self, action: #selector(calendarAddButtonClicked(sender:)), for: .touchUpInside)
+    }
+    
+    private let selectTimeModalView = SelectTimeModalView().then{
+        $0.isHidden = true
+    }
+
+    private let tagAddModalView = TagAddModalView().then{
+        $0.isHidden = true
+        $0.tagAddButton.addTarget(self, action: #selector(tagAddButtonClicked(sender:)), for: .touchUpInside)
+        $0.tagNameTextField.addTarget(self, action: #selector(tagNameTextFieldClicked(textField:)), for: UIControl.Event.editingDidBegin)
+
+    }
     
     private let tagCollectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewLayout()).then {
         let layout: UICollectionViewFlowLayout = UICollectionViewFlowLayout()
@@ -205,12 +206,10 @@ class PersonalPlanChangeViewController: UIViewController, UIGestureRecognizerDel
         return view
     }()
     
-    
-    
     //MARK: - lifeCycles
     override func viewDidLoad() {
         super.viewDidLoad()
-
+    
         configureUI()
     }
     
@@ -372,7 +371,26 @@ class PersonalPlanChangeViewController: UIViewController, UIGestureRecognizerDel
         self.view.addSubview(tagAddModalView)
     }
 
-    //MARK: - selectors
+    // MARK: - selectors
+    @objc func tagNameTextFieldClicked(textField: UITextField) {
+        
+        UIView.animate(withDuration: 0.3) {
+            self.tagAddModalView.modalBackgroundView.snp.remakeConstraints { make in
+                make.centerX.equalToSuperview()
+                make.top.equalToSuperview().offset(self.view.frame.height/4)
+                make.width.equalToSuperview().dividedBy(1.13)
+                make.height.equalToSuperview().dividedBy(3.38)
+            }
+            
+            self.view.layoutIfNeeded()
+        }
+
+    }
+    
+    @objc func tagAddModalViewShadowBackgroundView(sender:UITapGestureRecognizer){
+        tagAddModalView.isHidden = true
+    }
+    
     @objc func calendarAlert(){
         selectedRepeatDayTextArray = []
         selectCalendarModalView.isHidden = false
@@ -459,6 +477,16 @@ class PersonalPlanChangeViewController: UIViewController, UIGestureRecognizerDel
                 }
                 
                 self.locationBtn.alpha = 1
+                
+                self.view.layoutIfNeeded()
+            }
+        }else{
+            UIView.animate(withDuration: 0.3) {
+                self.tagAddModalView.modalBackgroundView.snp.remakeConstraints { make in
+                    make.centerX.centerY.equalToSuperview()
+                    make.width.equalToSuperview().dividedBy(1.13)
+                    make.height.equalToSuperview().dividedBy(3.38)
+                }
                 
                 self.view.layoutIfNeeded()
             }
@@ -577,6 +605,7 @@ extension PersonalPlanChangeViewController: UICollectionViewDataSource, UICollec
         if collectionView == tagCollectionView{
             if indexPath == [0,0]{
                 tagAddModalView.isHidden = false
+                tagAddModalView.tagNameTextField.becomeFirstResponder()
                 tagAddModalView.tagNameTextField.text = ""
                 
                 // TagColorCollection 초기화
