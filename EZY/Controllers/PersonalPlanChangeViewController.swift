@@ -25,19 +25,19 @@ class PersonalPlanChangeViewController: UIViewController, UIGestureRecognizerDel
                                                  TagColorCollectionViewModel(backgroundColor: UIColor(red: 255/255, green: 160/255, blue: 255/255, alpha: 1), isSelected: true),
                                                  TagColorCollectionViewModel(backgroundColor: UIColor(red: 255/255, green: 150/255, blue: 255/255, alpha: 1), isSelected: true)]
     
-    private var TagModels: [TagCollectionViewModel] = [TagCollectionViewModel(backgroundColor: UIColor(red: 186/255, green: 200/255, blue: 255/255, alpha: 1), isSelected: true),
-                                               TagCollectionViewModel(backgroundColor: UIColor(red: 196/255, green: 200/255, blue: 255/255, alpha: 1), isSelected: true),
-                                               TagCollectionViewModel(backgroundColor: UIColor(red: 206/255, green: 200/255, blue: 255/255, alpha: 1), isSelected: false),
-                                               TagCollectionViewModel(backgroundColor: UIColor(red: 216/255, green: 200/255, blue: 255/255, alpha: 1), isSelected: true),
-                                               TagCollectionViewModel(backgroundColor: UIColor(red: 226/255, green: 200/255, blue: 255/255, alpha: 1), isSelected: true),
-                                               TagCollectionViewModel(backgroundColor: UIColor(red: 236/255, green: 200/255, blue: 255/255, alpha: 1), isSelected: true),
-                                               TagCollectionViewModel(backgroundColor: UIColor(red: 246/255, green: 200/255, blue: 255/255, alpha: 1), isSelected: true),
-                                               TagCollectionViewModel(backgroundColor: UIColor(red: 255/255, green: 200/255, blue: 255/255, alpha: 1), isSelected: true),
-                                               TagCollectionViewModel(backgroundColor: UIColor(red: 255/255, green: 190/255, blue: 255/255, alpha: 1), isSelected: true),
-                                               TagCollectionViewModel(backgroundColor: UIColor(red: 255/255, green: 180/255, blue: 255/255, alpha: 1), isSelected: true),
-                                               TagCollectionViewModel(backgroundColor: UIColor(red: 255/255, green: 170/255, blue: 255/255, alpha: 1), isSelected: true),
-                                               TagCollectionViewModel(backgroundColor: UIColor(red: 255/255, green: 160/255, blue: 255/255, alpha: 1), isSelected: true),
-                                               TagCollectionViewModel(backgroundColor: UIColor(red: 255/255, green: 150/255, blue: 255/255, alpha: 1), isSelected: true)]
+    private var TagModels: [TagCollectionViewModel] = [TagCollectionViewModel(backgroundColor: UIColor(red: 186/255, green: 200/255, blue: 255/255, alpha: 1), isSelected: true, iconImgae: UIImage(named: "EZY_UnSelectedTagAddButtonImage")!),
+                                               TagCollectionViewModel(backgroundColor: UIColor(red: 221/255, green: 220/255, blue: 220/255, alpha: 1), isSelected: false, iconImgae: UIImage(named: "EZY_SelectedNoSelectTagButtonImage")!),
+                                               TagCollectionViewModel(backgroundColor: UIColor(red: 206/255, green: 200/255, blue: 255/255, alpha: 1), isSelected: true, iconImgae: UIImage(named: "EZY_UnSelectedTagAddButtonImage")!),
+                                               TagCollectionViewModel(backgroundColor: UIColor(red: 216/255, green: 200/255, blue: 255/255, alpha: 1), isSelected: true, iconImgae: UIImage(named: "EZY_UnSelectedTagAddButtonImage")!),
+                                               TagCollectionViewModel(backgroundColor: UIColor(red: 226/255, green: 200/255, blue: 255/255, alpha: 1), isSelected: true, iconImgae: UIImage(named: "EZY_UnSelectedTagAddButtonImage")!),
+                                               TagCollectionViewModel(backgroundColor: UIColor(red: 236/255, green: 200/255, blue: 255/255, alpha: 1), isSelected: true, iconImgae: UIImage(named: "EZY_UnSelectedTagAddButtonImage")!),
+                                               TagCollectionViewModel(backgroundColor: UIColor(red: 246/255, green: 200/255, blue: 255/255, alpha: 1), isSelected: true, iconImgae: UIImage(named: "EZY_UnSelectedTagAddButtonImage")!),
+                                               TagCollectionViewModel(backgroundColor: UIColor(red: 255/255, green: 200/255, blue: 255/255, alpha: 1), isSelected: true, iconImgae: UIImage(named: "EZY_UnSelectedTagAddButtonImage")!),
+                                               TagCollectionViewModel(backgroundColor: UIColor(red: 255/255, green: 190/255, blue: 255/255, alpha: 1), isSelected: true, iconImgae: UIImage(named: "EZY_UnSelectedTagAddButtonImage")!),
+                                               TagCollectionViewModel(backgroundColor: UIColor(red: 255/255, green: 180/255, blue: 255/255, alpha: 1), isSelected: true, iconImgae: UIImage(named: "EZY_UnSelectedTagAddButtonImage")!),
+                                               TagCollectionViewModel(backgroundColor: UIColor(red: 255/255, green: 170/255, blue: 255/255, alpha: 1), isSelected: true, iconImgae: UIImage(named: "EZY_UnSelectedTagAddButtonImage")!),
+                                               TagCollectionViewModel(backgroundColor: UIColor(red: 255/255, green: 160/255, blue: 255/255, alpha: 1), isSelected: true, iconImgae: UIImage(named: "EZY_UnSelectedTagAddButtonImage")!),
+                                               TagCollectionViewModel(backgroundColor: UIColor(red: 255/255, green: 150/255, blue: 255/255, alpha: 1), isSelected: true, iconImgae: UIImage(named: "EZY_UnSelectedTagAddButtonImage")!)]
     
     fileprivate let selectedRepeatColor = UIColor.rgb(red: 170, green: 187, blue: 255)
     
@@ -57,6 +57,7 @@ class PersonalPlanChangeViewController: UIViewController, UIGestureRecognizerDel
     
     private let tagAddModalView = TagAddModalView().then{
         $0.isHidden = true
+        $0.tagAddButton.addTarget(self, action: #selector(tagAddButtonClicked(sender:)), for: .touchUpInside)
     }
     
     fileprivate var selectedTimeStartHourIndex = 0
@@ -86,7 +87,7 @@ class PersonalPlanChangeViewController: UIViewController, UIGestureRecognizerDel
     private var dayPickerViewTextArray = [["Mon","Tue","Wed","Thr","Fri","Sat","Sun","Mon","Tue","Wed","Thr","Fri","Sat","Sun"].reversed(),["1","2","3","4","5","6","7","1","2","3","4","5","6","7"]]
     
     
-    private var tagNameTextArray = ["공부", "산책", "토익", "코딩", "요리", "운동", "정리", "청소","공부", "산책", "토익", "코딩", "요리", "운동", "정리", "청소","공부", "산책", "토익", "코딩", "요리", "운동", "정리", "청소","공부", "산책", "토익", "코딩", "요리", "운동", "정리", "청소"]
+    private var tagNameTextArray = ["x", "+", "TOEIC", "CODING", "COOKING", "EXERCISE", "CLEANING", "CLEANINNNNG","공부", "산책", "토익", "코딩", "요리", "운동", "정리", "청소","공부", "산책", "토익", "코딩", "요리", "운동", "정리", "청소","공부", "산책", "토익", "코딩", "요리", "운동", "정리", "청소"]
     
     private let tagCollectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewLayout()).then {
         let layout: UICollectionViewFlowLayout = UICollectionViewFlowLayout()
@@ -288,19 +289,19 @@ class PersonalPlanChangeViewController: UIViewController, UIGestureRecognizerDel
         }
         
         tagCollectionView.snp.makeConstraints { make in
-            make.top.equalTo(tagLabel.snp.bottom).offset(self.view.frame.height/60)
-            make.left.equalTo(tagLabel)
-            make.height.equalToSuperview().dividedBy(10)
+            make.top.equalTo(tagLabel.snp.bottom).offset(self.view.frame.height/162.4)
+            make.left.equalToSuperview()
+            make.height.equalToSuperview().dividedBy(13.09)
             make.right.equalToSuperview()
         }
-        
+                
         notificationTitleLabel.snp.makeConstraints { make in
-            make.left.equalTo(tagCollectionView)
+            make.left.equalTo(tagLabel)
             make.top.equalTo(tagCollectionView.snp.bottom).offset(self.view.frame.height/38.6)
         }
         
         notificationButton.snp.makeConstraints { make in
-            make.left.equalTo(notificationTitleLabel)
+            make.left.equalTo(tagLabel)
             make.top.equalTo(notificationTitleLabel.snp.bottom).offset(self.view.frame.height/73.11)
             make.width.equalToSuperview().dividedBy(4.15)
             make.height.equalToSuperview().dividedBy(23.88)
@@ -364,6 +365,10 @@ class PersonalPlanChangeViewController: UIViewController, UIGestureRecognizerDel
     @objc func calendarAlert(){
         selectedRepeatDayTextArray = []
         selectCalendarModalView.isHidden = false
+    }
+    
+    @objc func tagAddButtonClicked(sender:UIButton){
+        tagAddModalView.isHidden = true
     }
     
     @objc func clockAlert(){
@@ -445,6 +450,7 @@ class PersonalPlanChangeViewController: UIViewController, UIGestureRecognizerDel
 
 //MARK: - extension
 extension PersonalPlanChangeViewController: UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout{
+    
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         if collectionView == tagCollectionView{
             return TagModels.count
@@ -457,14 +463,44 @@ extension PersonalPlanChangeViewController: UICollectionViewDataSource, UICollec
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         if collectionView == tagCollectionView{
-            
-            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: TagCollectionViewCell.reuseId, for: indexPath) as! TagCollectionViewCell
+            if indexPath == [0,0]{
+                let cell = collectionView.dequeueReusableCell(withReuseIdentifier: TagCollectionViewCell.reuseId, for: indexPath) as! TagCollectionViewCell
                 
-            cell.setModel(TagModels[indexPath.row])
+                cell.tagNameLabel.isHidden = true
                 
-            cell.tagNameLabel.text = tagNameTextArray[indexPath.row]
+                cell.iconImageView.isHidden = false
                 
-            return cell
+                
+
+                cell.setModel(TagModels[indexPath.row])
+                return cell
+
+                
+            }else if indexPath == [0,1]{
+                let cell = collectionView.dequeueReusableCell(withReuseIdentifier: TagCollectionViewCell.reuseId, for: indexPath) as! TagCollectionViewCell
+                
+                cell.tagNameLabel.isHidden = true
+                
+                cell.iconImageView.isHidden = false
+
+                cell.setModel(TagModels[indexPath.row])
+                return cell
+
+            }else{
+                let cell = collectionView.dequeueReusableCell(withReuseIdentifier: TagCollectionViewCell.reuseId, for: indexPath) as! TagCollectionViewCell
+                    
+                cell.setModel(TagModels[indexPath.row])
+                
+                cell.iconImageView.isHidden = true
+
+                cell.tagNameLabel.isHidden = false
+
+                    
+                cell.tagNameLabel.text = tagNameTextArray[indexPath.row]
+                    
+                return cell
+            }
+
             
         }else if collectionView == selectCalendarModalView.repeatCollectionView{
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: DayCollectionViewCell.identifier, for: indexPath) as! DayCollectionViewCell
@@ -483,6 +519,8 @@ extension PersonalPlanChangeViewController: UICollectionViewDataSource, UICollec
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
         if collectionView == selectCalendarModalView.repeatCollectionView {
             return UIEdgeInsets(top: self.view.frame.width/100, left: self.view.frame.width/15.62, bottom: 0, right: self.view.frame.width/15.62)
+        }else if collectionView == tagCollectionView{
+            return UIEdgeInsets(top: 0, left: self.view.frame.width/12, bottom: 0, right: self.view.frame.width/12)
         }
         
         return UIEdgeInsets()
@@ -490,7 +528,12 @@ extension PersonalPlanChangeViewController: UICollectionViewDataSource, UICollec
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         if collectionView == tagCollectionView{
-            return CGSize(width: self.view.frame.width/4.4, height: self.view.frame.height/23)
+            if indexPath == [0,0] || indexPath == [0,1]{
+                return CGSize(width: self.view.frame.height/20, height: self.view.frame.height/20)
+            }else{
+                return CGSize(width: tagNameTextArray[indexPath.item].size(withAttributes: [NSAttributedString.Key.font : UIFont.systemFont(ofSize: 17)]).width + 25, height: self.view.frame.height/20)
+            }
+
         }else if collectionView == selectCalendarModalView.repeatCollectionView{
             return CGSize(width: self.view.frame.width/12.18, height: self.view.frame.height/23.88)
         }
@@ -502,17 +545,37 @@ extension PersonalPlanChangeViewController: UICollectionViewDataSource, UICollec
         if collectionView == tagCollectionView{
             if indexPath == [0,0]{
                 tagAddModalView.isHidden = false
-            }else{
-                // 이전에 선택되어있던 cell 선택 해제
-                for i in 0...TagModels.count-1{
-                    if TagModels[i].isSelected == false{
-                        TagModels[i].isSelected.toggle()
-                    }
-                }
+            }else if indexPath == [0,1]{
+                    TagModels[indexPath.row].iconImgae = UIImage(named: "EZY_SelectedNoSelectTagButtonImage")!
 
-                // 클릭한 cell 선택
-                TagModels[indexPath.row].isSelected.toggle()
+                    for i in 0...TagModels.count-1{
+                        if TagModels[i].isSelected == false{
+                            TagModels[i].isSelected.toggle()
+                        }
+                    }
+                    
+                    TagModels[indexPath.row].isSelected.toggle()
+                    
+
+
+            }else{
+                TagModels[1].iconImgae = UIImage(named: "EZY_UnSelectedNoSelectTagButtonImage")!
+
+                    for i in 0...TagModels.count-1{
+                        if TagModels[i].isSelected == false{
+                            TagModels[i].isSelected.toggle()
+                        }
+                    }
+                    
+                    TagModels[indexPath.row].isSelected.toggle()
+                    
+
             }
+            
+            
+            // 이전에 선택되어있던 cell 선택 해제
+
+            
         }else if collectionView == selectCalendarModalView.repeatCollectionView{
             repeatModels[indexPath.row].isSelected.toggle()
         }
@@ -584,14 +647,25 @@ extension PersonalPlanChangeViewController: UIPickerViewDelegate, UIPickerViewDa
             
             return pickerLabel!
         }else if pickerView == selectCalendarModalView.dayPickerView{
-            let pickerLabel1 = UILabel()
-            let pickerLabel2 = UILabel()
+            let pickerLabel1 = UILabel().then{
+                $0.font = UIFont(name: "AppleSDGothicNeo-SemiBold", size: 15)
+                $0.textAlignment = .center
+                $0.text = dayPickerViewTextArray[0][row]
+            }
             
-            let view = UIView(frame: CGRect(x: 0, y: 0, width:0, height:0))
+            let pickerLabel2 = UILabel().then{
+                $0.font = UIFont(name: "AppleSDGothicNeo-SemiBold", size: 20)
+                $0.textAlignment = .center
+                $0.text = dayPickerViewTextArray[1][row]
+            }
             
-            pickerLabel1.text = dayPickerViewTextArray[0][row]
-            pickerLabel2.text = dayPickerViewTextArray[1][row]
+            let view = UIView(frame: CGRect(x: 0, y: 0, width:0, height:0)).then{
+                $0.addSubview(pickerLabel1)
+                $0.addSubview(pickerLabel2)
+                $0.transform = CGAffineTransform(rotationAngle: (90 * (.pi / 180*3)))
+            }
             
+            // 공휴일은 파란색으로 표시하고 그 외에는 회색으로 표시한다.
             if dayPickerViewText1[row] == "Sun"{
                 pickerLabel1.textColor = UIColor(red: 125/255, green: 151/255, blue: 255/255, alpha: 1)
                 pickerLabel2.textColor = UIColor(red: 125/255, green: 151/255, blue: 255/255, alpha: 1)
@@ -599,14 +673,6 @@ extension PersonalPlanChangeViewController: UIPickerViewDelegate, UIPickerViewDa
                 pickerLabel1.textColor = UIColor(red: 100/255, green: 100/255, blue: 100/255, alpha: 1)
                 pickerLabel2.textColor = UIColor(red: 100/255, green: 100/255, blue: 100/255, alpha: 1)
             }
-            
-            pickerLabel1.font = UIFont(name: "AppleSDGothicNeo-SemiBold", size: 15)
-            pickerLabel1.textAlignment = .center
-            pickerLabel2.font = UIFont(name: "AppleSDGothicNeo-SemiBold", size: 20)
-            pickerLabel2.textAlignment = .center
-            
-            view.addSubview(pickerLabel1)
-            view.addSubview(pickerLabel2)
             
             pickerLabel2.snp.makeConstraints { make in
                 make.top.equalToSuperview().offset(self.view.frame.height/23)
@@ -620,17 +686,17 @@ extension PersonalPlanChangeViewController: UIPickerViewDelegate, UIPickerViewDa
             
             pickerView.subviews[1].backgroundColor = UIColor(red: 170/255, green: 187/255, blue: 255/255, alpha: 0.1)
             
-            view.transform = CGAffineTransform(rotationAngle: (90 * (.pi / 180*3)))
-            
             return view
         }
+        
         return UIView()
     }
-    
 }
 
+// MARK: - UITextViewDelegate extension
 extension PersonalPlanChangeViewController: UITextViewDelegate{
     func textViewDidBeginEditing(_ textView: UITextView) {
+        // textView클릭 시 explanationContainerView 올리기
         UIView.animate(withDuration: 0.3) {
             self.explanationContainerView.snp.remakeConstraints { make in
                 make.height.equalTo(self.view.frame.height/10.8)
@@ -640,18 +706,17 @@ extension PersonalPlanChangeViewController: UITextViewDelegate{
             }
             
             self.locationBtn.alpha = 0
-            
             self.view.layoutIfNeeded()
         }
         
+        // textView입력 중에는 btnStackView, calendarBtn를 비활성화한다.
         btnStackView.isUserInteractionEnabled = false
-        
         calendarBtn.isUserInteractionEnabled = false
     }
     
     func textViewDidEndEditing(_ textView: UITextView) {
+        // textView입력이 끝났을 시에는 btnStackView, calendarBtn를 활성화한다.
         btnStackView.isUserInteractionEnabled = true
-        
         calendarBtn.isUserInteractionEnabled = true
     }
 }

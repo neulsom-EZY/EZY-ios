@@ -10,6 +10,7 @@ import UIKit
 struct TagCollectionViewModel {
     var backgroundColor: UIColor
     var isSelected: Bool
+    var iconImgae: UIImage
 }
 
 struct CalendarModel{
