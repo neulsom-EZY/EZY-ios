@@ -477,7 +477,7 @@ class PersonalPlanChangeViewController: UIViewController, UIGestureRecognizerDel
     }
 }
 
-//MARK: - extension
+//MARK: - collectionView extension
 extension PersonalPlanChangeViewController: UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout{
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -577,7 +577,6 @@ extension PersonalPlanChangeViewController: UICollectionViewDataSource, UICollec
         if collectionView == tagCollectionView{
             if indexPath == [0,0]{
                 tagAddModalView.isHidden = false
-                
                 tagAddModalView.tagNameTextField.text = ""
                 
                 // TagColorCollection 초기화
@@ -589,48 +588,40 @@ extension PersonalPlanChangeViewController: UICollectionViewDataSource, UICollec
                 }
                 
                 TagColorModels[0].isSelected = false
-
                 tagAddModalView.tagColorCollectionView.reloadData()
-                
                 tagColorPreciousSelectedIndex = 0
             }else if indexPath == [0,1]{
-                    TagModels[indexPath.row].iconImgae = UIImage(named: "EZY_SelectedNoSelectTagButtonImage")!
+                TagModels[indexPath.row].iconImgae = UIImage(named: "EZY_SelectedNoSelectTagButtonImage")!
 
-                    for i in 0...TagModels.count-1{
-                        if TagModels[i].isSelected == false{
-                            TagModels[i].isSelected.toggle()
-                        }
+                for i in 0...TagModels.count-1{
+                    if TagModels[i].isSelected == false{
+                        TagModels[i].isSelected.toggle()
                     }
+                }
                     
-                    TagModels[indexPath.row].isSelected.toggle()
-                    
-
-
+                TagModels[indexPath.row].isSelected.toggle()
             }else{
                 TagModels[1].iconImgae = UIImage(named: "EZY_UnSelectedNoSelectTagButtonImage")!
 
-                    for i in 0...TagModels.count-1{
-                        if TagModels[i].isSelected == false{
-                            TagModels[i].isSelected.toggle()
-                        }
+                for i in 0...TagModels.count-1{
+                    if TagModels[i].isSelected == false{
+                        TagModels[i].isSelected.toggle()
                     }
+                }
                     
-                    TagModels[indexPath.row].isSelected.toggle()
-                    
-
+                TagModels[indexPath.row].isSelected.toggle()
             }
             
         }else if collectionView == selectCalendarModalView.repeatCollectionView{
+            
             repeatModels[indexPath.row].isSelected.toggle()
+            
         }else if collectionView == tagAddModalView.tagColorCollectionView{
+            
             if TagColorModels[indexPath.row].isSelected == true{
-                
                 TagColorModels[tagColorPreciousSelectedIndex].isSelected = true
-                
                 TagColorModels[indexPath.row].isSelected.toggle()
-                
                 selectedTagColorIndex = indexPath.row
-                
                 tagColorPreciousSelectedIndex = indexPath.row
             }
 
@@ -643,19 +634,17 @@ extension PersonalPlanChangeViewController: UICollectionViewDataSource, UICollec
 
 // MARK: - pickerview extension
 extension PersonalPlanChangeViewController: UIPickerViewDelegate, UIPickerViewDataSource{
-    // 피커뷰의 구성요소(컬럼) 수
-      func numberOfComponents(in pickerView: UIPickerView) -> Int {
+    func numberOfComponents(in pickerView: UIPickerView) -> Int {
         if pickerView == selectTimeModalView.startPickerView || pickerView == selectTimeModalView.endPickerView{
-            return 2    // 구성요소(컬럼)로 지역만 있으므로 1을 리턴
+            return 2
         }else if pickerView == selectCalendarModalView.dayPickerView{
             return 1
         }
     
         return Int()
-      }
-      
-      // 구성요소(컬럼)의 행수
-      func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
         if pickerView == selectTimeModalView.startPickerView || pickerView == selectTimeModalView.endPickerView{
             return startPickerViewText[component].count
         }else if pickerView == selectCalendarModalView.dayPickerView{
@@ -663,10 +652,9 @@ extension PersonalPlanChangeViewController: UIPickerViewDelegate, UIPickerViewDa
         }
 
         return Int()
-      }
+    }
    
-      // 피커뷰에 보여줄 값 전달
-      func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
         if pickerView == selectTimeModalView.startPickerView || pickerView == selectTimeModalView.endPickerView{
             return startPickerViewText[component][row]
         }else if pickerView == selectCalendarModalView.dayPickerView{
@@ -674,14 +662,12 @@ extension PersonalPlanChangeViewController: UIPickerViewDelegate, UIPickerViewDa
         }
 
         return String()
-      }
+    }
     
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         if pickerView == selectCalendarModalView.dayPickerView{
             selectedDayOfWeekText = dayPickerViewTextArray[0][row]
             selectedDayText = dayPickerViewTextArray[1][row]
-            
-            print("selectedDayTextArray : \(selectedDayOfWeekText), \(selectedDayText)")
         }
     }
     
@@ -699,7 +685,6 @@ extension PersonalPlanChangeViewController: UIPickerViewDelegate, UIPickerViewDa
             }
             
             pickerLabel?.text = startPickerViewText[component][row]
-            
             pickerView.subviews[1].backgroundColor = .clear // 회색 뷰 지우기
             
             return pickerLabel!
