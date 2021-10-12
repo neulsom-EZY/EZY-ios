@@ -10,10 +10,24 @@ import SnapKit
 import Then
 import Alamofire
 
-class AddMyToDoViewController:UIViewController{
-    private let tagData : [String] = ["","","자율동아리","공부","자율동아리","전공동아리","전공동아리","산책","자율동아리","공부","자율동아리","전공동아리","산책"]
-    private var alarmData  = ""
-    let tagColor : [UIColor] = [.rgb(red: 135, green: 159, blue: 255),.rgb(red: 150, green: 141, blue: 255),.rgb(red: 158, green: 177, blue: 252)]
+class AddMyToDoViewController: UIViewController{
+    private let tagData : [CollectionViewModel] = [CollectionViewModel(backgroundColor: .EZY_968DFF,
+                                                                       iconImage: UIImage(named: "EZY_GroupAddButton")?.withRenderingMode(.alwaysTemplate),
+                                                                       textData: nil),
+                                                   CollectionViewModel(backgroundColor: UIColor.rgb(red: 144, green: 144, blue: 144),
+                                                                       iconImage: UIImage(named: "EZY_GroupModalViewHideButton")?.withRenderingMode(.alwaysTemplate),
+                                                                       textData: nil),
+                                                   CollectionViewModel(backgroundColor: UIColor.rgb(red: 135, green: 159, blue: 255),  iconImage: nil, textData: "STUDY"),
+                                                   CollectionViewModel(backgroundColor: UIColor.rgb(red: 135, green: 159, blue: 255), iconImage: nil, textData: "PROGRAMMING"),
+                                                   CollectionViewModel(backgroundColor: UIColor.rgb(red: 135, green: 159, blue: 255), iconImage: nil, textData: "STUDY"),
+                                                   CollectionViewModel(backgroundColor: UIColor.rgb(red: 135, green: 159, blue: 255),  iconImage: nil, textData: "PROGRAMMING"),
+                                                   CollectionViewModel(backgroundColor: UIColor.rgb(red: 135, green: 159, blue: 255), iconImage: nil, textData: "MEETING")]
+    
+    
+    private var alarmData : [CollectionViewModel] = [CollectionViewModel(backgroundColor: UIColor.rgb(red: 144, green: 144, blue: 144),
+                                                                         iconImage: UIImage(named: "EZY_GroupAddButton")?.withRenderingMode(.alwaysTemplate),
+                                                                         textData: nil),
+                                                     CollectionViewModel(backgroundColor: UIColor.rgb(red: 144, green: 144, blue: 144), iconImage: UIImage(named: "EZY_GroupModalViewHideButton")?.withRenderingMode(.alwaysTemplate), textData: nil)]
     //MARK: - Properties
     
     let bounds = UIScreen.main.bounds
@@ -144,9 +158,6 @@ class AddMyToDoViewController:UIViewController{
         //추가페이지 작성후 실행시키는 코드
     }
     
-
-    
-    
     //MARK: - Helpers
     //모달 위치
     static func instance() -> AddMyToDoViewController {
@@ -210,8 +221,9 @@ class AddMyToDoViewController:UIViewController{
     }
     //MARK: - Alarm Setting Function
     func alarmReloadSetting(_ ampm: String,_ time: Int,_ minute: Int){
-        alarmData = "\(ampm) \(time):\(minute)"
+        alarmData[0].textData = "\(ampm) \(time):\(String(format: "%02d", minute))"
         alarmSettingcollectionView.reloadData()
+        alarmData[0].iconImage = nil
     }
     //MARK: - Location
     private func location(){
@@ -284,41 +296,18 @@ extension AddMyToDoViewController: UICollectionViewDelegateFlowLayout, UICollect
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         if collectionView == tagCollectionView{
             guard let tagCell = collectionView.dequeueReusableCell(withReuseIdentifier: TagCell.identifier, for: indexPath ) as? TagCell else{ return UICollectionViewCell()}
-            tagCell.backgroundColor = tagColor.randomElement()
-            tagCell.bglabel.textColor = tagCell.backgroundColor
-            if indexPath.item == indexPath.first{
-                tagCell.backgroundColor = .EZY_968DFF
-                tagCell.bglabel.isHidden = true
-                tagCell.iv.isHidden = false
-                tagCell.iv.image = UIImage(named: "EZY_GroupAddButton")?.withRenderingMode(.alwaysTemplate)
-                tagCell.tintColor = tagCell.backgroundColor
-            }else if(indexPath.item == 1){
-                tagCell.backgroundColor = .rgb(red: 144, green: 144, blue: 144)
-                tagCell.bglabel.isHidden = true
-                tagCell.iv.isHidden = false
-                tagCell.iv.image = UIImage(named: "EZY_GroupModalViewHideButton")?.withRenderingMode(.alwaysTemplate)
-                tagCell.tintColor = tagCell.backgroundColor
-            }
-            else{
-                tagCell.bglabel.isHidden = false
-                tagCell.iv.isHidden = true
-                tagCell.bglabel.text = tagData[indexPath.row]
-            }
+            tagCell.iv.image = tagData[indexPath.row].iconImage
+            tagCell.backgroundColor = tagData[indexPath.row].backgroundColor
+            tagCell.iv.tintColor = tagData[indexPath.row].backgroundColor
+            tagCell.bglabel.text = tagData[indexPath.row].textData
+            tagCell.bglabel.textColor = tagData[indexPath.row].backgroundColor
             return tagCell
         }else{
             guard let alarmCell = collectionView.dequeueReusableCell(withReuseIdentifier: AlarmSettingCell.identifier, for: indexPath) as? AlarmSettingCell else {return UICollectionViewCell()}
-            if indexPath.item == indexPath.last{
-                alarmCell.iv.image = UIImage(named: "EZY_GroupModalViewHideButton")?.withRenderingMode(.alwaysTemplate)
-                alarmCell.tintColor = alarmCell.backgroundColor
-            }
-            if alarmData.isEmpty{
-                alarmCell.bglabel.isHidden = true
-                alarmCell.iv.isHidden = false
-            }else{
-                alarmCell.bglabel.isHidden = false
-                alarmCell.iv.isHidden = true
-            }
-            
+            alarmCell.iv.image = alarmData[indexPath.row].iconImage
+            alarmCell.bglabel.text = alarmData[indexPath.row].textData
+            alarmCell.backgroundColor = alarmData[indexPath.row].backgroundColor
+            alarmCell.iv.tintColor = alarmData[indexPath.row].backgroundColor
             return alarmCell
         }
     }
@@ -326,9 +315,34 @@ extension AddMyToDoViewController: UICollectionViewDelegateFlowLayout, UICollect
         return bounds.width/34.1
     }
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: 100 , height: bounds.height/18.88)
+        //MARK: - Cell Dynamic width
+        let label = UILabel().then{
+            $0.dynamicFont(fontSize: 12, currentFontName: "AppleSDGothicNeo-Bold")
+            $0.sizeToFit()
+        }
+        if collectionView == tagCollectionView{
+            label.text = tagData[indexPath.row].textData
+            label.sizeToFit()
+            return CGSize(width: label.frame.width + bounds.width/9.868, height: bounds.height/18.88)
+        }
+        else{
+            label.text = alarmData[indexPath.row].textData
+            label.sizeToFit()
+            return CGSize(width: label.frame.width + bounds.width/9.868, height: bounds.height/18.88)
+        }
     }
-    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        if collectionView == alarmSettingcollectionView{
+            if indexPath.item == indexPath.first{
+                let MoreCalendarModalsVC = MoreAlarmModelViewController.instance()
+                MoreCalendarModalsVC.delegate = self
+                addDim()
+                present(MoreCalendarModalsVC, animated: true, completion: nil)
+                AlarmSettingCell().isSelected = false
+            }
+
+        }
+    }
 }
 
 extension AddMyToDoViewController : AlarmModelDelegate{

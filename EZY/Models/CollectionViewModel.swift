@@ -7,4 +7,8 @@
 
 import UIKit
 
-class CollectionViewModel
+struct CollectionViewModel{
+    let backgroundColor: UIColor
+    var iconImage : UIImage?
+    var textData : String?
+}

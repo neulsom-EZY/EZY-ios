@@ -23,14 +23,14 @@ class AlarmSettingCell : UICollectionViewCell{
     override var isSelected: Bool{
         didSet{
             if isSelected{
-                UIView.animate(withDuration: 0.1) { [self] in
+                UIView.animate(withDuration: 0.3) { [self] in
                     contentView.backgroundColor = .rgb(red: 144, green: 144, blue: 144)
                     bglabel.textColor = .white
                     iv.tintColor = .white
                 }
             }
             else {
-                UIView.animate(withDuration: 0.1) { [self] in
+                UIView.animate(withDuration: 0.3) { [self] in
                     bglabel.textColor = .rgb(red: 144, green: 144, blue: 144)
                     iv.tintColor = .rgb(red: 144, green: 144, blue: 144)
                     contentView.backgroundColor = .white

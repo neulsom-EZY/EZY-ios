@@ -42,7 +42,6 @@ class TagCell : UICollectionViewCell{
     override init(frame: CGRect) {
         super.init(frame: frame)
         contentView.backgroundColor = .white
-        layer.cornerRadius = 10
         contentView.addSubview(bglabel)
         contentView.addSubview(iv)
         Location()
@@ -62,6 +61,7 @@ class TagCell : UICollectionViewCell{
     }
     override func layoutSubviews() {
         super.layoutSubviews()
+        layer.cornerRadius = 10
         contentView.layer.cornerRadius = 10
         contentView.layer.applySketchShadow(color: .black, alpha: 0.1, x: 0, y: 4, blur: 14, spread: 0)
 
