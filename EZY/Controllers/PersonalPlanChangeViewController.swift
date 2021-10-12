@@ -7,8 +7,7 @@
 
 import UIKit
 
-class PersonalPlanChangeViewController: UIViewController, UIGestureRecognizerDelegate{
-
+class PersonalPlanChangeViewController: UIViewController, UIGestureRecognizerDelegate, AlarmModelDelegate{
     //MARK: - Properties
     var TagColorModels: [TagColorCollectionViewModel] = [
                                                 TagColorCollectionViewModel(backgroundColor: UIColor.EZY_TagColorArray[0], isSelected: false),
@@ -29,15 +28,7 @@ class PersonalPlanChangeViewController: UIViewController, UIGestureRecognizerDel
                                                TagCollectionViewModel(backgroundColor: UIColor(red: 221/255, green: 220/255, blue: 220/255, alpha: 1), isSelected: false, iconImgae: UIImage(named: "EZY_SelectedNoSelectTagButtonImage")!),
                                                TagCollectionViewModel(backgroundColor: UIColor(red: 206/255, green: 200/255, blue: 255/255, alpha: 1), isSelected: true, iconImgae: UIImage(named: "EZY_UnSelectedTagAddButtonImage")!),
                                                TagCollectionViewModel(backgroundColor: UIColor(red: 216/255, green: 200/255, blue: 255/255, alpha: 1), isSelected: true, iconImgae: UIImage(named: "EZY_UnSelectedTagAddButtonImage")!),
-                                               TagCollectionViewModel(backgroundColor: UIColor(red: 226/255, green: 200/255, blue: 255/255, alpha: 1), isSelected: true, iconImgae: UIImage(named: "EZY_UnSelectedTagAddButtonImage")!),
-                                               TagCollectionViewModel(backgroundColor: UIColor(red: 236/255, green: 200/255, blue: 255/255, alpha: 1), isSelected: true, iconImgae: UIImage(named: "EZY_UnSelectedTagAddButtonImage")!),
-                                               TagCollectionViewModel(backgroundColor: UIColor(red: 246/255, green: 200/255, blue: 255/255, alpha: 1), isSelected: true, iconImgae: UIImage(named: "EZY_UnSelectedTagAddButtonImage")!),
-                                               TagCollectionViewModel(backgroundColor: UIColor(red: 255/255, green: 200/255, blue: 255/255, alpha: 1), isSelected: true, iconImgae: UIImage(named: "EZY_UnSelectedTagAddButtonImage")!),
-                                               TagCollectionViewModel(backgroundColor: UIColor(red: 255/255, green: 190/255, blue: 255/255, alpha: 1), isSelected: true, iconImgae: UIImage(named: "EZY_UnSelectedTagAddButtonImage")!),
-                                               TagCollectionViewModel(backgroundColor: UIColor(red: 255/255, green: 180/255, blue: 255/255, alpha: 1), isSelected: true, iconImgae: UIImage(named: "EZY_UnSelectedTagAddButtonImage")!),
-                                               TagCollectionViewModel(backgroundColor: UIColor(red: 255/255, green: 170/255, blue: 255/255, alpha: 1), isSelected: true, iconImgae: UIImage(named: "EZY_UnSelectedTagAddButtonImage")!),
-                                               TagCollectionViewModel(backgroundColor: UIColor(red: 255/255, green: 160/255, blue: 255/255, alpha: 1), isSelected: true, iconImgae: UIImage(named: "EZY_UnSelectedTagAddButtonImage")!),
-                                               TagCollectionViewModel(backgroundColor: UIColor(red: 255/255, green: 150/255, blue: 255/255, alpha: 1), isSelected: true, iconImgae: UIImage(named: "EZY_UnSelectedTagAddButtonImage")!)]
+                                               TagCollectionViewModel(backgroundColor: UIColor(red: 226/255, green: 200/255, blue: 255/255, alpha: 1), isSelected: true, iconImgae: UIImage(named: "EZY_UnSelectedTagAddButtonImage")!)]
     
     fileprivate var selectedTimeStartHourIndex = 0
     
@@ -72,9 +63,15 @@ class PersonalPlanChangeViewController: UIViewController, UIGestureRecognizerDel
     private var dayPickerViewTextArray = [["Mon","Tue","Wed","Thr","Fri","Sat","Sun","Mon","Tue","Wed","Thr","Fri","Sat","Sun"].reversed(),["1","2","3","4","5","6","7","1","2","3","4","5","6","7"]]
     
     
-    private var tagNameTextArray = ["x", "+", "TOEIC", "CODING", "COOKING", "EXERCISE", "CLEANING", "CLEANINNNNG","공부", "산책", "토익", "코딩", "요리", "운동", "정리", "청소","공부", "산책", "토익", "코딩", "요리", "운동", "정리", "청소","공부", "산책", "토익", "코딩", "요리", "운동", "정리", "청소"]
+    private var tagNameTextArray = ["x", "+", "TOEIC", "CODING", "COOKING"]
     
     fileprivate let selectedRepeatColor = UIColor.rgb(red: 170, green: 187, blue: 255)
+    
+    //MARK: - 모달 background 설정
+    let bgView = UIView().then {
+        $0.backgroundColor = .black
+        $0.alpha = 0
+    }
     
     fileprivate lazy var repeatModels: [RepeatCollectionViewModal] = [RepeatCollectionViewModal(isSelected: false),RepeatCollectionViewModal(isSelected: false),RepeatCollectionViewModal(isSelected: false),RepeatCollectionViewModal(isSelected: false),RepeatCollectionViewModal(isSelected: false),RepeatCollectionViewModal(isSelected: false),RepeatCollectionViewModal(isSelected: false)]
         
@@ -93,7 +90,8 @@ class PersonalPlanChangeViewController: UIViewController, UIGestureRecognizerDel
         $0.isHidden = true
         $0.tagAddButton.addTarget(self, action: #selector(tagAddButtonClicked(sender:)), for: .touchUpInside)
         $0.tagNameTextField.addTarget(self, action: #selector(tagNameTextFieldClicked(textField:)), for: UIControl.Event.editingDidBegin)
-
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(tagAddModalViewShadowBackgroundView(sender:)))
+        $0.shadowBackgroundView.addGestureRecognizer(tapGesture)
     }
     
     private let tagCollectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewLayout()).then {
@@ -149,24 +147,21 @@ class PersonalPlanChangeViewController: UIViewController, UIGestureRecognizerDel
         $0.dynamicFont(fontSize: 14, currentFontName: "AppleSDGothicNeo-Bold")
     }
     
-    private let notificationButton = UIButton().then{
-        $0.setTitle("선택 안 함", for: .normal)
-        $0.dynamicFont(fontSize: 12, currentFontName: "AppleSDGothicNeo-SemiBold")
-        $0.backgroundColor = UIColor.rgb(red: 253, green: 253, blue: 253)
-        $0.setTitleColor(UIColor.rgb(red: 182, green: 182, blue: 182), for: .normal)
-        $0.layer.borderWidth = 1
-        $0.layer.borderColor = UIColor.rgb(red: 207, green: 207, blue: 207).cgColor
-        $0.layer.cornerRadius = 10
-    }
-    
     private let notificationAddButton = UIButton().then{
-        $0.setTitle("+ 추가", for: .normal)
-        $0.dynamicFont(fontSize: 12, currentFontName: "AppleSDGothicNeo-SemiBold")
         $0.backgroundColor = UIColor.rgb(red: 253, green: 253, blue: 253)
-        $0.setTitleColor(UIColor.rgb(red: 182, green: 182, blue: 182), for: .normal)
-        $0.layer.borderWidth = 1
-        $0.layer.borderColor = UIColor.rgb(red: 207, green: 207, blue: 207).cgColor
+        $0.setImage(UIImage(named: "EZY_UnSelectedTagAddButtonImage"), for: .normal)
         $0.layer.cornerRadius = 10
+        $0.layer.applySketchShadow(color: UIColor(red: 226/255, green: 226/255, blue: 226/255, alpha: 1), alpha: 1, x: 0, y: 3, blur: 15, spread: 0)
+        $0.addTarget(self, action: #selector(notificationAddButtonClicked(sender:)), for: .touchUpInside)
+    }
+
+    private lazy var notificationNoSelectButton = UIButton().then{
+        $0.imageEdgeInsets = UIEdgeInsets(top: view.frame.width/25, left: view.frame.width/25, bottom: view.frame.width/25, right: view.frame.width/25)
+        $0.setImage(UIImage(named: "EZY_SelectedNoSelectTagButtonImage"), for: .normal)
+        $0.backgroundColor = UIColor(red: 221/255, green: 220/255, blue: 220/255, alpha: 1)
+        $0.layer.cornerRadius = 10
+        $0.layer.applySketchShadow(color: UIColor(red: 226/255, green: 226/255, blue: 226/255, alpha: 1), alpha: 1, x: 0, y: 3, blur: 15, spread: 0)
+        $0.addTarget(self, action: #selector(notificationNoSelectButtonClicked(sender:)), for: .touchUpInside)
     }
     
     private let backButton = UIButton().then{
@@ -310,24 +305,24 @@ class PersonalPlanChangeViewController: UIViewController, UIGestureRecognizerDel
             make.top.equalTo(tagCollectionView.snp.bottom).offset(self.view.frame.height/38.6)
         }
         
-        notificationButton.snp.makeConstraints { make in
+        notificationAddButton.snp.makeConstraints { make in
             make.left.equalTo(tagLabel)
             make.top.equalTo(notificationTitleLabel.snp.bottom).offset(self.view.frame.height/73.11)
-            make.width.equalToSuperview().dividedBy(4.15)
-            make.height.equalToSuperview().dividedBy(23.88)
+            make.width.equalToSuperview().dividedBy(9)
+            make.height.equalTo(notificationAddButton.snp.width)
         }
         
-        notificationAddButton.snp.makeConstraints { make in
-            make.centerY.equalTo(notificationButton)
-            make.width.height.equalTo(notificationButton)
-            make.left.equalTo(notificationButton.snp.right).offset(self.view.frame.width/20.29)
+        notificationNoSelectButton.snp.makeConstraints { make in
+            make.centerY.equalTo(notificationAddButton)
+            make.width.height.equalTo(notificationAddButton)
+            make.left.equalTo(notificationAddButton.snp.right).offset(self.view.frame.width/37)
         }
         
         changeButton.snp.makeConstraints { make in
             make.centerX.equalToSuperview()
-            make.left.equalTo(notificationButton)
+            make.left.equalTo(notificationAddButton)
             make.height.equalToSuperview().dividedBy(20)
-            make.top.equalTo(notificationButton.snp.bottom).offset(self.view.frame.height/38.6)
+            make.top.equalTo(notificationAddButton.snp.bottom).offset(self.view.frame.height/38.6)
         }
         
         selectCalendarModalView.snp.makeConstraints { make in
@@ -363,8 +358,8 @@ class PersonalPlanChangeViewController: UIViewController, UIGestureRecognizerDel
         self.view.addSubview(tagLabel)
         self.view.addSubview(tagCollectionView)
         self.view.addSubview(notificationTitleLabel)
-        self.view.addSubview(notificationButton)
         self.view.addSubview(notificationAddButton)
+        self.view.addSubview(notificationNoSelectButton)
         self.view.addSubview(changeButton)
         self.view.addSubview(selectCalendarModalView)
         self.view.addSubview(selectTimeModalView)
@@ -373,7 +368,6 @@ class PersonalPlanChangeViewController: UIViewController, UIGestureRecognizerDel
 
     // MARK: - selectors
     @objc func tagNameTextFieldClicked(textField: UITextField) {
-        
         UIView.animate(withDuration: 0.3) {
             self.tagAddModalView.modalBackgroundView.snp.remakeConstraints { make in
                 make.centerX.equalToSuperview()
@@ -381,10 +375,17 @@ class PersonalPlanChangeViewController: UIViewController, UIGestureRecognizerDel
                 make.width.equalToSuperview().dividedBy(1.13)
                 make.height.equalToSuperview().dividedBy(3.38)
             }
-            
             self.view.layoutIfNeeded()
         }
-
+    }
+    
+    // MARK: - Gesture 안먹음
+    @objc func notificationAddButtonClicked(sender:UIButton){
+            let MoreCalendarModalsVC = MoreAlarmModelViewController.instance()
+            MoreCalendarModalsVC.delegate = self
+            addDim()
+            present(MoreCalendarModalsVC, animated: true, completion: nil)
+            AlarmSettingCell().isSelected = false
     }
     
     @objc func tagAddModalViewShadowBackgroundView(sender:UITapGestureRecognizer){
@@ -404,7 +405,25 @@ class PersonalPlanChangeViewController: UIViewController, UIGestureRecognizerDel
             // tagName이 적혀있으면
             self.view.endEditing(true)
             tagAddModalView.isHidden = true
+            
+            for i in 0...TagModels.count-1{
+                if TagModels[i].isSelected == false{
+                    TagModels[i].isSelected.toggle()
+                }
+            }
+            
+            TagModels[1].iconImgae = UIImage(named: "EZY_UnSelectedNoSelectTagButtonImage")!
+            
+            TagModels.insert(TagCollectionViewModel(backgroundColor: UIColor.EZY_TagColor2, isSelected: false, iconImgae: UIImage()), at: 2)
+            
+            tagNameTextArray.insert(tagAddModalView.tagNameTextField.text!, at: 2)
+            
+            tagCollectionView.reloadData()
         }
+    }
+    
+    @objc func notificationNoSelectButtonClicked(sender:UIButton){
+
     }
     
     @objc func clockAlert(){
@@ -465,7 +484,7 @@ class PersonalPlanChangeViewController: UIViewController, UIGestureRecognizerDel
     
     //MARK: 화면터치하여 내리기
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?){
-         self.view.endEditing(true)
+        self.explanationContainerView.tv.endEditing(true)
         
         if locationBtn.alpha == 0{
             UIView.animate(withDuration: 0.3) {
@@ -477,16 +496,6 @@ class PersonalPlanChangeViewController: UIViewController, UIGestureRecognizerDel
                 }
                 
                 self.locationBtn.alpha = 1
-                
-                self.view.layoutIfNeeded()
-            }
-        }else{
-            UIView.animate(withDuration: 0.3) {
-                self.tagAddModalView.modalBackgroundView.snp.remakeConstraints { make in
-                    make.centerX.centerY.equalToSuperview()
-                    make.width.equalToSuperview().dividedBy(1.13)
-                    make.height.equalToSuperview().dividedBy(3.38)
-                }
                 
                 self.view.layoutIfNeeded()
             }
@@ -502,6 +511,26 @@ class PersonalPlanChangeViewController: UIViewController, UIGestureRecognizerDel
         shake.fromValue = NSValue(cgPoint: CGPoint(x: (view?.center.x)! - 2, y: view?.center.y ?? 0.0))
         shake.toValue = NSValue(cgPoint: CGPoint(x: (view?.center.x)! + 2, y: view?.center.y ?? 0.0))
         view?.layer.add(shake, forKey: "position")
+    }
+    
+    private func addDim() {
+        view.addSubview(bgView)
+        bgView.snp.makeConstraints { (make) in
+            make.edges.equalTo(0)
+        }
+        DispatchQueue.main.async { [weak self] in
+            self?.bgView.alpha = 0.2
+        }
+    }
+    
+    func onTapClose() {
+        self.removeDim()
+    }
+    
+    private func removeDim() {
+        DispatchQueue.main.async { [weak self] in
+            self?.bgView.removeFromSuperview()
+        }
     }
 }
 
