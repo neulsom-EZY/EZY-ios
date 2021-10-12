@@ -106,6 +106,7 @@
 		AA04F9D72701C12600EE0506 /* SignUpTextFieldContainerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA04F9D62701C12600EE0506 /* SignUpTextFieldContainerView.swift */; };
 		AAD95AE126EC7EC7004E4580 /* NewNicknamePhoneNumViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAD95AE026EC7EC7004E4580 /* NewNicknamePhoneNumViewController.swift */; };
 		AAD95AE326EC818B004E4580 /* NewNicknamePutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAD95AE226EC818B004E4580 /* NewNicknamePutViewController.swift */; };
+		EE84DEC02715ABF100121C62 /* CollectionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE84DEBF2715ABF100121C62 /* CollectionViewModel.swift */; };
 		EE93B4D926876C6F0055D7A6 /* PushNotificationManagementViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE93B4D826876C6F0055D7A6 /* PushNotificationManagementViewController.swift */; };
 		EE93B4DB26876F430055D7A6 /* AlarmManagementButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE93B4DA26876F430055D7A6 /* AlarmManagementButton.swift */; };
 		EE93B4DF268797230055D7A6 /* CustomManagePushNotificationCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE93B4DE268797230055D7A6 /* CustomManagePushNotificationCell.swift */; };
@@ -244,6 +245,7 @@
 		AAD95AE026EC7EC7004E4580 /* NewNicknamePhoneNumViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewNicknamePhoneNumViewController.swift; sourceTree = "<group>"; };
 		AAD95AE226EC818B004E4580 /* NewNicknamePutViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewNicknamePutViewController.swift; sourceTree = "<group>"; };
 		C37AD74ACD84F363045FF654 /* Pods_EZY.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_EZY.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		EE84DEBF2715ABF100121C62 /* CollectionViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionViewModel.swift; sourceTree = "<group>"; };
 		EE93B4D826876C6F0055D7A6 /* PushNotificationManagementViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PushNotificationManagementViewController.swift; sourceTree = "<group>"; };
 		EE93B4DA26876F430055D7A6 /* AlarmManagementButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlarmManagementButton.swift; sourceTree = "<group>"; };
 		EE93B4DE268797230055D7A6 /* CustomManagePushNotificationCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomManagePushNotificationCell.swift; sourceTree = "<group>"; };
@@ -438,6 +440,7 @@
 				6AE5BB0226957B0600A9731B /* RepeatCollectionViewModel.swift */,
 				6A82835926997AB500AC381B /* TagCollectionViewModel.swift */,
 				6A3E2E7F26B6A60B0078D749 /* ManagementbtnModel.swift */,
+				EE84DEBF2715ABF100121C62 /* CollectionViewModel.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -754,6 +757,7 @@
 				EE9F0D3E26E8A9340015E81B /* CustomData.swift in Sources */,
 				6A685C0D26AC1E2D0079BC30 /* PersonalPlanDetailRepeatDayCollectionViewCell.swift in Sources */,
 				EE9F0D4326E8A9340015E81B /* SendUser.swift in Sources */,
+				EE84DEC02715ABF100121C62 /* CollectionViewModel.swift in Sources */,
 				6A4EDA41266E38E000B809EC /* GroupCollectionViewCell.swift in Sources */,
 				AAD95AE326EC818B004E4580 /* NewNicknamePutViewController.swift in Sources */,
 				6AA769EF26636AE700B7E1F5 /* EZY.xcdatamodeld in Sources */,

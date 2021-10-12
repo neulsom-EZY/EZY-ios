@@ -11,8 +11,8 @@ import Then
 import Alamofire
 
 class AddMyToDoViewController:UIViewController{
-    private let tagData : [String] = ["전공동아리","산책","자율동아리","공부","자율동아리","전공동아리","전공동아리","산책","자율동아리","공부","자율동아리","전공동아리","산책"]
-    private var alarmData  = "추가"
+    private let tagData : [String] = ["","","자율동아리","공부","자율동아리","전공동아리","전공동아리","산책","자율동아리","공부","자율동아리","전공동아리","산책"]
+    private var alarmData  = ""
     let tagColor : [UIColor] = [.rgb(red: 135, green: 159, blue: 255),.rgb(red: 150, green: 141, blue: 255),.rgb(red: 158, green: 177, blue: 252)]
     //MARK: - Properties
     
@@ -258,7 +258,7 @@ class AddMyToDoViewController:UIViewController{
         }
         alarmSettingcollectionView.snp.makeConstraints {
             $0.top.equalTo(alarmSettings.snp.bottom).offset(bounds.height/58)
-            $0.height.equalTo(bounds.height/23.7)
+            $0.height.equalTo(bounds.height/14.5)
             $0.left.right.equalToSuperview()
         }
         
@@ -284,15 +284,50 @@ extension AddMyToDoViewController: UICollectionViewDelegateFlowLayout, UICollect
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         if collectionView == tagCollectionView{
             guard let tagCell = collectionView.dequeueReusableCell(withReuseIdentifier: TagCell.identifier, for: indexPath ) as? TagCell else{ return UICollectionViewCell()}
-            tagCell.bglabel.text = tagData[indexPath.row]
-            
+            tagCell.backgroundColor = tagColor.randomElement()
+            tagCell.bglabel.textColor = tagCell.backgroundColor
+            if indexPath.item == indexPath.first{
+                tagCell.backgroundColor = .EZY_968DFF
+                tagCell.bglabel.isHidden = true
+                tagCell.iv.isHidden = false
+                tagCell.iv.image = UIImage(named: "EZY_GroupAddButton")?.withRenderingMode(.alwaysTemplate)
+                tagCell.tintColor = tagCell.backgroundColor
+            }else if(indexPath.item == 1){
+                tagCell.backgroundColor = .rgb(red: 144, green: 144, blue: 144)
+                tagCell.bglabel.isHidden = true
+                tagCell.iv.isHidden = false
+                tagCell.iv.image = UIImage(named: "EZY_GroupModalViewHideButton")?.withRenderingMode(.alwaysTemplate)
+                tagCell.tintColor = tagCell.backgroundColor
+            }
+            else{
+                tagCell.bglabel.isHidden = false
+                tagCell.iv.isHidden = true
+                tagCell.bglabel.text = tagData[indexPath.row]
+            }
             return tagCell
         }else{
             guard let alarmCell = collectionView.dequeueReusableCell(withReuseIdentifier: AlarmSettingCell.identifier, for: indexPath) as? AlarmSettingCell else {return UICollectionViewCell()}
+            if indexPath.item == indexPath.last{
+                alarmCell.iv.image = UIImage(named: "EZY_GroupModalViewHideButton")?.withRenderingMode(.alwaysTemplate)
+                alarmCell.tintColor = alarmCell.backgroundColor
+            }
+            if alarmData.isEmpty{
+                alarmCell.bglabel.isHidden = true
+                alarmCell.iv.isHidden = false
+            }else{
+                alarmCell.bglabel.isHidden = false
+                alarmCell.iv.isHidden = true
+            }
+            
             return alarmCell
         }
     }
-    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
+        return bounds.width/34.1
+    }
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        return CGSize(width: 100 , height: bounds.height/18.88)
+    }
     
 }
 
