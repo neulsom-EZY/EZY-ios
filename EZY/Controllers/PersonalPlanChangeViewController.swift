@@ -96,8 +96,6 @@ class PersonalPlanChangeViewController: UIViewController, UIGestureRecognizerDel
         $0.isHidden = true
         $0.tagAddButton.addTarget(self, action: #selector(tagAddButtonClicked(sender:)), for: .touchUpInside)
         $0.tagNameTextField.addTarget(self, action: #selector(tagNameTextFieldClicked(textField:)), for: UIControl.Event.editingDidBegin)
-        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(tagAddModalViewShadowBackgroundView(sender:)))
-        $0.shadowBackgroundView.addGestureRecognizer(tapGesture)
     }
     
     private let tagCollectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewLayout()).then {
@@ -407,10 +405,6 @@ class PersonalPlanChangeViewController: UIViewController, UIGestureRecognizerDel
         // 알림 시간 +버튼에 text로 넣기
     }
     
-    @objc func tagAddModalViewShadowBackgroundView(sender:UITapGestureRecognizer){
-        tagAddModalView.isHidden = true
-    }
-    
     @objc func calendarAlert(){
         selectedRepeatDayTextArray = []
         selectCalendarModalView.isHidden = false
@@ -611,7 +605,9 @@ extension PersonalPlanChangeViewController: UICollectionViewDataSource, UICollec
             return cell
         }else if collectionView == tagAddModalView.tagColorCollectionView{
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: TagColorCollectionViewCell.reuseId, for: indexPath) as! TagColorCollectionViewCell
-
+            
+            cell.backgroundColor = .white
+            
             cell.setModel(TagColorModels[indexPath.row])
             
             return cell
@@ -693,7 +689,7 @@ extension PersonalPlanChangeViewController: UICollectionViewDataSource, UICollec
             repeatModels[indexPath.row].isSelected.toggle()
             
         }else if collectionView == tagAddModalView.tagColorCollectionView{
-            
+            print("Asdf")
             if TagColorModels[indexPath.row].isSelected == true{
                 
                 TagColorModels[tagColorPreciousSelectedIndex].isSelected = true
