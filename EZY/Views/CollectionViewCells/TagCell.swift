@@ -32,9 +32,9 @@ class TagCell : UICollectionViewCell{
             }
             else {
                 UIView.animate(withDuration: 0.1) { [self] in
+                    contentView.backgroundColor = .white
                     bglabel.textColor = backgroundColor
                     iv.tintColor = backgroundColor
-                    contentView.backgroundColor = .white
                 }
             }
         }
@@ -55,16 +55,17 @@ class TagCell : UICollectionViewCell{
             $0.center.equalToSuperview()
         }
     }
-    override func awakeFromNib() {
-        super.awakeFromNib()
-        
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        iv.tintColor = .white
+        contentView.backgroundColor = .white
+        bglabel.textColor = .white
     }
     override func layoutSubviews() {
         super.layoutSubviews()
-        layer.cornerRadius = 10
+        layer.cornerRadius = 20
         contentView.layer.cornerRadius = 10
         contentView.layer.applySketchShadow(color: .black, alpha: 0.1, x: 0, y: 4, blur: 14, spread: 0)
-
     }
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")

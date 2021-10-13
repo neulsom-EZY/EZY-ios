@@ -11,7 +11,7 @@ import Then
 import Alamofire
 
 class AddMyToDoViewController: UIViewController{
-    private let tagData : [CollectionViewModel] = [CollectionViewModel(backgroundColor: .EZY_968DFF,
+     let tagData : [CollectionViewModel] = [CollectionViewModel(backgroundColor: .EZY_968DFF,
                                                                        iconImage: UIImage(named: "EZY_GroupAddButton")?.withRenderingMode(.alwaysTemplate),
                                                                        textData: nil),
                                                    CollectionViewModel(backgroundColor: UIColor.rgb(red: 144, green: 144, blue: 144),
@@ -19,15 +19,15 @@ class AddMyToDoViewController: UIViewController{
                                                                        textData: nil),
                                                    CollectionViewModel(backgroundColor: UIColor.rgb(red: 135, green: 159, blue: 255),  iconImage: nil, textData: "STUDY"),
                                                    CollectionViewModel(backgroundColor: UIColor.rgb(red: 135, green: 159, blue: 255), iconImage: nil, textData: "PROGRAMMING"),
-                                                   CollectionViewModel(backgroundColor: UIColor.rgb(red: 135, green: 159, blue: 255), iconImage: nil, textData: "STUDY"),
+                                                   CollectionViewModel(backgroundColor: .EZY_968DFF, iconImage: nil, textData: "STUDY"),
                                                    CollectionViewModel(backgroundColor: UIColor.rgb(red: 135, green: 159, blue: 255),  iconImage: nil, textData: "PROGRAMMING"),
                                                    CollectionViewModel(backgroundColor: UIColor.rgb(red: 135, green: 159, blue: 255), iconImage: nil, textData: "MEETING")]
     
     
-    private var alarmData : [CollectionViewModel] = [CollectionViewModel(backgroundColor: UIColor.rgb(red: 144, green: 144, blue: 144),
-                                                                         iconImage: UIImage(named: "EZY_GroupAddButton")?.withRenderingMode(.alwaysTemplate),
+    var alarmData : [CollectionViewModel] = [CollectionViewModel(backgroundColor: .EZY_968DFF,
+                                                                  iconImage: UIImage(named: "EZY_GroupAddButton")?.withRenderingMode(.alwaysTemplate),
                                                                          textData: nil),
-                                                     CollectionViewModel(backgroundColor: UIColor.rgb(red: 144, green: 144, blue: 144), iconImage: UIImage(named: "EZY_GroupModalViewHideButton")?.withRenderingMode(.alwaysTemplate), textData: nil)]
+                                              CollectionViewModel(backgroundColor: UIColor.rgb(red: 144, green: 144, blue: 144), iconImage: UIImage(named: "EZY_GroupModalViewHideButton")?.withRenderingMode(.alwaysTemplate), textData: nil)]
     //MARK: - Properties
     
     let bounds = UIScreen.main.bounds
@@ -269,8 +269,8 @@ class AddMyToDoViewController: UIViewController{
             $0.top.equalTo(tagCollectionView.snp.bottom)
         }
         alarmSettingcollectionView.snp.makeConstraints {
-            $0.top.equalTo(alarmSettings.snp.bottom).offset(bounds.height/58)
-            $0.height.equalTo(bounds.height/14.5)
+            $0.top.equalTo(alarmSettings.snp.bottom)
+            $0.height.equalTo(bounds.height/11.76)
             $0.left.right.equalToSuperview()
         }
         
@@ -305,8 +305,8 @@ extension AddMyToDoViewController: UICollectionViewDelegateFlowLayout, UICollect
         }else{
             guard let alarmCell = collectionView.dequeueReusableCell(withReuseIdentifier: AlarmSettingCell.identifier, for: indexPath) as? AlarmSettingCell else {return UICollectionViewCell()}
             alarmCell.iv.image = alarmData[indexPath.row].iconImage
-            alarmCell.bglabel.text = alarmData[indexPath.row].textData
             alarmCell.backgroundColor = alarmData[indexPath.row].backgroundColor
+            alarmCell.bglabel.text = alarmData[indexPath.row].textData
             alarmCell.iv.tintColor = alarmData[indexPath.row].backgroundColor
             return alarmCell
         }
@@ -330,6 +330,7 @@ extension AddMyToDoViewController: UICollectionViewDelegateFlowLayout, UICollect
             label.sizeToFit()
             return CGSize(width: label.frame.width + bounds.width/9.868, height: bounds.height/18.88)
         }
+        
     }
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         if collectionView == alarmSettingcollectionView{
@@ -339,8 +340,8 @@ extension AddMyToDoViewController: UICollectionViewDelegateFlowLayout, UICollect
                 addDim()
                 present(MoreCalendarModalsVC, animated: true, completion: nil)
                 AlarmSettingCell().isSelected = false
+                collectionView.deselectItem(at: indexPath, animated: true)
             }
-
         }
     }
 }

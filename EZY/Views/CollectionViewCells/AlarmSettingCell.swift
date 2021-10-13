@@ -23,16 +23,16 @@ class AlarmSettingCell : UICollectionViewCell{
     override var isSelected: Bool{
         didSet{
             if isSelected{
-                UIView.animate(withDuration: 0.3) { [self] in
-                    contentView.backgroundColor = .rgb(red: 144, green: 144, blue: 144)
+                UIView.animate(withDuration: 0.1) { [self] in
+                    contentView.backgroundColor = backgroundColor
                     bglabel.textColor = .white
                     iv.tintColor = .white
                 }
             }
             else {
-                UIView.animate(withDuration: 0.3) { [self] in
-                    bglabel.textColor = .rgb(red: 144, green: 144, blue: 144)
-                    iv.tintColor = .rgb(red: 144, green: 144, blue: 144)
+                UIView.animate(withDuration: 0.1) { [self] in
+                    bglabel.textColor = backgroundColor
+                    iv.tintColor = backgroundColor
                     contentView.backgroundColor = .white
                 }
             }
@@ -41,7 +41,7 @@ class AlarmSettingCell : UICollectionViewCell{
     override init(frame: CGRect) {
         super.init(frame: frame)
         contentView.backgroundColor = .white
-        layer.cornerRadius = 10
+        layer.cornerRadius = 20
         contentView.addSubview(bglabel)
         contentView.addSubview(iv)
         Location()
@@ -57,7 +57,8 @@ class AlarmSettingCell : UICollectionViewCell{
     }
     override func awakeFromNib() {
         super.awakeFromNib()
-        
+        iv.tintColor = .white
+        bglabel.textColor = .white
     }
     override func layoutSubviews() {
         super.layoutSubviews()
