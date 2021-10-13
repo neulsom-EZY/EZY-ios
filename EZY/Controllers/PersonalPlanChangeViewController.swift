@@ -50,9 +50,9 @@ class PersonalPlanChangeViewController: UIViewController, UIGestureRecognizerDel
     
     private var selectedDayText = ""
     
-    private var selectedStartTime = ["",""]
+    private var selectedStartTime = ["01","00"]
     
-    private var selectedEndTime = ["",""]
+    private var selectedEndTime = ["01","00"]
     
     private let dayEnglishTextArray = ["Mon","Tue","Wed","Thr","Fri","Sat","Sun"]
     
@@ -403,6 +403,8 @@ class PersonalPlanChangeViewController: UIViewController, UIGestureRecognizerDel
         addDim()
         present(MoreCalendarModalsVC, animated: true, completion: nil)
         AlarmSettingCell().isSelected = false
+        
+        // 알림 시간 +버튼에 text로 넣기
     }
     
     @objc func tagAddModalViewShadowBackgroundView(sender:UITapGestureRecognizer){
