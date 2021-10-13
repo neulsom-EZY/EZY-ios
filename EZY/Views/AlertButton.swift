@@ -14,7 +14,7 @@ class AlertButton : UIButton {
 
     private let view = UIView()
     
-    private let label = UILabel()
+    var alertButtonTitleLabel = UILabel()
     
     private let icon = UIImageView()
     
@@ -34,7 +34,7 @@ class AlertButton : UIButton {
     }
     private func addSubViews(){
         addSubview(view)
-        addSubview(label)
+        addSubview(alertButtonTitleLabel)
         addSubview(icon)
     }
     public func configure( with viewModel : AlertBtn){
@@ -42,12 +42,12 @@ class AlertButton : UIButton {
         view.backgroundColor = .white
         view.layer.applySketchShadow(color: UIColor.black, alpha: 0.1, x: 0, y: 4, blur: 15, spread: 0)
         
-        label.dynamicFont(fontSize: 16, currentFontName: "AppleSDGothicNeo-Regular")
-        label.textColor = .EZY_656565
+        alertButtonTitleLabel.dynamicFont(fontSize: 16, currentFontName: "AppleSDGothicNeo-Regular")
+        alertButtonTitleLabel.textColor = .EZY_656565
         
         icon.image = viewModel.icon
         icon.tintColor = viewModel.iconTintColor
-        label.text = viewModel.message
+        alertButtonTitleLabel.text = viewModel.message
     }
     override func layoutSubviews() {
         super.layoutSubviews()
@@ -65,7 +65,7 @@ class AlertButton : UIButton {
             make.center.equalTo(view.snp.center)
         }
         
-        label.snp.makeConstraints { (make) in
+        alertButtonTitleLabel.snp.makeConstraints { (make) in
             make.left.equalTo(view.snp.right).offset(frame.height/1.7)
             make.centerY.equalToSuperview()
             make.right.equalTo(snp.right)

@@ -66,7 +66,6 @@ class TagSettingViewController: UIViewController {
         $0.layer.cornerRadius = 10
         $0.setTitle("완 료", for: .normal)
         $0.dynamicFont(fontSize: 14, currentFontName: "AppleSDGothicNeo-SemiBold")
-        $0.addTarget(self, action: #selector(completeButtonClicked(sender:)), for: .touchUpInside)
     }
     
     let tagColorCollectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewLayout()).then {

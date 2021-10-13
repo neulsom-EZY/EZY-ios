@@ -107,7 +107,6 @@ class SelectTimeModalView: UIView {
         $0.backgroundColor = UIColor(red: 150/255, green: 141/255, blue: 255/255, alpha: 1)
         $0.layer.cornerRadius = 10
         $0.dynamicFont(fontSize: 12, currentFontName: "AppleSDGothicNeo-Bold")
-        $0.addTarget(self, action: #selector(completeButtonClicked(sender:)), for: .touchUpInside)
 
     }
     
@@ -142,9 +141,7 @@ class SelectTimeModalView: UIView {
     }
     
     //MARK: - selectors
-    @objc func completeButtonClicked(sender:UIButton){
-        self.isHidden = true
-    }
+
     
     @objc func endSelectCircleButton(sender:UIButton){
         UIView.animate(withDuration: 0.3) {

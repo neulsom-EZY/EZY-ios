@@ -50,6 +50,10 @@ class PersonalPlanChangeViewController: UIViewController, UIGestureRecognizerDel
     
     private var selectedDayText = ""
     
+    private var selectedStartTime = ["",""]
+    
+    private var selectedEndTime = ["",""]
+    
     private let dayEnglishTextArray = ["Mon","Tue","Wed","Thr","Fri","Sat","Sun"]
     
     private let dayKoreanTextArray = ["월","화","수","목","금","토","일"]
@@ -84,6 +88,8 @@ class PersonalPlanChangeViewController: UIViewController, UIGestureRecognizerDel
     
     private let selectTimeModalView = SelectTimeModalView().then{
         $0.isHidden = true
+        $0.completeButton.addTarget(self, action: #selector(selectedTimeCompleteButtonClicked(sender:)), for: .touchUpInside)
+
     }
 
     private let tagAddModalView = TagAddModalView().then{
@@ -373,6 +379,11 @@ class PersonalPlanChangeViewController: UIViewController, UIGestureRecognizerDel
     }
 
     // MARK: - selectors
+    @objc func selectedTimeCompleteButtonClicked(sender:UIButton){
+        self.selectTimeModalView.isHidden = true
+        clockBtn.alertButtonTitleLabel.text = "\(selectedStartTime.joined(separator: ":")) ~ \(selectedEndTime.joined(separator: ":"))"
+    }
+    
     @objc func tagNameTextFieldClicked(textField: UITextField) {
         UIView.animate(withDuration: 0.3) {
             self.tagAddModalView.modalBackgroundView.snp.remakeConstraints { make in
@@ -735,6 +746,18 @@ extension PersonalPlanChangeViewController: UIPickerViewDelegate, UIPickerViewDa
         if pickerView == selectCalendarModalView.dayPickerView{
             selectedDayOfWeekText = dayPickerViewTextArray[0][row]
             selectedDayText = dayPickerViewTextArray[1][row]
+        }else if pickerView == selectTimeModalView.startPickerView{
+            if component == 0{
+                selectedStartTime[0] = "\(startPickerViewText[0][row])"
+            }else{
+                selectedStartTime[1] = "\(startPickerViewText[1][row])"
+            }
+        }else if pickerView == selectTimeModalView.endPickerView{
+            if component == 0{
+                selectedEndTime[0] = "\(startPickerViewText[0][row])"
+            }else{
+                selectedEndTime[1] = "\(startPickerViewText[1][row])"
+            }
         }
     }
     
