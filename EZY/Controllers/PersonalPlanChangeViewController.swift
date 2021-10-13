@@ -26,9 +26,9 @@ class PersonalPlanChangeViewController: UIViewController, UIGestureRecognizerDel
     
     private var TagModels: [TagCollectionViewModel] = [TagCollectionViewModel(backgroundColor: UIColor(red: 186/255, green: 200/255, blue: 255/255, alpha: 1), isSelected: true, iconImgae: UIImage(named: "EZY_UnSelectedTagAddButtonImage")!),
                                                TagCollectionViewModel(backgroundColor: UIColor(red: 221/255, green: 220/255, blue: 220/255, alpha: 1), isSelected: false, iconImgae: UIImage(named: "EZY_SelectedNoSelectTagButtonImage")!),
-                                               TagCollectionViewModel(backgroundColor: UIColor(red: 206/255, green: 200/255, blue: 255/255, alpha: 1), isSelected: true, iconImgae: UIImage(named: "EZY_UnSelectedTagAddButtonImage")!),
-                                               TagCollectionViewModel(backgroundColor: UIColor(red: 216/255, green: 200/255, blue: 255/255, alpha: 1), isSelected: true, iconImgae: UIImage(named: "EZY_UnSelectedTagAddButtonImage")!),
-                                               TagCollectionViewModel(backgroundColor: UIColor(red: 226/255, green: 200/255, blue: 255/255, alpha: 1), isSelected: true, iconImgae: UIImage(named: "EZY_UnSelectedTagAddButtonImage")!)]
+                                                       TagCollectionViewModel(backgroundColor: UIColor(red: 206/255, green: 200/255, blue: 255/255, alpha: 1), isSelected: true, iconImgae: UIImage()),
+                                               TagCollectionViewModel(backgroundColor: UIColor(red: 216/255, green: 200/255, blue: 255/255, alpha: 1), isSelected: true, iconImgae: UIImage()),
+                                               TagCollectionViewModel(backgroundColor: UIColor(red: 226/255, green: 200/255, blue: 255/255, alpha: 1), isSelected: true, iconImgae: UIImage())]
     
     fileprivate var selectedTimeStartHourIndex = 0
     
@@ -58,7 +58,7 @@ class PersonalPlanChangeViewController: UIViewController, UIGestureRecognizerDel
     
     private var dayPickerViewText2 = ["12","3","4","5","6","7","2","3","4","5","6","7","2","3","4","5","6","7"]
     
-    private var startPickerViewText = [["1","2","3","4","5","6","7","8","9","10","11","12"],["00","05","10","15","20","25","30","35","40","45","50","55"]]
+    private var startPickerViewText = [["01","02","03","04","05","06","07","08","09","10","11","12"],["00","05","10","15","20","25","30","35","40","45","50","55"]]
     
     private var dayPickerViewTextArray = [["Mon","Tue","Wed","Thr","Fri","Sat","Sun","Mon","Tue","Wed","Thr","Fri","Sat","Sun"].reversed(),["1","2","3","4","5","6","7","1","2","3","4","5","6","7"]]
     
@@ -228,6 +228,12 @@ class PersonalPlanChangeViewController: UIViewController, UIGestureRecognizerDel
         tagAddModalView.tagColorCollectionView.delegate = self
         tagAddModalView.tagColorCollectionView.dataSource = self
         
+        selectTimeModalView.startPickerView.delegate = self
+        selectTimeModalView.startPickerView.dataSource = self
+        
+        selectTimeModalView.endPickerView.delegate = self
+        selectTimeModalView.endPickerView.dataSource = self
+        
         tagCollectionView.delegate = self
         tagCollectionView.dataSource = self
         
@@ -381,11 +387,11 @@ class PersonalPlanChangeViewController: UIViewController, UIGestureRecognizerDel
     
     // MARK: - Gesture 안먹음
     @objc func notificationAddButtonClicked(sender:UIButton){
-            let MoreCalendarModalsVC = MoreAlarmModelViewController.instance()
-            MoreCalendarModalsVC.delegate = self
-            addDim()
-            present(MoreCalendarModalsVC, animated: true, completion: nil)
-            AlarmSettingCell().isSelected = false
+        let MoreCalendarModalsVC = MoreAlarmModelViewController.instance()
+        MoreCalendarModalsVC.delegate = self
+        addDim()
+        present(MoreCalendarModalsVC, animated: true, completion: nil)
+        AlarmSettingCell().isSelected = false
     }
     
     @objc func tagAddModalViewShadowBackgroundView(sender:UITapGestureRecognizer){
@@ -597,7 +603,6 @@ extension PersonalPlanChangeViewController: UICollectionViewDataSource, UICollec
             
             return cell
         }
-
         return UICollectionViewCell()
     }
     
@@ -677,9 +682,13 @@ extension PersonalPlanChangeViewController: UICollectionViewDataSource, UICollec
         }else if collectionView == tagAddModalView.tagColorCollectionView{
             
             if TagColorModels[indexPath.row].isSelected == true{
+                
                 TagColorModels[tagColorPreciousSelectedIndex].isSelected = true
-                TagColorModels[indexPath.row].isSelected.toggle()
+                
+                TagColorModels[indexPath.row].isSelected = false
+                
                 selectedTagColorIndex = indexPath.row
+                
                 tagColorPreciousSelectedIndex = indexPath.row
             }
 
@@ -737,7 +746,7 @@ extension PersonalPlanChangeViewController: UIPickerViewDelegate, UIPickerViewDa
             {
                 pickerLabel = UILabel()
                 
-                pickerLabel?.font = UIFont(name: "AppleSDGothicNeo-SemiBold", size: 20)
+                pickerLabel?.font = UIFont(name: "AppleSDGothicNeo-SemiBold", size: 15)
                 pickerLabel?.textColor = UIColor(red: 120/255, green: 108/255, blue: 255/255, alpha: 1)
                 pickerLabel?.textAlignment = .center
             }
@@ -748,7 +757,7 @@ extension PersonalPlanChangeViewController: UIPickerViewDelegate, UIPickerViewDa
             return pickerLabel!
         }else if pickerView == selectCalendarModalView.dayPickerView{
             let pickerLabel1 = UILabel().then{
-                $0.font = UIFont(name: "AppleSDGothicNeo-SemiBold", size: 15)
+                $0.font = UIFont(name: "AppleSDGothicNeo-SemiBold", size: 17)
                 $0.textAlignment = .center
                 $0.text = dayPickerViewTextArray[0][row]
             }

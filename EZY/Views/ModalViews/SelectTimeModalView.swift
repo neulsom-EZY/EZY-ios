@@ -113,12 +113,10 @@ class SelectTimeModalView: UIView {
     
     lazy var startPickerView = UIPickerView().then{
         $0.tintColor = UIColor(red: 150/255, green: 141/255, blue: 255/255, alpha: 1)
-        $0.backgroundColor = .lightGray
     }
     
     lazy var endPickerView = UIPickerView().then{
         $0.tintColor = UIColor(red: 150/255, green: 141/255, blue: 255/255, alpha: 1)
-        $0.backgroundColor = .lightGray
     }
     
     private var startSelectedLabelText = "오전"
@@ -279,16 +277,16 @@ class SelectTimeModalView: UIView {
         
         startPickerView.snp.makeConstraints { make in
             make.centerX.equalTo(startSelectBackButton)
-            make.width.equalToSuperview().dividedBy(5.89)
-            make.height.equalToSuperview().dividedBy(2.64)
-            make.top.equalTo(startMorningLabel.snp.bottom).offset(viewBounds.height/42.73)
+            make.width.equalToSuperview().dividedBy(4)
+            make.height.equalToSuperview().dividedBy(2.4)
+            make.top.equalTo(startMorningLabel.snp.bottom).offset(viewBounds.height/70)
         }
         
         endPickerView.snp.makeConstraints { make in
             make.centerX.equalTo(endSelectBackButton)
-            make.width.equalToSuperview().dividedBy(5.89)
-            make.height.equalToSuperview().dividedBy(2.64)
-            make.top.equalTo(endMorningLabel.snp.bottom).offset(viewBounds.height/42.73)
+            make.width.equalToSuperview().dividedBy(4)
+            make.height.equalToSuperview().dividedBy(2.4)
+            make.top.equalTo(endMorningLabel.snp.bottom).offset(viewBounds.height/70)
         }
         
         completeButton.snp.makeConstraints { make in
@@ -296,6 +294,10 @@ class SelectTimeModalView: UIView {
             make.top.equalTo(endPickerView.snp.bottom).offset(viewBounds.height/58)
             make.width.equalToSuperview().dividedBy(4.71)
             make.height.equalToSuperview().dividedBy(8.09)
+        }
+        
+        waveLabel.snp.makeConstraints { make in
+            make.center.equalToSuperview()
         }
     }
     
