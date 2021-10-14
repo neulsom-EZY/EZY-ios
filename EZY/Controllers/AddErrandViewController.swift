@@ -65,19 +65,8 @@ class AddErrandViewController : UIViewController{
         $0.textColor = .rgb(red: 182, green: 182, blue: 182)
         $0.dynamicFont(fontSize: 12, currentFontName: "AppleSDGothicNeo-Bold")
     }
-<<<<<<< HEAD
- 
-    
-    let addPersonCollectionView: UICollectionView = {
-        let layout = UICollectionViewFlowLayout()
-        let cv = UICollectionView(frame: .zero, collectionViewLayout: layout)
-        cv.translatesAutoresizingMaskIntoConstraints = false
-        cv.register(DayCollectionViewCell.self, forCellWithReuseIdentifier: DayCollectionViewCell.identifier)
-        cv.showsHorizontalScrollIndicator = false
-        cv.isScrollEnabled = false
-        return cv
-    }()
-=======
+
+
     private let askForFavor  = UIButton().then{
         $0.setTitle("+ 인원 선택", for: .normal)
         $0.dynamicFont(fontSize: 12, currentFontName: "AppleSDGothicNeo-Bold")
@@ -85,9 +74,7 @@ class AddErrandViewController : UIViewController{
         $0.backgroundColor = .white
         $0.layer.applySketchShadow(color: .black, alpha: 0.1, x: 0, y: 4, blur: 14, spread: 0)
         $0.addTarget(self, action: #selector(addPerson), for: .touchUpInside)
-    }
->>>>>>> 69cf28b71dcb4e2f7999a77dd93de89b15b2077a
-    
+    }    
     private lazy var addButton : AdditionalButton = {
         let button = AdditionalButton(type: .system)
         button.title = "부탁하기"
@@ -208,58 +195,3 @@ class AddErrandViewController : UIViewController{
     }
 
 }
-<<<<<<< HEAD
-
-//MARK: - AddErrandViewController CollectionView
-
-extension AddErrandViewController : UICollectionViewDelegateFlowLayout,UICollectionViewDataSource{
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return data.count
-    }
-    func collectionView(_ collectionView: UICollectionView, didHighlightItemAt indexPath: IndexPath) {
-        if data.count == 1{
-            if indexPath.item == indexPath.last{
-                    let controller = MorePeopleToDo()
-                navigationController?.pushViewController(controller, animated: true)
-            }
-        }else{
-            if indexPath.item == 0{
-                    
-            }
-            else if indexPath.item == indexPath.last{
-                let controller = MorePeopleToDo()
-                navigationController?.pushViewController(controller, animated:true)
-            }
-        }
-    }
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: DayCollectionViewCell.identifier, for: indexPath) as? DayCollectionViewCell else {return UICollectionViewCell()}
-//        cell.bglabel.text = data[indexPath.row]
-//        cell.bglabel.dynamicFont(fontSize: 12, currentFontName:  "AppleSDGothicNeo-UltraLight")
-//        cell.bglabel.textColor = .rgb(red: 61, green: 100, blue: 255)
-//        cell.layer.borderWidth = 1
-//        cell.layer.borderColor = UIColor.rgb(red: 99, green: 131, blue: 255).cgColor
-//   
-//        if cell.bglabel.text == data.last{
-//            cell.bglabel.textColor = .EZY_BAC8FF
-//            cell.layer.borderColor = UIColor.EZY_BAC8FF.cgColor
-//            cell.bglabel.dynamicFont(fontSize: 12, currentFontName: "AppleSDGothicNeo-Bold")
-//        }
-//        if data.count == 2 {
-//            if indexPath.item == indexPath.first{
-//                cell.bglabel.text = "@" + data[indexPath.item]
-//            }
-//        }
-        return cell
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        let label = UILabel()
-        label.text = data[indexPath.row]
-        label.sizeToFit()
-        return CGSize(width: label.frame.width + view.frame.height/40.6, height: view.frame.height/25.375)
-    }
-
-}
-=======
->>>>>>> 69cf28b71dcb4e2f7999a77dd93de89b15b2077a
