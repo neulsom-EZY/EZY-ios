@@ -10,10 +10,24 @@ import SnapKit
 import Then
 import Alamofire
 
-class AddMyToDoViewController:UIViewController{
-    private let tagData : [String] = ["전공동아리","산책","자율동아리","공부","자율동아리","전공동아리","전공동아리","산책","자율동아리","공부","자율동아리","전공동아리","산책"]
-    private var alarmData  = "추가"
-    private let tagColor : [UIColor] = [.rgb(red: 135, green: 159, blue: 255),.rgb(red: 150, green: 141, blue: 255),.rgb(red: 158, green: 177, blue: 252)]
+class AddMyToDoViewController: UIViewController{
+     let tagData : [CollectionViewModel] = [CollectionViewModel(backgroundColor: .EZY_968DFF,
+                                                                       iconImage: UIImage(named: "EZY_GroupAddButton")?.withRenderingMode(.alwaysTemplate),
+                                                                       textData: nil),
+                                                   CollectionViewModel(backgroundColor: UIColor.rgb(red: 144, green: 144, blue: 144),
+                                                                       iconImage: UIImage(named: "EZY_GroupModalViewHideButton")?.withRenderingMode(.alwaysTemplate),
+                                                                       textData: nil),
+                                                   CollectionViewModel(backgroundColor: UIColor.rgb(red: 135, green: 159, blue: 255),  iconImage: nil, textData: "STUDY"),
+                                                   CollectionViewModel(backgroundColor: UIColor.rgb(red: 135, green: 159, blue: 255), iconImage: nil, textData: "PROGRAMMING"),
+                                                   CollectionViewModel(backgroundColor: .EZY_968DFF, iconImage: nil, textData: "STUDY"),
+                                                   CollectionViewModel(backgroundColor: UIColor.rgb(red: 135, green: 159, blue: 255),  iconImage: nil, textData: "PROGRAMMING"),
+                                                   CollectionViewModel(backgroundColor: UIColor.rgb(red: 135, green: 159, blue: 255), iconImage: nil, textData: "MEETING")]
+    
+    
+    var alarmData : [CollectionViewModel] = [CollectionViewModel(backgroundColor: .EZY_968DFF,
+                                                                  iconImage: UIImage(named: "EZY_GroupAddButton")?.withRenderingMode(.alwaysTemplate),
+                                                                         textData: nil),
+                                              CollectionViewModel(backgroundColor: UIColor.rgb(red: 144, green: 144, blue: 144), iconImage: UIImage(named: "EZY_GroupModalViewHideButton")?.withRenderingMode(.alwaysTemplate), textData: nil)]
     //MARK: - Properties
     
     let bounds = UIScreen.main.bounds
@@ -86,7 +100,7 @@ class AddMyToDoViewController:UIViewController{
     private let addButton : AdditionalButton = {
         let button = AdditionalButton(type: .system)
         button.title = "추가"
-        button.color = .EZY_BAC8FF
+        button.color = .rgb(red: 150, green: 141, blue: 255)
         button.addTarget(self, action: #selector(Addmytodobtn), for: .touchUpInside)
         return button
     }()
@@ -143,9 +157,6 @@ class AddMyToDoViewController:UIViewController{
         print("DEBUG:AddButton")
         //추가페이지 작성후 실행시키는 코드
     }
-    
-
-    
     
     //MARK: - Helpers
     //모달 위치
@@ -210,8 +221,9 @@ class AddMyToDoViewController:UIViewController{
     }
     //MARK: - Alarm Setting Function
     func alarmReloadSetting(_ ampm: String,_ time: Int,_ minute: Int){
-        alarmData = "\(ampm) \(time):\(minute)"
+        alarmData[0].textData = "\(ampm) \(time):\(String(format: "%02d", minute))"
         alarmSettingcollectionView.reloadData()
+        alarmData[0].iconImage = nil
     }
     //MARK: - Location
     private func location(){
@@ -247,109 +259,90 @@ class AddMyToDoViewController:UIViewController{
             $0.top.equalTo(explanationContainerView.snp.bottom).offset(bounds.height/42.74)
         }
         tagCollectionView.snp.makeConstraints {
-            $0.top.equalTo(tagLabel.snp.bottom).offset(bounds.height/58)
+            $0.top.equalTo(tagLabel.snp.bottom)
             $0.left.right.equalToSuperview()
-            $0.height.equalTo(bounds.height/10.54)
+            $0.height.equalTo(bounds.height/11)
         }
        
         alarmSettings.snp.makeConstraints {
             $0.left.equalTo(backbutton.snp.left)
-            $0.top.equalTo(tagCollectionView.snp.bottom).offset(bounds.height/36.91)
+            $0.top.equalTo(tagCollectionView.snp.bottom)
         }
         alarmSettingcollectionView.snp.makeConstraints {
-            $0.top.equalTo(alarmSettings.snp.bottom).offset(bounds.height/58)
-            $0.height.equalTo(bounds.height/23.7)
+            $0.top.equalTo(alarmSettings.snp.bottom)
+            $0.height.equalTo(bounds.height/11.76)
             $0.left.right.equalToSuperview()
         }
         
         addButton.snp.makeConstraints {
-            $0.top.equalTo(alarmSettingcollectionView.snp.bottom).offset(bounds.height/38.67)
+            $0.bottom.equalToSuperview().inset(bounds.height/33.8333)
             $0.height.equalTo(bounds.height/18.0)
             $0.left.right.equalToSuperview().inset(bounds.width/13.636363)
         }
     }
 
 }
+
 //MARK: - extension
-extension AddMyToDoViewController : UICollectionViewDelegateFlowLayout,UICollectionViewDataSource{
+extension AddMyToDoViewController: UICollectionViewDelegateFlowLayout, UICollectionViewDataSource{
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        if collectionView == self.tagCollectionView{
+        if collectionView == tagCollectionView{
             return tagData.count
-        }else if collectionView == self.alarmSettingcollectionView{
+        }else{
             return 2
         }
-        return 0
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        if collectionView == self.tagCollectionView{
-            let tagCell = collectionView.dequeueReusableCell(withReuseIdentifier: TagCell.identifier, for: indexPath) as! TagCell
-            tagCell.isSelected = false
-            tagCell.layer.borderWidth = 1
-            tagCell.bglabel.text = tagData[indexPath.row]
-            tagCell.bglabel.textColor = tagColor.randomElement()
-            tagCell.layer.borderColor = tagCell.bglabel.textColor.cgColor
-            tagCell.layer.cornerRadius = tagCell.frame.height/2
-            if indexPath.item == 0 {
-                tagCell.bglabel.text = "선택해제"
-                tagCell.bglabel.textColor = .rgb(red: 183, green: 180, blue: 180)
-                tagCell.layer.borderColor = UIColor.rgb(red: 201, green: 201, blue: 201).cgColor
-            }
-            if indexPath.item == 2{
-                tagCell.bglabel.text = "+ 추가"
-                tagCell.bglabel.textColor = .EZY_BAC8FF
-                tagCell.layer.borderColor = UIColor.EZY_BAC8FF.cgColor
-            }
+        if collectionView == tagCollectionView{
+            guard let tagCell = collectionView.dequeueReusableCell(withReuseIdentifier: TagCell.identifier, for: indexPath ) as? TagCell else{ return UICollectionViewCell()}
+            tagCell.iv.image = tagData[indexPath.row].iconImage
+            tagCell.backgroundColor = tagData[indexPath.row].backgroundColor
+            tagCell.iv.tintColor = tagData[indexPath.row].backgroundColor
+            tagCell.bglabel.text = tagData[indexPath.row].textData
+            tagCell.bglabel.textColor = tagData[indexPath.row].backgroundColor
             return tagCell
         }else{
-            let alarmCell = collectionView.dequeueReusableCell(withReuseIdentifier: AlarmSettingCell.identifier, for: indexPath) as! AlarmSettingCell
-            alarmCell.layer.cornerRadius = view.frame.height/81.2
-            alarmCell.bglabel.text = alarmData
-            alarmCell.bglabel.textColor = .rgb(red: 183, green: 180, blue: 180)
-            if indexPath.item == 0{
-                alarmCell.bglabel.text = "선택안함"
-            }
+            guard let alarmCell = collectionView.dequeueReusableCell(withReuseIdentifier: AlarmSettingCell.identifier, for: indexPath) as? AlarmSettingCell else {return UICollectionViewCell()}
+            alarmCell.iv.image = alarmData[indexPath.row].iconImage
+            alarmCell.backgroundColor = alarmData[indexPath.row].backgroundColor
+            alarmCell.bglabel.text = alarmData[indexPath.row].textData
+            alarmCell.iv.tintColor = alarmData[indexPath.row].backgroundColor
             return alarmCell
         }
     }
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        if collectionView == self.tagCollectionView{
-            return CGSize(width: view.frame.height/9.66, height: 10)
-        }else{
-            return CGSize(width: view.frame.height/9.78, height: view.frame.height/23.88)
-        }
-    }
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
-        if collectionView == self.tagCollectionView{
-            return view.frame.height/50.973
-        }else if collectionView == self.alarmSettingcollectionView{
-            return view.frame.height/47.76
+        return bounds.width/34.1
+    }
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        //MARK: - Cell Dynamic width
+        let label = UILabel().then{
+            $0.dynamicFont(fontSize: 12, currentFontName: "AppleSDGothicNeo-Bold")
+            $0.sizeToFit()
         }
-        return 0
-    }
-    func collectionView(_ collectionView: UICollectionView, shouldSelectItemAt indexPath: IndexPath) -> Bool {
-        let item = collectionView.cellForItem(at: indexPath)
-            if item?.isSelected ?? false {
-                collectionView.deselectItem(at: indexPath, animated: true)
-            } else {
-                collectionView.selectItem(at: indexPath, animated: true, scrollPosition: [])
-                return true
-            }
-            return false
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        if collectionView == self.tagCollectionView {
-
-        }else {
-            let MoreCalendarModalsVC = MoreAlarmModelViewController.instance()
-            MoreCalendarModalsVC.delegate = self
-            addDim()
-            present(MoreCalendarModalsVC, animated: true, completion: nil)
-            collectionView.deselectItem(at: indexPath, animated: true)
-            AlarmSettingCell().isSelected = false
+        if collectionView == tagCollectionView{
+            label.text = tagData[indexPath.row].textData
+            label.sizeToFit()
+            return CGSize(width: label.frame.width + bounds.width/9.868, height: bounds.height/18.88)
+        }
+        else{
+            label.text = alarmData[indexPath.row].textData
+            label.sizeToFit()
+            return CGSize(width: label.frame.width + bounds.width/9.868, height: bounds.height/18.88)
         }
         
+    }
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        if collectionView == alarmSettingcollectionView{
+            if indexPath.item == indexPath.first{
+                let MoreCalendarModalsVC = MoreAlarmModelViewController.instance()
+                MoreCalendarModalsVC.delegate = self
+                addDim()
+                present(MoreCalendarModalsVC, animated: true, completion: nil)
+                AlarmSettingCell().isSelected = false
+                collectionView.deselectItem(at: indexPath, animated: true)
+            }
+        }
     }
 }
 
