@@ -7,7 +7,8 @@
 
 import UIKit
 
-class PersonalPlanChangeViewController: UIViewController, UIGestureRecognizerDelegate, AlarmModelDelegate{
+class PersonalPlanChangeViewController: UIViewController{
+    
     //MARK: - Properties
     var TagColorModels: [TagColorCollectionViewModel] = [
                                                 TagColorCollectionViewModel(backgroundColor: UIColor.EZY_TagColorArray[0], isSelected: false),
@@ -515,6 +516,26 @@ class PersonalPlanChangeViewController: UIViewController, UIGestureRecognizerDel
         }
     }
     
+    //MARK: - Alarm Setting Function
+    func alarmReloadSetting(_ ampm: String,_ time: Int,_ minute: Int){
+        notificationAddButton.setTitle("\(ampm) \(time):\(String(format: "%02d", minute))", for: .normal)
+        notificationAddButton.setImage(nil, for: .normal)
+        
+        UIView.animate(withDuration: 0.3) {
+            self.notificationAddButton.snp.remakeConstraints { make in
+                make.left.equalTo(self.tagLabel)
+                make.top.equalTo(self.notificationTitleLabel.snp.bottom).offset(self.view.frame.height/73.11)
+                make.width.equalTo("\(ampm) \(time):\(String(format: "%02d", minute))".size(withAttributes: [NSAttributedString.Key.font : UIFont.systemFont(ofSize: 17)]).width + 25)
+                make.height.equalTo(self.notificationAddButton.snp.width)
+            }
+            
+            
+            
+            self.view.layoutIfNeeded()
+        }
+
+    }
+    
     // MARK: - shakeView
     func shakeView(_ view: UIView?) {
         let shake = CABasicAnimation(keyPath: "position")
@@ -534,10 +555,6 @@ class PersonalPlanChangeViewController: UIViewController, UIGestureRecognizerDel
         DispatchQueue.main.async { [weak self] in
             self?.bgView.alpha = 0.2
         }
-    }
-    
-    func onTapClose() {
-        self.removeDim()
     }
     
     private func removeDim() {
@@ -848,5 +865,15 @@ extension PersonalPlanChangeViewController: UITextViewDelegate{
         // textView입력이 끝났을 시에는 btnStackView, calendarBtn를 활성화한다.
         btnStackView.isUserInteractionEnabled = true
         calendarBtn.isUserInteractionEnabled = true
+    }
+}
+
+extension PersonalPlanChangeViewController: AlarmModelDelegate{
+    func updateData(ampm: String, time: Int, minute: Int) {
+        self.alarmReloadSetting(ampm, time + 1, minute)
+    }
+    
+    func onTapClose() {
+        self.removeDim()
     }
 }

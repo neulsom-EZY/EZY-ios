@@ -13,9 +13,9 @@ import Alamofire
 class AlertButton : UIButton {
 
     private let view = UIView()
-    
-    let alertButtonTitleLabel = UILabel()
 
+    let alertButtonTitleLabel = UILabel()
+    
     private let icon = UIImageView()
     private var viewModel : AlertBtn?
     

@@ -66,6 +66,7 @@ class AddErrandViewController : UIViewController{
         $0.dynamicFont(fontSize: 12, currentFontName: "AppleSDGothicNeo-Bold")
     }
 
+
     private let askForFavor  = UIButton().then{
         $0.setTitle("+ 인원 선택", for: .normal)
         $0.dynamicFont(fontSize: 12, currentFontName: "AppleSDGothicNeo-Bold")
