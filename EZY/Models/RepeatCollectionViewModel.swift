@@ -7,7 +7,6 @@
 
 import UIKit
 
-struct RepeatCollectionViewModel {
-    var backgroundColr: UIColor
+struct RepeatCollectionViewModal {
     var isSelected: Bool
 }

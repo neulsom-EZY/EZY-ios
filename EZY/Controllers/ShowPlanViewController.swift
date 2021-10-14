@@ -416,7 +416,6 @@ extension ShowPlanViewController: UICollectionViewDataSource{
 
 // MARK: - tableView Extension
 extension ShowPlanViewController: UITableViewDataSource{
-
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if groupNameArray.count == 0{
             tableView.isHidden = true

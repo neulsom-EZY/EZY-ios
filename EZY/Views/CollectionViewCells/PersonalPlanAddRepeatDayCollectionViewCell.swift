@@ -11,7 +11,7 @@ class PersonalPlanAddRepeatDayCollectionViewCell: UICollectionViewCell {
     
     static let reuseId = "\(PersonalPlanAddRepeatDayCollectionViewCell.self)"
     
-    var model: RepeatCollectionViewModel?
+    var model: TagCollectionViewModel?
 
         
     lazy var cellBackgroundView = UIView().then {
@@ -44,10 +44,10 @@ class PersonalPlanAddRepeatDayCollectionViewCell: UICollectionViewCell {
         layoutSetting()
     }
     
-    func setModel(_ model: RepeatCollectionViewModel, indexPath: IndexPath){
+    func setModel(_ model: TagCollectionViewModel, indexPath: IndexPath){
         self.model = model
         
-            cellBackgroundView.backgroundColor = model.backgroundColr
+            cellBackgroundView.backgroundColor = model.backgroundColor
             
         if label.text != "X"{
             

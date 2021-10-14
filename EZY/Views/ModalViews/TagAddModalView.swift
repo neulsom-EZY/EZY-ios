@@ -70,14 +70,14 @@ class TagAddModalView: UIView {
         $0.layer.shadowColor = UIColor.darkGray.cgColor
     }
     
-    private let tagCollectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewLayout()).then{
-        let layout = UICollectionViewFlowLayout()
+    let tagColorCollectionView = UICollectionView(frame: .zero, collectionViewLayout: CalendarViewLayout()).then{
+        let layout: UICollectionViewFlowLayout = UICollectionViewFlowLayout()
+        layout.itemSize = CGSize(width: 30, height: 30)
+        layout.scrollDirection = .horizontal
         $0.collectionViewLayout = layout
-        $0.translatesAutoresizingMaskIntoConstraints = false
-        $0.register(WhoShouldIAskCell.self, forCellWithReuseIdentifier: WhoShouldIAskCell.identifier)
         $0.showsHorizontalScrollIndicator = false
-        $0.isScrollEnabled = false
-        $0.backgroundColor = .lightGray
+        $0.backgroundColor = .white
+        $0.register(TagColorCollectionViewCell.self, forCellWithReuseIdentifier: TagColorCollectionViewCell.reuseId)
     }
     
     //MARK: - LifeCycles
@@ -138,16 +138,16 @@ class TagAddModalView: UIView {
             make.top.equalTo(tagNameBackgroundView.snp.bottom).offset(viewBounds.height/50.75)
         }
         
-        tagCollectionView.snp.makeConstraints { make in
-            make.left.equalTo(tagNameBackgroundView)
-            make.centerX.equalToSuperview()
-            make.height.equalToSuperview().dividedBy(7)
-            make.top.equalTo(tagColorLabel.snp.bottom).offset(viewBounds.height/203)
+        tagColorCollectionView.snp.makeConstraints { make in
+            make.top.equalTo(tagColorLabel.snp.bottom)
+            make.left.equalToSuperview()
+            make.height.equalTo(modalBackgroundView).dividedBy(5)
+            make.right.equalTo(modalBackgroundView)
         }
         
         tagAddButton.snp.makeConstraints { make in
             make.right.equalToSuperview().offset(-viewBounds.width/13.2)
-            make.top.equalTo(tagCollectionView.snp.bottom).offset(viewBounds.height/50)
+            make.top.equalTo(tagColorCollectionView.snp.bottom).offset(viewBounds.height/100)
             make.width.equalToSuperview().dividedBy(4.71)
             make.height.equalToSuperview().dividedBy(7.27)
         }
@@ -164,6 +164,6 @@ class TagAddModalView: UIView {
         modalBackgroundView.addSubview(tagColorLabel)
         modalBackgroundView.addSubview(tagAddButton)
         modalBackgroundView.addSubview(writeTagNameView)
-        modalBackgroundView.addSubview(tagCollectionView)
+        modalBackgroundView.addSubview(tagColorCollectionView)
     }
 }

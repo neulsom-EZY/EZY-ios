@@ -65,6 +65,7 @@ class AddErrandViewController : UIViewController{
         $0.textColor = .rgb(red: 182, green: 182, blue: 182)
         $0.dynamicFont(fontSize: 12, currentFontName: "AppleSDGothicNeo-Bold")
     }
+
     private let askForFavor  = UIButton().then{
         $0.setTitle("+ 인원 선택", for: .normal)
         $0.dynamicFont(fontSize: 12, currentFontName: "AppleSDGothicNeo-Bold")
@@ -72,8 +73,7 @@ class AddErrandViewController : UIViewController{
         $0.backgroundColor = .white
         $0.layer.applySketchShadow(color: .black, alpha: 0.1, x: 0, y: 4, blur: 14, spread: 0)
         $0.addTarget(self, action: #selector(addPerson), for: .touchUpInside)
-    }
-    
+    }    
     private lazy var addButton : AdditionalButton = {
         let button = AdditionalButton(type: .system)
         button.title = "부탁하기"
