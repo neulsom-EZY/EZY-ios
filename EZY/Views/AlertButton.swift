@@ -14,10 +14,9 @@ class AlertButton : UIButton {
 
     private let view = UIView()
     
-    var alertButtonTitleLabel = UILabel()
-    
+    let alertButtonTitleLabel = UILabel()
+
     private let icon = UIImageView()
-    
     private var viewModel : AlertBtn?
     
     override init(frame: CGRect) {
@@ -75,6 +74,4 @@ class AlertButton : UIButton {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-
-    
 }

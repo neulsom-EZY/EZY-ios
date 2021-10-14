@@ -107,22 +107,19 @@
 		AA04F9D72701C12600EE0506 /* SignUpTextFieldContainerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA04F9D62701C12600EE0506 /* SignUpTextFieldContainerView.swift */; };
 		AAD95AE126EC7EC7004E4580 /* NewNicknamePhoneNumViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAD95AE026EC7EC7004E4580 /* NewNicknamePhoneNumViewController.swift */; };
 		AAD95AE326EC818B004E4580 /* NewNicknamePutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAD95AE226EC818B004E4580 /* NewNicknamePutViewController.swift */; };
+		EE84DEC02715ABF100121C62 /* CollectionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE84DEBF2715ABF100121C62 /* CollectionViewModel.swift */; };
 		EE93B4D926876C6F0055D7A6 /* PushNotificationManagementViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE93B4D826876C6F0055D7A6 /* PushNotificationManagementViewController.swift */; };
 		EE93B4DB26876F430055D7A6 /* AlarmManagementButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE93B4DA26876F430055D7A6 /* AlarmManagementButton.swift */; };
-		EE93B4DD26878A5D0055D7A6 /* PersonalCalendarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE93B4DC26878A5D0055D7A6 /* PersonalCalendarViewController.swift */; };
 		EE93B4DF268797230055D7A6 /* CustomManagePushNotificationCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE93B4DE268797230055D7A6 /* CustomManagePushNotificationCell.swift */; };
 		EE93B4E42687BD8A0055D7A6 /* ManageData.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE93B4E32687BD8A0055D7A6 /* ManageData.swift */; };
-		EE93B4E82687FB660055D7A6 /* ErrandCalendarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE93B4E72687FB660055D7A6 /* ErrandCalendarViewController.swift */; };
 		EE9F0D2226E8A2AC0015E81B /* ErrandDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE9F0D1C26E8A2AC0015E81B /* ErrandDetailsViewController.swift */; };
 		EE9F0D2326E8A2AC0015E81B /* MoreAlarmModelViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE9F0D1D26E8A2AC0015E81B /* MoreAlarmModelViewController.swift */; };
 		EE9F0D2426E8A2AC0015E81B /* MorePeopleToDo.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE9F0D1E26E8A2AC0015E81B /* MorePeopleToDo.swift */; };
 		EE9F0D2526E8A2AC0015E81B /* AddMyToDoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE9F0D1F26E8A2AC0015E81B /* AddMyToDoViewController.swift */; };
 		EE9F0D2626E8A2AC0015E81B /* AddErrandViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE9F0D2026E8A2AC0015E81B /* AddErrandViewController.swift */; };
 		EE9F0D2726E8A2AC0015E81B /* MoreCalendarModalsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE9F0D2126E8A2AC0015E81B /* MoreCalendarModalsViewController.swift */; };
-		EE9F0D3626E8A9340015E81B /* SearchTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE9F0D2826E8A9330015E81B /* SearchTableView.swift */; };
 		EE9F0D3726E8A9340015E81B /* AddScheduleModalBtn .swift in Sources */ = {isa = PBXBuildFile; fileRef = EE9F0D2926E8A9330015E81B /* AddScheduleModalBtn .swift */; };
 		EE9F0D3826E8A9340015E81B /* inputContainerErrandTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE9F0D2A26E8A9330015E81B /* inputContainerErrandTextView.swift */; };
-		EE9F0D3926E8A9340015E81B /* NotFoundUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE9F0D2B26E8A9330015E81B /* NotFoundUser.swift */; };
 		EE9F0D3A26E8A9340015E81B /* TitleContainerTextFieldView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE9F0D2C26E8A9330015E81B /* TitleContainerTextFieldView.swift */; };
 		EE9F0D3B26E8A9340015E81B /* ExplanationContainerTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE9F0D2D26E8A9330015E81B /* ExplanationContainerTextView.swift */; };
 		EE9F0D3C26E8A9340015E81B /* ErrandInputContainterTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE9F0D2E26E8A9330015E81B /* ErrandInputContainterTextField.swift */; };
@@ -133,7 +130,6 @@
 		EE9F0D4126E8A9340015E81B /* AdditionalButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE9F0D3326E8A9330015E81B /* AdditionalButton.swift */; };
 		EE9F0D4226E8A9340015E81B /* AlarmDatePickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE9F0D3426E8A9340015E81B /* AlarmDatePickerView.swift */; };
 		EE9F0D4326E8A9340015E81B /* SendUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE9F0D3526E8A9340015E81B /* SendUser.swift */; };
-		EE9F0D4526E8A95C0015E81B /* SearchTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE9F0D4426E8A95C0015E81B /* SearchTableCell.swift */; };
 		EE9F0D4B26E8A9700015E81B /* ErrandPeopoleChooseAfterCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE9F0D4626E8A9700015E81B /* ErrandPeopoleChooseAfterCell.swift */; };
 		EE9F0D4C26E8A9700015E81B /* TagCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE9F0D4726E8A9700015E81B /* TagCell.swift */; };
 		EE9F0D4D26E8A9700015E81B /* DayCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE9F0D4826E8A9700015E81B /* DayCollectionViewCell.swift */; };
@@ -141,6 +137,7 @@
 		EE9F0D4F26E8A9700015E81B /* AlarmSettingCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE9F0D4A26E8A9700015E81B /* AlarmSettingCell.swift */; };
 		EE9F0D5126E8AA810015E81B /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE9F0D5026E8AA810015E81B /* Model.swift */; };
 		EE9F0D5326E8AA9E0015E81B /* SearchViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE9F0D5226E8AA9E0015E81B /* SearchViewModel.swift */; };
+		EEA49A132711C7B200265258 /* CalendarAlertBtn.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEA49A122711C7B200265258 /* CalendarAlertBtn.swift */; };
 		EEDCAF98268D85F1001E2B4F /* SwitchBtn.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEDCAF97268D85F1001E2B4F /* SwitchBtn.swift */; };
 /* End PBXBuildFile section */
 
@@ -250,22 +247,19 @@
 		AAD95AE026EC7EC7004E4580 /* NewNicknamePhoneNumViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewNicknamePhoneNumViewController.swift; sourceTree = "<group>"; };
 		AAD95AE226EC818B004E4580 /* NewNicknamePutViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewNicknamePutViewController.swift; sourceTree = "<group>"; };
 		C37AD74ACD84F363045FF654 /* Pods_EZY.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_EZY.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		EE84DEBF2715ABF100121C62 /* CollectionViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionViewModel.swift; sourceTree = "<group>"; };
 		EE93B4D826876C6F0055D7A6 /* PushNotificationManagementViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PushNotificationManagementViewController.swift; sourceTree = "<group>"; };
 		EE93B4DA26876F430055D7A6 /* AlarmManagementButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlarmManagementButton.swift; sourceTree = "<group>"; };
-		EE93B4DC26878A5D0055D7A6 /* PersonalCalendarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonalCalendarViewController.swift; sourceTree = "<group>"; };
 		EE93B4DE268797230055D7A6 /* CustomManagePushNotificationCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomManagePushNotificationCell.swift; sourceTree = "<group>"; };
 		EE93B4E32687BD8A0055D7A6 /* ManageData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManageData.swift; sourceTree = "<group>"; };
-		EE93B4E72687FB660055D7A6 /* ErrandCalendarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrandCalendarViewController.swift; sourceTree = "<group>"; };
 		EE9F0D1C26E8A2AC0015E81B /* ErrandDetailsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ErrandDetailsViewController.swift; sourceTree = "<group>"; };
 		EE9F0D1D26E8A2AC0015E81B /* MoreAlarmModelViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MoreAlarmModelViewController.swift; sourceTree = "<group>"; };
 		EE9F0D1E26E8A2AC0015E81B /* MorePeopleToDo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MorePeopleToDo.swift; sourceTree = "<group>"; };
 		EE9F0D1F26E8A2AC0015E81B /* AddMyToDoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddMyToDoViewController.swift; sourceTree = "<group>"; };
 		EE9F0D2026E8A2AC0015E81B /* AddErrandViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddErrandViewController.swift; sourceTree = "<group>"; };
 		EE9F0D2126E8A2AC0015E81B /* MoreCalendarModalsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MoreCalendarModalsViewController.swift; sourceTree = "<group>"; };
-		EE9F0D2826E8A9330015E81B /* SearchTableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchTableView.swift; sourceTree = "<group>"; };
 		EE9F0D2926E8A9330015E81B /* AddScheduleModalBtn .swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "AddScheduleModalBtn .swift"; sourceTree = "<group>"; };
 		EE9F0D2A26E8A9330015E81B /* inputContainerErrandTextView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = inputContainerErrandTextView.swift; sourceTree = "<group>"; };
-		EE9F0D2B26E8A9330015E81B /* NotFoundUser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotFoundUser.swift; sourceTree = "<group>"; };
 		EE9F0D2C26E8A9330015E81B /* TitleContainerTextFieldView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TitleContainerTextFieldView.swift; sourceTree = "<group>"; };
 		EE9F0D2D26E8A9330015E81B /* ExplanationContainerTextView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExplanationContainerTextView.swift; sourceTree = "<group>"; };
 		EE9F0D2E26E8A9330015E81B /* ErrandInputContainterTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ErrandInputContainterTextField.swift; sourceTree = "<group>"; };
@@ -276,7 +270,6 @@
 		EE9F0D3326E8A9330015E81B /* AdditionalButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AdditionalButton.swift; sourceTree = "<group>"; };
 		EE9F0D3426E8A9340015E81B /* AlarmDatePickerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlarmDatePickerView.swift; sourceTree = "<group>"; };
 		EE9F0D3526E8A9340015E81B /* SendUser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SendUser.swift; sourceTree = "<group>"; };
-		EE9F0D4426E8A95C0015E81B /* SearchTableCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchTableCell.swift; sourceTree = "<group>"; };
 		EE9F0D4626E8A9700015E81B /* ErrandPeopoleChooseAfterCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ErrandPeopoleChooseAfterCell.swift; sourceTree = "<group>"; };
 		EE9F0D4726E8A9700015E81B /* TagCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TagCell.swift; sourceTree = "<group>"; };
 		EE9F0D4826E8A9700015E81B /* DayCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DayCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -284,6 +277,7 @@
 		EE9F0D4A26E8A9700015E81B /* AlarmSettingCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlarmSettingCell.swift; sourceTree = "<group>"; };
 		EE9F0D5026E8AA810015E81B /* Model.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Model.swift; sourceTree = "<group>"; };
 		EE9F0D5226E8AA9E0015E81B /* SearchViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchViewModel.swift; sourceTree = "<group>"; };
+		EEA49A122711C7B200265258 /* CalendarAlertBtn.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarAlertBtn.swift; sourceTree = "<group>"; };
 		EEDCAF97268D85F1001E2B4F /* SwitchBtn.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwitchBtn.swift; sourceTree = "<group>"; };
 		EEE1E95626AAB71A0082B696 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
 		EEE1E95826AAB72E0082B696 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -413,14 +407,13 @@
 				EE9F0D2926E8A9330015E81B /* AddScheduleModalBtn .swift */,
 				EE9F0D3426E8A9340015E81B /* AlarmDatePickerView.swift */,
 				EE9F0D3226E8A9330015E81B /* AlertButton.swift */,
+				EEA49A122711C7B200265258 /* CalendarAlertBtn.swift */,
 				EE9F0D3026E8A9330015E81B /* CustomData.swift */,
 				EE9F0D2E26E8A9330015E81B /* ErrandInputContainterTextField.swift */,
 				EE9F0D2D26E8A9330015E81B /* ExplanationContainerTextView.swift */,
 				EE9F0D3126E8A9330015E81B /* GroupSearchTextfield.swift */,
 				EE9F0D2A26E8A9330015E81B /* inputContainerErrandTextView.swift */,
-				EE9F0D2B26E8A9330015E81B /* NotFoundUser.swift */,
 				EE9F0D2F26E8A9330015E81B /* OneAlertButton.swift */,
-				EE9F0D2826E8A9330015E81B /* SearchTableView.swift */,
 				EE9F0D3526E8A9340015E81B /* SendUser.swift */,
 				EE9F0D2C26E8A9330015E81B /* TitleContainerTextFieldView.swift */,
 				6AE5BB0A269670CB00A9731B /* CustomGradientContinueBtnView.swift */,
@@ -450,6 +443,7 @@
 				6AE5BB0226957B0600A9731B /* RepeatCollectionViewModel.swift */,
 				6A82835926997AB500AC381B /* TagCollectionViewModel.swift */,
 				6A3E2E7F26B6A60B0078D749 /* ManagementbtnModel.swift */,
+				EE84DEBF2715ABF100121C62 /* CollectionViewModel.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -487,8 +481,6 @@
 				6AE41E7D26A9560C0072612C /* TagSettingViewController.swift */,
 				6AB27CAF269D8C1600B95C0F /* WithdrawalViewController.swift */,
 				EE93B4D826876C6F0055D7A6 /* PushNotificationManagementViewController.swift */,
-				EE93B4DC26878A5D0055D7A6 /* PersonalCalendarViewController.swift */,
-				EE93B4E72687FB660055D7A6 /* ErrandCalendarViewController.swift */,
 				AAD95AE026EC7EC7004E4580 /* NewNicknamePhoneNumViewController.swift */,
 				AAD95AE226EC818B004E4580 /* NewNicknamePutViewController.swift */,
 			);
@@ -537,7 +529,6 @@
 		6AE5BAFE26954B6A00A9731B /* TableViewCells */ = {
 			isa = PBXGroup;
 			children = (
-				EE9F0D4426E8A95C0015E81B /* SearchTableCell.swift */,
 				6A4EDA36266DA52A00B809EC /* SettingTableViewCell.swift */,
 				6A4ED9FF2668653200B809EC /* ScheduleTimeTableViewCell.swift */,
 				6A4EDA2D266A332100B809EC /* NotificationTableViewCell.swift */,
@@ -755,7 +746,6 @@
 				6A3E2E7826B111540078D749 /* ChangePasswardAfterLoginViewController.swift in Sources */,
 				6A3E2E8026B6A60B0078D749 /* ManagementbtnModel.swift in Sources */,
 				6AA6F799269C2E6200958D36 /* NewPasswordPutViewController.swift in Sources */,
-				EE9F0D3926E8A9340015E81B /* NotFoundUser.swift in Sources */,
 				6A3E2E7E26B6A5FB0078D749 /* ViewModel.swift in Sources */,
 				6ACB4ED2269C2FA8008606C5 /* TopBarView.swift in Sources */,
 				6A8283502698132000AC381B /* PlanDeleteModalView.swift in Sources */,
@@ -768,9 +758,9 @@
 				AA04F9D52700996800EE0506 /* LoginTextFieldContainerView.swift in Sources */,
 				EE9F0D3C26E8A9340015E81B /* ErrandInputContainterTextField.swift in Sources */,
 				EE9F0D3E26E8A9340015E81B /* CustomData.swift in Sources */,
-				EE9F0D3626E8A9340015E81B /* SearchTableView.swift in Sources */,
 				6A685C0D26AC1E2D0079BC30 /* PersonalPlanDetailRepeatDayCollectionViewCell.swift in Sources */,
 				EE9F0D4326E8A9340015E81B /* SendUser.swift in Sources */,
+				EE84DEC02715ABF100121C62 /* CollectionViewModel.swift in Sources */,
 				6A4EDA41266E38E000B809EC /* GroupCollectionViewCell.swift in Sources */,
 				AAD95AE326EC818B004E4580 /* NewNicknamePutViewController.swift in Sources */,
 				6AA769EF26636AE700B7E1F5 /* EZY.xcdatamodeld in Sources */,
@@ -790,8 +780,8 @@
 				6A72073426C618600098830F /* RecommendedTagCollectionViewCell.swift in Sources */,
 				6AE5BB0326957B0600A9731B /* RepeatCollectionViewModel.swift in Sources */,
 				6AFB77F9267ECD6700B59482 /* WhiteBackgroundView.swift in Sources */,
+				EEA49A132711C7B200265258 /* CalendarAlertBtn.swift in Sources */,
 				EE9F0D3826E8A9340015E81B /* inputContainerErrandTextView.swift in Sources */,
-				EE9F0D4526E8A95C0015E81B /* SearchTableCell.swift in Sources */,
 				6AB486FF26834D8C00E95D43 /* CalendarCollectionViewCell.swift in Sources */,
 				6AE5BB1626969AFD00A9731B /* SelectLocationModalView.swift in Sources */,
 				AAD95AE126EC7EC7004E4580 /* NewNicknamePhoneNumViewController.swift in Sources */,
@@ -828,7 +818,6 @@
 				6AE5BAFC26953E0F00A9731B /* EndTimeTableViewCell.swift in Sources */,
 				6AA769EF26636AE700B7E1F5 /* EZY.xcdatamodeld in Sources */,
 				EE9F0D2726E8A2AC0015E81B /* MoreCalendarModalsViewController.swift in Sources */,
-				EE93B4DD26878A5D0055D7A6 /* PersonalCalendarViewController.swift in Sources */,
 				EE93B4D926876C6F0055D7A6 /* PushNotificationManagementViewController.swift in Sources */,
 				EE93B4E42687BD8A0055D7A6 /* ManageData.swift in Sources */,
 				6AA769E526636AE700B7E1F5 /* AppDelegate.swift in Sources */,
@@ -840,7 +829,6 @@
 				EE9F0D4B26E8A9700015E81B /* ErrandPeopoleChooseAfterCell.swift in Sources */,
 				EE9F0D3A26E8A9340015E81B /* TitleContainerTextFieldView.swift in Sources */,
 				EE93B4DF268797230055D7A6 /* CustomManagePushNotificationCell.swift in Sources */,
-				EE93B4E82687FB660055D7A6 /* ErrandCalendarViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

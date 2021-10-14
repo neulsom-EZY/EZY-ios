@@ -355,6 +355,12 @@ class ShowPlanViewController: UIViewController{
     private func removeDim() {
         DispatchQueue.main.async { [weak self] in
             self?.bgView.removeFromSuperview()
+            self?.dismiss(animated: true)
+        }
+    }
+    private func updateDim(viewcontroller : UIViewController){
+        DispatchQueue.main.async { [weak self] in
+            self?.navigationController?.pushViewController(viewcontroller ?? UIViewController(), animated: true)
         }
     }
 }
@@ -509,10 +515,12 @@ extension ShowPlanViewController: UITableViewDelegate{
 
 // MARK: - BulletinDelegate Extension
 extension ShowPlanViewController: BulletinDelegate {
-    func onTapClose() {
+    func update(vc: UIViewController) {
         self.removeDim()
+        self.updateDim(viewcontroller: vc)
     }
-    func update(){
+    
+    func onTapClose() {
         self.removeDim()
     }
 }
