@@ -10,25 +10,33 @@ import SnapKit
 import Then
 import Alamofire
 
-
-class AddMyToDoViewController:UIViewController{
-    let tagData : [String] = ["전공동아리","산책","자율동아리","공부","자율동아리","전공동아리","전공동아리","산책","자율동아리","공부","자율동아리","전공동아리","산책"]
-    var alarmData  = "추가"
-    let tagColor : [UIColor] = [.rgb(red: 135, green: 159, blue: 255),.rgb(red: 150, green: 141, blue: 255),.rgb(red: 158, green: 177, blue: 252)]
+class AddMyToDoViewController: UIViewController{
+     let tagData : [CollectionViewModel] = [CollectionViewModel(backgroundColor: .EZY_968DFF,
+                                                                       iconImage: UIImage(named: "EZY_GroupAddButton")?.withRenderingMode(.alwaysTemplate),
+                                                                       textData: nil),
+                                                   CollectionViewModel(backgroundColor: UIColor.rgb(red: 144, green: 144, blue: 144),
+                                                                       iconImage: UIImage(named: "EZY_GroupModalViewHideButton")?.withRenderingMode(.alwaysTemplate),
+                                                                       textData: nil),
+                                                   CollectionViewModel(backgroundColor: UIColor.rgb(red: 135, green: 159, blue: 255),  iconImage: nil, textData: "STUDY"),
+                                                   CollectionViewModel(backgroundColor: UIColor.rgb(red: 135, green: 159, blue: 255), iconImage: nil, textData: "PROGRAMMING"),
+                                                   CollectionViewModel(backgroundColor: .EZY_968DFF, iconImage: nil, textData: "STUDY"),
+                                                   CollectionViewModel(backgroundColor: UIColor.rgb(red: 135, green: 159, blue: 255),  iconImage: nil, textData: "PROGRAMMING"),
+                                                   CollectionViewModel(backgroundColor: UIColor.rgb(red: 135, green: 159, blue: 255), iconImage: nil, textData: "MEETING")]
+    
+    
+    var alarmData : [CollectionViewModel] = [CollectionViewModel(backgroundColor: .EZY_968DFF,
+                                                                  iconImage: UIImage(named: "EZY_GroupAddButton")?.withRenderingMode(.alwaysTemplate),
+                                                                         textData: nil),
+                                              CollectionViewModel(backgroundColor: UIColor.rgb(red: 144, green: 144, blue: 144), iconImage: UIImage(named: "EZY_GroupModalViewHideButton")?.withRenderingMode(.alwaysTemplate), textData: nil)]
     //MARK: - Properties
     
     let bounds = UIScreen.main.bounds
     
     //MARK: - 모달 background 설정
-    let bgView = UIView().then {
+    private let bgView = UIView().then {
         $0.backgroundColor = .black
         $0.alpha = 0
     }
-    //MARK: - 키보드 실행 됬을때 바탕이 되는 뷰
-    let backGroundView = UIButton().then{
-        $0.isHidden = true
-    }
-    
     private let backbutton = UIButton().then{
         $0.tintColor = .EZY_BAC8FF
         $0.setImage(UIImage(systemName: "arrow.left"), for: .normal)
@@ -42,12 +50,9 @@ class AddMyToDoViewController:UIViewController{
 
     private let titleContainerView = TitleContainerTextFieldView(tfTitle: "제목")
     
-    private let calendarBtn : AlertButton = {
-        let viewModel = AlertBtn(icon: UIImage(named: "EZY_Calendar")?.withRenderingMode(.alwaysTemplate), iconTintColor: .rgb(red: 255, green: 181, blue: 181), message: "2021.6.6 일요일")
-        let button = AlertButton(with: viewModel)
-        button.addTarget(self, action: #selector(calendarAlert), for: .touchUpInside)
-        return button
-    }()
+    private let calendarBtn = CalendarAlertBtn(icon: (UIImage(named: "EZY_Calendar")?.withRenderingMode(.alwaysTemplate))!, iconColor: .rgb(red: 255, green: 181, blue: 181), titleText: "2021.6.6 일요일", repeatText: "반복 없음").then {
+        $0.addTarget(self, action: #selector(calendarAlert), for: .touchUpInside)
+    }
     private let clockBtn : AlertButton = {
         let viewModel = AlertBtn(icon: UIImage(named: "EZY_clock")?.withRenderingMode(.alwaysTemplate), iconTintColor: .rgb(red: 255, green: 203, blue: 181), message: "11:00AM - 1:00PM")
         let button = AlertButton(with: viewModel)
@@ -56,14 +61,14 @@ class AddMyToDoViewController:UIViewController{
     }()
     
     private let locationBtn : AlertButton = {
-        let viewModel = AlertBtn(icon: UIImage(named: "EZY_Location")?.withRenderingMode(.alwaysTemplate), iconTintColor: .rgb(red: 199, green: 224, blue: 212), message: "광주소프트웨어마이스터고등학교")
+        let viewModel = AlertBtn(icon: UIImage(named: "EZY_location")?.withRenderingMode(.alwaysTemplate), iconTintColor: .rgb(red: 199, green: 224, blue: 212), message: "광주소프트웨어마이스터고등학교")
         let button = AlertButton(with: viewModel)
         button.addTarget(self, action: #selector(locationAlert), for: .touchUpInside)
         return button
     }()
     
     //MARK: - StackView
-    fileprivate lazy var btnStackView = UIStackView(arrangedSubviews: [calendarBtn,clockBtn,locationBtn]).then{
+    private lazy var btnStackView = UIStackView(arrangedSubviews: [calendarBtn,clockBtn,locationBtn]).then{
         $0.axis = .vertical
         $0.distribution = .fillEqually
         $0.spacing = bounds.height/47.7647
@@ -95,12 +100,12 @@ class AddMyToDoViewController:UIViewController{
     private let addButton : AdditionalButton = {
         let button = AdditionalButton(type: .system)
         button.title = "추가"
-        button.color = .EZY_BAC8FF
+        button.color = .rgb(red: 150, green: 141, blue: 255)
         button.addTarget(self, action: #selector(Addmytodobtn), for: .touchUpInside)
         return button
     }()
 
-    fileprivate let tagCollectionView: UICollectionView = {
+    private let tagCollectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
         let cv = UICollectionView(frame: .zero,collectionViewLayout: layout)
         layout.scrollDirection = .horizontal
@@ -111,7 +116,7 @@ class AddMyToDoViewController:UIViewController{
         return cv
     }()
 
-    let alarmSettingcollectionView: UICollectionView = {
+    private let alarmSettingcollectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
         let cv = UICollectionView(frame: .zero, collectionViewLayout: layout)
         layout.scrollDirection = .horizontal
@@ -123,52 +128,34 @@ class AddMyToDoViewController:UIViewController{
     }()
     
     //MARK: - Lifecycle
-    
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         configureUI()
-      
     }
 
     
     //MARK: - Selectors
     
-    @objc func todobackbtn(){
+    @objc private func todobackbtn(){
         //전페이지로 되돌아가는 버튼
-        dismiss(animated: true, completion: nil)
+        navigationController?.popViewController(animated: true)
     }
     
     
-    @objc func calendarAlert(){
+    @objc private func calendarAlert(){
         // 날짜 Alert를 실행시킬 부분
         
     }
-    @objc func clockAlert(){
+    @objc private func clockAlert(){
         //시간 Alert를 실행시킬 부분
     }
-    @objc func locationAlert(){
+    @objc private func locationAlert(){
         //위치 Alert 실행시킬 부분
     }
     
-    @objc func Addmytodobtn(){
+    @objc private func Addmytodobtn(){
         print("DEBUG:AddButton")
         //추가페이지 작성후 실행시키는 코드
-    }
-    
-
-    
-    //MARK: - Keyboard Action
-    @objc func KeyboardShow(){
-        backGroundView.isHidden = false
-        backGroundView.addTarget(self, action: #selector(KeyboardDown), for: .touchUpInside)
-    }
-    @objc func KeyboardHide(){
-        backGroundView.isHidden = true
-
-    }
-    @objc func KeyboardDown(){
-        self.view.endEditing(true)
     }
     
     //MARK: - Helpers
@@ -193,7 +180,7 @@ class AddMyToDoViewController:UIViewController{
         }
     }
     //MARK: - Helper
-    func configureUI(){
+    private func configureUI(){
         view.backgroundColor = .white
         tagCollectionView.contentInset = UIEdgeInsets(top: 0, left: view.frame.height/29, bottom: 0, right: view.frame.height/29)
         alarmSettingcollectionView.contentInset = UIEdgeInsets(top: 0, left: view.frame.height/29, bottom: 0, right: 0)
@@ -201,22 +188,20 @@ class AddMyToDoViewController:UIViewController{
         cornerRadius()
         collectionViewDataSourceAndDelegate()
         location()
-        keyboardStatus()
     }
-    //MARK: - keyboard Setting
-    func keyboardStatus(){
-        NotificationCenter.default.addObserver(self, selector: #selector(KeyboardShow), name: UIResponder.keyboardWillShowNotification, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(KeyboardHide), name: UIResponder.keyboardWillHideNotification, object: nil)
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        super.touchesBegan(touches, with: event)
+        view.endEditing(true)
     }
     //MARK: - CollectionView DataSource & Delegate
-    func collectionViewDataSourceAndDelegate(){
+    private func collectionViewDataSourceAndDelegate(){
         tagCollectionView.delegate = self
         tagCollectionView.dataSource = self
         alarmSettingcollectionView.delegate = self
         alarmSettingcollectionView.dataSource = self
     }
     //MARK: - AddView
-    func addView(){
+    private func addView(){
         view.addSubview(backbutton)
         view.addSubview(TitleLabel)
         view.addSubview(btnStackView)
@@ -225,35 +210,37 @@ class AddMyToDoViewController:UIViewController{
         view.addSubview(addButton)
         view.addSubview(alarmSettings)
         view.addSubview(alarmSettingcollectionView)
-        view.addSubview(backGroundView)
         view.addSubview(titleContainerView)
         view.addSubview(explanationContainerView)
     }
     //MARK: - CornerRadius
-    func cornerRadius(){
+    private func cornerRadius(){
         titleContainerView.layer.cornerRadius = view.frame.height/40.6
         addButton.layer.cornerRadius = view.frame.height/81.2
         explanationContainerView.layer.cornerRadius = view.frame.height/40.6
     }
+    //MARK: - Alarm Setting Function
+    func alarmReloadSetting(_ ampm: String,_ time: Int,_ minute: Int){
+        alarmData[0].textData = "\(ampm) \(time):\(String(format: "%02d", minute))"
+        alarmSettingcollectionView.reloadData()
+        alarmData[0].iconImage = nil
+    }
     //MARK: - Location
-    func location(){
-        backGroundView.snp.makeConstraints { (make) in
-            make.top.left.bottom.right.equalToSuperview()
+    private func location(){
+        backbutton.snp.makeConstraints {
+            $0.height.width.equalTo(bounds.height/33.8)
+            $0.left.equalTo(bounds.height/29)
+            $0.top.equalToSuperview().offset(bounds.height/13.3)
         }
-        backbutton.snp.makeConstraints { (make) in
-            make.height.width.equalTo(self.view.frame.height/33.8)
-            make.left.equalTo(self.view.frame.height/29)
-            make.top.equalTo(self.view.snp.top ).offset(self.view.frame.height/13.3)
+        TitleLabel.snp.makeConstraints {
+            $0.top.equalTo(backbutton.snp.bottom).offset(bounds.height/30.07)
+            $0.left.equalTo(backbutton.snp.left)
         }
-        TitleLabel.snp.makeConstraints { (make) in
-            make.top.equalTo(backbutton.snp.bottom).offset(self.view.frame.height/30.07)
-            make.left.equalTo(backbutton.snp.left)
-        }
-        titleContainerView.snp.makeConstraints { (make) in
-            make.height.equalTo(self.view.frame.height/14.7)
-            make.top.equalTo(TitleLabel.snp.bottom).offset(self.view.frame.height/30.07)
-            make.left.equalTo(backbutton.snp.left)
-            make.right.equalTo(view.snp.right).offset(self.view.frame.height/19.8 * -1)
+        titleContainerView.snp.makeConstraints {
+            $0.height.equalTo(bounds.height/14.7)
+            $0.top.equalTo(TitleLabel.snp.bottom).offset(bounds.height/30.07)
+            $0.left.equalTo(backbutton.snp.left)
+            $0.right.equalTo(view.snp.right).offset(bounds.height/19.8 * -1)
         }
         btnStackView.snp.makeConstraints {
             $0.top.equalTo(titleContainerView.snp.bottom).offset(bounds.self.height/42.74)
@@ -261,133 +248,108 @@ class AddMyToDoViewController:UIViewController{
             $0.right.equalToSuperview().inset(bounds.height/9.23)
             $0.height.equalTo(bounds.height/4.805)
         }
-     
-        explanationContainerView.snp.makeConstraints { (make) in
-            make.height.equalTo(self.view.frame.height/10.8)
-            make.top.equalTo(locationBtn.snp.bottom).offset(self.view.frame.height/45.11)
-            make.left.equalTo(backbutton.snp.left)
-            make.right.equalTo(titleContainerView.snp.right)
+        explanationContainerView.snp.makeConstraints {
+            $0.height.equalTo(bounds.height/10.8)
+            $0.top.equalTo(locationBtn.snp.bottom).offset(bounds.height/45.11)
+            $0.left.equalTo(backbutton.snp.left)
+            $0.right.equalTo(titleContainerView.snp.right)
         }
-        tagLabel.snp.makeConstraints { (make) in
-            make.left.equalTo(backbutton.snp.left)
-            make.top.equalTo(explanationContainerView.snp.bottom).offset(view.frame.height/42.74)
+        tagLabel.snp.makeConstraints {
+            $0.left.equalTo(backbutton.snp.left)
+            $0.top.equalTo(explanationContainerView.snp.bottom).offset(bounds.height/42.74)
         }
-        tagCollectionView.snp.makeConstraints { (make) in
-            make.top.equalTo(tagLabel.snp.bottom).offset(view.frame.height/58)
-            make.left.right.equalToSuperview()
-            make.height.equalTo(view.frame.height/10.54)
+        tagCollectionView.snp.makeConstraints {
+            $0.top.equalTo(tagLabel.snp.bottom)
+            $0.left.right.equalToSuperview()
+            $0.height.equalTo(bounds.height/11)
         }
        
-        alarmSettings.snp.makeConstraints { (make) in
-            make.left.equalTo(backbutton.snp.left)
-            make.top.equalTo(tagCollectionView.snp.bottom).offset(view.frame.height/36.91)
+        alarmSettings.snp.makeConstraints {
+            $0.left.equalTo(backbutton.snp.left)
+            $0.top.equalTo(tagCollectionView.snp.bottom)
         }
-        alarmSettingcollectionView.snp.makeConstraints { (make) in
-            make.top.equalTo(alarmSettings.snp.bottom).offset(view.frame.height/58)
-            make.height.equalTo(view.frame.height/23.7)
-            make.left.right.equalToSuperview()
+        alarmSettingcollectionView.snp.makeConstraints {
+            $0.top.equalTo(alarmSettings.snp.bottom)
+            $0.height.equalTo(bounds.height/11.76)
+            $0.left.right.equalToSuperview()
         }
         
-        addButton.snp.makeConstraints { (make) in
-            make.top.equalTo(alarmSettingcollectionView.snp.bottom).offset(view.frame.height/38.67)
-            make.height.equalTo(self.view.frame.height/18.0)
-            make.left.right.equalToSuperview().inset(view.frame.width/13.636363)
+        addButton.snp.makeConstraints {
+            $0.bottom.equalToSuperview().inset(bounds.height/33.8333)
+            $0.height.equalTo(bounds.height/18.0)
+            $0.left.right.equalToSuperview().inset(bounds.width/13.636363)
         }
     }
 
 }
+
 //MARK: - extension
-extension AddMyToDoViewController : UICollectionViewDelegateFlowLayout,UICollectionViewDataSource{
+extension AddMyToDoViewController: UICollectionViewDelegateFlowLayout, UICollectionViewDataSource{
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        if collectionView == self.tagCollectionView{
+        if collectionView == tagCollectionView{
             return tagData.count
-        }else if collectionView == self.alarmSettingcollectionView{
+        }else{
             return 2
         }
-        return 0
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        if collectionView == self.tagCollectionView{
-            let tagCell = collectionView.dequeueReusableCell(withReuseIdentifier: TagCell.identifier, for: indexPath) as! TagCell
-            tagCell.isSelected = false
-            tagCell.layer.borderWidth = 1
-            tagCell.bglabel.text = tagData[indexPath.row]
-            tagCell.bglabel.textColor = tagColor.randomElement()
-            tagCell.layer.borderColor = tagCell.bglabel.textColor.cgColor
-            tagCell.layer.cornerRadius = tagCell.frame.height/2
-            if indexPath.item == 0 {
-                tagCell.bglabel.text = "선택해제"
-                tagCell.bglabel.textColor = .rgb(red: 183, green: 180, blue: 180)
-                tagCell.layer.borderColor = UIColor.rgb(red: 201, green: 201, blue: 201).cgColor
-            }
-            if indexPath.item == 2{
-                tagCell.bglabel.text = "+ 추가"
-                tagCell.bglabel.textColor = .EZY_BAC8FF
-                tagCell.layer.borderColor = UIColor.EZY_BAC8FF.cgColor
-            }
+        if collectionView == tagCollectionView{
+            guard let tagCell = collectionView.dequeueReusableCell(withReuseIdentifier: TagCell.identifier, for: indexPath ) as? TagCell else{ return UICollectionViewCell()}
+            tagCell.iv.image = tagData[indexPath.row].iconImage
+            tagCell.backgroundColor = tagData[indexPath.row].backgroundColor
+            tagCell.iv.tintColor = tagData[indexPath.row].backgroundColor
+            tagCell.bglabel.text = tagData[indexPath.row].textData
+            tagCell.bglabel.textColor = tagData[indexPath.row].backgroundColor
             return tagCell
         }else{
-            let alarmCell = collectionView.dequeueReusableCell(withReuseIdentifier: AlarmSettingCell.identifier, for: indexPath) as! AlarmSettingCell
-            alarmCell.layer.borderWidth = 1
-            alarmCell.layer.borderColor = UIColor.rgb(red: 207, green: 207, blue: 207).cgColor
-            alarmCell.layer.cornerRadius = view.frame.height/81.2
-            alarmCell.bglabel.text = alarmData
-            alarmCell.bglabel.textColor = .rgb(red: 183, green: 180, blue: 180)
-            if indexPath.item == 0{
-                alarmCell.bglabel.text = "선택안함"
-            }
+            guard let alarmCell = collectionView.dequeueReusableCell(withReuseIdentifier: AlarmSettingCell.identifier, for: indexPath) as? AlarmSettingCell else {return UICollectionViewCell()}
+            alarmCell.iv.image = alarmData[indexPath.row].iconImage
+            alarmCell.backgroundColor = alarmData[indexPath.row].backgroundColor
+            alarmCell.bglabel.text = alarmData[indexPath.row].textData
+            alarmCell.iv.tintColor = alarmData[indexPath.row].backgroundColor
             return alarmCell
         }
     }
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        if collectionView == self.tagCollectionView{
-            return CGSize(width: view.frame.height/9.66, height: view.frame.height/25.375)
-        }else{
-            return CGSize(width: view.frame.height/9.78, height: view.frame.height/23.88)
-        }
-    }
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
-        if collectionView == self.tagCollectionView{
-            return view.frame.height/50.973
-        }else if collectionView == self.alarmSettingcollectionView{
-            return view.frame.height/47.76
+        return bounds.width/34.1
+    }
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        //MARK: - Cell Dynamic width
+        let label = UILabel().then{
+            $0.dynamicFont(fontSize: 12, currentFontName: "AppleSDGothicNeo-Bold")
+            $0.sizeToFit()
         }
-        return 0
+        if collectionView == tagCollectionView{
+            label.text = tagData[indexPath.row].textData
+            label.sizeToFit()
+            return CGSize(width: label.frame.width + bounds.width/9.868, height: bounds.height/18.88)
+        }
+        else{
+            label.text = alarmData[indexPath.row].textData
+            label.sizeToFit()
+            return CGSize(width: label.frame.width + bounds.width/9.868, height: bounds.height/18.88)
+        }
+        
     }
-    func collectionView(_ collectionView: UICollectionView, shouldSelectItemAt indexPath: IndexPath) -> Bool {
-        let item = collectionView.cellForItem(at: indexPath)
-            if item?.isSelected ?? false {
-                collectionView.deselectItem(at: indexPath, animated: true)
-            } else {
-                collectionView.selectItem(at: indexPath, animated: true, scrollPosition: [])
-                return true
-            }
-            return false
-    }
-    
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        if collectionView == self.tagCollectionView {
-
-        }else {
-            if indexPath.item == 0{
-                
-            }
-            else if indexPath.item == indexPath.last{
+        if collectionView == alarmSettingcollectionView{
+            if indexPath.item == indexPath.first{
                 let MoreCalendarModalsVC = MoreAlarmModelViewController.instance()
                 MoreCalendarModalsVC.delegate = self
                 addDim()
                 present(MoreCalendarModalsVC, animated: true, completion: nil)
-                collectionView.deselectItem(at: indexPath, animated: true)
                 AlarmSettingCell().isSelected = false
+                collectionView.deselectItem(at: indexPath, animated: true)
             }
-            
         }
-        
     }
 }
 
 extension AddMyToDoViewController : AlarmModelDelegate{
+    func updateData(ampm: String, time: Int, minute: Int) {
+        self.alarmReloadSetting(ampm, time + 1, minute)
+    }
     func onTapClose() {
         self.removeDim()
     }

@@ -9,6 +9,8 @@ import UIKit
 import SnapKit
 import Then
 
+
+
 class AddErrandViewController : UIViewController{
     //MARK: - Properties
     var data = ["JiHooooooooon","+ 추가"]
@@ -36,13 +38,9 @@ class AddErrandViewController : UIViewController{
         $0.spacing = bounds.height/47.7647
     }
     
-    private let calendarBtn : AlertButton = {
-        let viewModel = AlertBtn(icon: UIImage(named: "EZY_calendar")?.withRenderingMode(.alwaysTemplate), iconTintColor: .rgb(red: 255, green: 181, blue: 181), message: "2021.6.6 일요일")
-        let button = AlertButton(with: viewModel)
-        
-        button.addTarget(self, action: #selector(calendarAlert), for: .touchUpInside)
-        return button
-    }()
+    private let calendarBtn = CalendarAlertBtn(icon: (UIImage(named: "EZY_Calendar")?.withRenderingMode(.alwaysTemplate))!, iconColor: .rgb(red: 255, green: 181, blue: 181), titleText: "2021.6.6 일요일", repeatText: "월, 화, 수").then {
+        $0.addTarget(self, action: #selector(calendarAlert), for: .touchUpInside)
+    }
     private let clockBtn : AlertButton = {
         let viewModel = AlertBtn(icon: UIImage(named: "EZY_clock")?.withRenderingMode(.alwaysTemplate), iconTintColor: .rgb(red: 255, green: 203, blue: 181), message: "11:00AM - 1:00PM")
         let button = AlertButton(with: viewModel)
@@ -53,7 +51,6 @@ class AddErrandViewController : UIViewController{
     private let locationBtn : AlertButton = {
         let viewModel = AlertBtn(icon: UIImage(named: "EZY_location")?.withRenderingMode(.alwaysTemplate), iconTintColor: .rgb(red: 199, green: 224, blue: 212), message: "광주소프트웨어마이스터고등학교")
         let button = AlertButton(with: viewModel)
-        
         button.addTarget(self, action: #selector(locationAlert), for: .touchUpInside)
         return button
     }()
@@ -68,6 +65,7 @@ class AddErrandViewController : UIViewController{
         $0.textColor = .rgb(red: 182, green: 182, blue: 182)
         $0.dynamicFont(fontSize: 12, currentFontName: "AppleSDGothicNeo-Bold")
     }
+<<<<<<< HEAD
  
     
     let addPersonCollectionView: UICollectionView = {
@@ -79,6 +77,16 @@ class AddErrandViewController : UIViewController{
         cv.isScrollEnabled = false
         return cv
     }()
+=======
+    private let askForFavor  = UIButton().then{
+        $0.setTitle("+ 인원 선택", for: .normal)
+        $0.dynamicFont(fontSize: 12, currentFontName: "AppleSDGothicNeo-Bold")
+        $0.setTitleColor(UIColor.rgb(red: 129, green: 129, blue: 129), for: .normal)
+        $0.backgroundColor = .white
+        $0.layer.applySketchShadow(color: .black, alpha: 0.1, x: 0, y: 4, blur: 14, spread: 0)
+        $0.addTarget(self, action: #selector(addPerson), for: .touchUpInside)
+    }
+>>>>>>> 69cf28b71dcb4e2f7999a77dd93de89b15b2077a
     
     private lazy var addButton : AdditionalButton = {
         let button = AdditionalButton(type: .system)
@@ -94,34 +102,30 @@ class AddErrandViewController : UIViewController{
     override func viewDidLoad() {
         super.viewDidLoad()
         configureUI()
-        addPersonCollectionView.dataSource = self
-        addPersonCollectionView.delegate = self
-        addPersonCollectionView.allowsMultipleSelection = true
     }
     
     //MARK: - Selectors
     
-    @objc func todobackbtn(){
+    @objc private func todobackbtn(){
         //전페이지로 되돌아가는 버튼
-        let vc = LoginViewController()
-        vc.modalPresentationStyle = .fullScreen
-        present(vc, animated: false, completion: nil)
+        navigationController?.popViewController(animated: true)
+    }
+    @objc private func addPerson(){
+        navigationController?.pushViewController(MorePeopleToDo(), animated: true)
     }
     
-    @objc func calendarAlert(){
+    @objc private func calendarAlert(){
         // 날짜 Alert를 실행시킬 부분
     }
-    @objc func clockAlert(){
+    @objc private func clockAlert(){
         //시간 Alert를 실행시킬 부분
     }
-    @objc func locationAlert(){
+    @objc private func locationAlert(){
         //위치 Alert 실행시킬 부분
     }
     @objc func Addmytodobtn(){
         print("DEBUG:AddButton")
         //추가페이지 작성후 실행시키는 코드
-        
-        
     }
     @objc func Addlocationbtn(){
         let vc = AddMyToDoViewController()
@@ -131,19 +135,21 @@ class AddErrandViewController : UIViewController{
     //MARK: - Helpers
     func configureUI(){
         view.backgroundColor = .white
-        addPersonCollectionView.contentInset = UIEdgeInsets(top: 0, left: view.frame.height/29, bottom: 0, right: 0)
-
-        addPersonCollectionView.backgroundColor = .clear
         cornerRadius()
         addView()
         location()
         
+    }
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        super.touchesBegan(touches, with: event)
+        view.endEditing(true)
     }
     
     func cornerRadius(){
         RequestList.layer.cornerRadius = view.frame.height/40.6
         addButton.layer.cornerRadius = view.frame.height/81.2
         explanationContainerView.layer.cornerRadius = view.frame.height/40.6
+        askForFavor.layer.cornerRadius = 10
     }
     func addView(){
         view.addSubview(backbutton)
@@ -151,8 +157,8 @@ class AddErrandViewController : UIViewController{
         view.addSubview(RequestList)
         view.addSubview(btnStackView)
         view.addSubview(explanationContainerView)
-        view.addSubview(addPersonCollectionView)
         view.addSubview(kindOfCollectionView)
+        view.addSubview(askForFavor)
         view.addSubview(addButton)
     }
     func location(){
@@ -188,19 +194,21 @@ class AddErrandViewController : UIViewController{
             make.left.equalTo(backbutton.snp.left)
             make.top.equalTo(explanationContainerView.snp.bottom).offset(view.frame.height/33.75)
         }
-        addPersonCollectionView.snp.makeConstraints { (make) in
-            make.left.right.equalToSuperview()
-            make.height.equalTo(view.frame.height/25.375)
-            make.top.equalTo(kindOfCollectionView.snp.bottom).offset(view.frame.height/81.2)
+        askForFavor.snp.makeConstraints {
+            $0.top.equalTo(kindOfCollectionView.snp.bottom).offset(bounds.height/54)
+            $0.left.equalTo(backbutton.snp.left)
+            $0.height.equalTo(bounds.height/18.88)
+            $0.width.equalTo(bounds.width/4.07)
         }
         addButton.snp.makeConstraints { (make) in
-            make.bottom.equalToSuperview().inset(view.frame.height/8.202)
+            make.bottom.equalToSuperview().inset(bounds.height/33.833)
             make.height.equalTo(self.view.frame.height/18.0)
             make.left.right.equalToSuperview().inset(view.frame.width/13.636363)
         }
     }
 
 }
+<<<<<<< HEAD
 
 //MARK: - AddErrandViewController CollectionView
 
@@ -253,3 +261,5 @@ extension AddErrandViewController : UICollectionViewDelegateFlowLayout,UICollect
     }
 
 }
+=======
+>>>>>>> 69cf28b71dcb4e2f7999a77dd93de89b15b2077a

@@ -13,11 +13,14 @@ import Alamofire
 class AlertButton : UIButton {
 
     private let view = UIView()
+<<<<<<< HEAD
     
     var alertButtonTitleLabel = UILabel()
     
+=======
+    private let label = UILabel()
+>>>>>>> 69cf28b71dcb4e2f7999a77dd93de89b15b2077a
     private let icon = UIImageView()
-    
     private var viewModel : AlertBtn?
     
     override init(frame: CGRect) {
@@ -75,6 +78,4 @@ class AlertButton : UIButton {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-
-    
 }
