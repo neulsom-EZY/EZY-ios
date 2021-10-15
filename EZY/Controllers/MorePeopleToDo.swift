@@ -67,21 +67,17 @@ class MorePeopleToDo: UIViewController{
         return cv
     }()
     
-    private let userChoose : AdditionalButton = {
-        let button = AdditionalButton(type: .system)
-        button.title = "인원 선택"
-        button.color = .rgb(red: 151, green: 142, blue: 255)
-        button.addTarget(self, action: #selector(chooseUser), for: .touchUpInside)
-        return button
-    }()
-    
+    private let userChoose = AdditionalButton(type: .system).then {
+        $0.title = "인원 선택"
+        $0.color = .rgb(red: 151, green: 142, blue: 255)
+        $0.addTarget(self, action: #selector(chooseUser), for: .touchUpInside)
+    }
     
     //MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         configureUI()
-        WhatAboutPeopleLikeThis.dataSource = self
-        WhatAboutPeopleLikeThis.delegate = self
+        [WhatAboutPeopleLikeThis].forEach { $0.delegate = self; $0.dataSource = self}
         nickNameTextFieldContainerView.delegate = self
     }
     
@@ -103,14 +99,7 @@ class MorePeopleToDo: UIViewController{
     }
     //MARK: - AddView
     func addView(){
-        view.addSubview(backbutton)
-        view.addSubview(TitleLabel)
-        view.addSubview(SubLabel)
-        view.addSubview(GroupLabel)
-        view.addSubview(nickNameTextFieldContainerView)
-        view.addSubview(recommendPeopleLabel)
-        view.addSubview(WhatAboutPeopleLikeThis)
-        view.addSubview(userChoose)
+        [backbutton,TitleLabel,SubLabel,GroupLabel,nickNameTextFieldContainerView,recommendPeopleLabel,WhatAboutPeopleLikeThis,userChoose].forEach { view.addSubview($0)}
     }
     //MARK: - Data 일치 여부
     func DataIsRight(){
@@ -196,6 +185,7 @@ extension MorePeopleToDo : UITextFieldDelegate{
         print(textField.text!)
     }
 }
+
 //MARK: - CollectionView
 extension MorePeopleToDo : UICollectionViewDelegateFlowLayout,UICollectionViewDataSource{
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {

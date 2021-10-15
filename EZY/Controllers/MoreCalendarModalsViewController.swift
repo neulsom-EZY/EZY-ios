@@ -16,7 +16,6 @@ protocol BulletinDelegate: class {
 
 class MoreCalendarModalsViewController : UIViewController{
     
-    
     //MARK: - Properties
     weak var delegate: BulletinDelegate?
     
@@ -117,23 +116,17 @@ class MoreCalendarModalsViewController : UIViewController{
     }
     //MARK: - HELPERS
     
-    func configureUI(){
+    private func configureUI(){
         addView()
         cornerRadius()
         location()
         addTransparentsview(frame: transparentView.frame)
     }
-    func addView(){
-        view.addSubview(transparentView)
-        view.addSubview(bgView)
-        view.addSubview(TitleLabel)
-        view.addSubview(myToDo)
-        view.addSubview(errand)
-        view.addSubview(makeButton)
-        view.addSubview(makeTitle)
+    private func addView(){
+        [transparentView,bgView,TitleLabel,myToDo,errand,makeButton,makeTitle].forEach { view.addSubview($0)}
     }
     
-    func cornerRadius(){
+    private func cornerRadius(){
         myToDo.layer.cornerRadius = view.frame.height/40.6
         errand.layer.cornerRadius = view.frame.height/40.6
         makeButton.layer.cornerRadius = view.frame.height/81.2
@@ -141,7 +134,7 @@ class MoreCalendarModalsViewController : UIViewController{
         errand.layer.applySketchShadow(color: .gray, alpha: 0.25, x: 0, y: 4, blur: 14, spread: 0)
     }
     
-    func location(){
+    private func location(){
         bgView.snp.makeConstraints { (make) in
             make.left.equalToSuperview()
             make.right.equalToSuperview()
@@ -177,16 +170,16 @@ class MoreCalendarModalsViewController : UIViewController{
             make.center.equalTo(makeButton.snp.center)
         }
     }
-    func myTodoState(){
+    private func myTodoState(){
         myToDo.layer.borderColor = UIColor.clear.cgColor
         myToDo.isSelected = false
     }
 
-    func ErrandTodoState(){
+    private func ErrandTodoState(){
         errand.layer.borderColor = UIColor.clear.cgColor
         errand.isSelected = false
     }
-    func addTransparentsview(frame : CGRect){
+    private func addTransparentsview(frame : CGRect){
         let window = UIApplication.shared.keyWindow
         transparentView.frame = window?.frame ?? self.view.frame
         let tapgesture = UITapGestureRecognizer(target: self, action: #selector(onTapClose))

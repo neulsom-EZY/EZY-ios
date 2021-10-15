@@ -195,23 +195,12 @@ class AddMyToDoViewController: UIViewController{
     }
     //MARK: - CollectionView DataSource & Delegate
     private func collectionViewDataSourceAndDelegate(){
-        tagCollectionView.delegate = self
-        tagCollectionView.dataSource = self
-        alarmSettingcollectionView.delegate = self
-        alarmSettingcollectionView.dataSource = self
+        [tagCollectionView,alarmSettingcollectionView].forEach { $0.delegate = self; $0.dataSource = self}
     }
+    
     //MARK: - AddView
     private func addView(){
-        view.addSubview(backbutton)
-        view.addSubview(TitleLabel)
-        view.addSubview(btnStackView)
-        view.addSubview(tagLabel)
-        view.addSubview(tagCollectionView)
-        view.addSubview(addButton)
-        view.addSubview(alarmSettings)
-        view.addSubview(alarmSettingcollectionView)
-        view.addSubview(titleContainerView)
-        view.addSubview(explanationContainerView)
+        [backbutton,TitleLabel,btnStackView,tagLabel,tagCollectionView,addButton,alarmSettings,alarmSettingcollectionView,titleContainerView,explanationContainerView].forEach {view.addSubview($0)}
     }
     //MARK: - CornerRadius
     private func cornerRadius(){

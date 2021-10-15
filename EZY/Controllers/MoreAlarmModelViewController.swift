@@ -77,20 +77,15 @@ class MoreAlarmModelViewController : UIViewController{
         delegateAndDataSource()
     }
     private func addView(){
-        view.addSubview(transparentView)
-        view.addSubview(bgView)
+        [transparentView,bgView,makeButton].forEach {view.addSubview($0)}
         makeButton.addSubview(makeTitle)
-        view.addSubview(makeButton)
         bgView.addSubview(AlarmDateView)
     }
+    
     private func delegateAndDataSource(){
-        AlarmDateView.ampmPickerView.dataSource = self
-        AlarmDateView.timePickerView.dataSource = self
-        AlarmDateView.minutePickerView.dataSource = self
-        AlarmDateView.ampmPickerView.delegate = self
-        AlarmDateView.timePickerView.delegate = self
-        AlarmDateView.minutePickerView.delegate = self
+        [AlarmDateView.ampmPickerView,AlarmDateView.timePickerView,AlarmDateView.minutePickerView].forEach { $0.dataSource = self; $0.delegate = self}
     }
+    
     private func cornerRadius(){
         makeButton.layer.cornerRadius = view.frame.height/81.2
     }
