@@ -203,11 +203,28 @@ class PersonalPlanChangeViewController: UIViewController{
     
     //MARK: - helpers
     func configureUI(){
+
+        currentDaySetting()
+        
         addView()
                 
         location()
         
         dataSourceAndDelegate()
+    }
+    
+    func currentDaySetting(){
+        let currentDayOfWeek = DateFormatter().weekdaySymbols[Calendar.current.component(.weekday, from: Date()) - 1]
+        let endIdx: String.Index = currentDayOfWeek.index(currentDayOfWeek.startIndex, offsetBy: 2)
+        let formatter = DateFormatter()
+        
+        formatter.dateFormat = "yyyy.MM.dd"
+        
+        for i in 0...dayArray.count-1{
+            if String(currentDayOfWeek[...endIdx]) == "\(dayArray[i])"{
+                calendarBtn.dayLabel.text = "\(formatter.string(from: Date())) \(dayArray[i].rawValue)요일"
+            }
+        }
     }
     
     //MARK: - dataSourceAndDelegate
@@ -350,7 +367,6 @@ class PersonalPlanChangeViewController: UIViewController{
         self.view.addSubview(notificationAddButton)
         self.view.addSubview(notificationNoSelectButton)
         self.view.addSubview(changeButton)
-//        self.view.addSubview(selectCalendarModalView)
         self.view.addSubview(selectTimeModalView)
         self.view.addSubview(tagAddModalView)
     }
@@ -437,40 +453,6 @@ class PersonalPlanChangeViewController: UIViewController{
         self.navigationController?.popViewController(animated: true)
     }
     
-//    @objc func calendarAddButtonClicked(sender:UIButton){
-//        selectCalendarModalView.isHidden = true
-//
-//        // 선택된 반복일 저장
-//        for i in 0...repeatModels.count-1{
-//            if repeatModels[i].isSelected == true{
-//                selectedRepeatDayTextArray.append(dayKoreanTextArray[i])
-//            }
-//        }
-//
-
-//
-//        if selectedDayOfWeekText == "Mon"{
-//            selectedDayOfWeekText = "월"
-//        }else if selectedDayOfWeekText == "Tue"{
-//            selectedDayOfWeekText = "화"
-//        }else if selectedDayOfWeekText == "Wed"{
-//            selectedDayOfWeekText = "수"
-//        }else if selectedDayOfWeekText == "Thr"{
-//            selectedDayOfWeekText = "목"
-//        }else if selectedDayOfWeekText == "Fri"{
-//            selectedDayOfWeekText = "금"
-//        }else if selectedDayOfWeekText == "Sat"{
-//            selectedDayOfWeekText = "토"
-//        }else if selectedDayOfWeekText == "Sun"{
-//            selectedDayOfWeekText = "일"
-//        }
-//
-//        // 선택한 내용 dayLabel에 적용
-//        if selectedDayOfWeekText != ""{
-//            calendarBtn.dayLabel.text = "2021.6.\(selectedDayText) \(selectedDayOfWeekText)요일"
-//        }
-//    }
-    
     //MARK: 화면터치하여 내리기
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?){
         self.explanationContainerView.tv.endEditing(true)
@@ -501,7 +483,7 @@ class PersonalPlanChangeViewController: UIViewController{
     }
     
     //MARK: - calendar Setting Function
-    func calendarReloadSetting(_ selectedDay: String, _ selectedRepeatDay: [String], _ selectedDayOfWeek: String){
+    func calendarReloadSetting(_ selectedDay: String, _ selectedRepeatDay: [String], _ selectedDayOfWeek: String, _ yearAndMonthText: String){
         
         // 반복라벨에 적용
         if selectedRepeatDay.count == 0{
@@ -512,7 +494,7 @@ class PersonalPlanChangeViewController: UIViewController{
         
         // 선택한 내용 dayLabel에 적용
         if selectedDayOfWeek != ""{
-            calendarBtn.dayLabel.text = "2021.6.\(selectedDay) \(selectedDayOfWeek)요일"
+            calendarBtn.dayLabel.text = "\(yearAndMonthText).\(selectedDay) \(selectedDayOfWeek)요일"
         }
     }
     
@@ -790,8 +772,8 @@ extension PersonalPlanChangeViewController: AlarmModelDelegate{
 }
 
 extension PersonalPlanChangeViewController: CalendarAddDelegate{
-    func updateData(selectedDay: String, selectedRepeatDay: [String], selectedDayOfWeek: String) {
-        self.calendarReloadSetting(selectedDay, selectedRepeatDay, selectedDayOfWeek)
+    func updateData(selectedDay: String, selectedRepeatDay: [String], selectedDayOfWeek: String, yearAndMonthText: String) {
+        self.calendarReloadSetting(selectedDay, selectedRepeatDay, selectedDayOfWeek, yearAndMonthText)
     }
     
     func onTapCalendarModalClose(){

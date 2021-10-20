@@ -9,7 +9,7 @@ import UIKit
 
 protocol CalendarAddDelegate: AnyObject {
     func onTapCalendarModalClose()
-    func updateData(selectedDay : String , selectedRepeatDay : [String], selectedDayOfWeek: String)
+    func updateData(selectedDay : String , selectedRepeatDay : [String], selectedDayOfWeek: String, yearAndMonthText: String)
 }
 
 class CalendarAddModelViewController: UIViewController {
@@ -85,6 +85,10 @@ class CalendarAddModelViewController: UIViewController {
     
     private var repeatCollectionViewselectedIndex = 0
     
+    private var yearAndMonthText = ""
+    
+    private var monthText = ""
+    
     private var dayOfWeekPickerViewData:[String] = []
     
     private var dayPickerViewData:[String] = []
@@ -140,7 +144,9 @@ class CalendarAddModelViewController: UIViewController {
     
     // MARK: - currentDate Setting
     func currentDateSetting(){
-        
+        let formatter = DateFormatter()
+        formatter.dateFormat = "yyyy.MM"
+        yearAndMonthText = formatter.string(from: Date())
     }
     
     // MARK: - Selectors
@@ -166,7 +172,7 @@ class CalendarAddModelViewController: UIViewController {
         
         delegate?.onTapCalendarModalClose()
         dismiss(animated: true, completion: nil)
-        delegate?.updateData(selectedDay: self.selectedDay, selectedRepeatDay: self.selectedRepeatDay, selectedDayOfWeek: self.selectedDayOfWeek)
+        delegate?.updateData(selectedDay: self.selectedDay, selectedRepeatDay: self.selectedRepeatDay, selectedDayOfWeek: self.selectedDayOfWeek, yearAndMonthText: self.yearAndMonthText)
     }
     
     //MARK: - addView
