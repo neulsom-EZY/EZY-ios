@@ -9,6 +9,7 @@ import UIKit
 
 class PersonalPlanChangeViewController: UIViewController{
     
+    
     //MARK: - Properties
     var TagColorModels: [TagColorCollectionViewModel] = [
                                                 TagColorCollectionViewModel(backgroundColor: UIColor.EZY_TagColorArray[0], isSelected: false),
@@ -59,10 +60,6 @@ class PersonalPlanChangeViewController: UIViewController{
     
     private let dayKoreanTextArray = ["월","화","수","목","금","토","일"]
     
-    private var dayPickerViewText1 = ["Sun","Mon","Tue","Wed","Thr","Fri","Sat","Mon","Tue","Wed","Thr","Fri","Mon","Tue","Wed","Thr","Fri"]
-    
-    private var dayPickerViewText2 = ["12","3","4","5","6","7","2","3","4","5","6","7","2","3","4","5","6","7"]
-    
     private var startPickerViewText = [["01","02","03","04","05","06","07","08","09","10","11","12"],["00","05","10","15","20","25","30","35","40","45","50","55"]]
     
     private var dayPickerViewTextArray = [["Mon","Tue","Wed","Thr","Fri","Sat","Sun","Mon","Tue","Wed","Thr","Fri","Sat","Sun"].reversed(),["1","2","3","4","5","6","7","1","2","3","4","5","6","7"]]
@@ -77,8 +74,6 @@ class PersonalPlanChangeViewController: UIViewController{
         $0.backgroundColor = .black
         $0.alpha = 0
     }
-    
-    fileprivate lazy var repeatModels: [RepeatCollectionViewModal] = [RepeatCollectionViewModal(isSelected: false),RepeatCollectionViewModal(isSelected: false),RepeatCollectionViewModal(isSelected: false),RepeatCollectionViewModal(isSelected: false),RepeatCollectionViewModal(isSelected: false),RepeatCollectionViewModal(isSelected: false),RepeatCollectionViewModal(isSelected: false)]
     
     private let selectTimeModalView = SelectTimeModalView().then{
         $0.isHidden = true
@@ -234,8 +229,7 @@ class PersonalPlanChangeViewController: UIViewController{
         
         let firstCell = tagAddModalView.tagColorCollectionView.cellForItem(at: [0, 0]) as? TagColorCollectionViewCell
         firstCell?.checkImage.isHidden = false
-//
-//        selectCalendarModalView.dayPickerView.selectRow(dayPickerViewText2.count/2, inComponent: 0, animated: true)
+
     }
     
     //MARK: - addLayout
@@ -324,10 +318,6 @@ class PersonalPlanChangeViewController: UIViewController{
             make.top.equalTo(notificationAddButton.snp.bottom).offset(self.view.frame.height/38.6)
         }
         
-//        selectCalendarModalView.snp.makeConstraints { make in
-//            make.top.bottom.left.right.equalToSuperview()
-//        }
-        
         selectTimeModalView.snp.makeConstraints { make in
             make.top.bottom.left.right.equalToSuperview()
         }
@@ -395,8 +385,10 @@ class PersonalPlanChangeViewController: UIViewController{
     }
     
     @objc func calendarAlert(){
-        selectedRepeatDayTextArray = []
-//        selectCalendarModalView.isHidden = false
+        let CalendarAddModelVC = CalendarAddModelViewController.instance()
+        CalendarAddModelVC.delegate = self
+        addDim()
+        present(CalendarAddModelVC, animated: true, completion: nil)
     }
     
     @objc func tagAddButtonClicked(sender:UIButton){
@@ -455,12 +447,7 @@ class PersonalPlanChangeViewController: UIViewController{
 //            }
 //        }
 //
-//        // 반복라벨에 적용
-//        if selectedRepeatDayTextArray.count == 0{
-//            calendarBtn.repeatLabel.text = "반복 없음"
-//        }else{
-//            calendarBtn.repeatLabel.text = "\(selectedRepeatDayTextArray.joined(separator: ",")) 반복"
-//        }
+
 //
 //        if selectedDayOfWeekText == "Mon"{
 //            selectedDayOfWeekText = "월"
@@ -513,6 +500,22 @@ class PersonalPlanChangeViewController: UIViewController{
         print("alerm >> \(ampm) \(time):\(String(format: "%02d", minute))")
     }
     
+    //MARK: - calendar Setting Function
+    func calendarReloadSetting(_ selectedDay: String, _ selectedRepeatDay: [String], _ selectedDayOfWeek: String){
+        
+        // 반복라벨에 적용
+        if selectedRepeatDay.count == 0{
+            calendarBtn.repeatLabel.text = "반복 없음"
+        }else{
+            calendarBtn.repeatLabel.text = "\(selectedRepeatDay.joined(separator: ",")) 반복"
+        }
+        
+        // 선택한 내용 dayLabel에 적용
+        if selectedDayOfWeek != ""{
+            calendarBtn.dayLabel.text = "2021.6.\(selectedDay) \(selectedDayOfWeek)요일"
+        }
+    }
+    
     // MARK: - shakeView
     func shakeView(_ view: UIView?) {
         let shake = CABasicAnimation(keyPath: "position")
@@ -550,10 +553,7 @@ extension PersonalPlanChangeViewController: UICollectionViewDataSource, UICollec
         }else if collectionView == tagAddModalView.tagColorCollectionView{
             return TagColorModels.count
         }
-//        }else if collectionView == selectCalendarModalView.repeatCollectionView{
-//            return dayKoreanTextArray.count
-        
-        
+
         return Int()
     }
     
@@ -598,22 +598,12 @@ extension PersonalPlanChangeViewController: UICollectionViewDataSource, UICollec
             
             return cell
         }
-//        }else if collectionView == selectCalendarModalView.repeatCollectionView{
-//            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: DayCollectionViewCell.identifier, for: indexPath) as! DayCollectionViewCell
-//
-//            cell.dayKoreanLabel.text = dayKoreanTextArray[indexPath.row]
-//            cell.dayEnglishLabel.text = dayEnglishTextArray[indexPath.row]
-//
-//            cell.setModel(repeatModels[indexPath.row])
-//
-//            return cell
-        
+
         return UICollectionViewCell()
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
-//        if collectionView == selectCalendarModalView.repeatCollectionView {
-//            return UIEdgeInsets(top: self.view.frame.width/100, left: self.view.frame.width/15.62, bottom: 0, right: self.view.frame.width/15.62)
+
         if collectionView == tagCollectionView{
             return UIEdgeInsets(top: 0, left: self.view.frame.width/12, bottom: 0, right: self.view.frame.width/12)
         }else if collectionView == tagAddModalView.tagColorCollectionView{
@@ -633,10 +623,6 @@ extension PersonalPlanChangeViewController: UICollectionViewDataSource, UICollec
         }else if collectionView == tagAddModalView.tagColorCollectionView{
             return CGSize(width: self.view.frame.height/27, height: self.view.frame.height/27)
         }
-//        }else if collectionView == selectCalendarModalView.repeatCollectionView{
-//            return CGSize(width: self.view.frame.width/12.18, height: self.view.frame.height/23.88)
-
-        
         return CGSize()
     }
     
@@ -694,11 +680,6 @@ extension PersonalPlanChangeViewController: UICollectionViewDataSource, UICollec
 
             selectedTagColor = TagColorModels[indexPath.row].backgroundColor
         }
-//        }else if collectionView == selectCalendarModalView.repeatCollectionView{
-//
-//            repeatModels[indexPath.row].isSelected.toggle()
-//
-        
         
         collectionView.reloadData()
     }
@@ -731,9 +712,7 @@ extension PersonalPlanChangeViewController: UIPickerViewDelegate, UIPickerViewDa
     }
     
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-//        if pickerView == selectCalendarModalView.dayPickerView{
-//            selectedDayOfWeekText = dayPickerViewTextArray[0][row]
-//            selectedDayText = dayPickerViewTextArray[1][row]
+
         if pickerView == selectTimeModalView.startPickerView{
             if component == 0{
                 selectedStartTime[0] = "\(startPickerViewText[0][row])"
@@ -767,49 +746,7 @@ extension PersonalPlanChangeViewController: UIPickerViewDelegate, UIPickerViewDa
             
             return pickerLabel!
         }
-//        }else if pickerView == selectCalendarModalView.dayPickerView{
-//            let pickerLabel1 = UILabel().then{
-//                $0.font = UIFont(name: "AppleSDGothicNeo-SemiBold", size: 17)
-//                $0.textAlignment = .center
-//                $0.text = dayPickerViewTextArray[0][row]
-//            }
-//
-//            let pickerLabel2 = UILabel().then{
-//                $0.font = UIFont(name: "AppleSDGothicNeo-SemiBold", size: 20)
-//                $0.textAlignment = .center
-//                $0.text = dayPickerViewTextArray[1][row]
-//            }
-//
-//            let view = UIView(frame: CGRect(x: 0, y: 0, width:0, height:0)).then{
-//                $0.addSubview(pickerLabel1)
-//                $0.addSubview(pickerLabel2)
-//                $0.transform = CGAffineTransform(rotationAngle: (90 * (.pi / 180*3)))
-//            }
-//
-//            // 공휴일은 파란색으로 표시하고 그 외에는 회색으로 표시한다.
-//            if dayPickerViewText1[row] == "Sun"{
-//                pickerLabel1.textColor = UIColor(red: 125/255, green: 151/255, blue: 255/255, alpha: 1)
-//                pickerLabel2.textColor = UIColor(red: 125/255, green: 151/255, blue: 255/255, alpha: 1)
-//            }else{
-//                pickerLabel1.textColor = UIColor(red: 100/255, green: 100/255, blue: 100/255, alpha: 1)
-//                pickerLabel2.textColor = UIColor(red: 100/255, green: 100/255, blue: 100/255, alpha: 1)
-//            }
-//
-//            pickerLabel2.snp.makeConstraints { make in
-//                make.top.equalToSuperview().offset(self.view.frame.height/23)
-//                make.centerX.equalToSuperview()
-//            }
-//
-//            pickerLabel1.snp.makeConstraints { make in
-//                make.centerX.equalToSuperview()
-//                make.bottom.equalToSuperview().offset(-self.view.frame.height/23)
-//            }
-//
-//            pickerView.subviews[1].backgroundColor = UIColor(red: 170/255, green: 187/255, blue: 255/255, alpha: 0.1)
-//
-//            return view
-//        }
-        
+ 
         return UIView()
     }
 }
@@ -848,6 +785,16 @@ extension PersonalPlanChangeViewController: AlarmModelDelegate{
     }
     
     func onTapClose() {
+        self.removeDim()
+    }
+}
+
+extension PersonalPlanChangeViewController: CalendarAddDelegate{
+    func updateData(selectedDay: String, selectedRepeatDay: [String], selectedDayOfWeek: String) {
+        self.calendarReloadSetting(selectedDay, selectedRepeatDay, selectedDayOfWeek)
+    }
+    
+    func onTapCalendarModalClose(){
         self.removeDim()
     }
 }
