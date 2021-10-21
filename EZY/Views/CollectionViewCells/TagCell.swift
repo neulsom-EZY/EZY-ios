@@ -39,6 +39,9 @@ class TagCell : UICollectionViewCell{
             }
         }
     }
+    override func awakeFromNib() {
+        super.awakeFromNib()
+    }
     override init(frame: CGRect) {
         super.init(frame: frame)
         contentView.backgroundColor = .white

@@ -9,7 +9,7 @@ import UIKit
 import SnapKit
 import Then
 
-protocol UserDataDelegate : class{
+protocol UserDataDelegate : AnyObject{
     func updateData(name : String , Color : UIColor)
 }
 class MorePeopleToDo: UIViewController{
@@ -19,8 +19,7 @@ class MorePeopleToDo: UIViewController{
     let recommendData = ["Jihoooooon","siwonnnny","NoName","mingki","johnjihwan","noplayy"]
         
     let randomColorData : [UIColor] = [.rgb(red: 186, green: 200, blue: 255),.rgb(red: 255, green: 204, blue: 204),.rgb(red: 186, green: 222, blue: 255),.rgb(red: 207, green: 227, blue: 206),.rgb(red: 255, green: 209, blue: 141)]
-    var filterData = [SearchData]()
-    var filtered = false
+
 
     //MARK: - Properties
     weak var delegate : UserDataDelegate?
@@ -104,8 +103,9 @@ class MorePeopleToDo: UIViewController{
     //MARK: - Data 일치 여부
     func DataIsRight(){
         for item in data{
-            if item == (nickNameTextFieldContainerView.text ?? ""){
-                delegate?.updateData(name: nickNameTextFieldContainerView.text ?? "", Color: .blue)
+            if item == (nickNameTextFieldContainerView.text){
+                delegate?.updateData(name: nickNameTextFieldContainerView.text ?? ""
+                                     , Color: .blue)
                 navigationController?.popViewController(animated: true)
             }else{
                 shakeView(view)

@@ -11,7 +11,6 @@ import Then
 
 class AddErrandViewController : UIViewController{
     //MARK: - Properties
-    var data = ["JiHooooooooon","+ 추가"]
     let bounds = UIScreen.main.bounds
     
     private let backbutton = UIButton().then{
@@ -60,12 +59,13 @@ class AddErrandViewController : UIViewController{
         $0.dynamicFont(fontSize: 12, currentFontName: "AppleSDGothicNeo-Bold")
     }
 
-    private let askForFavor  = UIButton().then{
+     let askForFavor  = UIButton().then{
         $0.setTitle("+ 인원 선택", for: .normal)
         $0.dynamicFont(fontSize: 12, currentFontName: "AppleSDGothicNeo-Bold")
         $0.setTitleColor(UIColor.rgb(red: 129, green: 129, blue: 129), for: .normal)
         $0.backgroundColor = .white
         $0.layer.applySketchShadow(color: .black, alpha: 0.1, x: 0, y: 4, blur: 14, spread: 0)
+        $0.layer.cornerRadius = 10
         $0.addTarget(self, action: #selector(addPerson), for: .touchUpInside)
     }
     
@@ -123,12 +123,15 @@ class AddErrandViewController : UIViewController{
         super.touchesBegan(touches, with: event)
         view.endEditing(true)
     }
-    
+    private func updateUser(_ titleUser : String, _ color: UIColor){
+//        askForFavor.setTitle(titleUser, for: .normal)
+//        askForFavor.setTitleColor(color, for: .normal)
+        print(titleUser)
+    }
     private func cornerRadius(){
         requestList.layer.cornerRadius = view.frame.height/40.6
         addButton.layer.cornerRadius = view.frame.height/81.2
         explanationContainerView.layer.cornerRadius = view.frame.height/40.6
-        askForFavor.layer.cornerRadius = 10
     }
     private func addView(){
         [backbutton,titleLabel,requestList,btnStackView,explanationContainerView,kindOfCollectionView,askForFavor,addButton].forEach { view.addSubview($0)}
@@ -179,4 +182,9 @@ class AddErrandViewController : UIViewController{
         }
     }
 
+}
+extension AddErrandViewController : UserDataDelegate {
+    func updateData(name: String, Color: UIColor) {
+        updateUser(name, Color)
+    }
 }
