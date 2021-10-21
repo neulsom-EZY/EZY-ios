@@ -223,7 +223,6 @@ class PersonalPlanChangeViewController: UIViewController{
     
     //MARK: - dataSourceAndDelegate
     func dataSourceAndDelegate(){
-        
         tagAddModalView.tagColorCollectionView.delegate = self
         tagAddModalView.tagColorCollectionView.dataSource = self
         
@@ -234,7 +233,6 @@ class PersonalPlanChangeViewController: UIViewController{
         
         let firstCell = tagAddModalView.tagColorCollectionView.cellForItem(at: [0, 0]) as? TagColorCollectionViewCell
         firstCell?.checkImage.isHidden = false
-
     }
     
     //MARK: - addLayout
@@ -539,8 +537,9 @@ extension PersonalPlanChangeViewController: UICollectionViewDataSource, UICollec
                 let cell = collectionView.dequeueReusableCell(withReuseIdentifier: TagCollectionViewCell.reuseId, for: indexPath) as! TagCollectionViewCell
                 
                 cell.tagNameLabel.isHidden = true
-                cell.iconImageView.isHidden = false
-                
+                cell.iconButton.isHidden = false
+                cell.iconButton.imageEdgeInsets = UIEdgeInsets(top: view.frame.width/30, left: view.frame.width/30, bottom: view.frame.width/30, right: view.frame.width/30)
+
                 cell.setModel(TagModels[indexPath.row])
                 
                 return cell
@@ -548,7 +547,7 @@ extension PersonalPlanChangeViewController: UICollectionViewDataSource, UICollec
                 let cell = collectionView.dequeueReusableCell(withReuseIdentifier: TagCollectionViewCell.reuseId, for: indexPath) as! TagCollectionViewCell
                 
                 cell.tagNameLabel.isHidden = true
-                cell.iconImageView.isHidden = false
+                cell.iconButton.isHidden = false
 
                 cell.setModel(TagModels[indexPath.row])
                 
@@ -556,7 +555,7 @@ extension PersonalPlanChangeViewController: UICollectionViewDataSource, UICollec
             }else{
                 let cell = collectionView.dequeueReusableCell(withReuseIdentifier: TagCollectionViewCell.reuseId, for: indexPath) as! TagCollectionViewCell
                     
-                cell.iconImageView.isHidden = true
+                cell.iconButton.isHidden = true
                 cell.tagNameLabel.isHidden = false
 
                 cell.setModel(TagModels[indexPath.row])
