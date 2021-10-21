@@ -10,7 +10,7 @@ import SnapKit
 import Then
 
 protocol UserDataDelegate : AnyObject{
-    func updateData(name : String , Color : UIColor)
+    func userUpdateData(name : String? , Color : UIColor)
 }
 class MorePeopleToDo: UIViewController{
     let bounds = UIScreen.main.bounds
@@ -23,7 +23,9 @@ class MorePeopleToDo: UIViewController{
 
     //MARK: - Properties
     weak var delegate : UserDataDelegate?
-    
+    static func instance() -> MorePeopleToDo {
+        return MorePeopleToDo(nibName: nil, bundle: nil)
+    }
     private let backbutton = UIButton().then{
         $0.tintColor = .EZY_968DFF
         $0.setImage(UIImage(systemName: "arrow.left")?.withRenderingMode(.alwaysTemplate), for: .normal)
@@ -104,9 +106,8 @@ class MorePeopleToDo: UIViewController{
     func DataIsRight(){
         for item in data{
             if item == (nickNameTextFieldContainerView.text){
-                delegate?.updateData(name: nickNameTextFieldContainerView.text ?? ""
-                                     , Color: .blue)
                 navigationController?.popViewController(animated: true)
+                delegate?.userUpdateData(name: nickNameTextFieldContainerView.text, Color: .blue)
             }else{
                 shakeView(view)
             }

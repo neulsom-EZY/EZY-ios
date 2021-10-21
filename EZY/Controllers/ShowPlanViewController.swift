@@ -127,7 +127,7 @@ class ShowPlanViewController: UIViewController{
     }
     
     private let bgView = UIView().then {
-        $0.backgroundColor = .black.withAlphaComponent(0.5)
+        $0.backgroundColor = .black.withAlphaComponent(0.3)
     }
     
     private let middleComponemtView = UIButton().then{

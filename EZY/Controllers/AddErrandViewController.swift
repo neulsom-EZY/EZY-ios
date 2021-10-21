@@ -13,6 +13,8 @@ class AddErrandViewController : UIViewController{
     //MARK: - Properties
     let bounds = UIScreen.main.bounds
     
+    
+    
     private let backbutton = UIButton().then{
         $0.tintColor = .EZY_AFADFF
         $0.setImage(UIImage(systemName: "arrow.left"), for: .normal)
@@ -90,7 +92,9 @@ class AddErrandViewController : UIViewController{
         navigationController?.popViewController(animated: true)
     }
     @objc private func addPerson(){
-        navigationController?.pushViewController(MorePeopleToDo(), animated: true)
+        let con = MorePeopleToDo()
+        con.delegate = self
+        navigationController?.pushViewController(con, animated: true)
     }
     
     @objc private func calendarAlert(){
@@ -117,16 +121,17 @@ class AddErrandViewController : UIViewController{
         cornerRadius()
         addView()
         location()
-        
     }
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         super.touchesBegan(touches, with: event)
         view.endEditing(true)
     }
-    private func updateUser(_ titleUser : String, _ color: UIColor){
-//        askForFavor.setTitle(titleUser, for: .normal)
-//        askForFavor.setTitleColor(color, for: .normal)
-        print(titleUser)
+    static func instance() -> AddErrandViewController {
+        return AddErrandViewController(nibName: nil, bundle: nil)
+    }
+    private func ChangeUser(_ titleUser : String?, _ color: UIColor){
+        askForFavor.setTitle(titleUser, for: .normal)
+        askForFavor.setTitleColor(color, for: .normal)
     }
     private func cornerRadius(){
         requestList.layer.cornerRadius = view.frame.height/40.6
@@ -184,7 +189,7 @@ class AddErrandViewController : UIViewController{
 
 }
 extension AddErrandViewController : UserDataDelegate {
-    func updateData(name: String, Color: UIColor) {
-        updateUser(name, Color)
+    func userUpdateData(name: String?, Color: UIColor) {
+        self.ChangeUser(name, Color)
     }
 }
