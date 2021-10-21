@@ -107,7 +107,7 @@ class TimeAddModalViewController: UIViewController{
         $0.backgroundColor = UIColor(red: 150/255, green: 141/255, blue: 255/255, alpha: 1)
         $0.layer.cornerRadius = 10
         $0.dynamicFont(fontSize: 12, currentFontName: "AppleSDGothicNeo-Bold")
-
+        $0.addTarget(self, action: #selector(MakeTodo), for: .touchUpInside)
     }
     
     lazy var startPickerView = UIPickerView().then{
