@@ -60,7 +60,7 @@ class PersonalPlanChangeViewController: UIViewController{
     
     private let dayKoreanTextArray = ["월","화","수","목","금","토","일"]
     
-    private var startPickerViewText = [["01","02","03","04","05","06","07","08","09","10","11","12"],["00","05","10","15","20","25","30","35","40","45","50","55"]]
+
     
     private var dayPickerViewTextArray = [["Mon","Tue","Wed","Thr","Fri","Sat","Sun","Mon","Tue","Wed","Thr","Fri","Sat","Sun"].reversed(),["1","2","3","4","5","6","7","1","2","3","4","5","6","7"]]
     
@@ -73,12 +73,6 @@ class PersonalPlanChangeViewController: UIViewController{
     let bgView = UIView().then {
         $0.backgroundColor = .black
         $0.alpha = 0
-    }
-    
-    private let selectTimeModalView = SelectTimeModalView().then{
-        $0.isHidden = true
-        $0.completeButton.addTarget(self, action: #selector(selectedTimeCompleteButtonClicked(sender:)), for: .touchUpInside)
-
     }
 
     private let tagAddModalView = TagAddModalView().then{
@@ -233,12 +227,6 @@ class PersonalPlanChangeViewController: UIViewController{
         tagAddModalView.tagColorCollectionView.delegate = self
         tagAddModalView.tagColorCollectionView.dataSource = self
         
-        selectTimeModalView.startPickerView.delegate = self
-        selectTimeModalView.startPickerView.dataSource = self
-        
-        selectTimeModalView.endPickerView.delegate = self
-        selectTimeModalView.endPickerView.dataSource = self
-        
         tagCollectionView.delegate = self
         tagCollectionView.dataSource = self
         
@@ -335,10 +323,6 @@ class PersonalPlanChangeViewController: UIViewController{
             make.top.equalTo(notificationAddButton.snp.bottom).offset(self.view.frame.height/38.6)
         }
         
-        selectTimeModalView.snp.makeConstraints { make in
-            make.top.bottom.left.right.equalToSuperview()
-        }
-        
         tagAddModalView.snp.makeConstraints { make in
             make.top.bottom.left.right.equalToSuperview()
         }
@@ -367,15 +351,14 @@ class PersonalPlanChangeViewController: UIViewController{
         self.view.addSubview(notificationAddButton)
         self.view.addSubview(notificationNoSelectButton)
         self.view.addSubview(changeButton)
-        self.view.addSubview(selectTimeModalView)
         self.view.addSubview(tagAddModalView)
     }
 
     // MARK: - selectors
-    @objc func selectedTimeCompleteButtonClicked(sender:UIButton){
-        self.selectTimeModalView.isHidden = true
-        clockBtn.alertButtonTitleLabel.text = "\(selectedStartTime.joined(separator: ":")) ~ \(selectedEndTime.joined(separator: ":"))"
-    }
+//    @objc func selectedTimeCompleteButtonClicked(sender:UIButton){
+//        self.selectTimeModalView.isHidden = true
+//        clockBtn.alertButtonTitleLabel.text = "\(selectedStartTime.joined(separator: ":")) ~ \(selectedEndTime.joined(separator: ":"))"
+//    }
     
     @objc func tagNameTextFieldClicked(textField: UITextField) {
         UIView.animate(withDuration: 0.3) {
@@ -398,13 +381,6 @@ class PersonalPlanChangeViewController: UIViewController{
         AlarmSettingCell().isSelected = false
         
         // 알림 시간 +버튼에 text로 넣기
-    }
-    
-    @objc func calendarAlert(){
-        let CalendarAddModelVC = CalendarAddModelViewController.instance()
-        CalendarAddModelVC.delegate = self
-        addDim()
-        present(CalendarAddModelVC, animated: true, completion: nil)
     }
     
     @objc func tagAddButtonClicked(sender:UIButton){
@@ -436,8 +412,20 @@ class PersonalPlanChangeViewController: UIViewController{
 
     }
     
+    @objc func calendarAlert(){
+        print("calendar")
+        let CalendarAddModalVC = CalendarAddModelViewController.instance()
+        CalendarAddModalVC.delegate = self
+        addDim()
+        present(CalendarAddModalVC, animated: true, completion: nil)
+    }
+    
     @objc func clockAlert(){
-        selectTimeModalView.isHidden = false
+        print("clock")
+        let TimeAddModalVC = TimeAddModalViewController.instance()
+        TimeAddModalVC.delegate = self
+        addDim()
+        present(TimeAddModalVC, animated: true, completion: nil)
     }
     
     @objc func locationAlert(){
@@ -478,7 +466,7 @@ class PersonalPlanChangeViewController: UIViewController{
         notificationAddButton.setTitle("\(ampm) \(time):\(String(format: "%02d", minute))", for: .normal)
         notificationAddButton.setTitleColor(UIColor.black, for: .normal)
         notificationAddButton.setImage(nil, for: .normal)
-        
+        // +버튼 선택한 시간 표시 버튼으로 변경하기
         print("alerm >> \(ampm) \(time):\(String(format: "%02d", minute))")
     }
     
@@ -498,6 +486,11 @@ class PersonalPlanChangeViewController: UIViewController{
         }
     }
     
+    //MARK: - time Setting Function
+    func timeReloadSetting(_ startMorningOrAfternoon: String, _ endMorningOrAfternoon: String, _ startTime: String, _ endTime: String){
+        print("time : \(startMorningOrAfternoon), \(endMorningOrAfternoon), \(startTime), \(endTime)")
+    }
+    
     // MARK: - shakeView
     func shakeView(_ view: UIView?) {
         let shake = CABasicAnimation(keyPath: "position")
@@ -514,6 +507,7 @@ class PersonalPlanChangeViewController: UIViewController{
         bgView.snp.makeConstraints { (make) in
             make.edges.equalTo(0)
         }
+        
         DispatchQueue.main.async { [weak self] in
             self?.bgView.alpha = 0.2
         }
@@ -667,72 +661,6 @@ extension PersonalPlanChangeViewController: UICollectionViewDataSource, UICollec
     }
 }
 
-// MARK: - pickerview extension
-extension PersonalPlanChangeViewController: UIPickerViewDelegate, UIPickerViewDataSource{
-    func numberOfComponents(in pickerView: UIPickerView) -> Int {
-        if pickerView == selectTimeModalView.startPickerView || pickerView == selectTimeModalView.endPickerView{
-            return 2
-        }
-    
-        return Int()
-    }
-    
-    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-        if pickerView == selectTimeModalView.startPickerView || pickerView == selectTimeModalView.endPickerView{
-            return startPickerViewText[component].count
-        }
-        
-        return Int()
-    }
-   
-    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-        if pickerView == selectTimeModalView.startPickerView || pickerView == selectTimeModalView.endPickerView{
-            return startPickerViewText[component][row]
-        }
-
-        return String()
-    }
-    
-    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-
-        if pickerView == selectTimeModalView.startPickerView{
-            if component == 0{
-                selectedStartTime[0] = "\(startPickerViewText[0][row])"
-            }else{
-                selectedStartTime[1] = "\(startPickerViewText[1][row])"
-            }
-        }else if pickerView == selectTimeModalView.endPickerView{
-            if component == 0{
-                selectedEndTime[0] = "\(startPickerViewText[0][row])"
-            }else{
-                selectedEndTime[1] = "\(startPickerViewText[1][row])"
-            }
-        }
-    }
-    
-    func pickerView(_ pickerView: UIPickerView, viewForRow row: Int, forComponent component: Int, reusing view: UIView?) -> UIView {
-        if pickerView == selectTimeModalView.startPickerView || pickerView == selectTimeModalView.endPickerView{
-            var pickerLabel = view as? UILabel
-            
-            if (pickerLabel == nil)
-            {
-                pickerLabel = UILabel()
-                
-                pickerLabel?.font = UIFont(name: "AppleSDGothicNeo-SemiBold", size: 15)
-                pickerLabel?.textColor = UIColor(red: 120/255, green: 108/255, blue: 255/255, alpha: 1)
-                pickerLabel?.textAlignment = .center
-            }
-            
-            pickerLabel?.text = startPickerViewText[component][row]
-            pickerView.subviews[1].backgroundColor = .clear // 회색 뷰 지우기
-            
-            return pickerLabel!
-        }
- 
-        return UIView()
-    }
-}
-
 // MARK: - UITextViewDelegate extension
 extension PersonalPlanChangeViewController: UITextViewDelegate{
     func textViewDidBeginEditing(_ textView: UITextView) {
@@ -779,4 +707,16 @@ extension PersonalPlanChangeViewController: CalendarAddDelegate{
     func onTapCalendarModalClose(){
         self.removeDim()
     }
+}
+
+extension PersonalPlanChangeViewController: TimeAddDelegate{
+    func onTapTimeAddModalClose() {
+        self.removeDim()
+    }
+    
+    func updateData(startMorningOrAfternoon: String, endMorningOrAfternoon: String, startTime: String, endTime: String) {
+        self.timeReloadSetting(startMorningOrAfternoon, endMorningOrAfternoon, startTime, endTime)
+    }
+    
+    
 }

@@ -82,9 +82,7 @@ class CalendarAddModelViewController: UIViewController {
     private var selectedDayOfWeek = ""
     
     private var dayPickerViewselectedIndex = 0
-    
-    private var repeatCollectionViewselectedIndex = 0
-    
+        
     private var yearAndMonthText = ""
     
     private var monthText = ""
@@ -100,7 +98,6 @@ class CalendarAddModelViewController: UIViewController {
     private lazy var dayPickerViewAllData = [dayOfWeekPickerViewData,dayPickerViewData]
     
     fileprivate lazy var repeatModels: [RepeatCollectionViewModal] = [RepeatCollectionViewModal(isSelected: false),RepeatCollectionViewModal(isSelected: false),RepeatCollectionViewModal(isSelected: false),RepeatCollectionViewModal(isSelected: false),RepeatCollectionViewModal(isSelected: false),RepeatCollectionViewModal(isSelected: false),RepeatCollectionViewModal(isSelected: false)]
-    
     
     static func instance() -> CalendarAddModelViewController {
         return CalendarAddModelViewController(nibName: nil, bundle: nil).then {
@@ -118,7 +115,7 @@ class CalendarAddModelViewController: UIViewController {
     // MARK: - pickerViewDataSetting
     func pickerViewDataSetting(){
         getCurrentDate()
-
+        
         for i in 0...13{
             let addDay = DateComponents(day: i)
             let day = Calendar.current.date(byAdding: addDay, to: Date())
@@ -137,7 +134,7 @@ class CalendarAddModelViewController: UIViewController {
         
         addView()
 
-        addLayout()
+        location()
         
         delegateAndDataSource()
     }
@@ -189,8 +186,8 @@ class CalendarAddModelViewController: UIViewController {
         bgView.addSubview(calendarAddButton)
     }
     
-    // MARK: - addLayout
-    func addLayout(){
+    // MARK: - location
+    func location(){
         bgView.snp.makeConstraints { make in
             make.centerX.centerY.equalToSuperview()
             make.width.equalToSuperview().dividedBy(1.13)
@@ -260,7 +257,11 @@ class CalendarAddModelViewController: UIViewController {
         dayPickerView.delegate = self
         dayPickerView.dataSource = self
         
-        dayPickerView.selectRow(dayPickerViewData.count/2, inComponent: 0, animated: true)
+        // pickerview, collectionview 사용자가 선택한 걸로 기록해두기
+        // 사용자가 선택하기 전엔 collectionview는 is Select 모두 false로 하고
+        // 사용자가 선택한 후에는 사용자가 선택한 셀을 가져와서 표시한다.
+        // 사용자가 선택하기 전엔 pickerView는
+        
         dayPickerView.transform = CGAffineTransform(rotationAngle: (-90 * (.pi / 180*3)))
     }
     
@@ -298,9 +299,7 @@ extension CalendarAddModelViewController: UICollectionViewDelegateFlowLayout{
 extension CalendarAddModelViewController: UICollectionViewDelegate{
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         repeatModels[indexPath.row].isSelected.toggle()
-        
-        repeatCollectionViewselectedIndex = indexPath.row
-        
+                
         collectionView.reloadData()
     }
 }
@@ -321,11 +320,7 @@ extension CalendarAddModelViewController: UICollectionViewDataSource{
     }
 }
 
-extension CalendarAddModelViewController: UIPickerViewDelegate{
-    
-}
-
-extension CalendarAddModelViewController: UIPickerViewDataSource{
+extension CalendarAddModelViewController: UIPickerViewDataSource, UIPickerViewDelegate{
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
         return 1
     }
