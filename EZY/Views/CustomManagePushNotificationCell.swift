@@ -34,10 +34,7 @@ class CustomManagePushNotificationCell: UITableViewCell {
     private let divider = UIView().then{
         $0.backgroundColor = .EZY_DEDEDE
     }
-    private lazy var switchPushManage : SwitchBtn = {
-        let button = SwitchBtn()
-        return button
-    }()
+    private lazy var switchPushManage = SwitchBtn()
     
     //MARK: - Lifecycle
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
@@ -50,11 +47,8 @@ class CustomManagePushNotificationCell: UITableViewCell {
     
     //MARK: - HELPERs
     func addContentView(){
-        contentView.addSubview(view)
-        view.addSubview(title)
-        view.addSubview(explanation)
-        contentView.addSubview(divider)
-        contentView.addSubview(switchPushManage)
+        [view,divider,switchPushManage].forEach{ contentView.addSubview($0)}
+        [title,explanation].forEach{ view.addSubview($0)}
     }
     
     private func location(){

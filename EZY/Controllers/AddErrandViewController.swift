@@ -130,7 +130,7 @@ class AddErrandViewController : UIViewController{
         return AddErrandViewController(nibName: nil, bundle: nil)
     }
     private func ChangeUser(_ titleUser : String?, _ color: UIColor){
-        askForFavor.setTitle(titleUser, for: .normal)
+        askForFavor.setTitle("@\(titleUser ?? "")", for: .normal)
         askForFavor.setTitleColor(color, for: .normal)
     }
     private func cornerRadius(){

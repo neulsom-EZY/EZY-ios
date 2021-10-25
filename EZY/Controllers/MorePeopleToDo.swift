@@ -107,7 +107,7 @@ class MorePeopleToDo: UIViewController{
         for item in data{
             if item == (nickNameTextFieldContainerView.text){
                 navigationController?.popViewController(animated: true)
-                delegate?.userUpdateData(name: nickNameTextFieldContainerView.text, Color: .blue)
+                delegate?.userUpdateData(name: nickNameTextFieldContainerView.text, Color: .EZY_AFADFF)
             }else{
                 shakeView(view)
             }
@@ -157,15 +157,11 @@ class MorePeopleToDo: UIViewController{
             make.right.equalTo(view.snp.right).inset(view.frame.height/29)
         }
     }
-
-
-    
     //MARK: - 키보드 내리기
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         super.touchesBegan(touches, with: event)
         view.endEditing(true)
     }
-    
 
     //MARK: - Shake Animation
     func shakeView(_ view: UIView?) {
