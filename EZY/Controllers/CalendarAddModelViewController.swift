@@ -16,7 +16,7 @@ class CalendarAddModelViewController: UIViewController {
     // MARK: - Properties
     weak var delegate: CalendarAddDelegate?
     
-    let bgView = UIView().then {
+    private let bgView = UIView().then {
         $0.backgroundColor = .white
         $0.layer.cornerRadius = 10
     }

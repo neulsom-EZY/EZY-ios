@@ -60,8 +60,6 @@ class PersonalPlanChangeViewController: UIViewController{
     
     private let dayKoreanTextArray = ["월","화","수","목","금","토","일"]
     
-
-    
     private var dayPickerViewTextArray = [["Mon","Tue","Wed","Thr","Fri","Sat","Sun","Mon","Tue","Wed","Thr","Fri","Sat","Sun"].reversed(),["1","2","3","4","5","6","7","1","2","3","4","5","6","7"]]
     
     
@@ -137,8 +135,10 @@ class PersonalPlanChangeViewController: UIViewController{
     private let notificationAddButton = UIButton().then{
         $0.backgroundColor = UIColor.rgb(red: 253, green: 253, blue: 253)
         $0.setImage(UIImage(named: "EZY_UnSelectedTagAddButtonImage"), for: .normal)
+        $0.setTitleColor(UIColor(red: 150/255, green: 141/255, blue: 255/255, alpha: 1), for: .normal)
         $0.layer.cornerRadius = 10
         $0.layer.applySketchShadow(color: UIColor(red: 226/255, green: 226/255, blue: 226/255, alpha: 1), alpha: 1, x: 0, y: 3, blur: 15, spread: 0)
+        $0.dynamicFont(fontSize: 12, currentFontName: "AppleSDGothicNeo-Bold")
         $0.addTarget(self, action: #selector(notificationAddButtonClicked(sender:)), for: .touchUpInside)
     }
 
@@ -146,6 +146,7 @@ class PersonalPlanChangeViewController: UIViewController{
         $0.imageEdgeInsets = UIEdgeInsets(top: view.frame.width/25, left: view.frame.width/25, bottom: view.frame.width/25, right: view.frame.width/25)
         $0.setImage(UIImage(named: "EZY_SelectedNoSelectTagButtonImage"), for: .normal)
         $0.backgroundColor = UIColor(red: 221/255, green: 220/255, blue: 220/255, alpha: 1)
+        $0.isHighlighted = false
         $0.layer.cornerRadius = 10
         $0.layer.applySketchShadow(color: UIColor(red: 226/255, green: 226/255, blue: 226/255, alpha: 1), alpha: 1, x: 0, y: 3, blur: 15, spread: 0)
         $0.addTarget(self, action: #selector(notificationNoSelectButtonClicked(sender:)), for: .touchUpInside)
@@ -157,21 +158,21 @@ class PersonalPlanChangeViewController: UIViewController{
     }
     
     private let calendarBtn : CalendarBtn = {
-        let viewModel = CalendarModel(icon: UIImage(named: "EZY_Calendar")?.withRenderingMode(.alwaysTemplate), iconTintColor: .rgb(red: 255, green: 181, blue: 181), message: "2021.6.6 일요일", repeatText: "반복 없음")
+        let viewModel = CalendarModel(icon: UIImage(named: "EZY_Calendar")?.withRenderingMode(.alwaysTemplate), iconTintColor: .rgb(red: 255, green: 181, blue: 181), message: "날짜를 선택해주세요!", repeatText: "반복 없음")
         let button = CalendarBtn(with: viewModel)
         button.addTarget(self, action: #selector(calendarAlert), for: .touchUpInside)
         return button
     }()
     
     private let clockBtn : AlertButton = {
-        let viewModel = AlertBtn(icon: UIImage(named: "EZY_clock")?.withRenderingMode(.alwaysTemplate), iconTintColor: .rgb(red: 255, green: 203, blue: 181), message: "11:00AM - 1:00PM")
+        let viewModel = AlertBtn(icon: UIImage(named: "EZY_clock")?.withRenderingMode(.alwaysTemplate), iconTintColor: .rgb(red: 255, green: 203, blue: 181), message: "시간을 선택해주세요!")
         let button = AlertButton(with: viewModel)
         button.addTarget(self, action: #selector(clockAlert), for: .touchUpInside)
         return button
     }()
     
     private let locationBtn : AlertButton = {
-        let viewModel = AlertBtn(icon: UIImage(named: "EZY_location")?.withRenderingMode(.alwaysTemplate), iconTintColor: .rgb(red: 199, green: 224, blue: 212), message: "광주소프트웨어마이스터고등학교")
+        let viewModel = AlertBtn(icon: UIImage(named: "EZY_location")?.withRenderingMode(.alwaysTemplate), iconTintColor: .rgb(red: 199, green: 224, blue: 212), message: "위치를 선택해주세요!")
         let button = AlertButton(with: viewModel)
         button.addTarget(self, action: #selector(locationAlert), for: .touchUpInside)
         return button
@@ -188,6 +189,11 @@ class PersonalPlanChangeViewController: UIViewController{
         return view
     }()
     
+    let sizeCheckLabel = UILabel().then{
+        $0.dynamicFont(fontSize: 12, currentFontName: "AppleSDGothicNeo-Bold")
+        $0.sizeToFit()
+    }
+    
     //MARK: - lifeCycles
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -197,9 +203,6 @@ class PersonalPlanChangeViewController: UIViewController{
     
     //MARK: - helpers
     func configureUI(){
-
-        currentDaySetting()
-        
         addView()
                 
         location()
@@ -300,17 +303,19 @@ class PersonalPlanChangeViewController: UIViewController{
             make.left.equalTo(tagLabel)
             make.top.equalTo(tagCollectionView.snp.bottom).offset(self.view.frame.height/38.6)
         }
+
         
         notificationAddButton.snp.makeConstraints { make in
             make.left.equalTo(tagLabel)
             make.top.equalTo(notificationTitleLabel.snp.bottom).offset(self.view.frame.height/73.11)
-            make.width.equalToSuperview().dividedBy(9)
-            make.height.equalTo(notificationAddButton.snp.width)
+            make.width.equalTo(notificationAddButton.snp.height)
+            make.height.equalTo(self.view.frame.height/20)
         }
         
         notificationNoSelectButton.snp.makeConstraints { make in
+            make.height.equalTo(self.view.frame.height/20)
             make.centerY.equalTo(notificationAddButton)
-            make.width.height.equalTo(notificationAddButton)
+            make.width.equalTo(notificationNoSelectButton.snp.height)
             make.left.equalTo(notificationAddButton.snp.right).offset(self.view.frame.width/37)
         }
         
@@ -353,11 +358,6 @@ class PersonalPlanChangeViewController: UIViewController{
     }
 
     // MARK: - selectors
-//    @objc func selectedTimeCompleteButtonClicked(sender:UIButton){
-//        self.selectTimeModalView.isHidden = true
-//        clockBtn.alertButtonTitleLabel.text = "\(selectedStartTime.joined(separator: ":")) ~ \(selectedEndTime.joined(separator: ":"))"
-//    }
-    
     @objc func tagNameTextFieldClicked(textField: UITextField) {
         UIView.animate(withDuration: 0.3) {
             self.tagAddModalView.modalBackgroundView.snp.remakeConstraints { make in
@@ -407,7 +407,8 @@ class PersonalPlanChangeViewController: UIViewController{
     }
     
     @objc func notificationNoSelectButtonClicked(sender:UIButton){
-
+        notificationNoSelectButton.backgroundColor = UIColor(red: 221/255, green: 220/255, blue: 220/255, alpha: 1)
+        notificationNoSelectButton.setImage(UIImage(named: "EZY_SelectedNoSelectTagButtonImage"), for: .normal)
     }
     
     @objc func calendarAlert(){
@@ -462,10 +463,16 @@ class PersonalPlanChangeViewController: UIViewController{
     //MARK: - Alarm Setting Function
     func alarmReloadSetting(_ ampm: String,_ time: Int,_ minute: Int){
         notificationAddButton.setTitle("\(ampm) \(time):\(String(format: "%02d", minute))", for: .normal)
-        notificationAddButton.setTitleColor(UIColor.black, for: .normal)
         notificationAddButton.setImage(nil, for: .normal)
-        // +버튼 선택한 시간 표시 버튼으로 변경하기
-        print("alerm >> \(ampm) \(time):\(String(format: "%02d", minute))")
+        notificationNoSelectButton.backgroundColor = .white
+        notificationNoSelectButton.setImage(UIImage(named: "EZY_UnSelectedNoSelectTagButtonImage"), for: .normal)
+        
+        notificationAddButton.snp.remakeConstraints { make in
+            make.left.equalTo(tagLabel)
+            make.top.equalTo(notificationTitleLabel.snp.bottom).offset(self.view.frame.height/73.11)
+            make.width.equalToSuperview().dividedBy(4.07)
+            make.height.equalToSuperview().dividedBy(18.88)
+        }
     }
     
     //MARK: - calendar Setting Function
@@ -486,7 +493,8 @@ class PersonalPlanChangeViewController: UIViewController{
     
     //MARK: - time Setting Function
     func timeReloadSetting(_ startMorningOrAfternoon: String, _ endMorningOrAfternoon: String, _ startTime: String, _ endTime: String){
-        print("time : \(startMorningOrAfternoon), \(endMorningOrAfternoon), \(startTime), \(endTime)")
+        clockBtn.alertButtonTitleLabel.text = "\(startMorningOrAfternoon) \(startTime) ~ \(endMorningOrAfternoon) \(endTime)"
+        
     }
     
     // MARK: - shakeView

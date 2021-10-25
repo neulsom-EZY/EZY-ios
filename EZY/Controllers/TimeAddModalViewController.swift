@@ -16,92 +16,92 @@ class TimeAddModalViewController: UIViewController{
     // MARK: - Properties
     weak var delegate: TimeAddDelegate?
 
-    let bgView = UIView().then {
+    private let bgView = UIView().then {
         $0.backgroundColor = .white
         $0.layer.cornerRadius = 10
     }
     
-    lazy var modalTitleLabel = UILabel().then {
+    private let modalTitleLabel = UILabel().then {
         $0.text = "시간 선택"
         $0.textColor = UIColor(red: 150/255, green: 141/255, blue: 255/255, alpha: 1)
         $0.dynamicFont(fontSize: 12, currentFontName: "AppleSDGothicNeo-Bold")
     }
     
-    lazy var startMorningLabel = UILabel().then {
+    private let startMorningLabel = UILabel().then {
         $0.text = "오전"
         $0.textColor = UIColor(red: 114/255, green: 114/255, blue: 114/255, alpha: 1)
         $0.dynamicFont(fontSize: 12, currentFontName: "AppleSDGothicNeo-Medium")
     }
     
-    lazy var startAfternoonLabel = UILabel().then {
+    private let startAfternoonLabel = UILabel().then {
         $0.text = "오후"
         $0.textColor = UIColor(red: 114/255, green: 114/255, blue: 114/255, alpha: 1)
         $0.dynamicFont(fontSize: 12, currentFontName: "AppleSDGothicNeo-Thin")
     }
     
-    lazy var endMorningLabel = UILabel().then {
+    private let endMorningLabel = UILabel().then {
         $0.text = "오전"
         $0.textColor = UIColor(red: 114/255, green: 114/255, blue: 114/255, alpha: 1)
         $0.dynamicFont(fontSize: 12, currentFontName: "AppleSDGothicNeo-Medium")
     }
     
-    lazy var endAfternoonLabel = UILabel().then {
+    private let endAfternoonLabel = UILabel().then {
         $0.text = "오후"
         $0.textColor = UIColor(red: 114/255, green: 114/255, blue: 114/255, alpha: 1)
         $0.dynamicFont(fontSize: 12, currentFontName: "AppleSDGothicNeo-Thin")
     }
     
-    lazy var startHourLabel = UILabel().then{
+    private let startHourLabel = UILabel().then{
         $0.text = "시"
         $0.textColor = UIColor.black
         $0.dynamicFont(fontSize: 12, currentFontName: "AppleSDGothicNeo-Thin")
     }
     
-    lazy var startMinLabel = UILabel().then{
+    private let startMinLabel = UILabel().then{
         $0.text = "분"
         $0.textColor = UIColor.black
         $0.dynamicFont(fontSize: 12, currentFontName: "AppleSDGothicNeo-Thin")
     }
     
-    lazy var endHourLabel = UILabel().then{
+    private let endHourLabel = UILabel().then{
         $0.text = "시"
         $0.textColor = UIColor.black
         $0.dynamicFont(fontSize: 12, currentFontName: "AppleSDGothicNeo-Thin")
     }
     
-    lazy var endMinLabel = UILabel().then{
+    private let endMinLabel = UILabel().then{
         $0.text = "분"
         $0.textColor = UIColor.black
         $0.dynamicFont(fontSize: 12, currentFontName: "AppleSDGothicNeo-Thin")
     }
     
-    lazy var startSelectBackButton = UIButton().then {
+    private let startSelectBackButton = UIButton().then {
         $0.backgroundColor = UIColor(red: 150/255, green: 141/255, blue: 255/255, alpha: 1)
         $0.addTarget(self, action: #selector(startSelectCircleButton(sender:)), for: .touchUpInside)
     }
     
-    lazy var endSelectBackButton = UIButton().then {
+    private let endSelectBackButton = UIButton().then {
         $0.backgroundColor = UIColor(red: 150/255, green: 141/255, blue: 255/255, alpha: 1)
         $0.addTarget(self, action: #selector(endSelectCircleButton(sender:)), for: .touchUpInside)
     }
     
-    lazy var startSelectCircleButton = UIButton().then {
+    private let startSelectCircleButton = UIButton().then {
         $0.backgroundColor = UIColor.white
         $0.isUserInteractionEnabled = false
     }
     
-    lazy var endSelectCircleButton = UIButton().then {
+    private let endSelectCircleButton = UIButton().then {
         $0.backgroundColor = UIColor.white
         $0.isUserInteractionEnabled = false
     }
     
-    lazy var waveLabel = UILabel().then {
+    private let waveLabel = UILabel().then {
         $0.text = "~"
         $0.dynamicFont(fontSize: 20, currentFontName: "AppleSDGothicNeo-SemiBold")
         $0.textColor = UIColor(red: 220/255, green: 220/255, blue: 220/255, alpha: 1)
     }
     
-    lazy var completeButton = UIButton().then{
+    private let completeButton = UIButton().then{
         $0.setTitle("완 료", for: .normal)
         $0.setTitleColor(UIColor.white, for: .normal)
         $0.backgroundColor = UIColor(red: 150/255, green: 141/255, blue: 255/255, alpha: 1)
@@ -110,27 +110,33 @@ class TimeAddModalViewController: UIViewController{
         $0.addTarget(self, action: #selector(MakeTodo), for: .touchUpInside)
     }
     
-    lazy var startPickerView = UIPickerView().then{
+    private let startPickerView = UIPickerView().then{
         $0.tintColor = UIColor(red: 150/255, green: 141/255, blue: 255/255, alpha: 1)
     }
     
-    lazy var endPickerView = UIPickerView().then{
+    private let endPickerView = UIPickerView().then{
         $0.tintColor = UIColor(red: 150/255, green: 141/255, blue: 255/255, alpha: 1)
     }
     
-    private var startSelectedLabelText = "오전"
+    fileprivate var startSelectedLabelText = "오전"
     
-    private var endSelectedLabelText = "오전"
+    fileprivate var endSelectedLabelText = "오전"
     
-    private var startPickerViewText = [["01","02","03","04","05","06","07","08","09","10","11","12"],["00","05","10","15","20","25","30","35","40","45","50","55"]]
+    fileprivate var startMorningOrAfternoon = ""
     
-    private var startMorningOrAfternoon = ""
+    fileprivate var endMorningOrAfternoon = ""
     
-    private var endMorningOrAfternoon = ""
+    fileprivate var startHourTime = "01"
     
-    private var startTime = ""
+    fileprivate var startMinTime = "00"
     
-    private var endTime = ""
+    fileprivate var startTime = "01 : 00"
+    
+    fileprivate var endHourTime = "01"
+    
+    fileprivate var endMinTime = "00"
+    
+    fileprivate var endTime = "01 : 00"
     
     static func instance() -> TimeAddModalViewController {
         return TimeAddModalViewController(nibName: nil, bundle: nil).then {
@@ -248,7 +254,7 @@ class TimeAddModalViewController: UIViewController{
         
         startHourLabel.snp.makeConstraints { make in
             make.centerY.equalTo(startPickerView)
-            make.centerX.equalTo(startPickerView).offset(-self.view.frame.width/40)
+            make.centerX.equalTo(startPickerView).offset(-self.view.frame.width/50)
         }
         
         startMinLabel.snp.makeConstraints { make in
@@ -258,7 +264,7 @@ class TimeAddModalViewController: UIViewController{
         
         endHourLabel.snp.makeConstraints { make in
             make.centerY.equalTo(endPickerView)
-            make.centerX.equalTo(endPickerView).offset(-self.view.frame.width/40)
+            make.centerX.equalTo(endPickerView).offset(-self.view.frame.width/50)
         }
         
         endMinLabel.snp.makeConstraints { make in
@@ -313,6 +319,11 @@ class TimeAddModalViewController: UIViewController{
     }
     
     @objc func MakeTodo(){
+        startMorningOrAfternoon = startSelectedLabelText
+        endMorningOrAfternoon = endSelectedLabelText
+        startTime = "\(startHourTime) : \(startMinTime)"
+        endTime = "\(endHourTime) : \(endMinTime)"
+        
         delegate?.onTapTimeAddModalClose()
         dismiss(animated: true, completion: nil)
         delegate?.updateData(startMorningOrAfternoon: startMorningOrAfternoon, endMorningOrAfternoon: endMorningOrAfternoon, startTime: startTime, endTime: endTime)
@@ -381,6 +392,14 @@ class TimeAddModalViewController: UIViewController{
     func unHighlightedLabel(label:UILabel){
         label.dynamicFont(fontSize: 12, currentFontName: "AppleSDGothicNeo-Thin")
     }
+    
+    func addZero(n: Int) -> String{
+        if n < 9{
+            return "0\(n)"
+        }else{
+            return "\(n)"
+        }
+    }
 }
 
 extension TimeAddModalViewController: UIPickerViewDelegate{
@@ -393,14 +412,19 @@ extension TimeAddModalViewController: UIPickerViewDataSource{
     }
     
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-        return startPickerViewText[component].count
-    }
-   
-    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-        return startPickerViewText[component][row]
+        if component == 0{
+            return 12
+        }else{
+            return 60
+        }
     }
     
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+        if pickerView == startPickerView{
+            (component == 0) ? (startHourTime = "\(addZero(n: row+1))") : (startMinTime = "\(addZero(n: row))")
+        }else if pickerView == endPickerView{
+            (component == 0) ? (endHourTime = "\(addZero(n: row+1))") : (endMinTime = "\(addZero(n: row))")
+        }
 
     }
     
@@ -417,7 +441,12 @@ extension TimeAddModalViewController: UIPickerViewDataSource{
             pickerLabel?.textAlignment = .center
         }
         
-        pickerLabel?.text = startPickerViewText[component][row]
+        if component == 0{
+            pickerLabel?.text = "\(addZero(n:row+1))"
+        }else{ // component == 1
+            pickerLabel?.text = "\(addZero(n:row))"
+        }
+        
         pickerView.subviews[1].backgroundColor = .clear // 회색 뷰 지우기
         
         return pickerLabel!
