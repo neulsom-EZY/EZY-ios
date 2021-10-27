@@ -9,7 +9,7 @@ import UIKit
 
 protocol TimeAddDelegate: AnyObject {
     func onTapTimeAddModalClose()
-    func updateData(startMorningOrAfternoon : String , endMorningOrAfternoon : String, startTime: String, endTime: String)
+    func updateData(startMorningOrAfternoon : String , endMorningOrAfternoon : String, startTime: String, endTime: String, selectedValuesIndex: [String])
 }
 
 class TimeAddModalViewController: UIViewController{
@@ -138,6 +138,8 @@ class TimeAddModalViewController: UIViewController{
     
     fileprivate var endTime = "01 : 00"
     
+    private var selectedValuesIndex: [String] = ["오전","오전","0","0","0","0"]
+    
     static func instance() -> TimeAddModalViewController {
         return TimeAddModalViewController(nibName: nil, bundle: nil).then {
             $0.modalPresentationStyle = .overFullScreen
@@ -164,7 +166,6 @@ class TimeAddModalViewController: UIViewController{
     func delegateAndDataSource(){
         startPickerView.delegate = self
         startPickerView.dataSource = self
-        
         endPickerView.delegate = self
         endPickerView.dataSource = self
     }
@@ -326,7 +327,7 @@ class TimeAddModalViewController: UIViewController{
         
         delegate?.onTapTimeAddModalClose()
         dismiss(animated: true, completion: nil)
-        delegate?.updateData(startMorningOrAfternoon: startMorningOrAfternoon, endMorningOrAfternoon: endMorningOrAfternoon, startTime: startTime, endTime: endTime)
+        delegate?.updateData(startMorningOrAfternoon: startMorningOrAfternoon, endMorningOrAfternoon: endMorningOrAfternoon, startTime: startTime, endTime: endTime, selectedValuesIndex: selectedValuesIndex)
     }
     
     @objc func endSelectCircleButton(sender:UIButton){
@@ -394,38 +395,45 @@ class TimeAddModalViewController: UIViewController{
     }
     
     func addZero(n: Int) -> String{
-        if n < 9{
+        if n < 10{
             return "0\(n)"
         }else{
             return "\(n)"
         }
     }
-}
-
-extension TimeAddModalViewController: UIPickerViewDelegate{
     
+    func pickerViewValueSetting(selectedValuesIndex: [String]){
+    }
 }
 
-extension TimeAddModalViewController: UIPickerViewDataSource{
+extension TimeAddModalViewController: UIPickerViewDataSource, UIPickerViewDelegate{
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
         return 2
     }
     
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-        if component == 0{
-            return 12
-        }else{
-            return 60
-        }
+        if component == 0 { return 12 }else{ return 60 }
     }
     
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         if pickerView == startPickerView{
-            (component == 0) ? (startHourTime = "\(addZero(n: row+1))") : (startMinTime = "\(addZero(n: row))")
+            if component == 0{
+                startHourTime = "\(addZero(n: row+1))"
+                selectedValuesIndex[2] = "\(row)"
+            }else {
+                startMinTime = "\(addZero(n: row))"
+                selectedValuesIndex[3] = "\(row)"
+            }
+            
         }else if pickerView == endPickerView{
-            (component == 0) ? (endHourTime = "\(addZero(n: row+1))") : (endMinTime = "\(addZero(n: row))")
+            if component == 0{
+                endHourTime = "\(addZero(n: row+1))"
+                selectedValuesIndex[4] = "\(row)"
+            }else {
+                endMinTime = "\(addZero(n: row))"
+                selectedValuesIndex[5] = "\(row)"
+            }
         }
-
     }
     
     func pickerView(_ pickerView: UIPickerView, viewForRow row: Int, forComponent component: Int, reusing view: UIView?) -> UIView {

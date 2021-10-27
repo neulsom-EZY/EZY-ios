@@ -122,8 +122,6 @@ class MoreAlarmModelViewController : UIViewController{
         let tapgesture = UITapGestureRecognizer(target: self, action: #selector(onTapClose))
         transparentView.addGestureRecognizer(tapgesture)
     }
-    
-
 }
 //MARK: - PickerView Setting
 extension MoreAlarmModelViewController : UIPickerViewDelegate, UIPickerViewDataSource{

@@ -9,7 +9,7 @@ import UIKit
 
 protocol CalendarAddDelegate: AnyObject {
     func onTapCalendarModalClose()
-    func updateData(selectedDay : String , selectedRepeatDay : [String], selectedDayOfWeek: String, yearAndMonthText: String, selectedValuesIndex: Int)
+    func updateData(selectedDay : String , selectedRepeatDay : [String], selectedDayOfWeek: String, yearAndMonthText: String, selectedValuesIndex: Int, selectedRepeatIndex: [Int])
 }
 
 class CalendarAddModelViewController: UIViewController {
@@ -87,6 +87,8 @@ class CalendarAddModelViewController: UIViewController {
     
     private var monthText = ""
     
+    private var selectedRepeatIndex: [Int] = []
+    
     private var dayOfWeekPickerViewData:[String] = []
     
     private var dayPickerViewData:[String] = []
@@ -163,14 +165,14 @@ class CalendarAddModelViewController: UIViewController {
         
         for i in 0...repeatModels.count-1{
             if repeatModels[i].isSelected == true{
+                selectedRepeatIndex.append(i)
                 selectedRepeatDay.append(dayKoreanTextArray[i])
             }
         }
-        print("dayPickerViewselectedIndex : \(dayPickerViewselectedIndex)")
-
+                
         delegate?.onTapCalendarModalClose()
         dismiss(animated: true, completion: nil)
-        delegate?.updateData(selectedDay: self.selectedDay, selectedRepeatDay: self.selectedRepeatDay, selectedDayOfWeek: self.selectedDayOfWeek, yearAndMonthText: self.yearAndMonthText, selectedValuesIndex: dayPickerViewselectedIndex)
+        delegate?.updateData(selectedDay: self.selectedDay, selectedRepeatDay: self.selectedRepeatDay, selectedDayOfWeek: self.selectedDayOfWeek, yearAndMonthText: self.yearAndMonthText, selectedValuesIndex: self.dayPickerViewselectedIndex, selectedRepeatIndex: self.selectedRepeatIndex)
     }
     
     //MARK: - addView
@@ -282,13 +284,21 @@ class CalendarAddModelViewController: UIViewController {
         return dayPickerViewData
     }
     
-    func pickerViewValueSetting(selectedValuesIndex: Int){
-        dayPickerViewselectedIndex = selectedValuesIndex
+    func calendarModalDataSetting(dayIndex: Int, repeatIndex: [Int]){
+        dayPickerViewselectedIndex = dayIndex
 
-        if selectedValuesIndex == 0{
+        if dayIndex == 0{
             dayPickerView.selectRow(dayOfWeekPickerViewData.count-1, inComponent: 0, animated: false)
         }else{
-            dayPickerView.selectRow((dayOfWeekPickerViewData.count-1) - selectedValuesIndex, inComponent: 0, animated: false)
+            dayPickerView.selectRow((dayOfWeekPickerViewData.count-1) - dayIndex, inComponent: 0, animated: false)
+        }
+        
+        if repeatIndex.count > 0{
+            for i in 0...repeatIndex.count-1{
+                repeatModels[repeatIndex[i]].isSelected = true
+            }
+            repeatCollectionView.reloadData()
+
         }
     }
 }
@@ -306,7 +316,7 @@ extension CalendarAddModelViewController: UICollectionViewDelegateFlowLayout{
 extension CalendarAddModelViewController: UICollectionViewDelegate{
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         repeatModels[indexPath.row].isSelected.toggle()
-                
+        
         collectionView.reloadData()
     }
 }
