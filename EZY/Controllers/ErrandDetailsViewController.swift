@@ -17,7 +17,6 @@ class ErrandDetailsViewController: UIViewController {
         $0.tintColor = .EZY_AFADFF
         $0.setImage(UIImage(systemName: "arrow.left"), for: .normal)
         $0.addTarget(self, action: #selector(todobackbtn), for: .touchUpInside)
-
     }
     private let TitleLabel = UILabel().then{
         $0.textColor = .EZY_AFADFF
@@ -81,13 +80,11 @@ class ErrandDetailsViewController: UIViewController {
         return view
     }()
     
-    private let addButton : AdditionalButton = {
-        let button = AdditionalButton(type: .system)
-        button.title = "포기하기"
-        button.color = .EZY_BAC8FF
-        button.addTarget(self, action: #selector(Addmytodobtn), for: .touchUpInside)
-        return button
-    }()
+    private let addButton = AdditionalButton(type: .system).then{
+        $0.title = "포기하기"
+        $0.color = .EZY_BAC8FF
+        $0.addTarget(self, action: #selector(Addmytodobtn), for: .touchUpInside)
+    }
     
     //MARK: - Lifecycle
     
@@ -100,7 +97,7 @@ class ErrandDetailsViewController: UIViewController {
     
     //MARK: - Selectors
     
-    @objc func todobackbtn(){
+    @objc private func todobackbtn(){
         //전페이지로 되돌아가는 버튼
         navigationController?.popViewController(animated: true)
     }
@@ -114,7 +111,7 @@ class ErrandDetailsViewController: UIViewController {
     @objc func locationAlert(){
         //위치 Alert 실행시킬 부분
     }
-    @objc func Addmytodobtn(){
+    @objc private func Addmytodobtn(){
         print("DEBUG:AddButton")
         //추가페이지 작성후 실행시키는 코드
     }
@@ -132,13 +129,7 @@ class ErrandDetailsViewController: UIViewController {
         explanationContainerView.layer.cornerRadius = view.frame.height/40.6
     }
     private func addView(){
-        view.addSubview(backbutton)
-        view.addSubview(TitleLabel)
-        view.addSubview(Errandlabel)
-        view.addSubview(RequestList)
-        view.addSubview(btnStackView)
-        view.addSubview(explanationContainerView)
-        view.addSubview(addButton)
+        [backbutton,TitleLabel,Errandlabel,RequestList,btnStackView,explanationContainerView,addButton].forEach {view.addSubview($0)}
     }
     private func location(){
         backbutton.snp.makeConstraints { (make) in

@@ -14,9 +14,8 @@ class PushNotificationManagementViewController : UIViewController{
     //MARK: - Properties
     let bounds = UIScreen.main.bounds
     var manageData : [ManageData] = []
-    let titleNotification = ["EZY 앱 알림"]
-    let explanation = ["EZY 앱의 알림을 관리합니다."]
-    
+    private  let titleNotification = ["EZY 앱 알림"]
+    private let explanation = ["EZY 앱의 알림을 관리합니다."]
     
     private let backbutton = UIButton().then{
         $0.tintColor = .EZY_AFADFF
@@ -44,19 +43,17 @@ class PushNotificationManagementViewController : UIViewController{
         navigationController?.popViewController(animated: true )
     }
     //MARK: - Helpers
-    func configureUI(){
+    private func configureUI(){
         view.backgroundColor = .white
         addView()
         location()
         makeData()
         configure()
     }
-    func addView(){
-        view.addSubview(backbutton)
-        view.addSubview(TitleLabel)
-        view.addSubview(tableView)
+    private func addView(){
+        [backbutton,TitleLabel,tableView].forEach { view.addSubview($0)}
     }
-    func location(){
+    private func location(){
         backbutton.snp.makeConstraints { (make) in
             make.height.width.equalTo(self.view.frame.height/33.8)
             make.left.equalTo(self.view.frame.height/29)
@@ -76,7 +73,6 @@ class PushNotificationManagementViewController : UIViewController{
     
     private func makeData() {
             manageData.append(ManageData.init(title: titleNotification[0], explanation: explanation[0]))
-            
         }
 
     private func configure() {

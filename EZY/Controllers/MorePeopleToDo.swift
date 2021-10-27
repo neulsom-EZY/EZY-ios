@@ -9,8 +9,8 @@ import UIKit
 import SnapKit
 import Then
 
-protocol UserDataDelegate : class{
-    func updateData(name : String , Color : UIColor)
+protocol UserDataDelegate : AnyObject{
+    func userUpdateData(name : String? , Color : UIColor)
 }
 class MorePeopleToDo: UIViewController{
     let bounds = UIScreen.main.bounds
@@ -19,12 +19,13 @@ class MorePeopleToDo: UIViewController{
     let recommendData = ["Jihoooooon","siwonnnny","NoName","mingki","johnjihwan","noplayy"]
         
     let randomColorData : [UIColor] = [.rgb(red: 186, green: 200, blue: 255),.rgb(red: 255, green: 204, blue: 204),.rgb(red: 186, green: 222, blue: 255),.rgb(red: 207, green: 227, blue: 206),.rgb(red: 255, green: 209, blue: 141)]
-    var filterData = [SearchData]()
-    var filtered = false
+
 
     //MARK: - Properties
     weak var delegate : UserDataDelegate?
-    
+    static func instance() -> MorePeopleToDo {
+        return MorePeopleToDo(nibName: nil, bundle: nil)
+    }
     private let backbutton = UIButton().then{
         $0.tintColor = .EZY_968DFF
         $0.setImage(UIImage(systemName: "arrow.left")?.withRenderingMode(.alwaysTemplate), for: .normal)
@@ -67,21 +68,17 @@ class MorePeopleToDo: UIViewController{
         return cv
     }()
     
-    private let userChoose : AdditionalButton = {
-        let button = AdditionalButton(type: .system)
-        button.title = "인원 선택"
-        button.color = .rgb(red: 151, green: 142, blue: 255)
-        button.addTarget(self, action: #selector(chooseUser), for: .touchUpInside)
-        return button
-    }()
-    
+    private let userChoose = AdditionalButton(type: .system).then {
+        $0.title = "인원 선택"
+        $0.color = .rgb(red: 151, green: 142, blue: 255)
+        $0.addTarget(self, action: #selector(chooseUser), for: .touchUpInside)
+    }
     
     //MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         configureUI()
-        WhatAboutPeopleLikeThis.dataSource = self
-        WhatAboutPeopleLikeThis.delegate = self
+        [WhatAboutPeopleLikeThis].forEach { $0.delegate = self; $0.dataSource = self}
         nickNameTextFieldContainerView.delegate = self
     }
     
@@ -103,21 +100,14 @@ class MorePeopleToDo: UIViewController{
     }
     //MARK: - AddView
     func addView(){
-        view.addSubview(backbutton)
-        view.addSubview(TitleLabel)
-        view.addSubview(SubLabel)
-        view.addSubview(GroupLabel)
-        view.addSubview(nickNameTextFieldContainerView)
-        view.addSubview(recommendPeopleLabel)
-        view.addSubview(WhatAboutPeopleLikeThis)
-        view.addSubview(userChoose)
+        [backbutton,TitleLabel,SubLabel,GroupLabel,nickNameTextFieldContainerView,recommendPeopleLabel,WhatAboutPeopleLikeThis,userChoose].forEach { view.addSubview($0)}
     }
     //MARK: - Data 일치 여부
     func DataIsRight(){
         for item in data{
-            if item == (nickNameTextFieldContainerView.text ?? ""){
-                delegate?.updateData(name: nickNameTextFieldContainerView.text ?? "", Color: .blue)
+            if item == (nickNameTextFieldContainerView.text){
                 navigationController?.popViewController(animated: true)
+                delegate?.userUpdateData(name: nickNameTextFieldContainerView.text, Color: .EZY_AFADFF)
             }else{
                 shakeView(view)
             }
@@ -167,15 +157,11 @@ class MorePeopleToDo: UIViewController{
             make.right.equalTo(view.snp.right).inset(view.frame.height/29)
         }
     }
-
-
-    
     //MARK: - 키보드 내리기
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         super.touchesBegan(touches, with: event)
         view.endEditing(true)
     }
-    
 
     //MARK: - Shake Animation
     func shakeView(_ view: UIView?) {
@@ -196,6 +182,7 @@ extension MorePeopleToDo : UITextFieldDelegate{
         print(textField.text!)
     }
 }
+
 //MARK: - CollectionView
 extension MorePeopleToDo : UICollectionViewDelegateFlowLayout,UICollectionViewDataSource{
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {

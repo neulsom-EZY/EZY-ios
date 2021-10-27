@@ -195,23 +195,12 @@ class AddMyToDoViewController: UIViewController{
     }
     //MARK: - CollectionView DataSource & Delegate
     private func collectionViewDataSourceAndDelegate(){
-        tagCollectionView.delegate = self
-        tagCollectionView.dataSource = self
-        alarmSettingcollectionView.delegate = self
-        alarmSettingcollectionView.dataSource = self
+        [tagCollectionView,alarmSettingcollectionView].forEach { $0.delegate = self; $0.dataSource = self}
     }
+    
     //MARK: - AddView
     private func addView(){
-        view.addSubview(backbutton)
-        view.addSubview(TitleLabel)
-        view.addSubview(btnStackView)
-        view.addSubview(tagLabel)
-        view.addSubview(tagCollectionView)
-        view.addSubview(addButton)
-        view.addSubview(alarmSettings)
-        view.addSubview(alarmSettingcollectionView)
-        view.addSubview(titleContainerView)
-        view.addSubview(explanationContainerView)
+        [backbutton,TitleLabel,btnStackView,tagLabel,tagCollectionView,addButton,alarmSettings,alarmSettingcollectionView,titleContainerView,explanationContainerView].forEach {view.addSubview($0)}
     }
     //MARK: - CornerRadius
     private func cornerRadius(){
@@ -318,19 +307,18 @@ extension AddMyToDoViewController: UICollectionViewDelegateFlowLayout, UICollect
         //MARK: - Cell Dynamic width
         let label = UILabel().then{
             $0.dynamicFont(fontSize: 12, currentFontName: "AppleSDGothicNeo-Bold")
-            $0.sizeToFit()
         }
         if collectionView == tagCollectionView{
             label.text = tagData[indexPath.row].textData
             label.sizeToFit()
-            return CGSize(width: label.frame.width + bounds.width/9.868, height: bounds.height/18.88)
+            return CGSize(width: label.frame.width + bounds.height/18.88, height: bounds.height/18.88)
         }
         else{
             label.text = alarmData[indexPath.row].textData
             label.sizeToFit()
-            return CGSize(width: label.frame.width + bounds.width/9.868, height: bounds.height/18.88)
+            return CGSize(width: label.frame.width + bounds.height/18.88, height: bounds.height/18.88)
         }
-        
+
     }
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         if collectionView == alarmSettingcollectionView{
@@ -354,3 +342,4 @@ extension AddMyToDoViewController : AlarmModelDelegate{
         self.removeDim()
     }
 }
+
