@@ -128,7 +128,6 @@ class CalendarAddModelViewController: UIViewController {
     
     //MARK: - helpers
     func configureUI(){
-
         currentDateSetting()
         
         pickerViewDataSetting()
@@ -259,6 +258,12 @@ class CalendarAddModelViewController: UIViewController {
         dayPickerView.dataSource = self
         
         dayPickerView.transform = CGAffineTransform(rotationAngle: (-90 * (.pi / 180*3)))
+        print("dayPickerViewselectedIndex : \(dayPickerViewselectedIndex)")
+        if dayPickerViewselectedIndex == 0{
+            dayPickerView.selectRow(dayOfWeekPickerViewData.count-1, inComponent: 0, animated: false)
+        }else{
+            dayPickerView.selectRow(dayPickerViewselectedIndex, inComponent: 0, animated: false)
+        }
     }
     
     // MARK: - getCurrentDate
@@ -270,6 +275,7 @@ class CalendarAddModelViewController: UIViewController {
         dayPickerViewData = []
         
         dateFormatter.dateFormat = "dd"
+        
         for i in 0...13{
             let day = DateComponents(day: i)
             if let d100 = calendar.date(byAdding: day, to: now)
@@ -361,11 +367,9 @@ extension CalendarAddModelViewController: UIPickerViewDataSource, UIPickerViewDe
             make.centerX.equalToSuperview()
             make.bottom.equalToSuperview().offset(-self.view.frame.height/23)
         }
-
+        
         pickerView.subviews[1].backgroundColor = UIColor(red: 170/255, green: 187/255, blue: 255/255, alpha:0.1)
-        
-        pickerView.selectRow(dayOfWeekPickerViewData.count-1, inComponent: 0, animated: false)
-        
+
         return view
     }
 }

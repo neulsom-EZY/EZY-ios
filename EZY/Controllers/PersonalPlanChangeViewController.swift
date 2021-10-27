@@ -25,7 +25,7 @@ class PersonalPlanChangeViewController: UIViewController{
                                                 TagColorCollectionViewModel(backgroundColor: UIColor.EZY_TagColorArray[12], isSelected: true)]
     
     private var TagModels: [TagCollectionViewModel] = [TagCollectionViewModel(backgroundColor: UIColor(red: 186/255, green: 200/255, blue: 255/255, alpha: 1), isSelected: true, iconImgae: UIImage(named: "EZY_UnSelectedTagAddButtonImage")!),
-                                               TagCollectionViewModel(backgroundColor: UIColor(red: 221/255, green: 220/255, blue: 220/255, alpha: 1), isSelected: false, iconImgae: UIImage(named: "EZY_SelectedNoSelectTagButtonImage")!),
+                                                       TagCollectionViewModel(backgroundColor: UIColor(red: 221/255, green: 220/255, blue: 220/255, alpha: 1), isSelected: false, iconImgae: UIImage(named: "EZY_SelectedNoSelectTagButtonImage")!),
                                                        TagCollectionViewModel(backgroundColor: UIColor(red: 206/255, green: 200/255, blue: 255/255, alpha: 1), isSelected: true, iconImgae: UIImage()),
                                                TagCollectionViewModel(backgroundColor: UIColor(red: 216/255, green: 200/255, blue: 255/255, alpha: 1), isSelected: true, iconImgae: UIImage()),
                                                TagCollectionViewModel(backgroundColor: UIColor(red: 226/255, green: 200/255, blue: 255/255, alpha: 1), isSelected: true, iconImgae: UIImage())]
@@ -130,7 +130,8 @@ class PersonalPlanChangeViewController: UIViewController{
         $0.dynamicFont(fontSize: 14, currentFontName: "AppleSDGothicNeo-Bold")
     }
     
-    private let notificationAddButton = UIButton().then{
+    private lazy var notificationAddButton = UIButton().then{
+        $0.imageEdgeInsets = UIEdgeInsets(top: view.frame.width/27, left: view.frame.width/27, bottom: view.frame.width/27, right: view.frame.width/27)
         $0.backgroundColor = UIColor.rgb(red: 253, green: 253, blue: 253)
         $0.setImage(UIImage(named: "EZY_UnSelectedTagAddButtonImage"), for: .normal)
         $0.setTitleColor(UIColor(red: 150/255, green: 141/255, blue: 255/255, alpha: 1), for: .normal)
@@ -141,7 +142,7 @@ class PersonalPlanChangeViewController: UIViewController{
     }
 
     private lazy var notificationNoSelectButton = UIButton().then{
-        $0.imageEdgeInsets = UIEdgeInsets(top: view.frame.width/25, left: view.frame.width/25, bottom: view.frame.width/25, right: view.frame.width/25)
+        $0.imageEdgeInsets = UIEdgeInsets(top: view.frame.width/26, left: view.frame.width/26, bottom: view.frame.width/26, right: view.frame.width/26)
         $0.setImage(UIImage(named: "EZY_SelectedNoSelectTagButtonImage"), for: .normal)
         $0.backgroundColor = UIColor(red: 221/255, green: 220/255, blue: 220/255, alpha: 1)
         $0.isHighlighted = false
@@ -595,6 +596,7 @@ extension PersonalPlanChangeViewController: UICollectionViewDataSource, UICollec
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         if collectionView == tagCollectionView{
             if indexPath == [0,0]{
+                
                 tagAddModalView.isHidden = false
                 tagAddModalView.tagNameTextField.becomeFirstResponder()
                 tagAddModalView.tagNameTextField.text = ""
