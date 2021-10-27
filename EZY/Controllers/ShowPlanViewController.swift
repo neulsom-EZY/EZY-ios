@@ -341,15 +341,15 @@ class ShowPlanViewController: UIViewController{
     
     // MARK: - addDim
     private func addDim() {
-           view.addSubview(bgView)
-           bgView.snp.makeConstraints { (make) in
-               make.edges.equalTo(0)
-           }
-           
-           DispatchQueue.main.async { [weak self] in
-               self?.bgView.alpha = 0.2
-           }
-       }
+        view.addSubview(bgView)
+        bgView.snp.makeConstraints { (make) in
+            make.edges.equalTo(0)
+        }
+        
+        DispatchQueue.main.async { [weak self] in
+            self?.bgView.alpha = 0.2
+        }
+    }
        
     // MARK: - removeDim
     private func removeDim() {
@@ -360,7 +360,7 @@ class ShowPlanViewController: UIViewController{
     }
     private func updateDim(viewcontroller : UIViewController){
         DispatchQueue.main.async { [weak self] in
-            self?.navigationController?.pushViewController(viewcontroller ?? UIViewController(), animated: true)
+            self?.navigationController?.pushViewController(viewcontroller, animated: true)
         }
     }
 }
@@ -405,7 +405,6 @@ extension ShowPlanViewController: UICollectionViewDataSource{
                                                                 ScheduleTypeCollectionViewCell.ScheduleTypeCollectionViewIdentifier, for: indexPath) as? ScheduleTypeCollectionViewCell else {
             return UICollectionViewCell()
         }
-        
         
         cell.label.text = scheduleTypesArray[indexPath.row]
         cell.icon.image = icon[indexPath.row]
@@ -456,7 +455,6 @@ extension ShowPlanViewController: UITableViewDataSource{
 }
 
 extension ShowPlanViewController: UITableViewDelegate{
-    
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
         // 일정 이름 길이에 따른 모달의 layout 변경
@@ -466,7 +464,7 @@ extension ShowPlanViewController: UITableViewDelegate{
                 make.height.equalToSuperview().dividedBy(6.29)
                 make.centerX.centerY.equalToSuperview()
             }
-                                    
+          
             planCompleteModalView.labelView.snp.remakeConstraints { make in
                 make.centerX.equalToSuperview()
                 make.width.equalTo((planTitleTextArray[indexPath.row] as NSString).size(withAttributes: [NSAttributedString.Key.font : planCompleteModalView.planTitleNameLabel.font!]).width + (planCompleteModalView.completeQuestionsLabel.text! as NSString).size(withAttributes: [NSAttributedString.Key.font : planCompleteModalView.completeQuestionsLabel.font!]).width + self.view.frame.width/70)

@@ -18,5 +18,3 @@ enum Day : String{
 }
 
 var dayArray : [Day] = [.Mon,.Tue,.Wed,.Thu,.Fri,.Sat,.Sun]
-
-

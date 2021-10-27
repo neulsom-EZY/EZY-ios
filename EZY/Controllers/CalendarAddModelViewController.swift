@@ -128,6 +128,7 @@ class CalendarAddModelViewController: UIViewController {
     
     //MARK: - helpers
     func configureUI(){
+
         currentDateSetting()
         
         pickerViewDataSetting()
@@ -257,11 +258,6 @@ class CalendarAddModelViewController: UIViewController {
         dayPickerView.delegate = self
         dayPickerView.dataSource = self
         
-        // pickerview, collectionview 사용자가 선택한 걸로 기록해두기
-        // 사용자가 선택하기 전엔 collectionview는 is Select 모두 false로 하고
-        // 사용자가 선택한 후에는 사용자가 선택한 셀을 가져와서 표시한다.
-        // 사용자가 선택하기 전엔 pickerView는
-        
         dayPickerView.transform = CGAffineTransform(rotationAngle: (-90 * (.pi / 180*3)))
     }
     
@@ -367,6 +363,8 @@ extension CalendarAddModelViewController: UIPickerViewDataSource, UIPickerViewDe
         }
 
         pickerView.subviews[1].backgroundColor = UIColor(red: 170/255, green: 187/255, blue: 255/255, alpha:0.1)
+        
+        pickerView.selectRow(dayOfWeekPickerViewData.count-1, inComponent: 0, animated: false)
         
         return view
     }

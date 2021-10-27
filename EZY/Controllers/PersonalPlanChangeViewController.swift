@@ -8,8 +8,6 @@
 import UIKit
 
 class PersonalPlanChangeViewController: UIViewController{
-    
-    
     //MARK: - Properties
     var TagColorModels: [TagColorCollectionViewModel] = [
                                                 TagColorCollectionViewModel(backgroundColor: UIColor.EZY_TagColorArray[0], isSelected: false),
@@ -208,20 +206,6 @@ class PersonalPlanChangeViewController: UIViewController{
         location()
         
         dataSourceAndDelegate()
-    }
-    
-    func currentDaySetting(){
-        let currentDayOfWeek = DateFormatter().weekdaySymbols[Calendar.current.component(.weekday, from: Date()) - 1]
-        let endIdx: String.Index = currentDayOfWeek.index(currentDayOfWeek.startIndex, offsetBy: 2)
-        let formatter = DateFormatter()
-        
-        formatter.dateFormat = "yyyy.MM.dd"
-        
-        for i in 0...dayArray.count-1{
-            if String(currentDayOfWeek[...endIdx]) == "\(dayArray[i])"{
-                calendarBtn.dayLabel.text = "\(formatter.string(from: Date())) \(dayArray[i].rawValue)요일"
-            }
-        }
     }
     
     //MARK: - dataSourceAndDelegate
@@ -494,7 +478,6 @@ class PersonalPlanChangeViewController: UIViewController{
     //MARK: - time Setting Function
     func timeReloadSetting(_ startMorningOrAfternoon: String, _ endMorningOrAfternoon: String, _ startTime: String, _ endTime: String){
         clockBtn.alertButtonTitleLabel.text = "\(startMorningOrAfternoon) \(startTime) ~ \(endMorningOrAfternoon) \(endTime)"
-        
     }
     
     // MARK: - shakeView
@@ -724,6 +707,4 @@ extension PersonalPlanChangeViewController: TimeAddDelegate{
     func updateData(startMorningOrAfternoon: String, endMorningOrAfternoon: String, startTime: String, endTime: String) {
         self.timeReloadSetting(startMorningOrAfternoon, endMorningOrAfternoon, startTime, endTime)
     }
-    
-    
 }
