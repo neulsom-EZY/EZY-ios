@@ -9,7 +9,7 @@ import UIKit
 
 protocol CalendarAddDelegate: AnyObject {
     func onTapCalendarModalClose()
-    func updateData(selectedDay : String , selectedRepeatDay : [String], selectedDayOfWeek: String, yearAndMonthText: String)
+    func updateData(selectedDay : String , selectedRepeatDay : [String], selectedDayOfWeek: String, yearAndMonthText: String, selectedValuesIndex: Int)
 }
 
 class CalendarAddModelViewController: UIViewController {
@@ -166,10 +166,11 @@ class CalendarAddModelViewController: UIViewController {
                 selectedRepeatDay.append(dayKoreanTextArray[i])
             }
         }
-        
+        print("dayPickerViewselectedIndex : \(dayPickerViewselectedIndex)")
+
         delegate?.onTapCalendarModalClose()
         dismiss(animated: true, completion: nil)
-        delegate?.updateData(selectedDay: self.selectedDay, selectedRepeatDay: self.selectedRepeatDay, selectedDayOfWeek: self.selectedDayOfWeek, yearAndMonthText: self.yearAndMonthText)
+        delegate?.updateData(selectedDay: self.selectedDay, selectedRepeatDay: self.selectedRepeatDay, selectedDayOfWeek: self.selectedDayOfWeek, yearAndMonthText: self.yearAndMonthText, selectedValuesIndex: dayPickerViewselectedIndex)
     }
     
     //MARK: - addView
@@ -258,12 +259,6 @@ class CalendarAddModelViewController: UIViewController {
         dayPickerView.dataSource = self
         
         dayPickerView.transform = CGAffineTransform(rotationAngle: (-90 * (.pi / 180*3)))
-        print("dayPickerViewselectedIndex : \(dayPickerViewselectedIndex)")
-        if dayPickerViewselectedIndex == 0{
-            dayPickerView.selectRow(dayOfWeekPickerViewData.count-1, inComponent: 0, animated: false)
-        }else{
-            dayPickerView.selectRow(dayPickerViewselectedIndex, inComponent: 0, animated: false)
-        }
     }
     
     // MARK: - getCurrentDate
@@ -285,6 +280,16 @@ class CalendarAddModelViewController: UIViewController {
         }
 
         return dayPickerViewData
+    }
+    
+    func pickerViewValueSetting(selectedValuesIndex: Int){
+        dayPickerViewselectedIndex = selectedValuesIndex
+
+        if selectedValuesIndex == 0{
+            dayPickerView.selectRow(dayOfWeekPickerViewData.count-1, inComponent: 0, animated: false)
+        }else{
+            dayPickerView.selectRow((dayOfWeekPickerViewData.count-1) - selectedValuesIndex, inComponent: 0, animated: false)
+        }
     }
 }
 

@@ -60,6 +60,7 @@ class PersonalPlanChangeViewController: UIViewController{
     
     private var dayPickerViewTextArray = [["Mon","Tue","Wed","Thr","Fri","Sat","Sun","Mon","Tue","Wed","Thr","Fri","Sat","Sun"].reversed(),["1","2","3","4","5","6","7","1","2","3","4","5","6","7"]]
     
+    private var dayPickerViewSelectedValueIndex = 0
     
     private var tagNameTextArray = ["x", "+", "TOEIC", "CODING", "COOKING"]
     
@@ -397,15 +398,14 @@ class PersonalPlanChangeViewController: UIViewController{
     }
     
     @objc func calendarAlert(){
-        print("calendar")
         let CalendarAddModalVC = CalendarAddModelViewController.instance()
         CalendarAddModalVC.delegate = self
         addDim()
         present(CalendarAddModalVC, animated: true, completion: nil)
+        CalendarAddModalVC.pickerViewValueSetting(selectedValuesIndex: dayPickerViewSelectedValueIndex)
     }
     
     @objc func clockAlert(){
-        print("clock")
         let TimeAddModalVC = TimeAddModalViewController.instance()
         TimeAddModalVC.delegate = self
         addDim()
@@ -461,7 +461,7 @@ class PersonalPlanChangeViewController: UIViewController{
     }
     
     //MARK: - calendar Setting Function
-    func calendarReloadSetting(_ selectedDay: String, _ selectedRepeatDay: [String], _ selectedDayOfWeek: String, _ yearAndMonthText: String){
+    func calendarReloadSetting(_ selectedDay: String, _ selectedRepeatDay: [String], _ selectedDayOfWeek: String, _ yearAndMonthText: String, _ selectedValuesIndex: Int){
         
         // 반복라벨에 적용
         if selectedRepeatDay.count == 0{
@@ -474,11 +474,14 @@ class PersonalPlanChangeViewController: UIViewController{
         if selectedDayOfWeek != ""{
             calendarBtn.dayLabel.text = "\(yearAndMonthText).\(selectedDay) \(selectedDayOfWeek)요일"
         }
+        
+        dayPickerViewSelectedValueIndex = selectedValuesIndex
     }
     
     //MARK: - time Setting Function
     func timeReloadSetting(_ startMorningOrAfternoon: String, _ endMorningOrAfternoon: String, _ startTime: String, _ endTime: String){
         clockBtn.alertButtonTitleLabel.text = "\(startMorningOrAfternoon) \(startTime) ~ \(endMorningOrAfternoon) \(endTime)"
+        
     }
     
     // MARK: - shakeView
@@ -692,8 +695,8 @@ extension PersonalPlanChangeViewController: AlarmModelDelegate{
 }
 
 extension PersonalPlanChangeViewController: CalendarAddDelegate{
-    func updateData(selectedDay: String, selectedRepeatDay: [String], selectedDayOfWeek: String, yearAndMonthText: String) {
-        self.calendarReloadSetting(selectedDay, selectedRepeatDay, selectedDayOfWeek, yearAndMonthText)
+    func updateData(selectedDay: String, selectedRepeatDay: [String], selectedDayOfWeek: String, yearAndMonthText: String, selectedValuesIndex: Int) {
+        self.calendarReloadSetting(selectedDay, selectedRepeatDay, selectedDayOfWeek, yearAndMonthText, selectedValuesIndex)
     }
     
     func onTapCalendarModalClose(){
