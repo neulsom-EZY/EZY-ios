@@ -126,9 +126,7 @@ class ShowPlanViewController: UIViewController{
         $0.backgroundColor = .white
     }
     
-    private let bgView = UIView().then {
-        $0.backgroundColor = .black
-    }
+    private let bgView = UIView()
     
     private let middleComponemtView = UIButton().then{
         $0.backgroundColor = .white
@@ -311,10 +309,10 @@ class ShowPlanViewController: UIViewController{
     
     @objc func EZYPlanAddButtonClicked(sender:UIButton){
         let MoreCalendarModalsVC = MoreCalendarModalsViewController.instance()
-        present(MoreCalendarModalsVC, animated: true, completion: nil)
-        
         MoreCalendarModalsVC.delegate = self
-        
+
+        present(MoreCalendarModalsVC, animated: true, completion: nil)
+    
         addDim()
     }
     
@@ -341,15 +339,15 @@ class ShowPlanViewController: UIViewController{
     
     // MARK: - addDim
     private func addDim() {
-        view.addSubview(bgView)
-        bgView.snp.makeConstraints { (make) in
-            make.edges.equalTo(0)
-        }
-        
-        DispatchQueue.main.async { [weak self] in
-            self?.bgView.alpha = 0.2
-        }
-    }
+           view.addSubview(bgView)
+           bgView.snp.makeConstraints { (make) in
+               make.edges.equalTo(0)
+           }
+           
+           DispatchQueue.main.async { [weak self] in
+               self?.bgView.backgroundColor = .black.withAlphaComponent(0.15)
+           }
+       }
        
     // MARK: - removeDim
     private func removeDim() {
