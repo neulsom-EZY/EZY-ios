@@ -55,8 +55,7 @@ class SwitchBtn : UIButton{
         animationstate()
     }
     func animationstate(){
-        if (switchState)
-        {
+        if (switchState){
             animateOn()
         }else{
             animateOff()
@@ -72,19 +71,17 @@ class SwitchBtn : UIButton{
             self.titleBtnView.center.x = self.frame.width - (self.titleBtnView.frame.width / 2) - self.backview.frame.height/12.98
         }){ [weak self] _ in
             guard let self = self else {return}
-            
             self.delegate?.isOnValueChange(isOn: self.switchState)
         }
     }
+    
     func animateOff(){
-
         UIView.animate(withDuration: 0.25, animations: { [weak self] in
             guard let self = self else {return}
             self.backview.backgroundColor = .EZY_DEDEDE
             self.titleBtnView.center.x = self.titleBtnView.frame.width/2 + self.backview.frame.height/12.98
         }){ [weak self] _ in
             guard let self = self else {return}
-            
             self.delegate?.isOnValueChange(isOn: self.switchState)
         }
     }

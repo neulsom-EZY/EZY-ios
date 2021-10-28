@@ -22,7 +22,5 @@ struct MoreTodoModel : SearchViewModel {
     var showView: Bool{
         return formIsValid
     }
-
-
 }
 

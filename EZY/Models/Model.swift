@@ -48,8 +48,3 @@ struct SendUserView {
     let recipient : String?
 }
 
-//MARK: - SearchData
-struct SearchData {
-    let koreanName : String
-    let name : String
-}
