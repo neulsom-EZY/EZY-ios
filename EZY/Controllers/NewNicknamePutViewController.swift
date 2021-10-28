@@ -28,6 +28,17 @@ class NewNicknamePutViewController: UIViewController{
         $0.updateGradientTextColor_vertical(gradientColors: [.EZY_968DFF, UIColor.rgba(red: 148, green: 139, blue: 255, alpha: 0.4)])
     }
     
+    private let nicknameShowView = UIView().then {
+        $0.backgroundColor = .rgb(red: 250, green: 250, blue: 250)
+        $0.layer.borderColor = UIColor.rgb(red: 225, green: 225, blue: 225).cgColor
+        $0.layer.borderWidth = 1
+    }
+    
+    private let nicknameShowLabel = UILabel().then {
+        $0.text = "YoOoOoujin"
+        $0.dynamicFont(fontSize: 14, currentFontName: "AppleSDGothicNeo-Medium")
+        $0.textColor = .rgb(red: 175, green: 175, blue: 175)
+    }
     private let continueButton = CustomGradientContinueBtnView().then {
         $0.setTitle("로그인 하러 가기", for: .normal)
         $0.titleLabel?.dynamicFont(fontSize: 14, currentFontName: "AppleSDGothicNeo-Bold")
@@ -69,10 +80,13 @@ class NewNicknamePutViewController: UIViewController{
         view.addSubview(toNewNicknameLabel)
         view.addSubview(putLabel)
         view.addSubview(continueButton)
+        view.addSubview(nicknameShowView)
+        view.addSubview(nicknameShowLabel)
     }
     
     private func cornerRadius(){
         continueButton.layer.cornerRadius = self.view.frame.height/81.2
+        nicknameShowView.layer.cornerRadius = self.view.frame.width/75
     }
     
     private func location(){
@@ -91,6 +105,17 @@ class NewNicknamePutViewController: UIViewController{
         putLabel.snp.makeConstraints { make in
             make.top.equalTo(toNewNicknameLabel).offset(self.view.frame.height/27.07)
             make.left.equalTo(toNewNicknameLabel)
+        }
+        
+        nicknameShowView.snp.makeConstraints { make in
+            make.centerX.equalToSuperview()
+            make.top.equalTo(putLabel.snp.bottom).offset(self.view.frame.height/15.92)
+            make.width.equalToSuperview().dividedBy(1.36)
+            make.height.equalToSuperview().dividedBy(14.76)
+        }
+        
+        nicknameShowLabel.snp.makeConstraints { make in
+            make.center.equalTo(nicknameShowView)
         }
         
         continueButton.snp.makeConstraints { make in
