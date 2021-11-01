@@ -7,10 +7,15 @@
 
 import UIKit
 
+protocol TagTableViewCellDelegate: AnyObject{
+    func didTabAddButton(with string: String)
+}
+
 class TagTableViewCell: UITableViewCell {
-    
-    
+            
     static var reuseId = "\(TagTableViewCell.self)"
+    
+    public weak var delegate: TagTableViewCellDelegate?
     
     lazy var tagLabelBackgroundView = UIView().then {
         $0.backgroundColor = .white
@@ -33,6 +38,8 @@ class TagTableViewCell: UITableViewCell {
     lazy var tagSettingButton = UIButton().then{
         $0.setImage(UIImage(named: "EZY_TagSettingButton"), for: .normal)
     }
+    
+    private var string: String?
 
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -45,18 +52,25 @@ class TagTableViewCell: UITableViewCell {
         layoutSetting()
     }
     
-    func layoutSetting(){        
+    
+    public func configure(with string: String){
+        self.string = string
+    }
+    
+    func layoutSetting(){
+        guard let string = string else {return}
+
+        delegate?.didTabAddButton(with: string)
+        
         self.contentView.addSubview(tagLabelBackgroundView)
         self.contentView.addSubview(tagSettingButton)
         tagLabelBackgroundView.addSubview(tagNameLabel)
-        
-        
+                
         tagLabelBackgroundView.snp.makeConstraints { make in
             make.height.equalToSuperview().dividedBy(1.7)
             make.centerY.equalToSuperview()
             make.left.equalToSuperview()
-//            make.width.equalTo(tagNameLabel).offset(self.contentView.frame.width/20)
-            make.width.equalToSuperview().dividedBy(2)
+            make.width.equalTo(tagNameLabel).offset(self.contentView.frame.width/10)
         }
         
         tagSettingButton.snp.makeConstraints { make in

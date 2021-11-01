@@ -7,35 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		6AA769E526636AE700B7E1F5 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AA769E426636AE700B7E1F5 /* AppDelegate.swift */; };
-		6AA769E726636AE700B7E1F5 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AA769E626636AE700B7E1F5 /* SceneDelegate.swift */; };
-		6AA769EF26636AE700B7E1F5 /* EZY.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 6AA769ED26636AE700B7E1F5 /* EZY.xcdatamodeld */; };
-		6AA769F126636AE800B7E1F5 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6AA769F026636AE800B7E1F5 /* Assets.xcassets */; };
-		6AA769F426636AE800B7E1F5 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6AA769F226636AE800B7E1F5 /* LaunchScreen.storyboard */; };
-		6AA76A0226636D2800B7E1F5 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AA76A0126636D2800B7E1F5 /* LoginViewController.swift */; };
-		6AA76A1526638C5600B7E1F5 /* Poppins-MediumItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 6AA76A122663844A00B7E1F5 /* Poppins-MediumItalic.ttf */; };
-		6AA76A1626638C5600B7E1F5 /* Poppins-ThinItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 6AA76A102663844A00B7E1F5 /* Poppins-ThinItalic.ttf */; };
-		6AA76A1726638C5600B7E1F5 /* Poppins-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 6AA76A0C2663844A00B7E1F5 /* Poppins-Regular.ttf */; };
-		6AA76A1826638C5600B7E1F5 /* Poppins-BoldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 6AA76A112663844A00B7E1F5 /* Poppins-BoldItalic.ttf */; };
-		6AA76A1926638C5600B7E1F5 /* Poppins-Italic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 6AA76A0F2663844A00B7E1F5 /* Poppins-Italic.ttf */; };
-		6AA76A1A26638C5600B7E1F5 /* Poppins-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 6AA76A0A2663844A00B7E1F5 /* Poppins-Medium.ttf */; };
-		6AA76A1B26638C5600B7E1F5 /* Poppins-Thin.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 6AA76A0D2663844A00B7E1F5 /* Poppins-Thin.ttf */; };
-		6AA76A1C26638C5600B7E1F5 /* Poppins-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 6AA76A092663844A00B7E1F5 /* Poppins-Light.ttf */; };
-		6AA76A1D26638C5600B7E1F5 /* Poppins-LightItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 6AA76A072663844A00B7E1F5 /* Poppins-LightItalic.ttf */; };
-		6AA76A1E26638C5600B7E1F5 /* Poppins-ExtraLightItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 6AA76A082663844A00B7E1F5 /* Poppins-ExtraLightItalic.ttf */; };
-		6AA76A1F26638C5600B7E1F5 /* Poppins-ExtraBoldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 6AA76A062663844A00B7E1F5 /* Poppins-ExtraBoldItalic.ttf */; };
-		6AA76A2026638C5600B7E1F5 /* Poppins-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 6AA76A142663844A00B7E1F5 /* Poppins-SemiBold.ttf */; };
-		6AA76A2126638C5600B7E1F5 /* Poppins-Black.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 6AA76A032663844A00B7E1F5 /* Poppins-Black.ttf */; };
-		6AA76A2226638C5600B7E1F5 /* Poppins-BlackItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 6AA76A042663844A00B7E1F5 /* Poppins-BlackItalic.ttf */; };
-		6AA76A2326638C5600B7E1F5 /* Poppins-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 6AA76A0B2663844A00B7E1F5 /* Poppins-Bold.ttf */; };
-		6AA76A2426638C5600B7E1F5 /* Poppins-ExtraBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 6AA76A052663844A00B7E1F5 /* Poppins-ExtraBold.ttf */; };
-		6AA76A2526638C5600B7E1F5 /* Poppins-SemiBoldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 6AA76A132663844A00B7E1F5 /* Poppins-SemiBoldItalic.ttf */; };
-		6AA76A2626638C5600B7E1F5 /* Poppins-ExtraLight.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 6AA76A0E2663844A00B7E1F5 /* Poppins-ExtraLight.ttf */; };
+		08B81D198F46995E749BD8A0 /* Pods_EZY.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C37AD74ACD84F363045FF654 /* Pods_EZY.framework */; };
 		6A097CFD268ED628001E011D /* CalendarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A097CFC268ED628001E011D /* CalendarView.swift */; };
-		6A097CFF268ED68B001E011D /* CalendarViewLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A097CFE268ED68B001E011D /* CalendarViewLayout.swift */; };
 		6A138F81266F862200DBCE49 /* GroupAddCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A138F80266F862200DBCE49 /* GroupAddCollectionViewCell.swift */; };
-		6A138F83266F864300DBCE49 /* PinterestLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A138F82266F864300DBCE49 /* PinterestLayout.swift */; };
-		6A138F85266F866D00DBCE49 /* GroupManagementViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A138F84266F866D00DBCE49 /* GroupManagementViewController.swift */; };
 		6A138F89266FACFE00DBCE49 /* GroupAddModalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A138F88266FACFE00DBCE49 /* GroupAddModalView.swift */; };
 		6A138F8D26703C1900DBCE49 /* selectedMemberCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A138F8C26703C1900DBCE49 /* selectedMemberCollectionViewCell.swift */; };
 		6A1E3E9026797CB600E7B198 /* DeleteModalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A1E3E8F26797CB600E7B198 /* DeleteModalView.swift */; };
@@ -61,10 +35,9 @@
 		6A3E2EA226B6A84F0078D749 /* Poppins-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 6A3E2E9126B6A84F0078D749 /* Poppins-Bold.ttf */; };
 		6A3E2EA326B6A84F0078D749 /* Poppins-BoldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 6A3E2E9226B6A84F0078D749 /* Poppins-BoldItalic.ttf */; };
 		6A44474D26677647004C4BC3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6A44474C26677647004C4BC3 /* Assets.xcassets */; };
+		6A47F9D42718F63600AAA6E0 /* CalendarAddModelViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A47F9D32718F63600AAA6E0 /* CalendarAddModelViewController.swift */; };
 		6A4AE85D2678EBEE009E33CD /* GroupModifyDeleteModalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A4AE85C2678EBEE009E33CD /* GroupModifyDeleteModalView.swift */; };
 		6A4EDA002668653200B809EC /* ScheduleTimeTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A4ED9FF2668653200B809EC /* ScheduleTimeTableViewCell.swift */; };
-		6A4EDA02266866E600B809EC /* ScheduleTimeTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A4EDA01266866E600B809EC /* ScheduleTimeTableView.swift */; };
-		6A4EDA04266866FC00B809EC /* ScheduleTypeCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A4EDA03266866FC00B809EC /* ScheduleTypeCollectionView.swift */; };
 		6A4EDA2C266A045B00B809EC /* NotificationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A4EDA2B266A045B00B809EC /* NotificationViewController.swift */; };
 		6A4EDA2E266A332100B809EC /* NotificationTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A4EDA2D266A332100B809EC /* NotificationTableViewCell.swift */; };
 		6A4EDA30266A336000B809EC /* NotificationTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A4EDA2F266A336000B809EC /* NotificationTableView.swift */; };
@@ -73,7 +46,9 @@
 		6A4EDA37266DA52A00B809EC /* SettingTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A4EDA36266DA52A00B809EC /* SettingTableViewCell.swift */; };
 		6A4EDA41266E38E000B809EC /* GroupCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A4EDA40266E38E000B809EC /* GroupCollectionViewCell.swift */; };
 		6A685C0D26AC1E2D0079BC30 /* PersonalPlanDetailRepeatDayCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A685C0C26AC1E2D0079BC30 /* PersonalPlanDetailRepeatDayCollectionViewCell.swift */; };
+		6A6A66E026D608D40096A14B /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 6A6A66DF26D608D40096A14B /* GoogleService-Info.plist */; };
 		6A705BB6267E3ABF001954CE /* PersonalPlanChangeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A705BB5267E3ABF001954CE /* PersonalPlanChangeViewController.swift */; };
+		6A72073426C618600098830F /* RecommendedTagCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A72073326C618600098830F /* RecommendedTagCollectionViewCell.swift */; };
 		6A8283502698132000AC381B /* PlanDeleteModalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A82834F2698132000AC381B /* PlanDeleteModalView.swift */; };
 		6A82835426982A6C00AC381B /* InquiryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A82835326982A6C00AC381B /* InquiryViewController.swift */; };
 		6A82835626982A8B00AC381B /* questionTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A82835526982A8B00AC381B /* questionTableViewCell.swift */; };
@@ -92,45 +67,15 @@
 		6AA769E726636AE700B7E1F5 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AA769E626636AE700B7E1F5 /* SceneDelegate.swift */; };
 		6AA769EF26636AE700B7E1F5 /* EZY.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 6AA769ED26636AE700B7E1F5 /* EZY.xcdatamodeld */; };
 		6AA76A0226636D2800B7E1F5 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AA76A0126636D2800B7E1F5 /* LoginViewController.swift */; };
-		6AA76A1526638C5600B7E1F5 /* Poppins-MediumItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 6AA76A122663844A00B7E1F5 /* Poppins-MediumItalic.ttf */; };
-		6AA76A1626638C5600B7E1F5 /* Poppins-ThinItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 6AA76A102663844A00B7E1F5 /* Poppins-ThinItalic.ttf */; };
-		6AA76A1726638C5600B7E1F5 /* Poppins-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 6AA76A0C2663844A00B7E1F5 /* Poppins-Regular.ttf */; };
-		6AA76A1826638C5600B7E1F5 /* Poppins-BoldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 6AA76A112663844A00B7E1F5 /* Poppins-BoldItalic.ttf */; };
-		6AA76A1926638C5600B7E1F5 /* Poppins-Italic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 6AA76A0F2663844A00B7E1F5 /* Poppins-Italic.ttf */; };
-		6AA76A1A26638C5600B7E1F5 /* Poppins-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 6AA76A0A2663844A00B7E1F5 /* Poppins-Medium.ttf */; };
-		6AA76A1B26638C5600B7E1F5 /* Poppins-Thin.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 6AA76A0D2663844A00B7E1F5 /* Poppins-Thin.ttf */; };
-		6AA76A1C26638C5600B7E1F5 /* Poppins-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 6AA76A092663844A00B7E1F5 /* Poppins-Light.ttf */; };
-		6AA76A1D26638C5600B7E1F5 /* Poppins-LightItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 6AA76A072663844A00B7E1F5 /* Poppins-LightItalic.ttf */; };
-		6AA76A1E26638C5600B7E1F5 /* Poppins-ExtraLightItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 6AA76A082663844A00B7E1F5 /* Poppins-ExtraLightItalic.ttf */; };
-		6AA76A1F26638C5600B7E1F5 /* Poppins-ExtraBoldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 6AA76A062663844A00B7E1F5 /* Poppins-ExtraBoldItalic.ttf */; };
-		6AA76A2026638C5600B7E1F5 /* Poppins-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 6AA76A142663844A00B7E1F5 /* Poppins-SemiBold.ttf */; };
-		6AA76A2126638C5600B7E1F5 /* Poppins-Black.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 6AA76A032663844A00B7E1F5 /* Poppins-Black.ttf */; };
-		6AA76A2226638C5600B7E1F5 /* Poppins-BlackItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 6AA76A042663844A00B7E1F5 /* Poppins-BlackItalic.ttf */; };
-		6AA76A2326638C5600B7E1F5 /* Poppins-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 6AA76A0B2663844A00B7E1F5 /* Poppins-Bold.ttf */; };
-		6AA76A2426638C5600B7E1F5 /* Poppins-ExtraBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 6AA76A052663844A00B7E1F5 /* Poppins-ExtraBold.ttf */; };
-		6AA76A2526638C5600B7E1F5 /* Poppins-SemiBoldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 6AA76A132663844A00B7E1F5 /* Poppins-SemiBoldItalic.ttf */; };
-		6AA76A2626638C5600B7E1F5 /* Poppins-ExtraLight.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 6AA76A0E2663844A00B7E1F5 /* Poppins-ExtraLight.ttf */; };
-		AA13575E2695BF8200C1CAAB /* CustomGradientLoginBtnView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA13575A2695BF8200C1CAAB /* CustomGradientLoginBtnView.swift */; };
-		AA13575F2695BF8200C1CAAB /* CustomGradientContinueBtnView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA13575B2695BF8200C1CAAB /* CustomGradientContinueBtnView.swift */; };
-		AA1357602695BF8200C1CAAB /* CustomGradientTermsBtnView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA13575C2695BF8200C1CAAB /* CustomGradientTermsBtnView.swift */; };
-		AA1357672695BFC400C1CAAB /* NewPasswordPutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA1357612695BFC400C1CAAB /* NewPasswordPutViewController.swift */; };
-		AA1357682695BFC400C1CAAB /* SignUpNicknameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA1357622695BFC400C1CAAB /* SignUpNicknameViewController.swift */; };
-		AA1357692695BFC400C1CAAB /* SignUpPhoneNumViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA1357632695BFC400C1CAAB /* SignUpPhoneNumViewController.swift */; };
-		AA13576A2695BFC400C1CAAB /* NewPasswordPhoneNumViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA1357642695BFC400C1CAAB /* NewPasswordPhoneNumViewController.swift */; };
-		AA13576B2695BFC400C1CAAB /* SignUpPasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA1357652695BFC400C1CAAB /* SignUpPasswordViewController.swift */; };
-		AA13576C2695BFC400C1CAAB /* SignUpTermsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA1357662695BFC400C1CAAB /* SignUpTermsViewController.swift */; };
-		AA1357762695C4C600C1CAAB /* Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA1357742695C4C600C1CAAB /* Utilities.swift */; };
-		AA1357772695C4C600C1CAAB /* Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA1357752695C4C600C1CAAB /* Extension.swift */; };
-		AA58558C2697BF06000C4185 /* TopBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA58558B2697BF06000C4185 /* TopBarView.swift */; };
-		AA881D7226BB698500C04028 /* NewNicknamePhoneNumViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA881D7126BB698500C04028 /* NewNicknamePhoneNumViewController.swift */; };
-		AA881D7426BBB21100C04028 /* NewNicknamePutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA881D7326BBB21100C04028 /* NewNicknamePutViewController.swift */; };
 		6AA76A282663958B00B7E1F5 /* ShowPlanViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AA76A272663958B00B7E1F5 /* ShowPlanViewController.swift */; };
+		6AA7E785271E648500034327 /* DayModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AA7E784271E648500034327 /* DayModel.swift */; };
+		6AA7E7872720E64100034327 /* TimeAddModalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AA7E7862720E64100034327 /* TimeAddModalViewController.swift */; };
 		6AB27CAC269D758100B95C0F /* ChangeIdAfterLoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AB27CAB269D758100B95C0F /* ChangeIdAfterLoginViewController.swift */; };
 		6AB27CB0269D8C1600B95C0F /* WithdrawalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AB27CAF269D8C1600B95C0F /* WithdrawalViewController.swift */; };
 		6AB27CB2269DD1B900B95C0F /* InquiryChattingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AB27CB1269DD1B900B95C0F /* InquiryChattingViewController.swift */; };
 		6AB27CB4269DD42400B95C0F /* InquiryReceiveChattingBoxView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AB27CB3269DD42400B95C0F /* InquiryReceiveChattingBoxView.swift */; };
-		6AB486FD26832B8500E95D43 /* SelectCalendarModalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AB486FC26832B8500E95D43 /* SelectCalendarModalView.swift */; };
 		6AB486FF26834D8C00E95D43 /* CalendarCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AB486FE26834D8C00E95D43 /* CalendarCollectionViewCell.swift */; };
+		6AB7D443272FE41A00FAFA19 /* CalendarViewLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AB7D442272FE41A00FAFA19 /* CalendarViewLayout.swift */; };
 		6ABA2C8C26A5366000CB1E16 /* WithdrawalModalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6ABA2C8B26A5366000CB1E16 /* WithdrawalModalView.swift */; };
 		6AC1F4062684093700DDD08C /* TagColorCollectionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AC1F4052684093700DDD08C /* TagColorCollectionViewModel.swift */; };
 		6AC3BF18267B475200DDCBB2 /* PlanRequestRespondingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AC3BF17267B475200DDCBB2 /* PlanRequestRespondingViewController.swift */; };
@@ -140,7 +85,6 @@
 		6AE41E7C26A9492C0072612C /* TagTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AE41E7B26A9492C0072612C /* TagTableViewCell.swift */; };
 		6AE41E7E26A9560C0072612C /* TagSettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AE41E7D26A9560C0072612C /* TagSettingViewController.swift */; };
 		6AE41E8226A97C440072612C /* TagDeleteModalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AE41E8126A97C440072612C /* TagDeleteModalView.swift */; };
-		6AE5BAD52693D46A00A9731B /* SelectTimeModalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AE5BAD42693D46A00A9731B /* SelectTimeModalView.swift */; };
 		6AE5BAFA269534D300A9731B /* StartTimeTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AE5BAF9269534D300A9731B /* StartTimeTableViewCell.swift */; };
 		6AE5BAFC26953E0F00A9731B /* EndTimeTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AE5BAFB26953E0F00A9731B /* EndTimeTableViewCell.swift */; };
 		6AE5BB012695746F00A9731B /* PersonalPlanAddRepeatDayCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AE5BB002695746F00A9731B /* PersonalPlanAddRepeatDayCollectionViewCell.swift */; };
@@ -151,42 +95,65 @@
 		6AE5BB102696733F00A9731B /* SelectLocationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AE5BB0F2696733F00A9731B /* SelectLocationViewController.swift */; };
 		6AE5BB14269690B200A9731B /* LocationTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AE5BB13269690B200A9731B /* LocationTableViewCell.swift */; };
 		6AE5BB1626969AFD00A9731B /* SelectLocationModalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AE5BB1526969AFD00A9731B /* SelectLocationModalView.swift */; };
-		6AE5BB182696A6C600A9731B /* Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AE5BB172696A6C500A9731B /* Utilities.swift */; };
 		6AE5BB1A2696A6CE00A9731B /* Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AE5BB192696A6CE00A9731B /* Extension.swift */; };
 		6AE5BB1C2696B9C900A9731B /* PlanCompleteModalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AE5BB1B2696B9C900A9731B /* PlanCompleteModalView.swift */; };
 		6AE5BB1E2696DDA600A9731B /* PersonalPlanDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AE5BB1D2696DDA600A9731B /* PersonalPlanDetailViewController.swift */; };
 		6AFB77F9267ECD6700B59482 /* WhiteBackgroundView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AFB77F8267ECD6700B59482 /* WhiteBackgroundView.swift */; };
 		6AFB77FE267F343500B59482 /* TagAddModalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AFB77FD267F343500B59482 /* TagAddModalView.swift */; };
 		6AFB7800267F812B00B59482 /* TagColorCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AFB77FF267F812B00B59482 /* TagColorCollectionViewCell.swift */; };
-		AAA7885226A5921000230855 /* ErrandListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAA7885126A5921000230855 /* ErrandListViewController.swift */; };
-		AAADFD4E26ABD7A5000FBCCA /* MyToDoListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAADFD4D26ABD7A5000FBCCA /* MyToDoListViewController.swift */; };
-		AAADFD7226AC20DB000FBCCA /* ListTagView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAADFD7126AC20DB000FBCCA /* ListTagView.swift */; };
-		E5052C73E73080AD40F6F655 /* Pods_EZY.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A75C11C1873FE4E191601230 /* Pods_EZY.framework */; };
+		6AFCBE982711D6CE00801159 /* CalendarBtn.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AFCBE972711D6CE00801159 /* CalendarBtn.swift */; };
+		AA04F9D52700996800EE0506 /* LoginTextFieldContainerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA04F9D42700996800EE0506 /* LoginTextFieldContainerView.swift */; };
+		AA04F9D72701C12600EE0506 /* SignUpTextFieldContainerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA04F9D62701C12600EE0506 /* SignUpTextFieldContainerView.swift */; };
+		AAD95AE126EC7EC7004E4580 /* NewNicknamePhoneNumViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAD95AE026EC7EC7004E4580 /* NewNicknamePhoneNumViewController.swift */; };
+		AAD95AE326EC818B004E4580 /* NewNicknamePutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAD95AE226EC818B004E4580 /* NewNicknamePutViewController.swift */; };
+		EE84DEC02715ABF100121C62 /* CollectionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE84DEBF2715ABF100121C62 /* CollectionViewModel.swift */; };
 		EE93B4D926876C6F0055D7A6 /* PushNotificationManagementViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE93B4D826876C6F0055D7A6 /* PushNotificationManagementViewController.swift */; };
 		EE93B4DB26876F430055D7A6 /* AlarmManagementButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE93B4DA26876F430055D7A6 /* AlarmManagementButton.swift */; };
-		EE93B4DD26878A5D0055D7A6 /* PersonalCalendarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE93B4DC26878A5D0055D7A6 /* PersonalCalendarViewController.swift */; };
 		EE93B4DF268797230055D7A6 /* CustomManagePushNotificationCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE93B4DE268797230055D7A6 /* CustomManagePushNotificationCell.swift */; };
 		EE93B4E42687BD8A0055D7A6 /* ManageData.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE93B4E32687BD8A0055D7A6 /* ManageData.swift */; };
-		EE93B4E62687E1C30055D7A6 /* TeamCalendarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE93B4E52687E1C30055D7A6 /* TeamCalendarViewController.swift */; };
-		EE93B4E82687FB660055D7A6 /* ErrandCalendarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE93B4E72687FB660055D7A6 /* ErrandCalendarViewController.swift */; };
+		EE9582D2272A7B5F00AAEC8A /* LogoutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE9582D1272A7B5F00AAEC8A /* LogoutViewController.swift */; };
+		EE9582D4272A7BEF00AAEC8A /* LogoutCustomBtn.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE9582D3272A7BEF00AAEC8A /* LogoutCustomBtn.swift */; };
+		EE9F0D2226E8A2AC0015E81B /* ErrandDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE9F0D1C26E8A2AC0015E81B /* ErrandDetailsViewController.swift */; };
+		EE9F0D2326E8A2AC0015E81B /* MoreAlarmModelViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE9F0D1D26E8A2AC0015E81B /* MoreAlarmModelViewController.swift */; };
+		EE9F0D2426E8A2AC0015E81B /* MorePeopleToDo.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE9F0D1E26E8A2AC0015E81B /* MorePeopleToDo.swift */; };
+		EE9F0D2526E8A2AC0015E81B /* AddMyToDoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE9F0D1F26E8A2AC0015E81B /* AddMyToDoViewController.swift */; };
+		EE9F0D2626E8A2AC0015E81B /* AddErrandViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE9F0D2026E8A2AC0015E81B /* AddErrandViewController.swift */; };
+		EE9F0D2726E8A2AC0015E81B /* MoreCalendarModalsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE9F0D2126E8A2AC0015E81B /* MoreCalendarModalsViewController.swift */; };
+		EE9F0D3726E8A9340015E81B /* AddScheduleModalBtn .swift in Sources */ = {isa = PBXBuildFile; fileRef = EE9F0D2926E8A9330015E81B /* AddScheduleModalBtn .swift */; };
+		EE9F0D3826E8A9340015E81B /* inputContainerErrandTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE9F0D2A26E8A9330015E81B /* inputContainerErrandTextView.swift */; };
+		EE9F0D3A26E8A9340015E81B /* TitleContainerTextFieldView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE9F0D2C26E8A9330015E81B /* TitleContainerTextFieldView.swift */; };
+		EE9F0D3B26E8A9340015E81B /* ExplanationContainerTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE9F0D2D26E8A9330015E81B /* ExplanationContainerTextView.swift */; };
+		EE9F0D3C26E8A9340015E81B /* ErrandInputContainterTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE9F0D2E26E8A9330015E81B /* ErrandInputContainterTextField.swift */; };
+		EE9F0D3D26E8A9340015E81B /* OneAlertButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE9F0D2F26E8A9330015E81B /* OneAlertButton.swift */; };
+		EE9F0D3E26E8A9340015E81B /* CustomData.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE9F0D3026E8A9330015E81B /* CustomData.swift */; };
+		EE9F0D3F26E8A9340015E81B /* GroupSearchTextfield.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE9F0D3126E8A9330015E81B /* GroupSearchTextfield.swift */; };
+		EE9F0D4026E8A9340015E81B /* AlertButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE9F0D3226E8A9330015E81B /* AlertButton.swift */; };
+		EE9F0D4126E8A9340015E81B /* AdditionalButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE9F0D3326E8A9330015E81B /* AdditionalButton.swift */; };
+		EE9F0D4226E8A9340015E81B /* AlarmDatePickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE9F0D3426E8A9340015E81B /* AlarmDatePickerView.swift */; };
+		EE9F0D4326E8A9340015E81B /* SendUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE9F0D3526E8A9340015E81B /* SendUser.swift */; };
+		EE9F0D4B26E8A9700015E81B /* ErrandPeopoleChooseAfterCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE9F0D4626E8A9700015E81B /* ErrandPeopoleChooseAfterCell.swift */; };
+		EE9F0D4C26E8A9700015E81B /* TagCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE9F0D4726E8A9700015E81B /* TagCell.swift */; };
+		EE9F0D4D26E8A9700015E81B /* DayCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE9F0D4826E8A9700015E81B /* DayCollectionViewCell.swift */; };
+		EE9F0D4E26E8A9700015E81B /* WhatAboutPeopleLikeThisCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE9F0D4926E8A9700015E81B /* WhatAboutPeopleLikeThisCell.swift */; };
+		EE9F0D4F26E8A9700015E81B /* AlarmSettingCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE9F0D4A26E8A9700015E81B /* AlarmSettingCell.swift */; };
+		EE9F0D5126E8AA810015E81B /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE9F0D5026E8AA810015E81B /* Model.swift */; };
+		EE9F0D5326E8AA9E0015E81B /* SearchViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE9F0D5226E8AA9E0015E81B /* SearchViewModel.swift */; };
+		EEA49A132711C7B200265258 /* CalendarAlertBtn.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEA49A122711C7B200265258 /* CalendarAlertBtn.swift */; };
 		EEDCAF98268D85F1001E2B4F /* SwitchBtn.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEDCAF97268D85F1001E2B4F /* SwitchBtn.swift */; };
-		EEEDB2C22664D30D00E5C53A /* extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEEDB2C12664D30D00E5C53A /* extensions.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		14AF3F335899880714FDA1B3 /* Pods-EZY.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EZY.release.xcconfig"; path = "Target Support Files/Pods-EZY/Pods-EZY.release.xcconfig"; sourceTree = "<group>"; };
+		2FC16614E9BCACF88D1AB480 /* Pods-EZY.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EZY.release.xcconfig"; path = "Target Support Files/Pods-EZY/Pods-EZY.release.xcconfig"; sourceTree = "<group>"; };
 		6A097CFC268ED628001E011D /* CalendarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarView.swift; sourceTree = "<group>"; };
-		6A097CFE268ED68B001E011D /* CalendarViewLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarViewLayout.swift; sourceTree = "<group>"; };
 		6A097D01268ED7B1001E011D /* CalendarView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CalendarView.h; sourceTree = "<group>"; };
 		6A138F80266F862200DBCE49 /* GroupAddCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupAddCollectionViewCell.swift; sourceTree = "<group>"; };
-		6A138F82266F864300DBCE49 /* PinterestLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PinterestLayout.swift; sourceTree = "<group>"; };
-		6A138F84266F866D00DBCE49 /* GroupManagementViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupManagementViewController.swift; sourceTree = "<group>"; };
 		6A138F88266FACFE00DBCE49 /* GroupAddModalView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupAddModalView.swift; sourceTree = "<group>"; };
 		6A138F8C26703C1900DBCE49 /* selectedMemberCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = selectedMemberCollectionViewCell.swift; sourceTree = "<group>"; };
+		6A15D8A326D485DE00D932EC /* EZY.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = EZY.entitlements; sourceTree = "<group>"; };
 		6A1E3E8F26797CB600E7B198 /* DeleteModalView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteModalView.swift; sourceTree = "<group>"; };
 		6A3E2E7526B10D760078D749 /* ChangePasswardPhoneNumAfterLoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangePasswardPhoneNumAfterLoginViewController.swift; sourceTree = "<group>"; };
 		6A3E2E7726B111540078D749 /* ChangePasswardAfterLoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangePasswardAfterLoginViewController.swift; sourceTree = "<group>"; };
-		6A3E2E7D26B6A5FB0078D749 /* ViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ViewModel.swift; path = EZY/ViewModel/ViewModel.swift; sourceTree = SOURCE_ROOT; };
+		6A3E2E7D26B6A5FB0078D749 /* ViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ViewModel.swift; path = EZY/ViewModels/ViewModel.swift; sourceTree = SOURCE_ROOT; };
 		6A3E2E7F26B6A60B0078D749 /* ManagementbtnModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ManagementbtnModel.swift; sourceTree = "<group>"; };
 		6A3E2E8226B6A84E0078D749 /* Poppins-BlackItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Poppins-BlackItalic.ttf"; sourceTree = "<group>"; };
 		6A3E2E8326B6A84E0078D749 /* Poppins-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Poppins-Regular.ttf"; sourceTree = "<group>"; };
@@ -206,10 +173,9 @@
 		6A3E2E9126B6A84F0078D749 /* Poppins-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Poppins-Bold.ttf"; sourceTree = "<group>"; };
 		6A3E2E9226B6A84F0078D749 /* Poppins-BoldItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Poppins-BoldItalic.ttf"; sourceTree = "<group>"; };
 		6A44474C26677647004C4BC3 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		6A47F9D32718F63600AAA6E0 /* CalendarAddModelViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarAddModelViewController.swift; sourceTree = "<group>"; };
 		6A4AE85C2678EBEE009E33CD /* GroupModifyDeleteModalView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupModifyDeleteModalView.swift; sourceTree = "<group>"; };
 		6A4ED9FF2668653200B809EC /* ScheduleTimeTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleTimeTableViewCell.swift; sourceTree = "<group>"; };
-		6A4EDA01266866E600B809EC /* ScheduleTimeTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleTimeTableView.swift; sourceTree = "<group>"; };
-		6A4EDA03266866FC00B809EC /* ScheduleTypeCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleTypeCollectionView.swift; sourceTree = "<group>"; };
 		6A4EDA2B266A045B00B809EC /* NotificationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationViewController.swift; sourceTree = "<group>"; };
 		6A4EDA2D266A332100B809EC /* NotificationTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationTableViewCell.swift; sourceTree = "<group>"; };
 		6A4EDA2F266A336000B809EC /* NotificationTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationTableView.swift; sourceTree = "<group>"; };
@@ -218,7 +184,9 @@
 		6A4EDA36266DA52A00B809EC /* SettingTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingTableViewCell.swift; sourceTree = "<group>"; };
 		6A4EDA40266E38E000B809EC /* GroupCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupCollectionViewCell.swift; sourceTree = "<group>"; };
 		6A685C0C26AC1E2D0079BC30 /* PersonalPlanDetailRepeatDayCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonalPlanDetailRepeatDayCollectionViewCell.swift; sourceTree = "<group>"; };
+		6A6A66DF26D608D40096A14B /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		6A705BB5267E3ABF001954CE /* PersonalPlanChangeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonalPlanChangeViewController.swift; sourceTree = "<group>"; };
+		6A72073326C618600098830F /* RecommendedTagCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecommendedTagCollectionViewCell.swift; sourceTree = "<group>"; };
 		6A82834F2698132000AC381B /* PlanDeleteModalView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlanDeleteModalView.swift; sourceTree = "<group>"; };
 		6A82835326982A6C00AC381B /* InquiryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InquiryViewController.swift; sourceTree = "<group>"; };
 		6A82835526982A8B00AC381B /* questionTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = questionTableViewCell.swift; sourceTree = "<group>"; };
@@ -237,85 +205,17 @@
 		6AA769E426636AE700B7E1F5 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		6AA769E626636AE700B7E1F5 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		6AA769EE26636AE700B7E1F5 /* EZY.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = EZY.xcdatamodel; sourceTree = "<group>"; };
-		6AA769F026636AE800B7E1F5 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		6AA769F326636AE800B7E1F5 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		6AA769F526636AE800B7E1F5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		6AA76A0126636D2800B7E1F5 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
-		6AA76A032663844A00B7E1F5 /* Poppins-Black.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Poppins-Black.ttf"; path = "../../../../../Downloads/Poppins/Poppins-Black.ttf"; sourceTree = "<group>"; };
-		6AA76A042663844A00B7E1F5 /* Poppins-BlackItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Poppins-BlackItalic.ttf"; path = "../../../../../Downloads/Poppins/Poppins-BlackItalic.ttf"; sourceTree = "<group>"; };
-		6AA76A052663844A00B7E1F5 /* Poppins-ExtraBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Poppins-ExtraBold.ttf"; path = "../../../../../Downloads/Poppins/Poppins-ExtraBold.ttf"; sourceTree = "<group>"; };
-		6AA76A062663844A00B7E1F5 /* Poppins-ExtraBoldItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Poppins-ExtraBoldItalic.ttf"; path = "../../../../../Downloads/Poppins/Poppins-ExtraBoldItalic.ttf"; sourceTree = "<group>"; };
-		6AA76A072663844A00B7E1F5 /* Poppins-LightItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Poppins-LightItalic.ttf"; path = "../../../../../Downloads/Poppins/Poppins-LightItalic.ttf"; sourceTree = "<group>"; };
-		6AA76A082663844A00B7E1F5 /* Poppins-ExtraLightItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Poppins-ExtraLightItalic.ttf"; path = "../../../../../Downloads/Poppins/Poppins-ExtraLightItalic.ttf"; sourceTree = "<group>"; };
-		6AA76A092663844A00B7E1F5 /* Poppins-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Poppins-Light.ttf"; path = "../../../../../Downloads/Poppins/Poppins-Light.ttf"; sourceTree = "<group>"; };
-		6AA76A0A2663844A00B7E1F5 /* Poppins-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Poppins-Medium.ttf"; path = "../../../../../Downloads/Poppins/Poppins-Medium.ttf"; sourceTree = "<group>"; };
-		6AA76A0B2663844A00B7E1F5 /* Poppins-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Poppins-Bold.ttf"; path = "../../../../../Downloads/Poppins/Poppins-Bold.ttf"; sourceTree = "<group>"; };
-		6AA76A0C2663844A00B7E1F5 /* Poppins-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Poppins-Regular.ttf"; path = "../../../../../Downloads/Poppins/Poppins-Regular.ttf"; sourceTree = "<group>"; };
-		6AA76A0D2663844A00B7E1F5 /* Poppins-Thin.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Poppins-Thin.ttf"; path = "../../../../../Downloads/Poppins/Poppins-Thin.ttf"; sourceTree = "<group>"; };
-		6AA76A0E2663844A00B7E1F5 /* Poppins-ExtraLight.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Poppins-ExtraLight.ttf"; path = "../../../../../Downloads/Poppins/Poppins-ExtraLight.ttf"; sourceTree = "<group>"; };
-		6AA76A0F2663844A00B7E1F5 /* Poppins-Italic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Poppins-Italic.ttf"; path = "../../../../../Downloads/Poppins/Poppins-Italic.ttf"; sourceTree = "<group>"; };
-		6AA76A102663844A00B7E1F5 /* Poppins-ThinItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Poppins-ThinItalic.ttf"; path = "../../../../../Downloads/Poppins/Poppins-ThinItalic.ttf"; sourceTree = "<group>"; };
-		6AA76A112663844A00B7E1F5 /* Poppins-BoldItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Poppins-BoldItalic.ttf"; path = "../../../../../Downloads/Poppins/Poppins-BoldItalic.ttf"; sourceTree = "<group>"; };
-		6AA76A122663844A00B7E1F5 /* Poppins-MediumItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Poppins-MediumItalic.ttf"; path = "../../../../../Downloads/Poppins/Poppins-MediumItalic.ttf"; sourceTree = "<group>"; };
-		6AA76A132663844A00B7E1F5 /* Poppins-SemiBoldItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Poppins-SemiBoldItalic.ttf"; path = "../../../../../Downloads/Poppins/Poppins-SemiBoldItalic.ttf"; sourceTree = "<group>"; };
-		6AA76A142663844A00B7E1F5 /* Poppins-SemiBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Poppins-SemiBold.ttf"; path = "../../../../../Downloads/Poppins/Poppins-SemiBold.ttf"; sourceTree = "<group>"; };
-		6AA769F526636AE800B7E1F5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		6AA76A0126636D2800B7E1F5 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
-		6AA76A032663844A00B7E1F5 /* Poppins-Black.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Poppins-Black.ttf"; sourceTree = "<group>"; };
-		6AA76A042663844A00B7E1F5 /* Poppins-BlackItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Poppins-BlackItalic.ttf"; sourceTree = "<group>"; };
-		6AA76A052663844A00B7E1F5 /* Poppins-ExtraBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Poppins-ExtraBold.ttf"; sourceTree = "<group>"; };
-		6AA76A062663844A00B7E1F5 /* Poppins-ExtraBoldItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Poppins-ExtraBoldItalic.ttf"; sourceTree = "<group>"; };
-		6AA76A072663844A00B7E1F5 /* Poppins-LightItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Poppins-LightItalic.ttf"; sourceTree = "<group>"; };
-		6AA76A082663844A00B7E1F5 /* Poppins-ExtraLightItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Poppins-ExtraLightItalic.ttf"; sourceTree = "<group>"; };
-		6AA76A092663844A00B7E1F5 /* Poppins-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Poppins-Light.ttf"; sourceTree = "<group>"; };
-		6AA76A0A2663844A00B7E1F5 /* Poppins-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Poppins-Medium.ttf"; sourceTree = "<group>"; };
-		6AA76A0B2663844A00B7E1F5 /* Poppins-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Poppins-Bold.ttf"; sourceTree = "<group>"; };
-		6AA76A0C2663844A00B7E1F5 /* Poppins-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Poppins-Regular.ttf"; sourceTree = "<group>"; };
-		6AA76A0D2663844A00B7E1F5 /* Poppins-Thin.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Poppins-Thin.ttf"; sourceTree = "<group>"; };
-		6AA76A0E2663844A00B7E1F5 /* Poppins-ExtraLight.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Poppins-ExtraLight.ttf"; sourceTree = "<group>"; };
-		6AA76A0F2663844A00B7E1F5 /* Poppins-Italic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Poppins-Italic.ttf"; sourceTree = "<group>"; };
-		6AA76A102663844A00B7E1F5 /* Poppins-ThinItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Poppins-ThinItalic.ttf"; sourceTree = "<group>"; };
-		6AA76A112663844A00B7E1F5 /* Poppins-BoldItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Poppins-BoldItalic.ttf"; sourceTree = "<group>"; };
-		6AA76A122663844A00B7E1F5 /* Poppins-MediumItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Poppins-MediumItalic.ttf"; sourceTree = "<group>"; };
-		6AA76A132663844A00B7E1F5 /* Poppins-SemiBoldItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Poppins-SemiBoldItalic.ttf"; sourceTree = "<group>"; };
-		6AA76A142663844A00B7E1F5 /* Poppins-SemiBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Poppins-SemiBold.ttf"; sourceTree = "<group>"; };
-		8B5046DC93C289B5AC6C406E /* Pods-EZY.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EZY.debug.xcconfig"; path = "Target Support Files/Pods-EZY/Pods-EZY.debug.xcconfig"; sourceTree = "<group>"; };
-		A75C11C1873FE4E191601230 /* Pods_EZY.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_EZY.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		AA13575A2695BF8200C1CAAB /* CustomGradientLoginBtnView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomGradientLoginBtnView.swift; sourceTree = "<group>"; };
-		AA13575B2695BF8200C1CAAB /* CustomGradientContinueBtnView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomGradientContinueBtnView.swift; sourceTree = "<group>"; };
-		AA13575C2695BF8200C1CAAB /* CustomGradientTermsBtnView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomGradientTermsBtnView.swift; sourceTree = "<group>"; };
-		AA1357612695BFC400C1CAAB /* NewPasswordPutViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewPasswordPutViewController.swift; sourceTree = "<group>"; };
-		AA1357622695BFC400C1CAAB /* SignUpNicknameViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignUpNicknameViewController.swift; sourceTree = "<group>"; };
-		AA1357632695BFC400C1CAAB /* SignUpPhoneNumViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignUpPhoneNumViewController.swift; sourceTree = "<group>"; };
-		AA1357642695BFC400C1CAAB /* NewPasswordPhoneNumViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewPasswordPhoneNumViewController.swift; sourceTree = "<group>"; };
-		AA1357652695BFC400C1CAAB /* SignUpPasswordViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignUpPasswordViewController.swift; sourceTree = "<group>"; };
-		AA1357662695BFC400C1CAAB /* SignUpTermsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignUpTermsViewController.swift; sourceTree = "<group>"; };
-		AA1357742695C4C600C1CAAB /* Utilities.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Utilities.swift; sourceTree = "<group>"; };
-		AA1357752695C4C600C1CAAB /* Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Extension.swift; sourceTree = "<group>"; };
-		AA58558B2697BF06000C4185 /* TopBarView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TopBarView.swift; sourceTree = "<group>"; };
-		AA881D7126BB698500C04028 /* NewNicknamePhoneNumViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewNicknamePhoneNumViewController.swift; sourceTree = "<group>"; };
-		AA881D7326BBB21100C04028 /* NewNicknamePutViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewNicknamePutViewController.swift; sourceTree = "<group>"; };
-		6AA76A032663844A00B7E1F5 /* Poppins-Black.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Poppins-Black.ttf"; path = "/Downloads/Poppins/Poppins-Black.ttf"; sourceTree = "<absolute>"; };
-		6AA76A042663844A00B7E1F5 /* Poppins-BlackItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Poppins-BlackItalic.ttf"; path = "/Downloads/Poppins/Poppins-BlackItalic.ttf"; sourceTree = "<absolute>"; };
-		6AA76A052663844A00B7E1F5 /* Poppins-ExtraBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Poppins-ExtraBold.ttf"; path = "/Downloads/Poppins/Poppins-ExtraBold.ttf"; sourceTree = "<absolute>"; };
-		6AA76A062663844A00B7E1F5 /* Poppins-ExtraBoldItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Poppins-ExtraBoldItalic.ttf"; path = "/Downloads/Poppins/Poppins-ExtraBoldItalic.ttf"; sourceTree = "<absolute>"; };
-		6AA76A072663844A00B7E1F5 /* Poppins-LightItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Poppins-LightItalic.ttf"; path = "/Downloads/Poppins/Poppins-LightItalic.ttf"; sourceTree = "<absolute>"; };
-		6AA76A092663844A00B7E1F5 /* Poppins-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Poppins-Light.ttf"; path = "/Downloads/Poppins/Poppins-Light.ttf"; sourceTree = "<absolute>"; };
-		6AA76A0A2663844A00B7E1F5 /* Poppins-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Poppins-Medium.ttf"; path = "/Downloads/Poppins/Poppins-Medium.ttf"; sourceTree = "<absolute>"; };
-		6AA76A0B2663844A00B7E1F5 /* Poppins-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Poppins-Bold.ttf"; path = "/Downloads/Poppins/Poppins-Bold.ttf"; sourceTree = "<absolute>"; };
-		6AA76A0C2663844A00B7E1F5 /* Poppins-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Poppins-Regular.ttf"; path = "/Downloads/Poppins/Poppins-Regular.ttf"; sourceTree = "<absolute>"; };
-		6AA76A0D2663844A00B7E1F5 /* Poppins-Thin.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Poppins-Thin.ttf"; path = "/Downloads/Poppins/Poppins-Thin.ttf"; sourceTree = "<absolute>"; };
-		6AA76A0F2663844A00B7E1F5 /* Poppins-Italic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Poppins-Italic.ttf"; path = "/Downloads/Poppins/Poppins-Italic.ttf"; sourceTree = "<absolute>"; };
-		6AA76A102663844A00B7E1F5 /* Poppins-ThinItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Poppins-ThinItalic.ttf"; path = "/Downloads/Poppins/Poppins-ThinItalic.ttf"; sourceTree = "<absolute>"; };
-		6AA76A112663844A00B7E1F5 /* Poppins-BoldItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Poppins-BoldItalic.ttf"; path = "/Downloads/Poppins/Poppins-BoldItalic.ttf"; sourceTree = "<absolute>"; };
-		6AA76A122663844A00B7E1F5 /* Poppins-MediumItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Poppins-MediumItalic.ttf"; path = "/Downloads/Poppins/Poppins-MediumItalic.ttf"; sourceTree = "<absolute>"; };
 		6AA76A272663958B00B7E1F5 /* ShowPlanViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowPlanViewController.swift; sourceTree = "<group>"; };
+		6AA7E784271E648500034327 /* DayModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayModel.swift; sourceTree = "<group>"; };
+		6AA7E7862720E64100034327 /* TimeAddModalViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeAddModalViewController.swift; sourceTree = "<group>"; };
 		6AB27CAB269D758100B95C0F /* ChangeIdAfterLoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangeIdAfterLoginViewController.swift; sourceTree = "<group>"; };
 		6AB27CAF269D8C1600B95C0F /* WithdrawalViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WithdrawalViewController.swift; sourceTree = "<group>"; };
 		6AB27CB1269DD1B900B95C0F /* InquiryChattingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InquiryChattingViewController.swift; sourceTree = "<group>"; };
 		6AB27CB3269DD42400B95C0F /* InquiryReceiveChattingBoxView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InquiryReceiveChattingBoxView.swift; sourceTree = "<group>"; };
-		6AB486FC26832B8500E95D43 /* SelectCalendarModalView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectCalendarModalView.swift; sourceTree = "<group>"; };
 		6AB486FE26834D8C00E95D43 /* CalendarCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarCollectionViewCell.swift; sourceTree = "<group>"; };
+		6AB7D442272FE41A00FAFA19 /* CalendarViewLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarViewLayout.swift; sourceTree = "<group>"; };
 		6ABA2C8B26A5366000CB1E16 /* WithdrawalModalView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WithdrawalModalView.swift; sourceTree = "<group>"; };
 		6AC1F4052684093700DDD08C /* TagColorCollectionViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagColorCollectionViewModel.swift; sourceTree = "<group>"; };
 		6AC3BF17267B475200DDCBB2 /* PlanRequestRespondingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlanRequestRespondingViewController.swift; sourceTree = "<group>"; };
@@ -325,7 +225,6 @@
 		6AE41E7B26A9492C0072612C /* TagTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagTableViewCell.swift; sourceTree = "<group>"; };
 		6AE41E7D26A9560C0072612C /* TagSettingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagSettingViewController.swift; sourceTree = "<group>"; };
 		6AE41E8126A97C440072612C /* TagDeleteModalView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagDeleteModalView.swift; sourceTree = "<group>"; };
-		6AE5BAD42693D46A00A9731B /* SelectTimeModalView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectTimeModalView.swift; sourceTree = "<group>"; };
 		6AE5BAF9269534D300A9731B /* StartTimeTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartTimeTableViewCell.swift; sourceTree = "<group>"; };
 		6AE5BAFB26953E0F00A9731B /* EndTimeTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EndTimeTableViewCell.swift; sourceTree = "<group>"; };
 		6AE5BB002695746F00A9731B /* PersonalPlanAddRepeatDayCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonalPlanAddRepeatDayCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -336,29 +235,55 @@
 		6AE5BB0F2696733F00A9731B /* SelectLocationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectLocationViewController.swift; sourceTree = "<group>"; };
 		6AE5BB13269690B200A9731B /* LocationTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationTableViewCell.swift; sourceTree = "<group>"; };
 		6AE5BB1526969AFD00A9731B /* SelectLocationModalView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectLocationModalView.swift; sourceTree = "<group>"; };
-		6AE5BB172696A6C500A9731B /* Utilities.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Utilities.swift; sourceTree = "<group>"; };
 		6AE5BB192696A6CE00A9731B /* Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Extension.swift; sourceTree = "<group>"; };
 		6AE5BB1B2696B9C900A9731B /* PlanCompleteModalView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlanCompleteModalView.swift; sourceTree = "<group>"; };
 		6AE5BB1D2696DDA600A9731B /* PersonalPlanDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonalPlanDetailViewController.swift; sourceTree = "<group>"; };
 		6AFB77F8267ECD6700B59482 /* WhiteBackgroundView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WhiteBackgroundView.swift; sourceTree = "<group>"; };
 		6AFB77FD267F343500B59482 /* TagAddModalView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagAddModalView.swift; sourceTree = "<group>"; };
 		6AFB77FF267F812B00B59482 /* TagColorCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagColorCollectionViewCell.swift; sourceTree = "<group>"; };
-		8B5046DC93C289B5AC6C406E /* Pods-EZY.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EZY.debug.xcconfig"; path = "Target Support Files/Pods-EZY/Pods-EZY.debug.xcconfig"; sourceTree = "<group>"; };
-		A75C11C1873FE4E191601230 /* Pods_EZY.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_EZY.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		AAA7885126A5921000230855 /* ErrandListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrandListViewController.swift; sourceTree = "<group>"; };
-		AAADFD4D26ABD7A5000FBCCA /* MyToDoListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyToDoListViewController.swift; sourceTree = "<group>"; };
-		AAADFD7126AC20DB000FBCCA /* ListTagView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListTagView.swift; sourceTree = "<group>"; };
+		6AFCBE972711D6CE00801159 /* CalendarBtn.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarBtn.swift; sourceTree = "<group>"; };
+		AA04F9D42700996800EE0506 /* LoginTextFieldContainerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginTextFieldContainerView.swift; sourceTree = "<group>"; };
+		AA04F9D62701C12600EE0506 /* SignUpTextFieldContainerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpTextFieldContainerView.swift; sourceTree = "<group>"; };
+		AAD95AE026EC7EC7004E4580 /* NewNicknamePhoneNumViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewNicknamePhoneNumViewController.swift; sourceTree = "<group>"; };
+		AAD95AE226EC818B004E4580 /* NewNicknamePutViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewNicknamePutViewController.swift; sourceTree = "<group>"; };
+		C37AD74ACD84F363045FF654 /* Pods_EZY.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_EZY.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		EE84DEBF2715ABF100121C62 /* CollectionViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionViewModel.swift; sourceTree = "<group>"; };
 		EE93B4D826876C6F0055D7A6 /* PushNotificationManagementViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PushNotificationManagementViewController.swift; sourceTree = "<group>"; };
 		EE93B4DA26876F430055D7A6 /* AlarmManagementButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlarmManagementButton.swift; sourceTree = "<group>"; };
-		EE93B4DC26878A5D0055D7A6 /* PersonalCalendarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonalCalendarViewController.swift; sourceTree = "<group>"; };
 		EE93B4DE268797230055D7A6 /* CustomManagePushNotificationCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomManagePushNotificationCell.swift; sourceTree = "<group>"; };
 		EE93B4E32687BD8A0055D7A6 /* ManageData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManageData.swift; sourceTree = "<group>"; };
-		EE93B4E52687E1C30055D7A6 /* TeamCalendarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeamCalendarViewController.swift; sourceTree = "<group>"; };
-		EE93B4E72687FB660055D7A6 /* ErrandCalendarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrandCalendarViewController.swift; sourceTree = "<group>"; };
+		EE9582D1272A7B5F00AAEC8A /* LogoutViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogoutViewController.swift; sourceTree = "<group>"; };
+		EE9582D3272A7BEF00AAEC8A /* LogoutCustomBtn.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogoutCustomBtn.swift; sourceTree = "<group>"; };
+		EE9F0D1C26E8A2AC0015E81B /* ErrandDetailsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ErrandDetailsViewController.swift; sourceTree = "<group>"; };
+		EE9F0D1D26E8A2AC0015E81B /* MoreAlarmModelViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MoreAlarmModelViewController.swift; sourceTree = "<group>"; };
+		EE9F0D1E26E8A2AC0015E81B /* MorePeopleToDo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MorePeopleToDo.swift; sourceTree = "<group>"; };
+		EE9F0D1F26E8A2AC0015E81B /* AddMyToDoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddMyToDoViewController.swift; sourceTree = "<group>"; };
+		EE9F0D2026E8A2AC0015E81B /* AddErrandViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddErrandViewController.swift; sourceTree = "<group>"; };
+		EE9F0D2126E8A2AC0015E81B /* MoreCalendarModalsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MoreCalendarModalsViewController.swift; sourceTree = "<group>"; };
+		EE9F0D2926E8A9330015E81B /* AddScheduleModalBtn .swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "AddScheduleModalBtn .swift"; sourceTree = "<group>"; };
+		EE9F0D2A26E8A9330015E81B /* inputContainerErrandTextView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = inputContainerErrandTextView.swift; sourceTree = "<group>"; };
+		EE9F0D2C26E8A9330015E81B /* TitleContainerTextFieldView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TitleContainerTextFieldView.swift; sourceTree = "<group>"; };
+		EE9F0D2D26E8A9330015E81B /* ExplanationContainerTextView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExplanationContainerTextView.swift; sourceTree = "<group>"; };
+		EE9F0D2E26E8A9330015E81B /* ErrandInputContainterTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ErrandInputContainterTextField.swift; sourceTree = "<group>"; };
+		EE9F0D2F26E8A9330015E81B /* OneAlertButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OneAlertButton.swift; sourceTree = "<group>"; };
+		EE9F0D3026E8A9330015E81B /* CustomData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomData.swift; sourceTree = "<group>"; };
+		EE9F0D3126E8A9330015E81B /* GroupSearchTextfield.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GroupSearchTextfield.swift; sourceTree = "<group>"; };
+		EE9F0D3226E8A9330015E81B /* AlertButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlertButton.swift; sourceTree = "<group>"; };
+		EE9F0D3326E8A9330015E81B /* AdditionalButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AdditionalButton.swift; sourceTree = "<group>"; };
+		EE9F0D3426E8A9340015E81B /* AlarmDatePickerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlarmDatePickerView.swift; sourceTree = "<group>"; };
+		EE9F0D3526E8A9340015E81B /* SendUser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SendUser.swift; sourceTree = "<group>"; };
+		EE9F0D4626E8A9700015E81B /* ErrandPeopoleChooseAfterCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ErrandPeopoleChooseAfterCell.swift; sourceTree = "<group>"; };
+		EE9F0D4726E8A9700015E81B /* TagCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TagCell.swift; sourceTree = "<group>"; };
+		EE9F0D4826E8A9700015E81B /* DayCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DayCollectionViewCell.swift; sourceTree = "<group>"; };
+		EE9F0D4926E8A9700015E81B /* WhatAboutPeopleLikeThisCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WhatAboutPeopleLikeThisCell.swift; sourceTree = "<group>"; };
+		EE9F0D4A26E8A9700015E81B /* AlarmSettingCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlarmSettingCell.swift; sourceTree = "<group>"; };
+		EE9F0D5026E8AA810015E81B /* Model.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Model.swift; sourceTree = "<group>"; };
+		EE9F0D5226E8AA9E0015E81B /* SearchViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchViewModel.swift; sourceTree = "<group>"; };
+		EEA49A122711C7B200265258 /* CalendarAlertBtn.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarAlertBtn.swift; sourceTree = "<group>"; };
 		EEDCAF97268D85F1001E2B4F /* SwitchBtn.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwitchBtn.swift; sourceTree = "<group>"; };
 		EEE1E95626AAB71A0082B696 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
 		EEE1E95826AAB72E0082B696 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
-		EEEDB2C12664D30D00E5C53A /* extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = extensions.swift; sourceTree = "<group>"; };
+		F4A8BD50658C41664783D861 /* Pods-EZY.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EZY.debug.xcconfig"; path = "Target Support Files/Pods-EZY/Pods-EZY.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -367,7 +292,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				6ADE8A2726B7B76E002199E7 /* LocalAuthentication.framework in Frameworks */,
-				E5052C73E73080AD40F6F655 /* Pods_EZY.framework in Frameworks */,
+				08B81D198F46995E749BD8A0 /* Pods_EZY.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -378,7 +303,7 @@
 			isa = PBXGroup;
 			children = (
 				6ADE8A2626B7B76E002199E7 /* LocalAuthentication.framework */,
-				A75C11C1873FE4E191601230 /* Pods_EZY.framework */,
+				C37AD74ACD84F363045FF654 /* Pods_EZY.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -391,25 +316,10 @@
 			path = Header;
 			sourceTree = "<group>";
 		};
-		6A4EDA33266BD17B00B809EC /* ReusableViews */ = {
-			isa = PBXGroup;
-			children = (
-				6ACB4ED1269C2FA8008606C5 /* TopBarView.swift */,
-				6A4EDA34266BD27800B809EC /* TopView.swift */,
-				6A138F88266FACFE00DBCE49 /* GroupAddModalView.swift */,
-				6A94934D2670DBC700CC5B37 /* SearchResultsView.swift */,
-				6A4AE85C2678EBEE009E33CD /* GroupModifyDeleteModalView.swift */,
-				6A1E3E8F26797CB600E7B198 /* DeleteModalView.swift */,
-				6AFB77F8267ECD6700B59482 /* WhiteBackgroundView.swift */,
-				6AB27CB3269DD42400B95C0F /* InquiryReceiveChattingBoxView.swift */,
-				6A9DF2EA26A7C7B90026F89D /* InquirySendChattingBoxView.swift */,
-			);
-			path = ReusableViews;
-			sourceTree = "<group>";
-		};
 		6A9B7547269E82D800703ADF /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				6A6A66DF26D608D40096A14B /* GoogleService-Info.plist */,
 				EEE1E95626AAB71A0082B696 /* LaunchScreen.storyboard */,
 				6AA769E426636AE700B7E1F5 /* AppDelegate.swift */,
 				6AA769E626636AE700B7E1F5 /* SceneDelegate.swift */,
@@ -424,7 +334,6 @@
 				6AA769E226636AE700B7E1F5 /* Products */,
 				D97C84BDB41C12F061081FBC /* Pods */,
 				2B62A8E180A8585A5EDF7361 /* Frameworks */,
-				EEE1E92E26A9478F0082B696 /* Recovered References */,
 			);
 			sourceTree = "<group>";
 		};
@@ -439,20 +348,15 @@
 		6AA769E326636AE700B7E1F5 /* EZY */ = {
 			isa = PBXGroup;
 			children = (
-				AA1357732695C4A700C1CAAB /* Utils */,
+				6A15D8A326D485DE00D932EC /* EZY.entitlements */,
 				6AE5BB0426966DCA00A9731B /* Utils */,
 				6A097D00268ED792001E011D /* Header */,
-				EEEDB2C02664D10100E5C53A /* Utils */,
 				6AA76A0026636C7B00B7E1F5 /* Font */,
 				6AA769FF26636C7600B7E1F5 /* Controllers */,
 				6AA769FE26636C7000B7E1F5 /* Models */,
 				6AA769FD26636C6B00B7E1F5 /* Views */,
 				6AA769FC26636C6500B7E1F5 /* ViewModels */,
 				6AA769FB26636C5700B7E1F5 /* Services */,
-				6AA769E426636AE700B7E1F5 /* AppDelegate.swift */,
-				6AA769E626636AE700B7E1F5 /* SceneDelegate.swift */,
-				6AA769F026636AE800B7E1F5 /* Assets.xcassets */,
-				6AA769F226636AE800B7E1F5 /* LaunchScreen.storyboard */,
 				6A9B7547269E82D800703ADF /* Resources */,
 				6A44474C26677647004C4BC3 /* Assets.xcassets */,
 				6AA769F526636AE800B7E1F5 /* Info.plist */,
@@ -472,6 +376,7 @@
 		6AA769FC26636C6500B7E1F5 /* ViewModels */ = {
 			isa = PBXGroup;
 			children = (
+				EE9F0D5226E8AA9E0015E81B /* SearchViewModel.swift */,
 				6A3E2E7D26B6A5FB0078D749 /* ViewModel.swift */,
 			);
 			path = ViewModels;
@@ -480,28 +385,11 @@
 		6AA769FD26636C6B00B7E1F5 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				AA58558A2697BEEC000C4185 /* ReusableViews */,
-				AA13575B2695BF8200C1CAAB /* CustomGradientContinueBtnView.swift */,
-				AA13575A2695BF8200C1CAAB /* CustomGradientLoginBtnView.swift */,
-				AA13575C2695BF8200C1CAAB /* CustomGradientTermsBtnView.swift */,
+				6AB7D43C272FE25700FAFA19 /* View */,
+				6AB7D43B272FE24A00FAFA19 /* Alert */,
+				6AB7D43A272FE24200FAFA19 /* Button */,
 				6AE5BAFF26954B9900A9731B /* CollectionViewCells */,
 				6AE5BAFE26954B6A00A9731B /* TableViewCells */,
-				6AE5BAFD26954B4800A9731B /* ModalViews */,
-				6A4EDA33266BD17B00B809EC /* ReusableViews */,
-				6A4EDA03266866FC00B809EC /* ScheduleTypeCollectionView.swift */,
-				6AE5BB0A269670CB00A9731B /* CustomGradientContinueBtnView.swift */,
-				6AE5BB09269670CB00A9731B /* CustomGradientLoginBtnView.swift */,
-				6AE5BB0B269670CB00A9731B /* CustomGradientTermsBtnView.swift */,
-				6A4EDA01266866E600B809EC /* ScheduleTimeTableView.swift */,
-				6A4EDA2F266A336000B809EC /* NotificationTableView.swift */,
-				6A138F80266F862200DBCE49 /* GroupAddCollectionViewCell.swift */,
-				6A138F82266F864300DBCE49 /* PinterestLayout.swift */,
-				6A097CFC268ED628001E011D /* CalendarView.swift */,
-				6A097CFE268ED68B001E011D /* CalendarViewLayout.swift */,
-				AAADFD7126AC20DB000FBCCA /* ListTagView.swift */,
-				EE93B4DA26876F430055D7A6 /* AlarmManagementButton.swift */,
-				EE93B4DE268797230055D7A6 /* CustomManagePushNotificationCell.swift */,
-				EEDCAF97268D85F1001E2B4F /* SwitchBtn.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -509,10 +397,14 @@
 		6AA769FE26636C7000B7E1F5 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				EE9F0D5026E8AA810015E81B /* Model.swift */,
+				EE93B4E32687BD8A0055D7A6 /* ManageData.swift */,
 				6AC1F4052684093700DDD08C /* TagColorCollectionViewModel.swift */,
 				6AE5BB0226957B0600A9731B /* RepeatCollectionViewModel.swift */,
 				6A82835926997AB500AC381B /* TagCollectionViewModel.swift */,
 				6A3E2E7F26B6A60B0078D749 /* ManagementbtnModel.swift */,
+				EE84DEBF2715ABF100121C62 /* CollectionViewModel.swift */,
+				6AA7E784271E648500034327 /* DayModel.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -520,43 +412,11 @@
 		6AA769FF26636C7600B7E1F5 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				6AA6F78F269C2E4C00958D36 /* SignUpNicknameViewController.swift */,
-				6AA6F78E269C2E4C00958D36 /* SignUpPasswordViewController.swift */,
-				6AA6F790269C2E4C00958D36 /* SignUpPhoneNumViewController.swift */,
-				6AA6F791269C2E4D00958D36 /* SignUpTermsViewController.swift */,
-				6AA76A0126636D2800B7E1F5 /* LoginViewController.swift */,
-				AA1357642695BFC400C1CAAB /* NewPasswordPhoneNumViewController.swift */,
-				AA1357612695BFC400C1CAAB /* NewPasswordPutViewController.swift */,
-				AA1357622695BFC400C1CAAB /* SignUpNicknameViewController.swift */,
-				AA1357652695BFC400C1CAAB /* SignUpPasswordViewController.swift */,
-				AA1357632695BFC400C1CAAB /* SignUpPhoneNumViewController.swift */,
-				AA1357662695BFC400C1CAAB /* SignUpTermsViewController.swift */,
-				AA881D7126BB698500C04028 /* NewNicknamePhoneNumViewController.swift */,
-				AA881D7326BBB21100C04028 /* NewNicknamePutViewController.swift */,
-				6AA76A272663958B00B7E1F5 /* ShowPlanViewController.swift */,
-				6A4EDA2B266A045B00B809EC /* NotificationViewController.swift */,
-				6AA6F796269C2E6200958D36 /* NewPasswordPhoneNumViewController.swift */,
-				6AA6F797269C2E6200958D36 /* NewPasswordPutViewController.swift */,
-				6A138F84266F866D00DBCE49 /* GroupManagementViewController.swift */,
-				6AE41E7926A9228A0072612C /* TagManagementViewController.swift */,
-				6AE41E7D26A9560C0072612C /* TagSettingViewController.swift */,
-				6AC3BF17267B475200DDCBB2 /* PlanRequestRespondingViewController.swift */,
-				6A705BB5267E3ABF001954CE /* PersonalPlanChangeViewController.swift */,
-				6AE5BB1D2696DDA600A9731B /* PersonalPlanDetailViewController.swift */,
-				6A4EDA31266BD11600B809EC /* SettingViewController.swift */,
-				6AE5BB0F2696733F00A9731B /* SelectLocationViewController.swift */,
-				6A82835326982A6C00AC381B /* InquiryViewController.swift */,
-				AAA7885126A5921000230855 /* ErrandListViewController.swift */,
-				AAADFD4D26ABD7A5000FBCCA /* MyToDoListViewController.swift */,
-				6AB27CAB269D758100B95C0F /* ChangeIdAfterLoginViewController.swift */,
-				6A3E2E7526B10D760078D749 /* ChangePasswardPhoneNumAfterLoginViewController.swift */,
-				6A3E2E7726B111540078D749 /* ChangePasswardAfterLoginViewController.swift */,
-				6AB27CAF269D8C1600B95C0F /* WithdrawalViewController.swift */,
-				6AB27CB1269DD1B900B95C0F /* InquiryChattingViewController.swift */,
-				EE93B4D826876C6F0055D7A6 /* PushNotificationManagementViewController.swift */,
-				EE93B4DC26878A5D0055D7A6 /* PersonalCalendarViewController.swift */,
-				EE93B4E52687E1C30055D7A6 /* TeamCalendarViewController.swift */,
-				EE93B4E72687FB660055D7A6 /* ErrandCalendarViewController.swift */,
+				6AB7D439272FE1E400FAFA19 /* Modal */,
+				6AB7D431272FDF6E00FAFA19 /* Features */,
+				6AB7D42C272FDE6C00FAFA19 /* UserInfoChange */,
+				6AB7D42B272FDE5C00FAFA19 /* LogIn */,
+				6AB7D42A272FDE4900FAFA19 /* SignUp */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -585,26 +445,177 @@
 			path = Font;
 			sourceTree = "<group>";
 		};
-		AA1357732695C4A700C1CAAB /* Utils */ = {
+		6AB7D42A272FDE4900FAFA19 /* SignUp */ = {
 			isa = PBXGroup;
 			children = (
-				AA1357752695C4C600C1CAAB /* Extension.swift */,
-				AA1357742695C4C600C1CAAB /* Utilities.swift */,
+				6AA6F78F269C2E4C00958D36 /* SignUpNicknameViewController.swift */,
+				6AA6F78E269C2E4C00958D36 /* SignUpPasswordViewController.swift */,
+				6AA6F790269C2E4C00958D36 /* SignUpPhoneNumViewController.swift */,
+				6AA6F791269C2E4D00958D36 /* SignUpTermsViewController.swift */,
 			);
-			path = Utils;
+			path = SignUp;
 			sourceTree = "<group>";
 		};
-		AA58558A2697BEEC000C4185 /* ReusableViews */ = {
+		6AB7D42B272FDE5C00FAFA19 /* LogIn */ = {
 			isa = PBXGroup;
 			children = (
-				AA58558B2697BF06000C4185 /* TopBarView.swift */,
+				6AA76A0126636D2800B7E1F5 /* LoginViewController.swift */,
 			);
-			path = ReusableViews;
-		6AE5BAFD26954B4800A9731B /* ModalViews */ = {
+			path = LogIn;
+			sourceTree = "<group>";
+		};
+		6AB7D42C272FDE6C00FAFA19 /* UserInfoChange */ = {
 			isa = PBXGroup;
 			children = (
-				6AE5BAD42693D46A00A9731B /* SelectTimeModalView.swift */,
-				6AB486FC26832B8500E95D43 /* SelectCalendarModalView.swift */,
+				6AB7D42E272FDE7D00FAFA19 /* AfterLogin */,
+				6AB7D42D272FDE7600FAFA19 /* BeforeLogin */,
+			);
+			path = UserInfoChange;
+			sourceTree = "<group>";
+		};
+		6AB7D42D272FDE7600FAFA19 /* BeforeLogin */ = {
+			isa = PBXGroup;
+			children = (
+				6AA6F796269C2E6200958D36 /* NewPasswordPhoneNumViewController.swift */,
+				6AA6F797269C2E6200958D36 /* NewPasswordPutViewController.swift */,
+				AAD95AE026EC7EC7004E4580 /* NewNicknamePhoneNumViewController.swift */,
+				AAD95AE226EC818B004E4580 /* NewNicknamePutViewController.swift */,
+			);
+			path = BeforeLogin;
+			sourceTree = "<group>";
+		};
+		6AB7D42E272FDE7D00FAFA19 /* AfterLogin */ = {
+			isa = PBXGroup;
+			children = (
+				6A3E2E7526B10D760078D749 /* ChangePasswardPhoneNumAfterLoginViewController.swift */,
+				6A3E2E7726B111540078D749 /* ChangePasswardAfterLoginViewController.swift */,
+				6AB27CAB269D758100B95C0F /* ChangeIdAfterLoginViewController.swift */,
+			);
+			path = AfterLogin;
+			sourceTree = "<group>";
+		};
+		6AB7D42F272FDF4900FAFA19 /* Main */ = {
+			isa = PBXGroup;
+			children = (
+				6AA76A272663958B00B7E1F5 /* ShowPlanViewController.swift */,
+			);
+			path = Main;
+			sourceTree = "<group>";
+		};
+		6AB7D430272FDF5D00FAFA19 /* Setting */ = {
+			isa = PBXGroup;
+			children = (
+				6A4EDA31266BD11600B809EC /* SettingViewController.swift */,
+				6AB7D436272FE0E500FAFA19 /* SettingFeatures */,
+			);
+			path = Setting;
+			sourceTree = "<group>";
+		};
+		6AB7D431272FDF6E00FAFA19 /* Features */ = {
+			isa = PBXGroup;
+			children = (
+				6AB7D437272FE11600FAFA19 /* Location */,
+				6AB7D435272FE08700FAFA19 /* Errand */,
+				6AB7D434272FE08000FAFA19 /* MyToDo */,
+				6AB7D433272FE03400FAFA19 /* PushNotification */,
+				6AB7D432272FE00900FAFA19 /* Inquiry */,
+				6AB7D42F272FDF4900FAFA19 /* Main */,
+				6AB7D430272FDF5D00FAFA19 /* Setting */,
+			);
+			path = Features;
+			sourceTree = "<group>";
+		};
+		6AB7D432272FE00900FAFA19 /* Inquiry */ = {
+			isa = PBXGroup;
+			children = (
+				6A82835326982A6C00AC381B /* InquiryViewController.swift */,
+				6AB27CB1269DD1B900B95C0F /* InquiryChattingViewController.swift */,
+			);
+			path = Inquiry;
+			sourceTree = "<group>";
+		};
+		6AB7D433272FE03400FAFA19 /* PushNotification */ = {
+			isa = PBXGroup;
+			children = (
+				6A4EDA2B266A045B00B809EC /* NotificationViewController.swift */,
+			);
+			path = PushNotification;
+			sourceTree = "<group>";
+		};
+		6AB7D434272FE08000FAFA19 /* MyToDo */ = {
+			isa = PBXGroup;
+			children = (
+				EE9F0D1F26E8A2AC0015E81B /* AddMyToDoViewController.swift */,
+				6AE5BB1D2696DDA600A9731B /* PersonalPlanDetailViewController.swift */,
+				6A705BB5267E3ABF001954CE /* PersonalPlanChangeViewController.swift */,
+			);
+			path = MyToDo;
+			sourceTree = "<group>";
+		};
+		6AB7D435272FE08700FAFA19 /* Errand */ = {
+			isa = PBXGroup;
+			children = (
+				EE9F0D1E26E8A2AC0015E81B /* MorePeopleToDo.swift */,
+				EE9F0D1C26E8A2AC0015E81B /* ErrandDetailsViewController.swift */,
+				EE9F0D2026E8A2AC0015E81B /* AddErrandViewController.swift */,
+				6AC3BF17267B475200DDCBB2 /* PlanRequestRespondingViewController.swift */,
+			);
+			path = Errand;
+			sourceTree = "<group>";
+		};
+		6AB7D436272FE0E500FAFA19 /* SettingFeatures */ = {
+			isa = PBXGroup;
+			children = (
+				6AB27CAF269D8C1600B95C0F /* WithdrawalViewController.swift */,
+				6AE41E7926A9228A0072612C /* TagManagementViewController.swift */,
+				6AE41E7D26A9560C0072612C /* TagSettingViewController.swift */,
+				EE9582D1272A7B5F00AAEC8A /* LogoutViewController.swift */,
+				EE93B4D826876C6F0055D7A6 /* PushNotificationManagementViewController.swift */,
+			);
+			path = SettingFeatures;
+			sourceTree = "<group>";
+		};
+		6AB7D437272FE11600FAFA19 /* Location */ = {
+			isa = PBXGroup;
+			children = (
+				6AE5BB0F2696733F00A9731B /* SelectLocationViewController.swift */,
+			);
+			path = Location;
+			sourceTree = "<group>";
+		};
+		6AB7D439272FE1E400FAFA19 /* Modal */ = {
+			isa = PBXGroup;
+			children = (
+				6A47F9D32718F63600AAA6E0 /* CalendarAddModelViewController.swift */,
+				EE9F0D1D26E8A2AC0015E81B /* MoreAlarmModelViewController.swift */,
+				EE9F0D2126E8A2AC0015E81B /* MoreCalendarModalsViewController.swift */,
+				6AA7E7862720E64100034327 /* TimeAddModalViewController.swift */,
+			);
+			path = Modal;
+			sourceTree = "<group>";
+		};
+		6AB7D43A272FE24200FAFA19 /* Button */ = {
+			isa = PBXGroup;
+			children = (
+				EE9F0D3226E8A9330015E81B /* AlertButton.swift */,
+				EE9F0D3326E8A9330015E81B /* AdditionalButton.swift */,
+				EE9F0D2926E8A9330015E81B /* AddScheduleModalBtn .swift */,
+				EE93B4DA26876F430055D7A6 /* AlarmManagementButton.swift */,
+				EEA49A122711C7B200265258 /* CalendarAlertBtn.swift */,
+				6AE5BB0A269670CB00A9731B /* CustomGradientContinueBtnView.swift */,
+				6AE5BB09269670CB00A9731B /* CustomGradientLoginBtnView.swift */,
+				6AE5BB0B269670CB00A9731B /* CustomGradientTermsBtnView.swift */,
+				EE9F0D2F26E8A9330015E81B /* OneAlertButton.swift */,
+				EEDCAF97268D85F1001E2B4F /* SwitchBtn.swift */,
+				6AFCBE972711D6CE00801159 /* CalendarBtn.swift */,
+				EE9582D3272A7BEF00AAEC8A /* LogoutCustomBtn.swift */,
+			);
+			path = Button;
+			sourceTree = "<group>";
+		};
+		6AB7D43B272FE24A00FAFA19 /* Alert */ = {
+			isa = PBXGroup;
+			children = (
 				6AE5BB1526969AFD00A9731B /* SelectLocationModalView.swift */,
 				6AE5BB1B2696B9C900A9731B /* PlanCompleteModalView.swift */,
 				6A82834F2698132000AC381B /* PlanDeleteModalView.swift */,
@@ -612,12 +623,66 @@
 				6AE41E8126A97C440072612C /* TagDeleteModalView.swift */,
 				6ABA2C8B26A5366000CB1E16 /* WithdrawalModalView.swift */,
 			);
-			path = ModalViews;
+			path = Alert;
+			sourceTree = "<group>";
+		};
+		6AB7D43C272FE25700FAFA19 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				6AB7D442272FE41A00FAFA19 /* CalendarViewLayout.swift */,
+				6ACB4ED1269C2FA8008606C5 /* TopBarView.swift */,
+				EE9F0D2A26E8A9330015E81B /* inputContainerErrandTextView.swift */,
+				AA04F9D42700996800EE0506 /* LoginTextFieldContainerView.swift */,
+				6A4EDA34266BD27800B809EC /* TopView.swift */,
+				EE9F0D3526E8A9340015E81B /* SendUser.swift */,
+				6A138F88266FACFE00DBCE49 /* GroupAddModalView.swift */,
+				6A94934D2670DBC700CC5B37 /* SearchResultsView.swift */,
+				6A4AE85C2678EBEE009E33CD /* GroupModifyDeleteModalView.swift */,
+				6A4EDA2F266A336000B809EC /* NotificationTableView.swift */,
+				6A1E3E8F26797CB600E7B198 /* DeleteModalView.swift */,
+				AA04F9D62701C12600EE0506 /* SignUpTextFieldContainerView.swift */,
+				6AFB77F8267ECD6700B59482 /* WhiteBackgroundView.swift */,
+				6AB27CB3269DD42400B95C0F /* InquiryReceiveChattingBoxView.swift */,
+				6A097CFC268ED628001E011D /* CalendarView.swift */,
+				EE9F0D2D26E8A9330015E81B /* ExplanationContainerTextView.swift */,
+				6A9DF2EA26A7C7B90026F89D /* InquirySendChattingBoxView.swift */,
+				EE9F0D2C26E8A9330015E81B /* TitleContainerTextFieldView.swift */,
+				EE9F0D3026E8A9330015E81B /* CustomData.swift */,
+				6AB7D43F272FE2FE00FAFA19 /* TextField */,
+				6AB7D43E272FE2D800FAFA19 /* TableView */,
+				6AB7D43D272FE28900FAFA19 /* PickerView */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		6AB7D43D272FE28900FAFA19 /* PickerView */ = {
+			isa = PBXGroup;
+			children = (
+				EE9F0D3426E8A9340015E81B /* AlarmDatePickerView.swift */,
+			);
+			path = PickerView;
+			sourceTree = "<group>";
+		};
+		6AB7D43E272FE2D800FAFA19 /* TableView */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = TableView;
+			sourceTree = "<group>";
+		};
+		6AB7D43F272FE2FE00FAFA19 /* TextField */ = {
+			isa = PBXGroup;
+			children = (
+				EE9F0D3126E8A9330015E81B /* GroupSearchTextfield.swift */,
+				EE9F0D2E26E8A9330015E81B /* ErrandInputContainterTextField.swift */,
+			);
+			path = TextField;
 			sourceTree = "<group>";
 		};
 		6AE5BAFE26954B6A00A9731B /* TableViewCells */ = {
 			isa = PBXGroup;
 			children = (
+				EE93B4DE268797230055D7A6 /* CustomManagePushNotificationCell.swift */,
 				6A4EDA36266DA52A00B809EC /* SettingTableViewCell.swift */,
 				6A4ED9FF2668653200B809EC /* ScheduleTimeTableViewCell.swift */,
 				6A4EDA2D266A332100B809EC /* NotificationTableViewCell.swift */,
@@ -633,6 +698,12 @@
 		6AE5BAFF26954B9900A9731B /* CollectionViewCells */ = {
 			isa = PBXGroup;
 			children = (
+				6A138F80266F862200DBCE49 /* GroupAddCollectionViewCell.swift */,
+				EE9F0D4A26E8A9700015E81B /* AlarmSettingCell.swift */,
+				EE9F0D4626E8A9700015E81B /* ErrandPeopoleChooseAfterCell.swift */,
+				EE9F0D4726E8A9700015E81B /* TagCell.swift */,
+				EE9F0D4926E8A9700015E81B /* WhatAboutPeopleLikeThisCell.swift */,
+				EE9F0D4826E8A9700015E81B /* DayCollectionViewCell.swift */,
 				6A8283572699742300AC381B /* TagCollectionViewCell.swift */,
 				6A98A9CB2666F94E00BFAE30 /* ScheduleTypeCollectionViewCell.swift */,
 				6A4EDA40266E38E000B809EC /* GroupCollectionViewCell.swift */,
@@ -641,6 +712,7 @@
 				6AB486FE26834D8C00E95D43 /* CalendarCollectionViewCell.swift */,
 				6AE5BB002695746F00A9731B /* PersonalPlanAddRepeatDayCollectionViewCell.swift */,
 				6A685C0C26AC1E2D0079BC30 /* PersonalPlanDetailRepeatDayCollectionViewCell.swift */,
+				6A72073326C618600098830F /* RecommendedTagCollectionViewCell.swift */,
 			);
 			path = CollectionViewCells;
 			sourceTree = "<group>";
@@ -648,7 +720,6 @@
 		6AE5BB0426966DCA00A9731B /* Utils */ = {
 			isa = PBXGroup;
 			children = (
-				6AE5BB172696A6C500A9731B /* Utilities.swift */,
 				6AE5BB192696A6CE00A9731B /* Extension.swift */,
 			);
 			path = Utils;
@@ -657,48 +728,10 @@
 		D97C84BDB41C12F061081FBC /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				8B5046DC93C289B5AC6C406E /* Pods-EZY.debug.xcconfig */,
-				14AF3F335899880714FDA1B3 /* Pods-EZY.release.xcconfig */,
+				F4A8BD50658C41664783D861 /* Pods-EZY.debug.xcconfig */,
+				2FC16614E9BCACF88D1AB480 /* Pods-EZY.release.xcconfig */,
 			);
 			path = Pods;
-			sourceTree = "<group>";
-		};
-		EE93B4E22687BD740055D7A6 /* Data */ = {
-			isa = PBXGroup;
-			children = (
-				EE93B4E32687BD8A0055D7A6 /* ManageData.swift */,
-			);
-			path = Data;
-			sourceTree = "<group>";
-		};
-		EEE1E92E26A9478F0082B696 /* Recovered References */ = {
-			isa = PBXGroup;
-			children = (
-				6AA76A092663844A00B7E1F5 /* Poppins-Light.ttf */,
-				6AA76A102663844A00B7E1F5 /* Poppins-ThinItalic.ttf */,
-				6AA76A0F2663844A00B7E1F5 /* Poppins-Italic.ttf */,
-				6AA76A062663844A00B7E1F5 /* Poppins-ExtraBoldItalic.ttf */,
-				6AA76A0D2663844A00B7E1F5 /* Poppins-Thin.ttf */,
-				6AA76A122663844A00B7E1F5 /* Poppins-MediumItalic.ttf */,
-				6AA76A032663844A00B7E1F5 /* Poppins-Black.ttf */,
-				6AA76A052663844A00B7E1F5 /* Poppins-ExtraBold.ttf */,
-				6AA76A112663844A00B7E1F5 /* Poppins-BoldItalic.ttf */,
-				6AA76A0A2663844A00B7E1F5 /* Poppins-Medium.ttf */,
-				6AA76A0B2663844A00B7E1F5 /* Poppins-Bold.ttf */,
-				6AA76A042663844A00B7E1F5 /* Poppins-BlackItalic.ttf */,
-				6AA76A0C2663844A00B7E1F5 /* Poppins-Regular.ttf */,
-				6AA76A072663844A00B7E1F5 /* Poppins-LightItalic.ttf */,
-			);
-			name = "Recovered References";
-			sourceTree = "<group>";
-		};
-		EEEDB2C02664D10100E5C53A /* Utils */ = {
-			isa = PBXGroup;
-			children = (
-				EE93B4E22687BD740055D7A6 /* Data */,
-				EEEDB2C12664D30D00E5C53A /* extensions.swift */,
-			);
-			path = Utils;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -708,11 +741,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 6AA769F826636AE800B7E1F5 /* Build configuration list for PBXNativeTarget "EZY" */;
 			buildPhases = (
-				403E3B89B0999B5A60799CB9 /* [CP] Check Pods Manifest.lock */,
+				2EEEBD26844D7FB51B68F058 /* [CP] Check Pods Manifest.lock */,
 				6AA769DD26636AE700B7E1F5 /* Sources */,
 				6AA769DE26636AE700B7E1F5 /* Frameworks */,
 				6AA769DF26636AE700B7E1F5 /* Resources */,
-				8F426DE6A00A79981FB7B8D3 /* [CP] Embed Pods Frameworks */,
+				053764C923AB5A12868D2F1D /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -760,26 +793,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				6AA76A2626638C5600B7E1F5 /* Poppins-ExtraLight.ttf in Resources */,
-				6AA76A1E26638C5600B7E1F5 /* Poppins-ExtraLightItalic.ttf in Resources */,
-				6AA76A2526638C5600B7E1F5 /* Poppins-SemiBoldItalic.ttf in Resources */,
-				6AA76A2026638C5600B7E1F5 /* Poppins-SemiBold.ttf in Resources */,
-				6AA769F426636AE800B7E1F5 /* LaunchScreen.storyboard in Resources */,
-				6AA76A1C26638C5600B7E1F5 /* Poppins-Light.ttf in Resources */,
-				6AA76A1626638C5600B7E1F5 /* Poppins-ThinItalic.ttf in Resources */,
-				6AA76A1926638C5600B7E1F5 /* Poppins-Italic.ttf in Resources */,
-				6AA76A1F26638C5600B7E1F5 /* Poppins-ExtraBoldItalic.ttf in Resources */,
-				6AA76A1B26638C5600B7E1F5 /* Poppins-Thin.ttf in Resources */,
-				6AA76A1526638C5600B7E1F5 /* Poppins-MediumItalic.ttf in Resources */,
-				6AA76A2126638C5600B7E1F5 /* Poppins-Black.ttf in Resources */,
-				6AA76A2426638C5600B7E1F5 /* Poppins-ExtraBold.ttf in Resources */,
-				6AA76A1826638C5600B7E1F5 /* Poppins-BoldItalic.ttf in Resources */,
-				6AA76A1A26638C5600B7E1F5 /* Poppins-Medium.ttf in Resources */,
-				6AA76A2326638C5600B7E1F5 /* Poppins-Bold.ttf in Resources */,
-				6AA76A2226638C5600B7E1F5 /* Poppins-BlackItalic.ttf in Resources */,
-				6AA769F126636AE800B7E1F5 /* Assets.xcassets in Resources */,
-				6AA76A1726638C5600B7E1F5 /* Poppins-Regular.ttf in Resources */,
-				6AA76A1D26638C5600B7E1F5 /* Poppins-LightItalic.ttf in Resources */,
 				6A3E2E9326B6A84F0078D749 /* Poppins-BlackItalic.ttf in Resources */,
 				6A3E2E9426B6A84F0078D749 /* Poppins-Regular.ttf in Resources */,
 				6A3E2E9526B6A84F0078D749 /* Poppins-SemiBold.ttf in Resources */,
@@ -791,6 +804,7 @@
 				6A3E2E9B26B6A84F0078D749 /* Poppins-ExtraBold.ttf in Resources */,
 				6A3E2E9C26B6A84F0078D749 /* Poppins-Italic.ttf in Resources */,
 				6A3E2E9D26B6A84F0078D749 /* Poppins-MediumItalic.ttf in Resources */,
+				6A6A66E026D608D40096A14B /* GoogleService-Info.plist in Resources */,
 				6A3E2E9E26B6A84F0078D749 /* Poppins-ExtraLightItalic.ttf in Resources */,
 				6A3E2E9F26B6A84F0078D749 /* Poppins-SemiBoldItalic.ttf in Resources */,
 				6A3E2EA026B6A84F0078D749 /* Poppins-ExtraBoldItalic.ttf in Resources */,
@@ -804,7 +818,24 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		403E3B89B0999B5A60799CB9 /* [CP] Check Pods Manifest.lock */ = {
+		053764C923AB5A12868D2F1D /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-EZY/Pods-EZY-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-EZY/Pods-EZY-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-EZY/Pods-EZY-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		2EEEBD26844D7FB51B68F058 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -826,23 +857,6 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		8F426DE6A00A79981FB7B8D3 /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-EZY/Pods-EZY-frameworks-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-EZY/Pods-EZY-frameworks-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-EZY/Pods-EZY-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -850,56 +864,37 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				6AA76A0226636D2800B7E1F5 /* LoginViewController.swift in Sources */,
-				6AA769EF26636AE700B7E1F5 /* EZY.xcdatamodeld in Sources */,
-				6AA769E526636AE700B7E1F5 /* AppDelegate.swift in Sources */,
-				6AA769E726636AE700B7E1F5 /* SceneDelegate.swift in Sources */,
-				AA1357772695C4C600C1CAAB /* Extension.swift in Sources */,
-				6AA76A0226636D2800B7E1F5 /* LoginViewController.swift in Sources */,
-				AA1357682695BFC400C1CAAB /* SignUpNicknameViewController.swift in Sources */,
-				AA1357762695C4C600C1CAAB /* Utilities.swift in Sources */,
-				6AA769EF26636AE700B7E1F5 /* EZY.xcdatamodeld in Sources */,
-				AA13576A2695BFC400C1CAAB /* NewPasswordPhoneNumViewController.swift in Sources */,
-				AA1357672695BFC400C1CAAB /* NewPasswordPutViewController.swift in Sources */,
-				AA1357602695BF8200C1CAAB /* CustomGradientTermsBtnView.swift in Sources */,
-				6AA769E526636AE700B7E1F5 /* AppDelegate.swift in Sources */,
-				AA881D7226BB698500C04028 /* NewNicknamePhoneNumViewController.swift in Sources */,
-				AA13576C2695BFC400C1CAAB /* SignUpTermsViewController.swift in Sources */,
-				AA881D7426BBB21100C04028 /* NewNicknamePutViewController.swift in Sources */,
-				AA1357692695BFC400C1CAAB /* SignUpPhoneNumViewController.swift in Sources */,
-				6AA769E726636AE700B7E1F5 /* SceneDelegate.swift in Sources */,
-				AA13576B2695BFC400C1CAAB /* SignUpPasswordViewController.swift in Sources */,
-				AA13575E2695BF8200C1CAAB /* CustomGradientLoginBtnView.swift in Sources */,
-				AA58558C2697BF06000C4185 /* TopBarView.swift in Sources */,
-				AA13575F2695BF8200C1CAAB /* CustomGradientContinueBtnView.swift in Sources */,
-				6A138F83266F864300DBCE49 /* PinterestLayout.swift in Sources */,
 				6A4EDA35266BD27800B809EC /* TopView.swift in Sources */,
 				6AE5BB1A2696A6CE00A9731B /* Extension.swift in Sources */,
 				6A82835426982A6C00AC381B /* InquiryViewController.swift in Sources */,
 				6A4EDA2C266A045B00B809EC /* NotificationViewController.swift in Sources */,
 				6AE41E7C26A9492C0072612C /* TagTableViewCell.swift in Sources */,
-				6AE5BAD52693D46A00A9731B /* SelectTimeModalView.swift in Sources */,
 				6A4AE85D2678EBEE009E33CD /* GroupModifyDeleteModalView.swift in Sources */,
 				6AE5BB012695746F00A9731B /* PersonalPlanAddRepeatDayCollectionViewCell.swift in Sources */,
+				EE9F0D2226E8A2AC0015E81B /* ErrandDetailsViewController.swift in Sources */,
 				6A1E3E9026797CB600E7B198 /* DeleteModalView.swift in Sources */,
 				6AA76A0226636D2800B7E1F5 /* LoginViewController.swift in Sources */,
 				6AE5BB0E269670CB00A9731B /* CustomGradientTermsBtnView.swift in Sources */,
+				EE9F0D3F26E8A9340015E81B /* GroupSearchTextfield.swift in Sources */,
 				6A705BB6267E3ABF001954CE /* PersonalPlanChangeViewController.swift in Sources */,
 				6AA76A282663958B00B7E1F5 /* ShowPlanViewController.swift in Sources */,
 				6AB27CAC269D758100B95C0F /* ChangeIdAfterLoginViewController.swift in Sources */,
 				6AE5BB012695746F00A9731B /* PersonalPlanAddRepeatDayCollectionViewCell.swift in Sources */,
 				6A1E3E9026797CB600E7B198 /* DeleteModalView.swift in Sources */,
+				EE9F0D4D26E8A9700015E81B /* DayCollectionViewCell.swift in Sources */,
 				6AA76A0226636D2800B7E1F5 /* LoginViewController.swift in Sources */,
 				6AE5BB0E269670CB00A9731B /* CustomGradientTermsBtnView.swift in Sources */,
+				EE9F0D4F26E8A9700015E81B /* AlarmSettingCell.swift in Sources */,
 				6A705BB6267E3ABF001954CE /* PersonalPlanChangeViewController.swift in Sources */,
 				6A9DF2EB26A7C7B90026F89D /* InquirySendChattingBoxView.swift in Sources */,
 				6AA76A282663958B00B7E1F5 /* ShowPlanViewController.swift in Sources */,
+				EE9F0D4226E8A9340015E81B /* AlarmDatePickerView.swift in Sources */,
+				EE9F0D4126E8A9340015E81B /* AdditionalButton.swift in Sources */,
 				6A4EDA32266BD11600B809EC /* SettingViewController.swift in Sources */,
-				AAADFD4E26ABD7A5000FBCCA /* MyToDoListViewController.swift in Sources */,
-				6AE5BB182696A6C600A9731B /* Utilities.swift in Sources */,
-				6A4EDA04266866FC00B809EC /* ScheduleTypeCollectionView.swift in Sources */,
 				6A4EDA37266DA52A00B809EC /* SettingTableViewCell.swift in Sources */,
+				EE9F0D2426E8A2AC0015E81B /* MorePeopleToDo.swift in Sources */,
 				6A82835626982A8B00AC381B /* questionTableViewCell.swift in Sources */,
+				EE9F0D2526E8A2AC0015E81B /* AddMyToDoViewController.swift in Sources */,
 				6ABA2C8C26A5366000CB1E16 /* WithdrawalModalView.swift in Sources */,
 				6A3E2E7826B111540078D749 /* ChangePasswardAfterLoginViewController.swift in Sources */,
 				6A3E2E8026B6A60B0078D749 /* ManagementbtnModel.swift in Sources */,
@@ -907,13 +902,21 @@
 				6A3E2E7E26B6A5FB0078D749 /* ViewModel.swift in Sources */,
 				6ACB4ED2269C2FA8008606C5 /* TopBarView.swift in Sources */,
 				6A8283502698132000AC381B /* PlanDeleteModalView.swift in Sources */,
+				EE9F0D3726E8A9340015E81B /* AddScheduleModalBtn .swift in Sources */,
 				6A4EDA30266A336000B809EC /* NotificationTableView.swift in Sources */,
 				6A94934E2670DBC700CC5B37 /* SearchResultsView.swift in Sources */,
 				6AE5BB1C2696B9C900A9731B /* PlanCompleteModalView.swift in Sources */,
 				6AC1F4062684093700DDD08C /* TagColorCollectionViewModel.swift in Sources */,
 				6AE5BB0D269670CB00A9731B /* CustomGradientContinueBtnView.swift in Sources */,
+				AA04F9D52700996800EE0506 /* LoginTextFieldContainerView.swift in Sources */,
+				EE9582D4272A7BEF00AAEC8A /* LogoutCustomBtn.swift in Sources */,
+				EE9F0D3C26E8A9340015E81B /* ErrandInputContainterTextField.swift in Sources */,
+				EE9F0D3E26E8A9340015E81B /* CustomData.swift in Sources */,
 				6A685C0D26AC1E2D0079BC30 /* PersonalPlanDetailRepeatDayCollectionViewCell.swift in Sources */,
+				EE9F0D4326E8A9340015E81B /* SendUser.swift in Sources */,
+				EE84DEC02715ABF100121C62 /* CollectionViewModel.swift in Sources */,
 				6A4EDA41266E38E000B809EC /* GroupCollectionViewCell.swift in Sources */,
+				AAD95AE326EC818B004E4580 /* NewNicknamePutViewController.swift in Sources */,
 				6AA769EF26636AE700B7E1F5 /* EZY.xcdatamodeld in Sources */,
 				6AE5BB14269690B200A9731B /* LocationTableViewCell.swift in Sources */,
 				6A98A9CC2666F94E00BFAE30 /* ScheduleTypeCollectionViewCell.swift in Sources */,
@@ -924,50 +927,64 @@
 				6AFB77FE267F343500B59482 /* TagAddModalView.swift in Sources */,
 				6AB27CB4269DD42400B95C0F /* InquiryReceiveChattingBoxView.swift in Sources */,
 				6AA6F792269C2E4D00958D36 /* SignUpPasswordViewController.swift in Sources */,
+				EE9F0D4C26E8A9700015E81B /* TagCell.swift in Sources */,
+				6AA7E7872720E64100034327 /* TimeAddModalViewController.swift in Sources */,
+				EE9F0D4026E8A9340015E81B /* AlertButton.swift in Sources */,
+				EE9F0D5326E8AA9E0015E81B /* SearchViewModel.swift in Sources */,
 				6AA6F798269C2E6200958D36 /* NewPasswordPhoneNumViewController.swift in Sources */,
+				6A72073426C618600098830F /* RecommendedTagCollectionViewCell.swift in Sources */,
 				6AE5BB0326957B0600A9731B /* RepeatCollectionViewModel.swift in Sources */,
 				6AFB77F9267ECD6700B59482 /* WhiteBackgroundView.swift in Sources */,
+				EEA49A132711C7B200265258 /* CalendarAlertBtn.swift in Sources */,
+				EE9F0D3826E8A9340015E81B /* inputContainerErrandTextView.swift in Sources */,
 				6AB486FF26834D8C00E95D43 /* CalendarCollectionViewCell.swift in Sources */,
 				6AE5BB1626969AFD00A9731B /* SelectLocationModalView.swift in Sources */,
+				AAD95AE126EC7EC7004E4580 /* NewNicknamePhoneNumViewController.swift in Sources */,
 				6AE5BAFA269534D300A9731B /* StartTimeTableViewCell.swift in Sources */,
 				6AE5BB1E2696DDA600A9731B /* PersonalPlanDetailViewController.swift in Sources */,
 				6A138F89266FACFE00DBCE49 /* GroupAddModalView.swift in Sources */,
 				6A82835A26997AB500AC381B /* TagCollectionViewModel.swift in Sources */,
-				AAA7885226A5921000230855 /* ErrandListViewController.swift in Sources */,
-				6AB486FD26832B8500E95D43 /* SelectCalendarModalView.swift in Sources */,
-				6A097CFF268ED68B001E011D /* CalendarViewLayout.swift in Sources */,
+				EE9582D2272A7B5F00AAEC8A /* LogoutViewController.swift in Sources */,
+				6AA7E785271E648500034327 /* DayModel.swift in Sources */,
 				6A8283582699742300AC381B /* TagCollectionViewCell.swift in Sources */,
 				6AE41E7A26A9228A0072612C /* TagManagementViewController.swift in Sources */,
 				6AE41E7E26A9560C0072612C /* TagSettingViewController.swift in Sources */,
+				EE9F0D3D26E8A9340015E81B /* OneAlertButton.swift in Sources */,
 				6AA769E526636AE700B7E1F5 /* AppDelegate.swift in Sources */,
 				6AB27CB0269D8C1600B95C0F /* WithdrawalViewController.swift in Sources */,
-				6A4EDA02266866E600B809EC /* ScheduleTimeTableView.swift in Sources */,
 				6A138F81266F862200DBCE49 /* GroupAddCollectionViewCell.swift in Sources */,
+				EE9F0D2326E8A2AC0015E81B /* MoreAlarmModelViewController.swift in Sources */,
 				6AE5BB0C269670CB00A9731B /* CustomGradientLoginBtnView.swift in Sources */,
 				6AA6F793269C2E4D00958D36 /* SignUpNicknameViewController.swift in Sources */,
 				6AA769E726636AE700B7E1F5 /* SceneDelegate.swift in Sources */,
+				EE9F0D2626E8A2AC0015E81B /* AddErrandViewController.swift in Sources */,
 				6A4EDA002668653200B809EC /* ScheduleTimeTableViewCell.swift in Sources */,
-				6A138F85266F866D00DBCE49 /* GroupManagementViewController.swift in Sources */,
 				6AA6F794269C2E4D00958D36 /* SignUpPhoneNumViewController.swift in Sources */,
+				EE9F0D4E26E8A9700015E81B /* WhatAboutPeopleLikeThisCell.swift in Sources */,
+				6A47F9D42718F63600AAA6E0 /* CalendarAddModelViewController.swift in Sources */,
 				6A3E2E7626B10D760078D749 /* ChangePasswardPhoneNumAfterLoginViewController.swift in Sources */,
 				6AFB7800267F812B00B59482 /* TagColorCollectionViewCell.swift in Sources */,
 				6A4EDA2E266A332100B809EC /* NotificationTableViewCell.swift in Sources */,
 				6A138F8D26703C1900DBCE49 /* selectedMemberCollectionViewCell.swift in Sources */,
+				EE9F0D3B26E8A9340015E81B /* ExplanationContainerTextView.swift in Sources */,
+				AA04F9D72701C12600EE0506 /* SignUpTextFieldContainerView.swift in Sources */,
 				6AE41E8226A97C440072612C /* TagDeleteModalView.swift in Sources */,
+				6AB7D443272FE41A00FAFA19 /* CalendarViewLayout.swift in Sources */,
 				6AA6F795269C2E4D00958D36 /* SignUpTermsViewController.swift in Sources */,
 				6AE5BAFC26953E0F00A9731B /* EndTimeTableViewCell.swift in Sources */,
-				AAADFD7226AC20DB000FBCCA /* ListTagView.swift in Sources */,
 				6AA769EF26636AE700B7E1F5 /* EZY.xcdatamodeld in Sources */,
-				EE93B4E62687E1C30055D7A6 /* TeamCalendarViewController.swift in Sources */,
-				EE93B4DD26878A5D0055D7A6 /* PersonalCalendarViewController.swift in Sources */,
+				EE9F0D2726E8A2AC0015E81B /* MoreCalendarModalsViewController.swift in Sources */,
 				EE93B4D926876C6F0055D7A6 /* PushNotificationManagementViewController.swift in Sources */,
 				EE93B4E42687BD8A0055D7A6 /* ManageData.swift in Sources */,
 				6AA769E526636AE700B7E1F5 /* AppDelegate.swift in Sources */,
 				EE93B4DB26876F430055D7A6 /* AlarmManagementButton.swift in Sources */,
+				EE9F0D5126E8AA810015E81B /* Model.swift in Sources */,
 				EEDCAF98268D85F1001E2B4F /* SwitchBtn.swift in Sources */,
 				6AA769E726636AE700B7E1F5 /* SceneDelegate.swift in Sources */,
+				6AFCBE982711D6CE00801159 /* CalendarBtn.swift in Sources */,
+				EE9F0D4B26E8A9700015E81B /* ErrandPeopoleChooseAfterCell.swift in Sources */,
+				EE9F0D3A26E8A9340015E81B /* TitleContainerTextFieldView.swift in Sources */,
 				EE93B4DF268797230055D7A6 /* CustomManagePushNotificationCell.swift in Sources */,
-				EE93B4E82687FB660055D7A6 /* ErrandCalendarViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1092,18 +1109,20 @@
 		};
 		6AA769F926636AE800B7E1F5 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 8B5046DC93C289B5AC6C406E /* Pods-EZY.debug.xcconfig */;
+			baseConfigurationReference = F4A8BD50658C41664783D861 /* Pods-EZY.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = EZY/EZY.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = Q25U65UWAP;
 				INFOPLIST_FILE = EZY/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.5;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.yujin.EZY;
+				PRODUCT_BUNDLE_IDENTIFIER = com.app.EZY;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -1112,18 +1131,20 @@
 		};
 		6AA769FA26636AE800B7E1F5 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 14AF3F335899880714FDA1B3 /* Pods-EZY.release.xcconfig */;
+			baseConfigurationReference = 2FC16614E9BCACF88D1AB480 /* Pods-EZY.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = EZY/EZY.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = Q25U65UWAP;
 				INFOPLIST_FILE = EZY/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.5;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.yujin.EZY;
+				PRODUCT_BUNDLE_IDENTIFIER = com.app.EZY;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
