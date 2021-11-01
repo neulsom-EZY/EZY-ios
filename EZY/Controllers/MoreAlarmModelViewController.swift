@@ -13,6 +13,7 @@ protocol AlarmModelDelegate: class {
     func onTapClose()
     func updateData(ampm : String , time : Int , minute : Int) 
 }
+
 class MoreAlarmModelViewController : UIViewController{
     let ampmData = ["오후","오전"]
     lazy var ampm = self.ampmData[0]

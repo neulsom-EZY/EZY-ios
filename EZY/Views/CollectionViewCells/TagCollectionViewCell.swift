@@ -19,8 +19,9 @@ class TagCollectionViewCell: UICollectionViewCell {
         $0.layer.cornerRadius = 10
     }
     
-    public var iconImageView = UIImageView().then{
-        $0.image = UIImage(named: "EZY_UnSelectedTagAddButtonImage")
+    public var iconButton = UIButton().then{
+        $0.isUserInteractionEnabled = false
+        $0.setImage(UIImage(named: "EZY_UnSelectedTagAddButtonImage"), for: .normal)
     }
     
     lazy var tagNameLabel = UILabel().then {
@@ -41,7 +42,7 @@ class TagCollectionViewCell: UICollectionViewCell {
     func layoutSetting(){
         contentView.addSubview(tagBackgroundView)
         tagBackgroundView.addSubview(tagNameLabel)
-        tagBackgroundView.addSubview(iconImageView)
+        tagBackgroundView.addSubview(iconButton)
         
         tagBackgroundView.snp.makeConstraints { make in
             make.center.equalToSuperview()
@@ -52,7 +53,7 @@ class TagCollectionViewCell: UICollectionViewCell {
             make.centerX.centerY.equalToSuperview()
         }
         
-        iconImageView.snp.makeConstraints { make in
+        iconButton.snp.makeConstraints { make in
             make.center.equalToSuperview()
             make.width.height.equalToSuperview().dividedBy(3.5)
         }
@@ -63,12 +64,12 @@ class TagCollectionViewCell: UICollectionViewCell {
         
         if model.isSelected == false{
             tagBackgroundView.backgroundColor = model.backgroundColor
-            iconImageView.image = model.iconImgae
+            iconButton.setImage(model.iconImgae, for: .normal)
             tagNameLabel.textColor = .white
         }else{
             tagBackgroundView.backgroundColor = .white
             tagNameLabel.textColor = model.backgroundColor
-            iconImageView.image = model.iconImgae
+            iconButton.setImage(model.iconImgae, for: .normal)
         }
     }
     

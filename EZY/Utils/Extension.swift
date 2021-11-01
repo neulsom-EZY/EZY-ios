@@ -36,6 +36,7 @@ extension UIColor{
         return UIColor(red: red/255, green: green/255, blue: blue/255, alpha: alpha)
     }
     
+    static let EZY_000000 = UIColor.rgb(red: 0, green: 0, blue: 0)
     static let EZY_BAC8FF = UIColor.rgb(red: 186, green: 200, blue: 255)
     static let EZY_CFCBFF = UIColor.rgb(red: 207, green: 203, blue: 255)
     static let EZY_AFADFF = UIColor.rgb(red: 175, green: 173, blue: 255)
@@ -43,7 +44,6 @@ extension UIColor{
     static let EZY_6B40FF = UIColor.rgb(red: 107, green: 64,  blue: 255)
     static let EZY_C9BCFF = UIColor.rgb(red: 201, green: 188, blue: 255)
     static let EZY_B2B2B2 = UIColor.rgb(red: 178, green: 178, blue: 178)
-    static let EZY_000000 = UIColor.rgb(red: 0, green: 0, blue: 0)
     static let EZY_FCA1A1 = UIColor.rgb(red: 252, green: 161, blue: 161)
     static let EZY_747474 = UIColor.rgb(red: 116, green: 116, blue: 116)
     static let EZY_E3E3E3 = UIColor.rgb(red: 227, green: 227, blue: 227)

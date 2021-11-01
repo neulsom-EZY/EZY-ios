@@ -8,7 +8,6 @@
 import UIKit
 
 class PersonalPlanChangeViewController: UIViewController{
-    
     //MARK: - Properties
     var TagColorModels: [TagColorCollectionViewModel] = [
                                                 TagColorCollectionViewModel(backgroundColor: UIColor.EZY_TagColorArray[0], isSelected: false),
@@ -26,7 +25,7 @@ class PersonalPlanChangeViewController: UIViewController{
                                                 TagColorCollectionViewModel(backgroundColor: UIColor.EZY_TagColorArray[12], isSelected: true)]
     
     private var TagModels: [TagCollectionViewModel] = [TagCollectionViewModel(backgroundColor: UIColor(red: 186/255, green: 200/255, blue: 255/255, alpha: 1), isSelected: true, iconImgae: UIImage(named: "EZY_UnSelectedTagAddButtonImage")!),
-                                               TagCollectionViewModel(backgroundColor: UIColor(red: 221/255, green: 220/255, blue: 220/255, alpha: 1), isSelected: false, iconImgae: UIImage(named: "EZY_SelectedNoSelectTagButtonImage")!),
+                                                       TagCollectionViewModel(backgroundColor: UIColor(red: 221/255, green: 220/255, blue: 220/255, alpha: 1), isSelected: false, iconImgae: UIImage(named: "EZY_SelectedNoSelectTagButtonImage")!),
                                                        TagCollectionViewModel(backgroundColor: UIColor(red: 206/255, green: 200/255, blue: 255/255, alpha: 1), isSelected: true, iconImgae: UIImage()),
                                                TagCollectionViewModel(backgroundColor: UIColor(red: 216/255, green: 200/255, blue: 255/255, alpha: 1), isSelected: true, iconImgae: UIImage()),
                                                TagCollectionViewModel(backgroundColor: UIColor(red: 226/255, green: 200/255, blue: 255/255, alpha: 1), isSelected: true, iconImgae: UIImage())]
@@ -59,16 +58,15 @@ class PersonalPlanChangeViewController: UIViewController{
     
     private let dayKoreanTextArray = ["월","화","수","목","금","토","일"]
     
-    private var dayPickerViewText1 = ["Sun","Mon","Tue","Wed","Thr","Fri","Sat","Mon","Tue","Wed","Thr","Fri","Mon","Tue","Wed","Thr","Fri"]
-    
-    private var dayPickerViewText2 = ["12","3","4","5","6","7","2","3","4","5","6","7","2","3","4","5","6","7"]
-    
-    private var startPickerViewText = [["01","02","03","04","05","06","07","08","09","10","11","12"],["00","05","10","15","20","25","30","35","40","45","50","55"]]
-    
     private var dayPickerViewTextArray = [["Mon","Tue","Wed","Thr","Fri","Sat","Sun","Mon","Tue","Wed","Thr","Fri","Sat","Sun"].reversed(),["1","2","3","4","5","6","7","1","2","3","4","5","6","7"]]
     
+    private var dayPickerViewSelectedValueIndex = 0
+    
+    private var selectedValuesIndex: [String] = ["오전","오전","0","0","0","0"]
     
     private var tagNameTextArray = ["x", "+", "TOEIC", "CODING", "COOKING"]
+    
+    private var selectedRepeatIndex: [Int]  = []
     
     fileprivate let selectedRepeatColor = UIColor.rgb(red: 170, green: 187, blue: 255)
     
@@ -76,21 +74,6 @@ class PersonalPlanChangeViewController: UIViewController{
     let bgView = UIView().then {
         $0.backgroundColor = .black
         $0.alpha = 0
-    }
-    
-    fileprivate lazy var repeatModels: [RepeatCollectionViewModal] = [RepeatCollectionViewModal(isSelected: false),RepeatCollectionViewModal(isSelected: false),RepeatCollectionViewModal(isSelected: false),RepeatCollectionViewModal(isSelected: false),RepeatCollectionViewModal(isSelected: false),RepeatCollectionViewModal(isSelected: false),RepeatCollectionViewModal(isSelected: false)]
-        
-    private lazy var selectCalendarModalView = SelectCalendarModalView().then{
-        rotationAngle = 90 * ( .pi/180 )
-        $0.dayPickerView.transform = CGAffineTransform(rotationAngle: rotationAngle)
-        $0.isHidden = true
-        $0.calendarAddButton.addTarget(self, action: #selector(calendarAddButtonClicked(sender:)), for: .touchUpInside)
-    }
-    
-    private let selectTimeModalView = SelectTimeModalView().then{
-        $0.isHidden = true
-        $0.completeButton.addTarget(self, action: #selector(selectedTimeCompleteButtonClicked(sender:)), for: .touchUpInside)
-
     }
 
     private let tagAddModalView = TagAddModalView().then{
@@ -152,18 +135,22 @@ class PersonalPlanChangeViewController: UIViewController{
         $0.dynamicFont(fontSize: 14, currentFontName: "AppleSDGothicNeo-Bold")
     }
     
-    private let notificationAddButton = UIButton().then{
+    private lazy var notificationAddButton = UIButton().then{
+        $0.imageEdgeInsets = UIEdgeInsets(top: view.frame.width/27, left: view.frame.width/27, bottom: view.frame.width/27, right: view.frame.width/27)
         $0.backgroundColor = UIColor.rgb(red: 253, green: 253, blue: 253)
         $0.setImage(UIImage(named: "EZY_UnSelectedTagAddButtonImage"), for: .normal)
+        $0.setTitleColor(UIColor(red: 150/255, green: 141/255, blue: 255/255, alpha: 1), for: .normal)
         $0.layer.cornerRadius = 10
         $0.layer.applySketchShadow(color: UIColor(red: 226/255, green: 226/255, blue: 226/255, alpha: 1), alpha: 1, x: 0, y: 3, blur: 15, spread: 0)
+        $0.dynamicFont(fontSize: 12, currentFontName: "AppleSDGothicNeo-Bold")
         $0.addTarget(self, action: #selector(notificationAddButtonClicked(sender:)), for: .touchUpInside)
     }
 
     private lazy var notificationNoSelectButton = UIButton().then{
-        $0.imageEdgeInsets = UIEdgeInsets(top: view.frame.width/25, left: view.frame.width/25, bottom: view.frame.width/25, right: view.frame.width/25)
+        $0.imageEdgeInsets = UIEdgeInsets(top: view.frame.width/26, left: view.frame.width/26, bottom: view.frame.width/26, right: view.frame.width/26)
         $0.setImage(UIImage(named: "EZY_SelectedNoSelectTagButtonImage"), for: .normal)
         $0.backgroundColor = UIColor(red: 221/255, green: 220/255, blue: 220/255, alpha: 1)
+        $0.isHighlighted = false
         $0.layer.cornerRadius = 10
         $0.layer.applySketchShadow(color: UIColor(red: 226/255, green: 226/255, blue: 226/255, alpha: 1), alpha: 1, x: 0, y: 3, blur: 15, spread: 0)
         $0.addTarget(self, action: #selector(notificationNoSelectButtonClicked(sender:)), for: .touchUpInside)
@@ -175,21 +162,21 @@ class PersonalPlanChangeViewController: UIViewController{
     }
     
     private let calendarBtn : CalendarBtn = {
-        let viewModel = CalendarModel(icon: UIImage(named: "EZY_Calendar")?.withRenderingMode(.alwaysTemplate), iconTintColor: .rgb(red: 255, green: 181, blue: 181), message: "2021.6.6 일요일", repeatText: "반복 없음")
+        let viewModel = CalendarModel(icon: UIImage(named: "EZY_Calendar")?.withRenderingMode(.alwaysTemplate), iconTintColor: .rgb(red: 255, green: 181, blue: 181), message: "날짜를 선택해주세요!", repeatText: "반복 없음")
         let button = CalendarBtn(with: viewModel)
         button.addTarget(self, action: #selector(calendarAlert), for: .touchUpInside)
         return button
     }()
     
     private let clockBtn : AlertButton = {
-        let viewModel = AlertBtn(icon: UIImage(named: "EZY_clock")?.withRenderingMode(.alwaysTemplate), iconTintColor: .rgb(red: 255, green: 203, blue: 181), message: "11:00AM - 1:00PM")
+        let viewModel = AlertBtn(icon: UIImage(named: "EZY_clock")?.withRenderingMode(.alwaysTemplate), iconTintColor: .rgb(red: 255, green: 203, blue: 181), message: "시간을 선택해주세요!")
         let button = AlertButton(with: viewModel)
         button.addTarget(self, action: #selector(clockAlert), for: .touchUpInside)
         return button
     }()
     
     private let locationBtn : AlertButton = {
-        let viewModel = AlertBtn(icon: UIImage(named: "EZY_location")?.withRenderingMode(.alwaysTemplate), iconTintColor: .rgb(red: 199, green: 224, blue: 212), message: "광주소프트웨어마이스터고등학교")
+        let viewModel = AlertBtn(icon: UIImage(named: "EZY_location")?.withRenderingMode(.alwaysTemplate), iconTintColor: .rgb(red: 199, green: 224, blue: 212), message: "위치를 선택해주세요!")
         let button = AlertButton(with: viewModel)
         button.addTarget(self, action: #selector(locationAlert), for: .touchUpInside)
         return button
@@ -205,6 +192,11 @@ class PersonalPlanChangeViewController: UIViewController{
         let view = ExplanationContainerTextView(tvTitle: "설명")
         return view
     }()
+    
+    let sizeCheckLabel = UILabel().then{
+        $0.dynamicFont(fontSize: 12, currentFontName: "AppleSDGothicNeo-Bold")
+        $0.sizeToFit()
+    }
     
     //MARK: - lifeCycles
     override func viewDidLoad() {
@@ -224,20 +216,8 @@ class PersonalPlanChangeViewController: UIViewController{
     
     //MARK: - dataSourceAndDelegate
     func dataSourceAndDelegate(){
-        selectCalendarModalView.dayPickerView.delegate = self
-        selectCalendarModalView.dayPickerView.dataSource = self
-        
-        selectCalendarModalView.repeatCollectionView.delegate = self
-        selectCalendarModalView.repeatCollectionView.dataSource = self
-        
         tagAddModalView.tagColorCollectionView.delegate = self
         tagAddModalView.tagColorCollectionView.dataSource = self
-        
-        selectTimeModalView.startPickerView.delegate = self
-        selectTimeModalView.startPickerView.dataSource = self
-        
-        selectTimeModalView.endPickerView.delegate = self
-        selectTimeModalView.endPickerView.dataSource = self
         
         tagCollectionView.delegate = self
         tagCollectionView.dataSource = self
@@ -246,8 +226,6 @@ class PersonalPlanChangeViewController: UIViewController{
         
         let firstCell = tagAddModalView.tagColorCollectionView.cellForItem(at: [0, 0]) as? TagColorCollectionViewCell
         firstCell?.checkImage.isHidden = false
-        
-        selectCalendarModalView.dayPickerView.selectRow(dayPickerViewText2.count/2, inComponent: 0, animated: true)
     }
     
     //MARK: - addLayout
@@ -315,17 +293,19 @@ class PersonalPlanChangeViewController: UIViewController{
             make.left.equalTo(tagLabel)
             make.top.equalTo(tagCollectionView.snp.bottom).offset(self.view.frame.height/38.6)
         }
+
         
         notificationAddButton.snp.makeConstraints { make in
             make.left.equalTo(tagLabel)
             make.top.equalTo(notificationTitleLabel.snp.bottom).offset(self.view.frame.height/73.11)
-            make.width.equalToSuperview().dividedBy(9)
-            make.height.equalTo(notificationAddButton.snp.width)
+            make.width.equalTo(notificationAddButton.snp.height)
+            make.height.equalTo(self.view.frame.height/20)
         }
         
         notificationNoSelectButton.snp.makeConstraints { make in
+            make.height.equalTo(self.view.frame.height/20)
             make.centerY.equalTo(notificationAddButton)
-            make.width.height.equalTo(notificationAddButton)
+            make.width.equalTo(notificationNoSelectButton.snp.height)
             make.left.equalTo(notificationAddButton.snp.right).offset(self.view.frame.width/37)
         }
         
@@ -334,14 +314,6 @@ class PersonalPlanChangeViewController: UIViewController{
             make.left.equalTo(notificationAddButton)
             make.height.equalToSuperview().dividedBy(20)
             make.top.equalTo(notificationAddButton.snp.bottom).offset(self.view.frame.height/38.6)
-        }
-        
-        selectCalendarModalView.snp.makeConstraints { make in
-            make.top.bottom.left.right.equalToSuperview()
-        }
-        
-        selectTimeModalView.snp.makeConstraints { make in
-            make.top.bottom.left.right.equalToSuperview()
         }
         
         tagAddModalView.snp.makeConstraints { make in
@@ -372,17 +344,10 @@ class PersonalPlanChangeViewController: UIViewController{
         self.view.addSubview(notificationAddButton)
         self.view.addSubview(notificationNoSelectButton)
         self.view.addSubview(changeButton)
-        self.view.addSubview(selectCalendarModalView)
-        self.view.addSubview(selectTimeModalView)
         self.view.addSubview(tagAddModalView)
     }
 
     // MARK: - selectors
-    @objc func selectedTimeCompleteButtonClicked(sender:UIButton){
-        self.selectTimeModalView.isHidden = true
-        clockBtn.alertButtonTitleLabel.text = "\(selectedStartTime.joined(separator: ":")) ~ \(selectedEndTime.joined(separator: ":"))"
-    }
-    
     @objc func tagNameTextFieldClicked(textField: UITextField) {
         UIView.animate(withDuration: 0.3) {
             self.tagAddModalView.modalBackgroundView.snp.remakeConstraints { make in
@@ -404,11 +369,6 @@ class PersonalPlanChangeViewController: UIViewController{
         AlarmSettingCell().isSelected = false
         
         // 알림 시간 +버튼에 text로 넣기
-    }
-    
-    @objc func calendarAlert(){
-        selectedRepeatDayTextArray = []
-        selectCalendarModalView.isHidden = false
     }
     
     @objc func tagAddButtonClicked(sender:UIButton){
@@ -437,11 +397,24 @@ class PersonalPlanChangeViewController: UIViewController{
     }
     
     @objc func notificationNoSelectButtonClicked(sender:UIButton){
-
+        notificationNoSelectButton.backgroundColor = UIColor(red: 221/255, green: 220/255, blue: 220/255, alpha: 1)
+        notificationNoSelectButton.setImage(UIImage(named: "EZY_SelectedNoSelectTagButtonImage"), for: .normal)
+    }
+    
+    @objc func calendarAlert(){
+        let CalendarAddModalVC = CalendarAddModelViewController.instance()
+        CalendarAddModalVC.delegate = self
+        addDim()
+        present(CalendarAddModalVC, animated: true, completion: nil)
+        CalendarAddModalVC.calendarModalDataSetting(dayIndex: dayPickerViewSelectedValueIndex, repeatIndex: selectedRepeatIndex)
     }
     
     @objc func clockAlert(){
-        selectTimeModalView.isHidden = false
+        let TimeAddModalVC = TimeAddModalViewController.instance()
+        TimeAddModalVC.delegate = self
+        addDim()
+        present(TimeAddModalVC, animated: true, completion: nil)
+        TimeAddModalVC.timeValueSetting(selectedValuesIndex: selectedValuesIndex)
     }
     
     @objc func locationAlert(){
@@ -455,45 +428,6 @@ class PersonalPlanChangeViewController: UIViewController{
     
     @objc func backButtonClicked(sender:UIButton){
         self.navigationController?.popViewController(animated: true)
-    }
-    
-    @objc func calendarAddButtonClicked(sender:UIButton){
-        selectCalendarModalView.isHidden = true
-        
-        // 선택된 반복일 저장
-        for i in 0...repeatModels.count-1{
-            if repeatModels[i].isSelected == true{
-                selectedRepeatDayTextArray.append(dayKoreanTextArray[i])
-            }
-        }
-        
-        // 반복라벨에 적용
-        if selectedRepeatDayTextArray.count == 0{
-            calendarBtn.repeatLabel.text = "반복 없음"
-        }else{
-            calendarBtn.repeatLabel.text = "\(selectedRepeatDayTextArray.joined(separator: ",")) 반복"
-        }
-        
-        if selectedDayOfWeekText == "Mon"{
-            selectedDayOfWeekText = "월"
-        }else if selectedDayOfWeekText == "Tue"{
-            selectedDayOfWeekText = "화"
-        }else if selectedDayOfWeekText == "Wed"{
-            selectedDayOfWeekText = "수"
-        }else if selectedDayOfWeekText == "Thr"{
-            selectedDayOfWeekText = "목"
-        }else if selectedDayOfWeekText == "Fri"{
-            selectedDayOfWeekText = "금"
-        }else if selectedDayOfWeekText == "Sat"{
-            selectedDayOfWeekText = "토"
-        }else if selectedDayOfWeekText == "Sun"{
-            selectedDayOfWeekText = "일"
-        }
-        
-        // 선택한 내용 dayLabel에 적용
-        if selectedDayOfWeekText != ""{
-            calendarBtn.dayLabel.text = "2021.6.\(selectedDayText) \(selectedDayOfWeekText)요일"
-        }
     }
     
     //MARK: 화면터치하여 내리기
@@ -520,20 +454,38 @@ class PersonalPlanChangeViewController: UIViewController{
     func alarmReloadSetting(_ ampm: String,_ time: Int,_ minute: Int){
         notificationAddButton.setTitle("\(ampm) \(time):\(String(format: "%02d", minute))", for: .normal)
         notificationAddButton.setImage(nil, for: .normal)
+        notificationNoSelectButton.backgroundColor = .white
+        notificationNoSelectButton.setImage(UIImage(named: "EZY_UnSelectedNoSelectTagButtonImage"), for: .normal)
         
-        UIView.animate(withDuration: 0.3) {
-            self.notificationAddButton.snp.remakeConstraints { make in
-                make.left.equalTo(self.tagLabel)
-                make.top.equalTo(self.notificationTitleLabel.snp.bottom).offset(self.view.frame.height/73.11)
-                make.width.equalTo("\(ampm) \(time):\(String(format: "%02d", minute))".size(withAttributes: [NSAttributedString.Key.font : UIFont.systemFont(ofSize: 17)]).width + 25)
-                make.height.equalTo(self.notificationAddButton.snp.width)
-            }
-            
-            
-            
-            self.view.layoutIfNeeded()
+        notificationAddButton.snp.remakeConstraints { make in
+            make.left.equalTo(tagLabel)
+            make.top.equalTo(notificationTitleLabel.snp.bottom).offset(self.view.frame.height/73.11)
+            make.width.equalToSuperview().dividedBy(4.07)
+            make.height.equalToSuperview().dividedBy(18.88)
         }
+    }
+    
+    //MARK: - calendar Setting Function
+    func calendarReloadSetting(_ selectedDay: String, _ selectedRepeatDay: [String], _ selectedDayOfWeek: String, _ yearAndMonthText: String, _ selectedValuesIndex: Int, _ selectedRepeatIndex: [Int]){
+        
+        // 반복라벨에 적용
+        if selectedRepeatDay.count == 0{
+            calendarBtn.repeatLabel.text = "반복 없음"
+        }else{
+            calendarBtn.repeatLabel.text = "\(selectedRepeatDay.joined(separator: ",")) 반복"
+        }
+        
+        // 선택한 내용 dayLabel에 적용
+        if selectedDayOfWeek != "" { calendarBtn.dayLabel.text = "\(yearAndMonthText).\(selectedDay) \(selectedDayOfWeek)요일" }
+        
+        self.selectedRepeatIndex = selectedRepeatIndex
+        dayPickerViewSelectedValueIndex = selectedValuesIndex
+    }
+    
+    //MARK: - time Setting Function
+    func timeReloadSetting(_ startMorningOrAfternoon: String, _ endMorningOrAfternoon: String, _ startTime: String, _ endTime: String, _ afterOrMorn: [String], _ selectedTimeIndex: [Int]){
 
+        clockBtn.alertButtonTitleLabel.text = "\(startMorningOrAfternoon) \(startTime) ~ \(endMorningOrAfternoon) \(endTime)"
     }
     
     // MARK: - shakeView
@@ -552,11 +504,12 @@ class PersonalPlanChangeViewController: UIViewController{
         bgView.snp.makeConstraints { (make) in
             make.edges.equalTo(0)
         }
+        
         DispatchQueue.main.async { [weak self] in
             self?.bgView.alpha = 0.2
         }
     }
-    
+
     private func removeDim() {
         DispatchQueue.main.async { [weak self] in
             self?.bgView.removeFromSuperview()
@@ -570,12 +523,10 @@ extension PersonalPlanChangeViewController: UICollectionViewDataSource, UICollec
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         if collectionView == tagCollectionView{
             return TagModels.count
-        }else if collectionView == selectCalendarModalView.repeatCollectionView{
-            return dayKoreanTextArray.count
         }else if collectionView == tagAddModalView.tagColorCollectionView{
             return TagColorModels.count
         }
-        
+
         return Int()
     }
     
@@ -585,8 +536,9 @@ extension PersonalPlanChangeViewController: UICollectionViewDataSource, UICollec
                 let cell = collectionView.dequeueReusableCell(withReuseIdentifier: TagCollectionViewCell.reuseId, for: indexPath) as! TagCollectionViewCell
                 
                 cell.tagNameLabel.isHidden = true
-                cell.iconImageView.isHidden = false
-                
+                cell.iconButton.isHidden = false
+                cell.iconButton.imageEdgeInsets = UIEdgeInsets(top: view.frame.width/30, left: view.frame.width/30, bottom: view.frame.width/30, right: view.frame.width/30)
+
                 cell.setModel(TagModels[indexPath.row])
                 
                 return cell
@@ -594,7 +546,7 @@ extension PersonalPlanChangeViewController: UICollectionViewDataSource, UICollec
                 let cell = collectionView.dequeueReusableCell(withReuseIdentifier: TagCollectionViewCell.reuseId, for: indexPath) as! TagCollectionViewCell
                 
                 cell.tagNameLabel.isHidden = true
-                cell.iconImageView.isHidden = false
+                cell.iconButton.isHidden = false
 
                 cell.setModel(TagModels[indexPath.row])
                 
@@ -602,7 +554,7 @@ extension PersonalPlanChangeViewController: UICollectionViewDataSource, UICollec
             }else{
                 let cell = collectionView.dequeueReusableCell(withReuseIdentifier: TagCollectionViewCell.reuseId, for: indexPath) as! TagCollectionViewCell
                     
-                cell.iconImageView.isHidden = true
+                cell.iconButton.isHidden = true
                 cell.tagNameLabel.isHidden = false
 
                 cell.setModel(TagModels[indexPath.row])
@@ -611,15 +563,6 @@ extension PersonalPlanChangeViewController: UICollectionViewDataSource, UICollec
                     
                 return cell
             }
-        }else if collectionView == selectCalendarModalView.repeatCollectionView{
-            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: DayCollectionViewCell.identifier, for: indexPath) as! DayCollectionViewCell
-            
-            cell.dayKoreanLabel.text = dayKoreanTextArray[indexPath.row]
-            cell.dayEnglishLabel.text = dayEnglishTextArray[indexPath.row]
-            
-            cell.setModel(repeatModels[indexPath.row])
-            
-            return cell
         }else if collectionView == tagAddModalView.tagColorCollectionView{
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: TagColorCollectionViewCell.reuseId, for: indexPath) as! TagColorCollectionViewCell
             
@@ -629,13 +572,13 @@ extension PersonalPlanChangeViewController: UICollectionViewDataSource, UICollec
             
             return cell
         }
+
         return UICollectionViewCell()
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
-        if collectionView == selectCalendarModalView.repeatCollectionView {
-            return UIEdgeInsets(top: self.view.frame.width/100, left: self.view.frame.width/15.62, bottom: 0, right: self.view.frame.width/15.62)
-        }else if collectionView == tagCollectionView{
+
+        if collectionView == tagCollectionView{
             return UIEdgeInsets(top: 0, left: self.view.frame.width/12, bottom: 0, right: self.view.frame.width/12)
         }else if collectionView == tagAddModalView.tagColorCollectionView{
             return UIEdgeInsets(top: 0, left: self.view.frame.height/33.8, bottom: 0, right: self.view.frame.height/33.8)
@@ -651,13 +594,9 @@ extension PersonalPlanChangeViewController: UICollectionViewDataSource, UICollec
             }else{
                 return CGSize(width: tagNameTextArray[indexPath.item].size(withAttributes: [NSAttributedString.Key.font : UIFont.systemFont(ofSize: 17)]).width + 25, height: self.view.frame.height/20)
             }
-
-        }else if collectionView == selectCalendarModalView.repeatCollectionView{
-            return CGSize(width: self.view.frame.width/12.18, height: self.view.frame.height/23.88)
         }else if collectionView == tagAddModalView.tagColorCollectionView{
             return CGSize(width: self.view.frame.height/27, height: self.view.frame.height/27)
         }
-        
         return CGSize()
     }
     
@@ -700,11 +639,6 @@ extension PersonalPlanChangeViewController: UICollectionViewDataSource, UICollec
                     
                 TagModels[indexPath.row].isSelected.toggle()
             }
-            
-        }else if collectionView == selectCalendarModalView.repeatCollectionView{
-            
-            repeatModels[indexPath.row].isSelected.toggle()
-            
         }else if collectionView == tagAddModalView.tagColorCollectionView{
             print("Asdf")
             if TagColorModels[indexPath.row].isSelected == true{
@@ -722,121 +656,6 @@ extension PersonalPlanChangeViewController: UICollectionViewDataSource, UICollec
         }
         
         collectionView.reloadData()
-    }
-}
-
-// MARK: - pickerview extension
-extension PersonalPlanChangeViewController: UIPickerViewDelegate, UIPickerViewDataSource{
-    func numberOfComponents(in pickerView: UIPickerView) -> Int {
-        if pickerView == selectTimeModalView.startPickerView || pickerView == selectTimeModalView.endPickerView{
-            return 2
-        }else if pickerView == selectCalendarModalView.dayPickerView{
-            return 1
-        }
-    
-        return Int()
-    }
-    
-    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-        if pickerView == selectTimeModalView.startPickerView || pickerView == selectTimeModalView.endPickerView{
-            return startPickerViewText[component].count
-        }else if pickerView == selectCalendarModalView.dayPickerView{
-            return dayPickerViewTextArray[component].count
-        }
-
-        return Int()
-    }
-   
-    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-        if pickerView == selectTimeModalView.startPickerView || pickerView == selectTimeModalView.endPickerView{
-            return startPickerViewText[component][row]
-        }else if pickerView == selectCalendarModalView.dayPickerView{
-            return dayPickerViewTextArray[component][row]
-        }
-
-        return String()
-    }
-    
-    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-        if pickerView == selectCalendarModalView.dayPickerView{
-            selectedDayOfWeekText = dayPickerViewTextArray[0][row]
-            selectedDayText = dayPickerViewTextArray[1][row]
-        }else if pickerView == selectTimeModalView.startPickerView{
-            if component == 0{
-                selectedStartTime[0] = "\(startPickerViewText[0][row])"
-            }else{
-                selectedStartTime[1] = "\(startPickerViewText[1][row])"
-            }
-        }else if pickerView == selectTimeModalView.endPickerView{
-            if component == 0{
-                selectedEndTime[0] = "\(startPickerViewText[0][row])"
-            }else{
-                selectedEndTime[1] = "\(startPickerViewText[1][row])"
-            }
-        }
-    }
-    
-    func pickerView(_ pickerView: UIPickerView, viewForRow row: Int, forComponent component: Int, reusing view: UIView?) -> UIView {
-        if pickerView == selectTimeModalView.startPickerView || pickerView == selectTimeModalView.endPickerView{
-            var pickerLabel = view as? UILabel;
-            
-            if (pickerLabel == nil)
-            {
-                pickerLabel = UILabel()
-                
-                pickerLabel?.font = UIFont(name: "AppleSDGothicNeo-SemiBold", size: 15)
-                pickerLabel?.textColor = UIColor(red: 120/255, green: 108/255, blue: 255/255, alpha: 1)
-                pickerLabel?.textAlignment = .center
-            }
-            
-            pickerLabel?.text = startPickerViewText[component][row]
-            pickerView.subviews[1].backgroundColor = .clear // 회색 뷰 지우기
-            
-            return pickerLabel!
-        }else if pickerView == selectCalendarModalView.dayPickerView{
-            let pickerLabel1 = UILabel().then{
-                $0.font = UIFont(name: "AppleSDGothicNeo-SemiBold", size: 17)
-                $0.textAlignment = .center
-                $0.text = dayPickerViewTextArray[0][row]
-            }
-            
-            let pickerLabel2 = UILabel().then{
-                $0.font = UIFont(name: "AppleSDGothicNeo-SemiBold", size: 20)
-                $0.textAlignment = .center
-                $0.text = dayPickerViewTextArray[1][row]
-            }
-            
-            let view = UIView(frame: CGRect(x: 0, y: 0, width:0, height:0)).then{
-                $0.addSubview(pickerLabel1)
-                $0.addSubview(pickerLabel2)
-                $0.transform = CGAffineTransform(rotationAngle: (90 * (.pi / 180*3)))
-            }
-            
-            // 공휴일은 파란색으로 표시하고 그 외에는 회색으로 표시한다.
-            if dayPickerViewText1[row] == "Sun"{
-                pickerLabel1.textColor = UIColor(red: 125/255, green: 151/255, blue: 255/255, alpha: 1)
-                pickerLabel2.textColor = UIColor(red: 125/255, green: 151/255, blue: 255/255, alpha: 1)
-            }else{
-                pickerLabel1.textColor = UIColor(red: 100/255, green: 100/255, blue: 100/255, alpha: 1)
-                pickerLabel2.textColor = UIColor(red: 100/255, green: 100/255, blue: 100/255, alpha: 1)
-            }
-            
-            pickerLabel2.snp.makeConstraints { make in
-                make.top.equalToSuperview().offset(self.view.frame.height/23)
-                make.centerX.equalToSuperview()
-            }
-            
-            pickerLabel1.snp.makeConstraints { make in
-                make.centerX.equalToSuperview()
-                make.bottom.equalToSuperview().offset(-self.view.frame.height/23)
-            }
-            
-            pickerView.subviews[1].backgroundColor = UIColor(red: 170/255, green: 187/255, blue: 255/255, alpha: 0.1)
-            
-            return view
-        }
-        
-        return UIView()
     }
 }
 
@@ -875,5 +694,25 @@ extension PersonalPlanChangeViewController: AlarmModelDelegate{
     
     func onTapClose() {
         self.removeDim()
+    }
+}
+
+extension PersonalPlanChangeViewController: CalendarAddDelegate{
+    func updateData(selectedDay: String, selectedRepeatDay: [String], selectedDayOfWeek: String, yearAndMonthText: String, selectedValuesIndex: Int, selectedRepeatIndex: [Int]) {
+        self.calendarReloadSetting(selectedDay, selectedRepeatDay, selectedDayOfWeek, yearAndMonthText, selectedValuesIndex, selectedRepeatIndex)
+    }
+    
+    func onTapCalendarModalClose(){
+        self.removeDim()
+    }
+}
+
+extension PersonalPlanChangeViewController: TimeAddDelegate{
+    func onTapTimeAddModalClose() {
+        self.removeDim()
+    }
+    
+    func updateData(startMorningOrAfternoon: String, endMorningOrAfternoon: String, startTime: String, endTime: String, afterOrMorn: [String], selectedTimeIndex: [Int]) {
+        self.timeReloadSetting(startMorningOrAfternoon, endMorningOrAfternoon, startTime, endTime, afterOrMorn, selectedTimeIndex)
     }
 }
