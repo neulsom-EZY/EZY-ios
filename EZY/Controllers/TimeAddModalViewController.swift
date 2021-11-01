@@ -9,7 +9,7 @@ import UIKit
 
 protocol TimeAddDelegate: AnyObject {
     func onTapTimeAddModalClose()
-    func updateData(startMorningOrAfternoon : String , endMorningOrAfternoon : String, startTime: String, endTime: String, selectedValuesIndex: [String])
+    func updateData(startMorningOrAfternoon : String , endMorningOrAfternoon : String, startTime: String, endTime: String, afterOrMorn: [String], selectedTimeIndex: [Int])
 }
 
 class TimeAddModalViewController: UIViewController{
@@ -122,10 +122,6 @@ class TimeAddModalViewController: UIViewController{
     
     fileprivate var endSelectedLabelText = "오전"
     
-    fileprivate var startMorningOrAfternoon = ""
-    
-    fileprivate var endMorningOrAfternoon = ""
-    
     fileprivate var startHourTime = "01"
     
     fileprivate var startMinTime = "00"
@@ -138,7 +134,7 @@ class TimeAddModalViewController: UIViewController{
     
     fileprivate var endTime = "01 : 00"
     
-    private var selectedValuesIndex: [String] = ["오전","오전","0","0","0","0"]
+    private var selectedTimeIndex: [Int] = [0,0,0,0]
     
     static func instance() -> TimeAddModalViewController {
         return TimeAddModalViewController(nibName: nil, bundle: nil).then {
@@ -314,20 +310,16 @@ class TimeAddModalViewController: UIViewController{
     }
     
     //MARK: - selectors
-    @objc func onTapClose() {
-        delegate?.onTapTimeAddModalClose()
-        dismiss(animated: true, completion: nil)
-    }
-    
     @objc func MakeTodo(){
-        startMorningOrAfternoon = startSelectedLabelText
-        endMorningOrAfternoon = endSelectedLabelText
-        startTime = "\(startHourTime) : \(startMinTime)"
-        endTime = "\(endHourTime) : \(endMinTime)"
-        
         delegate?.onTapTimeAddModalClose()
         dismiss(animated: true, completion: nil)
-        delegate?.updateData(startMorningOrAfternoon: startMorningOrAfternoon, endMorningOrAfternoon: endMorningOrAfternoon, startTime: startTime, endTime: endTime, selectedValuesIndex: selectedValuesIndex)
+        print("시작 시 : \(selectedTimeIndex[0]) 시작 분: \(selectedTimeIndex[1]) 끝 시: \(selectedTimeIndex[2]) 끝 분: \(selectedTimeIndex[3])")
+        delegate?.updateData(startMorningOrAfternoon: startSelectedLabelText,
+                             endMorningOrAfternoon: endSelectedLabelText,
+                             startTime: "\(startHourTime) : \(startMinTime)",
+                             endTime: "\(endHourTime) : \(endMinTime)",
+                             afterOrMorn:[startSelectedLabelText, endSelectedLabelText],
+                             selectedTimeIndex: selectedTimeIndex)
     }
     
     @objc func endSelectCircleButton(sender:UIButton){
@@ -402,7 +394,7 @@ class TimeAddModalViewController: UIViewController{
         }
     }
     
-    func pickerViewValueSetting(selectedValuesIndex: [String]){
+    func timeValueSetting(selectedValuesIndex: [String]){
     }
 }
 
@@ -419,19 +411,18 @@ extension TimeAddModalViewController: UIPickerViewDataSource, UIPickerViewDelega
         if pickerView == startPickerView{
             if component == 0{
                 startHourTime = "\(addZero(n: row+1))"
-                selectedValuesIndex[2] = "\(row)"
+                selectedTimeIndex[0] = row
             }else {
-                startMinTime = "\(addZero(n: row))"
-                selectedValuesIndex[3] = "\(row)"
+                startMinTime = addZero(n: row)
+                selectedTimeIndex[1] = row
             }
-            
         }else if pickerView == endPickerView{
             if component == 0{
-                endHourTime = "\(addZero(n: row+1))"
-                selectedValuesIndex[4] = "\(row)"
+                endHourTime = addZero(n: row+1)
+                selectedTimeIndex[2] = row
             }else {
-                endMinTime = "\(addZero(n: row))"
-                selectedValuesIndex[5] = "\(row)"
+                endMinTime = addZero(n: row)
+                selectedTimeIndex[3] = row
             }
         }
     }

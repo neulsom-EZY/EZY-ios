@@ -414,7 +414,7 @@ class PersonalPlanChangeViewController: UIViewController{
         TimeAddModalVC.delegate = self
         addDim()
         present(TimeAddModalVC, animated: true, completion: nil)
-        TimeAddModalVC.pickerViewValueSetting(selectedValuesIndex: selectedValuesIndex)
+        TimeAddModalVC.timeValueSetting(selectedValuesIndex: selectedValuesIndex)
     }
     
     @objc func locationAlert(){
@@ -483,12 +483,9 @@ class PersonalPlanChangeViewController: UIViewController{
     }
     
     //MARK: - time Setting Function
-    func timeReloadSetting(_ startMorningOrAfternoon: String, _ endMorningOrAfternoon: String, _ startTime: String, _ endTime: String, _ selectedValuesIndex: [String]){
-        print("받을때 시간 \(startTime)")
+    func timeReloadSetting(_ startMorningOrAfternoon: String, _ endMorningOrAfternoon: String, _ startTime: String, _ endTime: String, _ afterOrMorn: [String], _ selectedTimeIndex: [Int]){
 
         clockBtn.alertButtonTitleLabel.text = "\(startMorningOrAfternoon) \(startTime) ~ \(endMorningOrAfternoon) \(endTime)"
-        
-        
     }
     
     // MARK: - shakeView
@@ -592,7 +589,6 @@ extension PersonalPlanChangeViewController: UICollectionViewDataSource, UICollec
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         if collectionView == tagCollectionView{
-            tagCollectionView.backgroundColor = .red
             if indexPath == [0,0] || indexPath == [0,1]{
                 return CGSize(width: self.view.frame.height/20, height: self.view.frame.height/20)
             }else{
@@ -607,7 +603,6 @@ extension PersonalPlanChangeViewController: UICollectionViewDataSource, UICollec
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         if collectionView == tagCollectionView{
             if indexPath == [0,0]{
-                
                 tagAddModalView.isHidden = false
                 tagAddModalView.tagNameTextField.becomeFirstResponder()
                 tagAddModalView.tagNameTextField.text = ""
@@ -713,12 +708,11 @@ extension PersonalPlanChangeViewController: CalendarAddDelegate{
 }
 
 extension PersonalPlanChangeViewController: TimeAddDelegate{
-    
     func onTapTimeAddModalClose() {
         self.removeDim()
     }
     
-    func updateData(startMorningOrAfternoon: String, endMorningOrAfternoon: String, startTime: String, endTime: String, selectedValuesIndex:[String]) {
-        self.timeReloadSetting(startMorningOrAfternoon, endMorningOrAfternoon, startTime, endTime, selectedValuesIndex)
+    func updateData(startMorningOrAfternoon: String, endMorningOrAfternoon: String, startTime: String, endTime: String, afterOrMorn: [String], selectedTimeIndex: [Int]) {
+        self.timeReloadSetting(startMorningOrAfternoon, endMorningOrAfternoon, startTime, endTime, afterOrMorn, selectedTimeIndex)
     }
 }
