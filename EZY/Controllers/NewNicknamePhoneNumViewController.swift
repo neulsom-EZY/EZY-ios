@@ -1,87 +1,112 @@
 //
-//  SignUpPasswordViewController.swift
+//  NewNicknamePhoneNumViewController.swift
 //  EZY
 //
-//  Created by 노연주 on 2021/06/12.
+//  Created by 노연주 on 2021/08/05.
 //
 
 import UIKit
 import SnapKit
 import Then
 
-class SignUpPasswordViewController: UIViewController{
+class NewNicknamePhoneNumViewController: UIViewController{
     //MARK: - Properties
     
     let topBarView = TopBarView().then {
         $0.goBackButton.addTarget(self, action: #selector(goBack), for: .touchUpInside)
     }
     
-    lazy var putPasswordLabel = UILabel().then {
-        $0.text = "비밀번호를\n입력해주세요."
-        $0.numberOfLines = 2
+    lazy var toNewNicknameLabel = UILabel().then {
+        $0.text = "새 닉네임을 위해"
         $0.dynamicFont(fontSize: 25, currentFontName: "AppleSDGothicNeo-SemiBold")
         $0.textColor = UIColor.EZY_968DFF
     }
     
-    lazy var passwordContainerView: UIView = {
-        let view = Utilities().inputContainerView(textField: passwordField, text: "비밀번호", fonts: 14)
+    lazy var putPhoneNumLabel = UILabel().then {
+        $0.text = "전화번호를 입력해주세요."
+        $0.dynamicFont(fontSize: 20, currentFontName: "AppleSDGothicNeo-SemiBold")
+        $0.updateGradientTextColor_vertical(gradientColors: [.EZY_968DFF, UIColor.rgba(red: 148, green: 139, blue: 255, alpha: 0.4)])
+    }
+    
+    lazy var phoneNumContainerView: UIView = {
+        let view = Utilities().inputContainerView(textField: phoneNumField, text: "전화번호", fonts: 14)
         return view
     }()
     
-    lazy var passwordField:UITextField = {
+    lazy var phoneNumField:UITextField = {
         let tf = Utilities().textField(withPlaceholder: "")
-        tf.isSecureTextEntry = true
         return tf
     }()
     
-    lazy var passwordConstraintsLabel = UILabel().then {
-        $0.text = "8자 이하, 영어 + 숫자최소 1개, 공백 허용x"
-        $0.textColor = UIColor.EZY_747474
-        $0.dynamicFont(fontSize: 10, currentFontName: "AppleSDGothicNeo-Regular")
+    lazy var certifiedButton = UIButton().then {
+        $0.setTitle("번호인증", for: .normal)
+        $0.titleLabel?.dynamicFont(fontSize: 10, currentFontName: "AppleSDGothicNeo-SemiBold")
+        $0.setTitleColor(UIColor.EZY_FFFFFF, for: .normal)
+        $0.backgroundColor = UIColor.EZY_E3E3E3
+        $0.addTarget(self, action: #selector(onTapcertified), for: .touchUpInside)
+    }
+    
+    lazy var doNotMatchLabel = UILabel().then {
+        $0.text = "일치하지 않는 전화번호입니다."
+        $0.textColor = UIColor.EZY_FCA1A1
+        $0.dynamicFont(fontSize: 10, currentFontName: "AppleSDGothicNeo-SemiBold")
     }
     
     lazy var continueButton = CustomGradientContinueBtnView().then {
+        $0.setTitle("닉네임 바꾸러 가기", for: .normal)
         $0.titleLabel?.dynamicFont(fontSize: 14, currentFontName: "AppleSDGothicNeo-Bold")
-        $0.addTarget(self, action: #selector(onTapContinuePhoneNum), for: .touchUpInside)
+        $0.addTarget(self, action: #selector(onTapContinueNewNicknamePut), for: .touchUpInside)
     }
     
     //MARK: - Lifecycle
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         configureUI()
     }
     
     //MARK: - Selectors
-
+    
     @objc
     func goBack(){
         navigationController?.popViewController(animated: true )
     }
     
     @objc
-    func onTapContinuePhoneNum(){
-        let controller = SignUpPhoneNumViewController()
+    func onTapcertified(){
+        print("DEBUG : Click bottom certified button Button")
+    }
+    
+    @objc
+    func onTapContinueNewNicknamePut(){
+        let controller = NewNicknamePutViewController()
         navigationController?.pushViewController(controller, animated: true)
     }
     
     //MARK: - Helpers
+    
     func configureUI(){
         view.backgroundColor = .white
         addView()
         topBarViewSetting()
         cornerRadius()
         location()
+        
+        doNotMatchLabel.isHidden = true
     }
     
     func addView(){
         view.addSubview(topBarView)
-        view.addSubview(putPasswordLabel)
-        view.addSubview(passwordContainerView)
-        view.addSubview(passwordConstraintsLabel)
+        view.addSubview(toNewNicknameLabel)
+        view.addSubview(putPhoneNumLabel)
+        view.addSubview(phoneNumContainerView)
+        view.addSubview(certifiedButton)
+        view.addSubview(doNotMatchLabel)
         view.addSubview(continueButton)
     }
     
     func cornerRadius(){
+        certifiedButton.layer.cornerRadius = self.view.frame.height/75
         continueButton.layer.cornerRadius = self.view.frame.height/81.2
     }
     
@@ -95,21 +120,33 @@ class SignUpPasswordViewController: UIViewController{
             make.height.equalTo(self.view.frame.height/7.19)
         }
         
-        putPasswordLabel.snp.makeConstraints { make in
+        toNewNicknameLabel.snp.makeConstraints { make in
+            make.left.equalTo(phoneNumContainerView)
             make.top.equalToSuperview().offset(self.view.frame.height/5.04)
-            make.left.equalTo(passwordContainerView)
         }
         
-        passwordContainerView.snp.makeConstraints { make in
-            make.top.equalTo(putPasswordLabel).offset(self.view.frame.height/8.29)
+        putPhoneNumLabel.snp.makeConstraints { make in
+            make.top.equalTo(toNewNicknameLabel).offset(self.view.frame.height/27.07)
+            make.left.equalTo(phoneNumContainerView)
+        }
+        
+        phoneNumContainerView.snp.makeConstraints { make in
+            make.top.equalTo(putPhoneNumLabel).offset(self.view.frame.height/11.77)
             make.centerX.equalToSuperview()
             make.width.equalTo(self.view.frame.width/1.34)
             make.height.equalTo(self.view.frame.height/15.62)
         }
         
-        passwordConstraintsLabel.snp.makeConstraints { make in
-            make.top.equalTo(passwordContainerView).offset(self.view.frame.height/13.76)
-            make.left.equalTo(passwordContainerView)
+        certifiedButton.snp.makeConstraints { make in
+            make.top.equalTo(putPhoneNumLabel).offset(self.view.frame.height/12.49)
+            make.right.equalToSuperview().offset(self.view.frame.width/8.3 * -1)
+            make.width.equalTo(self.view.frame.width/6.36)
+            make.height.equalTo(self.view.frame.height/36.9)
+        }
+        
+        doNotMatchLabel.snp.makeConstraints { make in
+            make.top.equalTo(phoneNumContainerView).offset(self.view.frame.height/13.76)
+            make.left.equalTo(phoneNumContainerView)
         }
         
         continueButton.snp.makeConstraints { make in
@@ -123,7 +160,7 @@ class SignUpPasswordViewController: UIViewController{
     func topBarViewSetting(){
         topBarView.addSubview(topBarView.goBackButton)
         topBarView.addSubview(topBarView.EZY_Logo)
-        
+                       
         topBarView.topBarViewLayoutSetting(screenHeight: self.view.frame.height, screenWidth: self.view.frame.width)
     }
     
@@ -143,29 +180,29 @@ class SignUpPasswordViewController: UIViewController{
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        passwordField.resignFirstResponder()
+        phoneNumField.resignFirstResponder()
     }
 }
 
-
 //MARK: - Preview
+
 #if DEBUG
 import SwiftUI
-struct SignUpPasswordViewControllerRepresentable: UIViewControllerRepresentable {
+struct NewNicknamePhoneNumViewControllerRepresentable: UIViewControllerRepresentable {
     
 func updateUIViewController(_ uiView: UIViewController,context: Context) {
         // leave this empty
 }
     @available(iOS 13.0.0, *)
     func makeUIViewController(context: Context) -> UIViewController{
-        SignUpPasswordViewController()
+        NewNicknamePhoneNumViewController()
     }
 }
 @available(iOS 13.0, *)
-struct SignUpPasswordViewControllerRepresentable_PreviewProvider: PreviewProvider {
+struct NewNicknamePhoneNumViewControllerRepresentable_PreviewProvider: PreviewProvider {
     static var previews: some View {
         Group {
-            SignUpPasswordViewControllerRepresentable()
+            NewNicknamePhoneNumViewControllerRepresentable()
                 .ignoresSafeArea()
                 .previewDisplayName(/*@START_MENU_TOKEN@*/"Preview"/*@END_MENU_TOKEN@*/)
                 .previewDevice(PreviewDevice(rawValue: "iPhone 11"))
@@ -173,5 +210,4 @@ struct SignUpPasswordViewControllerRepresentable_PreviewProvider: PreviewProvide
         
     }
 } #endif
-
 

@@ -1,15 +1,17 @@
 {
   "images" : [
     {
-      "filename" : "EZY_TermsBtn_Background.svg",
+      "filename" : "EZY_LoginButtonBackImg.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
+      "filename" : "2x_EZY_LoginButtonBackImg.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
+      "filename" : "3x_EZY_LoginButtonBackImg.png",
       "idiom" : "universal",
       "scale" : "3x"
     }
