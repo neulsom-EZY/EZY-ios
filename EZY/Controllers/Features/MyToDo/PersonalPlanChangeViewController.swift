@@ -68,11 +68,15 @@ class PersonalPlanChangeViewController: UIViewController{
     
     private var selectedAfterOrMorn = ["오후","오후"]
     
+    private var leftOrRight = ["L","L"]
+    
     private var selectedTimeIndex: [Int] = [0,0,0,0]
     
     private var tagNameTextArray = ["x", "+", "TOEIC", "CODING", "COOKING"]
     
     private var selectedRepeatIndex: [Int]  = []
+    
+    
     
     fileprivate let selectedRepeatColor = UIColor.rgb(red: 170, green: 187, blue: 255)
     
@@ -417,8 +421,8 @@ class PersonalPlanChangeViewController: UIViewController{
         TimeAddModalVC.delegate = self
         addDim()
         present(TimeAddModalVC, animated: true, completion: nil)
-        print("clockAlert - \(receiveStartTime), \(receiveEndTime)")
-        TimeAddModalVC.timeValueSetting(receiveStartTime: receiveStartTime, receiveEndTime: receiveEndTime, selectedAfterOrMorn: selectedAfterOrMorn, selectedValuesIndex: selectedTimeIndex)
+
+        TimeAddModalVC.timeValueSetting(receiveStartTime: receiveStartTime, receiveEndTime: receiveEndTime, leftOrRight: leftOrRight, selectedValuesIndex: selectedTimeIndex)
     }
     
     @objc func locationAlert(){
@@ -487,16 +491,21 @@ class PersonalPlanChangeViewController: UIViewController{
     }
     
     //MARK: - time Setting Function
-    func timeReloadSetting(_ startMorningOrAfternoon: String, _ endMorningOrAfternoon: String, _ startTime: String, _ endTime: String, _ afterOrMorn: [String], _ selectedTimeIndex: [Int]){
-        
-        self.selectedAfterOrMorn = afterOrMorn
+    func timeReloadSetting(_ leftOrRight: [String], _ startTime: String, _ endTime: String, _ afterOrMorn: [String], _ selectedTimeIndex: [Int]){
+        self.leftOrRight = leftOrRight
         self.selectedTimeIndex = selectedTimeIndex
         self.receiveStartTime = startTime
         self.receiveEndTime = endTime
-        
-        print("값 들어감 ? \(receiveStartTime), \(receiveEndTime)")
 
-        clockBtn.alertButtonTitleLabel.text = "\(startMorningOrAfternoon) \(startTime) ~ \(endMorningOrAfternoon) \(endTime)"
+        clockBtn.alertButtonTitleLabel.text = "\(LeftOrRightChangeKorean(leftOrRight: leftOrRight[0])) \(startTime) ~ \(LeftOrRightChangeKorean(leftOrRight: leftOrRight[1])) \(endTime)"
+    }
+    
+    func LeftOrRightChangeKorean(leftOrRight: String) -> String{
+        if leftOrRight == "L" {
+            return "오전"
+        }else{
+            return "오후"
+        }
     }
     
     // MARK: - shakeView
@@ -722,8 +731,8 @@ extension PersonalPlanChangeViewController: TimeAddDelegate{
         self.removeDim()
     }
     
-    func updateData(startMorningOrAfternoon: String, endMorningOrAfternoon: String, startTime: String, endTime: String, afterOrMorn: [String], selectedTimeIndex: [Int]) {
+    func updateData(leftOrRight: [String], startTime: String, endTime: String, afterOrMorn: [String], selectedTimeIndex: [Int]) {
 
-        self.timeReloadSetting(startMorningOrAfternoon, endMorningOrAfternoon, startTime, endTime, afterOrMorn, selectedTimeIndex)
+        self.timeReloadSetting(leftOrRight, startTime, endTime, afterOrMorn, selectedTimeIndex)
     }
 }
