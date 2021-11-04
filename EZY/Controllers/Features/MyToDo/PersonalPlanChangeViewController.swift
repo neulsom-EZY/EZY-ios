@@ -54,6 +54,10 @@ class PersonalPlanChangeViewController: UIViewController{
     
     private var selectedEndTime = ["01","00"]
     
+    private var receiveStartTime = "01 : 00"
+    
+    private var receiveEndTime = "01 : 00"
+    
     private let dayEnglishTextArray = ["Mon","Tue","Wed","Thr","Fri","Sat","Sun"]
     
     private let dayKoreanTextArray = ["월","화","수","목","금","토","일"]
@@ -62,7 +66,9 @@ class PersonalPlanChangeViewController: UIViewController{
     
     private var dayPickerViewSelectedValueIndex = 0
     
-    private var selectedValuesIndex: [String] = ["오전","오전","0","0","0","0"]
+    private var selectedAfterOrMorn = ["오후","오후"]
+    
+    private var selectedTimeIndex: [Int] = [0,0,0,0]
     
     private var tagNameTextArray = ["x", "+", "TOEIC", "CODING", "COOKING"]
     
@@ -218,10 +224,8 @@ class PersonalPlanChangeViewController: UIViewController{
     func dataSourceAndDelegate(){
         tagAddModalView.tagColorCollectionView.delegate = self
         tagAddModalView.tagColorCollectionView.dataSource = self
-        
         tagCollectionView.delegate = self
         tagCollectionView.dataSource = self
-        
         explanationContainerView.tv.delegate = self
         
         let firstCell = tagAddModalView.tagColorCollectionView.cellForItem(at: [0, 0]) as? TagColorCollectionViewCell
@@ -293,7 +297,6 @@ class PersonalPlanChangeViewController: UIViewController{
             make.left.equalTo(tagLabel)
             make.top.equalTo(tagCollectionView.snp.bottom).offset(self.view.frame.height/38.6)
         }
-
         
         notificationAddButton.snp.makeConstraints { make in
             make.left.equalTo(tagLabel)
@@ -414,7 +417,8 @@ class PersonalPlanChangeViewController: UIViewController{
         TimeAddModalVC.delegate = self
         addDim()
         present(TimeAddModalVC, animated: true, completion: nil)
-        TimeAddModalVC.timeValueSetting(selectedValuesIndex: selectedValuesIndex)
+        print("clockAlert - \(receiveStartTime), \(receiveEndTime)")
+        TimeAddModalVC.timeValueSetting(receiveStartTime: receiveStartTime, receiveEndTime: receiveEndTime, selectedAfterOrMorn: selectedAfterOrMorn, selectedValuesIndex: selectedTimeIndex)
     }
     
     @objc func locationAlert(){
@@ -484,6 +488,13 @@ class PersonalPlanChangeViewController: UIViewController{
     
     //MARK: - time Setting Function
     func timeReloadSetting(_ startMorningOrAfternoon: String, _ endMorningOrAfternoon: String, _ startTime: String, _ endTime: String, _ afterOrMorn: [String], _ selectedTimeIndex: [Int]){
+        
+        self.selectedAfterOrMorn = afterOrMorn
+        self.selectedTimeIndex = selectedTimeIndex
+        self.receiveStartTime = startTime
+        self.receiveEndTime = endTime
+        
+        print("값 들어감 ? \(receiveStartTime), \(receiveEndTime)")
 
         clockBtn.alertButtonTitleLabel.text = "\(startMorningOrAfternoon) \(startTime) ~ \(endMorningOrAfternoon) \(endTime)"
     }
@@ -640,7 +651,6 @@ extension PersonalPlanChangeViewController: UICollectionViewDataSource, UICollec
                 TagModels[indexPath.row].isSelected.toggle()
             }
         }else if collectionView == tagAddModalView.tagColorCollectionView{
-            print("Asdf")
             if TagColorModels[indexPath.row].isSelected == true{
                 
                 TagColorModels[tagColorPreciousSelectedIndex].isSelected = true
@@ -713,6 +723,7 @@ extension PersonalPlanChangeViewController: TimeAddDelegate{
     }
     
     func updateData(startMorningOrAfternoon: String, endMorningOrAfternoon: String, startTime: String, endTime: String, afterOrMorn: [String], selectedTimeIndex: [Int]) {
+
         self.timeReloadSetting(startMorningOrAfternoon, endMorningOrAfternoon, startTime, endTime, afterOrMorn, selectedTimeIndex)
     }
 }

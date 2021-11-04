@@ -118,9 +118,9 @@ class TimeAddModalViewController: UIViewController{
         $0.tintColor = UIColor(red: 150/255, green: 141/255, blue: 255/255, alpha: 1)
     }
     
-    fileprivate var startSelectedLabelText = "오전"
+    fileprivate var startSelectedLabelText = "오후"
     
-    fileprivate var endSelectedLabelText = "오전"
+    fileprivate var endSelectedLabelText = "오후"
     
     fileprivate var startHourTime = "01"
     
@@ -133,6 +133,12 @@ class TimeAddModalViewController: UIViewController{
     fileprivate var endMinTime = "00"
     
     fileprivate var endTime = "01 : 00"
+    
+    private var afterOrMorn = ["오후","오후"]
+    
+    private var sendStartTime = "01 : 00"
+    
+    private var sendEndTime = "01 : 00"
     
     private var selectedTimeIndex: [Int] = [0,0,0,0]
     
@@ -313,23 +319,76 @@ class TimeAddModalViewController: UIViewController{
     @objc func MakeTodo(){
         delegate?.onTapTimeAddModalClose()
         dismiss(animated: true, completion: nil)
-        print("시작 시 : \(selectedTimeIndex[0]) 시작 분: \(selectedTimeIndex[1]) 끝 시: \(selectedTimeIndex[2]) 끝 분: \(selectedTimeIndex[3])")
+        afterOrMorn = [startSelectedLabelText, endSelectedLabelText]
+
+        // startHourTime 그니까 시분이랑 sendStartTime이랑 다르면 sendStartTime의 hour, 또는 min자리에 넣어주면될듯~!!진짜루~!
+
+        
         delegate?.updateData(startMorningOrAfternoon: startSelectedLabelText,
                              endMorningOrAfternoon: endSelectedLabelText,
-                             startTime: "\(startHourTime) : \(startMinTime)",
-                             endTime: "\(endHourTime) : \(endMinTime)",
-                             afterOrMorn:[startSelectedLabelText, endSelectedLabelText],
+                             startTime: sendStartTime,
+                             endTime: sendEndTime,
+                             afterOrMorn: self.afterOrMorn,
                              selectedTimeIndex: selectedTimeIndex)
     }
     
     @objc func endSelectCircleButton(sender:UIButton){
+        endSelectCircleButtonMove(endSelectedLabelText: endSelectedLabelText)
+    }
+    
+    @objc func startSelectCircleButton(sender:UIButton){
+        startSelectCircleButtonMove(startSelectedLabelText: startSelectedLabelText)
+    }
+    
+    func highlightedLabel(label:UILabel){
+        label.dynamicFont(fontSize: 12, currentFontName: "AppleSDGothicNeo-SemiBold")
+    }
+    
+    func unHighlightedLabel(label:UILabel){
+        label.dynamicFont(fontSize: 12, currentFontName: "AppleSDGothicNeo-Thin")
+    }
+    
+    func addZero(n: Int) -> String{
+        if n < 10 { return "0\(n)" } else { return "\(n)" }
+    }
+    
+    func startSelectCircleButtonMove(startSelectedLabelText: String){
+        UIView.animate(withDuration: 0.3) {
+            self.startSelectCircleButton.snp.remakeConstraints { make in
+                make.centerY.equalToSuperview()
+                make.height.equalToSuperview().dividedBy(1.2)
+                make.width.equalTo(self.startSelectBackButton.snp.height).dividedBy(1.2)
+                
+                if startSelectedLabelText == "오전"{
+                    make.right.equalToSuperview().offset(-self.view.frame.width/290)
+                    
+                    self.highlightedLabel(label: self.startAfternoonLabel)
+                    self.unHighlightedLabel(label: self.startMorningLabel)
+                    
+                    self.startSelectedLabelText = "오후"
+                }else{
+                    make.left.equalToSuperview().offset(self.view.frame.width/290)
+                    
+                    self.highlightedLabel(label: self.startMorningLabel)
+                    self.unHighlightedLabel(label: self.startAfternoonLabel)
+                    
+                    self.startSelectedLabelText = "오전"
+
+                }
+            }
+            
+            self.view.layoutIfNeeded()
+        }
+    }
+    
+    func endSelectCircleButtonMove(endSelectedLabelText: String){
         UIView.animate(withDuration: 0.3) {
             self.endSelectCircleButton.snp.remakeConstraints { make in
                 make.centerY.equalToSuperview()
                 make.height.equalToSuperview().dividedBy(1.2)
                 make.width.equalTo(self.endSelectBackButton.snp.height).dividedBy(1.2)
                 
-                if self.endSelectedLabelText == "오전"{
+                if endSelectedLabelText == "오전"{
                     make.right.equalToSuperview().offset(-self.view.frame.width/290)
                     
                     self.highlightedLabel(label: self.endAfternoonLabel)
@@ -345,56 +404,25 @@ class TimeAddModalViewController: UIViewController{
                     self.endSelectedLabelText = "오전"
                 }
             }
-            
             self.view.layoutIfNeeded()
         }
     }
     
-    @objc func startSelectCircleButton(sender:UIButton){
-        UIView.animate(withDuration: 0.3) {
-            self.startSelectCircleButton.snp.remakeConstraints { make in
-                make.centerY.equalToSuperview()
-                make.height.equalToSuperview().dividedBy(1.2)
-                make.width.equalTo(self.startSelectBackButton.snp.height).dividedBy(1.2)
-                
-                if self.startSelectedLabelText == "오전"{
-                    make.right.equalToSuperview().offset(-self.view.frame.width/290)
-                    
-                    self.highlightedLabel(label: self.startAfternoonLabel)
-                    self.unHighlightedLabel(label: self.startMorningLabel)
-                    
-                    self.startSelectedLabelText = "오후"
-                }else{
-                    make.left.equalToSuperview().offset(self.view.frame.width/290)
-                    
-                    self.highlightedLabel(label: self.startMorningLabel)
-                    self.unHighlightedLabel(label: self.startAfternoonLabel)
-                    
-                    self.startSelectedLabelText = "오전"
-                }
-            }
-            
-            self.view.layoutIfNeeded()
-        }
-    }
-    
-    func highlightedLabel(label:UILabel){
-        label.dynamicFont(fontSize: 12, currentFontName: "AppleSDGothicNeo-SemiBold")
-    }
-    
-    func unHighlightedLabel(label:UILabel){
-        label.dynamicFont(fontSize: 12, currentFontName: "AppleSDGothicNeo-Thin")
-    }
-    
-    func addZero(n: Int) -> String{
-        if n < 10{
-            return "0\(n)"
-        }else{
-            return "\(n)"
-        }
-    }
-    
-    func timeValueSetting(selectedValuesIndex: [String]){
+    func timeValueSetting(receiveStartTime: String, receiveEndTime: String, selectedAfterOrMorn: [String], selectedValuesIndex: [Int]){
+        self.afterOrMorn = selectedAfterOrMorn
+        self.selectedTimeIndex = selectedValuesIndex
+        self.sendStartTime = receiveStartTime
+        self.sendEndTime = receiveEndTime
+        
+        print("timeValueSetting : \(startTime), \(endTime)")
+        
+        startSelectCircleButtonMove(startSelectedLabelText: selectedAfterOrMorn[0])
+        endSelectCircleButtonMove(endSelectedLabelText: selectedAfterOrMorn[1])
+        
+        startPickerView.selectRow(selectedValuesIndex[0], inComponent: 0, animated: false)
+        startPickerView.selectRow(selectedValuesIndex[1], inComponent: 1, animated: false)
+        endPickerView.selectRow(selectedValuesIndex[2], inComponent: 0, animated: false)
+        endPickerView.selectRow(selectedValuesIndex[3], inComponent: 1, animated: false)
     }
 }
 
@@ -425,6 +453,10 @@ extension TimeAddModalViewController: UIPickerViewDataSource, UIPickerViewDelega
                 selectedTimeIndex[3] = row
             }
         }
+        
+        // 여기서 변경된 값만 넣어줘야함 그래서.. 이 아래 두 코드를 여기서 넣어주면 안되고 근데 make todo에 또 넣으면 안됨 ㅅㅂ
+        sendStartTime = "\(startHourTime) : \(startMinTime)"
+        sendEndTime = "\(endHourTime) : \(endMinTime)"
     }
     
     func pickerView(_ pickerView: UIPickerView, viewForRow row: Int, forComponent component: Int, reusing view: UIView?) -> UIView {
