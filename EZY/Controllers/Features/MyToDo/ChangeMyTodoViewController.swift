@@ -7,48 +7,50 @@
 
 import UIKit
 
-class PersonalPlanChangeViewController: UIViewController{
+class ChangeMyTodoViewController: UIViewController{
     //MARK: - Properties
-    var TagColorModels: [TagColorCollectionViewModel] = [
-                                                TagColorCollectionViewModel(backgroundColor: UIColor.EZY_TagColorArray[0], isSelected: false),
-                                                 TagColorCollectionViewModel(backgroundColor: UIColor.EZY_TagColorArray[1], isSelected: true),
-                                                 TagColorCollectionViewModel(backgroundColor: UIColor.EZY_TagColorArray[2], isSelected: true),
-                                                 TagColorCollectionViewModel(backgroundColor: UIColor.EZY_TagColorArray[3], isSelected: true),
-                                                 TagColorCollectionViewModel(backgroundColor: UIColor.EZY_TagColorArray[4], isSelected: true),
-                                                 TagColorCollectionViewModel(backgroundColor: UIColor.EZY_TagColorArray[5], isSelected: true),
-                                                 TagColorCollectionViewModel(backgroundColor: UIColor.EZY_TagColorArray[6], isSelected: true),
-                                                 TagColorCollectionViewModel(backgroundColor: UIColor.EZY_TagColorArray[7], isSelected: true),
-                                                 TagColorCollectionViewModel(backgroundColor: UIColor.EZY_TagColorArray[8], isSelected: true),
-                                                 TagColorCollectionViewModel(backgroundColor: UIColor.EZY_TagColorArray[9], isSelected: true),
-                                                 TagColorCollectionViewModel(backgroundColor: UIColor.EZY_TagColorArray[10], isSelected: true),
-                                                TagColorCollectionViewModel(backgroundColor: UIColor.EZY_TagColorArray[11], isSelected: true),
-                                                TagColorCollectionViewModel(backgroundColor: UIColor.EZY_TagColorArray[12], isSelected: true)]
+    private var TagColorModels: [TagColorCollectionViewModel] = [
+        TagColorCollectionViewModel(backgroundColor: UIColor.EZY_TagColorArray[0], isSelected: false),
+        TagColorCollectionViewModel(backgroundColor: UIColor.EZY_TagColorArray[1], isSelected: true),
+        TagColorCollectionViewModel(backgroundColor: UIColor.EZY_TagColorArray[2], isSelected: true),
+        TagColorCollectionViewModel(backgroundColor: UIColor.EZY_TagColorArray[3], isSelected: true),
+        TagColorCollectionViewModel(backgroundColor: UIColor.EZY_TagColorArray[4], isSelected: true),
+        TagColorCollectionViewModel(backgroundColor: UIColor.EZY_TagColorArray[5], isSelected: true),
+        TagColorCollectionViewModel(backgroundColor: UIColor.EZY_TagColorArray[6], isSelected: true),
+        TagColorCollectionViewModel(backgroundColor: UIColor.EZY_TagColorArray[7], isSelected: true)]
     
-    private var TagModels: [TagCollectionViewModel] = [TagCollectionViewModel(backgroundColor: UIColor(red: 186/255, green: 200/255, blue: 255/255, alpha: 1), isSelected: true, iconImgae: UIImage(named: "EZY_UnSelectedTagAddButtonImage")!),
-                                                       TagCollectionViewModel(backgroundColor: UIColor(red: 221/255, green: 220/255, blue: 220/255, alpha: 1), isSelected: false, iconImgae: UIImage(named: "EZY_SelectedNoSelectTagButtonImage")!),
-                                                       TagCollectionViewModel(backgroundColor: UIColor(red: 206/255, green: 200/255, blue: 255/255, alpha: 1), isSelected: true, iconImgae: UIImage()),
-                                               TagCollectionViewModel(backgroundColor: UIColor(red: 216/255, green: 200/255, blue: 255/255, alpha: 1), isSelected: true, iconImgae: UIImage()),
-                                               TagCollectionViewModel(backgroundColor: UIColor(red: 226/255, green: 200/255, blue: 255/255, alpha: 1), isSelected: true, iconImgae: UIImage())]
-    
-    fileprivate var selectedTimeStartHourIndex = 0
-    
-    fileprivate var selectedTimeEndHourIndex = 0
-    
-    fileprivate var tagColorPreciousSelectedIndex = 0
-    
-    fileprivate var selectedTagColorIndex = 0
-    
-    fileprivate var selectedTagColor = UIColor()
-
-    private var selectedRepeatDayTextArray = [String]()
+    private var TagModels: [TagCollectionViewModel] = [
+        TagCollectionViewModel(backgroundColor: UIColor(red: 186/255, green: 200/255, blue: 255/255, alpha: 1), isSelected: true, iconImgae: UIImage(named: "EZY_UnSelectedTagAddButtonImage")!),
+        TagCollectionViewModel(backgroundColor: UIColor(red: 221/255, green: 220/255, blue: 220/255, alpha: 1), isSelected: false, iconImgae: UIImage(named: "EZY_SelectedNoSelectTagButtonImage")!),
+        TagCollectionViewModel(backgroundColor: UIColor(red: 206/255, green: 200/255, blue: 255/255, alpha: 1), isSelected: true, iconImgae: UIImage()),
+        TagCollectionViewModel(backgroundColor: UIColor(red: 216/255, green: 200/255, blue: 255/255, alpha: 1), isSelected: true, iconImgae: UIImage()),
+        TagCollectionViewModel(backgroundColor: UIColor(red: 226/255, green: 200/255, blue: 255/255, alpha: 1), isSelected: true, iconImgae: UIImage())]
     
     private var bounds = UIScreen.main.bounds
     
+    private var selectedRepeatDayTextArray = [String]()
+    
+    private var selectedTagColor = UIColor()
+    
     private var rotationAngle: CGFloat!
     
-    private var selectedDayOfWeekText = ""
+    private var selectedTimeIndex: [Int] = [0,0,0,0]
     
-    private var selectedDayText = ""
+    private var selectedRepeatIndex: [Int]  = []
+        
+    private var dayPickerViewSelectedValueIndex = 0
+    
+    private var tagColorPreciousSelectedIndex = 0
+    
+    private var selectedTimeStartHourIndex = 0
+    
+    private var selectedTimeEndHourIndex = 0
+    
+    private var selectedTagColorIndex = 0
+    
+    private var tagNameTextArray = ["x", "+", "TOEIC", "CODING", "COOKING"]
+    
+    private var selectedAfterOrMorn = ["오후","오후"]
     
     private var selectedStartTime = ["01","00"]
     
@@ -58,29 +60,12 @@ class PersonalPlanChangeViewController: UIViewController{
     
     private var receiveEndTime = "01 : 00"
     
-    private let dayEnglishTextArray = ["Mon","Tue","Wed","Thr","Fri","Sat","Sun"]
-    
-    private let dayKoreanTextArray = ["월","화","수","목","금","토","일"]
-    
-    private var dayPickerViewTextArray = [["Mon","Tue","Wed","Thr","Fri","Sat","Sun","Mon","Tue","Wed","Thr","Fri","Sat","Sun"].reversed(),["1","2","3","4","5","6","7","1","2","3","4","5","6","7"]]
-    
-    private var dayPickerViewSelectedValueIndex = 0
-    
-    private var selectedAfterOrMorn = ["오후","오후"]
-    
     private var leftOrRight = ["L","L"]
     
-    private var selectedTimeIndex: [Int] = [0,0,0,0]
+    private var selectedDayOfWeekText = ""
     
-    private var tagNameTextArray = ["x", "+", "TOEIC", "CODING", "COOKING"]
+    private var selectedDayText = ""
     
-    private var selectedRepeatIndex: [Int]  = []
-    
-    
-    
-    fileprivate let selectedRepeatColor = UIColor.rgb(red: 170, green: 187, blue: 255)
-    
-    //MARK: - 모달 background 설정
     let bgView = UIView().then {
         $0.backgroundColor = .black
         $0.alpha = 0
@@ -217,6 +202,8 @@ class PersonalPlanChangeViewController: UIViewController{
     
     //MARK: - helpers
     func configureUI(){
+        self.view.backgroundColor = .white
+        
         addView()
                 
         location()
@@ -238,8 +225,6 @@ class PersonalPlanChangeViewController: UIViewController{
     
     //MARK: - addLayout
     func location(){
-        self.view.backgroundColor = .white
-        
         backButton.snp.makeConstraints { make in
             make.top.equalTo(self.view.safeAreaLayoutGuide).offset(self.view.frame.height/47.7)
             make.left.equalToSuperview().offset(self.view.frame.width/12)
@@ -363,19 +348,17 @@ class PersonalPlanChangeViewController: UIViewController{
                 make.width.equalToSuperview().dividedBy(1.13)
                 make.height.equalToSuperview().dividedBy(3.38)
             }
+            
             self.view.layoutIfNeeded()
         }
     }
     
-    // MARK: - Gesture 안먹음
     @objc func notificationAddButtonClicked(sender:UIButton){
         let MoreCalendarModalsVC = MoreAlarmModelViewController.instance()
         MoreCalendarModalsVC.delegate = self
         addDim()
         present(MoreCalendarModalsVC, animated: true, completion: nil)
         AlarmSettingCell().isSelected = false
-        
-        // 알림 시간 +버튼에 text로 넣기
     }
     
     @objc func tagAddButtonClicked(sender:UIButton){
@@ -501,11 +484,7 @@ class PersonalPlanChangeViewController: UIViewController{
     }
     
     func LeftOrRightChangeKorean(leftOrRight: String) -> String{
-        if leftOrRight == "L" {
-            return "오전"
-        }else{
-            return "오후"
-        }
+        if leftOrRight == "L" { return "오전" }else{ return "오후" }
     }
     
     // MARK: - shakeView
@@ -538,7 +517,7 @@ class PersonalPlanChangeViewController: UIViewController{
 }
 
 //MARK: - collectionView extension
-extension PersonalPlanChangeViewController: UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout{
+extension ChangeMyTodoViewController: UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout{
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         if collectionView == tagCollectionView{
@@ -679,7 +658,7 @@ extension PersonalPlanChangeViewController: UICollectionViewDataSource, UICollec
 }
 
 // MARK: - UITextViewDelegate extension
-extension PersonalPlanChangeViewController: UITextViewDelegate{
+extension ChangeMyTodoViewController: UITextViewDelegate{
     func textViewDidBeginEditing(_ textView: UITextView) {
         // textView클릭 시 explanationContainerView 올리기
         UIView.animate(withDuration: 0.3) {
@@ -706,7 +685,7 @@ extension PersonalPlanChangeViewController: UITextViewDelegate{
     }
 }
 
-extension PersonalPlanChangeViewController: AlarmModelDelegate{
+extension ChangeMyTodoViewController: AlarmModelDelegate{
     func updateData(ampm: String, time: Int, minute: Int) {
         self.alarmReloadSetting(ampm, time + 1, minute)
     }
@@ -716,7 +695,7 @@ extension PersonalPlanChangeViewController: AlarmModelDelegate{
     }
 }
 
-extension PersonalPlanChangeViewController: CalendarAddDelegate{
+extension ChangeMyTodoViewController: CalendarAddDelegate{
     func updateData(selectedDay: String, selectedRepeatDay: [String], selectedDayOfWeek: String, yearAndMonthText: String, selectedValuesIndex: Int, selectedRepeatIndex: [Int]) {
         self.calendarReloadSetting(selectedDay, selectedRepeatDay, selectedDayOfWeek, yearAndMonthText, selectedValuesIndex, selectedRepeatIndex)
     }
@@ -726,7 +705,7 @@ extension PersonalPlanChangeViewController: CalendarAddDelegate{
     }
 }
 
-extension PersonalPlanChangeViewController: TimeAddDelegate{
+extension ChangeMyTodoViewController: TimeAddDelegate{
     func onTapTimeAddModalClose() {
         self.removeDim()
     }
