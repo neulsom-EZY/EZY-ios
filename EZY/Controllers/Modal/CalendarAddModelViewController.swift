@@ -15,7 +15,7 @@ protocol CalendarAddDelegate: AnyObject {
 class CalendarAddModelViewController: UIViewController {
     // MARK: - Properties
     weak var delegate: CalendarAddDelegate?
-    
+    private let transParentsView = UIView()
     private let bgView = UIView().then {
         $0.backgroundColor = .white
         $0.layer.cornerRadius = 10
@@ -177,16 +177,8 @@ class CalendarAddModelViewController: UIViewController {
     
     //MARK: - addView
     func addView(){
-        self.view.addSubview(bgView)
-        bgView.addSubview(titleLabel)
-        bgView.addSubview(monthLabel)
-        bgView.addSubview(monthYearLabel)
-        bgView.addSubview(calendarTriangleImageView)
-        bgView.addSubview(dayPickerView)
-        bgView.addSubview(divideLineView)
-        bgView.addSubview(repeatLabel)
-        bgView.addSubview(repeatCollectionView)
-        bgView.addSubview(calendarAddButton)
+        [transParentsView,bgView].forEach{ view.addSubview($0)}
+        [titleLabel,monthLabel,monthYearLabel,calendarTriangleImageView,dayPickerView,divideLineView,repeatLabel,repeatCollectionView,calendarAddButton].forEach{ bgView.addSubview($0)}
     }
     
     // MARK: - location
@@ -254,11 +246,8 @@ class CalendarAddModelViewController: UIViewController {
     
     // MARK: - delegateAndDataSource
     func delegateAndDataSource(){
-        repeatCollectionView.delegate = self
-        repeatCollectionView.dataSource = self
-        
-        dayPickerView.delegate = self
-        dayPickerView.dataSource = self
+        [repeatCollectionView].forEach{ $0.delegate = self; $0.dataSource = self}
+        [dayPickerView].forEach{ $0.delegate = self; $0.dataSource = self}
         
         dayPickerView.transform = CGAffineTransform(rotationAngle: (-90 * (.pi / 180*3)))
     }
