@@ -10,11 +10,10 @@ import Then
 import SnapKit
 
 protocol BulletinDelegate: class {
-    func onTapClose()
     func update(vc : UIViewController)
 }
 
-class MoreCalendarModalsViewController : UIViewController{
+class MoreCalendarModalsViewController : BaseModal{
     
     //MARK: - Properties
     weak var delegate: BulletinDelegate?
@@ -23,7 +22,6 @@ class MoreCalendarModalsViewController : UIViewController{
         $0.backgroundColor = .white
         $0.layer.cornerRadius = 40
     }
-    private let transparentView = UIView()
     
     private let TitleLabel = UILabel().then{
         $0.text = "추가 할 항목을 선택해주세요"
@@ -65,16 +63,17 @@ class MoreCalendarModalsViewController : UIViewController{
         }
     }
     //MARK: - Lifecycle
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
+    override func configure() {
+        super.configure()
         configureUI()
-        
+        addView()
+        cornerRadius()
+        location()
     }
     
     //MARK: - Selectors
     @objc func onTapClose() {
-        delegate?.onTapClose()
+        baseDelegate?.onTapClose()
         dismiss(animated: true, completion: nil)
     }
     
@@ -111,16 +110,13 @@ class MoreCalendarModalsViewController : UIViewController{
         }
     }
     @objc func MakeTodo(){
-        delegate?.onTapClose()
+        baseDelegate?.onTapClose()
         delegate?.update(vc: viewControlelrChoose)
     }
     //MARK: - HELPERS
     
     private func configureUI(){
-        addView()
-        cornerRadius()
-        location()
-        addTransparentsview(frame: transparentView.frame)
+        
     }
     private func addView(){
         [transparentView,bgView,TitleLabel,myToDo,errand,makeButton,makeTitle].forEach { view.addSubview($0)}
@@ -179,10 +175,5 @@ class MoreCalendarModalsViewController : UIViewController{
         errand.layer.borderColor = UIColor.clear.cgColor
         errand.isSelected = false
     }
-    private func addTransparentsview(frame : CGRect){
-        let window = UIApplication.shared.keyWindow
-        transparentView.frame = window?.frame ?? self.view.frame
-        let tapgesture = UITapGestureRecognizer(target: self, action: #selector(onTapClose))
-        transparentView.addGestureRecognizer(tapgesture)
-    }
+
 }
