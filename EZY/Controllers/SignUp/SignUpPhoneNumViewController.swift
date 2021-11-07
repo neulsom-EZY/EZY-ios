@@ -56,7 +56,7 @@ class SignUpPhoneNumViewController: UIViewController{
     @objc
     private func onTapContinueTerms(){
         if isValidPhoneNum(PhoneNumber: phoneNumContainer.tf.text) == true{
-            let controller = SignUpTermsViewController()
+            let controller = SignUpAuthCodeViewController()
             navigationController?.pushViewController(controller, animated: true)
         }else{
             shakeView(self.view)
