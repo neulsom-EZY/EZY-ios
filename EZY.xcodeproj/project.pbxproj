@@ -105,6 +105,7 @@
 		AA04F9D52700996800EE0506 /* LoginTextFieldContainerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA04F9D42700996800EE0506 /* LoginTextFieldContainerView.swift */; };
 		AA04F9D72701C12600EE0506 /* SignUpTextFieldContainerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA04F9D62701C12600EE0506 /* SignUpTextFieldContainerView.swift */; };
 		AA4575082736CC790018411C /* AuthCodeTextFieldView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA4575072736CC790018411C /* AuthCodeTextFieldView.swift */; };
+		AA82BCE02737AB2A000D3F04 /* SignUpAuthCodeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA82BCDF2737AB2A000D3F04 /* SignUpAuthCodeViewController.swift */; };
 		AAD95AE126EC7EC7004E4580 /* NewNicknamePhoneNumViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAD95AE026EC7EC7004E4580 /* NewNicknamePhoneNumViewController.swift */; };
 		AAD95AE326EC818B004E4580 /* NewNicknamePutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAD95AE226EC818B004E4580 /* NewNicknamePutViewController.swift */; };
 		EE84DEC02715ABF100121C62 /* CollectionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE84DEBF2715ABF100121C62 /* CollectionViewModel.swift */; };
@@ -246,6 +247,7 @@
 		AA04F9D42700996800EE0506 /* LoginTextFieldContainerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginTextFieldContainerView.swift; sourceTree = "<group>"; };
 		AA04F9D62701C12600EE0506 /* SignUpTextFieldContainerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpTextFieldContainerView.swift; sourceTree = "<group>"; };
 		AA4575072736CC790018411C /* AuthCodeTextFieldView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = AuthCodeTextFieldView.swift; path = PickerView/AuthCodeTextFieldView.swift; sourceTree = "<group>"; };
+		AA82BCDF2737AB2A000D3F04 /* SignUpAuthCodeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpAuthCodeViewController.swift; sourceTree = "<group>"; };
 		AAD95AE026EC7EC7004E4580 /* NewNicknamePhoneNumViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewNicknamePhoneNumViewController.swift; sourceTree = "<group>"; };
 		AAD95AE226EC818B004E4580 /* NewNicknamePutViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewNicknamePutViewController.swift; sourceTree = "<group>"; };
 		C37AD74ACD84F363045FF654 /* Pods_EZY.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_EZY.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -414,11 +416,11 @@
 		6AA769FF26636C7600B7E1F5 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				6AB7D439272FE1E400FAFA19 /* Modal */,
-				6AB7D431272FDF6E00FAFA19 /* Features */,
-				6AB7D42C272FDE6C00FAFA19 /* UserInfoChange */,
-				6AB7D42B272FDE5C00FAFA19 /* LogIn */,
 				6AB7D42A272FDE4900FAFA19 /* SignUp */,
+				6AB7D42B272FDE5C00FAFA19 /* LogIn */,
+				6AB7D42C272FDE6C00FAFA19 /* UserInfoChange */,
+				6AB7D431272FDF6E00FAFA19 /* Features */,
+				6AB7D439272FE1E400FAFA19 /* Modal */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -454,6 +456,7 @@
 				6AA6F78E269C2E4C00958D36 /* SignUpPasswordViewController.swift */,
 				6AA6F790269C2E4C00958D36 /* SignUpPhoneNumViewController.swift */,
 				6AA6F791269C2E4D00958D36 /* SignUpTermsViewController.swift */,
+				AA82BCDF2737AB2A000D3F04 /* SignUpAuthCodeViewController.swift */,
 			);
 			path = SignUp;
 			sourceTree = "<group>";
@@ -980,6 +983,7 @@
 				EE9F0D2726E8A2AC0015E81B /* MoreCalendarModalsViewController.swift in Sources */,
 				EE93B4D926876C6F0055D7A6 /* PushNotificationManagementViewController.swift in Sources */,
 				EE93B4E42687BD8A0055D7A6 /* ManageData.swift in Sources */,
+				AA82BCE02737AB2A000D3F04 /* SignUpAuthCodeViewController.swift in Sources */,
 				6AA769E526636AE700B7E1F5 /* AppDelegate.swift in Sources */,
 				EE93B4DB26876F430055D7A6 /* AlarmManagementButton.swift in Sources */,
 				EE9F0D5126E8AA810015E81B /* Model.swift in Sources */,
