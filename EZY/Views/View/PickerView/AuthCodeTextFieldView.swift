@@ -15,7 +15,7 @@ class AuthCodeTextFieldView: UIView {
         $0.textColor = .rgb(red: 106, green: 106, blue: 106)
     }
     
-    private let tf1 = UITextField().then {
+    let tf1 = UITextField().then {
         $0.textColor = .rgb(red: 152, green: 152, blue: 152)
         $0.dynamicFont(fontSize: 17, currentFontName: "AppleSDGothicNeo-Bold")
         $0.backgroundColor = .rgb(red: 250, green: 250, blue: 250)
@@ -23,7 +23,7 @@ class AuthCodeTextFieldView: UIView {
         $0.textAlignment = .center
     }
     
-    private let tf2 = UITextField().then {
+    let tf2 = UITextField().then {
         $0.textColor = .rgb(red: 152, green: 152, blue: 152)
         $0.dynamicFont(fontSize: 17, currentFontName: "AppleSDGothicNeo-Bold")
         $0.backgroundColor = .rgb(red: 250, green: 250, blue: 250)
@@ -31,7 +31,7 @@ class AuthCodeTextFieldView: UIView {
         $0.textAlignment = .center
     }
     
-    private let tf3 = UITextField().then {
+    let tf3 = UITextField().then {
         $0.textColor = .rgb(red: 152, green: 152, blue: 152)
         $0.dynamicFont(fontSize: 17, currentFontName: "AppleSDGothicNeo-Bold")
         $0.backgroundColor = .rgb(red: 250, green: 250, blue: 250)
@@ -39,19 +39,12 @@ class AuthCodeTextFieldView: UIView {
         $0.textAlignment = .center
     }
     
-    private let tf4 = UITextField().then {
+    let tf4 = UITextField().then {
         $0.textColor = .rgb(red: 152, green: 152, blue: 152)
         $0.dynamicFont(fontSize: 17, currentFontName: "AppleSDGothicNeo-Bold")
         $0.backgroundColor = .rgb(red: 250, green: 250, blue: 250)
         $0.borderStyle = .roundedRect
         $0.textAlignment = .center
-    }
-    
-    private let tfStack = UIStackView().then {
-        $0.translatesAutoresizingMaskIntoConstraints = false
-        $0.axis = .horizontal
-        $0.spacing = 15
-        $0.distribution = .fillEqually
     }
     
     override init(frame: CGRect) {
