@@ -9,7 +9,7 @@ import UIKit
 import Then
 import SnapKit
 
-protocol BulletinDelegate: class {
+protocol BulletinDelegate: AnyObject {
     func update(vc : UIViewController)
 }
 
@@ -46,17 +46,14 @@ class MoreCalendarModalsViewController : BaseModal{
         return button
     }()
     private let makeButton = UIButton().then{
+        $0.titleLabel?.dynamicFont(fontSize: 12, currentFontName: "AppleSDGothicNeo-Bold")
+        $0.titleLabel?.textColor = .white
+        $0.titleLabel?.text = "생성"
         $0.backgroundColor = .rgb(red: 170, green: 163, blue:255)
         $0.isEnabled = false
         $0.addTarget(self, action: #selector(MakeTodo), for: .touchUpInside)
     }
 
-    private let makeTitle = UILabel().then{
-        $0.text = "생 성"
-        $0.textColor = .white
-        $0.dynamicFont(fontSize: 12, currentFontName: "AppleSDGothicNeo-Bold")
-    }
-  
     static func instance() -> MoreCalendarModalsViewController {
         return MoreCalendarModalsViewController(nibName: nil, bundle: nil).then {
             $0.modalPresentationStyle = .overFullScreen
@@ -119,7 +116,7 @@ class MoreCalendarModalsViewController : BaseModal{
         
     }
     private func addView(){
-        [transparentView,bgView,TitleLabel,myToDo,errand,makeButton,makeTitle].forEach { view.addSubview($0)}
+        [transparentView,bgView,TitleLabel,myToDo,errand,makeButton].forEach { view.addSubview($0)}
     }
     
     private func cornerRadius(){
@@ -162,9 +159,7 @@ class MoreCalendarModalsViewController : BaseModal{
             make.width.equalTo(view.frame.height/11.6 )
             make.height.equalTo(view.frame.height/24.61 )
         }
-        makeTitle.snp.makeConstraints { (make) in
-            make.center.equalTo(makeButton.snp.center)
-        }
+
     }
     private func myTodoState(){
         myToDo.layer.borderColor = UIColor.clear.cgColor
@@ -175,5 +170,4 @@ class MoreCalendarModalsViewController : BaseModal{
         errand.layer.borderColor = UIColor.clear.cgColor
         errand.isSelected = false
     }
-
 }
