@@ -45,6 +45,7 @@
 		6A4EDA35266BD27800B809EC /* TopView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A4EDA34266BD27800B809EC /* TopView.swift */; };
 		6A4EDA37266DA52A00B809EC /* SettingTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A4EDA36266DA52A00B809EC /* SettingTableViewCell.swift */; };
 		6A4EDA41266E38E000B809EC /* GroupCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A4EDA40266E38E000B809EC /* GroupCollectionViewCell.swift */; };
+		6A5C6A242734A24000556849 /* TagAddModalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A5C6A232734A24000556849 /* TagAddModalViewController.swift */; };
 		6A685C0D26AC1E2D0079BC30 /* PersonalPlanDetailRepeatDayCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A685C0C26AC1E2D0079BC30 /* PersonalPlanDetailRepeatDayCollectionViewCell.swift */; };
 		6A6A66E026D608D40096A14B /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 6A6A66DF26D608D40096A14B /* GoogleService-Info.plist */; };
 		6A705BB6267E3ABF001954CE /* ChangeMyTodoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A705BB5267E3ABF001954CE /* ChangeMyTodoViewController.swift */; };
@@ -183,6 +184,7 @@
 		6A4EDA34266BD27800B809EC /* TopView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopView.swift; sourceTree = "<group>"; };
 		6A4EDA36266DA52A00B809EC /* SettingTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingTableViewCell.swift; sourceTree = "<group>"; };
 		6A4EDA40266E38E000B809EC /* GroupCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupCollectionViewCell.swift; sourceTree = "<group>"; };
+		6A5C6A232734A24000556849 /* TagAddModalViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagAddModalViewController.swift; sourceTree = "<group>"; };
 		6A685C0C26AC1E2D0079BC30 /* PersonalPlanDetailRepeatDayCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonalPlanDetailRepeatDayCollectionViewCell.swift; sourceTree = "<group>"; };
 		6A6A66DF26D608D40096A14B /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		6A705BB5267E3ABF001954CE /* ChangeMyTodoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangeMyTodoViewController.swift; sourceTree = "<group>"; };
@@ -571,6 +573,7 @@
 				6AE41E7D26A9560C0072612C /* TagSettingViewController.swift */,
 				EE9582D1272A7B5F00AAEC8A /* LogoutViewController.swift */,
 				EE93B4D826876C6F0055D7A6 /* PushNotificationManagementViewController.swift */,
+				6A5C6A232734A24000556849 /* TagAddModalViewController.swift */,
 			);
 			path = SettingFeatures;
 			sourceTree = "<group>";
@@ -976,6 +979,7 @@
 				EE9F0D2726E8A2AC0015E81B /* MoreCalendarModalsViewController.swift in Sources */,
 				EE93B4D926876C6F0055D7A6 /* PushNotificationManagementViewController.swift in Sources */,
 				EE93B4E42687BD8A0055D7A6 /* ManageData.swift in Sources */,
+				6A5C6A242734A24000556849 /* TagAddModalViewController.swift in Sources */,
 				6AA769E526636AE700B7E1F5 /* AppDelegate.swift in Sources */,
 				EE93B4DB26876F430055D7A6 /* AlarmManagementButton.swift in Sources */,
 				EE9F0D5126E8AA810015E81B /* Model.swift in Sources */,
