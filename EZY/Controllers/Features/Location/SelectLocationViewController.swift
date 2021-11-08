@@ -6,10 +6,21 @@
 //
 
 import UIKit
+import Alamofire
 
+
+public struct Place{
+        let placeName :String
+        let roadAdressName:String
+        let longitudeX:String
+        let latitudeY:String
+    }
+    
 class SelectLocationViewController: UIViewController {
     // MARK: - Properties
-    private let alphabetTextArray = ["A","B","C","D","E","F","G","H","I","J","K","A","B","C","D","E","F","G","H","I","J","K","A","B","C","D","E","F","G","H","I","J","K"]
+    private let alphabetTextArray: [String] = []
+    
+    var resultList=[Place]()
 
     private let selectLocationModalView = SelectLocationModalView().then{
         $0.okButton.addTarget(self, action: #selector(okButtonClicked(sender:)), for: .touchUpInside)
@@ -43,6 +54,7 @@ class SelectLocationViewController: UIViewController {
     
     private let searchButton = UIButton().then{
         $0.setImage(UIImage(named: "EZY_SearchButtonImage"), for: .normal)
+        $0.addTarget(self, action: #selector(searchButtonClicked(sender:)), for: .touchUpInside)
     }
     
     private let locationTableView = UITableView().then {
@@ -193,13 +205,14 @@ class SelectLocationViewController: UIViewController {
     @objc private func backButtonClicked(sender:UIButton){
         self.navigationController?.popViewController(animated: true)
     }
-}
-
-extension SelectLocationViewController: UITableViewDelegate{
     
+    @objc private func searchButtonClicked(sender:UIButton){
+        // 검색 버튼 클릭 시
+    }
 }
 
-extension SelectLocationViewController: UITableViewDataSource{
+// MARK: - UITableViewDelegate and UITableViewDataSource
+extension SelectLocationViewController: UITableViewDataSource, UITableViewDelegate{
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return alphabetTextArray.count
     }
@@ -207,9 +220,7 @@ extension SelectLocationViewController: UITableViewDataSource{
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: LocationTableViewCell.reuseId, for: indexPath) as! LocationTableViewCell
         
-        cell.backgroundColor = .clear
         cell.selectionStyle = .none
-        
         cell.alphabetLabel.text = alphabetTextArray[indexPath.row]
         
         return cell
