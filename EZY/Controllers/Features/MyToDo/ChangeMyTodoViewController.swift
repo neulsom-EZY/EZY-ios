@@ -623,6 +623,7 @@ extension ChangeMyTodoViewController : BaseModalDelegate{
     func onTapClose() {
         self.removeDim()
     }
+}
 
 extension ChangeMyTodoViewController: TagAddDelegate{
     func onTapTagAddModalClose() {
