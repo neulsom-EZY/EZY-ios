@@ -15,7 +15,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         guard let windowScene = (scene as? UIWindowScene) else { return }
         window = UIWindow(windowScene: windowScene)
       
-        let mainViewController = ChangePhoneNumPutViewController()
+        let mainViewController = LoginViewController()
 
 
         let navigationController = UINavigationController(rootViewController: mainViewController)
