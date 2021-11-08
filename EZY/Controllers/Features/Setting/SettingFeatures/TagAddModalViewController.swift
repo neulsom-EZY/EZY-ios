@@ -179,11 +179,28 @@ class TagAddModalViewController: UIViewController {
         tagColorCollectionView.dataSource = self
     }
     
+    // MARK: - shakeView
+    func shakeView(_ view: UIView?) {
+        let shake = CABasicAnimation(keyPath: "position")
+        shake.duration = 0.08
+        shake.repeatCount = 2
+        shake.autoreverses = true
+        shake.fromValue = NSValue(cgPoint: CGPoint(x: (view?.center.x)! - 2, y: view?.center.y ?? 0.0))
+        shake.toValue = NSValue(cgPoint: CGPoint(x: (view?.center.x)! + 2, y: view?.center.y ?? 0.0))
+        view?.layer.add(shake, forKey: "position")
+    }
+    
     //MARK: - selectors
     @objc func MakeTodo(){
-        delegate?.onTapTagAddModalClose()
-        dismiss(animated: true, completion: nil)
-//        delegate?.updateData(tagName: <#T##String#>, tagColorIndex: <#T##Int#>)
+        if tagNameTextField.text!.trimmingCharacters(in: .whitespaces).isEmpty || tagNameTextField.text == ""{
+            shakeView(tagNameLabel)
+        }else{
+            delegate?.onTapTagAddModalClose()
+            dismiss(animated: true, completion: nil)
+            delegate?.updateData(tagName: tagNameTextField.text!, tagColorIndex: selectedTagColorIndex)
+        }
+        
+        
     }
     
     static func instance() -> TagAddModalViewController {
