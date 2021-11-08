@@ -32,7 +32,7 @@ class ChangePhoneNumPutViewController: UIViewController {
     
     lazy var changeButton = UIButton().then {
         $0.setBackgroundImage(UIImage(named: "EZY_ChangeButtonImage"), for: .normal)
-        $0.setTitle("변경하러 가기", for: .normal)
+        $0.setTitle("계속하기", for: .normal)
         $0.dynamicFont(fontSize: 14, currentFontName: "AppleSDGothicNeo-Bold")
         $0.addTarget(self, action: #selector(changeButtonClicked(sender:)), for: .touchUpInside)
     }
