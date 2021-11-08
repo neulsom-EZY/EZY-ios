@@ -1,30 +1,31 @@
 //
-//  SignUpPhoneNumViewController.swift
+//  NewPasswordAuthCodeViewController.swift
 //  EZY
 //
-//  Created by 노연주 on 2021/06/13.
+//  Created by 노연주 on 2021/11/08.
 //
 
 import UIKit
 import SnapKit
 import Then
 
-class SignUpPhoneNumViewController: UIViewController{
+class NewPasswordAuthCodeViewController: UIViewController {
     //MARK: - Properties
     
     private let topBarView = TopBarView().then {
         $0.goBackButton.addTarget(self, action: #selector(goBack), for: .touchUpInside)
     }
     
-    private let putPhoneNumLabel = UILabel().then {
-        $0.text = "전화번호\n인증을 해주세요."
-        $0.numberOfLines = 2
+    private let toNewPassWordLabel = UILabel().then {
+        $0.text = "전화번호"
         $0.dynamicFont(fontSize: 25, currentFontName: "AppleSDGothicNeo-SemiBold")
         $0.textColor = UIColor.EZY_968DFF
     }
     
-    private let phoneNumContainer = SignUpTextFieldContainerView().then {
-        $0.tfTitle.text = "전화번호"
+    private let putPhoneNumLabel = UILabel().then {
+        $0.text = "인증을 완료해주세요!"
+        $0.dynamicFont(fontSize: 20, currentFontName: "AppleSDGothicNeo-SemiBold")
+        $0.updateGradientTextColor_vertical(gradientColors: [.EZY_968DFF, UIColor.rgba(red: 148, green: 139, blue: 255, alpha: 0.4)])
     }
     
     private let continueButton = CustomGradientContinueBtnView().then {
@@ -32,13 +33,8 @@ class SignUpPhoneNumViewController: UIViewController{
         $0.addTarget(self, action: #selector(onTapContinueTerms), for: .touchUpInside)
     }
     
-    private let certifiedButton = UIButton().then {
-        $0.setTitle("번호인증", for: .normal)
-        $0.titleLabel?.dynamicFont(fontSize: 10, currentFontName: "AppleSDGothicNeo-SemiBold")
-        $0.setTitleColor(UIColor.EZY_FFFFFF, for: .normal)
-        $0.backgroundColor = UIColor.EZY_E3E3E3
-        $0.addTarget(self, action: #selector(onTapcertified), for: .touchUpInside)
-    }
+    private let authCodeView = AuthCodeTextFieldView()
+    
     
     //MARK: - Lifecycle
     override func viewDidLoad() {
@@ -55,43 +51,86 @@ class SignUpPhoneNumViewController: UIViewController{
     
     @objc
     private func onTapContinueTerms(){
-        if isValidPhoneNum(PhoneNumber: phoneNumContainer.tf.text) == true{
-            let controller = SignUpAuthCodeViewController()
-            navigationController?.pushViewController(controller, animated: true)
-        }else{
-            shakeView(self.view)
-        }
+        let controller = NewPasswordPutViewController()
+        navigationController?.pushViewController(controller, animated: true)
     }
     
     @objc
-    private func onTapcertified(){
-        print("DEBUG : Click bottom certified button Button")
+    private func textDidChange(textfield: UITextField) {
+        let text = textfield.text
+        
+        if text?.utf16.count == 1{
+            switch textfield {
+                
+            case authCodeView.tf1:
+                authCodeView.tf2.becomeFirstResponder()
+                break
+                
+            case authCodeView.tf2:
+                authCodeView.tf3.becomeFirstResponder()
+                break
+                
+            case authCodeView.tf3:
+                authCodeView.tf4.becomeFirstResponder()
+                break
+                
+            default:
+                break
+                
+            }
+        }
+        
+        if text?.utf16.count == 0{
+            switch textfield {
+                
+            case authCodeView.tf2:
+                authCodeView.tf1.becomeFirstResponder()
+                break
+                
+            case authCodeView.tf3:
+                authCodeView.tf2.becomeFirstResponder()
+                break
+                
+            case authCodeView.tf4:
+                authCodeView.tf3.becomeFirstResponder()
+                break
+                
+            default:
+                break
+                
+            }
+        }
     }
-
+    
     //MARK: - Helpers
     private func configureUI(){
         view.backgroundColor = .white
         addView()
+        authCodeViewSetting()
         topBarViewSetting()
-        phoneNumContainerViewSetting()
         keyboardTypeSetting()
+        addNotificationCenter()
         cornerRadius()
         location()
-        addNotificationCenter()
     }
+    
+    // MARK: - Add View
     
     private func addView(){
         view.addSubview(topBarView)
+        view.addSubview(toNewPassWordLabel)
         view.addSubview(putPhoneNumLabel)
-        view.addSubview(phoneNumContainer)
         view.addSubview(continueButton)
-        view.addSubview(certifiedButton)
+        view.addSubview(authCodeView)
     }
+    
+    // MARK: - Corner Radius
     
     private func cornerRadius(){
         continueButton.layer.cornerRadius = self.view.frame.height/81.2
-        certifiedButton.layer.cornerRadius = self.view.frame.height/75
     }
+    
+    // MARK: - Location
     
     private func location(){
         topBarView.snp.makeConstraints { make in
@@ -100,16 +139,14 @@ class SignUpPhoneNumViewController: UIViewController{
             make.height.equalTo(self.view.frame.height/7.19)
         }
         
-        putPhoneNumLabel.snp.makeConstraints { make in
+        toNewPassWordLabel.snp.makeConstraints { make in
+            make.left.equalToSuperview().offset(self.view.frame.width/7.5)
             make.top.equalToSuperview().offset(self.view.frame.height/5.04)
-            make.left.equalTo(phoneNumContainer)
         }
         
-        phoneNumContainer.snp.makeConstraints { make in
-            make.top.equalTo(putPhoneNumLabel).offset(self.view.frame.height/8.29)
-            make.centerX.equalToSuperview()
-            make.width.equalTo(self.view.frame.width/1.34)
-            make.height.equalTo(self.view.frame.height/15.62)
+        putPhoneNumLabel.snp.makeConstraints { make in
+            make.top.equalTo(toNewPassWordLabel).offset(self.view.frame.height/27.07)
+            make.left.equalToSuperview().offset(self.view.frame.width/7.5)
         }
         
         continueButton.snp.makeConstraints { make in
@@ -119,12 +156,28 @@ class SignUpPhoneNumViewController: UIViewController{
             make.height.equalTo(self.view.frame.height/16.24)
         }
         
-        certifiedButton.snp.makeConstraints { make in
-            make.top.equalTo(putPhoneNumLabel).offset(self.view.frame.height/8.55)
-            make.right.equalToSuperview().offset(self.view.frame.width/8.3 * -1)
-            make.width.equalTo(self.view.frame.width/6.36)
-            make.height.equalTo(self.view.frame.height/36.9)
+        authCodeView.snp.makeConstraints { make in
+            make.centerX.equalToSuperview()
+            make.top.equalToSuperview().offset(self.view.frame.height/2.9)
+            make.width.equalToSuperview().dividedBy(1.79)
+            make.height.equalToSuperview().dividedBy(10.98)
         }
+    }
+    
+    //MARK: - textField Point Set
+    
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        authCodeView.tf1.resignFirstResponder()
+        authCodeView.tf2.resignFirstResponder()
+        authCodeView.tf3.resignFirstResponder()
+        authCodeView.tf4.resignFirstResponder()
+    }
+    
+    //MARK: - viewWillAppear
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        authCodeView.tf1.becomeFirstResponder()
     }
     
     //MARK: - topBarViewSetting
@@ -136,26 +189,22 @@ class SignUpPhoneNumViewController: UIViewController{
         topBarView.topBarViewLayoutSetting(screenHeight: self.view.frame.height, screenWidth: self.view.frame.width)
     }
     
-    //MARK: - phoneNumContainerViewSetting
-
-    private func phoneNumContainerViewSetting(){
-        phoneNumContainer.addSubview(phoneNumContainer.tfTitle)
-        phoneNumContainer.addSubview(phoneNumContainer.tf)
-        phoneNumContainer.addSubview(phoneNumContainer.divView)
-        
-        phoneNumContainer.loginTfSetting(screenHeight: self.view.frame.height, screenWidth: self.view.frame.width)
+    //MARK: - authCodeViewSetting
+    
+    private func authCodeViewSetting(){
+        authCodeView.tf1.addTarget(self, action: #selector(self.textDidChange(textfield:)), for: UIControl.Event.editingChanged)
+        authCodeView.tf2.addTarget(self, action: #selector(self.textDidChange(textfield:)), for: UIControl.Event.editingChanged)
+        authCodeView.tf3.addTarget(self, action: #selector(self.textDidChange(textfield:)), for: UIControl.Event.editingChanged)
+        authCodeView.tf4.addTarget(self, action: #selector(self.textDidChange(textfield:)), for: UIControl.Event.editingChanged)
     }
     
     //MARK: - KeyboardType Setting
     
     private func keyboardTypeSetting(){
-        phoneNumContainer.tf.keyboardType = .phonePad
-    }
-    
-    //MARK: - textField Point Set
-    
-    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        phoneNumContainer.tf.resignFirstResponder()
+        authCodeView.tf1.keyboardType = .phonePad
+        authCodeView.tf2.keyboardType = .phonePad
+        authCodeView.tf3.keyboardType = .phonePad
+        authCodeView.tf4.keyboardType = .phonePad
     }
     
     //MARK: - Add NotificationCenter
@@ -163,28 +212,6 @@ class SignUpPhoneNumViewController: UIViewController{
     private func addNotificationCenter(){
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(_:)), name:UIResponder.keyboardWillShowNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide(_:)), name: UIResponder.keyboardWillHideNotification, object: nil)
-    }
-    
-    //MARK: - shakeAnimation
-    
-    private func shakeView(_ view: UIView?) {
-        let shake = CABasicAnimation(keyPath: "position")
-        shake.duration = 0.08
-        shake.repeatCount = 2
-        shake.autoreverses = true
-        shake.fromValue = NSValue(cgPoint: CGPoint(x: (view?.center.x)! - 2, y: view?.center.y ?? 0.0))
-        shake.toValue = NSValue(cgPoint: CGPoint(x: (view?.center.x)! + 2, y: view?.center.y ?? 0.0))
-        view?.layer.add(shake, forKey: "position")
-    }
-    
-    //MARK: - PhoneNum Test
-        
-    private func isValidPhoneNum(PhoneNumber: String?) -> Bool {
-        guard PhoneNumber != nil else { return false }
-        
-        let idRegEx = "^01([0-9])([0-9]{3,4})([0-9]{4})$"
-        let pred = NSPredicate(format:"SELF MATCHES %@", idRegEx)
-        return pred.evaluate(with: PhoneNumber)
     }
     
     //MARK: - KeyboardWillShow -> continueButton Up
@@ -214,3 +241,7 @@ class SignUpPhoneNumViewController: UIViewController{
         }
     }
 }
+
+
+
+

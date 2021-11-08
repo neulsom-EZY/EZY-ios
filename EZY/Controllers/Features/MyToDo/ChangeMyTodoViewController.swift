@@ -9,15 +9,6 @@ import UIKit
 
 class ChangeMyTodoViewController: UIViewController{
     //MARK: - Properties
-    private var TagColorModels: [TagColorCollectionViewModel] = [
-        TagColorCollectionViewModel(backgroundColor: UIColor.EZY_TagColorArray[0], isSelected: false),
-        TagColorCollectionViewModel(backgroundColor: UIColor.EZY_TagColorArray[1], isSelected: true),
-        TagColorCollectionViewModel(backgroundColor: UIColor.EZY_TagColorArray[2], isSelected: true),
-        TagColorCollectionViewModel(backgroundColor: UIColor.EZY_TagColorArray[3], isSelected: true),
-        TagColorCollectionViewModel(backgroundColor: UIColor.EZY_TagColorArray[4], isSelected: true),
-        TagColorCollectionViewModel(backgroundColor: UIColor.EZY_TagColorArray[5], isSelected: true),
-        TagColorCollectionViewModel(backgroundColor: UIColor.EZY_TagColorArray[6], isSelected: true),
-        TagColorCollectionViewModel(backgroundColor: UIColor.EZY_TagColorArray[7], isSelected: true)]
     
     private var TagModels: [TagCollectionViewModel] = [
         TagCollectionViewModel(backgroundColor: UIColor(red: 186/255, green: 200/255, blue: 255/255, alpha: 1), isSelected: true, iconImgae: UIImage(named: "EZY_UnSelectedTagAddButtonImage")!),
@@ -30,8 +21,6 @@ class ChangeMyTodoViewController: UIViewController{
     
     private var selectedRepeatDayTextArray = [String]()
     
-    private var selectedTagColor = UIColor()
-    
     private var rotationAngle: CGFloat!
     
     private var selectedTimeIndex: [Int] = [0,0,0,0]
@@ -39,14 +28,10 @@ class ChangeMyTodoViewController: UIViewController{
     private var selectedRepeatIndex: [Int]  = []
         
     private var dayPickerViewSelectedValueIndex = 0
-    
-    private var tagColorPreciousSelectedIndex = 0
-    
+
     private var selectedTimeStartHourIndex = 0
     
     private var selectedTimeEndHourIndex = 0
-    
-    private var selectedTagColorIndex = 0
     
     private var tagNameTextArray = ["x", "+", "TOEIC", "CODING", "COOKING"]
     
@@ -69,12 +54,6 @@ class ChangeMyTodoViewController: UIViewController{
     let bgView = UIView().then {
         $0.backgroundColor = .black
         $0.alpha = 0
-    }
-
-    private let tagAddModalView = TagAddModalView().then{
-        $0.isHidden = true
-        $0.tagAddButton.addTarget(self, action: #selector(tagAddButtonClicked(sender:)), for: .touchUpInside)
-        $0.tagNameTextField.addTarget(self, action: #selector(tagNameTextFieldClicked(textField:)), for: UIControl.Event.editingDidBegin)
     }
     
     private let tagCollectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewLayout()).then {
@@ -210,14 +189,9 @@ class ChangeMyTodoViewController: UIViewController{
     
     //MARK: - dataSourceAndDelegate
     func dataSourceAndDelegate(){
-        tagAddModalView.tagColorCollectionView.delegate = self
-        tagAddModalView.tagColorCollectionView.dataSource = self
         tagCollectionView.delegate = self
         tagCollectionView.dataSource = self
         explanationContainerView.tv.delegate = self
-        
-        let firstCell = tagAddModalView.tagColorCollectionView.cellForItem(at: [0, 0]) as? TagColorCollectionViewCell
-        firstCell?.checkImage.isHidden = false
     }
     
     //MARK: - addLayout
@@ -300,10 +274,6 @@ class ChangeMyTodoViewController: UIViewController{
             make.top.equalTo(notificationAddButton.snp.bottom).offset(self.view.frame.height/38.6)
         }
         
-        tagAddModalView.snp.makeConstraints { make in
-            make.top.bottom.left.right.equalToSuperview()
-        }
-        
         calendarBtn.snp.makeConstraints { make in
             make.left.equalTo(titleBackgroundView)
             make.height.equalToSuperview().dividedBy(18.04)
@@ -328,21 +298,20 @@ class ChangeMyTodoViewController: UIViewController{
         self.view.addSubview(notificationAddButton)
         self.view.addSubview(notificationNoSelectButton)
         self.view.addSubview(changeButton)
-        self.view.addSubview(tagAddModalView)
     }
 
     // MARK: - selectors
     @objc func tagNameTextFieldClicked(textField: UITextField) {
-        UIView.animate(withDuration: 0.3) {
-            self.tagAddModalView.modalBackgroundView.snp.remakeConstraints { make in
-                make.centerX.equalToSuperview()
-                make.top.equalToSuperview().offset(self.view.frame.height/4)
-                make.width.equalToSuperview().dividedBy(1.13)
-                make.height.equalToSuperview().dividedBy(3.38)
-            }
-            
-            self.view.layoutIfNeeded()
-        }
+//        UIView.animate(withDuration: 0.3) {
+//            self.tagAddModalView.modalBackgroundView.snp.remakeConstraints { make in
+//                make.centerX.equalToSuperview()
+//                make.top.equalToSuperview().offset(self.view.frame.height/4)
+//                make.width.equalToSuperview().dividedBy(1.13)
+//                make.height.equalToSuperview().dividedBy(3.38)
+//            }
+//
+//            self.view.layoutIfNeeded()
+//        }
     }
     
     @objc func notificationAddButtonClicked(sender:UIButton){
@@ -352,31 +321,6 @@ class ChangeMyTodoViewController: UIViewController{
         addDim()
         present(MoreCalendarModalsVC, animated: true, completion: nil)
         AlarmSettingCell().isSelected = false
-    }
-    
-    @objc func tagAddButtonClicked(sender:UIButton){
-        // tagNameTextField.text가 공백으로만 이루어져있거나 empty일 때
-        if tagAddModalView.tagNameTextField.text!.trimmingCharacters(in: .whitespaces).isEmpty || tagAddModalView.tagNameTextField.text == ""{
-            shakeView(tagAddModalView.tagNameLabel)
-        }else{
-            // tagName이 적혀있으면
-            self.view.endEditing(true)
-            tagAddModalView.isHidden = true
-            
-            for i in 0...TagModels.count-1{
-                if TagModels[i].isSelected == false{
-                    TagModels[i].isSelected.toggle()
-                }
-            }
-            
-            TagModels[1].iconImgae = UIImage(named: "EZY_UnSelectedNoSelectTagButtonImage")!
-            
-            TagModels.insert(TagCollectionViewModel(backgroundColor: UIColor.EZY_TagColor2, isSelected: false, iconImgae: UIImage()), at: 2)
-            
-            tagNameTextArray.insert(tagAddModalView.tagNameTextField.text!, at: 2)
-            
-            tagCollectionView.reloadData()
-        }
     }
     
     @objc func notificationNoSelectButtonClicked(sender:UIButton){
@@ -399,7 +343,6 @@ class ChangeMyTodoViewController: UIViewController{
         TimeAddModalVC.delegate = self
         addDim()
         present(TimeAddModalVC, animated: true, completion: nil)
-
         TimeAddModalVC.timeValueSetting(receiveStartTime: receiveStartTime, receiveEndTime: receiveEndTime, leftOrRight: leftOrRight, selectedValuesIndex: selectedTimeIndex)
     }
     
@@ -478,6 +421,19 @@ class ChangeMyTodoViewController: UIViewController{
         clockBtn.alertButtonTitleLabel.text = "\(LeftOrRightChangeKorean(leftOrRight: leftOrRight[0])) \(startTime) ~ \(LeftOrRightChangeKorean(leftOrRight: leftOrRight[1])) \(endTime)"
     }
     
+    func tagReloadSetting(_ tagName: String, _ tagColorIndex: Int){
+            for i in 0...TagModels.count-1{
+                if TagModels[i].isSelected == false{
+                    TagModels[i].isSelected.toggle()
+                }
+            }
+            
+            TagModels[1].iconImgae = UIImage(named: "EZY_UnSelectedNoSelectTagButtonImage")!
+            TagModels.insert(TagCollectionViewModel(backgroundColor: UIColor.EZY_TagColor2, isSelected: false, iconImgae: UIImage()), at: 2)
+            tagNameTextArray.insert(tagName, at: 2)
+            tagCollectionView.reloadData()
+    }
+    
     func LeftOrRightChangeKorean(leftOrRight: String) -> String{
         if leftOrRight == "L" { return "오전" }else{ return "오후" }
     }
@@ -517,10 +473,8 @@ extension ChangeMyTodoViewController: UICollectionViewDataSource, UICollectionVi
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         if collectionView == tagCollectionView{
             return TagModels.count
-        }else if collectionView == tagAddModalView.tagColorCollectionView{
-            return TagColorModels.count
         }
-
+        
         return Int()
     }
     
@@ -557,14 +511,6 @@ extension ChangeMyTodoViewController: UICollectionViewDataSource, UICollectionVi
                     
                 return cell
             }
-        }else if collectionView == tagAddModalView.tagColorCollectionView{
-            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: TagColorCollectionViewCell.reuseId, for: indexPath) as! TagColorCollectionViewCell
-            
-            cell.backgroundColor = .white
-            
-            cell.setModel(TagColorModels[indexPath.row])
-            
-            return cell
         }
 
         return UICollectionViewCell()
@@ -574,8 +520,6 @@ extension ChangeMyTodoViewController: UICollectionViewDataSource, UICollectionVi
 
         if collectionView == tagCollectionView{
             return UIEdgeInsets(top: 0, left: self.view.frame.width/12, bottom: 0, right: self.view.frame.width/12)
-        }else if collectionView == tagAddModalView.tagColorCollectionView{
-            return UIEdgeInsets(top: 0, left: self.view.frame.height/33.8, bottom: 0, right: self.view.frame.height/33.8)
         }
         
         return UIEdgeInsets()
@@ -588,8 +532,6 @@ extension ChangeMyTodoViewController: UICollectionViewDataSource, UICollectionVi
             }else{
                 return CGSize(width: tagNameTextArray[indexPath.item].size(withAttributes: [NSAttributedString.Key.font : UIFont.systemFont(ofSize: 17)]).width + 25, height: self.view.frame.height/20)
             }
-        }else if collectionView == tagAddModalView.tagColorCollectionView{
-            return CGSize(width: self.view.frame.height/27, height: self.view.frame.height/27)
         }
         return CGSize()
     }
@@ -597,21 +539,11 @@ extension ChangeMyTodoViewController: UICollectionViewDataSource, UICollectionVi
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         if collectionView == tagCollectionView{
             if indexPath == [0,0]{
-                tagAddModalView.isHidden = false
-                tagAddModalView.tagNameTextField.becomeFirstResponder()
-                tagAddModalView.tagNameTextField.text = ""
-                
-                // TagColorCollection 초기화
-                let firstCell = tagAddModalView.tagColorCollectionView.cellForItem(at: [0, 0]) as? TagColorCollectionViewCell
-                firstCell?.checkImage.isHidden = false
-                
-                for i in 0...TagColorModels.count-1{
-                    TagColorModels[i].isSelected = true
-                }
-                
-                TagColorModels[0].isSelected = false
-                tagAddModalView.tagColorCollectionView.reloadData()
-                tagColorPreciousSelectedIndex = 0
+                // tagAddModalView 생성!
+                let TagAddModalVC = TagAddModalViewController.instance()
+                TagAddModalVC.delegate = self
+                addDim()
+                present(TagAddModalVC, animated: true, completion: nil)
             }else if indexPath == [0,1]{
                 TagModels[indexPath.row].iconImgae = UIImage(named: "EZY_SelectedNoSelectTagButtonImage")!
 
@@ -633,19 +565,6 @@ extension ChangeMyTodoViewController: UICollectionViewDataSource, UICollectionVi
                     
                 TagModels[indexPath.row].isSelected.toggle()
             }
-        }else if collectionView == tagAddModalView.tagColorCollectionView{
-            if TagColorModels[indexPath.row].isSelected == true{
-                
-                TagColorModels[tagColorPreciousSelectedIndex].isSelected = true
-                
-                TagColorModels[indexPath.row].isSelected = false
-                
-                selectedTagColorIndex = indexPath.row
-                
-                tagColorPreciousSelectedIndex = indexPath.row
-            }
-
-            selectedTagColor = TagColorModels[indexPath.row].backgroundColor
         }
         
         collectionView.reloadData()
@@ -703,5 +622,14 @@ extension ChangeMyTodoViewController: TimeAddDelegate{
 extension ChangeMyTodoViewController : BaseModalDelegate{
     func onTapClose() {
         self.removeDim()
+    }
+
+extension ChangeMyTodoViewController: TagAddDelegate{
+    func onTapTagAddModalClose() {
+        self.removeDim()
+    }
+    
+    func updateData(tagName: String, tagColorIndex: Int) {
+        self.tagReloadSetting(tagName, tagColorIndex)
     }
 }
