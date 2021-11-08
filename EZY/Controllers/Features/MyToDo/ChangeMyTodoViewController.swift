@@ -542,6 +542,7 @@ extension ChangeMyTodoViewController: UICollectionViewDataSource, UICollectionVi
                 // tagAddModalView 생성!
                 let TagAddModalVC = TagAddModalViewController.instance()
                 TagAddModalVC.delegate = self
+                TagAddModalVC.baseDelegate = self
                 addDim()
                 present(TagAddModalVC, animated: true, completion: nil)
             }else if indexPath == [0,1]{
@@ -598,38 +599,36 @@ extension ChangeMyTodoViewController: UITextViewDelegate{
         calendarBtn.isUserInteractionEnabled = true
     }
 }
-
+//MARK: - AlarmModal Delegate
 extension ChangeMyTodoViewController: AlarmModelDelegate{
     func updateData(ampm: String, time: Int, minute: Int) {
         self.alarmReloadSetting(ampm, time + 1, minute)
     }
     
 }
-
+//MARK: - CalendarModal Delegate
 extension ChangeMyTodoViewController: CalendarAddDelegate{
     func updateData(selectedDay: String, selectedRepeatDay: [String], selectedDayOfWeek: String, yearAndMonthText: String, selectedValuesIndex: Int, selectedRepeatIndex: [Int]) {
         self.calendarReloadSetting(selectedDay, selectedRepeatDay, selectedDayOfWeek, yearAndMonthText, selectedValuesIndex, selectedRepeatIndex)
     }
     
 }
-
+//MARK: - TimeModal Delegate
 extension ChangeMyTodoViewController: TimeAddDelegate{
     func updateData(leftOrRight: [String], startTime: String, endTime: String, afterOrMorn: [String], selectedTimeIndex: [Int]) {
-
         self.timeReloadSetting(leftOrRight, startTime, endTime, afterOrMorn, selectedTimeIndex)
     }
 }
+
+//MARK: - TagModal Delegate
+extension ChangeMyTodoViewController: TagAddDelegate{
+    func updateData(tagName: String, tagColorIndex: Int) {
+        self.tagReloadSetting(tagName, tagColorIndex)
+    }
+}
+//MARK: - BaseModal Delegate
 extension ChangeMyTodoViewController : BaseModalDelegate{
     func onTapClose() {
         self.removeDim()
-    }
-
-extension ChangeMyTodoViewController: TagAddDelegate{
-    func onTapTagAddModalClose() {
-        self.removeDim()
-    }
-    
-    func updateData(tagName: String, tagColorIndex: Int) {
-        self.tagReloadSetting(tagName, tagColorIndex)
     }
 }
