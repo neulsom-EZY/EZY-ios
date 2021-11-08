@@ -8,7 +8,6 @@
 import UIKit
 
 protocol TimeAddDelegate: AnyObject {
-//    func onTapTimeAddModalClose()
     func updateData(leftOrRight: [String], startTime: String, endTime: String, afterOrMorn: [String], selectedTimeIndex: [Int])
 }
 

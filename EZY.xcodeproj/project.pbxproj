@@ -588,11 +588,9 @@
 		6AB7D439272FE1E400FAFA19 /* Modal */ = {
 			isa = PBXGroup;
 			children = (
+				EEA936E52738A5F70064CF0B /* Modal */,
+				EEA936E42738A5E50064CF0B /* ModalControl */,
 				EE963D352734B0CE005070B5 /* BaseModal */,
-				6A47F9D32718F63600AAA6E0 /* CalendarAddModelViewController.swift */,
-				EE9F0D1D26E8A2AC0015E81B /* MoreAlarmModelViewController.swift */,
-				EE9F0D2126E8A2AC0015E81B /* MoreCalendarModalsViewController.swift */,
-				6AA7E7862720E64100034327 /* TimeAddModalViewController.swift */,
 			);
 			path = Modal;
 			sourceTree = "<group>";
@@ -743,6 +741,24 @@
 				EE963D362734B0DB005070B5 /* BaseModal.swift */,
 			);
 			path = BaseModal;
+			sourceTree = "<group>";
+		};
+		EEA936E42738A5E50064CF0B /* ModalControl */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = ModalControl;
+			sourceTree = "<group>";
+		};
+		EEA936E52738A5F70064CF0B /* Modal */ = {
+			isa = PBXGroup;
+			children = (
+				6A47F9D32718F63600AAA6E0 /* CalendarAddModelViewController.swift */,
+				EE9F0D1D26E8A2AC0015E81B /* MoreAlarmModelViewController.swift */,
+				EE9F0D2126E8A2AC0015E81B /* MoreCalendarModalsViewController.swift */,
+				6AA7E7862720E64100034327 /* TimeAddModalViewController.swift */,
+			);
+			path = Modal;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
