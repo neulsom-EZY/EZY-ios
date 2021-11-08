@@ -74,7 +74,7 @@ class NewNicknamePhoneNumViewController: UIViewController{
     @objc
     private func onTapContinueNewNicknamePut(){
         if isValidPhoneNum(PhoneNumber: phoneNumContainer.tf.text) == true{
-            let controller = NewNicknamePutViewController()
+            let controller = NewNicknameAuthCodeViewController()
             navigationController?.pushViewController(controller, animated: true)
         }else{
             shakeView(self.view)

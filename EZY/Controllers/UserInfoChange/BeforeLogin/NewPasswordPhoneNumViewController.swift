@@ -61,7 +61,7 @@ class NewPasswordPhoneNumViewController: UIViewController{
     @objc
     private func onTapContinueNewPasswordPut(){
         if isValidPhoneNum(PhoneNumber: phoneNumContainer.tf.text) == true{
-            let controller = NewPasswordPutViewController()
+            let controller = NewPasswordAuthCodeViewController()
             navigationController?.pushViewController(controller, animated: true)
         }else{
             shakeView(self.view)
