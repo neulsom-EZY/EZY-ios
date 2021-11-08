@@ -112,6 +112,8 @@
 		AAAA0EFB2738A30800DBCA68 /* ChangePasswordAuthCodeAfterLoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAAA0EFA2738A30800DBCA68 /* ChangePasswordAuthCodeAfterLoginViewController.swift */; };
 		AAAA0EFD27390E9300DBCA68 /* ChangePhoneNumPutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAAA0EFC27390E9300DBCA68 /* ChangePhoneNumPutViewController.swift */; };
 		AAAA0EFF2739107C00DBCA68 /* ChangePhoneNumAuthCodeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAAA0EFE2739107C00DBCA68 /* ChangePhoneNumAuthCodeViewController.swift */; };
+		AAAA0F1B2739458400DBCA68 /* ErrandListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAAA0F1A2739458400DBCA68 /* ErrandListViewController.swift */; };
+		AAAA0F1D2739458D00DBCA68 /* MyToDoListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAAA0F1C2739458D00DBCA68 /* MyToDoListViewController.swift */; };
 		AAD95AE126EC7EC7004E4580 /* NewNicknamePhoneNumViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAD95AE026EC7EC7004E4580 /* NewNicknamePhoneNumViewController.swift */; };
 		AAD95AE326EC818B004E4580 /* NewNicknamePutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAD95AE226EC818B004E4580 /* NewNicknamePutViewController.swift */; };
 		EE84DEC02715ABF100121C62 /* CollectionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE84DEBF2715ABF100121C62 /* CollectionViewModel.swift */; };
@@ -261,6 +263,8 @@
 		AAAA0EFA2738A30800DBCA68 /* ChangePasswordAuthCodeAfterLoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangePasswordAuthCodeAfterLoginViewController.swift; sourceTree = "<group>"; };
 		AAAA0EFC27390E9300DBCA68 /* ChangePhoneNumPutViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangePhoneNumPutViewController.swift; sourceTree = "<group>"; };
 		AAAA0EFE2739107C00DBCA68 /* ChangePhoneNumAuthCodeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangePhoneNumAuthCodeViewController.swift; sourceTree = "<group>"; };
+		AAAA0F1A2739458400DBCA68 /* ErrandListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ErrandListViewController.swift; sourceTree = "<group>"; };
+		AAAA0F1C2739458D00DBCA68 /* MyToDoListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyToDoListViewController.swift; sourceTree = "<group>"; };
 		AAD95AE026EC7EC7004E4580 /* NewNicknamePhoneNumViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewNicknamePhoneNumViewController.swift; sourceTree = "<group>"; };
 		AAD95AE226EC818B004E4580 /* NewNicknamePutViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewNicknamePutViewController.swift; sourceTree = "<group>"; };
 		C37AD74ACD84F363045FF654 /* Pods_EZY.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_EZY.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -569,6 +573,7 @@
 		6AB7D434272FE08000FAFA19 /* MyToDo */ = {
 			isa = PBXGroup;
 			children = (
+				AAAA0F1C2739458D00DBCA68 /* MyToDoListViewController.swift */,
 				EE9F0D1F26E8A2AC0015E81B /* AddMyToDoViewController.swift */,
 				6AE5BB1D2696DDA600A9731B /* PersonalPlanDetailViewController.swift */,
 				6A705BB5267E3ABF001954CE /* ChangeMyTodoViewController.swift */,
@@ -579,6 +584,7 @@
 		6AB7D435272FE08700FAFA19 /* Errand */ = {
 			isa = PBXGroup;
 			children = (
+				AAAA0F1A2739458400DBCA68 /* ErrandListViewController.swift */,
 				EE9F0D1E26E8A2AC0015E81B /* MorePeopleToDo.swift */,
 				EE9F0D1C26E8A2AC0015E81B /* ErrandDetailsViewController.swift */,
 				EE9F0D2026E8A2AC0015E81B /* AddErrandViewController.swift */,
@@ -903,6 +909,7 @@
 				6AE5BB1A2696A6CE00A9731B /* Extension.swift in Sources */,
 				6A82835426982A6C00AC381B /* InquiryViewController.swift in Sources */,
 				6A4EDA2C266A045B00B809EC /* NotificationViewController.swift in Sources */,
+				AAAA0F1B2739458400DBCA68 /* ErrandListViewController.swift in Sources */,
 				6AE41E7C26A9492C0072612C /* TagTableViewCell.swift in Sources */,
 				6A4AE85D2678EBEE009E33CD /* GroupModifyDeleteModalView.swift in Sources */,
 				6AE5BB012695746F00A9731B /* PersonalPlanAddRepeatDayCollectionViewCell.swift in Sources */,
@@ -940,6 +947,7 @@
 				6AA6F799269C2E6200958D36 /* NewPasswordPutViewController.swift in Sources */,
 				6A3E2E7E26B6A5FB0078D749 /* ViewModel.swift in Sources */,
 				6ACB4ED2269C2FA8008606C5 /* TopBarView.swift in Sources */,
+				AAAA0F1D2739458D00DBCA68 /* MyToDoListViewController.swift in Sources */,
 				6A8283502698132000AC381B /* PlanDeleteModalView.swift in Sources */,
 				EE9F0D3726E8A9340015E81B /* AddScheduleModalBtn .swift in Sources */,
 				6A4EDA30266A336000B809EC /* NotificationTableView.swift in Sources */,
