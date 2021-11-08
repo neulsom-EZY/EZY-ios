@@ -9,7 +9,7 @@ import UIKit
 
 protocol TimeAddDelegate: AnyObject {
     func onTapTimeAddModalClose()
-    func updateData(startMorningOrAfternoon : String , endMorningOrAfternoon : String, startTime: String, endTime: String, afterOrMorn: [String], selectedTimeIndex: [Int])
+    func updateData(leftOrRight: [String], startTime: String, endTime: String, afterOrMorn: [String], selectedTimeIndex: [Int])
 }
 
 class TimeAddModalViewController: UIViewController{
@@ -118,9 +118,11 @@ class TimeAddModalViewController: UIViewController{
         $0.tintColor = UIColor(red: 150/255, green: 141/255, blue: 255/255, alpha: 1)
     }
     
-    fileprivate var startSelectedLabelText = "오전"
+    private var leftOrRight = ["L", "L"]
     
-    fileprivate var endSelectedLabelText = "오전"
+    fileprivate var startSelectedLabelText = "L"
+    
+    fileprivate var endSelectedLabelText = "L"
     
     fileprivate var startHourTime = "01"
     
@@ -133,6 +135,12 @@ class TimeAddModalViewController: UIViewController{
     fileprivate var endMinTime = "00"
     
     fileprivate var endTime = "01 : 00"
+    
+    private var afterOrMorn = ["오후","오후"]
+    
+    private var sendStartTime = "01 : 00"
+    
+    private var sendEndTime = "01 : 00"
     
     private var selectedTimeIndex: [Int] = [0,0,0,0]
     
@@ -313,69 +321,23 @@ class TimeAddModalViewController: UIViewController{
     @objc func MakeTodo(){
         delegate?.onTapTimeAddModalClose()
         dismiss(animated: true, completion: nil)
-        print("시작 시 : \(selectedTimeIndex[0]) 시작 분: \(selectedTimeIndex[1]) 끝 시: \(selectedTimeIndex[2]) 끝 분: \(selectedTimeIndex[3])")
-        delegate?.updateData(startMorningOrAfternoon: startSelectedLabelText,
-                             endMorningOrAfternoon: endSelectedLabelText,
-                             startTime: "\(startHourTime) : \(startMinTime)",
-                             endTime: "\(endHourTime) : \(endMinTime)",
-                             afterOrMorn:[startSelectedLabelText, endSelectedLabelText],
-                             selectedTimeIndex: selectedTimeIndex)
+        afterOrMorn = [startSelectedLabelText, endSelectedLabelText]
+
+        // startHourTime 그니까 시분이랑 sendStartTime이랑 다르면 sendStartTime의 hour, 또는 min자리에 넣어주면될듯~!!진짜루~!
+
+        delegate?.updateData(leftOrRight: self.leftOrRight,
+                             startTime: self.sendStartTime,
+                             endTime: self.sendEndTime,
+                             afterOrMorn: self.afterOrMorn,
+                             selectedTimeIndex: self.selectedTimeIndex)
     }
     
     @objc func endSelectCircleButton(sender:UIButton){
-        UIView.animate(withDuration: 0.3) {
-            self.endSelectCircleButton.snp.remakeConstraints { make in
-                make.centerY.equalToSuperview()
-                make.height.equalToSuperview().dividedBy(1.2)
-                make.width.equalTo(self.endSelectBackButton.snp.height).dividedBy(1.2)
-                
-                if self.endSelectedLabelText == "오전"{
-                    make.right.equalToSuperview().offset(-self.view.frame.width/290)
-                    
-                    self.highlightedLabel(label: self.endAfternoonLabel)
-                    self.unHighlightedLabel(label: self.endMorningLabel)
-                    
-                    self.endSelectedLabelText = "오후"
-                }else{
-                    make.left.equalToSuperview().offset(self.view.frame.width/290)
-                    
-                    self.highlightedLabel(label: self.endMorningLabel)
-                    self.unHighlightedLabel(label: self.endAfternoonLabel)
-                    
-                    self.endSelectedLabelText = "오전"
-                }
-            }
-            
-            self.view.layoutIfNeeded()
-        }
+        endSelectCircleButtonMove(endSelectedLabelText: endSelectedLabelText)
     }
     
     @objc func startSelectCircleButton(sender:UIButton){
-        UIView.animate(withDuration: 0.3) {
-            self.startSelectCircleButton.snp.remakeConstraints { make in
-                make.centerY.equalToSuperview()
-                make.height.equalToSuperview().dividedBy(1.2)
-                make.width.equalTo(self.startSelectBackButton.snp.height).dividedBy(1.2)
-                
-                if self.startSelectedLabelText == "오전"{
-                    make.right.equalToSuperview().offset(-self.view.frame.width/290)
-                    
-                    self.highlightedLabel(label: self.startAfternoonLabel)
-                    self.unHighlightedLabel(label: self.startMorningLabel)
-                    
-                    self.startSelectedLabelText = "오후"
-                }else{
-                    make.left.equalToSuperview().offset(self.view.frame.width/290)
-                    
-                    self.highlightedLabel(label: self.startMorningLabel)
-                    self.unHighlightedLabel(label: self.startAfternoonLabel)
-                    
-                    self.startSelectedLabelText = "오전"
-                }
-            }
-            
-            self.view.layoutIfNeeded()
-        }
+        startSelectCircleButtonMove(startSelectedLabelText: startSelectedLabelText)
     }
     
     func highlightedLabel(label:UILabel){
@@ -387,14 +349,121 @@ class TimeAddModalViewController: UIViewController{
     }
     
     func addZero(n: Int) -> String{
-        if n < 10{
-            return "0\(n)"
-        }else{
-            return "\(n)"
+        if n < 10 { return "0\(n)" } else { return "\(n)" }
+    }
+    
+    func startSelectCircleButtonMove(startSelectedLabelText: String){
+        UIView.animate(withDuration: 0.3) { [self] in
+            self.startSelectCircleButton.snp.remakeConstraints { make in
+                make.centerY.equalToSuperview()
+                make.height.equalToSuperview().dividedBy(1.2)
+                make.width.equalTo(self.startSelectBackButton.snp.height).dividedBy(1.2)
+                
+                if leftOrRight[0] == "L"{
+                    make.right.equalToSuperview().offset(-self.view.frame.width/290)
+                    
+                    self.highlightedLabel(label: self.startAfternoonLabel)
+                    self.unHighlightedLabel(label: self.startMorningLabel)
+                    
+                    self.leftOrRight[0] = "R"
+                }else{
+                    make.left.equalToSuperview().offset(self.view.frame.width/290)
+                    
+                    self.highlightedLabel(label: self.startMorningLabel)
+                    self.unHighlightedLabel(label: self.startAfternoonLabel)
+                    
+                    self.leftOrRight[0] = "L"
+
+                }
+            }
+            
+            self.view.layoutIfNeeded()
         }
     }
     
-    func timeValueSetting(selectedValuesIndex: [String]){
+    func endSelectCircleButtonMove(endSelectedLabelText: String){
+        UIView.animate(withDuration: 0.3) { [self] in
+            self.endSelectCircleButton.snp.remakeConstraints { make in
+                make.centerY.equalToSuperview()
+                make.height.equalToSuperview().dividedBy(1.2)
+                make.width.equalTo(self.endSelectBackButton.snp.height).dividedBy(1.2)
+                
+                if leftOrRight[1] == "L"{
+                    make.right.equalToSuperview().offset(-self.view.frame.width/290)
+                    
+                    self.highlightedLabel(label: self.endAfternoonLabel)
+                    self.unHighlightedLabel(label: self.endMorningLabel)
+                    
+                    self.leftOrRight[1] = "R"
+                }else{
+                    make.left.equalToSuperview().offset(self.view.frame.width/290)
+                    
+                    self.highlightedLabel(label: self.endMorningLabel)
+                    self.unHighlightedLabel(label: self.endAfternoonLabel)
+                    
+                    self.leftOrRight[1] = "L"
+                }
+            }
+            self.view.layoutIfNeeded()
+        }
+    }
+    
+    func timeValueSetting(receiveStartTime: String, receiveEndTime: String, leftOrRight: [String], selectedValuesIndex: [Int]){
+        // 이전에 선택했던 값 변수에 save
+        self.leftOrRight = leftOrRight
+        self.selectedTimeIndex = selectedValuesIndex
+        self.sendStartTime = receiveStartTime
+        self.sendEndTime = receiveEndTime
+        
+        // 이전에 선택했던 값으로 datapickerview setting
+        startPickerView.selectRow(selectedValuesIndex[0], inComponent: 0, animated: false)
+        startPickerView.selectRow(selectedValuesIndex[1], inComponent: 1, animated: false)
+        endPickerView.selectRow(selectedValuesIndex[2], inComponent: 0, animated: false)
+        endPickerView.selectRow(selectedValuesIndex[3], inComponent: 1, animated: false)
+        
+        // 이전에 선택했던 오전, 오후 값으로 setting
+        if leftOrRight[0] == "R"{
+            self.startSelectCircleButton.snp.remakeConstraints { make in
+                make.centerY.equalToSuperview()
+                make.height.equalToSuperview().dividedBy(1.2)
+                make.width.equalTo(self.startSelectBackButton.snp.height).dividedBy(1.2)
+                make.right.equalToSuperview().offset(-self.view.frame.width/290)
+            }
+            
+            self.highlightedLabel(label: self.startAfternoonLabel)
+            self.unHighlightedLabel(label: self.startMorningLabel)
+        }else{
+            self.startSelectCircleButton.snp.remakeConstraints { make in
+                make.centerY.equalToSuperview()
+                make.height.equalToSuperview().dividedBy(1.2)
+                make.width.equalTo(self.startSelectBackButton.snp.height).dividedBy(1.2)
+                make.left.equalToSuperview().offset(self.view.frame.width/290)
+            }
+            self.highlightedLabel(label: self.startMorningLabel)
+            self.unHighlightedLabel(label: self.startAfternoonLabel)
+        }
+        
+        if leftOrRight[1] == "R"{
+            self.endSelectCircleButton.snp.remakeConstraints { make in
+                make.centerY.equalToSuperview()
+                make.height.equalToSuperview().dividedBy(1.2)
+                make.width.equalTo(self.endSelectBackButton.snp.height).dividedBy(1.2)
+                make.right.equalToSuperview().offset(-self.view.frame.width/290)
+            }
+            
+            self.highlightedLabel(label: self.endAfternoonLabel)
+            self.unHighlightedLabel(label: self.endMorningLabel)
+        }else{
+            self.endSelectCircleButton.snp.remakeConstraints { make in
+                make.centerY.equalToSuperview()
+                make.height.equalToSuperview().dividedBy(1.2)
+                make.width.equalTo(self.endSelectBackButton.snp.height).dividedBy(1.2)
+                make.left.equalToSuperview().offset(self.view.frame.width/290)
+            }
+            
+            self.highlightedLabel(label: self.endMorningLabel)
+            self.unHighlightedLabel(label: self.endAfternoonLabel)
+        }
     }
 }
 
@@ -425,6 +494,10 @@ extension TimeAddModalViewController: UIPickerViewDataSource, UIPickerViewDelega
                 selectedTimeIndex[3] = row
             }
         }
+        
+        // 여기서 변경된 값만 넣어줘야함 그래서.. 이 아래 두 코드를 여기서 넣어주면 안되고 근데 maketodo에 또 넣으면 안됨 ㅅㅂ
+        sendStartTime = "\(startHourTime) : \(startMinTime)"
+        sendEndTime = "\(endHourTime) : \(endMinTime)"
     }
     
     func pickerView(_ pickerView: UIPickerView, viewForRow row: Int, forComponent component: Int, reusing view: UIView?) -> UIView {
