@@ -8,28 +8,32 @@
 import UIKit
 
 class SelectLocationViewController: UIViewController {
-    
-    var alphabetTextArray = ["A","B","C","D","E","F","G","H","I","J","K","A","B","C","D","E","F","G","H","I","J","K","A","B","C","D","E","F","G","H","I","J","K"]
-    
-    var selectLocationModalView = SelectLocationModalView()
+    // MARK: - Properties
+    private let alphabetTextArray = ["A","B","C","D","E","F","G","H","I","J","K","A","B","C","D","E","F","G","H","I","J","K","A","B","C","D","E","F","G","H","I","J","K"]
+
+    private let selectLocationModalView = SelectLocationModalView().then{
+        $0.okButton.addTarget(self, action: #selector(okButtonClicked(sender:)), for: .touchUpInside)
+        $0.isHidden = true
+    }
         
-    lazy var backButton = UIButton().then {
+    private let backButton = UIButton().then {
         $0.setImage(UIImage(named: "EZY_LocationBackButton"), for: .normal)
+        $0.addTarget(self, action: #selector(backButtonClicked(sender:)), for: .touchUpInside)
     }
     
-    lazy var textFieldBackgroundView = UIView().then {
+    private let textFieldBackgroundView = UIView().then {
         $0.backgroundColor = UIColor(red: 245/255, green: 245/255, blue: 245/255, alpha: 1)
         $0.layer.cornerRadius = 10
     }
     
-    lazy var locationTextField = UITextField().then {
+    private let locationTextField = UITextField().then {
         $0.placeholder = "위치를 입력해주세요."
         $0.dynamicFont(fontSize: 10, currentFontName: "AppleSDGothicNeo-Bold")
     }
     
-    lazy var topViewHalfModalView = UIView().then{
+    private let topViewHalfModalView = UIView().then{
         $0.backgroundColor = .white
-        $0.roundCorners(cornerRadius: 50, maskedCorners: [.layerMaxXMaxYCorner, .layerMinXMaxYCorner]) // 그림자 코드 뒤에 넣으면 그림자가 안먹음
+        $0.roundCorners(cornerRadius: 50, maskedCorners: [.layerMaxXMaxYCorner, .layerMinXMaxYCorner])
         $0.layer.masksToBounds = false
         $0.layer.shadowOpacity = 0.3
         $0.layer.shadowRadius = 10
@@ -37,38 +41,85 @@ class SelectLocationViewController: UIViewController {
         $0.layer.shadowColor = UIColor(red: 163/255, green: 163/255, blue: 163/255, alpha: 1).cgColor
     }
     
-    lazy var locationTableView = UITableView().then {
+    private let searchButton = UIButton().then{
+        $0.setImage(UIImage(named: "EZY_SearchButtonImage"), for: .normal)
+    }
+    
+    private let locationTableView = UITableView().then {
         $0.backgroundColor = .clear
         $0.separatorStyle = .none
         $0.showsVerticalScrollIndicator = false
-    }
+        $0.register(LocationTableViewCell.self, forCellReuseIdentifier: LocationTableViewCell.reuseId)    }
 
+    // MARK: - LifeCycles
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        configureUI()
+    }
+    
+    // MARK: - configureUI
+    private func configureUI(){
         self.view.backgroundColor = .white
+
+        addView()
         
-        layoutSetting()
+        location()
         
-        locationTableViewSetting()
-        
-        selectLocationModalViewSetting()
+        delegateAndDataSource()
     }
     
-    @objc func okButtonClicked(sender:UIButton){
-        selectLocationModalView.isHidden = true
-        self.navigationController?.popViewController(animated: true)
-    }
-    
-    @objc func backButtonClicked(sender:UIButton){
-        self.navigationController?.popViewController(animated: true)
-    }
-    
-    func selectLocationModalViewSetting(){
-        
+    // MARK: - addView
+    private func addView(){
+        self.view.addSubview(topViewHalfModalView)
+        self.view.addSubview(backButton)
+        self.view.addSubview(textFieldBackgroundView)
+        self.view.addSubview(searchButton)
+        textFieldBackgroundView.addSubview(locationTextField)
+        self.view.addSubview(locationTableView)
         self.view.addSubview(selectLocationModalView)
+    }
+    
+    // MARK: - location
+    private func location(){
+        backButton.snp.makeConstraints { make in
+            make.top.equalTo(self.view.safeAreaLayoutGuide).offset(self.view.frame.height/30)
+            make.left.equalToSuperview().offset(self.view.frame.height/30)
+            make.height.equalToSuperview().dividedBy(33.8)
+            make.width.equalTo(backButton.snp.height)
+        }
         
-        selectLocationModalView.okButton.addTarget(self, action: #selector(okButtonClicked(sender:)), for: .touchUpInside)
+        searchButton.snp.makeConstraints { make in
+            make.centerY.equalTo(backButton)
+            make.right.equalToSuperview().offset(-self.view.frame.height/30)
+            make.height.equalToSuperview().dividedBy(51.09)
+            make.width.equalToSuperview().dividedBy(25)
+        }
+        
+        textFieldBackgroundView.snp.makeConstraints { make in
+            make.centerY.equalTo(backButton)
+            make.centerX.equalToSuperview()
+            make.height.equalToSuperview().dividedBy(21.3)
+            make.width.equalToSuperview().dividedBy(1.5)
+        }
+        
+        locationTextField.snp.makeConstraints { make in
+            make.width.equalToSuperview().dividedBy(1.19)
+            make.centerX.equalToSuperview()
+            make.height.equalToSuperview()
+        }
+        
+        topViewHalfModalView.snp.makeConstraints { make in
+            make.top.left.right.equalToSuperview()
+            make.height.equalToSuperview().dividedBy(6.24)
+        }
+        
+        locationTableView.snp.makeConstraints { make in
+            make.top.equalTo(topViewHalfModalView.snp.bottom).offset(self.view.frame.height/28)
+            make.left.equalToSuperview().offset(self.view.frame.width/14.2)
+            make.centerX.equalToSuperview()
+            make.bottom.equalToSuperview()
+        }
         
         selectLocationModalView.snp.makeConstraints { make in
             make.top.right.bottom.left.equalToSuperview()
@@ -125,65 +176,23 @@ class SelectLocationViewController: UIViewController {
             make.height.equalToSuperview().dividedBy(7.2)
             make.width.equalToSuperview().dividedBy(4.7)
         }
-        
-        selectLocationModalView.isHidden = true
     }
     
-    func locationTableViewSetting(){
+    // MARK: - delegateAndDataSource
+    private func delegateAndDataSource(){
         locationTableView.delegate = self
         locationTableView.dataSource = self
-        
-        self.view.addSubview(locationTableView)
-        
-        locationTableView.backgroundColor = .clear
-        
-        locationTableView.register(LocationTableViewCell.self, forCellReuseIdentifier: LocationTableViewCell.reuseId)
-        
-        locationTableView.showsHorizontalScrollIndicator = false
-        
-        locationTableView.snp.makeConstraints { make in
-            make.top.equalTo(topViewHalfModalView.snp.bottom).offset(self.view.frame.height/28)
-            make.left.equalToSuperview().offset(self.view.frame.width/14.2)
-            make.centerX.equalToSuperview()
-            make.bottom.equalToSuperview()
-        }
-
     }
     
-    func layoutSetting(){
-        self.view.addSubview(topViewHalfModalView)
-        self.view.addSubview(backButton)
-        self.view.addSubview(textFieldBackgroundView)
-        textFieldBackgroundView.addSubview(locationTextField)
-    
-        backButton.addTarget(self, action: #selector(backButtonClicked(sender:)), for: .touchUpInside)
-        
-        backButton.snp.makeConstraints { make in
-            make.top.equalTo(self.view.safeAreaLayoutGuide).offset(self.view.frame.height/30)
-            make.left.equalToSuperview().offset(self.view.frame.height/30)
-            make.height.equalToSuperview().dividedBy(33.8)
-            make.width.equalTo(backButton.snp.height)
-        }
-        
-        textFieldBackgroundView.snp.makeConstraints { make in
-            make.centerY.equalTo(backButton)
-            make.centerX.equalToSuperview()
-            make.height.equalToSuperview().dividedBy(21.3)
-            make.width.equalToSuperview().dividedBy(1.5)
-        }
-        
-        locationTextField.snp.makeConstraints { make in
-            make.width.equalToSuperview().dividedBy(1.19)
-            make.centerX.equalToSuperview()
-            make.height.equalToSuperview()
-        }
-        
-        topViewHalfModalView.snp.makeConstraints { make in
-            make.top.left.right.equalToSuperview()
-            make.height.equalToSuperview().dividedBy(6.24)
-        }
+    // MARK: - Selectors
+    @objc private func okButtonClicked(sender:UIButton){
+        selectLocationModalView.isHidden = true
+        self.navigationController?.popViewController(animated: true)
     }
-
+    
+    @objc private func backButtonClicked(sender:UIButton){
+        self.navigationController?.popViewController(animated: true)
+    }
 }
 
 extension SelectLocationViewController: UITableViewDelegate{
