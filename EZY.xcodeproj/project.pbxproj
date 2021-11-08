@@ -119,6 +119,7 @@
 		EE93B4E42687BD8A0055D7A6 /* ManageData.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE93B4E32687BD8A0055D7A6 /* ManageData.swift */; };
 		EE9582D2272A7B5F00AAEC8A /* LogoutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE9582D1272A7B5F00AAEC8A /* LogoutViewController.swift */; };
 		EE9582D4272A7BEF00AAEC8A /* LogoutCustomBtn.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE9582D3272A7BEF00AAEC8A /* LogoutCustomBtn.swift */; };
+		EE963D372734B0DB005070B5 /* BaseModal.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE963D362734B0DB005070B5 /* BaseModal.swift */; };
 		EE9F0D2226E8A2AC0015E81B /* ErrandDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE9F0D1C26E8A2AC0015E81B /* ErrandDetailsViewController.swift */; };
 		EE9F0D2326E8A2AC0015E81B /* MoreAlarmModelViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE9F0D1D26E8A2AC0015E81B /* MoreAlarmModelViewController.swift */; };
 		EE9F0D2426E8A2AC0015E81B /* MorePeopleToDo.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE9F0D1E26E8A2AC0015E81B /* MorePeopleToDo.swift */; };
@@ -266,6 +267,7 @@
 		EE93B4E32687BD8A0055D7A6 /* ManageData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManageData.swift; sourceTree = "<group>"; };
 		EE9582D1272A7B5F00AAEC8A /* LogoutViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogoutViewController.swift; sourceTree = "<group>"; };
 		EE9582D3272A7BEF00AAEC8A /* LogoutCustomBtn.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogoutCustomBtn.swift; sourceTree = "<group>"; };
+		EE963D362734B0DB005070B5 /* BaseModal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseModal.swift; sourceTree = "<group>"; };
 		EE9F0D1C26E8A2AC0015E81B /* ErrandDetailsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ErrandDetailsViewController.swift; sourceTree = "<group>"; };
 		EE9F0D1D26E8A2AC0015E81B /* MoreAlarmModelViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MoreAlarmModelViewController.swift; sourceTree = "<group>"; };
 		EE9F0D1E26E8A2AC0015E81B /* MorePeopleToDo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MorePeopleToDo.swift; sourceTree = "<group>"; };
@@ -607,6 +609,7 @@
 				EE9F0D1D26E8A2AC0015E81B /* MoreAlarmModelViewController.swift */,
 				EE9F0D2126E8A2AC0015E81B /* MoreCalendarModalsViewController.swift */,
 				6AA7E7862720E64100034327 /* TimeAddModalViewController.swift */,
+				EE963D352734B0CE005070B5 /* BaseModal */,
 			);
 			path = Modal;
 			sourceTree = "<group>";
@@ -750,6 +753,14 @@
 				2FC16614E9BCACF88D1AB480 /* Pods-EZY.release.xcconfig */,
 			);
 			path = Pods;
+			sourceTree = "<group>";
+		};
+		EE963D352734B0CE005070B5 /* BaseModal */ = {
+			isa = PBXGroup;
+			children = (
+				EE963D362734B0DB005070B5 /* BaseModal.swift */,
+			);
+			path = BaseModal;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -955,6 +966,7 @@
 				6AA6F798269C2E6200958D36 /* NewPasswordPhoneNumViewController.swift in Sources */,
 				6A72073426C618600098830F /* RecommendedTagCollectionViewCell.swift in Sources */,
 				6AE5BB0326957B0600A9731B /* RepeatCollectionViewModel.swift in Sources */,
+				EE963D372734B0DB005070B5 /* BaseModal.swift in Sources */,
 				6AFB77F9267ECD6700B59482 /* WhiteBackgroundView.swift in Sources */,
 				EEA49A132711C7B200265258 /* CalendarAlertBtn.swift in Sources */,
 				EE9F0D3826E8A9340015E81B /* inputContainerErrandTextView.swift in Sources */,

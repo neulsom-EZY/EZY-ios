@@ -156,16 +156,13 @@ class ChangeMyTodoViewController: UIViewController{
         return button
     }()
     
-    fileprivate lazy var btnStackView = UIStackView(arrangedSubviews: [clockBtn,locationBtn]).then{
+    private lazy var btnStackView = UIStackView(arrangedSubviews: [clockBtn,locationBtn]).then{
         $0.axis = .vertical
         $0.distribution = .fillEqually
         $0.spacing = bounds.height/47.7647
     }
     
-    private let explanationContainerView : ExplanationContainerTextView = {
-        let view = ExplanationContainerTextView(tvTitle: "설명")
-        return view
-    }()
+    private let explanationContainerView = ExplanationContainerTextView(tvTitle: "설명")
     
     let sizeCheckLabel = UILabel().then{
         $0.dynamicFont(fontSize: 12, currentFontName: "AppleSDGothicNeo-Bold")
@@ -211,23 +208,23 @@ class ChangeMyTodoViewController: UIViewController{
             make.top.equalTo(backButton.snp.bottom).offset(self.view.frame.height/50)
         }
         
-        titleBackgroundView.snp.makeConstraints { make in
-            make.centerX.equalToSuperview()
-            make.left.equalToSuperview().offset(self.view.frame.width/13.3)
-            make.height.equalToSuperview().dividedBy(12)
-            make.top.equalTo(mainTitleLabel.snp.bottom).offset(self.view.frame.height/50)
+        titleBackgroundView.snp.makeConstraints {
+            $0.centerX.equalToSuperview()
+            $0.left.equalToSuperview().offset(self.view.frame.width/13.3)
+            $0.height.equalToSuperview().dividedBy(12)
+            $0.top.equalTo(mainTitleLabel.snp.bottom).offset(self.view.frame.height/50)
         }
         
-        titleLabel.snp.makeConstraints { make in
-            make.centerY.equalToSuperview()
-            make.left.equalToSuperview().offset(self.view.frame.width/17.8)
+        titleLabel.snp.makeConstraints {
+            $0.centerY.equalToSuperview()
+            $0.left.equalToSuperview().offset(self.view.frame.width/17.8)
         }
         
-        titleTextField.snp.makeConstraints { make in
-            make.centerY.equalToSuperview()
-            make.left.equalTo(titleLabel.snp.right).offset(self.view.frame.width/17.8)
-            make.width.equalToSuperview().dividedBy(1.45)
-            make.height.equalToSuperview()
+        titleTextField.snp.makeConstraints {
+            $0.centerY.equalToSuperview()
+            $0.left.equalTo(titleLabel.snp.right).offset(self.view.frame.width/17.8)
+            $0.width.equalToSuperview().dividedBy(1.45)
+            $0.height.equalToSuperview()
         }
         
         btnStackView.snp.makeConstraints {
@@ -236,31 +233,26 @@ class ChangeMyTodoViewController: UIViewController{
             $0.right.equalToSuperview().inset(bounds.height/9.23)
             $0.height.equalTo(bounds.height/7.58)
         }
-        
-        explanationContainerView.snp.makeConstraints { (make) in
-            make.height.equalTo(self.view.frame.height/10.8)
-            make.top.equalTo(btnStackView.snp.bottom).offset(self.view.frame.height/30.0)
-            make.left.equalTo(self.btnStackView.snp.left)
-            make.centerX.equalToSuperview()
+        explanationContainerView.snp.makeConstraints {
+            $0.height.equalTo(self.view.frame.height/10.8)
+            $0.top.equalTo(btnStackView.snp.bottom).offset(self.view.frame.height/30.0)
+            $0.left.equalTo(self.btnStackView.snp.left)
+            $0.centerX.equalToSuperview()
         }
-        
         tagLabel.snp.makeConstraints { (make) in
             make.left.equalTo(backButton.snp.left)
             make.top.equalTo(btnStackView.snp.bottom).offset(self.view.frame.height/6.44)
         }
-        
         tagCollectionView.snp.makeConstraints { make in
             make.top.equalTo(tagLabel.snp.bottom).offset(self.view.frame.height/162.4)
             make.left.equalToSuperview()
             make.height.equalToSuperview().dividedBy(13.09)
             make.right.equalToSuperview()
         }
-                
         notificationTitleLabel.snp.makeConstraints { make in
             make.left.equalTo(tagLabel)
             make.top.equalTo(tagCollectionView.snp.bottom).offset(self.view.frame.height/38.6)
         }
-        
         notificationAddButton.snp.makeConstraints { make in
             make.left.equalTo(tagLabel)
             make.top.equalTo(notificationTitleLabel.snp.bottom).offset(self.view.frame.height/73.11)
@@ -325,6 +317,7 @@ class ChangeMyTodoViewController: UIViewController{
     @objc func notificationAddButtonClicked(sender:UIButton){
         let MoreCalendarModalsVC = MoreAlarmModelViewController.instance()
         MoreCalendarModalsVC.delegate = self
+        MoreCalendarModalsVC.baseDelegate = self
         addDim()
         present(MoreCalendarModalsVC, animated: true, completion: nil)
         AlarmSettingCell().isSelected = false
@@ -338,6 +331,7 @@ class ChangeMyTodoViewController: UIViewController{
     @objc func calendarAlert(){
         let CalendarAddModalVC = CalendarAddModelViewController.instance()
         CalendarAddModalVC.delegate = self
+        CalendarAddModalVC.baseDelegate = self
         addDim()
         present(CalendarAddModalVC, animated: true, completion: nil)
         CalendarAddModalVC.calendarModalDataSetting(dayIndex: dayPickerViewSelectedValueIndex, repeatIndex: selectedRepeatIndex)
@@ -345,6 +339,7 @@ class ChangeMyTodoViewController: UIViewController{
     
     @objc func clockAlert(){
         let TimeAddModalVC = TimeAddModalViewController.instance()
+        TimeAddModalVC.baseDelegate = self
         TimeAddModalVC.delegate = self
         addDim()
         present(TimeAddModalVC, animated: true, completion: nil)
@@ -465,7 +460,7 @@ class ChangeMyTodoViewController: UIViewController{
         }
     }
 
-    private func removeDim() {
+    func removeDim() {
         DispatchQueue.main.async { [weak self] in
             self?.bgView.removeFromSuperview()
         }
@@ -609,9 +604,6 @@ extension ChangeMyTodoViewController: AlarmModelDelegate{
         self.alarmReloadSetting(ampm, time + 1, minute)
     }
     
-    func onTapClose() {
-        self.removeDim()
-    }
 }
 
 extension ChangeMyTodoViewController: CalendarAddDelegate{
@@ -619,21 +611,18 @@ extension ChangeMyTodoViewController: CalendarAddDelegate{
         self.calendarReloadSetting(selectedDay, selectedRepeatDay, selectedDayOfWeek, yearAndMonthText, selectedValuesIndex, selectedRepeatIndex)
     }
     
-    func onTapCalendarModalClose(){
-        self.removeDim()
-    }
 }
 
 extension ChangeMyTodoViewController: TimeAddDelegate{
-    func onTapTimeAddModalClose() {
-        self.removeDim()
-    }
-    
     func updateData(leftOrRight: [String], startTime: String, endTime: String, afterOrMorn: [String], selectedTimeIndex: [Int]) {
 
         self.timeReloadSetting(leftOrRight, startTime, endTime, afterOrMorn, selectedTimeIndex)
     }
 }
+extension ChangeMyTodoViewController : BaseModalDelegate{
+    func onTapClose() {
+        self.removeDim()
+    }
 
 extension ChangeMyTodoViewController: TagAddDelegate{
     func onTapTagAddModalClose() {

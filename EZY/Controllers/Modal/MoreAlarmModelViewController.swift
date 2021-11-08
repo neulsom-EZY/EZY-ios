@@ -9,12 +9,11 @@ import UIKit
 import SnapKit
 import Then
 
-protocol AlarmModelDelegate: class {
-    func onTapClose()
+protocol AlarmModelDelegate: AnyObject {
     func updateData(ampm : String , time : Int , minute : Int) 
 }
 
-class MoreAlarmModelViewController : UIViewController{
+class MoreAlarmModelViewController : BaseModal{
     let ampmData = ["오후","오전"]
     lazy var ampm = self.ampmData[0]
     var time = 0
@@ -26,9 +25,7 @@ class MoreAlarmModelViewController : UIViewController{
         $0.backgroundColor = .white
         $0.layer.cornerRadius = 40
     }
-    let transparentView = UIView()
     
-
     
     private let makeButton = UIButton().then{
         $0.backgroundColor = .rgb(red: 129, green: 118, blue: 255)
@@ -49,33 +46,29 @@ class MoreAlarmModelViewController : UIViewController{
         }
     }
     //MARK: - Lifecycle
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-
-        configureUI()
+    override func configure() {
+        super.configure()
+        addView()
+        cornerRadius()
+        location()
+        delegateAndDataSource()
     }
     
     //MARK: - Selectors
     @objc func onTapClose() {
-        delegate?.onTapClose()
+        baseDelegate?.onTapClose()
         dismiss(animated: true, completion: nil)
     }
     
 
     @objc func MakeTodo(){
-        delegate?.onTapClose()
+        baseDelegate?.onTapClose()
         dismiss(animated: true, completion: nil)
         delegate?.updateData(ampm: ampm , time: time, minute: minute)
     }
     //MARK: - HELPERS
     private func configureUI(){
-        addView()
-        cornerRadius()
-        location()
-        addTransparentsview(frame: transparentView.frame)
-        
-        delegateAndDataSource()
+
     }
     private func addView(){
         [transparentView,bgView,makeButton].forEach {view.addSubview($0)}
@@ -116,12 +109,6 @@ class MoreAlarmModelViewController : UIViewController{
         
     }
 
-    private func addTransparentsview(frame : CGRect){
-        let window = UIApplication.shared.keyWindow
-        transparentView.frame = window?.frame ?? self.view.frame
-        let tapgesture = UITapGestureRecognizer(target: self, action: #selector(onTapClose))
-        transparentView.addGestureRecognizer(tapgesture)
-    }
 }
 //MARK: - PickerView Setting
 extension MoreAlarmModelViewController : UIPickerViewDelegate, UIPickerViewDataSource{

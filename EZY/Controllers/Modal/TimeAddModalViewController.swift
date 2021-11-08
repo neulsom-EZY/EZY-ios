@@ -8,14 +8,13 @@
 import UIKit
 
 protocol TimeAddDelegate: AnyObject {
-    func onTapTimeAddModalClose()
     func updateData(leftOrRight: [String], startTime: String, endTime: String, afterOrMorn: [String], selectedTimeIndex: [Int])
 }
 
-class TimeAddModalViewController: UIViewController{
+class TimeAddModalViewController: BaseModal{
     // MARK: - Properties
     weak var delegate: TimeAddDelegate?
-
+    
     private let bgView = UIView().then {
         $0.backgroundColor = .white
         $0.layer.cornerRadius = 10
@@ -150,15 +149,10 @@ class TimeAddModalViewController: UIViewController{
         }
     }
     
-    // MARK: - LifeCycles
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        
-        configureUI()
-    }
-    
+
     // MARK: - Helpers
-    func configureUI(){
+    override func configure() {
+        super.configure()
         addView()
         
         location()
@@ -319,7 +313,7 @@ class TimeAddModalViewController: UIViewController{
     
     //MARK: - selectors
     @objc func MakeTodo(){
-        delegate?.onTapTimeAddModalClose()
+        baseDelegate?.onTapClose()
         dismiss(animated: true, completion: nil)
         afterOrMorn = [startSelectedLabelText, endSelectedLabelText]
 

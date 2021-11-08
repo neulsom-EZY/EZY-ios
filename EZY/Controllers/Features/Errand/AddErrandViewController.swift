@@ -13,8 +13,6 @@ class AddErrandViewController : UIViewController{
     //MARK: - Properties
     let bounds = UIScreen.main.bounds
     
-    
-    
     private let backbutton = UIButton().then{
         $0.tintColor = .EZY_AFADFF
         $0.setImage(UIImage(systemName: "arrow.left"), for: .normal)

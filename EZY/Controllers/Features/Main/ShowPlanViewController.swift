@@ -310,7 +310,7 @@ class ShowPlanViewController: UIViewController{
     @objc func EZYPlanAddButtonClicked(sender:UIButton){
         let MoreCalendarModalsVC = MoreCalendarModalsViewController.instance()
         MoreCalendarModalsVC.delegate = self
-
+        MoreCalendarModalsVC.baseDelegate = self
         present(MoreCalendarModalsVC, animated: true, completion: nil)
     
         addDim()
@@ -515,9 +515,10 @@ extension ShowPlanViewController: BulletinDelegate {
         self.removeDim()
         self.updateDim(viewcontroller: vc)
     }
-    
+}
+extension ShowPlanViewController: BaseModalDelegate {
     func onTapClose() {
-        self.removeDim()
+        removeDim()
     }
 }
 

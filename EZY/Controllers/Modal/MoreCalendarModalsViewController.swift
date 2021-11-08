@@ -9,12 +9,11 @@ import UIKit
 import Then
 import SnapKit
 
-protocol BulletinDelegate: class {
-    func onTapClose()
+protocol BulletinDelegate: AnyObject {
     func update(vc : UIViewController)
 }
 
-class MoreCalendarModalsViewController : UIViewController{
+class MoreCalendarModalsViewController : BaseModal{
     
     //MARK: - Properties
     weak var delegate: BulletinDelegate?
@@ -23,7 +22,6 @@ class MoreCalendarModalsViewController : UIViewController{
         $0.backgroundColor = .white
         $0.layer.cornerRadius = 40
     }
-    private let transparentView = UIView()
     
     private let TitleLabel = UILabel().then{
         $0.text = "추가 할 항목을 선택해주세요"
@@ -48,33 +46,31 @@ class MoreCalendarModalsViewController : UIViewController{
         return button
     }()
     private let makeButton = UIButton().then{
+        $0.titleLabel?.dynamicFont(fontSize: 12, currentFontName: "AppleSDGothicNeo-Bold")
+        $0.titleLabel?.textColor = .white
+        $0.setTitle("생 성", for: .normal)
         $0.backgroundColor = .rgb(red: 170, green: 163, blue:255)
         $0.isEnabled = false
         $0.addTarget(self, action: #selector(MakeTodo), for: .touchUpInside)
     }
 
-    private let makeTitle = UILabel().then{
-        $0.text = "생 성"
-        $0.textColor = .white
-        $0.dynamicFont(fontSize: 12, currentFontName: "AppleSDGothicNeo-Bold")
-    }
-  
     static func instance() -> MoreCalendarModalsViewController {
         return MoreCalendarModalsViewController(nibName: nil, bundle: nil).then {
             $0.modalPresentationStyle = .overFullScreen
         }
     }
     //MARK: - Lifecycle
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
+    override func configure() {
+        super.configure()
         configureUI()
-        
+        addView()
+        cornerRadius()
+        location()
     }
     
     //MARK: - Selectors
     @objc func onTapClose() {
-        delegate?.onTapClose()
+        baseDelegate?.onTapClose()
         dismiss(animated: true, completion: nil)
     }
     
@@ -91,7 +87,6 @@ class MoreCalendarModalsViewController : UIViewController{
             makeButton.isEnabled = false
             myToDo.layer.borderWidth = 0
             myToDo.layer.borderColor = UIColor.clear.cgColor
-
         }
     }
 
@@ -110,20 +105,17 @@ class MoreCalendarModalsViewController : UIViewController{
             makeButton.isEnabled = false
         }
     }
-    @objc func MakeTodo(){
-        delegate?.onTapClose()
+    @objc private  func MakeTodo(){
+        baseDelegate?.onTapClose()
         delegate?.update(vc: viewControlelrChoose)
     }
     //MARK: - HELPERS
     
     private func configureUI(){
-        addView()
-        cornerRadius()
-        location()
-        addTransparentsview(frame: transparentView.frame)
+        
     }
     private func addView(){
-        [transparentView,bgView,TitleLabel,myToDo,errand,makeButton,makeTitle].forEach { view.addSubview($0)}
+        [transparentView,bgView,TitleLabel,myToDo,errand,makeButton].forEach { view.addSubview($0)}
     }
     
     private func cornerRadius(){
@@ -166,9 +158,7 @@ class MoreCalendarModalsViewController : UIViewController{
             make.width.equalTo(view.frame.height/11.6 )
             make.height.equalTo(view.frame.height/24.61 )
         }
-        makeTitle.snp.makeConstraints { (make) in
-            make.center.equalTo(makeButton.snp.center)
-        }
+
     }
     private func myTodoState(){
         myToDo.layer.borderColor = UIColor.clear.cgColor
@@ -178,11 +168,5 @@ class MoreCalendarModalsViewController : UIViewController{
     private func ErrandTodoState(){
         errand.layer.borderColor = UIColor.clear.cgColor
         errand.isSelected = false
-    }
-    private func addTransparentsview(frame : CGRect){
-        let window = UIApplication.shared.keyWindow
-        transparentView.frame = window?.frame ?? self.view.frame
-        let tapgesture = UITapGestureRecognizer(target: self, action: #selector(onTapClose))
-        transparentView.addGestureRecognizer(tapgesture)
     }
 }

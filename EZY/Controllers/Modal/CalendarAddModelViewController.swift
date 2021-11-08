@@ -8,14 +8,14 @@
 import UIKit
 
 protocol CalendarAddDelegate: AnyObject {
-    func onTapCalendarModalClose()
     func updateData(selectedDay : String , selectedRepeatDay : [String], selectedDayOfWeek: String, yearAndMonthText: String, selectedValuesIndex: Int, selectedRepeatIndex: [Int])
 }
 
-class CalendarAddModelViewController: UIViewController {
+class CalendarAddModelViewController: BaseModal {
     // MARK: - Properties
-    weak var delegate: CalendarAddDelegate?
     
+    weak var delegate: CalendarAddDelegate?
+
     private let bgView = UIView().then {
         $0.backgroundColor = .white
         $0.layer.cornerRadius = 10
@@ -108,10 +108,13 @@ class CalendarAddModelViewController: UIViewController {
     }
 
     // MARK: - LifeCycles
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        
-        configureUI()
+    override func configure() {
+        super.configure()
+        currentDateSetting()
+        pickerViewDataSetting()
+        addView()
+        location()
+        delegateAndDataSource()
     }
     
     // MARK: - pickerViewDataSetting
@@ -129,17 +132,7 @@ class CalendarAddModelViewController: UIViewController {
     }
     
     //MARK: - helpers
-    func configureUI(){
-        currentDateSetting()
-        
-        pickerViewDataSetting()
-        
-        addView()
 
-        location()
-        
-        delegateAndDataSource()
-    }
     
     // MARK: - currentDate Setting
     func currentDateSetting(){
@@ -150,7 +143,7 @@ class CalendarAddModelViewController: UIViewController {
     
     // MARK: - Selectors
     @objc func onTapClose() {
-        delegate?.onTapCalendarModalClose()
+        baseDelegate?.onTapClose()
         dismiss(animated: true, completion: nil)
     }
     
@@ -170,23 +163,15 @@ class CalendarAddModelViewController: UIViewController {
             }
         }
                 
-        delegate?.onTapCalendarModalClose()
+        baseDelegate?.onTapClose()
         dismiss(animated: true, completion: nil)
         delegate?.updateData(selectedDay: self.selectedDay, selectedRepeatDay: self.selectedRepeatDay, selectedDayOfWeek: self.selectedDayOfWeek, yearAndMonthText: self.yearAndMonthText, selectedValuesIndex: self.dayPickerViewselectedIndex, selectedRepeatIndex: self.selectedRepeatIndex)
     }
     
     //MARK: - addView
     func addView(){
-        self.view.addSubview(bgView)
-        bgView.addSubview(titleLabel)
-        bgView.addSubview(monthLabel)
-        bgView.addSubview(monthYearLabel)
-        bgView.addSubview(calendarTriangleImageView)
-        bgView.addSubview(dayPickerView)
-        bgView.addSubview(divideLineView)
-        bgView.addSubview(repeatLabel)
-        bgView.addSubview(repeatCollectionView)
-        bgView.addSubview(calendarAddButton)
+        [bgView].forEach{ view.addSubview($0)}
+        [titleLabel,monthLabel,monthYearLabel,calendarTriangleImageView,dayPickerView,divideLineView,repeatLabel,repeatCollectionView,calendarAddButton].forEach{ bgView.addSubview($0)}
     }
     
     // MARK: - location
@@ -254,11 +239,8 @@ class CalendarAddModelViewController: UIViewController {
     
     // MARK: - delegateAndDataSource
     func delegateAndDataSource(){
-        repeatCollectionView.delegate = self
-        repeatCollectionView.dataSource = self
-        
-        dayPickerView.delegate = self
-        dayPickerView.dataSource = self
+        [repeatCollectionView].forEach{ $0.delegate = self; $0.dataSource = self}
+        [dayPickerView].forEach{ $0.delegate = self; $0.dataSource = self}
         
         dayPickerView.transform = CGAffineTransform(rotationAngle: (-90 * (.pi / 180*3)))
     }
