@@ -48,7 +48,7 @@ class MoreCalendarModalsViewController : BaseModal{
     private let makeButton = UIButton().then{
         $0.titleLabel?.dynamicFont(fontSize: 12, currentFontName: "AppleSDGothicNeo-Bold")
         $0.titleLabel?.textColor = .white
-        $0.titleLabel?.text = "생성"
+        $0.setTitle("생 성", for: .normal)
         $0.backgroundColor = .rgb(red: 170, green: 163, blue:255)
         $0.isEnabled = false
         $0.addTarget(self, action: #selector(MakeTodo), for: .touchUpInside)
@@ -87,7 +87,6 @@ class MoreCalendarModalsViewController : BaseModal{
             makeButton.isEnabled = false
             myToDo.layer.borderWidth = 0
             myToDo.layer.borderColor = UIColor.clear.cgColor
-
         }
     }
 
@@ -106,7 +105,7 @@ class MoreCalendarModalsViewController : BaseModal{
             makeButton.isEnabled = false
         }
     }
-    @objc func MakeTodo(){
+    @objc private  func MakeTodo(){
         baseDelegate?.onTapClose()
         delegate?.update(vc: viewControlelrChoose)
     }

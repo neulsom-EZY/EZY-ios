@@ -9,7 +9,7 @@ import UIKit
 import SnapKit
 import Then
 
-protocol AlarmModelDelegate: class {
+protocol AlarmModelDelegate: AnyObject {
     func updateData(ampm : String , time : Int , minute : Int) 
 }
 
