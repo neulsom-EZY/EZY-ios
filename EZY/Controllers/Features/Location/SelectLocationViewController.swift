@@ -18,7 +18,7 @@ public struct Place{
     
 class SelectLocationViewController: UIViewController {
     // MARK: - Properties
-    private let alphabetTextArray: [String] = []
+    private let alphabetTextArray: [String] = ["A","B","C","D","E","F","G"]
     
     var resultList=[Place]()
 

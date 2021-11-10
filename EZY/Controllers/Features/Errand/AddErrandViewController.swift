@@ -12,6 +12,11 @@ import Then
 class AddErrandViewController : UIViewController{
     //MARK: - Properties
     let bounds = UIScreen.main.bounds
+   
+    let bgView = UIView().then {
+        $0.backgroundColor = .black
+        $0.alpha = 0
+    }
     
     private let backbutton = UIButton().then{
         $0.tintColor = .EZY_AFADFF
@@ -33,11 +38,11 @@ class AddErrandViewController : UIViewController{
         $0.spacing = bounds.height/47.7647
     }
     
-    private let calendarBtn = CalendarAlertBtn(icon: (UIImage(named: "EZY_Calendar")?.withRenderingMode(.alwaysTemplate))!, iconColor: .rgb(red: 255, green: 181, blue: 181), titleText: "2021.6.6 일요일", repeatText: "월, 화, 수").then {
+    private let calendarBtn = CalendarAlertBtn(icon: (UIImage(named: "EZY_Calendar")?.withRenderingMode(.alwaysTemplate))!, iconColor: .rgb(red: 255, green: 181, blue: 181), titleText: "날짜를 선택해주세요!", repeatText: "반복 없음").then {
         $0.addTarget(self, action: #selector(calendarAlert), for: .touchUpInside)
     }
     private let clockBtn : AlertButton = {
-        let viewModel = AlertBtn(icon: UIImage(named: "EZY_clock")?.withRenderingMode(.alwaysTemplate), iconTintColor: .rgb(red: 255, green: 203, blue: 181), message: "11:00AM - 1:00PM")
+        let viewModel = AlertBtn(icon: UIImage(named: "EZY_clock")?.withRenderingMode(.alwaysTemplate), iconTintColor: .rgb(red: 255, green: 203, blue: 181), message: "시간을 선택해주세요!")
         let button = AlertButton(with: viewModel)
         
         button.addTarget(self, action: #selector(clockAlert), for: .touchUpInside)
@@ -45,7 +50,7 @@ class AddErrandViewController : UIViewController{
     }()
     
     private let locationBtn : AlertButton = {
-        let viewModel = AlertBtn(icon: UIImage(named: "EZY_location")?.withRenderingMode(.alwaysTemplate), iconTintColor: .rgb(red: 199, green: 224, blue: 212), message: "광주소프트웨어마이스터고등학교")
+        let viewModel = AlertBtn(icon: UIImage(named: "EZY_location")?.withRenderingMode(.alwaysTemplate), iconTintColor: .rgb(red: 199, green: 224, blue: 212), message: "위치를 선택해주세요!")
         let button = AlertButton(with: viewModel)
         button.addTarget(self, action: #selector(locationAlert), for: .touchUpInside)
         return button
@@ -97,12 +102,16 @@ class AddErrandViewController : UIViewController{
     
     @objc private func calendarAlert(){
         // 날짜 Alert를 실행시킬 부분
+
     }
     @objc private func clockAlert(){
         //시간 Alert를 실행시킬 부분
+
     }
     @objc private func locationAlert(){
         //위치 Alert 실행시킬 부분
+        let nextViewController = SelectLocationViewController()
+        self.navigationController?.pushViewController(nextViewController, animated: true)
     }
     @objc private  func Addmytodobtn(){
         print("DEBUG:AddButton")
@@ -124,9 +133,7 @@ class AddErrandViewController : UIViewController{
         super.touchesBegan(touches, with: event)
         view.endEditing(true)
     }
-    static func instance() -> AddErrandViewController {
-        return AddErrandViewController(nibName: nil, bundle: nil)
-    }
+    //MARK: - USER Choose Action
     private func ChangeUser(_ titleUser : String?, _ color: UIColor){
         askForFavor.setTitle("@\(titleUser ?? "")", for: .normal)
         askForFavor.setTitleColor(color, for: .normal)
@@ -186,8 +193,39 @@ class AddErrandViewController : UIViewController{
     }
 
 }
+//MARK: - Modal Action
+extension AddErrandViewController {
+    private func addDim() {
+        view.addSubview(bgView)
+        bgView.snp.makeConstraints { (make) in
+            make.edges.equalTo(0)
+        }
+        
+        DispatchQueue.main.async { [weak self] in
+            self?.bgView.alpha = 0.2
+        }
+    }
+    
+    func removeDim() {
+        DispatchQueue.main.async { [weak self] in
+            self?.bgView.removeFromSuperview()
+        }
+    }
+}
+
+
+
+//MARK: - UserData 넘겨주기
 extension AddErrandViewController : UserDataDelegate {
     func userUpdateData(name: String?, Color: UIColor) {
         self.ChangeUser(name, Color)
     }
 }
+//MARK: - Modal Close
+extension AddErrandViewController : BaseModalDelegate{
+    func onTapClose() {
+        self.removeDim()
+    }
+}
+
+
