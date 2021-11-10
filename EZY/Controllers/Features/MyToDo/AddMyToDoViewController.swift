@@ -12,7 +12,7 @@ import Alamofire
 
 class AddMyToDoViewController: UIViewController{
      let tagData : [CollectionViewModel] = [CollectionViewModel(backgroundColor: .EZY_968DFF,iconImage: UIImage(named: "EZY_GroupAddButton")?.withRenderingMode(.alwaysTemplate),textData: nil),
-                                                   CollectionViewModel(backgroundColor: UIColor.rgb(red: 144, green: 144, blue: 144),iconImage: UIImage(named: "EZY_GroupModalViewHideButton")?.withRenderingMode(.alwaysTemplate),
+                                                   CollectionViewModel(backgroundColor: UIColor.rgb(red: 144, green: 144, blue: 144),iconImage: UIImage(named: "EZY_UnSelectedNoSelectTagButtonImage")?.withRenderingMode(.alwaysTemplate),
                                                                        textData: nil),
                                                    CollectionViewModel(backgroundColor: UIColor.rgb(red: 135, green: 159, blue: 255),  iconImage: nil, textData: "STUDY"),
                                                    CollectionViewModel(backgroundColor: UIColor.rgb(red: 135, green: 159, blue: 255), iconImage: nil, textData: "PROGRAMMING"),
@@ -24,7 +24,7 @@ class AddMyToDoViewController: UIViewController{
     var alarmData : [CollectionViewModel] = [CollectionViewModel(backgroundColor: .EZY_968DFF,
                                                                   iconImage: UIImage(named: "EZY_GroupAddButton")?.withRenderingMode(.alwaysTemplate),
                                                                          textData: nil),
-                                              CollectionViewModel(backgroundColor: UIColor.rgb(red: 144, green: 144, blue: 144), iconImage: UIImage(named: "EZY_GroupModalViewHideButton")?.withRenderingMode(.alwaysTemplate), textData: nil)]
+                                              CollectionViewModel(backgroundColor: UIColor.rgb(red: 144, green: 144, blue: 144), iconImage: UIImage(named: "EZY_UnSelectedNoSelectTagButtonImage")?.withRenderingMode(.alwaysTemplate), textData: nil)]
     //MARK: - Properties
     
     let bounds = UIScreen.main.bounds
