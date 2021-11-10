@@ -1,5 +1,6 @@
 PODS:
   - Alamofire (5.4.3)
+  - ChannelIOSDK (9.1.2)
   - Firebase/Analytics (8.7.0):
     - Firebase/Core
   - Firebase/Core (8.7.0):
@@ -98,6 +99,7 @@ PODS:
 
 DEPENDENCIES:
   - Alamofire (~> 5.2)
+  - ChannelIOSDK (from `https://mobile-static.channel.io/ios/latest/xcframework.podspec`)
   - Firebase/Analytics
   - Firebase/Core
   - Firebase/Messaging
@@ -121,8 +123,13 @@ SPEC REPOS:
     - SnapKit
     - Then
 
+EXTERNAL SOURCES:
+  ChannelIOSDK:
+    :podspec: https://mobile-static.channel.io/ios/latest/xcframework.podspec
+
 SPEC CHECKSUMS:
   Alamofire: e447a2774a40c996748296fa2c55112fdbbc42f9
+  ChannelIOSDK: c1e299699fcf095b01e8b94a52191d2c0efaf454
   Firebase: bc9325d5ee2041524bac78a5213d0e530c651309
   FirebaseAnalytics: 52768800c2add1d84b751420cb4caaf8195f2c41
   FirebaseCore: f4804c1d3f4bbbefc88904d15653038f2c99ddf7
@@ -137,6 +144,6 @@ SPEC CHECKSUMS:
   SnapKit: 97b92857e3df3a0c71833cce143274bf6ef8e5eb
   Then: acfe0be7e98221c6204e12f8161459606d5d822d
 
-PODFILE CHECKSUM: 92652939d22254c5563c2de98379d45c59b852c0
+PODFILE CHECKSUM: e3ecd5343ff908074a9128994a35a8b06ed33ce7
 
 COCOAPODS: 1.11.2
