@@ -54,6 +54,10 @@ extension UIColor{
     static let EZY_656565 = UIColor.rgb(red: 101, green: 101, blue: 101)
     static let EZY_DEDEDE = UIColor.rgb(red: 222, green: 222, blue: 222)
     static let EZY_CDCDCD = UIColor.rgb(red: 205, green: 205, blue: 205)
+    static let EZY_AAA8FF = UIColor.rgb(red: 170, green: 168, blue: 255)
+    static let EZY_D0D0D0 = UIColor.rgb(red: 208, green: 208, blue: 208)
+    static let EZY_796DFF = UIColor.rgb(red: 121, green: 109, blue: 255)
+    static let EZY_8F85FF = UIColor.rgb(red: 143, green: 133, blue: 255)
     static var EZY_TagColor1 = UIColor(red: 154/255, green: 119/255, blue: 255/255, alpha: 1)
     static var EZY_TagColor2 = UIColor(red: 129/255, green: 85/255, blue: 255/255, alpha: 1)
     static var EZY_TagColor3 = UIColor(red: 114/255, green: 110/255, blue: 255/255, alpha: 1)
@@ -69,6 +73,20 @@ extension UIColor{
     static var EZY_TagColor13 = UIColor(red: 198/255, green: 171/255, blue: 255/255, alpha: 1)
     
     static var EZY_TagColorArray = [EZY_TagColor1,EZY_TagColor2,EZY_TagColor3,EZY_TagColor4,EZY_TagColor5,EZY_TagColor6,EZY_TagColor7,EZY_TagColor8,EZY_TagColor9,EZY_TagColor10,EZY_TagColor11,EZY_TagColor12,EZY_TagColor13]
+    
+    static let EZY_PLAN_FINISH_PURPLE = UIColor.rgb(red: 189, green: 170, blue: 255)
+    static let EZY_PLAN_YELLOW = UIColor.rgb(red: 255, green: 209, blue: 141)
+    static let EZY_PLAN_ORANGE = UIColor.rgb(red: 255, green: 166, blue: 128)
+    static let EZY_PLAN_PURPLE = UIColor.rgb(red: 141, green: 138, blue: 255)
+    static let EZY_PLAN_MIDDLEPURPLE = UIColor.rgb(red: 175, green: 173, blue: 255)
+    static let EZY_PLAN_LIGHTPURPLE = UIColor.rgb(red: 200, green: 199, blue: 255)
+    static let EZY_PLAN_FINISH_BACK = UIColor.rgb(red: 242, green: 242, blue: 242)
+    static let EZY_PLAN_DO_BACK = UIColor.rgb(red: 255, green: 255, blue: 255)
+}
+
+extension CGColor{
+    static let EZY_PLAN_DO_SHADOW = UIColor.EZY_000000.cgColor
+    static let EZY_PLAN_FINISH_SHADOW = UIColor.EZY_FFFFFF.cgColor
 }
 
 //MARK: - UILabel dynamic font extension
