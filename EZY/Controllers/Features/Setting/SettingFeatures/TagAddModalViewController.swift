@@ -8,11 +8,10 @@
 import UIKit
 
 protocol TagAddDelegate: AnyObject {
-    func onTapTagAddModalClose()
     func updateData(tagName: String, tagColorIndex: Int)
 }
 
-class TagAddModalViewController: UIViewController {
+class TagAddModalViewController: BaseModal {
 
     // MARK: - Properties
     weak var delegate: TagAddDelegate?
@@ -98,22 +97,16 @@ class TagAddModalViewController: UIViewController {
         TagColorCollectionViewModel(backgroundColor: UIColor.EZY_TagColorArray[6], isSelected: true),
         TagColorCollectionViewModel(backgroundColor: UIColor.EZY_TagColorArray[7], isSelected: true)]
     
-    // MARK: - LifeCycles
-    override func viewDidLoad() {
-        super.viewDidLoad()
 
-        configureUI()
-    }
-    
     // MARK: - configureUI
-    func configureUI(){
+    override func configure() {
+        super.configure()
         addView()
         
         location()
         
         delegateAndDataSource()
     }
-    
     // MARK: - addView
     func addView(){
         self.view.addSubview(bgView)
@@ -195,7 +188,7 @@ class TagAddModalViewController: UIViewController {
         if tagNameTextField.text!.trimmingCharacters(in: .whitespaces).isEmpty || tagNameTextField.text == ""{
             shakeView(tagNameLabel)
         }else{
-            delegate?.onTapTagAddModalClose()
+            baseDelegate?.onTapClose()
             dismiss(animated: true, completion: nil)
             delegate?.updateData(tagName: tagNameTextField.text!, tagColorIndex: selectedTagColorIndex)
         }
