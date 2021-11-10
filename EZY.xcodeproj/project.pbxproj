@@ -262,7 +262,6 @@
 		6AFB77FD267F343500B59482 /* TagAddModalView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagAddModalView.swift; sourceTree = "<group>"; };
 		6AFB77FF267F812B00B59482 /* TagColorCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagColorCollectionViewCell.swift; sourceTree = "<group>"; };
 		6AFCBE972711D6CE00801159 /* CalendarBtn.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarBtn.swift; sourceTree = "<group>"; };
-		8926CC0FD49AE595A17DEEF3 /* Pods-EZY.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EZY.release.xcconfig"; path = "Target Support Files/Pods-EZY/Pods-EZY.release.xcconfig"; sourceTree = "<group>"; };
 		AA04F9D42700996800EE0506 /* LoginTextFieldContainerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginTextFieldContainerView.swift; sourceTree = "<group>"; };
 		AA04F9D62701C12600EE0506 /* SignUpTextFieldContainerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpTextFieldContainerView.swift; sourceTree = "<group>"; };
 		AA4575072736CC790018411C /* AuthCodeTextFieldView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = AuthCodeTextFieldView.swift; path = PickerView/AuthCodeTextFieldView.swift; sourceTree = "<group>"; };
@@ -799,7 +798,6 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 6AA769F826636AE800B7E1F5 /* Build configuration list for PBXNativeTarget "EZY" */;
 			buildPhases = (
-				3A858E0639A50E965E5D9AEA /* [CP] Check Pods Manifest.lock */,
 				6AA769DD26636AE700B7E1F5 /* Sources */,
 				6AA769DE26636AE700B7E1F5 /* Frameworks */,
 				6AA769DF26636AE700B7E1F5 /* Resources */,
