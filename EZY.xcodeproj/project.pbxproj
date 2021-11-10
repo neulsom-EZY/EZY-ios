@@ -45,6 +45,7 @@
 		6A4EDA35266BD27800B809EC /* TopView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A4EDA34266BD27800B809EC /* TopView.swift */; };
 		6A4EDA37266DA52A00B809EC /* SettingTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A4EDA36266DA52A00B809EC /* SettingTableViewCell.swift */; };
 		6A4EDA41266E38E000B809EC /* GroupCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A4EDA40266E38E000B809EC /* GroupCollectionViewCell.swift */; };
+		6A50CF7A273B3A9B0036EED6 /* BasicModalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A50CF79273B3A9B0036EED6 /* BasicModalViewController.swift */; };
 		6A5C6A242734A24000556849 /* TagAddModalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A5C6A232734A24000556849 /* TagAddModalViewController.swift */; };
 		6A685C0D26AC1E2D0079BC30 /* PersonalPlanDetailRepeatDayCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A685C0C26AC1E2D0079BC30 /* PersonalPlanDetailRepeatDayCollectionViewCell.swift */; };
 		6A6A66E026D608D40096A14B /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 6A6A66DF26D608D40096A14B /* GoogleService-Info.plist */; };
@@ -196,6 +197,7 @@
 		6A4EDA34266BD27800B809EC /* TopView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopView.swift; sourceTree = "<group>"; };
 		6A4EDA36266DA52A00B809EC /* SettingTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingTableViewCell.swift; sourceTree = "<group>"; };
 		6A4EDA40266E38E000B809EC /* GroupCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupCollectionViewCell.swift; sourceTree = "<group>"; };
+		6A50CF79273B3A9B0036EED6 /* BasicModalViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasicModalViewController.swift; sourceTree = "<group>"; };
 		6A5C6A232734A24000556849 /* TagAddModalViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagAddModalViewController.swift; sourceTree = "<group>"; };
 		6A685C0C26AC1E2D0079BC30 /* PersonalPlanDetailRepeatDayCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonalPlanDetailRepeatDayCollectionViewCell.swift; sourceTree = "<group>"; };
 		6A6A66DF26D608D40096A14B /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
@@ -626,6 +628,7 @@
 				EE9F0D2126E8A2AC0015E81B /* MoreCalendarModalsViewController.swift */,
 				6AA7E7862720E64100034327 /* TimeAddModalViewController.swift */,
 				EE963D352734B0CE005070B5 /* BaseModal */,
+				6A50CF79273B3A9B0036EED6 /* BasicModalViewController.swift */,
 			);
 			path = Modal;
 			sourceTree = "<group>";
@@ -950,6 +953,7 @@
 				EE9F0D2526E8A2AC0015E81B /* AddMyToDoViewController.swift in Sources */,
 				6ABA2C8C26A5366000CB1E16 /* WithdrawalModalView.swift in Sources */,
 				6A3E2E7826B111540078D749 /* ChangePasswordAfterLoginViewController.swift in Sources */,
+				6A50CF7A273B3A9B0036EED6 /* BasicModalViewController.swift in Sources */,
 				6A3E2E8026B6A60B0078D749 /* ManagementbtnModel.swift in Sources */,
 				6AA6F799269C2E6200958D36 /* NewPasswordPutViewController.swift in Sources */,
 				6A3E2E7E26B6A5FB0078D749 /* ViewModel.swift in Sources */,
