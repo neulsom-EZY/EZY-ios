@@ -17,9 +17,9 @@ class SettingViewController: UIViewController {
         $0.showsVerticalScrollIndicator = false
     }
     
-    lazy var settingListTitleLabel = ["푸시 알림 관리", "태그 관리","아이디 변경","비밀번호 변경", "회원 탈퇴"]
+    lazy var settingListTitleLabel = ["푸시 알림 관리", "태그 관리", "닉네임 변경","비밀번호 변경","전화번호 변경", "로그아웃", "회원 탈퇴"]
     
-    lazy var settingListDescriptionLabel = ["개인, 심부름관련 알림을 관리합니다.","일정의 태그를 관리합니다.","현재 사용 중인 닉네임을 변경합니다.","현재 사용 중인 비밀번호를 변경합니다.", "EZY 계정을 탈퇴합니다."]
+    lazy var settingListDescriptionLabel = ["개인, 심부름관련 알림을 관리합니다.","일정의 태그를 관리합니다.","현재 사용 중인 닉네임을 변경합니다.","현재 사용 중인 비밀번호를 변경합니다.","현재 사용 중인 전화번호를 변경합니다.","EZY에서 로그아웃합니다.", "EZY 계정을 탈퇴합니다."]
     
     //MARK: LifeCycles
     override func viewDidLoad() {
@@ -33,9 +33,7 @@ class SettingViewController: UIViewController {
         self.view.backgroundColor = .white
         
         addView()
-        
         topViewSetting()
-        
         settingtableViewSetting()
     }
     
@@ -83,9 +81,7 @@ class SettingViewController: UIViewController {
     @objc func backButtonClicked(sender: UIButton!) {
         self.navigationController?.popViewController(animated: true)
     }
-
 }
-
 
 //MARK: - extensions
 extension SettingViewController: UITableViewDelegate{
@@ -103,6 +99,12 @@ extension SettingViewController: UITableViewDelegate{
             let nextViewController = ChangePasswardPhoneNumAfterLoginViewController()
             self.navigationController?.pushViewController(nextViewController, animated: true)
         }else if indexPath.row == 4{
+            let nextViewController = ChangePhoneNumPutViewController()
+            self.navigationController?.pushViewController(nextViewController, animated: true)
+        }else if indexPath.row == 5{
+            let nextViewController = LogoutViewController()
+            self.navigationController?.pushViewController(nextViewController, animated: true)
+        }else if indexPath.row == 6{
             let nextViewController = WithdrawalViewController()
             self.navigationController?.pushViewController(nextViewController, animated: true)
         }

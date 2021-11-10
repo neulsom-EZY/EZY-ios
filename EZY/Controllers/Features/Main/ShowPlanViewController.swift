@@ -18,33 +18,25 @@ class ShowPlanViewController: UIViewController{
     
     private var planTimeArray: [String] = ["12:00 - 13:00", "12:00 - 13:00", "12:00 - 13:00", "12:00 - 13:00", "12:00 - 13:00", "12:00 - 13:00", "12:00 - 13:00", "12:00 - 13:00"]
     
-    private let scheduleTypesArray = ["나의 할 일","심부름","문의하기", "설정"]
+    private var scheduleTypesArray = ["나의 할 일","심부름","문의하기", "설정"]
     
-    private let icon = [UIImage(named: "EZY_OnePersonImage"), UIImage(named: "EZY_Errand"), UIImage(named: "EZY_InquiryImage"), UIImage(named: "EZY_settingsIcon")]
+    private var icon = [UIImage(named: "EZY_OnePersonImage"), UIImage(named: "EZY_Errand"), UIImage(named: "EZY_InquiryImage"), UIImage(named: "EZY_settingsIcon")]
     
-    fileprivate var userName = "Y00ujin"
-    
-    private lazy var planCompleteModalView = PlanCompleteModalView().then{
-        $0.isHidden = true
-        $0.okButton.addTarget(self, action: #selector(completeOkButtonClicked(sender:)), for: .touchUpInside)
-        $0.cancelButton.addTarget(self, action: #selector(completeCancelButtonClicked(sender:)), for: .touchUpInside)
-        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(handleTap(sender:)))
-        $0.shadowBackgroundView.addGestureRecognizer(tapGesture)
-    }
+    private let userName = "Y00ujin"
     
     private var selectedIndex = 0
     
     private let purpleColor: UIColor! = UIColor(red: 150/255, green: 141/255, blue: 255/255, alpha: 1)
     
-    fileprivate let orangeColor: UIColor! = UIColor(red: 255/255, green: 166/255, blue: 128/255, alpha: 1)
+    private let orangeColor: UIColor! = UIColor(red: 255/255, green: 166/255, blue: 128/255, alpha: 1)
     
-    fileprivate let yellowColor: UIColor! = UIColor(red: 255/255, green: 209/255, blue: 141/255, alpha: 1)
+    private let yellowColor: UIColor! = UIColor(red: 255/255, green: 209/255, blue: 141/255, alpha: 1)
     
-    fileprivate let greenColor: UIColor! = UIColor(red: 184/255, green: 128/255, blue: 255/255, alpha: 1)
+    private let greenColor: UIColor! = UIColor(red: 184/255, green: 128/255, blue: 255/255, alpha: 1)
     
-    fileprivate lazy var EZYPlanBackgroundColor: [UIColor] = [purpleColor, orangeColor, yellowColor, greenColor, purpleColor, orangeColor, yellowColor, greenColor]
+    private lazy var EZYPlanBackgroundColor: [UIColor] = [purpleColor, orangeColor, yellowColor, greenColor, purpleColor, orangeColor, yellowColor, greenColor]
     
-    fileprivate let questionTopLabelColorArray = [UIColor(red: 165/255, green: 139/255, blue: 254/255, alpha: 1), UIColor(red: 114/255, green: 111/255, blue: 254/255, alpha: 1)]
+    private let questionTopLabelColorArray = [UIColor(red: 165/255, green: 139/255, blue: 254/255, alpha: 1), UIColor(red: 114/255, green: 111/255, blue: 254/255, alpha: 1)]
     
     private let questionMiddleLabelColorArray = [UIColor(red: 114/255, green: 111/255, blue: 255/255, alpha: 1), UIColor(red: 140/255, green: 139/255, blue: 255/255, alpha: 1)]
     
@@ -81,7 +73,7 @@ class ShowPlanViewController: UIViewController{
         $0.updateGradientTextColor_vertical(gradientColors: questionBottomLabelColorArray)
     }
     
-    fileprivate lazy var ezyListTitleLabel = UILabel().then {
+    private lazy var ezyListTitleLabel = UILabel().then {
         $0.textColor = UIColor(red: 150/255, green: 141/255, blue: 255/255, alpha: 1)
         $0.text = "EZYLIST"
         $0.dynamicFont(fontSize: 12, currentFontName: "Poppins-Bold")
@@ -184,7 +176,6 @@ class ShowPlanViewController: UIViewController{
         middleComponemtView.addSubview(ezyListTitleLabel)
         middleComponemtView.addSubview(EZYPlanAddButton)
         self.view.addSubview(scheduleTypeCollectionMainView)
-        self.view.addSubview(planCompleteModalView)
         
         let attributedString = NSMutableAttributedString(string: ezyListTitleLabel.text!)
         attributedString.addAttribute(NSAttributedString.Key.kern, value: CGFloat(3.0), range: NSRange(location: 0, length: attributedString.length))
@@ -257,27 +248,6 @@ class ShowPlanViewController: UIViewController{
             make.centerX.equalToSuperview()
         }
         
-        planCompleteModalView.snp.makeConstraints { make in
-            make.top.right.bottom.left.equalToSuperview()
-        }
-        
-        planCompleteModalView.shadowBackgroundView.snp.makeConstraints { make in
-            make.top.right.bottom.left.equalToSuperview()
-        }
-        
-        planCompleteModalView.cancelButton.snp.makeConstraints { make in
-            make.bottom.equalTo(planCompleteModalView.okButton)
-            make.right.equalTo(planCompleteModalView.okButton.snp.left).offset(-self.view.frame.width/35)
-            make.height.width.equalTo(planCompleteModalView.okButton)
-        }
-        
-        planCompleteModalView.okButton.snp.makeConstraints { make in
-            make.bottom.equalToSuperview().offset(-self.view.frame.width/22)
-            make.right.equalToSuperview().offset(-self.view.frame.width/18)
-            make.height.equalToSuperview().dividedBy(3.9)
-            make.width.equalToSuperview().dividedBy(4.44)
-        }
-        
         emptyPlanBoxView.snp.makeConstraints { make in
             make.top.equalTo(ezyListTitleLabel.snp.bottom).offset(self.view.frame.height/12.11)
             make.bottom.equalToSuperview().offset(self.view.frame.height/12.11)
@@ -299,7 +269,7 @@ class ShowPlanViewController: UIViewController{
     
     // MARK: - Selectors
     @objc func handleTap(sender:UITapGestureRecognizer){
-        planCompleteModalView.isHidden = true
+        print("handleTap")
     }
     
     @objc func middleComponemtViewClicked(sender:UIButton){
@@ -323,18 +293,7 @@ class ShowPlanViewController: UIViewController{
     }
     
     @objc func completeOkButtonClicked(sender: UIButton) {
-        groupNameArray.remove(at: selectedIndex)
-        planTitleTextArray.remove(at: selectedIndex)
-        planTimeArray.remove(at: selectedIndex)
-        EZYPlanBackgroundColor.remove(at: selectedIndex)
-        
-        scheduleTimeTableView.deleteRows(at: [IndexPath(row: selectedIndex, section: 0)], with: .automatic)
-                
-        planCompleteModalView.isHidden = true
-    }
-    
-    @objc func completeCancelButtonClicked(sender: UIButton){
-        planCompleteModalView.isHidden = true
+
     }
     
     // MARK: - addDim
@@ -461,58 +420,12 @@ extension ShowPlanViewController: UITableViewDataSource{
 
 extension ShowPlanViewController: UITableViewDelegate{
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
-        // 일정 이름 길이에 따른 모달의 layout 변경
-        if planTitleTextArray[indexPath.row].count <= 10{
-            planCompleteModalView.modalBackgroundView.snp.remakeConstraints { make in
-                make.width.equalToSuperview().dividedBy(1.1)
-                make.height.equalToSuperview().dividedBy(6.29)
-                make.centerX.centerY.equalToSuperview()
-            }
-          
-            planCompleteModalView.labelView.snp.remakeConstraints { make in
-                make.centerX.equalToSuperview()
-                make.width.equalTo((planTitleTextArray[indexPath.row] as NSString).size(withAttributes: [NSAttributedString.Key.font : planCompleteModalView.planTitleNameLabel.font!]).width + (planCompleteModalView.completeQuestionsLabel.text! as NSString).size(withAttributes: [NSAttributedString.Key.font : planCompleteModalView.completeQuestionsLabel.font!]).width + self.view.frame.width/70)
-                make.height.equalToSuperview().dividedBy(10)
-                make.top.equalToSuperview().offset(self.view.frame.height/21)
-            }
-            
-            planCompleteModalView.planTitleNameLabel.snp.remakeConstraints { make in
-                make.left.centerY.equalToSuperview()
-            }
-            
-            planCompleteModalView.completeQuestionsLabel.snp.remakeConstraints { make in
-                make.right.centerY.equalToSuperview()
-            }
-        }else{
-            planCompleteModalView.modalBackgroundView.snp.remakeConstraints { make in
-                make.width.equalToSuperview().dividedBy(1.1)
-                make.height.equalToSuperview().dividedBy(5.75)
-                make.centerX.centerY.equalToSuperview()
-            }
-            
-            planCompleteModalView.labelView.snp.remakeConstraints { make in
-                make.centerX.equalToSuperview()
-                make.width.equalToSuperview()
-                make.height.equalToSuperview().dividedBy(3.8)
-                make.top.equalToSuperview().offset(self.view.frame.height/21)
-            }
-            
-            planCompleteModalView.planTitleNameLabel.snp.remakeConstraints { make in
-                make.top.centerX.equalToSuperview()
-            }
-            
-            planCompleteModalView.completeQuestionsLabel.snp.remakeConstraints { make in
-                make.bottom.centerX.equalToSuperview()
-            }
-        }
-    
-        planCompleteModalView.planTitleNameLabel.text = planTitleTextArray[indexPath.row]
-        
-        selectedIndex = indexPath.row
-        
-        planCompleteModalView.isHidden = false
-        
+        let BasicModalVC = BasicModalViewController.instance()
+        addDim()
+        BasicModalVC.delegate = self
+        BasicModalVC.baseDelegate = self
+        present(BasicModalVC, animated: true, completion: nil)
+        BasicModalVC.textSetting(colorText: groupNameArray[indexPath.row], contentText: "개인 일정을 완료할까요?")
     }
 }
 
@@ -539,5 +452,18 @@ extension UITableView {
     func resetTableViewScrollPositionToTop() {
         let indexPath = NSIndexPath(row: NSNotFound, section: 0)
         self.scrollToRow(at: indexPath as IndexPath, at: .top, animated: true)
+    }
+}
+
+extension ShowPlanViewController: ModalViewDelegate {
+    func onTapCloseModalView() {
+        groupNameArray.remove(at: selectedIndex)
+        planTitleTextArray.remove(at: selectedIndex)
+        planTimeArray.remove(at: selectedIndex)
+        EZYPlanBackgroundColor.remove(at: selectedIndex)
+        
+        scheduleTimeTableView.deleteRows(at: [IndexPath(row: selectedIndex, section: 0)], with: .automatic)
+        
+        removeDim()
     }
 }
