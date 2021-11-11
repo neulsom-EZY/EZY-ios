@@ -70,6 +70,21 @@ class MyToDoListViewController: UIViewController {
     private let noneListTag = ListTagView().then {
         $0.listLabel.text = "태그 없는 일정"
     }
+    
+    lazy var noneList = ScheduleTimeTableView.init(frame: self.view.frame)
+    
+    var noneDescriptionArray: [String] = ["공부", "공부"]
+    
+    let noneTitleArray: [String] = ["강아지 산책시키기", "카페에서 마카롱 사오기"]
+    
+    let nonePlanTimeArray: [String] = ["19:00 - 20:00", "12:00 - 13:00"]
+    
+    lazy var nonePlanBackgroundColor: [UIColor] = [.EZY_PLAN_PURPLE, .EZY_PLAN_FINISH_PURPLE]
+    
+    lazy var nonePlanDoOrFinishColor: [UIColor] = [.EZY_PLAN_DO_BACK, .EZY_PLAN_FINISH_BACK]
+    
+    lazy var nonePlanShadow: [CGColor] = [.EZY_PLAN_DO_SHADOW, .EZY_PLAN_FINISH_SHADOW]
+    
     //MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -105,6 +120,7 @@ class MyToDoListViewController: UIViewController {
         scrollInnerView.addSubview(secondListTag)
         scrollInnerView.addSubview(secondList)
         scrollInnerView.addSubview(noneListTag)
+        scrollInnerView.addSubview(noneList)
     }
     
     private func cornerRadius(){
@@ -138,7 +154,7 @@ class MyToDoListViewController: UIViewController {
             make.leading.equalTo(scrollView.contentLayoutGuide)
             make.bottom.equalTo(scrollView.contentLayoutGuide)
             make.width.equalTo(scrollView.frameLayoutGuide)
-            make.height.equalTo(firstList.tableView.contentSize.height + secondList.tableView.contentSize.height + (self.view.frame.height / 12.5) * 3) // tableView Height만큼 + tag 차지 높이 * tag 수
+            make.height.equalTo(firstList.tableView.contentSize.height + secondList.tableView.contentSize.height + noneList.tableView.contentSize.height + (self.view.frame.height / 12.5) * 3) // tableView Height만큼 + tag 차지 높이 * tag 수
         }
         
         firstListTag.snp.makeConstraints { make in
@@ -191,6 +207,21 @@ class MyToDoListViewController: UIViewController {
             make.width.equalTo(noneListTag.listLabel).offset(self.view.frame.width/12.5)
             make.height.equalTo(self.view.frame.height/31.23)
         }
+        
+        noneList.snp.makeConstraints { make in
+            noneList.backgroundColor = .clear
+            make.top.equalTo(noneListTag).offset(self.view.frame.height/47.76)
+            make.centerX.equalToSuperview()
+            make.width.equalToSuperview()
+            make.bottom.equalToSuperview()
+        }
+        
+        noneList.tableView.snp.makeConstraints { make in
+            make.top.equalTo(noneList).offset(self.view.frame.height/36)
+            make.width.height.equalToSuperview()
+            make.bottom.equalToSuperview()
+            make.centerX.equalToSuperview()
+        }
     }
     
     private func listTagViewSetting() {
@@ -215,11 +246,18 @@ class MyToDoListViewController: UIViewController {
         
         secondList.tableView.register(ScheduleTimeTableViewCell.self, forCellReuseIdentifier: ScheduleTimeTableViewCell.ScheduleTimeTableViewIdentifier)
         
+        noneList.tableView.dataSource = self
+        noneList.tableView.delegate = self
+        
+        noneList.tableView.register(ScheduleTimeTableViewCell.self, forCellReuseIdentifier: ScheduleTimeTableViewCell.ScheduleTimeTableViewIdentifier)
+        
         firstList.tableView.contentSize = CGSize(width: self.view.frame.width, height: (self.view.frame.height/8) * CGFloat(firstDescriptionArray.count))
         secondList.tableView.contentSize = CGSize(width: self.view.frame.width, height: (self.view.frame.height/8) * CGFloat(secondDescriptionArray.count))
+        noneList.tableView.contentSize = CGSize(width: self.view.frame.width, height: (self.view.frame.height/8) * CGFloat(noneDescriptionArray.count))
         
         firstList.tableView.isScrollEnabled = false
         secondList.tableView.isScrollEnabled = false
+        noneList.tableView.isScrollEnabled = false
     }
 
 }
@@ -229,8 +267,11 @@ extension MyToDoListViewController: UITableViewDataSource{
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if tableView == firstList.tableView {
             return firstDescriptionArray.count
+        } else if tableView == secondList.tableView {
+            return secondDescriptionArray.count
+        } else {
+            return noneDescriptionArray.count
         }
-        return secondDescriptionArray.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -251,7 +292,7 @@ extension MyToDoListViewController: UITableViewDataSource{
             cell.selectionStyle = UITableViewCell.SelectionStyle.none
             
             return cell
-        } else{
+        } else if tableView == secondList.tableView {
             let cell = tableView.dequeueReusableCell(withIdentifier: ScheduleTimeTableViewCell.ScheduleTimeTableViewIdentifier, for: indexPath) as! ScheduleTimeTableViewCell
             cell.groupNameLabel.text = secondDescriptionArray[indexPath.row]
             cell.titleLabel.text = secondTitleArray[indexPath.row]
@@ -262,6 +303,21 @@ extension MyToDoListViewController: UITableViewDataSource{
             cell.titleLabel.textColor = secondPlanBackgroundColor[indexPath.row]
             cell.groupNameLabel.textColor = secondPlanBackgroundColor[indexPath.row]
             cell.EZYLISTCellRightDecorationView.layer.shadowColor = secondPlanShadow[indexPath.row]
+            cell.backgroundColor = .clear
+            cell.selectionStyle = UITableViewCell.SelectionStyle.none
+            
+            return cell
+        } else{
+            let cell = tableView.dequeueReusableCell(withIdentifier: ScheduleTimeTableViewCell.ScheduleTimeTableViewIdentifier, for: indexPath) as! ScheduleTimeTableViewCell
+            cell.groupNameLabel.text = noneDescriptionArray[indexPath.row]
+            cell.titleLabel.text = noneTitleArray[indexPath.row]
+            cell.planTimeLabel.text = nonePlanTimeArray[indexPath.row]
+            cell.EZYLISTCellLeftDecorationView.backgroundColor = nonePlanBackgroundColor[indexPath.row]
+            cell.EZYLISTCellBackground.backgroundColor = nonePlanDoOrFinishColor[indexPath.row]
+            cell.EZYLISTCellRightDecorationView.backgroundColor = nonePlanDoOrFinishColor[indexPath.row]
+            cell.titleLabel.textColor = nonePlanBackgroundColor[indexPath.row]
+            cell.groupNameLabel.textColor = nonePlanBackgroundColor[indexPath.row]
+            cell.EZYLISTCellRightDecorationView.layer.shadowColor = nonePlanShadow[indexPath.row]
             cell.backgroundColor = .clear
             cell.selectionStyle = UITableViewCell.SelectionStyle.none
             
