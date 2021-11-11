@@ -325,7 +325,7 @@ class ShowPlanViewController: UIViewController{
 // MARK: - collectionView Extension
 extension ShowPlanViewController: UICollectionViewDelegate, UICollectionViewDelegateFlowLayout{
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize.init(width: self.view.frame.width / 3.45, height: (self.view.frame.width / 3)/0.95)
+        return CGSize.init(width: self.view.frame.width, height: self.view.frame.height/7.58)
     }
     
     //MARK: collectionView - left Padding

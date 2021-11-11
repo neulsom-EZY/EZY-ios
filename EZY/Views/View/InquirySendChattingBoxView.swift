@@ -8,9 +8,6 @@
 import UIKit
 
 class InquirySendChattingBoxView: UIView {
-    
-
-    
     var boxColor: [UIColor] = [UIColor(red: 182/255, green: 162/255, blue: 251/255, alpha: 1), UIColor(red: 193/255, green: 191/255, blue: 255/255, alpha: 1)]
 
     lazy var chattingBackgroundView = UIView().then {

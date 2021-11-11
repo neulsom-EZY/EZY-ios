@@ -185,6 +185,8 @@ class TagAddModalViewController: BaseModal {
     
     //MARK: - selectors
     @objc func MakeTodo(){
+        
+        
         if tagNameTextField.text!.trimmingCharacters(in: .whitespaces).isEmpty || tagNameTextField.text == ""{
             shakeView(tagNameLabel)
         }else{
@@ -192,8 +194,6 @@ class TagAddModalViewController: BaseModal {
             dismiss(animated: true, completion: nil)
             delegate?.updateData(tagName: tagNameTextField.text!, tagColorIndex: selectedTagColorIndex)
         }
-        
-        
     }
     
     static func instance() -> TagAddModalViewController {

@@ -67,7 +67,7 @@ class GroupAddModalView: UIView {
     }
     
     lazy var groupModalViewHideButton = UIButton().then {
-        $0.setImage(UIImage(named: "EZY_GroupModalViewHideButton"), for: .normal)
+        $0.setImage(UIImage(named: "EZY_UnSelectedNoSelectTagButtonImage"), for: .normal)
     }
     
     override init(frame: CGRect) {
