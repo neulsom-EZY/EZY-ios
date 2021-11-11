@@ -34,7 +34,7 @@ class MyToDoListViewController: UIViewController {
         $0.listLabel.text = "STUDY"
     }
     
-    private let firstList = ScheduleTimeTableView.init(frame: self.view.frame)
+    lazy var firstList = ScheduleTimeTableView.init(frame: self.view.frame)
     
     var firstDescriptionArray: [String] = ["NEULSOM", "NEULSOM"]
     
@@ -53,7 +53,7 @@ class MyToDoListViewController: UIViewController {
         $0.listLabel.text = "APP Programming"
     }
     
-    private let secondList = ScheduleTimeTableView.init(frame: self.view.frame)
+    lazy var secondList = ScheduleTimeTableView.init(frame: self.view.frame)
     
     var secondDescriptionArray: [String] = ["공부", "공부", "NEULSOM", "NEULSOM"]
     
@@ -67,7 +67,9 @@ class MyToDoListViewController: UIViewController {
     
     lazy var secondPlanShadow: [CGColor] = [.EZY_PLAN_DO_SHADOW, .EZY_PLAN_DO_SHADOW, .EZY_PLAN_FINISH_SHADOW, .EZY_PLAN_FINISH_SHADOW]
     
-    
+    private let noneListTag = ListTagView().then {
+        $0.listLabel.text = "태그 없는 일정"
+    }
     //MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -102,11 +104,13 @@ class MyToDoListViewController: UIViewController {
         scrollInnerView.addSubview(firstList)
         scrollInnerView.addSubview(secondListTag)
         scrollInnerView.addSubview(secondList)
+        scrollInnerView.addSubview(noneListTag)
     }
     
     private func cornerRadius(){
         firstListTag.layer.cornerRadius = self.view.frame.width/75
         secondListTag.layer.cornerRadius = self.view.frame.width/75
+        noneListTag.layer.cornerRadius = self.view.frame.width/75
     }
     
     private func location(){
@@ -134,7 +138,7 @@ class MyToDoListViewController: UIViewController {
             make.leading.equalTo(scrollView.contentLayoutGuide)
             make.bottom.equalTo(scrollView.contentLayoutGuide)
             make.width.equalTo(scrollView.frameLayoutGuide)
-            make.height.equalTo(firstList.tableView.contentSize.height + secondList.tableView.contentSize.height + (self.view.frame.height / 13.5) * 2) // tableView Height만큼 + tag 차지 높이 * tag 수
+            make.height.equalTo(firstList.tableView.contentSize.height + secondList.tableView.contentSize.height + (self.view.frame.height / 12.5) * 3) // tableView Height만큼 + tag 차지 높이 * tag 수
         }
         
         firstListTag.snp.makeConstraints { make in
@@ -180,6 +184,13 @@ class MyToDoListViewController: UIViewController {
             make.bottom.equalToSuperview()
             make.centerX.equalToSuperview()
         }
+        
+        noneListTag.snp.makeConstraints { make in
+            make.top.equalTo(secondList.tableView).offset(secondList.tableView.contentSize.height + self.view.frame.height / 81.2)
+            make.left.equalTo(backButton)
+            make.width.equalTo(noneListTag.listLabel).offset(self.view.frame.width/12.5)
+            make.height.equalTo(self.view.frame.height/31.23)
+        }
     }
     
     private func listTagViewSetting() {
@@ -188,6 +199,9 @@ class MyToDoListViewController: UIViewController {
         
         secondListTag.addSubview(secondListTag.listLabel)
         secondListTag.listTagViewLayoutSetting()
+        
+        noneListTag.addSubview(noneListTag.listLabel)
+        noneListTag.listTagViewLayoutSetting()
     }
     
     private func ScheduleTimeTableViewSetting(){
