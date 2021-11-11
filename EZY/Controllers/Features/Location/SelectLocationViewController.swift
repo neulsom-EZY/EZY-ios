@@ -18,7 +18,7 @@ public struct Place{
     
 class SelectLocationViewController: UIViewController {
     // MARK: - Properties
-    private let alphabetTextArray: [String] = []
+    private let alphabetTextArray: [String] = ["A"]
     
     var resultList=[Place]()
 
@@ -57,7 +57,7 @@ class SelectLocationViewController: UIViewController {
         $0.addTarget(self, action: #selector(searchButtonClicked(sender:)), for: .touchUpInside)
     }
     
-    private let locationTableView = UITableView().then {
+    private lazy var locationTableView = UITableView().then {
         $0.backgroundColor = .clear
         $0.separatorStyle = .none
         $0.showsVerticalScrollIndicator = false
@@ -128,7 +128,7 @@ class SelectLocationViewController: UIViewController {
         
         locationTableView.snp.makeConstraints { make in
             make.top.equalTo(topViewHalfModalView.snp.bottom).offset(self.view.frame.height/28)
-            make.left.equalToSuperview().offset(self.view.frame.width/14.2)
+            make.left.equalToSuperview()
             make.centerX.equalToSuperview()
             make.bottom.equalToSuperview()
         }
@@ -219,7 +219,6 @@ extension SelectLocationViewController: UITableViewDataSource, UITableViewDelega
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: LocationTableViewCell.reuseId, for: indexPath) as! LocationTableViewCell
-        
         cell.selectionStyle = .none
         cell.alphabetLabel.text = alphabetTextArray[indexPath.row]
         

@@ -23,11 +23,10 @@ class ChannelTalkViewController: UIViewController, ChannelPluginDelegate {
         
         ChannelIO.boot(with: bootConfig) { (completion, user) in
             if completion == .success, let user = user {
-                print("user : \(user)")
+                print("success")
             } else {
-                // show failed reason from bootStatus
+                print("failed")
             }
         }
     }
-
 }
