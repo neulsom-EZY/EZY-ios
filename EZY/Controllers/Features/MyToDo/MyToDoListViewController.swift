@@ -11,30 +11,30 @@ import Then
 
 class MyToDoListViewController: UIViewController {
     //MARK: - Properties
-    lazy var backButton = UIButton().then {
+    private let backButton = UIButton().then {
         $0.setImage(UIImage(named: "EZY_DetailBackButton"), for: .normal)
         $0.addTarget(self, action: #selector(goBack), for: .touchUpInside)
     }
     
-    lazy var listName = UILabel().then {
+    private let listName = UILabel().then {
         $0.text = "나의 할 일 목록"
         $0.textColor = UIColor.EZY_AAA8FF
         $0.dynamicFont(fontSize: 22, currentFontName: "AppleSDGothicNeo-SemiBold")
     }
     
-    lazy var scrollView = UIScrollView().then {
+    private let scrollView = UIScrollView().then {
         $0.backgroundColor = .clear
     }
     
-    lazy var scrollInnerView = UIView().then {
+    private let scrollInnerView = UIView().then {
         $0.backgroundColor = .clear
     }
     
-    lazy var firstListTag = ListTagView().then {
+    private let firstListTag = ListTagView().then {
         $0.listLabel.text = "STUDY"
     }
     
-    lazy var firstList = ScheduleTimeTableView.init(frame: self.view.frame)
+    private let firstList = ScheduleTimeTableView.init(frame: self.view.frame)
     
     var firstDescriptionArray: [String] = ["NEULSOM", "NEULSOM"]
     
@@ -49,11 +49,11 @@ class MyToDoListViewController: UIViewController {
     lazy var firstPlanShadow: [CGColor] = [.EZY_PLAN_DO_SHADOW, .EZY_PLAN_FINISH_SHADOW]
 
     
-    lazy var secondListTag = ListTagView().then {
+    private let secondListTag = ListTagView().then {
         $0.listLabel.text = "APP Programming"
     }
     
-    lazy var secondList = ScheduleTimeTableView.init(frame: self.view.frame)
+    private let secondList = ScheduleTimeTableView.init(frame: self.view.frame)
     
     var secondDescriptionArray: [String] = ["공부", "공부", "NEULSOM", "NEULSOM"]
     
@@ -77,12 +77,12 @@ class MyToDoListViewController: UIViewController {
     //MARK: - Selectors
     
     @objc
-    func goBack(){
+    private func goBack(){
         navigationController?.popViewController(animated: true )
     }
     
     //MARK: - Helpers
-    func configureUI(){
+    private func configureUI(){
         view.backgroundColor = .white
         
         listTagViewSetting()
@@ -93,7 +93,7 @@ class MyToDoListViewController: UIViewController {
         location()
     }
     
-    func addView(){
+    private func addView(){
         view.addSubview(backButton)
         view.addSubview(listName)
         view.addSubview(scrollView)
@@ -104,12 +104,12 @@ class MyToDoListViewController: UIViewController {
         scrollInnerView.addSubview(secondList)
     }
     
-    func cornerRadius(){
+    private func cornerRadius(){
         firstListTag.layer.cornerRadius = self.view.frame.width/75
         secondListTag.layer.cornerRadius = self.view.frame.width/75
     }
     
-    func location(){
+    private func location(){
         backButton.snp.makeConstraints { make in
             make.top.equalToSuperview().offset(self.view.frame.height/13.31)
             make.left.equalToSuperview().offset(self.view.frame.width/13.39)
@@ -182,7 +182,7 @@ class MyToDoListViewController: UIViewController {
         }
     }
     
-    func listTagViewSetting() {
+    private func listTagViewSetting() {
         firstListTag.addSubview(firstListTag.listLabel)
         firstListTag.listTagViewLayoutSetting()
         
@@ -190,7 +190,7 @@ class MyToDoListViewController: UIViewController {
         secondListTag.listTagViewLayoutSetting()
     }
     
-    func ScheduleTimeTableViewSetting(){
+    private func ScheduleTimeTableViewSetting(){
         firstList.tableView.dataSource = self
         firstList.tableView.delegate = self
         
