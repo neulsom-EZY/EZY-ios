@@ -10,6 +10,7 @@
 		48A6DFB1740BC19F4979354E /* Pods_EZY.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 141D7E802218CBC25C10854D /* Pods_EZY.framework */; };
 		5DE8F1B36EF48BD0FAC72192 /* Pods_EZY.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4723B10861C36D693807F253 /* Pods_EZY.framework */; };
 		6A097CFD268ED628001E011D /* CalendarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A097CFC268ED628001E011D /* CalendarView.swift */; };
+		6A136C44273C075000214A9F /* ChannelTalkViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A136C43273C075000214A9F /* ChannelTalkViewController.swift */; };
 		6A138F81266F862200DBCE49 /* GroupAddCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A138F80266F862200DBCE49 /* GroupAddCollectionViewCell.swift */; };
 		6A138F89266FACFE00DBCE49 /* GroupAddModalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A138F88266FACFE00DBCE49 /* GroupAddModalView.swift */; };
 		6A138F8D26703C1900DBCE49 /* selectedMemberCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A138F8C26703C1900DBCE49 /* selectedMemberCollectionViewCell.swift */; };
@@ -164,6 +165,7 @@
 		4723B10861C36D693807F253 /* Pods_EZY.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_EZY.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		6A097CFC268ED628001E011D /* CalendarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarView.swift; sourceTree = "<group>"; };
 		6A097D01268ED7B1001E011D /* CalendarView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CalendarView.h; sourceTree = "<group>"; };
+		6A136C43273C075000214A9F /* ChannelTalkViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChannelTalkViewController.swift; sourceTree = "<group>"; };
 		6A138F80266F862200DBCE49 /* GroupAddCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupAddCollectionViewCell.swift; sourceTree = "<group>"; };
 		6A138F88266FACFE00DBCE49 /* GroupAddModalView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupAddModalView.swift; sourceTree = "<group>"; };
 		6A138F8C26703C1900DBCE49 /* selectedMemberCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = selectedMemberCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -569,6 +571,7 @@
 			children = (
 				6A82835326982A6C00AC381B /* InquiryViewController.swift */,
 				6AB27CB1269DD1B900B95C0F /* InquiryChattingViewController.swift */,
+				6A136C43273C075000214A9F /* ChannelTalkViewController.swift */,
 			);
 			path = Inquiry;
 			sourceTree = "<group>";
@@ -1032,6 +1035,7 @@
 				6A47F9D42718F63600AAA6E0 /* CalendarAddModelViewController.swift in Sources */,
 				6A3E2E7626B10D760078D749 /* ChangePasswordPhoneNumAfterLoginViewController.swift in Sources */,
 				6AFB7800267F812B00B59482 /* TagColorCollectionViewCell.swift in Sources */,
+				6A136C44273C075000214A9F /* ChannelTalkViewController.swift in Sources */,
 				6A4EDA2E266A332100B809EC /* NotificationTableViewCell.swift in Sources */,
 				6A138F8D26703C1900DBCE49 /* selectedMemberCollectionViewCell.swift in Sources */,
 				EE9F0D3B26E8A9340015E81B /* ExplanationContainerTextView.swift in Sources */,

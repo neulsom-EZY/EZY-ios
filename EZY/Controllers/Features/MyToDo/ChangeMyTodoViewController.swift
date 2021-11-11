@@ -7,9 +7,9 @@
 
 import UIKit
 
+
 class ChangeMyTodoViewController: UIViewController{
     //MARK: - Properties
-    
     private var TagModels: [TagCollectionViewModel] = [
         TagCollectionViewModel(backgroundColor: UIColor(red: 186/255, green: 200/255, blue: 255/255, alpha: 1), isSelected: true, iconImgae: UIImage(named: "EZY_UnSelectedTagAddButtonImage")!),
         TagCollectionViewModel(backgroundColor: UIColor(red: 221/255, green: 220/255, blue: 220/255, alpha: 1), isSelected: false, iconImgae: UIImage(named: "EZY_SelectedNoSelectTagButtonImage")!),
@@ -543,7 +543,6 @@ extension ChangeMyTodoViewController: UICollectionViewDataSource, UICollectionVi
                     
                 TagModels[indexPath.row].isSelected.toggle()
             }else{
-                print("didididi")
                 TagModels[1].iconImgae = UIImage(named: "EZY_UnSelectedNoSelectTagButtonImage")!
 
                 for i in 0...TagModels.count-1{
@@ -614,6 +613,7 @@ extension ChangeMyTodoViewController: TagAddDelegate{
         self.tagReloadSetting(tagName, tagColorIndex)
     }
 }
+
 //MARK: - BaseModal Delegate
 extension ChangeMyTodoViewController : BaseModalDelegate{
     func onTapClose() {
