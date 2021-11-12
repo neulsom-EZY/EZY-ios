@@ -325,7 +325,7 @@ class ShowPlanViewController: UIViewController{
 // MARK: - collectionView Extension
 extension ShowPlanViewController: UICollectionViewDelegate, UICollectionViewDelegateFlowLayout{
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize.init(width: self.view.frame.width, height: self.view.frame.height/7.58)
+        return CGSize.init(width: self.view.frame.width/3.5, height: self.view.frame.height/6.24)
     }
     
     //MARK: collectionView - left Padding
@@ -370,8 +370,8 @@ extension ShowPlanViewController: UICollectionViewDataSource{
             return UICollectionViewCell()
         }
         
-        cell.label.text = scheduleTypesArray[indexPath.row]
-        cell.icon.image = icon[indexPath.row]
+        cell.planTypeLabel.text = scheduleTypesArray[indexPath.row]
+        cell.planTypeIconImageView.image = icon[indexPath.row]
         cell.backgroundColor = .clear
         return cell
     }

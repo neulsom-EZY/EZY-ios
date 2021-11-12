@@ -15,7 +15,7 @@ class LocationTableViewCell: UITableViewCell {
         
     private let alphabetLabelColorArray = [UIColor(red: 232/255, green: 229/255, blue: 255/255, alpha: 1), UIColor(red: 196/255, green: 191/255, blue: 255/255, alpha: 1)]
     
-    private lazy var alphabetLabel = UILabel().then {
+    lazy var alphabetLabel = UILabel().then {
         $0.text = "A"
         $0.textAlignment = .center
         $0.dynamicFont(fontSize: 25, currentFontName: "Poppins-Bold")
@@ -26,7 +26,7 @@ class LocationTableViewCell: UITableViewCell {
         $0.backgroundColor = .white
     }
     
-    private let locationTitleNameLabel = UILabel().then {
+    let locationTitleNameLabel = UILabel().then {
         $0.text = "광주소프트웨어마이스터고등학교"
         $0.dynamicFont(fontSize: 16, currentFontName: "AppleSDGothicNeo-Thin")
     }
