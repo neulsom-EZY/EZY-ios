@@ -11,13 +11,10 @@ import Alamofire
 class SelectLocationViewController: UIViewController {
     
     // MARK: - Properties
-<<<<<<< HEAD
-    private let alphabetTextArray: [String] = ["A","B","C","D","E","F","G"]
-=======
+
     private let alphabetTextArray: [String] = ["A", "B"]
     
     private let placeName: [String] = ["광주소프트웨어마이스터고등학교", "우리 집"]
->>>>>>> 1449765bcffe4d943e0de4d88c84238ea00df3d4
     
     let bgView = UIView().then {
         $0.backgroundColor = .black
