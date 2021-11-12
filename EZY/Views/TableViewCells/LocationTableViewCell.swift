@@ -11,39 +11,39 @@ class LocationTableViewCell: UITableViewCell {
     
     static let reuseId = "\(LocationTableViewCell.self)"
     
-    let viewBounds = UIScreen.main.bounds
+    private let viewBounds = UIScreen.main.bounds
         
-    let alphabetLabelColorArray = [UIColor(red: 232/255, green: 229/255, blue: 255/255, alpha: 1), UIColor(red: 196/255, green: 191/255, blue: 255/255, alpha: 1)]
+    private let alphabetLabelColorArray = [UIColor(red: 232/255, green: 229/255, blue: 255/255, alpha: 1), UIColor(red: 196/255, green: 191/255, blue: 255/255, alpha: 1)]
     
-    lazy var alphabetLabel = UILabel().then {
+    private lazy var alphabetLabel = UILabel().then {
         $0.text = "A"
         $0.textAlignment = .center
         $0.dynamicFont(fontSize: 25, currentFontName: "Poppins-Bold")
         $0.updateGradientTextColor_vertical(gradientColors: alphabetLabelColorArray)
     }
     
-    lazy var labelView = UIView().then {
+    private let labelView = UIView().then {
         $0.backgroundColor = .white
     }
     
-    lazy var locationTitleNameLabel = UILabel().then {
+    private let locationTitleNameLabel = UILabel().then {
         $0.text = "광주소프트웨어마이스터고등학교"
         $0.dynamicFont(fontSize: 16, currentFontName: "AppleSDGothicNeo-Thin")
     }
     
-    lazy var locationLabel = UILabel().then {
+    private let locationLabel = UILabel().then {
         $0.text = "광주 광산구 상무대로 312"
         $0.dynamicFont(fontSize: 10, currentFontName: "AppleSDGothicNeo-SemiBold")
         $0.textColor = UIColor(red: 203/255, green: 203/255, blue: 203/255, alpha: 1)
     }
     
-    lazy var subLocationLabel = UILabel().then {
+    private let subLocationLabel = UILabel().then {
         $0.text = "(우) 62423(지번) 송정동 710-3"
         $0.dynamicFont(fontSize: 8, currentFontName: "AppleSDGothicNeo-Thin")
         $0.textColor = UIColor(red: 177/255, green: 177/255, blue: 177/255, alpha: 1)
     }
     
-    lazy var divideLineView = UIView().then {
+    private let divideLineView = UIView().then {
         $0.backgroundColor = UIColor(red: 237/255, green: 237/255, blue: 237/255, alpha: 1)
     }
 
@@ -60,7 +60,7 @@ class LocationTableViewCell: UITableViewCell {
         
     }
     
-    func layoutSetting(){
+    private func layoutSetting(){
         contentView.addSubview(alphabetLabel)
         contentView.addSubview(divideLineView)
         contentView.addSubview(labelView)
