@@ -422,6 +422,7 @@ extension ShowPlanViewController: UITableViewDelegate{
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let BasicModalVC = BasicModalViewController.instance()
         addDim()
+        BasicModalVC.delegate = self
         BasicModalVC.baseDelegate = self
         present(BasicModalVC, animated: true, completion: nil)
         BasicModalVC.textSetting(colorText: groupNameArray[indexPath.row], contentText: "개인 일정을 완료할까요?")
@@ -438,6 +439,12 @@ extension ShowPlanViewController: BulletinDelegate {
 
 extension ShowPlanViewController: BaseModalDelegate {
     func onTapClose() {
+        removeDim()
+    }
+}
+
+extension ShowPlanViewController: BasicModalViewButtonDelegate{
+    func onTabOkButton() {
         groupNameArray.remove(at: selectedIndex)
         planTitleTextArray.remove(at: selectedIndex)
         planTimeArray.remove(at: selectedIndex)
