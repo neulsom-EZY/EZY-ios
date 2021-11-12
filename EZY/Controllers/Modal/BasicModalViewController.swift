@@ -7,8 +7,15 @@
 
 import UIKit
 
+protocol BasicModalViewButtonDelegate: AnyObject {
+    func onTabOkButton()
+}
+
 class BasicModalViewController: BaseModal {
-    // MARK: - Properties    
+    // MARK: - Properties
+    
+    weak var delegate: BasicModalViewButtonDelegate?
+    
     private let bgView = UIView().then {
         $0.backgroundColor = .white
         $0.layer.cornerRadius = 10
@@ -27,6 +34,7 @@ class BasicModalViewController: BaseModal {
         $0.setTitle("아니요!", for: .normal)
         $0.dynamicFont(fontSize: 12, currentFontName: "AppleSDGothicNeo-Bold")
         $0.backgroundColor = UIColor(red: 223/255, green: 223/255, blue: 223/255, alpha: 1)
+        $0.addTarget(self, action: #selector(noButton), for: .touchUpInside)
     }
     
     private let contentLabel = UILabel().then{
@@ -58,11 +66,12 @@ class BasicModalViewController: BaseModal {
     
     //MARK: - selectors
     @objc func MakeTodo(){
-        baseDelegate?.onTapClose()
+        delegate?.onTabOkButton()
         dismiss(animated: true, completion: nil)
     }
     
     @objc func noButton(){
+        baseDelegate?.onTapClose()
         dismiss(animated: true, completion: nil)
     }
     
