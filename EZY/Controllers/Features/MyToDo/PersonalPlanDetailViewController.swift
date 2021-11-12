@@ -449,7 +449,7 @@ class PersonalPlanDetailViewController: UIViewController {
     }
     
     @objc func planModifyButtonClicked(sender:UIButton){
-        let nextViewController = ChangeMyTodoViewController()
+        let nextViewController = AddOrChangeMyTodoViewController()
         self.navigationController?.pushViewController(nextViewController, animated: true)
     }
     
