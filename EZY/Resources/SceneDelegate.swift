@@ -19,14 +19,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
         window = UIWindow(windowScene: windowScene)
 
-<<<<<<< HEAD
-      
-        let mainViewController = ChangeMyTodoViewController()
- 
-=======
         let mainViewController = ChangeMyTodoViewController()
 
->>>>>>> e0fb79d492509fecb8b3ace8cd832d2b31a4c2c0
         let navigationController = UINavigationController(rootViewController: mainViewController)
 
         navigationController.navigationBar.isHidden = true
