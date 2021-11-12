@@ -422,7 +422,6 @@ extension ShowPlanViewController: UITableViewDelegate{
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let BasicModalVC = BasicModalViewController.instance()
         addDim()
-        BasicModalVC.delegate = self
         BasicModalVC.baseDelegate = self
         present(BasicModalVC, animated: true, completion: nil)
         BasicModalVC.textSetting(colorText: groupNameArray[indexPath.row], contentText: "개인 일정을 완료할까요?")
@@ -438,8 +437,14 @@ extension ShowPlanViewController: BulletinDelegate {
 }
 extension ShowPlanViewController: BaseModalDelegate {
     func onTapClose() {
-        removeDim()
-    }
+        groupNameArray.remove(at: selectedIndex)
+        planTitleTextArray.remove(at: selectedIndex)
+        planTimeArray.remove(at: selectedIndex)
+        EZYPlanBackgroundColor.remove(at: selectedIndex)
+        
+        scheduleTimeTableView.deleteRows(at: [IndexPath(row: selectedIndex, section: 0)], with: .automatic)
+        
+        removeDim()    }
 }
 
 extension UIScrollView {
@@ -452,18 +457,5 @@ extension UITableView {
     func resetTableViewScrollPositionToTop() {
         let indexPath = NSIndexPath(row: NSNotFound, section: 0)
         self.scrollToRow(at: indexPath as IndexPath, at: .top, animated: true)
-    }
-}
-
-extension ShowPlanViewController: ModalViewDelegate {
-    func onTapCloseModalView() {
-        groupNameArray.remove(at: selectedIndex)
-        planTitleTextArray.remove(at: selectedIndex)
-        planTimeArray.remove(at: selectedIndex)
-        EZYPlanBackgroundColor.remove(at: selectedIndex)
-        
-        scheduleTimeTableView.deleteRows(at: [IndexPath(row: selectedIndex, section: 0)], with: .automatic)
-        
-        removeDim()
     }
 }
