@@ -268,9 +268,6 @@ extension SelectLocationViewController: BaseModalDelegate {
 extension SelectLocationViewController: BasicModalViewButtonDelegate{
     func onTabOkButton() {
         removeDim()
-        
-        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 0.5) {
-            self.navigationController?.popViewController(animated: true)
-        }
+        self.navigationController?.popViewController(animated: false)
     }
 }
