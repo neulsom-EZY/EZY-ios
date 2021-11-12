@@ -87,6 +87,7 @@ class BasicModalViewController: BaseModal {
         
         string.setColorForText(textToFind: "\(colorText)", withColor: UIColor(red: 147/255, green: 145/255, blue: 254/255, alpha: 1))
         string.setFontForText(textToFind: "\(colorText)", withFont: UIFont(name: "AppleSDGothicNeo-SemiBold", size: 17)!)
+        string.setFontForText(textToFind: "\(contentText)", withFont: UIFont(name: "AppleSDGothicNeo-Thin", size: 16.5)!)
         contentLabel.attributedText = string
         
         

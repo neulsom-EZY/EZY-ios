@@ -78,14 +78,14 @@ class LocationTableViewCell: UITableViewCell {
         locationTitleNameLabel.snp.makeConstraints { make in
             make.top.left.equalToSuperview()
         }
-        
+
         locationLabel.snp.makeConstraints { make in
             make.bottom.left.equalToSuperview()
         }
-        
+
         subLocationLabel.snp.makeConstraints { make in
-            make.left.equalTo(locationLabel.snp.right).offset(contentView.frame.width/40)
-            make.bottom.equalTo(locationLabel)
+            make.left.equalTo(locationLabel.snp.right).offset(viewBounds.width/50)
+            make.bottom.equalToSuperview()
         }
         
         divideLineView.snp.makeConstraints { make in
@@ -96,10 +96,10 @@ class LocationTableViewCell: UITableViewCell {
         }
         
         labelView.snp.makeConstraints { make in
-            make.centerY.equalToSuperview()
+            make.right.equalToSuperview().offset(-viewBounds.width/14.2)
+            make.left.equalTo(alphabetLabel.snp.right).offset(viewBounds.width/25)
             make.height.equalToSuperview().dividedBy(1.7)
-            make.left.equalTo(alphabetLabel.snp.right).offset(contentView.frame.width/25)
-            make.right.equalToSuperview()
+            make.centerY.equalTo(alphabetLabel)
         }
     }
 
