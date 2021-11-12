@@ -252,6 +252,7 @@ extension SelectLocationViewController: UITableViewDataSource, UITableViewDelega
         let BasicModalVC = BasicModalViewController.instance()
         addDim()
         BasicModalVC.baseDelegate = self
+        BasicModalVC.delegate = self
         present(BasicModalVC, animated: true, completion: nil)
         BasicModalVC.textSetting(colorText: placeName[indexPath.row], contentText: "위치를 선택할까요?")
     }
@@ -261,5 +262,15 @@ extension SelectLocationViewController: UITableViewDataSource, UITableViewDelega
 extension SelectLocationViewController: BaseModalDelegate {
     func onTapClose() {
         removeDim()
+    }
+}
+
+extension SelectLocationViewController: BasicModalViewButtonDelegate{
+    func onTabOkButton() {
+        removeDim()
+        
+        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 0.5) {
+            self.navigationController?.popViewController(animated: true)
+        }
     }
 }
