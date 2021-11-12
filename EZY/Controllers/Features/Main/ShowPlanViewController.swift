@@ -435,6 +435,7 @@ extension ShowPlanViewController: BulletinDelegate {
         self.updateDim(viewcontroller: vc)
     }
 }
+
 extension ShowPlanViewController: BaseModalDelegate {
     func onTapClose() {
         groupNameArray.remove(at: selectedIndex)
@@ -444,7 +445,8 @@ extension ShowPlanViewController: BaseModalDelegate {
         
         scheduleTimeTableView.deleteRows(at: [IndexPath(row: selectedIndex, section: 0)], with: .automatic)
         
-        removeDim()    }
+        removeDim()
+    }
 }
 
 extension UIScrollView {

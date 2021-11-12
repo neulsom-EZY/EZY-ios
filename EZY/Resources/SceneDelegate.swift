@@ -19,7 +19,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
         window = UIWindow(windowScene: windowScene)
 
-        let mainViewController = SelectLocationViewController()
+        let mainViewController = ChangeMyTodoViewController()
 
         let navigationController = UINavigationController(rootViewController: mainViewController)
 
