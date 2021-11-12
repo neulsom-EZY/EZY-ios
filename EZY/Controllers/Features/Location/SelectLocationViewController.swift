@@ -8,19 +8,21 @@
 import UIKit
 import Alamofire
 
-
-public struct Place{
-        let placeName :String
-        let roadAdressName:String
-        let longitudeX:String
-        let latitudeY:String
-    }
-    
 class SelectLocationViewController: UIViewController {
-    // MARK: - Properties
-    private let alphabetTextArray: [String] = ["A","B","C","D","E","F","G"]
     
-    var resultList=[Place]()
+    // MARK: - Properties
+<<<<<<< HEAD
+    private let alphabetTextArray: [String] = ["A","B","C","D","E","F","G"]
+=======
+    private let alphabetTextArray: [String] = ["A", "B"]
+    
+    private let placeName: [String] = ["광주소프트웨어마이스터고등학교", "우리 집"]
+>>>>>>> 1449765bcffe4d943e0de4d88c84238ea00df3d4
+    
+    let bgView = UIView().then {
+        $0.backgroundColor = .black
+//        $0.alpha = 0
+    }
 
     private let selectLocationModalView = SelectLocationModalView().then{
         $0.okButton.addTarget(self, action: #selector(okButtonClicked(sender:)), for: .touchUpInside)
@@ -57,7 +59,7 @@ class SelectLocationViewController: UIViewController {
         $0.addTarget(self, action: #selector(searchButtonClicked(sender:)), for: .touchUpInside)
     }
     
-    private let locationTableView = UITableView().then {
+    private lazy var locationTableView = UITableView().then {
         $0.backgroundColor = .clear
         $0.separatorStyle = .none
         $0.showsVerticalScrollIndicator = false
@@ -128,7 +130,7 @@ class SelectLocationViewController: UIViewController {
         
         locationTableView.snp.makeConstraints { make in
             make.top.equalTo(topViewHalfModalView.snp.bottom).offset(self.view.frame.height/28)
-            make.left.equalToSuperview().offset(self.view.frame.width/14.2)
+            make.left.equalToSuperview()
             make.centerX.equalToSuperview()
             make.bottom.equalToSuperview()
         }
@@ -209,6 +211,27 @@ class SelectLocationViewController: UIViewController {
     @objc private func searchButtonClicked(sender:UIButton){
         // 검색 버튼 클릭 시
     }
+    
+    
+    // MARK: - addDim
+    private func addDim() {
+           view.addSubview(bgView)
+           bgView.snp.makeConstraints { (make) in
+               make.edges.equalTo(0)
+           }
+
+        DispatchQueue.main.async { [weak self] in
+               self?.bgView.backgroundColor = .black.withAlphaComponent(0.15)
+           }
+       }
+       
+    // MARK: - removeDim
+    private func removeDim() {
+        DispatchQueue.main.async { [weak self] in
+            self?.bgView.removeFromSuperview()
+            self?.dismiss(animated: true)
+        }
+    }
 }
 
 // MARK: - UITableViewDelegate and UITableViewDataSource
@@ -219,10 +242,9 @@ extension SelectLocationViewController: UITableViewDataSource, UITableViewDelega
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: LocationTableViewCell.reuseId, for: indexPath) as! LocationTableViewCell
-        
         cell.selectionStyle = .none
         cell.alphabetLabel.text = alphabetTextArray[indexPath.row]
-        
+        cell.locationTitleNameLabel.text = placeName[indexPath.row]
         return cell
     }
     
@@ -231,6 +253,17 @@ extension SelectLocationViewController: UITableViewDataSource, UITableViewDelega
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        selectLocationModalView.isHidden = false
+        let BasicModalVC = BasicModalViewController.instance()
+        addDim()
+        BasicModalVC.baseDelegate = self
+        present(BasicModalVC, animated: true, completion: nil)
+        BasicModalVC.textSetting(colorText: placeName[indexPath.row], contentText: "위치를 선택할까요?")
+    }
+
+}
+
+extension SelectLocationViewController: BaseModalDelegate {
+    func onTapClose() {
+        removeDim()
     }
 }

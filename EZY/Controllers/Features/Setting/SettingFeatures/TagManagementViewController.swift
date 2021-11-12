@@ -14,78 +14,76 @@ protocol SendTagNameSelectedCellIndexDelegate: AnyObject {
 
 class TagManagementViewController: UIViewController {
     // MARK: - Properties
-    var bag = Set<AnyCancellable>()
-        
-    var tagNameTextArray = [String]()
-    
-    var tagColor = [UIColor]()
-    
     static weak var delegate: SendTagNameSelectedCellIndexDelegate?
     
-    lazy var selectedRecommendedTagIndex: Int = 0
+    private var bag = Set<AnyCancellable>()
+        
+    private var tagNameTextArray = [String]()
     
-    lazy var selectedTagColor: UIColor = TagColorModels[0].backgroundColor
+    private var tagColor = [UIColor]()
+        
+    private var selectedRecommendedTagIndex: Int = 0
     
-    var selectedTagIndex: Int = 0
+    private lazy var selectedTagColor: UIColor = TagColorModels[0].backgroundColor
     
-    lazy var selectedTagColorIndex = 0
+    private var selectedTagIndex: Int = 0
     
-    var selectedTagColorIndexArray = [Int]()
+    private var selectedTagColorIndex = 0
     
-    var tagColorPreciousSelectedIndex = 0
+    private var selectedTagColorIndexArray = [Int]()
     
-    var changedTagName = ""
+    private var tagColorPreciousSelectedIndex = 0
     
-    var recommendedTextDataArray = ["STUDY","EXCERISE","ENGLISH","EAT","ROUTINE", "CLEANING"]
+    private var changedTagName = ""
     
-    lazy var recommendedTagNameTextArray = recommendedTextDataArray
+    private var recommendedTextDataArray = ["STUDY","EXCERISE","ENGLISH","EAT","ROUTINE", "CLEANING"]
     
-    lazy var tagAddModalView = TagAddModalView().then{
-        $0.tagAddButton.addTarget(self,action:#selector(tagAddCompletionbuttonClicked(sender:)), for:.touchUpInside)
-        $0.tagNameTextField.delegate = self
-        $0.writeTagNameView.isHidden = true
-        $0.isHidden = true
+    private lazy var recommendedTagNameTextArray = recommendedTextDataArray
+    
+    let bgView = UIView().then {
+        $0.backgroundColor = .black
+        $0.alpha = 0
     }
     
-    lazy var noTagImageView = UIImageView().then{
+    private var noTagImageView = UIImageView().then{
         $0.image = UIImage(named: "EZY_NoTagImage")
     }
     
-    lazy var tagGoodLabel = UILabel().then{
+    private var tagGoodLabel = UILabel().then{
         $0.text = "태그를 사용하시면 더 쉽게 일정을 정리할 수 있어요!"
         $0.textColor = UIColor(red: 82/255, green: 82/255, blue: 82/255, alpha: 1)
         $0.dynamicFont(fontSize: 14, currentFontName: "AppleSDGothicNeo-Medium")
     }
     
-    lazy var tagAddLabel = UILabel().then{
+    private var tagAddLabel = UILabel().then{
         $0.text = "추가 버튼을 눌러 태그를 추가해보세요!"
         $0.textColor = .black
         $0.dynamicFont(fontSize: 13, currentFontName: "AppleSDGothicNeo-Thin")
     }
     
-    lazy var backButton = UIButton().then{
+    private var backButton = UIButton().then{
         $0.setImage(UIImage(named: "EZY_TagManagementBackButtonImage"), for: .normal)
         $0.addTarget(self, action: #selector(backButtonClicked(sender:)), for: .touchUpInside)
     }
     
-    lazy var mainTitleLabel = UILabel().then {
+    private var mainTitleLabel = UILabel().then {
         $0.text = "태그 관리"
         $0.textColor = UIColor(red: 150/255, green: 141/255, blue: 255/255, alpha: 1)
         $0.dynamicFont(fontSize: 22, currentFontName: "Poppins-SemiBold")
     }
     
-    lazy var tagAddButton = UIButton().then{
+    private var tagAddButton = UIButton().then{
         $0.setImage(UIImage(named: "EZY_PlanAddButton"), for: .normal)
         $0.addTarget(self, action: #selector(tagAddButtonClicked(sender:)), for: .touchUpInside)
     }
     
-    lazy var tagTableView = UITableView().then {
+    private var tagTableView = UITableView().then {
         $0.separatorStyle = .none
         $0.showsVerticalScrollIndicator = false
         $0.register(TagTableViewCell.self, forCellReuseIdentifier: TagTableViewCell.reuseId)
     }
     
-    lazy var lineView = UIView().then{
+    private var lineView = UIView().then{
         $0.backgroundColor = UIColor(red: 222/255, green: 222/255, blue: 222/255, alpha: 1)
     }
         
@@ -99,7 +97,7 @@ class TagManagementViewController: UIViewController {
         $0.register(TagColorCollectionViewCell.self, forCellWithReuseIdentifier: TagColorCollectionViewCell.reuseId)
     }
     
-    let recommendedTagCollectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewLayout()).then{
+    private let recommendedTagCollectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewLayout()).then{
         let layout: UICollectionViewFlowLayout = UICollectionViewFlowLayout()
         layout.scrollDirection = .horizontal
         $0.collectionViewLayout = layout
@@ -108,7 +106,7 @@ class TagManagementViewController: UIViewController {
         $0.backgroundColor = .white
     }
 
-    var TagColorModels: [TagColorCollectionViewModel] = [
+    private var TagColorModels: [TagColorCollectionViewModel] = [
                                                 TagColorCollectionViewModel(backgroundColor: UIColor.EZY_TagColorArray[0], isSelected: false),
                                                  TagColorCollectionViewModel(backgroundColor: UIColor.EZY_TagColorArray[1], isSelected: true),
                                                  TagColorCollectionViewModel(backgroundColor: UIColor.EZY_TagColorArray[2], isSelected: true),
@@ -116,12 +114,7 @@ class TagManagementViewController: UIViewController {
                                                  TagColorCollectionViewModel(backgroundColor: UIColor.EZY_TagColorArray[4], isSelected: true),
                                                  TagColorCollectionViewModel(backgroundColor: UIColor.EZY_TagColorArray[5], isSelected: true),
                                                  TagColorCollectionViewModel(backgroundColor: UIColor.EZY_TagColorArray[6], isSelected: true),
-                                                 TagColorCollectionViewModel(backgroundColor: UIColor.EZY_TagColorArray[7], isSelected: true),
-                                                 TagColorCollectionViewModel(backgroundColor: UIColor.EZY_TagColorArray[8], isSelected: true),
-                                                 TagColorCollectionViewModel(backgroundColor: UIColor.EZY_TagColorArray[9], isSelected: true),
-                                                 TagColorCollectionViewModel(backgroundColor: UIColor.EZY_TagColorArray[10], isSelected: true),
-                                                TagColorCollectionViewModel(backgroundColor: UIColor.EZY_TagColorArray[11], isSelected: true),
-                                                TagColorCollectionViewModel(backgroundColor: UIColor.EZY_TagColorArray[12], isSelected: true)]
+                                                 TagColorCollectionViewModel(backgroundColor: UIColor.EZY_TagColorArray[7], isSelected: true)]
     
     // MARK: - LifeCycles
     override func viewDidLoad() {
@@ -142,34 +135,28 @@ class TagManagementViewController: UIViewController {
         
         location()
         
-        collectionViewDataSourceAndDelegate()
-        
-        tableViewDataSourceAndDelegate()
-        
+        dataSourceAndDelegate()
+            
         keyboardStatus()
     }
     
     // MARK: - keyboardStatus
     func keyboardStatus(){
-        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(_:)), name:UIResponder.keyboardWillShowNotification, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide(_:)), name: UIResponder.keyboardWillHideNotification, object: nil)
+//        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(_:)), name:UIResponder.keyboardWillShowNotification, object: nil)
+//        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide(_:)), name: UIResponder.keyboardWillHideNotification, object: nil)
     }
     
-    // MARK: - collectionViewDataSourceAndDelegate
-    func collectionViewDataSourceAndDelegate(){
+    // MARK: - dataSourceAndDelegate
+    func dataSourceAndDelegate(){
         recommendedTagCollectionView.dataSource = self
         recommendedTagCollectionView.delegate = self
         tagColorCollectionView.dataSource = self
         tagColorCollectionView.delegate = self
+        tagTableView.delegate = self
+        tagTableView.dataSource = self
         
         let firstCell = tagColorCollectionView.cellForItem(at: [0, 0]) as? TagColorCollectionViewCell
         firstCell?.checkImage.isHidden = false
-    }
-    
-    // MARK: - tableViewDataSourceAndDelegate
-    func tableViewDataSourceAndDelegate(){
-        tagTableView.delegate = self
-        tagTableView.dataSource = self
     }
     
     // MARK: - addView
@@ -184,8 +171,6 @@ class TagManagementViewController: UIViewController {
         self.view.addSubview(tagAddLabel)
         self.view.addSubview(recommendedTagCollectionView)
         self.view.addSubview(tagTableView)
-        self.view.addSubview(tagAddModalView)
-        self.tagAddModalView.modalBackgroundView.addSubview(tagColorCollectionView)
     }
     
     func location(){
@@ -243,17 +228,6 @@ class TagManagementViewController: UIViewController {
             make.centerX.equalToSuperview()
             make.top.equalTo(tagTableView.snp.bottom).offset(self.view.frame.height/40)
         }
-        
-        tagAddModalView.snp.makeConstraints { make in
-            make.top.right.bottom.left.equalToSuperview()
-        }
-
-        tagColorCollectionView.snp.makeConstraints { make in
-            make.top.equalTo(tagAddModalView.tagColorLabel.snp.bottom)
-            make.left.equalToSuperview()
-            make.height.equalTo(tagAddModalView.modalBackgroundView).dividedBy(5)
-            make.right.equalTo(tagAddModalView.modalBackgroundView)
-        }
     }
     
     // MARK: - selectors
@@ -310,8 +284,13 @@ class TagManagementViewController: UIViewController {
     }
     
     @objc func tagAddButtonClicked(sender:UIButton){
-        tagAddModalView.isHidden = false
-        tagAddModalView.tagNameTextField.text = ""
+        
+        // tagAddModalView 생성!
+        let TagAddModalVC = TagAddModalViewController.instance()
+        TagAddModalVC.delegate = self
+        TagAddModalVC.baseDelegate = self
+        addDim()
+        present(TagAddModalVC, animated: true, completion: nil)
         
         // TagColorCollection 초기화
         let firstCell = tagColorCollectionView.cellForItem(at: [0, 0]) as? TagColorCollectionViewCell
@@ -328,37 +307,22 @@ class TagManagementViewController: UIViewController {
         tagColorPreciousSelectedIndex = 0
     }
     
-    @objc func tagAddCompletionbuttonClicked(sender:UIButton){
-        // tagNameTextField.text가 공백으로만 이루어져있거나 empty일 때
-        if tagAddModalView.tagNameTextField.text!.trimmingCharacters(in: .whitespaces).isEmpty || tagAddModalView.tagNameTextField.text == ""{
-            shakeView(tagAddModalView.tagNameLabel)
-        }else{
-            self.view.endEditing(true)
+//    @objc func tagAddCompletionbuttonClicked(sender:UIButton){
 
-            tagAddModalView.isHidden = true
-
-            recommendedTagViewDown()
-
-            selectedTagColorIndexArray.append(selectedTagColorIndex)
-            tagNameTextArray.append(tagAddModalView.tagNameTextField.text!)
-            tagColor.append(UIColor.EZY_TagColorArray[selectedTagColorIndex])
-
-            tagTableView.reloadData()
-        }
-    }
+//    }
     
     @objc func backButtonClicked(sender:UIButton){
         self.navigationController?.popViewController(animated: true)
     }
     
     // MARK: - Notification
-    @objc func keyboardWillShow(_ sender: Notification) {
-        tagAddModalView.modalBackgroundView.frame.origin.y = self.view.frame.height/5
-    }
-
-    @objc func keyboardWillHide(_ sender: Notification) {
-        tagAddModalView.modalBackgroundView.frame.origin.y = (self.view.frame.height/2) - (tagAddModalView.modalBackgroundView.frame.height/2)
-    }
+//    @objc func keyboardWillShow(_ sender: Notification) {
+//        tagAddModalView.modalBackgroundView.frame.origin.y = self.view.frame.height/5
+//    }
+//
+//    @objc func keyboardWillHide(_ sender: Notification) {
+//        tagAddModalView.modalBackgroundView.frame.origin.y = (self.view.frame.height/2) - (tagAddModalView.modalBackgroundView.frame.height/2)
+//    }
     
     // MARK: - recommendedTagViewDown
     func recommendedTagViewDown(){
@@ -432,14 +396,14 @@ class TagManagementViewController: UIViewController {
     }
     
     // MARK: - hideSnackbarView
-    @objc private func hideSnackbarView() {
-        UIView.animate(withDuration: 0.4, animations: {
-            self.tagAddModalView.writeTagNameView.alpha = 0
-        }, completion: {
-            _ in
-            self.tagAddModalView.writeTagNameView.isHidden = true
-        })
-    }
+//    @objc private func hideSnackbarView() {
+//        UIView.animate(withDuration: 0.4, animations: {
+//            self.tagAddModalView.writeTagNameView.alpha = 0
+//        }, completion: {
+//            _ in
+//            self.tagAddModalView.writeTagNameView.isHidden = true
+//        })
+//    }
     
     // MARK: - shakeView
     func shakeView(_ view: UIView?) {
@@ -450,6 +414,37 @@ class TagManagementViewController: UIViewController {
         shake.fromValue = NSValue(cgPoint: CGPoint(x: (view?.center.x)! - 2, y: view?.center.y ?? 0.0))
         shake.toValue = NSValue(cgPoint: CGPoint(x: (view?.center.x)! + 2, y: view?.center.y ?? 0.0))
         view?.layer.add(shake, forKey: "position")
+    }
+    
+    private func addDim() {
+        view.addSubview(bgView)
+        bgView.snp.makeConstraints { (make) in
+            make.edges.equalTo(0)
+        }
+        
+        DispatchQueue.main.async { [weak self] in
+            self?.bgView.alpha = 0.2
+        }
+    }
+
+    func removeDim() {
+        DispatchQueue.main.async { [weak self] in
+            self?.bgView.removeFromSuperview()
+        }
+    }
+    
+    func tagReloadSetting(_ tagName: String, _ tagColorIndex: Int){
+
+            self.view.endEditing(true)
+
+
+            recommendedTagViewDown()
+
+            selectedTagColorIndexArray.append(tagColorIndex)
+            tagNameTextArray.append(tagName)
+            tagColor.append(UIColor.EZY_TagColorArray[tagColorIndex])
+
+            tagTableView.reloadData()
     }
 }
 
@@ -599,6 +594,8 @@ extension TagManagementViewController: UICollectionViewDataSource, UICollectionV
         
         return UIEdgeInsets()
     }
+    
+    
 }
 
 extension TagManagementViewController: SendChangedTagSetting{
@@ -626,18 +623,32 @@ extension TagManagementViewController: TagTableViewCellDelegate{
 }
 
 // MARK: - UITextFieldDelegate Extension
-extension TagManagementViewController: UITextFieldDelegate{
-    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
-        guard let text = tagAddModalView.tagNameTextField.text else { return true }
+//extension TagManagementViewController: UITextFieldDelegate{
+//    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+//        guard let text = tagAddModalView.tagNameTextField.text else { return true }
+//
+//        let newLength = text.count + string.count - range.length
+//
+//        if newLength > 30 {
+//            for _ in 0 ..< newLength - 30 {
+//                textField.deleteBackward()
+//            }
+//
+//        }
+//        return true
+//    }
+//}
 
-        let newLength = text.count + string.count - range.length
+//MARK: - TagModal Delegate
+extension TagManagementViewController: TagAddDelegate{
+    func updateData(tagName: String, tagColorIndex: Int) {
+        self.tagReloadSetting(tagName, tagColorIndex)
+    }
+}
 
-        if newLength > 30 {
-            for _ in 0 ..< newLength - 30 {
-                textField.deleteBackward()
-            }
-
-        }
-        return true
+//MARK: - BaseModal Delegate
+extension TagManagementViewController : BaseModalDelegate{
+    func onTapClose() {
+        self.removeDim()
     }
 }

@@ -7,9 +7,9 @@
 
 import UIKit
 
+
 class ChangeMyTodoViewController: UIViewController{
     //MARK: - Properties
-    
     private var TagModels: [TagCollectionViewModel] = [
         TagCollectionViewModel(backgroundColor: UIColor(red: 186/255, green: 200/255, blue: 255/255, alpha: 1), isSelected: true, iconImgae: UIImage(named: "EZY_UnSelectedTagAddButtonImage")!),
         TagCollectionViewModel(backgroundColor: UIColor(red: 221/255, green: 220/255, blue: 220/255, alpha: 1), isSelected: false, iconImgae: UIImage(named: "EZY_SelectedNoSelectTagButtonImage")!),
@@ -301,19 +301,6 @@ class ChangeMyTodoViewController: UIViewController{
     }
 
     // MARK: - selectors
-    @objc func tagNameTextFieldClicked(textField: UITextField) {
-//        UIView.animate(withDuration: 0.3) {
-//            self.tagAddModalView.modalBackgroundView.snp.remakeConstraints { make in
-//                make.centerX.equalToSuperview()
-//                make.top.equalToSuperview().offset(self.view.frame.height/4)
-//                make.width.equalToSuperview().dividedBy(1.13)
-//                make.height.equalToSuperview().dividedBy(3.38)
-//            }
-//
-//            self.view.layoutIfNeeded()
-//        }
-    }
-    
     @objc func notificationAddButtonClicked(sender:UIButton){
         let MoreCalendarModalsVC = MoreAlarmModelViewController.instance()
         MoreCalendarModalsVC.delegate = self
@@ -422,16 +409,16 @@ class ChangeMyTodoViewController: UIViewController{
     }
     
     func tagReloadSetting(_ tagName: String, _ tagColorIndex: Int){
-            for i in 0...TagModels.count-1{
-                if TagModels[i].isSelected == false{
-                    TagModels[i].isSelected.toggle()
-                }
+        for i in 0...TagModels.count-1{
+            if TagModels[i].isSelected == false{
+                TagModels[i].isSelected.toggle()
             }
-            
-            TagModels[1].iconImgae = UIImage(named: "EZY_UnSelectedNoSelectTagButtonImage")!
-            TagModels.insert(TagCollectionViewModel(backgroundColor: UIColor.EZY_TagColor2, isSelected: false, iconImgae: UIImage()), at: 2)
-            tagNameTextArray.insert(tagName, at: 2)
-            tagCollectionView.reloadData()
+        }
+        
+        TagModels[1].iconImgae = UIImage(named: "EZY_UnSelectedNoSelectTagButtonImage")!
+        TagModels.insert(TagCollectionViewModel(backgroundColor: UIColor.EZY_TagColor2, isSelected: false, iconImgae: UIImage()), at: 2)
+        tagNameTextArray.insert(tagName, at: 2)
+        tagCollectionView.reloadData()
     }
     
     func LeftOrRightChangeKorean(leftOrRight: String) -> String{
@@ -611,7 +598,6 @@ extension ChangeMyTodoViewController: CalendarAddDelegate{
     func updateData(selectedDay: String, selectedRepeatDay: [String], selectedDayOfWeek: String, yearAndMonthText: String, selectedValuesIndex: Int, selectedRepeatIndex: [Int]) {
         self.calendarReloadSetting(selectedDay, selectedRepeatDay, selectedDayOfWeek, yearAndMonthText, selectedValuesIndex, selectedRepeatIndex)
     }
-    
 }
 //MARK: - TimeModal Delegate
 extension ChangeMyTodoViewController: TimeAddDelegate{
@@ -627,6 +613,7 @@ extension ChangeMyTodoViewController: TagAddDelegate{
         self.tagReloadSetting(tagName, tagColorIndex)
     }
 }
+
 //MARK: - BaseModal Delegate
 extension ChangeMyTodoViewController : BaseModalDelegate{
     func onTapClose() {

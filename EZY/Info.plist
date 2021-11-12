@@ -20,8 +20,16 @@
 	<string>1</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
+	<key>NSCameraUsageDescription</key>
+	<string>Accessing to camera in order to provide better user experience</string>
 	<key>NSFaceIDUsageDescription</key>
 	<string>앱이 Face ID를 사용합니다.</string>
+	<key>NSMicrophoneUsageDescription</key>
+	<string>Accessing to microphone to record voice for video</string>
+	<key>NSPhotoLibraryAddUsageDescription</key>
+	<string>Accessing to photo library in order to save photos</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>Accessing to photo library in order to provide better user experience</string>
 	<key>UIAppFonts</key>
 	<array>
 		<string>Poppins-BlackItalic.ttf</string>

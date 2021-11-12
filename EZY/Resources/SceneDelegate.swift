@@ -6,22 +6,30 @@
 //
 
 import UIKit
+import ChannelIOFront
 
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     var window: UIWindow?
+    
+    var channelWindow: UIWindow?
 
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
         guard let windowScene = (scene as? UIWindowScene) else { return }
+
         window = UIWindow(windowScene: windowScene)
+<<<<<<< HEAD
       
         let mainViewController = ChangeMyTodoViewController()
+=======
+>>>>>>> 1449765bcffe4d943e0de4d88c84238ea00df3d4
 
+        let mainViewController = SelectLocationViewController()
 
         let navigationController = UINavigationController(rootViewController: mainViewController)
 
         navigationController.navigationBar.isHidden = true
-        
+
         window?.rootViewController = navigationController
         window?.makeKeyAndVisible()
 
@@ -31,6 +39,14 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
             }
         }
     }
+
+//    func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
+//        guard let windowScene = (scene as? UIWindowScene) else { return }
+//
+//        channelWindow = ChannelIO.initializeWindow(with: windowScene)
+//
+//        channelWindow?.rootViewController = ChannelTalkViewController()
+//    }
 
     func sceneDidDisconnect(_ scene: UIScene) {
         // Called as the scene is being released by the system.
