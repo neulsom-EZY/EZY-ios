@@ -7,14 +7,8 @@
 
 import UIKit
 
-protocol ModalViewDelegate: AnyObject {
-    func onTapCloseModalView()
-}
-
 class BasicModalViewController: BaseModal {
-    // MARK: - Properties
-    weak var delegate: ModalViewDelegate?
-    
+    // MARK: - Properties    
     private let bgView = UIView().then {
         $0.backgroundColor = .white
         $0.layer.cornerRadius = 10
@@ -66,7 +60,10 @@ class BasicModalViewController: BaseModal {
     @objc func MakeTodo(){
         baseDelegate?.onTapClose()
         dismiss(animated: true, completion: nil)
-        delegate?.onTapCloseModalView()
+    }
+    
+    @objc func noButton(){
+        dismiss(animated: true, completion: nil)
     }
     
     // MARK: - textSetting
@@ -79,8 +76,10 @@ class BasicModalViewController: BaseModal {
             string = NSMutableAttributedString(string: "\(colorText)\n\(contentText)")
         }
         
-        string.setColorForText(textToFind: "\(colorText)", withColor: .blue)
+        string.setColorForText(textToFind: "\(colorText)", withColor: UIColor(red: 147/255, green: 145/255, blue: 254/255, alpha: 1))
+        string.setFontForText(textToFind: "\(colorText)", withFont: UIFont(name: "AppleSDGothicNeo-SemiBold", size: 17)!)
         contentLabel.attributedText = string
+        
         
         let labelHeight = contentLabel.intrinsicContentSize.height
         let buttonHeight = self.view.frame.height/24.6
