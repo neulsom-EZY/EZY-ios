@@ -11,9 +11,10 @@ import Alamofire
 class SelectLocationViewController: UIViewController {
     
     // MARK: - Properties
-
+    private var kakaoPlaceSearchData : [KakaoDocuments]? = nil
+    //MARK: - Kakao Search Data
     private let alphabetTextArray: [String] = ["A", "B"]
-    
+
     private let placeName: [String] = ["광주소프트웨어마이스터고등학교", "우리 집"]
     
     let bgView = UIView().then {
@@ -207,6 +208,24 @@ class SelectLocationViewController: UIViewController {
     
     @objc private func searchButtonClicked(sender:UIButton){
         // 검색 버튼 클릭 시
+        let param : Parameters = ["query" :  locationTextField.text ?? ""]
+        KakaoPlaceSearchAPI.shared.getKakaoInfo(Parameters: param) { (response) in
+            switch response{
+            case.success(let kakaoData):
+                if  let  kakao = kakaoData as? [KakaoDocuments]{
+                    self.kakaoPlaceSearchData = kakao
+                    self.locationTableView.reloadData()
+                }
+            case .requestErr(let message):
+                print("requestError", message)
+            case .pathErr:
+                print("pathErr")
+            case .serverErr:
+                print("serverError")
+            case .networkFail:
+                print("networkFail")
+            }
+        }
     }
     
     
@@ -234,14 +253,14 @@ class SelectLocationViewController: UIViewController {
 // MARK: - UITableViewDelegate and UITableViewDataSource
 extension SelectLocationViewController: UITableViewDataSource, UITableViewDelegate{
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return alphabetTextArray.count
+        return kakaoPlaceSearchData?.count ??  0
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: LocationTableViewCell.reuseId, for: indexPath) as! LocationTableViewCell
         cell.selectionStyle = .none
-        cell.alphabetLabel.text = alphabetTextArray[indexPath.row]
-        cell.locationTitleNameLabel.text = placeName[indexPath.row]
+        cell.alphabetLabel.text = kakaoPlaceSearchData?[indexPath.row].addressName
+        cell.locationTitleNameLabel.text = kakaoPlaceSearchData?[indexPath.row].roadAddressName
         return cell
     }
     
@@ -255,7 +274,7 @@ extension SelectLocationViewController: UITableViewDataSource, UITableViewDelega
         BasicModalVC.baseDelegate = self
         BasicModalVC.delegate = self
         present(BasicModalVC, animated: true, completion: nil)
-        BasicModalVC.textSetting(colorText: placeName[indexPath.row], contentText: "위치를 선택할까요?")
+        BasicModalVC.textSetting(colorText: kakaoPlaceSearchData?[indexPath.row].placeName ?? "", contentText: "위치를 선택할까요?")
     }
 
 }

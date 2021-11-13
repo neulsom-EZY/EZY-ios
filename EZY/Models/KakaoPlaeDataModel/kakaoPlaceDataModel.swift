@@ -9,7 +9,7 @@ import Foundation
 import Alamofire
 
 class KakaoDataModel : Codable{
-    let document : [KakaoDocuments]
+    let documents : [KakaoDocuments]
 }
 struct KakaoDocuments : Codable{
     let addressName,placeName, roadAddressName : String
