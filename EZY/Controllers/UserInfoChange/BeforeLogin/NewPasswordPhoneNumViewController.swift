@@ -33,17 +33,9 @@ class NewPasswordPhoneNumViewController: UIViewController{
     }
     
     private let continueButton = CustomGradientContinueBtnView().then {
-        $0.setTitle("비밀번호 바꾸러 가기", for: .normal)
+        $0.setTitle("전화번호 인증하기", for: .normal)
         $0.titleLabel?.dynamicFont(fontSize: 14, currentFontName: "AppleSDGothicNeo-Bold")
         $0.addTarget(self, action: #selector(onTapContinueNewPasswordPut), for: .touchUpInside)
-    }
-    
-    private let certifiedButton = UIButton().then {
-        $0.setTitle("번호인증", for: .normal)
-        $0.titleLabel?.dynamicFont(fontSize: 10, currentFontName: "AppleSDGothicNeo-SemiBold")
-        $0.setTitleColor(UIColor.EZY_FFFFFF, for: .normal)
-        $0.backgroundColor = UIColor.EZY_E3E3E3
-        $0.addTarget(self, action: #selector(onTapcertified), for: .touchUpInside)
     }
     
     //MARK: - Lifecycle
@@ -91,12 +83,10 @@ class NewPasswordPhoneNumViewController: UIViewController{
         view.addSubview(putPhoneNumLabel)
         view.addSubview(phoneNumContainer)
         view.addSubview(continueButton)
-        view.addSubview(certifiedButton)
     }
     
     private func cornerRadius(){
         continueButton.layer.cornerRadius = self.view.frame.height/81.2
-        certifiedButton.layer.cornerRadius = self.view.frame.height/75
     }
     
     private func location(){
@@ -128,13 +118,6 @@ class NewPasswordPhoneNumViewController: UIViewController{
             make.centerX.equalToSuperview()
             make.width.equalTo(self.view.frame.width/1.13)
             make.height.equalTo(self.view.frame.height/16.24)
-        }
-        
-        certifiedButton.snp.makeConstraints { make in
-            make.top.equalTo(putPhoneNumLabel).offset(self.view.frame.height/12.49)
-            make.right.equalToSuperview().offset(self.view.frame.width/8.3 * -1)
-            make.width.equalTo(self.view.frame.width/6.36)
-            make.height.equalTo(self.view.frame.height/36.9)
         }
     }
     
