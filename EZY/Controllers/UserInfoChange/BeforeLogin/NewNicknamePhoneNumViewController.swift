@@ -47,7 +47,7 @@ class NewNicknamePhoneNumViewController: UIViewController{
     }
     
     private let continueButton = CustomGradientContinueBtnView().then {
-        $0.setTitle("닉네임 바꾸러 가기", for: .normal)
+        $0.setTitle("전화번호 인증하기", for: .normal)
         $0.titleLabel?.dynamicFont(fontSize: 14, currentFontName: "AppleSDGothicNeo-Bold")
         $0.addTarget(self, action: #selector(onTapContinueNewNicknamePut), for: .touchUpInside)
     }
