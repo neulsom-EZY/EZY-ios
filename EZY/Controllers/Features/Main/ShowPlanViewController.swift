@@ -315,6 +315,7 @@ class ShowPlanViewController: UIViewController{
             self?.dismiss(animated: true)
         }
     }
+    
     private func updateDim(viewcontroller : UIViewController){
         DispatchQueue.main.async { [weak self] in
             self?.navigationController?.pushViewController(viewcontroller, animated: true)

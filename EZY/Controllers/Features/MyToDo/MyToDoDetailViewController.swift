@@ -8,7 +8,11 @@
 import UIKit
 
 class MyToDoDetailViewController: UIViewController {
-        
+    // MARK: - Properties
+    let bgView = UIView().then {
+        $0.backgroundColor = .black
+    }
+    
     private let calendarBtn : CalendarBtn = {
         let viewModel = CalendarModel(icon: UIImage(named: "EZY_Calendar")?.withRenderingMode(.alwaysTemplate), iconTintColor: .rgb(red: 255, green: 181, blue: 181), message: "날짜를 선택해주세요!", repeatText: "반복 없음")
         let button = CalendarBtn(with: viewModel)
@@ -64,6 +68,7 @@ class MyToDoDetailViewController: UIViewController {
         $0.dynamicFont(fontSize: 13, currentFontName: "AppleSDGothicNeo-Medium")
         $0.textColor = UIColor(red: 146/255, green: 146/255, blue: 146/255, alpha: 1)
         $0.backgroundColor = .clear
+        $0.isEditable = false
     }
     
     private let tagLabel = UILabel().then {
@@ -96,10 +101,12 @@ class MyToDoDetailViewController: UIViewController {
     
     private let planDeleteButton = UIButton().then {
         $0.setImage(UIImage(named: "EZY_DeleteButton"), for: .normal)
+        $0.addTarget(self, action: #selector(planDeleteButtonClicked(sender:)), for: .touchUpInside)
     }
     
     private let planModifyButton = UIButton().then {
         $0.setImage(UIImage(named: "EZY_PlanModify"), for: .normal)
+        $0.addTarget(self, action: #selector(planModifyButtonClicked(sender:)), for: .touchUpInside)
     }
     
     private let dayLabelText = ["월","수","토","일"]
@@ -115,12 +122,14 @@ class MyToDoDetailViewController: UIViewController {
         $0.isEnabled = false
     }
     
+    // MARK: - LifeCycles
     override func viewDidLoad() {
         super.viewDidLoad()
 
         configureUI()
     }
     
+    // MARK: - Helpers
     private func configureUI(){
         self.view.backgroundColor = .white
         
@@ -130,17 +139,20 @@ class MyToDoDetailViewController: UIViewController {
         
         delegateAndDataSource()
     }
-    
+
+    // MARK: - delegateAndDataSource
     private func delegateAndDataSource(){
         repeatDayCollectionView.delegate = self
         repeatDayCollectionView.dataSource = self
     }
     
+    // MARK: - addView
     private func addView(){
         [planNameLabel, backButton, planTypeLabel, explanationBackgroundView, tagLabel, selectedTagButton, planDeleteButton, planModifyButton, notificationTitleLabel, repeatTitleLabel, notificationButton, noRepeatButton, repeatDayCollectionView, calendarBtn, btnStackView, selectedTagButton].forEach { view.addSubview($0) }
         [explanationTitleLabel, explanationContentTextView].forEach { explanationBackgroundView.addSubview($0) }
     }
     
+    // MARK: - location
     private func location(){
         backButton.snp.makeConstraints { make in
             make.top.equalTo(self.view.safeAreaLayoutGuide).offset(self.view.frame.height/47.7)
@@ -231,14 +243,52 @@ class MyToDoDetailViewController: UIViewController {
             make.width.equalToSuperview().dividedBy(4.07)
         }
     }
+    
+    // MARK: - Selectors
+    @objc func planDeleteButtonClicked(sender:UIButton){
+        let BasicModalVC = BasicModalViewController.instance()
+        addDim()
+        BasicModalVC.delegate = self
+        BasicModalVC.baseDelegate = self
+        present(BasicModalVC, animated: true, completion: nil)
+        BasicModalVC.textSetting(colorText: planNameLabel.text!, contentText: "개인 일정을 삭제할까요?")
+    }
+    
+    @objc func planModifyButtonClicked(sender:UIButton){
+        let nextVC = AddOrChangeMyTodoViewController()
+        navigationController?.pushViewController(nextVC, animated: true)
+        nextVC.mainTitleLabelSetting(mainTitleText: "개인 일정 변경", buttonText: "변경하기")
+    }
+    
+    // MARK: - addDim
+    private func addDim() {
+           view.addSubview(bgView)
+           bgView.snp.makeConstraints { (make) in
+               make.edges.equalTo(0)
+           }
+
+           DispatchQueue.main.async { [weak self] in
+               self?.bgView.backgroundColor = .black.withAlphaComponent(0.15)
+           }
+       }
+       
+    // MARK: - removeDim
+    private func removeDim() {
+        DispatchQueue.main.async { [weak self] in
+            self?.bgView.removeFromSuperview()
+            self?.dismiss(animated: true)
+        }
+    }
 }
 
+// MARK: - Collectionview extension
 extension MyToDoDetailViewController: UICollectionViewDelegate, UICollectionViewDelegateFlowLayout{
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         return CGSize.init(width: self.view.frame.height / 25.375, height: self.view.frame.height / 25.375)
     }
 }
 
+// MARK: - Collectionview extension
 extension MyToDoDetailViewController: UICollectionViewDataSource{
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return dayLabelText.count
@@ -250,5 +300,17 @@ extension MyToDoDetailViewController: UICollectionViewDataSource{
         cell.dayLabel.text = dayLabelText[indexPath.row]
         
         return cell
+    }
+}
+
+extension MyToDoDetailViewController: BasicModalViewButtonDelegate{
+    func onTabOkButton() {
+        navigationController?.popViewController(animated: false)
+    }
+}
+
+extension MyToDoDetailViewController: BaseModalDelegate{
+    func onTapClose() {
+        removeDim()
     }
 }
