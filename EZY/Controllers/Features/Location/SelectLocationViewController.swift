@@ -11,12 +11,10 @@ import Alamofire
 class SelectLocationViewController: UIViewController {
     
     // MARK: - Properties
-    private var kakaoPlaceSearchData : [KakaoDocuments]? = nil
-    //MARK: - Kakao Search Data
-    private let alphabetTextArray: [String] = ["A", "B"]
 
-    private let placeName: [String] = ["광주소프트웨어마이스터고등학교", "우리 집"]
-    
+    //MARK: - Kakao Search Data
+    private var kakaoPlaceSearchData : [KakaoDocuments]? = nil
+
     let bgView = UIView().then {
         $0.backgroundColor = .black
 //        $0.alpha = 0
@@ -260,7 +258,7 @@ extension SelectLocationViewController: UITableViewDataSource, UITableViewDelega
         let cell = tableView.dequeueReusableCell(withIdentifier: LocationTableViewCell.reuseId, for: indexPath) as! LocationTableViewCell
         cell.selectionStyle = .none
         cell.alphabetLabel.text = kakaoPlaceSearchData?[indexPath.row].addressName
-        cell.locationTitleNameLabel.text = kakaoPlaceSearchData?[indexPath.row].roadAddressName
+        cell.locationTitleNameLabel.text = kakaoPlaceSearchData?[indexPath.row].placeName
         return cell
     }
     
