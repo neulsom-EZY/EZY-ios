@@ -11,6 +11,10 @@ import Then
 
 class MyToDoListViewController: UIViewController {
     //MARK: - Properties
+    
+    var toDoTag:String = ""
+    var toDoTitle:String = ""
+        
     private let backButton = UIButton().then {
         $0.setImage(UIImage(named: "EZY_DetailBackButton"), for: .normal)
         $0.addTarget(self, action: #selector(goBack), for: .touchUpInside)
@@ -40,7 +44,7 @@ class MyToDoListViewController: UIViewController {
     
     lazy var firstList = ScheduleTimeTableView.init(frame: self.view.frame)
     
-    var firstDescriptionArray: [String] = ["NEULSOM", "NEULSOM"]
+    var firstDescriptionArray: [String] = ["STUDY", "STUDY"]
     
     let firstTitleArray: [String] = ["EZY 회의", "EZY 회의"]
     
@@ -59,7 +63,7 @@ class MyToDoListViewController: UIViewController {
     
     lazy var secondList = ScheduleTimeTableView.init(frame: self.view.frame)
     
-    var secondDescriptionArray: [String] = ["공부", "공부", "NEULSOM", "NEULSOM"]
+    var secondDescriptionArray: [String] = ["APP Programming", "APP Programming", "APP Programming", "APP Programming"]
     
     let secondTitleArray: [String] = ["강아지 산책시키기", "카페에서 마카롱 사오기", "EZY 회의", "EZY 회의"]
     
@@ -78,7 +82,7 @@ class MyToDoListViewController: UIViewController {
     
     lazy var noneList = ScheduleTimeTableView.init(frame: self.view.frame)
     
-    var noneDescriptionArray: [String] = ["공부", "공부"]
+    var noneDescriptionArray: [String] = ["태그 없는 일정", "태그 없는 일정"]
     
     let noneTitleArray: [String] = ["강아지 산책시키기", "카페에서 마카롱 사오기"]
     
@@ -276,7 +280,7 @@ class MyToDoListViewController: UIViewController {
 }
 
 extension MyToDoListViewController: UITableViewDataSource{
-
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if tableView == firstList.tableView {
             return firstDescriptionArray.count
@@ -350,8 +354,21 @@ extension MyToDoListViewController: UITableViewDataSource{
 extension MyToDoListViewController: UITableViewDelegate{
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        var cell = tableView.cellForRow(at: indexPath)
+//        var cell = tableView.cellForRow(at: indexPath)
+        
+        if tableView == firstList {
+            toDoTag = firstDescriptionArray[indexPath.row]
+            toDoTitle = firstTitleArray[indexPath.row]
+        } else if tableView == secondList {
+            toDoTag = secondDescriptionArray[indexPath.row]
+            toDoTitle = secondTitleArray[indexPath.row]
+        } else {
+            toDoTag = noneDescriptionArray[indexPath.row]
+            toDoTitle = noneTitleArray[indexPath.row]
+        }
     }
+    
+
     
 }
 
