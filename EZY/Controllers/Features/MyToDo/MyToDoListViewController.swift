@@ -14,6 +14,7 @@ class MyToDoListViewController: UIViewController {
     
     var toDoTag:String = ""
     var toDoTitle:String = ""
+    var toDoTime:String = ""
         
     private let backButton = UIButton().then {
         $0.setImage(UIImage(named: "EZY_DetailBackButton"), for: .normal)
@@ -105,6 +106,15 @@ class MyToDoListViewController: UIViewController {
     @objc
     private func goBack(){
         navigationController?.popViewController(animated: true )
+    }
+    
+    @objc
+    private func goDetail(){
+        let controller = PersonalPlanDetailViewController()
+        controller.toDoTag = toDoTag
+        controller.toDoTitle = toDoTitle
+        controller.toDoTime = toDoTime
+        navigationController?.pushViewController(controller, animated: true)
     }
     
     //MARK: - Helpers
@@ -355,16 +365,21 @@ extension MyToDoListViewController: UITableViewDelegate{
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
 //        var cell = tableView.cellForRow(at: indexPath)
-        
-        if tableView == firstList {
+        if tableView == firstList.tableView {
             toDoTag = firstDescriptionArray[indexPath.row]
             toDoTitle = firstTitleArray[indexPath.row]
-        } else if tableView == secondList {
+            toDoTime = firstPlanTimeArray[indexPath.row]
+            goDetail()
+        } else if tableView == secondList.tableView {
             toDoTag = secondDescriptionArray[indexPath.row]
             toDoTitle = secondTitleArray[indexPath.row]
+            toDoTime = secondPlanTimeArray[indexPath.row]
+            goDetail()
         } else {
             toDoTag = noneDescriptionArray[indexPath.row]
             toDoTitle = noneTitleArray[indexPath.row]
+            toDoTime = nonePlanTimeArray[indexPath.row]
+            goDetail()
         }
     }
     

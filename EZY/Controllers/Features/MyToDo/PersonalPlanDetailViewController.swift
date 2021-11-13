@@ -11,6 +11,10 @@ class PersonalPlanDetailViewController: UIViewController {
     
     var planDeleteModalView = PlanDeleteModalView()
     
+    var toDoTag:String = ""
+    var toDoTitle:String = ""
+    var toDoTime:String = ""
+    
     lazy var locationBackgroundView = UIView().then{
         $0.backgroundColor = .white
         $0.layer.cornerRadius = 10
@@ -68,7 +72,7 @@ class PersonalPlanDetailViewController: UIViewController {
     }
     
     lazy var planNameLabel = UILabel().then {
-        $0.text = "아름이 산책시키기"
+        $0.text = toDoTitle
         $0.textColor = UIColor(red: 150/255, green: 141/255, blue: 255/255, alpha: 1)
         $0.dynamicFont(fontSize: 22, currentFontName: "Poppins-SemiBold")
     }
@@ -86,7 +90,7 @@ class PersonalPlanDetailViewController: UIViewController {
     }
     
     lazy var timeLabel = UILabel().then {
-        $0.text = "11:00AM - 1:00PM"
+        $0.text = toDoTime
         $0.textColor = UIColor(red: 101/255, green: 101/255, blue: 101/255, alpha: 1)
         $0.dynamicFont(fontSize: 16, currentFontName: "Poppins-Regular")
     }
@@ -122,7 +126,7 @@ class PersonalPlanDetailViewController: UIViewController {
     }
     
     lazy var tagStudyButton = UIButton().then {
-        $0.setTitle("공부", for: .normal)
+        $0.setTitle(toDoTag, for: .normal)
         $0.setTitleColor(UIColor.white, for: .normal)
         $0.layer.borderWidth = 1
         $0.layer.borderColor = UIColor(red: 150/255, green: 141/255, blue: 255/255, alpha: 1).cgColor
