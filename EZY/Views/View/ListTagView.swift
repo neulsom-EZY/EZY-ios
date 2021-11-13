@@ -20,6 +20,6 @@ class ListTagView: UIView {
         }
         
         self.layer.borderWidth = 0.5
-        self.layer.borderColor = UIColor.EZY_796DFF.cgColor
+        self.layer.borderColor = listLabel.textColor.cgColor
     }
 }

@@ -32,17 +32,9 @@ class ChangePasswardPhoneNumAfterLoginViewController: UIViewController {
     
     lazy var changeButton = UIButton().then {
         $0.setBackgroundImage(UIImage(named: "EZY_ChangeButtonImage"), for: .normal)
-        $0.setTitle("변경하러 가기", for: .normal)
+        $0.setTitle("전화번호 인증하기", for: .normal)
         $0.dynamicFont(fontSize: 14, currentFontName: "AppleSDGothicNeo-Bold")
         $0.addTarget(self, action: #selector(changeButtonClicked(sender:)), for: .touchUpInside)
-    }
-    
-    lazy var certifiedButton = UIButton().then {
-        $0.setTitle("번호인증", for: .normal)
-        $0.titleLabel?.dynamicFont(fontSize: 10, currentFontName: "AppleSDGothicNeo-SemiBold")
-        $0.setTitleColor(UIColor.EZY_FFFFFF, for: .normal)
-        $0.backgroundColor = UIColor.EZY_E3E3E3
-        $0.addTarget(self, action: #selector(certifiedButtonClicked(sender:)), for: .touchUpInside)
     }
     
     //MARK: - LifyCycle
@@ -63,7 +55,6 @@ class ChangePasswardPhoneNumAfterLoginViewController: UIViewController {
         self.view.addSubview(phoneNumTextField)
         self.view.addSubview(phoneNumUnderLineView)
         self.view.addSubview(changeButton)
-        self.view.addSubview(certifiedButton)
     }
     
     // MARK: - Selectors
@@ -115,21 +106,10 @@ class ChangePasswardPhoneNumAfterLoginViewController: UIViewController {
             make.bottom.equalToSuperview().offset(-self.view.frame.height/23.8)
         }
         
-        certifiedButton.snp.makeConstraints { make in
-            make.centerY.equalTo(phoneNumNickNameLabel)
-            make.right.equalToSuperview().offset(self.view.frame.width/8.3 * -1)
-            make.width.equalTo(self.view.frame.width/6.36)
-            make.height.equalTo(self.view.frame.height/36.9)
-            
-            certifiedButton.layer.cornerRadius = self.view.frame.height/36.9/2
-        }
     }
     
     // MARK: - Selectors
-    @objc func certifiedButtonClicked(sender:UIButton){
-        print("번호인증")
-    }
-    
+
     @objc func changeButtonClicked(sender:UIButton){
         if isValidPhoneNumber(PhoneNumber: phoneNumTextField.text){
             let nextViewController = ChangePasswardAfterLoginViewController()

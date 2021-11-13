@@ -11,32 +11,41 @@ import Then
 
 class MyToDoListViewController: UIViewController {
     //MARK: - Properties
-    lazy var backButton = UIButton().then {
+    
+    var toDoTag:String = ""
+    var toDoTitle:String = ""
+    var toDoTime:String = ""
+        
+    private let backButton = UIButton().then {
         $0.setImage(UIImage(named: "EZY_DetailBackButton"), for: .normal)
         $0.addTarget(self, action: #selector(goBack), for: .touchUpInside)
     }
     
-    lazy var listName = UILabel().then {
+    private let listName = UILabel().then {
         $0.text = "나의 할 일 목록"
         $0.textColor = UIColor.EZY_AAA8FF
         $0.dynamicFont(fontSize: 22, currentFontName: "AppleSDGothicNeo-SemiBold")
     }
     
-    lazy var scrollView = UIScrollView().then {
+    private let line = UIView().then {
+        $0.backgroundColor = .EZY_D0D0D0
+    }
+    
+    private let scrollView = UIScrollView().then {
         $0.backgroundColor = .clear
     }
     
-    lazy var scrollInnerView = UIView().then {
+    private let scrollInnerView = UIView().then {
         $0.backgroundColor = .clear
     }
     
-    lazy var firstListTag = ListTagView().then {
+    private let firstListTag = ListTagView().then {
         $0.listLabel.text = "STUDY"
     }
     
     lazy var firstList = ScheduleTimeTableView.init(frame: self.view.frame)
     
-    var firstDescriptionArray: [String] = ["NEULSOM", "NEULSOM"]
+    var firstDescriptionArray: [String] = ["STUDY", "STUDY"]
     
     let firstTitleArray: [String] = ["EZY 회의", "EZY 회의"]
     
@@ -49,13 +58,13 @@ class MyToDoListViewController: UIViewController {
     lazy var firstPlanShadow: [CGColor] = [.EZY_PLAN_DO_SHADOW, .EZY_PLAN_FINISH_SHADOW]
 
     
-    lazy var secondListTag = ListTagView().then {
+    private let secondListTag = ListTagView().then {
         $0.listLabel.text = "APP Programming"
     }
     
     lazy var secondList = ScheduleTimeTableView.init(frame: self.view.frame)
     
-    var secondDescriptionArray: [String] = ["공부", "공부", "NEULSOM", "NEULSOM"]
+    var secondDescriptionArray: [String] = ["APP Programming", "APP Programming", "APP Programming", "APP Programming"]
     
     let secondTitleArray: [String] = ["강아지 산책시키기", "카페에서 마카롱 사오기", "EZY 회의", "EZY 회의"]
     
@@ -67,6 +76,24 @@ class MyToDoListViewController: UIViewController {
     
     lazy var secondPlanShadow: [CGColor] = [.EZY_PLAN_DO_SHADOW, .EZY_PLAN_DO_SHADOW, .EZY_PLAN_FINISH_SHADOW, .EZY_PLAN_FINISH_SHADOW]
     
+    private let noneListTag = ListTagView().then {
+        $0.listLabel.text = "태그 없는 일정"
+        $0.listLabel.textColor = .EZY_D0D0D0
+    }
+    
+    lazy var noneList = ScheduleTimeTableView.init(frame: self.view.frame)
+    
+    var noneDescriptionArray: [String] = ["태그 없는 일정", "태그 없는 일정"]
+    
+    let noneTitleArray: [String] = ["강아지 산책시키기", "카페에서 마카롱 사오기"]
+    
+    let nonePlanTimeArray: [String] = ["19:00 - 20:00", "12:00 - 13:00"]
+    
+    lazy var nonePlanBackgroundColor: [UIColor] = [.EZY_PLAN_PURPLE, .EZY_PLAN_FINISH_PURPLE]
+    
+    lazy var nonePlanDoOrFinishColor: [UIColor] = [.EZY_PLAN_DO_BACK, .EZY_PLAN_FINISH_BACK]
+    
+    lazy var nonePlanShadow: [CGColor] = [.EZY_PLAN_DO_SHADOW, .EZY_PLAN_FINISH_SHADOW]
     
     //MARK: - Lifecycle
     override func viewDidLoad() {
@@ -77,12 +104,21 @@ class MyToDoListViewController: UIViewController {
     //MARK: - Selectors
     
     @objc
-    func goBack(){
+    private func goBack(){
         navigationController?.popViewController(animated: true )
     }
     
+    @objc
+    private func goDetail(){
+        let controller = PersonalPlanDetailViewController()
+        controller.toDoTag = toDoTag
+        controller.toDoTitle = toDoTitle
+        controller.toDoTime = toDoTime
+        navigationController?.pushViewController(controller, animated: true)
+    }
+    
     //MARK: - Helpers
-    func configureUI(){
+    private func configureUI(){
         view.backgroundColor = .white
         
         listTagViewSetting()
@@ -93,23 +129,27 @@ class MyToDoListViewController: UIViewController {
         location()
     }
     
-    func addView(){
+    private func addView(){
         view.addSubview(backButton)
         view.addSubview(listName)
+        view.addSubview(line)
         view.addSubview(scrollView)
         scrollView.addSubview(scrollInnerView)
         scrollInnerView.addSubview(firstListTag)
         scrollInnerView.addSubview(firstList)
         scrollInnerView.addSubview(secondListTag)
         scrollInnerView.addSubview(secondList)
+        scrollInnerView.addSubview(noneListTag)
+        scrollInnerView.addSubview(noneList)
     }
     
-    func cornerRadius(){
+    private func cornerRadius(){
         firstListTag.layer.cornerRadius = self.view.frame.width/75
         secondListTag.layer.cornerRadius = self.view.frame.width/75
+        noneListTag.layer.cornerRadius = self.view.frame.width/75
     }
     
-    func location(){
+    private func location(){
         backButton.snp.makeConstraints { make in
             make.top.equalToSuperview().offset(self.view.frame.height/13.31)
             make.left.equalToSuperview().offset(self.view.frame.width/13.39)
@@ -121,25 +161,32 @@ class MyToDoListViewController: UIViewController {
             make.left.equalTo(backButton)
         }
         
+        line.snp.makeConstraints { make in
+            make.width.equalTo(self.view.frame.width/1.18)
+            make.height.equalTo(self.view.frame.height/1624)
+            make.centerX.equalToSuperview()
+            make.top.equalTo(listName).offset(self.view.frame.height/16.57)
+        }
+        
         scrollView.snp.makeConstraints { make in
-            make.top.equalTo(listName).offset(self.view.frame.height/1624)
+            make.top.equalTo(line).offset(self.view.frame.height/1624)
             make.bottom.equalToSuperview()
             make.leading.equalToSuperview()
             make.trailing.equalToSuperview()
         }
         
         scrollInnerView.snp.makeConstraints { make in
-            make.top.equalTo(listName.snp.bottom).offset(self.view.frame.height/80)
+            make.top.equalTo(scrollView.contentLayoutGuide)
             make.bottom.equalTo(scrollView.contentLayoutGuide)
             make.leading.equalTo(scrollView.contentLayoutGuide)
             make.bottom.equalTo(scrollView.contentLayoutGuide)
             make.width.equalTo(scrollView.frameLayoutGuide)
-            make.height.equalTo(firstList.tableView.contentSize.height + secondList.tableView.contentSize.height + (self.view.frame.height / 13.5) * 2) // tableView Height만큼 + tag 차지 높이 * tag 수
+            make.height.equalTo(firstList.tableView.contentSize.height + secondList.tableView.contentSize.height + noneList.tableView.contentSize.height + (self.view.frame.height / 13.5) * 3) // tableView Height만큼 + tag 차지 높이 * tag 수
         }
         
         firstListTag.snp.makeConstraints { make in
             make.top.equalTo(scrollInnerView).offset(self.view.frame.height/46.4)
-            make.left.equalTo(backButton)
+            make.left.equalTo(line)
             make.width.equalTo(firstListTag.listLabel).offset(self.view.frame.width/12.5)
             make.height.equalTo(self.view.frame.height/31.23)
         }
@@ -171,7 +218,7 @@ class MyToDoListViewController: UIViewController {
             make.top.equalTo(secondListTag).offset(self.view.frame.height/47.76)
             make.centerX.equalToSuperview()
             make.width.equalToSuperview()
-            make.bottom.equalToSuperview()
+            make.bottom.equalTo(noneListTag).offset(self.view.frame.height/18.92 * -1)
         }
         
         secondList.tableView.snp.makeConstraints { make in
@@ -180,17 +227,42 @@ class MyToDoListViewController: UIViewController {
             make.bottom.equalToSuperview()
             make.centerX.equalToSuperview()
         }
+        
+        noneListTag.snp.makeConstraints { make in
+            make.top.equalTo(secondList.tableView).offset(secondList.tableView.contentSize.height + self.view.frame.height / 81.2)
+            make.left.equalTo(backButton)
+            make.width.equalTo(noneListTag.listLabel).offset(self.view.frame.width/12.5)
+            make.height.equalTo(self.view.frame.height/31.23)
+        }
+        
+        noneList.snp.makeConstraints { make in
+            noneList.backgroundColor = .clear
+            make.top.equalTo(noneListTag).offset(self.view.frame.height/47.76)
+            make.centerX.equalToSuperview()
+            make.width.equalToSuperview()
+            make.bottom.equalToSuperview()
+        }
+        
+        noneList.tableView.snp.makeConstraints { make in
+            make.top.equalTo(noneList).offset(self.view.frame.height/36)
+            make.width.height.equalToSuperview()
+            make.bottom.equalToSuperview()
+            make.centerX.equalToSuperview()
+        }
     }
     
-    func listTagViewSetting() {
+    private func listTagViewSetting() {
         firstListTag.addSubview(firstListTag.listLabel)
         firstListTag.listTagViewLayoutSetting()
         
         secondListTag.addSubview(secondListTag.listLabel)
         secondListTag.listTagViewLayoutSetting()
+        
+        noneListTag.addSubview(noneListTag.listLabel)
+        noneListTag.listTagViewLayoutSetting()
     }
     
-    func ScheduleTimeTableViewSetting(){
+    private func ScheduleTimeTableViewSetting(){
         firstList.tableView.dataSource = self
         firstList.tableView.delegate = self
         
@@ -201,22 +273,32 @@ class MyToDoListViewController: UIViewController {
         
         secondList.tableView.register(ScheduleTimeTableViewCell.self, forCellReuseIdentifier: ScheduleTimeTableViewCell.ScheduleTimeTableViewIdentifier)
         
+        noneList.tableView.dataSource = self
+        noneList.tableView.delegate = self
+        
+        noneList.tableView.register(ScheduleTimeTableViewCell.self, forCellReuseIdentifier: ScheduleTimeTableViewCell.ScheduleTimeTableViewIdentifier)
+        
         firstList.tableView.contentSize = CGSize(width: self.view.frame.width, height: (self.view.frame.height/8) * CGFloat(firstDescriptionArray.count))
         secondList.tableView.contentSize = CGSize(width: self.view.frame.width, height: (self.view.frame.height/8) * CGFloat(secondDescriptionArray.count))
+        noneList.tableView.contentSize = CGSize(width: self.view.frame.width, height: (self.view.frame.height/8) * CGFloat(noneDescriptionArray.count))
         
         firstList.tableView.isScrollEnabled = false
         secondList.tableView.isScrollEnabled = false
+        noneList.tableView.isScrollEnabled = false
     }
 
 }
 
 extension MyToDoListViewController: UITableViewDataSource{
-
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if tableView == firstList.tableView {
             return firstDescriptionArray.count
+        } else if tableView == secondList.tableView {
+            return secondDescriptionArray.count
+        } else {
+            return noneDescriptionArray.count
         }
-        return secondDescriptionArray.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -237,7 +319,7 @@ extension MyToDoListViewController: UITableViewDataSource{
             cell.selectionStyle = UITableViewCell.SelectionStyle.none
             
             return cell
-        } else{
+        } else if tableView == secondList.tableView {
             let cell = tableView.dequeueReusableCell(withIdentifier: ScheduleTimeTableViewCell.ScheduleTimeTableViewIdentifier, for: indexPath) as! ScheduleTimeTableViewCell
             cell.groupNameLabel.text = secondDescriptionArray[indexPath.row]
             cell.titleLabel.text = secondTitleArray[indexPath.row]
@@ -248,6 +330,21 @@ extension MyToDoListViewController: UITableViewDataSource{
             cell.titleLabel.textColor = secondPlanBackgroundColor[indexPath.row]
             cell.groupNameLabel.textColor = secondPlanBackgroundColor[indexPath.row]
             cell.EZYLISTCellRightDecorationView.layer.shadowColor = secondPlanShadow[indexPath.row]
+            cell.backgroundColor = .clear
+            cell.selectionStyle = UITableViewCell.SelectionStyle.none
+            
+            return cell
+        } else{
+            let cell = tableView.dequeueReusableCell(withIdentifier: ScheduleTimeTableViewCell.ScheduleTimeTableViewIdentifier, for: indexPath) as! ScheduleTimeTableViewCell
+            cell.groupNameLabel.text = noneDescriptionArray[indexPath.row]
+            cell.titleLabel.text = noneTitleArray[indexPath.row]
+            cell.planTimeLabel.text = nonePlanTimeArray[indexPath.row]
+            cell.EZYLISTCellLeftDecorationView.backgroundColor = nonePlanBackgroundColor[indexPath.row]
+            cell.EZYLISTCellBackground.backgroundColor = nonePlanDoOrFinishColor[indexPath.row]
+            cell.EZYLISTCellRightDecorationView.backgroundColor = nonePlanDoOrFinishColor[indexPath.row]
+            cell.titleLabel.textColor = nonePlanBackgroundColor[indexPath.row]
+            cell.groupNameLabel.textColor = nonePlanBackgroundColor[indexPath.row]
+            cell.EZYLISTCellRightDecorationView.layer.shadowColor = nonePlanShadow[indexPath.row]
             cell.backgroundColor = .clear
             cell.selectionStyle = UITableViewCell.SelectionStyle.none
             
@@ -267,8 +364,26 @@ extension MyToDoListViewController: UITableViewDataSource{
 extension MyToDoListViewController: UITableViewDelegate{
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        var cell = tableView.cellForRow(at: indexPath)
+//        var cell = tableView.cellForRow(at: indexPath)
+        if tableView == firstList.tableView {
+            toDoTag = firstDescriptionArray[indexPath.row]
+            toDoTitle = firstTitleArray[indexPath.row]
+            toDoTime = firstPlanTimeArray[indexPath.row]
+            goDetail()
+        } else if tableView == secondList.tableView {
+            toDoTag = secondDescriptionArray[indexPath.row]
+            toDoTitle = secondTitleArray[indexPath.row]
+            toDoTime = secondPlanTimeArray[indexPath.row]
+            goDetail()
+        } else {
+            toDoTag = noneDescriptionArray[indexPath.row]
+            toDoTitle = noneTitleArray[indexPath.row]
+            toDoTime = nonePlanTimeArray[indexPath.row]
+            goDetail()
+        }
     }
+    
+
     
 }
 

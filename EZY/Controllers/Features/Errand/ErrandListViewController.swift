@@ -11,27 +11,36 @@ import Then
 
 class ErrandListViewController: UIViewController {
     //MARK: - Properties
+    
+    var errandType:String = ""
+    var errandTitle:String = ""
+    var errandTime:String = ""
+    var errandExplain:String = ""
 
-    lazy var backButton = UIButton().then {
+    private let backButton = UIButton().then {
         $0.setImage(UIImage(named: "EZY_DetailBackButton"), for: .normal)
         $0.addTarget(self, action: #selector(goBack), for: .touchUpInside)
     }
     
-    lazy var listName = UILabel().then {
+    private let listName = UILabel().then {
         $0.text = "심부름 목록"
         $0.textColor = UIColor.EZY_AAA8FF
         $0.dynamicFont(fontSize: 22, currentFontName: "AppleSDGothicNeo-SemiBold")
     }
     
-    lazy var scrollView = UIScrollView().then {
+    private let line = UIView().then {
+        $0.backgroundColor = .EZY_D0D0D0
+    }
+    
+    private let scrollView = UIScrollView().then {
         $0.backgroundColor = .clear
     }
     
-    lazy var scrollInnerView = UIView().then {
+    private let scrollInnerView = UIView().then {
         $0.backgroundColor = .clear
     }
     
-    lazy var acceptErrandTag = ListTagView().then {
+    private let acceptErrandTag = ListTagView().then {
         $0.listLabel.text = "부탁받은 심부름"
     }
     
@@ -49,7 +58,7 @@ class ErrandListViewController: UIViewController {
     
     lazy var acceptPlanShadow: [CGColor] = [.EZY_PLAN_DO_SHADOW, .EZY_PLAN_FINISH_SHADOW]
     
-    lazy var sendErrandTag = ListTagView().then {
+    private let sendErrandTag = ListTagView().then {
         $0.listLabel.text = "부탁한 심부름"
         $0.listLabel.textColor = .EZY_8F85FF
         $0.layer.borderColor = UIColor.EZY_8F85FF.cgColor
@@ -69,7 +78,7 @@ class ErrandListViewController: UIViewController {
     
     lazy var sendPlanShadow: [CGColor] = [.EZY_PLAN_DO_SHADOW, .EZY_PLAN_FINISH_SHADOW]
 
-    lazy var waitErrandTag = ListTagView().then {
+    private let waitErrandTag = ListTagView().then {
         $0.listLabel.text = "수락 대기 중인 심부름"
     }
     
@@ -100,6 +109,23 @@ class ErrandListViewController: UIViewController {
         navigationController?.popViewController(animated: true )
     }
     
+    @objc
+    private func goDetail(){
+        let controller = ErrandDetailsViewController()
+        controller.errandType = errandType
+        controller.errandTime = errandTime
+        controller.errandTitle = errandTitle
+        controller.errandExplain = errandExplain
+        navigationController?.pushViewController(controller, animated: true)
+    }
+    
+    @objc
+    private func goRequest(){
+        let controller = PlanRequestRespondingViewController()
+        controller.errandTime = errandTime
+        controller.errandTitle = errandTitle
+        navigationController?.pushViewController(controller, animated: true)
+    }
     //MARK: - Helpers
     func configureUI(){
         view.backgroundColor = .white
@@ -115,6 +141,7 @@ class ErrandListViewController: UIViewController {
     func addView(){
         view.addSubview(backButton)
         view.addSubview(listName)
+        view.addSubview(line)
         view.addSubview(scrollView)
         scrollView.addSubview(scrollInnerView)
         scrollInnerView.addSubview(acceptTableView)
@@ -143,15 +170,22 @@ class ErrandListViewController: UIViewController {
             make.left.equalTo(backButton)
         }
         
+        line.snp.makeConstraints { make in
+            make.width.equalTo(self.view.frame.width/1.18)
+            make.height.equalTo(self.view.frame.height/1624)
+            make.centerX.equalToSuperview()
+            make.top.equalTo(listName).offset(self.view.frame.height/16.57)
+        }
+        
         scrollView.snp.makeConstraints { make in
-            make.top.equalTo(listName).offset(self.view.frame.height/1624)
+            make.top.equalTo(line).offset(self.view.frame.height/1624)
             make.bottom.equalToSuperview()
             make.leading.equalToSuperview()
             make.trailing.equalToSuperview()
         }
         
         scrollInnerView.snp.makeConstraints { make in
-            make.top.equalTo(listName.snp.bottom).offset(self.view.frame.height/80)
+            make.top.equalTo(scrollView.contentLayoutGuide)
             make.bottom.equalTo(scrollView.contentLayoutGuide)
             make.leading.equalTo(scrollView.contentLayoutGuide)
             make.bottom.equalTo(scrollView.contentLayoutGuide)
@@ -161,7 +195,7 @@ class ErrandListViewController: UIViewController {
         
         acceptErrandTag.snp.makeConstraints { make in
             make.top.equalTo(scrollInnerView).offset(self.view.frame.height/46.4)
-            make.left.equalTo(listName)
+            make.left.equalTo(line)
             make.width.equalTo(acceptErrandTag.listLabel).offset(self.view.frame.width/12.5)
             make.height.equalTo(self.view.frame.height/31.23)
         }
@@ -343,7 +377,24 @@ extension ErrandListViewController: UITableViewDataSource{
 extension ErrandListViewController: UITableViewDelegate{
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        var cell = tableView.cellForRow(at: indexPath)
+//        var cell = tableView.cellForRow(at: indexPath)
+        if tableView == acceptTableView.tableView {
+            errandType = "받은 심부름"
+            errandExplain = "어떤 심부름을 부탁받았나요?"
+            errandTitle = acceptTitleArray[indexPath.row]
+            errandTime = acceptPlanTimeArray[indexPath.row]
+            goDetail()
+        } else if tableView == sendTableView.tableView {
+            errandType = "보낸 심부름"
+            errandExplain = "어떤 심부름을 부탁할까요?"
+            errandTitle = sendTitleArray[indexPath.row]
+            errandTime = sendPlanTimeArray[indexPath.row]
+            goDetail()
+        } else {
+            errandTitle = waitTitleArray[indexPath.row]
+            errandTime = waitPlanTimeArray[indexPath.row]
+            goRequest()
+        }
     }
 
     
