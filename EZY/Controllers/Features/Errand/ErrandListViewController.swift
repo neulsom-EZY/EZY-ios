@@ -23,6 +23,10 @@ class ErrandListViewController: UIViewController {
         $0.dynamicFont(fontSize: 22, currentFontName: "AppleSDGothicNeo-SemiBold")
     }
     
+    private let line = UIView().then {
+        $0.backgroundColor = .EZY_D0D0D0
+    }
+    
     lazy var scrollView = UIScrollView().then {
         $0.backgroundColor = .clear
     }
@@ -115,6 +119,7 @@ class ErrandListViewController: UIViewController {
     func addView(){
         view.addSubview(backButton)
         view.addSubview(listName)
+        view.addSubview(line)
         view.addSubview(scrollView)
         scrollView.addSubview(scrollInnerView)
         scrollInnerView.addSubview(acceptTableView)
@@ -143,15 +148,22 @@ class ErrandListViewController: UIViewController {
             make.left.equalTo(backButton)
         }
         
+        line.snp.makeConstraints { make in
+            make.width.equalTo(self.view.frame.width/1.18)
+            make.height.equalTo(self.view.frame.height/1624)
+            make.centerX.equalToSuperview()
+            make.top.equalTo(listName).offset(self.view.frame.height/16.57)
+        }
+        
         scrollView.snp.makeConstraints { make in
-            make.top.equalTo(listName).offset(self.view.frame.height/1624)
+            make.top.equalTo(line).offset(self.view.frame.height/1624)
             make.bottom.equalToSuperview()
             make.leading.equalToSuperview()
             make.trailing.equalToSuperview()
         }
         
         scrollInnerView.snp.makeConstraints { make in
-            make.top.equalTo(listName.snp.bottom).offset(self.view.frame.height/80)
+            make.top.equalTo(scrollView.contentLayoutGuide)
             make.bottom.equalTo(scrollView.contentLayoutGuide)
             make.leading.equalTo(scrollView.contentLayoutGuide)
             make.bottom.equalTo(scrollView.contentLayoutGuide)
@@ -161,7 +173,7 @@ class ErrandListViewController: UIViewController {
         
         acceptErrandTag.snp.makeConstraints { make in
             make.top.equalTo(scrollInnerView).offset(self.view.frame.height/46.4)
-            make.left.equalTo(listName)
+            make.left.equalTo(line)
             make.width.equalTo(acceptErrandTag.listLabel).offset(self.view.frame.width/12.5)
             make.height.equalTo(self.view.frame.height/31.23)
         }
