@@ -105,7 +105,7 @@ class LoginViewController: UIViewController{
     
     @objc
     private func onTapForgotPassword(){
-        let controller = NewPasswordPhoneNumViewController()
+        let controller = NewPasswordNicknameViewController()
         navigationController?.pushViewController(controller, animated: true)
     }
     
