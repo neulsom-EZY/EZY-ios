@@ -22,6 +22,10 @@ class MyToDoListViewController: UIViewController {
         $0.dynamicFont(fontSize: 22, currentFontName: "AppleSDGothicNeo-SemiBold")
     }
     
+    private let line = UIView().then {
+        $0.backgroundColor = .EZY_D0D0D0
+    }
+    
     private let scrollView = UIScrollView().then {
         $0.backgroundColor = .clear
     }
@@ -69,6 +73,7 @@ class MyToDoListViewController: UIViewController {
     
     private let noneListTag = ListTagView().then {
         $0.listLabel.text = "태그 없는 일정"
+        $0.listLabel.textColor = .EZY_D0D0D0
     }
     
     lazy var noneList = ScheduleTimeTableView.init(frame: self.view.frame)
@@ -113,6 +118,7 @@ class MyToDoListViewController: UIViewController {
     private func addView(){
         view.addSubview(backButton)
         view.addSubview(listName)
+        view.addSubview(line)
         view.addSubview(scrollView)
         scrollView.addSubview(scrollInnerView)
         scrollInnerView.addSubview(firstListTag)
@@ -141,25 +147,32 @@ class MyToDoListViewController: UIViewController {
             make.left.equalTo(backButton)
         }
         
+        line.snp.makeConstraints { make in
+            make.width.equalTo(self.view.frame.width/1.18)
+            make.height.equalTo(self.view.frame.height/1624)
+            make.centerX.equalToSuperview()
+            make.top.equalTo(listName).offset(self.view.frame.height/16.57)
+        }
+        
         scrollView.snp.makeConstraints { make in
-            make.top.equalTo(listName).offset(self.view.frame.height/1624)
+            make.top.equalTo(line).offset(self.view.frame.height/1624)
             make.bottom.equalToSuperview()
             make.leading.equalToSuperview()
             make.trailing.equalToSuperview()
         }
         
         scrollInnerView.snp.makeConstraints { make in
-            make.top.equalTo(listName.snp.bottom).offset(self.view.frame.height/80)
+            make.top.equalTo(scrollView.contentLayoutGuide)
             make.bottom.equalTo(scrollView.contentLayoutGuide)
             make.leading.equalTo(scrollView.contentLayoutGuide)
             make.bottom.equalTo(scrollView.contentLayoutGuide)
             make.width.equalTo(scrollView.frameLayoutGuide)
-            make.height.equalTo(firstList.tableView.contentSize.height + secondList.tableView.contentSize.height + noneList.tableView.contentSize.height + (self.view.frame.height / 12.5) * 3) // tableView Height만큼 + tag 차지 높이 * tag 수
+            make.height.equalTo(firstList.tableView.contentSize.height + secondList.tableView.contentSize.height + noneList.tableView.contentSize.height + (self.view.frame.height / 13.5) * 3) // tableView Height만큼 + tag 차지 높이 * tag 수
         }
         
         firstListTag.snp.makeConstraints { make in
             make.top.equalTo(scrollInnerView).offset(self.view.frame.height/46.4)
-            make.left.equalTo(backButton)
+            make.left.equalTo(line)
             make.width.equalTo(firstListTag.listLabel).offset(self.view.frame.width/12.5)
             make.height.equalTo(self.view.frame.height/31.23)
         }
@@ -191,7 +204,7 @@ class MyToDoListViewController: UIViewController {
             make.top.equalTo(secondListTag).offset(self.view.frame.height/47.76)
             make.centerX.equalToSuperview()
             make.width.equalToSuperview()
-            make.bottom.equalToSuperview()
+            make.bottom.equalTo(noneListTag).offset(self.view.frame.height/18.92 * -1)
         }
         
         secondList.tableView.snp.makeConstraints { make in
