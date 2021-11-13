@@ -222,6 +222,12 @@ class AddOrChangeMyTodoViewController: UIViewController{
             $0.width.equalToSuperview().dividedBy(1.45)
             $0.height.equalToSuperview()
         }
+        calendarBtn.snp.makeConstraints { make in
+            make.left.equalTo(titleBackgroundView)
+            make.height.equalToSuperview().dividedBy(18.04)
+            make.centerX.equalToSuperview()
+            make.top.equalTo(titleBackgroundView.snp.bottom).offset(self.view.frame.height/30.07)
+        }
         
         btnStackView.snp.makeConstraints {
             $0.top.equalTo(calendarBtn.snp.bottom).offset(bounds.height/47.76)
@@ -268,13 +274,6 @@ class AddOrChangeMyTodoViewController: UIViewController{
             make.left.equalTo(notificationAddButton)
             make.height.equalToSuperview().dividedBy(20)
             make.top.equalTo(notificationAddButton.snp.bottom).offset(self.view.frame.height/38.6)
-        }
-        
-        calendarBtn.snp.makeConstraints { make in
-            make.left.equalTo(titleBackgroundView)
-            make.height.equalToSuperview().dividedBy(18.04)
-            make.centerX.equalToSuperview()
-            make.top.equalTo(titleBackgroundView.snp.bottom).offset(self.view.frame.height/30.07)
         }
     }
     

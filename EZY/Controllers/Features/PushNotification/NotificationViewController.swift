@@ -214,7 +214,7 @@ class NotificationViewController: UIViewController {
 extension NotificationViewController: UITableViewDelegate{
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if testScheduleTypeArray[indexPath.row] == "개인일정"{
-            let nextVC = PersonalPlanDetailViewController()
+            let nextVC = MyToDoDetailViewController()
             self.navigationController?.pushViewController(nextVC, animated: true)
         }else{
             let nextVC = PlanRequestRespondingViewController()
