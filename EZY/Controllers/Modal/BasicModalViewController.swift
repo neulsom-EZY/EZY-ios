@@ -7,13 +7,14 @@
 
 import UIKit
 
-protocol ModalViewDelegate: AnyObject {
-    func onTapCloseModalView()
+protocol BasicModalViewButtonDelegate: AnyObject {
+    func onTabOkButton()
 }
 
 class BasicModalViewController: BaseModal {
     // MARK: - Properties
-    weak var delegate: ModalViewDelegate?
+    
+    weak var delegate: BasicModalViewButtonDelegate?
     
     private let bgView = UIView().then {
         $0.backgroundColor = .white
@@ -33,6 +34,7 @@ class BasicModalViewController: BaseModal {
         $0.setTitle("아니요!", for: .normal)
         $0.dynamicFont(fontSize: 12, currentFontName: "AppleSDGothicNeo-Bold")
         $0.backgroundColor = UIColor(red: 223/255, green: 223/255, blue: 223/255, alpha: 1)
+        $0.addTarget(self, action: #selector(noButton), for: .touchUpInside)
     }
     
     private let contentLabel = UILabel().then{
@@ -64,9 +66,13 @@ class BasicModalViewController: BaseModal {
     
     //MARK: - selectors
     @objc func MakeTodo(){
+        delegate?.onTabOkButton()
+        dismiss(animated: true, completion: nil)
+    }
+    
+    @objc func noButton(){
         baseDelegate?.onTapClose()
         dismiss(animated: true, completion: nil)
-        delegate?.onTapCloseModalView()
     }
     
     // MARK: - textSetting
@@ -79,8 +85,11 @@ class BasicModalViewController: BaseModal {
             string = NSMutableAttributedString(string: "\(colorText)\n\(contentText)")
         }
         
-        string.setColorForText(textToFind: "\(colorText)", withColor: .blue)
+        string.setColorForText(textToFind: "\(colorText)", withColor: UIColor(red: 147/255, green: 145/255, blue: 254/255, alpha: 1))
+        string.setFontForText(textToFind: "\(colorText)", withFont: UIFont(name: "AppleSDGothicNeo-SemiBold", size: 17)!)
+        string.setFontForText(textToFind: "\(contentText)", withFont: UIFont(name: "AppleSDGothicNeo-Thin", size: 16.5)!)
         contentLabel.attributedText = string
+        
         
         let labelHeight = contentLabel.intrinsicContentSize.height
         let buttonHeight = self.view.frame.height/24.6

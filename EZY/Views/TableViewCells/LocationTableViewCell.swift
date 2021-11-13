@@ -10,6 +10,8 @@ import UIKit
 class LocationTableViewCell: UITableViewCell {
     
     static let reuseId = "\(LocationTableViewCell.self)"
+    
+    let viewBounds = UIScreen.main.bounds
         
     let alphabetLabelColorArray = [UIColor(red: 232/255, green: 229/255, blue: 255/255, alpha: 1), UIColor(red: 196/255, green: 191/255, blue: 255/255, alpha: 1)]
     
@@ -69,34 +71,35 @@ class LocationTableViewCell: UITableViewCell {
         alphabetLabel.snp.makeConstraints { make in
             make.height.equalToSuperview().dividedBy(2.4)
             make.width.equalTo(alphabetLabel.snp.height)
-            make.left.equalToSuperview()
+            make.left.equalToSuperview().offset(viewBounds.width/14.2)
             make.centerY.equalToSuperview()
         }
         
         locationTitleNameLabel.snp.makeConstraints { make in
             make.top.left.equalToSuperview()
         }
-        
+
         locationLabel.snp.makeConstraints { make in
             make.bottom.left.equalToSuperview()
         }
-        
+
         subLocationLabel.snp.makeConstraints { make in
-            make.left.equalTo(locationLabel.snp.right).offset(contentView.frame.width/40)
-            make.bottom.equalTo(locationLabel)
+            make.left.equalTo(locationLabel.snp.right).offset(viewBounds.width/50)
+            make.bottom.equalToSuperview()
         }
         
         divideLineView.snp.makeConstraints { make in
             make.bottom.equalToSuperview()
             make.height.equalTo(0.5)
-            make.width.equalToSuperview()
+            make.width.equalToSuperview().dividedBy(1.13)
+            make.centerX.equalToSuperview()
         }
         
         labelView.snp.makeConstraints { make in
-            make.centerY.equalToSuperview()
+            make.right.equalToSuperview().offset(-viewBounds.width/14.2)
+            make.left.equalTo(alphabetLabel.snp.right).offset(viewBounds.width/25)
             make.height.equalToSuperview().dividedBy(1.7)
-            make.left.equalToSuperview().offset(contentView.frame.width/8)
-            make.right.equalToSuperview()
+            make.centerY.equalTo(alphabetLabel)
         }
     }
 
