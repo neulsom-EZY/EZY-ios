@@ -8,14 +8,11 @@
 import UIKit
 
 
-class ChangeMyTodoViewController: UIViewController{
+class AddOrChangeMyTodoViewController: UIViewController{
     //MARK: - Properties
     private var TagModels: [TagCollectionViewModel] = [
         TagCollectionViewModel(backgroundColor: UIColor(red: 186/255, green: 200/255, blue: 255/255, alpha: 1), isSelected: true, iconImgae: UIImage(named: "EZY_UnSelectedTagAddButtonImage")!),
-        TagCollectionViewModel(backgroundColor: UIColor(red: 221/255, green: 220/255, blue: 220/255, alpha: 1), isSelected: false, iconImgae: UIImage(named: "EZY_SelectedNoSelectTagButtonImage")!),
-        TagCollectionViewModel(backgroundColor: UIColor(red: 206/255, green: 200/255, blue: 255/255, alpha: 1), isSelected: true, iconImgae: UIImage()),
-        TagCollectionViewModel(backgroundColor: UIColor(red: 216/255, green: 200/255, blue: 255/255, alpha: 1), isSelected: true, iconImgae: UIImage()),
-        TagCollectionViewModel(backgroundColor: UIColor(red: 226/255, green: 200/255, blue: 255/255, alpha: 1), isSelected: true, iconImgae: UIImage())]
+        TagCollectionViewModel(backgroundColor: UIColor(red: 221/255, green: 220/255, blue: 220/255, alpha: 1), isSelected: false, iconImgae: UIImage(named: "EZY_SelectedNoSelectTagButtonImage")!)]
     
     private var bounds = UIScreen.main.bounds
     
@@ -77,7 +74,6 @@ class ChangeMyTodoViewController: UIViewController{
     }
     
     private let titleTextField = UITextField().then {
-        $0.text = "강아지 산책 시키기"
         $0.textAlignment = .left
         $0.textColor = UIColor(red: 101/255, green: 101/255, blue: 101/255, alpha: 1)
         $0.dynamicFont(fontSize: 14, currentFontName: "AppleSDGothicNeo-Medium")
@@ -89,7 +85,7 @@ class ChangeMyTodoViewController: UIViewController{
         $0.dynamicFont(fontSize: 14, currentFontName: "AppleSDGothicNeo-Bold")
     }
     
-    private let changeButton = UIButton().then {
+    private let addOrChangeButton = UIButton().then {
         $0.setTitle("변 경", for: .normal)
         $0.layer.cornerRadius = 10
         $0.backgroundColor = UIColor(red: 186/255, green: 200/255, blue: 255/255, alpha: 1)
@@ -226,6 +222,12 @@ class ChangeMyTodoViewController: UIViewController{
             $0.width.equalToSuperview().dividedBy(1.45)
             $0.height.equalToSuperview()
         }
+        calendarBtn.snp.makeConstraints { make in
+            make.left.equalTo(titleBackgroundView)
+            make.height.equalToSuperview().dividedBy(18.04)
+            make.centerX.equalToSuperview()
+            make.top.equalTo(titleBackgroundView.snp.bottom).offset(self.view.frame.height/30.07)
+        }
         
         btnStackView.snp.makeConstraints {
             $0.top.equalTo(calendarBtn.snp.bottom).offset(bounds.height/47.76)
@@ -267,37 +269,19 @@ class ChangeMyTodoViewController: UIViewController{
             make.left.equalTo(notificationAddButton.snp.right).offset(self.view.frame.width/37)
         }
         
-        changeButton.snp.makeConstraints { make in
+        addOrChangeButton.snp.makeConstraints { make in
             make.centerX.equalToSuperview()
             make.left.equalTo(notificationAddButton)
             make.height.equalToSuperview().dividedBy(20)
             make.top.equalTo(notificationAddButton.snp.bottom).offset(self.view.frame.height/38.6)
         }
-        
-        calendarBtn.snp.makeConstraints { make in
-            make.left.equalTo(titleBackgroundView)
-            make.height.equalToSuperview().dividedBy(18.04)
-            make.centerX.equalToSuperview()
-            make.top.equalTo(titleBackgroundView.snp.bottom).offset(self.view.frame.height/30.07)
-        }
     }
     
     //MARK: - addView
     func addView(){
-        self.view.addSubview(backButton)
-        self.view.addSubview(mainTitleLabel)
-        self.view.addSubview(titleBackgroundView)
-        titleBackgroundView.addSubview(titleLabel)
-        titleBackgroundView.addSubview(titleTextField)
-        self.view.addSubview(calendarBtn)
-        self.view.addSubview(btnStackView)
-        self.view.addSubview(explanationContainerView)
-        self.view.addSubview(tagLabel)
-        self.view.addSubview(tagCollectionView)
-        self.view.addSubview(notificationTitleLabel)
-        self.view.addSubview(notificationAddButton)
-        self.view.addSubview(notificationNoSelectButton)
-        self.view.addSubview(changeButton)
+        [backButton, mainTitleLabel, titleBackgroundView].forEach { view.addSubview($0)}
+        [titleLabel,titleTextField].forEach { titleBackgroundView.addSubview($0)}
+        [calendarBtn,btnStackView, explanationContainerView, tagLabel,tagCollectionView,notificationTitleLabel,notificationAddButton,notificationNoSelectButton,addOrChangeButton].forEach { view.addSubview($0) }
     }
 
     // MARK: - selectors
@@ -421,12 +405,17 @@ class ChangeMyTodoViewController: UIViewController{
         tagCollectionView.reloadData()
     }
     
-    func LeftOrRightChangeKorean(leftOrRight: String) -> String{
+    func mainTitleLabelSetting(mainTitleText: String, buttonText: String){
+        mainTitleLabel.text = mainTitleText
+        addOrChangeButton.setTitle(buttonText, for: .normal)
+    }
+    
+    private func LeftOrRightChangeKorean(leftOrRight: String) -> String{
         if leftOrRight == "L" { return "오전" }else{ return "오후" }
     }
     
     // MARK: - shakeView
-    func shakeView(_ view: UIView?) {
+    private func shakeView(_ view: UIView?) {
         let shake = CABasicAnimation(keyPath: "position")
         shake.duration = 0.08
         shake.repeatCount = 2
@@ -455,7 +444,7 @@ class ChangeMyTodoViewController: UIViewController{
 }
 
 //MARK: - collectionView extension
-extension ChangeMyTodoViewController: UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout{
+extension AddOrChangeMyTodoViewController: UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout{
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         if collectionView == tagCollectionView{
@@ -560,7 +549,7 @@ extension ChangeMyTodoViewController: UICollectionViewDataSource, UICollectionVi
 }
 
 // MARK: - UITextViewDelegate extension
-extension ChangeMyTodoViewController: UITextViewDelegate{
+extension AddOrChangeMyTodoViewController: UITextViewDelegate{
     func textViewDidBeginEditing(_ textView: UITextView) {
         // textView클릭 시 explanationContainerView 올리기
         UIView.animate(withDuration: 0.3) {
@@ -587,35 +576,34 @@ extension ChangeMyTodoViewController: UITextViewDelegate{
     }
 }
 //MARK: - AlarmModal Delegate
-extension ChangeMyTodoViewController: AlarmModelDelegate{
+extension AddOrChangeMyTodoViewController: AlarmModelDelegate{
     func updateData(ampm: String, time: Int, minute: Int) {
         self.alarmReloadSetting(ampm, time + 1, minute)
     }
     
 }
 //MARK: - CalendarModal Delegate
-extension ChangeMyTodoViewController: CalendarAddDelegate{
+extension AddOrChangeMyTodoViewController: CalendarAddDelegate{
     func updateData(selectedDay: String, selectedRepeatDay: [String], selectedDayOfWeek: String, yearAndMonthText: String, selectedValuesIndex: Int, selectedRepeatIndex: [Int]) {
         self.calendarReloadSetting(selectedDay, selectedRepeatDay, selectedDayOfWeek, yearAndMonthText, selectedValuesIndex, selectedRepeatIndex)
     }
 }
 //MARK: - TimeModal Delegate
-extension ChangeMyTodoViewController: TimeAddDelegate{
+extension AddOrChangeMyTodoViewController: TimeAddDelegate{
     func updateData(leftOrRight: [String], startTime: String, endTime: String, afterOrMorn: [String], selectedTimeIndex: [Int]) {
         self.timeReloadSetting(leftOrRight, startTime, endTime, afterOrMorn, selectedTimeIndex)
     }
 }
 
-
 //MARK: - TagModal Delegate
-extension ChangeMyTodoViewController: TagAddDelegate{
+extension AddOrChangeMyTodoViewController: TagAddDelegate{
     func updateData(tagName: String, tagColorIndex: Int) {
         self.tagReloadSetting(tagName, tagColorIndex)
     }
 }
 
 //MARK: - BaseModal Delegate
-extension ChangeMyTodoViewController : BaseModalDelegate{
+extension AddOrChangeMyTodoViewController : BaseModalDelegate{
     func onTapClose() {
         self.removeDim()
     }

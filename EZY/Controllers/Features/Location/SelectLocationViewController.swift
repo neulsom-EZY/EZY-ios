@@ -13,11 +13,10 @@ class SelectLocationViewController: UIViewController {
     // MARK: - Properties
     private let alphabetTextArray: [String] = ["A", "B"]
     
-    private let placeName: [String] = ["광주소프트웨어마이스터고등학교", "우리 집"]
+    private var placeName: [String] = ["광주소프트웨어마이스터고등학교광주", "광주소프트웨어마이스터고등학교광주 행정실"]
     
     let bgView = UIView().then {
         $0.backgroundColor = .black
-//        $0.alpha = 0
     }
 
     private let selectLocationModalView = SelectLocationModalView().then{
@@ -130,62 +129,6 @@ class SelectLocationViewController: UIViewController {
             make.centerX.equalToSuperview()
             make.bottom.equalToSuperview()
         }
-        
-        selectLocationModalView.snp.makeConstraints { make in
-            make.top.right.bottom.left.equalToSuperview()
-        }
-        
-        selectLocationModalView.shadowBackgroundView.snp.makeConstraints { make in
-            make.top.right.bottom.left.equalToSuperview()
-        }
-        
-        selectLocationModalView.modalBackgroundView.snp.makeConstraints { make in
-            make.width.equalToSuperview().dividedBy(1.13)
-            make.height.equalToSuperview().dividedBy(3.59)
-            make.centerX.centerY.equalToSuperview()
-        }
-        
-        selectLocationModalView.titleLabel.snp.makeConstraints { make in
-            make.top.equalToSuperview().offset(self.view.frame.height/33.8)
-            make.left.equalToSuperview().offset(self.view.frame.height/33.8)
-        }
-        
-        selectLocationModalView.iconCircleBackground.snp.makeConstraints { make in
-            make.centerX.equalToSuperview()
-            make.width.equalToSuperview().dividedBy(6.3)
-            make.height.equalTo(selectLocationModalView.iconCircleBackground.snp.width)
-            make.top.equalTo(selectLocationModalView.titleLabel.snp.bottom).offset(self.view.frame.height/62)
-            
-            selectLocationModalView.iconCircleBackground.layer.cornerRadius = ((self.view.frame.width/1.13)/6.3)/2
-        }
-        
-        selectLocationModalView.iconImageView.snp.makeConstraints { make in
-            make.centerX.centerY.equalToSuperview()
-            make.height.width.equalToSuperview().dividedBy(2)
-        }
-        
-        selectLocationModalView.modalLocationLabel.snp.makeConstraints { make in
-            make.centerX.equalTo(selectLocationModalView.iconCircleBackground)
-            make.top.equalTo(selectLocationModalView.iconCircleBackground.snp.bottom).offset(self.view.frame.height/54)
-        }
-        
-        selectLocationModalView.selectQuestionsLabel.snp.makeConstraints { make in
-            make.centerX.equalTo(selectLocationModalView.modalLocationLabel)
-            make.top.equalTo(selectLocationModalView.modalLocationLabel.snp.bottom)
-        }
-        
-        selectLocationModalView.okButton.snp.makeConstraints { make in
-            make.bottom.equalTo(selectLocationModalView.cancelButton)
-            make.right.equalTo(selectLocationModalView.cancelButton.snp.left).offset(-self.view.frame.width/35)
-            make.height.width.equalTo(selectLocationModalView.cancelButton)
-        }
-        
-        selectLocationModalView.cancelButton.snp.makeConstraints { make in
-            make.bottom.equalToSuperview().offset(-self.view.frame.height/40.6)
-            make.right.equalToSuperview().offset(-self.view.frame.width/15)
-            make.height.equalToSuperview().dividedBy(7.2)
-            make.width.equalToSuperview().dividedBy(4.7)
-        }
     }
     
     // MARK: - delegateAndDataSource
@@ -240,12 +183,21 @@ extension SelectLocationViewController: UITableViewDataSource, UITableViewDelega
         let cell = tableView.dequeueReusableCell(withIdentifier: LocationTableViewCell.reuseId, for: indexPath) as! LocationTableViewCell
         cell.selectionStyle = .none
         cell.alphabetLabel.text = alphabetTextArray[indexPath.row]
-        cell.locationTitleNameLabel.text = placeName[indexPath.row]
+        
+        if placeName[indexPath.row].count < 20{
+            cell.locationTitleNameLabel.numberOfLines = 0
+        }else{
+            placeName[indexPath.row] = placeName[indexPath.row].replacingOccurrences(of: " ", with: "\n")
+            
+            cell.locationTitleNameLabel.numberOfLines = 2
+        }
+        cell.locationTitleNameLabel.text = "\(placeName[indexPath.row])"
+        
         return cell
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return CGFloat(self.view.frame.height/14)
+        return CGFloat((placeName[indexPath.row].size(withAttributes: [NSAttributedString.Key.font : UIFont.systemFont(ofSize: 12)]).height) + 45)
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -256,7 +208,6 @@ extension SelectLocationViewController: UITableViewDataSource, UITableViewDelega
         present(BasicModalVC, animated: true, completion: nil)
         BasicModalVC.textSetting(colorText: placeName[indexPath.row], contentText: "위치를 선택할까요?")
     }
-
 }
 
 extension SelectLocationViewController: BaseModalDelegate {

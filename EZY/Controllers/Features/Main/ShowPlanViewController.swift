@@ -315,6 +315,7 @@ class ShowPlanViewController: UIViewController{
             self?.dismiss(animated: true)
         }
     }
+    
     private func updateDim(viewcontroller : UIViewController){
         DispatchQueue.main.async { [weak self] in
             self?.navigationController?.pushViewController(viewcontroller, animated: true)
@@ -325,7 +326,7 @@ class ShowPlanViewController: UIViewController{
 // MARK: - collectionView Extension
 extension ShowPlanViewController: UICollectionViewDelegate, UICollectionViewDelegateFlowLayout{
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize.init(width: self.view.frame.width, height: self.view.frame.height/7.58)
+        return CGSize.init(width: self.view.frame.width/3.5, height: self.view.frame.height/6.24)
     }
     
     //MARK: collectionView - left Padding
@@ -370,8 +371,8 @@ extension ShowPlanViewController: UICollectionViewDataSource{
             return UICollectionViewCell()
         }
         
-        cell.label.text = scheduleTypesArray[indexPath.row]
-        cell.icon.image = icon[indexPath.row]
+        cell.planTypeLabel.text = scheduleTypesArray[indexPath.row]
+        cell.planTypeIconImageView.image = icon[indexPath.row]
         cell.backgroundColor = .clear
         return cell
     }
@@ -422,6 +423,7 @@ extension ShowPlanViewController: UITableViewDelegate{
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let BasicModalVC = BasicModalViewController.instance()
         addDim()
+        BasicModalVC.delegate = self
         BasicModalVC.baseDelegate = self
         present(BasicModalVC, animated: true, completion: nil)
         BasicModalVC.textSetting(colorText: groupNameArray[indexPath.row], contentText: "개인 일정을 완료할까요?")
@@ -438,6 +440,12 @@ extension ShowPlanViewController: BulletinDelegate {
 
 extension ShowPlanViewController: BaseModalDelegate {
     func onTapClose() {
+        removeDim()
+    }
+}
+
+extension ShowPlanViewController: BasicModalViewButtonDelegate{
+    func onTabOkButton() {
         groupNameArray.remove(at: selectedIndex)
         planTitleTextArray.remove(at: selectedIndex)
         planTimeArray.remove(at: selectedIndex)
