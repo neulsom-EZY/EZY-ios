@@ -80,7 +80,10 @@ class MoreCalendarModalsViewController : BaseModal{
             makeButton.isEnabled = true
             myToDo.layer.borderWidth = 1
             myToDo.layer.borderColor = UIColor.EZY_AFADFF.cgColor
-            viewControlelrChoose = AddMyToDoViewController() //ViewController 보내줌
+            
+            let nextVC = AddOrChangeMyTodoViewController()
+            viewControlelrChoose = nextVC //ViewController 보내줌
+            nextVC.mainTitleLabelSetting(mainTitleText: "나의 할 일 추가", buttonText: "추가하기")
             ErrandTodoState()
 
         }else{

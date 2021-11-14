@@ -39,7 +39,7 @@ class BasicModalViewController: BaseModal {
     
     private let contentLabel = UILabel().then{
         $0.dynamicFont(fontSize: 16, currentFontName: "AppleSDGothicNeo-Thin")
-        $0.numberOfLines = 2
+        $0.numberOfLines = 3
         $0.textAlignment = .center
     }
     
@@ -78,15 +78,19 @@ class BasicModalViewController: BaseModal {
     // MARK: - textSetting
     func textSetting(colorText: String, contentText: String){
         let string : NSMutableAttributedString
-
+        var changeColorText = colorText
+        print("colorText.count : \(colorText.count)")
         if colorText.count < 7{
-            string = NSMutableAttributedString(string: "\(colorText) \(contentText)")
+            string = NSMutableAttributedString(string: "\(changeColorText) \(contentText)")
+        }else if colorText.count < 33{
+            changeColorText = colorText.replacingOccurrences(of: " ", with: "\n")
+            string = NSMutableAttributedString(string: "\(changeColorText) \n\(contentText)")
         }else{
-            string = NSMutableAttributedString(string: "\(colorText)\n\(contentText)")
+            string = NSMutableAttributedString(string: "\(changeColorText)\n\(contentText)")
         }
         
-        string.setColorForText(textToFind: "\(colorText)", withColor: UIColor(red: 147/255, green: 145/255, blue: 254/255, alpha: 1))
-        string.setFontForText(textToFind: "\(colorText)", withFont: UIFont(name: "AppleSDGothicNeo-SemiBold", size: 17)!)
+        string.setColorForText(textToFind: "\(changeColorText)", withColor: UIColor(red: 147/255, green: 145/255, blue: 254/255, alpha: 1))
+        string.setFontForText(textToFind: "\(changeColorText)", withFont: UIFont(name: "AppleSDGothicNeo-SemiBold", size: 17)!)
         string.setFontForText(textToFind: "\(contentText)", withFont: UIFont(name: "AppleSDGothicNeo-Thin", size: 16.5)!)
         contentLabel.attributedText = string
         

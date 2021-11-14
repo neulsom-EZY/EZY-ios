@@ -10,24 +10,24 @@ import UIKit
 class ScheduleTypeCollectionViewCell: UICollectionViewCell {
     static let ScheduleTypeCollectionViewIdentifier = "\(ScheduleTypeCollectionViewCell.self)"
     
-    let label = UILabel().then{
+    let viewBounds = UIScreen.main.bounds
+    
+    let planTypeLabel = UILabel().then{
         $0.text = "나의 할 일"
         $0.textColor = UIColor(red: 107/255, green: 64/255, blue: 255/255, alpha: 1)
         $0.dynamicFont(fontSize: 12, currentFontName: "AppleSDGothicNeo-SemiBold")
     }
     
-    let icon: UIImageView = UIImageView(image: UIImage(named: "EZY_MyJob"))
+    let planTypeIconImageView: UIImageView = UIImageView(image: UIImage(named: "EZY_MyJob"))
     
-    let circle = UIView().then {
-        // circle
+    private let circle = UIView().then {
         $0.layer.masksToBounds = true
-        $0.layer.cornerRadius = 35/2
         $0.clipsToBounds = true
         $0.layer.borderColor = UIColor.white.cgColor
         $0.backgroundColor = UIColor(red: 107/255, green: 64/255, blue: 255/255, alpha: 1)
     }
     
-    let mainView = UIView().then {
+    private let mainView = UIView().then {
         $0.layer.cornerRadius = 20
         $0.layer.shadowOpacity = 0.11
         $0.layer.shadowOffset = CGSize(width: 0, height: 3)
@@ -38,45 +38,53 @@ class ScheduleTypeCollectionViewCell: UICollectionViewCell {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        layoutSetting()
+        configureUI()
     }
     
     required init?(coder: NSCoder) {
         super.init(coder: coder)
-        layoutSetting()
+        configureUI()
     }
     
-    func layoutSetting(){
+    private func configureUI(){
+        addView()
         
+        location()
+
+    }
+    
+    private func addView(){
         backgroundColor = .clear
         contentView.addSubview(mainView)
         mainView.addSubview(circle)
-        mainView.addSubview(label)
-        circle.addSubview(icon)
-        
-        icon.snp.makeConstraints { make in
-            make.centerX.centerY.equalToSuperview()
-            make.height.equalToSuperview().dividedBy(2.2)
-//            make.width.equalTo(icon.snp.height).dividedBy(1.3)
-            make.width.equalTo(icon.snp.height)
-        }
-        
+        mainView.addSubview(planTypeLabel)
+        circle.addSubview(planTypeIconImageView)
+    }
+    
+    private func location(){
         mainView.snp.makeConstraints { make in
             make.centerX.centerY.equalToSuperview()
             make.width.height.equalToSuperview()
         }
         
         circle.snp.makeConstraints { (make) in
-            make.height.width.equalTo(35)
-            make.top.equalToSuperview().inset(8)
-            make.right.equalToSuperview().inset(8)
+            make.height.equalToSuperview().dividedBy(3.71)
+            make.width.equalTo(circle.snp.height)
+            make.top.equalToSuperview().offset(viewBounds.height/60)
+            make.right.equalToSuperview().offset(-viewBounds.height/60)
+            
+            circle.layer.cornerRadius = viewBounds.height/6.24/3.71/2
         }
         
-        label.snp.makeConstraints { (make) in
-            make.width.equalTo(70)
-            make.height.equalTo(14)
-            make.left.equalToSuperview().offset(16)
-            make.bottom.equalToSuperview().inset(20)
+        planTypeIconImageView.snp.makeConstraints { make in
+            make.centerX.centerY.equalToSuperview()
+            make.height.equalToSuperview().dividedBy(2.2)
+            make.width.equalTo(planTypeIconImageView.snp.height)
+        }
+        
+        planTypeLabel.snp.makeConstraints { (make) in
+            make.left.equalToSuperview().offset(viewBounds.height/40)
+            make.bottom.equalToSuperview().offset(-viewBounds.height/40)
         }
     }
 }
