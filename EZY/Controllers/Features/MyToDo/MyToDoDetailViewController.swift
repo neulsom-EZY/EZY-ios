@@ -214,7 +214,7 @@ class MyToDoDetailViewController: UIViewController {
             make.top.equalTo(tagLabel.snp.bottom).offset(self.view.frame.height/80)
             make.left.equalTo(tagLabel)
             make.height.equalToSuperview().dividedBy(18.88)
-            make.width.equalToSuperview().dividedBy(2.95) //dynamic width
+            make.width.equalTo((selectedTagButton.getButtonTitle().size(withAttributes: [NSAttributedString.Key.font : UIFont.systemFont(ofSize: 12)]).width) + 35)
         }
         repeatTitleLabel.snp.makeConstraints { make in
             make.left.equalTo(selectedTagButton)

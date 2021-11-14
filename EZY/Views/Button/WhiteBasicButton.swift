@@ -59,4 +59,8 @@ class WhiteBasicButton: UIButton {
         buttonTitleLabel.text = titleText
         buttonTitleLabel.textColor = titleColor
     }
+    
+    func getButtonTitle() -> String{
+        return buttonTitleLabel.text!
+    }
 }
