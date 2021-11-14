@@ -11,21 +11,15 @@ import Alamofire
 class SelectLocationViewController: UIViewController {
     
     // MARK: - Properties
-<<<<<<< HEAD
-
+    
+    
     //MARK: - Kakao Search Data
     private var kakaoPlaceSearchData : [KakaoDocuments]? = nil
-
-=======
-    private let alphabetTextArray: [String] = ["A", "B"]
-    
-    private var placeName: [String] = ["광주소프트웨어마이스터고등학교광주", "광주소프트웨어마이스터고등학교광주 행정실"]
-    
->>>>>>> 0dd6d4954ae9041c7e2dc967963302dd71a8cf78
     let bgView = UIView().then {
         $0.backgroundColor = .black
     }
-
+    private let alphabet : [String] = ["A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T","U","V","W","X","Y","Z"]
+    
     private let selectLocationModalView = SelectLocationModalView().then{
         $0.okButton.addTarget(self, action: #selector(okButtonClicked(sender:)), for: .touchUpInside)
         $0.isHidden = true
@@ -44,6 +38,7 @@ class SelectLocationViewController: UIViewController {
     private let locationTextField = UITextField().then {
         $0.placeholder = "위치를 입력해주세요."
         $0.dynamicFont(fontSize: 10, currentFontName: "AppleSDGothicNeo-Bold")
+        $0.returnKeyType = .done
     }
     
     private let topViewHalfModalView = UIView().then{
@@ -142,6 +137,7 @@ class SelectLocationViewController: UIViewController {
     private func delegateAndDataSource(){
         locationTableView.delegate = self
         locationTableView.dataSource = self
+        locationTextField.delegate = self
     }
     
     // MARK: - Selectors
@@ -176,7 +172,6 @@ class SelectLocationViewController: UIViewController {
         }
     }
     
-    
     // MARK: - addDim
     private func addDim() {
            view.addSubview(bgView)
@@ -207,27 +202,15 @@ extension SelectLocationViewController: UITableViewDataSource, UITableViewDelega
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: LocationTableViewCell.reuseId, for: indexPath) as! LocationTableViewCell
         cell.selectionStyle = .none
-<<<<<<< HEAD
-        cell.alphabetLabel.text = kakaoPlaceSearchData?[indexPath.row].addressName
+        cell.alphabetLabel.text = alphabet[indexPath.row]
         cell.locationTitleNameLabel.text = kakaoPlaceSearchData?[indexPath.row].placeName
-=======
-        cell.alphabetLabel.text = alphabetTextArray[indexPath.row]
-        
-        if placeName[indexPath.row].count < 20{
-            cell.locationTitleNameLabel.numberOfLines = 0
-        }else{
-            placeName[indexPath.row] = placeName[indexPath.row].replacingOccurrences(of: " ", with: "\n")
-            
-            cell.locationTitleNameLabel.numberOfLines = 2
-        }
-        cell.locationTitleNameLabel.text = "\(placeName[indexPath.row])"
-        
->>>>>>> 0dd6d4954ae9041c7e2dc967963302dd71a8cf78
+        cell.locationLabel.text = kakaoPlaceSearchData?[indexPath.row].roadAddressName
+        cell.subLocationLabel.text = kakaoPlaceSearchData?[indexPath.row].addressName
         return cell
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return CGFloat((placeName[indexPath.row].size(withAttributes: [NSAttributedString.Key.font : UIFont.systemFont(ofSize: 12)]).height) + 45)
+        return 75
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -239,7 +222,15 @@ extension SelectLocationViewController: UITableViewDataSource, UITableViewDelega
         BasicModalVC.textSetting(colorText: kakaoPlaceSearchData?[indexPath.row].placeName ?? "", contentText: "위치를 선택할까요?")
     }
 }
-
+//MARK: - textfield 설정
+extension SelectLocationViewController : UITextFieldDelegate{
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        locationTextField.resignFirstResponder()
+        searchButtonClicked(sender: searchButton.self)
+        return true
+    }
+}
+//MARK: - BaseModal Delegate
 extension SelectLocationViewController: BaseModalDelegate {
     func onTapClose() {
         removeDim()
