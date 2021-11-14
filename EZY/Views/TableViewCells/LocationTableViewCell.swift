@@ -69,8 +69,7 @@ class LocationTableViewCell: UITableViewCell {
         labelView.addSubview(subLocationLabel)
         
         alphabetLabel.snp.makeConstraints { make in
-            make.height.equalToSuperview().dividedBy(2.4)
-            make.width.equalTo(alphabetLabel.snp.height)
+            make.width.equalToSuperview().dividedBy(15)
             make.left.equalToSuperview().offset(viewBounds.width/14.2)
             make.centerY.equalToSuperview()
         }
@@ -95,12 +94,23 @@ class LocationTableViewCell: UITableViewCell {
             make.centerX.equalToSuperview()
         }
         
-        labelView.snp.makeConstraints { make in
-            make.right.equalToSuperview().offset(-viewBounds.width/14.2)
-            make.left.equalTo(alphabetLabel.snp.right).offset(viewBounds.width/25)
-            make.height.equalToSuperview().dividedBy(1.7)
-            make.centerY.equalTo(alphabetLabel)
+        if locationTitleNameLabel.text!.count > 20{
+            labelView.snp.remakeConstraints { make in
+                make.right.equalToSuperview().offset(-viewBounds.width/14.2)
+                make.left.equalTo(alphabetLabel.snp.right).offset(viewBounds.width/20)
+                make.height.equalToSuperview().dividedBy(1.3)
+                make.centerY.equalTo(alphabetLabel)
+            }
+        }else{
+            labelView.snp.remakeConstraints { make in
+                make.right.equalToSuperview().offset(-viewBounds.width/14.2)
+                make.left.equalTo(alphabetLabel.snp.right).offset(viewBounds.width/20)
+                make.height.equalToSuperview().dividedBy(1.7)
+                make.centerY.equalTo(alphabetLabel)
+            }
         }
+        
+
     }
 
 }
