@@ -110,7 +110,7 @@ class MyToDoListViewController: UIViewController {
     
     @objc
     private func goDetail(){
-        let controller = PersonalPlanDetailViewController()
+        let controller = MyToDoDetailViewController()
         controller.toDoTag = toDoTag
         controller.toDoTitle = toDoTitle
         controller.toDoTime = toDoTime
