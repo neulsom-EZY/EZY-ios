@@ -7,7 +7,8 @@
 
 import UIKit
 
-class MyToDoDetailViewController: UIViewController {
+class MyToDoDetailViewController: UIViewController{
+
     // MARK: - Properties
     let bgView = UIView().then {
         $0.backgroundColor = .black
@@ -78,7 +79,7 @@ class MyToDoDetailViewController: UIViewController {
         $0.dynamicFont(fontSize: 12, currentFontName: "AppleSDGothicNeo-Medium")
     }
     
-    private let selectedTagButton = WhiteBasicButton().then {
+    lazy var selectedTagButton = WhiteBasicButton().then {
         $0.buttonTitleLabelSetting(titleText: "PROGRAMMING", titleColor: UIColor(red: 164/255, green: 137/255, blue: 255/255, alpha: 1))
         $0.isEnabled = false
     }

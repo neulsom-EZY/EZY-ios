@@ -29,15 +29,8 @@ class SignUpPhoneNumViewController: UIViewController{
     
     private let continueButton = CustomGradientContinueBtnView().then {
         $0.titleLabel?.dynamicFont(fontSize: 14, currentFontName: "AppleSDGothicNeo-Bold")
+        $0.setTitle("전화번호 인증하기", for: .normal)
         $0.addTarget(self, action: #selector(onTapContinueTerms), for: .touchUpInside)
-    }
-    
-    private let certifiedButton = UIButton().then {
-        $0.setTitle("번호인증", for: .normal)
-        $0.titleLabel?.dynamicFont(fontSize: 10, currentFontName: "AppleSDGothicNeo-SemiBold")
-        $0.setTitleColor(UIColor.EZY_FFFFFF, for: .normal)
-        $0.backgroundColor = UIColor.EZY_E3E3E3
-        $0.addTarget(self, action: #selector(onTapcertified), for: .touchUpInside)
     }
     
     //MARK: - Lifecycle
@@ -63,11 +56,6 @@ class SignUpPhoneNumViewController: UIViewController{
         }
     }
     
-    @objc
-    private func onTapcertified(){
-        print("DEBUG : Click bottom certified button Button")
-    }
-
     //MARK: - Helpers
     private func configureUI(){
         view.backgroundColor = .white
@@ -85,12 +73,10 @@ class SignUpPhoneNumViewController: UIViewController{
         view.addSubview(putPhoneNumLabel)
         view.addSubview(phoneNumContainer)
         view.addSubview(continueButton)
-        view.addSubview(certifiedButton)
     }
     
     private func cornerRadius(){
         continueButton.layer.cornerRadius = self.view.frame.height/81.2
-        certifiedButton.layer.cornerRadius = self.view.frame.height/75
     }
     
     private func location(){
@@ -117,13 +103,6 @@ class SignUpPhoneNumViewController: UIViewController{
             make.centerX.equalToSuperview()
             make.width.equalTo(self.view.frame.width/1.13)
             make.height.equalTo(self.view.frame.height/16.24)
-        }
-        
-        certifiedButton.snp.makeConstraints { make in
-            make.top.equalTo(putPhoneNumLabel).offset(self.view.frame.height/8.55)
-            make.right.equalToSuperview().offset(self.view.frame.width/8.3 * -1)
-            make.width.equalTo(self.view.frame.width/6.36)
-            make.height.equalTo(self.view.frame.height/36.9)
         }
     }
     

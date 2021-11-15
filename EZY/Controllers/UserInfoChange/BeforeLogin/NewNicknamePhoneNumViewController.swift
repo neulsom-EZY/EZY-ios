@@ -32,14 +32,6 @@ class NewNicknamePhoneNumViewController: UIViewController{
         $0.tfTitle.text = "전화번호"
     }
     
-    private let certifiedButton = UIButton().then {
-        $0.setTitle("번호인증", for: .normal)
-        $0.titleLabel?.dynamicFont(fontSize: 10, currentFontName: "AppleSDGothicNeo-SemiBold")
-        $0.setTitleColor(UIColor.EZY_FFFFFF, for: .normal)
-        $0.backgroundColor = UIColor.EZY_E3E3E3
-        $0.addTarget(self, action: #selector(onTapcertified), for: .touchUpInside)
-    }
-    
     private let doNotMatchLabel = UILabel().then {
         $0.text = "일치하지 않는 전화번호입니다."
         $0.textColor = UIColor.EZY_FCA1A1
@@ -64,11 +56,6 @@ class NewNicknamePhoneNumViewController: UIViewController{
     @objc
     private func goBack(){
         navigationController?.popViewController(animated: true )
-    }
-    
-    @objc
-    private func onTapcertified(){
-        print("DEBUG : Click bottom certified button Button")
     }
     
     @objc
@@ -101,13 +88,11 @@ class NewNicknamePhoneNumViewController: UIViewController{
         view.addSubview(toNewNicknameLabel)
         view.addSubview(putPhoneNumLabel)
         view.addSubview(phoneNumContainer)
-        view.addSubview(certifiedButton)
         view.addSubview(doNotMatchLabel)
         view.addSubview(continueButton)
     }
     
     private func cornerRadius(){
-        certifiedButton.layer.cornerRadius = self.view.frame.height/75
         continueButton.layer.cornerRadius = self.view.frame.height/81.2
     }
     
@@ -134,13 +119,6 @@ class NewNicknamePhoneNumViewController: UIViewController{
             make.centerX.equalToSuperview()
             make.width.equalTo(self.view.frame.width/1.34)
             make.height.equalTo(self.view.frame.height/15.62)
-        }
-        
-        certifiedButton.snp.makeConstraints { make in
-            make.top.equalTo(putPhoneNumLabel).offset(self.view.frame.height/12.49)
-            make.right.equalToSuperview().offset(self.view.frame.width/8.3 * -1)
-            make.width.equalTo(self.view.frame.width/6.36)
-            make.height.equalTo(self.view.frame.height/36.9)
         }
         
         doNotMatchLabel.snp.makeConstraints { make in
