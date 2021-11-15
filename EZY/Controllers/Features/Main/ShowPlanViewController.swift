@@ -421,6 +421,8 @@ extension ShowPlanViewController: UITableViewDataSource{
 
 extension ShowPlanViewController: UITableViewDelegate{
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        selectedIndex = indexPath.row
+        
         let BasicModalVC = BasicModalViewController.instance()
         addDim()
         BasicModalVC.delegate = self

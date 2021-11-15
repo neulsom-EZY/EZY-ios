@@ -8,33 +8,38 @@
 import UIKit
 
 class PlanRequestRespondingViewController: UIViewController {
+    // MARK: - Properties
+    private var errandTitle:String = ""
     
-    var purpleColor: UIColor! = UIColor(red: 150/255, green: 141/255, blue: 255/255, alpha: 1)
+    private var errandTime:String = "11:00AM - 1:00PM"
     
-    var whitePurpleColor: UIColor! = UIColor(red: 227/255, green: 225/255, blue: 255/255, alpha: 1)
+    private let purpleColor: UIColor! = UIColor(red: 150/255, green: 141/255, blue: 255/255, alpha: 1)
     
-    lazy var labelColor: [UIColor] = [purpleColor, whitePurpleColor]
+    private let whitePurpleColor: UIColor! = UIColor(red: 227/255, green: 225/255, blue: 255/255, alpha: 1)
     
-    lazy var backButton = UIButton().then{
+    private lazy var labelColor: [UIColor] = [purpleColor, whitePurpleColor]
+    
+    private let backButton = UIButton().then{
         $0.setImage(UIImage(named: "EZY_RequestBackButton"), for: .normal)
+        $0.addTarget(self, action: #selector(backButtonClicked(sender:)), for: .touchUpInside)
     }
     
-    lazy var titleLabel = UILabel().then {
+    private lazy var titleLabel = UILabel().then {
         $0.text = "지환님이\n심부름을 부탁하셨어요."
         $0.numberOfLines = 0
         $0.textAlignment = .left
-        $0.dynamicFont(fontSize: 27, currentFontName: "AppleSDGothicNeo-SemiBold")
+        $0.dynamicFont(fontSize: 25, currentFontName: "AppleSDGothicNeo-SemiBold")
         $0.textColor = purpleColor
     }
     
-    lazy var contentLabel = UILabel().then {
+    private lazy var contentLabel = UILabel().then {
         $0.text = "보여드릴게요!"
         $0.textAlignment = .left
         $0.dynamicFont(fontSize: 20, currentFontName: "AppleSDGothicNeo-SemiBold")
         $0.updateGradientTextColor_vertical(gradientColors: labelColor)
     }
     
-    lazy var planShowView = UIView().then {
+    private let planShowView = UIView().then {
         $0.backgroundColor = .white
         $0.layer.cornerRadius = 20
         $0.layer.masksToBounds = false
@@ -44,105 +49,98 @@ class PlanRequestRespondingViewController: UIViewController {
         $0.layer.shadowColor = UIColor.black.cgColor
     }
     
-    lazy var planTitleLabel = UILabel().then {
+    private lazy var planTitleLabel = UILabel().then {
         $0.text = "마카롱 사오기"
         $0.dynamicFont(fontSize: 22, currentFontName: "AppleSDGothicNeo-Bold")
         $0.textColor = UIColor(red: 141/255, green: 138/255, blue: 255/255, alpha: 1)
     }
     
-    lazy var planCalenderLabel = UILabel().then {
+    private let planCalenderLabel = UILabel().then {
         $0.text = "2021. 05. 09 화요일"
         $0.textAlignment = .center
         $0.textColor = UIColor(red: 101/255, green: 101/255, blue: 101/255, alpha: 1)
         $0.dynamicFont(fontSize: 14, currentFontName: "Poppins-Regular")
     }
     
-    lazy var planTimeImageView = UIImageView().then {
+    private let planTimeImageView = UIImageView().then {
         $0.image = UIImage(named: "EZY_TimeSquare")
     }
     
-    lazy var planTimeLabel = UILabel().then {
+    private lazy var planTimeLabel = UILabel().then {
         $0.text = "11:00AM - 1:00PM"
         $0.textAlignment = .center
         $0.textColor = UIColor(red: 101/255, green: 101/255, blue: 101/255, alpha: 1)
         $0.dynamicFont(fontSize: 14, currentFontName: "Poppins-Regular")
     }
     
-    lazy var planLocationImageView = UIImageView().then {
-        $0.image = UIImage(named: "EZY_Location")
+    private let planLocationImageView = UIImageView().then {
+        $0.image = UIImage(named: "EZY_location")
     }
     
-    lazy var planLocationLabel = UILabel().then {
+    private let planLocationLabel = UILabel().then {
         $0.text = "광주소프트웨어마이스터고등학교"
         $0.textAlignment = .center
         $0.textColor = UIColor(red: 101/255, green: 101/255, blue: 101/255, alpha: 1)
         $0.dynamicFont(fontSize: 14, currentFontName: "Poppins-Regular")
     }
     
-    lazy var planExplanationView = UIView().then {
+    private let planExplanationView = UIView().then {
         $0.backgroundColor = UIColor(red: 248/255, green: 248/255, blue: 248/255, alpha: 1)
         $0.layer.cornerRadius = 10
     }
     
-    lazy var planCalenderImageView = UIImageView().then{
+    private let planCalenderImageView = UIImageView().then{
           $0.image = UIImage(named: "EZY_Calendar.svg")
     }
     
-    lazy var planExplanationLabel = UILabel().then{
+    private let planExplanationLabel = UILabel().then{
         $0.text = "회의에 꼭 참가해주세요."
         $0.textColor = UIColor(red: 101/255, green: 101/255, blue: 101/255, alpha: 1)
         $0.textAlignment = .center
         $0.dynamicFont(fontSize: 12, currentFontName: "AppleSDGothicNeo-Regular")
     }
     
-    lazy var rejectionButton = UIButton().then{
+    private let rejectionButton = UIButton().then{
         $0.setTitle("거 절", for: .normal)
         $0.backgroundColor = .white
-
+        $0.addTarget(self, action: #selector(rejectionButtonClicked(sender:)), for: .touchUpInside)
         $0.setTitleColor(UIColor(red: 207/255, green: 203/255, blue: 255/255, alpha: 1), for: .normal)
         $0.layer.borderWidth = 1.5
         $0.layer.borderColor = UIColor(red: 207/255, green: 203/255, blue: 255/255, alpha: 1).cgColor
         $0.dynamicFont(fontSize: 14, currentFontName: "AppleSDGothicNeo-Bold")
     }
     
-    lazy var acceptButton = UIButton().then {
+    private let acceptButton = UIButton().then {
         $0.setTitle("수 락", for: .normal)
         $0.backgroundColor = UIColor(red: 207/255, green: 203/255, blue: 255/255, alpha: 1)
         $0.setTitleColor(UIColor.white, for: .normal)
         $0.dynamicFont(fontSize: 14, currentFontName: "AppleSDGothicNeo-Bold")
+        $0.addTarget(self, action: #selector(acceptButtonClicked(sender:)), for: .touchUpInside)
     }
     
-    
+    // MARK: - LifeCycles
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        self.view.backgroundColor = .white
-        
-        layoutSetting()
+                
+        configureUI()
     }
     
-    func layoutSetting(){
-        self.view.addSubview(backButton)
-        self.view.addSubview(titleLabel)
-        self.view.addSubview(contentLabel)
-        self.view.addSubview(planShowView)
-        self.view.addSubview(rejectionButton)
-        self.view.addSubview(acceptButton)
-        planShowView.addSubview(planTitleLabel)
-        planShowView.addSubview(planTimeImageView)
-        planShowView.addSubview(planLocationImageView)
-        planShowView.addSubview(planCalenderLabel)
-        planShowView.addSubview(planTimeLabel)
-        planShowView.addSubview(planLocationLabel)
-        planShowView.addSubview(planExplanationView)
-        planShowView.addSubview(planCalenderImageView)
-        planExplanationView.addSubview(planExplanationLabel)
+    // MARK: - Helpers
+    private func configureUI(){
+        self.view.backgroundColor = .white
         
-        acceptButton.addTarget(self, action: #selector(acceptButtonClicked(sender:)), for: .touchUpInside)
-        rejectionButton.addTarget(self, action: #selector(rejectionButtonClicked(sender:)), for: .touchUpInside)
-        backButton.addTarget(self, action: #selector(backButtonClicked(sender:)), for: .touchUpInside)
-
-
+        addView()
+        
+        location()
+    }
+    
+    private func addView(){
+        [backButton, titleLabel, (contentLabel),planShowView, rejectionButton, acceptButton].forEach { view.addSubview($0)}
+        [planTitleLabel, planTimeImageView, planLocationImageView, planCalenderLabel, planTimeLabel, planLocationLabel, planExplanationView, planCalenderImageView].forEach { planShowView.addSubview($0) }
+        planExplanationView.addSubview(planExplanationLabel)
+    }
+    
+    private func location(){
         backButton.snp.makeConstraints { make in
             make.top.equalTo(self.view.safeAreaLayoutGuide).offset(self.view.frame.height/47.7)
             make.left.equalToSuperview().offset(self.view.frame.width/12)
@@ -154,7 +152,7 @@ class PlanRequestRespondingViewController: UIViewController {
             make.left.equalTo(backButton)
             make.top.equalTo(backButton.snp.bottom).offset(self.view.frame.height/30)
         }
-        
+         
         contentLabel.snp.makeConstraints { make in
             make.left.equalTo(backButton)
             make.top.equalTo(titleLabel.snp.bottom)
@@ -173,7 +171,7 @@ class PlanRequestRespondingViewController: UIViewController {
         }
         
         planCalenderImageView.snp.makeConstraints { make in
-            make.top.equalTo(planTitleLabel.snp.bottom).offset(self.view.frame.height/29)
+            make.top.equalToSuperview().offset(self.view.frame.height/20)
             make.width.equalToSuperview().dividedBy(17.3)
             make.height.equalTo(planCalenderImageView.snp.width)
             make.centerX.equalToSuperview()
@@ -210,7 +208,7 @@ class PlanRequestRespondingViewController: UIViewController {
         planExplanationView.snp.makeConstraints { make in
             make.centerX.equalToSuperview()
             make.left.equalToSuperview().offset(self.view.frame.height/45)
-            make.top.equalTo(planLocationLabel.snp.bottom).offset(self.view.frame.height/45)
+            make.top.equalTo(planLocationLabel.snp.bottom).offset(self.view.frame.height/30)
             make.bottom.equalToSuperview().offset(-self.view.frame.height/45)
         }
         
@@ -235,6 +233,11 @@ class PlanRequestRespondingViewController: UIViewController {
             
             acceptButton.layer.cornerRadius = (self.view.frame.height/20.3)/2
         }
+    }
+    
+    func errandInfoSetting(errandTitle: String, errandTime: String){
+        self.errandTitle = errandTitle
+        self.errandTime = errandTime
     }
     
     @objc func acceptButtonClicked(sender:UIButton){
