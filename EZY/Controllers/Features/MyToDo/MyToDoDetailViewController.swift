@@ -7,12 +7,8 @@
 
 import UIKit
 
-class MyToDoDetailViewController: UIViewController {
-    
-    var toDoTag:String = ""
-    var toDoTitle:String = ""
-    var toDoTime:String = ""
-    
+class MyToDoDetailViewController: UIViewController{
+
     // MARK: - Properties
     let bgView = UIView().then {
         $0.backgroundColor = .black
@@ -24,8 +20,8 @@ class MyToDoDetailViewController: UIViewController {
         return button
     }()
     
-    lazy var clockBtn : AlertButton = {
-        let viewModel = AlertBtn(icon: UIImage(named: "EZY_clock")?.withRenderingMode(.alwaysTemplate), iconTintColor: .rgb(red: 255, green: 203, blue: 181), message: toDoTime)
+    private let clockBtn : AlertButton = {
+        let viewModel = AlertBtn(icon: UIImage(named: "EZY_clock")?.withRenderingMode(.alwaysTemplate), iconTintColor: .rgb(red: 255, green: 203, blue: 181), message: "시간을 선택해주세요!")
         let button = AlertButton(with: viewModel)
         return button
     }()
@@ -44,10 +40,11 @@ class MyToDoDetailViewController: UIViewController {
     
     private let backButton = UIButton().then{
         $0.setImage(UIImage(named: "EZY_DetailBackButton"), for: .normal)
+        $0.addTarget(self, action: #selector(backButtonClicked(sender:)), for: .touchUpInside)
     }
     
-    lazy var planNameLabel = UILabel().then {
-        $0.text = toDoTitle
+    private let planNameLabel = UILabel().then {
+        $0.text = "아름이 산책시키기"
         $0.textColor = UIColor(red: 150/255, green: 141/255, blue: 255/255, alpha: 1)
         $0.dynamicFont(fontSize: 22, currentFontName: "Poppins-SemiBold")
     }
@@ -83,7 +80,7 @@ class MyToDoDetailViewController: UIViewController {
     }
     
     lazy var selectedTagButton = WhiteBasicButton().then {
-        $0.buttonTitleLabelSetting(titleText: toDoTag, titleColor: UIColor(red: 164/255, green: 137/255, blue: 255/255, alpha: 1))
+        $0.buttonTitleLabelSetting(titleText: "PROGRAMMING", titleColor: UIColor(red: 164/255, green: 137/255, blue: 255/255, alpha: 1))
         $0.isEnabled = false
     }
     
@@ -126,6 +123,10 @@ class MyToDoDetailViewController: UIViewController {
         $0.buttonTitleLabelSetting(titleText: "오전 12:12", titleColor: UIColor(red: 144/255, green: 144/255, blue: 144/255, alpha: 1))
         $0.isEnabled = false
     }
+    
+    var toDoTag: String = ""
+    var toDoTitle: String = ""
+    var toDoTime: String = ""
     
     // MARK: - LifeCycles
     override func viewDidLoad() {
@@ -263,6 +264,10 @@ class MyToDoDetailViewController: UIViewController {
         let nextVC = AddOrChangeMyTodoViewController()
         navigationController?.pushViewController(nextVC, animated: true)
         nextVC.mainTitleLabelSetting(mainTitleText: "개인 일정 변경", buttonText: "변경하기")
+    }
+    
+    @objc func backButtonClicked(sender:UIButton){
+        navigationController?.popViewController(animated: true)
     }
     
     // MARK: - addDim

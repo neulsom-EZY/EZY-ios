@@ -80,12 +80,15 @@ class BasicModalViewController: BaseModal {
         let string : NSMutableAttributedString
         var changeColorText = colorText
         print("colorText.count : \(colorText.count)")
-        if colorText.count < 7{
+        if colorText.count < 8{
+            contentLabel.numberOfLines = 0
             string = NSMutableAttributedString(string: "\(changeColorText) \(contentText)")
-        }else if colorText.count < 33{
-            changeColorText = colorText.replacingOccurrences(of: " ", with: "\n")
-            string = NSMutableAttributedString(string: "\(changeColorText) \n\(contentText)")
+        }else if colorText.count < 20{
+            contentLabel.numberOfLines = 2
+            string = NSMutableAttributedString(string: "\(changeColorText)\n\(contentText)")
         }else{
+            contentLabel.numberOfLines = 3
+            changeColorText = colorText.replacingOccurrences(of: " ", with: "\n")
             string = NSMutableAttributedString(string: "\(changeColorText)\n\(contentText)")
         }
         
