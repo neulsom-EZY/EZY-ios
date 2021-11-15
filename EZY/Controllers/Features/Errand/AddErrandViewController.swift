@@ -13,7 +13,7 @@ class AddErrandViewController : UIViewController{
     //MARK: - Properties
     let bounds = UIScreen.main.bounds
    
-    let bgView = UIView().then {
+    private let bgView = UIView().then {
         $0.backgroundColor = .black
         $0.alpha = 0
     }
@@ -123,12 +123,13 @@ class AddErrandViewController : UIViewController{
         present(vc, animated: true, completion: nil)    }
 
     //MARK: - Helpers
-    func configureUI(){
+    private func configureUI(){
         view.backgroundColor = .white
         cornerRadius()
         addView()
         location()
     }
+    //MARK: - 클릭시 키보드 내리기
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         super.touchesBegan(touches, with: event)
         view.endEditing(true)

@@ -12,7 +12,6 @@ class SelectLocationViewController: UIViewController {
     
     // MARK: - Properties
     
-    
     //MARK: - Kakao Search Data
     private var kakaoPlaceSearchData : [KakaoDocuments]? = nil
     let bgView = UIView().then {
@@ -171,7 +170,7 @@ class SelectLocationViewController: UIViewController {
             }
         }
     }
-    
+    //MARK: - Modal Effect
     // MARK: - addDim
     private func addDim() {
            view.addSubview(bgView)

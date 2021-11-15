@@ -39,7 +39,7 @@ class BasicModalViewController: BaseModal {
     
     private let contentLabel = UILabel().then{
         $0.dynamicFont(fontSize: 16, currentFontName: "AppleSDGothicNeo-Thin")
-        $0.numberOfLines = 3
+        $0.numberOfLines = 0
         $0.textAlignment = .center
     }
     
@@ -95,32 +95,24 @@ class BasicModalViewController: BaseModal {
         contentLabel.attributedText = string
         
         
-        let labelHeight = contentLabel.intrinsicContentSize.height
-        let buttonHeight = self.view.frame.height/24.6
-        let labelTopPaddingHeight = self.view.frame.height/26
-        let amongLabelButtonHeight = self.view.frame.height/50
-        let ButtonBottomPaddingHeight = self.view.frame.height/45.11
-        
         bgView.snp.makeConstraints { make in
             make.center.equalToSuperview()
             make.width.equalToSuperview().dividedBy(1.15)
-            make.height.equalTo(labelHeight + buttonHeight + labelTopPaddingHeight + amongLabelButtonHeight + ButtonBottomPaddingHeight)
         }
-        
         contentLabel.snp.makeConstraints { make in
-            make.top.equalToSuperview().offset(labelTopPaddingHeight)
+            make.top.equalToSuperview().offset(bounds.height/26)
             make.centerX.equalToSuperview()
         }
-        
         okButton.snp.makeConstraints { make in
-            make.height.equalTo(buttonHeight)
+            make.height.equalTo(bounds.height/24.6)
             make.width.equalToSuperview().dividedBy(4.44)
-            make.bottom.right.equalToSuperview().offset(-self.view.frame.height/53)
+            make.top.equalTo(contentLabel.snp.bottom).offset(bounds.height/53)
+            make.right.equalToSuperview().inset(bounds.width/53)
         }
-        
         cancelButton.snp.makeConstraints { make in
             make.height.width.equalTo(okButton)
-            make.bottom.equalTo(okButton)
+            make.top.equalTo(okButton)
+            make.bottom.equalTo(bgView).inset(bounds.height/62.4)
             make.right.equalTo(okButton.snp.left).offset(-self.view.frame.height/80)
         }
     }
@@ -131,8 +123,7 @@ extension NSMutableAttributedString {
         let range: NSRange = self.mutableString.range(of: textToFind, options: .caseInsensitive)
         self.addAttribute(NSAttributedString.Key.foregroundColor, value: color, range: range)
         }
-    func setFontForText(textToFind: String, withFont font: UIFont
-    ){
+    func setFontForText(textToFind: String, withFont font: UIFont){
         let range : NSRange = self.mutableString.range(of: textToFind,options: .caseInsensitive)
         self.addAttribute(NSAttributedString.Key.font, value: font, range: range)
     }
