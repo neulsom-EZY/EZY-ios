@@ -14,7 +14,7 @@ class PlanRequestRespondingViewController: UIViewController {
     private var errandTime:String = "11:00AM - 1:00PM"
     
     private let purpleColor: UIColor! = UIColor(red: 150/255, green: 141/255, blue: 255/255, alpha: 1)
-
+    
     private let whitePurpleColor: UIColor! = UIColor(red: 227/255, green: 225/255, blue: 255/255, alpha: 1)
     
     private lazy var labelColor: [UIColor] = [purpleColor, whitePurpleColor]
