@@ -122,8 +122,7 @@ class ErrandListViewController: UIViewController {
     @objc
     private func goRequest(){
         let controller = PlanRequestRespondingViewController()
-        controller.errandTime = errandTime
-        controller.errandTitle = errandTitle
+        controller.errandInfoSetting(errandTitle: errandTitle, errandTime: errandTime)
         navigationController?.pushViewController(controller, animated: true)
     }
     //MARK: - Helpers

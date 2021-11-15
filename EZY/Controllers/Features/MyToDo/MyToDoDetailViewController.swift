@@ -39,6 +39,7 @@ class MyToDoDetailViewController: UIViewController {
     
     private let backButton = UIButton().then{
         $0.setImage(UIImage(named: "EZY_DetailBackButton"), for: .normal)
+        $0.addTarget(self, action: #selector(backButtonClicked(sender:)), for: .touchUpInside)
     }
     
     private let planNameLabel = UILabel().then {
@@ -262,6 +263,10 @@ class MyToDoDetailViewController: UIViewController {
         let nextVC = AddOrChangeMyTodoViewController()
         navigationController?.pushViewController(nextVC, animated: true)
         nextVC.mainTitleLabelSetting(mainTitleText: "개인 일정 변경", buttonText: "변경하기")
+    }
+    
+    @objc func backButtonClicked(sender:UIButton){
+        navigationController?.popViewController(animated: true)
     }
     
     // MARK: - addDim
