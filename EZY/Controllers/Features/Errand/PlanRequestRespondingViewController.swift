@@ -14,7 +14,7 @@ class PlanRequestRespondingViewController: UIViewController {
     private var errandTime:String = "11:00AM - 1:00PM"
     
     private let purpleColor: UIColor! = UIColor(red: 150/255, green: 141/255, blue: 255/255, alpha: 1)
-    
+
     private let whitePurpleColor: UIColor! = UIColor(red: 227/255, green: 225/255, blue: 255/255, alpha: 1)
     
     private lazy var labelColor: [UIColor] = [purpleColor, whitePurpleColor]
@@ -50,7 +50,7 @@ class PlanRequestRespondingViewController: UIViewController {
     }
     
     private lazy var planTitleLabel = UILabel().then {
-        $0.text = errandTitle
+        $0.text = "마카롱 사오기"
         $0.dynamicFont(fontSize: 22, currentFontName: "AppleSDGothicNeo-Bold")
         $0.textColor = UIColor(red: 141/255, green: 138/255, blue: 255/255, alpha: 1)
     }
@@ -67,7 +67,7 @@ class PlanRequestRespondingViewController: UIViewController {
     }
     
     private lazy var planTimeLabel = UILabel().then {
-        $0.text = errandTime
+        $0.text = "11:00AM - 1:00PM"
         $0.textAlignment = .center
         $0.textColor = UIColor(red: 101/255, green: 101/255, blue: 101/255, alpha: 1)
         $0.dynamicFont(fontSize: 14, currentFontName: "Poppins-Regular")
