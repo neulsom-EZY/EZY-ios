@@ -11,11 +11,6 @@ import Then
 
 class ErrandListViewController: UIViewController {
     //MARK: - Properties
-    
-    var errandType:String = ""
-    var errandTitle:String = ""
-    var errandTime:String = ""
-    var errandExplain:String = ""
 
     private let backButton = UIButton().then {
         $0.setImage(UIImage(named: "EZY_DetailBackButton"), for: .normal)
@@ -108,18 +103,12 @@ class ErrandListViewController: UIViewController {
     @objc
     private func goDetail(){
         let controller = ErrandDetailsViewController()
-        controller.errandType = errandType
-        controller.errandTime = errandTime
-        controller.errandTitle = errandTitle
-        controller.errandExplain = errandExplain
         navigationController?.pushViewController(controller, animated: true)
     }
     
     @objc
     private func goRequest(){
         let controller = PlanRequestRespondingViewController()
-        controller.errandTime = errandTime
-        controller.errandTitle = errandTitle
         navigationController?.pushViewController(controller, animated: true)
     }
     //MARK: - Helpers
@@ -367,20 +356,10 @@ extension ErrandListViewController: UITableViewDelegate{
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
 //        var cell = tableView.cellForRow(at: indexPath)
         if tableView == acceptTableView.tableView {
-            errandType = "받은 심부름"
-            errandExplain = "어떤 심부름을 부탁받았나요?"
-            errandTitle = acceptTitleArray[indexPath.row]
-            errandTime = acceptPlanTimeArray[indexPath.row]
             goDetail()
         } else if tableView == sendTableView.tableView {
-            errandType = "보낸 심부름"
-            errandExplain = "어떤 심부름을 부탁할까요?"
-            errandTitle = sendTitleArray[indexPath.row]
-            errandTime = sendPlanTimeArray[indexPath.row]
             goDetail()
         } else {
-            errandTitle = waitTitleArray[indexPath.row]
-            errandTime = waitPlanTimeArray[indexPath.row]
             goRequest()
         }
     }
