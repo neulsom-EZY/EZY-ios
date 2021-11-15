@@ -124,10 +124,6 @@ class MyToDoDetailViewController: UIViewController{
         $0.isEnabled = false
     }
     
-    var toDoTag: String = ""
-    var toDoTitle: String = ""
-    var toDoTime: String = ""
-    
     // MARK: - LifeCycles
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -140,9 +136,7 @@ class MyToDoDetailViewController: UIViewController{
         self.view.backgroundColor = .white
         
         addView()
-        
         location()
-        
         delegateAndDataSource()
     }
 

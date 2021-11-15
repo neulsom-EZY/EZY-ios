@@ -39,7 +39,7 @@ class BasicModalViewController: BaseModal {
     
     private let contentLabel = UILabel().then{
         $0.dynamicFont(fontSize: 16, currentFontName: "AppleSDGothicNeo-Thin")
-        $0.numberOfLines = 3
+        $0.numberOfLines = 0
         $0.textAlignment = .center
     }
     

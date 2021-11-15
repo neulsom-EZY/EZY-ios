@@ -225,11 +225,6 @@ class PlanRequestRespondingViewController: UIViewController {
         }
     }
     
-    func errandInfoSetting(errandTitle: String, errandTime: String){
-        self.errandTitle = errandTitle
-        self.errandTime = errandTime
-    }
-    
     @objc func acceptButtonClicked(sender:UIButton){
         let notificationVC = NotificationViewController()
         notificationVC.isErrendAccept = true
