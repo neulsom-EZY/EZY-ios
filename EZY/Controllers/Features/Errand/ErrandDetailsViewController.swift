@@ -9,7 +9,6 @@ import UIKit
 
 class ErrandDetailsViewController: UIViewController {
     //MARK: - Properties
-    
     //MARK: - Dummy_Data
     var errandType:String = ""
     var errandTitle:String = ""

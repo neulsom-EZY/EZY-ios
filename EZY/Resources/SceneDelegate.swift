@@ -19,7 +19,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
         window = UIWindow(windowScene: windowScene)
       
-        let mainViewController = AddOrChangeMyTodoViewController()
+        let mainViewController = reErrandListViewController()
 
         let navigationController = UINavigationController(rootViewController: mainViewController)
 

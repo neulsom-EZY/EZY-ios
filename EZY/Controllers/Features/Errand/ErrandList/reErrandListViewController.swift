@@ -10,8 +10,12 @@ class reErrandListViewController : UIViewController{
     let bounds = UIScreen.main.bounds
     
     private let sections : [String] = ["부탁받은 심부름","부탁한 심부름"," 수락 대기 중인 심부름"]
-    
+    private let dummy : [String] = ["EZY 회의","EZY 회의","EZY 회의","EZY 회의","EZY 회의","EZY 회의","EZY 회의","EZY 회의","EZY 회의","EZY 회의","EZY 회의","EZY 회의"]
     //MARK: - Properties
+    private lazy var tableViewHeader = UIView(frame: CGRect(x: 0, y: 0, width: view.frame.width, height: bounds.height/7.315)).then{
+        $0.backgroundColor = .clear
+    }
+    
     private let backBtn = UIButton().then{
         $0.setImage(UIImage(named: "EZY_RequestBackButton"), for: .normal)
         $0.addTarget( self, action: #selector(BackAction), for: .touchUpInside)
@@ -27,7 +31,7 @@ class reErrandListViewController : UIViewController{
         $0.register(ErrandListItemTableViewCell.self, forCellReuseIdentifier: ErrandListItemTableViewCell.identifier)
         $0.showsVerticalScrollIndicator = false
         $0.separatorColor = .clear
-        $0.backgroundColor = .red
+        $0.backgroundColor = .clear
         $0.allowsSelection = false
     }
     
@@ -46,54 +50,63 @@ class reErrandListViewController : UIViewController{
     private func configure(){
         AddView()
         Location()
+        tableHeader()
         dataSourceAndDelegateSetting()
     }
     //MARK: - AddView
     private func AddView(){
-        [backBtn,titleLabel,listTv].forEach{ view.addSubview($0)}
+        [listTv].forEach{ view.addSubview($0)}
     }
     private func Location(){
+        listTv.snp.makeConstraints{
+            $0.top.bottom.left.right.equalToSuperview()
+        }
+    }
+    
+    //MARK: - TableView Datasource And Delegate
+    private func dataSourceAndDelegateSetting(){
+        listTv.delegate = self
+        listTv.dataSource = self
+    }
+    private func tableHeader(){
+        listTv.tableHeaderView = tableViewHeader
+        [backBtn,titleLabel].forEach{ listTv.addSubview($0)}
         backBtn.snp.makeConstraints{
-            $0.top.equalToSuperview().offset(bounds.height/13.31)
+            $0.top.equalToSuperview().offset(bounds.height/47.76)
             $0.left.equalToSuperview().offset(bounds.width/12.32)
         }
         titleLabel.snp.makeConstraints {
             $0.top.equalTo(backBtn.snp.bottom).offset(bounds.height/30.07)
             $0.left.equalTo(backBtn)
         }
-
-        listTv.snp.makeConstraints{
-            $0.top.equalTo(titleLabel.snp.bottom).offset(bounds.height/35.3)
-            $0.bottom.left.right.equalToSuperview()
-        }
-    }
-    //MARK: - TableView Datasource And Delegate
-    private func dataSourceAndDelegateSetting(){
-        listTv.delegate = self
-        listTv.dataSource = self
     }
 }
 extension reErrandListViewController : UITableViewDelegate , UITableViewDataSource{
     func numberOfSections(in tableView: UITableView) -> Int {
-        return 4
+        return sections.count
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 2
+        return dummy.count
     }
-
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-            return bounds.height/10.545
-    }
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        if indexPath.item == 0 {
-            guard let cell = tableView.dequeueReusableCell(withIdentifier: ErrandListItemTableViewCell.identifier, for: indexPath) as? ErrandListItemTableViewCell else {return UITableViewCell()}
-            return cell
-        }else if indexPath.item == 1 {
-            guard let cell = tableView.dequeueReusableCell(withIdentifier: ErrandListTableViewCell.identifier, for: indexPath) as? ErrandListTableViewCell else {return UITableViewCell()}
+        if indexPath.item == 0{
+            return bounds.height/15.7669
         }
-        return UITableViewCell()
+        return bounds.height/8.6
     }
-    
 
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        
+        if indexPath.item == 0 {
+            guard let cell = tableView.dequeueReusableCell(withIdentifier: ErrandListTableViewCell.identifier, for: indexPath) as? ErrandListTableViewCell else {return UITableViewCell()}
+            cell.label.text = sections[indexPath.section]
+            return cell
+        }
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: ErrandListItemTableViewCell.identifier, for: indexPath) as? ErrandListItemTableViewCell else {return UITableViewCell()}
+        cell.tbTypeLabel.text = sections[indexPath.section]
+        cell.ErrandTitle.text = dummy[indexPath.row]
+        cell.Date("11:00 - 13:00", nil)
+        return cell
+    }
 }
