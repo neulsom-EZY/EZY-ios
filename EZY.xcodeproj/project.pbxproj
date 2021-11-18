@@ -123,6 +123,9 @@
 		AACB691D274006E3000E5706 /* NewPasswordNicknameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AACB691C274006E3000E5706 /* NewPasswordNicknameViewController.swift */; };
 		AAD95AE126EC7EC7004E4580 /* NewNicknamePhoneNumViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAD95AE026EC7EC7004E4580 /* NewNicknamePhoneNumViewController.swift */; };
 		AAD95AE326EC818B004E4580 /* NewNicknamePutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAD95AE226EC818B004E4580 /* NewNicknamePutViewController.swift */; };
+		EE7CEE6B2741F749009A935A /* reErrandListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE7CEE6A2741F749009A935A /* reErrandListViewController.swift */; };
+		EE7CEE6E2741FB4A009A935A /* ErrandListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE7CEE6D2741FB4A009A935A /* ErrandListTableViewCell.swift */; };
+		EE7CEE7027421EDB009A935A /* ErrandListItemTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE7CEE6F27421EDB009A935A /* ErrandListItemTableViewCell.swift */; };
 		EE84DEC02715ABF100121C62 /* CollectionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE84DEBF2715ABF100121C62 /* CollectionViewModel.swift */; };
 		EE93B4D926876C6F0055D7A6 /* PushNotificationManagementViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE93B4D826876C6F0055D7A6 /* PushNotificationManagementViewController.swift */; };
 		EE93B4DB26876F430055D7A6 /* AlarmManagementButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE93B4DA26876F430055D7A6 /* AlarmManagementButton.swift */; };
@@ -157,6 +160,9 @@
 		EE9F0D5126E8AA810015E81B /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE9F0D5026E8AA810015E81B /* Model.swift */; };
 		EE9F0D5326E8AA9E0015E81B /* SearchViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE9F0D5226E8AA9E0015E81B /* SearchViewModel.swift */; };
 		EEA49A132711C7B200265258 /* CalendarAlertBtn.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEA49A122711C7B200265258 /* CalendarAlertBtn.swift */; };
+		EEB2195C273EC62D0035704D /* kakaoPlaceDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEB2195B273EC62D0035704D /* kakaoPlaceDataModel.swift */; };
+		EEB2195F273EC6E10035704D /* NetWorkResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEB2195E273EC6E10035704D /* NetWorkResult.swift */; };
+		EEB21962273EC7410035704D /* KakaoPlaceSearchAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEB21961273EC7410035704D /* KakaoPlaceSearchAPI.swift */; };
 		EEDCAF98268D85F1001E2B4F /* SwitchBtn.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEDCAF97268D85F1001E2B4F /* SwitchBtn.swift */; };
 /* End PBXBuildFile section */
 
@@ -284,6 +290,9 @@
 		AAD95AE026EC7EC7004E4580 /* NewNicknamePhoneNumViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewNicknamePhoneNumViewController.swift; sourceTree = "<group>"; };
 		AAD95AE226EC818B004E4580 /* NewNicknamePutViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewNicknamePutViewController.swift; sourceTree = "<group>"; };
 		EC87B4A0EB164D8634453F67 /* Pods-EZY.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EZY.debug.xcconfig"; path = "Target Support Files/Pods-EZY/Pods-EZY.debug.xcconfig"; sourceTree = "<group>"; };
+		EE7CEE6A2741F749009A935A /* reErrandListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = reErrandListViewController.swift; sourceTree = "<group>"; };
+		EE7CEE6D2741FB4A009A935A /* ErrandListTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrandListTableViewCell.swift; sourceTree = "<group>"; };
+		EE7CEE6F27421EDB009A935A /* ErrandListItemTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrandListItemTableViewCell.swift; sourceTree = "<group>"; };
 		EE84DEBF2715ABF100121C62 /* CollectionViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionViewModel.swift; sourceTree = "<group>"; };
 		EE93B4D826876C6F0055D7A6 /* PushNotificationManagementViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PushNotificationManagementViewController.swift; sourceTree = "<group>"; };
 		EE93B4DA26876F430055D7A6 /* AlarmManagementButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlarmManagementButton.swift; sourceTree = "<group>"; };
@@ -318,6 +327,9 @@
 		EE9F0D5026E8AA810015E81B /* Model.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Model.swift; sourceTree = "<group>"; };
 		EE9F0D5226E8AA9E0015E81B /* SearchViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchViewModel.swift; sourceTree = "<group>"; };
 		EEA49A122711C7B200265258 /* CalendarAlertBtn.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarAlertBtn.swift; sourceTree = "<group>"; };
+		EEB2195B273EC62D0035704D /* kakaoPlaceDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = kakaoPlaceDataModel.swift; sourceTree = "<group>"; };
+		EEB2195E273EC6E10035704D /* NetWorkResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetWorkResult.swift; sourceTree = "<group>"; };
+		EEB21961273EC7410035704D /* KakaoPlaceSearchAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KakaoPlaceSearchAPI.swift; sourceTree = "<group>"; };
 		EEDCAF97268D85F1001E2B4F /* SwitchBtn.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwitchBtn.swift; sourceTree = "<group>"; };
 		EEE1E95626AAB71A0082B696 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
 		EEE1E95826AAB72E0082B696 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -396,6 +408,7 @@
 				6AA769FD26636C6B00B7E1F5 /* Views */,
 				6AA769FC26636C6500B7E1F5 /* ViewModels */,
 				6AA769FB26636C5700B7E1F5 /* Services */,
+				EEB2195D273EC6BE0035704D /* Networking */,
 				6A9B7547269E82D800703ADF /* Resources */,
 				6A44474C26677647004C4BC3 /* Assets.xcassets */,
 				6AA769F526636AE800B7E1F5 /* Info.plist */,
@@ -408,6 +421,7 @@
 		6AA769FB26636C5700B7E1F5 /* Services */ = {
 			isa = PBXGroup;
 			children = (
+				EEB21960273EC71D0035704D /* KakaoPlaceSearchService */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -436,6 +450,7 @@
 		6AA769FE26636C7000B7E1F5 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				EEB2195A273EB5380035704D /* KakaoPlaeDataModel */,
 				EE9F0D5026E8AA810015E81B /* Model.swift */,
 				EE93B4E32687BD8A0055D7A6 /* ManageData.swift */,
 				6AC1F4052684093700DDD08C /* TagColorCollectionViewModel.swift */,
@@ -603,6 +618,7 @@
 		6AB7D435272FE08700FAFA19 /* Errand */ = {
 			isa = PBXGroup;
 			children = (
+				EE7CEE6C2741FB21009A935A /* ErrandList */,
 				AAAA0F1A2739458400DBCA68 /* ErrandListViewController.swift */,
 				EE9F0D1E26E8A2AC0015E81B /* MorePeopleToDo.swift */,
 				EE9F0D1C26E8A2AC0015E81B /* ErrandDetailsViewController.swift */,
@@ -791,12 +807,46 @@
 			path = Pods;
 			sourceTree = "<group>";
 		};
+		EE7CEE6C2741FB21009A935A /* ErrandList */ = {
+			isa = PBXGroup;
+			children = (
+				EE7CEE6A2741F749009A935A /* reErrandListViewController.swift */,
+				EE7CEE6D2741FB4A009A935A /* ErrandListTableViewCell.swift */,
+				EE7CEE6F27421EDB009A935A /* ErrandListItemTableViewCell.swift */,
+			);
+			path = ErrandList;
+			sourceTree = "<group>";
+		};
 		EE963D352734B0CE005070B5 /* BaseModal */ = {
 			isa = PBXGroup;
 			children = (
 				EE963D362734B0DB005070B5 /* BaseModal.swift */,
 			);
 			path = BaseModal;
+			sourceTree = "<group>";
+		};
+		EEB2195A273EB5380035704D /* KakaoPlaeDataModel */ = {
+			isa = PBXGroup;
+			children = (
+				EEB2195B273EC62D0035704D /* kakaoPlaceDataModel.swift */,
+			);
+			path = KakaoPlaeDataModel;
+			sourceTree = "<group>";
+		};
+		EEB2195D273EC6BE0035704D /* Networking */ = {
+			isa = PBXGroup;
+			children = (
+				EEB2195E273EC6E10035704D /* NetWorkResult.swift */,
+			);
+			path = Networking;
+			sourceTree = "<group>";
+		};
+		EEB21960273EC71D0035704D /* KakaoPlaceSearchService */ = {
+			isa = PBXGroup;
+			children = (
+				EEB21961273EC7410035704D /* KakaoPlaceSearchAPI.swift */,
+			);
+			path = KakaoPlaceSearchService;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -810,7 +860,7 @@
 				6AA769DD26636AE700B7E1F5 /* Sources */,
 				6AA769DE26636AE700B7E1F5 /* Frameworks */,
 				6AA769DF26636AE700B7E1F5 /* Resources */,
-				B2D2CA0DDDAF47D4687EAD88 /* [CP] Embed Pods Frameworks */,
+				FBB1D7784A786F5608542136 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -905,7 +955,7 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		B2D2CA0DDDAF47D4687EAD88 /* [CP] Embed Pods Frameworks */ = {
+		FBB1D7784A786F5608542136 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -944,12 +994,14 @@
 				EE9F0D3F26E8A9340015E81B /* GroupSearchTextfield.swift in Sources */,
 				6A705BB6267E3ABF001954CE /* AddOrChangeMyTodoViewController.swift in Sources */,
 				6AA76A282663958B00B7E1F5 /* ShowPlanViewController.swift in Sources */,
+				EEB2195C273EC62D0035704D /* kakaoPlaceDataModel.swift in Sources */,
 				6AB27CAC269D758100B95C0F /* ChangeIdAfterLoginViewController.swift in Sources */,
 				6AE5BB012695746F00A9731B /* PersonalPlanAddRepeatDayCollectionViewCell.swift in Sources */,
 				6A1E3E9026797CB600E7B198 /* DeleteModalView.swift in Sources */,
 				EE9F0D4D26E8A9700015E81B /* DayCollectionViewCell.swift in Sources */,
 				AAAA0F1F273A0F7D00DBCA68 /* ListTagView.swift in Sources */,
 				6AA76A0226636D2800B7E1F5 /* LoginViewController.swift in Sources */,
+				EEB2195F273EC6E10035704D /* NetWorkResult.swift in Sources */,
 				6AE5BB0E269670CB00A9731B /* CustomGradientTermsBtnView.swift in Sources */,
 				EE9F0D4F26E8A9700015E81B /* AlarmSettingCell.swift in Sources */,
 				AAAA0EFF2739107C00DBCA68 /* ChangePhoneNumAuthCodeViewController.swift in Sources */,
@@ -982,7 +1034,9 @@
 				6AC1F4062684093700DDD08C /* TagColorCollectionViewModel.swift in Sources */,
 				6AE5BB0D269670CB00A9731B /* CustomGradientContinueBtnView.swift in Sources */,
 				AA04F9D52700996800EE0506 /* LoginTextFieldContainerView.swift in Sources */,
+				EE7CEE7027421EDB009A935A /* ErrandListItemTableViewCell.swift in Sources */,
 				EE9582D4272A7BEF00AAEC8A /* LogoutCustomBtn.swift in Sources */,
+				EEB21962273EC7410035704D /* KakaoPlaceSearchAPI.swift in Sources */,
 				EE9F0D3C26E8A9340015E81B /* ErrandInputContainterTextField.swift in Sources */,
 				EE9F0D3E26E8A9340015E81B /* CustomData.swift in Sources */,
 				6A685C0D26AC1E2D0079BC30 /* PersonalPlanDetailRepeatDayCollectionViewCell.swift in Sources */,
@@ -1057,8 +1111,10 @@
 				EE9F0D2726E8A2AC0015E81B /* MoreCalendarModalsViewController.swift in Sources */,
 				EE93B4D926876C6F0055D7A6 /* PushNotificationManagementViewController.swift in Sources */,
 				EE93B4E42687BD8A0055D7A6 /* ManageData.swift in Sources */,
+				EE7CEE6E2741FB4A009A935A /* ErrandListTableViewCell.swift in Sources */,
 				AA82BCE02737AB2A000D3F04 /* SignUpAuthCodeViewController.swift in Sources */,
 				6A5C6A242734A24000556849 /* TagAddModalViewController.swift in Sources */,
+				EE7CEE6B2741F749009A935A /* reErrandListViewController.swift in Sources */,
 				6AA769E526636AE700B7E1F5 /* AppDelegate.swift in Sources */,
 				EE93B4DB26876F430055D7A6 /* AlarmManagementButton.swift in Sources */,
 				EE9F0D5126E8AA810015E81B /* Model.swift in Sources */,
