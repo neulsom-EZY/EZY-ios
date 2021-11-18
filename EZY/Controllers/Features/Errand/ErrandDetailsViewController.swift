@@ -9,16 +9,7 @@ import UIKit
 
 class ErrandDetailsViewController: UIViewController {
     //MARK: - Properties
-<<<<<<< HEAD
-    //MARK: - Dummy_Data
-    var errandType:String = ""
-    var errandTitle:String = ""
-    var errandTime:String = ""
-    var errandExplain:String = ""
-    
-=======
 
->>>>>>> 4835c51da1ef641fd9cb2dd13f4198d0e977f552
     static let data = ["JiHoooooon","siwony"]
     
     let bounds = UIScreen.main.bounds
