@@ -13,7 +13,8 @@ class ErrandListItemTableViewCell : UITableViewCell {
     //MARK: - Properties
     let bgview = UIView().then{
         $0.backgroundColor = .white
-        $0.layer.applySketchShadow(color: .rgb(red: 219, green: 219, blue: 219), alpha: 1, x: 0, y: 4, blur: 20, spread: 0)
+        $0.clipsToBounds = true
+        $0.layer.cornerRadius = 10
     }
     let tagView = UIView().then{
         $0.backgroundColor = .EZY_BDAAFF
@@ -41,6 +42,7 @@ class ErrandListItemTableViewCell : UITableViewCell {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         AddView()
         Location()
+        contentView.layer.applySketchShadow(color: .rgb(red: 219, green: 219, blue: 219), alpha: 1, x: 0, y: 4, blur: 20, spread: 0)
     }
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
