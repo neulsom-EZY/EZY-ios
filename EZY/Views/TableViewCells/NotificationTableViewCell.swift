@@ -9,14 +9,14 @@ import UIKit
 
 class NotificationTableViewCell: UITableViewCell {
     
-    //MARK: Properties
+    // MARK: - Properties
     static let NotificationTableViewIdentifier = "\(NotificationTableViewCell.self)"
     
-    lazy var logoCircleBackgroundView = UIView().then {
+    private let logoCircleBackgroundView = UIView().then {
         $0.backgroundColor = UIColor(red: 150/255, green: 141/255, blue: 255/255, alpha: 1)
     }
     
-    lazy var cellBackgroundView = UIView().then {
+    private let cellBackgroundView = UIView().then {
         $0.backgroundColor = .white
         $0.layer.cornerRadius = 10
         $0.layer.masksToBounds = false
@@ -26,29 +26,30 @@ class NotificationTableViewCell: UITableViewCell {
         $0.layer.shadowColor = UIColor(red: 222/255, green: 222/255, blue: 222/255, alpha: 1).cgColor
     }
     
-    lazy var scheduleTypeLabel = UILabel().then {
+     let scheduleTypeLabel = UILabel().then {
         $0.text = "개인일정"
         $0.textColor = UIColor(red: 144/255, green: 144/255, blue: 144/255, alpha: 1)
         $0.dynamicFont(fontSize: 8, currentFontName: "AppleSDGothicNeo-Light")
     }
 
-    lazy var notificationContentLabel = UILabel().then {
+    let notificationContentLabel = UILabel().then {
         $0.text = "지환님이 심부름 일정 변경을 요청했어요. \n확인해볼까요?"
         $0.textColor = UIColor(red: 150/255, green: 141/255, blue: 255/255, alpha: 1)
         $0.dynamicFont(fontSize: 12, currentFontName: "Poppins-SemiBold")
         $0.numberOfLines = 2
     }
     
-    lazy var afterNotificationTimeLabel = UILabel().then {
+    let afterNotificationTimeLabel = UILabel().then {
         $0.text = "12분 전"
         $0.dynamicFont(fontSize: 10, currentFontName: "AppleSDGothicNeo-Light")
         $0.textColor = UIColor(red: 144/255, green: 144/255, blue: 144/255, alpha: 1)
     }
     
-    lazy var scheduleImageByTypeImageView = UIImageView().then {
+    private let scheduleImageByTypeImageView = UIImageView().then {
         $0.image = UIImage(named: "EZY_Errand")
     }
     
+    // MARK: - awakeFromNib
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
@@ -56,6 +57,7 @@ class NotificationTableViewCell: UITableViewCell {
         configureUI()
     }
 
+    // MARK: - setSelected
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
 
@@ -63,14 +65,22 @@ class NotificationTableViewCell: UITableViewCell {
         configureUI()
     }
     
+    // MARK: - configureUI
     private func configureUI(){
-        contentView.addSubview(cellBackgroundView)
-        cellBackgroundView.addSubview(scheduleTypeLabel)
-        cellBackgroundView.addSubview(notificationContentLabel)
-        cellBackgroundView.addSubview(afterNotificationTimeLabel)
-        cellBackgroundView.addSubview(logoCircleBackgroundView)
-        logoCircleBackgroundView.addSubview(scheduleImageByTypeImageView)
+        addView()
         
+        location()
+    }
+    
+    // MARK: - addView
+    private func addView(){
+        contentView.addSubview(cellBackgroundView)
+        [scheduleTypeLabel, notificationContentLabel, afterNotificationTimeLabel, logoCircleBackgroundView].forEach { cellBackgroundView.addSubview($0) }
+        logoCircleBackgroundView.addSubview(scheduleImageByTypeImageView)
+    }
+    
+    // MARK: - location
+    private func location(){
         cellBackgroundView.snp.makeConstraints { make in
             make.height.equalToSuperview().dividedBy(1.18)
             make.top.equalToSuperview().offset(5)
@@ -85,7 +95,6 @@ class NotificationTableViewCell: UITableViewCell {
             make.left.equalToSuperview().offset(contentView.frame.width/20)
             
             logoCircleBackgroundView.layer.cornerRadius = ((contentView.frame.height/1.18)/2.4)/2
-            
         }
         
         scheduleImageByTypeImageView.snp.makeConstraints { make in
@@ -107,7 +116,5 @@ class NotificationTableViewCell: UITableViewCell {
             make.top.equalTo(scheduleTypeLabel.snp.bottom)
             make.left.equalTo(scheduleTypeLabel)
         }
-        
     }
-
 }

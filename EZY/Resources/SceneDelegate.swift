@@ -19,7 +19,11 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
         window = UIWindow(windowScene: windowScene)
       
+<<<<<<< HEAD
         let mainViewController = reErrandListViewController()
+=======
+        let mainViewController = PlanRequestRespondingViewController()
+>>>>>>> 4835c51da1ef641fd9cb2dd13f4198d0e977f552
 
         let navigationController = UINavigationController(rootViewController: mainViewController)
 

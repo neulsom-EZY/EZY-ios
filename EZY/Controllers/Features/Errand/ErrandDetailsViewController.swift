@@ -9,12 +9,16 @@ import UIKit
 
 class ErrandDetailsViewController: UIViewController {
     //MARK: - Properties
+<<<<<<< HEAD
     //MARK: - Dummy_Data
     var errandType:String = ""
     var errandTitle:String = ""
     var errandTime:String = ""
     var errandExplain:String = ""
     
+=======
+
+>>>>>>> 4835c51da1ef641fd9cb2dd13f4198d0e977f552
     static let data = ["JiHoooooon","siwony"]
     
     let bounds = UIScreen.main.bounds
@@ -24,9 +28,11 @@ class ErrandDetailsViewController: UIViewController {
         $0.setImage(UIImage(systemName: "arrow.left"), for: .normal)
         $0.addTarget(self, action: #selector(todobackbtn), for: .touchUpInside)
     }
-    private  lazy var TitleLabel = UILabel().then{
+
+    private let TitleLabel = UILabel().then{
+
         $0.textColor = .EZY_AFADFF
-        $0.text = errandType
+        $0.text = "받은 심부름"
         $0.dynamicFont(fontSize: 22, currentFontName: "AppleSDGothicNeo-SemiBold")
     }
     private let Errandlabel = UILabel().then{
@@ -34,8 +40,8 @@ class ErrandDetailsViewController: UIViewController {
         $0.dynamicFont(fontSize: 10, currentFontName: "AppleSDGothicNeo-Thin")
         $0.textColor = .rgb(red: 108, green: 108, blue: 108)
     }
-    private lazy var RequestList : inputContainerErrandTextView = {
-        let viewModel = ErrandinputContainerTv(viewbackColor: .rgb(red: 244, green: 246, blue: 255), titleText: errandExplain, titleColor: .rgb(red: 128, green: 153, blue: 255), explanationText: errandTitle, writeEditable: false)
+    private let RequestList : inputContainerErrandTextView = {
+        let viewModel = ErrandinputContainerTv(viewbackColor: .rgb(red: 244, green: 246, blue: 255), titleText: "어떤 심부름을 부탁 받았나요?", titleColor: .rgb(red: 128, green: 153, blue: 255), explanationText: "송정카페에서 초코마카롱 사오기송정카페에서 초코마카롱 사오기송정카페에서 초코마카롱 사오기송정카페에서 초코마카롱 송정카페에서 초코마카롱 사오기롱 사오기송정카페에서 초코", writeEditable: false)
         let view = inputContainerErrandTextView(with: viewModel)
         return view
     }()
@@ -46,8 +52,8 @@ class ErrandDetailsViewController: UIViewController {
         button.addTarget(self, action: #selector(calendarAlert), for: .touchUpInside)
         return button
     }()
-    private lazy var clockBtn : AlertButton = {
-        let viewModel = AlertBtn(icon: UIImage(named: "EZY_clock")?.withRenderingMode(.alwaysTemplate), iconTintColor: .rgb(red: 255, green: 203, blue: 181), message: errandTime)
+    private let clockBtn : AlertButton = {
+        let viewModel = AlertBtn(icon: UIImage(named: "EZY_clock")?.withRenderingMode(.alwaysTemplate), iconTintColor: .rgb(red: 255, green: 203, blue: 181), message: "11:00AM - 1:00PM")
         let button = AlertButton(with: viewModel)
         button.addTarget(self, action: #selector(clockAlert), for: .touchUpInside)
         return button
