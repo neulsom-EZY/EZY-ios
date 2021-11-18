@@ -31,13 +31,13 @@ class LocationTableViewCell: UITableViewCell {
         $0.dynamicFont(fontSize: 16, currentFontName: "AppleSDGothicNeo-Thin")
     }
     
-    private let locationLabel = UILabel().then {
+    let locationLabel = UILabel().then {
         $0.text = "광주 광산구 상무대로 312"
         $0.dynamicFont(fontSize: 10, currentFontName: "AppleSDGothicNeo-SemiBold")
         $0.textColor = UIColor(red: 203/255, green: 203/255, blue: 203/255, alpha: 1)
     }
     
-    private let subLocationLabel = UILabel().then {
+    let subLocationLabel = UILabel().then {
         $0.text = "(우) 62423(지번) 송정동 710-3"
         $0.dynamicFont(fontSize: 8, currentFontName: "AppleSDGothicNeo-Thin")
         $0.textColor = UIColor(red: 177/255, green: 177/255, blue: 177/255, alpha: 1)
@@ -76,6 +76,7 @@ class LocationTableViewCell: UITableViewCell {
         
         locationTitleNameLabel.snp.makeConstraints { make in
             make.top.left.equalToSuperview()
+            make.right.equalToSuperview().inset(10)
         }
 
         locationLabel.snp.makeConstraints { make in

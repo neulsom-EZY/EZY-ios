@@ -73,7 +73,7 @@ extension UIColor{
     static var EZY_TagColor13 = UIColor(red: 198/255, green: 171/255, blue: 255/255, alpha: 1)
     
     static var EZY_TagColorArray = [EZY_TagColor1,EZY_TagColor2,EZY_TagColor3,EZY_TagColor4,EZY_TagColor5,EZY_TagColor6,EZY_TagColor7,EZY_TagColor8,EZY_TagColor9,EZY_TagColor10,EZY_TagColor11,EZY_TagColor12,EZY_TagColor13]
-    
+    static let EZY_BDAAFF = UIColor.rgb(red: 189, green: 170, blue: 255)
     static let EZY_PLAN_FINISH_PURPLE = UIColor.rgb(red: 189, green: 170, blue: 255)
     static let EZY_PLAN_YELLOW = UIColor.rgb(red: 255, green: 209, blue: 141)
     static let EZY_PLAN_ORANGE = UIColor.rgb(red: 255, green: 166, blue: 128)

@@ -12,8 +12,10 @@ import Then
 protocol UserDataDelegate : AnyObject{
     func userUpdateData(name : String? , Color : UIColor)
 }
+
 class MorePeopleToDo: UIViewController{
     let bounds = UIScreen.main.bounds
+    //MARK: - Dummy Data
     let data = ["Jihoooooon","siwonnnny","NoName","mingki","johnjihwan","noplayy"]
 
     let recommendData = ["Jihoooooon","siwonnnny","NoName","mingki","johnjihwan","noplayy"]

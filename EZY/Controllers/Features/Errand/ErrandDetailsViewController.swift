@@ -19,7 +19,9 @@ class ErrandDetailsViewController: UIViewController {
         $0.setImage(UIImage(systemName: "arrow.left"), for: .normal)
         $0.addTarget(self, action: #selector(todobackbtn), for: .touchUpInside)
     }
+
     private let TitleLabel = UILabel().then{
+
         $0.textColor = .EZY_AFADFF
         $0.text = "받은 심부름"
         $0.dynamicFont(fontSize: 22, currentFontName: "AppleSDGothicNeo-SemiBold")
@@ -88,12 +90,9 @@ class ErrandDetailsViewController: UIViewController {
     }
     
     //MARK: - Lifecycle
-    
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         configureUI()
-
     }
     
     //MARK: - Selectors
@@ -103,13 +102,13 @@ class ErrandDetailsViewController: UIViewController {
         navigationController?.popViewController(animated: true)
     }
     
-    @objc func calendarAlert(){
+    @objc private  func calendarAlert(){
         // 날짜 Alert를 실행시킬 부분
     }
-    @objc func clockAlert(){
+    @objc private func clockAlert(){
         //시간 Alert를 실행시킬 부분
     }
-    @objc func locationAlert(){
+    @objc private func locationAlert(){
         //위치 Alert 실행시킬 부분
     }
     @objc private func Addmytodobtn(){
@@ -124,14 +123,17 @@ class ErrandDetailsViewController: UIViewController {
         addView()
         location()
     }
+    //MARK: - CornerRadius
     private func cornerRadius(){
         RequestList.layer.cornerRadius = view.frame.height/40.6
         addButton.layer.cornerRadius = view.frame.height/81.2
         explanationContainerView.layer.cornerRadius = view.frame.height/40.6
     }
+    //MARK: - AddVIew
     private func addView(){
         [backbutton,TitleLabel,Errandlabel,RequestList,btnStackView,explanationContainerView,addButton].forEach {view.addSubview($0)}
     }
+    //MARK: - Location
     private func location(){
         backbutton.snp.makeConstraints { (make) in
             make.height.width.equalTo(self.view.frame.height/33.8)
