@@ -79,9 +79,10 @@ class ChangePasswordPasswordAfterLoginViewController: UIViewController{
     
     @objc func changeButtonClicked(sender:UIButton){
         if isValidPassword(Password: lineInputView.getNickNameText()) == true{
-            let vc = ChangePasswordAuthCodeAfterLoginViewController()
+            let vc = SettingViewController()
 
-            self.navigationController?.pushViewController(vc, animated: true)
+            vc.modalPresentationStyle = .fullScreen
+            present(vc, animated: true, completion: nil)
         }else{
             lineInputView.checkNickNameIsEmpty()
         }

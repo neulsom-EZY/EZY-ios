@@ -27,9 +27,8 @@ class ChangePasswordNameAfterLoginViewController: UIViewController {
     // MARK: - LifyCycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+
         addView()
-        
         location()
     }
     
@@ -60,17 +59,6 @@ class ChangePasswordNameAfterLoginViewController: UIViewController {
             make.top.equalTo(self.view.safeAreaLayoutGuide)
             make.height.equalToSuperview().dividedBy(8)
         }
-    }
-    
-    // MARK: - Selectors
-    @objc //MARK: 모달 창 올리기
-    func keyboardWillShow(_ sender: Notification) {
-        changeButton.frame.origin.y = self.view.frame.height/2
-    }
-
-    @objc //MARK: 모달 창 원래대로 
-    func keyboardWillHide(_ sender: Notification) {
-        changeButton.frame.origin.y = self.view.frame.height-changeButton.frame.height-self.view.frame.height/23.8
     }
     
     // MARK: - Selectors

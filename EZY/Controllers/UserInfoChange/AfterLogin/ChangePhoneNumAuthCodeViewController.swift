@@ -26,7 +26,8 @@ class ChangePhoneNumAuthCodeViewController: UIViewController {
     //MARK: - LifyCycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        print("ChangePhoneNumAuthCodeViewController")
+
         addView()
         keyboardTypeSetting()
         authCodeViewSetting()
@@ -34,6 +35,7 @@ class ChangePhoneNumAuthCodeViewController: UIViewController {
     }
     
     func addView(){
+        
         view.backgroundColor = .white
         view.addSubview(topView)
         view.addSubview(authCodeView)
