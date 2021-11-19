@@ -8,6 +8,7 @@
 import UIKit
 import SnapKit
 import Then
+import Alamofire
 
 class SignUpTermsViewController: UIViewController{
     //MARK: - Properties
@@ -257,8 +258,37 @@ class SignUpTermsViewController: UIViewController{
     @objc
     private func onTapSignIn(){
         if flag1 == true && flag2 == true {
-            let controller = ShowPlanViewController()
-            navigationController?.pushViewController(controller, animated: true)
+            let param: Parameters = ["fcmToken": model?.fcmToken,
+                                     "username": model?.username,
+                                     "password": model?.password,
+                                     "phoneNumber": model?.phoneNumber]
+            API.shared.request(url: "/v1/member/signup", method: .post, parameter: param) { result in
+                switch result {
+                case .success(let data):
+                    print(data)
+                    let controller = ShowPlanViewController()
+                    self.navigationController?.pushViewController(controller, animated: true)
+                    break
+                case .requestErr(let err):
+                    print(err)
+                    break
+                case .pathErr:
+                    print("pathErr")
+                    break
+                case .serverErr:
+                    print("serverErr")
+                    break
+                case .networkFail:
+                    print("networkFail")
+                    break
+                case .tokenErr:
+                    print("tokenErr")
+                    break
+                case .authorityErr:
+                    print("authorityErr")
+                    break
+                }
+            }
         }else{
             shakeView(self.view)
         }
