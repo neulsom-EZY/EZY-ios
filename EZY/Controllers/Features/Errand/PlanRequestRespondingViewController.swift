@@ -9,34 +9,24 @@ import UIKit
 
 class PlanRequestRespondingViewController: UIViewController {
     // MARK: - Properties
-    private var errandTitle:String = ""
-    
-    private var errandTime:String = "11:00AM - 1:00PM"
-    
-    private let purpleColor: UIColor! = UIColor(red: 150/255, green: 141/255, blue: 255/255, alpha: 1)
-    
-    private let whitePurpleColor: UIColor! = UIColor(red: 227/255, green: 225/255, blue: 255/255, alpha: 1)
-    
-    private lazy var labelColor: [UIColor] = [purpleColor, whitePurpleColor]
-    
     private let backButton = UIButton().then{
         $0.setImage(UIImage(named: "EZY_RequestBackButton"), for: .normal)
         $0.addTarget(self, action: #selector(backButtonClicked(sender:)), for: .touchUpInside)
     }
     
-    private lazy var titleLabel = UILabel().then {
+    private let titleLabel = UILabel().then {
         $0.text = "지환님이\n심부름을 부탁하셨어요."
         $0.numberOfLines = 0
         $0.textAlignment = .left
         $0.dynamicFont(fontSize: 25, currentFontName: "AppleSDGothicNeo-SemiBold")
-        $0.textColor = purpleColor
+        $0.textColor = UIColor(red: 150/255, green: 141/255, blue: 255/255, alpha: 1)
     }
     
-    private lazy var contentLabel = UILabel().then {
+    private let contentLabel = UILabel().then {
         $0.text = "보여드릴게요!"
         $0.textAlignment = .left
         $0.dynamicFont(fontSize: 20, currentFontName: "AppleSDGothicNeo-SemiBold")
-        $0.updateGradientTextColor_vertical(gradientColors: labelColor)
+        $0.updateGradientTextColor_vertical(gradientColors: [UIColor(red: 150/255, green: 141/255, blue: 255/255, alpha: 1), UIColor(red: 227/255, green: 225/255, blue: 255/255, alpha: 1)])
     }
     
     private let planShowView = UIView().then {
@@ -49,7 +39,7 @@ class PlanRequestRespondingViewController: UIViewController {
         $0.layer.shadowColor = UIColor.black.cgColor
     }
     
-    private lazy var planTitleLabel = UILabel().then {
+    private let planTitleLabel = UILabel().then {
         $0.text = "마카롱 사오기"
         $0.dynamicFont(fontSize: 22, currentFontName: "AppleSDGothicNeo-Bold")
         $0.textColor = UIColor(red: 141/255, green: 138/255, blue: 255/255, alpha: 1)
@@ -66,7 +56,7 @@ class PlanRequestRespondingViewController: UIViewController {
         $0.image = UIImage(named: "EZY_TimeSquare")
     }
     
-    private lazy var planTimeLabel = UILabel().then {
+    private let planTimeLabel = UILabel().then {
         $0.text = "11:00AM - 1:00PM"
         $0.textAlignment = .center
         $0.textColor = UIColor(red: 101/255, green: 101/255, blue: 101/255, alpha: 1)
@@ -233,11 +223,6 @@ class PlanRequestRespondingViewController: UIViewController {
             
             acceptButton.layer.cornerRadius = (self.view.frame.height/20.3)/2
         }
-    }
-    
-    func errandInfoSetting(errandTitle: String, errandTime: String){
-        self.errandTitle = errandTitle
-        self.errandTime = errandTime
     }
     
     @objc func acceptButtonClicked(sender:UIButton){
