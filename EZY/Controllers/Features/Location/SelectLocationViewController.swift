@@ -11,14 +11,14 @@ import Alamofire
 class SelectLocationViewController: UIViewController {
     
     // MARK: - Properties
-    private let alphabetTextArray: [String] = ["A", "B"]
     
-    private var placeName: [String] = ["광주소프트웨어마이스터고등학교광주", "광주소프트웨어마이스터고등학교광주 행정실"]
-    
+    //MARK: - Kakao Search Data
+    private var kakaoPlaceSearchData : [KakaoDocuments]? = nil
     let bgView = UIView().then {
         $0.backgroundColor = .black
     }
-
+    private let alphabet : [String] = ["A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T","U","V","W","X","Y","Z"]
+    
     private let selectLocationModalView = SelectLocationModalView().then{
         $0.okButton.addTarget(self, action: #selector(okButtonClicked(sender:)), for: .touchUpInside)
         $0.isHidden = true
@@ -37,6 +37,7 @@ class SelectLocationViewController: UIViewController {
     private let locationTextField = UITextField().then {
         $0.placeholder = "위치를 입력해주세요."
         $0.dynamicFont(fontSize: 10, currentFontName: "AppleSDGothicNeo-Bold")
+        $0.returnKeyType = .done
     }
     
     private let topViewHalfModalView = UIView().then{
@@ -135,6 +136,7 @@ class SelectLocationViewController: UIViewController {
     private func delegateAndDataSource(){
         locationTableView.delegate = self
         locationTableView.dataSource = self
+        locationTextField.delegate = self
     }
     
     // MARK: - Selectors
@@ -149,9 +151,26 @@ class SelectLocationViewController: UIViewController {
     
     @objc private func searchButtonClicked(sender:UIButton){
         // 검색 버튼 클릭 시
+        let param : Parameters = ["query" :  locationTextField.text ?? ""]
+        KakaoPlaceSearchAPI.shared.getKakaoInfo(Parameters: param) { (response) in
+            switch response{
+            case.success(let kakaoData):
+                if  let  kakao = kakaoData as? [KakaoDocuments]{
+                    self.kakaoPlaceSearchData = kakao
+                    self.locationTableView.reloadData()
+                }
+            case .requestErr(let message):
+                print("requestError", message)
+            case .pathErr:
+                print("pathErr")
+            case .serverErr:
+                print("serverError")
+            case .networkFail:
+                print("networkFail")
+            }
+        }
     }
-    
-    
+    //MARK: - Modal Effect
     // MARK: - addDim
     private func addDim() {
            view.addSubview(bgView)
@@ -176,28 +195,21 @@ class SelectLocationViewController: UIViewController {
 // MARK: - UITableViewDelegate and UITableViewDataSource
 extension SelectLocationViewController: UITableViewDataSource, UITableViewDelegate{
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return alphabetTextArray.count
+        return kakaoPlaceSearchData?.count ??  0
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: LocationTableViewCell.reuseId, for: indexPath) as! LocationTableViewCell
         cell.selectionStyle = .none
-        cell.alphabetLabel.text = alphabetTextArray[indexPath.row]
-        
-        if placeName[indexPath.row].count < 20{
-            cell.locationTitleNameLabel.numberOfLines = 0
-        }else{
-            placeName[indexPath.row] = placeName[indexPath.row].replacingOccurrences(of: " ", with: "\n")
-            
-            cell.locationTitleNameLabel.numberOfLines = 2
-        }
-        cell.locationTitleNameLabel.text = "\(placeName[indexPath.row])"
-        
+        cell.alphabetLabel.text = alphabet[indexPath.row]
+        cell.locationTitleNameLabel.text = kakaoPlaceSearchData?[indexPath.row].placeName
+        cell.locationLabel.text = kakaoPlaceSearchData?[indexPath.row].roadAddressName
+        cell.subLocationLabel.text = kakaoPlaceSearchData?[indexPath.row].addressName
         return cell
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return CGFloat((placeName[indexPath.row].size(withAttributes: [NSAttributedString.Key.font : UIFont.systemFont(ofSize: 12)]).height) + 45)
+        return 75
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -206,10 +218,18 @@ extension SelectLocationViewController: UITableViewDataSource, UITableViewDelega
         BasicModalVC.baseDelegate = self
         BasicModalVC.delegate = self
         present(BasicModalVC, animated: true, completion: nil)
-        BasicModalVC.textSetting(colorText: placeName[indexPath.row], contentText: "위치를 선택할까요?")
+        BasicModalVC.textSetting(colorText: kakaoPlaceSearchData?[indexPath.row].placeName ?? "", contentText: "위치를 선택할까요?")
     }
 }
-
+//MARK: - textfield 설정
+extension SelectLocationViewController : UITextFieldDelegate{
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        locationTextField.resignFirstResponder()
+        searchButtonClicked(sender: searchButton.self)
+        return true
+    }
+}
+//MARK: - BaseModal Delegate
 extension SelectLocationViewController: BaseModalDelegate {
     func onTapClose() {
         removeDim()

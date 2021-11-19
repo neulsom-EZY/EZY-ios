@@ -19,7 +19,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
         window = UIWindow(windowScene: windowScene)
       
-        let mainViewController = LoginViewController()
+        let mainViewController = AddOrChangeMyTodoViewController()
 
         let navigationController = UINavigationController(rootViewController: mainViewController)
 
@@ -34,14 +34,6 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
             }
         }
     }
-
-//    func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
-//        guard let windowScene = (scene as? UIWindowScene) else { return }
-//
-//        channelWindow = ChannelIO.initializeWindow(with: windowScene)
-//
-//        channelWindow?.rootViewController = ChannelTalkViewController()
-//    }
 
     func sceneDidDisconnect(_ scene: UIScene) {
         // Called as the scene is being released by the system.

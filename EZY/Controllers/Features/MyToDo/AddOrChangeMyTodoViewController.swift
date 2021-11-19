@@ -6,7 +6,7 @@
 //
 
 import UIKit
-
+import Alamofire
 
 class AddOrChangeMyTodoViewController: UIViewController{
     //MARK: - Properties
@@ -86,7 +86,7 @@ class AddOrChangeMyTodoViewController: UIViewController{
     }
     
     private let addOrChangeButton = UIButton().then {
-        $0.setTitle("변 경", for: .normal)
+        $0.setTitle("추 가", for: .normal)
         $0.layer.cornerRadius = 10
         $0.backgroundColor = UIColor(red: 186/255, green: 200/255, blue: 255/255, alpha: 1)
         $0.dynamicFont(fontSize: 14, currentFontName: "AppleSDGothicNeo-SemiBold")
@@ -94,7 +94,7 @@ class AddOrChangeMyTodoViewController: UIViewController{
     }
     
     private let mainTitleLabel = UILabel().then{
-        $0.text = "나의 할 일 변경"
+        $0.text = "나의 할 일 추가"
         $0.textColor = UIColor(red: 154/255, green: 174/255, blue: 254/255, alpha: 1)
         $0.dynamicFont(fontSize: 22, currentFontName: "AppleSDGothicNeo-SemiBold")
     }
@@ -160,7 +160,7 @@ class AddOrChangeMyTodoViewController: UIViewController{
     
     private let explanationContainerView = ExplanationContainerTextView(tvTitle: "설명")
     
-    let sizeCheckLabel = UILabel().then{
+    private let sizeCheckLabel = UILabel().then{
         $0.dynamicFont(fontSize: 12, currentFontName: "AppleSDGothicNeo-Bold")
         $0.sizeToFit()
     }
@@ -173,7 +173,7 @@ class AddOrChangeMyTodoViewController: UIViewController{
     }
     
     //MARK: - helpers
-    func configureUI(){
+    private func configureUI(){
         self.view.backgroundColor = .white
         
         addView()
@@ -184,14 +184,14 @@ class AddOrChangeMyTodoViewController: UIViewController{
     }
     
     //MARK: - dataSourceAndDelegate
-    func dataSourceAndDelegate(){
+    private func dataSourceAndDelegate(){
         tagCollectionView.delegate = self
         tagCollectionView.dataSource = self
         explanationContainerView.tv.delegate = self
     }
     
     //MARK: - addLayout
-    func location(){
+    private func location(){
         backButton.snp.makeConstraints { make in
             make.top.equalTo(self.view.safeAreaLayoutGuide).offset(self.view.frame.height/47.7)
             make.left.equalToSuperview().offset(self.view.frame.width/12)
@@ -278,7 +278,7 @@ class AddOrChangeMyTodoViewController: UIViewController{
     }
     
     //MARK: - addView
-    func addView(){
+    private func addView(){
         [backButton, mainTitleLabel, titleBackgroundView].forEach { view.addSubview($0)}
         [titleLabel,titleTextField].forEach { titleBackgroundView.addSubview($0)}
         [calendarBtn,btnStackView, explanationContainerView, tagLabel,tagCollectionView,notificationTitleLabel,notificationAddButton,notificationNoSelectButton,addOrChangeButton].forEach { view.addSubview($0) }
@@ -323,7 +323,8 @@ class AddOrChangeMyTodoViewController: UIViewController{
     }
     
     @objc func changeButtonClicked(sender:UIButton){
-        self.navigationController?.popViewController(animated: true)
+//        self.navigationController?.popViewController(animated: true)
+        addPost()
     }
     
     @objc func backButtonClicked(sender:UIButton){
@@ -351,7 +352,7 @@ class AddOrChangeMyTodoViewController: UIViewController{
     }
     
     //MARK: - Alarm Setting Function
-    func alarmReloadSetting(_ ampm: String,_ time: Int,_ minute: Int){
+    private func alarmReloadSetting(_ ampm: String,_ time: Int,_ minute: Int){
         notificationAddButton.setTitle("\(ampm) \(time):\(String(format: "%02d", minute))", for: .normal)
         notificationAddButton.setImage(nil, for: .normal)
         notificationNoSelectButton.backgroundColor = .white
@@ -366,7 +367,7 @@ class AddOrChangeMyTodoViewController: UIViewController{
     }
     
     //MARK: - calendar Setting Function
-    func calendarReloadSetting(_ selectedDay: String, _ selectedRepeatDay: [String], _ selectedDayOfWeek: String, _ yearAndMonthText: String, _ selectedValuesIndex: Int, _ selectedRepeatIndex: [Int]){
+    private func calendarReloadSetting(_ selectedDay: String, _ selectedRepeatDay: [String], _ selectedDayOfWeek: String, _ yearAndMonthText: String, _ selectedValuesIndex: Int, _ selectedRepeatIndex: [Int]){
         
         // 반복라벨에 적용
         if selectedRepeatDay.count == 0{
@@ -383,7 +384,7 @@ class AddOrChangeMyTodoViewController: UIViewController{
     }
     
     //MARK: - time Setting Function
-    func timeReloadSetting(_ leftOrRight: [String], _ startTime: String, _ endTime: String, _ afterOrMorn: [String], _ selectedTimeIndex: [Int]){
+    private func timeReloadSetting(_ leftOrRight: [String], _ startTime: String, _ endTime: String, _ afterOrMorn: [String], _ selectedTimeIndex: [Int]){
         self.leftOrRight = leftOrRight
         self.selectedTimeIndex = selectedTimeIndex
         self.receiveStartTime = startTime
@@ -392,7 +393,8 @@ class AddOrChangeMyTodoViewController: UIViewController{
         clockBtn.alertButtonTitleLabel.text = "\(LeftOrRightChangeKorean(leftOrRight: leftOrRight[0])) \(startTime) ~ \(LeftOrRightChangeKorean(leftOrRight: leftOrRight[1])) \(endTime)"
     }
     
-    func tagReloadSetting(_ tagName: String, _ tagColorIndex: Int){
+    // MARK: - tagReloadSetting
+    private func tagReloadSetting(_ tagName: String, _ tagColorIndex: Int){
         for i in 0...TagModels.count-1{
             if TagModels[i].isSelected == false{
                 TagModels[i].isSelected.toggle()
@@ -405,11 +407,13 @@ class AddOrChangeMyTodoViewController: UIViewController{
         tagCollectionView.reloadData()
     }
     
+    // MARK: - mainTitleLabelSetting
     func mainTitleLabelSetting(mainTitleText: String, buttonText: String){
         mainTitleLabel.text = mainTitleText
         addOrChangeButton.setTitle(buttonText, for: .normal)
     }
     
+    // MARK: - LeftOrRightChangeKorean
     private func LeftOrRightChangeKorean(leftOrRight: String) -> String{
         if leftOrRight == "L" { return "오전" }else{ return "오후" }
     }
@@ -425,6 +429,7 @@ class AddOrChangeMyTodoViewController: UIViewController{
         view?.layer.add(shake, forKey: "position")
     }
     
+    // MARK: - addDim
     private func addDim() {
         view.addSubview(bgView)
         bgView.snp.makeConstraints { (make) in
@@ -436,9 +441,29 @@ class AddOrChangeMyTodoViewController: UIViewController{
         }
     }
 
-    func removeDim() {
+    // MARK: - removeDim
+    private func removeDim() {
         DispatchQueue.main.async { [weak self] in
             self?.bgView.removeFromSuperview()
+        }
+    }
+    
+    private func addPost() {
+        let url = "http://13.209.63.165:8082/v1/plan/personal"
+        
+        let header: HTTPHeaders = ["Authorization": ""]
+        
+        let params = [ "period": [ "endDateTime": "yyyy-MM-ddTHH:mm:ss", "startDateTime": "yyyy-MM-ddTHH:mm:ss" ], "planInfo": [ "explanation": "explanation", "location": "location", "title": "title" ], "repetition": true, "tagIdx": 12 ] as Dictionary
+        
+        let call = AF.request(url, method: .post, parameters: params, encoding: JSONEncoding.default, headers: header)
+        
+        call.responseString { (response) in
+            switch response.result {
+            case .success:
+                print("POST success")
+            case .failure(let error):
+                print("Alamofire Request Error\nCode:\(error._code), Message: \(error.errorDescription!)")
+            }
         }
     }
 }

@@ -265,6 +265,7 @@ class WithdrawalViewController: UIViewController {
     func keyboardWillShow(_ sender: Notification) {
         withdrawalButton.frame.origin.y = self.view.frame.height/2
     }
+    
 
     @objc //MARK: 모달 창 원래대로
     func keyboardWillHide(_ sender: Notification) {
