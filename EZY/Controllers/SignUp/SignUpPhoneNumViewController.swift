@@ -8,9 +8,11 @@
 import UIKit
 import SnapKit
 import Then
+import Alamofire
 
 class SignUpPhoneNumViewController: UIViewController{
     //MARK: - Properties
+    var model:UserModel?
     
     private let topBarView = TopBarView().then {
         $0.goBackButton.addTarget(self, action: #selector(goBack), for: .touchUpInside)
@@ -48,9 +50,46 @@ class SignUpPhoneNumViewController: UIViewController{
     
     @objc
     private func onTapContinueTerms(){
+        self.model!.phoneNumber = phoneNumContainer.tf.text!
+        print(model)
+        
+        let param: Parameters = [
+            "phoneNumber": model?.phoneNumber
+        ]
+        print(param)
+        
         if isValidPhoneNum(PhoneNumber: phoneNumContainer.tf.text) == true{
-            let controller = SignUpAuthCodeViewController()
-            navigationController?.pushViewController(controller, animated: true)
+//            let controller = SignUpAuthCodeViewController()
+//            controller.model = model
+//            navigationController?.pushViewController(controller, animated: true)
+            API.shared.request(url: "/v1/member/verified/phone", method: .post, parameter: param) { result in
+                switch result {
+                case .success(let data):
+                    print(data)
+                    let controller = SignUpAuthCodeViewController()
+                    controller.model = self.model
+                    self.navigationController?.pushViewController(controller, animated: true)
+                    break
+                case .requestErr(let err):
+                    print(err)
+                    break
+                case .pathErr:
+                    print("pathErr")
+                    break
+                case .serverErr:
+                    print("serverErr")
+                    break
+                case .networkFail:
+                    print("networkFail")
+                    break
+                case .tokenErr:
+                    print("tokenErr")
+                    break
+                case .authorityErr:
+                    print("authorityErr")
+                    break
+                }
+            }
         }else{
             shakeView(self.view)
         }

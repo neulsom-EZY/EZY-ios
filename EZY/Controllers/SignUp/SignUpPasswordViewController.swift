@@ -56,8 +56,11 @@ class SignUpPasswordViewController: UIViewController{
     
     @objc
     private func onTapContinuePhoneNum(){
+        self.model!.password = passwordContainer.tf.text!
+        print(model)
         if isValidPassword(Password: passwordContainer.tf.text) == true{
             let controller = SignUpPhoneNumViewController()
+            controller.model = model
             navigationController?.pushViewController(controller, animated: true)
         }else{
             shakeView(self.view)
