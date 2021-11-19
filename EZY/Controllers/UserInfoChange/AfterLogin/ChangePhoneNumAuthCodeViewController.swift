@@ -36,8 +36,6 @@ class ChangePhoneNumAuthCodeViewController: UIViewController {
     func addView(){
         view.backgroundColor = .white
         view.addSubview(topView)
-        topView.addSubview(topView.backButton)
-        topView.addSubview(topView.titleLabel)
         view.addSubview(authCodeView)
         view.addSubview(changeButton)
     }
@@ -47,17 +45,6 @@ class ChangePhoneNumAuthCodeViewController: UIViewController {
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(_:)), name:UIResponder.keyboardWillShowNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide(_:)), name: UIResponder.keyboardWillHideNotification, object: nil)
         
-        topView.backButton.snp.makeConstraints { make in
-            make.top.equalTo(self.view.safeAreaLayoutGuide).offset(self.view.frame.height/47.7)
-            make.left.equalToSuperview().offset(self.view.frame.width/12)
-            make.width.equalToSuperview().dividedBy(33.8/2)
-            make.height.equalTo(topView.backButton.snp.width)
-        }
-        
-        topView.titleLabel.snp.makeConstraints { make in
-            make.left.equalTo(topView.backButton)
-            make.top.equalTo(topView.backButton.snp.bottom).offset(self.view.frame.height/30)
-        }
         
         topView.snp.makeConstraints { make in
             make.left.right.equalToSuperview()
@@ -106,7 +93,7 @@ class ChangePhoneNumAuthCodeViewController: UIViewController {
     }
     
     @objc func changeButtonClicked(sender:UIButton){
-        let nextViewController = ChangePasswardAfterLoginViewController()
+        let nextViewController = ChangePasswordNameAfterLoginViewController()
         self.navigationController?.pushViewController(nextViewController, animated: true)
     }
     

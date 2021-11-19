@@ -181,8 +181,8 @@ class WithdrawalViewController: UIViewController {
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide(_:)), name: UIResponder.keyboardWillHideNotification, object: nil)
                 
         idNameLabel.snp.makeConstraints { make in
-            make.top.equalTo(topView.titleLabel.snp.bottom).offset(self.view.frame.height/16.91)
-            make.left.equalTo(topView.titleLabel)
+            make.top.equalTo(topView.snp.bottom).offset(self.view.frame.height/16.91)
+            make.left.equalTo(topView)
         }
         
         idTextField.snp.makeConstraints { make in
@@ -235,24 +235,11 @@ class WithdrawalViewController: UIViewController {
     
     func topViewSetting(){
         self.view.addSubview(topView)
-        topView.addSubview(topView.backButton)
-        topView.addSubview(topView.titleLabel)
         
         topView.backButton.addTarget(self, action: #selector(backButtonClicked(sender:)), for: .touchUpInside)
         
         topView.topViewDataSetting(backButtonImage: UIImage(named: "EZY_IdChangeBackButtonImage")!, titleLabelText: "회원 탈퇴", textColor: UIColor(red: 120/255, green: 81/255, blue: 255/255, alpha: 1))
         
-        topView.backButton.snp.makeConstraints { make in
-            make.top.equalTo(self.view.safeAreaLayoutGuide).offset(self.view.frame.height/47.7)
-            make.left.equalToSuperview().offset(self.view.frame.width/12)
-            make.width.equalToSuperview().dividedBy(33.8/2)
-            make.height.equalTo(topView.backButton.snp.width)
-        }
-        
-        topView.titleLabel.snp.makeConstraints { make in
-            make.left.equalTo(topView.backButton)
-            make.top.equalTo(topView.backButton.snp.bottom).offset(self.view.frame.height/30)
-        }
         
         topView.snp.makeConstraints { make in
             make.left.right.equalToSuperview()

@@ -49,8 +49,6 @@ class ChangePhoneNumPutViewController: UIViewController {
     func addView(){
         self.view.backgroundColor = .white
         self.view.addSubview(topView)
-        topView.addSubview(topView.backButton)
-        topView.addSubview(topView.titleLabel)
         self.view.addSubview(phoneNumNickNameLabel)
         self.view.addSubview(phoneNumTextField)
         self.view.addSubview(phoneNumUnderLineView)
@@ -69,11 +67,6 @@ class ChangePhoneNumPutViewController: UIViewController {
             make.height.equalTo(topView.backButton.snp.width)
         }
         
-        topView.titleLabel.snp.makeConstraints { make in
-            make.left.equalTo(topView.backButton)
-            make.top.equalTo(topView.backButton.snp.bottom).offset(self.view.frame.height/30)
-        }
-        
         topView.snp.makeConstraints { make in
             make.left.right.equalToSuperview()
             make.top.equalTo(self.view.safeAreaLayoutGuide)
@@ -81,8 +74,8 @@ class ChangePhoneNumPutViewController: UIViewController {
         }
         
         phoneNumNickNameLabel.snp.makeConstraints { make in
-            make.top.equalTo(topView.titleLabel.snp.bottom).offset(self.view.frame.height/16.91)
-            make.left.equalTo(topView.titleLabel)
+            make.top.equalTo(topView.snp.bottom).offset(self.view.frame.height/16.91)
+            make.left.equalTo(topView)
         }
         
         phoneNumTextField.snp.makeConstraints { make in
@@ -111,7 +104,7 @@ class ChangePhoneNumPutViewController: UIViewController {
     
     @objc func changeButtonClicked(sender:UIButton){
         if isValidPhoneNumber(PhoneNumber: phoneNumTextField.text){
-            let nextViewController = ChangePasswardAfterLoginViewController()
+            let nextViewController = ChangePasswordNameAfterLoginViewController()
             self.navigationController?.pushViewController(nextViewController, animated: true)
         }else{
             shakeView(phoneNumNickNameLabel)

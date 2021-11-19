@@ -75,8 +75,6 @@ class ChangeIdAfterLoginViewController: UIViewController {
     private func addView(){
         self.view.backgroundColor = .white
         self.view.addSubview(topView)
-        topView.addSubview(topView.backButton)
-        topView.addSubview(topView.titleLabel)
         self.view.addSubview(idNickNameLabel)
         self.view.addSubview(idTextField)
         self.view.addSubview(idUnderLineView)
@@ -86,18 +84,6 @@ class ChangeIdAfterLoginViewController: UIViewController {
     
     // MARK: - addLayout
     private func location(){
-        topView.backButton.snp.makeConstraints { make in
-            make.top.equalTo(self.view.safeAreaLayoutGuide).offset(self.view.frame.height/47.7)
-            make.left.equalToSuperview().offset(self.view.frame.width/12)
-            make.width.equalToSuperview().dividedBy(33.8/2)
-            make.height.equalTo(topView.backButton.snp.width)
-        }
-        
-        topView.titleLabel.snp.makeConstraints { make in
-            make.left.equalTo(topView.backButton)
-            make.top.equalTo(topView.backButton.snp.bottom).offset(self.view.frame.height/30)
-        }
-        
         topView.snp.makeConstraints { make in
             make.left.right.equalToSuperview()
             make.top.equalTo(self.view.safeAreaLayoutGuide)
@@ -105,8 +91,8 @@ class ChangeIdAfterLoginViewController: UIViewController {
         }
         
         idNickNameLabel.snp.makeConstraints { make in
-            make.top.equalTo(topView.titleLabel.snp.bottom).offset(self.view.frame.height/16.91)
-            make.left.equalTo(topView.titleLabel)
+            make.top.equalTo(topView.snp.bottom).offset(self.view.frame.height/16.91)
+            make.left.equalTo(topView)
         }
         
         idTextField.snp.makeConstraints { make in

@@ -61,8 +61,7 @@ class SettingViewController: UIViewController {
         topView.topViewDataSetting(backButtonImage: UIImage(named: "EZY_SettingBackButton")!, titleLabelText: "설정",
                                    textColor: UIColor(red: 175/255, green: 173/255, blue: 255/255, alpha: 1))
 
-        topView.topViewLayoutSetting(screenHeight: Double(self.view.bounds.height), screenWeight: Double(self.view.bounds.width))
-        
+
         topView.snp.makeConstraints { make in
             make.left.right.equalToSuperview()
             make.top.equalTo(self.view.safeAreaLayoutGuide)
@@ -73,8 +72,6 @@ class SettingViewController: UIViewController {
     //MARK: - addSubview
     func addView(){
         self.view.addSubview(topView)
-        topView.addSubview(topView.backButton)
-        topView.addSubview(topView.titleLabel)
     }
     
     //MARK: - selectors
@@ -96,7 +93,7 @@ extension SettingViewController: UITableViewDelegate{
             let nextViewController = ChangeIdAfterLoginViewController()
             self.navigationController?.pushViewController(nextViewController, animated: true)
         }else if indexPath.row == 3{
-            let nextViewController = ChangePasswardPhoneNumAfterLoginViewController()
+            let nextViewController = ChangePasswordNameAfterLoginViewController()
             self.navigationController?.pushViewController(nextViewController, animated: true)
         }else if indexPath.row == 4{
             let nextViewController = ChangePhoneNumPutViewController()

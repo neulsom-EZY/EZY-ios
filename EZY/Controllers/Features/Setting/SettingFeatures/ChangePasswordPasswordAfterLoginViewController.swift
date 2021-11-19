@@ -1,30 +1,28 @@
 //
-//  ChangePasswardAfterLoginViewController.swift
+//  ChangePasswardWritePasswardViewController.swift
 //  EZY
 //
-//  Created by 김유진 on 2021/07/28.
+//  Created by 김유진 on 2021/11/19.
 //
 
 import UIKit
 
-class ChangePasswordNameAfterLoginViewController: UIViewController {
+class ChangePasswordPasswordAfterLoginViewController: UIViewController{
     //MARK: - Properties
-    private let topView = TopView().then{
-        $0.topViewDataSetting(backButtonImage: UIImage(named: "EZY_IdChangeBackButtonImage")!, titleLabelText: "비밀번호 변경", textColor: UIColor(red: 120/255, green: 81/255, blue: 255/255, alpha: 1))
-    }
+    private let topView = TopView()
     
     private let lineInputView = LineInputView().then{
-        $0.dataSetting(titleText: "닉네임", placeHolderText: "닉네임을 입력해주세요", conditionText: "1 ~ 10, 영어로 작성해주세요!")
+        $0.dataSetting(titleText: "비밀번호", placeHolderText: "비밀번호를 입력해주세요", conditionText: "영어 숫자 조합 8자 이상, 특수문자 가능, 공백 허용x")
     }
     
     private let changeButton = UIButton().then {
         $0.setBackgroundImage(UIImage(named: "EZY_ChangeButtonImage"), for: .normal)
-        $0.setTitle("계속하기", for: .normal)
+        $0.setTitle("비밀번호 변경하기", for: .normal)
         $0.dynamicFont(fontSize: 14, currentFontName: "AppleSDGothicNeo-Bold")
         $0.addTarget(self, action: #selector(changeButtonClicked(sender:)), for: .touchUpInside)
     }
     
-    // MARK: - LifyCycle
+    //MARK: - LifyCycle
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -33,14 +31,26 @@ class ChangePasswordNameAfterLoginViewController: UIViewController {
         location()
     }
     
-    // MARK: - addView
     private func addView(){
         self.view.backgroundColor = .white
-        [topView, lineInputView, changeButton].forEach { self.view.addSubview($0) }
+        self.view.addSubview(topView)
+        self.view.addSubview(lineInputView)
+        self.view.addSubview(changeButton)
+        
+        
+        topView.backButton.addTarget(self, action: #selector(backButtonClicked(sender:)), for: .touchUpInside)
+        
+        
+        topView.topViewDataSetting(backButtonImage: UIImage(named: "EZY_IdChangeBackButtonImage")!, titleLabelText: "비밀번호 변경", textColor: UIColor(red: 120/255, green: 81/255, blue: 255/255, alpha: 1))
+        
+        topView.snp.makeConstraints { make in
+            make.left.right.equalToSuperview()
+            make.top.equalTo(self.view.safeAreaLayoutGuide)
+            make.height.equalToSuperview().dividedBy(8)
+        }
     }
     
-    // MARK: - location
-    private func location() {
+    func location() {
         lineInputView.snp.makeConstraints { make in
             make.width.equalToSuperview()
             make.top.equalTo(topView.snp.bottom).offset(self.view.frame.height/17.65)
@@ -54,12 +64,6 @@ class ChangePasswordNameAfterLoginViewController: UIViewController {
             make.height.equalToSuperview().dividedBy(16.24)
             make.bottom.equalToSuperview().offset(-self.view.frame.height/23.8)
         }
-        
-        topView.snp.makeConstraints { make in
-            make.left.right.equalToSuperview()
-            make.top.equalTo(self.view.safeAreaLayoutGuide)
-            make.height.equalToSuperview().dividedBy(8)
-        }
     }
     
     // MARK: - Selectors
@@ -68,15 +72,15 @@ class ChangePasswordNameAfterLoginViewController: UIViewController {
         changeButton.frame.origin.y = self.view.frame.height/2
     }
 
-    @objc //MARK: 모달 창 원래대로 
+    @objc //MARK: 모달 창 원래대로
     func keyboardWillHide(_ sender: Notification) {
         changeButton.frame.origin.y = self.view.frame.height-changeButton.frame.height-self.view.frame.height/23.8
     }
     
-    // MARK: - Selectors
     @objc func changeButtonClicked(sender:UIButton){
-        if isValidNickname(Nickname: lineInputView.getNickNameText()) == true{
-            let vc = ChangePasswordPhoneNumAfterLoginViewController()
+        if isValidPassword(Password: lineInputView.getNickNameText()) == true{
+            let vc = ChangePasswordAuthCodeAfterLoginViewController()
+
             self.navigationController?.pushViewController(vc, animated: true)
         }else{
             lineInputView.checkNickNameIsEmpty()
@@ -87,12 +91,11 @@ class ChangePasswordNameAfterLoginViewController: UIViewController {
         self.navigationController?.popViewController(animated: true)
     }
     
-    // MARK: - isValidNickname
-    private func isValidNickname(Nickname: String?) -> Bool {
-        guard Nickname != nil else { return false }
+    private func isValidPassword(Password: String?) -> Bool {
+        guard Password != nil else { return false }
             
-        let NicknameRegEx = ("[A-Za-z].{0,9}")
-        let pred = NSPredicate(format:"SELF MATCHES %@", NicknameRegEx)
-        return pred.evaluate(with: Nickname)
+        let PasswordRegEx = ("(?=.*[A-Za-z~!@#$%^&*])(?=.*[0-9]).{8,}")
+        let pred = NSPredicate(format:"SELF MATCHES %@", PasswordRegEx)
+        return pred.evaluate(with: Password)
     }
 }
