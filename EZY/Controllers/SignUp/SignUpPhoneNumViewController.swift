@@ -66,9 +66,34 @@ class SignUpPhoneNumViewController: UIViewController{
                 switch result {
                 case .success(let data):
                     print(data)
-                    let controller = SignUpAuthCodeViewController()
-                    controller.model = self.model
-                    self.navigationController?.pushViewController(controller, animated: true)
+                    API.shared.request(url: "/v1/member/auth", method: .post, parameter: param) { result in
+                        switch result {
+                        case .success(let data):
+                            print(data)
+                            let controller = SignUpAuthCodeViewController()
+                            controller.model = self.model
+                            self.navigationController?.pushViewController(controller, animated: true)
+                            break
+                        case .requestErr(let err):
+                            print(err)
+                            break
+                        case .pathErr:
+                            print("pathErr")
+                            break
+                        case .serverErr:
+                            print("serverErr")
+                            break
+                        case .networkFail:
+                            print("networkFail")
+                            break
+                        case .tokenErr:
+                            print("tokenErr")
+                            break
+                        case .authorityErr:
+                            print("authorityErr")
+                            break
+                        }
+                    }
                     break
                 case .requestErr(let err):
                     print(err)
