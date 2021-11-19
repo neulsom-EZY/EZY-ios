@@ -8,6 +8,7 @@
 import UIKit
 import SnapKit
 import Then
+import Alamofire
 
 class SignUpAuthCodeViewController: UIViewController {
     //MARK: - Properties
@@ -47,8 +48,37 @@ class SignUpAuthCodeViewController: UIViewController {
     
     @objc
     private func onTapContinueTerms(){
-        let controller = SignUpTermsViewController()
-        navigationController?.pushViewController(controller, animated: true)
+        // MARK: - 인증번호 인증
+        let key:String = authCodeView.tf1.text! + authCodeView.tf2.text! + authCodeView.tf3.text! + authCodeView.tf4.text!
+        let param: Parameters = ["key" : key]
+        API.shared.request(url: "/v1/member/verified/auth", method: .post, parameter: param) { result in
+            switch result {
+            case .success(let data):
+                print(data)
+                let controller = SignUpTermsViewController()
+                controller.model = self.model
+                self.navigationController?.pushViewController(controller, animated: true)
+                break
+            case .requestErr(let err):
+                print(err)
+                break
+            case .pathErr:
+                print("pathErr")
+                break
+            case .serverErr:
+                print("serverErr")
+                break
+            case .networkFail:
+                print("networkFail")
+                break
+            case .tokenErr:
+                print("tokenErr")
+                break
+            case .authorityErr:
+                print("authorityErr")
+                break
+            }
+        }
     }
     
     @objc

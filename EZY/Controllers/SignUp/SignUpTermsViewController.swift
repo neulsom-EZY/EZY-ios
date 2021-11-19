@@ -11,6 +11,7 @@ import Then
 
 class SignUpTermsViewController: UIViewController{
     //MARK: - Properties
+    var model:UserModel?
     
     private let topBarView = TopBarView().then {
         $0.goBackButton.addTarget(self, action: #selector(goBack), for: .touchUpInside)

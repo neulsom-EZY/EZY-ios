@@ -59,13 +59,12 @@ class SignUpPhoneNumViewController: UIViewController{
         print(param)
         
         if isValidPhoneNum(PhoneNumber: phoneNumContainer.tf.text) == true{
-//            let controller = SignUpAuthCodeViewController()
-//            controller.model = model
-//            navigationController?.pushViewController(controller, animated: true)
+            // MARK: - 핸드폰 번호 존재 여부 확인
             API.shared.request(url: "/v1/member/verified/phone", method: .post, parameter: param) { result in
                 switch result {
                 case .success(let data):
                     print(data)
+                    // MARK: - 인증번호 전송하기
                     API.shared.request(url: "/v1/member/auth", method: .post, parameter: param) { result in
                         switch result {
                         case .success(let data):
