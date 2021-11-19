@@ -51,8 +51,11 @@ class SignUpNicknameViewController: UIViewController{
     
     @objc
     private func onTapContinuePassword(){
+        let model: UserModel = UserModel(success: true, fcmToken: "", password: "", phoneNumber: "", username: nicknameContainer.tf.text!)
+        print(model)
         if isValidNickname(Nickname: nicknameContainer.tf.text) == true {
             let controller = SignUpPasswordViewController()
+            controller.model = model
             navigationController?.pushViewController(controller, animated: true)
         }else{
             shakeView(self.view)

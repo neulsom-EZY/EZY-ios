@@ -8,9 +8,11 @@
 import UIKit
 import SnapKit
 import Then
+import Alamofire
 
 class SignUpPasswordViewController: UIViewController{
     //MARK: - Properties
+    var model:UserModel?
     
     private let topBarView = TopBarView().then {
         $0.goBackButton.addTarget(self, action: #selector(goBack), for: .touchUpInside)
