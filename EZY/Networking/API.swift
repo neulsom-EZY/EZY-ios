@@ -9,9 +9,9 @@ import Alamofire
 import UIKit
 
 class API {
-    static let shared: API = API() 
+    static let shared: API = API()
     
-    func request(url: String, method: HTTPMethod, parameter: [String: Any]? = nil, completion: @escaping (APIResult<Any>) -> Void) {
+    func request(url: String, method: HTTPMethod, parameter: [String: Any]? = nil, completion: @escaping (NetworkResult<Any>) -> Void) {
         var header: HTTPHeaders = [ : ]
         AF.request("\(Config.baseURL)\(url)",method: method, parameters: parameter, encoding: JSONEncoding.default, headers: header).responseJSON { response in
             switch response.result {
@@ -23,25 +23,26 @@ class API {
                 completion(.success(networkResult))
             case .failure(let error):
                 print(error.localizedDescription)
-                completion(.networkError)
+                completion(.networkFail)
             }
         }
     }
     
-    private func statusFilter(data: Data, status: Int) -> APIResult<Any> {
+    // status 결과
+    private func statusFilter(data: Data, status: Int) -> NetworkResult<Any> {
         switch status {
         case 200, 201:
             return .success(data)
         case 204, 400, 500:
-            return .requsestError(data)
+            return .requestErr(data)
         case 404:
-            return .invalidURL
+            return .pathErr
         case 401:
-            return .tokenError
+            return .tokenErr
         case 403:
-            return .authorityError
+            return .authorityErr
         default:
-            return .requsestError(data)
+            return .requestErr(data)
         }
     }
 }
