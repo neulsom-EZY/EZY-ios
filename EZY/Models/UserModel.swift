@@ -8,9 +8,9 @@
 import Foundation
 
 struct UserModel:Codable {
-    let success: Bool
-    let fcmToken: String
-    let password: String
-    let phoneNumber: String
-    let username: String
+    var success: Bool
+    var fcmToken: String
+    var password: String
+    var phoneNumber: String
+    var username: String
 }
