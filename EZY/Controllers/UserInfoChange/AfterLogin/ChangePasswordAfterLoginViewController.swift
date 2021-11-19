@@ -10,6 +10,7 @@ import UIKit
 class ChangePasswordNameAfterLoginViewController: UIViewController {
     //MARK: - Properties
     private let topView = TopView().then{
+        $0.backButton.addTarget(self, action: #selector(backButtonClicked(sender:)), for: .touchUpInside)
         $0.topViewDataSetting(backButtonImage: UIImage(named: "EZY_IdChangeBackButtonImage")!, titleLabelText: "비밀번호 변경", textColor: UIColor(red: 120/255, green: 81/255, blue: 255/255, alpha: 1))
     }
     

@@ -9,7 +9,10 @@ import UIKit
 
 class ChangePasswordPasswordAfterLoginViewController: UIViewController{
     //MARK: - Properties
-    private let topView = TopView()
+    private let topView = TopView().then{
+        $0.backButton.addTarget(self, action: #selector(backButtonClicked(sender:)), for: .touchUpInside)
+        $0.topViewDataSetting(backButtonImage: UIImage(named: "EZY_IdChangeBackButtonImage")!, titleLabelText: "비밀번호 변경", textColor: UIColor(red: 120/255, green: 81/255, blue: 255/255, alpha: 1))
+    }
     
     private let lineInputView = LineInputView().then{
         $0.dataSetting(titleText: "비밀번호", placeHolderText: "비밀번호를 입력해주세요", conditionText: "영어 숫자 조합 8자 이상, 특수문자 가능, 공백 허용x")
@@ -27,30 +30,17 @@ class ChangePasswordPasswordAfterLoginViewController: UIViewController{
         super.viewDidLoad()
         
         addView()
-        
         location()
     }
     
+    // MARK: - addView
     private func addView(){
         self.view.backgroundColor = .white
-        self.view.addSubview(topView)
-        self.view.addSubview(lineInputView)
-        self.view.addSubview(changeButton)
-        
-        
-        topView.backButton.addTarget(self, action: #selector(backButtonClicked(sender:)), for: .touchUpInside)
-        
-        
-        topView.topViewDataSetting(backButtonImage: UIImage(named: "EZY_IdChangeBackButtonImage")!, titleLabelText: "비밀번호 변경", textColor: UIColor(red: 120/255, green: 81/255, blue: 255/255, alpha: 1))
-        
-        topView.snp.makeConstraints { make in
-            make.left.right.equalToSuperview()
-            make.top.equalTo(self.view.safeAreaLayoutGuide)
-            make.height.equalToSuperview().dividedBy(8)
-        }
+        [topView, lineInputView, changeButton].forEach { self.view.addSubview($0) }
     }
     
-    func location() {
+    // MARK: - location
+    private func location() {
         lineInputView.snp.makeConstraints { make in
             make.width.equalToSuperview()
             make.top.equalTo(topView.snp.bottom).offset(self.view.frame.height/17.65)
@@ -64,23 +54,18 @@ class ChangePasswordPasswordAfterLoginViewController: UIViewController{
             make.height.equalToSuperview().dividedBy(16.24)
             make.bottom.equalToSuperview().offset(-self.view.frame.height/23.8)
         }
+        
+        topView.snp.makeConstraints { make in
+            make.left.right.equalToSuperview()
+            make.top.equalTo(self.view.safeAreaLayoutGuide)
+            make.height.equalToSuperview().dividedBy(8)
+        }
     }
     
     // MARK: - Selectors
-    @objc //MARK: 모달 창 올리기
-    func keyboardWillShow(_ sender: Notification) {
-        changeButton.frame.origin.y = self.view.frame.height/2
-    }
-
-    @objc //MARK: 모달 창 원래대로
-    func keyboardWillHide(_ sender: Notification) {
-        changeButton.frame.origin.y = self.view.frame.height-changeButton.frame.height-self.view.frame.height/23.8
-    }
-    
-    @objc func changeButtonClicked(sender:UIButton){
+    @objc private func changeButtonClicked(sender:UIButton){
         if isValidPassword(Password: lineInputView.getNickNameText()) == true{
             let vc = SettingViewController()
-
             vc.modalPresentationStyle = .fullScreen
             present(vc, animated: true, completion: nil)
         }else{
@@ -88,10 +73,11 @@ class ChangePasswordPasswordAfterLoginViewController: UIViewController{
         }
     }
     
-    @objc func backButtonClicked(sender:UIButton){
+    @objc private func backButtonClicked(sender:UIButton){
         self.navigationController?.popViewController(animated: true)
     }
     
+    // MARK: - isValidPassword
     private func isValidPassword(Password: String?) -> Bool {
         guard Password != nil else { return false }
             
