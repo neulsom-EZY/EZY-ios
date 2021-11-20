@@ -51,7 +51,8 @@ class SignUpNicknameViewController: UIViewController{
     
     @objc
     private func onTapContinuePassword(){
-        let model: UserModel = UserModel(success: true, fcmToken: "eeq95na-4EfXtgyfzGP4No:APA91bGlbqqApcqjsDGkuo6IBJ9WOYD0rt_xXTPFhPZxHdMLdowi-eq5G-jjNbb2mqMoROu1AuKdadReniq0Qp-5oJGTGswrBK_nQcucT6UQoLqqfN0GdqnITMwFzQ-1yDAPhGytHIpQ", password: "", phoneNumber: "", username: nicknameContainer.tf.text!)
+        let app = UIApplication.shared.delegate as! AppDelegate
+        let model: UserModel = UserModel(fcmToken: app.userFcmToken!, password: "", phoneNumber: "", username: nicknameContainer.tf.text!)
         print(model)
         if isValidNickname(Nickname: nicknameContainer.tf.text) == true {
             let controller = SignUpPasswordViewController()

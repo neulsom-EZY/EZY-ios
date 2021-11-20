@@ -8,7 +8,6 @@
 import Foundation
 
 struct UserModel:Codable {
-    var success: Bool
     var fcmToken: String
     var password: String
     var phoneNumber: String

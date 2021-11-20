@@ -14,6 +14,8 @@ import ChannelIOFront
 
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
+    var userFcmToken:String? = ""
+    
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         FirebaseApp.configure()
 
@@ -30,7 +32,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
       let deviceTokenString = deviceToken.reduce("", {$0 + String(format: "%02X", $1)})
       print("deviceToken :", deviceTokenString)
-        
       Messaging.messaging().apnsToken = deviceToken
     }
 
@@ -98,6 +99,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 extension AppDelegate : MessagingDelegate {
     func messaging(_ messaging: Messaging, didReceiveRegistrationToken fcmToken: String?) {
         print("파이어베이스 토큰: \(fcmToken ?? "")")
+        userFcmToken = fcmToken
     }
 
 }
