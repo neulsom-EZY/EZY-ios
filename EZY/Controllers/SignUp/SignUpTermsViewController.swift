@@ -293,7 +293,6 @@ class SignUpTermsViewController: UIViewController{
             shakeView(self.view)
         }
     }
-
     //MARK: - Helpers
     private func configureUI(){
         view.backgroundColor = .white
