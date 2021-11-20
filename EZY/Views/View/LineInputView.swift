@@ -43,8 +43,9 @@ class LineInputView: UIView {
     
     // MARK: - Helpers
     private func configureUI(){
-        addView()
+        infoTextField.becomeFirstResponder()
         
+        addView()
         location()
     }
     

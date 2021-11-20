@@ -52,7 +52,7 @@ class ChangePasswordNameAfterLoginViewController: UIViewController {
             make.left.equalToSuperview().offset(self.view.frame.width/17)
             make.centerX.equalToSuperview()
             make.height.equalToSuperview().dividedBy(16.24)
-            make.bottom.equalToSuperview().offset(-self.view.frame.height/23.8)
+            make.centerY.equalToSuperview().offset(self.view.frame.height/40)
         }
         
         topView.snp.makeConstraints { make in

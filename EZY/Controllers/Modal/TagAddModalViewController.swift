@@ -104,13 +104,25 @@ class TagAddModalViewController: BaseModal {
         addView()
         location()
         delegateAndDataSource()
-        addKeyboardNotifications()
+        self.addKeyboardNotifications()
+
     }
     
+    // MARK: - LifeCycles
+    override func viewWillAppear(_ animated: Bool) {
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        self.removeKeyboardNotifications()
+    }
+
     // MARK: - addKeyboardNotifications
     private func addKeyboardNotifications(){
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(_:)), name: UIResponder.keyboardWillShowNotification, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide(_:)), name: UIResponder.keyboardWillHideNotification, object: nil)
+    }
+    
+    private func removeKeyboardNotifications(){
+        NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillShowNotification , object: nil)
     }
     
     // MARK: - addView
@@ -201,11 +213,7 @@ class TagAddModalViewController: BaseModal {
     }
     
     @objc private func keyboardWillShow(_ noti: NSNotification){
-        self.view.frame.origin.y -= 100
-    }
-    
-    @objc private func keyboardWillHide(_ noti: NSNotification){
-        self.view.frame.origin.y += 100
+        self.view.frame.origin.y = -self.view.frame.height/8
     }
     
     // MARK: - instance

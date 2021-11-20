@@ -52,7 +52,7 @@ class ChangePasswordPasswordAfterLoginViewController: UIViewController{
             make.left.equalToSuperview().offset(self.view.frame.width/17)
             make.centerX.equalToSuperview()
             make.height.equalToSuperview().dividedBy(16.24)
-            make.bottom.equalToSuperview().offset(-self.view.frame.height/23.8)
+            make.centerY.equalToSuperview().offset(self.view.frame.height/40)
         }
         
         topView.snp.makeConstraints { make in
@@ -65,9 +65,14 @@ class ChangePasswordPasswordAfterLoginViewController: UIViewController{
     // MARK: - Selectors
     @objc private func changeButtonClicked(sender:UIButton){
         if isValidPassword(Password: lineInputView.getNickNameText()) == true{
-            let vc = SettingViewController()
-            vc.modalPresentationStyle = .fullScreen
-            present(vc, animated: true, completion: nil)
+
+            let controllers = self.navigationController?.viewControllers
+            for vc in controllers! {
+                if vc is SettingViewController {
+                    _ = self.navigationController?.popToViewController(vc as! SettingViewController, animated: true)
+                }
+            }
+            
         }else{
             lineInputView.checkNickNameIsEmpty()
         }
