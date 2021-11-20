@@ -629,7 +629,6 @@
 				6AE41E7926A9228A0072612C /* TagManagementViewController.swift */,
 				6AE41E7D26A9560C0072612C /* TagSettingViewController.swift */,
 				EE93B4D826876C6F0055D7A6 /* PushNotificationManagementViewController.swift */,
-				6A5C6A232734A24000556849 /* TagAddModalViewController.swift */,
 				6AEB2F1D27478E7600C213EF /* ChangePasswordPasswordAfterLoginViewController.swift */,
 			);
 			path = SettingFeatures;
@@ -646,6 +645,7 @@
 		6AB7D439272FE1E400FAFA19 /* Modal */ = {
 			isa = PBXGroup;
 			children = (
+				6A5C6A232734A24000556849 /* TagAddModalViewController.swift */,
 				6A47F9D32718F63600AAA6E0 /* CalendarAddModelViewController.swift */,
 				EE9F0D1D26E8A2AC0015E81B /* MoreAlarmModelViewController.swift */,
 				EE9F0D2126E8A2AC0015E81B /* MoreCalendarModalsViewController.swift */,

@@ -96,19 +96,25 @@ class TagAddModalViewController: BaseModal {
         TagColorCollectionViewModel(backgroundColor: UIColor.EZY_TagColorArray[5], isSelected: true),
         TagColorCollectionViewModel(backgroundColor: UIColor.EZY_TagColorArray[6], isSelected: true),
         TagColorCollectionViewModel(backgroundColor: UIColor.EZY_TagColorArray[7], isSelected: true)]
-    
 
     // MARK: - configureUI
     override func configure() {
         super.configure()
+        
         addView()
-        
         location()
-        
         delegateAndDataSource()
+        addKeyboardNotifications()
     }
+    
+    // MARK: - addKeyboardNotifications
+    private func addKeyboardNotifications(){
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(_:)), name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide(_:)), name: UIResponder.keyboardWillHideNotification, object: nil)
+    }
+    
     // MARK: - addView
-    func addView(){
+    private func addView(){
         self.view.addSubview(bgView)
         [titleLabel,tagNameLabel,tagNameBackgroundView].forEach {bgView.addSubview($0)}
         tagNameBackgroundView.addSubview(tagNameTextField)
@@ -116,7 +122,7 @@ class TagAddModalViewController: BaseModal {
     }
     
     // MARK: - location
-    func location(){
+    private func location(){
         bgView.snp.makeConstraints { make in
             make.centerX.centerY.equalToSuperview()
             make.width.equalToSuperview().dividedBy(1.13)
@@ -167,13 +173,13 @@ class TagAddModalViewController: BaseModal {
     }
     
     // MARK: - delegateAndDataSource
-    func delegateAndDataSource(){
+    private func delegateAndDataSource(){
         tagColorCollectionView.delegate = self
         tagColorCollectionView.dataSource = self
     }
     
     // MARK: - shakeView
-    func shakeView(_ view: UIView?) {
+    private func shakeView(_ view: UIView?) {
         let shake = CABasicAnimation(keyPath: "position")
         shake.duration = 0.08
         shake.repeatCount = 2
@@ -183,10 +189,8 @@ class TagAddModalViewController: BaseModal {
         view?.layer.add(shake, forKey: "position")
     }
     
-    //MARK: - selectors
-    @objc func MakeTodo(){
-        
-        
+    // MARK: - selectors
+    @objc private func MakeTodo(){
         if tagNameTextField.text!.trimmingCharacters(in: .whitespaces).isEmpty || tagNameTextField.text == ""{
             shakeView(tagNameLabel)
         }else{
@@ -196,6 +200,15 @@ class TagAddModalViewController: BaseModal {
         }
     }
     
+    @objc private func keyboardWillShow(_ noti: NSNotification){
+        self.view.frame.origin.y -= 100
+    }
+    
+    @objc private func keyboardWillHide(_ noti: NSNotification){
+        self.view.frame.origin.y += 100
+    }
+    
+    // MARK: - instance
     static func instance() -> TagAddModalViewController {
         return TagAddModalViewController(nibName: nil, bundle: nil).then {
             $0.modalPresentationStyle = .overFullScreen
@@ -203,6 +216,7 @@ class TagAddModalViewController: BaseModal {
     }
 }
 
+// MARK: - Extension
 extension TagAddModalViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout{
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return TagColorModels.count
