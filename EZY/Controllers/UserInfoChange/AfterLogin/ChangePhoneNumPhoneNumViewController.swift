@@ -7,7 +7,7 @@
 
 import UIKit
 
-class ChangePhoneNumPutViewController: UIViewController {
+class ChangePhoneNumPhoneNumViewController: UIViewController {
     //MARK: - Properties
     private let topView = TopView().then{
         $0.backButton.addTarget(self, action: #selector(backButtonClicked(sender:)), for: .touchUpInside)
@@ -66,7 +66,7 @@ class ChangePhoneNumPutViewController: UIViewController {
     // MARK: - Selectors
     @objc private func changeButtonClicked(sender:UIButton){
         if isValidPhoneNumber(PhoneNumber: lineInputView.getNickNameText()){
-            let nextViewController = ChangePasswordNameAfterLoginViewController()
+            let nextViewController = ChangePhoneNumAuthCodeViewController()
             self.navigationController?.pushViewController(nextViewController, animated: true)
         }else{
             lineInputView.checkNickNameIsEmpty()

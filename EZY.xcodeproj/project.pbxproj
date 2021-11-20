@@ -112,7 +112,7 @@
 		AAAA0EF727389F4000DBCA68 /* NewPasswordAuthCodeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAAA0EF627389F4000DBCA68 /* NewPasswordAuthCodeViewController.swift */; };
 		AAAA0EF92738A21D00DBCA68 /* NewNicknameAuthCodeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAAA0EF82738A21D00DBCA68 /* NewNicknameAuthCodeViewController.swift */; };
 		AAAA0EFB2738A30800DBCA68 /* ChangePasswordAuthCodeAfterLoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAAA0EFA2738A30800DBCA68 /* ChangePasswordAuthCodeAfterLoginViewController.swift */; };
-		AAAA0EFD27390E9300DBCA68 /* ChangePhoneNumPutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAAA0EFC27390E9300DBCA68 /* ChangePhoneNumPutViewController.swift */; };
+		AAAA0EFD27390E9300DBCA68 /* ChangePhoneNumPhoneNumViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAAA0EFC27390E9300DBCA68 /* ChangePhoneNumPhoneNumViewController.swift */; };
 		AAAA0EFF2739107C00DBCA68 /* ChangePhoneNumAuthCodeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAAA0EFE2739107C00DBCA68 /* ChangePhoneNumAuthCodeViewController.swift */; };
 		AAAA0F1B2739458400DBCA68 /* ErrandListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAAA0F1A2739458400DBCA68 /* ErrandListViewController.swift */; };
 		AAAA0F1D2739458D00DBCA68 /* MyToDoListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAAA0F1C2739458D00DBCA68 /* MyToDoListViewController.swift */; };
@@ -276,7 +276,7 @@
 		AAAA0EF627389F4000DBCA68 /* NewPasswordAuthCodeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewPasswordAuthCodeViewController.swift; sourceTree = "<group>"; };
 		AAAA0EF82738A21D00DBCA68 /* NewNicknameAuthCodeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewNicknameAuthCodeViewController.swift; sourceTree = "<group>"; };
 		AAAA0EFA2738A30800DBCA68 /* ChangePasswordAuthCodeAfterLoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangePasswordAuthCodeAfterLoginViewController.swift; sourceTree = "<group>"; };
-		AAAA0EFC27390E9300DBCA68 /* ChangePhoneNumPutViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangePhoneNumPutViewController.swift; sourceTree = "<group>"; };
+		AAAA0EFC27390E9300DBCA68 /* ChangePhoneNumPhoneNumViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangePhoneNumPhoneNumViewController.swift; sourceTree = "<group>"; };
 		AAAA0EFE2739107C00DBCA68 /* ChangePhoneNumAuthCodeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangePhoneNumAuthCodeViewController.swift; sourceTree = "<group>"; };
 		AAAA0F1A2739458400DBCA68 /* ErrandListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ErrandListViewController.swift; sourceTree = "<group>"; };
 		AAAA0F1C2739458D00DBCA68 /* MyToDoListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyToDoListViewController.swift; sourceTree = "<group>"; };
@@ -545,7 +545,7 @@
 				AAAA0EFA2738A30800DBCA68 /* ChangePasswordAuthCodeAfterLoginViewController.swift */,
 				6A3E2E7726B111540078D749 /* ChangePasswordAfterLoginViewController.swift */,
 				6AB27CAB269D758100B95C0F /* ChangeIdAfterLoginViewController.swift */,
-				AAAA0EFC27390E9300DBCA68 /* ChangePhoneNumPutViewController.swift */,
+				AAAA0EFC27390E9300DBCA68 /* ChangePhoneNumPhoneNumViewController.swift */,
 				AAAA0EFE2739107C00DBCA68 /* ChangePhoneNumAuthCodeViewController.swift */,
 			);
 			path = AfterLogin;
@@ -1004,7 +1004,7 @@
 				6AA76A282663958B00B7E1F5 /* ShowPlanViewController.swift in Sources */,
 				EE9F0D4226E8A9340015E81B /* AlarmDatePickerView.swift in Sources */,
 				EE9F0D4126E8A9340015E81B /* AdditionalButton.swift in Sources */,
-				AAAA0EFD27390E9300DBCA68 /* ChangePhoneNumPutViewController.swift in Sources */,
+				AAAA0EFD27390E9300DBCA68 /* ChangePhoneNumPhoneNumViewController.swift in Sources */,
 				6A4EDA32266BD11600B809EC /* SettingViewController.swift in Sources */,
 				6A4EDA37266DA52A00B809EC /* SettingTableViewCell.swift in Sources */,
 				EE9F0D2426E8A2AC0015E81B /* MorePeopleToDo.swift in Sources */,
