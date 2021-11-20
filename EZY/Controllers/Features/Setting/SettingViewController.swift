@@ -23,6 +23,8 @@ class SettingViewController: UIViewController {
         $0.register(SettingTableViewCell.self, forCellReuseIdentifier: SettingTableViewCell.settingTableViewCellIdentifier)
     }
     
+    private let bgView = UIView()
+    
     private let settingListTitleLabel = ["푸시 알림 관리", "태그 관리", "닉네임 변경","비밀번호 변경","전화번호 변경", "로그아웃", "회원 탈퇴"]
     
     private let settingListDescriptionLabel = ["개인, 심부름관련 알림을 관리합니다.","일정의 태그를 관리합니다.","현재 사용 중인 닉네임을 변경합니다.","현재 사용 중인 비밀번호를 변경합니다.","현재 사용 중인 전화번호를 변경합니다.","EZY에서 로그아웃합니다.", "EZY 계정을 탈퇴합니다."]
@@ -73,6 +75,26 @@ class SettingViewController: UIViewController {
     @objc func backButtonClicked(sender: UIButton!) {
         self.navigationController?.popViewController(animated: true)
     }
+    
+    // MARK: - addDim
+    private func addDim() {
+           view.addSubview(bgView)
+           bgView.snp.makeConstraints { (make) in
+               make.edges.equalTo(0)
+           }
+           
+           DispatchQueue.main.async { [weak self] in
+               self?.bgView.backgroundColor = .black.withAlphaComponent(0.15)
+           }
+       }
+       
+    // MARK: - removeDim
+    private func removeDim() {
+        DispatchQueue.main.async { [weak self] in
+            self?.bgView.removeFromSuperview()
+            self?.dismiss(animated: true)
+        }
+    }
 }
 
 //MARK: - extensions
@@ -94,8 +116,12 @@ extension SettingViewController: UITableViewDelegate{
             let nextViewController = ChangePhoneNumPhoneNumViewController()
             self.navigationController?.pushViewController(nextViewController, animated: true)
         }else if indexPath.row == 5{
-            let nextViewController = LogoutViewController()
-            self.navigationController?.pushViewController(nextViewController, animated: true)
+            let BasicModalVC = BasicModalViewController.instance()
+            addDim()
+            BasicModalVC.delegate = self
+            BasicModalVC.baseDelegate = self
+            present(BasicModalVC, animated: true, completion: nil)
+            BasicModalVC.textSetting(colorText: "", contentText: "정말 로그아웃하시겠습니까?")
         }else if indexPath.row == 6{
             let nextViewController = WithdrawalViewController()
             self.navigationController?.pushViewController(nextViewController, animated: true)
@@ -121,5 +147,23 @@ extension SettingViewController: UITableViewDataSource{
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return self.view.frame.height/10
+    }
+}
+
+extension SettingViewController: BaseModalDelegate {
+    func onTapClose() {
+        removeDim()
+    }
+}
+
+extension SettingViewController: BasicModalViewButtonDelegate{
+    func onTabOkButton() {
+        removeDim()
+        
+        DispatchQueue.main.async { [weak self] in
+            let nextVC = LoginViewController()
+            nextVC.modalPresentationStyle = .fullScreen
+            self!.present(nextVC, animated: true, completion: nil)
+        }
     }
 }

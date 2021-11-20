@@ -79,7 +79,7 @@ class BasicModalViewController: BaseModal {
     func textSetting(colorText: String, contentText: String){
         let string : NSMutableAttributedString
         var changeColorText = colorText
-        print("colorText.count : \(colorText.count)")
+
         if colorText.count < 8{
             contentLabel.numberOfLines = 0
             string = NSMutableAttributedString(string: "\(changeColorText) \(contentText)")
@@ -110,7 +110,7 @@ class BasicModalViewController: BaseModal {
             make.height.equalTo(bounds.height/24.6)
             make.width.equalToSuperview().dividedBy(4.44)
             make.top.equalTo(contentLabel.snp.bottom).offset(bounds.height/53)
-            make.right.equalToSuperview().inset(bounds.width/53)
+            make.right.equalToSuperview().inset(bounds.height/62.4)
         }
         cancelButton.snp.makeConstraints { make in
             make.height.width.equalTo(okButton)

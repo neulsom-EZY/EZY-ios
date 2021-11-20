@@ -30,7 +30,6 @@ class ChangePhoneNumPhoneNumViewController: UIViewController {
         super.viewDidLoad()
         
         addView()
-        
         location()
     }
     

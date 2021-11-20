@@ -26,7 +26,6 @@ class ChangePhoneNumAuthCodeViewController: UIViewController {
     // MARK: - LifyCycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        print("ChangePhoneNumAuthCodeViewController")
 
         addView()
         keyboardTypeSetting()
