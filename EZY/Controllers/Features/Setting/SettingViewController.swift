@@ -10,16 +10,22 @@ import UIKit
 class SettingViewController: UIViewController {
     
     // MARK: - Properties
-    lazy var topView = TopView()
-    
-    let settingTableView = UITableView().then {
-        $0.separatorStyle = .none
-        $0.showsVerticalScrollIndicator = false
+    private let topView = TopView().then{
+        $0.backButton.addTarget(self, action: #selector(backButtonClicked(sender:)), for: .touchUpInside)
+        $0.topViewDataSetting(backButtonImage: UIImage(named: "EZY_SettingBackButton")!, titleLabelText: "설정",
+                                   textColor: UIColor(red: 175/255, green: 173/255, blue: 255/255, alpha: 1))
     }
     
-    lazy var settingListTitleLabel = ["푸시 알림 관리", "태그 관리", "닉네임 변경","비밀번호 변경","전화번호 변경", "로그아웃", "회원 탈퇴"]
+    private let settingTableView = UITableView().then {
+        $0.separatorStyle = .none
+        $0.showsVerticalScrollIndicator = false
+        $0.isScrollEnabled = false
+        $0.register(SettingTableViewCell.self, forCellReuseIdentifier: SettingTableViewCell.settingTableViewCellIdentifier)
+    }
     
-    lazy var settingListDescriptionLabel = ["개인, 심부름관련 알림을 관리합니다.","일정의 태그를 관리합니다.","현재 사용 중인 닉네임을 변경합니다.","현재 사용 중인 비밀번호를 변경합니다.","현재 사용 중인 전화번호를 변경합니다.","EZY에서 로그아웃합니다.", "EZY 계정을 탈퇴합니다."]
+    private let settingListTitleLabel = ["푸시 알림 관리", "태그 관리", "닉네임 변경","비밀번호 변경","전화번호 변경", "로그아웃", "회원 탈퇴"]
+    
+    private let settingListDescriptionLabel = ["개인, 심부름관련 알림을 관리합니다.","일정의 태그를 관리합니다.","현재 사용 중인 닉네임을 변경합니다.","현재 사용 중인 비밀번호를 변경합니다.","현재 사용 중인 전화번호를 변경합니다.","EZY에서 로그아웃합니다.", "EZY 계정을 탈퇴합니다."]
     
     //MARK: LifeCycles
     override func viewDidLoad() {
@@ -28,24 +34,23 @@ class SettingViewController: UIViewController {
         configureUI()
     }
     
-    //MARK: - helpers
-    func configureUI(){
+    //MARK: - Helpers
+    private func configureUI(){
         self.view.backgroundColor = .white
         
         addView()
-        topViewSetting()
-        settingtableViewSetting()
+        
+        location()
+        
+        delegateAndDataSource()
     }
     
-    //MARK: - SettingTableView setting
-    func settingtableViewSetting(){
-        settingTableView.delegate = self
-        settingTableView.dataSource = self
-        
-        settingTableView.isScrollEnabled = false
-        
-        settingTableView.register(SettingTableViewCell.self, forCellReuseIdentifier: SettingTableViewCell.settingTableViewCellIdentifier)
-        self.view.addSubview(settingTableView)
+    private func location(){
+        topView.snp.makeConstraints { make in
+            make.left.right.equalToSuperview()
+            make.top.equalTo(self.view.safeAreaLayoutGuide)
+            make.height.equalToSuperview().dividedBy(8)
+        }
         
         settingTableView.snp.makeConstraints { make in
             make.top.equalTo(topView.snp.bottom).offset(self.view.frame.height/50)
@@ -54,27 +59,17 @@ class SettingViewController: UIViewController {
         }
     }
     
-    //MARK: - topViewSetting
-    func topViewSetting(){
-        topView.backButton.addTarget(self, action: #selector(backButtonClicked(sender:)), for: .touchUpInside)
-        
-        topView.topViewDataSetting(backButtonImage: UIImage(named: "EZY_SettingBackButton")!, titleLabelText: "설정",
-                                   textColor: UIColor(red: 175/255, green: 173/255, blue: 255/255, alpha: 1))
-
-
-        topView.snp.makeConstraints { make in
-            make.left.right.equalToSuperview()
-            make.top.equalTo(self.view.safeAreaLayoutGuide)
-            make.height.equalToSuperview().dividedBy(8)
-        }
+    private func delegateAndDataSource(){
+        settingTableView.delegate = self
+        settingTableView.dataSource = self
     }
     
     //MARK: - addSubview
     func addView(){
-        self.view.addSubview(topView)
+        [topView, settingTableView].forEach { self.view.addSubview($0) }
     }
     
-    //MARK: - selectors
+    //MARK: - Selectors
     @objc func backButtonClicked(sender: UIButton!) {
         self.navigationController?.popViewController(animated: true)
     }
@@ -126,9 +121,5 @@ extension SettingViewController: UITableViewDataSource{
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return self.view.frame.height/10
-    }
-    
-    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-           return 0
     }
 }
