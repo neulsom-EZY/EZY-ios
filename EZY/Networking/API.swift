@@ -20,7 +20,7 @@ class API {
                 guard let data = response.data else { return }
                 guard let status = response.response?.statusCode else { return }
                 let networkResult = self.statusFilter(data: data, status: status)
-                completion(.success(networkResult))
+                completion(networkResult)
             case .failure(let error):
                 print(error.localizedDescription)
                 completion(.networkFail)
