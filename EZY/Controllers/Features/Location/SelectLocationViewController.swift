@@ -260,5 +260,3 @@ extension SelectLocationViewController: BasicModalViewButtonDelegate{
         self.navigationController?.popViewController(animated: false)
     }
 }
-
-

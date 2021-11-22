@@ -25,9 +25,7 @@ class MorePeopleToDo: UIViewController{
 
     //MARK: - Properties
     weak var delegate : UserDataDelegate?
-    static func instance() -> MorePeopleToDo {
-        return MorePeopleToDo(nibName: nil, bundle: nil)
-    }
+
     private let backbutton = UIButton().then{
         $0.tintColor = .EZY_968DFF
         $0.setImage(UIImage(systemName: "arrow.left")?.withRenderingMode(.alwaysTemplate), for: .normal)

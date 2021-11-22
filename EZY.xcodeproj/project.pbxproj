@@ -116,7 +116,6 @@
 		AAAA0EFB2738A30800DBCA68 /* ChangePasswordAuthCodeAfterLoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAAA0EFA2738A30800DBCA68 /* ChangePasswordAuthCodeAfterLoginViewController.swift */; };
 		AAAA0EFD27390E9300DBCA68 /* ChangePhoneNumPutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAAA0EFC27390E9300DBCA68 /* ChangePhoneNumPutViewController.swift */; };
 		AAAA0EFF2739107C00DBCA68 /* ChangePhoneNumAuthCodeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAAA0EFE2739107C00DBCA68 /* ChangePhoneNumAuthCodeViewController.swift */; };
-		AAAA0F1B2739458400DBCA68 /* 2ErrandListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAAA0F1A2739458400DBCA68 /* 2ErrandListViewController.swift */; };
 		AAAA0F1D2739458D00DBCA68 /* MyToDoListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAAA0F1C2739458D00DBCA68 /* MyToDoListViewController.swift */; };
 		AAAA0F1F273A0F7D00DBCA68 /* ListTagView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAAA0F1E273A0F7D00DBCA68 /* ListTagView.swift */; };
 		AAAA0F21273A10FC00DBCA68 /* ScheduleTimeTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAAA0F20273A10FC00DBCA68 /* ScheduleTimeTableView.swift */; };
@@ -284,7 +283,6 @@
 		AAAA0EFA2738A30800DBCA68 /* ChangePasswordAuthCodeAfterLoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangePasswordAuthCodeAfterLoginViewController.swift; sourceTree = "<group>"; };
 		AAAA0EFC27390E9300DBCA68 /* ChangePhoneNumPutViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangePhoneNumPutViewController.swift; sourceTree = "<group>"; };
 		AAAA0EFE2739107C00DBCA68 /* ChangePhoneNumAuthCodeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangePhoneNumAuthCodeViewController.swift; sourceTree = "<group>"; };
-		AAAA0F1A2739458400DBCA68 /* 2ErrandListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = 2ErrandListViewController.swift; sourceTree = "<group>"; };
 		AAAA0F1C2739458D00DBCA68 /* MyToDoListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyToDoListViewController.swift; sourceTree = "<group>"; };
 		AAAA0F1E273A0F7D00DBCA68 /* ListTagView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListTagView.swift; sourceTree = "<group>"; };
 		AAAA0F20273A10FC00DBCA68 /* ScheduleTimeTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleTimeTableView.swift; sourceTree = "<group>"; };
@@ -623,7 +621,6 @@
 			isa = PBXGroup;
 			children = (
 				EE7CEE6C2741FB21009A935A /* ErrandList */,
-				AAAA0F1A2739458400DBCA68 /* 2ErrandListViewController.swift */,
 				EE9F0D1E26E8A2AC0015E81B /* MorePeopleToDo.swift */,
 				EE9F0D1C26E8A2AC0015E81B /* ErrandDetailsViewController.swift */,
 				EE9F0D2026E8A2AC0015E81B /* AddErrandViewController.swift */,
@@ -989,7 +986,6 @@
 				6AE5BB1A2696A6CE00A9731B /* Extension.swift in Sources */,
 				6A82835426982A6C00AC381B /* InquiryViewController.swift in Sources */,
 				6A4EDA2C266A045B00B809EC /* NotificationViewController.swift in Sources */,
-				AAAA0F1B2739458400DBCA68 /* 2ErrandListViewController.swift in Sources */,
 				6AE41E7C26A9492C0072612C /* TagTableViewCell.swift in Sources */,
 				6A4AE85D2678EBEE009E33CD /* GroupModifyDeleteModalView.swift in Sources */,
 				EE9FBB552748DC6A00667B41 /* NoPlaceView.swift in Sources */,

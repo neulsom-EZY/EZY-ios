@@ -171,7 +171,7 @@ class PlanRequestRespondingViewController: UIViewController {
         }
         
         planCalenderImageView.snp.makeConstraints { make in
-            make.top.equalToSuperview().offset(self.view.frame.height/20)
+            make.top.equalTo(planTitleLabel.snp.bottom).offset(view.frame.height/50.75)
             make.width.equalToSuperview().dividedBy(17.3)
             make.height.equalTo(planCalenderImageView.snp.width)
             make.centerX.equalToSuperview()

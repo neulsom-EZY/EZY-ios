@@ -6,10 +6,6 @@
 //
 
 import UIKit
-protocol ErrandDetailTypeDelegate : AnyObject{
-    func SendErrand()
-    func GetErrand()
-}
 
 class ErrandListViewController : UIViewController{
     let bounds = UIScreen.main.bounds
@@ -20,8 +16,6 @@ class ErrandListViewController : UIViewController{
     private let dummy3 : [String] = ["EZY 회의","EZY 회의","EZY 회의","EZY 회의","EZY 회의"]
 
     //MARK: - Properties
-    
-    weak var delegate : ErrandDetailTypeDelegate?
     
     private lazy var tableViewHeader = UIView(frame: CGRect(x: 0, y: 0, width: view.frame.width, height: bounds.height/7.315)).then{
         $0.backgroundColor = .clear
@@ -42,7 +36,6 @@ class ErrandListViewController : UIViewController{
         $0.showsVerticalScrollIndicator = false
         $0.separatorColor = .clear
         $0.backgroundColor = .clear
-        $0.allowsSelection = false
     }
     
     //MARK: - Lifecycle
@@ -74,8 +67,7 @@ class ErrandListViewController : UIViewController{
     }
     //MARK: - TableView Datasource And Delegate
     private func dataSourceAndDelegateSetting(){
-        listTv.delegate = self
-        listTv.dataSource = self
+        [listTv].forEach{$0.dataSource = self ; $0.delegate = self}
     }
     private func tableHeader(){
         listTv.tableHeaderView = tableViewHeader
@@ -116,22 +108,27 @@ extension ErrandListViewController : UITableViewDelegate , UITableViewDataSource
         if indexPath.item == 0 {
             guard let cell = tableView.dequeueReusableCell(withIdentifier: ErrandListTableViewCell.identifier, for: indexPath) as? ErrandListTableViewCell else {return UITableViewCell()}
             cell.label.text = sections[indexPath.section]
+            cell.selectionStyle = .none
             return cell
         }
         guard let cell = tableView.dequeueReusableCell(withIdentifier: ErrandListItemTableViewCell.identifier, for: indexPath) as? ErrandListItemTableViewCell else {return UITableViewCell()}
+        cell.selectionStyle = .none
         cell.tbTypeLabel.text = sections[indexPath.section]
         cell.ErrandTitle.text = dummy1[indexPath.row]
         cell.Date("11:00 - 13:00", nil)
         return cell
     }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if indexPath.item != 0{
+            tableViewSectionManager(indexPath: indexPath)
+        }
+    }
+    private func tableViewSectionManager(indexPath : IndexPath){
         if indexPath.section ==  0{
             let controller = ErrandDetailsViewController()
-            delegate?.GetErrand()
             navigationController?.pushViewController(controller, animated: true)
         }else if indexPath.section == 1{
             let controller = ErrandDetailsViewController()
-            delegate?.SendErrand()
             navigationController?.pushViewController(controller, animated: true)
         }else{
             let controller = PlanRequestRespondingViewController()

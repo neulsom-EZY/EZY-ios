@@ -13,6 +13,7 @@ class LogoutViewController : UIViewController {
     //MARK: - Properties
     private let backBtn = UIButton().then{
         $0.setImage(UIImage(named: "EZY_ErrandBackButtonImage")?.withRenderingMode(.alwaysTemplate), for: .normal)
+        $0.addTarget(self, action: #selector(backBtnAction), for: .touchUpInside)
         $0.tintColor = .EZY_968DFF
     }
     private let titleLabel = UILabel().then{
@@ -33,6 +34,11 @@ class LogoutViewController : UIViewController {
     }
     
     //MARK: - Selectors
+    @objc
+    private func backBtnAction(){
+        navigationController?.popViewController(animated: true)
+    }
+    
     @objc private func logoutAction(){
         print("Logout")
     }
