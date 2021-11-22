@@ -19,7 +19,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
         window = UIWindow(windowScene: windowScene)
       
-        let mainViewController = reErrandListViewController()
+        let mainViewController = SelectLocationViewController()
 
         let navigationController = UINavigationController(rootViewController: mainViewController)
 

@@ -158,8 +158,9 @@
 		EE9F0D4E26E8A9700015E81B /* WhatAboutPeopleLikeThisCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE9F0D4926E8A9700015E81B /* WhatAboutPeopleLikeThisCell.swift */; };
 		EE9F0D4F26E8A9700015E81B /* AlarmSettingCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE9F0D4A26E8A9700015E81B /* AlarmSettingCell.swift */; };
 		EE9F0D5126E8AA810015E81B /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE9F0D5026E8AA810015E81B /* Model.swift */; };
-		EE9F0D5326E8AA9E0015E81B /* SearchViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE9F0D5226E8AA9E0015E81B /* SearchViewModel.swift */; };
+		EE9FBB552748DC6A00667B41 /* NoPlaceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE9FBB542748DC6A00667B41 /* NoPlaceView.swift */; };
 		EEA49A132711C7B200265258 /* CalendarAlertBtn.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEA49A122711C7B200265258 /* CalendarAlertBtn.swift */; };
+		EEAF5357274B32240063D99A /* KakaoPlaceViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEAF5356274B32240063D99A /* KakaoPlaceViewModel.swift */; };
 		EEB2195C273EC62D0035704D /* kakaoPlaceDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEB2195B273EC62D0035704D /* kakaoPlaceDataModel.swift */; };
 		EEB2195F273EC6E10035704D /* NetWorkResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEB2195E273EC6E10035704D /* NetWorkResult.swift */; };
 		EEB21962273EC7410035704D /* KakaoPlaceSearchAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEB21961273EC7410035704D /* KakaoPlaceSearchAPI.swift */; };
@@ -325,8 +326,9 @@
 		EE9F0D4926E8A9700015E81B /* WhatAboutPeopleLikeThisCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WhatAboutPeopleLikeThisCell.swift; sourceTree = "<group>"; };
 		EE9F0D4A26E8A9700015E81B /* AlarmSettingCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlarmSettingCell.swift; sourceTree = "<group>"; };
 		EE9F0D5026E8AA810015E81B /* Model.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Model.swift; sourceTree = "<group>"; };
-		EE9F0D5226E8AA9E0015E81B /* SearchViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchViewModel.swift; sourceTree = "<group>"; };
+		EE9FBB542748DC6A00667B41 /* NoPlaceView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoPlaceView.swift; sourceTree = "<group>"; };
 		EEA49A122711C7B200265258 /* CalendarAlertBtn.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarAlertBtn.swift; sourceTree = "<group>"; };
+		EEAF5356274B32240063D99A /* KakaoPlaceViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KakaoPlaceViewModel.swift; sourceTree = "<group>"; };
 		EEB2195B273EC62D0035704D /* kakaoPlaceDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = kakaoPlaceDataModel.swift; sourceTree = "<group>"; };
 		EEB2195E273EC6E10035704D /* NetWorkResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetWorkResult.swift; sourceTree = "<group>"; };
 		EEB21961273EC7410035704D /* KakaoPlaceSearchAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KakaoPlaceSearchAPI.swift; sourceTree = "<group>"; };
@@ -429,8 +431,8 @@
 		6AA769FC26636C6500B7E1F5 /* ViewModels */ = {
 			isa = PBXGroup;
 			children = (
-				EE9F0D5226E8AA9E0015E81B /* SearchViewModel.swift */,
 				6A3E2E7D26B6A5FB0078D749 /* ViewModel.swift */,
+				EEAF5356274B32240063D99A /* KakaoPlaceViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -722,6 +724,7 @@
 				6AB7D43F272FE2FE00FAFA19 /* TextField */,
 				6AB7D43E272FE2D800FAFA19 /* TableView */,
 				6AB7D43D272FE28900FAFA19 /* PickerView */,
+				EE9FBB542748DC6A00667B41 /* NoPlaceView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -986,6 +989,7 @@
 				AAAA0F1B2739458400DBCA68 /* ErrandListViewController.swift in Sources */,
 				6AE41E7C26A9492C0072612C /* TagTableViewCell.swift in Sources */,
 				6A4AE85D2678EBEE009E33CD /* GroupModifyDeleteModalView.swift in Sources */,
+				EE9FBB552748DC6A00667B41 /* NoPlaceView.swift in Sources */,
 				6AE5BB012695746F00A9731B /* PersonalPlanAddRepeatDayCollectionViewCell.swift in Sources */,
 				EE9F0D2226E8A2AC0015E81B /* ErrandDetailsViewController.swift in Sources */,
 				6A1E3E9026797CB600E7B198 /* DeleteModalView.swift in Sources */,
@@ -1060,7 +1064,6 @@
 				EE9F0D4C26E8A9700015E81B /* TagCell.swift in Sources */,
 				6AA7E7872720E64100034327 /* TimeAddModalViewController.swift in Sources */,
 				EE9F0D4026E8A9340015E81B /* AlertButton.swift in Sources */,
-				EE9F0D5326E8AA9E0015E81B /* SearchViewModel.swift in Sources */,
 				6AA6F798269C2E6200958D36 /* NewPasswordPhoneNumViewController.swift in Sources */,
 				6A72073426C618600098830F /* RecommendedTagCollectionViewCell.swift in Sources */,
 				6AE5BB0326957B0600A9731B /* RepeatCollectionViewModel.swift in Sources */,
@@ -1109,6 +1112,7 @@
 				6AE5BAFC26953E0F00A9731B /* EndTimeTableViewCell.swift in Sources */,
 				6AA769EF26636AE700B7E1F5 /* EZY.xcdatamodeld in Sources */,
 				EE9F0D2726E8A2AC0015E81B /* MoreCalendarModalsViewController.swift in Sources */,
+				EEAF5357274B32240063D99A /* KakaoPlaceViewModel.swift in Sources */,
 				EE93B4D926876C6F0055D7A6 /* PushNotificationManagementViewController.swift in Sources */,
 				EE93B4E42687BD8A0055D7A6 /* ManageData.swift in Sources */,
 				EE7CEE6E2741FB4A009A935A /* ErrandListTableViewCell.swift in Sources */,

@@ -12,6 +12,7 @@ class SelectLocationViewController: UIViewController {
     
     // MARK: - Properties
     
+
     //MARK: - Kakao Search Data
     private var kakaoPlaceSearchData : [KakaoDocuments]? = nil
     let bgView = UIView().then {
@@ -54,6 +55,9 @@ class SelectLocationViewController: UIViewController {
         $0.setImage(UIImage(named: "EZY_SearchButtonImage"), for: .normal)
         $0.addTarget(self, action: #selector(searchButtonClicked(sender:)), for: .touchUpInside)
     }
+    private let noPlace = NoPlace().then{
+        $0.isHidden = false
+    }
     
     private lazy var locationTableView = UITableView().then {
         $0.backgroundColor = .clear
@@ -88,6 +92,7 @@ class SelectLocationViewController: UIViewController {
         textFieldBackgroundView.addSubview(locationTextField)
         self.view.addSubview(locationTableView)
         self.view.addSubview(selectLocationModalView)
+        self.view.addSubview(noPlace)
     }
     
     // MARK: - location
@@ -129,6 +134,10 @@ class SelectLocationViewController: UIViewController {
             make.left.equalToSuperview()
             make.centerX.equalToSuperview()
             make.bottom.equalToSuperview()
+        }
+        noPlace.snp.makeConstraints{
+            $0.center.equalToSuperview()
+            $0.width.equalTo(view.frame.width/1.556)
         }
     }
     
@@ -224,6 +233,12 @@ extension SelectLocationViewController: UITableViewDataSource, UITableViewDelega
 //MARK: - textfield 설정
 extension SelectLocationViewController : UITextFieldDelegate{
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        if kakaoPlaceSearchData?.isEmpty ?? false{
+            noPlace.isHidden = true
+        }else{
+            noPlace.isHidden = false
+            noPlace.title.text = "\"\(locationTextField.text ?? "" )\""
+        }
         locationTextField.resignFirstResponder()
         searchButtonClicked(sender: searchButton.self)
         return true
@@ -242,3 +257,5 @@ extension SelectLocationViewController: BasicModalViewButtonDelegate{
         self.navigationController?.popViewController(animated: false)
     }
 }
+
+
