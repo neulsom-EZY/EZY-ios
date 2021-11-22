@@ -620,7 +620,7 @@
 		6AB7D435272FE08700FAFA19 /* Errand */ = {
 			isa = PBXGroup;
 			children = (
-				EE7CEE6C2741FB21009A935A /* ErrandList */,
+				EE7CEE6A2741F749009A935A /* ErrandListViewController.swift */,
 				EE9F0D1E26E8A2AC0015E81B /* MorePeopleToDo.swift */,
 				EE9F0D1C26E8A2AC0015E81B /* ErrandDetailsViewController.swift */,
 				EE9F0D2026E8A2AC0015E81B /* AddErrandViewController.swift */,
@@ -772,6 +772,7 @@
 		6AE5BAFF26954B9900A9731B /* CollectionViewCells */ = {
 			isa = PBXGroup;
 			children = (
+				EE7CEE6C2741FB21009A935A /* ErrandList */,
 				6A138F80266F862200DBCE49 /* GroupAddCollectionViewCell.swift */,
 				EE9F0D4A26E8A9700015E81B /* AlarmSettingCell.swift */,
 				EE9F0D4626E8A9700015E81B /* ErrandPeopoleChooseAfterCell.swift */,
@@ -813,7 +814,6 @@
 		EE7CEE6C2741FB21009A935A /* ErrandList */ = {
 			isa = PBXGroup;
 			children = (
-				EE7CEE6A2741F749009A935A /* ErrandListViewController.swift */,
 				EE7CEE6D2741FB4A009A935A /* ErrandListTableViewCell.swift */,
 				EE7CEE6F27421EDB009A935A /* ErrandListItemTableViewCell.swift */,
 			);

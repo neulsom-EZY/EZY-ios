@@ -13,6 +13,7 @@ class SelectLocationViewController: UIViewController {
     // MARK: - Properties
     
     private var kakaoPlaceVM : KakaoPlaceViewModel!
+    
     //MARK: - Kakao Search Data
     let bgView = UIView().then {
         $0.backgroundColor = .black
