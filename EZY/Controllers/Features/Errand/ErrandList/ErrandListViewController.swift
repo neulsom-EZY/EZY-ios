@@ -1,21 +1,31 @@
 //
-//  reErrandListViewController.swift
+//  ErrandListViewController.swift
 //  EZY
 //
 //  Created by Ji-hoon Ahn on 2021/11/15.
 //
 
 import UIKit
-class reErrandListViewController : UIViewController{
+protocol ErrandDetailTypeDelegate : AnyObject{
+    func SendErrand()
+    func GetErrand()
+}
+
+class ErrandListViewController : UIViewController{
     let bounds = UIScreen.main.bounds
     
     private let sections : [String] = ["부탁받은 심부름","부탁한 심부름"," 수락 대기 중인 심부름"]
-    private let dummy : [String] = ["EZY 회의","EZY 회의","EZY 회의","EZY 회의","EZY 회의","EZY 회의","EZY 회의","EZY 회의","EZY 회의","EZY 회의","EZY 회의","EZY 회의"]
+    private let dummy1 : [String] = ["EZY 회의","EZY 회의","EZY 회의","EZY 회의","EZY 회의","EZY 회의","EZY 회의","EZY 회의","EZY 회의","EZY 회의","EZY 회의","EZY 회의"]
+    private let dummy2 : [String] = ["EZY 회의","EZY 회의","EZY 회의","EZY 회의"]
+    private let dummy3 : [String] = ["EZY 회의","EZY 회의","EZY 회의","EZY 회의","EZY 회의"]
+
     //MARK: - Properties
+    
+    weak var delegate : ErrandDetailTypeDelegate?
+    
     private lazy var tableViewHeader = UIView(frame: CGRect(x: 0, y: 0, width: view.frame.width, height: bounds.height/7.315)).then{
         $0.backgroundColor = .clear
     }
-    
     private let backBtn = UIButton().then{
         $0.setImage(UIImage(named: "EZY_RequestBackButton"), for: .normal)
         $0.addTarget( self, action: #selector(BackAction), for: .touchUpInside)
@@ -62,7 +72,6 @@ class reErrandListViewController : UIViewController{
             $0.top.bottom.left.right.equalToSuperview()
         }
     }
-    
     //MARK: - TableView Datasource And Delegate
     private func dataSourceAndDelegateSetting(){
         listTv.delegate = self
@@ -81,23 +90,29 @@ class reErrandListViewController : UIViewController{
         }
     }
 }
-extension reErrandListViewController : UITableViewDelegate , UITableViewDataSource{
+extension ErrandListViewController : UITableViewDelegate , UITableViewDataSource{
     func numberOfSections(in tableView: UITableView) -> Int {
         return sections.count
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return dummy.count
+        if section == 0{
+            return dummy1.count
+        }else if section == 1{
+            return dummy2.count
+        }else{
+            return dummy3.count
+        }
     }
+    
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         if indexPath.item == 0{
             return bounds.height/15.7669
         }
         return bounds.height/8.6
     }
-
+    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        
         if indexPath.item == 0 {
             guard let cell = tableView.dequeueReusableCell(withIdentifier: ErrandListTableViewCell.identifier, for: indexPath) as? ErrandListTableViewCell else {return UITableViewCell()}
             cell.label.text = sections[indexPath.section]
@@ -105,8 +120,22 @@ extension reErrandListViewController : UITableViewDelegate , UITableViewDataSour
         }
         guard let cell = tableView.dequeueReusableCell(withIdentifier: ErrandListItemTableViewCell.identifier, for: indexPath) as? ErrandListItemTableViewCell else {return UITableViewCell()}
         cell.tbTypeLabel.text = sections[indexPath.section]
-        cell.ErrandTitle.text = dummy[indexPath.row]
+        cell.ErrandTitle.text = dummy1[indexPath.row]
         cell.Date("11:00 - 13:00", nil)
         return cell
+    }
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if indexPath.section ==  0{
+            let controller = ErrandDetailsViewController()
+            delegate?.GetErrand()
+            navigationController?.pushViewController(controller, animated: true)
+        }else if indexPath.section == 1{
+            let controller = ErrandDetailsViewController()
+            delegate?.SendErrand()
+            navigationController?.pushViewController(controller, animated: true)
+        }else{
+            let controller = PlanRequestRespondingViewController()
+            navigationController?.pushViewController(controller, animated: true)
+        }
     }
 }

@@ -14,7 +14,6 @@ class SelectLocationViewController: UIViewController {
     
     private var kakaoPlaceVM : KakaoPlaceViewModel!
     //MARK: - Kakao Search Data
-    private var kakaoPlaceSearchData : [KakaoDocuments]? = nil
     let bgView = UIView().then {
         $0.backgroundColor = .black
     }
@@ -57,18 +56,19 @@ class SelectLocationViewController: UIViewController {
     }
     private let noPlace = NoPlace().then{
         $0.isHidden = false
+        $0.title.text = "검색결과가 없습니다"
     }
     
     private lazy var locationTableView = UITableView().then {
         $0.backgroundColor = .clear
         $0.separatorStyle = .none
         $0.showsVerticalScrollIndicator = false
-        $0.register(LocationTableViewCell.self, forCellReuseIdentifier: LocationTableViewCell.reuseId)    }
-
+        $0.register(LocationTableViewCell.self, forCellReuseIdentifier: LocationTableViewCell.reuseId)
+    }
+    
     // MARK: - LifeCycles
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         configureUI()
     }
     
@@ -213,7 +213,7 @@ extension SelectLocationViewController: UITableViewDataSource, UITableViewDelega
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: LocationTableViewCell.reuseId, for: indexPath) as! LocationTableViewCell
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: LocationTableViewCell.reuseId, for: indexPath) as? LocationTableViewCell else{return UITableViewCell()}
         cell.selectionStyle = .none
         
         let kakaoPlaceVM = self.kakaoPlaceVM.kakaoPlaceIndex(indexPath.row)
@@ -230,22 +230,18 @@ extension SelectLocationViewController: UITableViewDataSource, UITableViewDelega
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let BasicModalVC = BasicModalViewController.instance()
+        let kakaoPlaceVM = self.kakaoPlaceVM.kakaoPlaceIndex(indexPath.row)
         addDim()
         BasicModalVC.baseDelegate = self
         BasicModalVC.delegate = self
         present(BasicModalVC, animated: true, completion: nil)
-        BasicModalVC.textSetting(colorText: kakaoPlaceSearchData?[indexPath.row].placeName ?? "", contentText: "위치를 선택할까요?")
+        BasicModalVC.textSetting(colorText: kakaoPlaceVM.placeName ?? "", contentText: "위치를 선택할까요?")
     }
 }
 //MARK: - textfield 설정
 extension SelectLocationViewController : UITextFieldDelegate{
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        if kakaoPlaceSearchData?.isEmpty ?? false{
-            noPlace.isHidden = true
-        }else{
-            noPlace.isHidden = false
-            noPlace.title.text = "\"\(locationTextField.text ?? "" )\""
-        }
+        
         locationTextField.resignFirstResponder()
         searchButtonClicked(sender: searchButton.self)
         return true
