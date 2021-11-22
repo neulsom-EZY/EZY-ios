@@ -64,11 +64,11 @@ class ChangePhoneNumPhoneNumViewController: UIViewController {
     
     // MARK: - Selectors
     @objc private func changeButtonClicked(sender:UIButton){
-        if isValidPhoneNumber(PhoneNumber: lineInputView.getNickNameText()){
+        if isValidPhoneNumber(PhoneNumber: lineInputView.getInfoText()){
             let nextViewController = ChangePhoneNumAuthCodeViewController()
             self.navigationController?.pushViewController(nextViewController, animated: true)
         }else{
-            lineInputView.checkNickNameIsEmpty()
+            lineInputView.checkInfoTextIsEmpty()
         }
     }
     

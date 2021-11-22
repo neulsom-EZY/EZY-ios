@@ -64,11 +64,11 @@ class ChangePasswordNameAfterLoginViewController: UIViewController {
     
     // MARK: - Selectors
     @objc func changeButtonClicked(sender:UIButton){
-        if isValidNickname(Nickname: lineInputView.getNickNameText()) == true{
+        if isValidNickname(Nickname: lineInputView.getInfoText()) == true{
             let vc = ChangePasswordPhoneNumAfterLoginViewController()
             self.navigationController?.pushViewController(vc, animated: true)
         }else{
-            lineInputView.checkNickNameIsEmpty()
+            lineInputView.checkInfoTextIsEmpty()
         }
     }
     

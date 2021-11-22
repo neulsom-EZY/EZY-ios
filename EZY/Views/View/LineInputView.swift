@@ -87,12 +87,13 @@ class LineInputView: UIView {
         conditionLabel.text = conditionText
     }
     
-    // MARK: - getNickNameText
-    func getNickNameText() -> String{
+    // MARK: - getInfoText
+    func getInfoText() -> String{
         return infoTextField.text!
     }
     
-    func checkNickNameIsEmpty() {
+    // MARK: - checkInfoTextIsEmpty
+    func checkInfoTextIsEmpty() {
         if infoTextField.text?.isEmpty == true{
             shakeView(titleLabel)
         }

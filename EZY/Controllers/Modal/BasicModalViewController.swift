@@ -53,9 +53,7 @@ class BasicModalViewController: BaseModal {
     // MARK: - addView
     private func addView(){
         self.view.addSubview(bgView)
-        bgView.addSubview(okButton)
-        bgView.addSubview(cancelButton)
-        bgView.addSubview(contentLabel)
+        [okButton, cancelButton, contentLabel].forEach { bgView.addSubview($0) }
     }
     
     static func instance() -> BasicModalViewController {

@@ -64,7 +64,7 @@ class ChangePasswordPasswordAfterLoginViewController: UIViewController{
     
     // MARK: - Selectors
     @objc private func changeButtonClicked(sender:UIButton){
-        if isValidPassword(Password: lineInputView.getNickNameText()) == true{
+        if isValidPassword(Password: lineInputView.getInfoText()) == true{
 
             let controllers = self.navigationController?.viewControllers
             for vc in controllers! {
@@ -74,7 +74,7 @@ class ChangePasswordPasswordAfterLoginViewController: UIViewController{
             }
             
         }else{
-            lineInputView.checkNickNameIsEmpty()
+            lineInputView.checkInfoTextIsEmpty()
         }
     }
     

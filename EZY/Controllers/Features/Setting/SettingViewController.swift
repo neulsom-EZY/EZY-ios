@@ -162,8 +162,7 @@ extension SettingViewController: BasicModalViewButtonDelegate{
         
         DispatchQueue.main.async { [weak self] in
             let nextVC = LoginViewController()
-            nextVC.modalPresentationStyle = .fullScreen
-            self!.present(nextVC, animated: true, completion: nil)
+            self?.navigationController?.popToViewController(nextVC, animated: true)
         }
     }
 }

@@ -65,10 +65,10 @@ class ChangeIdAfterLoginViewController: UIViewController {
     
     // MARK: - Selectors
     @objc private func changeButtonClicked(sender:UIButton){
-        if isValidId(id: lineInputView.getNickNameText()) == true{
+        if isValidId(id: lineInputView.getInfoText()) == true{
             navigationController?.popViewController(animated: true)
         }else{
-            lineInputView.checkNickNameIsEmpty()
+            lineInputView.checkInfoTextIsEmpty()
         }
     }
     

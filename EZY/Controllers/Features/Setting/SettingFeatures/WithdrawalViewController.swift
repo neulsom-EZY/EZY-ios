@@ -11,53 +11,32 @@ import LocalAuthentication
 class WithdrawalViewController: UIViewController {
     
     //MARK: - Properties
-    let authContext = LAContext()
+    private let authContext = LAContext()
     
-    lazy var topView = TopView()
+    private let topView = TopView().then{
+        $0.backButton.addTarget(self, action: #selector(backButtonClicked(sender:)), for: .touchUpInside)
+        $0.topViewDataSetting(backButtonImage: UIImage(named: "EZY_IdChangeBackButtonImage")!, titleLabelText: "회원 탈퇴", textColor: UIColor(red: 120/255, green: 81/255, blue: 255/255, alpha: 1))
+    }
     
-    lazy var withdrawalModalView = WithdrawalModalView()
+    private let bgView = UIView()
     
-    lazy var idNameLabel = UILabel().then {
+    private let idNameLabel = UILabel().then {
         $0.textColor = UIColor(red: 150/255, green: 141/255, blue: 255/255, alpha: 1)
         $0.text = "아이디/닉네임"
         $0.dynamicFont(fontSize: 10, currentFontName: "AppleSDGothicNeo-SemiBold")
     }
     
-    lazy var idTextField = UITextField().then {
-        $0.textColor = UIColor(red: 101/255, green: 101/255, blue: 101/255, alpha: 1)
-        $0.placeholder = "아이디를 입력해주세요"
-        $0.dynamicFont(fontSize: 14, currentFontName: "AppleSDGothicNeo-Regular")
+    private let nameLineInputView = LineInputView().then{
+        $0.dataSetting(titleText: "닉네임", placeHolderText: "닉네임을 입력해주세요", conditionText: "1~10자사이 영어로 입력해주세요!")
     }
     
-    lazy var idUnderLineView = UIView().then {
-        $0.backgroundColor = UIColor(red: 150/255, green: 141/255, blue: 255/255, alpha: 1)
+    private let passwordLineInputView = LineInputView().then{
+        $0.dataSetting(titleText: "비밀번호", placeHolderText: "비밀번호를 입력해주세요", conditionText: "영어 숫자 조합 8자 이상, 특수문자 가능, 공백 허용x")
     }
     
-    lazy var pwNameLabel = UILabel().then {
-        $0.textColor = UIColor(red: 150/255, green: 141/255, blue: 255/255, alpha: 1)
-        $0.text = "비밀번호"
-        $0.dynamicFont(fontSize: 10, currentFontName: "AppleSDGothicNeo-SemiBold")
-    }
-    
-    lazy var showPasswordButton = UIButton().then {
-        $0.setImage(UIImage(named: "EZY_eye"), for: .normal)
-        $0.addTarget(self, action: #selector(EyeButtondClicked), for: .touchUpInside)
-    }
-    
-    lazy var pwTextField = UITextField().then {
-        $0.textColor = UIColor(red: 101/255, green: 101/255, blue: 101/255, alpha: 1)
-        $0.placeholder = "비밀번호를 입력해주세요"
-        $0.dynamicFont(fontSize: 14, currentFontName: "AppleSDGothicNeo-Regular")
-    }
-    
-    lazy var pwUnderLineView = UIView().then {
-        $0.backgroundColor = UIColor(red: 150/255, green: 141/255, blue: 255/255, alpha: 1)
-    }
-    
-    lazy var withdrawalButton = UIButton().then {
-        $0.setBackgroundImage(UIImage(named: "EZY_IdChangeButtonImage"), for: .normal)
+    private let withdrawalButton = UIButton().then {
+        $0.setBackgroundImage(UIImage(named: "EZY_ChangeButtonImage"), for: .normal)
         $0.setTitle("탈퇴하기", for: .normal)
-        $0.alpha = 0.5
         $0.dynamicFont(fontSize: 14, currentFontName: "AppleSDGothicNeo-Bold")
         $0.addTarget(self, action: #selector(withdrawalButtonClicked(sender:)), for: .touchUpInside)
     }
@@ -66,180 +45,37 @@ class WithdrawalViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        topViewSetting()
-        
-        layoutSetting()
-        
-        withdrawalModalViewSetting()
+        addView()
+        location()
     }
     
-    @objc func okButtonClicked(sender:UIButton){
-        let nextViewController = LoginViewController()
-        self.navigationController?.pushViewController(nextViewController, animated: true)
-        
-    }
-    
-    @objc func EyeButtondClicked(sender:UIButton){
-        if pwTextField.isSecureTextEntry == true {
-            pwTextField.isSecureTextEntry = false
-        } else {
-            pwTextField.isSecureTextEntry = true
-        }
-    }
-    
-    @objc func withdrawalButtonClicked(sender:UIButton){
-        var error: NSError?
-        if authContext.canEvaluatePolicy(.deviceOwnerAuthentication, error: &error) {
-
-            authContext.evaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, localizedReason: description) { success, error in
-                if success {
-                    print("인증성공")
-
-                    DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 1) {
-                        self.withdrawalModalView.isHidden = false
-                    }
-
-                }else{
-                    print("인증실패")
-                    print(error?.localizedDescription)
-                }
-            }
-        }
-    }
-    
-    func withdrawalModalViewSetting() {
-        self.view.addSubview(withdrawalModalView)
-        
-        withdrawalModalView.okButton.addTarget(self, action: #selector(okButtonClicked(sender:)), for: .touchUpInside)
-        
-        withdrawalModalView.snp.makeConstraints { make in
-            make.top.right.bottom.left.equalToSuperview()
-        }
-        
-        withdrawalModalView.shadowBackgroundView.snp.makeConstraints { make in
-            make.top.right.bottom.left.equalToSuperview()
-        }
-        
-        withdrawalModalView.modalBackgroundView.snp.makeConstraints { make in
-            make.width.equalToSuperview().dividedBy(1.13)
-            make.height.equalToSuperview().dividedBy(3.59)
-            make.centerX.centerY.equalToSuperview()
-        }
-        
-        withdrawalModalView.titleLabel.snp.makeConstraints { make in
-            make.top.equalToSuperview().offset(self.view.frame.height/33.8)
-            make.left.equalToSuperview().offset(self.view.frame.height/33.8)
-        }
-        
-        withdrawalModalView.withdrawalCircleImageView.snp.makeConstraints { make in
-            make.centerX.equalToSuperview()
-            make.height.equalTo(self.view).dividedBy(17.27)
-            make.width.equalTo(withdrawalModalView.withdrawalCircleImageView.snp.height)
-            make.top.equalTo(withdrawalModalView.titleLabel.snp.bottom).offset(self.view.frame.height/33.8)
-        }
-        
-        withdrawalModalView.withdrawalContentLabel.snp.makeConstraints { make in
-            make.top.equalTo(withdrawalModalView.withdrawalCircleImageView.snp.bottom).offset(self.view.frame.height/40.6)
-            make.centerX.equalToSuperview()
-        }
-        
-        withdrawalModalView.okButton.snp.makeConstraints { make in
-            make.bottom.equalTo(withdrawalModalView.noButton)
-            make.right.equalTo(withdrawalModalView.noButton.snp.left).offset(-self.view.frame.width/35)
-            make.height.width.equalTo(withdrawalModalView.noButton)
-        }
-        
-        withdrawalModalView.noButton.snp.makeConstraints { make in
-            make.bottom.equalToSuperview().offset(-self.view.frame.height/30.6)
-            make.right.equalToSuperview().offset(-self.view.frame.width/15)
-            make.height.equalToSuperview().dividedBy(7.2)
-            make.width.equalToSuperview().dividedBy(4.7)
-        }
-        
-        withdrawalModalView.isHidden = true
-        
-    }
-    
-    @objc func backButtonClicked(sender:UIButton){
-        self.navigationController?.popViewController(animated: true)
-    }
-    
-    func layoutSetting(){
+    // MARK: - addView
+    private func addView(){
         self.view.backgroundColor = .white
-        self.view.addSubview(idNameLabel)
-        self.view.addSubview(idTextField)
-        self.view.addSubview(idUnderLineView)
-        self.view.addSubview(pwNameLabel)
-        self.view.addSubview(pwTextField)
-        self.view.addSubview(pwUnderLineView)
-        self.view.addSubview(withdrawalButton)
-        self.view.addSubview(showPasswordButton)
-        
-        topView.backButton.addTarget(self, action: #selector(backButtonClicked(sender:)), for: .touchUpInside)
-        
-        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(_:)), name:UIResponder.keyboardWillShowNotification, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide(_:)), name: UIResponder.keyboardWillHideNotification, object: nil)
-                
-        idNameLabel.snp.makeConstraints { make in
-            make.top.equalTo(topView.snp.bottom).offset(self.view.frame.height/16.91)
-            make.left.equalTo(topView)
-        }
-        
-        idTextField.snp.makeConstraints { make in
-            make.top.equalTo(idNameLabel.snp.bottom)
-            make.left.equalTo(idNameLabel)
+        [topView, nameLineInputView, passwordLineInputView, withdrawalButton].forEach { self.view.addSubview($0) }
+    }
+    
+    // MARK: - location
+    private func location() {
+        nameLineInputView.snp.makeConstraints { make in
+            make.width.equalToSuperview()
+            make.top.equalTo(topView.snp.bottom).offset(self.view.frame.height/17.65)
+            make.height.equalToSuperview().dividedBy(13)
             make.centerX.equalToSuperview()
-            make.height.equalToSuperview().dividedBy(27)
         }
         
-        idUnderLineView.snp.makeConstraints { make in
-            make.top.equalTo(idTextField.snp.bottom)
-            make.left.equalTo(idTextField)
+        passwordLineInputView.snp.makeConstraints { make in
+            make.top.equalTo(nameLineInputView.snp.bottom).offset(self.view.frame.height/17.65)
+            make.height.width.equalTo(nameLineInputView)
             make.centerX.equalToSuperview()
-            make.height.equalTo(2)
-        }
-        
-        pwNameLabel.snp.makeConstraints { make in
-            make.top.equalTo(idUnderLineView.snp.bottom).offset(self.view.frame.height/16.91)
-            make.left.equalTo(idUnderLineView)
-        }
-        
-        pwTextField.snp.makeConstraints { make in
-            make.top.equalTo(pwNameLabel.snp.bottom)
-            make.left.equalTo(pwNameLabel)
-            make.right.equalTo(pwUnderLineView).offset(-self.view.frame.width/20)
-            make.height.equalToSuperview().dividedBy(27)
-        }
-        
-        pwUnderLineView.snp.makeConstraints { make in
-            make.top.equalTo(pwTextField.snp.bottom)
-            make.left.equalTo(pwTextField)
-            make.centerX.equalToSuperview()
-            make.height.equalTo(2)
         }
         
         withdrawalButton.snp.makeConstraints { make in
             make.left.equalToSuperview().offset(self.view.frame.width/17)
             make.centerX.equalToSuperview()
             make.height.equalToSuperview().dividedBy(16.24)
-            make.bottom.equalToSuperview().offset(-self.view.frame.height/23.8)
+            make.centerY.equalToSuperview().offset(self.view.frame.height/40)
         }
-        
-        showPasswordButton.snp.makeConstraints { make in
-            make.centerY.equalTo(pwTextField)
-            make.right.equalTo(pwUnderLineView)
-            make.height.equalTo(self.view.frame.height/90.22*1.2)
-            make.width.equalTo(self.view.frame.width/25*1.2)
-        }
-    }
-    
-    func topViewSetting(){
-        self.view.addSubview(topView)
-        
-        topView.backButton.addTarget(self, action: #selector(backButtonClicked(sender:)), for: .touchUpInside)
-        
-        topView.topViewDataSetting(backButtonImage: UIImage(named: "EZY_IdChangeBackButtonImage")!, titleLabelText: "회원 탈퇴", textColor: UIColor(red: 120/255, green: 81/255, blue: 255/255, alpha: 1))
-        
         
         topView.snp.makeConstraints { make in
             make.left.right.equalToSuperview()
@@ -248,19 +84,115 @@ class WithdrawalViewController: UIViewController {
         }
     }
     
-    @objc //MARK: 모달 창 올리기
-    func keyboardWillShow(_ sender: Notification) {
-        withdrawalButton.frame.origin.y = self.view.frame.height/2
+    // MARK: - Selectors
+    @objc private func backButtonClicked(sender:UIButton){
+        self.navigationController?.popViewController(animated: true)
     }
     
-
-    @objc //MARK: 모달 창 원래대로
-    func keyboardWillHide(_ sender: Notification) {
-        withdrawalButton.frame.origin.y = self.view.frame.height-withdrawalButton.frame.height-self.view.frame.height/23.8
+    @objc func withdrawalButtonClicked(sender:UIButton){
+        // 아이디 비밀번호 유효성 체크 -> 맞음 -> 모달띄우기 -> okclick -> 페이스아이디 -> poptoVC
+        if isValidId(id: nameLineInputView.getInfoText()){
+            if isValidPassword(password: passwordLineInputView.getInfoText()){
+                let BasicModalVC = BasicModalViewController.instance()
+                addDim()
+                BasicModalVC.delegate = self
+                BasicModalVC.baseDelegate = self
+                present(BasicModalVC, animated: true, completion: nil)
+                BasicModalVC.textSetting(colorText: "", contentText: "정말 로그아웃하시겠습니까?")
+            }else{
+                passwordLineInputView.checkInfoTextIsEmpty()
+            }
+        }else{
+            nameLineInputView.checkInfoTextIsEmpty()
+        }
     }
     
-    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        idTextField.resignFirstResponder()
-        pwTextField.resignFirstResponder()
+    // MARK: - isValidId
+    private func isValidId(id: String?) -> Bool {
+        guard id != nil else { return false }
+        
+        let idRegEx = "[A-Za-z]{1,10}"
+        let pred = NSPredicate(format:"SELF MATCHES %@", idRegEx)
+        return pred.evaluate(with: id)
+    }
+    
+    // MARK: - isValidPassword
+    private func isValidPassword(password: String?) -> Bool {
+        guard password != nil else { return false }
+            
+        let PasswordRegEx = ("(?=.*[A-Za-z~!@#$%^&*])(?=.*[0-9]).{8,}")
+        let pred = NSPredicate(format:"SELF MATCHES %@", PasswordRegEx)
+        return pred.evaluate(with: password)
+    }
+    
+    // MARK: - addDim
+    private func addDim() {
+        view.addSubview(bgView)
+        bgView.snp.makeConstraints { (make) in
+            make.edges.equalTo(0)
+        }
+        
+        DispatchQueue.main.async { [weak self] in
+            self?.bgView.backgroundColor = .black.withAlphaComponent(0.15)
+        }
+    }
+       
+    // MARK: - removeDim
+    private func removeDim() {
+        DispatchQueue.main.async { [weak self] in
+            self?.bgView.removeFromSuperview()
+            self?.dismiss(animated: true)
+        }
     }
 }
+
+extension WithdrawalViewController: BaseModalDelegate {
+    func onTapClose() {
+        removeDim()
+        
+        print("nonono")
+    }
+}
+
+extension WithdrawalViewController: BasicModalViewButtonDelegate{
+    func onTabOkButton() {
+        removeDim()
+        
+        DispatchQueue.main.async { [weak self] in
+            let nextVC = LoginViewController()
+            self?.navigationController?.popToViewController(nextVC, animated: true)
+        }
+        
+        print("yesss")
+    }
+}
+
+
+//extension WithdrawalViewController: BaseModalDelegate {
+//    func onTapClose() {
+//        removeDim()
+//        print("Asdf")
+//    }
+//}
+//
+//extension WithdrawalViewController: BasicModalViewButtonDelegate{
+//    func onTabOkButton() {
+//        removeDim()
+//
+//        var error: NSError?
+//        if authContext.canEvaluatePolicy(.deviceOwnerAuthentication, error: &error) {
+//
+//            authContext.evaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, localizedReason: description) { success, error in
+//                if success {
+//                    print("인증성공")
+//
+//                    let vc = LoginViewController()
+//                    self.navigationController?.popToViewController(vc, animated: true)
+//                }else{
+//                    print("인증실패")
+//                    print(error?.localizedDescription)
+//                }
+//            }
+//        }
+//    }
+//}
