@@ -12,7 +12,7 @@ class SelectLocationViewController: UIViewController {
     
     // MARK: - Properties
     
-
+    private var kakaoPlaceVM : KakaoPlaceViewModel!
     //MARK: - Kakao Search Data
     private var kakaoPlaceSearchData : [KakaoDocuments]? = nil
     let bgView = UIView().then {
@@ -165,7 +165,9 @@ class SelectLocationViewController: UIViewController {
             switch response{
             case.success(let kakaoData):
                 if  let  kakao = kakaoData as? [KakaoDocuments]{
-                    self.kakaoPlaceSearchData = kakao
+                    self.kakaoPlaceVM = KakaoPlaceViewModel(KakaoPlaces: kakao)
+                }
+                DispatchQueue.main.async {
                     self.locationTableView.reloadData()
                 }
             case .requestErr(let message):
@@ -203,17 +205,22 @@ class SelectLocationViewController: UIViewController {
 
 // MARK: - UITableViewDelegate and UITableViewDataSource
 extension SelectLocationViewController: UITableViewDataSource, UITableViewDelegate{
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return self.kakaoPlaceVM == nil ? 0 : self.kakaoPlaceVM.numberOfSections
+    }
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return kakaoPlaceSearchData?.count ??  0
+        return self.kakaoPlaceVM.numberOfRowsInSection(section)
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: LocationTableViewCell.reuseId, for: indexPath) as! LocationTableViewCell
         cell.selectionStyle = .none
+        
+        let kakaoPlaceVM = self.kakaoPlaceVM.kakaoPlaceIndex(indexPath.row)
         cell.alphabetLabel.text = alphabet[indexPath.row]
-        cell.locationTitleNameLabel.text = kakaoPlaceSearchData?[indexPath.row].placeName
-        cell.locationLabel.text = kakaoPlaceSearchData?[indexPath.row].roadAddressName
-        cell.subLocationLabel.text = kakaoPlaceSearchData?[indexPath.row].addressName
+        cell.locationTitleNameLabel.text = kakaoPlaceVM.placeName
+        cell.locationLabel.text = kakaoPlaceVM.roadName
+        cell.subLocationLabel.text = kakaoPlaceVM.addressName
         return cell
     }
     

@@ -8,17 +8,17 @@
 import Foundation
 
 struct KakaoPlaceViewModel {
-    let KakaoPlace : [KakaoDocuments]
+    let KakaoPlaces : [KakaoDocuments]
 }
 extension KakaoPlaceViewModel{
     var numberOfSections : Int{
         return 1
     }
     func numberOfRowsInSection(_ section : Int) -> Int{
-        return self.KakaoPlace.count
+        return self.KakaoPlaces.count
     }
     func kakaoPlaceIndex(_ index : Int) -> KakaoViewModel{
-        let kakaoPlace = self.KakaoPlace[index]
+        let kakaoPlace = self.KakaoPlaces[index]
         return KakaoViewModel(kakaoPlace)
     }
 }
@@ -29,5 +29,16 @@ struct KakaoViewModel{
 extension KakaoViewModel{
     init(_ kakaoPlace : KakaoDocuments){
         self.kakaoPlace = kakaoPlace
+    }
+}
+extension KakaoViewModel{
+    var placeName : String?{
+        return self.kakaoPlace.placeName
+    }
+    var roadName : String?{
+        return self.kakaoPlace.roadAddressName
+    }
+    var addressName: String?{
+        return self.kakaoPlace.addressName
     }
 }
