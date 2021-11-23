@@ -9,7 +9,11 @@ import Foundation
 import UIKit
 import Alamofire
 
-class TokenUtils{
+final class TokenUtils{
+    
+    static let shared = TokenUtils()
+    private init() { }
+    
     //MARK: - 키체인 값 저장
     func save(_ service: String, account : String, value : String){
         let keyChainQuery : NSDictionary = [
@@ -20,23 +24,21 @@ class TokenUtils{
         ]
         //현재 저장되어 있는 값 삭제 - 기존의 값을 덮어 쓰지 못하기 떄문에
         SecItemDelete(keyChainQuery)
-        
         //새로운 키 체인 아이템 등록
         let status: OSStatus = SecItemAdd(keyChainQuery, nil)
         assert(status == noErr, "토큰 값 저장에 실패했습니다.")
         NSLog("status = \(status)")
     }
     //MARK: - 키체인에 저장된 값을 읽어오는 메소드
-    func load(_ service : String, account : String) -> String?{
+    func read(_ service : String, account : String) -> String?{
         //1.키 체인 쿼리 정의
         let keyChainQuery :NSDictionary = [
                 kSecClass : kSecClassGenericPassword,
                 kSecAttrService : service,
                 kSecAttrAccount : account,
-                kSecReturnData : kCFBooleanTrue!,
-                kSecMatchLimit : kSecMatchLimitOne
+                kSecReturnData : kCFBooleanTrue!, //CFData타입으로 불러오라는 의미
+                kSecMatchLimit : kSecMatchLimitOne // 중복되는 경우 하나의 값만 가져오라는 의미
             ]
-            
             //2.키 체인에 저장된 값을 읽어온다
             var dataTypeRef : AnyObject?
             let status = SecItemCopyMatching(keyChainQuery, &dataTypeRef)
@@ -59,16 +61,15 @@ class TokenUtils{
             kSecAttrService: service,
             kSecAttrAccount : account
         ]
-        
         //현재 저장되어 있는 값 삭제
         let status = SecItemDelete(keyChainQuery)
         assert(status == noErr , "토큰값 삭제에 실패했습니다.")
         NSLog("status = \(status)")
     }
     //키 체인안에 저장된 엑세스 토큰을 이용하여 헤더를 만들어주는 메소드
-     func getAuthorizationHeader() -> HTTPHeaders? {
-         let serviceID = "com.app.EZY"
-         if let accessToken = self.load(serviceID, account: "accessToken"){
+    func getAuthorizationHeader(_ serviceID : String) -> HTTPHeaders? {
+         let serviceID = serviceID
+         if let accessToken = self.read(serviceID, account: "accessToken"){
              return ["Autorization": "Bearer \(accessToken)"] as HTTPHeaders
          }else{
              return nil
