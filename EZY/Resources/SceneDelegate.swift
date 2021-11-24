@@ -21,6 +21,10 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
       
 
         let mainViewController = LoginViewController()
+<<<<<<< HEAD
+=======
+
+>>>>>>> a91703aa63ed97c1f0f86e1d97860d498bfe6e8f
 
         let navigationController = UINavigationController(rootViewController: mainViewController)
 
