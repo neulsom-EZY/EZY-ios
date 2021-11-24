@@ -8,9 +8,11 @@
 import UIKit
 import SnapKit
 import Then
+import Alamofire
 
 class SignUpPasswordViewController: UIViewController{
     //MARK: - Properties
+    var model:UserModel?
     
     private let topBarView = TopBarView().then {
         $0.goBackButton.addTarget(self, action: #selector(goBack), for: .touchUpInside)
@@ -54,8 +56,11 @@ class SignUpPasswordViewController: UIViewController{
     
     @objc
     private func onTapContinuePhoneNum(){
+        self.model!.password = passwordContainer.tf.text!
+        print(model)
         if isValidPassword(Password: passwordContainer.tf.text) == true{
             let controller = SignUpPhoneNumViewController()
+            controller.model = model
             navigationController?.pushViewController(controller, animated: true)
         }else{
             shakeView(self.view)

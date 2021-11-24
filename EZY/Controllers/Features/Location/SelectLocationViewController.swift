@@ -179,6 +179,10 @@ class SelectLocationViewController: UIViewController {
                 print("serverError")
             case .networkFail:
                 print("networkFail")
+            case .tokenErr:
+                print("tokenErr")
+            case .authorityErr:
+                print("authorityErr")
             }
         }
     }

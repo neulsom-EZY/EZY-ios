@@ -79,7 +79,7 @@ class MyToDoDetailViewController: UIViewController{
         $0.dynamicFont(fontSize: 12, currentFontName: "AppleSDGothicNeo-Medium")
     }
     
-    lazy var selectedTagButton = WhiteBasicButton().then {
+    private let selectedTagButton = WhiteBasicButton().then {
         $0.buttonTitleLabelSetting(titleText: "PROGRAMMING", titleColor: UIColor(red: 164/255, green: 137/255, blue: 255/255, alpha: 1))
         $0.isEnabled = false
     }
@@ -124,10 +124,6 @@ class MyToDoDetailViewController: UIViewController{
         $0.isEnabled = false
     }
     
-    var toDoTag: String = ""
-    var toDoTitle: String = ""
-    var toDoTime: String = ""
-    
     // MARK: - LifeCycles
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -140,9 +136,7 @@ class MyToDoDetailViewController: UIViewController{
         self.view.backgroundColor = .white
         
         addView()
-        
         location()
-        
         delegateAndDataSource()
     }
 
