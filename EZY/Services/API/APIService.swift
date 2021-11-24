@@ -12,7 +12,7 @@ import UIKit
 class APIService<T : Decodable>{
 
     //MARK: - Request Method
-    func Request(url : String ,method : HTTPMethod, param : Parameters?, header : HTTPHeaders?,completion: @escaping(NetworkResult<Any>) ->  Void){
+    func Request(url : String ,method : HTTPMethod, param : Parameters?, header : HTTPHeaders?,JSONDecodeUsingStatus: Bool,completion: @escaping(NetworkResult<Any>) ->  Void){
         let dataRequest = AF.request("\(Config.baseURL)\(url)",
                                      method: method,
                                      parameters: param,
@@ -25,7 +25,7 @@ class APIService<T : Decodable>{
                 NSLog("Success : \(success)")
                 guard let statusCode = response.response?.statusCode else {return}
                 guard let data = response.data else { return }
-                let networkResult = self.judgeStatus(by: statusCode, data, method: method)
+                let networkResult = self.judgeStatus(by: statusCode, data, JSONDecodeUsingStatus)
                 completion(networkResult)
             case.failure(let err):
                 NSLog("Fail : \(err.localizedDescription)")
@@ -34,27 +34,21 @@ class APIService<T : Decodable>{
         }
     }
     //MARK: - Data Request Status
-    private func judgeStatus(by  statusCode : Int, _ data : Data, method : HTTPMethod) -> NetworkResult<Any>{
+    private func judgeStatus(by  statusCode : Int, _ data : Data, _ JSONDecodeUsingStatus: Bool) -> NetworkResult<Any>{
         switch statusCode{
-        case 200 : return methodStatus(method: method, data: data)
+        case 200 : return methodStatus( data: data, JSONDecodeUsingStatus: JSONDecodeUsingStatus)
         case 400: return .pathErr
         case 500: return .serverErr
         default: return .networkFail
         }
     }
     //MARK: - Method Type
-    private func methodStatus(method : HTTPMethod, data : Data) -> NetworkResult<Any>{
-        switch method{
-        case .post:
-            return .success(data)
-        case .get:
+    private func methodStatus( data : Data, JSONDecodeUsingStatus: Bool) -> NetworkResult<Any>{
+        switch JSONDecodeUsingStatus{
+        case true:
             return isValidData(data)
-        case .put:
-            return .success(data)
-        case .delete:
-            return .success(data)
         default:
-            return .pathErr
+            return .success(data)
         }
     }
     //MARK: - JSONDecoder
@@ -65,4 +59,3 @@ class APIService<T : Decodable>{
         return .success(dataDecoder)
     }
 }
-
