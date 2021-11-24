@@ -14,6 +14,7 @@ struct KakaoPlaceSearchAPI{
     
     func getKakaoInfo(Parameters param : Parameters,completion : @escaping (NetworkResult<Any>) -> Void){
         let URL  = "https://dapi.kakao.com/v2/local/search/keyword.json"
+        
         let header : HTTPHeaders = [ "Authorization" : "KakaoAK 5991020f6bc97398537f1fc8ede3c0c5"]
 
         let dataRequest = AF.request(URL, method: .get, parameters: param, encoding: URLEncoding.queryString, headers: header)

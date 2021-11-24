@@ -102,11 +102,11 @@ class AddErrandViewController : UIViewController{
     
     @objc private func calendarAlert(){
         // 날짜 Alert를 실행시킬 부분
-
+        
     }
     @objc private func clockAlert(){
         //시간 Alert를 실행시킬 부분
-
+        
     }
     @objc private func locationAlert(){
         //위치 Alert 실행시킬 부분

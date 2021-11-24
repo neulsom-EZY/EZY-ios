@@ -10,14 +10,14 @@ import SnapKit
 import Then
 
 protocol AlarmModelDelegate: AnyObject {
-    func updateData(ampm : String , time : Int , minute : Int) 
+    func updateData(ampm : String , time : Int , minute : Int)
 }
 
 class MoreAlarmModelViewController : BaseModal{
-    let ampmData = ["오후","오전"]
-    lazy var ampm = self.ampmData[0]
-    var time = 0
-    var minute = 0
+    private  let ampmData = ["오후","오전"]
+    private  lazy var ampm = self.ampmData[0]
+    private var time = 0
+    private var minute = 0
     //MARK: - Properties
     weak var delegate: AlarmModelDelegate?
     
@@ -68,7 +68,7 @@ class MoreAlarmModelViewController : BaseModal{
     }
     //MARK: - HELPERS
     private func configureUI(){
-
+        
     }
     private func addView(){
         [transparentView,bgView,makeButton].forEach {view.addSubview($0)}
@@ -131,7 +131,7 @@ extension MoreAlarmModelViewController : UIPickerViewDelegate, UIPickerViewDataS
     //MARK: - Picker 갯수
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
         if pickerView == AlarmDateView.ampmPickerView{
-        return ampmData[row]
+            return ampmData[row]
         }
         else if pickerView == AlarmDateView.timePickerView{
             return "\(row)"
