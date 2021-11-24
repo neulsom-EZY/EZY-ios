@@ -49,7 +49,7 @@ class BasicModalViewController: BaseModal {
 
         addView()
     }
-    
+        
     // MARK: - addView
     private func addView(){
         self.view.addSubview(bgView)
@@ -64,11 +64,13 @@ class BasicModalViewController: BaseModal {
     
     //MARK: - selectors
     @objc func MakeTodo(){
+        print("MakeTodo")
         delegate?.onTabOkButton()
         dismiss(animated: true, completion: nil)
     }
     
     @objc func noButton(){
+        print("noButton")
         baseDelegate?.onTapClose()
         dismiss(animated: true, completion: nil)
     }

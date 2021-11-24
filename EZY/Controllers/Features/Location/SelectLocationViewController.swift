@@ -14,15 +14,12 @@ class SelectLocationViewController: UIViewController {
     
     //MARK: - Kakao Search Data
     private var kakaoPlaceSearchData : [KakaoDocuments]? = nil
-    let bgView = UIView().then {
+    
+    private let bgView = UIView().then {
         $0.backgroundColor = .black
     }
-    private let alphabet : [String] = ["A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T","U","V","W","X","Y","Z"]
     
-    private let selectLocationModalView = SelectLocationModalView().then{
-        $0.okButton.addTarget(self, action: #selector(okButtonClicked(sender:)), for: .touchUpInside)
-        $0.isHidden = true
-    }
+    private let alphabet : [String] = ["A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T","U","V","W","X","Y","Z"]
         
     private let backButton = UIButton().then {
         $0.setImage(UIImage(named: "EZY_LocationBackButton"), for: .normal)
@@ -59,7 +56,8 @@ class SelectLocationViewController: UIViewController {
         $0.backgroundColor = .clear
         $0.separatorStyle = .none
         $0.showsVerticalScrollIndicator = false
-        $0.register(LocationTableViewCell.self, forCellReuseIdentifier: LocationTableViewCell.reuseId)    }
+        $0.register(LocationTableViewCell.self, forCellReuseIdentifier: LocationTableViewCell.reuseId)
+    }
 
     // MARK: - LifeCycles
     override func viewDidLoad() {
@@ -73,21 +71,14 @@ class SelectLocationViewController: UIViewController {
         self.view.backgroundColor = .white
 
         addView()
-        
         location()
-        
         delegateAndDataSource()
     }
     
     // MARK: - addView
     private func addView(){
-        self.view.addSubview(topViewHalfModalView)
-        self.view.addSubview(backButton)
-        self.view.addSubview(textFieldBackgroundView)
-        self.view.addSubview(searchButton)
-        textFieldBackgroundView.addSubview(locationTextField)
-        self.view.addSubview(locationTableView)
-        self.view.addSubview(selectLocationModalView)
+        [topViewHalfModalView, backButton,textFieldBackgroundView,searchButton, locationTableView].forEach { self.view.addSubview($0) }
+        [locationTextField].forEach { textFieldBackgroundView.addSubview($0) }
     }
     
     // MARK: - location
@@ -98,32 +89,27 @@ class SelectLocationViewController: UIViewController {
             make.height.equalToSuperview().dividedBy(33.8)
             make.width.equalTo(backButton.snp.height)
         }
-        
         searchButton.snp.makeConstraints { make in
             make.centerY.equalTo(backButton)
             make.right.equalToSuperview().offset(-self.view.frame.height/30)
             make.height.equalToSuperview().dividedBy(51.09)
             make.width.equalToSuperview().dividedBy(25)
         }
-        
         textFieldBackgroundView.snp.makeConstraints { make in
             make.centerY.equalTo(backButton)
             make.centerX.equalToSuperview()
             make.height.equalToSuperview().dividedBy(21.3)
             make.width.equalToSuperview().dividedBy(1.5)
         }
-        
         locationTextField.snp.makeConstraints { make in
             make.width.equalToSuperview().dividedBy(1.19)
             make.centerX.equalToSuperview()
             make.height.equalToSuperview()
         }
-        
         topViewHalfModalView.snp.makeConstraints { make in
             make.top.left.right.equalToSuperview()
             make.height.equalToSuperview().dividedBy(6.24)
         }
-        
         locationTableView.snp.makeConstraints { make in
             make.top.equalTo(topViewHalfModalView.snp.bottom).offset(self.view.frame.height/28)
             make.left.equalToSuperview()
@@ -140,11 +126,6 @@ class SelectLocationViewController: UIViewController {
     }
     
     // MARK: - Selectors
-    @objc private func okButtonClicked(sender:UIButton){
-        selectLocationModalView.isHidden = true
-        self.navigationController?.popViewController(animated: true)
-    }
-    
     @objc private func backButtonClicked(sender:UIButton){
         self.navigationController?.popViewController(animated: true)
     }
@@ -170,18 +151,18 @@ class SelectLocationViewController: UIViewController {
             }
         }
     }
-    //MARK: - Modal Effect
+
     // MARK: - addDim
     private func addDim() {
-           view.addSubview(bgView)
-           bgView.snp.makeConstraints { (make) in
-               make.edges.equalTo(0)
-           }
+        view.addSubview(bgView)
+        bgView.snp.makeConstraints { (make) in
+            make.edges.equalTo(0)
+        }
 
         DispatchQueue.main.async { [weak self] in
-               self?.bgView.backgroundColor = .black.withAlphaComponent(0.15)
-           }
-       }
+            self?.bgView.backgroundColor = .black.withAlphaComponent(0.15)
+        }
+    }
        
     // MARK: - removeDim
     private func removeDim() {
@@ -215,8 +196,8 @@ extension SelectLocationViewController: UITableViewDataSource, UITableViewDelega
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let BasicModalVC = BasicModalViewController.instance()
         addDim()
-        BasicModalVC.baseDelegate = self
         BasicModalVC.delegate = self
+        BasicModalVC.baseDelegate = self
         present(BasicModalVC, animated: true, completion: nil)
         BasicModalVC.textSetting(colorText: kakaoPlaceSearchData?[indexPath.row].placeName ?? "", contentText: "위치를 선택할까요?")
     }
@@ -229,7 +210,7 @@ extension SelectLocationViewController : UITextFieldDelegate{
         return true
     }
 }
-//MARK: - BaseModal Delegate
+
 extension SelectLocationViewController: BaseModalDelegate {
     func onTapClose() {
         removeDim()
@@ -239,6 +220,7 @@ extension SelectLocationViewController: BaseModalDelegate {
 extension SelectLocationViewController: BasicModalViewButtonDelegate{
     func onTabOkButton() {
         removeDim()
-        self.navigationController?.popViewController(animated: false)
+        
+        self.navigationController?.popViewController(animated: true)
     }
 }

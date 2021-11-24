@@ -124,7 +124,6 @@ class TagSettingViewController: UIViewController {
     // MARK: - addView
     private func addView(){
         self.view.backgroundColor = .white
-        
         [tagColorCollectionView, backButton, mainTitleLabel, tagDeleteButton, tagNameTitleLabel, tagNameTextField, tagNameTextFieldUnderLineView, tagColorTitleLabel, completeButton].forEach { view.addSubview($0) }
     }
     
@@ -201,8 +200,14 @@ class TagSettingViewController: UIViewController {
         if tagNameTextField.text?.isEmpty == true{
             shakeView(tagNameTitleLabel)
         }else{
-            delegate?.didTagCompleteButton(changedTagName: tagNameTextField.text!, changedColorIndex: selectedTagColorIndex, tagColorPreciousSelectedIndex: tagColorPreciousSelectedIndex)
+            for i in 0...TagColorModels.count-1{
+                if TagColorModels[i].isSelected == false{
+                    selectedTagColorIndex = i
+                }
+            }
             
+            delegate?.didTagCompleteButton(changedTagName: tagNameTextField.text!, changedColorIndex: selectedTagColorIndex, tagColorPreciousSelectedIndex: tagColorPreciousSelectedIndex)
+            print("changedColorIndex : \(selectedTagColorIndex)")
             navigationController?.popViewController(animated: true)
         }
     }

@@ -100,17 +100,12 @@ class TagManagementViewController: UIViewController {
     }
     
     // MARK: - addView
-    func addView(){
+    private func addView(){
         self.view.backgroundColor = .white
-        self.view.addSubview(backButton)
-        self.view.addSubview(mainTitleLabel)
-        self.view.addSubview(tagAddButton)
-        self.view.addSubview(noTagImageView)
-        self.view.addSubview(tagGoodLabel)
-        self.view.addSubview(tagAddLabel)
-        self.view.addSubview(tagTableView)
+        [backButton, mainTitleLabel, tagAddButton, noTagImageView, tagGoodLabel, tagAddLabel, tagTableView].forEach { view.addSubview($0) }
     }
     
+    // MARK: - location
     private func location(){
         backButton.snp.makeConstraints { make in
             make.top.equalTo(self.view.safeAreaLayoutGuide).offset(self.view.frame.height/47.7)
@@ -192,11 +187,14 @@ class TagManagementViewController: UIViewController {
         self.view.endEditing(true)
         selectedTagColorIndexArray.append(tagColorIndex)
         tagNameTextArray.append(tagName)
-        tagColor.append(UIColor.EZY_TagColorArray[tagColorIndex])
+        tagColor.append(UIColor.EZY_TagColorArray[tagColorIndex]) // color는 왜 담음?
         tagTableView.reloadData()
         
         tagTableView.isHidden = false
         noTagImageView.isHidden = true
+        
+        print("selectedTagColorIndexArray : \(selectedTagColorIndexArray)")
+        print("tagNameTextArray : \(tagNameTextArray)")
     }
 }
 
@@ -236,7 +234,7 @@ extension TagManagementViewController: UITableViewDataSource, UITableViewDelegat
             
             self!.tagTableView.deleteRows(at: [IndexPath(row: indexPath.row, section: 0)], with: .automatic)
         }.store(in: &bag)
-
+        print("MAnage : selectedTagColorIndexArray : \(selectedTagColorIndexArray)")
         vc.dataSetting(selectedTagColorIndex: selectedTagColorIndexArray[indexPath.row], tagName: "\(tagNameTextArray[indexPath.row])", tagColorPreciousSelectedIndex: self.tagColorPreciousSelectedIndex)
         
         vc.delegate = self
@@ -249,7 +247,8 @@ extension TagManagementViewController: UITableViewDataSource, UITableViewDelegat
 extension TagManagementViewController: SendChangedTagSetting{
     func didTagCompleteButton(changedTagName: String, changedColorIndex: Int, tagColorPreciousSelectedIndex: Int) {
         tagNameTextArray[selectedTagIndex] = changedTagName
-        
+        selectedTagColorIndexArray[selectedTagIndex] = changedColorIndex
+        tagColor[selectedTagIndex] = UIColor.EZY_TagColorArray[changedColorIndex]
         tagTableView.reloadData()
     }
 }
