@@ -23,6 +23,7 @@ class SwitchBtn : UIButton{
     }
     var switchState : Bool = false
     weak var delegate: SwitchStateDelegate?
+    var switchStateArray: [Bool] = [false, false]
 
     override init(frame: CGRect) {
         super.init(frame: frame)

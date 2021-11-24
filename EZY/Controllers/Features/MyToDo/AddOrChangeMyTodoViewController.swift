@@ -9,7 +9,7 @@ import UIKit
 import Alamofire
 
 class AddOrChangeMyTodoViewController: UIViewController{
-    //MARK: - Properties
+    // MARK: - Properties
     private var TagModels: [TagCollectionViewModel] = [
         TagCollectionViewModel(backgroundColor: UIColor(red: 186/255, green: 200/255, blue: 255/255, alpha: 1), isSelected: true, iconImgae: UIImage(named: "EZY_UnSelectedTagAddButtonImage")!),
         TagCollectionViewModel(backgroundColor: UIColor(red: 221/255, green: 220/255, blue: 220/255, alpha: 1), isSelected: false, iconImgae: UIImage(named: "EZY_SelectedNoSelectTagButtonImage")!)]
@@ -165,32 +165,30 @@ class AddOrChangeMyTodoViewController: UIViewController{
         $0.sizeToFit()
     }
     
-    //MARK: - lifeCycles
+    // MARK: - lifeCycles
     override func viewDidLoad() {
         super.viewDidLoad()
     
         configureUI()
     }
     
-    //MARK: - helpers
+    // MARK: - helpers
     private func configureUI(){
         self.view.backgroundColor = .white
         
         addView()
-                
         location()
-        
         dataSourceAndDelegate()
     }
     
-    //MARK: - dataSourceAndDelegate
+    // MARK: - dataSourceAndDelegate
     private func dataSourceAndDelegate(){
         tagCollectionView.delegate = self
         tagCollectionView.dataSource = self
         explanationContainerView.tv.delegate = self
     }
     
-    //MARK: - addLayout
+    // MARK: - location
     private func location(){
         backButton.snp.makeConstraints { make in
             make.top.equalTo(self.view.safeAreaLayoutGuide).offset(self.view.frame.height/47.7)
@@ -331,7 +329,7 @@ class AddOrChangeMyTodoViewController: UIViewController{
         self.navigationController?.popViewController(animated: true)
     }
     
-    //MARK: 화면터치하여 내리기
+    // MARK: 화면터치하여 내리기
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?){
         self.explanationContainerView.tv.endEditing(true)
         
@@ -351,7 +349,7 @@ class AddOrChangeMyTodoViewController: UIViewController{
         }
     }
     
-    //MARK: - Alarm Setting Function
+    // MARK: - Alarm Setting Function
     private func alarmReloadSetting(_ ampm: String,_ time: Int,_ minute: Int){
         notificationAddButton.setTitle("\(ampm) \(time):\(String(format: "%02d", minute))", for: .normal)
         notificationAddButton.setImage(nil, for: .normal)
@@ -366,33 +364,15 @@ class AddOrChangeMyTodoViewController: UIViewController{
         }
     }
     
-    //MARK: - calendar Setting Function
-    private func calendarReloadSetting(_ selectedDay: String, _ selectedRepeatDay: [String], _ selectedDayOfWeek: String, _ yearAndMonthText: String, _ selectedValuesIndex: Int, _ selectedRepeatIndex: [Int]){
-        
-        // 반복라벨에 적용
-        if selectedRepeatDay.count == 0{
-            calendarBtn.repeatLabel.text = "반복 없음"
-        }else{
-            calendarBtn.repeatLabel.text = "\(selectedRepeatDay.joined(separator: ",")) 반복"
-        }
-        
-        // 선택한 내용 dayLabel에 적용
-        if selectedDayOfWeek != "" { calendarBtn.dayLabel.text = "\(yearAndMonthText).\(selectedDay) \(selectedDayOfWeek)요일" }
-        
-        self.selectedRepeatIndex = selectedRepeatIndex
-        dayPickerViewSelectedValueIndex = selectedValuesIndex
-    }
-    
-    //MARK: - time Setting Function
-    private func timeReloadSetting(_ leftOrRight: [String], _ startTime: String, _ endTime: String, _ afterOrMorn: [String], _ selectedTimeIndex: [Int]){
-        self.leftOrRight = leftOrRight
-        self.selectedTimeIndex = selectedTimeIndex
-        self.receiveStartTime = startTime
-        self.receiveEndTime = endTime
-
-        clockBtn.alertButtonTitleLabel.text = "\(LeftOrRightChangeKorean(leftOrRight: leftOrRight[0])) \(startTime) ~ \(LeftOrRightChangeKorean(leftOrRight: leftOrRight[1])) \(endTime)"
-    }
-    
+//    // MARK: - time Setting Function
+//    private func timeReloadSetting(_ leftOrRight: [String], _ startTime: String, _ endTime: String, _ afterOrMorn: [String], _ selectedTimeIndex: [Int]){
+//        self.leftOrRight = leftOrRight
+//        self.selectedTimeIndex = selectedTimeIndex
+//        self.receiveStartTime = startTime
+//        self.receiveEndTime = endTime
+//
+//    }
+//
     // MARK: - tagReloadSetting
     private func tagReloadSetting(_ tagName: String, _ tagColorIndex: Int){
         for i in 0...TagModels.count-1{
@@ -609,14 +589,26 @@ extension AddOrChangeMyTodoViewController: AlarmModelDelegate{
 }
 //MARK: - CalendarModal Delegate
 extension AddOrChangeMyTodoViewController: CalendarAddDelegate{
-    func updateData(selectedDay: String, selectedRepeatDay: [String], selectedDayOfWeek: String, yearAndMonthText: String, selectedValuesIndex: Int, selectedRepeatIndex: [Int]) {
-        self.calendarReloadSetting(selectedDay, selectedRepeatDay, selectedDayOfWeek, yearAndMonthText, selectedValuesIndex, selectedRepeatIndex)
+    func updateData(selectedDay: String, selectedRepeatDay: [String]) {
+        // 선택 날짜 표시
+        if selectedRepeatDay.count == 0 { calendarBtn.repeatLabel.text = "반복 없음" }
+        else{ calendarBtn.repeatLabel.text = "\(selectedRepeatDay.joined(separator: ",")) 반복" }
+        
+        // 선택한 반복 표시
+        calendarBtn.dayLabel.text = selectedDay
     }
 }
 //MARK: - TimeModal Delegate
 extension AddOrChangeMyTodoViewController: TimeAddDelegate{
-    func updateData(leftOrRight: [String], startTime: String, endTime: String, afterOrMorn: [String], selectedTimeIndex: [Int]) {
-        self.timeReloadSetting(leftOrRight, startTime, endTime, afterOrMorn, selectedTimeIndex)
+//    func updateData(leftOrRight: [String], startTime: String, endTime: String, afterOrMorn: [String], selectedTimeIndex: [Int]) {
+//        self.timeReloadSetting(leftOrRight, startTime, endTime, afterOrMorn, selectedTimeIndex)
+//    }
+    
+    func updateData(leftOrRight: [String], selectedTime: [String], selectedTimeIndex: [Int]) {
+        print("넘어왔어요~ leftOrRight : \(leftOrRight) / selectedTime : \(selectedTime) / selectedTimeIndex : \(selectedTimeIndex)")
+        
+        clockBtn.alertButtonTitleLabel.text = "\(leftOrRight[0]) \(selectedTime[0]):\(selectedTime[1]) - \(leftOrRight[1]) \(selectedTime[2]):\(selectedTime[3])"
+
     }
 }
 

@@ -12,13 +12,12 @@ protocol TagAddDelegate: AnyObject {
 }
 
 class TagAddModalViewController: BaseModal {
-
     // MARK: - Properties
     weak var delegate: TagAddDelegate?
     
-    private var tagColorPreciousSelectedIndex = 0
-    
     private var selectedTagColorIndex = 0
+    
+    private var tagColorPreciousSelectedIndex = 0
     
     private var selectedTagColor = UIColor()
 
@@ -104,16 +103,15 @@ class TagAddModalViewController: BaseModal {
         addView()
         location()
         delegateAndDataSource()
-        self.addKeyboardNotifications()
-
     }
     
     // MARK: - LifeCycles
     override func viewWillAppear(_ animated: Bool) {
+        addKeyboardNotifications()
     }
     
     override func viewWillDisappear(_ animated: Bool) {
-        self.removeKeyboardNotifications()
+        removeKeyboardNotifications()
     }
 
     // MARK: - addKeyboardNotifications
