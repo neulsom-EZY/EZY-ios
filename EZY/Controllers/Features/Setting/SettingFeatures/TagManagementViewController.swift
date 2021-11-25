@@ -26,7 +26,7 @@ class TagManagementViewController: UIViewController {
     
     private var selectedTagColorIndexArray = [Int]()
     
-    private var tagColorPreciousSelectedIndex = 0
+//    private var tagColorPreciousSelectedIndex = 0
         
     private let bgView = UIView().then {
         $0.backgroundColor = .black
@@ -233,10 +233,10 @@ extension TagManagementViewController: UITableViewDataSource, UITableViewDelegat
             self!.tagColor.remove(at: indexPath.row)
             
             self!.tagTableView.deleteRows(at: [IndexPath(row: indexPath.row, section: 0)], with: .automatic)
+            self!.noTagImageView.isHidden = false
         }.store(in: &bag)
-        print("MAnage : selectedTagColorIndexArray : \(selectedTagColorIndexArray)")
-        vc.dataSetting(selectedTagColorIndex: selectedTagColorIndexArray[indexPath.row], tagName: "\(tagNameTextArray[indexPath.row])", tagColorPreciousSelectedIndex: self.tagColorPreciousSelectedIndex)
-        
+
+        vc.dataSetting(selectedTagColorIndex: selectedTagColorIndexArray[indexPath.row], tagName: "\(tagNameTextArray[indexPath.row])")
         vc.delegate = self
         
         self.navigationController?.pushViewController(vc, animated: true)
@@ -245,7 +245,7 @@ extension TagManagementViewController: UITableViewDataSource, UITableViewDelegat
 
 // MARK: - SendChangedTagSetting
 extension TagManagementViewController: SendChangedTagSetting{
-    func didTagCompleteButton(changedTagName: String, changedColorIndex: Int, tagColorPreciousSelectedIndex: Int) {
+    func didTagCompleteButton(changedTagName: String, changedColorIndex: Int) {
         tagNameTextArray[selectedTagIndex] = changedTagName
         selectedTagColorIndexArray[selectedTagIndex] = changedColorIndex
         tagColor[selectedTagIndex] = UIColor.EZY_TagColorArray[changedColorIndex]

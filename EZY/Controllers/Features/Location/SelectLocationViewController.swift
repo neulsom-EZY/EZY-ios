@@ -199,7 +199,7 @@ extension SelectLocationViewController: UITableViewDataSource, UITableViewDelega
         BasicModalVC.delegate = self
         BasicModalVC.baseDelegate = self
         present(BasicModalVC, animated: true, completion: nil)
-        BasicModalVC.textSetting(colorText: kakaoPlaceSearchData?[indexPath.row].placeName ?? "", contentText: "위치를 선택할까요?")
+        BasicModalVC.textSetting(colorText: kakaoPlaceSearchData?[indexPath.row].placeName ?? "", contentText: "위치를 선택할까요?", sender: UIButton())
     }
 }
 //MARK: - textfield 설정
@@ -218,7 +218,7 @@ extension SelectLocationViewController: BaseModalDelegate {
 }
 
 extension SelectLocationViewController: BasicModalViewButtonDelegate{
-    func onTabOkButton() {
+    func onTabOkButton(sender:UIButton) {
         removeDim()
         
         self.navigationController?.popViewController(animated: true)

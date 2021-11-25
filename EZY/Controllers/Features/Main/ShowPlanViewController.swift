@@ -428,7 +428,7 @@ extension ShowPlanViewController: UITableViewDelegate{
         BasicModalVC.delegate = self
         BasicModalVC.baseDelegate = self
         present(BasicModalVC, animated: true, completion: nil)
-        BasicModalVC.textSetting(colorText: groupNameArray[indexPath.row], contentText: "개인 일정을 완료할까요?")
+        BasicModalVC.textSetting(colorText: groupNameArray[indexPath.row], contentText: "개인 일정을 완료할까요?", sender:UIButton())
     }
 }
 
@@ -447,7 +447,7 @@ extension ShowPlanViewController: BaseModalDelegate {
 }
 
 extension ShowPlanViewController: BasicModalViewButtonDelegate{
-    func onTabOkButton() {
+    func onTabOkButton(sender:UIButton) {
         groupNameArray.remove(at: selectedIndex)
         planTitleTextArray.remove(at: selectedIndex)
         planTimeArray.remove(at: selectedIndex)

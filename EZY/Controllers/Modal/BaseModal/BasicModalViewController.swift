@@ -8,13 +8,15 @@
 import UIKit
 
 protocol BasicModalViewButtonDelegate: AnyObject {
-    func onTabOkButton()
+    func onTabOkButton(sender:UIButton)
 }
 
 class BasicModalViewController: BaseModal {
     // MARK: - Properties
     
     weak var delegate: BasicModalViewButtonDelegate?
+    
+    private var sender = UIButton()
     
     private let bgView = UIView().then {
         $0.backgroundColor = .white
@@ -65,7 +67,7 @@ class BasicModalViewController: BaseModal {
     //MARK: - selectors
     @objc func MakeTodo(){
         print("MakeTodo")
-        delegate?.onTabOkButton()
+        delegate?.onTabOkButton(sender: self.sender)
         dismiss(animated: true, completion: nil)
     }
     
@@ -76,9 +78,10 @@ class BasicModalViewController: BaseModal {
     }
     
     // MARK: - textSetting
-    func textSetting(colorText: String, contentText: String){
+    func textSetting(colorText: String, contentText: String, sender:UIButton){
         let string : NSMutableAttributedString
         var changeColorText = colorText
+        self.sender = sender
 
         if colorText.count < 8{
             contentLabel.numberOfLines = 0

@@ -98,7 +98,7 @@ class WithdrawalViewController: UIViewController {
                 BasicModalVC.delegate = self
                 BasicModalVC.baseDelegate = self
                 present(BasicModalVC, animated: true, completion: nil)
-                BasicModalVC.textSetting(colorText: "", contentText: "정말 로그아웃하시겠습니까?")
+                BasicModalVC.textSetting(colorText: "", contentText: "정말 로그아웃하시겠습니까?", sender: UIButton())
             }else{
                 passwordLineInputView.checkInfoTextIsEmpty()
             }
@@ -149,21 +149,18 @@ class WithdrawalViewController: UIViewController {
 extension WithdrawalViewController: BaseModalDelegate {
     func onTapClose() {
         removeDim()
-        
-        print("nonono")
     }
 }
 
 extension WithdrawalViewController: BasicModalViewButtonDelegate{
-    func onTabOkButton() {
+    func onTabOkButton(sender: UIButton) {
         removeDim()
         
         DispatchQueue.main.async { [weak self] in
             let nextVC = LoginViewController()
             self?.navigationController?.popToViewController(nextVC, animated: true)
+            
         }
-        
-        print("yesss")
     }
 }
 

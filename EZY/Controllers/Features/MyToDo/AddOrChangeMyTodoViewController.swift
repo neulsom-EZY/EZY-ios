@@ -600,13 +600,7 @@ extension AddOrChangeMyTodoViewController: CalendarAddDelegate{
 }
 //MARK: - TimeModal Delegate
 extension AddOrChangeMyTodoViewController: TimeAddDelegate{
-//    func updateData(leftOrRight: [String], startTime: String, endTime: String, afterOrMorn: [String], selectedTimeIndex: [Int]) {
-//        self.timeReloadSetting(leftOrRight, startTime, endTime, afterOrMorn, selectedTimeIndex)
-//    }
-    
-    func updateData(leftOrRight: [String], selectedTime: [String], selectedTimeIndex: [Int]) {
-        print("넘어왔어요~ leftOrRight : \(leftOrRight) / selectedTime : \(selectedTime) / selectedTimeIndex : \(selectedTimeIndex)")
-        
+    func updateData(leftOrRight: [String], selectedTime: [String], selectedTimeIndex: [Int]) {        
         clockBtn.alertButtonTitleLabel.text = "\(leftOrRight[0]) \(selectedTime[0]):\(selectedTime[1]) - \(leftOrRight[1]) \(selectedTime[2]):\(selectedTime[3])"
 
     }

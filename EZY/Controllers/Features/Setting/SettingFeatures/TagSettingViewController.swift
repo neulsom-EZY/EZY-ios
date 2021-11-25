@@ -9,7 +9,7 @@ import UIKit
 import Combine
 
 protocol SendChangedTagSetting{
-    func didTagCompleteButton(changedTagName: String, changedColorIndex: Int, tagColorPreciousSelectedIndex: Int)
+    func didTagCompleteButton(changedTagName: String, changedColorIndex: Int)
 }
 
 class TagSettingViewController: UIViewController {
@@ -34,6 +34,10 @@ class TagSettingViewController: UIViewController {
     
     var passDeleteEventButton = PassthroughSubject<UIButton, Never>()
     
+    private let bgView = UIView().then {
+        $0.backgroundColor = .black
+    }
+    
     private let backButton = UIButton().then{
         $0.setImage(UIImage(named: "EZY_TagManagementBackButtonImage"), for: .normal)
         $0.addTarget(self, action: #selector(backButtonClicked(sender:)), for: .touchUpInside)
@@ -47,6 +51,7 @@ class TagSettingViewController: UIViewController {
     
     private let tagDeleteButton = UIButton().then {
         $0.setImage(UIImage(named: "EZY_DeleteButton"), for: .normal)
+        $0.addTarget(self, action: #selector(modalDeleteButtonClicked(sender:)), for: .touchUpInside)
     }
     
     private let tagNameTitleLabel = UILabel().then {
@@ -188,8 +193,12 @@ class TagSettingViewController: UIViewController {
     
     // MARK: - Selectors
     @objc private func modalDeleteButtonClicked(sender:UIButton){
-        passDeleteEventButton.send(sender)
-        self.navigationController?.popViewController(animated: true)
+        let BasicModalVC = BasicModalViewController.instance()
+        addDim()
+        BasicModalVC.delegate = self
+        BasicModalVC.baseDelegate = self
+        present(BasicModalVC, animated: true, completion: nil)
+        BasicModalVC.textSetting(colorText: tagNameTextField.text ?? "", contentText: "태그를 삭제할까요?", sender: sender)
     }
     
     @objc private func backButtonClicked(sender:UIButton){
@@ -206,16 +215,15 @@ class TagSettingViewController: UIViewController {
                 }
             }
             
-            delegate?.didTagCompleteButton(changedTagName: tagNameTextField.text!, changedColorIndex: selectedTagColorIndex, tagColorPreciousSelectedIndex: tagColorPreciousSelectedIndex)
-            print("changedColorIndex : \(selectedTagColorIndex)")
+            delegate?.didTagCompleteButton(changedTagName: tagNameTextField.text!, changedColorIndex: selectedTagColorIndex)
+
             navigationController?.popViewController(animated: true)
         }
     }
     
-    func dataSetting(selectedTagColorIndex: Int, tagName: String, tagColorPreciousSelectedIndex: Int){
+    func dataSetting(selectedTagColorIndex: Int, tagName: String){
         tagNameTextField.text = tagName
         TagColorModels[selectedTagColorIndex].isSelected = false
-        TagColorModels[tagColorPreciousSelectedIndex].isSelected = true
         tagColorCollectionView.reloadData()
         tagNameTextCount = tagName.count
         self.selectedTagColorIndex = selectedTagColorIndex
@@ -230,6 +238,26 @@ class TagSettingViewController: UIViewController {
         shake.fromValue = NSValue(cgPoint: CGPoint(x: (view?.center.x)! - 2, y: view?.center.y ?? 0.0))
         shake.toValue = NSValue(cgPoint: CGPoint(x: (view?.center.x)! + 2, y: view?.center.y ?? 0.0))
         view?.layer.add(shake, forKey: "position")
+    }
+    
+    // MARK: - addDim
+    private func addDim() {
+        view.addSubview(bgView)
+        bgView.snp.makeConstraints { (make) in
+            make.edges.equalTo(0)
+        }
+
+        DispatchQueue.main.async { [weak self] in
+            self?.bgView.backgroundColor = .black.withAlphaComponent(0.15)
+        }
+    }
+       
+    // MARK: - removeDim
+    private func removeDim() {
+        DispatchQueue.main.async { [weak self] in
+            self?.bgView.removeFromSuperview()
+            self?.dismiss(animated: true)
+        }
     }
 }
 
@@ -297,5 +325,23 @@ extension TagSettingViewController: UITextFieldDelegate{
             }
         }
         return true
+    }
+}
+
+extension TagSettingViewController: BaseModalDelegate {
+    func onTapClose() {
+        removeDim()
+    }
+}
+
+extension TagSettingViewController: BasicModalViewButtonDelegate{
+    func onTabOkButton(sender: UIButton) {
+        passDeleteEventButton.send(sender)
+        
+        removeDim()
+        
+        DispatchQueue.main.async { [weak self] in
+            self!.navigationController?.popViewController(animated: true)
+        }
     }
 }

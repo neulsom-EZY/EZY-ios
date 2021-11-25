@@ -121,7 +121,7 @@ extension SettingViewController: UITableViewDelegate{
             BasicModalVC.delegate = self
             BasicModalVC.baseDelegate = self
             present(BasicModalVC, animated: true, completion: nil)
-            BasicModalVC.textSetting(colorText: "", contentText: "정말 로그아웃하시겠습니까?")
+            BasicModalVC.textSetting(colorText: "", contentText: "정말 로그아웃하시겠습니까?", sender: UIButton())
         }else if indexPath.row == 6{
             let nextViewController = WithdrawalViewController()
             self.navigationController?.pushViewController(nextViewController, animated: true)
@@ -157,7 +157,7 @@ extension SettingViewController: BaseModalDelegate {
 }
 
 extension SettingViewController: BasicModalViewButtonDelegate{
-    func onTabOkButton() {
+    func onTabOkButton(sender:UIButton) {
         removeDim()
         
         DispatchQueue.main.async { [weak self] in

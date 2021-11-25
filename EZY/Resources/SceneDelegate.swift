@@ -19,7 +19,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
         window = UIWindow(windowScene: windowScene)
       
-        let mainViewController = TagManagementViewController()
+        let mainViewController = ShowPlanViewController()
 
         let navigationController = UINavigationController(rootViewController: mainViewController)
 
