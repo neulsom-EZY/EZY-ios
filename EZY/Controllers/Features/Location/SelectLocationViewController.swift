@@ -9,12 +9,10 @@ import UIKit
 import Alamofire
 
 class SelectLocationViewController: UIViewController {
-    
-    // MARK: - Properties
-    
-    //MARK: - Kakao Search Data
+    // MARK: - Kakao Search Data
     private var kakaoPlaceSearchData : [KakaoDocuments]? = nil
     
+    // MARK: - Properties
     private let bgView = UIView().then {
         $0.backgroundColor = .black
     }

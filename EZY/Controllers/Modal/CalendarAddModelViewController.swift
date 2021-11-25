@@ -8,13 +8,14 @@
 import UIKit
 
 protocol CalendarAddDelegate: AnyObject {
-    func updateData(selectedDay : String , selectedRepeatDay : [String])
+    func updateData(selectedDay: String , selectedRepeatDay: [String], selectedDayIndex: Int)
 }
 
 class CalendarAddModelViewController: BaseModal {
     // MARK: - Properties
-    
     weak var delegate: CalendarAddDelegate?
+    
+    var selectedDayIndex = 13
 
     private let bgView = UIView().then {
         $0.backgroundColor = .white
@@ -151,8 +152,6 @@ class CalendarAddModelViewController: BaseModal {
         }
     }
     
-    var selectedDayIndex = 13
-    
     // MARK: - delegateAndDataSource
     private func delegateAndDataSource(){
         [repeatCollectionView].forEach{ $0.delegate = self; $0.dataSource = self}
@@ -244,40 +243,19 @@ class CalendarAddModelViewController: BaseModal {
     
     // MARK: - calendarModalDataSetting
     func calendarModalDataSetting(dayIndex: Int, repeatIndex: [Int]){
-//        dayPickerViewselectedIndex = dayIndex
-
         if dayIndex == 0{
             dayPickerView.selectRow(getDate(firstAdd: 0, endAdd: 13).count-1, inComponent: 0, animated: false)
         }else{
-            dayPickerView.selectRow((getDate(firstAdd: 0, endAdd: 13).count-1) - dayIndex, inComponent: 0, animated: false)
+            dayPickerView.selectRow( dayIndex, inComponent: 0, animated: false)
         }
     }
     
-    
     @objc private func MakeTodo(){
-//        for i in 0...dayArray.count-1{
-//            if dayOfWeekPickerViewData[dayPickerViewselectedIndex] == "\(dayArray[i])"{
-//                selectedDayOfWeek = dayArray[i].rawValue
-//            }
-//        }
-//
-//        selectedDay = dayPickerViewData[dayPickerViewselectedIndex]
-//
-//        for i in 0...repeatModels.count-1{
-//            if repeatModels[i].isSelected == true{
-//                selectedRepeatIndex.append(i)
-//                selectedRepeatDay.append(dayKoreanTextArray[i])
-//            }
-//        }
         baseDelegate?.onTapClose()
         dismiss(animated: true, completion: nil)
         
         delegate?.updateData(
-            selectedDay: "\(getYearMonth()) \(getDate(firstAdd: 13-selectedDayIndex, endAdd: 13-selectedDayIndex).joined()) \(changeKorean(eng: getDayOfWeek()[selectedDayIndex]))",
-            selectedRepeatDay: getRepeatDay())
-//        delegate?.updateData(selectedDay: self.selectedDay, selectedRepeatDay: self.selectedRepeatDay, selectedDayOfWeek: self.selectedDayOfWeek, yearAndMonthText: self.yearAndMonthText, selectedValuesIndex: self.dayPickerViewselectedIndex, selectedRepeatIndex: self.selectedRepeatIndex)
-        
-//        delegate?.updateData(selectedDay: "", selectedRepeatDay: getRepeatDay())
+            selectedDay: "\(getYearMonth()) \(getDate(firstAdd: 13-selectedDayIndex, endAdd: 13-selectedDayIndex).joined()) \(changeKorean(eng: getDayOfWeek()[selectedDayIndex]))", selectedRepeatDay: getRepeatDay(), selectedDayIndex: selectedDayIndex)
     }
 }
 

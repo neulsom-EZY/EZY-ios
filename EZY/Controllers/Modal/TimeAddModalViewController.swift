@@ -202,7 +202,7 @@ class TimeAddModalViewController: BaseModal{
         if n < 10 { return "0\(n)" } else { return "\(n)" }
     }
 
-    func timeValueSetting(receiveStartTime: String, receiveEndTime: String, leftOrRight: [String], selectedValuesIndex: [Int]){
+    func timeValueSetting(leftOrRight: [String], selectedValuesIndex: [Int]){
         // 이전에 선택했던 값으로 datapickerview setting
         startPickerView.selectRow(selectedValuesIndex[0], inComponent: 0, animated: false)
         startPickerView.selectRow(selectedValuesIndex[1], inComponent: 1, animated: false)
