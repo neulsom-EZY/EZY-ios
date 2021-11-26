@@ -66,13 +66,11 @@ class BasicModalViewController: BaseModal {
     
     //MARK: - selectors
     @objc func MakeTodo(){
-        print("MakeTodo")
         delegate?.onTabOkButton(sender: self.sender)
         dismiss(animated: true, completion: nil)
     }
     
     @objc func noButton(){
-        print("noButton")
         baseDelegate?.onTapClose()
         dismiss(animated: true, completion: nil)
     }

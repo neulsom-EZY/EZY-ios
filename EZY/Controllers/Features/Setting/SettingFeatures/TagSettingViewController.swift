@@ -31,7 +31,7 @@ class TagSettingViewController: UIViewController {
     private var selectedTagIndex = 0
     
     private var selectedTagColorIndex = 0
-    
+        
     var passDeleteEventButton = PassthroughSubject<UIButton, Never>()
     
     private let bgView = UIView().then {

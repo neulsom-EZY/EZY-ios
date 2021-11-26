@@ -71,7 +71,7 @@ class WithdrawalViewController: UIViewController {
         }
         
         withdrawalButton.snp.makeConstraints { make in
-            make.left.equalToSuperview().offset(self.view.frame.width/17)
+            make.left.equalToSuperview().offset(self.view.frame.width/15)
             make.centerX.equalToSuperview()
             make.height.equalToSuperview().dividedBy(16.24)
             make.centerY.equalToSuperview().offset(self.view.frame.height/40)
@@ -90,7 +90,6 @@ class WithdrawalViewController: UIViewController {
     }
     
     @objc func withdrawalButtonClicked(sender:UIButton){
-        // 아이디 비밀번호 유효성 체크 -> 맞음 -> 모달띄우기 -> okclick -> 페이스아이디 -> poptoVC
         if isValidId(id: nameLineInputView.getInfoText()){
             if isValidPassword(password: passwordLineInputView.getInfoText()){
                 let BasicModalVC = BasicModalViewController.instance()
@@ -98,7 +97,7 @@ class WithdrawalViewController: UIViewController {
                 BasicModalVC.delegate = self
                 BasicModalVC.baseDelegate = self
                 present(BasicModalVC, animated: true, completion: nil)
-                BasicModalVC.textSetting(colorText: "", contentText: "정말 로그아웃하시겠습니까?", sender: UIButton())
+                BasicModalVC.textSetting(colorText: "", contentText: "정말 탈퇴하시겠습니까?", sender: UIButton())
             }else{
                 passwordLineInputView.checkInfoTextIsEmpty()
             }
@@ -159,7 +158,6 @@ extension WithdrawalViewController: BasicModalViewButtonDelegate{
         DispatchQueue.main.async { [weak self] in
             let nextVC = LoginViewController()
             self?.navigationController?.popToViewController(nextVC, animated: true)
-            
         }
     }
 }
