@@ -19,7 +19,9 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
         window = UIWindow(windowScene: windowScene)
       
-        let mainViewController = AddOrChangeMyTodoViewController()
+
+        let mainViewController = LoginViewController()
+
 
         let navigationController = UINavigationController(rootViewController: mainViewController)
 

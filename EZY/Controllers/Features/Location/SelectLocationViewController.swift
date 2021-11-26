@@ -13,7 +13,11 @@ class SelectLocationViewController: UIViewController {
     private var kakaoPlaceSearchData : [KakaoDocuments]? = nil
     
     // MARK: - Properties
-    private let bgView = UIView().then {
+    
+    private var kakaoPlaceVM : KakaoPlaceViewModel!
+    
+    //MARK: - Kakao Search Data
+    let bgView = UIView().then {
         $0.backgroundColor = .black
     }
     
@@ -49,6 +53,10 @@ class SelectLocationViewController: UIViewController {
         $0.setImage(UIImage(named: "EZY_SearchButtonImage"), for: .normal)
         $0.addTarget(self, action: #selector(searchButtonClicked(sender:)), for: .touchUpInside)
     }
+    private let noPlace = NoPlace().then{
+        $0.isHidden = false
+        $0.title.text = "검색결과가 없습니다"
+    }
     
     private lazy var locationTableView = UITableView().then {
         $0.backgroundColor = .clear
@@ -56,11 +64,10 @@ class SelectLocationViewController: UIViewController {
         $0.showsVerticalScrollIndicator = false
         $0.register(LocationTableViewCell.self, forCellReuseIdentifier: LocationTableViewCell.reuseId)
     }
-
+    
     // MARK: - LifeCycles
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         configureUI()
     }
     
@@ -114,6 +121,10 @@ class SelectLocationViewController: UIViewController {
             make.centerX.equalToSuperview()
             make.bottom.equalToSuperview()
         }
+        noPlace.snp.makeConstraints{
+            $0.center.equalToSuperview()
+            $0.width.equalTo(view.frame.width/1.556)
+        }
     }
     
     // MARK: - delegateAndDataSource
@@ -135,7 +146,9 @@ class SelectLocationViewController: UIViewController {
             switch response{
             case.success(let kakaoData):
                 if  let  kakao = kakaoData as? [KakaoDocuments]{
-                    self.kakaoPlaceSearchData = kakao
+                    self.kakaoPlaceVM = KakaoPlaceViewModel(KakaoPlaces: kakao)
+                }
+                DispatchQueue.main.async {
                     self.locationTableView.reloadData()
                 }
             case .requestErr(let message):
@@ -146,6 +159,10 @@ class SelectLocationViewController: UIViewController {
                 print("serverError")
             case .networkFail:
                 print("networkFail")
+            case .tokenErr:
+                print("tokenErr")
+            case .authorityErr:
+                print("authorityErr")
             }
         }
     }
@@ -173,17 +190,22 @@ class SelectLocationViewController: UIViewController {
 
 // MARK: - UITableViewDelegate and UITableViewDataSource
 extension SelectLocationViewController: UITableViewDataSource, UITableViewDelegate{
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return self.kakaoPlaceVM == nil ? 0 : self.kakaoPlaceVM.numberOfSections
+    }
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return kakaoPlaceSearchData?.count ??  0
+        return self.kakaoPlaceVM.numberOfRowsInSection(section)
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: LocationTableViewCell.reuseId, for: indexPath) as! LocationTableViewCell
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: LocationTableViewCell.reuseId, for: indexPath) as? LocationTableViewCell else{return UITableViewCell()}
         cell.selectionStyle = .none
+        
+        let kakaoPlaceVM = self.kakaoPlaceVM.kakaoPlaceIndex(indexPath.row)
         cell.alphabetLabel.text = alphabet[indexPath.row]
-        cell.locationTitleNameLabel.text = kakaoPlaceSearchData?[indexPath.row].placeName
-        cell.locationLabel.text = kakaoPlaceSearchData?[indexPath.row].roadAddressName
-        cell.subLocationLabel.text = kakaoPlaceSearchData?[indexPath.row].addressName
+        cell.locationTitleNameLabel.text = kakaoPlaceVM.placeName
+        cell.locationLabel.text = kakaoPlaceVM.roadName
+        cell.subLocationLabel.text = kakaoPlaceVM.addressName
         return cell
     }
     
@@ -193,17 +215,19 @@ extension SelectLocationViewController: UITableViewDataSource, UITableViewDelega
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let BasicModalVC = BasicModalViewController.instance()
+        let kakaoPlaceVM = self.kakaoPlaceVM.kakaoPlaceIndex(indexPath.row)
         addDim()
         BasicModalVC.delegate = self
         BasicModalVC.baseDelegate = self
         present(BasicModalVC, animated: true, completion: nil)
-        BasicModalVC.textSetting(colorText: kakaoPlaceSearchData?[indexPath.row].placeName ?? "", contentText: "위치를 선택할까요?", sender: UIButton())
+        BasicModalVC.textSetting(colorText: kakaoPlaceVM.placeName ?? "", contentText: "위치를 선택할까요?")
     }
 }
 
 // MARK: - textfield 설정
 extension SelectLocationViewController : UITextFieldDelegate{
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        
         locationTextField.resignFirstResponder()
         searchButtonClicked(sender: searchButton.self)
         return true

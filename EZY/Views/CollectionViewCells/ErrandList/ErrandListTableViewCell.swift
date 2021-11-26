@@ -12,13 +12,11 @@ class ErrandListTableViewCell : UITableViewCell{
     private let view = UIView()
     let label = UILabel().then{
         $0.dynamicFont(fontSize: 10, currentFontName: "AppleSDGothicNeo-Bold")
-        $0.text = "씨발 ㅈ같은 EZYtlqkflqklqkdlqwkldkqlwkd"
         $0.textColor = .EZY_796DFF
     }
     //MARK: - LifeCycle
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
-        backgroundColor = .lightGray
         view.backgroundColor = .white
         AddView()
         location()
@@ -51,7 +49,6 @@ class ErrandListTableViewCell : UITableViewCell{
             $0.borderColor = UIColor.EZY_796DFF.cgColor
             $0.cornerRadius = 5
             $0.borderWidth = 0.5
-            $0.applySketchShadow(color: .lightGray, alpha: 1, x: 0, y: 0, blur: 10, spread: 0)
         }
     }
 }
