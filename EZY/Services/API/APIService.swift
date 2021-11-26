@@ -12,7 +12,7 @@ import UIKit
 class APIService<T : Decodable>{
 
     //MARK: - Request Method
-    func Request(url : String ,method : HTTPMethod, param : Parameters?, header : HTTPHeaders?,JSONDecodeUsingStatus: Bool,completion: @escaping(NetworkResult<Any>) ->  Void){
+    func request(url : String ,method : HTTPMethod, param : Parameters?, header : HTTPHeaders?,JSONDecodeUsingStatus: Bool,completion: @escaping(NetworkResult<Any>) ->  Void){
         let dataRequest = AF.request("\(Config.baseURL)\(url)",
                                      method: method,
                                      parameters: param,
