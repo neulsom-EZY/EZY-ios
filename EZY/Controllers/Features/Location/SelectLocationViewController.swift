@@ -220,7 +220,7 @@ extension SelectLocationViewController: UITableViewDataSource, UITableViewDelega
         BasicModalVC.delegate = self
         BasicModalVC.baseDelegate = self
         present(BasicModalVC, animated: true, completion: nil)
-        BasicModalVC.textSetting(colorText: kakaoPlaceVM.placeName ?? "", contentText: "위치를 선택할까요?")
+        BasicModalVC.textSetting(colorText: kakaoPlaceVM.placeName ?? "", contentText: "위치를 선택할까요?", sender: UIButton())
     }
 }
 

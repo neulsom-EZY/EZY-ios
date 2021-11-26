@@ -20,7 +20,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         window = UIWindow(windowScene: windowScene)
       
 
-        let mainViewController = LoginViewController()
+        let mainViewController = InquiryViewController()
 
 
         let navigationController = UINavigationController(rootViewController: mainViewController)
