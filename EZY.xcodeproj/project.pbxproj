@@ -126,6 +126,7 @@
 		AAE539D527421C5A007A7651 /* UserModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAE539D427421C5A007A7651 /* UserModel.swift */; };
 		AAE539DA274221BC007A7651 /* Config.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAE539D9274221BC007A7651 /* Config.swift */; };
 		AAE539DC27422250007A7651 /* API.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAE539DB27422250007A7651 /* API.swift */; };
+		EE7CEE6B2741F749009A935A /* ErrandListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE7CEE6A2741F749009A935A /* ErrandListViewController.swift */; };
 		EE7CEE6B2741F749009A935A /* reErrandListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE7CEE6A2741F749009A935A /* reErrandListViewController.swift */; };
 		EE7CEE6E2741FB4A009A935A /* ErrandListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE7CEE6D2741FB4A009A935A /* ErrandListTableViewCell.swift */; };
 		EE7CEE7027421EDB009A935A /* ErrandListItemTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE7CEE6F27421EDB009A935A /* ErrandListItemTableViewCell.swift */; };
@@ -168,6 +169,7 @@
 		EEB2195C273EC62D0035704D /* kakaoPlaceDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEB2195B273EC62D0035704D /* kakaoPlaceDataModel.swift */; };
 		EEB2195F273EC6E10035704D /* NetWorkResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEB2195E273EC6E10035704D /* NetWorkResult.swift */; };
 		EEB21962273EC7410035704D /* KakaoPlaceSearchAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEB21961273EC7410035704D /* KakaoPlaceSearchAPI.swift */; };
+		EEBEBC91274CE3CA009292CD /* APIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEBEBC90274CE3CA009292CD /* APIService.swift */; };
 		EEDCAF98268D85F1001E2B4F /* SwitchBtn.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEDCAF97268D85F1001E2B4F /* SwitchBtn.swift */; };
 /* End PBXBuildFile section */
 
@@ -339,6 +341,7 @@
 		EEB2195B273EC62D0035704D /* kakaoPlaceDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = kakaoPlaceDataModel.swift; sourceTree = "<group>"; };
 		EEB2195E273EC6E10035704D /* NetWorkResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetWorkResult.swift; sourceTree = "<group>"; };
 		EEB21961273EC7410035704D /* KakaoPlaceSearchAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KakaoPlaceSearchAPI.swift; sourceTree = "<group>"; };
+		EEBEBC90274CE3CA009292CD /* APIService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIService.swift; sourceTree = "<group>"; };
 		EEDCAF97268D85F1001E2B4F /* SwitchBtn.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwitchBtn.swift; sourceTree = "<group>"; };
 		EEE1E95626AAB71A0082B696 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
 		EEE1E95826AAB72E0082B696 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -430,6 +433,7 @@
 		6AA769FB26636C5700B7E1F5 /* Services */ = {
 			isa = PBXGroup;
 			children = (
+				EEBEBC8F274CE3B7009292CD /* API */,
 				EEB21960273EC71D0035704D /* KakaoPlaceSearchService */,
 			);
 			path = Services;
@@ -862,6 +866,14 @@
 			path = KakaoPlaceSearchService;
 			sourceTree = "<group>";
 		};
+		EEBEBC8F274CE3B7009292CD /* API */ = {
+			isa = PBXGroup;
+			children = (
+				EEBEBC90274CE3CA009292CD /* APIService.swift */,
+			);
+			path = API;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -1068,13 +1080,13 @@
 				6A097CFD268ED628001E011D /* CalendarView.swift in Sources */,
 				6AC3BF18267B475200DDCBB2 /* PlanRequestRespondingViewController.swift in Sources */,
 				6AFB77FE267F343500B59482 /* TagAddModalView.swift in Sources */,
+				EEBEBC91274CE3CA009292CD /* APIService.swift in Sources */,
 				AAAA0F21273A10FC00DBCA68 /* ScheduleTimeTableView.swift in Sources */,
 				6AB27CB4269DD42400B95C0F /* InquiryReceiveChattingBoxView.swift in Sources */,
 				6AA6F792269C2E4D00958D36 /* SignUpPasswordViewController.swift in Sources */,
 				EE9F0D4C26E8A9700015E81B /* TagCell.swift in Sources */,
 				6AA7E7872720E64100034327 /* TimeAddModalViewController.swift in Sources */,
 				EE9F0D4026E8A9340015E81B /* AlertButton.swift in Sources */,
-				EE9F0D5326E8AA9E0015E81B /* SearchViewModel.swift in Sources */,
 				AAE539D527421C5A007A7651 /* UserModel.swift in Sources */,
 				6AA6F798269C2E6200958D36 /* NewPasswordPhoneNumViewController.swift in Sources */,
 				6A72073426C618600098830F /* RecommendedTagCollectionViewCell.swift in Sources */,
