@@ -20,7 +20,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         window = UIWindow(windowScene: windowScene)
       
 
-        let mainViewController = InquiryViewController()
+        let mainViewController = AddOrChangeMyTodoViewController()
 
 
         let navigationController = UINavigationController(rootViewController: mainViewController)
