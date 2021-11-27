@@ -6,8 +6,14 @@
 //
 
 import UIKit
+import Alamofire
 
 class ChangePhoneNumPutViewController: UIViewController {
+    
+    final class Shared : APIService<KakaoDataModel>{
+        //MARK: - SingleTon
+        static let shared = APIService<KakaoDataModel>()
+    }
     //MARK: - Properties
     lazy var topView = TopView().then{
         $0.backButton.addTarget(self, action: #selector(backButtonClicked(sender:)), for: .touchUpInside)
@@ -111,8 +117,35 @@ class ChangePhoneNumPutViewController: UIViewController {
     
     @objc func changeButtonClicked(sender:UIButton){
         if isValidPhoneNumber(PhoneNumber: phoneNumTextField.text){
-            let nextViewController = ChangePasswardAfterLoginViewController()
-            self.navigationController?.pushViewController(nextViewController, animated: true)
+            let param:Parameters = ["phoneNumber": phoneNumTextField.text!]
+            Shared.shared.request(url: "/v1/member/auth", method: .post, param: param, header: .none, JSONDecodeUsingStatus: false){ result in
+                switch result {
+                case .success(let data):
+                    print(data)
+                    let nextViewController = ChangePhoneNumAuthCodeViewController()
+                    nextViewController.phoneNum = self.phoneNumTextField.text!
+                    self.navigationController?.pushViewController(nextViewController, animated: true)
+                case .requestErr(let err):
+                    print(err)
+                    break
+                case .pathErr:
+                    print("pathErr")
+                    break
+                case .serverErr:
+                    print("serverErr")
+                    break
+                case .networkFail:
+                    print("networkFail")
+                    break
+                case .tokenErr:
+                    print("tokenErr")
+                    break
+                case .authorityErr:
+                    print("authorityErr")
+                    break
+                }
+            }
+            
         }else{
             shakeView(phoneNumNickNameLabel)
         }
