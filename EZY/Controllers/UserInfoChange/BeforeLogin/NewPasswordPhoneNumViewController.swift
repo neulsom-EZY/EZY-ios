@@ -66,6 +66,7 @@ class NewPasswordPhoneNumViewController: UIViewController{
                 case .success(let data):
                     print(data)
                     let controller = NewPasswordAuthCodeViewController()
+                    controller.nickname = self.nickname
                     self.navigationController?.pushViewController(controller, animated: true)
                     break
                 case .requestErr(let err):
