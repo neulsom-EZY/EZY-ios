@@ -111,6 +111,7 @@
 		AA04F9D72701C12600EE0506 /* SignUpTextFieldContainerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA04F9D62701C12600EE0506 /* SignUpTextFieldContainerView.swift */; };
 		AA4575082736CC790018411C /* AuthCodeTextFieldView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA4575072736CC790018411C /* AuthCodeTextFieldView.swift */; };
 		AA82BCE02737AB2A000D3F04 /* SignUpAuthCodeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA82BCDF2737AB2A000D3F04 /* SignUpAuthCodeViewController.swift */; };
+		AAA1D06A27527FBE00BD446A /* ChangePasswordNicknameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAA1D06927527FBE00BD446A /* ChangePasswordNicknameViewController.swift */; };
 		AAAA0EF727389F4000DBCA68 /* NewPasswordAuthCodeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAAA0EF627389F4000DBCA68 /* NewPasswordAuthCodeViewController.swift */; };
 		AAAA0EF92738A21D00DBCA68 /* NewNicknameAuthCodeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAAA0EF82738A21D00DBCA68 /* NewNicknameAuthCodeViewController.swift */; };
 		AAAA0EFB2738A30800DBCA68 /* ChangePasswordAuthCodeAfterLoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAAA0EFA2738A30800DBCA68 /* ChangePasswordAuthCodeAfterLoginViewController.swift */; };
@@ -282,6 +283,7 @@
 		AA04F9D62701C12600EE0506 /* SignUpTextFieldContainerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpTextFieldContainerView.swift; sourceTree = "<group>"; };
 		AA4575072736CC790018411C /* AuthCodeTextFieldView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = AuthCodeTextFieldView.swift; path = PickerView/AuthCodeTextFieldView.swift; sourceTree = "<group>"; };
 		AA82BCDF2737AB2A000D3F04 /* SignUpAuthCodeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpAuthCodeViewController.swift; sourceTree = "<group>"; };
+		AAA1D06927527FBE00BD446A /* ChangePasswordNicknameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangePasswordNicknameViewController.swift; sourceTree = "<group>"; };
 		AAAA0EF627389F4000DBCA68 /* NewPasswordAuthCodeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewPasswordAuthCodeViewController.swift; sourceTree = "<group>"; };
 		AAAA0EF82738A21D00DBCA68 /* NewNicknameAuthCodeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewNicknameAuthCodeViewController.swift; sourceTree = "<group>"; };
 		AAAA0EFA2738A30800DBCA68 /* ChangePasswordAuthCodeAfterLoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangePasswordAuthCodeAfterLoginViewController.swift; sourceTree = "<group>"; };
@@ -557,6 +559,7 @@
 		6AB7D42E272FDE7D00FAFA19 /* AfterLogin */ = {
 			isa = PBXGroup;
 			children = (
+				AAA1D06927527FBE00BD446A /* ChangePasswordNicknameViewController.swift */,
 				6A3E2E7526B10D760078D749 /* ChangePasswordPhoneNumAfterLoginViewController.swift */,
 				AAAA0EFA2738A30800DBCA68 /* ChangePasswordAuthCodeAfterLoginViewController.swift */,
 				6A3E2E7726B111540078D749 /* ChangePasswordAfterLoginViewController.swift */,
@@ -1089,6 +1092,7 @@
 				6AA6F798269C2E6200958D36 /* NewPasswordPhoneNumViewController.swift in Sources */,
 				6A72073426C618600098830F /* RecommendedTagCollectionViewCell.swift in Sources */,
 				6AE5BB0326957B0600A9731B /* RepeatCollectionViewModel.swift in Sources */,
+				AAA1D06A27527FBE00BD446A /* ChangePasswordNicknameViewController.swift in Sources */,
 				EE963D372734B0DB005070B5 /* BaseModal.swift in Sources */,
 				EEAF5359274B56430063D99A /* TokenUtils.swift in Sources */,
 				6AFB77F9267ECD6700B59482 /* WhiteBackgroundView.swift in Sources */,
