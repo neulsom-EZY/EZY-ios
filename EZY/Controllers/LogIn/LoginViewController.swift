@@ -137,7 +137,6 @@ class LoginViewController: UIViewController{
                     let refreshToken = self.model?.data.refreshToken
                     self.tk.save("com.app.EZY", account: "accessToken", value: accessToken!)
                     self.tk.save("com.app.EZY", account: "refreshToken", value: refreshToken!)
-                    
                     let controller = ShowPlanViewController()
                     self.navigationController?.pushViewController(controller, animated: true)
                     break
