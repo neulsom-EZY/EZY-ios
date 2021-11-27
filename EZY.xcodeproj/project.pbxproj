@@ -122,12 +122,10 @@
 		AACB691D274006E3000E5706 /* NewPasswordNicknameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AACB691C274006E3000E5706 /* NewPasswordNicknameViewController.swift */; };
 		AAD95AE126EC7EC7004E4580 /* NewNicknamePhoneNumViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAD95AE026EC7EC7004E4580 /* NewNicknamePhoneNumViewController.swift */; };
 		AAD95AE326EC818B004E4580 /* NewNicknamePutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAD95AE226EC818B004E4580 /* NewNicknamePutViewController.swift */; };
-		EE7CEE6B2741F749009A935A /* ErrandListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE7CEE6A2741F749009A935A /* ErrandListViewController.swift */; };
 		AAE539D527421C5A007A7651 /* UserModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAE539D427421C5A007A7651 /* UserModel.swift */; };
 		AAE539DA274221BC007A7651 /* Config.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAE539D9274221BC007A7651 /* Config.swift */; };
 		AAE539DC27422250007A7651 /* API.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAE539DB27422250007A7651 /* API.swift */; };
 		EE7CEE6B2741F749009A935A /* ErrandListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE7CEE6A2741F749009A935A /* ErrandListViewController.swift */; };
-		EE7CEE6B2741F749009A935A /* reErrandListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE7CEE6A2741F749009A935A /* reErrandListViewController.swift */; };
 		EE7CEE6E2741FB4A009A935A /* ErrandListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE7CEE6D2741FB4A009A935A /* ErrandListTableViewCell.swift */; };
 		EE7CEE7027421EDB009A935A /* ErrandListItemTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE7CEE6F27421EDB009A935A /* ErrandListItemTableViewCell.swift */; };
 		EE84DEC02715ABF100121C62 /* CollectionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE84DEBF2715ABF100121C62 /* CollectionViewModel.swift */; };
@@ -545,13 +543,13 @@
 		6AB7D42D272FDE7600FAFA19 /* BeforeLogin */ = {
 			isa = PBXGroup;
 			children = (
+				AACB691C274006E3000E5706 /* NewPasswordNicknameViewController.swift */,
 				6AA6F796269C2E6200958D36 /* NewPasswordPhoneNumViewController.swift */,
 				AAAA0EF627389F4000DBCA68 /* NewPasswordAuthCodeViewController.swift */,
 				6AA6F797269C2E6200958D36 /* NewPasswordPutViewController.swift */,
 				AAD95AE026EC7EC7004E4580 /* NewNicknamePhoneNumViewController.swift */,
 				AAAA0EF82738A21D00DBCA68 /* NewNicknameAuthCodeViewController.swift */,
 				AAD95AE226EC818B004E4580 /* NewNicknamePutViewController.swift */,
-				AACB691C274006E3000E5706 /* NewPasswordNicknameViewController.swift */,
 			);
 			path = BeforeLogin;
 			sourceTree = "<group>";
