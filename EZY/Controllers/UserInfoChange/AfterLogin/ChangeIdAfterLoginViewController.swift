@@ -6,8 +6,15 @@
 //
 
 import UIKit
+import Alamofire
 
 class ChangeIdAfterLoginViewController: UIViewController {
+    
+    let tk = TokenUtils.shared
+    final class Shared : APIService<KakaoDataModel>{
+        //MARK: - SingleTon
+        static let shared = APIService<KakaoDataModel>()
+    }
     
     // MARK: - Properties
     private let topView = TopView().then{
@@ -139,9 +146,36 @@ class ChangeIdAfterLoginViewController: UIViewController {
     // MARK: - Selectors
     @objc private func changeButtonClicked(sender:UIButton){
         if isValidId(id: idTextField.text) == true{
-            let nextVC = SettingViewController()
-            nextVC.modalPresentationStyle = .fullScreen
-            present(nextVC, animated: true, completion: nil)
+            print(self.tk.getAuthorizationHeader("com.app.EZY")!)
+            let param: Parameters = ["username": "@" + idTextField.text!]
+            Shared.shared.request(url: "/v1/member/change/username", method: .put, param: param, header: self.tk.getAuthorizationHeader("com.app.EZY")!, JSONDecodeUsingStatus: true){ result in
+                switch result {
+                case .success(let data):
+                    print(data)
+                    let nextVC = SettingViewController()
+                    nextVC.modalPresentationStyle = .fullScreen
+                    self.present(nextVC, animated: true, completion: nil)
+                case .requestErr(let err):
+                    print(err)
+                    break
+                case .pathErr:
+                    print("pathErr")
+                    break
+                case .serverErr:
+                    print("serverErr")
+                    break
+                case .networkFail:
+                    print("networkFail")
+                    break
+                case .tokenErr:
+                    print("tokenErr")
+                    break
+                case .authorityErr:
+                    print("authorityErr")
+                    break
+                }
+            }
+            
         }else{
             shakeView(idNickNameLabel)
         }
