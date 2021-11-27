@@ -14,6 +14,11 @@ import Alamofire
 class LoginViewController: UIViewController{
     //MARK: - Properties
     
+    final class Shared : APIService<KakaoDataModel>{
+        //MARK: - SingleTon
+        static let shared = APIService<KakaoDataModel>()
+    }
+    
     private let titleLabel = UILabel().then {
         $0.text = "EZY"
         $0.dynamicFont(fontSize: 38, currentFontName: "AppleSDGothicNeo-Bold")
@@ -120,7 +125,7 @@ class LoginViewController: UIViewController{
     private func onTapLogin(){
         if isValidNickname(Nickname: nicknameContainer.tf.text) == true && isValidPassword(Password: passwordContainer.tf.text) == true{
             let param: Parameters = ["password": passwordContainer.tf.text!, "username": "@" + nicknameContainer.tf.text!]
-            API.shared.request(url: "/v1/member/signin", method: .post, parameter: param) { result in
+            Shared.shared.request(url: "/v1/member/signin", method: .post, param: param, header: .none, JSONDecodeUsingStatus: false) { result in
                 switch result {
                 case .success(let data):
                     print(data)
