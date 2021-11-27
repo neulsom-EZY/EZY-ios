@@ -142,6 +142,7 @@ class ChangePasswordNicknameViewController: UIViewController {
         if isValidId(id: idTextField.text) == true{
             let nextVC = ChangePasswardPhoneNumAfterLoginViewController()
             nextVC.modalPresentationStyle = .fullScreen
+            nextVC.nickname = idTextField.text!
             present(nextVC, animated: true, completion: nil)
         }else{
             shakeView(idNickNameLabel)

@@ -6,9 +6,18 @@
 //
 
 import UIKit
+import Alamofire
 
 class ChangePasswardAfterLoginViewController: UIViewController {
     //MARK: - Properties
+    var nickname:String = ""
+    var key:String = ""
+    
+    final class Shared : APIService<KakaoDataModel>{
+        //MARK: - SingleTon
+        static let shared = APIService<KakaoDataModel>()
+    }
+    
     lazy var topView = TopView()
     
     lazy var passwordNickNameLabel = UILabel().then {
@@ -136,9 +145,34 @@ class ChangePasswardAfterLoginViewController: UIViewController {
     
     @objc func changeButtonClicked(sender:UIButton){
         if isValidPassward(Passward: passwardTextField.text) == true{
-            let vc = SettingViewController()
-            vc.modalPresentationStyle = .fullScreen
-            present(vc, animated: true, completion: nil)
+            let param: Parameters = ["key": key, "newPassword": passwardTextField.text!, "username": "@" + nickname]
+            Shared.shared.request(url: "/v1/member/change/password", method: .put, param: param, header: .none, JSONDecodeUsingStatus: false){ result in
+                switch result{
+                case .success(let data):
+                    print(data)
+                    let vc = SettingViewController()
+                    vc.modalPresentationStyle = .fullScreen
+                    self.present(vc, animated: true, completion: nil)
+                case .requestErr(let err):
+                    print(err)
+                case .pathErr:
+                    print("pathErr")
+                    break
+                case .serverErr:
+                    print("serverErr")
+                    break
+                case .networkFail:
+                    print("networkFail")
+                    break
+                case .tokenErr:
+                    print("tokenErr")
+                    break
+                case .authorityErr:
+                    print("authorityErr")
+                    break
+                }
+                
+            }
         }else{
             shakeView(passwordNickNameLabel)
         }
