@@ -14,6 +14,9 @@ import Alamofire
 class LoginViewController: UIViewController{
     //MARK: - Properties
     
+    let tk = TokenUtils.shared
+    var model:LoginModel?
+    
     final class Shared : APIService<KakaoDataModel>{
         //MARK: - SingleTon
         static let shared = APIService<KakaoDataModel>()
@@ -129,6 +132,12 @@ class LoginViewController: UIViewController{
                 switch result {
                 case .success(let data):
                     print(data)
+                    self.model = try! JSONDecoder().decode(LoginModel.self, from: data as! Data)
+                    let accessToken = self.model?.data.accessToken
+                    let refreshToken = self.model?.data.refreshToken
+                    self.tk.save("com.app.EZY", account: "accessToken", value: accessToken!)
+                    self.tk.save("com.app.EZY", account: "refreshToken", value: refreshToken!)
+                    
                     let controller = ShowPlanViewController()
                     self.navigationController?.pushViewController(controller, animated: true)
                     break
