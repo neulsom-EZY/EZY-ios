@@ -7,8 +7,14 @@
 
 import UIKit
 import LocalAuthentication
+import Alamofire
 
 class WithdrawalViewController: UIViewController {
+    let tk = TokenUtils.shared
+    final class Shared : APIService<KakaoDataModel>{
+        //MARK: - SingleTon
+        static let shared = APIService<KakaoDataModel>()
+    }
     
     //MARK: - Properties
     let authContext = LAContext()
@@ -59,7 +65,8 @@ class WithdrawalViewController: UIViewController {
         $0.setTitle("탈퇴하기", for: .normal)
         $0.alpha = 0.5
         $0.dynamicFont(fontSize: 14, currentFontName: "AppleSDGothicNeo-Bold")
-        $0.addTarget(self, action: #selector(withdrawalButtonClicked(sender:)), for: .touchUpInside)
+//        $0.addTarget(self, action: #selector(withdrawalButtonClicked(sender:)), for: .touchUpInside)
+        $0.addTarget(self, action: #selector(okButtonClicked(sender:)), for: .touchUpInside)
     }
 
     //MARK: - LifeCycle
@@ -74,8 +81,37 @@ class WithdrawalViewController: UIViewController {
     }
     
     @objc func okButtonClicked(sender:UIButton){
-        let nextViewController = LoginViewController()
-        self.navigationController?.pushViewController(nextViewController, animated: true)
+        let header = tk.getAuthorizationHeader(Bundle.bundleIdentifier)
+        let param: Parameters = ["password": pwTextField.text!, "username": idTextField.text!]
+        Shared.shared.request(url: "/v1/member/delete", method: .post, param: param, header: header, JSONDecodeUsingStatus: false){ result in
+            switch result{
+            case .success(let data):
+                print(data)
+                self.tk.delete(Bundle.bundleIdentifier, account: "accessToken")
+                self.tk.delete(Bundle.bundleIdentifier, account: "refreshToken")
+                let nextViewController = LoginViewController()
+                self.navigationController?.pushViewController(nextViewController, animated: true)
+            case .requestErr(let err):
+                print(err)
+                break
+            case .pathErr:
+                print("pathErr")
+                break
+            case .serverErr:
+                print("serverErr")
+                break
+            case .networkFail:
+                print("networkFail")
+                break
+            case .tokenErr:
+                print("tokenErr")
+                break
+            case .authorityErr:
+                print("authorityErr")
+                break
+            }
+        }
+        
         
     }
     
