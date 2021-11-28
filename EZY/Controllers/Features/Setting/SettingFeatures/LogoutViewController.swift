@@ -8,8 +8,14 @@
 import UIKit
 import SnapKit
 import Then
+import Alamofire
 
 class LogoutViewController : UIViewController {
+    let tk = TokenUtils.shared
+    final class Shared : APIService<KakaoDataModel>{
+        //MARK: - SingleTon
+        static let shared = APIService<KakaoDataModel>()
+    }
     //MARK: - Properties
     private let backBtn = UIButton().then{
         $0.setImage(UIImage(named: "EZY_ErrandBackButtonImage")?.withRenderingMode(.alwaysTemplate), for: .normal)
@@ -41,6 +47,35 @@ class LogoutViewController : UIViewController {
     
     @objc private func logoutAction(){
         print("Logout")
+        let header = tk.getAuthorizationHeader(Bundle.bundleIdentifier)
+        Shared.shared.request(url: "/v1/member/logout", method: .delete, param: .none, header: header, JSONDecodeUsingStatus: false, completion: {result in
+            switch result{
+            case .success(let data):
+                print(data)
+                self.tk.delete(Bundle.bundleIdentifier, account: "accessToken")
+                self.tk.delete(Bundle.bundleIdentifier, account: "refreshToken")
+                let controller = LoginViewController()
+                self.navigationController?.pushViewController(controller, animated: true)
+            case .requestErr(let err):
+                print(err)
+                break
+            case .pathErr:
+                print("pathErr")
+                break
+            case .serverErr:
+                print("serverErr")
+                break
+            case .networkFail:
+                print("networkFail")
+                break
+            case .tokenErr:
+                print("tokenErr")
+                break
+            case .authorityErr:
+                print("authorityErr")
+                break
+            }
+        })
     }
     
     //MARK: - Helper
