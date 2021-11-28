@@ -123,8 +123,9 @@ class ChangePhoneNumAuthCodeViewController: UIViewController {
             case .success(let data):
                 print(data)
                 // MARK: - 새 전화번호 변경
+                let header = self.tk.getAuthorizationHeader(Bundle.bundleIdentifier)!
                 let param: Parameters = ["newPhoneNumber": self.phoneNum]
-                Shared.shared.request(url: "/v1/member/change/phone", method: .put, param: param, header: self.tk.getAuthorizationHeader(Bundle.bundleIdentifier)!, JSONDecodeUsingStatus: false){ result in
+                Shared.shared.request(url: "/v1/member/change/phone", method: .put, param: param, header: header, JSONDecodeUsingStatus: false){ result in
                     switch result {
                     case .success(let data):
                         print(data)
