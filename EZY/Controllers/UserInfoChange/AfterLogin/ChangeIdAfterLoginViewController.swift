@@ -148,7 +148,7 @@ class ChangeIdAfterLoginViewController: UIViewController {
         if isValidId(id: idTextField.text) == true{
             print(self.tk.getAuthorizationHeader("com.app.EZY")!)
             let param: Parameters = ["username": "@" + idTextField.text!]
-            Shared.shared.request(url: "/v1/member/change/username", method: .put, param: param, header: self.tk.getAuthorizationHeader("com.app.EZY")!, JSONDecodeUsingStatus: true){ result in
+            Shared.shared.request(url: "/v1/member/change/username", method: .put, param: param, header: self.tk.getAuthorizationHeader(Bundle.bundleIdentifier)!, JSONDecodeUsingStatus: true){ result in
                 switch result {
                 case .success(let data):
                     print(data)
