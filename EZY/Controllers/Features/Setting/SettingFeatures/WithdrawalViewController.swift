@@ -82,7 +82,7 @@ class WithdrawalViewController: UIViewController {
     
     @objc func okButtonClicked(sender:UIButton){
         let header = tk.getAuthorizationHeader(Bundle.bundleIdentifier)
-        let param: Parameters = ["password": pwTextField.text!, "username": idTextField.text!]
+        let param: Parameters = ["password": pwTextField.text!, "username": "@" + idTextField.text!]
         Shared.shared.request(url: "/v1/member/delete", method: .post, param: param, header: header, JSONDecodeUsingStatus: false){ result in
             switch result{
             case .success(let data):
