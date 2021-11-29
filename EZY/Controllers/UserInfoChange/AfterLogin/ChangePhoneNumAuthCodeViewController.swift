@@ -6,8 +6,17 @@
 //
 
 import UIKit
+import Alamofire
 
 class ChangePhoneNumAuthCodeViewController: UIViewController {
+    
+    var phoneNum:String = ""
+    private let tk = TokenUtils.shared
+    final class API : APIService<KakaoDataModel>{
+        //MARK: - SingleTon
+        static let shared = APIService<KakaoDataModel>()
+    }
+    
     //MARK: - Properties
     private let topView = TopView().then{
         $0.backButton.addTarget(self, action: #selector(backButtonClicked(sender:)), for: .touchUpInside)
@@ -86,10 +95,67 @@ class ChangePhoneNumAuthCodeViewController: UIViewController {
     
     // MARK: - Selectors
     @objc func changeButtonClicked(sender:UIButton){
+<<<<<<< HEAD
         let controllers = self.navigationController?.viewControllers
         for vc in controllers! {
             if vc is SettingViewController {
                 _ = self.navigationController?.popToViewController(vc as! SettingViewController, animated: true)
+=======
+        let key:String = authCodeView.tf1.text! + authCodeView.tf2.text! + authCodeView.tf3.text! + authCodeView.tf4.text!
+        // MARK: - 인증번호 인증
+        let param: Parameters = ["key" : key]
+        API.shared.request(url: "/v1/member/verified/auth", method: .post, param: param, header: .none, JSONDecodeUsingStatus: false){ result in
+            switch result {
+            case .success(let data):
+                print(data)
+                // MARK: - 새 전화번호 변경
+                let header = self.tk.getAuthorizationHeader(Bundle.bundleIdentifier)!
+                let param: Parameters = ["newPhoneNumber": self.phoneNum]
+                API.shared.request(url: "/v1/member/change/phone", method: .put, param: param, header: header, JSONDecodeUsingStatus: false){ result in
+                    switch result {
+                    case .success(let data):
+                        print(data)
+                        let nextViewController = SettingViewController()
+                        self.navigationController?.pushViewController(nextViewController, animated: true)
+                    case .requestErr(let err):
+                        print(err)
+                        break
+                    case .pathErr:
+                        print("pathErr")
+                        break
+                    case .serverErr:
+                        print("serverErr")
+                        break
+                    case .networkFail:
+                        print("networkFail")
+                        break
+                    case .tokenErr:
+                        print("tokenErr")
+                        break
+                    case .authorityErr:
+                        print("authorityErr")
+                        break
+                    }
+                }
+            case .requestErr(let err):
+                print(err)
+                break
+            case .pathErr:
+                print("pathErr")
+                break
+            case .serverErr:
+                print("serverErr")
+                break
+            case .networkFail:
+                print("networkFail")
+                break
+            case .tokenErr:
+                print("tokenErr")
+                break
+            case .authorityErr:
+                print("authorityErr")
+                break
+>>>>>>> 5e764f019799c33724997cb7f7c51db47eeec075
             }
         }
     }

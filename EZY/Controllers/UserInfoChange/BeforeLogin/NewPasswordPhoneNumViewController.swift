@@ -8,10 +8,17 @@
 import UIKit
 import SnapKit
 import Then
+import Alamofire
 
 class NewPasswordPhoneNumViewController: UIViewController{
     //MARK: - Properties
-   
+    var nickname:String = ""
+
+    final class API : APIService<KakaoDataModel>{
+        //MARK: - SingleTon
+        static let shared = APIService<KakaoDataModel>()
+    }
+    
     private let topBarView = TopBarView().then {
         $0.goBackButton.addTarget(self, action: #selector(goBack), for: .touchUpInside)
     }
@@ -53,8 +60,35 @@ class NewPasswordPhoneNumViewController: UIViewController{
     @objc
     private func onTapContinueNewPasswordPut(){
         if isValidPhoneNum(PhoneNumber: phoneNumContainer.tf.text) == true{
-            let controller = NewPasswordAuthCodeViewController()
-            navigationController?.pushViewController(controller, animated: true)
+            let param: Parameters = ["phoneNumber": phoneNumContainer.tf.text!, "username": "@" + nickname]
+            API.shared.request(url: "/v1/member/send/change/password/authkey", method: .post, param: param, header: .none, JSONDecodeUsingStatus: false) { result in
+                switch result {
+                case .success(let data):
+                    print(data)
+                    let controller = NewPasswordAuthCodeViewController()
+                    controller.nickname = self.nickname
+                    self.navigationController?.pushViewController(controller, animated: true)
+                    break
+                case .requestErr(let err):
+                    print(err)
+                case .pathErr:
+                    print("pathErr")
+                    break
+                case .serverErr:
+                    print("serverErr")
+                    break
+                case .networkFail:
+                    print("networkFail")
+                    break
+                case .tokenErr:
+                    print("tokenErr")
+                    break
+                case .authorityErr:
+                    print("authorityErr")
+                    break
+                }
+            }
+            
         }else{
             shakeView(self.view)
         }

@@ -11,6 +11,7 @@ import Then
 
 class NewPasswordAuthCodeViewController: UIViewController {
     //MARK: - Properties
+    var nickname:String = ""
     
     private let topBarView = TopBarView().then {
         $0.goBackButton.addTarget(self, action: #selector(goBack), for: .touchUpInside)
@@ -30,7 +31,7 @@ class NewPasswordAuthCodeViewController: UIViewController {
     
     private let continueButton = CustomGradientContinueBtnView().then {
         $0.titleLabel?.dynamicFont(fontSize: 14, currentFontName: "AppleSDGothicNeo-Bold")
-        $0.addTarget(self, action: #selector(onTapContinueTerms), for: .touchUpInside)
+        $0.addTarget(self, action: #selector(onTapContinue), for: .touchUpInside)
     }
     
     private let authCodeView = AuthCodeTextFieldView()
@@ -50,8 +51,10 @@ class NewPasswordAuthCodeViewController: UIViewController {
     }
     
     @objc
-    private func onTapContinueTerms(){
+    private func onTapContinue(){
         let controller = NewPasswordPutViewController()
+        controller.nickname = self.nickname
+        controller.key = authCodeView.tf1.text! + authCodeView.tf2.text! + authCodeView.tf3.text! + authCodeView.tf4.text!
         navigationController?.pushViewController(controller, animated: true)
     }
     

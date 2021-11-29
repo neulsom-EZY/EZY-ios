@@ -7,8 +7,14 @@
 
 import UIKit
 import LocalAuthentication
+import Alamofire
 
 class WithdrawalViewController: UIViewController {
+    private let tk = TokenUtils.shared
+    final class API : APIService<KakaoDataModel>{
+        //MARK: - SingleTon
+        static let shared = APIService<KakaoDataModel>()
+    }
     
     //MARK: - Properties
     private let authContext = LAContext()
@@ -38,7 +44,8 @@ class WithdrawalViewController: UIViewController {
         $0.setBackgroundImage(UIImage(named: "EZY_ChangeButtonImage"), for: .normal)
         $0.setTitle("탈퇴하기", for: .normal)
         $0.dynamicFont(fontSize: 14, currentFontName: "AppleSDGothicNeo-Bold")
-        $0.addTarget(self, action: #selector(withdrawalButtonClicked(sender:)), for: .touchUpInside)
+//        $0.addTarget(self, action: #selector(withdrawalButtonClicked(sender:)), for: .touchUpInside)
+        $0.addTarget(self, action: #selector(okButtonClicked(sender:)), for: .touchUpInside)
     }
 
     //MARK: - LifeCycle
@@ -49,10 +56,74 @@ class WithdrawalViewController: UIViewController {
         location()
     }
     
+<<<<<<< HEAD
     // MARK: - addView
     private func addView(){
         self.view.backgroundColor = .white
         [topView, nameLineInputView, passwordLineInputView, withdrawalButton].forEach { self.view.addSubview($0) }
+=======
+    @objc func okButtonClicked(sender:UIButton){
+        let header = tk.getAuthorizationHeader(Bundle.bundleIdentifier)
+        let param: Parameters = ["password": pwTextField.text!, "username": "@" + idTextField.text!]
+        API.shared.request(url: "/v1/member/delete", method: .post, param: param, header: header, JSONDecodeUsingStatus: false){ result in
+            switch result{
+            case .success(let data):
+                print(data)
+                self.tk.delete(Bundle.bundleIdentifier, account: "accessToken")
+                self.tk.delete(Bundle.bundleIdentifier, account: "refreshToken")
+                let nextViewController = LoginViewController()
+                self.navigationController?.pushViewController(nextViewController, animated: true)
+            case .requestErr(let err):
+                print(err)
+                break
+            case .pathErr:
+                print("pathErr")
+                break
+            case .serverErr:
+                print("serverErr")
+                break
+            case .networkFail:
+                print("networkFail")
+                break
+            case .tokenErr:
+                print("tokenErr")
+                break
+            case .authorityErr:
+                print("authorityErr")
+                break
+            }
+        }
+        
+        
+    }
+    
+    @objc func EyeButtondClicked(sender:UIButton){
+        if pwTextField.isSecureTextEntry == true {
+            pwTextField.isSecureTextEntry = false
+        } else {
+            pwTextField.isSecureTextEntry = true
+        }
+    }
+    
+    @objc func withdrawalButtonClicked(sender:UIButton){
+        var error: NSError?
+        if authContext.canEvaluatePolicy(.deviceOwnerAuthentication, error: &error) {
+
+            authContext.evaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, localizedReason: description) { success, error in
+                if success {
+                    print("인증성공")
+
+                    DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 1) {
+                        self.withdrawalModalView.isHidden = false
+                    }
+
+                }else{
+                    print("인증실패")
+                    print(error?.localizedDescription)
+                }
+            }
+        }
+>>>>>>> 5e764f019799c33724997cb7f7c51db47eeec075
     }
     
     // MARK: - location

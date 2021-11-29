@@ -6,10 +6,23 @@
 //
 
 import UIKit
+import Alamofire
 
+<<<<<<< HEAD
 class ChangePasswordPhoneNumAfterLoginViewController: UIViewController {
     // MARK: - Properties
     private let topView = TopView().then{
+=======
+class ChangePasswardPhoneNumAfterLoginViewController: UIViewController {
+    //MARK: - Properties
+    var nickname:String = ""
+    
+    final class API : APIService<KakaoDataModel>{
+        //MARK: - SingleTon
+        static let shared = APIService<KakaoDataModel>()
+    }
+    lazy var topView = TopView().then{
+>>>>>>> 5e764f019799c33724997cb7f7c51db47eeec075
         $0.backButton.addTarget(self, action: #selector(backButtonClicked(sender:)), for: .touchUpInside)
         $0.topViewDataSetting(backButtonImage: UIImage(named: "EZY_IdChangeBackButtonImage")!, titleLabelText: "비밀번호 변경", textColor: UIColor(red: 120/255, green: 81/255, blue: 255/255, alpha: 1))
     }
@@ -63,10 +76,44 @@ class ChangePasswordPhoneNumAfterLoginViewController: UIViewController {
     }
     
     // MARK: - Selectors
+<<<<<<< HEAD
     @objc private func changeButtonClicked(sender:UIButton){
         if isValidPhoneNumber(PhoneNumber: lineInputView.getInfoText()){
             let nextViewController = ChangePasswordAuthCodeAfterLoginViewController()
             self.navigationController?.pushViewController(nextViewController, animated: true)
+=======
+
+    @objc func changeButtonClicked(sender:UIButton){
+        if isValidPhoneNumber(PhoneNumber: phoneNumTextField.text){
+            let param: Parameters = ["phoneNumber": phoneNumTextField.text!, "username": "@" + nickname]
+            API.shared.request(url: "/v1/member/send/change/password/authkey", method: .post, param: param, header: .none, JSONDecodeUsingStatus: false) { result in
+                switch result {
+                case .success(let data):
+                    print(data)
+                    let controller = ChangePasswordAuthCodeAfterLoginViewController()
+                    controller.nickname = self.nickname
+                    self.navigationController?.pushViewController(controller, animated: true)
+                    break
+                case .requestErr(let err):
+                    print(err)
+                case .pathErr:
+                    print("pathErr")
+                    break
+                case .serverErr:
+                    print("serverErr")
+                    break
+                case .networkFail:
+                    print("networkFail")
+                    break
+                case .tokenErr:
+                    print("tokenErr")
+                    break
+                case .authorityErr:
+                    print("authorityErr")
+                    break
+                }
+            }
+>>>>>>> 5e764f019799c33724997cb7f7c51db47eeec075
         }else{
             lineInputView.checkInfoTextIsEmpty()
         }

@@ -6,8 +6,15 @@
 //
 
 import UIKit
+import Alamofire
 
 class ChangeIdAfterLoginViewController: UIViewController {
+    
+    private let tk = TokenUtils.shared
+    final class API : APIService<KakaoDataModel>{
+        //MARK: - SingleTon
+        static let shared = APIService<KakaoDataModel>()
+    }
     
     // MARK: - Properties
     private let topView = TopView().then{
@@ -15,8 +22,31 @@ class ChangeIdAfterLoginViewController: UIViewController {
         $0.topViewDataSetting(backButtonImage: UIImage(named: "EZY_IdChangeBackButtonImage")!, titleLabelText: "닉네임 변경", textColor: UIColor(red: 120/255, green: 81/255, blue: 255/255, alpha: 1))
     }
     
+<<<<<<< HEAD
     private let lineInputView = LineInputView().then{
         $0.dataSetting(titleText: "닉네임", placeHolderText: "닉네임을 입력해주세요", conditionText: "1 ~ 10자 사이 영어로 작성해주세요!")
+=======
+    private let idNickNameLabel = UILabel().then {
+        $0.textColor = UIColor(red: 150/255, green: 141/255, blue: 255/255, alpha: 1)
+        $0.text = "닉네임"
+        $0.dynamicFont(fontSize: 10, currentFontName: "AppleSDGothicNeo-SemiBold")
+    }
+
+    private let idTextField = UITextField().then {
+        $0.textColor = UIColor(red: 101/255, green: 101/255, blue: 101/255, alpha: 1)
+        $0.placeholder = "닉네임을 입력해주세요"
+        $0.dynamicFont(fontSize: 14, currentFontName: "AppleSDGothicNeo-Regular")
+    }
+    
+    private let idUnderLineView = UIView().then {
+        $0.backgroundColor = UIColor(red: 150/255, green: 141/255, blue: 255/255, alpha: 1)
+    }
+    
+    private let idConditionLabel = UILabel().then {
+        $0.text = "1 ~ 10자 사이 영어로 작성해주세요!"
+        $0.textColor = UIColor(red: 116/255, green: 116/255, blue: 116/255, alpha: 1)
+        $0.dynamicFont(fontSize: 10, currentFontName: "AppleSDGothicNeo-Regular")
+>>>>>>> 5e764f019799c33724997cb7f7c51db47eeec075
     }
     
     private let changeButton = UIButton().then {
@@ -63,8 +93,40 @@ class ChangeIdAfterLoginViewController: UIViewController {
     
     // MARK: - Selectors
     @objc private func changeButtonClicked(sender:UIButton){
+<<<<<<< HEAD
         if isValidId(id: lineInputView.getInfoText()) == true{
             navigationController?.popViewController(animated: true)
+=======
+        if isValidId(id: idTextField.text) == true{
+            let header = tk.getAuthorizationHeader(Bundle.bundleIdentifier)!
+            let param: Parameters = ["username": "@" + idTextField.text!]
+            API.shared.request(url: "/v1/member/change/username", method: .put, param: param, header: header, JSONDecodeUsingStatus: false){ result in
+                switch result {
+                case .success(let data):
+                    print(data)
+                    self.navigationController?.popViewController(animated: true)
+                case .requestErr(let err):
+                    print(err)
+                    break
+                case .pathErr:
+                    print("pathErr")
+                    break
+                case .serverErr:
+                    print("serverErr")
+                    break
+                case .networkFail:
+                    print("networkFail")
+                    break
+                case .tokenErr:
+                    print("tokenErr")
+                    break
+                case .authorityErr:
+                    print("authorityErr")
+                    break
+                }
+            }
+            
+>>>>>>> 5e764f019799c33724997cb7f7c51db47eeec075
         }else{
             lineInputView.checkInfoTextIsEmpty()
         }

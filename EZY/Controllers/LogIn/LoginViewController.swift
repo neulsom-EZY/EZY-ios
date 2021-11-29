@@ -14,6 +14,14 @@ import Alamofire
 class LoginViewController: UIViewController{
     //MARK: - Properties
     
+    private let tk = TokenUtils.shared
+    var model:LoginModel?
+    
+    final class API : APIService<KakaoDataModel>{
+        //MARK: - SingleTon
+        static let shared = APIService<KakaoDataModel>()
+    }
+    
     private let titleLabel = UILabel().then {
         $0.text = "EZY"
         $0.dynamicFont(fontSize: 38, currentFontName: "AppleSDGothicNeo-Bold")
@@ -120,10 +128,15 @@ class LoginViewController: UIViewController{
     private func onTapLogin(){
         if isValidNickname(Nickname: nicknameContainer.tf.text) == true && isValidPassword(Password: passwordContainer.tf.text) == true{
             let param: Parameters = ["password": passwordContainer.tf.text!, "username": "@" + nicknameContainer.tf.text!]
-            API.shared.request(url: "/v1/member/signin", method: .post, parameter: param) { result in
+            API.shared.request(url: "/v1/member/signin", method: .post, param: param, header: .none, JSONDecodeUsingStatus: false) { result in
                 switch result {
                 case .success(let data):
                     print(data)
+                    self.model = try! JSONDecoder().decode(LoginModel.self, from: data as! Data)
+                    let accessToken = self.model?.data.accessToken
+                    let refreshToken = self.model?.data.refreshToken
+                    self.tk.save(Bundle.bundleIdentifier, account: "accessToken", value: accessToken!)
+                    self.tk.save(Bundle.bundleIdentifier, account: "refreshToken", value: refreshToken!)
                     let controller = ShowPlanViewController()
                     self.navigationController?.pushViewController(controller, animated: true)
                     break
