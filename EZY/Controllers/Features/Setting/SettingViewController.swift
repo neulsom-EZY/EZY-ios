@@ -110,10 +110,10 @@ extension SettingViewController: UITableViewDelegate{
             let nextViewController = ChangeIdAfterLoginViewController()
             self.navigationController?.pushViewController(nextViewController, animated: true)
         }else if indexPath.row == 3{
-            let nextViewController = ChangePasswordNameAfterLoginViewController()
+            let nextViewController = ChangePasswordNicknameViewController()
             self.navigationController?.pushViewController(nextViewController, animated: true)
         }else if indexPath.row == 4{
-            let nextViewController = ChangePhoneNumPhoneNumViewController()
+            let nextViewController = ChangePhoneNumPutViewController()
             self.navigationController?.pushViewController(nextViewController, animated: true)
         }else if indexPath.row == 5{
             let BasicModalVC = BasicModalViewController.instance()

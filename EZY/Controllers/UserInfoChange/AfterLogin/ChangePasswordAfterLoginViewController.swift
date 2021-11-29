@@ -1,14 +1,7 @@
-//
-//  ChangePasswardAfterLoginViewController.swift
-//  EZY
-//
-//  Created by 김유진 on 2021/07/28.
-//
-
 import UIKit
 import Alamofire
 
-class ChangePasswordNameAfterLoginViewController: UIViewController {
+class ChangePasswardAfterLoginViewController: UIViewController {
     //MARK: - Properties
     var nickname:String = ""
     var key:String = ""
@@ -32,45 +25,53 @@ class ChangePasswordNameAfterLoginViewController: UIViewController {
         $0.dynamicFont(fontSize: 14, currentFontName: "AppleSDGothicNeo-Regular")
     }
     
-    private let lineInputView = LineInputView().then{
-        $0.dataSetting(titleText: "닉네임", placeHolderText: "닉네임을 입력해주세요", conditionText: "1 ~ 10, 영어로 작성해주세요!")
+    lazy var UnderLineView = UIView().then {
+        $0.backgroundColor = UIColor(red: 150/255, green: 141/255, blue: 255/255, alpha: 1)
     }
     
-    private let changeButton = UIButton().then {
+    lazy var passwardConditionLabel = UILabel().then {
+        $0.text = "8자 이하, 영어 + 숫자최소 1개, 공백 허용x"
+        $0.textColor = UIColor(red: 116/255, green: 116/255, blue: 116/255, alpha: 1)
+        $0.dynamicFont(fontSize: 10, currentFontName: "AppleSDGothicNeo-Regular")
+    }
+    
+    lazy var changeButton = UIButton().then {
         $0.setBackgroundImage(UIImage(named: "EZY_ChangeButtonImage"), for: .normal)
-        $0.setTitle("계속하기", for: .normal)
+        $0.setTitle("변경하기", for: .normal)
         $0.dynamicFont(fontSize: 14, currentFontName: "AppleSDGothicNeo-Bold")
         $0.addTarget(self, action: #selector(changeButtonClicked(sender:)), for: .touchUpInside)
     }
     
-    // MARK: - LifyCycle
+    //MARK: - LifyCycle
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         addView()
-        location()
+        
+        addLayout()
     }
     
-    // MARK: - addView
-    private func addView(){
-        self.view.backgroundColor = .white
-        [topView, lineInputView, changeButton].forEach { self.view.addSubview($0) }
-    }
-    
-    // MARK: - location
-    private func location() {
-        lineInputView.snp.makeConstraints { make in
-            make.width.equalToSuperview()
-            make.top.equalTo(topView.snp.bottom).offset(self.view.frame.height/17.65)
-            make.height.equalToSuperview().dividedBy(13)
-            make.centerX.equalToSuperview()
+    func addView(){
+        self.view.addSubview(topView)
+        topView.addSubview(topView.backButton)
+        topView.addSubview(topView.titleLabel)
+        
+        topView.backButton.addTarget(self, action: #selector(backButtonClicked(sender:)), for: .touchUpInside)
+        
+        topView.titleLabel.text = "비밀번호 변경"
+        
+        topView.topViewDataSetting(backButtonImage: UIImage(named: "EZY_IdChangeBackButtonImage")!, titleLabelText: "비밀번호 변경", textColor: UIColor(red: 120/255, green: 81/255, blue: 255/255, alpha: 1))
+        
+        topView.backButton.snp.makeConstraints { make in
+            make.top.equalTo(self.view.safeAreaLayoutGuide).offset(self.view.frame.height/47.7)
+            make.left.equalToSuperview().offset(self.view.frame.width/12)
+            make.width.equalToSuperview().dividedBy(33.8/2)
+            make.height.equalTo(topView.backButton.snp.width)
         }
         
-        changeButton.snp.makeConstraints { make in
-            make.left.equalToSuperview().offset(self.view.frame.width/17)
-            make.centerX.equalToSuperview()
-            make.height.equalToSuperview().dividedBy(16.24)
-            make.centerY.equalToSuperview().offset(self.view.frame.height/40)
+        topView.titleLabel.snp.makeConstraints { make in
+            make.left.equalTo(topView.backButton)
+            make.top.equalTo(topView.backButton.snp.bottom).offset(self.view.frame.height/30)
         }
         
         topView.snp.makeConstraints { make in
@@ -80,19 +81,63 @@ class ChangePasswordNameAfterLoginViewController: UIViewController {
         }
     }
     
+    func addLayout() {
+        self.view.backgroundColor = .white
+        self.view.addSubview(passwordNickNameLabel)
+        self.view.addSubview(passwardTextField)
+        self.view.addSubview(UnderLineView)
+        self.view.addSubview(changeButton)
+        self.view.addSubview(passwardConditionLabel)
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(_:)), name:UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide(_:)), name: UIResponder.keyboardWillHideNotification, object: nil)
+        
+        passwardConditionLabel.snp.makeConstraints { make in
+            make.top.equalTo(UnderLineView.snp.bottom).offset(self.view.frame.height/100)
+            make.left.equalTo(UnderLineView)
+        }
+        
+        passwordNickNameLabel.snp.makeConstraints { make in
+            make.top.equalTo(topView.titleLabel.snp.bottom).offset(self.view.frame.height/16.91)
+            make.left.equalTo(topView.titleLabel)
+        }
+        
+        passwardTextField.snp.makeConstraints { make in
+            make.top.equalTo(passwordNickNameLabel.snp.bottom)
+            make.left.equalTo(passwordNickNameLabel).offset(self.view.frame.width/80)
+            make.centerX.equalToSuperview()
+            make.height.equalToSuperview().dividedBy(27)
+        }
+        
+        UnderLineView.snp.makeConstraints { make in
+            make.top.equalTo(passwardTextField.snp.bottom)
+            make.left.equalTo(passwordNickNameLabel)
+            make.centerX.equalToSuperview()
+            make.height.equalTo(2)
+        }
+        
+        changeButton.snp.makeConstraints { make in
+            make.left.equalToSuperview().offset(self.view.frame.width/17)
+            make.centerX.equalToSuperview()
+            make.height.equalToSuperview().dividedBy(16.24)
+            make.bottom.equalToSuperview().offset(-self.view.frame.height/23.8)
+            
+        }
+    }
+    
     // MARK: - Selectors
     @objc //MARK: 모달 창 올리기
     func keyboardWillShow(_ sender: Notification) {
         changeButton.frame.origin.y = self.view.frame.height/2
     }
 
-    @objc //MARK: 모달 창 원래대로 
+    @objc //MARK: 모달 창 원래대로
     func keyboardWillHide(_ sender: Notification) {
         changeButton.frame.origin.y = self.view.frame.height-changeButton.frame.height-self.view.frame.height/23.8
     }
     
     @objc func changeButtonClicked(sender:UIButton){
-        if isValidPassword(password: passwardTextField.text) == true{
+        if isValidPassward(Passward: passwardTextField.text) == true{
             let param: Parameters = ["key": key, "newPassword": passwardTextField.text!, "username": "@" + nickname]
             API.shared.request(url: "/v1/member/change/password", method: .put, param: param, header: .none, JSONDecodeUsingStatus: false){ result in
                 switch result{
@@ -120,27 +165,35 @@ class ChangePasswordNameAfterLoginViewController: UIViewController {
                 }
                 
             }
+        }else{
+            shakeView(passwordNickNameLabel)
         }
+
     }
     
     @objc func backButtonClicked(sender:UIButton){
         self.navigationController?.popViewController(animated: true)
     }
     
-    private func isValidPassword(password: String?) -> Bool {
-        guard password != nil else { return false }
-            
-        let PasswordRegEx = ("(?=.*[A-Za-z~!@#$%^&*])(?=.*[0-9]).{8,}")
-        let pred = NSPredicate(format:"SELF MATCHES %@", PasswordRegEx)
-        return pred.evaluate(with: password)
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        passwardTextField.resignFirstResponder()
     }
     
-    // MARK: - isValidNickname
-    private func isValidNickname(Nickname: String?) -> Bool {
-        guard Nickname != nil else { return false }
-            
-        let NicknameRegEx = ("[A-Za-z].{0,9}")
-        let pred = NSPredicate(format:"SELF MATCHES %@", NicknameRegEx)
-        return pred.evaluate(with: Nickname)
+    func shakeView(_ view: UIView?) {
+        let shake = CABasicAnimation(keyPath: "position")
+        shake.duration = 0.08
+        shake.repeatCount = 2
+        shake.autoreverses = true
+        shake.fromValue = NSValue(cgPoint: CGPoint(x: (view?.center.x)! - 2, y: view?.center.y ?? 0.0))
+        shake.toValue = NSValue(cgPoint: CGPoint(x: (view?.center.x)! + 2, y: view?.center.y ?? 0.0))
+        view?.layer.add(shake, forKey: "position")
+    }
+    
+    func isValidPassward(Passward: String?) -> Bool {
+        guard Passward != nil else { return false }
+        
+        let PasswardRegEx = ("(?=.*[A-Za-z~!@#$%^&*])(?=.*[0-9]).{8,}")
+        let pred = NSPredicate(format:"SELF MATCHES %@", PasswardRegEx)
+        return pred.evaluate(with: Passward)
     }
 }
