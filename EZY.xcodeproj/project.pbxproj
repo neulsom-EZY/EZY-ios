@@ -113,6 +113,7 @@
 		AA82BCE02737AB2A000D3F04 /* SignUpAuthCodeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA82BCDF2737AB2A000D3F04 /* SignUpAuthCodeViewController.swift */; };
 		AAA1D06A27527FBE00BD446A /* ChangePasswordNicknameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAA1D06927527FBE00BD446A /* ChangePasswordNicknameViewController.swift */; };
 		AAA1D06E275294BF00BD446A /* LoginModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAA1D06D275294BF00BD446A /* LoginModel.swift */; };
+		AAA1D0722754AFF500BD446A /* LogOutAlertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAA1D0712754AFF500BD446A /* LogOutAlertView.swift */; };
 		AAAA0EF727389F4000DBCA68 /* NewPasswordAuthCodeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAAA0EF627389F4000DBCA68 /* NewPasswordAuthCodeViewController.swift */; };
 		AAAA0EF92738A21D00DBCA68 /* NewNicknameAuthCodeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAAA0EF82738A21D00DBCA68 /* NewNicknameAuthCodeViewController.swift */; };
 		AAAA0EFB2738A30800DBCA68 /* ChangePasswordAuthCodeAfterLoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAAA0EFA2738A30800DBCA68 /* ChangePasswordAuthCodeAfterLoginViewController.swift */; };
@@ -286,6 +287,7 @@
 		AA82BCDF2737AB2A000D3F04 /* SignUpAuthCodeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpAuthCodeViewController.swift; sourceTree = "<group>"; };
 		AAA1D06927527FBE00BD446A /* ChangePasswordNicknameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangePasswordNicknameViewController.swift; sourceTree = "<group>"; };
 		AAA1D06D275294BF00BD446A /* LoginModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginModel.swift; sourceTree = "<group>"; };
+		AAA1D0712754AFF500BD446A /* LogOutAlertView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogOutAlertView.swift; sourceTree = "<group>"; };
 		AAAA0EF627389F4000DBCA68 /* NewPasswordAuthCodeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewPasswordAuthCodeViewController.swift; sourceTree = "<group>"; };
 		AAAA0EF82738A21D00DBCA68 /* NewNicknameAuthCodeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewNicknameAuthCodeViewController.swift; sourceTree = "<group>"; };
 		AAAA0EFA2738A30800DBCA68 /* ChangePasswordAuthCodeAfterLoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangePasswordAuthCodeAfterLoginViewController.swift; sourceTree = "<group>"; };
@@ -708,6 +710,7 @@
 				6AFB77FD267F343500B59482 /* TagAddModalView.swift */,
 				6AE41E8126A97C440072612C /* TagDeleteModalView.swift */,
 				6ABA2C8B26A5366000CB1E16 /* WithdrawalModalView.swift */,
+				AAA1D0712754AFF500BD446A /* LogOutAlertView.swift */,
 			);
 			path = Alert;
 			sourceTree = "<group>";
@@ -1129,6 +1132,7 @@
 				6AA6F794269C2E4D00958D36 /* SignUpPhoneNumViewController.swift in Sources */,
 				EE9F0D4E26E8A9700015E81B /* WhatAboutPeopleLikeThisCell.swift in Sources */,
 				6A47F9D42718F63600AAA6E0 /* CalendarAddModelViewController.swift in Sources */,
+				AAA1D0722754AFF500BD446A /* LogOutAlertView.swift in Sources */,
 				6A3E2E7626B10D760078D749 /* ChangePasswordPhoneNumAfterLoginViewController.swift in Sources */,
 				6AFB7800267F812B00B59482 /* TagColorCollectionViewCell.swift in Sources */,
 				6A136C44273C075000214A9F /* ChannelTalkViewController.swift in Sources */,
