@@ -261,7 +261,7 @@ class AddOrChangeMyTodoViewController: UIViewController{
     }
 
     // MARK: - selectors
-    @objc func notificationAddButtonClicked(sender:UIButton){
+    @objc private func notificationAddButtonClicked(sender:UIButton){
         let MoreCalendarModalsVC = MoreAlarmModelViewController.instance()
         MoreCalendarModalsVC.delegate = self
         MoreCalendarModalsVC.baseDelegate = self
@@ -270,12 +270,12 @@ class AddOrChangeMyTodoViewController: UIViewController{
         AlarmSettingCell().isSelected = false
     }
     
-    @objc func notificationNoSelectButtonClicked(sender:UIButton){
+    @objc private func notificationNoSelectButtonClicked(sender:UIButton){
         notificationNoSelectButton.backgroundColor = UIColor(red: 221/255, green: 220/255, blue: 220/255, alpha: 1)
         notificationNoSelectButton.setImage(UIImage(named: "EZY_SelectedNoSelectTagButtonImage"), for: .normal)
     }
     
-    @objc func calendarAlert(){
+    @objc private func calendarAlert(){
         let CalendarAddModalVC = CalendarAddModelViewController.instance()
         CalendarAddModalVC.delegate = self
         CalendarAddModalVC.baseDelegate = self
@@ -284,7 +284,7 @@ class AddOrChangeMyTodoViewController: UIViewController{
         CalendarAddModalVC.calendarModalDataSetting(dayIndex: selectedDayIndex, repeatIndex: selectedRepeatIndex)
     }
     
-    @objc func clockAlert(){
+    @objc private func clockAlert(){
         let TimeAddModalVC = TimeAddModalViewController.instance()
         TimeAddModalVC.baseDelegate = self
         TimeAddModalVC.delegate = self
@@ -293,12 +293,16 @@ class AddOrChangeMyTodoViewController: UIViewController{
         TimeAddModalVC.timeValueSetting(leftOrRight: ["오전", "오전"], selectedValuesIndex: selectedTimeIndex)
     }
     
-    @objc func locationAlert(){
+    @objc private func locationAlert(){
         let nextViewController = SelectLocationViewController()
         self.navigationController?.pushViewController(nextViewController, animated: true)
     }
     
-    @objc func changeButtonClicked(sender:UIButton){
+    @objc private func backButtonClicked(sender:UIButton){
+        self.navigationController?.popViewController(animated: true)
+    }
+    
+    @objc private func changeButtonClicked(sender:UIButton){
         if checkEmpty(textField: titleTextField) == true{
             shakeView(titleLabel)
         }else{
@@ -318,10 +322,6 @@ class AddOrChangeMyTodoViewController: UIViewController{
                 }
             }
         }
-    }
-    
-    @objc func backButtonClicked(sender:UIButton){
-        self.navigationController?.popViewController(animated: true)
     }
     
     // MARK: 화면터치하여 설명 뷰 내리기
