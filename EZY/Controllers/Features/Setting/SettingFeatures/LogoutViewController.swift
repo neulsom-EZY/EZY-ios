@@ -12,7 +12,7 @@ import Alamofire
 
 class LogoutViewController : UIViewController {
     private let tk = TokenUtils.shared
-    final class Shared : APIService<KakaoDataModel>{
+    final class API : APIService<KakaoDataModel>{
         //MARK: - SingleTon
         static let shared = APIService<KakaoDataModel>()
     }
@@ -48,7 +48,7 @@ class LogoutViewController : UIViewController {
     @objc private func logoutAction(){
         print("Logout")
         let header = tk.getAuthorizationHeader(Bundle.bundleIdentifier)
-        Shared.shared.request(url: "/v1/member/logout", method: .delete, param: .none, header: header, JSONDecodeUsingStatus: false, completion: {result in
+        API.shared.request(url: "/v1/member/logout", method: .delete, param: .none, header: header, JSONDecodeUsingStatus: false, completion: {result in
             switch result{
             case .success(let data):
                 print(data)

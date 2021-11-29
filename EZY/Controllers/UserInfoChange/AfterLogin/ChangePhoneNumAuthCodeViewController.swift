@@ -12,7 +12,7 @@ class ChangePhoneNumAuthCodeViewController: UIViewController {
     
     var phoneNum:String = ""
     private let tk = TokenUtils.shared
-    final class Shared : APIService<KakaoDataModel>{
+    final class API : APIService<KakaoDataModel>{
         //MARK: - SingleTon
         static let shared = APIService<KakaoDataModel>()
     }
@@ -118,14 +118,14 @@ class ChangePhoneNumAuthCodeViewController: UIViewController {
         let key:String = authCodeView.tf1.text! + authCodeView.tf2.text! + authCodeView.tf3.text! + authCodeView.tf4.text!
         // MARK: - 인증번호 인증
         let param: Parameters = ["key" : key]
-        Shared.shared.request(url: "/v1/member/verified/auth", method: .post, param: param, header: .none, JSONDecodeUsingStatus: false){ result in
+        API.shared.request(url: "/v1/member/verified/auth", method: .post, param: param, header: .none, JSONDecodeUsingStatus: false){ result in
             switch result {
             case .success(let data):
                 print(data)
                 // MARK: - 새 전화번호 변경
                 let header = self.tk.getAuthorizationHeader(Bundle.bundleIdentifier)!
                 let param: Parameters = ["newPhoneNumber": self.phoneNum]
-                Shared.shared.request(url: "/v1/member/change/phone", method: .put, param: param, header: header, JSONDecodeUsingStatus: false){ result in
+                API.shared.request(url: "/v1/member/change/phone", method: .put, param: param, header: header, JSONDecodeUsingStatus: false){ result in
                     switch result {
                     case .success(let data):
                         print(data)

@@ -17,7 +17,7 @@ class LoginViewController: UIViewController{
     private let tk = TokenUtils.shared
     var model:LoginModel?
     
-    final class Shared : APIService<KakaoDataModel>{
+    final class API : APIService<KakaoDataModel>{
         //MARK: - SingleTon
         static let shared = APIService<KakaoDataModel>()
     }
@@ -128,7 +128,7 @@ class LoginViewController: UIViewController{
     private func onTapLogin(){
         if isValidNickname(Nickname: nicknameContainer.tf.text) == true && isValidPassword(Password: passwordContainer.tf.text) == true{
             let param: Parameters = ["password": passwordContainer.tf.text!, "username": "@" + nicknameContainer.tf.text!]
-            Shared.shared.request(url: "/v1/member/signin", method: .post, param: param, header: .none, JSONDecodeUsingStatus: false) { result in
+            API.shared.request(url: "/v1/member/signin", method: .post, param: param, header: .none, JSONDecodeUsingStatus: false) { result in
                 switch result {
                 case .success(let data):
                     print(data)

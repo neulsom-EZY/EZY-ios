@@ -11,7 +11,7 @@ import Alamofire
 class ChangeIdAfterLoginViewController: UIViewController {
     
     private let tk = TokenUtils.shared
-    final class Shared : APIService<KakaoDataModel>{
+    final class API : APIService<KakaoDataModel>{
         //MARK: - SingleTon
         static let shared = APIService<KakaoDataModel>()
     }
@@ -148,7 +148,7 @@ class ChangeIdAfterLoginViewController: UIViewController {
         if isValidId(id: idTextField.text) == true{
             let header = tk.getAuthorizationHeader(Bundle.bundleIdentifier)!
             let param: Parameters = ["username": "@" + idTextField.text!]
-            Shared.shared.request(url: "/v1/member/change/username", method: .put, param: param, header: header, JSONDecodeUsingStatus: false){ result in
+            API.shared.request(url: "/v1/member/change/username", method: .put, param: param, header: header, JSONDecodeUsingStatus: false){ result in
                 switch result {
                 case .success(let data):
                     print(data)

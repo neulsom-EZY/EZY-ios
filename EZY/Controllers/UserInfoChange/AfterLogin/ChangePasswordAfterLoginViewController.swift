@@ -13,7 +13,7 @@ class ChangePasswardAfterLoginViewController: UIViewController {
     var nickname:String = ""
     var key:String = ""
     
-    final class Shared : APIService<KakaoDataModel>{
+    final class API : APIService<KakaoDataModel>{
         //MARK: - SingleTon
         static let shared = APIService<KakaoDataModel>()
     }
@@ -146,7 +146,7 @@ class ChangePasswardAfterLoginViewController: UIViewController {
     @objc func changeButtonClicked(sender:UIButton){
         if isValidPassward(Passward: passwardTextField.text) == true{
             let param: Parameters = ["key": key, "newPassword": passwardTextField.text!, "username": "@" + nickname]
-            Shared.shared.request(url: "/v1/member/change/password", method: .put, param: param, header: .none, JSONDecodeUsingStatus: false){ result in
+            API.shared.request(url: "/v1/member/change/password", method: .put, param: param, header: .none, JSONDecodeUsingStatus: false){ result in
                 switch result{
                 case .success(let data):
                     print(data)

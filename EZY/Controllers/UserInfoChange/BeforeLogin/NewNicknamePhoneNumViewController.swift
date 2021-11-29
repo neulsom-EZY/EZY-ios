@@ -13,7 +13,7 @@ import Alamofire
 class NewNicknamePhoneNumViewController: UIViewController{
     //MARK: - Properties
     
-    final class Shared : APIService<KakaoDataModel>{
+    final class API : APIService<KakaoDataModel>{
         //MARK: - SingleTon
         static let shared = APIService<KakaoDataModel>()
     }
@@ -68,7 +68,7 @@ class NewNicknamePhoneNumViewController: UIViewController{
     private func onTapContinueNewNicknamePut(){
         if isValidPhoneNum(PhoneNumber: phoneNumContainer.tf.text) == true{
             let param: Parameters = ["phoneNumber": phoneNumContainer.tf.text!]
-            Shared.shared.request(url: "/v1/member/find/username", method: .post, param: param, header: .none, JSONDecodeUsingStatus: false){ result in
+            API.shared.request(url: "/v1/member/find/username", method: .post, param: param, header: .none, JSONDecodeUsingStatus: false){ result in
                 switch result {
                 case .success(let data):
                     print(data)

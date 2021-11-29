@@ -10,7 +10,7 @@ import Alamofire
 
 class ChangePhoneNumPutViewController: UIViewController {
     
-    final class Shared : APIService<KakaoDataModel>{
+    final class API : APIService<KakaoDataModel>{
         //MARK: - SingleTon
         static let shared = APIService<KakaoDataModel>()
     }
@@ -118,7 +118,7 @@ class ChangePhoneNumPutViewController: UIViewController {
     @objc func changeButtonClicked(sender:UIButton){
         if isValidPhoneNumber(PhoneNumber: phoneNumTextField.text){
             let param:Parameters = ["phoneNumber": phoneNumTextField.text!]
-            Shared.shared.request(url: "/v1/member/auth", method: .post, param: param, header: .none, JSONDecodeUsingStatus: false){ result in
+            API.shared.request(url: "/v1/member/auth", method: .post, param: param, header: .none, JSONDecodeUsingStatus: false){ result in
                 switch result {
                 case .success(let data):
                     print(data)

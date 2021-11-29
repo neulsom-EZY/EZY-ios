@@ -11,7 +11,7 @@ import Alamofire
 
 class WithdrawalViewController: UIViewController {
     private let tk = TokenUtils.shared
-    final class Shared : APIService<KakaoDataModel>{
+    final class API : APIService<KakaoDataModel>{
         //MARK: - SingleTon
         static let shared = APIService<KakaoDataModel>()
     }
@@ -83,7 +83,7 @@ class WithdrawalViewController: UIViewController {
     @objc func okButtonClicked(sender:UIButton){
         let header = tk.getAuthorizationHeader(Bundle.bundleIdentifier)
         let param: Parameters = ["password": pwTextField.text!, "username": "@" + idTextField.text!]
-        Shared.shared.request(url: "/v1/member/delete", method: .post, param: param, header: header, JSONDecodeUsingStatus: false){ result in
+        API.shared.request(url: "/v1/member/delete", method: .post, param: param, header: header, JSONDecodeUsingStatus: false){ result in
             switch result{
             case .success(let data):
                 print(data)
