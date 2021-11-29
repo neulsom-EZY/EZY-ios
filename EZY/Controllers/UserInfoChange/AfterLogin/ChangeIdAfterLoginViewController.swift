@@ -10,7 +10,7 @@ import Alamofire
 
 class ChangeIdAfterLoginViewController: UIViewController {
     
-    let tk = TokenUtils.shared
+    private let tk = TokenUtils.shared
     final class Shared : APIService<KakaoDataModel>{
         //MARK: - SingleTon
         static let shared = APIService<KakaoDataModel>()

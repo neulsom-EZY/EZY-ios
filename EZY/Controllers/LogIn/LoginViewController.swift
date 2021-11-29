@@ -14,7 +14,7 @@ import Alamofire
 class LoginViewController: UIViewController{
     //MARK: - Properties
     
-    let tk = TokenUtils.shared
+    private let tk = TokenUtils.shared
     var model:LoginModel?
     
     final class Shared : APIService<KakaoDataModel>{
