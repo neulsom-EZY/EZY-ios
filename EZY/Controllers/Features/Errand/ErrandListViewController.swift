@@ -6,8 +6,14 @@
 //
 
 import UIKit
+import Alamofire
 
 class ErrandListViewController : UIViewController{
+    //MARK: - API class
+    final class API : APIService<ErrandEntireModel>{
+        static let shared = API()
+    }
+    
     let bounds = UIScreen.main.bounds
     
     private let sections : [String] = ["부탁받은 심부름","부탁한 심부름"," 수락 대기 중인 심부름"]
@@ -134,5 +140,25 @@ extension ErrandListViewController : UITableViewDelegate , UITableViewDataSource
             let controller = PlanRequestRespondingViewController()
             navigationController?.pushViewController(controller, animated: true)
         }
+    }
+    private func httpErrandRequest(){
+//        let header : HTTPHeaders = ["Authorization": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJAamlob29uIiwiYXV0aCI6W3siYXV0aG9yaXR5IjoiUk9MRV9DTElFTlQifV0sImlhdCI6MTYzODE2MTgxNCwiZXhwIjoxNjM4MTY1NDE0fQ.M01X8KPVz-FkARpHBGe66OSXxb4WBhj9dl5kMwBDXx0"]
+//        API.shared.request(url: "", method: .get, header: header,JSONDecodeUsingStatus: true) { (response) in
+//            switch response{
+//            case.success(let value ):
+//            case .requestErr(_):
+//                <#code#>
+//            case .pathErr:
+//                <#code#>
+//            case .serverErr:
+//                <#code#>
+//            case .networkFail:
+//                <#code#>
+//            case .tokenErr:
+//                <#code#>
+//            case .authorityErr:
+//                <#code#>
+//            }
+//        }
     }
 }

@@ -9,10 +9,10 @@ import Alamofire
 import UIKit
 
 //MARK: - API Service !
-class APIService<T : Decodable>{
+class APIService<T : Codable>{
 
     //MARK: - Request Method
-    func request(url : String ,method : HTTPMethod, param : Parameters?, header : HTTPHeaders?,JSONDecodeUsingStatus: Bool,completion: @escaping(NetworkResult<Any>) ->  Void){
+    func request(url : String ,method : HTTPMethod, param : Parameters? = nil, header : HTTPHeaders? = nil,JSONDecodeUsingStatus: Bool,completion: @escaping(NetworkResult<Any>) ->  Void){
         let dataRequest = AF.request("\(Config.baseURL)\(url)",
                                      method: method,
                                      parameters: param,
