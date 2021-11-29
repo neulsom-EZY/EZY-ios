@@ -10,11 +10,6 @@ import Alamofire
 
 class ChangePasswordNameAfterLoginViewController: UIViewController {
     //MARK: - Properties
-<<<<<<< HEAD
-    private let topView = TopView().then{
-        $0.backButton.addTarget(self, action: #selector(backButtonClicked(sender:)), for: .touchUpInside)
-        $0.topViewDataSetting(backButtonImage: UIImage(named: "EZY_IdChangeBackButtonImage")!, titleLabelText: "비밀번호 변경", textColor: UIColor(red: 120/255, green: 81/255, blue: 255/255, alpha: 1))
-=======
     var nickname:String = ""
     var key:String = ""
     
@@ -35,7 +30,6 @@ class ChangePasswordNameAfterLoginViewController: UIViewController {
         $0.textColor = UIColor(red: 101/255, green: 101/255, blue: 101/255, alpha: 1)
         $0.placeholder = "새로운 비밀번호를 입력해주세요"
         $0.dynamicFont(fontSize: 14, currentFontName: "AppleSDGothicNeo-Regular")
->>>>>>> 5e764f019799c33724997cb7f7c51db47eeec075
     }
     
     private let lineInputView = LineInputView().then{
@@ -87,12 +81,6 @@ class ChangePasswordNameAfterLoginViewController: UIViewController {
     }
     
     // MARK: - Selectors
-<<<<<<< HEAD
-    @objc private func changeButtonClicked(sender:UIButton){
-        if isValidNickname(Nickname: lineInputView.getInfoText()) == true{
-            let vc = ChangePasswordPhoneNumAfterLoginViewController()
-            self.navigationController?.pushViewController(vc, animated: true)
-=======
     @objc //MARK: 모달 창 올리기
     func keyboardWillShow(_ sender: Notification) {
         changeButton.frame.origin.y = self.view.frame.height/2
@@ -132,7 +120,6 @@ class ChangePasswordNameAfterLoginViewController: UIViewController {
                 }
                 
             }
->>>>>>> 5e764f019799c33724997cb7f7c51db47eeec075
         }else{
             lineInputView.checkInfoTextIsEmpty()
         }
