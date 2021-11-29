@@ -6,9 +6,16 @@
 //
 
 import UIKit
+import Alamofire
 
 class ChangePasswardPhoneNumAfterLoginViewController: UIViewController {
     //MARK: - Properties
+    var nickname:String = ""
+    
+    final class API : APIService<KakaoDataModel>{
+        //MARK: - SingleTon
+        static let shared = APIService<KakaoDataModel>()
+    }
     lazy var topView = TopView().then{
         $0.backButton.addTarget(self, action: #selector(backButtonClicked(sender:)), for: .touchUpInside)
         $0.topViewDataSetting(backButtonImage: UIImage(named: "EZY_IdChangeBackButtonImage")!, titleLabelText: "비밀번호 변경", textColor: UIColor(red: 120/255, green: 81/255, blue: 255/255, alpha: 1))
@@ -112,8 +119,34 @@ class ChangePasswardPhoneNumAfterLoginViewController: UIViewController {
 
     @objc func changeButtonClicked(sender:UIButton){
         if isValidPhoneNumber(PhoneNumber: phoneNumTextField.text){
-            let nextViewController = ChangePasswardAfterLoginViewController()
-            self.navigationController?.pushViewController(nextViewController, animated: true)
+            let param: Parameters = ["phoneNumber": phoneNumTextField.text!, "username": "@" + nickname]
+            API.shared.request(url: "/v1/member/send/change/password/authkey", method: .post, param: param, header: .none, JSONDecodeUsingStatus: false) { result in
+                switch result {
+                case .success(let data):
+                    print(data)
+                    let controller = ChangePasswordAuthCodeAfterLoginViewController()
+                    controller.nickname = self.nickname
+                    self.navigationController?.pushViewController(controller, animated: true)
+                    break
+                case .requestErr(let err):
+                    print(err)
+                case .pathErr:
+                    print("pathErr")
+                    break
+                case .serverErr:
+                    print("serverErr")
+                    break
+                case .networkFail:
+                    print("networkFail")
+                    break
+                case .tokenErr:
+                    print("tokenErr")
+                    break
+                case .authorityErr:
+                    print("authorityErr")
+                    break
+                }
+            }
         }else{
             shakeView(phoneNumNickNameLabel)
         }

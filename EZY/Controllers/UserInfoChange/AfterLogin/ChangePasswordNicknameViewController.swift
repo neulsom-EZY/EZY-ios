@@ -1,25 +1,19 @@
 //
-//  IdChangeViewController.swift
+//  ChangePasswordNicknameViewController.swift
 //  EZY
 //
-//  Created by 김유진 on 2021/07/13.
+//  Created by 노연주 on 2021/11/28.
 //
 
 import UIKit
-import Alamofire
+import SnapKit
+import Then
 
-class ChangeIdAfterLoginViewController: UIViewController {
-    
-    private let tk = TokenUtils.shared
-    final class API : APIService<KakaoDataModel>{
-        //MARK: - SingleTon
-        static let shared = APIService<KakaoDataModel>()
-    }
-    
+class ChangePasswordNicknameViewController: UIViewController {
     // MARK: - Properties
     private let topView = TopView().then{
         $0.backButton.addTarget(self, action: #selector(backButtonClicked(sender:)), for: .touchUpInside)
-        $0.topViewDataSetting(backButtonImage: UIImage(named: "EZY_IdChangeBackButtonImage")!, titleLabelText: "닉네임 변경", textColor: UIColor(red: 120/255, green: 81/255, blue: 255/255, alpha: 1))
+        $0.topViewDataSetting(backButtonImage: UIImage(named: "EZY_IdChangeBackButtonImage")!, titleLabelText: "비밀번호 변경", textColor: UIColor(red: 120/255, green: 81/255, blue: 255/255, alpha: 1))
     }
     
     private let idNickNameLabel = UILabel().then {
@@ -46,7 +40,7 @@ class ChangeIdAfterLoginViewController: UIViewController {
     
     private let changeButton = UIButton().then {
         $0.setBackgroundImage(UIImage(named: "EZY_IdChangeButtonImage"), for: .normal)
-        $0.setTitle("변경하기", for: .normal)
+        $0.setTitle("계속하기", for: .normal)
         $0.alpha = 0.5
         $0.dynamicFont(fontSize: 14, currentFontName: "AppleSDGothicNeo-Bold")
         $0.addTarget(self, action: #selector(changeButtonClicked(sender:)), for: .touchUpInside)
@@ -56,7 +50,7 @@ class ChangeIdAfterLoginViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        configure()
+        configureUI()
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -64,7 +58,7 @@ class ChangeIdAfterLoginViewController: UIViewController {
     }
     
     // MARK: - Helpers
-    private func configure(){
+    private func configureUI(){
         addView()
         
         addObserver()
@@ -146,34 +140,9 @@ class ChangeIdAfterLoginViewController: UIViewController {
     // MARK: - Selectors
     @objc private func changeButtonClicked(sender:UIButton){
         if isValidId(id: idTextField.text) == true{
-            let header = tk.getAuthorizationHeader(Bundle.bundleIdentifier)!
-            let param: Parameters = ["username": "@" + idTextField.text!]
-            API.shared.request(url: "/v1/member/change/username", method: .put, param: param, header: header, JSONDecodeUsingStatus: false){ result in
-                switch result {
-                case .success(let data):
-                    print(data)
-                    self.navigationController?.popViewController(animated: true)
-                case .requestErr(let err):
-                    print(err)
-                    break
-                case .pathErr:
-                    print("pathErr")
-                    break
-                case .serverErr:
-                    print("serverErr")
-                    break
-                case .networkFail:
-                    print("networkFail")
-                    break
-                case .tokenErr:
-                    print("tokenErr")
-                    break
-                case .authorityErr:
-                    print("authorityErr")
-                    break
-                }
-            }
-            
+            let controller = ChangePasswardPhoneNumAfterLoginViewController()
+            controller.nickname = idTextField.text!
+            self.navigationController?.pushViewController(controller, animated: true)
         }else{
             shakeView(idNickNameLabel)
         }
@@ -211,4 +180,5 @@ class ChangeIdAfterLoginViewController: UIViewController {
         let pred = NSPredicate(format:"SELF MATCHES %@", idRegEx)
         return pred.evaluate(with: id)
     }
+    
 }

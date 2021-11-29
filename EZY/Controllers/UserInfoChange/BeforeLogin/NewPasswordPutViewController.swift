@@ -8,9 +8,17 @@
 import UIKit
 import SnapKit
 import Then
+import Alamofire
 
 class NewPasswordPutViewController: UIViewController{
     //MARK: - Properties
+    var nickname:String = ""
+    var key: String = ""
+    
+    final class API : APIService<KakaoDataModel>{
+        //MARK: - SingleTon
+        static let shared = APIService<KakaoDataModel>()
+    }
     
     private let topBarView = TopBarView().then {
         $0.goBackButton.addTarget(self, action: #selector(goBack), for: .touchUpInside)
@@ -61,8 +69,33 @@ class NewPasswordPutViewController: UIViewController{
     @objc
     private func onTapContinueNewPasswordPut(){
         if isValidPassword(Password: passwordContainer.tf.text) == true{
-            let controller = LoginViewController()
-            navigationController?.pushViewController(controller, animated: true)
+            let param: Parameters = ["key": key, "newPassword": passwordContainer.tf.text!, "username": "@" + nickname]
+            API.shared.request(url: "/v1/member/change/password", method: .put, param: param, header: .none, JSONDecodeUsingStatus: false){ result in
+                switch result{
+                case .success(let data):
+                    print(data)
+                    let controller = LoginViewController()
+                    self.navigationController?.pushViewController(controller, animated: true)
+                case .requestErr(let err):
+                    print(err)
+                case .pathErr:
+                    print("pathErr")
+                    break
+                case .serverErr:
+                    print("serverErr")
+                    break
+                case .networkFail:
+                    print("networkFail")
+                    break
+                case .tokenErr:
+                    print("tokenErr")
+                    break
+                case .authorityErr:
+                    print("authorityErr")
+                    break
+                }
+                
+            }
         }else{
             shakeView(self.view)
         }

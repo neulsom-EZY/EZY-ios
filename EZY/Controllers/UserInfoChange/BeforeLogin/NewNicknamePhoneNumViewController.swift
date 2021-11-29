@@ -8,9 +8,15 @@
 import UIKit
 import SnapKit
 import Then
+import Alamofire
 
 class NewNicknamePhoneNumViewController: UIViewController{
     //MARK: - Properties
+    
+    final class API : APIService<KakaoDataModel>{
+        //MARK: - SingleTon
+        static let shared = APIService<KakaoDataModel>()
+    }
     
     private let topBarView = TopBarView().then {
         $0.goBackButton.addTarget(self, action: #selector(goBack), for: .touchUpInside)
@@ -61,8 +67,32 @@ class NewNicknamePhoneNumViewController: UIViewController{
     @objc
     private func onTapContinueNewNicknamePut(){
         if isValidPhoneNum(PhoneNumber: phoneNumContainer.tf.text) == true{
-            let controller = NewNicknameAuthCodeViewController()
-            navigationController?.pushViewController(controller, animated: true)
+            let param: Parameters = ["phoneNumber": phoneNumContainer.tf.text!]
+            API.shared.request(url: "/v1/member/find/username", method: .post, param: param, header: .none, JSONDecodeUsingStatus: false){ result in
+                switch result {
+                case .success(let data):
+                    print(data)
+                    let controller = NewNicknameAuthCodeViewController()
+                    self.navigationController?.pushViewController(controller, animated: true)
+                case .requestErr(let err):
+                    print(err)
+                case .pathErr:
+                    print("pathErr")
+                    break
+                case .serverErr:
+                    print("serverErr")
+                    break
+                case .networkFail:
+                    print("networkFail")
+                    break
+                case .tokenErr:
+                    print("tokenErr")
+                    break
+                case .authorityErr:
+                    print("authorityErr")
+                    break
+                }
+            }
         }else{
             shakeView(self.view)
         }
