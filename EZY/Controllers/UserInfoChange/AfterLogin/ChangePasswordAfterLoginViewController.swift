@@ -81,6 +81,7 @@ class ChangePasswordNameAfterLoginViewController: UIViewController {
     }
     
     // MARK: - Selectors
+<<<<<<< HEAD
     @objc //MARK: 모달 창 올리기
     func keyboardWillShow(_ sender: Notification) {
         changeButton.frame.origin.y = self.view.frame.height/2
@@ -120,12 +121,18 @@ class ChangePasswordNameAfterLoginViewController: UIViewController {
                 }
                 
             }
+=======
+    @objc func changeButtonClicked(sender:UIButton){
+        if isValidNickname(Nickname: lineInputView.getInfoText()) == true{
+            let vc = ChangePasswordPhoneNumAfterLoginViewController()
+            self.navigationController?.pushViewController(vc, animated: true)
+>>>>>>> parent of 49180d5 ([CREATE] addMyToDoAPI)
         }else{
             lineInputView.checkInfoTextIsEmpty()
         }
     }
     
-    @objc private func backButtonClicked(sender:UIButton){
+    @objc func backButtonClicked(sender:UIButton){
         self.navigationController?.popViewController(animated: true)
     }
     

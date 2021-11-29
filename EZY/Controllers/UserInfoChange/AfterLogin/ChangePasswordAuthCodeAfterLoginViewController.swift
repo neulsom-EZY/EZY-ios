@@ -87,7 +87,7 @@ class ChangePasswordAuthCodeAfterLoginViewController: UIViewController {
         authCodeView.tf2.keyboardType = .phonePad
         authCodeView.tf3.keyboardType = .phonePad
         authCodeView.tf4.keyboardType = .phonePad
-    }
+    }git revert
     
     // MARK: - Selectors
     @objc func changeButtonClicked(sender:UIButton){

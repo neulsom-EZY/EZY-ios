@@ -77,7 +77,11 @@ class ChangePasswardPhoneNumAfterLoginViewController: UIViewController {
     
     // MARK: - Selectors
 <<<<<<< HEAD
+<<<<<<< HEAD
     @objc private func changeButtonClicked(sender:UIButton){
+=======
+    @objc func changeButtonClicked(sender:UIButton){
+>>>>>>> parent of 49180d5 ([CREATE] addMyToDoAPI)
         if isValidPhoneNumber(PhoneNumber: lineInputView.getInfoText()){
             let nextViewController = ChangePasswordAuthCodeAfterLoginViewController()
             self.navigationController?.pushViewController(nextViewController, animated: true)
@@ -119,7 +123,7 @@ class ChangePasswardPhoneNumAfterLoginViewController: UIViewController {
         }
     }
     
-    @objc  private func backButtonClicked(sender:UIButton){
+    @objc private func backButtonClicked(sender:UIButton){
         self.navigationController?.popViewController(animated: true)
     }
 
