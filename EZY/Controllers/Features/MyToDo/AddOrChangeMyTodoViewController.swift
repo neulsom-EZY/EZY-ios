@@ -10,7 +10,7 @@ import Alamofire
 
 class AddOrChangeMyTodoViewController: UIViewController{
     // MARK: - Properties
-    final class API: APIService<KakaoDataModel>{
+    final class API: APIService<ResponseModel>{
         static var shared = API()
     }
     
@@ -626,3 +626,8 @@ extension AddOrChangeMyTodoViewController: BasicModalViewButtonDelegate{
     }
 }
 
+struct ResponseModel : Codable{
+    var success: Bool
+    var code: Int
+    var massage: String
+}

@@ -18,8 +18,7 @@ class SettingViewController: UIViewController {
     
     private let topView = TopView().then{
         $0.backButton.addTarget(self, action: #selector(backButtonClicked(sender:)), for: .touchUpInside)
-        $0.topViewDataSetting(backButtonImage: UIImage(named: "EZY_SettingBackButton")!, titleLabelText: "설정",
-                                   textColor: UIColor(red: 175/255, green: 173/255, blue: 255/255, alpha: 1))
+        $0.topViewDataSetting(backButtonImage: UIImage(named: "EZY_SettingBackButton")!, titleLabelText: "설정", textColor: UIColor(red: 175/255, green: 173/255, blue: 255/255, alpha: 1))
     }
     
     private let settingTableView = UITableView().then {
@@ -66,12 +65,12 @@ class SettingViewController: UIViewController {
     }
     
     // MARK: - addSubview
-    func addView(){
+    private func addView(){
         [topView, settingTableView].forEach { self.view.addSubview($0) }
     }
     
     // MARK: - Selectors
-    @objc func backButtonClicked(sender: UIButton!) {
+    @objc private func backButtonClicked(sender: UIButton!) {
         self.navigationController?.popViewController(animated: true)
     }
     
