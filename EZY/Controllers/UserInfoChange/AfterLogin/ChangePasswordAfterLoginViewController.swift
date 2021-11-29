@@ -11,7 +11,12 @@ class ChangePasswardAfterLoginViewController: UIViewController {
         static let shared = APIService<KakaoDataModel>()
     }
     
-    lazy var topView = TopView()
+    lazy var topView = TopView().then{
+        $0.backButton.addTarget(self, action: #selector(backButtonClicked(sender:)), for: .touchUpInside)
+        $0.topViewDataSetting(backButtonImage: UIImage(named: "EZY_IdChangeBackButtonImage")!, titleLabelText: "비밀번호 변경", textColor: UIColor(red: 120/255, green: 81/255, blue: 255/255, alpha: 1))
+    }
+    
+    
     
     lazy var passwordNickNameLabel = UILabel().then {
         $0.textColor = UIColor(red: 150/255, green: 141/255, blue: 255/255, alpha: 1)
@@ -52,15 +57,6 @@ class ChangePasswardAfterLoginViewController: UIViewController {
     }
     
     func addView(){
-        self.view.addSubview(topView)
-        topView.addSubview(topView.backButton)
-        topView.addSubview(topView.titleLabel)
-        
-        topView.backButton.addTarget(self, action: #selector(backButtonClicked(sender:)), for: .touchUpInside)
-        
-        topView.titleLabel.text = "비밀번호 변경"
-        
-        topView.topViewDataSetting(backButtonImage: UIImage(named: "EZY_IdChangeBackButtonImage")!, titleLabelText: "비밀번호 변경", textColor: UIColor(red: 120/255, green: 81/255, blue: 255/255, alpha: 1))
         
         topView.backButton.snp.makeConstraints { make in
             make.top.equalTo(self.view.safeAreaLayoutGuide).offset(self.view.frame.height/47.7)
