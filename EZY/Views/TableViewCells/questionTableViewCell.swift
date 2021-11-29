@@ -8,29 +8,27 @@
 import UIKit
 
 class questionTableViewCell: UITableViewCell {
-    
+    // MARK: - Properties
     static let reuseId = "\(questionTableViewCell.self)"
     
-    lazy var questionCircleBackgroundView = UIView().then{
+    private let viewBounds = UIScreen.main.bounds
+    
+    private let questionCircleBackgroundView = UIView().then{
         $0.backgroundColor = UIColor(red: 107/255, green: 64/255, blue: 255/255, alpha: 1)
     }
     
-    lazy var questionLogoLabel = UILabel().then {
+    private let questionLogoLabel = UILabel().then {
         $0.text = "Q"
         $0.dynamicFont(fontSize: 12, currentFontName: "Poppins-Bold")
         $0.textColor = UIColor.white
     }
     
-    lazy var qnaBackgroundView = UIView().then{
+    private let qnaBackgroundView = UIView().then{
         $0.backgroundColor = UIColor(red: 250/255, green: 250/255, blue: 250/255, alpha: 1)
         $0.layer.cornerRadius = 3
     }
     
-    lazy var answerIconImageView = UIImageView().then {
-        $0.image = UIImage(named: "EZY_QuestionArrow")
-    }
-    
-    lazy var titleTextView = UITextView().then {
+    let titleTextView = UITextView().then {
         $0.text = "아이디는 어디서 변경할 수 있나요?"
         $0.textColor = UIColor(red: 83/255, green: 83/255, blue: 83/255, alpha: 1)
         $0.dynamicFont(fontSize: 12, currentFontName: "AppleSDGothicNeo-Medium")
@@ -39,7 +37,7 @@ class questionTableViewCell: UITableViewCell {
         $0.isSelectable = false
     }
     
-    lazy var contentTextView = UITextView().then {
+    let contentTextView = UITextView().then {
         $0.text = "아이디는 설정 > 아이디 변경 창에서 변경할 수 있습니다."
         $0.textColor = UIColor(red: 121/255, green: 121/255, blue: 121/255, alpha: 121/255)
         $0.dynamicFont(fontSize: 10, currentFontName: "AppleSDGothicNeo-Medium")
@@ -49,59 +47,57 @@ class questionTableViewCell: UITableViewCell {
         $0.isSelectable = false
     }
 
+    // MARK: - awakeFromNib
     override func awakeFromNib() {
         super.awakeFromNib()
 
-        layoutSetting()
-
+        configureUI()
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
 
-        layoutSetting()
+        configureUI()
     }
     
-    func layoutSetting(){
-        contentView.addSubview(questionCircleBackgroundView)
-        contentView.addSubview(qnaBackgroundView)
-        contentView.addSubview(titleTextView)
-        qnaBackgroundView.addSubview(answerIconImageView)
-        questionCircleBackgroundView.addSubview(questionLogoLabel)
-        qnaBackgroundView.addSubview(contentTextView)
-        
+    // MARK: - Helpers
+    private func configureUI(){
+        addView()
+        location()
+    }
+    
+    // MARK: - addView
+    private func addView(){
+        [questionCircleBackgroundView, qnaBackgroundView, titleTextView].forEach { contentView.addSubview($0) }
+        [contentTextView].forEach { qnaBackgroundView.addSubview($0) }
+        [questionLogoLabel].forEach { questionCircleBackgroundView.addSubview($0) }
+    }
+    
+    // MARK: - location
+    private func location(){
         questionCircleBackgroundView.snp.makeConstraints { make in
             make.left.top.equalToSuperview()
             make.width.equalToSuperview().dividedBy(13)
-            make.height.equalTo(questionCircleBackgroundView.snp.width)
-            
+            make.height.equalTo(contentView.snp.width).dividedBy(13)
             questionCircleBackgroundView.layer.cornerRadius = (contentView.frame.width/13)/2
         }
-        
         questionLogoLabel.snp.makeConstraints { make in
             make.centerX.centerY.equalToSuperview()
         }
-        
         titleTextView.snp.makeConstraints { make in
-            make.left.equalTo(questionCircleBackgroundView.snp.right).offset(contentView.frame.width/44.5)
-            make.centerY.equalTo(questionCircleBackgroundView)
+            make.centerY.equalTo(questionCircleBackgroundView).offset(-viewBounds.height/320)
             make.height.equalTo(questionCircleBackgroundView)
-            make.right.equalToSuperview()
+            make.left.equalTo(questionCircleBackgroundView.snp.right).offset(viewBounds.width/50)
         }
-        
-        contentTextView.snp.makeConstraints { make in
-            make.left.equalToSuperview().offset(self.contentView.frame.height/8)
-            make.centerY.equalToSuperview()
-            
-        }
-        
         qnaBackgroundView.snp.makeConstraints { make in
-            make.width.equalToSuperview()
-            make.top.equalTo(questionCircleBackgroundView.snp.bottom).offset(contentView.frame.height/11.5)
-            make.height.equalTo(contentTextView).multipliedBy(1.2)
+            make.left.equalTo(questionCircleBackgroundView)
             make.centerX.equalToSuperview()
+            make.height.equalTo(contentTextView).multipliedBy(1.2)
+            make.top.equalTo(questionCircleBackgroundView.snp.bottom).offset(viewBounds.height/80)
         }
-
+        contentTextView.snp.makeConstraints { make in
+            make.left.equalToSuperview().offset(viewBounds.width/50)
+            make.centerY.equalToSuperview()
+        }
     }
-
 }

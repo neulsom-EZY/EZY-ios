@@ -12,9 +12,7 @@
 		6A097CFD268ED628001E011D /* CalendarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A097CFC268ED628001E011D /* CalendarView.swift */; };
 		6A136C44273C075000214A9F /* ChannelTalkViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A136C43273C075000214A9F /* ChannelTalkViewController.swift */; };
 		6A138F81266F862200DBCE49 /* GroupAddCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A138F80266F862200DBCE49 /* GroupAddCollectionViewCell.swift */; };
-		6A138F89266FACFE00DBCE49 /* GroupAddModalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A138F88266FACFE00DBCE49 /* GroupAddModalView.swift */; };
 		6A138F8D26703C1900DBCE49 /* selectedMemberCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A138F8C26703C1900DBCE49 /* selectedMemberCollectionViewCell.swift */; };
-		6A1E3E9026797CB600E7B198 /* DeleteModalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A1E3E8F26797CB600E7B198 /* DeleteModalView.swift */; };
 		6A3E2E7626B10D760078D749 /* ChangePasswordPhoneNumAfterLoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A3E2E7526B10D760078D749 /* ChangePasswordPhoneNumAfterLoginViewController.swift */; };
 		6A3E2E7826B111540078D749 /* ChangePasswordAfterLoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A3E2E7726B111540078D749 /* ChangePasswordAfterLoginViewController.swift */; };
 		6A3E2E7E26B6A5FB0078D749 /* ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A3E2E7D26B6A5FB0078D749 /* ViewModel.swift */; };
@@ -38,7 +36,6 @@
 		6A3E2EA326B6A84F0078D749 /* Poppins-BoldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 6A3E2E9226B6A84F0078D749 /* Poppins-BoldItalic.ttf */; };
 		6A44474D26677647004C4BC3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6A44474C26677647004C4BC3 /* Assets.xcassets */; };
 		6A47F9D42718F63600AAA6E0 /* CalendarAddModelViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A47F9D32718F63600AAA6E0 /* CalendarAddModelViewController.swift */; };
-		6A4AE85D2678EBEE009E33CD /* GroupModifyDeleteModalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A4AE85C2678EBEE009E33CD /* GroupModifyDeleteModalView.swift */; };
 		6A4EDA002668653200B809EC /* ScheduleTimeTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A4ED9FF2668653200B809EC /* ScheduleTimeTableViewCell.swift */; };
 		6A4EDA2C266A045B00B809EC /* NotificationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A4EDA2B266A045B00B809EC /* NotificationViewController.swift */; };
 		6A4EDA2E266A332100B809EC /* NotificationTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A4EDA2D266A332100B809EC /* NotificationTableViewCell.swift */; };
@@ -58,7 +55,6 @@
 		6A82835626982A8B00AC381B /* questionTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A82835526982A8B00AC381B /* questionTableViewCell.swift */; };
 		6A8283582699742300AC381B /* TagCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A8283572699742300AC381B /* TagCollectionViewCell.swift */; };
 		6A82835A26997AB500AC381B /* TagCollectionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A82835926997AB500AC381B /* TagCollectionViewModel.swift */; };
-		6A94934E2670DBC700CC5B37 /* SearchResultsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A94934D2670DBC700CC5B37 /* SearchResultsView.swift */; };
 		6A98A9CC2666F94E00BFAE30 /* ScheduleTypeCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A98A9CB2666F94E00BFAE30 /* ScheduleTypeCollectionViewCell.swift */; };
 		6A9DF2EB26A7C7B90026F89D /* InquirySendChattingBoxView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A9DF2EA26A7C7B90026F89D /* InquirySendChattingBoxView.swift */; };
 		6AA6F792269C2E4D00958D36 /* SignUpPasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AA6F78E269C2E4C00958D36 /* SignUpPasswordViewController.swift */; };
@@ -81,7 +77,6 @@
 		6AB27CB4269DD42400B95C0F /* InquiryReceiveChattingBoxView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AB27CB3269DD42400B95C0F /* InquiryReceiveChattingBoxView.swift */; };
 		6AB486FF26834D8C00E95D43 /* CalendarCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AB486FE26834D8C00E95D43 /* CalendarCollectionViewCell.swift */; };
 		6AB7D443272FE41A00FAFA19 /* CalendarViewLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AB7D442272FE41A00FAFA19 /* CalendarViewLayout.swift */; };
-		6ABA2C8C26A5366000CB1E16 /* WithdrawalModalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6ABA2C8B26A5366000CB1E16 /* WithdrawalModalView.swift */; };
 		6AC1F4062684093700DDD08C /* TagColorCollectionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AC1F4052684093700DDD08C /* TagColorCollectionViewModel.swift */; };
 		6AC3BF18267B475200DDCBB2 /* PlanRequestRespondingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AC3BF17267B475200DDCBB2 /* PlanRequestRespondingViewController.swift */; };
 		6ACB4ED2269C2FA8008606C5 /* TopBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6ACB4ED1269C2FA8008606C5 /* TopBarView.swift */; };
@@ -103,6 +98,9 @@
 		6AE5BB1A2696A6CE00A9731B /* Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AE5BB192696A6CE00A9731B /* Extension.swift */; };
 		6AE5BB1C2696B9C900A9731B /* PlanCompleteModalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AE5BB1B2696B9C900A9731B /* PlanCompleteModalView.swift */; };
 		6AE5BB1E2696DDA600A9731B /* MyToDoDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AE5BB1D2696DDA600A9731B /* MyToDoDetailViewController.swift */; };
+		6AEB2F1C274772B900C213EF /* LineInputView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AEB2F1B274772B900C213EF /* LineInputView.swift */; };
+		6AEB2F1E27478E7600C213EF /* ChangePasswordPasswordAfterLoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AEB2F1D27478E7600C213EF /* ChangePasswordPasswordAfterLoginViewController.swift */; };
+		6AEB2F20274D0EBE00C213EF /* TimeLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AEB2F1F274D0EBE00C213EF /* TimeLabel.swift */; };
 		6AFB77F9267ECD6700B59482 /* WhiteBackgroundView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AFB77F8267ECD6700B59482 /* WhiteBackgroundView.swift */; };
 		6AFB77FE267F343500B59482 /* TagAddModalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AFB77FD267F343500B59482 /* TagAddModalView.swift */; };
 		6AFB7800267F812B00B59482 /* TagColorCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AFB77FF267F812B00B59482 /* TagColorCollectionViewCell.swift */; };
@@ -116,7 +114,7 @@
 		AAAA0EF727389F4000DBCA68 /* NewPasswordAuthCodeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAAA0EF627389F4000DBCA68 /* NewPasswordAuthCodeViewController.swift */; };
 		AAAA0EF92738A21D00DBCA68 /* NewNicknameAuthCodeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAAA0EF82738A21D00DBCA68 /* NewNicknameAuthCodeViewController.swift */; };
 		AAAA0EFB2738A30800DBCA68 /* ChangePasswordAuthCodeAfterLoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAAA0EFA2738A30800DBCA68 /* ChangePasswordAuthCodeAfterLoginViewController.swift */; };
-		AAAA0EFD27390E9300DBCA68 /* ChangePhoneNumPutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAAA0EFC27390E9300DBCA68 /* ChangePhoneNumPutViewController.swift */; };
+		AAAA0EFD27390E9300DBCA68 /* ChangePhoneNumPhoneNumViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAAA0EFC27390E9300DBCA68 /* ChangePhoneNumPhoneNumViewController.swift */; };
 		AAAA0EFF2739107C00DBCA68 /* ChangePhoneNumAuthCodeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAAA0EFE2739107C00DBCA68 /* ChangePhoneNumAuthCodeViewController.swift */; };
 		AAAA0F1D2739458D00DBCA68 /* MyToDoListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAAA0F1C2739458D00DBCA68 /* MyToDoListViewController.swift */; };
 		AAAA0F1F273A0F7D00DBCA68 /* ListTagView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAAA0F1E273A0F7D00DBCA68 /* ListTagView.swift */; };
@@ -135,7 +133,6 @@
 		EE93B4DB26876F430055D7A6 /* AlarmManagementButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE93B4DA26876F430055D7A6 /* AlarmManagementButton.swift */; };
 		EE93B4DF268797230055D7A6 /* CustomManagePushNotificationCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE93B4DE268797230055D7A6 /* CustomManagePushNotificationCell.swift */; };
 		EE93B4E42687BD8A0055D7A6 /* ManageData.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE93B4E32687BD8A0055D7A6 /* ManageData.swift */; };
-		EE9582D2272A7B5F00AAEC8A /* LogoutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE9582D1272A7B5F00AAEC8A /* LogoutViewController.swift */; };
 		EE9582D4272A7BEF00AAEC8A /* LogoutCustomBtn.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE9582D3272A7BEF00AAEC8A /* LogoutCustomBtn.swift */; };
 		EE963D372734B0DB005070B5 /* BaseModal.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE963D362734B0DB005070B5 /* BaseModal.swift */; };
 		EE9F0D2226E8A2AC0015E81B /* ErrandDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE9F0D1C26E8A2AC0015E81B /* ErrandDetailsViewController.swift */; };
@@ -183,10 +180,8 @@
 		6A097D01268ED7B1001E011D /* CalendarView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CalendarView.h; sourceTree = "<group>"; };
 		6A136C43273C075000214A9F /* ChannelTalkViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChannelTalkViewController.swift; sourceTree = "<group>"; };
 		6A138F80266F862200DBCE49 /* GroupAddCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupAddCollectionViewCell.swift; sourceTree = "<group>"; };
-		6A138F88266FACFE00DBCE49 /* GroupAddModalView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupAddModalView.swift; sourceTree = "<group>"; };
 		6A138F8C26703C1900DBCE49 /* selectedMemberCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = selectedMemberCollectionViewCell.swift; sourceTree = "<group>"; };
 		6A15D8A326D485DE00D932EC /* EZY.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = EZY.entitlements; sourceTree = "<group>"; };
-		6A1E3E8F26797CB600E7B198 /* DeleteModalView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteModalView.swift; sourceTree = "<group>"; };
 		6A3E2E7526B10D760078D749 /* ChangePasswordPhoneNumAfterLoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangePasswordPhoneNumAfterLoginViewController.swift; sourceTree = "<group>"; };
 		6A3E2E7726B111540078D749 /* ChangePasswordAfterLoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangePasswordAfterLoginViewController.swift; sourceTree = "<group>"; };
 		6A3E2E7D26B6A5FB0078D749 /* ViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ViewModel.swift; path = EZY/ViewModels/ViewModel.swift; sourceTree = SOURCE_ROOT; };
@@ -210,7 +205,6 @@
 		6A3E2E9226B6A84F0078D749 /* Poppins-BoldItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Poppins-BoldItalic.ttf"; sourceTree = "<group>"; };
 		6A44474C26677647004C4BC3 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		6A47F9D32718F63600AAA6E0 /* CalendarAddModelViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarAddModelViewController.swift; sourceTree = "<group>"; };
-		6A4AE85C2678EBEE009E33CD /* GroupModifyDeleteModalView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupModifyDeleteModalView.swift; sourceTree = "<group>"; };
 		6A4ED9FF2668653200B809EC /* ScheduleTimeTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleTimeTableViewCell.swift; sourceTree = "<group>"; };
 		6A4EDA2B266A045B00B809EC /* NotificationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationViewController.swift; sourceTree = "<group>"; };
 		6A4EDA2D266A332100B809EC /* NotificationTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationTableViewCell.swift; sourceTree = "<group>"; };
@@ -230,7 +224,6 @@
 		6A82835526982A8B00AC381B /* questionTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = questionTableViewCell.swift; sourceTree = "<group>"; };
 		6A8283572699742300AC381B /* TagCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagCollectionViewCell.swift; sourceTree = "<group>"; };
 		6A82835926997AB500AC381B /* TagCollectionViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagCollectionViewModel.swift; sourceTree = "<group>"; };
-		6A94934D2670DBC700CC5B37 /* SearchResultsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResultsView.swift; sourceTree = "<group>"; };
 		6A98A9CB2666F94E00BFAE30 /* ScheduleTypeCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleTypeCollectionViewCell.swift; sourceTree = "<group>"; };
 		6A9DF2EA26A7C7B90026F89D /* InquirySendChattingBoxView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InquirySendChattingBoxView.swift; sourceTree = "<group>"; };
 		6AA6F78E269C2E4C00958D36 /* SignUpPasswordViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignUpPasswordViewController.swift; sourceTree = "<group>"; };
@@ -255,7 +248,6 @@
 		6AB27CB3269DD42400B95C0F /* InquiryReceiveChattingBoxView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InquiryReceiveChattingBoxView.swift; sourceTree = "<group>"; };
 		6AB486FE26834D8C00E95D43 /* CalendarCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarCollectionViewCell.swift; sourceTree = "<group>"; };
 		6AB7D442272FE41A00FAFA19 /* CalendarViewLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarViewLayout.swift; sourceTree = "<group>"; };
-		6ABA2C8B26A5366000CB1E16 /* WithdrawalModalView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WithdrawalModalView.swift; sourceTree = "<group>"; };
 		6AC1F4052684093700DDD08C /* TagColorCollectionViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagColorCollectionViewModel.swift; sourceTree = "<group>"; };
 		6AC3BF17267B475200DDCBB2 /* PlanRequestRespondingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlanRequestRespondingViewController.swift; sourceTree = "<group>"; };
 		6ACB4ED1269C2FA8008606C5 /* TopBarView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TopBarView.swift; sourceTree = "<group>"; };
@@ -277,6 +269,9 @@
 		6AE5BB192696A6CE00A9731B /* Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Extension.swift; sourceTree = "<group>"; };
 		6AE5BB1B2696B9C900A9731B /* PlanCompleteModalView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlanCompleteModalView.swift; sourceTree = "<group>"; };
 		6AE5BB1D2696DDA600A9731B /* MyToDoDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyToDoDetailViewController.swift; sourceTree = "<group>"; };
+		6AEB2F1B274772B900C213EF /* LineInputView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LineInputView.swift; sourceTree = "<group>"; };
+		6AEB2F1D27478E7600C213EF /* ChangePasswordPasswordAfterLoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangePasswordPasswordAfterLoginViewController.swift; sourceTree = "<group>"; };
+		6AEB2F1F274D0EBE00C213EF /* TimeLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeLabel.swift; sourceTree = "<group>"; };
 		6AFB77F8267ECD6700B59482 /* WhiteBackgroundView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WhiteBackgroundView.swift; sourceTree = "<group>"; };
 		6AFB77FD267F343500B59482 /* TagAddModalView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagAddModalView.swift; sourceTree = "<group>"; };
 		6AFB77FF267F812B00B59482 /* TagColorCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagColorCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -290,7 +285,7 @@
 		AAAA0EF627389F4000DBCA68 /* NewPasswordAuthCodeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewPasswordAuthCodeViewController.swift; sourceTree = "<group>"; };
 		AAAA0EF82738A21D00DBCA68 /* NewNicknameAuthCodeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewNicknameAuthCodeViewController.swift; sourceTree = "<group>"; };
 		AAAA0EFA2738A30800DBCA68 /* ChangePasswordAuthCodeAfterLoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangePasswordAuthCodeAfterLoginViewController.swift; sourceTree = "<group>"; };
-		AAAA0EFC27390E9300DBCA68 /* ChangePhoneNumPutViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangePhoneNumPutViewController.swift; sourceTree = "<group>"; };
+		AAAA0EFC27390E9300DBCA68 /* ChangePhoneNumPhoneNumViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangePhoneNumPhoneNumViewController.swift; sourceTree = "<group>"; };
 		AAAA0EFE2739107C00DBCA68 /* ChangePhoneNumAuthCodeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangePhoneNumAuthCodeViewController.swift; sourceTree = "<group>"; };
 		AAAA0F1C2739458D00DBCA68 /* MyToDoListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyToDoListViewController.swift; sourceTree = "<group>"; };
 		AAAA0F1E273A0F7D00DBCA68 /* ListTagView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListTagView.swift; sourceTree = "<group>"; };
@@ -310,7 +305,6 @@
 		EE93B4DA26876F430055D7A6 /* AlarmManagementButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlarmManagementButton.swift; sourceTree = "<group>"; };
 		EE93B4DE268797230055D7A6 /* CustomManagePushNotificationCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomManagePushNotificationCell.swift; sourceTree = "<group>"; };
 		EE93B4E32687BD8A0055D7A6 /* ManageData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManageData.swift; sourceTree = "<group>"; };
-		EE9582D1272A7B5F00AAEC8A /* LogoutViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogoutViewController.swift; sourceTree = "<group>"; };
 		EE9582D3272A7BEF00AAEC8A /* LogoutCustomBtn.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogoutCustomBtn.swift; sourceTree = "<group>"; };
 		EE963D362734B0DB005070B5 /* BaseModal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseModal.swift; sourceTree = "<group>"; };
 		EE9F0D1C26E8A2AC0015E81B /* ErrandDetailsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ErrandDetailsViewController.swift; sourceTree = "<group>"; };
@@ -570,7 +564,7 @@
 				AAAA0EFA2738A30800DBCA68 /* ChangePasswordAuthCodeAfterLoginViewController.swift */,
 				6A3E2E7726B111540078D749 /* ChangePasswordAfterLoginViewController.swift */,
 				6AB27CAB269D758100B95C0F /* ChangeIdAfterLoginViewController.swift */,
-				AAAA0EFC27390E9300DBCA68 /* ChangePhoneNumPutViewController.swift */,
+				AAAA0EFC27390E9300DBCA68 /* ChangePhoneNumPhoneNumViewController.swift */,
 				AAAA0EFE2739107C00DBCA68 /* ChangePhoneNumAuthCodeViewController.swift */,
 			);
 			path = AfterLogin;
@@ -654,9 +648,8 @@
 				6AB27CAF269D8C1600B95C0F /* WithdrawalViewController.swift */,
 				6AE41E7926A9228A0072612C /* TagManagementViewController.swift */,
 				6AE41E7D26A9560C0072612C /* TagSettingViewController.swift */,
-				EE9582D1272A7B5F00AAEC8A /* LogoutViewController.swift */,
 				EE93B4D826876C6F0055D7A6 /* PushNotificationManagementViewController.swift */,
-				6A5C6A232734A24000556849 /* TagAddModalViewController.swift */,
+				6AEB2F1D27478E7600C213EF /* ChangePasswordPasswordAfterLoginViewController.swift */,
 			);
 			path = SettingFeatures;
 			sourceTree = "<group>";
@@ -672,12 +665,12 @@
 		6AB7D439272FE1E400FAFA19 /* Modal */ = {
 			isa = PBXGroup;
 			children = (
+				6A5C6A232734A24000556849 /* TagAddModalViewController.swift */,
 				6A47F9D32718F63600AAA6E0 /* CalendarAddModelViewController.swift */,
+				6AA7E7862720E64100034327 /* TimeAddModalViewController.swift */,
 				EE9F0D1D26E8A2AC0015E81B /* MoreAlarmModelViewController.swift */,
 				EE9F0D2126E8A2AC0015E81B /* MoreCalendarModalsViewController.swift */,
-				6AA7E7862720E64100034327 /* TimeAddModalViewController.swift */,
 				EE963D352734B0CE005070B5 /* BaseModal */,
-				6A50CF79273B3A9B0036EED6 /* BasicModalViewController.swift */,
 			);
 			path = Modal;
 			sourceTree = "<group>";
@@ -710,7 +703,6 @@
 				6A82834F2698132000AC381B /* PlanDeleteModalView.swift */,
 				6AFB77FD267F343500B59482 /* TagAddModalView.swift */,
 				6AE41E8126A97C440072612C /* TagDeleteModalView.swift */,
-				6ABA2C8B26A5366000CB1E16 /* WithdrawalModalView.swift */,
 			);
 			path = Alert;
 			sourceTree = "<group>";
@@ -718,17 +710,15 @@
 		6AB7D43C272FE25700FAFA19 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				6AEB2F1F274D0EBE00C213EF /* TimeLabel.swift */,
+				6AEB2F1B274772B900C213EF /* LineInputView.swift */,
 				6AB7D442272FE41A00FAFA19 /* CalendarViewLayout.swift */,
 				6ACB4ED1269C2FA8008606C5 /* TopBarView.swift */,
 				EE9F0D2A26E8A9330015E81B /* inputContainerErrandTextView.swift */,
 				AA04F9D42700996800EE0506 /* LoginTextFieldContainerView.swift */,
 				6A4EDA34266BD27800B809EC /* TopView.swift */,
 				EE9F0D3526E8A9340015E81B /* SendUser.swift */,
-				6A138F88266FACFE00DBCE49 /* GroupAddModalView.swift */,
-				6A94934D2670DBC700CC5B37 /* SearchResultsView.swift */,
-				6A4AE85C2678EBEE009E33CD /* GroupModifyDeleteModalView.swift */,
 				6A4EDA2F266A336000B809EC /* NotificationTableView.swift */,
-				6A1E3E8F26797CB600E7B198 /* DeleteModalView.swift */,
 				AA04F9D62701C12600EE0506 /* SignUpTextFieldContainerView.swift */,
 				6AFB77F8267ECD6700B59482 /* WhiteBackgroundView.swift */,
 				6AB27CB3269DD42400B95C0F /* InquiryReceiveChattingBoxView.swift */,
@@ -842,6 +832,7 @@
 		EE963D352734B0CE005070B5 /* BaseModal */ = {
 			isa = PBXGroup;
 			children = (
+				6A50CF79273B3A9B0036EED6 /* BasicModalViewController.swift */,
 				EE963D362734B0DB005070B5 /* BaseModal.swift */,
 			);
 			path = BaseModal;
@@ -1028,16 +1019,15 @@
 				EE9FBB552748DC6A00667B41 /* NoPlaceView.swift in Sources */,
 				6AE5BB012695746F00A9731B /* PersonalPlanAddRepeatDayCollectionViewCell.swift in Sources */,
 				EE9F0D2226E8A2AC0015E81B /* ErrandDetailsViewController.swift in Sources */,
-				6A1E3E9026797CB600E7B198 /* DeleteModalView.swift in Sources */,
 				6AA76A0226636D2800B7E1F5 /* LoginViewController.swift in Sources */,
 				6AE5BB0E269670CB00A9731B /* CustomGradientTermsBtnView.swift in Sources */,
 				EE9F0D3F26E8A9340015E81B /* GroupSearchTextfield.swift in Sources */,
+				6AEB2F1C274772B900C213EF /* LineInputView.swift in Sources */,
 				6A705BB6267E3ABF001954CE /* AddOrChangeMyTodoViewController.swift in Sources */,
 				6AA76A282663958B00B7E1F5 /* ShowPlanViewController.swift in Sources */,
 				EEB2195C273EC62D0035704D /* kakaoPlaceDataModel.swift in Sources */,
 				6AB27CAC269D758100B95C0F /* ChangeIdAfterLoginViewController.swift in Sources */,
 				6AE5BB012695746F00A9731B /* PersonalPlanAddRepeatDayCollectionViewCell.swift in Sources */,
-				6A1E3E9026797CB600E7B198 /* DeleteModalView.swift in Sources */,
 				EE9F0D4D26E8A9700015E81B /* DayCollectionViewCell.swift in Sources */,
 				AAAA0F1F273A0F7D00DBCA68 /* ListTagView.swift in Sources */,
 				6AA76A0226636D2800B7E1F5 /* LoginViewController.swift in Sources */,
@@ -1052,14 +1042,13 @@
 				6AA76A282663958B00B7E1F5 /* ShowPlanViewController.swift in Sources */,
 				EE9F0D4226E8A9340015E81B /* AlarmDatePickerView.swift in Sources */,
 				EE9F0D4126E8A9340015E81B /* AdditionalButton.swift in Sources */,
-				AAAA0EFD27390E9300DBCA68 /* ChangePhoneNumPutViewController.swift in Sources */,
+				AAAA0EFD27390E9300DBCA68 /* ChangePhoneNumPhoneNumViewController.swift in Sources */,
 				6A4EDA32266BD11600B809EC /* SettingViewController.swift in Sources */,
 				6A4EDA37266DA52A00B809EC /* SettingTableViewCell.swift in Sources */,
 				EE9F0D2426E8A2AC0015E81B /* MorePeopleToDo.swift in Sources */,
 				6A82835626982A8B00AC381B /* questionTableViewCell.swift in Sources */,
 				EEE5547B2750BDE1002779F0 /* ErrandEntireModel.swift in Sources */,
 				EE9F0D2526E8A2AC0015E81B /* AddMyToDoViewController.swift in Sources */,
-				6ABA2C8C26A5366000CB1E16 /* WithdrawalModalView.swift in Sources */,
 				6A3E2E7826B111540078D749 /* ChangePasswordAfterLoginViewController.swift in Sources */,
 				6A50CF7A273B3A9B0036EED6 /* BasicModalViewController.swift in Sources */,
 				6A3E2E8026B6A60B0078D749 /* ManagementbtnModel.swift in Sources */,
@@ -1070,7 +1059,6 @@
 				6A8283502698132000AC381B /* PlanDeleteModalView.swift in Sources */,
 				EE9F0D3726E8A9340015E81B /* AddScheduleModalBtn .swift in Sources */,
 				6A4EDA30266A336000B809EC /* NotificationTableView.swift in Sources */,
-				6A94934E2670DBC700CC5B37 /* SearchResultsView.swift in Sources */,
 				6AE5BB1C2696B9C900A9731B /* PlanCompleteModalView.swift in Sources */,
 				6AC1F4062684093700DDD08C /* TagColorCollectionViewModel.swift in Sources */,
 				6AE5BB0D269670CB00A9731B /* CustomGradientContinueBtnView.swift in Sources */,
@@ -1082,6 +1070,7 @@
 				EE9F0D3E26E8A9340015E81B /* CustomData.swift in Sources */,
 				6A685C0D26AC1E2D0079BC30 /* PersonalPlanDetailRepeatDayCollectionViewCell.swift in Sources */,
 				AA4575082736CC790018411C /* AuthCodeTextFieldView.swift in Sources */,
+				6AEB2F20274D0EBE00C213EF /* TimeLabel.swift in Sources */,
 				EE9F0D4326E8A9340015E81B /* SendUser.swift in Sources */,
 				EE84DEC02715ABF100121C62 /* CollectionViewModel.swift in Sources */,
 				6A4EDA41266E38E000B809EC /* GroupCollectionViewCell.swift in Sources */,
@@ -1118,9 +1107,7 @@
 				AAD95AE126EC7EC7004E4580 /* NewNicknamePhoneNumViewController.swift in Sources */,
 				6AE5BAFA269534D300A9731B /* StartTimeTableViewCell.swift in Sources */,
 				6AE5BB1E2696DDA600A9731B /* MyToDoDetailViewController.swift in Sources */,
-				6A138F89266FACFE00DBCE49 /* GroupAddModalView.swift in Sources */,
 				6A82835A26997AB500AC381B /* TagCollectionViewModel.swift in Sources */,
-				EE9582D2272A7B5F00AAEC8A /* LogoutViewController.swift in Sources */,
 				AACB691D274006E3000E5706 /* NewPasswordNicknameViewController.swift in Sources */,
 				6AA7E785271E648500034327 /* DayModel.swift in Sources */,
 				AAAA0EF92738A21D00DBCA68 /* NewNicknameAuthCodeViewController.swift in Sources */,
@@ -1149,6 +1136,7 @@
 				EE9F0D3B26E8A9340015E81B /* ExplanationContainerTextView.swift in Sources */,
 				AAAA0EF727389F4000DBCA68 /* NewPasswordAuthCodeViewController.swift in Sources */,
 				AA04F9D72701C12600EE0506 /* SignUpTextFieldContainerView.swift in Sources */,
+				6AEB2F1E27478E7600C213EF /* ChangePasswordPasswordAfterLoginViewController.swift in Sources */,
 				6AE41E8226A97C440072612C /* TagDeleteModalView.swift in Sources */,
 				6AB7D443272FE41A00FAFA19 /* CalendarViewLayout.swift in Sources */,
 				6AA6F795269C2E4D00958D36 /* SignUpTermsViewController.swift in Sources */,

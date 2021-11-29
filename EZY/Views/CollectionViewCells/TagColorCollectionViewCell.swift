@@ -6,10 +6,10 @@
 //
 
 import UIKit
-
-protocol TagColorCollectionViewCellDelegate: AnyObject{
-    func tagColordidTabAddButton(with string: String)
-}
+//
+//protocol TagColorCollectionViewCellDelegate: AnyObject{
+//    func tagColordidTabAddButton(with string: String)
+//}
 
 class TagColorCollectionViewCell: UICollectionViewCell {
     
@@ -20,7 +20,7 @@ class TagColorCollectionViewCell: UICollectionViewCell {
     
     var model: TagColorCollectionViewModel?
     
-    public weak var delegate: TagColorCollectionViewCellDelegate?
+//    public weak var delegate: TagColorCollectionViewCellDelegate?
     
     lazy var colorBackgroundView = UIView().then {
         $0.backgroundColor = UIColor(red: 186/255, green: 200/255, blue: 255/255, alpha: 1)
@@ -57,8 +57,7 @@ class TagColorCollectionViewCell: UICollectionViewCell {
     }
     
     func layoutSetting(){
-         
-        delegate?.tagColordidTabAddButton(with: string!)
+//        delegate?.tagColordidTabAddButton(with: string!)
 
         contentView.addSubview(colorBackgroundView)
         colorBackgroundView.addSubview(checkImage)
@@ -79,15 +78,19 @@ class TagColorCollectionViewCell: UICollectionViewCell {
     func setModel(_ model: TagColorCollectionViewModel){
         self.model = model
         colorBackgroundView.backgroundColor = model.backgroundColor
-        checkImage.isHidden = model.isSelected
+//        checkImage.isHidden = model.isSelected
+    
                 
         if model.isSelected == false{
             colorBackgroundView.layer.masksToBounds = false
-//            colorBackgroundView.layer.shadowOpacity = 0.5
             colorBackgroundView.layer.shadowOpacity = 1
             colorBackgroundView.layer.shadowRadius = 6
             colorBackgroundView.layer.shadowOffset = CGSize(width: 0, height: 0)
             colorBackgroundView.layer.shadowColor = UIColor.lightGray.cgColor
+            checkImage.isHidden = false
+        }else{
+            checkImage.isHidden = true
+            colorBackgroundView.layer.shadowColor = UIColor.white.cgColor
         }
     }
     
@@ -95,12 +98,12 @@ class TagColorCollectionViewCell: UICollectionViewCell {
         super.prepareForReuse()
         
         // 셀이 재사용되기 전에 셀의 속성을 초기화시켜준다.
-        colorBackgroundView.layer.masksToBounds = true
-        colorBackgroundView.layer.shadowOpacity = 0
-        colorBackgroundView.layer.shadowRadius = 0
-        colorBackgroundView.layer.shadowOffset = CGSize(width: 0, height: 0)
-        colorBackgroundView.layer.shadowColor = .none
-        
-        checkImage.isHidden = true
+//        colorBackgroundView.layer.masksToBounds = true
+//        colorBackgroundView.layer.shadowOpacity = 0
+//        colorBackgroundView.layer.shadowRadius = 0
+//        colorBackgroundView.layer.shadowOffset = CGSize(width: 0, height: 0)
+//        colorBackgroundView.layer.shadowColor = .none
+//
+//        checkImage.isHidden = true
     }
 }
