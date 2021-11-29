@@ -185,6 +185,9 @@ extension MorePeopleToDo : UITextFieldDelegate{
 
 //MARK: - CollectionView
 extension MorePeopleToDo : UICollectionViewDelegateFlowLayout,UICollectionViewDataSource{
+    func numberOfSections(in collectionView: UICollectionView) -> Int {
+        return 3
+    }
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
             return recommendData.count
     }

@@ -171,6 +171,7 @@
 		EEB21962273EC7410035704D /* KakaoPlaceSearchAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEB21961273EC7410035704D /* KakaoPlaceSearchAPI.swift */; };
 		EEBEBC91274CE3CA009292CD /* APIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEBEBC90274CE3CA009292CD /* APIService.swift */; };
 		EEDCAF98268D85F1001E2B4F /* SwitchBtn.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEDCAF97268D85F1001E2B4F /* SwitchBtn.swift */; };
+		EEE5547B2750BDE1002779F0 /* ErrandEntireModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEE5547A2750BDE1002779F0 /* ErrandEntireModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -347,6 +348,7 @@
 		EEDCAF97268D85F1001E2B4F /* SwitchBtn.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwitchBtn.swift; sourceTree = "<group>"; };
 		EEE1E95626AAB71A0082B696 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
 		EEE1E95826AAB72E0082B696 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
+		EEE5547A2750BDE1002779F0 /* ErrandEntireModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrandEntireModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -465,6 +467,7 @@
 		6AA769FE26636C7000B7E1F5 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				EEE554792750BDB4002779F0 /* Errand */,
 				EEB2195A273EB5380035704D /* KakaoPlaeDataModel */,
 				EE9F0D5026E8AA810015E81B /* Model.swift */,
 				EE93B4E32687BD8A0055D7A6 /* ManageData.swift */,
@@ -878,6 +881,14 @@
 			path = API;
 			sourceTree = "<group>";
 		};
+		EEE554792750BDB4002779F0 /* Errand */ = {
+			isa = PBXGroup;
+			children = (
+				EEE5547A2750BDE1002779F0 /* ErrandEntireModel.swift */,
+			);
+			path = Errand;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -1046,6 +1057,7 @@
 				6A4EDA37266DA52A00B809EC /* SettingTableViewCell.swift in Sources */,
 				EE9F0D2426E8A2AC0015E81B /* MorePeopleToDo.swift in Sources */,
 				6A82835626982A8B00AC381B /* questionTableViewCell.swift in Sources */,
+				EEE5547B2750BDE1002779F0 /* ErrandEntireModel.swift in Sources */,
 				EE9F0D2526E8A2AC0015E81B /* AddMyToDoViewController.swift in Sources */,
 				6ABA2C8C26A5366000CB1E16 /* WithdrawalModalView.swift in Sources */,
 				6A3E2E7826B111540078D749 /* ChangePasswordAfterLoginViewController.swift in Sources */,
