@@ -21,11 +21,9 @@ class ChangeIdAfterLoginViewController: UIViewController {
         $0.backButton.addTarget(self, action: #selector(backButtonClicked(sender:)), for: .touchUpInside)
         $0.topViewDataSetting(backButtonImage: UIImage(named: "EZY_IdChangeBackButtonImage")!, titleLabelText: "닉네임 변경", textColor: UIColor(red: 120/255, green: 81/255, blue: 255/255, alpha: 1))
     }
-    
-<<<<<<< HEAD
     private let lineInputView = LineInputView().then{
         $0.dataSetting(titleText: "닉네임", placeHolderText: "닉네임을 입력해주세요", conditionText: "1 ~ 10자 사이 영어로 작성해주세요!")
-=======
+    }
     private let idNickNameLabel = UILabel().then {
         $0.textColor = UIColor(red: 150/255, green: 141/255, blue: 255/255, alpha: 1)
         $0.text = "닉네임"
@@ -46,7 +44,6 @@ class ChangeIdAfterLoginViewController: UIViewController {
         $0.text = "1 ~ 10자 사이 영어로 작성해주세요!"
         $0.textColor = UIColor(red: 116/255, green: 116/255, blue: 116/255, alpha: 1)
         $0.dynamicFont(fontSize: 10, currentFontName: "AppleSDGothicNeo-Regular")
->>>>>>> 5e764f019799c33724997cb7f7c51db47eeec075
     }
     
     private let changeButton = UIButton().then {
@@ -93,10 +90,6 @@ class ChangeIdAfterLoginViewController: UIViewController {
     
     // MARK: - Selectors
     @objc private func changeButtonClicked(sender:UIButton){
-<<<<<<< HEAD
-        if isValidId(id: lineInputView.getInfoText()) == true{
-            navigationController?.popViewController(animated: true)
-=======
         if isValidId(id: idTextField.text) == true{
             let header = tk.getAuthorizationHeader(Bundle.bundleIdentifier)!
             let param: Parameters = ["username": "@" + idTextField.text!]
@@ -126,7 +119,6 @@ class ChangeIdAfterLoginViewController: UIViewController {
                 }
             }
             
->>>>>>> 5e764f019799c33724997cb7f7c51db47eeec075
         }else{
             lineInputView.checkInfoTextIsEmpty()
         }
