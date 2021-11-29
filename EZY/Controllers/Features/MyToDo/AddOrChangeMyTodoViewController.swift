@@ -53,9 +53,16 @@ class AddOrChangeMyTodoViewController: UIViewController{
         $0.dynamicFont(fontSize: 14, currentFontName: "AppleSDGothicNeo-Medium")
     }
     
-    private let calendarBtn : CalendarBtn = {
-        let viewModel = CalendarModel(icon: UIImage(named: "EZY_Calendar")?.withRenderingMode(.alwaysTemplate), iconTintColor: .rgb(red: 255, green: 181, blue: 181), message: "날짜를 선택해주세요!", repeatText: "반복 없음")
-        let button = CalendarBtn(with: viewModel)
+//    private let calendarBtn : CalendarBtn = {
+//        let viewModel = CalendarModel(icon: UIImage(named: "EZY_Calendar")?.withRenderingMode(.alwaysTemplate), iconTintColor: .rgb(red: 255, green: 181, blue: 181), message: "날짜를 선택해주세요!", repeatText: "반복 없음")
+//        let button = CalendarBtn(with: viewModel)
+//        button.addTarget(self, action: #selector(calendarAlert), for: .touchUpInside)
+//        return button
+//    }()
+    
+    private let calendarBtn : AlertButton = {
+        let viewModel = AlertBtn(icon: UIImage(named: "EZY_Calendar")?.withRenderingMode(.alwaysTemplate), iconTintColor: .rgb(red: 255, green: 203, blue: 181), message: "날짜를 선택해주세요!")
+        let button = AlertButton(with: viewModel)
         button.addTarget(self, action: #selector(calendarAlert), for: .touchUpInside)
         return button
     }()
@@ -570,13 +577,9 @@ extension AddOrChangeMyTodoViewController: AlarmModelDelegate{
 
 // MARK: - CalendarModal Delegate
 extension AddOrChangeMyTodoViewController: CalendarAddDelegate{
-    func updateData(selectedDay: String, selectedRepeatDay: [String], selectedDayIndex: Int) {
-        // 선택 날짜를 현재 VC의 label에 표시
-        if selectedRepeatDay.count == 0 { calendarBtn.repeatLabel.text = "반복 없음" }
-        else{ calendarBtn.repeatLabel.text = "\(selectedRepeatDay.joined(separator: ",")) 반복" }
-        
+    func updateData(selectedDay: String, selectedDayIndex: Int) {
         // 선택한 반복 현재 VC의 label에 표시
-        calendarBtn.dayLabel.text = selectedDay
+        calendarBtn.alertButtonTitleLabel.text = selectedDay
         
         // 선택했던 index를 저장하고 다시 시간 선택 모달을 호출할 시에 index를 통해 전에 선택한 값을 세팅한다.
         self.selectedDayIndex = selectedDayIndex
