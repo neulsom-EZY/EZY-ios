@@ -150,9 +150,8 @@ class ChangePasswardAfterLoginViewController: UIViewController {
                 switch result{
                 case .success(let data):
                     print(data)
-                    let vc = SettingViewController()
-                    vc.modalPresentationStyle = .fullScreen
-                    self.present(vc, animated: true, completion: nil)
+                    let controller = SettingViewController()
+                    self.navigationController?.pushViewController(controller, animated: true)
                 case .requestErr(let err):
                     print(err)
                 case .pathErr:

@@ -109,11 +109,10 @@ class ChangePasswordAuthCodeAfterLoginViewController: UIViewController {
     }
     
     @objc func changeButtonClicked(sender:UIButton){
-        let nextVC = ChangePasswardAfterLoginViewController()
-        nextVC.modalPresentationStyle = .fullScreen
-        nextVC.nickname = self.nickname
-        nextVC.key = authCodeView.tf1.text! + authCodeView.tf2.text! + authCodeView.tf3.text! + authCodeView.tf4.text!
-        self.present(nextVC, animated: true, completion: nil)
+        let controller = ChangePasswardAfterLoginViewController()
+        controller.nickname = self.nickname
+        controller.key = authCodeView.tf1.text! + authCodeView.tf2.text! + authCodeView.tf3.text! + authCodeView.tf4.text!
+        self.navigationController?.pushViewController(controller, animated: true)
     }
     
     @objc func backButtonClicked(sender:UIButton){

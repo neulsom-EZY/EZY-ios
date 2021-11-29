@@ -24,13 +24,13 @@ class ChangeIdAfterLoginViewController: UIViewController {
     
     private let idNickNameLabel = UILabel().then {
         $0.textColor = UIColor(red: 150/255, green: 141/255, blue: 255/255, alpha: 1)
-        $0.text = "아이디/닉네임"
+        $0.text = "닉네임"
         $0.dynamicFont(fontSize: 10, currentFontName: "AppleSDGothicNeo-SemiBold")
     }
 
     private let idTextField = UITextField().then {
         $0.textColor = UIColor(red: 101/255, green: 101/255, blue: 101/255, alpha: 1)
-        $0.placeholder = "아이디를 입력해주세요"
+        $0.placeholder = "닉네임을 입력해주세요"
         $0.dynamicFont(fontSize: 14, currentFontName: "AppleSDGothicNeo-Regular")
     }
     
@@ -152,9 +152,7 @@ class ChangeIdAfterLoginViewController: UIViewController {
                 switch result {
                 case .success(let data):
                     print(data)
-                    let nextVC = SettingViewController()
-                    nextVC.modalPresentationStyle = .fullScreen
-                    self.present(nextVC, animated: true, completion: nil)
+                    self.navigationController?.popViewController(animated: true)
                 case .requestErr(let err):
                     print(err)
                     break

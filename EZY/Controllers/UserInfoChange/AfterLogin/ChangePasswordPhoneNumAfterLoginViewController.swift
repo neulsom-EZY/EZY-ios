@@ -124,10 +124,9 @@ class ChangePasswardPhoneNumAfterLoginViewController: UIViewController {
                 switch result {
                 case .success(let data):
                     print(data)
-                    let nextVC = ChangePasswordAuthCodeAfterLoginViewController()
-                    nextVC.modalPresentationStyle = .fullScreen
-                    nextVC.nickname = self.nickname
-                    self.present(nextVC, animated: true, completion: nil)
+                    let controller = ChangePasswordAuthCodeAfterLoginViewController()
+                    controller.nickname = self.nickname
+                    self.navigationController?.pushViewController(controller, animated: true)
                     break
                 case .requestErr(let err):
                     print(err)

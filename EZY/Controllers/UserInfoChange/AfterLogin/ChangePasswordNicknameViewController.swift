@@ -140,10 +140,9 @@ class ChangePasswordNicknameViewController: UIViewController {
     // MARK: - Selectors
     @objc private func changeButtonClicked(sender:UIButton){
         if isValidId(id: idTextField.text) == true{
-            let nextVC = ChangePasswardPhoneNumAfterLoginViewController()
-            nextVC.modalPresentationStyle = .fullScreen
-            nextVC.nickname = idTextField.text!
-            present(nextVC, animated: true, completion: nil)
+            let controller = ChangePasswardPhoneNumAfterLoginViewController()
+            controller.nickname = idTextField.text!
+            self.navigationController?.pushViewController(controller, animated: true)
         }else{
             shakeView(idNickNameLabel)
         }
