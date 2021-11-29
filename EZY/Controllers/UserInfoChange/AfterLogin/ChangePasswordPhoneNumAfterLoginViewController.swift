@@ -63,7 +63,7 @@ class ChangePasswordPhoneNumAfterLoginViewController: UIViewController {
     }
     
     // MARK: - Selectors
-    @objc func changeButtonClicked(sender:UIButton){
+    @objc private func changeButtonClicked(sender:UIButton){
         if isValidPhoneNumber(PhoneNumber: lineInputView.getInfoText()){
             let nextViewController = ChangePasswordAuthCodeAfterLoginViewController()
             self.navigationController?.pushViewController(nextViewController, animated: true)
@@ -72,7 +72,7 @@ class ChangePasswordPhoneNumAfterLoginViewController: UIViewController {
         }
     }
     
-    @objc private func backButtonClicked(sender:UIButton){
+    @objc  private func backButtonClicked(sender:UIButton){
         self.navigationController?.popViewController(animated: true)
     }
 

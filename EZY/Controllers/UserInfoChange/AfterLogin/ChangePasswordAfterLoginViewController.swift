@@ -63,7 +63,7 @@ class ChangePasswordNameAfterLoginViewController: UIViewController {
     }
     
     // MARK: - Selectors
-    @objc func changeButtonClicked(sender:UIButton){
+    @objc private func changeButtonClicked(sender:UIButton){
         if isValidNickname(Nickname: lineInputView.getInfoText()) == true{
             let vc = ChangePasswordPhoneNumAfterLoginViewController()
             self.navigationController?.pushViewController(vc, animated: true)
@@ -72,7 +72,7 @@ class ChangePasswordNameAfterLoginViewController: UIViewController {
         }
     }
     
-    @objc func backButtonClicked(sender:UIButton){
+    @objc private func backButtonClicked(sender:UIButton){
         self.navigationController?.popViewController(animated: true)
     }
     

@@ -11,7 +11,7 @@ class InquiryViewController: UIViewController {
     // MARK: - Properties
     private let beforeInquiryTitleText: [String] = ["아이디는 어디서 변경할 수 있나요?", "심부름 내용은 변경이 불가능하나요?", "회원 탈퇴는 어떻게 하나요?","회원 탈퇴는 어떻게 하나요?"]
     private let beforeInquiryContentText: [String] = ["아이디는 설정 > 아이디 변경 창에서 변경할 수 있습니다.","네. 심부름 내용은 변경이 불가능합니다.","회원탈퇴는 설정 > 회원 탈퇴  창에서  할 수 있습니다.","회원탈퇴는 설정 > 회원 탈퇴  창에서  할 수 있습니다."]
-    
+
     private let backButton = UIButton().then{
         $0.setImage(UIImage(named: "EZY_DetailBackButton"), for: .normal)
         $0.addTarget(self, action: #selector(backButtonClicked(sender:)), for: .touchUpInside)
