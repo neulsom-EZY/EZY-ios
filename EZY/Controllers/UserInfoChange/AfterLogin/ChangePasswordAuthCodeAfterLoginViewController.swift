@@ -9,14 +9,10 @@ import UIKit
 
 class ChangePasswordAuthCodeAfterLoginViewController: UIViewController {
     //MARK: - Properties
-<<<<<<< HEAD
-    private let topView = TopView().then{
-=======
     
     var nickname:String = ""
     
     lazy var topView = TopView().then{
->>>>>>> 5e764f019799c33724997cb7f7c51db47eeec075
         $0.backButton.addTarget(self, action: #selector(backButtonClicked(sender:)), for: .touchUpInside)
         $0.topViewDataSetting(backButtonImage: UIImage(named: "EZY_IdChangeBackButtonImage")!, titleLabelText: "비밀번호 변경", textColor: UIColor(red: 120/255, green: 81/255, blue: 255/255, alpha: 1))
     }
@@ -93,18 +89,12 @@ class ChangePasswordAuthCodeAfterLoginViewController: UIViewController {
         authCodeView.tf4.keyboardType = .phonePad
     }
     
-<<<<<<< HEAD
     // MARK: - Selectors
-    @objc private func changeButtonClicked(sender:UIButton){
-        let nextViewController = ChangePasswordPasswordAfterLoginViewController()
-        self.navigationController?.pushViewController(nextViewController, animated: true)
-=======
     @objc func changeButtonClicked(sender:UIButton){
         let controller = ChangePasswardAfterLoginViewController()
         controller.nickname = self.nickname
         controller.key = authCodeView.tf1.text! + authCodeView.tf2.text! + authCodeView.tf3.text! + authCodeView.tf4.text!
         self.navigationController?.pushViewController(controller, animated: true)
->>>>>>> 5e764f019799c33724997cb7f7c51db47eeec075
     }
     
     @objc private func backButtonClicked(sender:UIButton){
