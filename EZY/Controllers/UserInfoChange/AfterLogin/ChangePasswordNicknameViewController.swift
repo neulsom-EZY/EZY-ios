@@ -50,7 +50,7 @@ class ChangePasswordNicknameViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        configure()
+        configureUI()
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -58,7 +58,7 @@ class ChangePasswordNicknameViewController: UIViewController {
     }
     
     // MARK: - Helpers
-    private func configure(){
+    private func configureUI(){
         addView()
         
         addObserver()
