@@ -19,7 +19,7 @@ class ChangePasswordAuthCodeAfterLoginViewController: UIViewController {
     
     private let authCodeView = AuthCodeTextFieldView()
     
-    lazy var changeButton = UIButton().then {
+    private let changeButton = UIButton().then {
         $0.setBackgroundImage(UIImage(named: "EZY_ChangeButtonImage"), for: .normal)
         $0.setTitle("변경하러 가기", for: .normal)
         $0.dynamicFont(fontSize: 14, currentFontName: "AppleSDGothicNeo-Bold")
@@ -36,31 +36,21 @@ class ChangePasswordAuthCodeAfterLoginViewController: UIViewController {
         location()
     }
     
-    func addView(){
-        view.backgroundColor = .white
-        view.addSubview(topView)
-        topView.addSubview(topView.backButton)
-        topView.addSubview(topView.titleLabel)
-        view.addSubview(authCodeView)
-        view.addSubview(changeButton)
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        authCodeView.tf1.becomeFirstResponder()
     }
     
-    // MARK: - Selectors
-    func location() {
+    // MARK: - addView
+    private func addView(){
+        view.backgroundColor = .white
+        [topView, authCodeView, changeButton].forEach { view.addSubview($0) }
+    }
+    
+    // MARK: - location
+    private func location() {
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(_:)), name:UIResponder.keyboardWillShowNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide(_:)), name: UIResponder.keyboardWillHideNotification, object: nil)
-        
-        topView.backButton.snp.makeConstraints { make in
-            make.top.equalTo(self.view.safeAreaLayoutGuide).offset(self.view.frame.height/47.7)
-            make.left.equalToSuperview().offset(self.view.frame.width/12)
-            make.width.equalToSuperview().dividedBy(33.8/2)
-            make.height.equalTo(topView.backButton.snp.width)
-        }
-        
-        topView.titleLabel.snp.makeConstraints { make in
-            make.left.equalTo(topView.backButton)
-            make.top.equalTo(topView.backButton.snp.bottom).offset(self.view.frame.height/30)
-        }
         
         topView.snp.makeConstraints { make in
             make.left.right.equalToSuperview()
@@ -79,19 +69,11 @@ class ChangePasswordAuthCodeAfterLoginViewController: UIViewController {
             make.left.equalToSuperview().offset(self.view.frame.width/17)
             make.centerX.equalToSuperview()
             make.height.equalToSuperview().dividedBy(16.24)
-            make.bottom.equalToSuperview().offset(-self.view.frame.height/23.8)
+            make.centerY.equalToSuperview().offset(self.view.frame.height/40)
         }
     }
-    
-    //MARK: - viewWillAppear
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        authCodeView.tf1.becomeFirstResponder()
-    }
-    
-    //MARK: - authCodeViewSetting
-    
+
+    // MARK: - authCodeViewSetting
     private func authCodeViewSetting(){
         authCodeView.tf1.addTarget(self, action: #selector(self.textDidChange(textfield:)), for: UIControl.Event.editingChanged)
         authCodeView.tf2.addTarget(self, action: #selector(self.textDidChange(textfield:)), for: UIControl.Event.editingChanged)
@@ -99,8 +81,7 @@ class ChangePasswordAuthCodeAfterLoginViewController: UIViewController {
         authCodeView.tf4.addTarget(self, action: #selector(self.textDidChange(textfield:)), for: UIControl.Event.editingChanged)
     }
     
-    //MARK: - KeyboardType Setting
-    
+    // MARK: - KeyboardType Setting
     private func keyboardTypeSetting(){
         authCodeView.tf1.keyboardType = .phonePad
         authCodeView.tf2.keyboardType = .phonePad
@@ -108,29 +89,27 @@ class ChangePasswordAuthCodeAfterLoginViewController: UIViewController {
         authCodeView.tf4.keyboardType = .phonePad
     }
     
+    // MARK: - Selectors
     @objc func changeButtonClicked(sender:UIButton){
-        let controller = ChangePasswardAfterLoginViewController()
-        controller.nickname = self.nickname
-        controller.key = authCodeView.tf1.text! + authCodeView.tf2.text! + authCodeView.tf3.text! + authCodeView.tf4.text!
-        self.navigationController?.pushViewController(controller, animated: true)
+//        let controller = ChangePasswardAfterLoginViewController()
+//        controller.nickname = self.nickname
+//        controller.key = authCodeView.tf1.text! + authCodeView.tf2.text! + authCodeView.tf3.text! + authCodeView.tf4.text!
+//        self.navigationController?.pushViewController(controller, animated: true)
     }
     
-    @objc func backButtonClicked(sender:UIButton){
+    @objc private func backButtonClicked(sender:UIButton){
         self.navigationController?.popViewController(animated: true)
     }
     
-    @objc //MARK: 모달 창 올리기
-    func keyboardWillShow(_ sender: Notification) {
+    @objc private func keyboardWillShow(_ sender: Notification) {
         changeButton.frame.origin.y = self.view.frame.height/2
     }
 
-    @objc //MARK: 모달 창 원래대로
-    func keyboardWillHide(_ sender: Notification) {
+    @objc private func keyboardWillHide(_ sender: Notification) {
         changeButton.frame.origin.y = self.view.frame.height-changeButton.frame.height-self.view.frame.height/23.8
     }
     
-    @objc
-    private func textDidChange(textfield: UITextField) {
+    @objc private func textDidChange(textfield: UITextField) {
         let text = textfield.text
         
         if text?.utf16.count == 1{
@@ -177,7 +156,6 @@ class ChangePasswordAuthCodeAfterLoginViewController: UIViewController {
     }
     
     //MARK: - textField Point Set
-    
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         authCodeView.tf1.resignFirstResponder()
         authCodeView.tf2.resignFirstResponder()
@@ -185,7 +163,7 @@ class ChangePasswordAuthCodeAfterLoginViewController: UIViewController {
         authCodeView.tf4.resignFirstResponder()
     }
   
-    func shakeView(_ view: UIView?) {
+    private func shakeView(_ view: UIView?) {
         let shake = CABasicAnimation(keyPath: "position")
         shake.duration = 0.08
         shake.repeatCount = 2
@@ -194,5 +172,4 @@ class ChangePasswordAuthCodeAfterLoginViewController: UIViewController {
         shake.toValue = NSValue(cgPoint: CGPoint(x: (view?.center.x)! + 2, y: view?.center.y ?? 0.0))
         view?.layer.add(shake, forKey: "position")
     }
-
 }

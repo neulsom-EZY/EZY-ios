@@ -251,7 +251,7 @@ class MyToDoDetailViewController: UIViewController{
         BasicModalVC.delegate = self
         BasicModalVC.baseDelegate = self
         present(BasicModalVC, animated: true, completion: nil)
-        BasicModalVC.textSetting(colorText: planNameLabel.text!, contentText: "개인 일정을 삭제할까요?")
+        BasicModalVC.textSetting(colorText: planNameLabel.text!, contentText: "개인 일정을 삭제할까요?", sender: UIButton())
     }
     
     @objc func planModifyButtonClicked(sender:UIButton){
@@ -308,7 +308,7 @@ extension MyToDoDetailViewController: UICollectionViewDataSource{
 }
 
 extension MyToDoDetailViewController: BasicModalViewButtonDelegate{
-    func onTabOkButton() {
+    func onTabOkButton(sender: UIButton) {
         navigationController?.popViewController(animated: false)
     }
 }

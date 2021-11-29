@@ -8,13 +8,15 @@
 import UIKit
 
 protocol BasicModalViewButtonDelegate: AnyObject {
-    func onTabOkButton()
+    func onTabOkButton(sender:UIButton)
 }
 
 class BasicModalViewController: BaseModal {
     // MARK: - Properties
     
     weak var delegate: BasicModalViewButtonDelegate?
+    
+    private var sender = UIButton()
     
     private let bgView = UIView().then {
         $0.backgroundColor = .white
@@ -49,13 +51,11 @@ class BasicModalViewController: BaseModal {
 
         addView()
     }
-    
+        
     // MARK: - addView
     private func addView(){
         self.view.addSubview(bgView)
-        bgView.addSubview(okButton)
-        bgView.addSubview(cancelButton)
-        bgView.addSubview(contentLabel)
+        [okButton, cancelButton, contentLabel].forEach { bgView.addSubview($0) }
     }
     
     static func instance() -> BasicModalViewController {
@@ -66,7 +66,7 @@ class BasicModalViewController: BaseModal {
     
     //MARK: - selectors
     @objc func MakeTodo(){
-        delegate?.onTabOkButton()
+        delegate?.onTabOkButton(sender: self.sender)
         dismiss(animated: true, completion: nil)
     }
     
@@ -76,10 +76,11 @@ class BasicModalViewController: BaseModal {
     }
     
     // MARK: - textSetting
-    func textSetting(colorText: String, contentText: String){
+    func textSetting(colorText: String, contentText: String, sender:UIButton){
         let string : NSMutableAttributedString
         var changeColorText = colorText
-        print("colorText.count : \(colorText.count)")
+        self.sender = sender
+
         if colorText.count < 8{
             contentLabel.numberOfLines = 0
             string = NSMutableAttributedString(string: "\(changeColorText) \(contentText)")
@@ -110,7 +111,7 @@ class BasicModalViewController: BaseModal {
             make.height.equalTo(bounds.height/24.6)
             make.width.equalToSuperview().dividedBy(4.44)
             make.top.equalTo(contentLabel.snp.bottom).offset(bounds.height/53)
-            make.right.equalToSuperview().inset(bounds.width/53)
+            make.right.equalToSuperview().inset(bounds.height/62.4)
         }
         cancelButton.snp.makeConstraints { make in
             make.height.width.equalTo(okButton)
