@@ -20,7 +20,7 @@ class WithdrawalViewController: UIViewController {
     private let authContext = LAContext()
     
     private let topView = TopView().then{
-        $0.backButton.addTarget(self, action: #selector(backButtonClicked(sender:)), for: .touchUpInside)
+//        $0.backButton.addTarget(self, action: #selector(backButtonClicked(sender:)), for: .touchUpInside)
         $0.topViewDataSetting(backButtonImage: UIImage(named: "EZY_IdChangeBackButtonImage")!, titleLabelText: "회원 탈퇴", textColor: UIColor(red: 120/255, green: 81/255, blue: 255/255, alpha: 1))
     }
     
@@ -56,15 +56,15 @@ class WithdrawalViewController: UIViewController {
         location()
     }
     
-<<<<<<< HEAD
     // MARK: - addView
     private func addView(){
         self.view.backgroundColor = .white
         [topView, nameLineInputView, passwordLineInputView, withdrawalButton].forEach { self.view.addSubview($0) }
-=======
+    }
+
     @objc func okButtonClicked(sender:UIButton){
         let header = tk.getAuthorizationHeader(Bundle.bundleIdentifier)
-        let param: Parameters = ["password": pwTextField.text!, "username": "@" + idTextField.text!]
+        let param: Parameters = ["password": passwordLineInputView.getInfoText(), "username": "@" + nameLineInputView.getInfoText()]
         API.shared.request(url: "/v1/member/delete", method: .post, param: param, header: header, JSONDecodeUsingStatus: false){ result in
             switch result{
             case .success(let data):
@@ -93,39 +93,36 @@ class WithdrawalViewController: UIViewController {
                 break
             }
         }
-        
-        
     }
     
-    @objc func EyeButtondClicked(sender:UIButton){
-        if pwTextField.isSecureTextEntry == true {
-            pwTextField.isSecureTextEntry = false
-        } else {
-            pwTextField.isSecureTextEntry = true
-        }
-    }
+//    @objc func EyeButtondClicked(sender:UIButton){
+//        if pwTextField.isSecureTextEntry == true {
+//            pwTextField.isSecureTextEntry = false
+//        } else {
+//            pwTextField.isSecureTextEntry = true
+//        }
+//    }
     
-    @objc func withdrawalButtonClicked(sender:UIButton){
-        var error: NSError?
-        if authContext.canEvaluatePolicy(.deviceOwnerAuthentication, error: &error) {
-
-            authContext.evaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, localizedReason: description) { success, error in
-                if success {
-                    print("인증성공")
-
-                    DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 1) {
-                        self.withdrawalModalView.isHidden = false
-                    }
-
-                }else{
-                    print("인증실패")
-                    print(error?.localizedDescription)
-                }
-            }
-        }
->>>>>>> 5e764f019799c33724997cb7f7c51db47eeec075
-    }
-    
+//    @objc func withdrawalButtonClicked(sender:UIButton){
+//        var error: NSError?
+//        if authContext.canEvaluatePolicy(.deviceOwnerAuthentication, error: &error) {
+//
+//            authContext.evaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, localizedReason: description) { success, error in
+//                if success {
+//                    print("인증성공")
+//
+//                    DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 1) {
+//                        self.withdrawalModalView.isHidden = false
+//                    }
+//
+//                }else{
+//                    print("인증실패")
+//                    print(error?.localizedDescription)
+//                }
+//            }
+//        }
+//    }
+//
     // MARK: - location
     private func location() {
         nameLineInputView.snp.makeConstraints { make in
@@ -160,22 +157,22 @@ class WithdrawalViewController: UIViewController {
         self.navigationController?.popViewController(animated: true)
     }
     
-    @objc func withdrawalButtonClicked(sender:UIButton){
-        if isValidId(id: nameLineInputView.getInfoText()){
-            if isValidPassword(password: passwordLineInputView.getInfoText()){
-                let BasicModalVC = BasicModalViewController.instance()
-                addDim()
-                BasicModalVC.delegate = self
-                BasicModalVC.baseDelegate = self
-                present(BasicModalVC, animated: true, completion: nil)
-                BasicModalVC.textSetting(colorText: "", contentText: "정말 탈퇴하시겠습니까?", sender: UIButton())
-            }else{
-                passwordLineInputView.checkInfoTextIsEmpty()
-            }
-        }else{
-            nameLineInputView.checkInfoTextIsEmpty()
-        }
-    }
+//    @objc func withdrawalButtonClicked(sender:UIButton){
+//        if isValidId(id: nameLineInputView.getInfoText()){
+//            if isValidPassword(password: passwordLineInputView.getInfoText()){
+//                let BasicModalVC = BasicModalViewController.instance()
+//                addDim()
+//                BasicModalVC.delegate = self
+//                BasicModalVC.baseDelegate = self
+//                present(BasicModalVC, animated: true, completion: nil)
+//                BasicModalVC.textSetting(colorText: "", contentText: "정말 탈퇴하시겠습니까?", sender: UIButton())
+//            }else{
+//                passwordLineInputView.checkInfoTextIsEmpty()
+//            }
+//        }else{
+//            nameLineInputView.checkInfoTextIsEmpty()
+//        }
+//    }
     
     // MARK: - isValidId
     private func isValidId(id: String?) -> Bool {

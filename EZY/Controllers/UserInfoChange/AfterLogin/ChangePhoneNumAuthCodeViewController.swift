@@ -95,12 +95,6 @@ class ChangePhoneNumAuthCodeViewController: UIViewController {
     
     // MARK: - Selectors
     @objc func changeButtonClicked(sender:UIButton){
-<<<<<<< HEAD
-        let controllers = self.navigationController?.viewControllers
-        for vc in controllers! {
-            if vc is SettingViewController {
-                _ = self.navigationController?.popToViewController(vc as! SettingViewController, animated: true)
-=======
         let key:String = authCodeView.tf1.text! + authCodeView.tf2.text! + authCodeView.tf3.text! + authCodeView.tf4.text!
         // MARK: - 인증번호 인증
         let param: Parameters = ["key" : key]
@@ -155,7 +149,6 @@ class ChangePhoneNumAuthCodeViewController: UIViewController {
             case .authorityErr:
                 print("authorityErr")
                 break
->>>>>>> 5e764f019799c33724997cb7f7c51db47eeec075
             }
         }
     }

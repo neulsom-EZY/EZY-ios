@@ -87,14 +87,14 @@ class ChangePasswordAuthCodeAfterLoginViewController: UIViewController {
         authCodeView.tf2.keyboardType = .phonePad
         authCodeView.tf3.keyboardType = .phonePad
         authCodeView.tf4.keyboardType = .phonePad
-    }git revert
+    }
     
     // MARK: - Selectors
     @objc func changeButtonClicked(sender:UIButton){
-        let controller = ChangePasswardAfterLoginViewController()
-        controller.nickname = self.nickname
-        controller.key = authCodeView.tf1.text! + authCodeView.tf2.text! + authCodeView.tf3.text! + authCodeView.tf4.text!
-        self.navigationController?.pushViewController(controller, animated: true)
+//        let controller = ChangePasswardAfterLoginViewController()
+//        controller.nickname = self.nickname
+//        controller.key = authCodeView.tf1.text! + authCodeView.tf2.text! + authCodeView.tf3.text! + authCodeView.tf4.text!
+//        self.navigationController?.pushViewController(controller, animated: true)
     }
     
     @objc private func backButtonClicked(sender:UIButton){

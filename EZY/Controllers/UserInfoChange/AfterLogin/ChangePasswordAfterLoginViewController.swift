@@ -81,7 +81,6 @@ class ChangePasswordNameAfterLoginViewController: UIViewController {
     }
     
     // MARK: - Selectors
-<<<<<<< HEAD
     @objc //MARK: 모달 창 올리기
     func keyboardWillShow(_ sender: Notification) {
         changeButton.frame.origin.y = self.view.frame.height/2
@@ -93,7 +92,7 @@ class ChangePasswordNameAfterLoginViewController: UIViewController {
     }
     
     @objc func changeButtonClicked(sender:UIButton){
-        if isValidPassward(Passward: passwardTextField.text) == true{
+        if isValidPassword(password: passwardTextField.text) == true{
             let param: Parameters = ["key": key, "newPassword": passwardTextField.text!, "username": "@" + nickname]
             API.shared.request(url: "/v1/member/change/password", method: .put, param: param, header: .none, JSONDecodeUsingStatus: false){ result in
                 switch result{
@@ -121,19 +120,19 @@ class ChangePasswordNameAfterLoginViewController: UIViewController {
                 }
                 
             }
-=======
-    @objc func changeButtonClicked(sender:UIButton){
-        if isValidNickname(Nickname: lineInputView.getInfoText()) == true{
-            let vc = ChangePasswordPhoneNumAfterLoginViewController()
-            self.navigationController?.pushViewController(vc, animated: true)
->>>>>>> parent of 49180d5 ([CREATE] addMyToDoAPI)
-        }else{
-            lineInputView.checkInfoTextIsEmpty()
         }
     }
     
     @objc func backButtonClicked(sender:UIButton){
         self.navigationController?.popViewController(animated: true)
+    }
+    
+    private func isValidPassword(password: String?) -> Bool {
+        guard password != nil else { return false }
+            
+        let PasswordRegEx = ("(?=.*[A-Za-z~!@#$%^&*])(?=.*[0-9]).{8,}")
+        let pred = NSPredicate(format:"SELF MATCHES %@", PasswordRegEx)
+        return pred.evaluate(with: password)
     }
     
     // MARK: - isValidNickname

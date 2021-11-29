@@ -8,11 +8,6 @@
 import UIKit
 import Alamofire
 
-<<<<<<< HEAD
-class ChangePasswordPhoneNumAfterLoginViewController: UIViewController {
-    // MARK: - Properties
-    private let topView = TopView().then{
-=======
 class ChangePasswardPhoneNumAfterLoginViewController: UIViewController {
     //MARK: - Properties
     var nickname:String = ""
@@ -22,7 +17,6 @@ class ChangePasswardPhoneNumAfterLoginViewController: UIViewController {
         static let shared = APIService<KakaoDataModel>()
     }
     lazy var topView = TopView().then{
->>>>>>> 5e764f019799c33724997cb7f7c51db47eeec075
         $0.backButton.addTarget(self, action: #selector(backButtonClicked(sender:)), for: .touchUpInside)
         $0.topViewDataSetting(backButtonImage: UIImage(named: "EZY_IdChangeBackButtonImage")!, titleLabelText: "비밀번호 변경", textColor: UIColor(red: 120/255, green: 81/255, blue: 255/255, alpha: 1))
     }
@@ -76,20 +70,9 @@ class ChangePasswardPhoneNumAfterLoginViewController: UIViewController {
     }
     
     // MARK: - Selectors
-<<<<<<< HEAD
-<<<<<<< HEAD
-    @objc private func changeButtonClicked(sender:UIButton){
-=======
     @objc func changeButtonClicked(sender:UIButton){
->>>>>>> parent of 49180d5 ([CREATE] addMyToDoAPI)
         if isValidPhoneNumber(PhoneNumber: lineInputView.getInfoText()){
-            let nextViewController = ChangePasswordAuthCodeAfterLoginViewController()
-            self.navigationController?.pushViewController(nextViewController, animated: true)
-=======
-
-    @objc func changeButtonClicked(sender:UIButton){
-        if isValidPhoneNumber(PhoneNumber: phoneNumTextField.text){
-            let param: Parameters = ["phoneNumber": phoneNumTextField.text!, "username": "@" + nickname]
+            let param: Parameters = ["phoneNumber": lineInputView.getInfoText(), "username": "@" + nickname]
             API.shared.request(url: "/v1/member/send/change/password/authkey", method: .post, param: param, header: .none, JSONDecodeUsingStatus: false) { result in
                 switch result {
                 case .success(let data):
@@ -117,7 +100,6 @@ class ChangePasswardPhoneNumAfterLoginViewController: UIViewController {
                     break
                 }
             }
->>>>>>> 5e764f019799c33724997cb7f7c51db47eeec075
         }else{
             lineInputView.checkInfoTextIsEmpty()
         }
