@@ -317,9 +317,11 @@ class AddOrChangeMyTodoViewController: UIViewController{
     }
     
     @objc private func changeButtonClicked(sender:UIButton){
-        
-        addMyToDoAPI()
-
+        if mainTitleLabel.text == "나의 할 일 변경"{
+            myToDoAPI(url: "/v1/plan/personal/{personalPlanIdx}")
+        }else{
+            myToDoAPI(url: "/v1/plan/personal")
+        }
     }
     
     // MARK: - Alarm Setting Function
@@ -397,7 +399,7 @@ class AddOrChangeMyTodoViewController: UIViewController{
         }
     }
     
-    private func addMyToDoAPI(){
+    private func myToDoAPI(url: String){
         let headers: HTTPHeaders = ["Authorization": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJAeW91amluIiwiYXV0aCI6W3siYXV0aG9yaXR5IjoiUk9MRV9DTElFTlQifV0sImlhdCI6MTYzODE2MTE3NSwiZXhwIjoxNjM4MTY0Nzc1fQ.6Fny5sU-EfDSCbmbdmN2LDFB621iie5HC4P4nTqpRp4"]
 
         let params: Parameters = [
@@ -414,7 +416,7 @@ class AddOrChangeMyTodoViewController: UIViewController{
             "tagIdx": 1
           ]
 
-        API.shared.request(url: "/v1/plan/personal", method: .post, param: params, header: headers, JSONDecodeUsingStatus: false, completion: { result in
+        API.shared.request(url: url, method: .post, param: params, header: headers, JSONDecodeUsingStatus: false, completion: { result in
             switch result {
             case .success(let result):
                 print("success result\(result)")
