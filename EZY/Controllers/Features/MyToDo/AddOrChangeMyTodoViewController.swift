@@ -300,7 +300,7 @@ class AddOrChangeMyTodoViewController: UIViewController{
     }
     
     @objc func changeButtonClicked(sender:UIButton){
-        // ?
+
     }
     
     @objc func backButtonClicked(sender:UIButton){
@@ -381,6 +381,25 @@ class AddOrChangeMyTodoViewController: UIViewController{
             self?.bgView.removeFromSuperview()
         }
     }
+    
+    // MARK: - MyToDoAPI
+    private func myToDoAPI(url: String){
+        let headers: HTTPHeaders = ["Authorization" : "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJAeW91amluIiwiYXV0aCI6W3siYXV0aG9yaXR5IjoiUk9MRV9DTElFTlQifV0sImlhdCI6MTYzODE2MTE3NSwiZXhwIjoxNjM4MTY0Nzc1fQ.6Fny5sU-EfDSCbmbdmN2LDFB621iie5HC4P4nTqpRp4"]
+        
+        let params: Parameters = [
+            "period": [
+              "endDateTime": "yyyy-MM-dd'T'HH:mm:ss",
+              "startDateTime": "yyyy-MM-dd'T'HH:mm:ss"
+            ],
+            "planInfo": [
+              "explanation": "string",
+              "location": "string",
+              "title": "string"
+            ],
+            "recipient": "string"
+        ]
+    }
+    
 }
 
 // MARK: - collectionView extension
