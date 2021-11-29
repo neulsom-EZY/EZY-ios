@@ -6,19 +6,37 @@
 //
 
 import UIKit
+import Alamofire
 
-class ChangePhoneNumPhoneNumViewController: UIViewController {
+class ChangePhoneNumPutViewController: UIViewController {
+    
+    final class API : APIService<KakaoDataModel>{
+        //MARK: - SingleTon
+        static let shared = APIService<KakaoDataModel>()
+    }
     //MARK: - Properties
-    private let topView = TopView().then{
+    lazy var topView = TopView().then{
         $0.backButton.addTarget(self, action: #selector(backButtonClicked(sender:)), for: .touchUpInside)
         $0.topViewDataSetting(backButtonImage: UIImage(named: "EZY_IdChangeBackButtonImage")!, titleLabelText: "전화번호 변경", textColor: UIColor(red: 120/255, green: 81/255, blue: 255/255, alpha: 1))
     }
     
-    private let lineInputView = LineInputView().then{
-        $0.dataSetting(titleText: "전화번호", placeHolderText: "변경할 전화번호를 입력해주세요", conditionText: "하이픈(-)없이 작성해주세요!")
+    lazy var phoneNumNickNameLabel = UILabel().then {
+        $0.textColor = UIColor(red: 150/255, green: 141/255, blue: 255/255, alpha: 1)
+        $0.text = "전화번호"
+        $0.dynamicFont(fontSize: 10, currentFontName: "AppleSDGothicNeo-SemiBold")
     }
     
-    private let changeButton = UIButton().then {
+    lazy var phoneNumTextField = UITextField().then {
+        $0.textColor = UIColor(red: 101/255, green: 101/255, blue: 101/255, alpha: 1)
+        $0.placeholder = "전화번호를 입력해주세요"
+        $0.dynamicFont(fontSize: 14, currentFontName: "AppleSDGothicNeo-Regular")
+    }
+    
+    lazy var phoneNumUnderLineView = UIView().then {
+        $0.backgroundColor = UIColor(red: 150/255, green: 141/255, blue: 255/255, alpha: 1)
+    }
+    
+    lazy var changeButton = UIButton().then {
         $0.setBackgroundImage(UIImage(named: "EZY_ChangeButtonImage"), for: .normal)
         $0.setTitle("계속하기", for: .normal)
         $0.dynamicFont(fontSize: 14, currentFontName: "AppleSDGothicNeo-Bold")
@@ -30,29 +48,36 @@ class ChangePhoneNumPhoneNumViewController: UIViewController {
         super.viewDidLoad()
         
         addView()
+        
         location()
     }
     
-    // MARK: - addView
-    private func addView(){
+    func addView(){
         self.view.backgroundColor = .white
-        [topView, lineInputView, changeButton].forEach { self.view.addSubview($0) }
+        self.view.addSubview(topView)
+        topView.addSubview(topView.backButton)
+        topView.addSubview(topView.titleLabel)
+        self.view.addSubview(phoneNumNickNameLabel)
+        self.view.addSubview(phoneNumTextField)
+        self.view.addSubview(phoneNumUnderLineView)
+        self.view.addSubview(changeButton)
     }
     
-    // MARK: - location
-    private func location() {
-        lineInputView.snp.makeConstraints { make in
-            make.width.equalToSuperview()
-            make.top.equalTo(topView.snp.bottom).offset(self.view.frame.height/17.65)
-            make.height.equalToSuperview().dividedBy(13)
-            make.centerX.equalToSuperview()
+    // MARK: - Selectors
+    func location() {
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(_:)), name:UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide(_:)), name: UIResponder.keyboardWillHideNotification, object: nil)
+        
+        topView.backButton.snp.makeConstraints { make in
+            make.top.equalTo(self.view.safeAreaLayoutGuide).offset(self.view.frame.height/47.7)
+            make.left.equalToSuperview().offset(self.view.frame.width/12)
+            make.width.equalToSuperview().dividedBy(33.8/2)
+            make.height.equalTo(topView.backButton.snp.width)
         }
         
-        changeButton.snp.makeConstraints { make in
-            make.left.equalToSuperview().offset(self.view.frame.width/17)
-            make.centerX.equalToSuperview()
-            make.height.equalToSuperview().dividedBy(16.24)
-            make.centerY.equalToSuperview().offset(self.view.frame.height/40)
+        topView.titleLabel.snp.makeConstraints { make in
+            make.left.equalTo(topView.backButton)
+            make.top.equalTo(topView.backButton.snp.bottom).offset(self.view.frame.height/30)
         }
         
         topView.snp.makeConstraints { make in
@@ -60,24 +85,101 @@ class ChangePhoneNumPhoneNumViewController: UIViewController {
             make.top.equalTo(self.view.safeAreaLayoutGuide)
             make.height.equalToSuperview().dividedBy(8)
         }
-    }
-    
-    // MARK: - Selectors
-    @objc private func changeButtonClicked(sender:UIButton){
-        if isValidPhoneNumber(PhoneNumber: lineInputView.getInfoText()){
-            let nextViewController = ChangePhoneNumAuthCodeViewController()
-            self.navigationController?.pushViewController(nextViewController, animated: true)
-        }else{
-            lineInputView.checkInfoTextIsEmpty()
+        
+        phoneNumNickNameLabel.snp.makeConstraints { make in
+            make.top.equalTo(topView.titleLabel.snp.bottom).offset(self.view.frame.height/16.91)
+            make.left.equalTo(topView.titleLabel)
+        }
+        
+        phoneNumTextField.snp.makeConstraints { make in
+            make.top.equalTo(phoneNumNickNameLabel.snp.bottom)
+            make.left.equalTo(phoneNumNickNameLabel).offset(self.view.frame.width/80)
+            make.centerX.equalToSuperview()
+            make.height.equalToSuperview().dividedBy(27)
+        }
+        
+        phoneNumUnderLineView.snp.makeConstraints { make in
+            make.top.equalTo(phoneNumTextField.snp.bottom)
+            make.left.equalTo(phoneNumNickNameLabel)
+            make.centerX.equalToSuperview()
+            make.height.equalTo(2)
+        }
+        
+        changeButton.snp.makeConstraints { make in
+            make.left.equalToSuperview().offset(self.view.frame.width/17)
+            make.centerX.equalToSuperview()
+            make.height.equalToSuperview().dividedBy(16.24)
+            make.bottom.equalToSuperview().offset(-self.view.frame.height/23.8)
         }
     }
     
-    @objc private func backButtonClicked(sender:UIButton){
+    // MARK: - Selectors
+    
+    @objc func changeButtonClicked(sender:UIButton){
+        if isValidPhoneNumber(PhoneNumber: phoneNumTextField.text){
+            let param:Parameters = ["phoneNumber": phoneNumTextField.text!]
+            API.shared.request(url: "/v1/member/auth", method: .post, param: param, header: .none, JSONDecodeUsingStatus: false){ result in
+                switch result {
+                case .success(let data):
+                    print(data)
+                    let nextViewController = ChangePhoneNumAuthCodeViewController()
+                    nextViewController.phoneNum = self.phoneNumTextField.text!
+                    self.navigationController?.pushViewController(nextViewController, animated: true)
+                case .requestErr(let err):
+                    print(err)
+                    break
+                case .pathErr:
+                    print("pathErr")
+                    break
+                case .serverErr:
+                    print("serverErr")
+                    break
+                case .networkFail:
+                    print("networkFail")
+                    break
+                case .tokenErr:
+                    print("tokenErr")
+                    break
+                case .authorityErr:
+                    print("authorityErr")
+                    break
+                }
+            }
+            
+        }else{
+            shakeView(phoneNumNickNameLabel)
+        }
+    }
+    
+    @objc func backButtonClicked(sender:UIButton){
         self.navigationController?.popViewController(animated: true)
     }
     
-    // MARK: - isValidPhoneNumber
-    private func isValidPhoneNumber(PhoneNumber: String?) -> Bool {
+    @objc //MARK: 모달 창 올리기
+    func keyboardWillShow(_ sender: Notification) {
+        changeButton.frame.origin.y = self.view.frame.height/2
+    }
+
+    @objc //MARK: 모달 창 원래대로
+    func keyboardWillHide(_ sender: Notification) {
+        changeButton.frame.origin.y = self.view.frame.height-changeButton.frame.height-self.view.frame.height/23.8
+    }
+    
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        phoneNumTextField.resignFirstResponder()
+    }
+  
+    func shakeView(_ view: UIView?) {
+        let shake = CABasicAnimation(keyPath: "position")
+        shake.duration = 0.08
+        shake.repeatCount = 2
+        shake.autoreverses = true
+        shake.fromValue = NSValue(cgPoint: CGPoint(x: (view?.center.x)! - 2, y: view?.center.y ?? 0.0))
+        shake.toValue = NSValue(cgPoint: CGPoint(x: (view?.center.x)! + 2, y: view?.center.y ?? 0.0))
+        view?.layer.add(shake, forKey: "position")
+    }
+    
+    func isValidPhoneNumber(PhoneNumber: String?) -> Bool {
         guard PhoneNumber != nil else { return false }
         
         let idRegEx = "^01([0-9])([0-9]{3,4})([0-9]{4})$"
