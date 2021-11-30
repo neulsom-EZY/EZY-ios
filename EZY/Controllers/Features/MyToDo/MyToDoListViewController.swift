@@ -128,7 +128,9 @@ extension MyToDoListViewController : UITableViewDelegate , UITableViewDataSource
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let controller = MyToDoDetailViewController()
-        navigationController?.pushViewController(controller, animated: true)
+        if indexPath.item != 0{
+            let controller = MyToDoDetailViewController()
+            navigationController?.pushViewController(controller, animated: true)
+        }
     }
 }
