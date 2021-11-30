@@ -103,7 +103,7 @@ class MyToDoListViewController : UIViewController{
         [listTableView].forEach{$0.dataSource = self ; $0.delegate = self}
     }
     
-    // MARK: - CheckPlanEmpty
+    // MARK: - checkPlanEmpty
     private func checkPlanEmpty(){
         if sections.isEmpty == true{
             planEmptyView.isHidden = false
@@ -111,6 +111,8 @@ class MyToDoListViewController : UIViewController{
             planEmptyView.isHidden = true
         }
     }
+    
+    // MARK: - api
 }
 
 // MARK: - TableView Extension

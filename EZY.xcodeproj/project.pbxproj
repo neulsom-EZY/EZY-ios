@@ -60,6 +60,8 @@
 		6A9F0F3C2755B7F500D9E2F7 /* TableViewHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A9F0F3B2755B7F500D9E2F7 /* TableViewHeaderView.swift */; };
 		6A9F0F412755C31B00D9E2F7 /* ListTableViewHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A9F0F3F2755C31B00D9E2F7 /* ListTableViewHeaderView.swift */; };
 		6A9F0F4627561F8B00D9E2F7 /* PlanEmptyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A9F0F4527561F8B00D9E2F7 /* PlanEmptyView.swift */; };
+		6A9F0F502756481000D9E2F7 /* MyToDoListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A9F0F4F2756481000D9E2F7 /* MyToDoListTableViewCell.swift */; };
+		6A9F0F522756492A00D9E2F7 /* MyToDoListItemTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A9F0F512756492A00D9E2F7 /* MyToDoListItemTableViewCell.swift */; };
 		6AA6F792269C2E4D00958D36 /* SignUpPasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AA6F78E269C2E4C00958D36 /* SignUpPasswordViewController.swift */; };
 		6AA6F793269C2E4D00958D36 /* SignUpNicknameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AA6F78F269C2E4C00958D36 /* SignUpNicknameViewController.swift */; };
 		6AA6F794269C2E4D00958D36 /* SignUpPhoneNumViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AA6F790269C2E4C00958D36 /* SignUpPhoneNumViewController.swift */; };
@@ -241,6 +243,8 @@
 		6A9F0F3B2755B7F500D9E2F7 /* TableViewHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewHeaderView.swift; sourceTree = "<group>"; };
 		6A9F0F3F2755C31B00D9E2F7 /* ListTableViewHeaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ListTableViewHeaderView.swift; path = EZY/Views/View/ListTableViewHeaderView.swift; sourceTree = SOURCE_ROOT; };
 		6A9F0F4527561F8B00D9E2F7 /* PlanEmptyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlanEmptyView.swift; sourceTree = "<group>"; };
+		6A9F0F4F2756481000D9E2F7 /* MyToDoListTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyToDoListTableViewCell.swift; sourceTree = "<group>"; };
+		6A9F0F512756492A00D9E2F7 /* MyToDoListItemTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyToDoListItemTableViewCell.swift; sourceTree = "<group>"; };
 		6AA6F78E269C2E4C00958D36 /* SignUpPasswordViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignUpPasswordViewController.swift; sourceTree = "<group>"; };
 		6AA6F78F269C2E4C00958D36 /* SignUpNicknameViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignUpNicknameViewController.swift; sourceTree = "<group>"; };
 		6AA6F790269C2E4C00958D36 /* SignUpPhoneNumViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignUpPhoneNumViewController.swift; sourceTree = "<group>"; };
@@ -765,6 +769,8 @@
 				EE9CE4732755326000A3014E /* SearchView.swift */,
 				EE9CE477275532DC00A3014E /* NotFoundUser.swift */,
 				EE8265C927561DF3000ACC1C /* UserChooseView.swift */,
+				6A9F0F4F2756481000D9E2F7 /* MyToDoListTableViewCell.swift */,
+				6A9F0F512756492A00D9E2F7 /* MyToDoListItemTableViewCell.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1126,6 +1132,8 @@
 				6AC3BF18267B475200DDCBB2 /* PlanRequestRespondingViewController.swift in Sources */,
 				6AFB77FE267F343500B59482 /* TagAddModalView.swift in Sources */,
 				EEBEBC91274CE3CA009292CD /* APIService.swift in Sources */,
+				6A9F0F502756481000D9E2F7 /* MyToDoListTableViewCell.swift in Sources */,
+				6A9F0F522756492A00D9E2F7 /* MyToDoListItemTableViewCell.swift in Sources */,
 				6A9F0F3C2755B7F500D9E2F7 /* TableViewHeaderView.swift in Sources */,
 				AAAA0F21273A10FC00DBCA68 /* ScheduleTimeTableView.swift in Sources */,
 				6AB27CB4269DD42400B95C0F /* InquiryReceiveChattingBoxView.swift in Sources */,
