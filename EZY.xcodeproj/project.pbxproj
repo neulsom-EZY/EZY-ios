@@ -61,6 +61,7 @@
 		6A9F0F3C2755B7F500D9E2F7 /* TableViewHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A9F0F3B2755B7F500D9E2F7 /* TableViewHeaderView.swift */; };
 		6A9F0F412755C31B00D9E2F7 /* ListTableViewHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A9F0F3F2755C31B00D9E2F7 /* ListTableViewHeaderView.swift */; };
 		6A9F0F442755C33C00D9E2F7 /* MyToDoListItemTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A9F0F432755C33C00D9E2F7 /* MyToDoListItemTableViewCell.swift */; };
+		6A9F0F4627561F8B00D9E2F7 /* PlanEmptyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A9F0F4527561F8B00D9E2F7 /* PlanEmptyView.swift */; };
 		6AA6F792269C2E4D00958D36 /* SignUpPasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AA6F78E269C2E4C00958D36 /* SignUpPasswordViewController.swift */; };
 		6AA6F793269C2E4D00958D36 /* SignUpNicknameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AA6F78F269C2E4C00958D36 /* SignUpNicknameViewController.swift */; };
 		6AA6F794269C2E4D00958D36 /* SignUpPhoneNumViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AA6F790269C2E4C00958D36 /* SignUpPhoneNumViewController.swift */; };
@@ -234,6 +235,7 @@
 		6A9F0F3B2755B7F500D9E2F7 /* TableViewHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewHeaderView.swift; sourceTree = "<group>"; };
 		6A9F0F3F2755C31B00D9E2F7 /* ListTableViewHeaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ListTableViewHeaderView.swift; path = EZY/Views/View/ListTableViewHeaderView.swift; sourceTree = SOURCE_ROOT; };
 		6A9F0F432755C33C00D9E2F7 /* MyToDoListItemTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MyToDoListItemTableViewCell.swift; path = ../../../../../../.Trash/MyToDoListItemTableViewCell.swift; sourceTree = "<group>"; };
+		6A9F0F4527561F8B00D9E2F7 /* PlanEmptyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlanEmptyView.swift; sourceTree = "<group>"; };
 		6AA6F78E269C2E4C00958D36 /* SignUpPasswordViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignUpPasswordViewController.swift; sourceTree = "<group>"; };
 		6AA6F78F269C2E4C00958D36 /* SignUpNicknameViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignUpNicknameViewController.swift; sourceTree = "<group>"; };
 		6AA6F790269C2E4C00958D36 /* SignUpPhoneNumViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignUpPhoneNumViewController.swift; sourceTree = "<group>"; };
@@ -718,6 +720,7 @@
 		6AB7D43C272FE25700FAFA19 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				6A9F0F4527561F8B00D9E2F7 /* PlanEmptyView.swift */,
 				6A9F0F3F2755C31B00D9E2F7 /* ListTableViewHeaderView.swift */,
 				6AEB2F1F274D0EBE00C213EF /* TimeLabel.swift */,
 				6AEB2F1B274772B900C213EF /* LineInputView.swift */,
@@ -1143,6 +1146,7 @@
 				6AA6F794269C2E4D00958D36 /* SignUpPhoneNumViewController.swift in Sources */,
 				EE9F0D4E26E8A9700015E81B /* WhatAboutPeopleLikeThisCell.swift in Sources */,
 				6A47F9D42718F63600AAA6E0 /* CalendarAddModalViewController.swift in Sources */,
+				6A9F0F4627561F8B00D9E2F7 /* PlanEmptyView.swift in Sources */,
 				6A3E2E7626B10D760078D749 /* ChangePasswordPhoneNumAfterLoginViewController.swift in Sources */,
 				6AFB7800267F812B00B59482 /* TagColorCollectionViewCell.swift in Sources */,
 				6A136C44273C075000214A9F /* ChannelTalkViewController.swift in Sources */,

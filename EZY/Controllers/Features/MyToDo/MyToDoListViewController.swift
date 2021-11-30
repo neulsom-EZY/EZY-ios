@@ -20,6 +20,10 @@ class MyToDoListViewController : UIViewController{
     
     private let tableViewHeader = TableViewHeaderView()
     
+    private let planEmptyView = PlanEmptyView().then{
+        $0.isHidden = true
+    }
+    
     private let topView = TopView().then{
         $0.layer.masksToBounds = false
         $0.layer.shadowOpacity = 10
@@ -38,10 +42,15 @@ class MyToDoListViewController : UIViewController{
         $0.tableHeaderView = tableViewHeader
     }
     
-    private let sections : [String] = ["STUDY","EXERCISE","DATE"]
-    private let dummy1 : [String] = ["EZY 회의","EZY 회의","EZY 회의","EZY 회의","EZY 회의","EZY 회의","EZY 회의","EZY 회의","EZY 회의","EZY 회의","EZY 회의","EZY 회의"]
-    private let dummy2 : [String] = ["EZY 회의","EZY 회의","EZY 회의","EZY 회의"]
-    private let dummy3 : [String] = ["EZY 회의","EZY 회의","EZY 회의","EZY 회의","EZY 회의"]
+//    private let sections : [String] = ["STUDY","EXERCISE","DATE"]
+//    private let dummy1 : [String] = ["EZY 회의","EZY 회의","EZY 회의","EZY 회의","EZY 회의","EZY 회의","EZY 회의","EZY 회의","EZY 회의","EZY 회의","EZY 회의","EZY 회의"]
+//    private let dummy2 : [String] = ["EZY 회의","EZY 회의","EZY 회의","EZY 회의"]
+//    private let dummy3 : [String] = ["EZY 회의","EZY 회의","EZY 회의","EZY 회의","EZY 회의"]
+    
+    private let sections = [String]()
+    private let dummy1 = [String]()
+    private let dummy2 = [String]()
+    private let dummy3 = [String]()
     
     // MARK: - Lifecycle
     override func viewDidLoad() {
@@ -59,6 +68,7 @@ class MyToDoListViewController : UIViewController{
     private func configureUI(){
         view.backgroundColor = .white
 
+        checkPlanEmpty()
         addView()
         location()
         dataSourceAndDelegate()
@@ -66,7 +76,7 @@ class MyToDoListViewController : UIViewController{
     
     // MARK: - AddView
     private func addView(){
-        [listTableView, topView].forEach{ view.addSubview($0)}
+        [listTableView, topView, planEmptyView].forEach{ view.addSubview($0)}
     }
     
     // MARK: - location
@@ -80,11 +90,26 @@ class MyToDoListViewController : UIViewController{
             make.bottom.left.right.equalToSuperview()
             make.top.equalTo(topView.snp.bottom)
         }
+        planEmptyView.snp.makeConstraints { make in
+            make.centerX.equalToSuperview()
+            make.top.equalTo(topView.snp.bottom).offset(self.view.frame.height/6)
+            make.height.equalToSuperview().dividedBy(2.4)
+            make.width.equalToSuperview().dividedBy(1.4)
+        }
     }
     
     // MARK: - dataSourceAndDelegate
     private func dataSourceAndDelegate(){
         [listTableView].forEach{$0.dataSource = self ; $0.delegate = self}
+    }
+    
+    // MARK: - CheckPlanEmpty
+    private func checkPlanEmpty(){
+        if sections.isEmpty == true{
+            planEmptyView.isHidden = false
+        }else{
+            planEmptyView.isHidden = true
+        }
     }
 }
 

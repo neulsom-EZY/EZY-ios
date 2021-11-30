@@ -2,12 +2,6 @@
 <Workspace
    version = "1.0">
    <FileRef
-      location = "group:ListTableViewHeaderView.swift">
-   </FileRef>
-   <FileRef
-      location = "group:/Users/yujin/Desktop/2021_EZY/EZY/EZY/Views/TableViewCells/MyToDoListItemTableViewCell.swift">
-   </FileRef>
-   <FileRef
       location = "group:EZY.xcodeproj">
    </FileRef>
    <FileRef
