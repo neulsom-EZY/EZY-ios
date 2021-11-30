@@ -746,8 +746,6 @@
 				6AB7D43F272FE2FE00FAFA19 /* TextField */,
 				6AB7D43E272FE2D800FAFA19 /* TableView */,
 				6AB7D43D272FE28900FAFA19 /* PickerView */,
-				6A9F0F4F2756481000D9E2F7 /* MyToDoListTableViewCell.swift */,
-				6A9F0F512756492A00D9E2F7 /* MyToDoListItemTableViewCell.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -780,6 +778,8 @@
 		6AE5BAFE26954B6A00A9731B /* TableViewCells */ = {
 			isa = PBXGroup;
 			children = (
+				6A9F0F4F2756481000D9E2F7 /* MyToDoListTableViewCell.swift */,
+				6A9F0F512756492A00D9E2F7 /* MyToDoListItemTableViewCell.swift */,
 				EE93B4DE268797230055D7A6 /* CustomManagePushNotificationCell.swift */,
 				6A4EDA36266DA52A00B809EC /* SettingTableViewCell.swift */,
 				6A4ED9FF2668653200B809EC /* ScheduleTimeTableViewCell.swift */,
