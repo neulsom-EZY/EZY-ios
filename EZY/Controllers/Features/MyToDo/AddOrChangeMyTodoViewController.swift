@@ -53,13 +53,6 @@ class AddOrChangeMyTodoViewController: UIViewController{
         $0.dynamicFont(fontSize: 14, currentFontName: "AppleSDGothicNeo-Medium")
     }
     
-//    private let calendarBtn : CalendarBtn = {
-//        let viewModel = CalendarModel(icon: UIImage(named: "EZY_Calendar")?.withRenderingMode(.alwaysTemplate), iconTintColor: .rgb(red: 255, green: 181, blue: 181), message: "날짜를 선택해주세요!", repeatText: "반복 없음")
-//        let button = CalendarBtn(with: viewModel)
-//        button.addTarget(self, action: #selector(calendarAlert), for: .touchUpInside)
-//        return button
-//    }()
-    
     private let calendarBtn : AlertButton = {
         let viewModel = AlertBtn(icon: UIImage(named: "EZY_Calendar")?.withRenderingMode(.alwaysTemplate), iconTintColor: .rgb(red: 255, green: 203, blue: 181), message: "날짜를 선택해주세요!")
         let button = AlertButton(with: viewModel)
@@ -283,7 +276,7 @@ class AddOrChangeMyTodoViewController: UIViewController{
     }
     
     @objc private func calendarAlert(){
-        let CalendarAddModalVC = CalendarAddModelViewController.instance()
+        let CalendarAddModalVC = CalendarAddModalViewController.instance()
         CalendarAddModalVC.delegate = self
         CalendarAddModalVC.baseDelegate = self
         addDim()

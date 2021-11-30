@@ -82,7 +82,7 @@ class SelectLocationViewController: UIViewController {
     
     // MARK: - addView
     private func addView(){
-        [topViewHalfModalView, backButton,textFieldBackgroundView,searchButton, locationTableView].forEach { self.view.addSubview($0) }
+        [topViewHalfModalView, backButton,textFieldBackgroundView,searchButton, locationTableView,noPlace].forEach { self.view.addSubview($0) }
         [locationTextField].forEach { textFieldBackgroundView.addSubview($0) }
     }
     

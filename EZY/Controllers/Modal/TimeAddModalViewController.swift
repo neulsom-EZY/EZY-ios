@@ -164,7 +164,7 @@ class TimeAddModalViewController: BaseModal{
             make.centerX.equalTo(endPickerView).offset(self.view.frame.width/9)
         }
         completeButton.snp.makeConstraints { make in
-            make.right.equalToSuperview().offset(-self.view.frame.width/13.2)
+            make.right.equalToSuperview().offset(-self.view.frame.width/15)
             make.top.equalTo(endPickerView.snp.bottom)
             make.width.equalToSuperview().dividedBy(4.71)
             make.height.equalToSuperview().dividedBy(8.09)
