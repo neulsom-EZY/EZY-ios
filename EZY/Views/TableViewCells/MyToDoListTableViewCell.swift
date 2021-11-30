@@ -43,8 +43,8 @@ class MyToDoListTableViewCell: UITableViewCell {
     // MARK: - location
     private func location(){
         view.snp.makeConstraints{
-            $0.top.bottom.equalTo(label).inset(-5)
-            $0.left.equalToSuperview().offset(bounds.width/13.39)
+            $0.top.bottom.equalTo(label).inset(-6)
+            $0.left.equalToSuperview().offset(bounds.width/11)
             $0.centerY.equalToSuperview()
         }
         label.snp.makeConstraints {

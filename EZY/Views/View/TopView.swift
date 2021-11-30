@@ -30,6 +30,8 @@ class TopView: UIView {
     
     // MARK: - Helpers
     private func configureUI(){
+        self.backgroundColor = .white
+        
         addView()
         location()
     }

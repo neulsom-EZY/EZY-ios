@@ -337,8 +337,8 @@ extension UIView {
 
 //MARK: - Shadow extension
 extension CALayer {
-func applySketchShadow(color: UIColor = .black,alpha: Float = 0.5,x:CGFloat,y:CGFloat,blur: CGFloat,spread: CGFloat = 0){
-        shadowColor = color.cgColor
+func applySketchShadow(color: UIColor = .lightGray,alpha: Float = 0.5,x:CGFloat,y:CGFloat,blur: CGFloat,spread: CGFloat = 0){
+    shadowColor = color.cgColor
         shadowOpacity = alpha
         shadowOffset = CGSize(width: x, height: y)
         shadowRadius = blur/UIScreen.main.scale
