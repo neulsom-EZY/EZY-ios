@@ -1,5 +1,5 @@
 //
-//  MyToDoListItemTableViewCell.swift
+//  MyToDoListTableViewCell.swift
 //  EZY
 //
 //  Created by 김유진 on 2021/11/30.
@@ -7,7 +7,7 @@
 
 import UIKit
 
-class MyToDoListItemTableViewCell: UITableViewCell {
+class MyToDoListTableViewCell: UITableViewCell {
     //MARK: - Properties
     static let identifier = "ErrandListTableViewCell"
     
