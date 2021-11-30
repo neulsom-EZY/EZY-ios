@@ -8,11 +8,17 @@
 import UIKit
 import SnapKit
 import Then
+import Alamofire
 
 class AddErrandViewController : UIViewController{
+    final class API : APIService<KakaoDataModel>{
+        static let shared = API()
+    }
+    
     //MARK: - Properties
     let bounds = UIScreen.main.bounds
-   
+    
+    
     private let bgView = UIView().then {
         $0.backgroundColor = .black
         $0.alpha = 0
@@ -116,6 +122,7 @@ class AddErrandViewController : UIViewController{
     @objc private  func Addmytodobtn(){
         print("DEBUG:AddButton")
         //추가페이지 작성후 실행시키는 코드
+        httpErrandRequest()
     }
     @objc private func Addlocationbtn(){
         let vc = AddMyToDoViewController()
@@ -192,7 +199,39 @@ class AddErrandViewController : UIViewController{
             make.left.right.equalToSuperview().inset(view.frame.width/13.636363)
         }
     }
-
+    private func httpErrandRequest(){
+        let header : HTTPHeaders = ["Authorization":  TokenUtils.shared.read(Bundle.bundleIdentifier, account: "accessToken") ?? "" ]
+        let param : Parameters = [
+            "period" : [    "endDateTime": "yyyy-MM-dd'T'HH:mm:ss",
+                            "startDateTime": "yyyy-MM-dd'T'HH:mm:ss"],
+            "planInfo" : [    "explanation": "string",
+                              "location": "string",
+                              "title": "string"],
+            "recipient" : "string"
+        ]
+        API.shared.request(url: "/v1/errand/send",
+                           method: .post,
+                           param: param,
+                           header: header,
+                           JSONDecodeUsingStatus: false) { (response) in
+            switch response {
+            case .success(let value):
+                NSLog("\(value)")
+            case .requestErr(let err):
+                NSLog("\(err)")
+            case .pathErr:
+                NSLog("pathError")
+            case .serverErr:
+                NSLog("serverError")
+            case .networkFail:
+                NSLog("networkFail")
+            case .tokenErr:
+                NSLog("TokenError")
+            case .authorityErr:
+                NSLog("authorityErr")
+            }
+        }
+    }
 }
 //MARK: - Modal Action
 extension AddErrandViewController {
@@ -214,8 +253,6 @@ extension AddErrandViewController {
     }
 }
 
-
-
 //MARK: - UserData 넘겨주기
 extension AddErrandViewController : UserDataDelegate {
     func userUpdateData(name: String?, Color: UIColor) {
@@ -228,5 +265,3 @@ extension AddErrandViewController : BaseModalDelegate{
         self.removeDim()
     }
 }
-
-

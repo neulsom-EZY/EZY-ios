@@ -13,6 +13,7 @@ class ErrandListViewController : UIViewController{
     final class API : APIService<ErrandEntireModel>{
         static let shared = API()
     }
+    //MARK: - Token
     
     let bounds = UIScreen.main.bounds
     
@@ -61,6 +62,7 @@ class ErrandListViewController : UIViewController{
         Location()
         tableHeader()
         dataSourceAndDelegateSetting()
+        httpErrandRequest()
     }
     //MARK: - AddView
     private func AddView(){
@@ -142,23 +144,28 @@ extension ErrandListViewController : UITableViewDelegate , UITableViewDataSource
         }
     }
     private func httpErrandRequest(){
-//        let header : HTTPHeaders = ["Authorization": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJAamlob29uIiwiYXV0aCI6W3siYXV0aG9yaXR5IjoiUk9MRV9DTElFTlQifV0sImlhdCI6MTYzODE2MTgxNCwiZXhwIjoxNjM4MTY1NDE0fQ.M01X8KPVz-FkARpHBGe66OSXxb4WBhj9dl5kMwBDXx0"]
-//        API.shared.request(url: "", method: .get, header: header,JSONDecodeUsingStatus: true) { (response) in
-//            switch response{
-//            case.success(let value ):
-//            case .requestErr(_):
-//                <#code#>
-//            case .pathErr:
-//                <#code#>
-//            case .serverErr:
-//                <#code#>
-//            case .networkFail:
-//                <#code#>
-//            case .tokenErr:
-//                <#code#>
-//            case .authorityErr:
-//                <#code#>
-//            }
-//        }
+        let header : HTTPHeaders = ["Authorization" : TokenUtils.shared.read(Bundle.bundleIdentifier, account: "accessToken") ?? ""]
+        API.shared.request(url: "/v1/errand/",
+                           method: .get,
+                           header: header,
+                           JSONDecodeUsingStatus: false) { (response) in
+            switch response{
+            case.success(let value):
+                NSLog("\(value)")
+                
+            case .requestErr(let err):
+                NSLog("\(err)")
+            case .pathErr:
+                NSLog("PathError")
+            case .serverErr:
+                NSLog("Server Error")
+            case .networkFail:
+                NSLog("networkFail")
+            case .tokenErr:
+                NSLog("tokenErr")
+            case .authorityErr:
+                NSLog("authorityErr")
+            }
+        }
     }
 }
