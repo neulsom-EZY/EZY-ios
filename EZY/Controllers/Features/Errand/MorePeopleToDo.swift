@@ -222,10 +222,10 @@ extension MorePeopleToDo : UITextFieldDelegate{
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         httpRequest()
         nickNameTextFieldContainerView.resignFirstResponder()
+        view.endEditing(true)
         DispatchQueue.main.async {
             self.searcherView.tv.reloadData()
         }
-        view.endEditing(true)
         return true
     }
 }

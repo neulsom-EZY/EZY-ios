@@ -13,7 +13,7 @@ struct ErrandListViewModel{
 }
 extension ErrandListViewModel{
     var numberOfSection : Int{
-        return 2
+        return 3
     }
     func numberOfRowsInSection(_ section : Int) -> Int{
         if section == 0{

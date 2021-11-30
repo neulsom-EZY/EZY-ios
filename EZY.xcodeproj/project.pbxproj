@@ -57,10 +57,8 @@
 		6A82835A26997AB500AC381B /* TagCollectionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A82835926997AB500AC381B /* TagCollectionViewModel.swift */; };
 		6A98A9CC2666F94E00BFAE30 /* ScheduleTypeCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A98A9CB2666F94E00BFAE30 /* ScheduleTypeCollectionViewCell.swift */; };
 		6A9DF2EB26A7C7B90026F89D /* InquirySendChattingBoxView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A9DF2EA26A7C7B90026F89D /* InquirySendChattingBoxView.swift */; };
-		6A9F0F3A2755B50000D9E2F7 /* MyToDoListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A9F0F392755B50000D9E2F7 /* MyToDoListTableViewCell.swift */; };
 		6A9F0F3C2755B7F500D9E2F7 /* TableViewHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A9F0F3B2755B7F500D9E2F7 /* TableViewHeaderView.swift */; };
 		6A9F0F412755C31B00D9E2F7 /* ListTableViewHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A9F0F3F2755C31B00D9E2F7 /* ListTableViewHeaderView.swift */; };
-		6A9F0F442755C33C00D9E2F7 /* MyToDoListItemTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A9F0F432755C33C00D9E2F7 /* MyToDoListItemTableViewCell.swift */; };
 		6A9F0F4627561F8B00D9E2F7 /* PlanEmptyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A9F0F4527561F8B00D9E2F7 /* PlanEmptyView.swift */; };
 		6AA6F792269C2E4D00958D36 /* SignUpPasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AA6F78E269C2E4C00958D36 /* SignUpPasswordViewController.swift */; };
 		6AA6F793269C2E4D00958D36 /* SignUpNicknameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AA6F78F269C2E4C00958D36 /* SignUpNicknameViewController.swift */; };
@@ -135,6 +133,8 @@
 		EE7CEE7027421EDB009A935A /* ErrandListItemTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE7CEE6F27421EDB009A935A /* ErrandListItemTableViewCell.swift */; };
 		EE8265C52755C6F6000ACC1C /* SearchViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE8265C42755C6F6000ACC1C /* SearchViewModel.swift */; };
 		EE8265CA27561DF3000ACC1C /* UserChooseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE8265C927561DF3000ACC1C /* UserChooseView.swift */; };
+		EE8265CE275644B1000ACC1C /* MyToDoListItemTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE8265CD275644B1000ACC1C /* MyToDoListItemTableViewCell.swift */; };
+		EE8265D027564533000ACC1C /* MyToDoListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE8265CF27564533000ACC1C /* MyToDoListTableViewCell.swift */; };
 		EE84DEC02715ABF100121C62 /* CollectionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE84DEBF2715ABF100121C62 /* CollectionViewModel.swift */; };
 		EE93B4D926876C6F0055D7A6 /* PushNotificationManagementViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE93B4D826876C6F0055D7A6 /* PushNotificationManagementViewController.swift */; };
 		EE93B4DB26876F430055D7A6 /* AlarmManagementButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE93B4DA26876F430055D7A6 /* AlarmManagementButton.swift */; };
@@ -238,10 +238,8 @@
 		6A82835926997AB500AC381B /* TagCollectionViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagCollectionViewModel.swift; sourceTree = "<group>"; };
 		6A98A9CB2666F94E00BFAE30 /* ScheduleTypeCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleTypeCollectionViewCell.swift; sourceTree = "<group>"; };
 		6A9DF2EA26A7C7B90026F89D /* InquirySendChattingBoxView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InquirySendChattingBoxView.swift; sourceTree = "<group>"; };
-		6A9F0F392755B50000D9E2F7 /* MyToDoListTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyToDoListTableViewCell.swift; sourceTree = "<group>"; };
 		6A9F0F3B2755B7F500D9E2F7 /* TableViewHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewHeaderView.swift; sourceTree = "<group>"; };
 		6A9F0F3F2755C31B00D9E2F7 /* ListTableViewHeaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ListTableViewHeaderView.swift; path = EZY/Views/View/ListTableViewHeaderView.swift; sourceTree = SOURCE_ROOT; };
-		6A9F0F432755C33C00D9E2F7 /* MyToDoListItemTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MyToDoListItemTableViewCell.swift; path = ../../../../../../.Trash/MyToDoListItemTableViewCell.swift; sourceTree = "<group>"; };
 		6A9F0F4527561F8B00D9E2F7 /* PlanEmptyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlanEmptyView.swift; sourceTree = "<group>"; };
 		6AA6F78E269C2E4C00958D36 /* SignUpPasswordViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignUpPasswordViewController.swift; sourceTree = "<group>"; };
 		6AA6F78F269C2E4C00958D36 /* SignUpNicknameViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignUpNicknameViewController.swift; sourceTree = "<group>"; };
@@ -319,6 +317,8 @@
 		EE7CEE6F27421EDB009A935A /* ErrandListItemTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrandListItemTableViewCell.swift; sourceTree = "<group>"; };
 		EE8265C42755C6F6000ACC1C /* SearchViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewModel.swift; sourceTree = "<group>"; };
 		EE8265C927561DF3000ACC1C /* UserChooseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserChooseView.swift; sourceTree = "<group>"; };
+		EE8265CD275644B1000ACC1C /* MyToDoListItemTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyToDoListItemTableViewCell.swift; sourceTree = "<group>"; };
+		EE8265CF27564533000ACC1C /* MyToDoListTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyToDoListTableViewCell.swift; sourceTree = "<group>"; };
 		EE84DEBF2715ABF100121C62 /* CollectionViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionViewModel.swift; sourceTree = "<group>"; };
 		EE93B4D826876C6F0055D7A6 /* PushNotificationManagementViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PushNotificationManagementViewController.swift; sourceTree = "<group>"; };
 		EE93B4DA26876F430055D7A6 /* AlarmManagementButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlarmManagementButton.swift; sourceTree = "<group>"; };
@@ -752,7 +752,6 @@
 				6AB27CB3269DD42400B95C0F /* InquiryReceiveChattingBoxView.swift */,
 				6A097CFC268ED628001E011D /* CalendarView.swift */,
 				EE9F0D2D26E8A9330015E81B /* ExplanationContainerTextView.swift */,
-				EE9FBB542748DC6A00667B41 /* NoPlaceView.swift */,
 				6A9F0F3B2755B7F500D9E2F7 /* TableViewHeaderView.swift */,
 				6A9DF2EA26A7C7B90026F89D /* InquirySendChattingBoxView.swift */,
 				EE9F0D2C26E8A9330015E81B /* TitleContainerTextFieldView.swift */,
@@ -798,7 +797,8 @@
 		6AE5BAFE26954B6A00A9731B /* TableViewCells */ = {
 			isa = PBXGroup;
 			children = (
-				6A9F0F432755C33C00D9E2F7 /* MyToDoListItemTableViewCell.swift */,
+				EE8265CF27564533000ACC1C /* MyToDoListTableViewCell.swift */,
+				EE8265CD275644B1000ACC1C /* MyToDoListItemTableViewCell.swift */,
 				EE93B4DE268797230055D7A6 /* CustomManagePushNotificationCell.swift */,
 				6A4EDA36266DA52A00B809EC /* SettingTableViewCell.swift */,
 				6A4ED9FF2668653200B809EC /* ScheduleTimeTableViewCell.swift */,
@@ -809,7 +809,6 @@
 				6A82835526982A8B00AC381B /* questionTableViewCell.swift */,
 				6AE41E7B26A9492C0072612C /* TagTableViewCell.swift */,
 				EE9CE4752755329900A3014E /* SearchTableView.swift */,
-				6A9F0F392755B50000D9E2F7 /* MyToDoListTableViewCell.swift */,
 			);
 			path = TableViewCells;
 			sourceTree = "<group>";
@@ -1061,10 +1060,12 @@
 				EE9F0D3F26E8A9340015E81B /* GroupSearchTextfield.swift in Sources */,
 				6AEB2F1C274772B900C213EF /* LineInputView.swift in Sources */,
 				6A705BB6267E3ABF001954CE /* AddOrChangeMyTodoViewController.swift in Sources */,
+				EE8265CE275644B1000ACC1C /* MyToDoListItemTableViewCell.swift in Sources */,
 				6AA76A282663958B00B7E1F5 /* ShowPlanViewController.swift in Sources */,
 				EEB2195C273EC62D0035704D /* kakaoPlaceDataModel.swift in Sources */,
 				6AB27CAC269D758100B95C0F /* ChangeIdAfterLoginViewController.swift in Sources */,
 				6AE5BB012695746F00A9731B /* PersonalPlanAddRepeatDayCollectionViewCell.swift in Sources */,
+				EE8265D027564533000ACC1C /* MyToDoListTableViewCell.swift in Sources */,
 				EE9F0D4D26E8A9700015E81B /* DayCollectionViewCell.swift in Sources */,
 				AAAA0F1F273A0F7D00DBCA68 /* ListTagView.swift in Sources */,
 				6AA76A0226636D2800B7E1F5 /* LoginViewController.swift in Sources */,
@@ -1093,7 +1094,6 @@
 				6A3E2E7E26B6A5FB0078D749 /* ViewModel.swift in Sources */,
 				6ACB4ED2269C2FA8008606C5 /* TopBarView.swift in Sources */,
 				AAAA0F1D2739458D00DBCA68 /* MyToDoListViewController.swift in Sources */,
-				6A9F0F3A2755B50000D9E2F7 /* MyToDoListTableViewCell.swift in Sources */,
 				6A8283502698132000AC381B /* PlanDeleteModalView.swift in Sources */,
 				EE9F0D3726E8A9340015E81B /* AddScheduleModalBtn .swift in Sources */,
 				6A4EDA30266A336000B809EC /* NotificationTableView.swift in Sources */,
@@ -1125,7 +1125,6 @@
 				6A097CFD268ED628001E011D /* CalendarView.swift in Sources */,
 				6AC3BF18267B475200DDCBB2 /* PlanRequestRespondingViewController.swift in Sources */,
 				6AFB77FE267F343500B59482 /* TagAddModalView.swift in Sources */,
-				6A9F0F442755C33C00D9E2F7 /* MyToDoListItemTableViewCell.swift in Sources */,
 				EEBEBC91274CE3CA009292CD /* APIService.swift in Sources */,
 				6A9F0F3C2755B7F500D9E2F7 /* TableViewHeaderView.swift in Sources */,
 				AAAA0F21273A10FC00DBCA68 /* ScheduleTimeTableView.swift in Sources */,
@@ -1172,7 +1171,7 @@
 				6AA6F794269C2E4D00958D36 /* SignUpPhoneNumViewController.swift in Sources */,
 				EE8265C52755C6F6000ACC1C /* SearchViewModel.swift in Sources */,
 				EE9F0D4E26E8A9700015E81B /* WhatAboutPeopleLikeThisCell.swift in Sources */,
-				6A47F9D42718F63600AAA6E0 /* CalendarAddModelViewController.swift in Sources */,
+				6A47F9D42718F63600AAA6E0 /* CalendarAddModalViewController.swift in Sources */,
 				EE9CE47227550EC700A3014E /* UserSearchModel.swift in Sources */,
 				6A47F9D42718F63600AAA6E0 /* CalendarAddModalViewController.swift in Sources */,
 				6A9F0F4627561F8B00D9E2F7 /* PlanEmptyView.swift in Sources */,

@@ -18,6 +18,9 @@ class ErrandListViewController : UIViewController{
     let bounds = UIScreen.main.bounds
     
     private let sections : [String] = ["부탁받은 심부름","부탁한 심부름"," 수락 대기 중인 심부름"]
+    
+    
+    
     private let dummy1 : [String] = ["EZY 회의","EZY 회의","EZY 회의","EZY 회의","EZY 회의","EZY 회의","EZY 회의","EZY 회의","EZY 회의","EZY 회의","EZY 회의","EZY 회의"]
     private let dummy2 : [String] = ["EZY 회의","EZY 회의","EZY 회의","EZY 회의"]
     private let dummy3 : [String] = ["EZY 회의","EZY 회의","EZY 회의","EZY 회의","EZY 회의"]
