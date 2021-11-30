@@ -8,7 +8,6 @@
 import UIKit
 
 class MyToDoListTableViewCell: UITableViewCell {
-
     //MARK: - Properties
     static let identifier = "ErrandListTableViewCell"
     
