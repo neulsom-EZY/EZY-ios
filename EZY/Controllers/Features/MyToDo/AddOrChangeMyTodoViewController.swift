@@ -9,58 +9,32 @@ import UIKit
 import Alamofire
 
 class AddOrChangeMyTodoViewController: UIViewController{
-    //MARK: - Properties
-    private var TagModels: [TagCollectionViewModel] = [
-        TagCollectionViewModel(backgroundColor: UIColor(red: 186/255, green: 200/255, blue: 255/255, alpha: 1), isSelected: true, iconImgae: UIImage(named: "EZY_UnSelectedTagAddButtonImage")!),
-        TagCollectionViewModel(backgroundColor: UIColor(red: 221/255, green: 220/255, blue: 220/255, alpha: 1), isSelected: false, iconImgae: UIImage(named: "EZY_SelectedNoSelectTagButtonImage")!)]
+    // MARK: - Properties
+    final class API: APIService<ResponseModel>{
+        static var shared = API()
+    }
     
     private var bounds = UIScreen.main.bounds
-    
-    private var selectedRepeatDayTextArray = [String]()
-    
+        
     private var rotationAngle: CGFloat!
     
     private var selectedTimeIndex: [Int] = [0,0,0,0]
     
     private var selectedRepeatIndex: [Int]  = []
         
-    private var dayPickerViewSelectedValueIndex = 0
-
-    private var selectedTimeStartHourIndex = 0
-    
-    private var selectedTimeEndHourIndex = 0
-    
-    private var tagNameTextArray = ["x", "+", "TOEIC", "CODING", "COOKING"]
-    
-    private var selectedAfterOrMorn = ["오후","오후"]
-    
-    private var selectedStartTime = ["01","00"]
-    
-    private var selectedEndTime = ["01","00"]
-    
+    private var selectedDayIndex = 0
+        
+    private var tagNameTextArray = ["x", "+"]
+        
     private var receiveStartTime = "01 : 00"
     
     private var receiveEndTime = "01 : 00"
     
-    private var leftOrRight = ["L","L"]
+    private var planTime = ["0000-00-00","00:00","00:00"]
     
-    private var selectedDayOfWeekText = ""
+    private let bgView = UIView().then { $0.backgroundColor = .black }
     
-    private var selectedDayText = ""
-    
-    let bgView = UIView().then {
-        $0.backgroundColor = .black
-        $0.alpha = 0
-    }
-    
-    private let tagCollectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewLayout()).then {
-        let layout: UICollectionViewFlowLayout = UICollectionViewFlowLayout()
-        layout.scrollDirection = .horizontal
-        $0.collectionViewLayout = layout
-        $0.showsHorizontalScrollIndicator = false
-        $0.backgroundColor = .clear
-        $0.register(TagCollectionViewCell.self, forCellWithReuseIdentifier: TagCollectionViewCell.reuseId)
-    }
+    private let explanationContainerView = ExplanationContainerTextView(tvTitle: "설명")
     
     private let titleBackgroundView = UIView().then {
         $0.backgroundColor = UIColor(red: 244/255, green: 246/255, blue: 255/255, alpha: 1)
@@ -77,6 +51,38 @@ class AddOrChangeMyTodoViewController: UIViewController{
         $0.textAlignment = .left
         $0.textColor = UIColor(red: 101/255, green: 101/255, blue: 101/255, alpha: 1)
         $0.dynamicFont(fontSize: 14, currentFontName: "AppleSDGothicNeo-Medium")
+    }
+    
+    private let calendarBtn : AlertButton = {
+        let viewModel = AlertBtn(icon: UIImage(named: "EZY_Calendar")?.withRenderingMode(.alwaysTemplate), iconTintColor: .rgb(red: 255, green: 203, blue: 181), message: "날짜를 선택해주세요!")
+        let button = AlertButton(with: viewModel)
+        button.addTarget(self, action: #selector(calendarAlert), for: .touchUpInside)
+        return button
+    }()
+    
+    private let clockBtn : AlertButton = {
+        let viewModel = AlertBtn(icon: UIImage(named: "EZY_clock")?.withRenderingMode(.alwaysTemplate), iconTintColor: .rgb(red: 255, green: 203, blue: 181), message: "시간을 선택해주세요!")
+        let button = AlertButton(with: viewModel)
+        button.addTarget(self, action: #selector(clockAlert), for: .touchUpInside)
+        return button
+    }()
+    
+    private let locationBtn : AlertButton = {
+        let viewModel = AlertBtn(icon: UIImage(named: "EZY_location")?.withRenderingMode(.alwaysTemplate), iconTintColor: .rgb(red: 199, green: 224, blue: 212), message: "위치를 선택해주세요!")
+        let button = AlertButton(with: viewModel)
+        button.addTarget(self, action: #selector(locationAlert), for: .touchUpInside)
+        return button
+    }()
+    
+    private lazy var btnStackView = UIStackView(arrangedSubviews: [clockBtn,locationBtn]).then{
+        $0.axis = .vertical
+        $0.distribution = .fillEqually
+        $0.spacing = bounds.height/47.7647
+    }
+    
+    private let sizeCheckLabel = UILabel().then{
+        $0.dynamicFont(fontSize: 12, currentFontName: "AppleSDGothicNeo-Bold")
+        $0.sizeToFit()
     }
     
     private let tagLabel = UILabel().then {
@@ -131,66 +137,43 @@ class AddOrChangeMyTodoViewController: UIViewController{
         $0.addTarget(self, action: #selector(backButtonClicked(sender:)), for: .touchUpInside)
     }
     
-    private let calendarBtn : CalendarBtn = {
-        let viewModel = CalendarModel(icon: UIImage(named: "EZY_Calendar")?.withRenderingMode(.alwaysTemplate), iconTintColor: .rgb(red: 255, green: 181, blue: 181), message: "날짜를 선택해주세요!", repeatText: "반복 없음")
-        let button = CalendarBtn(with: viewModel)
-        button.addTarget(self, action: #selector(calendarAlert), for: .touchUpInside)
-        return button
-    }()
-    
-    private let clockBtn : AlertButton = {
-        let viewModel = AlertBtn(icon: UIImage(named: "EZY_clock")?.withRenderingMode(.alwaysTemplate), iconTintColor: .rgb(red: 255, green: 203, blue: 181), message: "시간을 선택해주세요!")
-        let button = AlertButton(with: viewModel)
-        button.addTarget(self, action: #selector(clockAlert), for: .touchUpInside)
-        return button
-    }()
-    
-    private let locationBtn : AlertButton = {
-        let viewModel = AlertBtn(icon: UIImage(named: "EZY_location")?.withRenderingMode(.alwaysTemplate), iconTintColor: .rgb(red: 199, green: 224, blue: 212), message: "위치를 선택해주세요!")
-        let button = AlertButton(with: viewModel)
-        button.addTarget(self, action: #selector(locationAlert), for: .touchUpInside)
-        return button
-    }()
-    
-    private lazy var btnStackView = UIStackView(arrangedSubviews: [clockBtn,locationBtn]).then{
-        $0.axis = .vertical
-        $0.distribution = .fillEqually
-        $0.spacing = bounds.height/47.7647
+    private let tagCollectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewLayout()).then {
+        let layout: UICollectionViewFlowLayout = UICollectionViewFlowLayout()
+        layout.scrollDirection = .horizontal
+        $0.collectionViewLayout = layout
+        $0.showsHorizontalScrollIndicator = false
+        $0.backgroundColor = .clear
+        $0.register(TagCollectionViewCell.self, forCellWithReuseIdentifier: TagCollectionViewCell.reuseId)
     }
     
-    private let explanationContainerView = ExplanationContainerTextView(tvTitle: "설명")
+    private var TagModels: [TagCollectionViewModel] = [
+        TagCollectionViewModel(backgroundColor: UIColor(red: 186/255, green: 200/255, blue: 255/255, alpha: 1), isSelected: true, iconImgae: UIImage(named: "EZY_UnSelectedTagAddButtonImage")!),
+        TagCollectionViewModel(backgroundColor: UIColor(red: 221/255, green: 220/255, blue: 220/255, alpha: 1), isSelected: false, iconImgae: UIImage(named: "EZY_SelectedNoSelectTagButtonImage")!)]
     
-    private let sizeCheckLabel = UILabel().then{
-        $0.dynamicFont(fontSize: 12, currentFontName: "AppleSDGothicNeo-Bold")
-        $0.sizeToFit()
-    }
-    
-    //MARK: - lifeCycles
+    // MARK: - lifeCycles
     override func viewDidLoad() {
         super.viewDidLoad()
     
         configureUI()
     }
     
-    //MARK: - helpers
+    // MARK: - helpers
     private func configureUI(){
         self.view.backgroundColor = .white
         
         addView()
-                
         location()
-        
         dataSourceAndDelegate()
     }
     
-    //MARK: - dataSourceAndDelegate
+    // MARK: - dataSourceAndDelegate
     private func dataSourceAndDelegate(){
         tagCollectionView.delegate = self
         tagCollectionView.dataSource = self
         explanationContainerView.tv.delegate = self
     }
     
-    //MARK: - addLayout
+    // MARK: - location
     private func location(){
         backButton.snp.makeConstraints { make in
             make.top.equalTo(self.view.safeAreaLayoutGuide).offset(self.view.frame.height/47.7)
@@ -198,24 +181,20 @@ class AddOrChangeMyTodoViewController: UIViewController{
             make.width.equalToSuperview().dividedBy(33.8/2)
             make.height.equalTo(backButton.snp.width)
         }
-        
         mainTitleLabel.snp.makeConstraints { make in
             make.left.equalTo(backButton)
             make.top.equalTo(backButton.snp.bottom).offset(self.view.frame.height/50)
         }
-        
         titleBackgroundView.snp.makeConstraints {
             $0.centerX.equalToSuperview()
             $0.left.equalToSuperview().offset(self.view.frame.width/13.3)
             $0.height.equalToSuperview().dividedBy(12)
             $0.top.equalTo(mainTitleLabel.snp.bottom).offset(self.view.frame.height/50)
         }
-        
         titleLabel.snp.makeConstraints {
             $0.centerY.equalToSuperview()
             $0.left.equalToSuperview().offset(self.view.frame.width/17.8)
         }
-        
         titleTextField.snp.makeConstraints {
             $0.centerY.equalToSuperview()
             $0.left.equalTo(titleLabel.snp.right).offset(self.view.frame.width/17.8)
@@ -228,7 +207,6 @@ class AddOrChangeMyTodoViewController: UIViewController{
             make.centerX.equalToSuperview()
             make.top.equalTo(titleBackgroundView.snp.bottom).offset(self.view.frame.height/30.07)
         }
-        
         btnStackView.snp.makeConstraints {
             $0.top.equalTo(calendarBtn.snp.bottom).offset(bounds.height/47.76)
             $0.left.equalTo(calendarBtn)
@@ -261,14 +239,12 @@ class AddOrChangeMyTodoViewController: UIViewController{
             make.width.equalTo(notificationAddButton.snp.height)
             make.height.equalTo(self.view.frame.height/20)
         }
-        
         notificationNoSelectButton.snp.makeConstraints { make in
             make.height.equalTo(self.view.frame.height/20)
             make.centerY.equalTo(notificationAddButton)
             make.width.equalTo(notificationNoSelectButton.snp.height)
             make.left.equalTo(notificationAddButton.snp.right).offset(self.view.frame.width/37)
         }
-        
         addOrChangeButton.snp.makeConstraints { make in
             make.centerX.equalToSuperview()
             make.left.equalTo(notificationAddButton)
@@ -285,7 +261,7 @@ class AddOrChangeMyTodoViewController: UIViewController{
     }
 
     // MARK: - selectors
-    @objc func notificationAddButtonClicked(sender:UIButton){
+    @objc private func notificationAddButtonClicked(sender:UIButton){
         let MoreCalendarModalsVC = MoreAlarmModelViewController.instance()
         MoreCalendarModalsVC.delegate = self
         MoreCalendarModalsVC.baseDelegate = self
@@ -294,44 +270,61 @@ class AddOrChangeMyTodoViewController: UIViewController{
         AlarmSettingCell().isSelected = false
     }
     
-    @objc func notificationNoSelectButtonClicked(sender:UIButton){
+    @objc private func notificationNoSelectButtonClicked(sender:UIButton){
         notificationNoSelectButton.backgroundColor = UIColor(red: 221/255, green: 220/255, blue: 220/255, alpha: 1)
         notificationNoSelectButton.setImage(UIImage(named: "EZY_SelectedNoSelectTagButtonImage"), for: .normal)
     }
     
-    @objc func calendarAlert(){
-        let CalendarAddModalVC = CalendarAddModelViewController.instance()
+    @objc private func calendarAlert(){
+        let CalendarAddModalVC = CalendarAddModalViewController.instance()
         CalendarAddModalVC.delegate = self
         CalendarAddModalVC.baseDelegate = self
         addDim()
         present(CalendarAddModalVC, animated: true, completion: nil)
-        CalendarAddModalVC.calendarModalDataSetting(dayIndex: dayPickerViewSelectedValueIndex, repeatIndex: selectedRepeatIndex)
+        CalendarAddModalVC.calendarModalDataSetting(dayIndex: selectedDayIndex, repeatIndex: selectedRepeatIndex)
     }
     
-    @objc func clockAlert(){
+    @objc private func clockAlert(){
         let TimeAddModalVC = TimeAddModalViewController.instance()
         TimeAddModalVC.baseDelegate = self
         TimeAddModalVC.delegate = self
         addDim()
         present(TimeAddModalVC, animated: true, completion: nil)
-        TimeAddModalVC.timeValueSetting(receiveStartTime: receiveStartTime, receiveEndTime: receiveEndTime, leftOrRight: leftOrRight, selectedValuesIndex: selectedTimeIndex)
+        TimeAddModalVC.timeValueSetting(leftOrRight: ["오전", "오전"], selectedValuesIndex: selectedTimeIndex)
     }
     
-    @objc func locationAlert(){
+    @objc private func locationAlert(){
         let nextViewController = SelectLocationViewController()
         self.navigationController?.pushViewController(nextViewController, animated: true)
     }
     
-    @objc func changeButtonClicked(sender:UIButton){
-//        self.navigationController?.popViewController(animated: true)
-        addPost()
-    }
-    
-    @objc func backButtonClicked(sender:UIButton){
+    @objc private func backButtonClicked(sender:UIButton){
         self.navigationController?.popViewController(animated: true)
     }
     
-    //MARK: 화면터치하여 내리기
+    @objc private func changeButtonClicked(sender:UIButton){
+        if checkEmpty(textField: titleTextField) == true{
+            shakeView(titleLabel)
+        }else{
+            if planTime[0] == "0000-00-00"{
+                shakeView(calendarBtn)
+            }else{
+                if planTime[1] == "00:00"{
+                    shakeView(clockBtn)
+                }else{
+                    if titleTextField.text == "나의 할 일 추가"{
+                        print("추가 API 실행")
+                        myToDoAPI(url: "추가 url")
+                    }else{
+                        print("변경 API 실행")
+                        myToDoAPI(url: "변경 url")
+                    }
+                }
+            }
+        }
+    }
+    
+    // MARK: 화면터치하여 설명 뷰 내리기
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?){
         self.explanationContainerView.tv.endEditing(true)
         
@@ -351,7 +344,7 @@ class AddOrChangeMyTodoViewController: UIViewController{
         }
     }
     
-    //MARK: - Alarm Setting Function
+    // MARK: - Alarm Setting Function
     private func alarmReloadSetting(_ ampm: String,_ time: Int,_ minute: Int){
         notificationAddButton.setTitle("\(ampm) \(time):\(String(format: "%02d", minute))", for: .normal)
         notificationAddButton.setImage(nil, for: .normal)
@@ -366,67 +359,34 @@ class AddOrChangeMyTodoViewController: UIViewController{
         }
     }
     
-    //MARK: - calendar Setting Function
-    private func calendarReloadSetting(_ selectedDay: String, _ selectedRepeatDay: [String], _ selectedDayOfWeek: String, _ yearAndMonthText: String, _ selectedValuesIndex: Int, _ selectedRepeatIndex: [Int]){
-        
-        // 반복라벨에 적용
-        if selectedRepeatDay.count == 0{
-            calendarBtn.repeatLabel.text = "반복 없음"
-        }else{
-            calendarBtn.repeatLabel.text = "\(selectedRepeatDay.joined(separator: ",")) 반복"
-        }
-        
-        // 선택한 내용 dayLabel에 적용
-        if selectedDayOfWeek != "" { calendarBtn.dayLabel.text = "\(yearAndMonthText).\(selectedDay) \(selectedDayOfWeek)요일" }
-        
-        self.selectedRepeatIndex = selectedRepeatIndex
-        dayPickerViewSelectedValueIndex = selectedValuesIndex
-    }
-    
-    //MARK: - time Setting Function
-    private func timeReloadSetting(_ leftOrRight: [String], _ startTime: String, _ endTime: String, _ afterOrMorn: [String], _ selectedTimeIndex: [Int]){
-        self.leftOrRight = leftOrRight
-        self.selectedTimeIndex = selectedTimeIndex
-        self.receiveStartTime = startTime
-        self.receiveEndTime = endTime
-
-        clockBtn.alertButtonTitleLabel.text = "\(LeftOrRightChangeKorean(leftOrRight: leftOrRight[0])) \(startTime) ~ \(LeftOrRightChangeKorean(leftOrRight: leftOrRight[1])) \(endTime)"
-    }
-    
-    // MARK: - tagReloadSetting
-    private func tagReloadSetting(_ tagName: String, _ tagColorIndex: Int){
-        for i in 0...TagModels.count-1{
-            if TagModels[i].isSelected == false{
-                TagModels[i].isSelected.toggle()
-            }
-        }
-        
-        TagModels[1].iconImgae = UIImage(named: "EZY_UnSelectedNoSelectTagButtonImage")!
-        TagModels.insert(TagCollectionViewModel(backgroundColor: UIColor.EZY_TagColor2, isSelected: false, iconImgae: UIImage()), at: 2)
-        tagNameTextArray.insert(tagName, at: 2)
-        tagCollectionView.reloadData()
-    }
-    
     // MARK: - mainTitleLabelSetting
     func mainTitleLabelSetting(mainTitleText: String, buttonText: String){
         mainTitleLabel.text = mainTitleText
         addOrChangeButton.setTitle(buttonText, for: .normal)
     }
     
-    // MARK: - LeftOrRightChangeKorean
-    private func LeftOrRightChangeKorean(leftOrRight: String) -> String{
-        if leftOrRight == "L" { return "오전" }else{ return "오후" }
+    // MARK: - checkEmpty
+    private func checkEmpty(textField: UITextField) -> Bool{
+        if textField.text!.trimmingCharacters(in: .whitespaces).isEmpty || textField.text == ""{
+            return true
+        }else{
+            return false
+        }
     }
     
-    // MARK: - shakeView
-    private func shakeView(_ view: UIView?) {
-        let shake = CABasicAnimation(keyPath: "position")
-        shake.duration = 0.08
-        shake.repeatCount = 2
-        shake.autoreverses = true
-        shake.fromValue = NSValue(cgPoint: CGPoint(x: (view?.center.x)! - 2, y: view?.center.y ?? 0.0))
-        shake.toValue = NSValue(cgPoint: CGPoint(x: (view?.center.x)! + 2, y: view?.center.y ?? 0.0))
-        view?.layer.add(shake, forKey: "position")
+    // MARK: - tagToggle
+    private func tagToggle(index: IndexPath){
+        tagReset()
+        TagModels[index.row].isSelected.toggle()
+    }
+    
+    // MARK: - tagReset
+    private func tagReset(){
+        for i in 0...TagModels.count-1{
+            if TagModels[i].isSelected == false{
+                TagModels[i].isSelected.toggle()
+            }
+        }
     }
     
     // MARK: - addDim
@@ -448,27 +408,57 @@ class AddOrChangeMyTodoViewController: UIViewController{
         }
     }
     
-    private func addPost() {
-        let url = "http://13.209.63.165:8082/v1/plan/personal"
+    // MARK: - shakeView
+    private func shakeView(_ view: UIView?) {
+        let shake = CABasicAnimation(keyPath: "position")
+        shake.duration = 0.08
+        shake.repeatCount = 2
+        shake.autoreverses = true
+        shake.fromValue = NSValue(cgPoint: CGPoint(x: (view?.center.x)! - 2, y: view?.center.y ?? 0.0))
+        shake.toValue = NSValue(cgPoint: CGPoint(x: (view?.center.x)! + 2, y: view?.center.y ?? 0.0))
+        view?.layer.add(shake, forKey: "position")
+    }
+    
+    // MARK: - MyToDoAPI
+    private func myToDoAPI(url: String){
+        let headers: HTTPHeaders = ["Authorization" : "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJAeW91amluIiwiYXV0aCI6W3siYXV0aG9yaXR5IjoiUk9MRV9DTElFTlQifV0sImlhdCI6MTYzODE2MTE3NSwiZXhwIjoxNjM4MTY0Nzc1fQ.6Fny5sU-EfDSCbmbdmN2LDFB621iie5HC4P4nTqpRp4"]
         
-        let header: HTTPHeaders = ["Authorization": ""]
+        let params: Parameters = [
+            "period": [
+                "endDateTime": "\(planTime[0])T\(planTime[1]):00",
+                "startDateTime": "\(planTime[0])T\(planTime[2]):00"
+            ],
+            "planInfo": [
+                "explanation": "\(explanationContainerView.tv)",
+                "location": "location",
+                "title": "\(titleTextField.text ?? "")"
+            ],
+            "repetition": true,
+            "tagIdx": 1
+        ]
         
-        let params = [ "period": [ "endDateTime": "yyyy-MM-ddTHH:mm:ss", "startDateTime": "yyyy-MM-ddTHH:mm:ss" ], "planInfo": [ "explanation": "explanation", "location": "location", "title": "title" ], "repetition": true, "tagIdx": 12 ] as Dictionary
-        
-        let call = AF.request(url, method: .post, parameters: params, encoding: JSONEncoding.default, headers: header)
-        
-        call.responseString { (response) in
-            switch response.result {
-            case .success:
-                print("POST success")
-            case .failure(let error):
-                print("Alamofire Request Error\nCode:\(error._code), Message: \(error.errorDescription!)")
+        API.shared.request(url: url, method: .post, param: params, header: headers, JSONDecodeUsingStatus: false) { result in
+            switch result{
+            case .success(let result):
+                print("success result : \(result)")
+            case .requestErr(let result):
+                print("requestErr : \(result)")
+            case .pathErr:
+                print("pathErr")
+            case .serverErr:
+                print("serverErr")
+            case .networkFail:
+                print("networkFail")
+            case .tokenErr:
+                print("tokenErr")
+            case .authorityErr:
+                print("authorityErr")
             }
         }
     }
 }
 
-//MARK: - collectionView extension
+// MARK: - collectionView extension
 extension AddOrChangeMyTodoViewController: UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout{
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -483,11 +473,10 @@ extension AddOrChangeMyTodoViewController: UICollectionViewDataSource, UICollect
         if collectionView == tagCollectionView{
             if indexPath == [0,0]{
                 let cell = collectionView.dequeueReusableCell(withReuseIdentifier: TagCollectionViewCell.reuseId, for: indexPath) as! TagCollectionViewCell
+                cell.iconButton.imageEdgeInsets = UIEdgeInsets(top: view.frame.width/30, left: view.frame.width/30, bottom: view.frame.width/30, right: view.frame.width/30)
                 
                 cell.tagNameLabel.isHidden = true
                 cell.iconButton.isHidden = false
-                cell.iconButton.imageEdgeInsets = UIEdgeInsets(top: view.frame.width/30, left: view.frame.width/30, bottom: view.frame.width/30, right: view.frame.width/30)
-
                 cell.setModel(TagModels[indexPath.row])
                 
                 return cell
@@ -496,7 +485,6 @@ extension AddOrChangeMyTodoViewController: UICollectionViewDataSource, UICollect
                 
                 cell.tagNameLabel.isHidden = true
                 cell.iconButton.isHidden = false
-
                 cell.setModel(TagModels[indexPath.row])
                 
                 return cell
@@ -505,9 +493,7 @@ extension AddOrChangeMyTodoViewController: UICollectionViewDataSource, UICollect
                     
                 cell.iconButton.isHidden = true
                 cell.tagNameLabel.isHidden = false
-
                 cell.setModel(TagModels[indexPath.row])
-                    
                 cell.tagNameLabel.text = tagNameTextArray[indexPath.row]
                     
                 return cell
@@ -518,55 +504,30 @@ extension AddOrChangeMyTodoViewController: UICollectionViewDataSource, UICollect
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
-
-        if collectionView == tagCollectionView{
-            return UIEdgeInsets(top: 0, left: self.view.frame.width/12, bottom: 0, right: self.view.frame.width/12)
-        }
-        
-        return UIEdgeInsets()
+        return UIEdgeInsets(top: 0, left: self.view.frame.width/12, bottom: 0, right: self.view.frame.width/12)
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        if collectionView == tagCollectionView{
-            if indexPath == [0,0] || indexPath == [0,1]{
-                return CGSize(width: self.view.frame.height/20, height: self.view.frame.height/20)
-            }else{
-                return CGSize(width: tagNameTextArray[indexPath.item].size(withAttributes: [NSAttributedString.Key.font : UIFont.systemFont(ofSize: 17)]).width + 25, height: self.view.frame.height/20)
-            }
+        if indexPath == [0,0] || indexPath == [0,1]{
+            return CGSize(width: self.view.frame.height/20, height: self.view.frame.height/20)
+        }else{
+            return CGSize(width: tagNameTextArray[indexPath.item].size(withAttributes:[NSAttributedString.Key.font : UIFont.systemFont(ofSize: 17)]).width + 25, height:self.view.frame.height/20)
         }
-        return CGSize()
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        if collectionView == tagCollectionView{
-            if indexPath == [0,0]{
-                // tagAddModalView 생성!
-                let TagAddModalVC = TagAddModalViewController.instance()
-                TagAddModalVC.delegate = self
-                TagAddModalVC.baseDelegate = self
-                addDim()
-                present(TagAddModalVC, animated: true, completion: nil)
-            }else if indexPath == [0,1]{
-                TagModels[indexPath.row].iconImgae = UIImage(named: "EZY_SelectedNoSelectTagButtonImage")!
-
-                for i in 0...TagModels.count-1{
-                    if TagModels[i].isSelected == false{
-                        TagModels[i].isSelected.toggle()
-                    }
-                }
-                    
-                TagModels[indexPath.row].isSelected.toggle()
-            }else{
-                TagModels[1].iconImgae = UIImage(named: "EZY_UnSelectedNoSelectTagButtonImage")!
-
-                for i in 0...TagModels.count-1{
-                    if TagModels[i].isSelected == false{
-                        TagModels[i].isSelected.toggle()
-                    }
-                }
-                    
-                TagModels[indexPath.row].isSelected.toggle()
-            }
+        if indexPath == [0,0]{
+            let TagAddModalVC = TagAddModalViewController.instance()
+            TagAddModalVC.delegate = self
+            TagAddModalVC.baseDelegate = self
+            addDim()
+            present(TagAddModalVC, animated: true, completion: nil)
+        }else if indexPath == [0,1]{
+            TagModels[indexPath.row].iconImgae = UIImage(named: "EZY_SelectedNoSelectTagButtonImage")!
+            tagToggle(index: indexPath)
+        }else{
+            TagModels[1].iconImgae = UIImage(named: "EZY_UnSelectedNoSelectTagButtonImage")!
+            tagToggle(index: indexPath)
         }
         
         collectionView.reloadData()
@@ -600,36 +561,69 @@ extension AddOrChangeMyTodoViewController: UITextViewDelegate{
         calendarBtn.isUserInteractionEnabled = true
     }
 }
-//MARK: - AlarmModal Delegate
+// MARK: - AlarmModal Delegate
 extension AddOrChangeMyTodoViewController: AlarmModelDelegate{
     func updateData(ampm: String, time: Int, minute: Int) {
         self.alarmReloadSetting(ampm, time + 1, minute)
     }
-    
 }
-//MARK: - CalendarModal Delegate
+
+// MARK: - CalendarModal Delegate
 extension AddOrChangeMyTodoViewController: CalendarAddDelegate{
-    func updateData(selectedDay: String, selectedRepeatDay: [String], selectedDayOfWeek: String, yearAndMonthText: String, selectedValuesIndex: Int, selectedRepeatIndex: [Int]) {
-        self.calendarReloadSetting(selectedDay, selectedRepeatDay, selectedDayOfWeek, yearAndMonthText, selectedValuesIndex, selectedRepeatIndex)
-    }
-}
-//MARK: - TimeModal Delegate
-extension AddOrChangeMyTodoViewController: TimeAddDelegate{
-    func updateData(leftOrRight: [String], startTime: String, endTime: String, afterOrMorn: [String], selectedTimeIndex: [Int]) {
-        self.timeReloadSetting(leftOrRight, startTime, endTime, afterOrMorn, selectedTimeIndex)
+    func updateData(selectedDay: String, selectedDayIndex: Int) {
+        // 선택한 반복 현재 VC의 label에 표시
+        calendarBtn.alertButtonTitleLabel.text = selectedDay
+        
+        // 선택했던 index를 저장하고 다시 시간 선택 모달을 호출할 시에 index를 통해 전에 선택한 값을 세팅한다.
+        self.selectedDayIndex = selectedDayIndex
+        
+        // server 데이터 형식에 맞게 설정한 후 planTime에 저장한다. (이후 planTime을 server로 전송)
+        let endIdx: String.Index = selectedDay.index(selectedDay.startIndex, offsetBy: 11)
+        let result = String(selectedDay[...endIdx]).replacingOccurrences(of: ". ", with: "-")
+        planTime[0] = result
     }
 }
 
-//MARK: - TagModal Delegate
+// MARK: - TimeModal Delegate
+extension AddOrChangeMyTodoViewController: TimeAddDelegate{
+    func updateData(leftOrRight: [String], selectedTime: [String], selectedTimeIndex: [Int]) {        
+        clockBtn.alertButtonTitleLabel.text = "\(leftOrRight[0]) \(selectedTime[0]):\(selectedTime[1]) - \(leftOrRight[1]) \(selectedTime[2]):\(selectedTime[3])"
+        
+        // 선택했던 index를 저장하고 다시 시간 선택 모달을 호출할 시에 index를 통해 전에 선택한 값을 세팅한다.
+        self.selectedTimeIndex = selectedTimeIndex
+        
+        // server 데이터 형식에 맞게 설정한 후 planTime에 저장한다. (이후 planTime을 server로 전송)
+        planTime[0] = "\(selectedTime[0]):\(selectedTime[1])"
+        planTime[1] = "\(selectedTime[2]):\(selectedTime[3])"
+    }
+}
+
+// MARK: - TagModal Delegate
 extension AddOrChangeMyTodoViewController: TagAddDelegate{
     func updateData(tagName: String, tagColorIndex: Int) {
-        self.tagReloadSetting(tagName, tagColorIndex)
+        tagReset()
+        TagModels[1].iconImgae = UIImage(named: "EZY_UnSelectedNoSelectTagButtonImage")!
+        TagModels.insert(TagCollectionViewModel(backgroundColor: UIColor.EZY_TagColorArray[tagColorIndex], isSelected: false, iconImgae: UIImage()), at: 2)
+        tagNameTextArray.insert(tagName, at: 2)
+        tagCollectionView.reloadData()
     }
 }
 
-//MARK: - BaseModal Delegate
+// MARK: - BaseModal Delegate
 extension AddOrChangeMyTodoViewController : BaseModalDelegate{
     func onTapClose() {
         self.removeDim()
     }
+}
+
+extension AddOrChangeMyTodoViewController: BasicModalViewButtonDelegate{
+    func onTabOkButton(sender: UIButton) {
+        self.removeDim()
+    }
+}
+
+struct ResponseModel : Codable{
+    var success: Bool
+    var code: Int
+    var massage: String
 }

@@ -9,6 +9,8 @@ import UIKit
 import Alamofire
 
 class SelectLocationViewController: UIViewController {
+    // MARK: - Kakao Search Data
+    private var kakaoPlaceSearchData : [KakaoDocuments]? = nil
     
     // MARK: - Properties
     
@@ -18,12 +20,8 @@ class SelectLocationViewController: UIViewController {
     let bgView = UIView().then {
         $0.backgroundColor = .black
     }
-    private let alphabet : [String] = ["A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T","U","V","W","X","Y","Z"]
     
-    private let selectLocationModalView = SelectLocationModalView().then{
-        $0.okButton.addTarget(self, action: #selector(okButtonClicked(sender:)), for: .touchUpInside)
-        $0.isHidden = true
-    }
+    private let alphabet : [String] = ["A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T","U","V","W","X","Y","Z"]
         
     private let backButton = UIButton().then {
         $0.setImage(UIImage(named: "EZY_LocationBackButton"), for: .normal)
@@ -78,22 +76,14 @@ class SelectLocationViewController: UIViewController {
         self.view.backgroundColor = .white
 
         addView()
-        
         location()
-        
         delegateAndDataSource()
     }
     
     // MARK: - addView
     private func addView(){
-        self.view.addSubview(topViewHalfModalView)
-        self.view.addSubview(backButton)
-        self.view.addSubview(textFieldBackgroundView)
-        self.view.addSubview(searchButton)
-        textFieldBackgroundView.addSubview(locationTextField)
-        self.view.addSubview(locationTableView)
-        self.view.addSubview(selectLocationModalView)
-        self.view.addSubview(noPlace)
+        [topViewHalfModalView, backButton,textFieldBackgroundView,searchButton, locationTableView,noPlace].forEach { self.view.addSubview($0) }
+        [locationTextField].forEach { textFieldBackgroundView.addSubview($0) }
     }
     
     // MARK: - location
@@ -104,32 +94,27 @@ class SelectLocationViewController: UIViewController {
             make.height.equalToSuperview().dividedBy(33.8)
             make.width.equalTo(backButton.snp.height)
         }
-        
         searchButton.snp.makeConstraints { make in
             make.centerY.equalTo(backButton)
             make.right.equalToSuperview().offset(-self.view.frame.height/30)
             make.height.equalToSuperview().dividedBy(51.09)
             make.width.equalToSuperview().dividedBy(25)
         }
-        
         textFieldBackgroundView.snp.makeConstraints { make in
             make.centerY.equalTo(backButton)
             make.centerX.equalToSuperview()
             make.height.equalToSuperview().dividedBy(21.3)
             make.width.equalToSuperview().dividedBy(1.5)
         }
-        
         locationTextField.snp.makeConstraints { make in
             make.width.equalToSuperview().dividedBy(1.19)
             make.centerX.equalToSuperview()
             make.height.equalToSuperview()
         }
-        
         topViewHalfModalView.snp.makeConstraints { make in
             make.top.left.right.equalToSuperview()
             make.height.equalToSuperview().dividedBy(6.24)
         }
-        
         locationTableView.snp.makeConstraints { make in
             make.top.equalTo(topViewHalfModalView.snp.bottom).offset(self.view.frame.height/28)
             make.left.equalToSuperview()
@@ -150,11 +135,6 @@ class SelectLocationViewController: UIViewController {
     }
     
     // MARK: - Selectors
-    @objc private func okButtonClicked(sender:UIButton){
-        selectLocationModalView.isHidden = true
-        self.navigationController?.popViewController(animated: true)
-    }
-    
     @objc private func backButtonClicked(sender:UIButton){
         self.navigationController?.popViewController(animated: true)
     }
@@ -186,18 +166,18 @@ class SelectLocationViewController: UIViewController {
             }
         }
     }
-    //MARK: - Modal Effect
+
     // MARK: - addDim
     private func addDim() {
-           view.addSubview(bgView)
-           bgView.snp.makeConstraints { (make) in
-               make.edges.equalTo(0)
-           }
+        view.addSubview(bgView)
+        bgView.snp.makeConstraints { (make) in
+            make.edges.equalTo(0)
+        }
 
         DispatchQueue.main.async { [weak self] in
-               self?.bgView.backgroundColor = .black.withAlphaComponent(0.15)
-           }
-       }
+            self?.bgView.backgroundColor = .black.withAlphaComponent(0.15)
+        }
+    }
        
     // MARK: - removeDim
     private func removeDim() {
@@ -237,13 +217,14 @@ extension SelectLocationViewController: UITableViewDataSource, UITableViewDelega
         let BasicModalVC = BasicModalViewController.instance()
         let kakaoPlaceVM = self.kakaoPlaceVM.kakaoPlaceIndex(indexPath.row)
         addDim()
-        BasicModalVC.baseDelegate = self
         BasicModalVC.delegate = self
+        BasicModalVC.baseDelegate = self
         present(BasicModalVC, animated: true, completion: nil)
-        BasicModalVC.textSetting(colorText: kakaoPlaceVM.placeName ?? "", contentText: "위치를 선택할까요?")
+        BasicModalVC.textSetting(colorText: kakaoPlaceVM.placeName ?? "", contentText: "위치를 선택할까요?", sender: UIButton())
     }
 }
-//MARK: - textfield 설정
+
+// MARK: - textfield 설정
 extension SelectLocationViewController : UITextFieldDelegate{
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         
@@ -252,7 +233,7 @@ extension SelectLocationViewController : UITextFieldDelegate{
         return true
     }
 }
-//MARK: - BaseModal Delegate
+
 extension SelectLocationViewController: BaseModalDelegate {
     func onTapClose() {
         removeDim()
@@ -260,8 +241,9 @@ extension SelectLocationViewController: BaseModalDelegate {
 }
 
 extension SelectLocationViewController: BasicModalViewButtonDelegate{
-    func onTabOkButton() {
+    func onTabOkButton(sender:UIButton) {
         removeDim()
-        self.navigationController?.popViewController(animated: false)
+
+        self.navigationController?.popViewController(animated: true)
     }
 }

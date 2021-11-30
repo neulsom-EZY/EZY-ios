@@ -10,8 +10,15 @@ import SnapKit
 import Then
 
 class ShowPlanViewController: UIViewController{
-
-    //MARK: Properties
+    // MARK: - Properties
+    private var selectedIndex = 0
+    
+    private let bgView = UIView()
+    
+    private let planEmptyView = PlanEmptyView().then{
+        $0.isHidden = true
+    }
+    
     private var groupNameArray: [String] = ["EZY 회의", "디자인 이론 공부", "강아지 산책시키기", "카페에서 마카롱 사오기", "EZY 회의", "디자인 이론 공부", "강아지 산책시키기", "카페에서 마카롱 사오기"]
     
     private var planTitleTextArray: [String] = ["EZY 회의", "디자인 이론 공부", "강아지 산책시키기", "카페에서 마카롱 사오기", "EZY 회의댜댵", "디자인 이론 공부", "강아지 산책시키기", "카페에서 마카롱 사오기"]
@@ -22,25 +29,9 @@ class ShowPlanViewController: UIViewController{
     
     private var icon = [UIImage(named: "EZY_OnePersonImage"), UIImage(named: "EZY_Errand"), UIImage(named: "EZY_InquiryImage"), UIImage(named: "EZY_settingsIcon")]
     
-    private let userName = "Y00ujin"
-    
-    private var selectedIndex = 0
-    
-    private let purpleColor: UIColor! = UIColor(red: 150/255, green: 141/255, blue: 255/255, alpha: 1)
-    
-    private let orangeColor: UIColor! = UIColor(red: 255/255, green: 166/255, blue: 128/255, alpha: 1)
-    
-    private let yellowColor: UIColor! = UIColor(red: 255/255, green: 209/255, blue: 141/255, alpha: 1)
-    
-    private let greenColor: UIColor! = UIColor(red: 184/255, green: 128/255, blue: 255/255, alpha: 1)
-    
-    private lazy var EZYPlanBackgroundColor: [UIColor] = [purpleColor, orangeColor, yellowColor, greenColor, purpleColor, orangeColor, yellowColor, greenColor]
-    
-    private let questionTopLabelColorArray = [UIColor(red: 165/255, green: 139/255, blue: 254/255, alpha: 1), UIColor(red: 114/255, green: 111/255, blue: 254/255, alpha: 1)]
-    
-    private let questionMiddleLabelColorArray = [UIColor(red: 114/255, green: 111/255, blue: 255/255, alpha: 1), UIColor(red: 140/255, green: 139/255, blue: 255/255, alpha: 1)]
-    
-    private let questionBottomLabelColorArray = [UIColor(red: 140/255, green: 139/255, blue: 255/255, alpha: 1), UIColor(red: 218/255, green: 225/255, blue: 255/255, alpha: 1)]
+    private var EZYPlanBackgroundColor: [UIColor] = [UIColor.EZY_TagColor2, UIColor.EZY_AFADFF, UIColor.EZY_TagColor2, UIColor.EZY_TagColor9, UIColor.EZY_AFADFF, UIColor.EZY_TagColor2, UIColor.EZY_TagColor2, UIColor.EZY_AFADFF]
+
+
     
     private let badgeView = UIView().then {
         $0.backgroundColor = UIColor(red: 107/255, green: 64/255, blue: 255/255, alpha: 1)
@@ -52,53 +43,36 @@ class ShowPlanViewController: UIViewController{
         $0.addTarget(self, action: #selector(notificationButtonClicked), for: .touchUpInside)
     }
 
-    private lazy var questionTopLabel = UILabel().then {
-        $0.text = "\(userName)님,"
+    private let questionTopLabel = UILabel().then {
+        $0.text = "YOOujin님,"
         $0.textAlignment = .left
         $0.dynamicFont(fontSize: 28, currentFontName: "AppleSDGothicNeo-Bold")
-        $0.updateGradientTextColor_vertical(gradientColors: questionTopLabelColorArray)
+        $0.updateGradientTextColor_vertical(gradientColors: [UIColor(red: 165/255, green: 139/255, blue: 254/255, alpha: 1), UIColor(red: 114/255, green: 111/255, blue: 254/255, alpha: 1)])
     }
     
-    private lazy var questionMiddleLabel = UILabel().then{
+    private let questionMiddleLabel = UILabel().then{
         $0.text = "오늘은 어떤 하루를"
         $0.textAlignment = .left
         $0.dynamicFont(fontSize: 22, currentFontName: "AppleSDGothicNeo-Bold")
-        $0.updateGradientTextColor_vertical(gradientColors: questionMiddleLabelColorArray)
+        $0.updateGradientTextColor_vertical(gradientColors: [UIColor(red: 114/255, green: 111/255, blue: 255/255, alpha: 1), UIColor(red: 140/255, green: 139/255, blue: 255/255, alpha: 1)])
     }
     
-    private lazy var questionBottomLabel = UILabel().then{
+    private let questionBottomLabel = UILabel().then{
         $0.text = "보내실 건가요?"
         $0.textAlignment = .left
         $0.dynamicFont(fontSize: 22, currentFontName: "AppleSDGothicNeo-Bold")
-        $0.updateGradientTextColor_vertical(gradientColors: questionBottomLabelColorArray)
+        $0.updateGradientTextColor_vertical(gradientColors: [UIColor(red: 140/255, green: 139/255, blue: 255/255, alpha: 1), UIColor(red: 218/255, green: 225/255, blue: 255/255, alpha: 1)])
     }
     
-    private lazy var ezyListTitleLabel = UILabel().then {
+    private let ezyListTitleLabel = UILabel().then {
         $0.textColor = UIColor(red: 150/255, green: 141/255, blue: 255/255, alpha: 1)
         $0.text = "EZYLIST"
         $0.dynamicFont(fontSize: 12, currentFontName: "Poppins-Bold")
     }
     
-    private let EZYPlanAddButton = UIButton().then {
+    private let planAddButton = UIButton().then {
         $0.setImage(UIImage(named: "EZY_PlanAddButton"), for: .normal)
-        $0.addTarget(self, action: #selector(EZYPlanAddButtonClicked(sender:)), for: .touchUpInside)
-    }
-    
-    private let emptyPlanBoxView = UIView().then{
-        $0.backgroundColor = .white
-    }
-    
-    private let emptyLabel = UITextView().then{
-        $0.isScrollEnabled = false
-        $0.isEditable = false
-        $0.textColor = UIColor(red: 74/255, green: 74/255, blue: 74/255, alpha: 1)
-        $0.text = "아직 계획이 없네요 !\n가치있는 하루를 위해 계획을 세워보세요"
-        $0.textAlignment = .center
-        $0.dynamicFont(fontSize: 12, currentFontName: "AppleSDGothicNeo-Thin")
-    }
-    
-    private let emptyImageView = UIImageView().then{
-        $0.image = UIImage(named: "EZY_EmptyImage")
+        $0.addTarget(self, action: #selector(planAddButtonClicked(sender:)), for: .touchUpInside)
     }
     
     private let scheduleTimeTableView = UITableView().then {
@@ -110,16 +84,14 @@ class ShowPlanViewController: UIViewController{
     private let scheduleTypeCollectionMainView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout()).then {
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .horizontal
-        $0.backgroundColor = .white
+        $0.backgroundColor = .clear
         $0.contentInset = UIEdgeInsets.init(top: 0, left: 17, bottom: 0, right: 0)
         $0.showsHorizontalScrollIndicator = false
         $0.collectionViewLayout = layout
         $0.register(ScheduleTypeCollectionViewCell.self, forCellWithReuseIdentifier: ScheduleTypeCollectionViewCell.ScheduleTypeCollectionViewIdentifier)
         $0.backgroundColor = .white
     }
-    
-    private let bgView = UIView()
-    
+        
     private let middleComponemtView = UIButton().then{
         $0.backgroundColor = .white
         $0.layer.masksToBounds = false
@@ -130,154 +102,109 @@ class ShowPlanViewController: UIViewController{
         $0.addTarget(self, action: #selector(middleComponemtViewClicked(sender:)), for: .touchUpInside)
     }
     
-    //MARK: Lifecycles
+    // MARK: - Lifecycles
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         addView()
-        
         location()
-        
-        tableViewDataSourceAndDelegate()
-        
-        collectionViewDataSourceAndDelegate()
+        delegateAndDataSource()
+        resetTableViewCollectionView()
     }
     
-    // MARK: - resetTableViewCollectionView
-    func resetTableViewCollectionView(){
-        scheduleTimeTableView.resetTableViewScrollPositionToTop()
-        scheduleTypeCollectionMainView.resetCollectionViewScrollPositionToTop()
-    }
-    
-    // MARK: - collectionViewDataSourceAndDelegate
-    func collectionViewDataSourceAndDelegate(){
+    // MARK: - delegateAndDataSource
+    private func delegateAndDataSource(){
         scheduleTypeCollectionMainView.delegate = self
         scheduleTypeCollectionMainView.dataSource = self
-    }
-    
-    // MARK: - tableViewDataSourceAndDelegate
-    func tableViewDataSourceAndDelegate(){
         scheduleTimeTableView.dataSource = self
         scheduleTimeTableView.delegate = self
     }
     
-    // MARK: - addView
-    func addView(){
-        self.view.backgroundColor = .white
-        self.view.addSubview(questionTopLabel)
-        self.view.addSubview(questionMiddleLabel)
-        self.view.addSubview(questionBottomLabel)
-        self.view.addSubview(notificationButton)
-        self.notificationButton.addSubview(badgeView)
-        self.view.addSubview(emptyPlanBoxView)
-        emptyPlanBoxView.addSubview(emptyLabel)
-        emptyPlanBoxView.addSubview(emptyImageView)
-        self.view.addSubview(scheduleTimeTableView)
-        self.view.addSubview(middleComponemtView)
-        middleComponemtView.addSubview(ezyListTitleLabel)
-        middleComponemtView.addSubview(EZYPlanAddButton)
-        self.view.addSubview(scheduleTypeCollectionMainView)
+    // MARK: - resetTableViewCollectionView
+    private func resetTableViewCollectionView(){
+        scheduleTimeTableView.resetTableViewScrollPositionToTop()
+        scheduleTypeCollectionMainView.resetCollectionViewScrollPositionToTop()
         
         let attributedString = NSMutableAttributedString(string: ezyListTitleLabel.text!)
         attributedString.addAttribute(NSAttributedString.Key.kern, value: CGFloat(3.0), range: NSRange(location: 0, length: attributedString.length))
         ezyListTitleLabel.attributedText = attributedString
     }
     
+    // MARK: - addView
+    private func addView(){
+        self.view.backgroundColor = .white
+        [questionTopLabel, questionMiddleLabel, questionBottomLabel, notificationButton, scheduleTimeTableView, middleComponemtView, scheduleTypeCollectionMainView, planEmptyView].forEach { view.addSubview($0) }
+        [badgeView].forEach { view.addSubview($0)}
+        [ezyListTitleLabel, planAddButton].forEach { middleComponemtView.addSubview($0) }
+    }
+    
     // MARK: - location
-    func location(){
+    private func location(){
         questionTopLabel.snp.makeConstraints { make in
             make.left.equalToSuperview().offset(self.view.frame.width/12.9)
             make.top.equalToSuperview().offset(self.view.frame.height/12)
             make.width.equalToSuperview().dividedBy(2)
         }
-        
         questionMiddleLabel.snp.makeConstraints { make in
             make.top.equalTo(questionTopLabel.snp.bottom)
             make.left.equalTo(questionTopLabel)
         }
-
         questionBottomLabel.snp.makeConstraints { make in
             make.top.equalTo(questionMiddleLabel.snp.bottom)
             make.left.equalTo(questionMiddleLabel)
         }
-        
         badgeView.snp.makeConstraints { make in
             make.top.equalToSuperview().inset(5)
             make.right.equalToSuperview().offset(-3)
             make.width.equalToSuperview().dividedBy(3)
             make.height.equalTo(badgeView.snp.width)
-            
             badgeView.layer.cornerRadius = view.frame.height/54.1/4
         }
-        
         notificationButton.snp.makeConstraints { make in
             make.top.equalTo(questionTopLabel)
             make.right.equalToSuperview().offset(-26.8)
             make.width.equalToSuperview().dividedBy(31.2/2)
             make.height.equalToSuperview().dividedBy(54.1/2)
         }
-        
         scheduleTypeCollectionMainView.snp.makeConstraints { make in
             make.top.equalTo(questionBottomLabel.snp.bottom)
             make.width.equalToSuperview()
             make.centerX.equalToSuperview()
             make.height.equalToSuperview().dividedBy(5.01)
-            
-            scheduleTypeCollectionMainView.backgroundColor = .clear
         }
-        
         middleComponemtView.snp.makeConstraints { make in
             make.top.equalTo(scheduleTypeCollectionMainView.snp.bottom)
             make.width.equalToSuperview()
             make.height.equalToSuperview().dividedBy(13)
         }
-        
         ezyListTitleLabel.snp.makeConstraints { make in
             make.centerY.equalToSuperview()
             make.left.equalTo(questionTopLabel)
         }
-
-        EZYPlanAddButton.snp.makeConstraints { make in
+        planAddButton.snp.makeConstraints { make in
             make.centerY.equalToSuperview()
             make.right.equalTo(notificationButton)
         }
-        
         scheduleTimeTableView.snp.makeConstraints { make in
             make.top.equalTo(ezyListTitleLabel.snp.bottom).offset(self.view.frame.height/36)
             make.width.equalToSuperview()
             make.bottom.equalToSuperview()
             make.centerX.equalToSuperview()
         }
-        
-        emptyPlanBoxView.snp.makeConstraints { make in
+        planEmptyView.snp.makeConstraints { make in
             make.top.equalTo(ezyListTitleLabel.snp.bottom).offset(self.view.frame.height/12.11)
             make.bottom.equalToSuperview().offset(self.view.frame.height/12.11)
             make.left.right.equalToSuperview()
         }
-        
-        emptyImageView.snp.makeConstraints { make in
-            make.top.equalToSuperview()
-            make.centerX.equalToSuperview()
-            make.height.equalToSuperview().dividedBy(2)
-            make.width.equalToSuperview().dividedBy(1.4)
-        }
-        
-        emptyLabel.snp.makeConstraints { make in
-            make.top.equalTo(emptyImageView.snp.bottom).offset(self.view.frame.height/33.8)
-            make.centerX.equalToSuperview()
-        }
     }
     
     // MARK: - Selectors
-    @objc func handleTap(sender:UITapGestureRecognizer){
-        print("handleTap")
-    }
-    
-    @objc func middleComponemtViewClicked(sender:UIButton){
+    @objc private func middleComponemtViewClicked(sender:UIButton){
         let indexPath = NSIndexPath(row: NSNotFound, section: 0)
         self.scheduleTimeTableView.scrollToRow(at: indexPath as IndexPath, at: .top, animated: true)
     }
     
-    @objc func EZYPlanAddButtonClicked(sender:UIButton){
+    @objc private func planAddButtonClicked(sender:UIButton){
         let MoreCalendarModalsVC = MoreCalendarModalsViewController.instance()
         MoreCalendarModalsVC.delegate = self
         MoreCalendarModalsVC.baseDelegate = self
@@ -286,14 +213,10 @@ class ShowPlanViewController: UIViewController{
         addDim()
     }
     
-    @objc func notificationButtonClicked(sender: UIButton) {
+    @objc private func notificationButtonClicked(sender: UIButton) {
         resetTableViewCollectionView()
         let pushVC = NotificationViewController()
         self.navigationController?.pushViewController(pushVC, animated: true)
-    }
-    
-    @objc func completeOkButtonClicked(sender: UIButton) {
-
     }
     
     // MARK: - addDim
@@ -316,6 +239,7 @@ class ShowPlanViewController: UIViewController{
         }
     }
     
+    // MARK: - updateDim
     private func updateDim(viewcontroller : UIViewController){
         DispatchQueue.main.async { [weak self] in
             self?.navigationController?.pushViewController(viewcontroller, animated: true)
@@ -383,10 +307,10 @@ extension ShowPlanViewController: UITableViewDataSource{
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if groupNameArray.count == 0{
             tableView.isHidden = true
-            emptyPlanBoxView.isHidden = false
+            planEmptyView.isHidden = false
             return groupNameArray.count
         }else{
-            emptyPlanBoxView.isHidden = true
+            planEmptyView.isHidden = true
             tableView.isHidden = false
             return groupNameArray.count
         }
@@ -428,7 +352,7 @@ extension ShowPlanViewController: UITableViewDelegate{
         BasicModalVC.delegate = self
         BasicModalVC.baseDelegate = self
         present(BasicModalVC, animated: true, completion: nil)
-        BasicModalVC.textSetting(colorText: groupNameArray[indexPath.row], contentText: "개인 일정을 완료할까요?")
+        BasicModalVC.textSetting(colorText: groupNameArray[indexPath.row], contentText: "개인 일정을 완료할까요?", sender:UIButton())
     }
 }
 
@@ -440,14 +364,16 @@ extension ShowPlanViewController: BulletinDelegate {
     }
 }
 
+// MARK: - BaseModalDelegate Extension
 extension ShowPlanViewController: BaseModalDelegate {
     func onTapClose() {
         removeDim()
     }
 }
 
+// MARK: - BasicModalViewButtonDelegate Extension
 extension ShowPlanViewController: BasicModalViewButtonDelegate{
-    func onTabOkButton() {
+    func onTabOkButton(sender:UIButton) {
         groupNameArray.remove(at: selectedIndex)
         planTitleTextArray.remove(at: selectedIndex)
         planTimeArray.remove(at: selectedIndex)
@@ -459,12 +385,14 @@ extension ShowPlanViewController: BasicModalViewButtonDelegate{
     }
 }
 
+// MARK: - UIScrollView Extension
 extension UIScrollView {
     func resetCollectionViewScrollPositionToTop() {
         self.contentOffset = CGPoint(x: -contentInset.left, y: -contentInset.top)
     }
 }
 
+// MARK: - UITableView Extension
 extension UITableView {
     func resetTableViewScrollPositionToTop() {
         let indexPath = NSIndexPath(row: NSNotFound, section: 0)
