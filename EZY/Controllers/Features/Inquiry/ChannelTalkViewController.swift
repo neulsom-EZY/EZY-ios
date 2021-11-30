@@ -12,9 +12,7 @@ class ChannelTalkViewController: UIViewController, ChannelPluginDelegate {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-                
-        self.view.backgroundColor = .systemPink
-        
+                        
         ChannelIO.delegate = self
         
         let bootConfig = BootConfig(pluginKey: "756d13d4-e4f8-4709-a527-a733454a1b74")

@@ -15,6 +15,10 @@ class ShowPlanViewController: UIViewController{
     
     private let bgView = UIView()
     
+    private let planEmptyView = PlanEmptyView().then{
+        $0.isHidden = true
+    }
+    
     private var groupNameArray: [String] = ["EZY 회의", "디자인 이론 공부", "강아지 산책시키기", "카페에서 마카롱 사오기", "EZY 회의", "디자인 이론 공부", "강아지 산책시키기", "카페에서 마카롱 사오기"]
     
     private var planTitleTextArray: [String] = ["EZY 회의", "디자인 이론 공부", "강아지 산책시키기", "카페에서 마카롱 사오기", "EZY 회의댜댵", "디자인 이론 공부", "강아지 산책시키기", "카페에서 마카롱 사오기"]
@@ -27,9 +31,7 @@ class ShowPlanViewController: UIViewController{
     
     private var EZYPlanBackgroundColor: [UIColor] = [UIColor.EZY_TagColor2, UIColor.EZY_AFADFF, UIColor.EZY_TagColor2, UIColor.EZY_TagColor9, UIColor.EZY_AFADFF, UIColor.EZY_TagColor2, UIColor.EZY_TagColor2, UIColor.EZY_AFADFF]
 
-    private let emptyPlanBoxView = UIView().then{ $0.backgroundColor = .white }
-    
-    private let emptyImageView = UIImageView().then{ $0.image = UIImage(named: "EZY_EmptyImage") }
+
     
     private let badgeView = UIView().then {
         $0.backgroundColor = UIColor(red: 107/255, green: 64/255, blue: 255/255, alpha: 1)
@@ -71,15 +73,6 @@ class ShowPlanViewController: UIViewController{
     private let planAddButton = UIButton().then {
         $0.setImage(UIImage(named: "EZY_PlanAddButton"), for: .normal)
         $0.addTarget(self, action: #selector(planAddButtonClicked(sender:)), for: .touchUpInside)
-    }
-    
-    private let emptyLabel = UITextView().then{
-        $0.isScrollEnabled = false
-        $0.isEditable = false
-        $0.textColor = UIColor(red: 74/255, green: 74/255, blue: 74/255, alpha: 1)
-        $0.text = "아직 계획이 없네요 !\n가치있는 하루를 위해 계획을 세워보세요"
-        $0.textAlignment = .center
-        $0.dynamicFont(fontSize: 12, currentFontName: "AppleSDGothicNeo-Thin")
     }
     
     private let scheduleTimeTableView = UITableView().then {
@@ -140,9 +133,8 @@ class ShowPlanViewController: UIViewController{
     // MARK: - addView
     private func addView(){
         self.view.backgroundColor = .white
-        [questionTopLabel, questionMiddleLabel, questionBottomLabel, notificationButton, emptyPlanBoxView, scheduleTimeTableView, middleComponemtView, scheduleTypeCollectionMainView].forEach { view.addSubview($0) }
+        [questionTopLabel, questionMiddleLabel, questionBottomLabel, notificationButton, scheduleTimeTableView, middleComponemtView, scheduleTypeCollectionMainView, planEmptyView].forEach { view.addSubview($0) }
         [badgeView].forEach { view.addSubview($0)}
-        [emptyLabel, emptyImageView].forEach { emptyPlanBoxView.addSubview($0) }
         [ezyListTitleLabel, planAddButton].forEach { middleComponemtView.addSubview($0) }
     }
     
@@ -199,20 +191,10 @@ class ShowPlanViewController: UIViewController{
             make.bottom.equalToSuperview()
             make.centerX.equalToSuperview()
         }
-        emptyPlanBoxView.snp.makeConstraints { make in
+        planEmptyView.snp.makeConstraints { make in
             make.top.equalTo(ezyListTitleLabel.snp.bottom).offset(self.view.frame.height/12.11)
             make.bottom.equalToSuperview().offset(self.view.frame.height/12.11)
             make.left.right.equalToSuperview()
-        }
-        emptyImageView.snp.makeConstraints { make in
-            make.top.equalToSuperview()
-            make.centerX.equalToSuperview()
-            make.height.equalToSuperview().dividedBy(2)
-            make.width.equalToSuperview().dividedBy(1.4)
-        }
-        emptyLabel.snp.makeConstraints { make in
-            make.top.equalTo(emptyImageView.snp.bottom).offset(self.view.frame.height/33.8)
-            make.centerX.equalToSuperview()
         }
     }
     
@@ -325,10 +307,10 @@ extension ShowPlanViewController: UITableViewDataSource{
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if groupNameArray.count == 0{
             tableView.isHidden = true
-            emptyPlanBoxView.isHidden = false
+            planEmptyView.isHidden = false
             return groupNameArray.count
         }else{
-            emptyPlanBoxView.isHidden = true
+            planEmptyView.isHidden = true
             tableView.isHidden = false
             return groupNameArray.count
         }

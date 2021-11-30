@@ -8,10 +8,10 @@
 import UIKit
 
 protocol CalendarAddDelegate: AnyObject {
-    func updateData(selectedDay: String , selectedRepeatDay: [String], selectedDayIndex: Int)
+    func updateData(selectedDay: String, selectedDayIndex: Int)
 }
 
-class CalendarAddModelViewController: BaseModal {
+class CalendarAddModalViewController: BaseModal {
     // MARK: - Properties
     weak var delegate: CalendarAddDelegate?
     
@@ -40,10 +40,6 @@ class CalendarAddModelViewController: BaseModal {
         $0.textColor = UIColor.black
     }
     
-    private let divideLineView = UIView().then {
-        $0.backgroundColor = UIColor(red: 233/255, green: 233/255, blue: 233/255, alpha: 1)
-    }
-    
     private let calendarAddButton = UIButton().then{
         $0.backgroundColor = UIColor(red: 170/255, green: 187/255, blue: 254/255, alpha: 1)
         $0.setTitle("완 료", for: .normal)
@@ -57,28 +53,12 @@ class CalendarAddModelViewController: BaseModal {
         $0.transform = CGAffineTransform(rotationAngle: (-90 * (.pi / 180*3)))
     }
     
-    private let repeatCollectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewLayout()).then{
-        let layout = UICollectionViewFlowLayout()
-        $0.collectionViewLayout = layout
-        $0.register(DayCollectionViewCell.self, forCellWithReuseIdentifier: DayCollectionViewCell.identifier)
-        $0.showsHorizontalScrollIndicator = false
-        $0.isScrollEnabled = false
-    }
-    
-    private let repeatLabel = UILabel().then {
-        $0.text = "반복 설정"
-        $0.textColor = UIColor(red: 69/255, green: 69/255, blue: 69/255, alpha: 1)
-        $0.dynamicFont(fontSize: 10, currentFontName: "AppleSDGothicNeo-Thin")
-    }
-    
     private let calendarTriangleImageView = UIImageView().then{
         $0.image = UIImage(named:"EZY_CalendarTriangleViewBlue.svg")
     }
     
-    private var repeatModels: [RepeatCollectionViewModal] = [RepeatCollectionViewModal(isSelected: false),RepeatCollectionViewModal(isSelected: false),RepeatCollectionViewModal(isSelected: false),RepeatCollectionViewModal(isSelected: false),RepeatCollectionViewModal(isSelected: false),RepeatCollectionViewModal(isSelected: false),RepeatCollectionViewModal(isSelected: false)]
-    
-    static func instance() -> CalendarAddModelViewController {
-        return CalendarAddModelViewController(nibName: nil, bundle: nil).then {
+    static func instance() -> CalendarAddModalViewController {
+        return CalendarAddModalViewController(nibName: nil, bundle: nil).then {
             $0.modalPresentationStyle = .overFullScreen
         }
     }
@@ -95,7 +75,7 @@ class CalendarAddModelViewController: BaseModal {
     //MARK: - addView
     private func addView(){
         [bgView].forEach{ view.addSubview($0)}
-        [titleLabel,monthLabel,monthYearLabel,calendarTriangleImageView,dayPickerView,divideLineView,repeatLabel,repeatCollectionView,calendarAddButton].forEach{ bgView.addSubview($0)}
+        [titleLabel,monthLabel,monthYearLabel,calendarTriangleImageView,dayPickerView,calendarAddButton].forEach{ bgView.addSubview($0)}
     }
     
     // MARK: - location
@@ -103,7 +83,7 @@ class CalendarAddModelViewController: BaseModal {
         bgView.snp.makeConstraints { make in
             make.centerX.centerY.equalToSuperview()
             make.width.equalToSuperview().dividedBy(1.13)
-            make.height.equalToSuperview().dividedBy(2.3)
+            make.height.equalToSuperview().dividedBy(2.91)
         }
         titleLabel.snp.makeConstraints { make in
             make.top.equalToSuperview().offset(self.view.frame.height/33.8)
@@ -118,7 +98,7 @@ class CalendarAddModelViewController: BaseModal {
             make.left.equalTo(monthLabel.snp.right).offset(self.view.frame.height/161.2)
         }
         calendarTriangleImageView.snp.makeConstraints { make in
-            make.top.equalTo(monthLabel.snp.bottom).offset(self.view.frame.height/300)
+            make.top.equalTo(monthLabel.snp.bottom).offset(self.view.frame.height/50)
             make.height.width.equalTo(10)
             make.centerX.equalToSuperview()
         }
@@ -126,35 +106,18 @@ class CalendarAddModelViewController: BaseModal {
             make.centerX.equalToSuperview()
             make.left.equalToSuperview().offset(self.view.frame.width/3)
             make.height.equalToSuperview().dividedBy(1.1)
-            make.centerY.equalToSuperview().offset(-self.view.frame.height/25)
-        }
-        divideLineView.snp.makeConstraints { make in
-            make.top.equalTo(dayPickerView.snp.bottom).offset(-self.view.frame.height/7.5)
-            make.right.equalToSuperview().offset(-self.view.frame.width/13)
-            make.left.equalToSuperview().offset(self.view.frame.width/13)
-            make.height.equalTo(0.5)
-        }
-        repeatLabel.snp.makeConstraints { make in
-            make.top.equalTo(divideLineView.snp.bottom).offset(self.view.frame.height/33.8)
-            make.left.equalTo(divideLineView)
-        }
-        repeatCollectionView.snp.makeConstraints { make in
-            make.centerX.equalToSuperview()
-            make.width.equalToSuperview()
-            make.top.equalTo(repeatLabel.snp.bottom).offset(self.view.frame.height/73.81)
-            make.height.equalToSuperview().dividedBy(8.6)
+            make.centerY.equalToSuperview().offset(self.view.frame.height/40)
         }
         calendarAddButton.snp.makeConstraints { make in
-            make.right.equalTo(divideLineView)
-            make.top.equalTo(repeatCollectionView.snp.bottom).offset(self.view.frame.height/52)
+            make.right.equalToSuperview().offset(-self.view.frame.width/15)
+            make.bottom.equalToSuperview().offset(-self.view.frame.width/18)
             make.width.equalToSuperview().dividedBy(4.71)
-            make.height.equalToSuperview().dividedBy(10.42)
+            make.height.equalToSuperview().dividedBy(8.45)
         }
     }
     
     // MARK: - delegateAndDataSource
     private func delegateAndDataSource(){
-        [repeatCollectionView].forEach{ $0.delegate = self; $0.dataSource = self}
         [dayPickerView].forEach{ $0.delegate = self; $0.dataSource = self}
     }
     
@@ -211,18 +174,6 @@ class CalendarAddModelViewController: BaseModal {
         return repeatDayOfWeek
     }
     
-    private func getRepeatDay() -> [String]{
-        var repeatDay: [String] = []
-        
-        for i in 0...dayArray.count-1{
-            if repeatModels[i].isSelected == true{
-                repeatDay.append(dayArray[i].rawValue)
-            }
-        }
-
-        return repeatDay
-    }
-    
     private func getYearMonth() -> String{
         let formatter = DateFormatter()
         formatter.dateFormat = "yyyy. MM."
@@ -255,45 +206,11 @@ class CalendarAddModelViewController: BaseModal {
         dismiss(animated: true, completion: nil)
         
         delegate?.updateData(
-            selectedDay: "\(getYearMonth()) \(getDate(firstAdd: 13-selectedDayIndex, endAdd: 13-selectedDayIndex).joined()) \(changeKorean(eng: getDayOfWeek()[selectedDayIndex]))", selectedRepeatDay: getRepeatDay(), selectedDayIndex: selectedDayIndex)
+            selectedDay: "\(getYearMonth()) \(getDate(firstAdd: 13-selectedDayIndex, endAdd: 13-selectedDayIndex).joined()) \(changeKorean(eng: getDayOfWeek()[selectedDayIndex]))", selectedDayIndex: selectedDayIndex)
     }
 }
 
-extension CalendarAddModelViewController: UICollectionViewDelegateFlowLayout{
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
-        return UIEdgeInsets(top: self.view.frame.width/100, left: self.view.frame.width/15.62, bottom: 0, right: self.view.frame.width/15.62)
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: self.view.frame.width/12.18, height: self.view.frame.height/23.88)
-    }
-}
-
-extension CalendarAddModelViewController: UICollectionViewDelegate{
-    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        repeatModels[indexPath.row].isSelected.toggle()
-        
-        collectionView.reloadData()
-    }
-}
-
-extension CalendarAddModelViewController: UICollectionViewDataSource{
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return repeatDayOfWeek()[0].count
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: DayCollectionViewCell.identifier, for: indexPath) as! DayCollectionViewCell
-            
-        cell.dayKoreanLabel.text = repeatDayOfWeek()[0][indexPath.row]
-        cell.dayEnglishLabel.text = repeatDayOfWeek()[1][indexPath.row]
-        cell.setModel(repeatModels[indexPath.row])
-        
-        return cell
-    }
-}
-
-extension CalendarAddModelViewController: UIPickerViewDataSource, UIPickerViewDelegate{
+extension CalendarAddModalViewController: UIPickerViewDataSource, UIPickerViewDelegate{
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
         return 1
     }

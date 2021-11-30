@@ -10,6 +10,10 @@ import Alamofire
 
 class AddOrChangeMyTodoViewController: UIViewController{
     // MARK: - Properties
+    final class API: APIService<ResponseModel>{
+        static var shared = API()
+    }
+    
     private var bounds = UIScreen.main.bounds
         
     private var rotationAngle: CGFloat!
@@ -25,6 +29,8 @@ class AddOrChangeMyTodoViewController: UIViewController{
     private var receiveStartTime = "01 : 00"
     
     private var receiveEndTime = "01 : 00"
+    
+    private var planTime = ["0000-00-00","00:00","00:00"]
     
     private let bgView = UIView().then { $0.backgroundColor = .black }
     
@@ -47,9 +53,9 @@ class AddOrChangeMyTodoViewController: UIViewController{
         $0.dynamicFont(fontSize: 14, currentFontName: "AppleSDGothicNeo-Medium")
     }
     
-    private let calendarBtn : CalendarBtn = {
-        let viewModel = CalendarModel(icon: UIImage(named: "EZY_Calendar")?.withRenderingMode(.alwaysTemplate), iconTintColor: .rgb(red: 255, green: 181, blue: 181), message: "날짜를 선택해주세요!", repeatText: "반복 없음")
-        let button = CalendarBtn(with: viewModel)
+    private let calendarBtn : AlertButton = {
+        let viewModel = AlertBtn(icon: UIImage(named: "EZY_Calendar")?.withRenderingMode(.alwaysTemplate), iconTintColor: .rgb(red: 255, green: 203, blue: 181), message: "날짜를 선택해주세요!")
+        let button = AlertButton(with: viewModel)
         button.addTarget(self, action: #selector(calendarAlert), for: .touchUpInside)
         return button
     }()
@@ -175,24 +181,20 @@ class AddOrChangeMyTodoViewController: UIViewController{
             make.width.equalToSuperview().dividedBy(33.8/2)
             make.height.equalTo(backButton.snp.width)
         }
-        
         mainTitleLabel.snp.makeConstraints { make in
             make.left.equalTo(backButton)
             make.top.equalTo(backButton.snp.bottom).offset(self.view.frame.height/50)
         }
-        
         titleBackgroundView.snp.makeConstraints {
             $0.centerX.equalToSuperview()
             $0.left.equalToSuperview().offset(self.view.frame.width/13.3)
             $0.height.equalToSuperview().dividedBy(12)
             $0.top.equalTo(mainTitleLabel.snp.bottom).offset(self.view.frame.height/50)
         }
-        
         titleLabel.snp.makeConstraints {
             $0.centerY.equalToSuperview()
             $0.left.equalToSuperview().offset(self.view.frame.width/17.8)
         }
-        
         titleTextField.snp.makeConstraints {
             $0.centerY.equalToSuperview()
             $0.left.equalTo(titleLabel.snp.right).offset(self.view.frame.width/17.8)
@@ -205,7 +207,6 @@ class AddOrChangeMyTodoViewController: UIViewController{
             make.centerX.equalToSuperview()
             make.top.equalTo(titleBackgroundView.snp.bottom).offset(self.view.frame.height/30.07)
         }
-        
         btnStackView.snp.makeConstraints {
             $0.top.equalTo(calendarBtn.snp.bottom).offset(bounds.height/47.76)
             $0.left.equalTo(calendarBtn)
@@ -238,14 +239,12 @@ class AddOrChangeMyTodoViewController: UIViewController{
             make.width.equalTo(notificationAddButton.snp.height)
             make.height.equalTo(self.view.frame.height/20)
         }
-        
         notificationNoSelectButton.snp.makeConstraints { make in
             make.height.equalTo(self.view.frame.height/20)
             make.centerY.equalTo(notificationAddButton)
             make.width.equalTo(notificationNoSelectButton.snp.height)
             make.left.equalTo(notificationAddButton.snp.right).offset(self.view.frame.width/37)
         }
-        
         addOrChangeButton.snp.makeConstraints { make in
             make.centerX.equalToSuperview()
             make.left.equalTo(notificationAddButton)
@@ -262,7 +261,7 @@ class AddOrChangeMyTodoViewController: UIViewController{
     }
 
     // MARK: - selectors
-    @objc func notificationAddButtonClicked(sender:UIButton){
+    @objc private func notificationAddButtonClicked(sender:UIButton){
         let MoreCalendarModalsVC = MoreAlarmModelViewController.instance()
         MoreCalendarModalsVC.delegate = self
         MoreCalendarModalsVC.baseDelegate = self
@@ -271,13 +270,13 @@ class AddOrChangeMyTodoViewController: UIViewController{
         AlarmSettingCell().isSelected = false
     }
     
-    @objc func notificationNoSelectButtonClicked(sender:UIButton){
+    @objc private func notificationNoSelectButtonClicked(sender:UIButton){
         notificationNoSelectButton.backgroundColor = UIColor(red: 221/255, green: 220/255, blue: 220/255, alpha: 1)
         notificationNoSelectButton.setImage(UIImage(named: "EZY_SelectedNoSelectTagButtonImage"), for: .normal)
     }
     
-    @objc func calendarAlert(){
-        let CalendarAddModalVC = CalendarAddModelViewController.instance()
+    @objc private func calendarAlert(){
+        let CalendarAddModalVC = CalendarAddModalViewController.instance()
         CalendarAddModalVC.delegate = self
         CalendarAddModalVC.baseDelegate = self
         addDim()
@@ -285,7 +284,7 @@ class AddOrChangeMyTodoViewController: UIViewController{
         CalendarAddModalVC.calendarModalDataSetting(dayIndex: selectedDayIndex, repeatIndex: selectedRepeatIndex)
     }
     
-    @objc func clockAlert(){
+    @objc private func clockAlert(){
         let TimeAddModalVC = TimeAddModalViewController.instance()
         TimeAddModalVC.baseDelegate = self
         TimeAddModalVC.delegate = self
@@ -294,17 +293,35 @@ class AddOrChangeMyTodoViewController: UIViewController{
         TimeAddModalVC.timeValueSetting(leftOrRight: ["오전", "오전"], selectedValuesIndex: selectedTimeIndex)
     }
     
-    @objc func locationAlert(){
+    @objc private func locationAlert(){
         let nextViewController = SelectLocationViewController()
         self.navigationController?.pushViewController(nextViewController, animated: true)
     }
     
-    @objc func changeButtonClicked(sender:UIButton){
-        // ?
+    @objc private func backButtonClicked(sender:UIButton){
+        self.navigationController?.popViewController(animated: true)
     }
     
-    @objc func backButtonClicked(sender:UIButton){
-        self.navigationController?.popViewController(animated: true)
+    @objc private func changeButtonClicked(sender:UIButton){
+        if checkEmpty(textField: titleTextField) == true{
+            shakeView(titleLabel)
+        }else{
+            if planTime[0] == "0000-00-00"{
+                shakeView(calendarBtn)
+            }else{
+                if planTime[1] == "00:00"{
+                    shakeView(clockBtn)
+                }else{
+                    if titleTextField.text == "나의 할 일 추가"{
+                        print("추가 API 실행")
+                        myToDoAPI(url: "추가 url")
+                    }else{
+                        print("변경 API 실행")
+                        myToDoAPI(url: "변경 url")
+                    }
+                }
+            }
+        }
     }
     
     // MARK: 화면터치하여 설명 뷰 내리기
@@ -348,6 +365,15 @@ class AddOrChangeMyTodoViewController: UIViewController{
         addOrChangeButton.setTitle(buttonText, for: .normal)
     }
     
+    // MARK: - checkEmpty
+    private func checkEmpty(textField: UITextField) -> Bool{
+        if textField.text!.trimmingCharacters(in: .whitespaces).isEmpty || textField.text == ""{
+            return true
+        }else{
+            return false
+        }
+    }
+    
     // MARK: - tagToggle
     private func tagToggle(index: IndexPath){
         tagReset()
@@ -379,6 +405,55 @@ class AddOrChangeMyTodoViewController: UIViewController{
     private func removeDim() {
         DispatchQueue.main.async { [weak self] in
             self?.bgView.removeFromSuperview()
+        }
+    }
+    
+    // MARK: - shakeView
+    private func shakeView(_ view: UIView?) {
+        let shake = CABasicAnimation(keyPath: "position")
+        shake.duration = 0.08
+        shake.repeatCount = 2
+        shake.autoreverses = true
+        shake.fromValue = NSValue(cgPoint: CGPoint(x: (view?.center.x)! - 2, y: view?.center.y ?? 0.0))
+        shake.toValue = NSValue(cgPoint: CGPoint(x: (view?.center.x)! + 2, y: view?.center.y ?? 0.0))
+        view?.layer.add(shake, forKey: "position")
+    }
+    
+    // MARK: - MyToDoAPI
+    private func myToDoAPI(url: String){
+        let headers: HTTPHeaders = ["Authorization" : "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJAeW91amluIiwiYXV0aCI6W3siYXV0aG9yaXR5IjoiUk9MRV9DTElFTlQifV0sImlhdCI6MTYzODE2MTE3NSwiZXhwIjoxNjM4MTY0Nzc1fQ.6Fny5sU-EfDSCbmbdmN2LDFB621iie5HC4P4nTqpRp4"]
+        
+        let params: Parameters = [
+            "period": [
+                "endDateTime": "\(planTime[0])T\(planTime[1]):00",
+                "startDateTime": "\(planTime[0])T\(planTime[2]):00"
+            ],
+            "planInfo": [
+                "explanation": "\(explanationContainerView.tv)",
+                "location": "location",
+                "title": "\(titleTextField.text ?? "")"
+            ],
+            "repetition": true,
+            "tagIdx": 1
+        ]
+        
+        API.shared.request(url: url, method: .post, param: params, header: headers, JSONDecodeUsingStatus: false) { result in
+            switch result{
+            case .success(let result):
+                print("success result : \(result)")
+            case .requestErr(let result):
+                print("requestErr : \(result)")
+            case .pathErr:
+                print("pathErr")
+            case .serverErr:
+                print("serverErr")
+            case .networkFail:
+                print("networkFail")
+            case .tokenErr:
+                print("tokenErr")
+            case .authorityErr:
+                print("authorityErr")
+            }
         }
     }
 }
@@ -495,16 +570,17 @@ extension AddOrChangeMyTodoViewController: AlarmModelDelegate{
 
 // MARK: - CalendarModal Delegate
 extension AddOrChangeMyTodoViewController: CalendarAddDelegate{
-    func updateData(selectedDay: String, selectedRepeatDay: [String], selectedDayIndex: Int) {
-        // 선택 날짜 표시
-        if selectedRepeatDay.count == 0 { calendarBtn.repeatLabel.text = "반복 없음" }
-        else{ calendarBtn.repeatLabel.text = "\(selectedRepeatDay.joined(separator: ",")) 반복" }
-        
-        // 선택한 반복 표시
-        calendarBtn.dayLabel.text = selectedDay
+    func updateData(selectedDay: String, selectedDayIndex: Int) {
+        // 선택한 반복 현재 VC의 label에 표시
+        calendarBtn.alertButtonTitleLabel.text = selectedDay
         
         // 선택했던 index를 저장하고 다시 시간 선택 모달을 호출할 시에 index를 통해 전에 선택한 값을 세팅한다.
         self.selectedDayIndex = selectedDayIndex
+        
+        // server 데이터 형식에 맞게 설정한 후 planTime에 저장한다. (이후 planTime을 server로 전송)
+        let endIdx: String.Index = selectedDay.index(selectedDay.startIndex, offsetBy: 11)
+        let result = String(selectedDay[...endIdx]).replacingOccurrences(of: ". ", with: "-")
+        planTime[0] = result
     }
 }
 
@@ -515,6 +591,10 @@ extension AddOrChangeMyTodoViewController: TimeAddDelegate{
         
         // 선택했던 index를 저장하고 다시 시간 선택 모달을 호출할 시에 index를 통해 전에 선택한 값을 세팅한다.
         self.selectedTimeIndex = selectedTimeIndex
+        
+        // server 데이터 형식에 맞게 설정한 후 planTime에 저장한다. (이후 planTime을 server로 전송)
+        planTime[0] = "\(selectedTime[0]):\(selectedTime[1])"
+        planTime[1] = "\(selectedTime[2]):\(selectedTime[3])"
     }
 }
 
@@ -536,3 +616,14 @@ extension AddOrChangeMyTodoViewController : BaseModalDelegate{
     }
 }
 
+extension AddOrChangeMyTodoViewController: BasicModalViewButtonDelegate{
+    func onTabOkButton(sender: UIButton) {
+        self.removeDim()
+    }
+}
+
+struct ResponseModel : Codable{
+    var success: Bool
+    var code: Int
+    var massage: String
+}

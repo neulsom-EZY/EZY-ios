@@ -4,6 +4,7 @@ import Alamofire
 class ChangePasswardAfterLoginViewController: UIViewController {
     //MARK: - Properties
     var nickname:String = ""
+    
     var key:String = ""
     
     final class API : APIService<KakaoDataModel>{
@@ -11,95 +12,73 @@ class ChangePasswardAfterLoginViewController: UIViewController {
         static let shared = APIService<KakaoDataModel>()
     }
     
-    lazy var topView = TopView()
+    private let topView = TopView().then{
+        $0.backButton.addTarget(self, action: #selector(backButtonClicked(sender:)), for: .touchUpInside)
+        $0.topViewDataSetting(backButtonImage: UIImage(named: "EZY_IdChangeBackButtonImage")!, titleLabelText: "비밀번호 변경", textColor: UIColor(red: 120/255, green: 81/255, blue: 255/255, alpha: 1))
+    }
     
-    lazy var passwordNickNameLabel = UILabel().then {
+    private let passwordNickNameLabel = UILabel().then {
         $0.textColor = UIColor(red: 150/255, green: 141/255, blue: 255/255, alpha: 1)
         $0.text = "비밀번호"
         $0.dynamicFont(fontSize: 10, currentFontName: "AppleSDGothicNeo-SemiBold")
     }
     
-    lazy var passwardTextField = UITextField().then {
+    private let passwardTextField = UITextField().then {
         $0.textColor = UIColor(red: 101/255, green: 101/255, blue: 101/255, alpha: 1)
         $0.placeholder = "새로운 비밀번호를 입력해주세요"
         $0.dynamicFont(fontSize: 14, currentFontName: "AppleSDGothicNeo-Regular")
     }
     
-    lazy var UnderLineView = UIView().then {
+    private let UnderLineView = UIView().then {
         $0.backgroundColor = UIColor(red: 150/255, green: 141/255, blue: 255/255, alpha: 1)
     }
     
-    lazy var passwardConditionLabel = UILabel().then {
+    private let passwardConditionLabel = UILabel().then {
         $0.text = "8자 이하, 영어 + 숫자최소 1개, 공백 허용x"
         $0.textColor = UIColor(red: 116/255, green: 116/255, blue: 116/255, alpha: 1)
         $0.dynamicFont(fontSize: 10, currentFontName: "AppleSDGothicNeo-Regular")
     }
     
-    lazy var changeButton = UIButton().then {
+    private let changeButton = UIButton().then {
         $0.setBackgroundImage(UIImage(named: "EZY_ChangeButtonImage"), for: .normal)
         $0.setTitle("변경하기", for: .normal)
         $0.dynamicFont(fontSize: 14, currentFontName: "AppleSDGothicNeo-Bold")
         $0.addTarget(self, action: #selector(changeButtonClicked(sender:)), for: .touchUpInside)
     }
     
-    //MARK: - LifyCycle
+    // MARK: - LifyCycle
     override func viewDidLoad() {
         super.viewDidLoad()
         
         addView()
-        
-        addLayout()
+        location()
     }
     
-    func addView(){
-        self.view.addSubview(topView)
-        topView.addSubview(topView.backButton)
-        topView.addSubview(topView.titleLabel)
-        
-        topView.backButton.addTarget(self, action: #selector(backButtonClicked(sender:)), for: .touchUpInside)
-        
-        topView.titleLabel.text = "비밀번호 변경"
-        
-        topView.topViewDataSetting(backButtonImage: UIImage(named: "EZY_IdChangeBackButtonImage")!, titleLabelText: "비밀번호 변경", textColor: UIColor(red: 120/255, green: 81/255, blue: 255/255, alpha: 1))
-        
-        topView.backButton.snp.makeConstraints { make in
-            make.top.equalTo(self.view.safeAreaLayoutGuide).offset(self.view.frame.height/47.7)
-            make.left.equalToSuperview().offset(self.view.frame.width/12)
-            make.width.equalToSuperview().dividedBy(33.8/2)
-            make.height.equalTo(topView.backButton.snp.width)
-        }
-        
-        topView.titleLabel.snp.makeConstraints { make in
-            make.left.equalTo(topView.backButton)
-            make.top.equalTo(topView.backButton.snp.bottom).offset(self.view.frame.height/30)
-        }
-        
-        topView.snp.makeConstraints { make in
-            make.left.right.equalToSuperview()
-            make.top.equalTo(self.view.safeAreaLayoutGuide)
-            make.height.equalToSuperview().dividedBy(8)
-        }
-    }
-    
-    func addLayout() {
+    private func addView(){
         self.view.backgroundColor = .white
+        
         self.view.addSubview(passwordNickNameLabel)
         self.view.addSubview(passwardTextField)
         self.view.addSubview(UnderLineView)
         self.view.addSubview(changeButton)
         self.view.addSubview(passwardConditionLabel)
-        
-        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(_:)), name:UIResponder.keyboardWillShowNotification, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide(_:)), name: UIResponder.keyboardWillHideNotification, object: nil)
-        
+
+    }
+    
+    func location() {
+        topView.snp.makeConstraints { make in
+            make.left.right.equalToSuperview()
+            make.top.equalTo(self.view.safeAreaLayoutGuide)
+            make.height.equalToSuperview().dividedBy(8)
+        }
         passwardConditionLabel.snp.makeConstraints { make in
             make.top.equalTo(UnderLineView.snp.bottom).offset(self.view.frame.height/100)
             make.left.equalTo(UnderLineView)
         }
         
         passwordNickNameLabel.snp.makeConstraints { make in
-            make.top.equalTo(topView.titleLabel.snp.bottom).offset(self.view.frame.height/16.91)
-            make.left.equalTo(topView.titleLabel)
+            make.top.equalTo(topView.snp.bottom).offset(self.view.frame.height/16.91)
+            make.left.equalTo(topView)
         }
         
         passwardTextField.snp.makeConstraints { make in

@@ -10,10 +10,15 @@ import UIKit
 class SettingViewController: UIViewController {
     
     // MARK: - Properties
+    private let bgView = UIView()
+    
+    private let settingListTitleLabel = ["푸시 알림 관리", "태그 관리", "닉네임 변경","비밀번호 변경","전화번호 변경", "로그아웃", "회원 탈퇴"]
+    
+    private let settingListDescriptionLabel = ["개인, 심부름관련 알림을 관리합니다.","일정의 태그를 관리합니다.","현재 사용 중인 닉네임을 변경합니다.","현재 사용 중인 비밀번호를 변경합니다.","현재 사용 중인 전화번호를 변경합니다.","EZY에서 로그아웃합니다.", "EZY 계정을 탈퇴합니다."]
+    
     private let topView = TopView().then{
         $0.backButton.addTarget(self, action: #selector(backButtonClicked(sender:)), for: .touchUpInside)
-        $0.topViewDataSetting(backButtonImage: UIImage(named: "EZY_SettingBackButton")!, titleLabelText: "설정",
-                                   textColor: UIColor(red: 175/255, green: 173/255, blue: 255/255, alpha: 1))
+        $0.topViewDataSetting(backButtonImage: UIImage(named: "EZY_SettingBackButton")!, titleLabelText: "설정", textColor: UIColor(red: 175/255, green: 173/255, blue: 255/255, alpha: 1))
     }
     
     private let settingTableView = UITableView().then {
@@ -23,37 +28,29 @@ class SettingViewController: UIViewController {
         $0.register(SettingTableViewCell.self, forCellReuseIdentifier: SettingTableViewCell.settingTableViewCellIdentifier)
     }
     
-    private let bgView = UIView()
-    
-    private let settingListTitleLabel = ["푸시 알림 관리", "태그 관리", "닉네임 변경","비밀번호 변경","전화번호 변경", "로그아웃", "회원 탈퇴"]
-    
-    private let settingListDescriptionLabel = ["개인, 심부름관련 알림을 관리합니다.","일정의 태그를 관리합니다.","현재 사용 중인 닉네임을 변경합니다.","현재 사용 중인 비밀번호를 변경합니다.","현재 사용 중인 전화번호를 변경합니다.","EZY에서 로그아웃합니다.", "EZY 계정을 탈퇴합니다."]
-    
-    //MARK: LifeCycles
+    // MARK: LifeCycles
     override func viewDidLoad() {
         super.viewDidLoad()
         
         configureUI()
     }
     
-    //MARK: - Helpers
+    // MARK: - Helpers
     private func configureUI(){
         self.view.backgroundColor = .white
         
         addView()
-        
         location()
-        
         delegateAndDataSource()
     }
     
+    // MARK: - location
     private func location(){
         topView.snp.makeConstraints { make in
             make.left.right.equalToSuperview()
             make.top.equalTo(self.view.safeAreaLayoutGuide)
             make.height.equalToSuperview().dividedBy(8)
         }
-        
         settingTableView.snp.makeConstraints { make in
             make.top.equalTo(topView.snp.bottom).offset(self.view.frame.height/50)
             make.width.equalToSuperview()
@@ -61,18 +58,19 @@ class SettingViewController: UIViewController {
         }
     }
     
+    // MARK: - delegateAndDataSource
     private func delegateAndDataSource(){
         settingTableView.delegate = self
         settingTableView.dataSource = self
     }
     
-    //MARK: - addSubview
-    func addView(){
+    // MARK: - addSubview
+    private func addView(){
         [topView, settingTableView].forEach { self.view.addSubview($0) }
     }
     
-    //MARK: - Selectors
-    @objc func backButtonClicked(sender: UIButton!) {
+    // MARK: - Selectors
+    @objc private func backButtonClicked(sender: UIButton!) {
         self.navigationController?.popViewController(animated: true)
     }
     
