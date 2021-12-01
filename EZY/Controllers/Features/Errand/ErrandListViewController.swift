@@ -19,7 +19,8 @@ class ErrandListViewController : UIViewController{
     
     private let sections : [String] = ["부탁받은 심부름","부탁한 심부름"," 수락 대기 중인 심부름"]
     
-    
+    private var ErrandListTypeVM : ErrandListTypeViewModel!
+
     
     private let dummy1 : [String] = ["EZY 회의","EZY 회의","EZY 회의","EZY 회의","EZY 회의","EZY 회의","EZY 회의","EZY 회의","EZY 회의","EZY 회의","EZY 회의","EZY 회의"]
     private let dummy2 : [String] = ["EZY 회의","EZY 회의","EZY 회의","EZY 회의"]
@@ -151,11 +152,16 @@ extension ErrandListViewController : UITableViewDelegate , UITableViewDataSource
         API.shared.request(url: "/v1/errand/",
                            method: .get,
                            header: header,
-                           JSONDecodeUsingStatus: false) { (response) in
+                           JSONDecodeUsingStatus: true) { (response) in
             switch response{
             case.success(let value):
                 NSLog("\(value)")
-                
+                if let data = value as? ErrandEntireModel{
+                    
+                    
+                    
+                    
+                }
             case .requestErr(let err):
                 NSLog("\(err)")
             case .pathErr:

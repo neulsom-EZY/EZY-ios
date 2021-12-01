@@ -10,8 +10,6 @@ import Alamofire
 
 class SelectLocationViewController: UIViewController {
     // MARK: - Kakao Search Data
-    private var kakaoPlaceSearchData : [KakaoDocuments]? = nil
-    
     // MARK: - Properties
     
     private var kakaoPlaceVM : KakaoPlaceViewModel!
@@ -151,6 +149,7 @@ class SelectLocationViewController: UIViewController {
                 DispatchQueue.main.async {
                     self.locationTableView.reloadData()
                 }
+                self.noUserAction()
             case .requestErr(let message):
                 print("requestError", message)
             case .pathErr:
@@ -164,6 +163,15 @@ class SelectLocationViewController: UIViewController {
             case .authorityErr:
                 print("authorityErr")
             }
+        }
+    }
+    
+    private func noUserAction(){
+        if kakaoPlaceVM.KakaoPlaces.isEmpty{
+            noPlace.isHidden = false
+            noPlace.title.text = locationTextField.text ?? ""
+        }else{
+            noPlace.isHidden = true
         }
     }
 
@@ -186,6 +194,7 @@ class SelectLocationViewController: UIViewController {
             self?.dismiss(animated: true)
         }
     }
+
 }
 
 // MARK: - UITableViewDelegate and UITableViewDataSource
@@ -227,7 +236,6 @@ extension SelectLocationViewController: UITableViewDataSource, UITableViewDelega
 // MARK: - textfield 설정
 extension SelectLocationViewController : UITextFieldDelegate{
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        
         locationTextField.resignFirstResponder()
         searchButtonClicked(sender: searchButton.self)
         return true
@@ -242,8 +250,7 @@ extension SelectLocationViewController: BaseModalDelegate {
 
 extension SelectLocationViewController: BasicModalViewButtonDelegate{
     func onTabOkButton(sender:UIButton) {
-        removeDim()
-
+        self.removeDim()
         self.navigationController?.popViewController(animated: true)
     }
 }

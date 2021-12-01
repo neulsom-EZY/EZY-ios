@@ -120,8 +120,6 @@ class AddErrandViewController : UIViewController{
         self.navigationController?.pushViewController(nextViewController, animated: true)
     }
     @objc private  func Addmytodobtn(){
-        print("DEBUG:AddButton")
-        //추가페이지 작성후 실행시키는 코드
         httpErrandRequest()
     }
     @objc private func Addlocationbtn(){
@@ -265,3 +263,4 @@ extension AddErrandViewController : BaseModalDelegate{
         self.removeDim()
     }
 }
+

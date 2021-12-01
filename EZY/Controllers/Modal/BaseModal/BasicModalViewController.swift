@@ -66,7 +66,7 @@ class BasicModalViewController: BaseModal {
     
     //MARK: - selectors
     @objc func MakeTodo(){
-        delegate?.onTabOkButton(sender: self.sender)
+        delegate?.onTabOkButton( sender: self.sender)
         dismiss(animated: true, completion: nil)
     }
     

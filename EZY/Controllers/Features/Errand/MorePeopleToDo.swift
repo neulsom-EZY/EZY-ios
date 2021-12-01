@@ -254,6 +254,7 @@ extension MorePeopleToDo : UITableViewDelegate , UITableViewDataSource{
         searchingUserView.label.text = searchData[indexPath.row].username.trimmingCharacters(in: ["@"])
         searchUserLabel.isHidden = false
         searchingUserView.isHidden = false
+        searcherView.noUser.isHidden = true
     }
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: SearchTableCell.identifier) as? SearchTableCell else{return UITableViewCell()}
