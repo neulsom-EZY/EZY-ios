@@ -177,22 +177,35 @@ class MorePeopleToDo: UIViewController{
             case.success(let value):
                 NSLog("success :: \(value)")
                 if let data = value as? UserSearchModel{
-                    print("\(data.list[0].username)")
                     self.searchData = data.list
+                    DispatchQueue.main.async {
+                        self.searcherView.tv.reloadData()
+                    }
                 }
             case .requestErr(let error):
                 NSLog("ERROR :: \(error)")
+                self.failedAction()
             case .pathErr:
                 NSLog("pathError")
+                self.failedAction()
             case .serverErr:
                 NSLog("ServerError")
+                self.failedAction()
             case .networkFail:
                 NSLog("networkFail")
+                self.failedAction()
             case .tokenErr:
                 NSLog("TokenError")
             case .authorityErr:
                 NSLog("authorityErr")
             }
+        }
+    }
+    private func failedAction(){
+        searchData = .init()
+        DispatchQueue.main.async {
+            self.searcherView.tv.reloadData()
+            self.searcherView.noUser.isHidden = false
         }
     }
     private func configureNotificationObservers(){
@@ -221,11 +234,9 @@ extension MorePeopleToDo : UITextFieldDelegate{
     // 리턴 눌렀을때 키보드 내리기
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         httpRequest()
+        dropdownAnimation()
         nickNameTextFieldContainerView.resignFirstResponder()
         view.endEditing(true)
-        DispatchQueue.main.async {
-            self.searcherView.tv.reloadData()
-        }
         return true
     }
 }
@@ -247,7 +258,6 @@ extension MorePeopleToDo : UITableViewDelegate , UITableViewDataSource{
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: SearchTableCell.identifier) as? SearchTableCell else{return UITableViewCell()}
         cell.personName.text = searchData[indexPath.row].username.trimmingCharacters(in: ["@"])
-        
         cell.selectionStyle = .none
         return cell
     }
@@ -258,17 +268,18 @@ extension MorePeopleToDo : UITableViewDelegate , UITableViewDataSource{
 extension MorePeopleToDo : FormViewModel{
     func updateForm() {
         isTableVisible = viewModel.showView
-        if isTableVisible{
-            searcherView.tv.reloadData()
-            UIView.animate(withDuration: 0.2) {
-                self.searcherView.frame = CGRect(x: self.view.frame.height/23.2, y: self.view.frame.height/3.0526, width: self.view.frame.width/1.2255, height: self.view.frame.height/5.1392)
-                self.view.layoutIfNeeded()
+        if !isTableVisible{
+                UIView.animate(withDuration: 0.2) {
+                    self.searcherView.frame = CGRect(x: self.view.frame.height/23.2, y: self.view.frame.height/3.0526, width: self.view.frame.width/1.2255, height: 0)
+                    self.view.layoutIfNeeded()
+                    self.searcherView.noUser.isHidden = true
             }
-        }else{
-            UIView.animate(withDuration: 0.2) {
-                self.searcherView.frame = CGRect(x: self.view.frame.height/23.2, y: self.view.frame.height/3.0526, width: self.view.frame.width/1.2255, height: 0)
-                self.view.layoutIfNeeded()
-            }
+        }
+    }
+    func dropdownAnimation(){
+        UIView.animate(withDuration: 0.2) {
+            self.searcherView.frame = CGRect(x: self.view.frame.height/23.2, y: self.view.frame.height/3.0526, width: self.view.frame.width/1.2255, height: self.view.frame.height/5.1392)
+            self.view.layoutIfNeeded()
         }
     }
 }

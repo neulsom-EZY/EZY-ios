@@ -12,8 +12,7 @@ class SearchView : UIView {
         $0.register(SearchTableCell.self, forCellReuseIdentifier: SearchTableCell.identifier)
     }
     let noUser = NotFoundUser().then{
-        $0.translatesAutoresizingMaskIntoConstraints = false
-        $0.isHidden = false
+        $0.isHidden = true
     }
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -25,6 +24,7 @@ class SearchView : UIView {
     func addView(){
         addSubview(view)
         view.addSubview(tv)
+        view.addSubview(noUser)
     }
     
     override func layoutSubviews() {
@@ -40,6 +40,9 @@ class SearchView : UIView {
             make.left.equalToSuperview()
             make.right.equalToSuperview()
             make.bottom.equalToSuperview()
+        }
+        noUser.snp.makeConstraints{
+            $0.center.equalToSuperview()
         }
     }
     

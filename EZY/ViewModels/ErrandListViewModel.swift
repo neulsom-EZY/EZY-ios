@@ -10,6 +10,7 @@ import Foundation
 struct ErrandListViewModel{
     let errandGotList : [ ErrandEntireDocument]
     let errandAskedList : [ ErrandEntireDocument]
+    let errandWaitingForAcceptance : [ErrandEntireDocument]
 }
 extension ErrandListViewModel{
     var numberOfSection : Int{

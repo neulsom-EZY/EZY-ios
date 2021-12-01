@@ -18,14 +18,10 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         guard let windowScene = (scene as? UIWindowScene) else { return }
 
         window = UIWindow(windowScene: windowScene)
-<<<<<<< HEAD
       
 
         let mainViewController = LoginViewController()
-=======
         
-        let mainViewController = MyToDoListViewController()
->>>>>>> 4db3e9fa2d60ca35f3058ddbfe3e84abe27a7a03
 
         let navigationController = UINavigationController(rootViewController: mainViewController)
 
